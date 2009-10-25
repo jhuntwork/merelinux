@@ -1,6 +1,6 @@
 Summary: Core System Man Pages
 Name: man-pages
-Version: 3.21
+Version: 3.23
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -30,5 +30,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 
 %changelog
-* Sat Jul 18 2009 Jeremy Huntwork [jhuntwork at lightcube dot us]
+* Sun Oct 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Initial version
+
+* Sat Jul 18 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version

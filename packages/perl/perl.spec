@@ -37,7 +37,9 @@ cat > %{name}-req << "EOF"
 	-e '/perl(VMS::Filespec)/d' \
 	-e '/perl(VMS::Stdio)/d' \
 	-e '/perl(NDBM_File)/d' \
-	-e '/perl(Your::Module::Here)/d'
+	-e '/perl(Your::Module::Here)/d' \
+	-e '/perl(DBD::SQLite)/d' \
+	-e '/perl(DBIx::Simple)/d'
 EOF
 chmod +x %{name}-req
 %define __perl_requires %{_builddir}/%{name}-%{version}/%{name}-req

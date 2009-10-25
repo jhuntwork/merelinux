@@ -36,5 +36,5 @@ rpm -ivh \
  /usr/src/rpm/RPMS/$ARCH/psmisc-22.8-1.$ARCH.rpm \
  /usr/src/rpm/RPMS/$ARCH/gdbm-1.8.3-1.$ARCH.rpm \
  /usr/src/rpm/RPMS/$ARCH/man-db-2.5.5-1.$ARCH.rpm \
- /usr/src/rpm/RPMS/noarch/man-pages-3.21-1.noarch.rpm \
+ /usr/src/rpm/RPMS/noarch/man-pages-3.23-1.noarch.rpm \
  /usr/src/rpm/RPMS/noarch/iana-etc-2.30-1.noarch.rpm
