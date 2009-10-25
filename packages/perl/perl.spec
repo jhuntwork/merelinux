@@ -1,14 +1,13 @@
 Summary: Perl Progamming Language
 Name: perl
-Version: 5.10.0
+Version: 5.10.1
 Release: 1
 Group: Development/Languages
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.perl.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-consolidated-1.patch
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, zlib
 
@@ -44,17 +43,16 @@ chmod +x %{name}-req
 %define __perl_requires %{_builddir}/%{name}-%{version}/%{name}-req
 
 %build
-patch -Np1 -i %{SOURCE1}
-sed -i.bak \
-	"/if grep/a skip \"not testing setlogsock('stream'): _PATH_LOG unavailable\", 10 \
-	unless -e Sys::Syslog::_PATH_LOG();" \
-	ext/Sys/Syslog/t/syslog.t
+sed -i -e "s|BUILD_ZLIB\s*= True|BUILD_ZLIB = False|" \
+       -e "s|INCLUDE\s*= ./zlib-src|INCLUDE = /usr/include|" \
+       -e "s|LIB\s*= ./zlib-src|LIB = /usr/%{_lib}|" \
+       ext/Compress-Raw-Zlib/config.in
 sh Configure -des -Dprefix=/usr \
                   -Dvendorprefix=/usr           \
                   -Dman1dir=/usr/share/man/man1 \
                   -Dman3dir=/usr/share/man/man3 \
                   -Dpager="/usr/bin/less -isR"
-make BUILD_ZLIB=False
+make
 #make test
 
 %install
@@ -85,6 +83,7 @@ rm -rf %{buildroot}
 /usr/bin/perlbug
 /usr/bin/perldoc
 /usr/bin/perlivp
+/usr/bin/perlthanks
 /usr/bin/piconv
 /usr/bin/pl2pm
 /usr/bin/pod2html
@@ -108,5 +107,8 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Upgrade to 5.10.1
+
 * Tue Jul 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version

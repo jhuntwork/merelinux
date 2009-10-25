@@ -1,6 +1,6 @@
 Summary: GNU Coreutils
 Name: coreutils
-Version: 7.4
+Version: 7.6
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -17,6 +17,13 @@ Requires(post): texinfo, bash, ncurses
 %description
 %{name} provides some core system utilities, such as cp, mv, ls
 
+%package libstdbuf
+Summary: Provides libstdbuf.so
+Group: Development/Libraries
+
+%description libstdbuf
+Provides libstdbuf.so
+
 %prep
 %setup -q
 
@@ -25,7 +32,7 @@ patch -Np1 -i %{SOURCE1}
 %ifarch i686
 patch -Np1 -i %{SOURCE2}
 %endif
-./configure --prefix=/usr --enable-no-install-program=kill,uptime
+./configure --prefix=/usr --enable-no-install-program=kill,uptime --libdir=/usr/%{_lib}
 make
 #make NON_ROOT_USERNAME=nobody check-root
 #chown -Rv nobody config.log {gnulib-tests,lib,src}/.deps
@@ -130,6 +137,7 @@ rm -rf %{buildroot}
 /usr/bin/sort
 /usr/bin/split
 /usr/bin/stat
+/usr/bin/stdbuf
 /usr/bin/sum
 /usr/bin/tac
 /usr/bin/tail
@@ -154,6 +162,14 @@ rm -rf %{buildroot}
 /usr/share/info/coreutils.info
 /usr/share/man/man1/*
 
+%files libstdbuf
+%defattr(-,root,root)
+%dir /usr/%{_lib}/%{name}
+/usr/%{_lib}/%{name}/libstdbuf.so
+
 %changelog
+* Mon Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Upgrade to 7.6
+
 * Mon Jul 27 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version

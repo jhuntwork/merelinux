@@ -1,6 +1,6 @@
 Summary: GNU Binutils
 Name: binutils
-Version: 2.19.1
+Version: 2.20
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -36,7 +36,7 @@ make tooldir=/usr
 cd ../%{name}-build
 make tooldir=/usr DESTDIR=%{buildroot} install
 cp ../%{name}-%{version}/include/libiberty.h %{buildroot}/usr/include
-rm -f %{buildroot}%{_infodir}/dir
+rm -f %{buildroot}/usr/share/info/dir
 
 %post
 for i in as bfd binutils configure gprof ld
@@ -61,10 +61,13 @@ rm -rf %{buildroot}
 %endif
 /usr/bin/*
 /usr/include/*
-/usr/man/man1/*
+/usr/share/man/man1/*
 /usr/share/locale/*
-/usr/info/*
+/usr/share/info/*
 
 %changelog
+* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Upgrade to 2.20
+
 * Sun Jul 19 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version

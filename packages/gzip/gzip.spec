@@ -1,6 +1,6 @@
 Summary: Gzip compression utility
 Name: gzip
-Version: 1.3.12
+Version: 1.3.13
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -18,8 +18,6 @@ The GNU zip compression utility.
 %setup -q
 
 %build
-sed -i 's/futimens/gl_&/' gzip.c lib/utimens.{c,h}
-sed -i 's/5 -)/5 - >\&3)/' zdiff.in
 ./configure --prefix=/usr --bindir=/bin
 make
 make check
@@ -70,5 +68,8 @@ rm -rf %{buildroot}
 /usr/share/man/man1/znew.1
 
 %changelog
+* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Upgrade to 1.3.13
+
 * Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version

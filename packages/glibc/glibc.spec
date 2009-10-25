@@ -1,13 +1,14 @@
 Summary: GNU C Library
 Name: glibc
 Version: 2.10.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/libc
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-binutils-1.patch
 
 Requires: base-files
 BuildRequires: digest(%{SOURCE0}) = ee71dedf724dc775e4efec9b823ed3be
@@ -32,6 +33,7 @@ object files available in order to create the executables.
 %prep
 rm -rf glibc-build
 %setup -q -n glibc-%{version}
+%patch -p1 %{PATCH0}
 
 %build
 sed -i '/vi_VN.TCVN/d' localedata/SUPPORTED
@@ -139,5 +141,7 @@ rm -rf glibc-build
 /usr/share/info/libc*
 
 %changelog
+* Fri Oct 23 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Updated to build with binutils 2.20 and gcc 4.4.2
 * Sat Jul 18 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version

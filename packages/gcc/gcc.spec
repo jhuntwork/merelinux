@@ -1,6 +1,6 @@
 Summary: The GNU Compiler Collection
 Name: gcc
-Version: 4.4.1
+Version: 4.4.2
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -150,5 +150,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libstdc++.so.*
 
 %changelog
+* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Upgrade to 4.4.2
+
 * Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version

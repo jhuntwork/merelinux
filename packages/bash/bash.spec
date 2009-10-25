@@ -1,20 +1,20 @@
 Summary: GNU Bash
 Name: bash
 Version: 4.0
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/bash
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-fixes-3.patch
+Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-fixes-4.patch
 Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
 
 Requires: glibc, ncurses, readline
 
 BuildRequires: digest(%{SOURCE0}) = a90a1b5a6db4838483f05438e05e8eb9
-BuildRequires: digest(%{PATCH0}) = 682003bdbb543da8841d49729d1c5994
+BuildRequires: digest(%{PATCH0}) = 1712950349a705dabedef6c920422011
 BuildRequires: digest(%{PATCH1}) = 725983bd3d3356134494d8a1ec6cf63f
 
 %package doc
@@ -69,5 +69,8 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
+* Thu Sat 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Updated upstream patches
+
 * Thu Aug 13 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
