@@ -37,4 +37,8 @@ rpm -ivh \
  /usr/src/rpm/RPMS/$ARCH/gdbm-1.8.3-1.$ARCH.rpm \
  /usr/src/rpm/RPMS/$ARCH/man-db-2.5.5-1.$ARCH.rpm \
  /usr/src/rpm/RPMS/noarch/man-pages-3.23-1.noarch.rpm \
- /usr/src/rpm/RPMS/noarch/iana-etc-2.30-1.noarch.rpm
+ /usr/src/rpm/RPMS/noarch/iana-etc-2.30-1.noarch.rpm \
+ /usr/src/rpm/RPMS/$ARCH/patch-2.5.9-1.$ARCH.rpm \
+ /usr/src/rpm/RPMS/$ARCH/Python-2.6.3-1.$ARCH.rpm \
+ /usr/src/rpm/RPMS/$ARCH/cracklib-2.8.13-1.$ARCH.rpm \
+ /usr/src/rpm/RPMS/$ARCH/Linux-PAM-1.1.0-1.$ARCH.rpm

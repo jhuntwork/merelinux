@@ -1,7 +1,7 @@
 Summary: Base directory layout
 Name: base-layout
-Version: 0.0
-Release: 2
+Version: 0.1
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -148,6 +148,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Wed Sep 9 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-1
+- Added a new locale
+
 * Wed Sep 9 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.0-2
 - Added /usr/share/dict as one of the base directories
 

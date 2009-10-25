@@ -1,6 +1,6 @@
 Summary: Python Programming Language
 Name: Python
-Version: 2.6.2
+Version: 2.6.3
 Release: 1
 Group: Development/Languages
 License: Modified CNRI Open Source License
@@ -70,5 +70,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/python2.6/config
 
 %changelog
+* Sun Oct 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Upgrade to 2.6.3
+
 * Tue Sep 8 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
