@@ -1,7 +1,7 @@
 Summary: GNU Grep
 Name: grep
 Version: 2.5.4
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -34,10 +34,10 @@ rm -f %{buildroot}/usr/share/info/dir
 rm -rf %{buildroot}
 
 %post
-/usr/bin/install-info %{_infodir}/grep.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/grep.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete %{_infodir}/grep.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/grep.info /usr/share/info/dir
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -50,5 +50,8 @@ rm -rf %{buildroot}
 /usr/share/man/man1/grep.1
 
 %changelog
-* Tue Jul 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Sat Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.4-2
+- Use FHS compatible info directories
+
+* Tue Jul 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.4-1
 - Initial version

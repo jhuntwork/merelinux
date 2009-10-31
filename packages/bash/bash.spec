@@ -1,7 +1,7 @@
 Summary: GNU Bash
 Name: bash
 Version: 4.0
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -51,10 +51,10 @@ rm -f %{buildroot}/usr/share/info/dir
 rm -rf %{buildroot}
 
 %post doc
-/usr/bin/install-info %{_infodir}/bash.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/bash.info /usr/share/info/dir
 
 %preun doc
-/usr/bin/install-info --delete %{_infodir}/bash.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/bash.info /usr/share/info/dir
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -69,8 +69,11 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
-* Thu Sat 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0-3
+- Use FHS compatible info directories
+
+* Thu Sep 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0-2
 - Updated upstream patches
 
-* Thu Aug 13 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Thu Aug 13 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0-1
 - Initial version

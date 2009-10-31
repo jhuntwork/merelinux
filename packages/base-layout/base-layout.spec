@@ -1,7 +1,7 @@
 Summary: Base directory layout
 Name: base-layout
 Version: 0.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -23,20 +23,30 @@ install -dv %{buildroot}/{bin,boot,dev,etc,home,lib,media,mnt,opt,proc,root,sbin
 
 install -dv %{buildroot}/media/{floppy,cdrom}
 install -dv %{buildroot}/usr/{,local/}{bin,include,lib,sbin,src}
-install -dv %{buildroot}/usr/{,local/}share/{dict,doc,info,locale,man}
+install -dv %{buildroot}/usr/{,local/}share/{dict,doc,info,locale}
 install -dv %{buildroot}/usr/{,local/}share/{misc,terminfo,zoneinfo}
-install -dv %{buildroot}/usr/{,local/}share/man/man{1..8}
-for dir in %{buildroot}/usr %{buildroot}/usr/local
-  do ln -sv share/{man,doc,info} $dir
-done
+install -dv %{buildroot}/usr/share/man
+ln -sv ../../share/man %{buildroot}/usr/local/share/man
 install -dv %{buildroot}/var/{lock,log,mail,run,spool,tmp}
 install -dv %{buildroot}/var/spool/repackage
 install -dv %{buildroot}/var/{opt,cache,lib/{hwclock,misc,locate},local}
 
+> %{name}.man
+for man in man{{1..9}{,x},{0,1,3}p,n}; do
+	mkdir -p %{buildroot}/usr/share/man/$man
+	echo "%dir %ghost /usr/share/man/$man" >> %{name}.man
+done
+for loc in bg cs da de el en eo es fi fr hr hu id it ja ko nl pl pt pt_BR \
+  ro ru sk sl sv tr zh_CN zh_TW; do
+	mkdir -p %{buildroot}/usr/share/man/${loc}/man{1..9}
+	echo "%dir %ghost %lang(${loc}) /usr/share/man/${loc}" >> %{name}.man
+	echo "%dir %ghost %lang(${loc}) /usr/share/man/${loc}/*" >> %{name}.man
+done
+
 > %{name}.lang
 egrep -vh '^($|#)' %{SOURCE0} %{SOURCE1} | while read loc; do
 	echo $loc | grep -q '@' && locale=${loc%%@*} || locale=$loc
-	mkdir -p ${RPM_BUILD_ROOT}/usr/share/locale/${loc}/LC_{MESSAGES,TIME}
+	mkdir -p %{buildroot}/usr/share/locale/${loc}/LC_{MESSAGES,TIME}
 	echo "%dir %ghost %lang(${locale}) /usr/share/locale/${loc}" \
 		>> %{name}.lang
 	echo "%dir %ghost %lang(${locale}) /usr/share/locale/${loc}/LC_MESSAGES" \
@@ -45,7 +55,7 @@ egrep -vh '^($|#)' %{SOURCE0} %{SOURCE1} | while read loc; do
 		>> %{name}.lang
 done
 
-cat %{name}.lang > %{name}.files
+cat  %{name}.man %{name}.lang > %{name}.files
 
 # multilib directories
 %if "%{_lib}" != "lib"
@@ -57,12 +67,6 @@ rm -rf %{buildroot}
 
 %files -f %{name}.files
 %defattr(-,root,root)
-/usr/doc
-/usr/info
-/usr/man
-/usr/local/doc
-/usr/local/info
-/usr/local/man
 %dir /
 %dir /bin
 %dir /boot
@@ -100,15 +104,7 @@ rm -rf %{buildroot}
 %dir /usr/local/share/doc
 %dir /usr/local/share/info
 %dir /usr/local/share/locale
-%dir /usr/local/share/man
-%dir /usr/local/share/man/man1
-%dir /usr/local/share/man/man2
-%dir /usr/local/share/man/man3
-%dir /usr/local/share/man/man4
-%dir /usr/local/share/man/man5
-%dir /usr/local/share/man/man6
-%dir /usr/local/share/man/man7
-%dir /usr/local/share/man/man8
+/usr/local/share/man
 %dir /usr/local/share/misc
 %dir /usr/local/share/terminfo
 %dir /usr/local/share/zoneinfo
@@ -120,14 +116,6 @@ rm -rf %{buildroot}
 %dir /usr/share/info
 %dir /usr/share/locale
 %dir /usr/share/man
-%dir /usr/share/man/man1
-%dir /usr/share/man/man2
-%dir /usr/share/man/man3
-%dir /usr/share/man/man4
-%dir /usr/share/man/man5
-%dir /usr/share/man/man6
-%dir /usr/share/man/man7
-%dir /usr/share/man/man8
 %dir /usr/share/misc
 %dir /usr/share/terminfo
 %dir /usr/share/zoneinfo
@@ -148,7 +136,10 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
-* Wed Sep 9 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-1
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-2
+- Restructure man directories to be FHS compliant
+
+* Sun Oct 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-1
 - Added a new locale
 
 * Wed Sep 9 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.0-2

@@ -1,7 +1,7 @@
 Summary: GNU Inetutils
 Name: inetutils
 Version: 1.6
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -37,10 +37,10 @@ rm -f %{buildroot}/usr/share/info/dir
 rm -rf %{buildroot}
 
 %post
-/usr/bin/install-info %{_infodir}/inetutils.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/inetutils.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete %{_infodir}/inetutils.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/inetutils.info /usr/share/info/dir
 
 %files
 %defattr(-,root,root)
@@ -66,5 +66,8 @@ rm -rf %{buildroot}
 /usr/share/man/man8/ping.8
 
 %changelog
-* Tue Jul 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6-2
+- Use FHS compatible info directories
+
+* Tue Jul 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6-1
 - Initial version

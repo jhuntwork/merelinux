@@ -28,7 +28,7 @@ Libaries, headers and documentation for developing with %{_name}
 %setup -q
 
 %build
-./configure --libdir=/%{_lib} --sbindir=/%{_lib}/security \
+./configure --prefix=/usr --libdir=/%{_lib} --sbindir=/%{_lib}/security \
   --enable-securedir=/%{_lib}/security --enable-read-both-confs
 make
 

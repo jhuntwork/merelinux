@@ -1,7 +1,7 @@
 Summary: GNU Streams Editor
 Name: sed
 Version: 4.2.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -29,10 +29,10 @@ rm -f %{buildroot}/usr/share/info/dir
 %find_lang %{name}
 
 %post
-/usr/bin/install-info %{_infodir}/sed.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/sed.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete %{_infodir}/sed.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/sed.info /usr/share/info/dir
 
 %clean
 rm -rf %{buildroot}
@@ -44,5 +44,8 @@ rm -rf %{buildroot}
 /usr/share/man/man1/sed.1
 
 %changelog
-* Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.1-2
+- Use FHS compatible info directories
+
+* Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.1-1
 - Initial version

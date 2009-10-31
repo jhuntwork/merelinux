@@ -1,7 +1,7 @@
 Summary: GNU Troff (Groff)
 Name: groff
 Version: 1.20.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -12,9 +12,16 @@ Patch: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i18
 
 Requires: base-layout, glibc, gcc-libs, gcc-c++-libs
 
+%package doc
+Requires: %{name}
+Summary: Documentation for %{name}
+
 %description
 The groff (GNU troff) software is a typesetting package which reads plain text
 mixed with formatting commands and produces formatted output.
+
+%description doc
+Documentation for %{name}
 
 %prep
 %setup -q
@@ -30,10 +37,10 @@ ln -sv tbl %{buildroot}/usr/bin/gtbl
 rm -f %{buildroot}/usr/share/info/dir
 
 %post
-/usr/bin/install-info %{_infodir}/groff.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/groff.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete %{_infodir}/groff.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/groff.info /usr/share/info/dir
 
 %clean
 rm -rf %{buildroot}
@@ -84,7 +91,6 @@ rm -rf %{buildroot}
 /usr/bin/tfmtodit
 /usr/bin/troff
 /usr/%{_lib}/%{name}
-/usr/share/doc/%{name}-%{version}
 /usr/share/%{name}
 /usr/share/info/groff.info
 /usr/share/info/groff.info-1
@@ -150,6 +156,13 @@ rm -rf %{buildroot}
 /usr/share/man/man7/groff_www.7
 /usr/share/man/man7/roff.7
 
+%files doc
+%defattr(-,root,root)
+/usr/share/doc/%{name}-%{version}
+
 %changelog
-* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.20.1-2
+- Use FHS compatible info dirs. Use separate doc package.
+
+* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.20.1-1
 - Initial version

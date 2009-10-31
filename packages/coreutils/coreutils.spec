@@ -1,7 +1,7 @@
 Summary: GNU Coreutils
 Name: coreutils
 Version: 7.6
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -54,10 +54,10 @@ rm -f %{buildroot}/usr/share/info/dir
 rm -rf %{buildroot}
 
 %post
-/usr/bin/install-info %{_infodir}/coreutils.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/coreutils.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete %{_infodir}/coreutils.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/coreutils.info /usr/share/info/dir
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -168,8 +168,11 @@ rm -rf %{buildroot}
 /usr/%{_lib}/%{name}/libstdbuf.so
 
 %changelog
-* Mon Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.6-2
+- Use FHS compatible info directories
+
+* Mon Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.6-1
 - Upgrade to 7.6
 
-* Mon Jul 27 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Mon Jul 27 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.4-1
 - Initial version

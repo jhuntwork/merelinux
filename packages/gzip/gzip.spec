@@ -1,7 +1,7 @@
 Summary: Gzip compression utility
 Name: gzip
 Version: 1.3.13
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -30,10 +30,10 @@ mv -v %{buildroot}/bin/{zfgrep,zforce,zgrep,zless,zmore,znew} %{buildroot}/usr/b
 rm -f %{buildroot}/usr/share/info/dir
 
 %post
-/usr/bin/install-info %{_infodir}/gzip.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/gzip.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete %{_infodir}/gzip.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/gzip.info /usr/share/info/dir
 
 %clean
 rm -rf %{buildroot}
@@ -68,8 +68,11 @@ rm -rf %{buildroot}
 /usr/share/man/man1/znew.1
 
 %changelog
-* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.3.13-2
+- Use FHS compatible info directories
+
+* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.3.13-1
 - Upgrade to 1.3.13
 
-* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.3.12-1
 - Initial version

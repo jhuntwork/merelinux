@@ -1,7 +1,7 @@
 Summary: Gawk
 Name: gawk
 Version: 3.1.7
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -30,12 +30,12 @@ rm -f %{buildroot}/usr/share/info/dir
 %find_lang %{name}
 
 %post
-/usr/bin/install-info %{_infodir}/gawk.info %{_infodir}/dir
-/usr/bin/install-info %{_infodir}/gawkinet.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/gawk.info /usr/share/info/dir
+/usr/bin/install-info /usr/share/info/gawkinet.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete %{_infodir}/gawk.info %{_infodir}/dir
-/usr/bin/install-info --delete %{_infodir}/gawkinet.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/gawk.info /usr/share/info/dir
+/usr/bin/install-info --delete /usr/share/info/gawkinet.info /usr/share/info/dir
 
 %clean
 rm -rf %{buildroot}
@@ -57,5 +57,8 @@ rm -rf %{buildroot}
 /usr/share/man/man1/pgawk.1
 
 %changelog
-* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.7-1
+- Use FHS compatible info directories
+
+* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.7-1
 - Initial version

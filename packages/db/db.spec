@@ -1,7 +1,7 @@
 Summary: The Berkeley Database
 Name: db
 Version: 4.7.25
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -61,7 +61,6 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libdb_cxx-4.7.a
 /usr/%{_lib}/libdb_cxx-4.7.so
 /usr/%{_lib}/libdb_cxx-4.so
-/usr/share/doc/%{name}-%{version}
 
 %files devel
 %defattr(-,root,root)
@@ -72,7 +71,11 @@ rm -rf %{buildroot}
 /usr/include/db.h
 /usr/include/db_185.h
 /usr/include/db_cxx.h
+/usr/share/doc/%{name}-%{version}
 
 %changelog
-* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.7.25-2
+- Use FHS compatible info directories. Move documentation to devel package.
+
+* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.7.25-1
 - Initial version
