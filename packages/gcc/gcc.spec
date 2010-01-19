@@ -1,7 +1,7 @@
 Summary: The GNU Compiler Collection
 Name: gcc
 Version: 4.4.2
-Release: 1
+Release: 2
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
@@ -10,6 +10,7 @@ URL: http://gcc.gnu.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, glibc-devel, linux-headers, gmp, mpfr, binutils
+BuildRequires: digest(%{SOURCE0}) = 70f5ac588a79e3c9901d5b34f58d896d
 
 %description
 The GNU Compiler Collection is required to compile various languages.
@@ -91,7 +92,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/lib/cpp
+/%{_lib}/cpp
 /usr/bin/cc
 /usr/bin/cpp
 /usr/bin/gcc
@@ -105,7 +106,7 @@ rm -rf %{buildroot}
 /usr/info/gccinstall.info
 /usr/info/gccint.info
 /usr/info/libgomp.info
-/usr/lib/gcc
+/usr/%{_lib}/gcc
 /usr/%{_lib}/libgcc_s.so
 /usr/%{_lib}/libgomp.a
 /usr/%{_lib}/libgomp.so
@@ -117,6 +118,19 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libssp.a
 /usr/%{_lib}/libssp.so
 /usr/%{_lib}/libssp_nonshared.a
+%ifarch ppc
+/usr/%{_lib}/nof/libgcc_s.so
+/usr/%{_lib}/nof/libgomp.a
+/usr/%{_lib}/nof/libgomp.so
+/usr/%{_lib}/nof/libgomp.spec
+/usr/%{_lib}/nof/libmudflap.a
+/usr/%{_lib}/nof/libmudflap.so
+/usr/%{_lib}/nof/libmudflapth.a
+/usr/%{_lib}/nof/libmudflapth.so
+/usr/%{_lib}/nof/libssp.a
+/usr/%{_lib}/nof/libssp.so
+/usr/%{_lib}/nof/libssp_nonshared.a
+%endif
 /usr/man/man1/gcov*
 /usr/man/man1/gcc*
 /usr/man/man1/cpp*
@@ -131,6 +145,13 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libmudflap.so.*
 /usr/%{_lib}/libmudflapth.so.*
 /usr/%{_lib}/libssp.so.*
+%ifarch ppc
+/usr/%{_lib}/nof/libgcc_s.so.*
+/usr/%{_lib}/nof/libgomp.so.*
+/usr/%{_lib}/nof/libmudflap.so.*
+/usr/%{_lib}/nof/libmudflapth.so.*
+/usr/%{_lib}/nof/libssp.so.*
+%endif
 
 %files c++
 %defattr(-,root,root)
@@ -142,15 +163,26 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libstdc++.a
 /usr/%{_lib}/libstdc++.so
 /usr/%{_lib}/libsupc++.a
+%ifarch ppc
+/usr/%{_lib}/nof/libstdc++.a
+/usr/%{_lib}/nof/libstdc++.so
+/usr/%{_lib}/nof/libsupc++.a
+%endif
 /usr/man/man1/g++*
 /usr/share/locale/*/LC_MESSAGES/libstdc++.mo
 
 %files c++-libs
 %defattr(-,root,root)
 /usr/%{_lib}/libstdc++.so.*
+%ifarch ppc
+/usr/%{_lib}/nof/libstdc++.so.*
+%endif
 
 %changelog
-* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Tue Dec 29 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.2-2
+- Add in support for PowerPC
+
+* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.2-1
 - Upgrade to 4.4.2
 
 * Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -

@@ -9,7 +9,8 @@ Vendor: LightCube Solutions
 URL: http://pkg-config.freedesktop.org
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, glibc-devel, linux-headers, binutils, gcc
+Requires: base-layout, glibc
+Provides: pkgconfig
 
 %description
 pkg-config is a helper tool used when compiling applications and libraries. It can
@@ -26,6 +27,8 @@ make check
 
 %install
 make DESTDIR=%{buildroot} install
+install -dv %{buildroot}/usr/share/pkgconfig
+install -dv %{buildroot}/usr/%{_lib}/pkgconfig
 
 %clean
 rm -rf %{buildroot}
@@ -34,8 +37,10 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/bin/pkg-config
 /usr/share/aclocal/pkg.m4
+/usr/share/pkgconfig
+/usr/%{_lib}/pkgconfig
 /usr/share/man/man1/pkg-config.1
 
 %changelog
-* Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.23-1
 - Initial version

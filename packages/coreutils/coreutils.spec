@@ -1,7 +1,7 @@
 Summary: GNU Coreutils
 Name: coreutils
-Version: 7.6
-Release: 2
+Version: 8.2
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -12,6 +12,9 @@ Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i
 Source2: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-uname-1.patch
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = dfb0d3dbc5f555386339f4f74621cda0
+BuildRequires: digest(%{SOURCE1}) = 13699e7e1c2ab2165dbe9f35c047e804
+BuildRequires: digest(%{SOURCE2}) = 510a730e7bc8fd92daaf47aad4dc1200
 Requires(post): texinfo, bash, ncurses
 
 %description
@@ -117,6 +120,7 @@ rm -rf %{buildroot}
 /usr/bin/mktemp
 /usr/bin/nl
 /usr/bin/nohup
+/usr/bin/nproc
 /usr/bin/od
 /usr/bin/paste
 /usr/bin/pathchk
@@ -168,6 +172,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/%{name}/libstdbuf.so
 
 %changelog
+* Mon Dec 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.2-1
+- Upgrade to 8.2
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.6-2
 - Use FHS compatible info directories
 

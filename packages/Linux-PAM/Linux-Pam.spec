@@ -1,7 +1,7 @@
 Summary: Linux-PAM (Pluggable Authentication Modules for Linux)
 Name: Linux-PAM
 Version: 1.1.0
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -35,6 +35,7 @@ make
 %install
 make DESTDIR=%{buildroot} install
 find %{buildroot} -name "*.la" -exec rm -vf '{}' \;
+install -dv %{buildroot}/etc/pam.d
 %find_lang %{name}
 
 %clean
@@ -43,6 +44,7 @@ rm -rf %{buildroot}
 %files -f %{name}.lang
 %defattr(-,root,root)
 %dir /etc/environment
+%dir /etc/pam.d
 /etc/security
 /%{_lib}/libpam.so.0
 /%{_lib}/libpam.so.0.82.1
@@ -64,5 +66,8 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Sun Nov 01 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.0-2
+- Added the /etc/pam.d directory
+
 * Sat Oct 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.0-1
 - Initial version

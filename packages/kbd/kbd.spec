@@ -47,7 +47,6 @@ rm -rf %{buildroot}
 /usr/bin/psfgettable
 /usr/bin/psfstriptable
 /usr/bin/psfxtable
-/usr/bin/resizecons
 /usr/bin/setfont
 /usr/bin/setkeycodes
 /usr/bin/setleds
@@ -81,6 +80,9 @@ rm -rf %{buildroot}
 /usr/share/man/man8/setfont.8
 /usr/share/man/man8/setkeycodes.8
 /usr/share/man/man8/showconsolefont.8
+%ifarch i686
+/usr/bin/resizecons
+%endif
 
 %changelog
 * Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -

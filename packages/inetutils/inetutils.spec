@@ -1,16 +1,16 @@
 Summary: GNU Inetutils
 Name: inetutils
-Version: 1.6
-Release: 2
+Version: 1.7
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/inetutils
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-no_server_man_pages-1.patch
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = a1d5a01b0ab8a7e596ac4cff0cce7129
 
 %description
 %{name} is a collection of common networking programs including ftp,
@@ -20,7 +20,6 @@ telnet, ping, hostname and traceroute
 %setup -q
 
 %build
-patch -Np1 -i %{SOURCE1}
 ./configure --prefix=/usr --libexecdir=/usr/sbin \
     --localstatedir=/var --disable-ifconfig \
     --disable-logger --disable-syslogd --disable-whois \
@@ -49,6 +48,7 @@ rm -rf %{buildroot}
 /usr/bin/hostname
 /usr/bin/ping6
 /usr/bin/rcp
+/usr/bin/rexec
 /usr/bin/rlogin
 /usr/bin/rsh
 /usr/bin/talk
@@ -57,15 +57,21 @@ rm -rf %{buildroot}
 /usr/bin/traceroute
 /usr/share/info/inetutils.info
 /usr/share/man/man1/ftp.1
+/usr/share/man/man1/hostname.1
 /usr/share/man/man1/rcp.1
+/usr/share/man/man1/rexec.1
 /usr/share/man/man1/rlogin.1
 /usr/share/man/man1/rsh.1
 /usr/share/man/man1/talk.1
 /usr/share/man/man1/telnet.1
 /usr/share/man/man1/tftp.1
-/usr/share/man/man8/ping.8
+/usr/share/man/man1/traceroute.1
+/usr/share/man/man1/ping.1
 
 %changelog
+* Mon Dec 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.7-1
+- Upgrade to 1.7
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6-2
 - Use FHS compatible info directories
 

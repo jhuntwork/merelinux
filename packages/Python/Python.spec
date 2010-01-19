@@ -1,15 +1,16 @@
 Summary: Python Programming Language
 Name: Python
-Version: 2.6.3
+Version: 2.6.4
 Release: 1
 Group: Development/Languages
 License: Modified CNRI Open Source License
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.python.org
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
+BuildRequires:  digest(%{SOURCE0}) = fee5408634a54e721a93531aba37f8c1
 Provides: python(abi) = 2.6
 
 %description
@@ -70,7 +71,10 @@ rm -rf %{buildroot}
 /usr/%{_lib}/python2.6/config
 
 %changelog
-* Sun Oct 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Tue Dec 29 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.4-1
+- Upgrade to 2.6.4
+
+* Sun Oct 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.3-1
 - Upgrade to 2.6.3
 
 * Tue Sep 8 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -

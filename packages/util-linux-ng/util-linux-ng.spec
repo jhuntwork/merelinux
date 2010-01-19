@@ -1,15 +1,16 @@
 Summary: Util-Linux Next Generation
 Name: util-linux-ng
-Version: 2.16
+Version: 2.16.2
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://userweb.kernel.org/~kzak/util-linux-ng
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = edd1f7a82fd388cc0e1e3d2d1e7ea55a
 
 %package devel
 Summary: %{name} headers and libraries
@@ -91,7 +92,6 @@ rm -rf %{buildroot}
 /usr/bin/flock
 /usr/bin/getopt
 /usr/bin/hexdump
-/usr/bin/i386
 /usr/bin/ionice
 /usr/bin/ipcmk
 /usr/bin/ipcrm
@@ -134,6 +134,14 @@ rm -rf %{buildroot}
 /usr/share/man/man1/*
 /usr/share/man/man5/*
 /usr/share/man/man8/*
+%ifarch i686
+/usr/bin/i386
+%endif
+%ifarch ppc
+/usr/bin/ppc
+/usr/bin/ppc32
+/usr/bin/ppc64
+%endif
 
 %files devel
 %defattr(-,root,root)
@@ -149,5 +157,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/uuid.pc
 
 %changelog
-* Sun Jul 26 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Mon Dec 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.16.2-1
+- Upgrade to 2.16.2
+
+* Sun Jul 26 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.16-1
 - Initial version

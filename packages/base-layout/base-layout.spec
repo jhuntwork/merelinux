@@ -1,7 +1,7 @@
 Summary: Base directory layout
 Name: base-layout
 Version: 0.1
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -23,13 +23,17 @@ install -dv %{buildroot}/{bin,boot,dev,etc,home,lib,media,mnt,opt,proc,root,sbin
 
 install -dv %{buildroot}/media/{floppy,cdrom}
 install -dv %{buildroot}/usr/{,local/}{bin,include,lib,sbin,src}
-install -dv %{buildroot}/usr/{,local/}share/{dict,doc,info,locale}
+install -dv %{buildroot}/usr/{,local/}share/{aclocal,dict,doc,gtk-doc/html,info,locale}
 install -dv %{buildroot}/usr/{,local/}share/{misc,terminfo,zoneinfo}
 install -dv %{buildroot}/usr/share/man
 ln -sv ../../share/man %{buildroot}/usr/local/share/man
 install -dv %{buildroot}/var/{lock,log,mail,run,spool,tmp}
 install -dv %{buildroot}/var/spool/repackage
 install -dv %{buildroot}/var/{opt,cache,lib/{hwclock,misc,locate},local}
+
+%ifarch ppc
+install -dv %{buildroot}/usr/%{_lib}/nof
+%endif
 
 > %{name}.man
 for man in man{{1..9}{,x},{0,1,3}p,n}; do
@@ -95,6 +99,9 @@ rm -rf %{buildroot}
 %if "%{_lib}" != "lib"
 %dir /usr/%{_lib}
 %endif
+%ifarch ppc
+%dir /usr/%{_lib}/nof
+%endif
 %dir /usr/local
 %dir /usr/local/bin
 %dir /usr/local/include
@@ -104,16 +111,19 @@ rm -rf %{buildroot}
 %dir /usr/local/share/doc
 %dir /usr/local/share/info
 %dir /usr/local/share/locale
-/usr/local/share/man
+%dir %ghost /usr/local/share/man
 %dir /usr/local/share/misc
 %dir /usr/local/share/terminfo
 %dir /usr/local/share/zoneinfo
 %dir /usr/local/src
 %dir /usr/sbin
 %dir /usr/share
+%dir /usr/share/aclocal
 %dir /usr/share/dict
 %dir /usr/share/doc
 %dir /usr/share/info
+%dir /usr/share/gtk-doc
+%dir /usr/share/gtk-doc/html
 %dir /usr/share/locale
 %dir /usr/share/man
 %dir /usr/share/misc
@@ -136,6 +146,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Sun Nov 01 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-3
+- Add /usr/share/aclocal and /usr/share/gtk-doc/html
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-2
 - Restructure man directories to be FHS compliant
 

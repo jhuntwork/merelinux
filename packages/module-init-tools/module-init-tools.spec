@@ -1,15 +1,16 @@
 Summary: module-init-tools
 Name: module-init-tools
-Version: 3.10
-Release: 2
+Version: 3.11.1
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.kernel.org/pub/linux/utils/kernel/module-init-tools
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, zlib
+BuildRequires: digest(%{SOURCE0}) = 28dfcb9e24cdbeb12b99ac1eb8af7dea
 
 %description
 Tools for activating Linux kernel modules
@@ -55,6 +56,9 @@ rm -rf %{buildroot}
 /usr/share/man/man8/rmmod.8
 
 %changelog
+* Tue Dec 29 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.11.1-1
+- Upgrade to 3.11.1
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.10-2
 - Use FHS compatible info directories
 
