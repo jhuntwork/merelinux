@@ -10,6 +10,7 @@ URL: http://www.gnu.org/software/ncurses
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = cce05daf61a64501ef6cd8da1f727ec6
 
 %package devel
 Summary: Headers and libraries for developing with %{name} 
@@ -70,7 +71,6 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libformw.so.*
 /usr/%{_lib}/libmenuw.so.*
 /usr/%{_lib}/libpanelw.so.*
-/usr/%{_lib}/terminfo
 /usr/share/man/man1/*
 /usr/share/man/man5/term.5
 /usr/share/man/man5/terminfo.5
