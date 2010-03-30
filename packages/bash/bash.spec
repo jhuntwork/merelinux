@@ -1,21 +1,19 @@
 Summary: GNU Bash
 Name: bash
-Version: 4.0
-Release: 3
+Version: 4.1
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/bash
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-fixes-4.patch
-Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
+Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
 
 Requires: glibc, ncurses, readline
 
-BuildRequires: digest(%{SOURCE0}) = a90a1b5a6db4838483f05438e05e8eb9
-BuildRequires: digest(%{PATCH0}) = 1712950349a705dabedef6c920422011
-BuildRequires: digest(%{PATCH1}) = 725983bd3d3356134494d8a1ec6cf63f
+BuildRequires: digest(%{SOURCE0}) = 9800d8724815fd84994d9be65ab5e7b8
+BuildRequires: digest(%{PATCH0}) = 7b9ef6862dc12cb3489ebb0d0e7801e6
 
 %package doc
 Summary: Bash Documentation 
@@ -30,7 +28,6 @@ Extensive documentation for the GNU Bash shell
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 ./configure --prefix=/usr --bindir=/bin --without-bash-malloc \
@@ -69,6 +66,9 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
+* Tue Mar 30 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-1
+- Uppdated to 4.1
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0-3
 - Use FHS compatible info directories
 
