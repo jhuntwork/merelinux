@@ -10,6 +10,7 @@ URL: http://www.perl.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, zlib
+BuildRequires: digest(%{SOURCE0}) = 82400c6d34f7b7b43d0196c76cd2bbb1
 
 Provides: perl, perl(Carp::Heavy), perl(getopts.pl)
 
