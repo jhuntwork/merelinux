@@ -1,6 +1,6 @@
 Summary: The GNU Readline Library
 Name: readline
-Version: 6.0
+Version: 6.1
 Release: 1
 Group: System Environment/Libraries
 License: BSD
@@ -8,9 +8,9 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://tiswww.case.edu/php/chet/readline/rltop.html
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-fixes-1.patch
 
 Requires: base-layout, glibc, ncurses
+BuildRequires: digest(%{SOURCE0}) = fc2f7e714fe792db1ce6ddc4c9fb4ef3
 
 %package devel
 Summary: Headers and objects for developing with %{name}
@@ -28,7 +28,9 @@ Headers and objects for developing with %{name}
 %build
 sed -i '/MV.*old/d' Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
-patch -Np1 -i %{SOURCE1}
+sed -i -e 's/0x0600/0x0601/' \
+       -e 's/6\.0/6.1/' \
+       -e 's/RL_VERSION_MINOR\t0/RL_VERSION_MINOR\t1/' readline.h
 ./configure --prefix=/usr --libdir=/%{_lib}
 make SHLIB_LIBS=-lncurses
 
@@ -62,9 +64,9 @@ done
 %files
 %defattr(-,root,root)
 /%{_lib}/libhistory.so.6
-/%{_lib}/libhistory.so.6.0
+/%{_lib}/libhistory.so.6.1
 /%{_lib}/libreadline.so.6
-/%{_lib}/libreadline.so.6.0
+/%{_lib}/libreadline.so.6.1
 
 %files devel
 %defattr(-,root,root)
@@ -82,5 +84,8 @@ done
 /usr/share/man/man3/readline.3
 
 %changelog
+* Tue Mar 30 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Updated to 6.1
+
 * Sun Jul 19 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
