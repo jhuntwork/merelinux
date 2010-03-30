@@ -1,15 +1,16 @@
 Summary: The GNU Documentation System
 Name: texinfo
-Version: 4.13
+Version: 4.13a
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/texinfo
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}a.tar.gz
+Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc, ncurses, bash
+BuildRequires: digest(%{SOURCE0}) = 71ba711519209b5fb583fed2b3d86fcb
 
 %package tex
 Summary: Tools for formatting texinfo docs for printing using TeX.
@@ -24,7 +25,7 @@ other projects as well.
 Tools for formatting texinfo docs for printing using TeX.
 
 %prep
-%setup -q
+%setup -q -n %{name}-4.13
 
 %build
 ./configure --prefix=/usr
