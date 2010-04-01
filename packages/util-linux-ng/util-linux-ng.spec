@@ -1,6 +1,6 @@
 Summary: Util-Linux Next Generation
 Name: util-linux-ng
-Version: 2.16.2
+Version: 2.17.2
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,7 +10,7 @@ URL: http://userweb.kernel.org/~kzak/util-linux-ng
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = edd1f7a82fd388cc0e1e3d2d1e7ea55a
+BuildRequires: digest(%{SOURCE0}) = 4635725a3eef1c57090bac8ea5e082e6
 
 %package devel
 Summary: %{name} headers and libraries
@@ -80,6 +80,7 @@ rm -rf %{buildroot}
 /sbin/swapoff
 /sbin/swapon
 /sbin/switch_root
+/sbin/wipefs
 /usr/bin/cal
 /usr/bin/chkdupexe
 /usr/bin/chrt
@@ -89,6 +90,7 @@ rm -rf %{buildroot}
 /usr/bin/column
 /usr/bin/cytune
 /usr/bin/ddate
+/usr/bin/fallocate
 /usr/bin/flock
 /usr/bin/getopt
 /usr/bin/hexdump
@@ -117,6 +119,7 @@ rm -rf %{buildroot}
 /usr/bin/tailf
 /usr/bin/taskset
 /usr/bin/ul
+/usr/bin/unshare
 /usr/bin/uuidgen
 /usr/bin/wall
 /usr/bin/whereis
@@ -142,6 +145,10 @@ rm -rf %{buildroot}
 /usr/bin/ppc32
 /usr/bin/ppc64
 %endif
+%ifarch x86_64
+/usr/bin/i386
+/usr/bin/x86_64
+%endif
 
 %files devel
 %defattr(-,root,root)
@@ -157,6 +164,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/uuid.pc
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.17.2-1
+- Upgrade to 2.17.2
+
 * Mon Dec 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.16.2-1
 - Upgrade to 2.16.2
 
