@@ -1,27 +1,28 @@
 Summary: GNU Diffutils
 Name: diffutils
-Version: 2.8.1
-Release: 2
+Version: 2.9
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/diffutils
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i18n-1.patch
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = d6bc1bdc874ddb14cfed4d1655a0dbbe
 
 %description
 Utilities for comparing differences between files.
 
 %prep
 %setup -q
-%patch -p1
 
 %build
-touch man/diff.1
-./configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info
+./configure \
+  --prefix=/usr \
+  --mandir=/usr/share/man \
+  --infodir=/usr/share/info
 make
 
 %install
@@ -51,6 +52,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/sdiff.1
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.9-1
+- Upgrade to 2.9
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.1-2
 - Use FHS compatible directories for info files
 
