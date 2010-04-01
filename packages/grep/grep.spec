@@ -1,16 +1,16 @@
 Summary: GNU Grep
 Name: grep
-Version: 2.5.4
-Release: 2
+Version: 2.6.1
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/grep
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-debian_fixes-1.patch
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = 8d1496da11029112a4d0986cbf09e26f
 
 %description
 %{name} searches one or more input files for lines
@@ -20,9 +20,9 @@ containing a match to a specified pattern.
 %setup -q
 
 %build
-patch -Np1 -i %{SOURCE1}
-./configure --prefix=/usr --bindir=/bin \
-    --without-included-regex
+./configure \
+  --prefix=/usr \
+  --bindir=/bin
 make
 
 %install
@@ -50,6 +50,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/grep.1
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.1-1
+- Upgrade to 2.6.1
+
 * Sat Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.4-2
 - Use FHS compatible info directories
 
