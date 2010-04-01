@@ -1,15 +1,16 @@
 Summary: ext2, ext3 and ext4 File System Programs
 Name: e2fsprogs
-Version: 1.41.8
+Version: 1.41.11
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
-URL: http://userweb.kernel.org/~kzak/util-linux-ng
+URL: http://e2fsprogs.sourceforge.net
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = fb507a40c2706bc38306f150d069e345
 
 %package devel
 Summary: %{name} headers and libraries
@@ -26,12 +27,16 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-sed -i -e "s/July/Jul/" version.h
 mkdir -v build
 cd build
-../configure --prefix=/usr --with-root-prefix="" \
-  --enable-elf-shlibs --libdir=/usr/%{_lib} \
-  --disable-libblkid --disable-libuuid --disable-uuidd \
+../configure \
+  --prefix=/usr \
+  --with-root-prefix="" \
+  --enable-elf-shlibs \
+  --libdir=/usr/%{_lib} \
+  --disable-libblkid \
+  --disable-libuuid \
+  --disable-uuidd \
   --disable-fsck
 make
 make check
@@ -83,6 +88,7 @@ rm -rf %{buildroot}
 /sbin/tune2fs
 /usr/bin/chattr
 /usr/bin/lsattr
+/usr/sbin/e2freefrag
 /usr/%{_lib}/e2initrd_helper
 /usr/%{_lib}/libcom_err.so
 /usr/%{_lib}/libcom_err.so.*
@@ -123,5 +129,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/ss.pc
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.11-1
+- Upgrade to 1.41.11
+
 * Thu Aug 13 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
