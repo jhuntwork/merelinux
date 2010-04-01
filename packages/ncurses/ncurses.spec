@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libformw.so.*
 /usr/%{_lib}/libmenuw.so.*
 /usr/%{_lib}/libpanelw.so.*
+%ifnarch x86_64
+/usr/%{_lib}/terminfo
+%endif
 /usr/share/man/man1/*
 /usr/share/man/man5/term.5
 /usr/share/man/man5/terminfo.5
