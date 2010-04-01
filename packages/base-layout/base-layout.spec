@@ -1,7 +1,7 @@
 Summary: Base directory layout
 Name: base-layout
 Version: 0.1
-Release: 4
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -23,7 +23,6 @@ install -dv %{buildroot}/{bin,boot,dev,etc,home,lib,media,mnt,opt,proc,root,sbin
 
 install -dv %{buildroot}/media/{floppy,cdrom}
 install -dv %{buildroot}/usr/{,local/}{bin,include,lib,sbin,src}
-install -dv %{buildroot}/usr/lib/pkgconfig
 install -dv %{buildroot}/usr/{,local/}share/{aclocal,dict,doc,gtk-doc/html,info,locale}
 install -dv %{buildroot}/usr/{,local/}share/{misc,terminfo,zoneinfo}
 install -dv %{buildroot}/usr/share/man
@@ -65,7 +64,6 @@ cat  %{name}.man %{name}.lang > %{name}.files
 # multilib directories
 %if "%{_lib}" != "lib"
   install -dv %{buildroot}/{usr/,}%{_lib}
-  install -dv %{buildroot}/usr/%{_lib}/pkgconfig
 %endif
 
 %clean
@@ -148,9 +146,6 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
-* Sun Nov 01 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-4
-- Add pkgconfig dirs in /usr/lib and /usr/lib64
-
 * Sun Nov 01 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-3
 - Add /usr/share/aclocal and /usr/share/gtk-doc/html
 
