@@ -1,16 +1,18 @@
 Summary: kbd
 Name: kbd
-Version: 1.15
+Version: 1.15.1
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://freshmeat.net/projects/kbd
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-backspace-1.patch
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-backspace-1.patch
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = f997c490fe5ede839aacf31da6c4eb06
+BuildRequires: digest(%{PATCH0}) = f75cca16a38da6caa7d52151f7136895
 
 %description
 The kbd package contains keytable files and keyboard utilities
@@ -20,7 +22,8 @@ The kbd package contains keytable files and keyboard utilities
 %patch -p1
 
 %build
-./configure --prefix=/usr --datadir=/%{_lib}/kbd
+autoreconf
+./configure --prefix=/usr --datadir=/lib/kbd
 make
 
 %install
@@ -31,7 +34,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/%{_lib}/kbd
+/lib/kbd
 /usr/bin/chvt
 /usr/bin/deallocvt
 /usr/bin/dumpkeys
@@ -85,5 +88,8 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.15.1-1
+- Initial version
+
 * Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
