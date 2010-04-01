@@ -7,10 +7,11 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/sed
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
 Requires(post): texinfo, bash, ncurses
+BuildRequires: digest(%{SOURCE0}) = 7d310fbd76e01a01115075c1fd3f455a
 
 %description
 Sed is used to filter text and perform modifications on it.

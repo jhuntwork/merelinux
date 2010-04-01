@@ -7,10 +7,10 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/groff
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i18n-1.patch
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc, gcc-libs, gcc-c++-libs
+BuildRequires: digest(%{SOURCE0}) = 48fa768dd6fdeb7968041dd5ae8e2b02
 
 %package doc
 Requires: %{name}
@@ -27,7 +27,9 @@ Documentation for %{name}
 %setup -q
 
 %build
-PAGE=letter ./configure --prefix=/usr
+PAGE=letter ./configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib}/groff
 make
 
 %install

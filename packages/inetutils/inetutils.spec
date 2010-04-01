@@ -20,10 +20,15 @@ telnet, ping, hostname and traceroute
 %setup -q
 
 %build
-./configure --prefix=/usr --libexecdir=/usr/sbin \
-    --localstatedir=/var --disable-ifconfig \
-    --disable-logger --disable-syslogd --disable-whois \
-    --disable-servers
+./configure \
+  --prefix=/usr \
+  --libexecdir=/usr/sbin \
+  --localstatedir=/var \
+  --disable-ifconfig \
+  --disable-logger \
+  --disable-syslogd \
+  --disable-whois \
+  --disable-servers
 make
 
 %install

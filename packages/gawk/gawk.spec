@@ -7,9 +7,10 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/gawk
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = 674cc5875714315c490b26293d36dfcf
 
 %description
 Gawk is the GNU implementation of the awk command. The utility

@@ -7,9 +7,10 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/findutils
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = 351cc4adb07d54877fa15f75fb77d39f
 
 %description
 Utilities for searching files in a directory hierarchy.
