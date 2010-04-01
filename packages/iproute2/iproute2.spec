@@ -1,22 +1,23 @@
 Summary: Net:Iproute2
 Name: iproute2
-Version: 2.6.29
+Version: 2.6.33
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.linuxfoundation.org/en/Net:Iproute2
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-1.tar.bz2
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, db
+BuildRequires: digest(%{SOURCE0}) = b371fca3fcb5e436e69a7c2111d84a3c
 
 %description
 Iproute2 is a collection of utilities for controlling
 TCP/IP networking and traffic control in Linux
 
 %prep
-%setup -q -n %{name}-%{version}-1
+%setup -q
 
 %build
 make DESTDIR= LIBDIR=/usr/%{_lib}
@@ -32,7 +33,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /etc/iproute2
-/%{_lib}/tc
+/lib/tc
 /sbin/arpd
 /sbin/ctstat
 /sbin/genl
@@ -64,6 +65,7 @@ rm -rf %{buildroot}
 /usr/share/man/man8/tc-bfifo.8
 /usr/share/man/man8/tc-cbq-details.8
 /usr/share/man/man8/tc-cbq.8
+/usr/share/man/man8/tc-drr.8
 /usr/share/man/man8/tc-htb.8
 /usr/share/man/man8/tc-pfifo.8
 /usr/share/man/man8/tc-pfifo_fast.8
@@ -74,5 +76,8 @@ rm -rf %{buildroot}
 /usr/share/man/man8/tc.8
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.33-1
+- Upgraded to 2.6.33-1
+
 * Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
