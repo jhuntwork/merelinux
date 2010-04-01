@@ -8,9 +8,11 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.perl.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-utf8-1.patch
 
 Requires: base-layout, glibc, zlib
 BuildRequires: digest(%{SOURCE0}) = 82400c6d34f7b7b43d0196c76cd2bbb1
+BuildRequires: digest(%{PATCH0}) = f0c8a66598708bd7def8e85eed82bb95
 
 Provides: perl, perl(Carp::Heavy), perl(getopts.pl)
 
@@ -19,6 +21,7 @@ Perl is a stable, cross platform programming language.
 
 %prep
 %setup -q
+%patch0 -p1
 # perl doesn't conform to POSIX sh and doesn't offer any easy workaround
 mkdir bin
 ln -s /bin/bash bin/sh
@@ -110,6 +113,9 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+- Add in UTF-8 fixes
+
 * Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Upgrade to 5.10.1
 
