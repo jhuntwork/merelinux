@@ -1,15 +1,16 @@
 Summary: Fine Free File Command
 Name: file
-Version: 5.03
+Version: 5.04
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://darwinsys.com/file
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = accade81ff1cc774904b47c72c8aeea0
 
 %package devel
 Summary: Libraries and headers for developing with libmagic
@@ -54,5 +55,8 @@ rm -rf %{buildroot}
 /usr/share/man/man3/libmagic.3
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.04-1
+- Upgrade to 5.04
+
 * Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
