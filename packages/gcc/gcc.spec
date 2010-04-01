@@ -1,7 +1,7 @@
 Summary: The GNU Compiler Collection
 Name: gcc
-Version: 4.4.2
-Release: 2
+Version: 4.4.3
+Release: 1
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://gcc.gnu.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, glibc-devel, linux-headers, gmp, mpfr, binutils
-BuildRequires: digest(%{SOURCE0}) = 70f5ac588a79e3c9901d5b34f58d896d
+BuildRequires: digest(%{SOURCE0}) = fe1ca818fc6d2caeffc9051fe67ff103
 
 %description
 The GNU Compiler Collection is required to compile various languages.
@@ -55,16 +55,23 @@ sed -i 's/^T_CFLAGS =$$/& -fomit-frame-pointer/' gcc/Makefile.in
 %endif
 mkdir -v ../%{name}-build
 cd ../%{name}-build
-../%{name}-%{version}/configure --prefix=/usr --libexecdir=/usr/lib \
- --enable-shared --enable-threads=posix --enable-__cxa_atexit \
- --enable-clocale=gnu --enable-languages=c,c++
+../%{name}-%{version}/configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib} \
+  --libexecdir=/usr/%{_lib} \
+  --enable-shared \
+  --enable-threads=posix \
+  --enable-__cxa_atexit \
+  --enable-clocale=gnu \
+  --enable-languages=c,c++ \
+  --disable-multilib
 make LDFLAGS="-s"
 
 %install
 cd ../%{name}-build
 make DESTDIR=%{buildroot} install
-mkdir %{buildroot}/lib
-ln -sv ../usr/bin/cpp %{buildroot}/lib
+mkdir %{buildroot}/%{_lib}
+ln -sv ../usr/bin/cpp %{buildroot}/%{_lib}
 ln -sv gcc %{buildroot}/usr/bin/cc
 rm -f %{buildroot}%{_infodir}/dir
 find %{buildroot} -name *.la -exec rm -v '{}' \;
@@ -179,6 +186,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.3-1
+- Upgrade to 4.4.3
+
 * Tue Dec 29 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.2-2
 - Add in support for PowerPC
 
