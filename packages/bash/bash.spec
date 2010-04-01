@@ -1,7 +1,7 @@
 Summary: GNU Bash
 Name: bash
 Version: 4.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,11 +9,13 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/bash
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
+Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-upstream_fixes_1-5.patch
 
 Requires: glibc, ncurses, readline
 
 BuildRequires: digest(%{SOURCE0}) = 9800d8724815fd84994d9be65ab5e7b8
 BuildRequires: digest(%{PATCH0}) = 7b9ef6862dc12cb3489ebb0d0e7801e6
+BuildRequires: digest(%{PATCH1}) = df1aab878fcb3b7955e15f8e5444c037
 
 %package doc
 Summary: Bash Documentation 
@@ -28,6 +30,7 @@ Extensive documentation for the GNU Bash shell
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 ./configure --prefix=/usr --bindir=/bin --without-bash-malloc \
@@ -66,6 +69,9 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-2
+- Add in upstream patches
+
 * Tue Mar 30 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-1
 - Uppdated to 4.1
 
