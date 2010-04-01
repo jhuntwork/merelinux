@@ -1,6 +1,6 @@
 Summary: less
 Name: less
-Version: 429
+Version: 436
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -37,5 +37,8 @@ rm -rf %{buildroot}
 /usr/share/man/man1/lesskey.1
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 436-1
+- Upgrade to 436
+
 * Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
