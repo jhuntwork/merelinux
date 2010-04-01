@@ -10,6 +10,7 @@ URL: http://www.gnu.org/software/gdbm
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = 1d1b1d5c0245b1c00aff92da751e9aa1
 
 %package devel
 Summary: Libraries and headers for developing with %{name}
