@@ -1,6 +1,6 @@
 Summary: GNU Coreutils
 Name: coreutils
-Version: 8.2
+Version: 8.4
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -8,13 +8,13 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/coreutils
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i18n-1.patch
-Source2: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-uname-1.patch
+Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i18n-1.patch
+Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-uname-1.patch
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = dfb0d3dbc5f555386339f4f74621cda0
-BuildRequires: digest(%{SOURCE1}) = 13699e7e1c2ab2165dbe9f35c047e804
-BuildRequires: digest(%{SOURCE2}) = 510a730e7bc8fd92daaf47aad4dc1200
+BuildRequires: digest(%{SOURCE0}) = 56f549854d723d9dcebb77919019df55
+BuildRequires: digest(%{PATCH0}) = 13699e7e1c2ab2165dbe9f35c047e804
+BuildRequires: digest(%{PATCH1}) = 510a730e7bc8fd92daaf47aad4dc1200
 Requires(post): texinfo, bash, ncurses
 
 %description
@@ -29,13 +29,16 @@ Provides libstdbuf.so
 
 %prep
 %setup -q
+%patch0 -p1
+%ifarch i686
+%patch1 -p1
+%endif
 
 %build
-patch -Np1 -i %{SOURCE1}
-%ifarch i686
-patch -Np1 -i %{SOURCE2}
-%endif
-./configure --prefix=/usr --enable-no-install-program=kill,uptime --libdir=/usr/%{_lib}
+./configure \
+  --prefix=/usr \
+  --enable-no-install-program=kill,uptime \
+  --libdir=/usr/%{_lib}
 make
 #make NON_ROOT_USERNAME=nobody check-root
 #chown -Rv nobody config.log {gnulib-tests,lib,src}/.deps
@@ -172,6 +175,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/%{name}/libstdbuf.so
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.4-1
+- Upgrade to 8.4
+
 * Mon Dec 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.2-1
 - Upgrade to 8.2
 
