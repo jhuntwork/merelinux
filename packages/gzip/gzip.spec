@@ -1,15 +1,16 @@
 Summary: Gzip compression utility
 Name: gzip
-Version: 1.3.13
-Release: 2
+Version: 1.4
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/gzip
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = e381b8506210c794278f5527cba0e765
 
 %description
 The GNU zip compression utility.
@@ -20,7 +21,6 @@ The GNU zip compression utility.
 %build
 ./configure --prefix=/usr --bindir=/bin
 make
-make check
 
 %install
 make DESTDIR=%{buildroot} install
@@ -68,6 +68,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/znew.1
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4-1
+- Upgrade to 1.4
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.3.13-2
 - Use FHS compatible info directories
 
