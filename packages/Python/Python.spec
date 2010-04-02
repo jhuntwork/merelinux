@@ -1,6 +1,6 @@
 Summary: Python Programming Language
 Name: Python
-Version: 2.6.4
+Version: 2.6.5
 Release: 1
 Group: Development/Languages
 License: Modified CNRI Open Source License
@@ -10,7 +10,7 @@ URL: http://www.python.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
-BuildRequires:  digest(%{SOURCE0}) = fee5408634a54e721a93531aba37f8c1
+BuildRequires:  digest(%{SOURCE0}) = 6bef0417e71a1a1737ccf5750420fdb3
 Provides: python(abi) = 2.6
 
 %description
@@ -71,6 +71,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/python2.6/config
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.5-1
+- Upgrade to 2.6.5
+
 * Tue Dec 29 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.4-1
 - Upgrade to 2.6.4
 
