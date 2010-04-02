@@ -1,6 +1,6 @@
 Summary: CrackLib
 Name: cracklib
-Version: 2.8.13
+Version: 2.8.16
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -11,6 +11,8 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-words-20080507.gz
 
 Requires: base-layout, glibc
+BuildRequires: digest(%{SOURCE0}) = 3bfb22db8fcffd019463ee415a1b25b7
+BuildRequires: digest(%{SOURCE1}) = 7fa6ba0cd50e7f9ccaf4707c810b14f1
 
 %description
 A Next generation version of the libCrack password checking library.
@@ -43,7 +45,7 @@ make
 make DESTDIR=%{buildroot} install
 mkdir -p %{buildroot}/%{_lib}/cracklib
 mv -v %{buildroot}/usr/%{_lib}/libcrack.so.2* %{buildroot}/%{_lib}
-ln -v -sf ../../%{_lib}/libcrack.so.2.8.0 %{buildroot}/usr/%{_lib}/libcrack.so
+ln -v -sf ../../%{_lib}/libcrack.so.2.8.1 %{buildroot}/usr/%{_lib}/libcrack.so
 install -v -m644 -D %{SOURCE1} %{buildroot}/usr/share/dict/cracklib-words.gz
 gunzip -fv %{buildroot}/usr/share/dict/cracklib-words.gz
 ln -svf cracklib-words %{buildroot}/usr/share/dict/words
@@ -63,7 +65,7 @@ rm -rf %{buildroot}
 %files -f %{name}.lang
 %defattr(-,root,root)
 /%{_lib}/libcrack.so.2
-/%{_lib}/libcrack.so.2.8.0
+/%{_lib}/libcrack.so.2.8.1
 /%{_lib}/cracklib
 /usr/sbin/cracklib-check
 /usr/sbin/cracklib-format
@@ -90,5 +92,8 @@ rm -rf %{buildroot}
 /usr/include/packer.h
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.16-1
+- Upgrade to 2.8.16
+
 * Tue Sep 8 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.13-1
 - Initial version
