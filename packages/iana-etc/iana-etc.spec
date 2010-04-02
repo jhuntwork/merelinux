@@ -11,6 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 
 Buildarch: noarch
 Requires: base-layout
+BuildRequires: digest(%{SOURCE0}) = 3ba3afb1d1b261383d247f46cb135ee8
 
 %description
 %{name} provides the /etc/protocols and /etc/services files created from raw data
