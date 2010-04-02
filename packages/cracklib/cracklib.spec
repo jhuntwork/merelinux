@@ -28,7 +28,7 @@ Requires: %{name} = %{version}
 %package devel
 Summary: Files for developing with %{name}
 Group: Development/Libraries
-Requires: %{name} = ${version}
+Requires: %{name} = %{version}
 
 %description devel
 Libraries and Header files for developing with %{name}
