@@ -1,6 +1,6 @@
 Summary: The Berkeley Database
 Name: db
-Version: 5.0.21
+Version: 4.8.26
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,12 +10,12 @@ URL: http://www.oracle.com/technology/products/berkeley-db/db
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 9a749fd2e98fe15840493ddc34cc66d8
+BuildRequires: digest(%{SOURCE0}) = 3476bac9ec0f3c40729c8a404151d5e3
 
 %package devel
 Summary: Libraries and headers for developing with %{name}
 Group: Development/Libraries
-Requires: glibc-devel linux-headers gcc binutils %{name}
+Requires: %{name}
 
 %description
 Berkeley DB is a lightweight embeddable database engine.
@@ -48,18 +48,18 @@ rm -rf %{buildroot}
 /usr/bin/db_dump
 /usr/bin/db_hotbackup
 /usr/bin/db_load
-/usr/bin/db_log_verify
 /usr/bin/db_printlog
 /usr/bin/db_recover
+/usr/bin/db_sql
 /usr/bin/db_stat
 /usr/bin/db_upgrade
 /usr/bin/db_verify
-/usr/%{_lib}/libdb-5.0.a
-/usr/%{_lib}/libdb-5.0.so
-/usr/%{_lib}/libdb-5.so
-/usr/%{_lib}/libdb_cxx-5.0.a
-/usr/%{_lib}/libdb_cxx-5.0.so
-/usr/%{_lib}/libdb_cxx-5.so
+/usr/%{_lib}/libdb-4.8.a
+/usr/%{_lib}/libdb-4.8.so
+/usr/%{_lib}/libdb-4.so
+/usr/%{_lib}/libdb_cxx-4.8.a
+/usr/%{_lib}/libdb_cxx-4.8.so
+/usr/%{_lib}/libdb_cxx-4.so
 
 %files devel
 %defattr(-,root,root)
@@ -73,8 +73,8 @@ rm -rf %{buildroot}
 /usr/share/doc/%{name}-%{version}
 
 %changelog
-* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.21-1
-- Upgrade to 5.0.21
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.8.26-1
+- Upgrade to 4.8.26
 
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.7.25-2
 - Use FHS compatible info directories. Move documentation to devel package.
