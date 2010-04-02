@@ -36,7 +36,6 @@ make check
 %install
 make DESTDIR=%{buildroot} install
 rm -rf %{buildroot}/usr/share/man/{de,es,fr,it,ja}
-rm -rf %{buildroot}/usr/share/doc
 %find_lang %{name}
 %find_lang %{name}-gnulib
 cat %{name}-gnulib.lang >> %{name}.lang
@@ -46,7 +45,6 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-%doc manual/man_db.{ps,cat}
 /etc/man_db.conf
 /usr/bin/apropos
 /usr/bin/catman
@@ -58,6 +56,7 @@ rm -rf %{buildroot}
 /usr/bin/zsoelim
 /usr/%{_lib}/man-db
 /usr/sbin/accessdb
+/usr/share/doc/man-db
 /usr/share/man/man1/apropos.1
 /usr/share/man/man1/lexgrog.1
 /usr/share/man/man1/man.1
