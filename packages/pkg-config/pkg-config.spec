@@ -7,7 +7,9 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://pkg-config.freedesktop.org
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+
+BuildRequires: digest(%{SOURCE0}) = d922a88782b64441d06547632fd85744
 
 Requires: base-layout, glibc
 Provides: pkgconfig
