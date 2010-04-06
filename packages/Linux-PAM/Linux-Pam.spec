@@ -20,8 +20,8 @@ libraries that enable the local system administrator to choose how
 applications authenticate users.
 
 %package devel
-Summary: Libraries, headers and documentation for developing with %{_name}
-Requires: %{_name}
+Summary: Libraries, headers and documentation for developing with %{name}
+Requires: %{name}
 Group: Development/Libs
 
 %description devel
