@@ -49,7 +49,6 @@ ln -v -sf ../../%{_lib}/libcrack.so.2.8.1 %{buildroot}/usr/%{_lib}/libcrack.so
 install -v -m644 -D %{SOURCE1} %{buildroot}/usr/share/dict/cracklib-words.gz
 gunzip -fv %{buildroot}/usr/share/dict/cracklib-words.gz
 ln -svf cracklib-words %{buildroot}/usr/share/dict/words
-install -v -m755 -d %{buildroot}/lib/cracklib
 find %{buildroot} -name "*.la" -exec rm -vf '{}' \;
 %find_lang %{name}
 
