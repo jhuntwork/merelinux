@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: http://e2fsprogs.sourceforge.net
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, util-linux-ng
 BuildRequires: digest(%{SOURCE0}) = fb507a40c2706bc38306f150d069e345
 
 %package devel
