@@ -7,9 +7,10 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/less
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc, ncurses
+BuildRequires: digest(%{SOURCE0}) = 817bf051953ad2dea825a1cdf460caa4
 
 %description
 Less allows forward and backwards page viewing through the contents of a file
