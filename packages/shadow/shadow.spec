@@ -45,7 +45,7 @@ rm -rf %{buildroot}
 /bin/login
 /bin/passwd
 /bin/su
-/etc/default/useradd
+/etc/default
 /etc/login.defs
 /etc/pam.d
 /sbin/nologin
