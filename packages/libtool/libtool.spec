@@ -1,15 +1,17 @@
 Summary: GNU Libtool
 Name: libtool
-Version: 2.2.6
+Version: 2.2.6b
 Release: 1
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/libtool
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}a.tar.gz
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
+Requires(post): texinfo, bash, ncurses, readline
+BuildRequires: digest(%{SOURCE0}) = 07da460450490148c6d2df0f21481a25
 
 %description
 %{name} is a generic library support script. It hides the complexity
@@ -21,7 +23,7 @@ of using shared libraries behind a consistent, portable interface.
 %build
 ./configure --prefix=/usr --libdir=/usr/%{_lib}
 make
-#make check
+make check
 
 %install
 make DESTDIR=%{buildroot} install
@@ -32,10 +34,10 @@ find %{buildroot} -name "*.la" -exec rm -v '{}' \;
 rm -rf %{buildroot}
 
 %post
-/usr/bin/install-info %{_infodir}/libtool.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/libtool.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete %{_infodir}/libtool.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/libtool.info /usr/share/info/dir
 
 %files
 %defattr(-,root,root)
@@ -57,5 +59,8 @@ rm -rf %{buildroot}
 /usr/share/libtool
 
 %changelog
+* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.6b-1
+- Upgrade to 2.2.6b
+
 * Tue Jul 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
