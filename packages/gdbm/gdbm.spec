@@ -14,7 +14,7 @@ BuildRequires: digest(%{SOURCE0}) = 1d1b1d5c0245b1c00aff92da751e9aa1
 
 %package devel
 Summary: Libraries and headers for developing with %{name}
-Requires: %{name} glibc-devel linux-headers gcc binutils
+Requires: %{name}
 
 %description
 GNU dbm is a set of database routines that use extensible hashing.
@@ -27,7 +27,7 @@ Libraries and headers for developing with %{name}
 %setup -q
 
 %build
-./configure --prefix=/usr --libdir=/usr/%{_lib}
+./configure --prefix=/usr --libdir=/usr/%{_lib} --infodir=/usr/share/info
 make
 
 %install
@@ -36,14 +36,14 @@ make INSTALL_ROOT=%{buildroot} install-compat
 rm -f %{buildroot}/usr/info/dir
 find %{buildroot} -name "*.la" -exec rm -v '{}' \;
 
-%post devel
-/usr/bin/install-info %{_infodir}/gdbm.info %{_infodir}/dir
-
-%preun devel
-/usr/bin/install-info --delete %{_infodir}/gdbm.info %{_infodir}/dir
-
 %clean
 rm -rf %{buildroot}
+
+%post devel
+/usr/bin/install-info /usr/share/info/gdbm.info /usr/share/info/dir
+
+%preun devel
+/usr/bin/install-info --delete /usr/share/info/gdbm.info /usr/share/info/dir
 
 %files
 %defattr(-,root,root)
@@ -62,7 +62,7 @@ rm -rf %{buildroot}
 /usr/include/gdbm.h
 /usr/include/ndbm.h
 /usr/man/man3/gdbm.3
-/usr/info/gdbm.info
+/usr/share/info/gdbm.info
 
 %changelog
 * Fri Aug 14 2009 Jeremy Huntwork (jhuntwork at lightcube dot us
