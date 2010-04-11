@@ -1,6 +1,6 @@
 Summary: The MPFR Library
 Name: mpfr
-Version: 2.4.1
+Version: 2.4.2
 Release: 1
 Group: System Environment/Libraries
 License: GPLv2
@@ -10,11 +10,13 @@ URL: http://www.mpfr.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, gmp
+BuildRequires: digest(%{SOURCE0}) = 89e59fe665e2b3ad44a6789f40b059a0
 
 %package devel
 Summary: Headers, object files and info pages for developing with %{name}
 Group: Development/Libraries
-Requires: glibc-devel, texinfo, linux-headers, binutils, gcc, %{name}
+Requires: %{name}
+Requires(post): texinfo, bash, ncurses, readline
 
 %description
 The MPFR library is a C library for multiple-precision floating-point
@@ -44,10 +46,10 @@ rm -rf %{buildroot}
 %postun -p /sbin/ldconfig
 
 %post devel
-/usr/bin/install-info %{_infodir}/mpfr.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/mpfr.info /usr/share/info/dir
 
 %preun devel
-/usr/bin/install-info --delete %{_infodir}/mpfr.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/mpfr.info /usr/share/info/dir
 
 %files
 %defattr(-,root,root)
@@ -61,8 +63,11 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libmpfr.a
 /usr/%{_lib}/libmpfr.la
 /usr/share/info/mpfr.info
-%doc mpfr.html/*.html
+/usr/share/doc/mpfr
 
 %changelog
+* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.4.2-1
+- Upgrade to 2.4.2
+
 * Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
