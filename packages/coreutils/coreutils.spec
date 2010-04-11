@@ -15,7 +15,7 @@ Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = 56f549854d723d9dcebb77919019df55
 BuildRequires: digest(%{PATCH0}) = 13699e7e1c2ab2165dbe9f35c047e804
 BuildRequires: digest(%{PATCH1}) = 510a730e7bc8fd92daaf47aad4dc1200
-Requires(post): texinfo, bash, ncurses
+Requires(post): texinfo, bash, ncurses, readline
 
 %description
 %{name} provides some core system utilities, such as cp, mv, ls
