@@ -17,7 +17,7 @@ BuildRequires: digest(%{PATCH0}) =  e373fcd16bac28d6e53a268b875bfd8c
 %package devel
 Summary: Libraries and headers for developing with %{name}
 Group: Development/Libraries
-Requires: glibc-devel %{name}
+Requires: %{name}
 
 %description
 %{name} is high-quality data compressor.
