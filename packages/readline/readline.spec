@@ -15,9 +15,11 @@ BuildRequires: digest(%{SOURCE0}) = fc2f7e714fe792db1ce6ddc4c9fb4ef3
 %package devel
 Summary: Headers and objects for developing with %{name}
 Group: Development
-Requires: glibc-devel, linux-headers, binutils, gcc
+Requires: %{name}
 
 %description
+The GNU Readline library provides a set of functions for use by applications
+that allow users to edit command lines as they are typed in.
 
 %description devel
 Headers and objects for developing with %{name}
@@ -52,13 +54,13 @@ rm -rf %{buildroot}
 %post devel
 for i in history readline rluserman
 do
-  /usr/bin/install-info %{_infodir}/$i.info %{_infodir}/dir
+  /usr/bin/install-info /usr/share/info/$i.info /usr/share/info/dir
 done
 
 %preun devel
 for i in history readline rluserman
 do
-  /usr/bin/install-info --delete %{_infodir}/$i.info %{_infodir}/dir
+  /usr/bin/install-info --delete /usr/share/info/$i.info /usr/share/info/dir
 done
 
 %files
@@ -70,7 +72,6 @@ done
 
 %files devel
 %defattr(-,root,root)
-%doc doc/*.{ps,pdf,html,dvi}
 /usr/share/readline
 /usr/include/readline
 /usr/%{_lib}/libhistory.a
