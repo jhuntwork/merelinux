@@ -1,7 +1,7 @@
 Summary: Base directory layout
 Name: base-layout
 Version: 0.1
-Release: 3
+Release: 4
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -40,8 +40,9 @@ for man in man{{1..9}{,x},{0,1,3}p,n}; do
 	mkdir -p %{buildroot}/usr/share/man/$man
 	echo "%dir %ghost /usr/share/man/$man" >> %{name}.man
 done
-for loc in bg cs da de el en eo es fi fr hr hu id it ja ko nl pl pt pt_BR \
-  ro ru sk sl sv tr zh_CN zh_TW; do
+for loc in bg cs da de el en eo es fi fr fr.ISO8859-1 fr.UTF-8 \
+  hr hu id it it.ISO8859-1 it.UTF-8 ja ko nl pl pl.ISO8859-2 pl.UTF-8 pt pt_BR \
+  ro ru ru.UTF-8 ru.KOI8-R sk sl sv tr zh_CN zh_TW; do
 	mkdir -p %{buildroot}/usr/share/man/${loc}/man{1..9}
 	echo "%dir %ghost %lang(${loc}) /usr/share/man/${loc}" >> %{name}.man
 	echo "%dir %ghost %lang(${loc}) /usr/share/man/${loc}/*" >> %{name}.man
@@ -146,6 +147,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-4
+- Add more man dir locations to accomodate vim
+
 * Sun Nov 01 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-3
 - Add /usr/share/aclocal and /usr/share/gtk-doc/html
 
