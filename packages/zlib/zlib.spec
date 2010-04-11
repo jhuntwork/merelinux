@@ -1,7 +1,7 @@
 Summary: zlib Compression Library
 Name: zlib
 Version: 1.2.4
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
@@ -12,17 +12,17 @@ Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.ta
 Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = 763c6a0b4ad1cdf5549e3ab3f140f4cb
 
-%package devel
-Summary: Headers for developing with zlib
-Group: Development
-Requires: glibc-devel, linux-headers, binutils, gcc
-
 %description
 According to its maintainers, zlib is:
 A Massively Spiffy Yet Delicately Unobtrusive Compression Library
 
+%package devel
+Summary: Headers and libraries for developing with %{name}
+Group: Development/Libraries
+Requires: %{name}
+
 %description devel
-Headers for developing with zlib
+Headers and libraries for developing with %{name}
 
 %prep
 %setup -q
@@ -50,19 +50,21 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/%{_lib}/libz.so.1
-/%{_lib}/libz.so.1.2.4
-%attr(0644,root,root) /usr/%{_lib}/libz.a
-/usr/%{_lib}/libz.so
+/%{_lib}/libz.so.*
 
 %files devel
 %defattr(-,root,root)
+%attr(0644,root,root) /usr/%{_lib}/libz.a
+/usr/%{_lib}/libz.so
 /usr/%{_lib}/pkgconfig/zlib.pc
 /usr/share/man/man3/zlib.3
 /usr/include/zconf.h
 /usr/include/zlib.h
 
 %changelog
+* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.2.4-2
+- Move development libraries to the devel package 
+
 * Tue Mar 30 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.2.4-1
 - Update to 1.2.4
 
