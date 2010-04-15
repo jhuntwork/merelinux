@@ -1,7 +1,7 @@
 Summary: GNU Bash
 Name: bash
 Version: 4.1
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -16,12 +16,14 @@ Requires: glibc, ncurses, readline
 BuildRequires: digest(%{SOURCE0}) = 9800d8724815fd84994d9be65ab5e7b8
 BuildRequires: digest(%{PATCH0}) = 7b9ef6862dc12cb3489ebb0d0e7801e6
 BuildRequires: digest(%{PATCH1}) = df1aab878fcb3b7955e15f8e5444c037
+BuildRequires: readline-devel
 
 %package doc
 Summary: Bash Documentation 
+Requires: texinfo, bash
 
 %description
-%{name} is an sh-compatible shell that incorporates useful features from the
+Bash is an sh-compatible shell that incorporates useful features from the
 Korn shell (ksh) and C shell (csh).
 
 %description doc
@@ -44,6 +46,33 @@ make
 %install
 make DESTDIR=%{buildroot} install
 ln -vs bash %{buildroot}/bin/sh
+install -dv %{buildroot}/etc
+cat > %{buildroot}/etc/bashrc << "EOF"
+alias ls='ls --color=auto'
+alias ll='ls -l'
+eval $(dircolors -b /etc/dircolors)
+
+# Setup a red prompt for root and a green one for users. 
+NORMAL="\[\e[0m\]"
+RED="\[\e[1;31m\]"
+GREEN="\[\e[1;32m\]"
+if [[ $EUID == 0 ]] ; then
+        PS1="$RED\u$NORMAL@\h $RED[ $NORMAL\w$RED ]# $NORMAL"
+else
+        PS1="$GREEN\u$NORMAL@\h $GREEN[ $NORMAL\w$GREEN ]\$ $NORMAL"
+fi
+
+if [ "`locale charmap 2>/dev/null`" = "UTF-8" ]
+then
+	stty iutf8
+fi
+EOF
+cat > %{buildroot}/etc/profile << "EOF"
+export PATH=/bin:/usr/bin:/sbin:/usr/sbin
+export INPUTRC=/etc/inputrc
+export PKG_CONFIG_PATH="/usr/%{_lib}/pkgconfig"
+source /etc/bashrc
+EOF
 rm -f %{buildroot}/usr/share/info/dir
 %find_lang %{name}
 
@@ -61,6 +90,8 @@ rm -rf %{buildroot}
 /bin/bash
 /bin/bashbug
 /bin/sh
+/etc/bashrc
+/etc/profile
 /usr/share/man/man1/bash.1
 /usr/share/man/man1/bashbug.1
 
@@ -69,6 +100,9 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
+* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-3
+- Add in user environment files, fix build dependencies
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-2
 - Add in upstream patches
 
