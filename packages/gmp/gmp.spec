@@ -1,7 +1,7 @@
 Summary: The GNU Multiple Precision Arithmetic Library
 Name: gmp
 Version: 5.0.1
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
@@ -51,10 +51,10 @@ rm -f %{buildroot}/usr/share/info/dir
 rm -rf %{buildroot}
 
 %post devel
-/usr/bin/install-info %{_infodir}/gmp.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/gmp.info /usr/share/info/dir
 
 %preun devel
-/usr/bin/install-info --delete %{_infodir}/gmp.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/gmp.info /usr/share/info/dir
 
 %files
 %defattr(-,root,root)
@@ -77,6 +77,9 @@ rm -rf %{buildroot}
 /usr/share/info/gmp.info-2
 
 %changelog
+* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.1-2
+- Fixes to infodir location
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.1-1
 - Upgrade to 5.0.1
 
