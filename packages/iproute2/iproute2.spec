@@ -1,7 +1,7 @@
 Summary: Net:Iproute2
 Name: iproute2
 Version: 2.6.33
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,12 +9,20 @@ Vendor: LightCube Solutions
 URL: http://www.linuxfoundation.org/en/Net:Iproute2
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, db
+Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = b371fca3fcb5e436e69a7c2111d84a3c
+BuildRequires: db-devel
 
 %description
 Iproute2 is a collection of utilities for controlling
 TCP/IP networking and traffic control in Linux
+
+%package arpd
+Summary: arpd binary
+Requires: %{name}, db
+
+%description arpd
+The aprd binary
 
 %prep
 %setup -q
@@ -34,7 +42,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /etc/iproute2
 /lib/tc
-/sbin/arpd
 /sbin/ctstat
 /sbin/genl
 /sbin/ifcfg
@@ -51,7 +58,6 @@ rm -rf %{buildroot}
 /sbin/ss
 /sbin/tc
 /usr/share/doc/%{name}-%{version}
-/usr/share/man/man8/arpd.8
 /usr/share/man/man8/ctstat.8
 /usr/share/man/man8/ip.8
 /usr/share/man/man8/lnstat.8
@@ -75,7 +81,15 @@ rm -rf %{buildroot}
 /usr/share/man/man8/tc-tbf.8
 /usr/share/man/man8/tc.8
 
+%files arpd
+%defattr(-,root,root)
+/sbin/arpd
+/usr/share/man/man8/arpd.8
+
 %changelog
+* Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.33-2
+- Separate the aprd binary due to its dependence on db
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.33-1
 - Upgraded to 2.6.33-1
 
