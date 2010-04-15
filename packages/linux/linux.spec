@@ -8,9 +8,10 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.kernel.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+
 %ifarch x86_64
 Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}-configs/%{name}-config-%{version}-x86_64
-BuildRequires: digest(%{SOURCE1}) = 367662fc75245ca343016c8f04e4e387
+BuildRequires: digest(%{SOURCE1}) = 0210a3032b23901667d75be985b58e45
 %endif
 
 Requires: base-layout
@@ -22,12 +23,21 @@ The Linux Kernel
 %package headers
 Group: Development
 Summary: Linux Userspace Headers
+Requires: base-layout
 
 %description headers
 In order to compile anything, the Linux kernel needs to expose an
 Application Programming Interface (API) for the system's C library (Glibc)
 to utilize. This is done by sanitizing various C header files that are
 shipped in the Linux kernel source package.
+
+%package devel
+Group: Development/Kernel
+Summary: Kernel sources for installed kernel
+Requires: %{name}
+
+%description devel
+Kernel sources for installed kernel
 
 %prep
 %setup -q
@@ -43,15 +53,27 @@ cp %{SOURCE1} .config
 make
 
 %install
+# Install the headers
 mkdir -pv %{buildroot}/usr/include
 cp -rv dest/include/* %{buildroot}/usr/include
+
+# Install the modules
+make INSTALL_MOD_PATH=%{buildroot} modules_install
+
+# Install the kernel source
+DIRNAME="/usr/src/kernels/%{name}-%{version}-%{release}"
+install -dv %{buildroot}$DIRNAME
+cp -a * %{buildroot}$DIRNAME
+ln -nsf "$DIRNAME" "%{buildroot}/lib/modules/%{version}/source"
+ln -nsf "$DIRNAME" "%{buildroot}/lib/modules/%{version}/build"
+
+# Install the kernel image, system.map and config
 mkdir %{buildroot}/boot
+cp System.map %{buildroot}/boot/System.map-%{version}-%{release}
+cp .config %{buildroot}/boot/config-%{version}-%{release}
 %ifarch x86_64
 cp arch/x86_64/boot/bzImage %{buildroot}/boot/%{name}-%{version}-%{release}
 %endif
-cp System.map %{buildroot}/boot/System.map-%{version}-%{release}
-cp .config %{buildroot}/boot/config-%{version}-%{release}
-make INSTALL_MOD_PATH=%{buildroot} modules_install
 
 %clean
 rm -fr %{buildroot}
@@ -62,7 +84,9 @@ rm -fr %{buildroot}
 /boot/config-%{version}-%{release}
 /boot/linux-%{version}-%{release}
 /lib/firmware
-/lib/modules/%{version}
+%dir /lib/modules/%{version}
+/lib/modules/%{version}/kernel
+/lib/modules/%{version}/modules.*
 
 %files headers
 %defattr(-,root,root)
@@ -76,6 +100,12 @@ rm -fr %{buildroot}
 /usr/include/sound
 /usr/include/video
 /usr/include/xen
+
+%files devel
+%defattr(-,root,root)
+/usr/src/kernels/%{name}-%{version}-%{release}
+/lib/modules/%{version}/source
+/lib/modules/%{version}/build
 
 %changelog
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.33.2-1
