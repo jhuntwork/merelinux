@@ -175,7 +175,7 @@ rm -rf %{buildroot}
 /usr/share/doc/gettext/textdomain.3.html
 /usr/share/doc/gettext/tutorial.html
 /usr/share/doc/gettext/xgettext.1.html
-/usr/share/doc/libasprintf/autosprintf_all.html
+/usr/share/doc/libasprintf
 /usr/share/gettext
 /usr/share/info/autosprintf.info
 /usr/share/info/gettext.info
