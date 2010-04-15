@@ -1,7 +1,7 @@
 Summary: GNU Binutils
 Name: binutils
 Version: 2.20.1
-Release: 1
+Release: 2
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
@@ -9,8 +9,10 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/binutils
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, glibc-devel, linux-headers, zlib, texinfo
+Requires: base-layout, glibc, zlib
+Requires(post): texinfo, bash, ncurses, readline
 BuildRequires: digest(%{SOURCE0}) = 9cdfb9d6ec0578c166d3beae5e15c4e5
+BuildRequires: zlib-devel
 
 %description
 Provides an assembler, linker and a collection of other tools
@@ -45,13 +47,13 @@ cat bfd.lang binutils.lang gas.lang gprof.lang ld.lang opcodes.lang > ../%{name}
 %post
 for i in as bfd binutils configure gprof ld
 do
-  /usr/bin/install-info %{_infodir}/$i.info %{_infodir}/dir
+  /usr/bin/install-info /usr/share/info/$i.info /usr/share/info/dir
 done
 
 %preun
 for i in as bfd binutils configure gprof ld
 do
-  /usr/bin/install-info --delete %{_infodir}/$i.info %{_infodir}/dir
+  /usr/bin/install-info --delete /usr/share/info/$i.info /usr/share/info/dir
 done
 
 %clean
@@ -116,6 +118,9 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-2
+- Fixes to infodir locations
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-1
 - Upgrade to 2.20.1
 
