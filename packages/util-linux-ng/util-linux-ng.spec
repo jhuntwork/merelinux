@@ -9,15 +9,17 @@ Vendor: LightCube Solutions
 URL: http://userweb.kernel.org/~kzak/util-linux-ng
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, ncurses, zlib
 BuildRequires: digest(%{SOURCE0}) = 4635725a3eef1c57090bac8ea5e082e6
+BuildRequires: ncurses-devel, zlib-devel
+
+%description
+Provides some core Linux utilities, particularly those
+relating to the file system.
 
 %package devel
 Summary: %{name} headers and libraries
-Requires: glibc-devel, linux-headers, binutils, gcc, %{name}
-
-%description
-%{name} provides some core Linux utilities
+Requires: %{name}
 
 %description devel
 Headers and libraries for libblkid and libuuid
@@ -44,10 +46,10 @@ rm -rf %{buildroot}
 %postun -p /sbin/ldconfig
 
 %post devel
-/usr/bin/install-info %{_infodir}/ipc.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/ipc.info /usr/share/info/dir
 
 %preun devel
-/usr/bin/install-info --delete %{_infodir}/ipc.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/ipc.info /usr/share/info/dir
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -154,8 +156,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/share/info/ipc.info
 /usr/share/man/man3/*
-/usr/include/blkid/blkid.h
-/usr/include/uuid/uuid.h
+/usr/include/blkid
+/usr/include/uuid
 /usr/%{_lib}/libblkid.a
 /usr/%{_lib}/libblkid.so
 /usr/%{_lib}/libuuid.a
