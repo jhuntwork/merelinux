@@ -1,7 +1,7 @@
 Summary: Ncurses Library
 Name: ncurses
 Version: 5.7
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
@@ -107,8 +107,10 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libpanelw.so
 /usr/include/*.h
 /usr/share/man/man3/*
-%doc doc/*
 
 %changelog
+* Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.7-2
+- Remove bad location for installed docs
+
 * Sun Jul 26 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
