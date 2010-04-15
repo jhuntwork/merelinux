@@ -9,9 +9,9 @@ Vendor: LightCube Solutions
 URL: http://www.webdav.org/neon
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, openssl, expat, zlib
+Requires: base-layout, glibc, expat, zlib, openssl
 BuildRequires: digest(%{SOURCE0}) = ba1015b59c112d44d7797b62fe7bee51
-BuildRequires: openssl-devel, expat-devel, zlib-devel
+BuildRequires: expat-devel, zlib-devel, openssl-devel
 
 %description
 neon is an HTTP and WebDAV client library, with a C interface.
@@ -28,7 +28,11 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-./configure --prefix=/usr --libdir=/usr/%{_lib} --with-ssl --enable-shared
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib} \
+  --with-ssl \
+  --enable-shared
 make
 
 %install
