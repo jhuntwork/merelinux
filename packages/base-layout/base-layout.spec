@@ -1,7 +1,7 @@
 Summary: Base directory layout
 Name: base-layout
 Version: 0.1
-Release: 4
+Release: 5
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -20,13 +20,12 @@ directories for a standard system.
 %install
 # Top-level directories
 install -dv %{buildroot}/{bin,boot,dev,etc,home,lib,media,mnt,opt,proc,root,sbin,srv,sys,tmp,usr,var}
-
+install -dv %{buildroot}/lib/modules
 install -dv %{buildroot}/media/{floppy,cdrom}
 install -dv %{buildroot}/usr/{,local/}{bin,include,lib,sbin,src}
+install -dv %{buildroot}/usr/src/kernels
 install -dv %{buildroot}/usr/{,local/}share/{aclocal,dict,doc,gtk-doc/html,info,locale}
-install -dv %{buildroot}/usr/{,local/}share/{misc,terminfo,zoneinfo}
-install -dv %{buildroot}/usr/share/man
-ln -sv ../../share/man %{buildroot}/usr/local/share/man
+install -dv %{buildroot}/usr/{,local/}share/{man,misc,terminfo,zoneinfo}
 install -dv %{buildroot}/var/{lock,log,mail,run,spool,tmp}
 install -dv %{buildroot}/var/spool/repackage
 install -dv %{buildroot}/var/{opt,cache,lib/{hwclock,misc,locate},local}
@@ -79,6 +78,7 @@ rm -rf %{buildroot}
 %dir /etc
 %dir /home
 %dir /lib
+%dir /lib/modules
 %if "%{_lib}" != "lib"
 %dir /%{_lib}
 %endif
@@ -112,7 +112,7 @@ rm -rf %{buildroot}
 %dir /usr/local/share/doc
 %dir /usr/local/share/info
 %dir /usr/local/share/locale
-%dir %ghost /usr/local/share/man
+%dir /usr/local/share/man
 %dir /usr/local/share/misc
 %dir /usr/local/share/terminfo
 %dir /usr/local/share/zoneinfo
@@ -131,6 +131,7 @@ rm -rf %{buildroot}
 %dir /usr/share/terminfo
 %dir /usr/share/zoneinfo
 %dir /usr/src
+%dir /usr/src/kernels
 %dir /var
 %dir /var/cache
 %dir /var/lib
@@ -147,6 +148,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-5
+- Add /lib/modules, fix /usr/share/local/man
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-4
 - Add more man dir locations to accomodate vim
 
