@@ -10,6 +10,7 @@ URL: http://www.gnu.org/software/tar
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
+Requires(post): texinfo, bash, ncurses, readline
 BuildRequires: digest(%{SOURCE0}) = 41e2ca4b924ec7860e51b43ad06cdb7e
 
 %description
