@@ -1,7 +1,7 @@
 Summary: The Expat XML Parser
 Name: expat
 Version: 2.0.1
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -29,7 +29,7 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-./configure --prefix=/usr --libdir=/usr/%{_lib}
+./configure --prefix=/usr --libdir=/usr/%{_lib} --mandir=/usr/share/man
 make
 
 %install
@@ -45,7 +45,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/bin/xmlwf
 /usr/%{_lib}/libexpat.so.*
-/usr/man/man1/xmlwf.1
+/usr/share/man/man1/xmlwf.1
 
 %files devel
 %defattr(-,root,root)
@@ -56,5 +56,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libexpat.so
 
 %changelog
+* Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.0.1-2
+- Fixes to mandir location
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.0.1-1
 - Initial version
