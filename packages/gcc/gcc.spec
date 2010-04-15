@@ -1,7 +1,7 @@
 Summary: The GNU Compiler Collection
 Name: gcc
 Version: 4.4.3
-Release: 1
+Release: 2
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
@@ -9,8 +9,10 @@ Vendor: LightCube Solutions
 URL: http://gcc.gnu.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, glibc-devel, linux-headers, gmp, mpfr, binutils
+Requires: base-layout, glibc, gmp, mpfr
+Requires(post): texinfo, bash, ncurses, readline
 BuildRequires: digest(%{SOURCE0}) = fe1ca818fc6d2caeffc9051fe67ff103
+BuildRequires: gmp-devel, mpfr-devel
 
 %description
 The GNU Compiler Collection is required to compile various languages.
@@ -26,18 +28,18 @@ compiled using GCC.
 %package c++
 Summary: GCC C++ compiler
 Group: Development/Tools
-Requires: %{name} = %{version}-%{release}
-Requires: %{name}-c++-libs = %{version}-%{release}
+Requires: %{name} = %{version}
+Requires: %{name}-c++-libs = %{version}
 
 %description c++
-The %{name}-c++ package contains a C++ compiler to be used with GCC. It
+The %{name}-c++ package contains a C++ compiler to be used with GCC.
 It includes support for most of the current C++ specification, including
 templates and exception handling.
 
 %package c++-libs
 Summary: GCC C++ support libraries
 Group: System Environment/Libraries
-Requires: %{name}-libs = %{version}-%{release}
+Requires: %{name}-libs = %{version}
 
 %description c++-libs
 The %{name}-c++-libs package contains support libraries for programs
@@ -64,6 +66,9 @@ cd ../%{name}-build
   --enable-__cxa_atexit \
   --enable-clocale=gnu \
   --enable-languages=c,c++ \
+  --infodir=/usr/share/info \
+  --mandir=/usr/share/man \
+  --disable-bootstrap \
   --disable-multilib
 make LDFLAGS="-s"
 
@@ -73,19 +78,22 @@ make DESTDIR=%{buildroot} install
 mkdir %{buildroot}/%{_lib}
 ln -sv ../usr/bin/cpp %{buildroot}/%{_lib}
 ln -sv gcc %{buildroot}/usr/bin/cc
-rm -f %{buildroot}%{_infodir}/dir
-find %{buildroot} -name *.la -exec rm -v '{}' \;
+rm -f %{buildroot}/usr/share/info/dir
+%find_lang %{name}
+%find_lang cpplib
+%find_lang libstdc++
+cat %{name}.lang cpplib.lang > ../%{name}-%{version}/%{name}.lang
 
 %post
 for i in cpp cppinternals gcc gccinstall gccint libgomp
 do
-  /usr/bin/install-info %{_infodir}/$i.info %{_infodir}/dir
+  /usr/bin/install-info /usr/share/info/$i.info /usr/share/info/dir
 done
 
 %preun
 for i in cpp cppinternals gcc gccinstall gccint libgomp
 do
-  /usr/bin/install-info --delete %{_infodir}/$i.info %{_infodir}/dir
+  /usr/bin/install-info --delete /usr/share/info/$i.info /usr/share/info/dir
 done
 
 %post libs -p /sbin/ldconfig
@@ -97,7 +105,7 @@ done
 %clean
 rm -rf %{buildroot}
 
-%files
+%files -f %{name}.lang
 %defattr(-,root,root)
 /%{_lib}/cpp
 /usr/bin/cc
@@ -107,12 +115,12 @@ rm -rf %{buildroot}
 /usr/bin/gcov
 /usr/bin/*-linux-gnu-gcc
 /usr/bin/*-linux-gnu-gcc-%{version}
-/usr/info/cpp.info
-/usr/info/cppinternals.info
-/usr/info/gcc.info
-/usr/info/gccinstall.info
-/usr/info/gccint.info
-/usr/info/libgomp.info
+/usr/share/info/cpp.info
+/usr/share/info/cppinternals.info
+/usr/share/info/gcc.info
+/usr/share/info/gccinstall.info
+/usr/share/info/gccint.info
+/usr/share/info/libgomp.info
 /usr/%{_lib}/gcc
 /usr/%{_lib}/libgcc_s.so
 /usr/%{_lib}/libgomp.a
@@ -125,6 +133,11 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libssp.a
 /usr/%{_lib}/libssp.so
 /usr/%{_lib}/libssp_nonshared.a
+/usr/%{_lib}/libgomp.la
+/usr/%{_lib}/libmudflap.la
+/usr/%{_lib}/libmudflapth.la
+/usr/%{_lib}/libssp.la
+/usr/%{_lib}/libssp_nonshared.la
 %ifarch ppc
 /usr/%{_lib}/nof/libgcc_s.so
 /usr/%{_lib}/nof/libgomp.a
@@ -138,12 +151,10 @@ rm -rf %{buildroot}
 /usr/%{_lib}/nof/libssp.so
 /usr/%{_lib}/nof/libssp_nonshared.a
 %endif
-/usr/man/man1/gcov*
-/usr/man/man1/gcc*
-/usr/man/man1/cpp*
-/usr/man/man7/*
-/usr/share/locale/*/LC_MESSAGES/cpplib.mo
-/usr/share/locale/*/LC_MESSAGES/gcc.mo
+/usr/share/man/man1/gcov*
+/usr/share/man/man1/gcc*
+/usr/share/man/man1/cpp*
+/usr/share/man/man7/*
 
 %files libs
 %defattr(-,root,root)
@@ -160,7 +171,7 @@ rm -rf %{buildroot}
 /usr/%{_lib}/nof/libssp.so.*
 %endif
 
-%files c++
+%files c++ -f ../%{name}-build/libstdc++.lang
 %defattr(-,root,root)
 /usr/bin/c++
 /usr/bin/g++
@@ -170,13 +181,14 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libstdc++.a
 /usr/%{_lib}/libstdc++.so
 /usr/%{_lib}/libsupc++.a
+/usr/%{_lib}/libstdc++.la
+/usr/%{_lib}/libsupc++.la
 %ifarch ppc
 /usr/%{_lib}/nof/libstdc++.a
 /usr/%{_lib}/nof/libstdc++.so
 /usr/%{_lib}/nof/libsupc++.a
 %endif
-/usr/man/man1/g++*
-/usr/share/locale/*/LC_MESSAGES/libstdc++.mo
+/usr/share/man/man1/g++*
 
 %files c++-libs
 %defattr(-,root,root)
@@ -186,6 +198,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.3-2
+- Fixes to infodir locations
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.3-1
 - Upgrade to 4.4.3
 
