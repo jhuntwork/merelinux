@@ -30,12 +30,27 @@ make
 %install
 install -dv %{buildroot}/{sbin,usr/share/man/man{5,8}}
 make prefix=%{buildroot} BINDIR=%{buildroot}/sbin install
+install -dv %{buildroot}/etc
+cat > %{buildroot}/etc/syslog.conf << "EOF"
+# Begin /etc/syslog.conf
+
+auth,authpriv.* -/var/log/auth.log
+*.*;auth,authpriv.none -/var/log/sys.log
+daemon.* -/var/log/daemon.log
+kern.* -/var/log/kern.log
+mail.* -/var/log/mail.log
+user.* -/var/log/user.log
+*.emerg *
+
+# End /etc/syslog.conf
+EOF
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
+/etc/syslog.conf
 /sbin/klogd
 /sbin/syslogd
 /usr/share/man/man5/syslog.conf.5
