@@ -1,7 +1,7 @@
 Summary: GNU C Library
 Name: glibc
 Version: 2.11.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -19,8 +19,8 @@ C-based software installed in the system.
 %package devel
 Summary: Headers, object files and utilities for development using C libraries
 Group: Development/Libraries
-Requires: %{name} = %{version}-%{release}, texinfo
-Requires: linux-headers
+Requires: %{name} = %{version}, texinfo
+Requires(post): texinfo, bash, ncurses, readline
 
 %description devel
 The %{name}-devel package contains the object files necessary for
@@ -56,7 +56,7 @@ touch %{buildroot}/etc/ld.so.conf
 cd ../glibc-build
 make install_root=%{buildroot} install
 make install_root=%{buildroot} localedata/install-locales
-rm -f %{buildroot}%{_infodir}/dir
+rm -f %{buildroot}/usr/share/info/dir
 cat > %{buildroot}/etc/nsswitch.conf << "EOF"
 # Begin /etc/nsswitch.conf
 
@@ -82,17 +82,16 @@ cat > %{buildroot}/etc/ld.so.conf << "EOF"
 
 # End /etc/ld.so.conf
 EOF
-rm -f %{buildroot}/usr/share/info/dir
 %find_lang libc
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %post devel
-/usr/bin/install-info %{_infodir}/libc.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/libc.info /usr/share/info/dir
 
 %preun devel
-/usr/bin/install-info --delete %{_infodir}/libc.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/libc.info /usr/share/info/dir
 
 %clean
 rm -rf %{buildroot}
@@ -141,6 +140,9 @@ rm -rf glibc-build
 /usr/share/info/libc*
 
 %changelog
+* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.11.1-2
+- Fixes to infodir locations
+
 * Mon Mar 29 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Updated to version 2.11.1
 
