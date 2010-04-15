@@ -1,7 +1,7 @@
 Summary: CrackLib
 Name: cracklib
 Version: 2.8.16
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -13,6 +13,7 @@ Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-words-200805
 Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = 3bfb22db8fcffd019463ee415a1b25b7
 BuildRequires: digest(%{SOURCE1}) = 7fa6ba0cd50e7f9ccaf4707c810b14f1
+BuildRequires: Python-devel
 
 %description
 A Next generation version of the libCrack password checking library.
@@ -49,14 +50,13 @@ ln -v -sf ../../%{_lib}/libcrack.so.2.8.1 %{buildroot}/usr/%{_lib}/libcrack.so
 install -v -m644 -D %{SOURCE1} %{buildroot}/usr/share/dict/cracklib-words.gz
 gunzip -fv %{buildroot}/usr/share/dict/cracklib-words.gz
 ln -svf cracklib-words %{buildroot}/usr/share/dict/words
-find %{buildroot} -name "*.la" -exec rm -vf '{}' \;
 %find_lang %{name}
 
 %post
 /usr/sbin/create-cracklib-dict /usr/share/dict/cracklib-words >/dev/null 2>&1
 
 %postun
-rm -rf /%{_lib}/cracklib
+/bin/rm -rf /%{_lib}/cracklib
 
 %clean
 rm -rf %{buildroot}
@@ -79,6 +79,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/%{_lib}/python2.6/site-packages/_cracklibmodule.a
 /usr/%{_lib}/python2.6/site-packages/_cracklibmodule.so
+/usr/%{_lib}/python2.6/site-packages/_cracklibmodule.la
 /usr/%{_lib}/python2.6/site-packages/cracklib.py
 /usr/%{_lib}/python2.6/site-packages/cracklib.pyc
 /usr/%{_lib}/python2.6/site-packages/cracklib.pyo
@@ -87,10 +88,14 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/%{_lib}/libcrack.a
 /usr/%{_lib}/libcrack.so
+/usr/%{_lib}/libcrack.la
 /usr/include/crack.h
 /usr/include/packer.h
 
 %changelog
+* Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.16-2
+- Fixes to dependencies and ambiguous postun command.
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.16-1
 - Upgrade to 2.8.16
 
