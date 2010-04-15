@@ -10,9 +10,10 @@ URL: http://www.kernel.org/pub/linux/%{_lib}s/pam/
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-docs.tar.bz2
 
-Requires: base-layout, glibc, cracklib
+Requires: base-layout, glibc, flex, cracklib
 BuildRequires: digest(%{SOURCE0}) = 9b3d952b173d5b9836cbc7e8de108bee
 BuildRequires: digest(%{SOURCE1}) = a8f77330be4a6bc73e0e584a599649b0
+BuildRequires: cracklib-devel, flex-devel
 
 %description
 Linux-PAM (Pluggable Authentication Modules for Linux) is a suite of shared
@@ -41,7 +42,6 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
-find %{buildroot} -name "*.la" -exec rm -vf '{}' \;
 install -dv %{buildroot}/etc/pam.d
 %find_lang %{name}
 
@@ -69,6 +69,9 @@ rm -rf %{buildroot}
 /%{_lib}/libpamc.so
 /%{_lib}/libpam_misc.so
 /%{_lib}/libpam.so
+/%{_lib}/libpam.la
+/%{_lib}/libpam_misc.la
+/%{_lib}/libpamc.la
 /usr/include/security
 /usr/share/man/man3/*
 
