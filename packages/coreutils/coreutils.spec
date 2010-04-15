@@ -1,7 +1,7 @@
 Summary: GNU Coreutils
 Name: coreutils
 Version: 8.4
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -11,11 +11,12 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i18n-1.patch
 Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-uname-1.patch
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, gmp
+Requires(post): texinfo, bash, ncurses, readline
 BuildRequires: digest(%{SOURCE0}) = 56f549854d723d9dcebb77919019df55
 BuildRequires: digest(%{PATCH0}) = 13699e7e1c2ab2165dbe9f35c047e804
 BuildRequires: digest(%{PATCH1}) = 510a730e7bc8fd92daaf47aad4dc1200
-Requires(post): texinfo, bash, ncurses, readline
+BuildRequires: gmp-devel
 
 %description
 %{name} provides some core system utilities, such as cp, mv, ls
@@ -54,6 +55,8 @@ do
 done
 mv -v %{buildroot}/usr/bin/chroot %{buildroot}/usr/sbin
 rm -f %{buildroot}/usr/share/info/dir
+install -dv %{buildroot}/etc
+%{buildroot}/usr/bin/dircolors -p > %{buildroot}/etc/dircolors
 %find_lang %{name}
 
 %clean
@@ -93,6 +96,7 @@ rm -rf %{buildroot}
 /bin/sync
 /bin/true
 /bin/uname
+/etc/dircolors
 /usr/bin/[
 /usr/bin/base64
 /usr/bin/basename
@@ -175,6 +179,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/%{name}/libstdbuf.so
 
 %changelog
+* Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.4-2
+- Add in dependency on gmp, create a dircolors listing
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.4-1
 - Upgrade to 8.4
 
