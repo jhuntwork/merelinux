@@ -1,7 +1,7 @@
 Summary: The GNU Readline Library
 Name: readline
 Version: 6.1
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
@@ -10,7 +10,9 @@ URL: http://tiswww.case.edu/php/chet/readline/rltop.html
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc, ncurses
+Requires(post): texinfo, bash
 BuildRequires: digest(%{SOURCE0}) = fc2f7e714fe792db1ce6ddc4c9fb4ef3
+BuildRequires: ncurses-devel
 
 %package devel
 Summary: Headers and objects for developing with %{name}
@@ -85,6 +87,9 @@ done
 /usr/share/man/man3/readline.3
 
 %changelog
+* Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 6.1-2
+- Fixes to build dependencies
+
 * Tue Mar 30 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Updated to 6.1
 
