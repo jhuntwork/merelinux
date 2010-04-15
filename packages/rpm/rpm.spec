@@ -1,7 +1,7 @@
 Summary: rpm package manager
 Name: rpm
 Version: 5.1.9
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -9,9 +9,9 @@ Vendor: LightCube Solutions
 URL: http://www.pcre.org
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, bzip2, beecrypt, openssl, pcre, popt, neon, expat, db, zlib
+Requires: base-layout, glibc, bzip2, beecrypt, openssl, pcre, popt, neon, expat, zlib
 BuildRequires: digest(%{SOURCE0}) = 2b6ff8f7abb1fe919402f00cc0ca56f7
-BuildRequires: beecrypt-devel, openssl-devel, Python-devel, pcre-devel, popt-devel, neon-devel, expat-devel, db-devel, zlib-devel
+BuildRequires: beecrypt-devel, openssl-devel, Python-devel, pcre-devel, popt-devel, neon-devel, expat-devel, zlib-devel, bzip2-devel
 
 %description
 RPM is a powerful and mature command-line driven package management system
@@ -46,7 +46,12 @@ sed -i '/^%%_lib/s/lib$/lib64/' macros.in
   --libdir=/usr/%{_lib} \
   --with-openssl=yes \
   --with-python=yes \
-  --with-pcre=external
+  --with-pcre=external \
+  --with-neon=external \
+  --with-bzip2=external \
+  --with-lua=internal \
+  --with-xc=internal \
+  --with-db-tools-integrated
 make
 
 %install
@@ -118,11 +123,12 @@ rm -rf %{buildroot}
 
 %files python
 %defattr(-,root,root)
-/usr/%{_lib}/python2.6/site-packages/rpm/__init__.py
-/usr/%{_lib}/python2.6/site-packages/rpm/_rpmmodule.a
-/usr/%{_lib}/python2.6/site-packages/rpm/_rpmmodule.la
-/usr/%{_lib}/python2.6/site-packages/rpm/_rpmmodule.so
+/usr/%{_lib}/python2.6/site-packages/rpm
 
 %changelog
+* Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.9-2
+- Fixes to python subpackage
+- Use internal db, lua and xc and external bzip2
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.9-1
 - Initial version
