@@ -9,8 +9,9 @@ Vendor: LightCube Solutions
 URL: http://darwinsys.com/file
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, zlib
 BuildRequires: digest(%{SOURCE0}) = accade81ff1cc774904b47c72c8aeea0
+BuildRequires: zlib-devel
 
 %package devel
 Summary: Libraries and headers for developing with libmagic
