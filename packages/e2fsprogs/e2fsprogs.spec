@@ -11,6 +11,7 @@ Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.ta
 
 Requires: base-layout, glibc, util-linux-ng
 BuildRequires: digest(%{SOURCE0}) = fb507a40c2706bc38306f150d069e345
+BuildRequires: util-linux-ng-devel
 
 %package devel
 Summary: %{name} headers and libraries
