@@ -9,11 +9,12 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/inetutils
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, ncurses, readline
 BuildRequires: digest(%{SOURCE0}) = a1d5a01b0ab8a7e596ac4cff0cce7129
+BuildRequires: readline-devel, ncurses-devel
 
 %description
-%{name} is a collection of common networking programs including ftp,
+Inetutils is a collection of common networking programs including ftp,
 telnet, ping, hostname and traceroute
 
 %prep
