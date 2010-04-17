@@ -14,6 +14,11 @@ Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}-configs/%{name}-conf
 BuildRequires: digest(%{SOURCE1}) = 0210a3032b23901667d75be985b58e45
 %endif
 
+%ifarch i686
+Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}-configs/%{name}-config-%{version}-i686
+BuildRequires: digest(%{SOURCE1}) = fc7cb3e55b3ee840166ba947918efbbc
+%endif
+
 Requires: base-layout
 BuildRequires: digest(%{SOURCE0}) = 80c5ff544b0ee4d9b5d8b8b89d4a0ef9
 
@@ -73,6 +78,9 @@ cp System.map %{buildroot}/boot/System.map-%{version}-%{release}
 cp .config %{buildroot}/boot/config-%{version}-%{release}
 %ifarch x86_64
 cp arch/x86_64/boot/bzImage %{buildroot}/boot/%{name}-%{version}-%{release}
+%endif
+%ifarch i686
+cp arch/x86/boot/bzImage %{buildroot}/boot/%{name}-%{version}-%{release}
 %endif
 
 %clean
