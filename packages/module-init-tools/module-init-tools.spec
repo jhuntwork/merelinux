@@ -11,6 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 
 Requires: base-layout, glibc, zlib
 BuildRequires: digest(%{SOURCE0}) = 28dfcb9e24cdbeb12b99ac1eb8af7dea
+BuildRequires: zlib-devel
 
 %description
 Tools for activating Linux kernel modules
