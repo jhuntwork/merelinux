@@ -9,8 +9,9 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/grep
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, pcre
 BuildRequires: digest(%{SOURCE0}) = 8d1496da11029112a4d0986cbf09e26f
+BuildRequires: pcre-devel
 
 %description
 %{name} searches one or more input files for lines
