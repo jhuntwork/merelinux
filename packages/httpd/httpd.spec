@@ -11,11 +11,11 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 Source1: http://dev.lightcube.us/~jhuntwork/sources/blfs-bootscripts/blfs-bootscripts-20090302.tar.bz2
 Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-config-1.patch
 
-Requires: base-layout, glibc, openssl, pcre, apr, apr-util, zlib
+Requires: base-layout, glibc, openssl, pcre, apr, apr-util, zlib, expat, db
 BuildRequires: digest(%{SOURCE0}) = 016cec97337eccead2aad6a7c27f2e14
 BuildRequires: digest(%{SOURCE1}) = 7ee5363f223235adc54046623ffa77cd
 BuildRequires: digest(%{PATCH0}) = e02a3ec5925eb9e111400b9aa229f822
-BuildRequires: openssl-devel, pcre-devel, apr-devel, apr-util-devel, zlib-devel
+BuildRequires: openssl-devel, pcre-devel, apr-devel, apr-util-devel, zlib-devel, expat-devel, db-devel
 
 %description
 Subversion is an open source version control system.
