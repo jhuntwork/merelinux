@@ -1,7 +1,7 @@
 Summary: Ncurses Library
 Name: ncurses
 Version: 5.7
-Release: 2
+Release: 3
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
@@ -15,7 +15,7 @@ BuildRequires: digest(%{SOURCE0}) = cce05daf61a64501ef6cd8da1f727ec6
 %package devel
 Summary: Headers and libraries for developing with %{name} 
 Group: Development
-Requires: glibc-devel, linux-headers, binutils, gcc
+Requires: %{name}
 
 %description
 %{name} is an API for writing text-based user interfaces.
@@ -42,10 +42,10 @@ do
   echo "INPUT(-l${lib}w)" >%{buildroot}/usr/%{_lib}/lib${lib}.so
   ln -sfv lib${lib}w.a %{buildroot}/usr/%{_lib}/lib${lib}.a
 done
-ln -sfv libncurses++w.a %{buildroot}/usr/%{_lib}/libncurses++.a
 rm -vf %{buildroot}/usr/%{_lib}/libcursesw.so
 echo "INPUT(-lncursesw)" >%{buildroot}/usr/%{_lib}/libcursesw.so
 ln -sfv libncurses.so %{buildroot}/usr/%{_lib}/libcurses.so
+ln -sfv libncurses++w.a %{buildroot}/usr/%{_lib}/libncurses++.a
 ln -sfv libncursesw.a %{buildroot}/usr/%{_lib}/libcursesw.a
 ln -sfv libncurses.a %{buildroot}/usr/%{_lib}/libcurses.a
 
@@ -57,7 +57,6 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-%attr (644,root,root) /usr/%{_lib}/libncurses++w.a
 /usr/bin/captoinfo
 /usr/bin/clear
 /usr/bin/infocmp
@@ -99,6 +98,7 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libncurses.a
 /usr/%{_lib}/libncurses.so
 /usr/%{_lib}/libncurses++.a
+/usr/%{_lib}/libncurses++w.a
 /usr/%{_lib}/libncursesw.a
 /usr/%{_lib}/libncursesw.so
 /usr/%{_lib}/libpanel.a
@@ -109,6 +109,9 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Fri Apr 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.7-3
+- Add missing link for libncurses++w.a
+
 * Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.7-2
 - Remove bad location for installed docs
 
