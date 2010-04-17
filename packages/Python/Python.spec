@@ -9,8 +9,9 @@ Vendor: LightCube Solutions
 URL: http://www.python.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, ncurses, zlib, readline
 BuildRequires:  digest(%{SOURCE0}) = 6bef0417e71a1a1737ccf5750420fdb3
+BuildRequires: ncurses-devel, zlib-devel, readline-devel
 Provides: python(abi) = 2.6
 
 %description
