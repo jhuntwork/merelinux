@@ -11,7 +11,7 @@ Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.ta
 
 Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = 8441c014170823f2dff97e33df55af1e
-BuildRequires: Python
+BuildRequires: Python-devel
 
 %description
 BeeCrypt aims to provide a strong and fast cryptography toolkit.
