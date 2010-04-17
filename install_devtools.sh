@@ -15,6 +15,8 @@ rpm -ivh -r /mnt/tempsystem \
   $REPOS/noarch/automake-1.11.1-1.noarch.rpm \
   $REPOS/$ARCH/libtool-2.2.6b-1.$ARCH.rpm \
   $REPOS/$ARCH/pkg-config-0.23-1.$ARCH.rpm \
+  $REPOS/$ARCH/patch-2.6.1-1.$ARCH.rpm \
   $REPOS/$ARCH/m4-1.4.14-1.$ARCH.rpm \
+  $REPOS/$ARCH/flex-2.5.35-1.x86_64.rpm \
   $REPOS/$ARCH/bison-2.4.2-1.$ARCH.rpm \
   $REPOS/$ARCH/mpfr-2.4.2-1.$ARCH.rpm 

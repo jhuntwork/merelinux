@@ -4,19 +4,7 @@ ARCH=$(uname -m)
 REPOS="/usr/src/rpm/RPMS"
 EXTRA="-r /mnt/tempsystem"
 
-# Command to install all base system packages at once
-rpm $EXTRA --initdb
-rpm -qa $EXTRA
 rpm -ivh $EXTRA \
- $REPOS/$ARCH/base-layout-0.1-5.$ARCH.rpm \
- $REPOS/noarch/base-files-0.1-1.noarch.rpm \
- $REPOS/$ARCH/glibc-2.11.1-2.$ARCH.rpm \
- $REPOS/$ARCH/readline-6.1-2.$ARCH.rpm \
- $REPOS/$ARCH/bash-4.1-3.$ARCH.rpm \
- $REPOS/$ARCH/zlib-1.2.4-2.$ARCH.rpm \
- $REPOS/$ARCH/ncurses-5.7-2.$ARCH.rpm \
- $REPOS/$ARCH/perl-5.10.1-1.$ARCH.rpm \
- $REPOS/$ARCH/texinfo-4.13a-1.$ARCH.rpm \
  $REPOS/$ARCH/bash-doc-4.1-3.$ARCH.rpm \
  $REPOS/$ARCH/gcc-libs-4.4.3-2.$ARCH.rpm \
  $REPOS/$ARCH/gcc-c++-libs-4.4.3-2.$ARCH.rpm \
@@ -39,10 +27,8 @@ rpm -ivh $EXTRA \
  $REPOS/$ARCH/kbd-1.15.1-1.$ARCH.rpm \
  $REPOS/$ARCH/less-436-1.$ARCH.rpm \
  $REPOS/$ARCH/gdbm-1.8.3-1.$ARCH.rpm \
- $REPOS/$ARCH/flex-2.5.35-1.x86_64.rpm \
  $REPOS/noarch/man-pages-3.24-1.noarch.rpm \
  $REPOS/noarch/iana-etc-2.30-1.noarch.rpm \
- $REPOS/$ARCH/patch-2.6.1-1.$ARCH.rpm \
  $REPOS/$ARCH/psmisc-22.10-2.$ARCH.rpm \
  $REPOS/$ARCH/sysklogd-1.5-1.$ARCH.rpm \
  $REPOS/$ARCH/tar-1.23-1.$ARCH.rpm \
