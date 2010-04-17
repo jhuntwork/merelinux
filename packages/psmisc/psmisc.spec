@@ -37,6 +37,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /bin/fuser
 /bin/killall
+/bin/peekfd
 /bin/prtstat
 /usr/bin/pstree
 /usr/share/man/man1/fuser.1
