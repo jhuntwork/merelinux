@@ -24,6 +24,7 @@ lines of code.
 %build
 ./configure --prefix=/usr --libexecdir=/usr/%{_lib}
 make
+make check
 
 %install
 make DESTDIR=%{buildroot} install
