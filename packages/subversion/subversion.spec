@@ -9,9 +9,9 @@ Vendor: LightCube Solutions
 URL: http://subversion.apache.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, apr, apr-util, neon, openssl, zlib, sqlite, expat
+Requires: base-layout, glibc, apr, apr-util, neon, openssl, zlib, expat, sqlite, db
 BuildRequires: digest(%{SOURCE0}) = 9c30a47b1d48664e7afef68bb4834c53
-BuildRequires: apr-devel, apr-util-devel, neon-devel, openssl-devel, zlib-devel, sqlite-devel, expat-devel, Python-devel, httpd-devel
+BuildRequires: apr-devel, apr-util-devel, neon-devel, openssl-devel, zlib-devel, expat-devel, Python-devel, httpd-devel, sqlite-devel, db-devel
 
 %description
 Subversion is an open source version control system.
