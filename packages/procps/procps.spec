@@ -10,12 +10,13 @@ URL: http://procps.sourceforge.net
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-watch_unicode-1.patch
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, ncurses
 BuildRequires: digest(%{SOURCE0}) = 9532714b6846013ca9898984ba4cd7e0
 BuildRequires: digest(%{PATCH0}) = cd1a757e532d93662a7ed71da80e6b58
+BuildRequires: ncurses-devel
 
 %description
-%{name} is a number small useful utilities that give information about
+procps is a number small useful utilities that give information about
 processes using the /proc filesystem. The package includes the programs
 ps, top, vmstat, w, kill, free, slabtop, and skill. 
 
