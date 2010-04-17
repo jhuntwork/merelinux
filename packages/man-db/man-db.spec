@@ -9,8 +9,9 @@ Vendor: LightCube Solutions
 URL: http://man-db.nongnu.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, gdbm, groff
+Requires: base-layout, glibc, gdbm, groff, zlib
 BuildRequires: digest(%{SOURCE0}) = eef0d8c8e54894e4e050e2176bb1d88d
+BuildRequires: gdbm-devel, zlib-devel
 
 %description
 man-db is an implementation of the standard Unix documentation
