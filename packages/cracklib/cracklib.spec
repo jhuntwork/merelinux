@@ -10,10 +10,10 @@ URL: http://cracklib.sourceforge.net
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-words-20080507.gz
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, zlib
 BuildRequires: digest(%{SOURCE0}) = 3bfb22db8fcffd019463ee415a1b25b7
 BuildRequires: digest(%{SOURCE1}) = 7fa6ba0cd50e7f9ccaf4707c810b14f1
-BuildRequires: Python-devel
+BuildRequires: zlib-devel, Python-devel
 
 %description
 A Next generation version of the libCrack password checking library.
