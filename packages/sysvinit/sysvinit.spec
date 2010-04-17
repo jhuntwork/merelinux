@@ -1,7 +1,7 @@
 Summary: System V style init programs
 Name: sysvinit
 Version: 2.86
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -31,6 +31,35 @@ make -C src
 %install
 install -dv %{buildroot}/{bin,sbin,usr/bin,usr/include,usr/share/man/man{1,5,8}}
 make ROOT=%{buildroot} -C src install
+install -dv %{buildroot}/etc
+cat > %{buildroot}/etc/inittab << "EOF"
+#Begin /etc/inittab
+
+id:3:initdefault:
+
+si::sysinit:/etc/rc.d/init.d/rc sysinit
+
+l0:0:wait:/etc/rc.d/init.d/rc 0
+l1:S1:wait:/etc/rc.d/init.d/rc 1
+l2:2:wait:/etc/rc.d/init.d/rc 2
+l3:3:wait:/etc/rc.d/init.d/rc 3
+l4:4:wait:/etc/rc.d/init.d/rc 4
+l5:5:wait:/etc/rc.d/init.d/rc 5
+l6:6:wait:/etc/rc.d/init.d/rc 6
+
+ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+
+su:S016:once:/sbin/sulogin
+
+1:2345:respawn:/sbin/agetty tty1 9600
+2:2345:respawn:/sbin/agetty tty2 9600
+3:2345:respawn:/sbin/agetty tty3 9600
+4:2345:respawn:/sbin/agetty tty4 9600
+5:2345:respawn:/sbin/agetty tty5 9600
+6:2345:respawn:/sbin/agetty tty6 9600
+
+# End /etc/inittab
+EOF
 rm -rfv %{buildroot}/usr/include
 
 %clean
@@ -40,6 +69,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /bin/mountpoint
 /bin/pidof
+/etc/inittab
 /sbin/bootlogd
 /sbin/halt
 /sbin/init
@@ -59,5 +89,8 @@ rm -rf %{buildroot}
 /usr/share/man/man8/*
 
 %changelog
+* Sat Apr 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.86-2
+- Add a default inittab file
+
 * Tue Apr 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.86-1
 - Initial version
