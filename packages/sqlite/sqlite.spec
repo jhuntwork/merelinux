@@ -40,18 +40,18 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /usr/bin/sqlite3
-/usr/lib64/libsqlite3.so.0
-/usr/lib64/libsqlite3.so.0.8.6
+/usr/%{_lib}/libsqlite3.so.0
+/usr/%{_lib}/libsqlite3.so.0.8.6
 /usr/share/man/man1/sqlite3.1
 
 %files devel
 %defattr(-,root,root)
 /usr/include/sqlite3.h
 /usr/include/sqlite3ext.h
-/usr/lib64/libsqlite3.a
-/usr/lib64/libsqlite3.la
-/usr/lib64/libsqlite3.so
-/usr/lib64/pkgconfig/sqlite3.pc
+/usr/%{_lib}/libsqlite3.a
+/usr/%{_lib}/libsqlite3.la
+/usr/%{_lib}/libsqlite3.so
+/usr/%{_lib}/pkgconfig/sqlite3.pc
 
 %changelog
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.6.23.1-1
