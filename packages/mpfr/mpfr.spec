@@ -11,6 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 
 Requires: base-layout, glibc, gmp
 BuildRequires: digest(%{SOURCE0}) = 89e59fe665e2b3ad44a6789f40b059a0
+BuildRequires: gmp-devel
 
 %package devel
 Summary: Headers, object files and info pages for developing with %{name}
