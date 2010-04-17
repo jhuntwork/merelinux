@@ -13,6 +13,7 @@ Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-fi
 Requires: base-layout, glibc, ncurses
 BuildRequires: digest(%{SOURCE0}) = f0901284b338e448bfd79ccca0041254
 BuildRequires: digest(%{PATCH0}) = 3af30a47fbf94d141c4317bf87d28e25
+BuildRequires: ncurses-devel
 
 %description
 Vim is an advanced text editor that seeks to provide the power of the de-facto
