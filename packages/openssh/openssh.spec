@@ -10,10 +10,10 @@ URL: http://www.openssl.com
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 Source1: http://dev.lightcube.us/~jhuntwork/sources/blfs-bootscripts/blfs-bootscripts-20090302.tar.bz2
 
-Requires: base-layout, glibc, openssl, Linux-PAM
+Requires: base-layout, glibc, openssl, Linux-PAM, zlib
 BuildRequires: digest(%{SOURCE0}) = da10af8a789fa2e83e3635f3a1b76f5e
 BuildRequires: digest(%{SOURCE1}) = 7ee5363f223235adc54046623ffa77cd
-BuildRequires: openssl-devel
+BuildRequires: openssl-devel, zlib-devel
 
 %description
 OpenSSH is a free version of the SSH connectivity tools.
