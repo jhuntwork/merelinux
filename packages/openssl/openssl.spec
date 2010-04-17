@@ -9,8 +9,9 @@ Vendor: LightCube Solutions
 URL: http://www.openssl.org
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, zlib
 BuildRequires: digest(%{SOURCE0}) = 89eaa86e25b2845f920ec00ae4c864ed
+BuildRequires: zlib-devel
 
 %description
 OpenSSL provides a robust, commercial-grade, full-featured, and Open Source
@@ -41,7 +42,7 @@ Miscellaneous OpenSSL related tools
 ./config \
   --openssldir=/etc/ssl \
   --prefix=/usr \
-  shared
+  shared zlib-dynamic
 make LIBDIR=%{_lib} MANDIR=/usr/share/man
 
 %install
