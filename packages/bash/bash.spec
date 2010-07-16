@@ -1,7 +1,7 @@
 Summary: GNU Bash
 Name: bash
 Version: 4.1
-Release: 3
+Release: 4
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -14,7 +14,7 @@ Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-up
 Requires: glibc, ncurses, readline
 
 BuildRequires: digest(%{SOURCE0}) = 9800d8724815fd84994d9be65ab5e7b8
-BuildRequires: digest(%{PATCH0}) = 7b9ef6862dc12cb3489ebb0d0e7801e6
+BuildRequires: digest(%{PATCH0}) = 98b964e1d400a2e301e7cdb34019e599
 BuildRequires: digest(%{PATCH1}) = df1aab878fcb3b7955e15f8e5444c037
 BuildRequires: readline-devel
 
@@ -100,6 +100,9 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
+* Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-4
+- Updated bash rpm-requires patch
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-3
 - Add in user environment files, fix build dependencies
 
