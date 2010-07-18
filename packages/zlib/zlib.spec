@@ -1,7 +1,7 @@
 Summary: zlib Compression Library
 Name: zlib
-Version: 1.2.4
-Release: 3
+Version: 1.2.5
+Release: 1
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://www.zlib.net
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 763c6a0b4ad1cdf5549e3ab3f140f4cb
+BuildRequires: digest(%{SOURCE0}) = be1e89810e66150f5b0327984d8625a0
 
 %description
 According to its maintainers, zlib is:
@@ -57,6 +57,9 @@ rm -rf %{buildroot}
 /usr/include/zlib.h
 
 %changelog
+* Sat Jul 17 2010 Jeremy Huntwork <jhuntowrk@lightcubesolutions.com> - 1.2.5-1
+- Upgrade to 1.2.5
+
 * Fri Apr 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.2.4-3
 - Fixes to build method since 1.2.4 has a new make system
 
