@@ -1,7 +1,7 @@
 Summary: Fine Free File Command
 Name: file
 Version: 5.04
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -18,14 +18,17 @@ Summary: Libraries and headers for developing with libmagic
 Group: Development/Libraries
 
 %description
-The file command is "a file type guesser", that is, a command-line tool that tells you in words what kind of data a file contains.
-file does not rely on filename extensions, but looks at the contents of a file to determine its type.
+The file command is "a file type guesser", that is, a command-line tool that
+tells you in words what kind of data a file contains. It does not rely on
+filename extensions, but looks at the contents of a file to determine its type.
 
 %description devel
 Libraries and headers for developing with libmagic
 
 %prep
 %setup -q
+# Move the datadir location from /usr/share/misc to /usr/share/file
+sed -i 's/misc/file/' configure
 
 %build
 ./configure --prefix=/usr --libdir=/usr/%{_lib}
@@ -46,7 +49,7 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libmagic.so.1.0.0
 /usr/share/man/man1/file.1
 /usr/share/man/man4/magic.4
-/usr/share/misc/magic.mgc
+/usr/share/file
 
 %files devel
 %defattr(-,root,root)
@@ -56,6 +59,9 @@ rm -rf %{buildroot}
 /usr/share/man/man3/libmagic.3
 
 %changelog
+* Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.04-2
+- Make datadir /usr/share/file instead of /usr/share/misc
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.04-1
 - Upgrade to 5.04
 
