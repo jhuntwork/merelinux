@@ -1,7 +1,7 @@
 Summary: The GNU Documentation System
 Name: texinfo
 Version: 4.13a
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -11,6 +11,7 @@ Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.ta
 
 Requires: base-layout, glibc, ncurses, bash
 BuildRequires: digest(%{SOURCE0}) = 71ba711519209b5fb583fed2b3d86fcb
+BuildRequires: ncurses-devel
 
 %package tex
 Summary: Tools for formatting texinfo docs for printing using TeX.
@@ -71,8 +72,11 @@ rm -rf %{buildroot}
 
 %files tex
 %defattr(-,root,root)
-/usr/share/texmf/*
+/usr/share/texmf
 
 %changelog
-* Tue Aug 4 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.13a-2
+- Add Build requirement for ncurses-devel
+
+* Tue Aug 04 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
