@@ -1,6 +1,6 @@
 Summary: pkg-config 
 Name: pkg-config
-Version: 0.23
+Version: 0.25
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: http://pkg-config.freedesktop.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
-BuildRequires: digest(%{SOURCE0}) = d922a88782b64441d06547632fd85744
+BuildRequires: digest(%{SOURCE0}) = a3270bab3f4b69b7dc6dbdacbcae9745
 
 Requires: base-layout, glibc
 Provides: pkgconfig
@@ -42,7 +42,11 @@ rm -rf %{buildroot}
 /usr/share/pkgconfig
 /usr/%{_lib}/pkgconfig
 /usr/share/man/man1/pkg-config.1
+/usr/share/doc/pkg-config
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.25-1
+- Upgrade to 0.25
+
 * Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.23-1
 - Initial version
