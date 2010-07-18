@@ -1,7 +1,7 @@
 Summary: GNU Coreutils
 Name: coreutils
-Version: 8.4
-Release: 2
+Version: 8.5
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,13 +9,13 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/coreutils
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i18n-1.patch
-Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-uname-1.patch
+Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-uname-2.patch
 
 Requires: base-layout, glibc, gmp
 Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = 56f549854d723d9dcebb77919019df55
-BuildRequires: digest(%{PATCH0}) = 13699e7e1c2ab2165dbe9f35c047e804
-BuildRequires: digest(%{PATCH1}) = 510a730e7bc8fd92daaf47aad4dc1200
+BuildRequires: digest(%{SOURCE0}) = c1ffe586d001e87d66cd80c4536ee823
+BuildRequires: digest(%{PATCH0}) = e806ba5734411d1384f1e56169f31b22
+BuildRequires: digest(%{PATCH1}) = 500481b75892e5c07e19e9953a690e54
 BuildRequires: gmp-devel
 
 %description
@@ -179,6 +179,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/%{name}/libstdbuf.so
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.5-1
+- Upgrade to 8.5
+
 * Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.4-2
 - Add in dependency on gmp, create a dircolors listing
 
