@@ -1,6 +1,6 @@
 Summary: GNU Autoconf
 Name: autoconf
-Version: 2.65
+Version: 2.66
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -12,7 +12,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 
 Requires: base-layout, glibc, bash, m4
 Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = a6de1cc6434cd64038b0a0ae4e252b33
+BuildRequires: digest(%{SOURCE0}) = d2d22a532ee0e4d6d86a02e6425ecfce
 
 %description
 Autoconf is an extensible package of M4 macros that produce
@@ -64,5 +64,8 @@ rm -rf %{buildroot}
 
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.66-1
+- Upgrade to 2.66
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.65-1
 - Initial version
