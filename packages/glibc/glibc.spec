@@ -1,7 +1,7 @@
 Summary: GNU C Library
 Name: glibc
-Version: 2.11.1
-Release: 2
+Version: 2.11.2
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://www.gnu.org/software/libc
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-files
-BuildRequires: digest(%{SOURCE0}) = 6856d5d8b1239556687f0d1217f3f266
+BuildRequires: digest(%{SOURCE0}) = 414fc1bad64c0e34ead0bb3d0f191456
 
 %description
 The system C library which defines run-time functions for all
@@ -140,6 +140,9 @@ rm -rf glibc-build
 /usr/share/info/libc*
 
 %changelog
+* Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.11.2-1
+- Upgrade to 2.11.2
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.11.1-2
 - Fixes to infodir locations
 
