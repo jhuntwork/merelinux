@@ -1,6 +1,6 @@
 Summary: GNU Grep
 Name: grep
-Version: 2.6.1
+Version: 2.6.3
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,7 +10,7 @@ URL: http://www.gnu.org/software/grep
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc, pcre
-BuildRequires: digest(%{SOURCE0}) = 8d1496da11029112a4d0986cbf09e26f
+BuildRequires: digest(%{SOURCE0}) = 3095b57837b312f087c0680559de7f13
 BuildRequires: pcre-devel
 
 %description
@@ -51,6 +51,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/grep.1
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.3-1
+- Upgrade to 2.6.3
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.1-1
 - Upgrade to 2.6.1
 
