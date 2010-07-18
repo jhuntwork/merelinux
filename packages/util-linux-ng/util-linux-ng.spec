@@ -1,6 +1,6 @@
 Summary: Util-Linux Next Generation
 Name: util-linux-ng
-Version: 2.17.2
+Version: 2.18
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,7 +10,7 @@ URL: http://userweb.kernel.org/~kzak/util-linux-ng
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, ncurses, zlib
-BuildRequires: digest(%{SOURCE0}) = 4635725a3eef1c57090bac8ea5e082e6
+BuildRequires: digest(%{SOURCE0}) = 2f5f71e6af969d041d73ab778c141a77
 BuildRequires: ncurses-devel, zlib-devel
 
 %description
@@ -58,9 +58,14 @@ rm -rf %{buildroot}
 /bin/more
 /bin/mount
 /bin/umount
-/sbin/agetty
+/bin/findmnt
+/%{_lib}/libmount.so.1
+/%{_lib}/libmount.so.1.1.0
 /%{_lib}/libblkid.so.*
 /%{_lib}/libuuid.so.*
+/sbin/agetty
+/sbin/fsfreeze
+/sbin/swaplabel
 /sbin/blkid
 /sbin/blockdev
 /sbin/cfdisk
@@ -158,14 +163,21 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 /usr/include/blkid
 /usr/include/uuid
+/usr/include/mount
 /usr/%{_lib}/libblkid.a
 /usr/%{_lib}/libblkid.so
 /usr/%{_lib}/libuuid.a
 /usr/%{_lib}/libuuid.so
+/usr/%{_lib}/libmount.a
+/usr/%{_lib}/libmount.so
+/usr/%{_lib}/pkgconfig/mount.pc
 /usr/%{_lib}/pkgconfig/blkid.pc
 /usr/%{_lib}/pkgconfig/uuid.pc
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.18-1
+- Upgrade to 2.18
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.17.2-1
 - Upgrade to 2.17.2
 
