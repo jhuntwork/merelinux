@@ -1,7 +1,7 @@
 Summary: The GNU Compiler Collection
 Name: gcc
-Version: 4.4.3
-Release: 2
+Version: 4.5.0
+Release: 1
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
@@ -9,10 +9,10 @@ Vendor: LightCube Solutions
 URL: http://gcc.gnu.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, gmp, mpfr
+Requires: base-layout, glibc, gmp, mpfr, mpc, zlib, elfutils-libelf
 Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = fe1ca818fc6d2caeffc9051fe67ff103
-BuildRequires: gmp-devel, mpfr-devel
+BuildRequires: digest(%{SOURCE0}) = ff27b7c4a5d5060c8a8543a44abca31f
+BuildRequires: gmp-devel, mpfr-devel, mpc-devel, zlib-devel, elfutils-devel
 
 %description
 The GNU Compiler Collection is required to compile various languages.
@@ -61,6 +61,7 @@ cd ../%{name}-build
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --libexecdir=/usr/%{_lib} \
+  --with-system-zlib \
   --enable-shared \
   --enable-threads=posix \
   --enable-__cxa_atexit \
@@ -115,6 +116,7 @@ rm -rf %{buildroot}
 /usr/bin/gcov
 /usr/bin/*-linux-gnu-gcc
 /usr/bin/*-linux-gnu-gcc-%{version}
+/usr/share/gcc-%{version}
 /usr/share/info/cpp.info
 /usr/share/info/cppinternals.info
 /usr/share/info/gcc.info
@@ -198,6 +200,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.0-1
+- Upgrade to 4.5.0
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.3-2
 - Fixes to infodir locations
 
