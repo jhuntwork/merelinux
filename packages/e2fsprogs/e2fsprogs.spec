@@ -1,6 +1,6 @@
 Summary: ext2, ext3 and ext4 File System Programs
 Name: e2fsprogs
-Version: 1.41.11
+Version: 1.41.12
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,7 +10,7 @@ URL: http://e2fsprogs.sourceforge.net
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc, util-linux-ng
-BuildRequires: digest(%{SOURCE0}) = fb507a40c2706bc38306f150d069e345
+BuildRequires: digest(%{SOURCE0}) = 1b24a21fc0c2381ef420961cbfec733f
 BuildRequires: util-linux-ng-devel
 
 %package devel
@@ -58,12 +58,12 @@ rm -rf %{buildroot}
 %postun -p /sbin/ldconfig
 
 %post devel
-/usr/bin/install-info %{_infodir}/libext2fs.info %{_infodir}/dir
-/usr/bin/install-info %{_infodir}/com_err.info %{_infodir}/dir
+/usr/bin/install-info /usr/share/info/libext2fs.info /usr/share/info/dir
+/usr/bin/install-info /usr/share/info/com_err.info /usr/share/info/dir
 
 %preun devel
-/usr/bin/install-info --delete %{_infodir}/libext2fs.info %{_infodir}/dir
-/usr/bin/install-info --delete %{_infodir}/com_err.info %{_infodir}/dir
+/usr/bin/install-info --delete /usr/share/info/libext2fs.info /usr/share/info/dir
+/usr/bin/install-info --delete /usr/share/info/com_err.info /usr/share/info/dir
 
 %files -f build/%{name}.lang
 %defattr(-,root,root)
@@ -130,6 +130,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/ss.pc
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.12-1
+- Upgrade to 1.41.12
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.11-1
 - Upgrade to 1.41.11
 
