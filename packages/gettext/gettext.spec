@@ -1,6 +1,6 @@
 Summary: GNU Gettext
 Name: gettext
-Version: 0.17 
+Version: 0.18.1.1 
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -8,11 +8,9 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/gettext
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-upstream_fixes-2.patch
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 58a2bc6d39c0ba57823034d55d65d606
-BuildRequires: digest(%{PATCH0}) = ae64b6399ed6536e148e8386bcb91689
+BuildRequires: digest(%{SOURCE0}) = 3dd55b952826d2b32f51308f2f91aa89
 
 %description
 The GNU `gettext' utilities are a set of tools that provides a framework to help
@@ -36,7 +34,6 @@ Extensive examples on how to implement gettext in development
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 ./configure --prefix=/usr --libdir=/usr/%{_lib}
@@ -116,9 +113,9 @@ rm -rf %{buildroot}
 /usr/share/aclocal/wint_t.m4
 /usr/share/aclocal/xsize.m4
 /usr/%{_lib}/libasprintf.so.*
-/usr/%{_lib}/libgettextlib-0.17.so
 /usr/%{_lib}/libgettextpo.so.*
-/usr/%{_lib}/libgettextsrc-0.17.so
+/usr/%{_lib}/libgettextlib-0.18.1.so
+/usr/%{_lib}/libgettextsrc-0.18.1.so
 %dir /usr/share/doc/gettext/
 /usr/share/doc/gettext/FAQ.html
 /usr/share/doc/gettext/autopoint.1.html
@@ -216,6 +213,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libgettextsrc.la
 /usr/%{_lib}/libgettextsrc.so
 /usr/%{_lib}/preloadable_libintl.so
+/usr/share/aclocal/fcntl-o.m4
+/usr/share/aclocal/threadlib.m4
 /usr/share/doc/gettext/javadoc2
 /usr/share/doc/gettext/csharpdoc
 /usr/share/man/man3/bind_textdomain_codeset.3
@@ -233,5 +232,8 @@ rm -rf %{buildroot}
 /usr/share/doc/gettext/examples
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.18.1.1-1
+- Upgrade to 0.18.1.1
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.17-1
 - Initial version
