@@ -1,6 +1,6 @@
 Summary: GNU Libtool
 Name: libtool
-Version: 2.2.6b
+Version: 2.2.10
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 
 Requires: base-layout, glibc
 Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = 07da460450490148c6d2df0f21481a25
+BuildRequires: digest(%{SOURCE0}) = b745d220e88163fcd9eea0a90ccf21b0
 
 %description
 %{name} is a generic library support script. It hides the complexity
@@ -57,8 +57,13 @@ rm -rf %{buildroot}
 /usr/share/info/libtool.info-1
 /usr/share/info/libtool.info-2
 /usr/share/libtool
+/usr/share/man/man1/libtool.1
+/usr/share/man/man1/libtoolize.1
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.10-1
+- Upgrade to 2.2.10
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.6b-1
 - Upgrade to 2.2.6b
 
