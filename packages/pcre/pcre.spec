@@ -1,6 +1,6 @@
 Summary: PCRE - Perl Compatible Regular Expressions
 Name: pcre
-Version: 8.02
+Version: 8.10
 Release: 1
 Group: System Environment/Libraries
 License: GPL
@@ -10,7 +10,7 @@ URL: http://www.pcre.org
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc, bzip2, zlib, readline
-BuildRequires: digest(%{SOURCE0}) = 27948c1b5f5c1eabc23cba1ebe4c316f
+BuildRequires: digest(%{SOURCE0}) = 780867a700e9d4e4b9cb47aa5453e4b2
 BuildRequires: bzip2-devel, zlib-devel, readline-devel
 
 %description
@@ -84,5 +84,8 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.10-1
+- Upgrade to 8.10
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.02-1
 - Initial version
