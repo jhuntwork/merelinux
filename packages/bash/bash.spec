@@ -9,13 +9,13 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/bash
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
-Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-upstream_fixes_1-5.patch
+Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-upstream_fixes.patch
 
 Requires: glibc, ncurses, readline
 
 BuildRequires: digest(%{SOURCE0}) = 9800d8724815fd84994d9be65ab5e7b8
 BuildRequires: digest(%{PATCH0}) = 98b964e1d400a2e301e7cdb34019e599
-BuildRequires: digest(%{PATCH1}) = df1aab878fcb3b7955e15f8e5444c037
+BuildRequires: digest(%{PATCH1}) = f6580108f133dd7f0579be412f03ab8a
 BuildRequires: readline-devel
 
 %package doc
@@ -101,7 +101,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-4
-- Updated bash rpm-requires patch
+- Updated bash rpm-requires patch and upstream patch
 
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-3
 - Add in user environment files, fix build dependencies
