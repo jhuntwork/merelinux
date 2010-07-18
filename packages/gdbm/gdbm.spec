@@ -27,7 +27,11 @@ Libraries and headers for developing with %{name}
 %setup -q
 
 %build
-./configure --prefix=/usr --libdir=/usr/%{_lib} --infodir=/usr/share/info
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib} \
+  --infodir=/usr/share/info \
+  --mandir=/usr/share/man
 make
 
 %install
@@ -61,7 +65,7 @@ rm -rf %{buildroot}
 /usr/include/dbm.h
 /usr/include/gdbm.h
 /usr/include/ndbm.h
-/usr/man/man3/gdbm.3
+/usr/share/man/man3/gdbm.3
 /usr/share/info/gdbm.info
 
 %changelog
