@@ -1,6 +1,6 @@
 Summary: GNU C Library
 Name: glibc
-Version: 2.11.2
+Version: 2.12.1
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,7 +10,7 @@ URL: http://www.gnu.org/software/libc
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-files
-BuildRequires: digest(%{SOURCE0}) = 414fc1bad64c0e34ead0bb3d0f191456
+BuildRequires: digest(%{SOURCE0}) = be0ea9e587f08c87604fe10a91f72afd
 
 %description
 The system C library which defines run-time functions for all
@@ -140,6 +140,9 @@ rm -rf glibc-build
 /usr/share/info/libc*
 
 %changelog
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.12.1-1
+- Upgrade to 2.12.1
+
 * Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.11.2-1
 - Upgrade to 2.11.2
 
