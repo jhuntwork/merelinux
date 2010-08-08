@@ -1,6 +1,6 @@
 Summary: The GNU Compiler Collection
 Name: gcc
-Version: 4.5.0
+Version: 4.5.1
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 
 Requires: base-layout, glibc, gmp, mpfr, mpc, zlib, elfutils-libelf
 Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = ff27b7c4a5d5060c8a8543a44abca31f
+BuildRequires: digest(%{SOURCE0}) = 48231a8e33ed6e058a341c53b819de1a
 BuildRequires: gmp-devel, mpfr-devel, mpc-devel, zlib-devel, elfutils-devel
 
 %description
@@ -69,8 +69,7 @@ cd ../%{name}-build
   --enable-languages=c,c++ \
   --infodir=/usr/share/info \
   --mandir=/usr/share/man \
-  --disable-bootstrap \
-  --disable-multilib
+  --disable-bootstrap
 make LDFLAGS="-s"
 
 %install
@@ -80,6 +79,9 @@ mkdir %{buildroot}/%{_lib}
 ln -sv ../usr/bin/cpp %{buildroot}/%{_lib}
 ln -sv gcc %{buildroot}/usr/bin/cc
 rm -f %{buildroot}/usr/share/info/dir
+%if "%{_lib}" != "lib"
+rm -rf %{buildroot}/usr/lib
+%endif
 %find_lang %{name}
 %find_lang cpplib
 %find_lang libstdc++
@@ -140,19 +142,6 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libmudflapth.la
 /usr/%{_lib}/libssp.la
 /usr/%{_lib}/libssp_nonshared.la
-%ifarch ppc
-/usr/%{_lib}/nof/libgcc_s.so
-/usr/%{_lib}/nof/libgomp.a
-/usr/%{_lib}/nof/libgomp.so
-/usr/%{_lib}/nof/libgomp.spec
-/usr/%{_lib}/nof/libmudflap.a
-/usr/%{_lib}/nof/libmudflap.so
-/usr/%{_lib}/nof/libmudflapth.a
-/usr/%{_lib}/nof/libmudflapth.so
-/usr/%{_lib}/nof/libssp.a
-/usr/%{_lib}/nof/libssp.so
-/usr/%{_lib}/nof/libssp_nonshared.a
-%endif
 /usr/share/man/man1/gcov*
 /usr/share/man/man1/gcc*
 /usr/share/man/man1/cpp*
@@ -165,13 +154,6 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libmudflap.so.*
 /usr/%{_lib}/libmudflapth.so.*
 /usr/%{_lib}/libssp.so.*
-%ifarch ppc
-/usr/%{_lib}/nof/libgcc_s.so.*
-/usr/%{_lib}/nof/libgomp.so.*
-/usr/%{_lib}/nof/libmudflap.so.*
-/usr/%{_lib}/nof/libmudflapth.so.*
-/usr/%{_lib}/nof/libssp.so.*
-%endif
 
 %files c++ -f ../%{name}-build/libstdc++.lang
 %defattr(-,root,root)
@@ -185,21 +167,16 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libsupc++.a
 /usr/%{_lib}/libstdc++.la
 /usr/%{_lib}/libsupc++.la
-%ifarch ppc
-/usr/%{_lib}/nof/libstdc++.a
-/usr/%{_lib}/nof/libstdc++.so
-/usr/%{_lib}/nof/libsupc++.a
-%endif
 /usr/share/man/man1/g++*
 
 %files c++-libs
 %defattr(-,root,root)
 /usr/%{_lib}/libstdc++.so.*
-%ifarch ppc
-/usr/%{_lib}/nof/libstdc++.so.*
-%endif
 
 %changelog
+* Thu Aug 05 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.1-1
+- Upgrade to 4.5.1 and enable multilib
+
 * Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.0-1
 - Upgrade to 4.5.0
 
