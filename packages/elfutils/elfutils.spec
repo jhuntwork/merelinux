@@ -9,8 +9,9 @@ Vendor: LightCube Solutions
 URL: https://fedorahosted.org/elfutils
 Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
+Requires: base-layout, glibc, zlib, bzip2, xz
 BuildRequires: digest(%{SOURCE0}) = a0bed1130135f17ad27533b0034dba8d
+BuildRequires: zlib-devel, bzip2-devel, xz-devel
 
 %description
 Provides utilites for processing ELF files in an
