@@ -22,7 +22,7 @@ Patch6: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.2.0_parentdir-v
 Patch7: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.2.0_depends-fix.patch
 Patch8: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.2.0_umem-fix.patch
 
-Requires: base-layout, glibc, bzip2, beecrypt, openssl, pcre, popt, neon, expat, zlib, xz, elfutils-libelf, file, xar, readline, libxml2
+Requires: base-layout, glibc, bzip2, beecrypt, openssl, pcre, popt, neon, expat, zlib, elfutils-libelf, file, readline, xar, xz, libxml2
 BuildRequires: digest(%{SOURCE0}) = 71f825ede4a2ddc191132ae017c9a6e4
 BuildRequires: digest(%{SOURCE1}) = 27dfe162f78b88d13538407dd60c68ae
 BuildRequires: digest(%{SOURCE2}) = d4bee74500d8634f80529b345153516a
@@ -38,7 +38,7 @@ BuildRequires: digest(%{PATCH6}) = b206993c3ca04d8f27603349c44805e1
 BuildRequires: digest(%{PATCH7}) = 0524bc4dd16d37ce62f668450726ae7d
 BuildRequires: digest(%{PATCH8}) = c0c40b0b93ae4f286677744401074fc8
 BuildRequires: beecrypt-devel, openssl-devel, Python-devel, pcre-devel, popt-devel, neon-devel, readline-devel
-BuildRequires: expat-devel, zlib-devel, bzip2-devel, xz-devel, elfutils-devel, file-devel, xar-devel, libxml2-devel
+BuildRequires: expat-devel, zlib-devel, bzip2-devel, elfutils-devel, file-devel, libxml2-devel, xar-devel, xz-devel
 
 %description
 RPM is a powerful and mature command-line driven package management system
@@ -48,7 +48,7 @@ Unix software packages.
 %package devel
 Summary: Headers and libraries for developing with %{name}
 Group: Development/Libraries
-Requires: %{name}
+Requires: %{name}, %{name}-build
 
 %description devel
 Headers and libraries for developing with %{name}
@@ -85,8 +85,12 @@ sed -i 's@python_version="2.6@python_version="2.7 2.6@' configure
 %build
 %ifarch x86_64
 sed -i '/^%%_lib/s/lib$/lib64/' macros.in
+# FHS mods
+sed -i 's@_prefix}/info@_datadir}/info@' macros.in
+sed -i 's@_prefix}/man@_datadir}/man@' macros.in
 %endif
-export CFLAGS="$CFLAGS -I/usr/include/xar"
+export CFLAGS="%{CFLAGS}  -I/usr/include/xar"
+export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
@@ -114,6 +118,9 @@ install -m 755 %{SOURCE1} %{buildroot}/usr/lib/rpm/scriptletdeps.sh
 install -m0755 %{SOURCE2} %{buildroot}/usr/lib/rpm/check-rpaths
 install -m0755 %{SOURCE3} %{buildroot}/usr/lib/rpm/check-rpaths-worker
 install -m0755 %{SOURCE4} %{buildroot}/usr/lib/rpm/brp-nobuilddirpath
+install -dv %{buildroot}/etc/rpm
+echo "%%CFLAGS    -O2 -pipe" >> %{buildroot}/etc/rpm/macros
+echo "%%LDFLAGS   -s" >> %{buildroot}/etc/rpm/macros
 %find_lang %{name}
 
 %clean
@@ -124,10 +131,10 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
+%dir /etc/rpm/
 /usr/bin/gendiff
 /usr/bin/rpm
 /usr/bin/rpm2cpio
-/usr/bin/rpmbuild
 /usr/bin/rpmconstant
 %dir /usr/lib/rpm
 %dir /usr/lib/rpm/bin
@@ -182,7 +189,6 @@ rm -rf %{buildroot}
 /usr/share/man/man8/rpm.8
 /usr/share/man/pl/man1/gendiff.1
 /usr/share/man/man8/rpm2cpio.8
-/usr/share/man/man8/rpmbuild.8
 /usr/share/man/man8/rpmcache.8
 /usr/share/man/man8/rpmconstant.8
 /usr/share/man/man8/rpmdeps.8
@@ -217,6 +223,7 @@ rm -rf %{buildroot}
 
 %files build
 %defattr(-,root,root)
+/etc/rpm/macros
 /usr/bin/rpmbuild
 /usr/lib/rpm/install-sh
 /usr/lib/rpm/brp-*
@@ -244,6 +251,7 @@ rm -rf %{buildroot}
 /usr/lib/rpm/php.req
 /usr/lib/rpm/scriptletdeps.sh
 /usr/lib/rpm/vcheck
+/usr/share/man/man8/rpmbuild.8
 
 %changelog
 * Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.2.1-1
