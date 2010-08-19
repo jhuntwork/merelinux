@@ -1,7 +1,7 @@
 Summary: Net:Iproute2
 Name: iproute2
-Version: 2.6.33
-Release: 2
+Version: 2.6.35
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://www.linuxfoundation.org/en/Net:Iproute2
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = b371fca3fcb5e436e69a7c2111d84a3c
+BuildRequires: digest(%{SOURCE0}) = b0f281b3124bf04669e18f5fe16d4934
 BuildRequires: db-devel
 
 %description
@@ -28,11 +28,11 @@ The aprd binary
 %setup -q
 
 %build
-make DESTDIR= LIBDIR=/usr/%{_lib}
+make DESTDIR= LIBDIR=/%{_lib}
 
 %install
 make DESTDIR=%{buildroot} SBINDIR=/sbin MANDIR=/usr/share/man \
-     LIBDIR=/usr/%{_lib} DOCDIR=/usr/share/doc/%{name}-%{version} install
+     LIBDIR=/%{_lib} DOCDIR=/usr/share/doc/%{name}-%{version} install
 rm -v %{buildroot}/usr/share/man/man3/libnetlink.3
 
 %clean
@@ -41,7 +41,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /etc/iproute2
-/lib/tc
+/%{_lib}/tc
 /sbin/ctstat
 /sbin/genl
 /sbin/ifcfg
@@ -87,6 +87,9 @@ rm -rf %{buildroot}
 /usr/share/man/man8/arpd.8
 
 %changelog
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.35-1
+- Upgrade to 2.6.35
+
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.33-2
 - Separate the aprd binary due to its dependence on db
 
