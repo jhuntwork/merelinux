@@ -22,6 +22,8 @@ database in place of the traditional flat-text whatis databases
 %setup -q
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
