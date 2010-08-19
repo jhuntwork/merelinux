@@ -1,6 +1,6 @@
 Summary: GNU Diffutils
 Name: diffutils
-Version: 2.9
+Version: 3.0
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,7 +10,7 @@ URL: http://www.gnu.org/software/diffutils
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = d6bc1bdc874ddb14cfed4d1655a0dbbe
+BuildRequires: digest(%{SOURCE0}) = 684aaba1baab743a2a90e52162ff07da
 
 %description
 Utilities for comparing differences between files.
@@ -52,6 +52,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/sdiff.1
 
 %changelog
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0-1
+- Upgrade to 3.0
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.9-1
 - Upgrade to 2.9
 
