@@ -36,6 +36,8 @@ Libraries and headers for developing with libelf
 %setup -q
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
