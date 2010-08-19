@@ -27,6 +27,8 @@ Documentation for %{name}
 %setup -q
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 PAGE=letter ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}/groff
