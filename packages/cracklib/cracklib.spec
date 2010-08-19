@@ -77,12 +77,12 @@ rm -rf %{buildroot}
 
 %files python
 %defattr(-,root,root)
-/usr/%{_lib}/python2.6/site-packages/_cracklibmodule.a
-/usr/%{_lib}/python2.6/site-packages/_cracklibmodule.so
-/usr/%{_lib}/python2.6/site-packages/_cracklibmodule.la
-/usr/%{_lib}/python2.6/site-packages/cracklib.py
-/usr/%{_lib}/python2.6/site-packages/cracklib.pyc
-/usr/%{_lib}/python2.6/site-packages/cracklib.pyo
+/usr/lib/python2.7/site-packages/_cracklibmodule.a
+/usr/lib/python2.7/site-packages/_cracklibmodule.so
+/usr/lib/python2.7/site-packages/_cracklibmodule.la
+/usr/lib/python2.7/site-packages/cracklib.py
+/usr/lib/python2.7/site-packages/cracklib.pyc
+/usr/lib/python2.7/site-packages/cracklib.pyo
 
 %files devel
 %defattr(-,root,root)
