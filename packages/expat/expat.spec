@@ -29,7 +29,12 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-./configure --prefix=/usr --libdir=/usr/%{_lib} --mandir=/usr/share/man
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib} \
+  --mandir=/usr/share/man
 make
 
 %install
