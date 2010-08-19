@@ -32,6 +32,8 @@ Libraries and headers for developing with curl.
 %setup -q
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 ./configure --prefix=/usr --libdir=/usr/%{_lib}
 make
 
@@ -45,17 +47,17 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/bin/curl
 /usr/share/man/man1/curl.1
-/usr/lib64/libcurl.so.4
-/usr/lib64/libcurl.so.4.2.0
+/usr/%{_lib}/libcurl.so.4
+/usr/%{_lib}/libcurl.so.4.2.0
 
 %files devel
 %defattr(-,root,root)
 /usr/bin/curl-config
 /usr/include/curl
-/usr/lib64/libcurl.a
-/usr/lib64/libcurl.la
-/usr/lib64/libcurl.so
-/usr/lib64/pkgconfig/libcurl.pc
+/usr/%{_lib}/libcurl.a
+/usr/%{_lib}/libcurl.la
+/usr/%{_lib}/libcurl.so
+/usr/%{_lib}/pkgconfig/libcurl.pc
 /usr/share/man/man1/curl-config.1
 /usr/share/man/man3/*
 
