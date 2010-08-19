@@ -33,6 +33,8 @@ Requires: Python
 %setup -q
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
@@ -59,9 +61,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libbeecrypt.so
 
 %files python
-/usr/%{_lib}/python2.6/site-packages/_bc.a
-/usr/%{_lib}/python2.6/site-packages/_bc.la
-/usr/%{_lib}/python2.6/site-packages/_bc.so
+/usr/lib/python2.7/site-packages/_bc.a
+/usr/lib/python2.7/site-packages/_bc.la
+/usr/lib/python2.7/site-packages/_bc.so
 
 %changelog
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.1-1
