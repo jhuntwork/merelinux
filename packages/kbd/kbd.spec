@@ -1,6 +1,6 @@
 Summary: kbd
 Name: kbd
-Version: 1.15.1
+Version: 1.15.2
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-backspace-1.patch
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = f997c490fe5ede839aacf31da6c4eb06
+BuildRequires: digest(%{SOURCE0}) = 77d0b51454522bc6c170bbdc6e31202a
 BuildRequires: digest(%{PATCH0}) = f75cca16a38da6caa7d52151f7136895
 
 %description
@@ -22,7 +22,6 @@ The kbd package contains keytable files and keyboard utilities
 %patch -p1
 
 %build
-autoreconf
 ./configure --prefix=/usr --datadir=/lib/kbd
 make
 
@@ -88,8 +87,11 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.15.2-1
+- Upgrade to 1.15.2
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.15.1-1
-- Initial version
+- Upgrade to 1.15.1
 
 * Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
 - Initial version
