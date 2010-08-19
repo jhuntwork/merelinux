@@ -1,6 +1,6 @@
 Summary: GNU Inetutils
 Name: inetutils
-Version: 1.7
+Version: 1.8
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,7 +10,7 @@ URL: http://www.gnu.org/software/inetutils
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = a1d5a01b0ab8a7e596ac4cff0cce7129
+BuildRequires: digest(%{SOURCE0}) = ad8fdcdf1797b9ca258264a6b04e48fd
 BuildRequires: readline-devel, ncurses-devel
 
 %description
@@ -73,8 +73,12 @@ rm -rf %{buildroot}
 /usr/share/man/man1/tftp.1
 /usr/share/man/man1/traceroute.1
 /usr/share/man/man1/ping.1
+/usr/share/man/man1/ping6.1
 
 %changelog
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8-1
+- Upgrade to 1.8
+
 * Mon Dec 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.7-1
 - Upgrade to 1.7
 
