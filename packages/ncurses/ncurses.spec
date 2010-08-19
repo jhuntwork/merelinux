@@ -27,6 +27,8 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 ./configure --prefix=/usr --mandir=/usr/share/man --with-shared \
  --without-debug --enable-widec --libdir=/usr/%{_lib}
 make
