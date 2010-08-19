@@ -1,6 +1,6 @@
 Summary: OpenSSH
 Name: openssh
-Version: 5.4p1
+Version: 5.5p1
 Release: 1
 Group: Services
 License: BSD
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 Source1: http://dev.lightcube.us/~jhuntwork/sources/blfs-bootscripts/blfs-bootscripts-20090302.tar.bz2
 
 Requires: base-layout, glibc, openssl, Linux-PAM, zlib
-BuildRequires: digest(%{SOURCE0}) = da10af8a789fa2e83e3635f3a1b76f5e
+BuildRequires: digest(%{SOURCE0}) = 88633408f4cb1eb11ec7e2ec58b519eb
 BuildRequires: digest(%{SOURCE1}) = 7ee5363f223235adc54046623ffa77cd
 BuildRequires: openssl-devel, zlib-devel
 
@@ -36,6 +36,8 @@ make DESTDIR=%{buildroot} install
 install -dv %{buildroot}/var/lib/sshd
 install -dv %{buildroot}/etc/{pam.d,rc.d/init.d}
 tar -xf %{SOURCE1}
+sed -i 's@^# Begin.*@&\n# chkconfig: 345 30 30\n# description: Secure remote shell service@' \
+  blfs-bootscripts-20090302/blfs/init.d/sshd
 install -m754 blfs-bootscripts-20090302/blfs/init.d/sshd \
   %{buildroot}/etc/rc.d/init.d/
 cat > %{buildroot}/etc/pam.d/sshd << "EOF"
@@ -78,5 +80,8 @@ rm -rf %{buildroot}
 /var/lib/sshd
 
 %changelog
+* Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.5p1-1
+- Upgraded to 5.5p1 and added support for chkconfig
+
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.4p1-1
 - Initial version
