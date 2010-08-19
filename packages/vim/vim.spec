@@ -25,6 +25,8 @@ Unix editor 'Vi', with a more complete feature set.
 
 %build
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --enable-multibyte
