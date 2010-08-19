@@ -8,10 +8,12 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/m4
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-headers_fix-1.patch
 
 Requires: base-layout, glibc
 Requires(post): texinfo, bash, ncurses, readline
 BuildRequires: digest(%{SOURCE0}) = e6fb7d08d50d87e796069cff12a52a93
+BuildRequires: digest(%{PATCH0}) = 40d43ae3aa76610778f864224160aabe
 
 %description
 %{name} is a macro processor. It copies its input to the output,
@@ -19,6 +21,7 @@ expanding macros as it goes.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 ./configure --prefix=/usr
