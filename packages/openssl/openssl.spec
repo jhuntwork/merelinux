@@ -1,16 +1,18 @@
 Summary: OpenSSL
 Name: openssl
-Version: 1.0.0
+Version: 1.0.0a
 Release: 1
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.openssl.org
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-ldflags-1.patch
 
 Requires: base-layout, glibc, zlib
-BuildRequires: digest(%{SOURCE0}) = 89eaa86e25b2845f920ec00ae4c864ed
+BuildRequires: digest(%{SOURCE0}) = e3873edfffc783624cfbdb65e2249cbd
+BuildRequires: digest(%{PATCH0}) = dad1ab082383bddee627a1c3af624b36
 BuildRequires: zlib-devel
 
 %description
@@ -37,13 +39,14 @@ Miscellaneous OpenSSL related tools
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 ./config \
   --openssldir=/etc/ssl \
   --prefix=/usr \
   shared zlib-dynamic
-make LIBDIR=%{_lib} MANDIR=/usr/share/man
+make LDFLAGS=%{LDFLAGS} LIBDIR=%{_lib} MANDIR=/usr/share/man
 
 %install
 make INSTALL_PREFIX=%{buildroot} LIBDIR=%{_lib} MANDIR=/usr/share/man install
@@ -88,5 +91,8 @@ rm -rf %{buildroot}
 /etc/ssl/misc
 
 %changelog
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0a-1
+- Upgrade to 1.0.0a
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0-1
 - Initial version
