@@ -1,6 +1,6 @@
 Summary: udev
 Name: udev
-Version: 151
+Version: 160
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}-config/%{name}-config-20100128.tar.bz2
 
 Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = aeae0e6273dcbec246c3c1b9868ebed1
+BuildRequires: digest(%{SOURCE0}) = 65459a1f090082c0471bf4e5112208d7
 BuildRequires: digest(%{SOURCE1}) = 8c8ad22d6fb9aa7c0733d33035204ea2
 
 %description
@@ -32,22 +32,19 @@ tar -xf %{SOURCE1}
   --prefix=/usr \
   --sysconfdir=/etc \
   --sbindir=/sbin \
-  --with-rootlibdir=/lib \
+  --with-rootlibdir=/%{_lib} \
   --libexecdir=/lib/udev \
   --disable-extras \
   --libdir=/usr/%{_lib} \
-  --with-html-dir=/usr/share/doc/%{name} \
-  --disable-introspection
+  --disable-introspection \
+  --with-html-dir=/usr/share/doc/%{name}
 make
 
 %install
 install -dv %{buildroot}/lib/udev/devices/{pts,shm}
 make DESTDIR=%{buildroot} install
-find %{buildroot} -name "*.la" -exec rm -fv '{}' \;
+sed -i.bak 's@include$@&\nudevdir=/lib/udev@' %{buildroot}/usr/%{_lib}/pkgconfig/libudev.pc
 mknod -m0666 %{buildroot}/lib/udev/devices/null c 1 3
-install -m644 -v rules/packages/64-*.rules %{buildroot}/lib/udev/rules.d/
-install -m644 -v rules/packages/40-pilot-links.rules %{buildroot}/lib/udev/rules.d/
-install -m644 -v rules/packages/40-isdn.rules %{buildroot}/lib/udev/rules.d/
 cd udev-config-20100128
 make DESTDIR=%{buildroot} install
 make DESTDIR=%{buildroot} install-doc
@@ -58,8 +55,8 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /etc/udev
-/lib/libudev.so.0
-/lib/libudev.so.0.6.1
+/%{_lib}/libudev.so.0
+/%{_lib}/libudev.so.0.8.3
 /lib/udev
 /sbin/udevadm
 /sbin/udevd
@@ -73,10 +70,14 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/include/libudev.h
 /usr/%{_lib}/libudev.so
+/usr/%{_lib}/libudev.la
 /usr/%{_lib}/pkgconfig/libudev.pc
 /usr/share/pkgconfig/udev.pc
 /usr/share/doc/udev
 
 %changelog
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 160-1
+- Upgrade to 160
+
 * Sat Apr 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 151-1
 - Initial version
