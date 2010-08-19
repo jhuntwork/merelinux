@@ -1,6 +1,6 @@
 Summary: GNU Bison
 Name: bison
-Version: 2.4.2
+Version: 2.4.3
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 
 Requires: base-layout, glibc, m4
 Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = 63584004613aaef2d3dca19088eb1654
+BuildRequires: digest(%{SOURCE0}) = c1d3ea81bc370dbd43b6f0b2cd21287e
 
 %description
 %{name} is a general purpose parser generator.
@@ -53,6 +53,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/yacc.1
 
 %changelog
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.4.3-1
+- Upgrade to 2.4.3
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.4.2-1
 - Upgrade to 2.4.2
 
