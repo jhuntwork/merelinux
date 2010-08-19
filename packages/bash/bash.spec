@@ -1,7 +1,7 @@
 Summary: GNU Bash
 Name: bash
 Version: 4.1
-Release: 4
+Release: 5
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -70,7 +70,9 @@ EOF
 cat > %{buildroot}/etc/profile << "EOF"
 export PATH=/bin:/usr/bin:/sbin:/usr/sbin
 export INPUTRC=/etc/inputrc
-export PKG_CONFIG_PATH="/usr/%{_lib}/pkgconfig"
+export PKG_CONFIG_PATH="/usr/%{_lib}/pkgconfig:/usr/share/pkgconfig"
+export HISTSIZE=1000
+export HISTTIMEFORMAT="\%F \%T :: "
 source /etc/bashrc
 EOF
 rm -f %{buildroot}/usr/share/info/dir
@@ -100,6 +102,9 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
+* Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-5
+- Add HISTSIZE and HISTTIMEFORMAT default values to /etc/profile
+
 * Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-4
 - Updated bash rpm-requires patch and upstream patch
 
