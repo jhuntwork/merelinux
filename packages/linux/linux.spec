@@ -1,6 +1,6 @@
 Summary: The Linux Kernel
 Name: linux
-Version: 2.6.33.2
+Version: 2.6.35
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.t
 
 %ifarch x86_64
 Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}-configs/%{name}-config-%{version}-x86_64
-BuildRequires: digest(%{SOURCE1}) = 0210a3032b23901667d75be985b58e45
+BuildRequires: digest(%{SOURCE1}) = 16d42d453996d81ebc269014917aa4c0
 %endif
 
 %ifarch i686
@@ -20,7 +20,7 @@ BuildRequires: digest(%{SOURCE1}) = fc7cb3e55b3ee840166ba947918efbbc
 %endif
 
 Requires: base-layout
-BuildRequires: digest(%{SOURCE0}) = 80c5ff544b0ee4d9b5d8b8b89d4a0ef9
+BuildRequires: digest(%{SOURCE0}) = 091abeb4684ce03d1d936851618687b6
 
 %description
 The Linux Kernel
@@ -67,8 +67,17 @@ make INSTALL_MOD_PATH=%{buildroot} modules_install
 
 # Install the kernel source
 DIRNAME="/usr/src/kernels/%{name}-%{version}-%{release}"
-install -dv %{buildroot}$DIRNAME
-cp -a * %{buildroot}$DIRNAME
+install -dv "%{buildroot}$DIRNAME"
+cp -a .config Module.symvers .version scripts include "%{buildroot}$DIRNAME"
+install -dv "%{buildroot}$DIRNAME/arch/x86/"
+cp -a arch/x86/include "%{buildroot}$DIRNAME/arch/x86/"
+find . -type f -a '(' -name Kconfig\* -o -name Makefile\* -o -name \*.s ')' | (
+  while read file
+  do
+    install -dv "%{buildroot}$DIRNAME/`dirname $file`"
+    cp "$file" "%{buildroot}$DIRNAME/$file"
+  done
+)
 ln -nsf "$DIRNAME" "%{buildroot}/lib/modules/%{version}/source"
 ln -nsf "$DIRNAME" "%{buildroot}/lib/modules/%{version}/build"
 
@@ -77,10 +86,10 @@ mkdir %{buildroot}/boot
 cp System.map %{buildroot}/boot/System.map-%{version}-%{release}
 cp .config %{buildroot}/boot/config-%{version}-%{release}
 %ifarch x86_64
-cp arch/x86_64/boot/bzImage %{buildroot}/boot/%{name}-%{version}-%{release}
+cp arch/x86_64/boot/bzImage %{buildroot}/boot/vmlinux-%{version}-%{release}
 %endif
 %ifarch i686
-cp arch/x86/boot/bzImage %{buildroot}/boot/%{name}-%{version}-%{release}
+cp arch/x86/boot/bzImage %{buildroot}/boot/vmlinux-%{version}-%{release}
 %endif
 
 %clean
@@ -90,7 +99,7 @@ rm -fr %{buildroot}
 %defattr(-,root,root)
 /boot/System.map-%{version}-%{release}
 /boot/config-%{version}-%{release}
-/boot/linux-%{version}-%{release}
+/boot/vmlinux-%{version}-%{release}
 /lib/firmware
 %dir /lib/modules/%{version}
 /lib/modules/%{version}/kernel
@@ -116,6 +125,9 @@ rm -fr %{buildroot}
 /lib/modules/%{version}/build
 
 %changelog
+* Mon Aug 09 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.35-1
+- Upgrade to 2.6.35-1
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.33.2-1
 - Upgrade to 2.6.33.2, add in kernel image
 
