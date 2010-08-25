@@ -72,7 +72,7 @@ export PATH=/bin:/usr/bin:/sbin:/usr/sbin
 export INPUTRC=/etc/inputrc
 export PKG_CONFIG_PATH="/usr/%{_lib}/pkgconfig:/usr/share/pkgconfig"
 export HISTSIZE=1000
-export HISTTIMEFORMAT="\%F \%T :: "
+export HISTTIMEFORMAT="%%F %%T :: "
 source /etc/bashrc
 EOF
 rm -f %{buildroot}/usr/share/info/dir
