@@ -1,7 +1,7 @@
 Summary: Kernel and system logging daemons
 Name: sysklogd
 Version: 1.5
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -41,6 +41,7 @@ kern.* -/var/log/kern.log
 mail.* -/var/log/mail.log
 user.* -/var/log/user.log
 *.emerg *
+cron.* -/var/log/cron.log
 
 # End /etc/syslog.conf
 EOF
@@ -59,5 +60,8 @@ rm -rf %{buildroot}
 /usr/share/man/man8/syslogd.8
 
 %changelog
+* Sun Aug 22 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.5-2
+- Add entry for cron log
+
 * Tue Apr 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.5-1
 - Initial version
