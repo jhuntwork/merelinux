@@ -34,8 +34,10 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
-mkdir -v %{buildroot}/bin
+mkdir -v %{buildroot}/{,s}bin
 mv -v %{buildroot}/usr/bin/ping %{buildroot}/bin
+mv -v %{buildroot}/usr/bin/hostname %{buildroot}/bin
+mv -v %{buildroot}/usr/bin/traceroute %{buildroot}/sbin
 rm -f %{buildroot}/usr/share/info/dir
 
 %clean
@@ -49,9 +51,10 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
+/bin/hostname
 /bin/ping
+/sbin/traceroute
 /usr/bin/ftp
-/usr/bin/hostname
 /usr/bin/ping6
 /usr/bin/rcp
 /usr/bin/rexec
@@ -60,7 +63,6 @@ rm -rf %{buildroot}
 /usr/bin/talk
 /usr/bin/telnet
 /usr/bin/tftp
-/usr/bin/traceroute
 /usr/share/info/inetutils.info
 /usr/share/man/man1/ftp.1
 /usr/share/man/man1/hostname.1
