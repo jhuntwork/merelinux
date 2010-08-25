@@ -8,11 +8,11 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.openssl.com
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/blfs-bootscripts/blfs-bootscripts-20090302.tar.bz2
+Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/sshd.init
 
 Requires: base-layout, glibc, openssl, Linux-PAM, zlib
 BuildRequires: digest(%{SOURCE0}) = 88633408f4cb1eb11ec7e2ec58b519eb
-BuildRequires: digest(%{SOURCE1}) = 7ee5363f223235adc54046623ffa77cd
+BuildRequires: digest(%{SOURCE1}) = 85413f16db7f2b66af700fb54df35302
 BuildRequires: openssl-devel, zlib-devel
 
 %description
@@ -34,12 +34,8 @@ make
 %install
 make DESTDIR=%{buildroot} install
 install -dv %{buildroot}/var/lib/sshd
-install -dv %{buildroot}/etc/{pam.d,rc.d/init.d}
-tar -xf %{SOURCE1}
-sed -i 's@^# Begin.*@&\n# chkconfig: 345 30 30\n# description: Secure remote shell service@' \
-  blfs-bootscripts-20090302/blfs/init.d/sshd
-install -m754 blfs-bootscripts-20090302/blfs/init.d/sshd \
-  %{buildroot}/etc/rc.d/init.d/
+install -dv %{buildroot}/etc/{pam.d,init.d}
+install -m754 %{SOURCE1} %{buildroot}/etc/init.d/sshd
 cat > %{buildroot}/etc/pam.d/sshd << "EOF"
 # Begin /etc/pam.d/sshd
 
@@ -60,13 +56,19 @@ password    required       pam_unix.so      md5 shadow use_authtok
 # End /etc/pam.d/sshd
 EOF
 
+%post
+/usr/sbin/install_initd sshd
+
+%preun
+/usr/sbin/remove_initd sshd
+
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
 /etc/pam.d/sshd
-/etc/rc.d/init.d/sshd
+/etc/init.d/sshd
 /etc/ssh
 /usr/bin/scp
 /usr/bin/sftp
@@ -81,7 +83,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.5p1-1
-- Upgraded to 5.5p1 and added support for chkconfig
+- Upgraded to 5.5p1 and added support for lsb bootscripts
 
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.4p1-1
 - Initial version
