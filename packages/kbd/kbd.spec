@@ -27,29 +27,31 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
+install -dv %{buildroot}/bin
+mv -v %{buildroot}/usr/bin/{kbd_mode,loadkeys,openvt,setfont} %{buildroot}/bin
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
+/bin/kbd_mode
+/bin/loadkeys
+/bin/openvt
+/bin/setfont
 /lib/kbd
 /usr/bin/chvt
 /usr/bin/deallocvt
 /usr/bin/dumpkeys
 /usr/bin/fgconsole
 /usr/bin/getkeycodes
-/usr/bin/kbd_mode
 /usr/bin/kbdrate
-/usr/bin/loadkeys
 /usr/bin/loadunimap
 /usr/bin/mapscrn
-/usr/bin/openvt
 /usr/bin/psfaddtable
 /usr/bin/psfgettable
 /usr/bin/psfstriptable
 /usr/bin/psfxtable
-/usr/bin/setfont
 /usr/bin/setkeycodes
 /usr/bin/setleds
 /usr/bin/setmetamode
