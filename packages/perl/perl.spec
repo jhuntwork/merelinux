@@ -58,6 +58,7 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
+install -dv %{buildroot}/usr/lib/perl5/site_perl/5.12.1/$(arch)-linux/{auto,Bundle}
 
 %clean
 rm -rf %{buildroot}
