@@ -1,6 +1,6 @@
 Summary: Apache HTTP Server
 Name: httpd
-Version: 2.2.15
+Version: 2.2.16
 Release: 1
 Group: Services
 License: Apache
@@ -12,7 +12,7 @@ Source1: http://dev.lightcube.us/~jhuntwork/sources/blfs-bootscripts/blfs-bootsc
 Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-config-1.patch
 
 Requires: base-layout, glibc, openssl, pcre, apr, apr-util, zlib, expat, db
-BuildRequires: digest(%{SOURCE0}) = 016cec97337eccead2aad6a7c27f2e14
+BuildRequires: digest(%{SOURCE0}) = c8ff2a07c884300bc7766a2e7f662d33
 BuildRequires: digest(%{SOURCE1}) = 7ee5363f223235adc54046623ffa77cd
 BuildRequires: digest(%{PATCH0}) = e02a3ec5925eb9e111400b9aa229f822
 BuildRequires: openssl-devel, pcre-devel, apr-devel, apr-util-devel, zlib-devel, expat-devel, db-devel
@@ -54,6 +54,8 @@ sed -i -e "s/User daemon/User apache/" \
     %{buildroot}/etc/apache/httpd.conf
 install -dv %{buildroot}/etc/rc.d/init.d
 tar -xf %{SOURCE1}
+sed -i 's@^# Begin.*@&\n# chkconfig: 345 40 40\n# description: Apache Httpd Server@' \
+  blfs-bootscripts-20090302/blfs/init.d/apache
 install -m754 blfs-bootscripts-20090302/blfs/init.d/apache \
   %{buildroot}/etc/rc.d/init.d/
 
@@ -155,5 +157,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/apache/httpd.exp
 
 %changelog
+* Fri Aug 20 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.16-1
+- Upgrade to 2.2.16
+
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.15-1
 - Initial version
