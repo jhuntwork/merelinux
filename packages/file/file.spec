@@ -37,7 +37,6 @@ make check
 
 %install
 make DESTDIR=%{buildroot} install
-rm -v %{buildroot}/usr/%{_lib}/libmagic.la
 
 %clean
 rm -rf %{buildroot}
@@ -55,6 +54,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/include/magic.h
 /usr/%{_lib}/libmagic.a
+/usr/%{_lib}/libmagic.la
 /usr/%{_lib}/libmagic.so
 /usr/share/man/man3/libmagic.3
 
