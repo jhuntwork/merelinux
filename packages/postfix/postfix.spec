@@ -8,12 +8,15 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.postfix.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/blfs-bootscripts/blfs-bootscripts-20090302.tar.bz2
+Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}.init
 
-Requires: base-layout, glibc, openssl, db, pcre, zlib
 BuildRequires: digest(%{SOURCE0}) = b7a5c3ccd309156a65d6f8d2683d4fa1
-BuildRequires: digest(%{SOURCE1}) = 7ee5363f223235adc54046623ffa77cd
-BuildRequires: db-devel, openssl-devel, pcre-devel, zlib-devel
+BuildRequires: digest(%{SOURCE1}) = 6b5839cdeaa91b671134e60f41c4e24d
+BuildRequires: db-devel
+BuildRequires: openssl-devel
+BuildRequires: pcre-devel
+BuildRequires: zlib-devel
+BuildRequires: cyrus-sasl-devel
 
 %description
 Postfix is Wietse Venema's mailer that started life at IBM research as an
@@ -25,19 +28,24 @@ a definite Sendmail-ish flavor, but the inside is completely different.
 %setup -q
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 make makefiles \
-     CCARGS='-DDEF_DAEMON_DIR=\"/usr/lib/postfix\" -DUSE_SASL_AUTH -DUSE_CYRUS_SASL -DDEF_MANPAGE_DIR=\"/usr/share/man\" -DHAS_PCRE -DUSE_TLS -I/usr/include/sasl/ -I/usr/include/openssl/' \
-     AUXLIBS='-L/usr/%{_lib} -lsasl2 -lpcre -ldb -lz -lm -lssl -lcrypto'
+     CCARGS='%{CFLAGS} -DDEF_DAEMON_DIR=\"/usr/lib/postfix\" -DUSE_SASL_AUTH -DUSE_CYRUS_SASL -DDEF_MANPAGE_DIR=\"/usr/share/man\" -DHAS_PCRE -DUSE_TLS -I/usr/include/sasl/ -I/usr/include/openssl/' \
+     AUXLIBS='-L/usr/%{_lib} -lsasl2 -lpcre -ldb -lz -lm -lssl -lcrypto %{LDFLAGS}'
 make
 
 %install
 sh postfix-install -non-interactive install_root=%{buildroot}
-install -dv %{buildroot}/etc/rc.d/init.d
-tar -xf %{SOURCE1}
-sed -i 's@^# Begin.*@&\n# chkconfig: 345 25 35\n# description: Postfix MTA@' \
-  blfs-bootscripts-20090302/blfs/init.d/postfix
-install -m754 blfs-bootscripts-20090302/blfs/init.d/postfix \
-  %{buildroot}/etc/rc.d/init.d/
+install -dv %{buildroot}/etc/init.d
+install -m754 %{SOURCE1} %{buildroot}/etc/init.d/%{name}
+#install -dv %{buildroot}/var/spool/postfix
+
+%post
+/usr/sbin/install_initd postfix
+
+%preun
+/usr/sbin/remove_initd postfix
 
 %clean
 rm -rf %{buildroot}
@@ -45,21 +53,19 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /etc/postfix
-/etc/rc.d/init.d/postfix
+/etc/init.d/postfix
 /usr/bin/mailq
 /usr/bin/newaliases
 /usr/lib/postfix
 /usr/sbin/postalias
 /usr/sbin/postcat
 /usr/sbin/postconf
-/usr/sbin/postdrop
 /usr/sbin/postfix
 /usr/sbin/postkick
 /usr/sbin/postlock
 /usr/sbin/postlog
 /usr/sbin/postmap
 /usr/sbin/postmulti
-/usr/sbin/postqueue
 /usr/sbin/postsuper
 /usr/sbin/sendmail
 /usr/share/man/man1/mailq.1
@@ -124,6 +130,25 @@ rm -rf %{buildroot}
 /usr/share/man/man8/trivial-rewrite.8
 /usr/share/man/man8/verify.8
 /usr/share/man/man8/virtual.8
+%dir /var/spool/postfix
+%defattr(-,postfix,postfix)
+/var/spool/postfix/active
+/var/spool/postfix/bounce
+/var/spool/postfix/corrupt
+/var/spool/postfix/defer
+/var/spool/postfix/deferred
+/var/spool/postfix/flush
+/var/spool/postfix/hold
+/var/spool/postfix/incoming
+/var/spool/postfix/private
+/var/spool/postfix/saved
+/var/spool/postfix/trace
+%defattr(-,postfix,postdrop)
+/var/spool/postfix/public
+/var/spool/postfix/maildrop
+%defattr(2755,root,postdrop)
+/usr/sbin/postdrop
+/usr/sbin/postqueue
 
 %changelog
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.7.1-1
