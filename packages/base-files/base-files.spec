@@ -1,7 +1,7 @@
 Summary: Essential System Files
 Name: base-files
 Version: 0.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -21,6 +21,7 @@ root:x:0:0:root:/root:/bin/bash
 bin:x:1:1:bin:/dev/null:/bin/false
 fcron:x:22:22:fcron:/dev/null:/bin/false
 apache:x:25:25:apache:/dev/null:/bin/false
+nginx:x:26:26:apache:/dev/null:/bin/false
 postfix:x:32:32:postfix:/dev/null:/bin/false
 mysql:x:40:40:mysql:/dev/null:/bin/false
 ftp:x:45:45:ftp:/srv/ftp:/bin/false
@@ -48,6 +49,7 @@ usb:x:14:
 cdrom:x:15:
 fcron:x:22:
 apache:x:25:
+nginx:x:26:
 postfix:x:32:
 postdrop:x:33:
 mail:x:34:
@@ -126,6 +128,9 @@ touch %{buildroot}/var/log/{btmp,lastlog,wtmp}
 /var/run/utmp
 
 %changelog
+* Sun Aug 22 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-2
+- Add nginx user and group.
+
 * Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-1
 - Add inputrc file. Increment local version.
 
