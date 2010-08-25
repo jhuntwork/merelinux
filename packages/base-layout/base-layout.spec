@@ -1,7 +1,7 @@
 Summary: Base directory layout
 Name: base-layout
 Version: 0.1
-Release: 5
+Release: 6
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -19,10 +19,10 @@ directories for a standard system.
 
 %install
 # Top-level directories
-install -dv %{buildroot}/{bin,boot,dev,etc,home,lib,media,mnt,opt,proc,root,sbin,srv,sys,tmp,usr,var}
-install -dv %{buildroot}/lib/modules
+install -dv %{buildroot}/{bin,boot,dev,etc/sysconfig,home,lib,media,mnt,opt,proc,root,sbin,srv,sys,tmp,usr,var}
+install -dv %{buildroot}/lib/{lsb,modules}
 install -dv %{buildroot}/media/{floppy,cdrom}
-install -dv %{buildroot}/usr/{,local/}{bin,include,lib,sbin,src}
+install -dv %{buildroot}/usr/{,local/}{bin,include,lib/lsb,sbin,src}
 install -dv %{buildroot}/usr/src/kernels
 install -dv %{buildroot}/usr/{,local/}share/{aclocal,dict,doc,gtk-doc/html,info,locale}
 install -dv %{buildroot}/usr/{,local/}share/{man,misc,terminfo,zoneinfo}
@@ -76,8 +76,10 @@ rm -rf %{buildroot}
 %dir /boot
 %dir /dev
 %dir /etc
+%dir /etc/sysconfig
 %dir /home
 %dir /lib
+%dir /lib/lsb
 %dir /lib/modules
 %if "%{_lib}" != "lib"
 %dir /%{_lib}
@@ -100,9 +102,7 @@ rm -rf %{buildroot}
 %if "%{_lib}" != "lib"
 %dir /usr/%{_lib}
 %endif
-%ifarch ppc
-%dir /usr/%{_lib}/nof
-%endif
+%dir /usr/lib/lsb
 %dir /usr/local
 %dir /usr/local/bin
 %dir /usr/local/include
@@ -148,6 +148,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Mon Aug 23 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-6
+- Add /{,usr}/lib/lsb directories, /etc/sysconfig
+
 * Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-5
 - Add /lib/modules, fix /usr/share/local/man
 
