@@ -7,10 +7,10 @@ License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://beecrypt.sourceforge.net
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = 8441c014170823f2dff97e33df55af1e
+BuildRequires: gcc-c++
 BuildRequires: Python-devel
 
 %description
@@ -37,7 +37,8 @@ export CFLAGS="%{CFLAGS}"
 export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
-  --libdir=/usr/%{_lib}
+  --libdir=/usr/%{_lib} \
+  --disable-openmp
 make
 
 %install
