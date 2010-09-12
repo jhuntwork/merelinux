@@ -1,17 +1,21 @@
 Summary: Apache Portable Runtime Utility
 Name: apr-util
 Version: 1.3.9
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: Apache
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://apr.apache.org
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-db5-1.patch
 
-Requires: base-layout, glibc, apr, expat, db
-BuildRequires: digest(%{SOURCE0}) = cc2ec0ba4f01d88375f1170f762518fa
-BuildRequires: apr-devel, expat-devel, db-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = fd2a76352353e6bc2f7cc7da80e2ab3842795199
+BuildRequires: digest(sha1:%{PATCH0}) = d414417c983a5dee7fbfb179caf2a8293d2383df
+BuildRequires: apr-devel
+BuildRequires: expat-devel
+BuildRequires: db-devel
+BuildRequires: sqlite-devel
 
 %description
 A companion library to Apache Portable Runtime
@@ -26,6 +30,7 @@ Headers and libraries for developing with %{name}
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 ./configure \
@@ -50,6 +55,7 @@ rm -rf %{buildroot}
 %dir /usr/%{_lib}/apr-util-1
 /usr/%{_lib}/libaprutil-1.so.*
 /usr/%{_lib}/apr-util-1/apr_dbm_db-1.so
+/usr/%{_lib}/apr-util-1/apr_dbd_sqlite3-1.so
 
 %files devel
 %defattr(-,root,root)
@@ -93,8 +99,14 @@ rm -rf %{buildroot}
 /usr/%{_lib}/apr-util-1/apr_dbm_db.a
 /usr/%{_lib}/apr-util-1/apr_dbm_db.la
 /usr/%{_lib}/apr-util-1/apr_dbm_db.so
+/usr/%{_lib}/apr-util-1/apr_dbd_sqlite3.a
+/usr/%{_lib}/apr-util-1/apr_dbd_sqlite3.la
+/usr/%{_lib}/apr-util-1/apr_dbd_sqlite3.so
 
 
 %changelog
+* Wed Sep 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.3.9-2
+- Build against db5 and sqlite
+
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.3.9-1
 - Initial version
