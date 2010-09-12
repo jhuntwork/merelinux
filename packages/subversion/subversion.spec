@@ -1,17 +1,25 @@
 Summary: Subversion
 Name: subversion
-Version: 1.6.9
+Version: 1.6.12
 Release: 1
 Group: Services
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://subversion.apache.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, apr, apr-util, neon, openssl, zlib, expat, sqlite, db
-BuildRequires: digest(%{SOURCE0}) = 9c30a47b1d48664e7afef68bb4834c53
-BuildRequires: apr-devel, apr-util-devel, neon-devel, openssl-devel, zlib-devel, expat-devel, Python-devel, httpd-devel, sqlite-devel, db-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = b4ae7c75abbbdade8b2c9122ca7e2e26c6468a82
+BuildRequires: apr-devel
+BuildRequires: apr-util-devel
+BuildRequires: neon-devel
+BuildRequires: openssl-devel
+BuildRequires: zlib-devel
+BuildRequires: expat-devel
+BuildRequires: Python-devel
+BuildRequires: httpd-devel
+BuildRequires: sqlite-devel
+BuildRequires: db-devel
 
 %description
 Subversion is an open source version control system.
@@ -19,7 +27,7 @@ Subversion is an open source version control system.
 %package devel
 Summary: Headers and libraries for developing with Subversion
 Group: Development/Libraries
-Requires: %{name}
+Requires: %{name}, %{name}-python, %{name}-perl
 
 %description devel
 Headers and libraries for developing with Subversion
@@ -32,18 +40,28 @@ Requires: %{name}, Python
 %description python
 Subversion Python Bindings
 
-%package httpd
+%package perl
+Summary: Subversion Perl Bindings
+Group: Development/Libraries
+Requires: %{name}, perl
+
+%description perl
+Subversion Perl Bindings
+
+%package apache
 Summary: mod_dav_svn and mod_authz_svn for Apache HTTP Server
 Group: Services
 Requires: %{name}, httpd
 
-%description httpd
+%description apache
 Modules for using Subversion with Apache HTTP Server
 
 %prep
 %setup -q
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
@@ -56,14 +74,32 @@ Modules for using Subversion with Apache HTTP Server
   --with-ssl
 make
 make swig-py
+make swig-pl
 
 %install
 make DESTDIR=%{buildroot} install
 make DESTDIR=%{buildroot} install-swig-py
+make DESTDIR=%{buildroot} install-swig-pl
+find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+rm -v %{buildroot}/usr/lib/perl5/5.12.1/%{_arch}-linux/perllocal.pod
+install -dv %{buildroot}/usr/lib/python2.7/site-packages
+mv -v %{buildroot}/usr/%{_lib}/svn-python/* %{buildroot}/usr/lib/python2.7/site-packages
+rm -rf %{buildroot}/usr/%{_lib}/svn-python
 %find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
+
+%post
+/sbin/ldconfig
+
+%postun
+/sbin/ldconfig
+
+%post apache
+echo 'To activate this module, add the following lines to /etc/apache/httpd.conf:
+LoadModule dav_svn_module %{_lib}/apache/mod_dav_svn.so
+LoadModule authz_svn_module %{_lib}/apache/mod_authz_svn.so'
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -103,14 +139,14 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libsvn_subr-1.so.0.0.0
 /usr/%{_lib}/libsvn_wc-1.so.0
 /usr/%{_lib}/libsvn_wc-1.so.0.0.0
-/usr/share/man/man1/svn.1
-/usr/share/man/man1/svnadmin.1
-/usr/share/man/man1/svndumpfilter.1
-/usr/share/man/man1/svnlook.1
-/usr/share/man/man1/svnsync.1
-/usr/share/man/man1/svnversion.1
-/usr/share/man/man5/svnserve.conf.5
-/usr/share/man/man8/svnserve.8
+/usr/share/man/man1/svn.1.bz2
+/usr/share/man/man1/svnadmin.1.bz2
+/usr/share/man/man1/svndumpfilter.1.bz2
+/usr/share/man/man1/svnlook.1.bz2
+/usr/share/man/man1/svnsync.1.bz2
+/usr/share/man/man1/svnversion.1.bz2
+/usr/share/man/man5/svnserve.conf.5.bz2
+/usr/share/man/man8/svnserve.8.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -156,21 +192,46 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libsvn_wc-1.a
 /usr/%{_lib}/libsvn_wc-1.la
 /usr/%{_lib}/libsvn_wc-1.so
+/usr/%{_lib}/libsvn_swig_py-1.a
+/usr/%{_lib}/libsvn_swig_py-1.la
+/usr/%{_lib}/libsvn_swig_py-1.so
+/usr/%{_lib}/libsvn_swig_perl-1.a
+/usr/%{_lib}/libsvn_swig_perl-1.la
+/usr/%{_lib}/libsvn_swig_perl-1.so
+/usr/share/man/man3/SVN::Base.3.bz2
+/usr/share/man/man3/SVN::Client.3.bz2
+/usr/share/man/man3/SVN::Core.3.bz2
+/usr/share/man/man3/SVN::Delta.3.bz2
+/usr/share/man/man3/SVN::Fs.3.bz2
+/usr/share/man/man3/SVN::Ra.3.bz2
+/usr/share/man/man3/SVN::Repos.3.bz2
+/usr/share/man/man3/SVN::Wc.3.bz2
 
 %files python
 %defattr(-,root,root)
 /usr/%{_lib}/libsvn_swig_py-1.so.0
 /usr/%{_lib}/libsvn_swig_py-1.so.0.0.0
-/usr/%{_lib}/svn-python
-/usr/%{_lib}/libsvn_swig_py-1.a
-/usr/%{_lib}/libsvn_swig_py-1.la
-/usr/%{_lib}/libsvn_swig_py-1.so
+/usr/lib/python2.7/site-packages/svn
+/usr/lib/python2.7/site-packages/libsvn
 
-%files httpd
+%files perl
+%defattr(-,root,root)
+/usr/lib/perl5/site_perl/5.12.1/%{_arch}-linux/SVN
+/usr/lib/perl5/site_perl/5.12.1/%{_arch}-linux/auto/SVN
+/usr/%{_lib}/libsvn_swig_perl-1.so.0
+/usr/%{_lib}/libsvn_swig_perl-1.so.0.0.0
+
+%files apache
 %defattr(-,root,root)
 /usr/%{_lib}/apache/mod_authz_svn.so
 /usr/%{_lib}/apache/mod_dav_svn.so
 
 %changelog
+* Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6.12-1
+- Upgrade to 1.6.12
+
+* Wed Sep 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6.9-2
+- Include Perl Bindings
+
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6.9-1
 - Initial version
