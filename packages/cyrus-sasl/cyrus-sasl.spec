@@ -7,13 +7,17 @@ License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://asg.web.cmu.edu/sasl
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-gcc44-1.patch
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-gcc44-1.patch
+Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-db-1.patch
 
-Requires: base-layout, glibc, openssl, Linux-PAM, gdbm, db
-BuildRequires: digest(%{SOURCE0}) = 2eb0e48106f0e9cd8001e654f267ecbc
-BuildRequires: digest(%{PATCH0}) = 04f9bf36c4a1f994875bca5c0f1e020c
-BuildRequires: openssl-devel, Linux-PAM-devel, gdbm-devel, db-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 5df33a6788d6cd8329b109eff777c6cfae1a21bd
+BuildRequires: digest(sha1:%{PATCH0}) = 0343b15c40d4a62643f21dc541fffa12d1efa347
+BuildRequires: digest(sha1:%{PATCH1}) = 828fe0212f72d7fd1294fffa04698de7412ac2cd
+BuildRequires: openssl-devel
+BuildRequires: Linux-PAM-devel
+BuildRequires: gdbm-devel
+BuildRequires: db-devel
 
 %description
 SASL is the Simple Authentication and Security Layer, a method for adding
@@ -30,11 +34,14 @@ Headers and libraries for developing with %{name}
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
-  --sysconfdir=/etc \
+  --sysconfdir=/etc/sasl2 \
   --with-dbpath=/var/lib/sasl/sasldb2 \
   --with-saslauthd=/var/run/saslauthd \
   --mandir=/usr/share/man \
@@ -43,6 +50,8 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
+install -dv %{buildroot}/etc/sasl2
+find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
 
 %clean
 rm -rf %{buildroot}
@@ -53,6 +62,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %dir /usr/lib/sasl2
+%dir /etc/sasl2
 /usr/lib/sasl2/libanonymous.so.2
 /usr/lib/sasl2/libanonymous.so.2.0.23
 /usr/lib/sasl2/libcrammd5.so.2
@@ -72,10 +82,7 @@ rm -rf %{buildroot}
 /usr/sbin/sasldblistusers2
 /usr/sbin/saslpasswd2
 /usr/sbin/testsaslauthd
-/usr/share/man/man8/pluginviewer.8
-/usr/share/man/man8/saslauthd.8
-/usr/share/man/man8/sasldblistusers2.8
-/usr/share/man/man8/saslpasswd2.8
+/usr/share/man/man8/*
 
 %files devel
 %defattr(-,root,root)
