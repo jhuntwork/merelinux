@@ -1,17 +1,15 @@
 Summary: GNU Bash
 Name: bash
 Version: 4.1
-Release: 5
+Release: 6
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/bash
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
-Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-upstream_fixes.patch
-
-Requires: glibc, ncurses, readline
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
+Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-upstream_fixes.patch
 
 BuildRequires: digest(%{SOURCE0}) = 9800d8724815fd84994d9be65ab5e7b8
 BuildRequires: digest(%{PATCH0}) = 98b964e1d400a2e301e7cdb34019e599
@@ -35,8 +33,14 @@ Extensive documentation for the GNU Bash shell
 %patch1 -p1
 
 %build
-./configure --prefix=/usr --bindir=/bin --without-bash-malloc \
-  --htmldir=/usr/share/doc/%{name}-%{version}  --with-installed-readline
+export CFLAGS="%{CFLAGS}"
+export LDFLAGS="%{LDFLAGS}"
+./configure \
+  --prefix=/usr \
+  --bindir=/bin \
+  --without-bash-malloc \
+  --htmldir=/usr/share/doc/%{name}-%{version} \
+  --with-installed-readline
 make
 #sed -i 's/LANG/LC_ALL/' tests/intl.tests
 #sed -i 's@tests@& </dev/tty@' tests/run-test
@@ -92,8 +96,8 @@ rm -rf %{buildroot}
 /bin/bash
 /bin/bashbug
 /bin/sh
-/etc/bashrc
-/etc/profile
+%config /etc/bashrc
+%config /etc/profile
 /usr/share/man/man1/bash.1
 /usr/share/man/man1/bashbug.1
 
@@ -102,6 +106,9 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
+* Mon Sep 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -4.1-6
+- Properly identify config files
+
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-5
 - Add HISTSIZE and HISTTIMEFORMAT default values to /etc/profile
 
