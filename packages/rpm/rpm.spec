@@ -1,44 +1,31 @@
 Summary: rpm package manager
 Name: rpm
-Version: 5.2.1
+Version: 5.3.3
 Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.rpm5.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/scriptletdeps.sh
-Source2: http://dev.lightcube.us/~jhuntwork/sources/%{name}/check-rpaths
-Source3: http://dev.lightcube.us/~jhuntwork/sources/%{name}/check-rpaths-worker
-Source4: http://dev.lightcube.us/~jhuntwork/sources/%{name}/brp-nobuilddirpath
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.1.6_macrofix.patch
-Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.0.3_envfix.patch
-Patch2: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.1.6_tar-fix.patch
-Patch3: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.1.9_no-parentdirs.patch
-Patch4: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.1.9_perl-vendor.patch
-Patch5: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.1.9_ordering-fix.patch
-Patch6: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.2.0_parentdir-vs-requires.patch
-Patch7: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.2.0_depends-fix.patch
-Patch8: http://dev.lightcube.us/~jhuntwork/sources/%{name}/rpm-5.2.0_umem-fix.patch
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, bzip2, beecrypt, openssl, pcre, popt, neon, expat, zlib, elfutils-libelf, file, readline, xar, xz, libxml2
-BuildRequires: digest(%{SOURCE0}) = 71f825ede4a2ddc191132ae017c9a6e4
-BuildRequires: digest(%{SOURCE1}) = 27dfe162f78b88d13538407dd60c68ae
-BuildRequires: digest(%{SOURCE2}) = d4bee74500d8634f80529b345153516a
-BuildRequires: digest(%{SOURCE3}) = 90a6ada57b7a6ed8842d6c87e484524c
-BuildRequires: digest(%{SOURCE4}) = 466d42aecf322e258d50fffe09e0bcc9
-BuildRequires: digest(%{PATCH0}) = b5ecaa7f29818957c322ff9b018c85b3 
-BuildRequires: digest(%{PATCH1}) = c00058f24dc442f52c467f13a5b5cd70
-BuildRequires: digest(%{PATCH2}) = c9b4b6366e17d1cce53e6eb33a6b2937
-BuildRequires: digest(%{PATCH3}) = eae8b5767aa60a68a0512b41efa6a08d
-BuildRequires: digest(%{PATCH4}) = 538e3960ddc7d45f6ecf5eac5f00f337
-BuildRequires: digest(%{PATCH5}) = 1b92cf05f07ca58ce6c0feca8124ab1b
-BuildRequires: digest(%{PATCH6}) = b206993c3ca04d8f27603349c44805e1
-BuildRequires: digest(%{PATCH7}) = 0524bc4dd16d37ce62f668450726ae7d
-BuildRequires: digest(%{PATCH8}) = c0c40b0b93ae4f286677744401074fc8
-BuildRequires: beecrypt-devel, openssl-devel, Python-devel, pcre-devel, popt-devel, neon-devel, readline-devel
-BuildRequires: expat-devel, zlib-devel, bzip2-devel, elfutils-devel, file-devel, libxml2-devel, xar-devel, xz-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 3bb0a97aa42a1fab41302fc7cc052ec0899d9cf2
+BuildRequires: beecrypt-devel
+BuildRequires: bzip2-devel
+BuildRequires: elfutils-devel
+BuildRequires: expat-devel
+BuildRequires: file-devel
+BuildRequires: libxml2-devel
+BuildRequires: neon-devel
+BuildRequires: openssl-devel
+BuildRequires: pcre-devel
+BuildRequires: popt-devel
+BuildRequires: Python-devel
+BuildRequires: readline-devel
+BuildRequires: sqlite-devel
+BuildRequires: xar-devel
+BuildRequires: xz-devel
+BuildRequires: zlib-devel
 
 %description
 RPM is a powerful and mature command-line driven package management system
@@ -71,56 +58,62 @@ Tools for building rpm packages
 
 %prep
 %setup -q
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p0
-%patch6 -p1
-%patch7 -p1
-%patch8 -p0
 sed -i 's@python_version="2.6@python_version="2.7 2.6@' configure
+cat > rpm-req << "EOF"
+#!/bin/sh
+%{__perl_requires} "$@" | sed -e '/perl(cases)/d'
+EOF
+chmod +x rpm-req
+%define __perl_requires %{_builddir}/rpm-%{version}/rpm-req
 
 %build
 %ifarch x86_64
-sed -i '/^%%_lib/s/lib$/lib64/' macros.in
-# FHS mods
-sed -i 's@_prefix}/info@_datadir}/info@' macros.in
-sed -i 's@_prefix}/man@_datadir}/man@' macros.in
+sed -i '/^%%_lib/s/lib$/lib64/' macros/macros.in
 %endif
+# FHS mods
+sed -i 's@_prefix}/info@_datadir}/info@' macros/macros.in
+sed -i 's@_prefix}/man@_datadir}/man@' macros/macros.in
 export CFLAGS="%{CFLAGS}  -I/usr/include/xar"
 export LDFLAGS="%{LDFLAGS}"
+sed -i "/^PACKAGE_BUGREPORT=/s|'.*'|suport@lightcube.us|" configure
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
-  --with-openssl \
-  --with-python=yes \
-  --with-pcre=external \
-  --with-zlib \
-  --with-neon=external \
-  --with-bzip2=external \
-  --with-lua=internal \
-  --with-xz=external \
-  --with-file=external \
-  --with-xar=external \
-  --without-selinux \
+  --with-db-tools-integrated \
   --with-libelf \
-  --disable-rpath \
-  --disable-dependency-tracking \
-  --with-db-tools-integrated
+  --with-openssl \
+  --with-python \
+  --with-zlib \
+  --with-bzip2=external \
+  --with-file=external \
+  --with-pcre=external \
+  --with-neon=external \
+  --with-sqlite=external \
+  --with-xar=external \
+  --with-xz=external \
+  --with-lua=internal \
+  --without-selinux \
+  --disable-openmp
 make
 
 %install
 make DESTDIR=%{buildroot} install
-install -m 755 %{SOURCE1} %{buildroot}/usr/lib/rpm/scriptletdeps.sh
-# Install rpath test scripts
-install -m0755 %{SOURCE2} %{buildroot}/usr/lib/rpm/check-rpaths
-install -m0755 %{SOURCE3} %{buildroot}/usr/lib/rpm/check-rpaths-worker
-install -m0755 %{SOURCE4} %{buildroot}/usr/lib/rpm/brp-nobuilddirpath
+install -dv %{buildroot}/var/lib/rpm/{log,tmp}
 install -dv %{buildroot}/etc/rpm
 echo "%%CFLAGS    -O2 -pipe" >> %{buildroot}/etc/rpm/macros
 echo "%%LDFLAGS   -s" >> %{buildroot}/etc/rpm/macros
+
+# Compress man pages
+find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+
+# Create /etc/rpm/platform
+cat > %{buildroot}/etc/rpm/platform << "EOF"
+%{_target_cpu}-%{_target_vendor}-%{_target_os}%{?_gnu}
+noarch-%{_target_vendor}-%{_target_os}%{?_gnu}
+%{_target_cpu}-.*-%{_target_os}.*
+noarch-.*-%{_target_os}.*
+EOF
+
 %find_lang %{name}
 
 %clean
@@ -132,10 +125,17 @@ rm -rf %{buildroot}
 %files -f %{name}.lang
 %defattr(-,root,root)
 %dir /etc/rpm/
+/etc/rpm/platform
 /usr/bin/gendiff
 /usr/bin/rpm
 /usr/bin/rpm2cpio
 /usr/bin/rpmconstant
+/usr/%{_lib}/librpm-5.3.so
+/usr/%{_lib}/librpmbuild-5.3.so
+/usr/%{_lib}/librpmconstant-5.3.so
+/usr/%{_lib}/librpmdb-5.3.so
+/usr/%{_lib}/librpmio-5.3.so
+/usr/%{_lib}/librpmmisc-5.3.so
 %dir /usr/lib/rpm
 %dir /usr/lib/rpm/bin
 /usr/lib/rpm/bin/db_archive
@@ -151,7 +151,6 @@ rm -rf %{buildroot}
 /usr/lib/rpm/bin/db_upgrade
 /usr/lib/rpm/bin/db_verify
 /usr/lib/rpm/bin/debugedit
-/usr/lib/rpm/bin/grep
 /usr/lib/rpm/bin/mtree
 /usr/lib/rpm/bin/rpmcache
 /usr/lib/rpm/bin/rpmcmp
@@ -160,11 +159,24 @@ rm -rf %{buildroot}
 /usr/lib/rpm/bin/rpmspecdump
 /usr/lib/rpm/bin/txar
 /usr/lib/rpm/bin/wget
+/usr/lib/rpm/bin/abi-compliance-checker.pl
+/usr/lib/rpm/bin/api-sanity-autotest.pl
+/usr/lib/rpm/bin/chroot
+/usr/lib/rpm/bin/cp
+/usr/lib/rpm/bin/db_log_verify
+/usr/lib/rpm/bin/db_sql_codegen
+/usr/lib/rpm/bin/dbsql
+/usr/lib/rpm/bin/find
+/usr/lib/rpm/bin/install-sh
+/usr/lib/rpm/bin/mkinstalldirs
+/usr/lib/rpm/bin/rpmlua
+/usr/lib/rpm/bin/rpmluac
+/usr/lib/rpm/bin/sqlite3
 /usr/lib/rpm/cpuinfo.yaml
 /usr/lib/rpm/find-debuginfo.sh
 /usr/lib/rpm/helpers
 /usr/lib/rpm/macros
-/usr/lib/rpm/mkinstalldirs
+/usr/lib/rpm/macros.d
 /usr/lib/rpm/perl.req
 /usr/lib/rpm/qf
 /usr/lib/rpm/rpm.daily
@@ -177,22 +189,24 @@ rm -rf %{buildroot}
 /usr/lib/rpm/u_pkg.sh
 /usr/lib/rpm/vpkg-provides.sh
 /usr/lib/rpm/vpkg-provides2.sh
-/usr/%{_lib}/librpm-5.2.so
-/usr/%{_lib}/librpmbuild-5.2.so
-/usr/%{_lib}/librpmconstant-5.2.so
-/usr/%{_lib}/librpmdb-5.2.so
-/usr/%{_lib}/librpmio-5.2.so
-/usr/%{_lib}/librpmmisc-5.2.so
-/usr/share/man/*/man8/*
-/usr/share/man/man1/gendiff.1
-/usr/share/man/man1/rpmgrep.1
-/usr/share/man/man8/rpm.8
-/usr/share/man/pl/man1/gendiff.1
-/usr/share/man/man8/rpm2cpio.8
-/usr/share/man/man8/rpmcache.8
-/usr/share/man/man8/rpmconstant.8
-/usr/share/man/man8/rpmdeps.8
-/usr/share/man/man8/rpmmtree.8
+%dir /var/lib/rpm
+/var/lib/rpm/DB_CONFIG
+%dir /var/lib/rpm/log
+%dir /var/lib/rpm/tmp
+/usr/share/man/man1/gendiff.1.bz2
+/usr/share/man/*/man1/gendiff.1.bz2
+/usr/share/man/man1/rpmgrep.1.bz2
+/usr/share/man/man8/rpm.8.bz2
+/usr/share/man/*/man8/rpm.8.bz2
+/usr/share/man/man8/rpm2cpio.8.bz2
+/usr/share/man/*/man8/rpm2cpio.8.bz2
+/usr/share/man/man8/rpmcache.8.bz2
+/usr/share/man/*/man8/rpmcache.8.bz2
+/usr/share/man/man8/rpmconstant.8.bz2
+/usr/share/man/man8/rpmdeps.8.bz2
+/usr/share/man/*/man8/rpmdeps.8.bz2
+/usr/share/man/man8/rpmmtree.8.bz2
+/usr/share/man/*/man8/rpmgraph.8.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -216,6 +230,7 @@ rm -rf %{buildroot}
 /usr/%{_lib}/librpmmisc.a
 /usr/%{_lib}/librpmmisc.la
 /usr/%{_lib}/librpmmisc.so
+/usr/lib/rpm/lib
 
 %files python
 %defattr(-,root,root)
@@ -225,15 +240,15 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /etc/rpm/macros
 /usr/bin/rpmbuild
-/usr/lib/rpm/install-sh
 /usr/lib/rpm/brp-*
-/usr/lib/rpm/check-*
+/usr/lib/rpm/check-files
 /usr/lib/rpm/cross-build
 /usr/lib/rpm/find-lang.sh
 /usr/lib/rpm/find-prov.pl
 /usr/lib/rpm/find-provides.perl
 /usr/lib/rpm/find-req.pl
 /usr/lib/rpm/find-requires.perl
+/usr/lib/rpm/macros.rpmbuild
 /usr/lib/rpm/mono-find-provides
 /usr/lib/rpm/mono-find-requires
 /usr/lib/rpm/perldeps.pl
@@ -249,13 +264,19 @@ rm -rf %{buildroot}
 /usr/lib/rpm/perl.prov
 /usr/lib/rpm/php.prov
 /usr/lib/rpm/php.req
-/usr/lib/rpm/scriptletdeps.sh
 /usr/lib/rpm/vcheck
-/usr/share/man/man8/rpmbuild.8
+/usr/share/man/man8/rpmbuild.8.bz2
+/usr/share/man/*/man8/rpmbuild.8.bz2
 
 %changelog
-* Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.2.1-1
-- Update to 5.2.1
+* Tue Sep 07 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.3-1
+- Upgrade to 5.3.3
+
+* Mon Aug 30 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.2-2
+- Use external db
+
+* Thu Aug 26 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.2-1
+- Update to 5.3.2
 
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.9-2
 - Fixes to python subpackage
