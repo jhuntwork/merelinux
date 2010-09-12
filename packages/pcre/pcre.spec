@@ -1,17 +1,20 @@
 Summary: PCRE - Perl Compatible Regular Expressions
 Name: pcre
 Version: 8.10
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.pcre.org
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0: http://dev.lightcube.us/sources/%{name}/pcreposix.patch
 
-Requires: base-layout, glibc, bzip2, zlib, readline
-BuildRequires: digest(%{SOURCE0}) = 780867a700e9d4e4b9cb47aa5453e4b2
-BuildRequires: bzip2-devel, zlib-devel, readline-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 8b345da0f835b2caabff071b0b5bab40564652be
+BuildRequires: digest(sha1:%{PATCH0}) = ea2dab6648c0ccb43d4e3783932f5e3d87db73a8
+BuildRequires: bzip2-devel
+BuildRequires: readline-devel
+BuildRequires: zlib-devel
 
 %description
 The PCRE library is a set of functions that implement regular expression
@@ -27,6 +30,7 @@ Headers and libraries for developing with %{name}
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 ./configure \
@@ -84,6 +88,10 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.10-2
+- Add patch for pcreposix which avoids duplicate function names from other
+  packages
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.10-1
 - Upgrade to 8.10
 
