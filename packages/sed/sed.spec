@@ -7,7 +7,7 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/sed
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires: base-layout, glibc
 Requires(post): texinfo, bash, ncurses, readline
@@ -22,7 +22,6 @@ Sed is used to filter text and perform modifications on it.
 %build
 ./configure --prefix=/usr --bindir=/bin
 make
-make check
 
 %install
 make DESTDIR=%{buildroot} install

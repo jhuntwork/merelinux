@@ -7,10 +7,9 @@ License: Apache
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://apr.apache.org
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = fc80cb54f158c2674f9eeb47a1f672cd
+BuildRequires: digest(sha1:%{SOURCE0}) = d48324efb0280749a5d7ccbb053d68545c568b4b
 
 %description
 Apache project core software libraries

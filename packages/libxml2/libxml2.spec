@@ -7,7 +7,7 @@ License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.xmlsoft.org
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
 Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = 9abc9959823ca9ff904f1fbcf21df066
