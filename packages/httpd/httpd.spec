@@ -1,24 +1,31 @@
 Summary: Apache HTTP Server
 Name: httpd
 Version: 2.2.16
-Release: 1
+Release: 2
 Group: Services
 License: Apache
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://httpd.apache.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
-Source1: http://dev.lightcube.us/~jhuntwork/sources/blfs-bootscripts/blfs-bootscripts-20090302.tar.bz2
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-config-1.patch
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source1: http://dev.lightcube.us/sources/%{name}/%{name}.init
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-config-1.patch
 
-Requires: base-layout, glibc, openssl, pcre, apr, apr-util, zlib, expat, db
-BuildRequires: digest(%{SOURCE0}) = c8ff2a07c884300bc7766a2e7f662d33
-BuildRequires: digest(%{SOURCE1}) = 7ee5363f223235adc54046623ffa77cd
-BuildRequires: digest(%{PATCH0}) = e02a3ec5925eb9e111400b9aa229f822
-BuildRequires: openssl-devel, pcre-devel, apr-devel, apr-util-devel, zlib-devel, expat-devel, db-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = ef92f5b3124fe5e9ba6121ea7f4bab8c014068f9
+BuildRequires: digest(sha1:%{SOURCE1}) = ee24aa6c2e35669e22942840b747e4135693762f
+BuildRequires: digest(sha1:%{PATCH0}) = ec266d894e4f42d813b713af596048879325f22e
+BuildRequires: openssl-devel
+BuildRequires: pcre-devel
+BuildRequires: apr-devel
+BuildRequires: apr-util-devel
+BuildRequires: zlib-devel
+BuildRequires: expat-devel
+BuildRequires: db-devel
 
 %description
-Subversion is an open source version control system.
+The Apache HTTP Server is a popular, secure, efficient and extensible
+HTTP server for modern operating systems providing HTTP services in sync with
+current HTTP standards.
 
 %package devel
 Summary: Header files for developing with Apache httpd
@@ -52,12 +59,9 @@ install -dv %{buildroot}/var/log/apache
 sed -i -e "s/User daemon/User apache/" \
        -e "s/Group daemon/Group apache/" \
     %{buildroot}/etc/apache/httpd.conf
-install -dv %{buildroot}/etc/rc.d/init.d
-tar -xf %{SOURCE1}
-sed -i 's@^# Begin.*@&\n# chkconfig: 345 40 40\n# description: Apache Httpd Server@' \
-  blfs-bootscripts-20090302/blfs/init.d/apache
-install -m754 blfs-bootscripts-20090302/blfs/init.d/apache \
-  %{buildroot}/etc/rc.d/init.d/
+install -dv %{buildroot}/etc/init.d
+install -m754 %{SOURCE1} %{buildroot}/etc/init.d/httpd
+find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
 
 %clean
 rm -rf %{buildroot}
@@ -65,7 +69,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /etc/apache
-/etc/rc.d/init.d/apache
+/etc/init.d/httpd
 %dir /usr/%{_lib}/apache
 /usr/%{_lib}/apache/mod_actions.so
 /usr/%{_lib}/apache/mod_alias.so
@@ -134,18 +138,18 @@ rm -rf %{buildroot}
 /usr/sbin/httxt2dbm
 /usr/sbin/logresolve
 /usr/sbin/rotatelogs
-/usr/share/man/man1/dbmmanage.1
-/usr/share/man/man1/htdbm.1
-/usr/share/man/man1/htdigest.1
-/usr/share/man/man1/htpasswd.1
-/usr/share/man/man8/ab.8
-/usr/share/man/man8/apachectl.8
-/usr/share/man/man8/apxs.8
-/usr/share/man/man8/htcacheclean.8
-/usr/share/man/man8/httpd.8
-/usr/share/man/man8/logresolve.8
-/usr/share/man/man8/rotatelogs.8
-/usr/share/man/man8/suexec.8
+/usr/share/man/man1/dbmmanage.1.bz2
+/usr/share/man/man1/htdbm.1.bz2
+/usr/share/man/man1/htdigest.1.bz2
+/usr/share/man/man1/htpasswd.1.bz2
+/usr/share/man/man8/ab.8.bz2
+/usr/share/man/man8/apachectl.8.bz2
+/usr/share/man/man8/apxs.8.bz2
+/usr/share/man/man8/htcacheclean.8.bz2
+/usr/share/man/man8/httpd.8.bz2
+/usr/share/man/man8/logresolve.8.bz2
+/usr/share/man/man8/rotatelogs.8.bz2
+/usr/share/man/man8/suexec.8.bz2
 /var/log/apache
 %defattr(-,apache,apache)
 /srv/www
@@ -157,6 +161,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/apache/httpd.exp
 
 %changelog
+* Wed Sep 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.16-2
+- Fix description
+
 * Fri Aug 20 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.16-1
 - Upgrade to 2.2.16
 
