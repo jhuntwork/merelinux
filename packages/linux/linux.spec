@@ -1,26 +1,26 @@
 Summary: The Linux Kernel
 Name: linux
-Version: 2.6.35
+Version: 2.6.35.4
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.kernel.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+
+Requires: base-layout
+BuildRequires: digest(sha1:%{SOURCE0}) = 60f4b0f178034a0629c5fcf75b79818b1feef0ed
 
 %ifarch x86_64
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}-configs/%{name}-config-%{version}-x86_64
-BuildRequires: digest(%{SOURCE1}) = 16d42d453996d81ebc269014917aa4c0
+Source1: http://dev.lightcube.us/sources/%{name}-configs/%{name}-config-%{version}-x86_64
+BuildRequires: digest(sha1:%{SOURCE1}) = 1097637e5829eae09bc3bed288aa7d1ad7cf4c0f
 %endif
 
 %ifarch i686
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}-configs/%{name}-config-%{version}-i686
+Source1: http://dev.lightcube.us/sources/%{name}-configs/%{name}-config-%{version}-i686
 BuildRequires: digest(%{SOURCE1}) = fc7cb3e55b3ee840166ba947918efbbc
 %endif
-
-Requires: base-layout
-BuildRequires: digest(%{SOURCE0}) = 091abeb4684ce03d1d936851618687b6
 
 %description
 The Linux Kernel
