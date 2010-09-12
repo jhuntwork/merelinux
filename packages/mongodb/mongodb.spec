@@ -1,17 +1,17 @@
 Summary: mongoDB
 Name: mongodb
-Version: 1.6.1
+Version: 1.6.2
 Release: 1
 Group: Services
 License: AGPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.mongodb.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-src-r%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/mongod.init
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-src-r%{version}.tar.gz
+Source1: http://dev.lightcube.us/sources/%{name}/mongod.init
 
-BuildRequires: digest(%{SOURCE0}) = e4f37470bc4f910e086f68070053e8a2
-BuildRequires: digest(%{SOURCE1}) = 007ae152d90134e27b20adacfc302e21
+BuildRequires: digest(sha1:%{SOURCE0}) = 0a7ef4825a6ec6f91a272611fde7c0b46eacd89a
+BuildRequires: digest(sha1:%{SOURCE1}) = 497cd02f1f2a4577bc06819eaee5f43306981e34
 BuildRequires: boost-devel
 BuildRequires: scons
 BuildRequires: pcre-devel
@@ -52,7 +52,7 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/etc/mongod.conf
+%config /etc/mongod.conf
 /etc/init.d/mongod
 /usr/bin/bsondump
 /usr/bin/mongo
@@ -65,9 +65,12 @@ rm -rf %{buildroot}
 /usr/bin/mongosniff
 /usr/bin/mongostat
 /usr/sbin/mongod
-/srv/mongodb
+%dir /srv/mongodb
 
 %changelog
+* Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6.2-1
+- Upgrade to 1.6.2
+
 * Sun Aug 22 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6.1-1
 - Upgrade to 1.6.1
 
