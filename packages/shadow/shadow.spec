@@ -7,14 +7,13 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://pkg-shadow.alioth.debian.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, cracklib, Linux-PAM
-BuildRequires: digest(%{SOURCE0}) = d593a9cab93c48ee0a6ba056db8c1997
+BuildRequires: digest(sha1:%{SOURCE0}) = 43e29471057c671de51360b10e3ee2b419c78ffa
 BuildRequires: Linux-PAM-devel
 
 %description
-%{name} provides a suite of tools for managing system users, groups and passwords 
+Shadow provides a suite of tools for managing system users, groups and passwords 
 
 %prep
 %setup -q
@@ -23,7 +22,7 @@ BuildRequires: Linux-PAM-devel
 sed -i 's/groups$(EXEEXT) //' src/Makefile.in
 find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
 sed -i -e 's/ ko//' -e 's/ zh_CN zh_TW//' man/Makefile.in
-sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD MD5@' \
+sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
        -e 's@/var/spool/mail@/var/mail@' etc/login.defs
 ./configure \
   --sysconfdir=/etc
@@ -120,6 +119,7 @@ session     required        pam_warn.so
 
 # End /etc/pam.d/other
 EOF
+find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
 %find_lang %{name}
 
 %clean
@@ -130,9 +130,27 @@ rm -rf %{buildroot}
 /bin/login
 /bin/passwd
 /bin/su
-/etc/default
-/etc/login.defs
-/etc/pam.d
+%dir /etc/default
+%config /etc/default/useradd
+%config /etc/login.defs
+%dir /etc/pam.d
+%config /etc/pam.d/chage
+%config /etc/pam.d/chfn
+%config /etc/pam.d/chgpasswd
+%config /etc/pam.d/chpasswd
+%config /etc/pam.d/chsh
+%config /etc/pam.d/groupadd
+%config /etc/pam.d/groupdel
+%config /etc/pam.d/groupmems
+%config /etc/pam.d/groupmod
+%config /etc/pam.d/login
+%config /etc/pam.d/newusers
+%config /etc/pam.d/other
+%config /etc/pam.d/passwd
+%config /etc/pam.d/su
+%config /etc/pam.d/useradd
+%config /etc/pam.d/userdel
+%config /etc/pam.d/usermod
 /sbin/nologin
 /usr/bin/chage
 /usr/bin/chfn
