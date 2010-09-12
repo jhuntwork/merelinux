@@ -117,9 +117,9 @@ touch %{buildroot}/var/log/{btmp,lastlog,wtmp}
 %defattr(-,root,root)
 /dev/console
 /dev/null
-/etc/passwd
-/etc/group
-/etc/inputrc
+%config /etc/passwd
+%config /etc/group
+%config /etc/inputrc
 /etc/mtab
 /var/log/btmp
 /var/log/wtmp
