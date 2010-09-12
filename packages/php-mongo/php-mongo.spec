@@ -7,9 +7,8 @@ License: Apache
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://pecl.php.net/package/mongo
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/mongo-%{version}.tgz
+Source0: http://dev.lightcube.us/sources/%{name}/mongo-%{version}.tgz
 
-Requires: php
 BuildRequires: digest(%{SOURCE0}) = 99646026a03e61d5e33fbe1ee87e7f9b
 BuildRequires: php-devel
 BuildRequires: autoconf
@@ -31,10 +30,8 @@ make test
 make INSTALL_ROOT=%{buildroot} EXTENSION_DIR=/usr/%{_lib}/php/extensions install
 
 %post
-/bin/sed -i 's@^\[PHP\]$@&\nextension=mongo.so@' /etc/php.ini
-
-%postun
-/bin/sed -i '/^extension=mongo.so/d' /etc/php.ini
+echo 'To activate this module add the following line to /etc/php.ini:
+extension=mongo.so'
 
 %clean
 rm -rf %{buildroot}

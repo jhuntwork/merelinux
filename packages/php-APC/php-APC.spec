@@ -7,9 +7,8 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://pecl.php.net/package/APC
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/APC-%{version}.tgz
+Source0: http://dev.lightcube.us/sources/%{name}/APC-%{version}.tgz
 
-Requires: base-layout, glibc, php
 BuildRequires: digest(%{SOURCE0}) = 1f7a58f850e795b0958a3f99ae8c2cc4
 BuildRequires: php-devel
 BuildRequires: autoconf
@@ -36,10 +35,8 @@ make INSTALL_ROOT=%{buildroot} EXTENSION_DIR=/usr/%{_lib}/php/extensions install
 install -m644 apc.php %{buildroot}/usr/%{_lib}/php
 
 %post
-/bin/sed -i 's@^\[PHP\]$@&\nextension=apc.so@' /etc/php.ini
-
-%postun
-/bin/sed -i '/^extension=apc.so/d' /etc/php.ini
+echo 'To activate this module add the following line to /etc/php.ini:
+extension=apc.so'
 
 %clean
 rm -rf %{buildroot}
