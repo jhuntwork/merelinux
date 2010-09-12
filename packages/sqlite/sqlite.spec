@@ -7,7 +7,7 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.sqlite.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-amalgamation-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-amalgamation-%{version}.tar.gz
 
 Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = ed585bb3d4e5c643843ebb1e318644ce
