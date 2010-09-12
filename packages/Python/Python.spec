@@ -10,9 +10,14 @@ URL: http://www.python.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 %define abi 2.7
 
-Requires: base-layout, glibc, ncurses, zlib, readline, openssl, bzip2, gdbm
 BuildRequires:  digest(%{SOURCE0}) = 0e8c9ec32abf5b732bea7d91b38c3339
-BuildRequires: ncurses-devel, zlib-devel, readline-devel, openssl-devel, bzip2-devel, gdbm-devel
+BuildRequires: ncurses-devel
+BuildRequires: zlib-devel
+BuildRequires: readline-devel
+BuildRequires: openssl-devel
+BuildRequires: bzip2-devel
+BuildRequires: gdbm-devel
+BuildRequires: sqlite-devel
 Provides: python(abi) = %{abi}
 
 %description
@@ -49,8 +54,13 @@ sed -i '/#!/s@/local@@' %{buildroot}/usr/lib/python%{abi}/cgi.py
   mv -v %{buildroot}/usr/lib/pkgconfig %{buildroot}/usr/lib64/
   mv -v %{buildroot}/usr/lib/libpython* %{buildroot}/usr/lib64/
 %endif
-find %{buildroot}/usr/lib/python%{abi} -mindepth 1 -maxdepth 1 -not -name config | sed "s|^%{buildroot}||" >python-files
-find %{buildroot}/usr/lib/python%{abi}/config -not -name Makefile | sed "s|^%{buildroot}||" >config-files
+find %{buildroot}/usr/lib/python%{abi} \
+  -mindepth 1 -maxdepth 1 -not -name config | sed "s|^%{buildroot}||" >python-files
+find %{buildroot}/usr/lib/python%{abi}/config \
+  -mindepth 1 -maxdepth 1 -not -name Makefile | sed "s|^%{buildroot}||" >devel-files
+find %{buildroot}/usr/include/python%{abi} \
+  -mindepth 1 -maxdepth 1 -not -name pyconfig.h | sed "s|^%{buildroot}||" >>devel-files
+find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
 
 %clean
 rm -rf %{buildroot}
@@ -71,11 +81,10 @@ rm -rf %{buildroot}
 %dir /usr/lib/python%{abi}/config
 /usr/lib/python%{abi}/config/Makefile
 /usr/%{_lib}/libpython2.7.so.1.0
-/usr/share/man/man1/python%{abi}.1
+/usr/share/man/man1/python%{abi}.1.bz2
 
-%files -f config-files devel
+%files -f devel-files devel
 %defattr(-,root,root)
-/usr/include/python%{abi}
 /usr/%{_lib}/libpython2.7.so
 /usr/%{_lib}/pkgconfig/python-%{abi}.pc
 /usr/%{_lib}/pkgconfig/python.pc
