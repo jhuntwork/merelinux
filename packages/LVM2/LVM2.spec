@@ -2,7 +2,7 @@ Summary: Logical Volume Manager 2
 Name: LVM2
 Version: 2.02.73
 Release: 1
-Group: System Environment/Libraries
+Group: Utilities
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
