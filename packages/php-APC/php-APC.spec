@@ -1,7 +1,7 @@
 Summary: Alternative PHP Cache
 Name: php-APC
 Version: 3.1.4
-Release: 1
+Release: 2
 Group: Development/Languages
 License: GPLv2
 Distribution: LightCube OS
@@ -13,6 +13,8 @@ BuildRequires: digest(%{SOURCE0}) = 1f7a58f850e795b0958a3f99ae8c2cc4
 BuildRequires: php-devel
 BuildRequires: autoconf
 BuildRequires: pcre-devel
+
+Requires: php
 
 %description
 The Alternative PHP Cache (APC) is a free and open opcode cache for PHP. Its
@@ -47,5 +49,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/php/extensions/apc.so
 
 %changelog
+* Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.4-2
+- Add dependency on php
+
 * Sun Aug 22 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.4-1
 - Initial version

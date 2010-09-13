@@ -1,7 +1,7 @@
 Summary: Subversion Driver for PHP
 Name: php-svn
 Version: 1.0.0
-Release: 1
+Release: 2
 Group: Development/Languages
 License: PHP
 Distribution: LightCube OS
@@ -19,7 +19,10 @@ BuildRequires: neon-devel
 BuildRequires: sqlite-devel
 BuildRequires: expat-devel
 
+Requires: php
+
 %description
+Subversion driver for PHP
 
 %prep
 %setup -q -n svn-%{version}
@@ -47,5 +50,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/php/extensions/svn.so
 
 %changelog
+* Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0-2
+- Add a description and dependency on php
+
 * Thu Sep 09 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0-1
 - Initial version
