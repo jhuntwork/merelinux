@@ -1,7 +1,7 @@
 Summary: MongoDB Driver for PHP
 Name: php-mongo
 Version: 1.0.9
-Release: 1
+Release: 2
 Group: Development/Languages
 License: Apache
 Distribution: LightCube OS
@@ -9,9 +9,11 @@ Vendor: LightCube Solutions
 URL: http://pecl.php.net/package/mongo
 Source0: http://dev.lightcube.us/sources/%{name}/mongo-%{version}.tgz
 
-BuildRequires: digest(%{SOURCE0}) = 99646026a03e61d5e33fbe1ee87e7f9b
+BuildRequires: digest(sha1:%{SOURCE0}) = b4a0d1854faa78b2e8a87d1050495197e0b1cb9e
 BuildRequires: php-devel
 BuildRequires: autoconf
+
+Requires: php
 
 %description
 
@@ -41,5 +43,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/php/extensions/mongo.so
 
 %changelog
+* Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.9-2
+- Fix missing dependency on php
+
 * Sun Aug 22 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.9-1
 - Initial version
