@@ -1,7 +1,7 @@
 Summary: XDebug Extension for PHP
 Name: php-xdebug
 Version: 2.1.0
-Release: 1
+Release: 2
 Group: Development/Languages
 License: Xdebug
 Distribution: LightCube OS
@@ -23,7 +23,7 @@ Requires: php
 export CFLAGS="%{CFLAGS}"
 export LDFLAGS="%{LDFLAGS}"
 phpize
-./configure
+./configure --enable-xdebug
 make
 make test
 
@@ -32,7 +32,7 @@ make INSTALL_ROOT=%{buildroot} EXTENSION_DIR=/usr/%{_lib}/php/extensions install
 
 %post
 echo 'To activate this module add the following line to /etc/php.ini:
-extension=xdebug.so'
+zend_extension=/usr/%{_lib}/php/extensions/xdebug.so'
 
 %clean
 rm -rf %{buildroot}
@@ -42,5 +42,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/php/extensions/xdebug.so
 
 %changelog
+* Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.1.0-2
+- Fix output instructions, use --enable-xdebug with configure
+
 * Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.1.0-1
 - Initial version
