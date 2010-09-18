@@ -1,7 +1,7 @@
 Summary: LFS LSB Bootscripts
 Name: lsb-bootscripts
 Version: 3
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -10,15 +10,18 @@ Buildarch: noarch
 URL: http://www.linuxfromscratch.org/lfs
 Source0: http://dev.lightcube.us/sources/%{name}/lsb-v%{version}.tar.bz2
 Source1: http://dev.lightcube.us/sources/%{name}/service
+Patch0: http://dev.lightcube.us/sources/%{name}/lsb-v%{version}-dhclient-1.patch
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 8ccc03c42c4e29d579fa124743ebeef966485ece
 BuildRequires: digest(sha1:%{SOURCE1}) = d935be1993dbf647d9bba00f95b0d0982227d47a
+BuildRequires: digest(sha1:%{PATCH0}) = a63b4edc53572aa316417ad473dfa43dae0878d1
 
 %description
 LSB compatible bootscripts from the LFS project.
 
 %prep
 %setup -q -n lsb-v%{version}
+%patch0 -p1
 
 %install
 # Fix syntax error
@@ -59,6 +62,9 @@ rm -rf %{buildroot}
 /usr/sbin/service
 
 %changelog
+* Fri Sep 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3-3
+- Add dhclient service
+
 * Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3-2
 - Fix quotes in service script
 
