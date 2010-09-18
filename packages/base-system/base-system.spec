@@ -1,7 +1,7 @@
 Summary: LightCube OS Base System Meta-Package
 Name: base-system
 Version: 0.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -10,6 +10,8 @@ Buildarch: noarch
 
 Requires: base-layout
 Requires: base-files
+Requires: linux
+Requires: grub
 Requires: procps
 Requires: psmisc
 Requires: pciutils
@@ -34,6 +36,7 @@ Requires: e2fsprogs
 Requires: gettext
 Requires: xfsprogs
 Requires: grep
+Requires: dhcp
 Requires: fcron
 Requires: gawk
 Requires: diffutils
@@ -64,5 +67,8 @@ packages are installed.
 %files
 
 %changelog
+* Fri Sep 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-2
+- Add linux, grub and dhcp as requirements
+
 * Mon Sep 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-1
 - Initial version
