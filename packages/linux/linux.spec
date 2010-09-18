@@ -1,7 +1,7 @@
 Summary: The Linux Kernel
 Name: linux
 Version: 2.6.36
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -13,7 +13,7 @@ BuildRequires: digest(sha1:%{SOURCE0}) = d01857f41bd56d650d00003f4c69ba300924372
 
 %ifarch x86_64
 Source1: http://dev.lightcube.us/sources/%{name}-configs/%{name}-config-%{version}-rc4.x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = 191592b4cf48a8ab1799cf2d99e70e3c7139b0ee
+BuildRequires: digest(sha1:%{SOURCE1}) = c0288996e333d91af600c370fc65f1a080667c4f
 %endif
 
 %ifarch i686
@@ -54,6 +54,7 @@ make INSTALL_HDR_PATH=dest headers_install
 find dest -name .install -exec rm -v '{}' \;
 find dest -name ..install.cmd -exec rm -v '{}' \;
 cp %{SOURCE1} .config
+sed -i 's@-LightCube@-%{release}@' .config
 make -j8
 
 %install
@@ -77,8 +78,8 @@ find . -type f -a '(' -name Kconfig\* -o -name Makefile\* -o -name \*.s ')' | (
     cp "$file" "%{buildroot}$DIRNAME/$file"
   done
 )
-ln -nsf "$DIRNAME" "%{buildroot}/lib/modules/%{version}-rc4/source"
-ln -nsf "$DIRNAME" "%{buildroot}/lib/modules/%{version}-rc4/build"
+ln -nsf "$DIRNAME" "%{buildroot}/lib/modules/%{version}-rc4-%{release}/source"
+ln -nsf "$DIRNAME" "%{buildroot}/lib/modules/%{version}-rc4-%{release}/build"
 
 # Install the kernel image, system.map and config
 mkdir %{buildroot}/boot
@@ -91,6 +92,9 @@ cp arch/x86_64/boot/bzImage %{buildroot}/boot/vmlinux-%{version}-rc4-%{release}
 cp arch/x86/boot/bzImage %{buildroot}/boot/vmlinux-%{version}-rc4-%{release}
 %endif
 
+%post
+/usr/bin/mkinitramfs %{version}-rc4-%{release}
+
 %clean
 rm -fr %{buildroot}
 
@@ -100,9 +104,9 @@ rm -fr %{buildroot}
 /boot/config-%{version}-rc4-%{release}
 /boot/vmlinux-%{version}-rc4-%{release}
 /lib/firmware
-%dir /lib/modules/%{version}-rc4
-/lib/modules/%{version}-rc4/kernel
-/lib/modules/%{version}-rc4/modules.*
+%dir /lib/modules/%{version}-rc4-%{release}
+/lib/modules/%{version}-rc4-%{release}/kernel
+/lib/modules/%{version}-rc4-%{release}/modules.*
 
 %files headers
 %defattr(-,root,root)
@@ -120,10 +124,13 @@ rm -fr %{buildroot}
 %files devel
 %defattr(-,root,root)
 /usr/src/kernels/%{name}-%{version}-rc4-%{release}
-/lib/modules/%{version}-rc4/source
-/lib/modules/%{version}-rc4/build
+/lib/modules/%{version}-rc4-%{release}/source
+/lib/modules/%{version}-rc4-%{release}/build
 
 %changelog
+* Wed Sep 15 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.36-rc4-2
+- Remove deprecated IDE support, add VIRTIO_BLK and VIRTIO_NET
+
 * Mon Sep 13 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.36-rc4-1
 - Upgrade to 2.6.36-rc4
 
