@@ -1,7 +1,7 @@
 Summary: module-init-tools
 Name: module-init-tools
 Version: 3.12
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -31,7 +31,8 @@ make
 
 %install
 make DESTDIR=%{buildroot} INSTALL=install install
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+install -dv %{buildroot}/etc/modprobe.d
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -39,6 +40,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /bin/lsmod
+/etc/modprobe.d
 /sbin/depmod
 /sbin/insmod
 /sbin/insmod.static
@@ -57,6 +59,9 @@ rm -rf %{buildroot}
 /usr/share/man/man8/rmmod.8.bz2
 
 %changelog
+* Tue Sep 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.12-3
+- Add an /etc/modprobe.d directory
+
 * Mon Sep 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.12-2
 - Fix rogue info file instructions
 
