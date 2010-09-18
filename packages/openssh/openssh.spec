@@ -1,19 +1,19 @@
 Summary: OpenSSH
 Name: openssh
 Version: 5.5p1
-Release: 1
+Release: 2
 Group: Services
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.openssl.com
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/sshd.init
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source1: http://dev.lightcube.us/sources/%{name}/sshd.init
 
-Requires: base-layout, glibc, openssl, Linux-PAM, zlib
-BuildRequires: digest(%{SOURCE0}) = 88633408f4cb1eb11ec7e2ec58b519eb
-BuildRequires: digest(%{SOURCE1}) = 85413f16db7f2b66af700fb54df35302
-BuildRequires: openssl-devel, zlib-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 361c6335e74809b26ea096b34062ba8ff6c97cd6
+BuildRequires: digest(sha1:%{SOURCE1}) = de7e20c23da063a29222ad9c753d57702e49e6cb
+BuildRequires: openssl-devel
+BuildRequires: zlib-devel
 
 %description
 OpenSSH is a free version of the SSH connectivity tools.
@@ -58,6 +58,15 @@ EOF
 
 %post
 /usr/sbin/install_initd sshd
+if [ ! -f /etc/ssh/ssh_host_key ]
+   then /usr/bin/ssh-keygen -t rsa1 -f /etc/ssh/ssh_host_key -N "" >/dev/null 2>&1
+fi
+if [ ! -f /etc/ssh/ssh_host_rsa_key ]
+   then /usr/bin/ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N "" >/dev/null 2>&1
+fi
+if [ ! -f /etc/ssh/ssh_host_dsa_key ]
+   then /usr/bin/ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N "" >/dev/null 2>&1
+fi
 
 %preun
 /usr/sbin/remove_initd sshd
@@ -82,6 +91,9 @@ rm -rf %{buildroot}
 /var/lib/sshd
 
 %changelog
+* Sat Sep 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.5p1-2
+- Add host keys on install, if they don't exist
+
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.5p1-1
 - Upgraded to 5.5p1 and added support for lsb bootscripts
 
