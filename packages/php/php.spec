@@ -1,7 +1,7 @@
 Summary: PHP Hypertext Preprocessor
 Name: php
 Version: 5.3.3
-Release: 1
+Release: 2
 Group: Development/Languages
 License: PHP v3.01
 Distribution: LightCube OS
@@ -23,7 +23,6 @@ BuildRequires: db-devel
 BuildRequires: bzip2-devel
 BuildRequires: curl-devel
 BuildRequires: gdbm-devel
-BuildRequires: readline-devel
 BuildRequires: ncurses-devel
 BuildRequires: httpd-devel
 BuildRequires: apr-devel
@@ -74,7 +73,7 @@ export LDFLAGS="%{LDFLAGS}"
   --with-bz2 \
   --with-db4 \
   --with-curl \
-  --with-readline \
+  --enable-pcntl \
   --enable-mbstring \
   --with-gettext \
   --with-pcre-regex=/usr \
@@ -104,7 +103,7 @@ cd ../%{name}-%{version}-fpm
   --with-bz2 \
   --with-db4 \
   --with-curl \
-  --with-readline \
+  --enable-pcntl \
   --enable-mbstring \
   --with-gettext \
   --with-pcre-regex=/usr \
@@ -180,5 +179,8 @@ AddType application/x-httpd-php .php'
 /usr/%{_lib}/apache/libphp5.so
 
 %changelog
+* Sat Oct 02 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.3-2
+- Remove readline, add pcntl
+
 * Fri Aug 20 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.3-1
 - Initial version
