@@ -1,7 +1,7 @@
 Summary: The Linux Kernel
 Name: linux
 Version: 2.6.36
-Release: 2
+Release: 4
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,11 +9,12 @@ Vendor: LightCube Solutions
 URL: http://www.kernel.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-rc4.tar.bz2
 
+Requires(post): mkinitramfs
 BuildRequires: digest(sha1:%{SOURCE0}) = d01857f41bd56d650d00003f4c69ba300924372f
 
 %ifarch x86_64
 Source1: http://dev.lightcube.us/sources/%{name}-configs/%{name}-config-%{version}-rc4.x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = c0288996e333d91af600c370fc65f1a080667c4f
+BuildRequires: digest(sha1:%{SOURCE1}) = e255d408bc033e94321387f377c7c04ce4be7a0c
 %endif
 
 %ifarch i686
@@ -128,6 +129,12 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-rc4-%{release}/build
 
 %changelog
+* Tue Sep 28 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.36-rc4-4
+- Add in some more network drivers
+
+* Tue Sep 21 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.36-rc4-3
+- Make mkinitramfs an explicit post requirement
+
 * Wed Sep 15 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.36-rc4-2
 - Remove deprecated IDE support, add VIRTIO_BLK and VIRTIO_NET
 
