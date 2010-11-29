@@ -1,6 +1,6 @@
 Summary: mongoDB
 Name: mongodb
-Version: 1.6.2
+Version: 1.6.4
 Release: 1
 Group: Services
 License: AGPL
@@ -10,7 +10,7 @@ URL: http://www.mongodb.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-src-r%{version}.tar.gz
 Source1: http://dev.lightcube.us/sources/%{name}/mongod.init
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 0a7ef4825a6ec6f91a272611fde7c0b46eacd89a
+BuildRequires: digest(sha1:%{SOURCE0}) = 09bcee3c05d248ad5093243e14f9260ca79a6cb9 
 BuildRequires: digest(sha1:%{SOURCE1}) = 497cd02f1f2a4577bc06819eaee5f43306981e34
 BuildRequires: boost-devel
 BuildRequires: scons
@@ -25,7 +25,7 @@ MongoDB (from "humongous") is a scalable, high-performance, open source,
 document-oriented database
 
 %prep
-%setup -q -n %{name}-src-r%{version}
+%setup -n %{name}-src-r%{version}
 
 %build
 scons all
@@ -68,6 +68,9 @@ rm -rf %{buildroot}
 %dir /srv/mongodb
 
 %changelog
+* Sun Nov 28 2010 Fitz Agard <fhagard@lightcubesolutions.com> - 1.6.4-1
+- Upgrade to 1.6.4
+
 * Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6.2-1
 - Upgrade to 1.6.2
 
