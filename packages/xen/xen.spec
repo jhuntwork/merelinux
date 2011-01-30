@@ -10,10 +10,14 @@ URL: http://www.xen.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-gcc4.5-1.patch
 Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-python-1.patch
+Patch2: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-xmlproc-1.patch
 
+Requires: python-lxml
+Requires: linux-xen
 BuildRequires: digest(sha1:%{SOURCE0}) = 964a56b6aeb54d6ba3ddaacf19657de8a20d193e
 BuildRequires: digest(sha1:%{PATCH0}) = bfa62bc88b0d56db7ef35fec0dfc35f5886981c4
 BuildRequires: digest(sha1:%{PATCH1}) = 4284e82bef8d92123e437991cd32bd6fd12f33cb
+BuildRequires: digest(sha1:%{PATCH2}) = 063d1cad4b4b2856c39cb8c9fac85ed42ae26447
 BuildRequires: openssl-devel
 BuildRequires: ncurses-devel
 BuildRequires: zlib-devel
@@ -43,6 +47,9 @@ Headers and libraries for developing with xen
 sed -i 's@Winline$@& -Wno-uninitialized@' extras/mini-os/minios.mk
 sed -i 's@void shared_info@char shared_info[PAGE_SIZE]@' extras/mini-os/arch/x86/mm.c
 %patch1 -p1
+sed -i 's@^#define WRITE.*$@#undef WRITE\n&@' tools/blktap/lib/blktaplib.h
+sed -i 's@^#define WRITE.*$@#undef WRITE\n&@' tools/blktap2/include/blktaplib.h
+%patch2 -p1
 
 %build
 make xen
@@ -53,7 +60,10 @@ make stubdom
 make DESTDIR=%{buildroot} install-xen
 make DESTDIR=%{buildroot} install-tools
 make DESTDIR=%{buildroot} install-stubdom
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+# Fix some defaults to be more sane with our setup
+sed -i '/relocation-server yes/s@^@#@' %{buildroot}/etc/xen/xend-config.sxp
+sed -i '/unix-server/s@.*$@&\n\(xend-unix-server yes\)@' %{buildroot}/etc/xen/xend-config.sxp
+%{compress_man}
 rm -rf %{buildroot}/usr/src
 rm -rf %{buildroot}/etc/bash*
 
@@ -196,5 +206,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/*.so
 
 %changelog
+* Fri Dec 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0.1-2
+- Fix blktap issues and dependencies on deprecated xmlproc code
+
 * Thu Sep 09 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0.1-1
 - Initial version

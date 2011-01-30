@@ -20,11 +20,11 @@ BuildRequires: digest(sha1:%{SOURCE0}) = 0bfe55c7a5e11d72f19f26cb0383178605951c7
 #sed -i -e 's@alt-libs elksemu@alt-libs@' \
 #       -e 's@install-lib install-emu@install-lib@' \
 #    makefile.in
-make MANDIR=/usr/share/man
+make CC="gcc -m32" MANDIR=/usr/share/man
 
 %install
 make DIST=%{buildroot} install
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}

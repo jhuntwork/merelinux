@@ -1,7 +1,7 @@
 Summary: Log Rotation Tool
 Name: logrotate
 Version: 3.7.9
-Release: 1
+Release: 2
 Group: Services
 License: GPL
 Distribution: LightCube OS
@@ -36,11 +36,14 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/etc/logrotate.d
+%dir /etc/logrotate.d
 /usr/sbin/logrotate
 /usr/share/man/man5/logrotate.conf.5.bz2
 /usr/share/man/man8/logrotate.8.bz2
 
 %changelog
+* Sun Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.7.9-1
+- Fixes to /etc/logrotate.d directory
+
 * Sun Aug 22 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.7.9-1
 - Initial version

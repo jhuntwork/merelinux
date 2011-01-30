@@ -1,20 +1,20 @@
 Summary: The Linux Kernel for Xen dom0 hosts
 Name: linux-xen
-Version: 2.6.32.13
+Version: 2.6.32.26
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.kernel.org
-Source0: http://dev.lightcube.us/sources/linux/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/linux-xen/%{name}-%{version}.tar.bz2
 
 Requires: base-layout
-BuildRequires: digest(sha1:%{SOURCE0}) = 2b88b3f3b9b28c078d4ed37b2cb47826e193f534
+BuildRequires: digest(sha1:%{SOURCE0}) = 2d674a097195f106b63d85de58bfe9aad41bcc86
 
 %ifarch x86_64
-Source1: http://dev.lightcube.us/sources/linux-configs/%{name}-config-%{version}-x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = 4cf77258c4e1583ba456558ced2c649f7c8989ca
+Source1: http://dev.lightcube.us/sources/linux-xen/%{name}-config-%{version}-x86_64
+BuildRequires: digest(sha1:%{SOURCE1}) = ef4b9b74e08fee788f24608d68f2ed1cd64aa90d
 %endif
 
 %description
@@ -34,7 +34,7 @@ Kernel sources for installed kernel
 %build
 make mrproper
 cp %{SOURCE1} .config
-make
+make -j2
 
 %install
 # Install the modules
@@ -61,7 +61,7 @@ mkdir %{buildroot}/boot
 cp System.map %{buildroot}/boot/System.map-xen-%{version}-%{release}
 cp .config %{buildroot}/boot/config-xen-%{version}-%{release}
 %ifarch x86_64
-cp arch/x86_64/boot/vmlinuz %{buildroot}/boot/vmlinux-xen-%{version}-%{release}
+cp arch/x86_64/boot/bzImage %{buildroot}/boot/vmlinux-xen-%{version}-%{release}
 %endif
 
 %clean
@@ -84,5 +84,8 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-xen/build
 
 %changelog
+* Fri Dec 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.32.26-1
+- Upgrade to 2.6.32.26
+
 * Wed Sep 09 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.32.13-1
 - Initial version
