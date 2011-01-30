@@ -1,7 +1,7 @@
 Summary: Smart Package Manager
 Name: smart
 Version: 1.4
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -29,16 +29,20 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 install -dv %{buildroot}/usr/lib/smart
 cat > %{buildroot}/usr/lib/smart/distro.py << "EOF"
 if not sysconf.getReadOnly():
             sysconf.set("channels.lightcube", {
                             "type": "rpm-md",
                             "name": "LightCube OS Repository",
-                            "baseurl": "http://dev.lightcube.us/repos"
+                            "baseurl": "http://dev.lightcube.us/pub/LightCubeOS/stable"
                         })
 EOF
+# Do not do multi downloads
+sed -i '/^MAXACTIVEDOWNLOADS/s@= .*@= 1@' %{buildroot}/usr/lib/python2.7/site-packages/smart/fetcher.py
+# Do not use pycurl ever
+sed -i 's@import pycurl@&foobar@g' %{buildroot}/usr/lib/python2.7/site-packages/smart/fetcher.py
 %find_lang %{name}
 
 %clean
@@ -52,6 +56,11 @@ rm -rf %{buildroot}
 /usr/share/man/man8/smart.8.bz2
 
 %changelog
+* Sun Sep 05 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4-3
+- Change LightCube OS repository to default to stable
+- Make maximum concurrent downloads 1
+- Kill any use of pycurl as it's currently broken
+
 * Sun Sep 05 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4-2
 - Add configuration for LightCube OS repository
 
