@@ -1,17 +1,20 @@
 Summary: The CLooG Code Generator in the Polyhedral Model
 Name: cloog-ppl
-Version: 0.15.9
+Version: 0.15.10
 Release: 1
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://gcc.gnu.org/wiki/CLooG-PPL
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, gmp, ppl
-BuildRequires: digest(%{SOURCE0}) = 806e001d1b1a6b130069ff6274900af5 
-BuildRequires: ppl-devel, gmp-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 3d8725487a41e0f06c5d52daad74e279b555b833
+BuildRequires: autoconf
+BuildRequires: automake
+BuildRequires: libtool
+BuildRequires: ppl-devel
+BuildRequires: gmp-devel
 
 %description
 CLooG is a free software and library to generate code for scanning Z-polyhedra.
@@ -31,6 +34,7 @@ applications using %{name}.
 %setup -q
 
 %build
+./autogen.sh
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
@@ -68,5 +72,8 @@ rm -rf %{buildroot}
 /usr/include/cloog
 
 %changelog
+* Sun Dec 19 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.15.10-1
+- Upgrade to 0.15.10
+
 * Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.15.9-1
 - Initial version

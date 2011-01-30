@@ -1,6 +1,6 @@
 Summary: GNU Autoconf
 Name: autoconf
-Version: 2.66
+Version: 2.68
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -8,11 +8,9 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 Buildarch: noarch
 URL: http://www.gnu.org/software/autoconf
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, bash, m4
-Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = d2d22a532ee0e4d6d86a02e6425ecfce
+BuildRequires: digest(sha1:%{SOURCE0}) = b534c293b22048c022b1ff3a372b9c03f26170b4
 
 %description
 Autoconf is an extensible package of M4 macros that produce
@@ -28,6 +26,7 @@ make
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -52,18 +51,12 @@ rm -rf %{buildroot}
 /usr/share/autoconf
 /usr/share/info/autoconf.info
 /usr/share/info/standards.info
-/usr/share/man/man1/autoconf.1
-/usr/share/man/man1/autoheader.1
-/usr/share/man/man1/autom4te.1
-/usr/share/man/man1/autoreconf.1
-/usr/share/man/man1/autoscan.1
-/usr/share/man/man1/autoupdate.1
-/usr/share/man/man1/config.guess.1
-/usr/share/man/man1/config.sub.1
-/usr/share/man/man1/ifnames.1
-
+/usr/share/man/man1/*
 
 %changelog
+* Fri Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.68-1
+- Upgrade to 2.68
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.66-1
 - Upgrade to 2.66
 

@@ -1,15 +1,19 @@
 Summary: GNU C Library
 Name: glibc
 Version: 2.12.1
-Release: 3
+Release: 4
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/libc
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-ld_audit_fix-1.patch
+Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-origin_fix-1.patch
 
 BuildRequires: digest(%{SOURCE0}) = be0ea9e587f08c87604fe10a91f72afd
+BuildRequires: digest(sha1:%{PATCH0}) = b95a1d14fd9323b3d0a080333805468fd8be5fcb
+BuildRequires: digest(sha1:%{PATCH1}) = dcf29ac9381a1863fe94b6ba4d7a2bcdbcedf949
 
 %description
 The system C library which defines run-time functions for all
@@ -30,12 +34,16 @@ object files available in order to create the executables.
 %prep
 rm -rf glibc-build
 %setup -q
+%patch0 -p1
+%patch1 -p1
 %ifarch x86_64
 cd ..
 rm -rf glibc-build-32
 rm -rf %{name}-%{version}-32
 mv -v %{name}-%{version}{,-32}
 %setup -q
+%patch0 -p1
+%patch1 -p1
 %endif
 
 %build
@@ -183,6 +191,9 @@ rm -rf glibc-build
 %endif
 
 %changelog
+* Fri Dec 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.12.1-4
+- Upstream security fixes
+
 * Thu Sep 09 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.12.1-3
 - Add 32-bit libs for x86_64
 

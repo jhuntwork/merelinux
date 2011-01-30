@@ -1,18 +1,23 @@
 Summary: The GNU Compiler Collection
 Name: gcc
-Version: 4.5.1
+Version: 4.5.2
 Release: 1
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://gcc.gnu.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, gmp, mpfr, mpc, zlib, elfutils-libelf
 Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = 48231a8e33ed6e058a341c53b819de1a
-BuildRequires: gmp-devel, mpfr-devel, mpc-devel, zlib-devel, elfutils-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = ad5c440526c98fd17a74eab80c031af6b64d9c90
+BuildRequires: gmp-devel
+BuildRequires: mpfr-devel
+BuildRequires: mpc-devel
+BuildRequires: ppl-devel
+BuildRequires: cloog-ppl-devel
+BuildRequires: zlib-devel
+BuildRequires: elfutils-devel
 
 %description
 The GNU Compiler Collection is required to compile various languages.
@@ -67,10 +72,10 @@ cd ../%{name}-build
   --enable-__cxa_atexit \
   --enable-clocale=gnu \
   --enable-languages=c,c++ \
+  --disable-bootstrap \
   --infodir=/usr/share/info \
-  --mandir=/usr/share/man \
-  --disable-bootstrap
-make LDFLAGS="-s"
+  --mandir=/usr/share/man 
+make -j2 LDFLAGS="-s"
 
 %install
 cd ../%{name}-build
@@ -78,10 +83,11 @@ make DESTDIR=%{buildroot} install
 mkdir %{buildroot}/%{_lib}
 ln -sv ../usr/bin/cpp %{buildroot}/%{_lib}
 ln -sv gcc %{buildroot}/usr/bin/cc
-rm -f %{buildroot}/usr/share/info/dir
+mv %{buildroot}/usr/%{_lib}/*.py %{buildroot}/usr/share/gcc-%{version}/python/
 %if "%{_lib}" != "lib"
-rm -rf %{buildroot}/usr/lib
+rm -f %{buildroot}/usr/lib/*.py
 %endif
+rm -f %{buildroot}/usr/share/info/dir
 %find_lang %{name}
 %find_lang cpplib
 %find_lang libstdc++
@@ -118,7 +124,6 @@ rm -rf %{buildroot}
 /usr/bin/gcov
 /usr/bin/*-linux-gnu-gcc
 /usr/bin/*-linux-gnu-gcc-%{version}
-/usr/share/gcc-%{version}
 /usr/share/info/cpp.info
 /usr/share/info/cppinternals.info
 /usr/share/info/gcc.info
@@ -146,6 +151,24 @@ rm -rf %{buildroot}
 /usr/share/man/man1/gcc*
 /usr/share/man/man1/cpp*
 /usr/share/man/man7/*
+%if "%{_lib}" != "lib"
+/usr/lib/libgcc_s.so
+/usr/lib/libgomp.a
+/usr/lib/libgomp.la
+/usr/lib/libgomp.so
+/usr/lib/libgomp.spec
+/usr/lib/libmudflap.a
+/usr/lib/libmudflap.la
+/usr/lib/libmudflap.so
+/usr/lib/libmudflapth.a
+/usr/lib/libmudflapth.la
+/usr/lib/libmudflapth.so
+/usr/lib/libssp.a
+/usr/lib/libssp.la
+/usr/lib/libssp.so
+/usr/lib/libssp_nonshared.a
+/usr/lib/libssp_nonshared.la
+%endif
 
 %files libs
 %defattr(-,root,root)
@@ -154,6 +177,13 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libmudflap.so.*
 /usr/%{_lib}/libmudflapth.so.*
 /usr/%{_lib}/libssp.so.*
+%if "%{_lib}" != "lib"
+/usr/lib/libgcc_s.so.*
+/usr/lib/libgomp.so.*
+/usr/lib/libmudflap.so.*
+/usr/lib/libmudflapth.so.*
+/usr/lib/libssp.so.*
+%endif
 
 %files c++ -f ../%{name}-build/libstdc++.lang
 %defattr(-,root,root)
@@ -168,12 +198,26 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libstdc++.la
 /usr/%{_lib}/libsupc++.la
 /usr/share/man/man1/g++*
+%if "%{_lib}" != "lib"
+/usr/lib/libstdc++.a
+/usr/lib/libstdc++.la
+/usr/lib/libstdc++.so
+/usr/lib/libsupc++.a
+/usr/lib/libsupc++.la
+%endif
 
 %files c++-libs
 %defattr(-,root,root)
+/usr/share/gcc-%{version}
 /usr/%{_lib}/libstdc++.so.*
+%if "%{_lib}" != "lib"
+/usr/lib/libstdc++.so.*
+%endif
 
 %changelog
+* Sun Dec 19 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.2-1
+- Upgrade to 4.5.2
+
 * Thu Aug 05 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.1-1
 - Upgrade to 4.5.1 and enable multilib
 

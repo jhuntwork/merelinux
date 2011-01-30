@@ -9,7 +9,6 @@ Vendor: LightCube Solutions
 URL: http://gmplib.org
 Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = 6bac6df75c192a13419dfd71d19240a7
 
 %ifarch x86_64
@@ -39,7 +38,12 @@ applications using %{name}.
 %setup -q
 
 %build
-./configure --prefix=/usr --enable-cxx --enable-mpbsd --libdir=/usr/%{_lib} %{my_build}
+./configure \
+  --prefix=/usr \
+  --enable-cxx \
+  --enable-mpbsd \
+  --libdir=/usr/%{_lib} \
+  %{my_build}
 make
 make check
 

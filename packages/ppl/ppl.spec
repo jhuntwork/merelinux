@@ -7,13 +7,14 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.cs.unipr.it/ppl
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-upstream_fixes-1.patch
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-upstream_fixes-1.patch
 
-Requires: base-layout, glibc, gmp
 BuildRequires: digest(%{SOURCE0}) = 5667111f53150618b0fa522ffc53fc3e
 BuildRequires: digest(%{PATCH0}) = f051ea3dbdc20c5567490978e5faf368
 BuildRequires: gmp-devel
+BuildRequires: autoconf
+BuildRequires: automake
 
 %package devel
 Summary: Headers and object files for developing with %{name}
