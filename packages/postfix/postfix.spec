@@ -1,6 +1,6 @@
 Summary: Postfix MTA
 Name: postfix
-Version: 2.7.1
+Version: 2.8.0
 Release: 1
 Group: Services
 License: IBM Public License
@@ -10,8 +10,8 @@ URL: http://www.postfix.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 Source1: http://dev.lightcube.us/sources/%{name}/%{name}.init
 
-BuildRequires: digest(%{SOURCE0}) = b7a5c3ccd309156a65d6f8d2683d4fa1
-BuildRequires: digest(%{SOURCE1}) = 6b5839cdeaa91b671134e60f41c4e24d
+BuildRequires: digest(sha1:%{SOURCE0}) = d7a4fb5ee1f5d12aa1abd6cf8ce8254b4805486d
+BuildRequires: digest(sha1:%{SOURCE1}) = 006d67f1bc872bb3c29be83dae50044eb646aeeb
 BuildRequires: db-devel
 BuildRequires: openssl-devel
 BuildRequires: pcre-devel
@@ -39,7 +39,7 @@ make
 sh postfix-install -non-interactive install_root=%{buildroot}
 install -dv %{buildroot}/etc/init.d
 install -m754 %{SOURCE1} %{buildroot}/etc/init.d/%{name}
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 
 %post
 /usr/sbin/install_initd postfix
@@ -107,5 +107,8 @@ rm -rf %{buildroot}
 /usr/sbin/postqueue
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.0-1
+- Upgrade to 2.8.0
+
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.7.1-1
 - Initial version
