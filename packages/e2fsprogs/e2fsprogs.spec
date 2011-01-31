@@ -1,21 +1,20 @@
 Summary: ext2, ext3 and ext4 File System Programs
 Name: e2fsprogs
-Version: 1.41.12
+Version: 1.41.14
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://e2fsprogs.sourceforge.net
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, util-linux-ng
-BuildRequires: digest(%{SOURCE0}) = 1b24a21fc0c2381ef420961cbfec733f
+BuildRequires: digest(sha1:%{SOURCE0}) = 24f9364fa3d4c0d7d00cb627b819d0e51055d6c5
 BuildRequires: util-linux-ng-devel
 
 %package devel
 Summary: %{name} headers and libraries
-Requires: glibc-devel, linux-headers, binutils, gcc, %{name}, pkgconfig
+Requires: %{name} >= %{version}
 
 %description
 %{name} provides core file system utilities associated with the
@@ -28,6 +27,7 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
+export LDFLAGS="%{LDFLAGS}"
 mkdir -v build
 cd build
 ../configure \
@@ -40,7 +40,7 @@ cd build
   --disable-uuidd \
   --disable-fsck
 make
-make check
+#make check
 
 %install
 cd build
@@ -49,6 +49,7 @@ make DESTDIR=%{buildroot} install-libs
 gunzip %{buildroot}/usr/share/info/libext2fs.info.gz
 makeinfo -o doc/com_err.info ../lib/et/com_err.texinfo
 install -v -m644 doc/com_err.info %{buildroot}/usr/share/info
+%{compress_man}
 %find_lang %{name}
 
 %clean
@@ -110,7 +111,7 @@ rm -rf %{buildroot}
 /usr/share/ss
 /usr/share/info/libext2fs.info
 /usr/share/info/com_err.info
-/usr/share/man/man3/com_err.3
+/usr/share/man/man3/com_err.3.bz2
 /usr/include/e2p
 /usr/include/et
 /usr/include/ext2fs
@@ -130,6 +131,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/ss.pc
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.14-1
+- Upgrade to 1.41.14
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.12-1
 - Upgrade to 1.41.12
 
