@@ -1,15 +1,15 @@
 Summary: The Berkeley Database
 Name: db
-Version: 5.0.26
+Version: 5.1.19
 Release: 1
 Group: System Environment/Base
-License: GPLv2
+License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.oracle.com/technology/products/berkeley-db/db
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = ab945a9ec9d2e2c6406d583de2554976cfaf3be6 
+BuildRequires: digest(sha1:%{SOURCE0}) = 0c84ed9c6e16857ceb66193bedbb15b05ffbebd0
 BuildRequires: gcc-c++
 
 %package devel
@@ -27,6 +27,7 @@ Libraries and headers for developing with %{name}
 %setup -q
 
 %build
+export LDFLAGS="%{LDFLAGS}"
 cd build_unix
 ../dist/configure \
   --prefix=/usr \
@@ -43,7 +44,11 @@ make
 %install
 cd build_unix
 make docdir=/usr/share/doc/%{name}-%{version} DESTDIR=%{buildroot} install
-find %{buildroot} -name "*.la" -exec rm -vf '{}' \;
+# rpm expects there to be a db51 directory for headers
+install -dv %{buildroot}/usr/include/db51
+for i in db.h db_185.h db_cxx.h dbsql.h ; do
+    ln -sv ../$i %{buildroot}/usr/include/db51/
+done
 
 %clean
 rm -rf %{buildroot}
@@ -59,37 +64,44 @@ rm -rf %{buildroot}
 /usr/bin/db_log_verify
 /usr/bin/db_printlog
 /usr/bin/db_recover
+/usr/bin/db_replicate
 /usr/bin/db_sql_codegen
 /usr/bin/dbsql
 /usr/bin/db_stat
 /usr/bin/db_upgrade
 /usr/bin/db_verify
-/usr/%{_lib}/libdb-5.0.a
-/usr/%{_lib}/libdb-5.0.so
+/usr/%{_lib}/libdb-5.1.a
+/usr/%{_lib}/libdb-5.1.so
 /usr/%{_lib}/libdb-5.so
-/usr/%{_lib}/libdb_cxx-5.0.a
-/usr/%{_lib}/libdb_cxx-5.0.so
+/usr/%{_lib}/libdb_cxx-5.1.a
+/usr/%{_lib}/libdb_cxx-5.1.so
 /usr/%{_lib}/libdb_cxx-5.so
-/usr/%{_lib}/libdb_sql-5.0.a
-/usr/%{_lib}/libdb_sql-5.0.so
+/usr/%{_lib}/libdb_sql-5.1.a
+/usr/%{_lib}/libdb_sql-5.1.so
 /usr/%{_lib}/libdb_sql-5.so
-
 
 %files devel
 %defattr(-,root,root)
+/usr/%{_lib}/libdb-5.1.la
 /usr/%{_lib}/libdb.a
 /usr/%{_lib}/libdb.so
+/usr/%{_lib}/libdb_cxx-5.1.la
 /usr/%{_lib}/libdb_cxx.a
 /usr/%{_lib}/libdb_cxx.so
+/usr/%{_lib}/libdb_sql-5.1.la
 /usr/%{_lib}/libdb_sql.a
 /usr/%{_lib}/libdb_sql.so
 /usr/include/db.h
 /usr/include/db_185.h
 /usr/include/db_cxx.h
 /usr/include/dbsql.h
+/usr/include/db51
 /usr/share/doc/%{name}-%{version}
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.19-1
+- Upgrade to 5.1.19
+
 * Mon Aug 30 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.26-1
 - Upgrade to 5.0.26
 
