@@ -1,17 +1,18 @@
 Summary: elfutils
 Name: elfutils
-Version: 0.148
+Version: 0.151
 Release: 1
 Group: Development/Utilities
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: https://fedorahosted.org/elfutils
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, zlib, bzip2, xz
-BuildRequires: digest(%{SOURCE0}) = a0bed1130135f17ad27533b0034dba8d
-BuildRequires: zlib-devel, bzip2-devel, xz-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = d58369d03f821733cebed3e3b1bb7d0f373d7dee
+BuildRequires: zlib-devel
+BuildRequires: bzip2-devel
+BuildRequires: xz-devel
 
 %description
 Provides utilites for processing ELF files in an
@@ -78,21 +79,21 @@ rm -rf %{buildroot}
 %files libelf
 %defattr(-,root,root)
 %dir /usr/%{_lib}/elfutils/
-/usr/%{_lib}/elfutils/libebl_alpha-0.148.so
-/usr/%{_lib}/elfutils/libebl_arm-0.148.so
-/usr/%{_lib}/elfutils/libebl_i386-0.148.so
-/usr/%{_lib}/elfutils/libebl_ia64-0.148.so
-/usr/%{_lib}/elfutils/libebl_ppc-0.148.so
-/usr/%{_lib}/elfutils/libebl_ppc64-0.148.so
-/usr/%{_lib}/elfutils/libebl_s390-0.148.so
-/usr/%{_lib}/elfutils/libebl_sh-0.148.so
-/usr/%{_lib}/elfutils/libebl_sparc-0.148.so
-/usr/%{_lib}/elfutils/libebl_x86_64-0.148.so
-/usr/%{_lib}/libasm-0.148.so
+/usr/%{_lib}/elfutils/libebl_alpha-%{version}.so
+/usr/%{_lib}/elfutils/libebl_arm-%{version}.so
+/usr/%{_lib}/elfutils/libebl_i386-%{version}.so
+/usr/%{_lib}/elfutils/libebl_ia64-%{version}.so
+/usr/%{_lib}/elfutils/libebl_ppc-%{version}.so
+/usr/%{_lib}/elfutils/libebl_ppc64-%{version}.so
+/usr/%{_lib}/elfutils/libebl_s390-%{version}.so
+/usr/%{_lib}/elfutils/libebl_sh-%{version}.so
+/usr/%{_lib}/elfutils/libebl_sparc-%{version}.so
+/usr/%{_lib}/elfutils/libebl_x86_64-%{version}.so
+/usr/%{_lib}/libasm-%{version}.so
 /usr/%{_lib}/libasm.so.1
-/usr/%{_lib}/libdw-0.148.so
+/usr/%{_lib}/libdw-%{version}.so
 /usr/%{_lib}/libdw.so.1
-/usr/%{_lib}/libelf-0.148.so
+/usr/%{_lib}/libelf-%{version}.so
 /usr/%{_lib}/libelf.so.1
 
 %files devel
@@ -121,5 +122,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libelf.so
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.151-1
+- Upgrade to 0.151
+
 * Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.148-1
 - Initial version
