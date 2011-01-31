@@ -1,17 +1,15 @@
 Summary: GNU Tape Archiver
 Name: tar
-Version: 1.23
+Version: 1.25
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/tar
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
-Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = 41e2ca4b924ec7860e51b43ad06cdb7e
+BuildRequires: digest(sha1:%{SOURCE0}) = 0f0c090e51d127cbeffbb9aeeb90db1181d82aed
 
 %description
 The Tar program provides the ability to create tar archives,
@@ -21,11 +19,12 @@ as well as various other kinds of manipulation.
 %setup -q
 
 %build
-sed -i /SIGPIPE/d src/tar.c
-./configure --prefix=/usr --bindir=/bin --libexecdir=/usr/sbin
+FORCE_UNSAFE_CONFIGURE=1 \
+./configure \
+  --prefix=/usr \
+  --bindir=/bin \
+  --libexecdir=/usr/sbin
 make
-sed -i '35 i\
-AT_UNPRIVILEGED_PREREQ' tests/remfiles01.at
 make check
 
 %install
@@ -51,5 +50,8 @@ rm -rf %{buildroot}
 /usr/share/info/tar.info-2
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.25-1
+- Upgrade to 1.25
+
 * Tue Apr 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.23-1
 - Initial version
