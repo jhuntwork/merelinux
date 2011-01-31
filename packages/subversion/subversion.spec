@@ -1,6 +1,6 @@
 Summary: Subversion
 Name: subversion
-Version: 1.6.12
+Version: 1.6.15
 Release: 1
 Group: Services
 License: GPL
@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: http://subversion.apache.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = b4ae7c75abbbdade8b2c9122ca7e2e26c6468a82
+BuildRequires: digest(sha1:%{SOURCE0}) = b6fadf944a94b86f989f07bc2d781be41df017bf
 BuildRequires: apr-devel
 BuildRequires: apr-util-devel
 BuildRequires: neon-devel
@@ -80,7 +80,7 @@ make swig-pl
 make DESTDIR=%{buildroot} install
 make DESTDIR=%{buildroot} install-swig-py
 make DESTDIR=%{buildroot} install-swig-pl
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 rm -v %{buildroot}/usr/lib/perl5/5.12.1/%{_arch}-linux/perllocal.pod
 install -dv %{buildroot}/usr/lib/python2.7/site-packages
 mv -v %{buildroot}/usr/%{_lib}/svn-python/* %{buildroot}/usr/lib/python2.7/site-packages
@@ -227,6 +227,9 @@ LoadModule authz_svn_module %{_lib}/apache/mod_authz_svn.so'
 /usr/%{_lib}/apache/mod_dav_svn.so
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6.15-1
+- Upgrade to 1.6.15
+
 * Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.6.12-1
 - Upgrade to 1.6.12
 
