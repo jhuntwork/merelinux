@@ -1,16 +1,15 @@
 Summary: Net:Iproute2
 Name: iproute2
-Version: 2.6.35
+Version: 2.6.37
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.linuxfoundation.org/en/Net:Iproute2
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = b0f281b3124bf04669e18f5fe16d4934
+BuildRequires: digest(sha1:%{SOURCE0}) = 7852fb66fb745dc3c1fabee24d7d8ff017c48d36
 BuildRequires: db-devel
 
 %description
@@ -19,7 +18,8 @@ TCP/IP networking and traffic control in Linux
 
 %package arpd
 Summary: arpd binary
-Requires: %{name}, db
+Requires: %{name} >= %{version}
+Requires: db
 
 %description arpd
 The aprd binary
@@ -28,12 +28,14 @@ The aprd binary
 %setup -q
 
 %build
-make DESTDIR= LIBDIR=/%{_lib}
+make LDFLAGS="%{LDFLAGS}" DESTDIR= LIBDIR=/%{_lib}
 
 %install
 make DESTDIR=%{buildroot} SBINDIR=/sbin MANDIR=/usr/share/man \
      LIBDIR=/%{_lib} DOCDIR=/usr/share/doc/%{name}-%{version} install
+install -dv %{buildroot}/var/lib/arpd
 rm -v %{buildroot}/usr/share/man/man3/libnetlink.3
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -58,35 +60,39 @@ rm -rf %{buildroot}
 /sbin/ss
 /sbin/tc
 /usr/share/doc/%{name}-%{version}
-/usr/share/man/man8/ctstat.8
-/usr/share/man/man8/ip.8
-/usr/share/man/man8/lnstat.8
-/usr/share/man/man8/nstat.8
-/usr/share/man/man8/routef.8
-/usr/share/man/man8/routel.8
-/usr/share/man/man8/rtacct.8
-/usr/share/man/man8/rtmon.8
-/usr/share/man/man8/rtstat.8
-/usr/share/man/man8/ss.8
-/usr/share/man/man8/tc-bfifo.8
-/usr/share/man/man8/tc-cbq-details.8
-/usr/share/man/man8/tc-cbq.8
-/usr/share/man/man8/tc-drr.8
-/usr/share/man/man8/tc-htb.8
-/usr/share/man/man8/tc-pfifo.8
-/usr/share/man/man8/tc-pfifo_fast.8
-/usr/share/man/man8/tc-prio.8
-/usr/share/man/man8/tc-red.8
-/usr/share/man/man8/tc-sfq.8
-/usr/share/man/man8/tc-tbf.8
-/usr/share/man/man8/tc.8
+/usr/share/man/man8/ctstat.8.bz2
+/usr/share/man/man8/ip.8.bz2
+/usr/share/man/man8/lnstat.8.bz2
+/usr/share/man/man8/nstat.8.bz2
+/usr/share/man/man8/routef.8.bz2
+/usr/share/man/man8/routel.8.bz2
+/usr/share/man/man8/rtacct.8.bz2
+/usr/share/man/man8/rtstat.8.bz2
+/usr/share/man/man8/rtmon.8.bz2
+/usr/share/man/man8/ss.8.bz2
+/usr/share/man/man8/tc-bfifo.8.bz2
+/usr/share/man/man8/tc-cbq-details.8.bz2
+/usr/share/man/man8/tc-cbq.8.bz2
+/usr/share/man/man8/tc-drr.8.bz2
+/usr/share/man/man8/tc-htb.8.bz2
+/usr/share/man/man8/tc-pfifo.8.bz2
+/usr/share/man/man8/tc-pfifo_fast.8.bz2
+/usr/share/man/man8/tc-prio.8.bz2
+/usr/share/man/man8/tc-red.8.bz2
+/usr/share/man/man8/tc-sfq.8.bz2
+/usr/share/man/man8/tc-tbf.8.bz2
+/usr/share/man/man8/tc.8.bz2
 
 %files arpd
 %defattr(-,root,root)
 /sbin/arpd
-/usr/share/man/man8/arpd.8
+/usr/share/man/man8/arpd.8.bz2
+/var/lib/arpd
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.37-1
+- Upgrade to 2.6.37
+
 * Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.35-1
 - Upgrade to 2.6.35
 
