@@ -1,18 +1,16 @@
 Summary: udev
 Name: udev
-Version: 160
+Version: 165
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}-config/%{name}-config-20100128.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 65459a1f090082c0471bf4e5112208d7
-BuildRequires: digest(%{SOURCE1}) = 8c8ad22d6fb9aa7c0733d33035204ea2
+BuildRequires: digest(sha1:%{SOURCE0}) = 1dab9e274723d6a142a38227de3b52c030abbf07
+BuildRequires: xsltproc
 
 %description
 Udev provides a dynamic /dev directory, and hooks userspace into kernel device events.
@@ -27,7 +25,6 @@ Files for developing with %{name}
 %setup -q
 
 %build
-tar -xf %{SOURCE1}
 ./configure \
   --prefix=/usr \
   --sysconfdir=/etc \
@@ -43,11 +40,9 @@ make
 %install
 install -dv %{buildroot}/lib/udev/devices/{pts,shm}
 make DESTDIR=%{buildroot} install
-sed -i.bak 's@include$@&\nudevdir=/lib/udev@' %{buildroot}/usr/%{_lib}/pkgconfig/libudev.pc
+sed -i 's@include$@&\nudevdir=/lib/udev@' %{buildroot}/usr/%{_lib}/pkgconfig/libudev.pc
 mknod -m0666 %{buildroot}/lib/udev/devices/null c 1 3
-cd udev-config-20100128
-make DESTDIR=%{buildroot} install
-make DESTDIR=%{buildroot} install-doc
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -55,16 +50,14 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /etc/udev
-/%{_lib}/libudev.so.0
-/%{_lib}/libudev.so.0.8.3
+/%{_lib}/libudev.so.*
 /lib/udev
 /sbin/udevadm
 /sbin/udevd
-/usr/share/doc/udev-config
-/usr/share/man/man7/udev.7
-/usr/share/man/man8/scsi_id.8
-/usr/share/man/man8/udevadm.8
-/usr/share/man/man8/udevd.8
+/usr/share/man/man7/udev.7.bz2
+/usr/share/man/man8/scsi_id.8.bz2
+/usr/share/man/man8/udevadm.8.bz2
+/usr/share/man/man8/udevd.8.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -76,6 +69,9 @@ rm -rf %{buildroot}
 /usr/share/doc/udev
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 165-1
+- Upgrade to 165
+
 * Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 160-1
 - Upgrade to 160
 
