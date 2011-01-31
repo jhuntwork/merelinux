@@ -1,25 +1,22 @@
 Summary: GNU Coreutils
 Name: coreutils
-Version: 8.5
+Version: 8.9
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/coreutils
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-i18n-1.patch
-Patch1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-uname-2.patch
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-i18n-1.patch
+Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-uname-1.patch
 
-Requires: base-layout, glibc, gmp
-Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = c1ffe586d001e87d66cd80c4536ee823
-BuildRequires: digest(%{PATCH0}) = e806ba5734411d1384f1e56169f31b22
-BuildRequires: digest(%{PATCH1}) = 500481b75892e5c07e19e9953a690e54
-BuildRequires: gmp-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 1e7a4d012abf840684d3b769297721377ffc4743
+BuildRequires: digest(sha1:%{PATCH0}) = 4911c71e20656cc820a0be3d5ce633ad6373e893
+BuildRequires: digest(sha1:%{PATCH1}) = 42f651a027be6c6819bcccb98d2d13d2acb03ca3
 
 %description
-%{name} provides some core system utilities, such as cp, mv, ls
+A collection of core system utilities, such as cp, mv, ls
 
 %package libstdbuf
 Summary: Provides libstdbuf.so
@@ -31,9 +28,7 @@ Provides libstdbuf.so
 %prep
 %setup -q
 %patch0 -p1
-%ifarch i686
 %patch1 -p1
-%endif
 
 %build
 ./configure \
@@ -47,6 +42,7 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
+%{compress_man}
 mkdir -v %{buildroot}/bin
 mkdir -v %{buildroot}/usr/sbin
 for file in cat chgrp chmod chown cp date dd df echo false head ln ls mkdir mknod mv nice pwd readlink rm rmdir sleep stty sync true uname
@@ -179,6 +175,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/%{name}/libstdbuf.so
 
 %changelog
+* Sat Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.9-1
+- Upgrade to 8.9
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.5-1
 - Upgrade to 8.5
 
