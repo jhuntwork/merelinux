@@ -1,18 +1,17 @@
 Summary: OpenSSL
 Name: openssl
-Version: 1.0.0a
+Version: 1.0.0c
 Release: 1
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.openssl.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-ldflags-1.patch
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-ldflags-1.patch
 
-Requires: base-layout, glibc, zlib
-BuildRequires: digest(%{SOURCE0}) = e3873edfffc783624cfbdb65e2249cbd
-BuildRequires: digest(%{PATCH0}) = dad1ab082383bddee627a1c3af624b36
+BuildRequires: digest(sha1:%{SOURCE0}) = 5a2d74fa7fe90c80915332404b9700044ef676a1
+BuildRequires: digest(sha1:%{PATCH0})  = 443872eca56c0f5c6f34ec8b07f70a549e830994
 BuildRequires: zlib-devel
 
 %description
@@ -51,6 +50,7 @@ make LDFLAGS=%{LDFLAGS} LIBDIR=%{_lib} MANDIR=/usr/share/man
 %install
 make INSTALL_PREFIX=%{buildroot} LIBDIR=%{_lib} MANDIR=/usr/share/man install
 cp -r certs %{buildroot}/etc/ssl
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -68,10 +68,9 @@ rm -rf %{buildroot}
 /usr/bin/openssl
 /usr/%{_lib}/libcrypto.so.1.0.0
 /usr/%{_lib}/libssl.so.1.0.0
-/usr/share/man/man1/*
-/usr/share/man/man5/config.5
-/usr/share/man/man5/x509v3_config.5
-/usr/share/man/man7/des_modes.7
+/usr/share/man/man1/*.bz2
+/usr/share/man/man5/*.bz2
+/usr/share/man/man7/*.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -84,13 +83,16 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/libcrypto.pc
 /usr/%{_lib}/pkgconfig/libssl.pc
 /usr/%{_lib}/pkgconfig/openssl.pc
-/usr/share/man/man3/*
+/usr/share/man/man3/*.bz2
 
 %files misc
 %defattr(-,root,root)
 /etc/ssl/misc
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0c-1
+- Upgrade to 1.0.0c
+
 * Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0a-1
 - Upgrade to 1.0.0a
 
