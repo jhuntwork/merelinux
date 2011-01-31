@@ -1,17 +1,18 @@
 Summary: neon HTTP and WebDAV client library
 Name: neon
-Version: 0.29.3
+Version: 0.29.5
 Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.webdav.org/neon
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, expat, zlib, openssl
-BuildRequires: digest(%{SOURCE0}) = ba1015b59c112d44d7797b62fe7bee51
-BuildRequires: expat-devel, zlib-devel, openssl-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 46e85922b2dad60f50393e7d8d4075c880c7e03e
+BuildRequires: expat-devel
+BuildRequires: zlib-devel
+BuildRequires: openssl-devel
 
 %description
 neon is an HTTP and WebDAV client library, with a C interface.
@@ -39,6 +40,7 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
+%{compress_man}
 %find_lang %{name}
 
 %clean
@@ -60,9 +62,12 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libneon.so
 /usr/%{_lib}/pkgconfig/neon.pc
 /usr/share/doc/%{name}-%{version}
-/usr/share/man/man1/neon-config.1
+/usr/share/man/man1/*
 /usr/share/man/man3/*
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.29.5-1
+- Upgrade to 0.29.5
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.29.3-1
 - Initial version
