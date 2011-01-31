@@ -1,7 +1,7 @@
 Summary: The Simple Authentication and Security Layer
 Name: cyrus-sasl
 Version: 2.1.23
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -51,7 +51,7 @@ make
 %install
 make DESTDIR=%{buildroot} install
 install -dv %{buildroot}/etc/sasl2
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -104,5 +104,8 @@ rm -rf %{buildroot}
 /usr/include/sasl
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.1.23-2
+- Rebuild against db-5.1.19
+
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.1.23-1
 - Initial version
