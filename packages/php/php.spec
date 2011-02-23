@@ -1,7 +1,7 @@
 Summary: PHP Hypertext Preprocessor
 Name: php
-Version: 5.3.3
-Release: 2
+Version: 5.3.5
+Release: 1
 Group: Development/Languages
 License: PHP v3.01
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://www.php.net
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1: http://dev.lightcube.us/sources/%{name}/%{name}-fpm.init
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 9f66716b341119e4e4f8fe3d81b7d0a5daf3cbc8
+BuildRequires: digest(sha1:%{SOURCE0}) = 355701b723fcb497581c368be4d6e572c150a5ea
 BuildRequires: digest(sha1:%{SOURCE1}) = 8e2b3f62bb719db1c29345e0193ce814315e2bb0
 BuildRequires: zlib-devel
 BuildRequires: libxml2-devel
@@ -161,8 +161,8 @@ AddType application/x-httpd-php .php'
 /usr/bin/phar.phar
 /usr/bin/php
 /usr/%{_lib}/php
-/usr/share/man/man1/php-fpm.1.bz2
 /usr/share/man/man1/php.1.bz2
+/usr/share/man/man8/php-fpm.8.bz2
 /usr/sbin/php-fpm
 
 %files devel
@@ -179,6 +179,9 @@ AddType application/x-httpd-php .php'
 /usr/%{_lib}/apache/libphp5.so
 
 %changelog
+* Mon Feb 21 2011 Fitz Agard <fhagard@lightcubesolutions.com> - 5.3.5-1
+- Updating package 
+
 * Sat Oct 02 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.3-2
 - Remove readline, add pcntl
 
