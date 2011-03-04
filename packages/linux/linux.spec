@@ -1,6 +1,6 @@
 Summary: The Linux Kernel
 Name: linux
-Version: 2.6.37
+Version: 2.6.37.2
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -10,11 +10,11 @@ URL: http://www.kernel.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires(post): mkinitramfs
-BuildRequires: digest(sha1:%{SOURCE0}) = eba83c89e71a86060ef6ff76aefff660aef819e2
+BuildRequires: digest(sha1:%{SOURCE0}) = e2273eb385579fdf73b1f3ece2539c2156c06cd0
 
 %ifarch x86_64
 Source1: http://dev.lightcube.us/sources/%{name}-configs/%{name}-config-%{version}.x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = 039ad007eba835c6f5eb0473a2a6de020415f36d
+BuildRequires: digest(sha1:%{SOURCE1}) = 8a968f3a6621e49ac02dde1ae0e0ed8560aae039
 %endif
 
 %ifarch i686
@@ -129,6 +129,9 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-%{release}/build
 
 %changelog
+* Thu Mar 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.37.2-1
+- Upgrade to 2.6.37.2
+
 * Tue Sep 28 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.36-rc4-4
 - Add in some more network drivers
 
