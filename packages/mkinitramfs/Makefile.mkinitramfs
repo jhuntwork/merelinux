@@ -1,0 +1,14 @@
+PREFIX ?= /usr
+BINDIR ?= $(PREFIX)/bin
+DATADIR ?= $(PREFIX)/share/mkinitramfs
+
+all:
+	@echo "Nothing to build."
+	@echo "Use 'make install' to install this package."
+
+install:
+	install -d -m0755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(DATADIR)
+	sed 's@DATADIR=.*@DATADIR=$(DATADIR)@' mkinitramfs.orig > mkinitramfs
+	install -m0755 mkinitramfs $(DESTDIR)$(BINDIR)
+	install -m0644 init.in $(DESTDIR)$(DATADIR)
+	install -m0644 initcd.in $(DESTDIR)$(DATADIR)

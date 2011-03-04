@@ -1,0 +1,127 @@
+#!/bin/bash
+# This file based in part on the mkinitrafms script for the LFS LiveCD
+# written by Alexander E. Patrakov
+
+if [ -z $1 ] ; then
+  echo 'Missing kernel version'
+  exit 1
+else 
+  KERNEL_VERSION=$1
+fi
+
+if [ ! -d "/lib/modules/$1" ] ; then
+  echo "No modules directory named $1"
+  exit 1
+fi
+
+if [ ! -z $2 ] && [ $2 = "cd"] ; then
+   CD=1
+else
+   CD=0
+fi
+
+DATADIR=/usr/share/mkinitramfs
+
+if [ $CD -eq 1 ] ; then
+  CDBINEXTRA='blockdev dmsetup losetup'
+  CDLIBEXTRA='libdevmapper.so.1.02 libm.so.6'
+  INITRAMFS_FILE=/mnt/iso/boot/isolinux/initramfs.gz
+  INITIN=initcd.in
+else
+  CDBINEXTRA=''
+  CDLIBEXTRA=''
+  INITRAMFS_FILE=/boot/initrd.img-$KERNEL_VERSION
+  INITIN=init.in
+fi
+
+function die {
+   rm -rf $WDIR
+   exit 1
+}
+
+# Determine the main lib directory for this arch
+case $(uname -m) in
+        x86_64) LIBDIR=lib64 ; DL=ld-linux-x86-64.so.2 ;;
+        *) LIBDIR=lib ; ld-linux.so.2 ;;
+esac
+
+# Create a temporrary working directory
+WDIR=`mktemp -d`
+
+# Create base directory structure
+mkdir -p $WDIR/{bin,dev,etc/{modprobe.d,udev/rules.d},lib/firmware,sbin,sys,proc}
+touch $WDIR/etc/modprobe.d/modprobe.conf
+ln -s lib $WDIR/lib64
+
+# Create necessary device nodes
+mknod -m 640 $WDIR/dev/console c 5 1
+mknod -m 664 $WDIR/dev/null c 1 3
+
+# Install the udev configuration files
+cp /etc/udev/udev.conf $WDIR/etc/udev/udev.conf
+cp /etc/udev/rules.d/* $WDIR/etc/udev/rules.d
+
+if [ $CD -eq 0 ] ; then
+    if [ -f /etc/mdadm.conf ] ; then cp /etc/mdadm.conf $WDIR/etc ; fi
+fi 
+
+# Install the init file
+install -m755 $DATADIR/$INITIN $WDIR/init
+
+# Install basic binaries
+for f in sh cat cp dd killall ls lsmod mdadm mkdir mknod mount umount sed sleep ln rm uname $CDBINEXTRA
+do
+  file=$(type -p $f)
+  if [ ! -z $file ] ; then
+    cp $file $WDIR/bin
+  else
+    echo "Missing required binary: $f"
+    die
+  fi
+done
+
+for f in udevadm udevd modprobe blkid switch_root
+do
+  file=$(type -p $f)
+  if [ ! -z $file ] ; then
+    cp $file $WDIR/sbin
+  else
+    echo "Missing required binary: $f"
+    die
+  fi
+done
+
+# Install libraries
+for l in $DL $CDEXTRA \
+ librt.so.1 \
+ libpthread.so.0 \
+ libblkid.so.1 \
+ libc.so.6 \
+ libdl.so.2 \
+ libncursesw.so.5 \
+ libreadline.so.6 \
+ libhistory.so.6 \
+ libz.so.1 \
+ libuuid.so.1 \
+ libblkid.so.1
+do
+  file=$(PATH=/$LIBDIR:/usr/$LIBDIR type -p $l)
+  if [ ! -z $file ] ; then
+    cp $file $WDIR/lib
+  else
+    echo "Missing required library: $l"
+    die
+  fi
+done
+cp -a /lib/udev $WDIR/lib
+
+# Install the kernel modules
+find /lib/modules/$KERNEL_VERSION/kernel/{crypto,fs,lib} \
+ /lib/modules/$KERNEL_VERSION/kernel/drivers/{block,ata,md,firewire,scsi,usb/{host,storage},message,pcmcia,virtio} \
+ -type f | cpio --make-directories -p $WDIR
+depmod -b $WDIR $KERNEL_VERSION
+
+( cd $WDIR ; find . | cpio -o -H newc | gzip -9 ) > $INITRAMFS_FILE
+
+# Remove the temporary directory
+rm -rf $WDIR

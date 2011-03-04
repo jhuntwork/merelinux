@@ -1,6 +1,6 @@
 Summary: mkinitramfs
 Name: mkinitramfs
-Version: 0.4.1
+Version: 0.5
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -8,7 +8,15 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 Buildarch: noarch
 URL: http://dev.lightcube.us/projects/lightcubeos
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: Makefile.mkinitramfs
+Source1: init.in
+Source2: initcd.in
+Source3: mkinitramfs.orig
+
+BuildRequires: digest(sha1:%{SOURCE0}) = 7dfa2af5c2455c3f9107103cf4f3ab2a34d3fe62
+BuildRequires: digest(sha1:%{SOURCE1}) = b3b2eabb64918a03500485f188e31012b4a12b23
+BuildRequires: digest(sha1:%{SOURCE2}) = 168fab370b6e1041999e7d37f1210c93db80a240
+BuildRequires: digest(sha1:%{SOURCE3}) = 8ed3fced5f229bea0a8b06b38a82958c5241f5b2
 
 Requires: base-layout
 Requires: glibc
@@ -21,18 +29,19 @@ Requires: readline
 Requires: psmisc
 Requires: module-init-tools
 Requires: util-linux-ng
-BuildRequires: digest(sha1:%{SOURCE0}) = 104bd13f498c59c67389069426355715b62f55f4
+Requires: LVM2
 
 %description
 A simple script to generate an initramfs file for a specified kernel.
 
 %prep
-%setup -q
+%setup -T -c
+cp %{SOURCE0} %{SOURCE1} %{SOURCE2} %{SOURCE3} .
 
 %build
 
 %install
-make DESTDIR=%{buildroot} install
+make -f %{SOURCE0} DESTDIR=%{buildroot} install
 
 %clean
 rm -rf %{buildroot}
@@ -43,6 +52,9 @@ rm -rf %{buildroot}
 /usr/share/mkinitramfs
 
 %changelog
+* Fri Mar 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.5-1
+- Upgrade to 0.5
+
 * Sat Sep 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.4.1-1
 - Upgrade to 0.4.1
 - Fixes switch_root usage, restructure to avoid repeating code.
