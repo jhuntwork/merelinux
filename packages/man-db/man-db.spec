@@ -1,17 +1,17 @@
 Summary: man-db
 Name: man-db
-Version: 2.5.7
+Version: 2.5.9
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://man-db.nongnu.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, gdbm, groff, zlib
-BuildRequires: digest(%{SOURCE0}) = eef0d8c8e54894e4e050e2176bb1d88d
-BuildRequires: gdbm-devel, zlib-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = e307ec4c440b82c20c9c20984852046d01426333
+BuildRequires: gdbm-devel
+BuildRequires: zlib-devel
 
 %description
 man-db is an implementation of the standard Unix documentation
@@ -39,6 +39,7 @@ make check
 %install
 make DESTDIR=%{buildroot} install
 rm -rf %{buildroot}/usr/share/man/{de,es,fr,it,ja}
+%{compress_man}
 %find_lang %{name}
 %find_lang %{name}-gnulib
 cat %{name}-gnulib.lang >> %{name}.lang
@@ -60,20 +61,14 @@ rm -rf %{buildroot}
 /usr/%{_lib}/man-db
 /usr/sbin/accessdb
 /usr/share/doc/man-db
-/usr/share/man/man1/apropos.1
-/usr/share/man/man1/lexgrog.1
-/usr/share/man/man1/man.1
-/usr/share/man/man1/manconv.1
-/usr/share/man/man1/manpath.1
-/usr/share/man/man1/whatis.1
-/usr/share/man/man1/zsoelim.1
-/usr/share/man/man5/manpath.5
-/usr/share/man/man8/accessdb.8
-/usr/share/man/man8/catman.8
-/usr/share/man/man8/mandb.8
-
+/usr/share/man/man1/*
+/usr/share/man/man5/*
+/usr/share/man/man8/*
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.9-1
+- Upgraded to 2.5.9
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.7-1
 - Upgraded to 2.5.7
 
