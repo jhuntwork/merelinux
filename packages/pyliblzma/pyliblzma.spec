@@ -1,7 +1,7 @@
 Summary: PylibLZMA
 Name: pyliblzma
 Version: 0.5.3
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: https://launchpad.net/pyliblzma
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 6240ec6f830f35f4087b8926a95c2074320b7ed5
-BuildRequires: Python
+BuildRequires: Python-devel
 BuildRequires: setuptools
 BuildRequires: xz-devel
 
@@ -35,5 +35,8 @@ rm -rf %{buildroot}
 /usr/lib/python2.7/site-packages/*
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.5.3-2
+- Rebuild against xz-5.0.1
+
 * Tue Aug 31 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.5.3-1
 - Initial version
