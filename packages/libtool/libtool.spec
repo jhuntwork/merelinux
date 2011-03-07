@@ -1,17 +1,15 @@
 Summary: GNU Libtool
 Name: libtool
-Version: 2.2.10
+Version: 2.4
 Release: 1
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/libtool
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
-Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = b745d220e88163fcd9eea0a90ccf21b0
+BuildRequires: digest(sha1:%{SOURCE0}) = 149e9d7a993b643d13149a94d07bbca1085e601c
 
 %description
 %{name} is a generic library support script. It hides the complexity
@@ -28,7 +26,7 @@ make check
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
-find %{buildroot} -name "*.la" -exec rm -v '{}' \;
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -57,10 +55,13 @@ rm -rf %{buildroot}
 /usr/share/info/libtool.info-1
 /usr/share/info/libtool.info-2
 /usr/share/libtool
-/usr/share/man/man1/libtool.1
-/usr/share/man/man1/libtoolize.1
+/usr/share/man/man1/libtool.1.bz2
+/usr/share/man/man1/libtoolize.1.bz2
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.4-1
+- Upgrade to 2.4
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.10-1
 - Upgrade to 2.2.10
 
