@@ -1,7 +1,7 @@
 Summary: rpm package manager
 Name: rpm
 Version: 5.3.6
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -10,7 +10,6 @@ URL: http://www.rpm5.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 9348c4072766554bffa367581dbfee100fa73eee
-BuildRequires: beecrypt-devel
 BuildRequires: bzip2-devel
 BuildRequires: db-devel
 BuildRequires: elfutils-devel
@@ -102,6 +101,7 @@ make
 make DESTDIR=%{buildroot} install
 install -dv %{buildroot}/var/lib/rpm/{log,tmp}
 install -dv %{buildroot}/etc/rpm
+install -dv %{buildroot}/usr/src/rpm
 echo "%%CFLAGS    -O2 -pipe" >> %{buildroot}/etc/rpm/macros
 echo "%%LDFLAGS   -s" >> %{buildroot}/etc/rpm/macros
 echo "%%compress_man	/usr/lib/rpm/compress_man.sh %%{buildroot}" >> %{buildroot}/etc/rpm/macros
@@ -273,10 +273,15 @@ rm -rf %{buildroot}
 /usr/lib/rpm/php.prov
 /usr/lib/rpm/php.req
 /usr/lib/rpm/vcheck
+%dir /usr/src/rpm
 /usr/share/man/man8/rpmbuild.8.bz2
 /usr/share/man/*/man8/rpmbuild.8.bz2
 
 %changelog
+* Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.6-2
+- Add /usr/src/rpm directory to rpm-build
+- Remove dependency on external beecrypt
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.6-1
 - Upgrade to 5.3.6
 
