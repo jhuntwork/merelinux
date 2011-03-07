@@ -1,0 +1,2 @@
+# Run dhcpcd when anything resembling a valid Ethernet-like interface appears
+ACTION=="add", SUBSYSTEM=="net", ATTR{addr_len}=="6", ATTR{address}!="00:00:00:00:00:00", RUN+="dhcp-helper %k"

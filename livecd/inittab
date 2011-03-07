@@ -1,0 +1,26 @@
+# Begin /etc/inittab
+
+id:3:initdefault:
+
+si::sysinit:/etc/init.d/rc S
+
+l0:0:wait:/etc/init.d/rc 0
+l1:S1:wait:/etc/init.d/rc 1
+l2:2:wait:/etc/init.d/rc 2
+l3:3:wait:/etc/init.d/rc 3
+l4:4:wait:/etc/init.d/rc 4
+l5:5:wait:/etc/init.d/rc 5
+l6:6:wait:/etc/init.d/rc 6
+
+ca:12345:ctrlaltdel:/sbin/shutdown -t1 -a -r now
+
+su:S016:once:/sbin/sulogin
+
+1:2345:respawn:/bin/openvt -f -c 1 -e -w -- /bin/livecd-login
+2:2345:respawn:/bin/openvt -f -c 2 -e -w -- /bin/livecd-login
+3:2345:respawn:/bin/openvt -f -c 3 -e -w -- /bin/livecd-login
+4:2345:respawn:/bin/openvt -f -c 4 -e -w -- /bin/livecd-login
+5:2345:respawn:/bin/openvt -f -c 5 -e -w -- /bin/livecd-login
+6:2345:respawn:/bin/openvt -f -c 6 -e -w -- /bin/livecd-login
+
+# End /etc/inittab
