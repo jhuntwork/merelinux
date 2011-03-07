@@ -1,16 +1,15 @@
 Summary: Gzip compression utility
 Name: gzip
 Version: 1.4
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/gzip
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = e381b8506210c794278f5527cba0e765
+BuildRequires: digest(sha1:%{SOURCE0}) = 1d398dac6a7920a7de6e2685fe472a840eb2ce6e
 
 %description
 The GNU zip compression utility.
@@ -25,9 +24,12 @@ make
 %install
 make DESTDIR=%{buildroot} install
 mkdir -pv %{buildroot}/usr/bin
-mv -v %{buildroot}/bin/{gzexe,uncompress,zcmp,zdiff,zegrep} %{buildroot}/usr/bin
+rm -v %{buildroot}/bin/uncompress
+mv -v %{buildroot}/bin/{gzexe,zcmp,zdiff,zegrep} %{buildroot}/usr/bin
 mv -v %{buildroot}/bin/{zfgrep,zforce,zgrep,zless,zmore,znew} %{buildroot}/usr/bin
 rm -f %{buildroot}/usr/share/info/dir
+ln -sv /bin/gunzip %{buildroot}/usr/bin/uncompress
+%{compress_man}
 
 %post
 /usr/bin/install-info /usr/share/info/gzip.info /usr/share/info/dir
@@ -55,19 +57,13 @@ rm -rf %{buildroot}
 /usr/bin/zmore
 /usr/bin/znew
 /usr/share/info/gzip.info
-/usr/share/man/man1/gunzip.1
-/usr/share/man/man1/gzexe.1
-/usr/share/man/man1/gzip.1
-/usr/share/man/man1/zcat.1
-/usr/share/man/man1/zcmp.1
-/usr/share/man/man1/zdiff.1
-/usr/share/man/man1/zforce.1
-/usr/share/man/man1/zgrep.1
-/usr/share/man/man1/zless.1
-/usr/share/man/man1/zmore.1
-/usr/share/man/man1/znew.1
+/usr/share/man/man1/*.bz2
 
 %changelog
+* Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4-2
+- Change a hard-linked binary to a symbolic link
+- Compress man pages
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4-1
 - Upgrade to 1.4
 
