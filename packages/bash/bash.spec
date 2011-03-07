@@ -10,10 +10,6 @@ URL: http://www.gnu.org/software/bash
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
 
-# The below line is to ensure that the post install is performed after texinfo in a
-# new install
-Requires(post): texinfo, bash, ncurses, readline
-
 BuildRequires: digest(sha1:%{SOURCE0}) = 487840ab7134eb7901fbb2e49b0ee3d22de15cb8
 BuildRequires: digest(sha1:%{PATCH0})  = b84164630c0c1353730cc8695d0d49304bcb8141
 BuildRequires: readline-devel
@@ -21,6 +17,13 @@ BuildRequires: readline-devel
 %description
 Bash is an sh-compatible shell that incorporates useful features from the
 Korn shell (ksh) and C shell (csh).
+
+%package doc
+Summary: Extra Bash Documentation
+Requires: texinfo, bash
+
+%description doc
+Extensive documentation for the GNU Bash shell
 
 %prep
 %setup -q
@@ -80,10 +83,10 @@ rm -f %{buildroot}/usr/share/info/dir
 %clean
 rm -rf %{buildroot}
 
-%post
+%post doc
 /usr/bin/install-info /usr/share/info/bash.info /usr/share/info/dir
 
-%preun
+%preun doc
 /usr/bin/install-info --delete /usr/share/info/bash.info /usr/share/info/dir
 
 %files -f %{name}.lang
@@ -95,13 +98,14 @@ rm -rf %{buildroot}
 %config /etc/profile
 /usr/share/man/man1/bash.1.bz2
 /usr/share/man/man1/bashbug.1.bz2
+
+%files doc
 /usr/share/doc/%{name}-%{version}
 /usr/share/info/bash.info
 
 %changelog
 * Fri Mar 04 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2-1
 - Upgrade to 4.2
-- Merge doc subpackage back into main package
 
 * Mon Sep 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-6
 - Properly identify config files
