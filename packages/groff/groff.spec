@@ -1,16 +1,15 @@
 Summary: GNU Troff (Groff)
 Name: groff
-Version: 1.20.1
-Release: 2
+Version: 1.21
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/groff
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, gcc-libs, gcc-c++-libs
-BuildRequires: digest(%{SOURCE0}) = 48fa768dd6fdeb7968041dd5ae8e2b02
+BuildRequires: digest(sha1:%{SOURCE0}) = a513aca4a7530a6e63325addd6ba2d282c8f1608
 
 %package doc
 Requires: %{name}
@@ -39,6 +38,7 @@ make DESTDIR=%{buildroot} docdir=/usr/share/doc/%{name}-%{version} install
 ln -sv eqn %{buildroot}/usr/bin/geqn
 ln -sv tbl %{buildroot}/usr/bin/gtbl
 rm -f %{buildroot}/usr/share/info/dir
+%{compress_man}
 
 %post
 /usr/bin/install-info /usr/share/info/groff.info /usr/share/info/dir
@@ -100,71 +100,18 @@ rm -rf %{buildroot}
 /usr/share/info/groff.info-1
 /usr/share/info/groff.info-2
 /usr/share/info/groff.info-3
-/usr/share/man/man1/addftinfo.1
-/usr/share/man/man1/afmtodit.1
-/usr/share/man/man1/chem.1
-/usr/share/man/man1/eqn.1
-/usr/share/man/man1/eqn2graph.1
-/usr/share/man/man1/gdiffmk.1
-/usr/share/man/man1/grap2graph.1
-/usr/share/man/man1/grn.1
-/usr/share/man/man1/grodvi.1
-/usr/share/man/man1/groff.1
-/usr/share/man/man1/groffer.1
-/usr/share/man/man1/grog.1
-/usr/share/man/man1/grohtml.1
-/usr/share/man/man1/grolbp.1
-/usr/share/man/man1/grolj4.1
-/usr/share/man/man1/grops.1
-/usr/share/man/man1/grotty.1
-/usr/share/man/man1/hpftodit.1
-/usr/share/man/man1/indxbib.1
-/usr/share/man/man1/lkbib.1
-/usr/share/man/man1/lookbib.1
-/usr/share/man/man1/mmroff.1
-/usr/share/man/man1/neqn.1
-/usr/share/man/man1/nroff.1
-/usr/share/man/man1/pdfroff.1
-/usr/share/man/man1/pfbtops.1
-/usr/share/man/man1/pic.1
-/usr/share/man/man1/pic2graph.1
-/usr/share/man/man1/preconv.1
-/usr/share/man/man1/refer.1
-/usr/share/man/man1/roff2dvi.1
-/usr/share/man/man1/roff2html.1
-/usr/share/man/man1/roff2pdf.1
-/usr/share/man/man1/roff2ps.1
-/usr/share/man/man1/roff2text.1
-/usr/share/man/man1/roff2x.1
-/usr/share/man/man1/soelim.1
-/usr/share/man/man1/tbl.1
-/usr/share/man/man1/tfmtodit.1
-/usr/share/man/man1/troff.1
-/usr/share/man/man5/groff_font.5
-/usr/share/man/man5/groff_out.5
-/usr/share/man/man5/groff_tmac.5
-/usr/share/man/man5/lj4_font.5
-/usr/share/man/man7/ditroff.7
-/usr/share/man/man7/groff.7
-/usr/share/man/man7/groff_char.7
-/usr/share/man/man7/groff_diff.7
-/usr/share/man/man7/groff_hdtbl.7
-/usr/share/man/man7/groff_man.7
-/usr/share/man/man7/groff_mdoc.7
-/usr/share/man/man7/groff_me.7
-/usr/share/man/man7/groff_mm.7
-/usr/share/man/man7/groff_mmse.7
-/usr/share/man/man7/groff_mom.7
-/usr/share/man/man7/groff_ms.7
-/usr/share/man/man7/groff_trace.7
-/usr/share/man/man7/groff_www.7
-/usr/share/man/man7/roff.7
+/usr/share/man/man1/*.bz2
+/usr/share/man/man5/*.bz2
+/usr/share/man/man7/*.bz2
 
 %files doc
 %defattr(-,root,root)
 /usr/share/doc/%{name}-%{version}
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.21-1
+- Upgrade to 1.21
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.20.1-2
 - Use FHS compatible info dirs. Use separate doc package.
 
