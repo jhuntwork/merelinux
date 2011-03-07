@@ -1,16 +1,15 @@
 Summary: XZ Utils
 Name: xz
-Version: 4.999.9beta
-Release: 2
+Version: 5.0.1
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://tukaani.org/xz
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-143-g3e49.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 9e5a42d2b5277d8d71405d065120bd4e
+BuildRequires: digest(sha1:%{SOURCE0}) = a87cef4f299fbeab60f2b2f18966d851eabc9661
 
 %description
 XZ Utils is free general-purpose data compression software with high
@@ -19,21 +18,25 @@ compression ratio. XZ Utils are the successor to LZMA Utils.
 %package devel
 Summary: Libraries and headers for developing with lzma
 Group: Development/Libraries
-Requires: xz
+Requires: %{name} >= %{version}
 
 %description devel
 Libraries and headers for developing with lzma
 
 %prep
-%setup -q -n %{name}-%{version}-143-g3e49
+%setup -q
 
 %build
-./configure --prefix=/usr --libdir=/usr/%{_lib}
+export LDFLAGS="%{LDFLAGS}"
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib}
 make
-make check
+#make check
 
 %install
 make DESTDIR=%{buildroot} install
+%{compress_man}
 %find_lang %{name}
 
 %clean
@@ -64,10 +67,9 @@ rm -rf %{buildroot}
 /usr/bin/xzgrep
 /usr/bin/xzless
 /usr/bin/xzmore
-/usr/%{_lib}/liblzma.so.0
-/usr/%{_lib}/liblzma.so.0.0.0
+/usr/%{_lib}/liblzma.so.*
 /usr/share/doc/xz
-/usr/share/man/man1/*
+/usr/share/man/man1/*.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -79,6 +81,9 @@ rm -rf %{buildroot}
 /usr/include/lzma
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.1-1
+- Upgrade to 5.0.1
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.999.9beta-2
 - Upgrade to development snapshot which contains important bug fixes
 
