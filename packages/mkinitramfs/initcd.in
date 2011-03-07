@@ -3,7 +3,7 @@
 PATH=/bin:/usr/bin:/sbin:/usr/sbin
 export PATH
 
-EXPECTED_LABEL="lightcubecd-2"
+EXPECTED_LABEL="__VERSION__"
 EXPECTED_LABEL="$EXPECTED_LABEL                                "
 EXPECTED_LABEL=${EXPECTED_LABEL:0:32}
 init=/sbin/init

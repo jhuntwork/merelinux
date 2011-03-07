@@ -25,6 +25,7 @@ fi
 DATADIR=/usr/share/mkinitramfs
 
 if [ $CD -eq 1 ] ; then
+  CDVERSION="lightcubecd-$3"
   CDBINEXTRA='blockdev dmsetup losetup'
   CDLIBEXTRA='libdevmapper.so.1.02 libm.so.6'
   INITRAMFS_FILE=/tmp/initramfs.gz
@@ -71,7 +72,12 @@ if [ $CD -eq 0 ] ; then
 fi 
 
 # Install the init file
-install -m755 $DATADIR/$INITIN $WDIR/init
+if [ $CD -eq 1 ] ; then
+    sed "s/__VERSION__/$CDVERSION/" $DATADIR/$INITIN > $WDIR/init
+    chmod 0755 $WDIR/init
+else
+    install -m0755 $DATADIR/$INITIN $WDIR/init
+fi
 
 # Install basic binaries
 for f in sh cat cp dd killall ls lsmod mdadm mkdir mknod mount umount sed sleep ln rm uname $CDBINEXTRA
@@ -97,7 +103,7 @@ do
 done
 
 # Install libraries
-for l in $DL $CDEXTRA \
+for l in $DL $CDLIBEXTRA \
  librt.so.1 \
  libpthread.so.0 \
  libblkid.so.1 \
