@@ -1,7 +1,7 @@
 Summary: man-db
 Name: man-db
 Version: 2.5.9
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,6 +9,7 @@ Vendor: LightCube Solutions
 URL: http://man-db.nongnu.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
+Requires: groff
 BuildRequires: digest(sha1:%{SOURCE0}) = e307ec4c440b82c20c9c20984852046d01426333
 BuildRequires: gdbm-devel
 BuildRequires: zlib-devel
@@ -66,6 +67,9 @@ rm -rf %{buildroot}
 /usr/share/man/man8/*
 
 %changelog
+* Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.9-2
+- Rebuild with groff dependency, fix broken rpm package.
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.9-1
 - Upgraded to 2.5.9
 
