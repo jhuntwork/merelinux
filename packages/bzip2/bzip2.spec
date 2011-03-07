@@ -1,18 +1,15 @@
 Summary: bzip2 
 Name: bzip2
-Version: 1.0.5
-Release: 2
+Version: 1.0.6
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
-URL: http://www.bzip2.org/
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-version_fixes-1.patch
+URL: http://www.bzip2.org
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 3c15a0c8d1d3ee1c46a1634d00617b1a
-BuildRequires: digest(%{PATCH0}) =  e373fcd16bac28d6e53a268b875bfd8c
+BuildRequires: digest(sha1:%{SOURCE0}) = 3f89f861209ce81a6bab1fd1998c0ef311712002
 
 %package devel
 Summary: Libraries and headers for developing with %{name}
@@ -27,14 +24,13 @@ Libraries and headers for developing with %{name}
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
-make -f Makefile-libbz2_so
+make LDFLAGS="%{LDFLAGS}" -f Makefile-libbz2_so
 make clean
-make
+make LDFLAGS="%{LDFLAGS}"
 
 %install
 make PREFIX=%{buildroot}/usr install
@@ -49,6 +45,7 @@ ln -sv ../../%{_lib}/libbz2.so.1.0 %{buildroot}/usr/%{_lib}/libbz2.so
 rm -v %{buildroot}/usr/bin/{bunzip2,bzcat,bzip2}
 ln -sv bzip2 %{buildroot}/bin/bunzip2
 ln -sv bzip2 %{buildroot}/bin/bzcat
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -58,8 +55,7 @@ rm -rf %{buildroot}
 /bin/bunzip2
 /bin/bzcat
 /bin/bzip2
-/%{_lib}/libbz2.so.1.0
-/%{_lib}/libbz2.so.1.0.5
+/%{_lib}/libbz2.so.*
 /usr/bin/bzcmp
 /usr/bin/bzdiff
 /usr/bin/bzegrep
@@ -68,14 +64,7 @@ rm -rf %{buildroot}
 /usr/bin/bzip2recover
 /usr/bin/bzless
 /usr/bin/bzmore
-/usr/share/man/man1/bzcmp.1
-/usr/share/man/man1/bzdiff.1
-/usr/share/man/man1/bzegrep.1
-/usr/share/man/man1/bzfgrep.1
-/usr/share/man/man1/bzgrep.1
-/usr/share/man/man1/bzip2.1
-/usr/share/man/man1/bzless.1
-/usr/share/man/man1/bzmore.1
+/usr/share/man/man1/*.bz2
 
 %files devel
 /usr/%{_lib}/libbz2.a
@@ -83,6 +72,9 @@ rm -rf %{buildroot}
 /usr/include/bzlib.h
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.6-1
+- Upgrade to 1.0.6
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.5-2
 - Fix lib version to match binary version
 
