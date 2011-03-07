@@ -1,6 +1,6 @@
 Summary: rpm package manager
 Name: rpm
-Version: 5.3.3
+Version: 5.3.6
 Release: 1
 Group: System Environment/Libraries
 License: GPL
@@ -9,9 +9,10 @@ Vendor: LightCube Solutions
 URL: http://www.rpm5.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 3bb0a97aa42a1fab41302fc7cc052ec0899d9cf2
+BuildRequires: digest(sha1:%{SOURCE0}) = 9348c4072766554bffa367581dbfee100fa73eee
 BuildRequires: beecrypt-devel
 BuildRequires: bzip2-devel
+BuildRequires: db-devel
 BuildRequires: elfutils-devel
 BuildRequires: expat-devel
 BuildRequires: file-devel
@@ -75,24 +76,25 @@ sed -i 's@_prefix}/info@_datadir}/info@' macros/macros.in
 sed -i 's@_prefix}/man@_datadir}/man@' macros/macros.in
 export CFLAGS="%{CFLAGS}  -I/usr/include/xar"
 export LDFLAGS="%{LDFLAGS}"
-sed -i "/^PACKAGE_BUGREPORT=/s|'.*'|suport@lightcube.us|" configure
+sed -i "/^PACKAGE_BUGREPORT=/s|'.*'|support@lightcube.us|" configure
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
-  --with-db-tools-integrated \
-  --with-libelf \
-  --with-openssl \
-  --with-python \
-  --with-zlib \
   --with-bzip2=external \
+  --with-db=external \
   --with-file=external \
-  --with-pcre=external \
+  --with-libelf \
+  --with-lua=internal \
   --with-neon=external \
+  --with-openssl \
+  --with-pcre=external \
+  --with-popt=external \
+  --with-python \
+  --without-selinux \
   --with-sqlite=external \
   --with-xar=external \
   --with-xz=external \
-  --with-lua=internal \
-  --without-selinux \
+  --with-zlib \
   --disable-openmp
 make
 
@@ -102,9 +104,24 @@ install -dv %{buildroot}/var/lib/rpm/{log,tmp}
 install -dv %{buildroot}/etc/rpm
 echo "%%CFLAGS    -O2 -pipe" >> %{buildroot}/etc/rpm/macros
 echo "%%LDFLAGS   -s" >> %{buildroot}/etc/rpm/macros
+echo "%%compress_man	/usr/lib/rpm/compress_man.sh %%{buildroot}" >> %{buildroot}/etc/rpm/macros
+
+# Add compress man helper
+cat > %{buildroot}/usr/lib/rpm/compress_man.sh << "EOF"
+#!/bin/bash
+find "$@/usr/share/man" -type f -exec bzip2 -9 '{}' \;
+for i in $(find "$@/usr/share/man" -type l) ; do
+    link=$(basename `readlink $i`)
+    fn=$(basename $i)
+    dn=$(dirname $i)
+    rm -vf $i
+    ln -sv $link.bz2 "$dn/$fn.bz2"
+done
+EOF
+chmod 0755 %{buildroot}/usr/lib/rpm/compress_man.sh
 
 # Compress man pages
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 
 # Create /etc/rpm/platform
 cat > %{buildroot}/etc/rpm/platform << "EOF"
@@ -138,18 +155,6 @@ rm -rf %{buildroot}
 /usr/%{_lib}/librpmmisc-5.3.so
 %dir /usr/lib/rpm
 %dir /usr/lib/rpm/bin
-/usr/lib/rpm/bin/db_archive
-/usr/lib/rpm/bin/db_checkpoint
-/usr/lib/rpm/bin/db_deadlock
-/usr/lib/rpm/bin/db_dump
-/usr/lib/rpm/bin/db_hotbackup
-/usr/lib/rpm/bin/db_load
-/usr/lib/rpm/bin/db_printlog
-/usr/lib/rpm/bin/db_recover
-/usr/lib/rpm/bin/db_stat
-/usr/lib/rpm/bin/db_tool
-/usr/lib/rpm/bin/db_upgrade
-/usr/lib/rpm/bin/db_verify
 /usr/lib/rpm/bin/debugedit
 /usr/lib/rpm/bin/mtree
 /usr/lib/rpm/bin/rpmcache
@@ -163,8 +168,6 @@ rm -rf %{buildroot}
 /usr/lib/rpm/bin/api-sanity-autotest.pl
 /usr/lib/rpm/bin/chroot
 /usr/lib/rpm/bin/cp
-/usr/lib/rpm/bin/db_log_verify
-/usr/lib/rpm/bin/db_sql_codegen
 /usr/lib/rpm/bin/dbsql
 /usr/lib/rpm/bin/find
 /usr/lib/rpm/bin/install-sh
@@ -172,6 +175,10 @@ rm -rf %{buildroot}
 /usr/lib/rpm/bin/rpmlua
 /usr/lib/rpm/bin/rpmluac
 /usr/lib/rpm/bin/sqlite3
+/usr/lib/rpm/bin/lua
+/usr/lib/rpm/bin/luac
+/usr/lib/rpm/dbconvert.sh
+/usr/lib/rpm/gem_helper.rb
 /usr/lib/rpm/cpuinfo.yaml
 /usr/lib/rpm/find-debuginfo.sh
 /usr/lib/rpm/helpers
@@ -243,6 +250,7 @@ rm -rf %{buildroot}
 /usr/lib/rpm/brp-*
 /usr/lib/rpm/check-files
 /usr/lib/rpm/cross-build
+/usr/lib/rpm/compress_man.sh
 /usr/lib/rpm/find-lang.sh
 /usr/lib/rpm/find-prov.pl
 /usr/lib/rpm/find-provides.perl
@@ -269,6 +277,9 @@ rm -rf %{buildroot}
 /usr/share/man/*/man8/rpmbuild.8.bz2
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.6-1
+- Upgrade to 5.3.6
+
 * Tue Sep 07 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.3-1
 - Upgrade to 5.3.3
 
