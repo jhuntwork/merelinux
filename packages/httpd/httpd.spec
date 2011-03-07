@@ -1,7 +1,7 @@
 Summary: Apache HTTP Server
 Name: httpd
-Version: 2.2.16
-Release: 2
+Version: 2.2.17
+Release: 1
 Group: Services
 License: Apache
 Distribution: LightCube OS
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1: http://dev.lightcube.us/sources/%{name}/%{name}.init
 Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-config-1.patch
 
-BuildRequires: digest(sha1:%{SOURCE0}) = ef92f5b3124fe5e9ba6121ea7f4bab8c014068f9
+BuildRequires: digest(sha1:%{SOURCE0}) = 5c9b44620dee449a86ba1bcba1715033c2c26b08
 BuildRequires: digest(sha1:%{SOURCE1}) = ee24aa6c2e35669e22942840b747e4135693762f
 BuildRequires: digest(sha1:%{PATCH0}) = ec266d894e4f42d813b713af596048879325f22e
 BuildRequires: openssl-devel
@@ -61,7 +61,7 @@ sed -i -e "s/User daemon/User apache/" \
     %{buildroot}/etc/apache/httpd.conf
 install -dv %{buildroot}/etc/init.d
 install -m754 %{SOURCE1} %{buildroot}/etc/init.d/httpd
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -161,6 +161,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/apache/httpd.exp
 
 %changelog
+* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.17-1
+- Upgrade to 2.2.17
+
 * Wed Sep 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.2.16-2
 - Fix description
 
