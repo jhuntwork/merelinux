@@ -1,19 +1,15 @@
 Summary: GNU C Library
 Name: glibc
-Version: 2.12.1
-Release: 4
+Version: 2.12.2
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/libc
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-ld_audit_fix-1.patch
-Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-origin_fix-1.patch
 
-BuildRequires: digest(%{SOURCE0}) = be0ea9e587f08c87604fe10a91f72afd
-BuildRequires: digest(sha1:%{PATCH0}) = b95a1d14fd9323b3d0a080333805468fd8be5fcb
-BuildRequires: digest(sha1:%{PATCH1}) = dcf29ac9381a1863fe94b6ba4d7a2bcdbcedf949
+BuildRequires: digest(sha1:%{SOURCE0}) = 3ef6d36eee2dc7c4351f215f689e6a04c161a35e
 
 %description
 The system C library which defines run-time functions for all
@@ -22,7 +18,7 @@ C-based software installed in the system.
 %package devel
 Summary: Headers, object files and utilities for development using C libraries
 Group: Development/Libraries
-Requires: %{name} = %{version}
+Requires: %{name} >= %{version}
 
 %description devel
 The %{name}-devel package contains the object files necessary for
@@ -191,6 +187,9 @@ rm -rf glibc-build
 %endif
 
 %changelog
+* Sat Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.12.2-1
+- Upgrade to 2.12.2
+
 * Fri Dec 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.12.1-4
 - Upstream security fixes
 
