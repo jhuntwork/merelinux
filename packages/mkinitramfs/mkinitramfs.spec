@@ -1,6 +1,6 @@
 Summary: mkinitramfs
 Name: mkinitramfs
-Version: 0.5
+Version: 0.5.1
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -16,7 +16,7 @@ Source3: mkinitramfs.orig
 BuildRequires: digest(sha1:%{SOURCE0}) = 7dfa2af5c2455c3f9107103cf4f3ab2a34d3fe62
 BuildRequires: digest(sha1:%{SOURCE1}) = b3b2eabb64918a03500485f188e31012b4a12b23
 BuildRequires: digest(sha1:%{SOURCE2}) = 168fab370b6e1041999e7d37f1210c93db80a240
-BuildRequires: digest(sha1:%{SOURCE3}) = 8ed3fced5f229bea0a8b06b38a82958c5241f5b2
+BuildRequires: digest(sha1:%{SOURCE3}) = 5394dc0a4587e680988815fc5edcf6be32ef972d
 
 Requires: base-layout
 Requires: glibc
@@ -52,6 +52,11 @@ rm -rf %{buildroot}
 /usr/share/mkinitramfs
 
 %changelog
+* Fri Mar 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.5.1-1
+- Upgrade to 0.5.1
+- Removes unnecessary error warning, fixes some errors when building the
+- initramfs image for the LiveCD
+
 * Fri Mar 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.5-1
 - Upgrade to 0.5
 

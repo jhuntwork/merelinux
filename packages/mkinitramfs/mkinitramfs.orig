@@ -1,6 +1,8 @@
 #!/bin/bash
 # This file based in part on the mkinitrafms script for the LFS LiveCD
 # written by Alexander E. Patrakov
+#
+# Version 0.5.1
 
 if [ -z $1 ] ; then
   echo 'Missing kernel version'
@@ -14,7 +16,7 @@ if [ ! -d "/lib/modules/$1" ] ; then
   exit 1
 fi
 
-if [ ! -z $2 ] && [ $2 = "cd"] ; then
+if [ ! -z $2 ] && [ "$2" = "cd" ] ; then
    CD=1
 else
    CD=0
@@ -25,7 +27,7 @@ DATADIR=/usr/share/mkinitramfs
 if [ $CD -eq 1 ] ; then
   CDBINEXTRA='blockdev dmsetup losetup'
   CDLIBEXTRA='libdevmapper.so.1.02 libm.so.6'
-  INITRAMFS_FILE=/mnt/iso/boot/isolinux/initramfs.gz
+  INITRAMFS_FILE=/tmp/initramfs.gz
   INITIN=initcd.in
 else
   CDBINEXTRA=''
@@ -59,7 +61,10 @@ mknod -m 664 $WDIR/dev/null c 1 3
 
 # Install the udev configuration files
 cp /etc/udev/udev.conf $WDIR/etc/udev/udev.conf
-cp /etc/udev/rules.d/* $WDIR/etc/udev/rules.d
+for file in $(find /etc/udev/rules.d/ -type f)
+do
+    cp -v $file $WDIR/etc/udev/rules.d
+done
 
 if [ $CD -eq 0 ] ; then
     if [ -f /etc/mdadm.conf ] ; then cp /etc/mdadm.conf $WDIR/etc ; fi
