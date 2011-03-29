@@ -11,6 +11,7 @@ CDVERSION=3
 # image with more threads - one per processor should be safe
 if [ ! -z $1 ]  ; then
     THREADS="-p $1"
+    MFLAGS="-j $1"
 fi
 
 # Shouldn't need to modify these
@@ -89,7 +90,7 @@ if [ ! -f $BASE/tools/bin/mkzftree ] ; then
     tar -xf zisofs-tools-1.0.8.tar.bz2
     cd zisofs-tools-1.0.8
     ./configure --prefix=$BASE/tools
-    make
+    make $MFLAGS
     make install
     cd ..
 fi
@@ -99,7 +100,7 @@ if [ ! -f $BASE/tools/bin/mkisofs ] ; then
     wget ftp://ftp.berlios.de/pub/cdrecord/cdrtools-3.00.tar.bz2
     tar -xf cdrtools-3.00.tar.bz2
     cd cdrtools-3.00
-    make INS_BASE=$BASE/tools DEFINSUSR=root DEFINSGRP=root
+    make $MFLAGS INS_BASE=$BASE/tools DEFINSUSR=root DEFINSGRP=root
     make INS_BASE=$BASE/tools DEFINSUSR=root DEFINSGRP=root install
     cd ..
 fi
