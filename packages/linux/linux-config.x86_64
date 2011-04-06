@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux/x86_64 2.6.37.2 Kernel Configuration
-# Thu Mar  3 22:57:20 2011
+# Wed Apr  6 15:05:23 2011
 #
 CONFIG_64BIT=y
 # CONFIG_X86_32 is not set
@@ -891,8 +891,42 @@ CONFIG_XEN_BLKDEV_FRONTEND=y
 CONFIG_VIRTIO_BLK=m
 # CONFIG_BLK_DEV_HD is not set
 # CONFIG_BLK_DEV_RBD is not set
-# CONFIG_MISC_DEVICES is not set
+CONFIG_MISC_DEVICES=y
+# CONFIG_AD525X_DPOT is not set
+# CONFIG_IBM_ASM is not set
+# CONFIG_PHANTOM is not set
+# CONFIG_SGI_IOC4 is not set
+# CONFIG_TIFM_CORE is not set
+# CONFIG_ICS932S401 is not set
+# CONFIG_ENCLOSURE_SERVICES is not set
+# CONFIG_CS5535_MFGPT is not set
+# CONFIG_HP_ILO is not set
+# CONFIG_APDS9802ALS is not set
+# CONFIG_ISL29003 is not set
+# CONFIG_ISL29020 is not set
+# CONFIG_SENSORS_TSL2550 is not set
+# CONFIG_SENSORS_BH1780 is not set
+# CONFIG_SENSORS_BH1770 is not set
+# CONFIG_SENSORS_APDS990X is not set
+# CONFIG_HMC6352 is not set
+# CONFIG_DS1682 is not set
+# CONFIG_VMWARE_BALLOON is not set
+# CONFIG_BMP085 is not set
+# CONFIG_PCH_PHUB is not set
+# CONFIG_C2PORT is not set
+
+#
+# EEPROM support
+#
+# CONFIG_EEPROM_AT24 is not set
+# CONFIG_EEPROM_LEGACY is not set
+# CONFIG_EEPROM_MAX6875 is not set
 CONFIG_EEPROM_93CX6=m
+# CONFIG_CB710_CORE is not set
+
+#
+# Texas Instruments shared transport line discipline
+#
 CONFIG_HAVE_IDE=y
 # CONFIG_IDE is not set
 
@@ -1427,8 +1461,30 @@ CONFIG_RT2800PCI_PCI=y
 # CONFIG_USB_KAWETH is not set
 # CONFIG_USB_PEGASUS is not set
 # CONFIG_USB_RTL8150 is not set
-# CONFIG_USB_USBNET is not set
+CONFIG_USB_USBNET=m
+CONFIG_USB_NET_AX8817X=m
+CONFIG_USB_NET_CDCETHER=m
+# CONFIG_USB_NET_CDC_EEM is not set
+# CONFIG_USB_NET_DM9601 is not set
+# CONFIG_USB_NET_SMSC75XX is not set
+# CONFIG_USB_NET_SMSC95XX is not set
+# CONFIG_USB_NET_GL620A is not set
+CONFIG_USB_NET_NET1080=m
+# CONFIG_USB_NET_PLUSB is not set
+# CONFIG_USB_NET_MCS7830 is not set
+# CONFIG_USB_NET_RNDIS_HOST is not set
+CONFIG_USB_NET_CDC_SUBSET=m
+# CONFIG_USB_ALI_M5632 is not set
+# CONFIG_USB_AN2720 is not set
+CONFIG_USB_BELKIN=y
+CONFIG_USB_ARMLINUX=y
+# CONFIG_USB_EPSON2888 is not set
+# CONFIG_USB_KC2190 is not set
+CONFIG_USB_NET_ZAURUS=m
+# CONFIG_USB_NET_CX82310_ETH is not set
+# CONFIG_USB_NET_INT51X1 is not set
 # CONFIG_USB_IPHETH is not set
+# CONFIG_USB_SIERRA_NET is not set
 CONFIG_NET_PCMCIA=y
 CONFIG_PCMCIA_3C589=m
 CONFIG_PCMCIA_3C574=m
