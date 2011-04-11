@@ -1,7 +1,7 @@
 Summary: The Linux Kernel
 Name: linux
 Version: 2.6.37.2
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -13,8 +13,8 @@ Requires(post): mkinitramfs
 BuildRequires: digest(sha1:%{SOURCE0}) = e2273eb385579fdf73b1f3ece2539c2156c06cd0
 
 %ifarch x86_64
-Source1: http://dev.lightcube.us/sources/%{name}-configs/%{name}-config-%{version}.x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = 8a968f3a6621e49ac02dde1ae0e0ed8560aae039
+Source1: http://dev.lightcube.us/svn/lightcubeos/!svn/bc/349/lightcube_os/trunk/packages/%{name}/%{name}-config.x86_64
+BuildRequires: digest(sha1:%{SOURCE1}) = 9a5fdd3f06bd4f350ddf1def6c2289ea7f103570
 %endif
 
 %ifarch i686
