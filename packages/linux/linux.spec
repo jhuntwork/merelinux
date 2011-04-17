@@ -129,6 +129,9 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-%{release}/build
 
 %changelog
+* Mon Apr 11 2001 Archaic <address@omit.ted> - 2.6.37.2-2
+- Change d/l location of the linux config file
+
 * Thu Mar 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.37.2-1
 - Upgrade to 2.6.37.2
 
