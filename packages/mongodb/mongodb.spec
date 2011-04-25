@@ -1,6 +1,6 @@
 Summary: mongoDB
 Name: mongodb
-Version: 1.6.4
+Version: 1.8.1
 Release: 1
 Group: Services
 License: AGPL
@@ -9,9 +9,11 @@ Vendor: LightCube Solutions
 URL: http://www.mongodb.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-src-r%{version}.tar.gz
 Source1: http://dev.lightcube.us/sources/%{name}/mongod.init
+Patch0:  http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-spidermonkey-1.8.5-support.patch
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 09bcee3c05d248ad5093243e14f9260ca79a6cb9 
+BuildRequires: digest(sha1:%{SOURCE0}) = 615cfe4ace4899e73a7083059c7178d8f5c19f03
 BuildRequires: digest(sha1:%{SOURCE1}) = 497cd02f1f2a4577bc06819eaee5f43306981e34
+BuildRequires: digest(sha1:%{PATCH0})  = 0d892f6cfb3ea4487a734b25f126ab560c7e804b
 BuildRequires: boost-devel
 BuildRequires: scons
 BuildRequires: pcre-devel
@@ -25,10 +27,11 @@ MongoDB (from "humongous") is a scalable, high-performance, open source,
 document-oriented database
 
 %prep
-%setup -n %{name}-src-r%{version}
+%setup -q -n %{name}-src-r%{version}
+%patch0 -p1
 
 %build
-scons all
+scons %{PMFLAGS} all
 
 %install
 scons --prefix=%{buildroot}/usr install
@@ -68,6 +71,9 @@ rm -rf %{buildroot}
 %dir /srv/mongodb
 
 %changelog
+* Mon Apr 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8.1-1
+- Upgrade to 1.8.1
+
 * Sun Nov 28 2010 Fitz Agard <fhagard@lightcubesolutions.com> - 1.6.4-1
 - Upgrade to 1.6.4
 
