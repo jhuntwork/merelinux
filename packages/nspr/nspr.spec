@@ -1,16 +1,15 @@
 Summary: NSPR
 Name: nspr
-Version: 4.8.6
+Version: 4.8.7
 Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
-URL: https://developer.mozilla.org/en/NSPR
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+URL: https://developer.mozilla.org/En/NSPR
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 592c275728c29d193fdba8009165990b
+BuildRequires: digest(sha1:%{SOURCE0}) = 34d9eb75b47a3d19b57ef1ed5aef2004e79b5fc4
 
 %description
 Netscape Portable Runtime (NSPR) provides a platform-neutral API for system
@@ -34,12 +33,13 @@ Headers and libraries for developing with %{name}
 
 %build
 cd mozilla/nsprpub
+export LDFLAGS=%{LDFLAGS}
 ./configure \
   --prefix=/usr \
   --disable-debug \
   --enable-optimize \
   --libdir=/usr/%{_lib} %{_extra_args}
-make
+make %{PMFLAGS}
 
 %install
 cd mozilla/nsprpub
@@ -69,5 +69,8 @@ rm -rf %{buildroot}
 /usr/share/aclocal/nspr.m4
 
 %changelog
+* Mon Apr 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.8.7-1
+- Upgrade to 4.8.7
+
 * Wed Aug 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.8.6-1
 - Initial version
