@@ -1,17 +1,17 @@
 Summary: Util-Linux Next Generation
 Name: util-linux-ng
 Version: 2.18
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://userweb.kernel.org/~kzak/util-linux-ng
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, ncurses, zlib
-BuildRequires: digest(%{SOURCE0}) = 2f5f71e6af969d041d73ab778c141a77
-BuildRequires: ncurses-devel, zlib-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 154db0512caae0b6e90eee4b7312d4caf3d6b978
+BuildRequires: ncurses-devel
+BuildRequires: zlib-devel
 
 %description
 Provides some core Linux utilities, particularly those
@@ -28,15 +28,16 @@ Headers and libraries for libblkid and libuuid
 %setup -q
 
 %build
-sed -i 's@etc/adjtime@var/%{_lib}/hwclock/adjtime@g' $(grep -rl '/etc/adjtime' .)
+export LDFLAGS="%{LDFLAGS}"
+sed -i 's@etc/adjtime@var/lib/hwclock/adjtime@g' $(grep -rl '/etc/adjtime' .)
 ./configure --enable-arch --enable-partx --enable-write --libdir=/%{_lib}
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 rm -vf %{buildroot}/usr/share/info/dir
 rm %{buildroot}/usr/share/getopt/*.tcsh
-find %{buildroot} -name *.la -exec rm -v '{}' \;
+%{compress_man}
 %find_lang %{name}
 
 %clean
@@ -164,6 +165,9 @@ rm -rf %{buildroot}
 /usr/include/blkid
 /usr/include/uuid
 /usr/include/mount
+/usr/%{_lib}/libblkid.la
+/usr/%{_lib}/libmount.la
+/usr/%{_lib}/libuuid.la
 /usr/%{_lib}/libblkid.a
 /usr/%{_lib}/libblkid.so
 /usr/%{_lib}/libuuid.a
@@ -175,6 +179,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/uuid.pc
 
 %changelog
+* Thu Apr 28 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.18-2
+- Fix hwclock to use /var/lib/hwclock/adjtime
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.18-1
 - Upgrade to 2.18
 
