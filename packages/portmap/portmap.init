@@ -1,0 +1,51 @@
+#!/bin/sh
+# Begin /etc/init.d/portmap
+
+### BEGIN INIT INFO
+# Provides:            portmap
+# Required-Start:      $network
+# Should-Start:        $remote_fs
+# Required-Stop:       $network
+# Should-Stop:         $remote_fs
+# Default-Start:       3 4 5 
+# Default-Stop:        0 1 2 6
+# Short-Description:   Starts/Stops the portmap daemon.
+# Description:         Starts and stops the portmap daemon.
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+MESSAGE="Portmap Server"
+BIN_FILE="/sbin/portmap"
+
+chk_stat
+
+case "$1" in
+    start)
+        start_daemon "${BIN_FILE}"
+        evaluate_retval start
+        ;;
+
+    stop)
+        killproc "${BIN_FILE}"
+        evaluate_retval stop
+        ;;
+
+    restart)
+        killproc "$BIN_FILE"
+        sleep 1
+        start_daemon "${BIN_FILE}"
+        evaluate_retval restart
+        ;;
+
+    status)
+        statusproc "${BIN_FILE}"
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop|restart|status}"
+        exit 1
+        ;;
+esac
+
+# End /etc/init.d/portmap
