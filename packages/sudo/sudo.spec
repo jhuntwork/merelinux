@@ -76,7 +76,7 @@ rm -rf %{buildroot}
 
 %changelog
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8.1p1-1
-- Initial version
+- Upgrade to 1.8.1p1. Fix issues with default sudoers file and add a missing PAM config.
 
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.7.4p2-1
 - Initial version
