@@ -1,23 +1,23 @@
 Summary: The GNU Readline Library
 Name: readline
-Version: 6.1
-Release: 2
+Version: 6.2
+Release: 1
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://tiswww.case.edu/php/chet/readline/rltop.html
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-fixes-1.patch
 
-Requires: base-layout, glibc, ncurses
-Requires(post): texinfo, bash
-BuildRequires: digest(%{SOURCE0}) = fc2f7e714fe792db1ce6ddc4c9fb4ef3
+BuildRequires: digest(sha1:%{SOURCE0}) = a9761cd9c3da485eb354175fcc2fe35856bc43ac
+BuildRequires: digest(sha1:%{PATCH0})  = b721a06ba9db6b6ce342444fcd8bfef25bd9e189
 BuildRequires: ncurses-devel
 
 %package devel
 Summary: Headers and objects for developing with %{name}
 Group: Development
-Requires: %{name}
+Requires: %{name} >= %{version}
 
 %description
 The GNU Readline library provides a set of functions for use by applications
@@ -28,15 +28,15 @@ Headers and objects for developing with %{name}
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 sed -i '/MV.*old/d' Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
-sed -i -e 's/0x0600/0x0601/' \
-       -e 's/6\.0/6.1/' \
-       -e 's/RL_VERSION_MINOR\t0/RL_VERSION_MINOR\t1/' readline.h
-./configure --prefix=/usr --libdir=/%{_lib}
-make SHLIB_LIBS=-lncurses
+./configure \
+  --prefix=/usr \
+  --libdir=/%{_lib}
+make %{PMFLAGS} SHLIB_LIBS=-lncurses
 
 %install
 make DESTDIR=%{buildroot} install
@@ -46,6 +46,7 @@ rm -v %{buildroot}/%{_lib}/lib{readline,history}.so
 ln -sfv ../../%{_lib}/libreadline.so.6 %{buildroot}/usr/%{_lib}/libreadline.so
 ln -sfv ../../%{_lib}/libhistory.so.6 %{buildroot}/usr/%{_lib}/libhistory.so
 rm -f %{buildroot}/usr/share/info/dir
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -67,10 +68,8 @@ done
 
 %files
 %defattr(-,root,root)
-/%{_lib}/libhistory.so.6
-/%{_lib}/libhistory.so.6.1
-/%{_lib}/libreadline.so.6
-/%{_lib}/libreadline.so.6.1
+/%{_lib}/libhistory.so.*
+/%{_lib}/libreadline.so.*
 
 %files devel
 %defattr(-,root,root)
@@ -83,10 +82,12 @@ done
 /usr/share/info/history.info
 /usr/share/info/readline.info
 /usr/share/info/rluserman.info
-/usr/share/man/man3/history.3
-/usr/share/man/man3/readline.3
+/usr/share/man/man3/*
 
 %changelog
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 6.2-1
+- Upgrade to 6.2
+
 * Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 6.1-2
 - Fixes to build dependencies
 
