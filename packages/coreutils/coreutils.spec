@@ -1,6 +1,6 @@
 Summary: GNU Coreutils
 Name: coreutils
-Version: 8.9
+Version: 8.12
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -8,26 +8,19 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/coreutils
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-i18n-1.patch
+#Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-i18n-1.patch
 Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-uname-1.patch
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 1e7a4d012abf840684d3b769297721377ffc4743
-BuildRequires: digest(sha1:%{PATCH0}) = 4911c71e20656cc820a0be3d5ce633ad6373e893
-BuildRequires: digest(sha1:%{PATCH1}) = 42f651a027be6c6819bcccb98d2d13d2acb03ca3
+BuildRequires: digest(sha1:%{SOURCE0}) = 279209289dde85b562f71180bf43c2663f7bd3de
+#BuildRequires: digest(sha1:%{PATCH0})  = af23ad4d99fe8a78b408ea91825aa04490194675
+BuildRequires: digest(sha1:%{PATCH1})  = 42f651a027be6c6819bcccb98d2d13d2acb03ca3
 
 %description
 A collection of core system utilities, such as cp, mv, ls
 
-%package libstdbuf
-Summary: Provides libstdbuf.so
-Group: Development/Libraries
-
-%description libstdbuf
-Provides libstdbuf.so
-
 %prep
 %setup -q
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
 
 %build
@@ -35,17 +28,17 @@ Provides libstdbuf.so
   --prefix=/usr \
   --enable-no-install-program=kill,uptime \
   --libdir=/usr/%{_lib}
-make
-#make NON_ROOT_USERNAME=nobody check-root
-#chown -Rv nobody config.log {gnulib-tests,lib,src}/.deps
-#su nobody -s /bin/bash -c "make RUN_EXPENSIVE_TESTS=yes check"
+make %{PMFLAGS}
+make %{PMFLAGS} NON_ROOT_USERNAME=nobody check-root
+chown -Rv nobody .
+su nobody -s /bin/bash -c "make %{PMFLAGS} RUN_EXPENSIVE_TESTS=yes check"
 
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
 mkdir -v %{buildroot}/bin
 mkdir -v %{buildroot}/usr/sbin
-for file in cat chgrp chmod chown cp date dd df echo false head ln ls mkdir mknod mv nice pwd readlink rm rmdir sleep stty sync true uname
+for file in cat chgrp chmod chown cp date dd df dirname echo false head ln ls mkdir mknod mv nice pwd readlink rm rmdir sleep stty sync touch true uname
 do
   mv -v %{buildroot}/usr/bin/$file %{buildroot}/bin
 done
@@ -74,6 +67,7 @@ rm -rf %{buildroot}
 /bin/date
 /bin/dd
 /bin/df
+/bin/dirname
 /bin/echo
 /bin/false
 /bin/head
@@ -90,6 +84,7 @@ rm -rf %{buildroot}
 /bin/sleep
 /bin/stty
 /bin/sync
+/bin/touch
 /bin/true
 /bin/uname
 /etc/dircolors
@@ -103,7 +98,6 @@ rm -rf %{buildroot}
 /usr/bin/cut
 /usr/bin/dir
 /usr/bin/dircolors
-/usr/bin/dirname
 /usr/bin/du
 /usr/bin/env
 /usr/bin/expand
@@ -151,7 +145,6 @@ rm -rf %{buildroot}
 /usr/bin/tee
 /usr/bin/test
 /usr/bin/timeout
-/usr/bin/touch
 /usr/bin/tr
 /usr/bin/truncate
 /usr/bin/tsort
@@ -165,16 +158,15 @@ rm -rf %{buildroot}
 /usr/bin/who
 /usr/bin/whoami
 /usr/bin/yes
+/usr/%{_lib}/coreutils
 /usr/sbin/chroot
 /usr/share/info/coreutils.info
 /usr/share/man/man1/*
 
-%files libstdbuf
-%defattr(-,root,root)
-%dir /usr/%{_lib}/%{name}
-/usr/%{_lib}/%{name}/libstdbuf.so
-
 %changelog
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.12-1
+- Upgrade to 8.12
+
 * Sat Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.9-1
 - Upgrade to 8.9
 
