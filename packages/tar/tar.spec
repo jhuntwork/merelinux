@@ -1,6 +1,6 @@
 Summary: GNU Tape Archiver
 Name: tar
-Version: 1.25
+Version: 1.26
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/tar
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 0f0c090e51d127cbeffbb9aeeb90db1181d82aed
+BuildRequires: digest(sha1:%{SOURCE0}) = 70f298c3cd997b694864c55e6d8655324c87a0cc
 
 %description
 The Tar program provides the ability to create tar archives,
@@ -24,7 +24,7 @@ FORCE_UNSAFE_CONFIGURE=1 \
   --prefix=/usr \
   --bindir=/bin \
   --libexecdir=/usr/sbin
-make
+make %{PMFLAGS}
 make check
 
 %install
@@ -50,6 +50,9 @@ rm -rf %{buildroot}
 /usr/share/info/tar.info-2
 
 %changelog
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.26-1
+- Upgrade to 1.26
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.25-1
 - Upgrade to 1.25
 
