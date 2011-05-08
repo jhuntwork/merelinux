@@ -1,15 +1,17 @@
 Summary: Base directory layout
 Name: base-layout
 Version: 0.1
-Release: 6
+Release: 7
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/lang-iso
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/lang-exceptions
+Source0: http://dev.lightcube.us/sources/%{name}/lang-iso
+Source1: http://dev.lightcube.us/sources/%{name}/lang-exceptions
 
 Requires(postun): /
+BuildRequires: digest(sha1:%{SOURCE0}) = 9b091c035b2959b085ef7e46f242451bce844d4c
+BuildRequires: digest(sha1:%{SOURCE1}) = 890e047e6b8a2a34f84f0214bbd4a6fcf7bd1d05
 
 %description
 Provides an empty filesystem layout with all necessary
@@ -24,7 +26,7 @@ install -dv %{buildroot}/lib/{lsb,modules}
 install -dv %{buildroot}/media/{floppy,cdrom}
 install -dv %{buildroot}/usr/{,local/}{bin,include,lib/lsb,sbin,src}
 install -dv %{buildroot}/usr/src/kernels
-install -dv %{buildroot}/usr/{,local/}share/{aclocal,dict,doc,gtk-doc/html,info,locale}
+install -dv %{buildroot}/usr/{,local/}share/{aclocal,dict,doc,info,locale}
 install -dv %{buildroot}/usr/{,local/}share/{man,misc,terminfo,zoneinfo}
 install -dv %{buildroot}/var/{lock,log,mail,run,spool,tmp}
 install -dv %{buildroot}/var/spool/repackage
@@ -123,8 +125,6 @@ rm -rf %{buildroot}
 %dir /usr/share/dict
 %dir /usr/share/doc
 %dir /usr/share/info
-%dir /usr/share/gtk-doc
-%dir /usr/share/gtk-doc/html
 %dir /usr/share/locale
 %dir /usr/share/man
 %dir /usr/share/misc
@@ -148,6 +148,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-7
+- Remove /usr/share/gtk-doc
+
 * Mon Aug 23 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-6
 - Add /{,usr}/lib/lsb directories, /etc/sysconfig
 
