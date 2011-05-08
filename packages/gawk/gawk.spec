@@ -1,15 +1,14 @@
 Summary: Gawk
 Name: gawk
 Version: 3.1.8
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/gawk
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc
 BuildRequires: digest(%{SOURCE0}) = 52b41c6c4418b3226dfb8f82076193bb
 
 %description
@@ -22,12 +21,18 @@ lines of code.
 %setup -q
 
 %build
-./configure --prefix=/usr --libexecdir=/usr/%{_lib}
-make
+./configure \
+  --prefix=/usr \
+  --libexecdir=/usr/%{_lib}
+make %{PMFLAGS}
 make check
 
 %install
 make DESTDIR=%{buildroot} install
+install -dv %{buildroot}/bin
+mv -v %{buildroot}/usr/bin/gawk %{buildroot}/bin
+rm -v %{buildroot}/usr/bin/awk
+ln -sv gawk %{buildroot}/bin/awk
 rm -f %{buildroot}/usr/share/info/dir
 %find_lang %{name}
 
@@ -44,8 +49,8 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-/usr/bin/awk
-/usr/bin/gawk
+/bin/awk
+/bin/gawk
 /usr/bin/gawk-%{version}
 /usr/bin/igawk
 /usr/bin/pgawk
@@ -59,7 +64,10 @@ rm -rf %{buildroot}
 /usr/share/man/man1/pgawk.1
 
 %changelog
-* Sun Aug 08 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.8-1
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.8-2
+- Move gawk and awk to /bin.
+
+* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.8-1
 - Upgrade to 3.1.8
 
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.7-2
