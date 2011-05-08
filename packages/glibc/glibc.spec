@@ -1,6 +1,6 @@
 Summary: GNU C Library
 Name: glibc
-Version: 2.12.2
+Version: 2.13
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/libc
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 3ef6d36eee2dc7c4351f215f689e6a04c161a35e
+BuildRequires: digest(sha1:%{SOURCE0}) = 14d83dced873a21a3da6a0bfa0926f40d82ef980
 
 %description
 The system C library which defines run-time functions for all
@@ -30,16 +30,12 @@ object files available in order to create the executables.
 %prep
 rm -rf glibc-build
 %setup -q
-%patch0 -p1
-%patch1 -p1
 %ifarch x86_64
 cd ..
 rm -rf glibc-build-32
 rm -rf %{name}-%{version}-32
 mv -v %{name}-%{version}{,-32}
 %setup -q
-%patch0 -p1
-%patch1 -p1
 %endif
 
 %build
@@ -63,7 +59,9 @@ CC="gcc -m32" CXX="g++ -m32" \
   --libdir=/usr/lib \
   libc_cv_forced_unwind=yes \
   libc_cv_c_cleanup=yes
-make
+make PARALLELMFLAGS="%{PMFLAGS}"
+cp -v ../glibc-%{version}-32/iconvdata/gconv-modules iconvdata
+make PARALLELMFLAGS="%{PMFLAGS}" -k check 2>&1 | tee glibc-check-log
 cd ../glibc-%{version}
 %endif
 sed -i '/vi_VN.TCVN/d' localedata/SUPPORTED
@@ -83,18 +81,20 @@ echo "slibdir=/lib64" > configparms
   --enable-kernel=2.6.18 \
   --libexecdir=/usr/%{_lib}/glibc \
   --libdir=/usr/%{_lib}
-make
+make PARALLELMFLAGS="%{PMFLAGS}"
+cp -v ../glibc-%{version}/iconvdata/gconv-modules iconvdata
+make PARALLELMFLAGS="%{PMFLAGS}" -k check 2>&1 | tee glibc-check-log
 
 %install
 install -dv %{buildroot}/etc
 touch %{buildroot}/etc/ld.so.conf
 %ifarch x86_64
 cd ../glibc-build-32
-make install_root=%{buildroot} install
+make PARALLELMFLAGS="%{PMFLAGS}" install_root=%{buildroot} install
 %endif
 cd ../glibc-build
-make install_root=%{buildroot} install
-make install_root=%{buildroot} localedata/install-locales
+make PARALLELMFLAGS="%{PMFLAGS}" install_root=%{buildroot} install
+make PARALLELMFLAGS="%{PMFLAGS}" install_root=%{buildroot} localedata/install-locales
 rm -f %{buildroot}/usr/share/info/dir
 rm -f %{buildroot}/etc/localtime
 cat > %{buildroot}/etc/nsswitch.conf << "EOF"
@@ -117,8 +117,7 @@ EOF
 cat > %{buildroot}/etc/ld.so.conf << "EOF"
 # Begin /etc/ld.so.conf
 
-/usr/local/lib
-/opt/lib
+#/usr/local/lib
 
 # End /etc/ld.so.conf
 EOF
@@ -187,6 +186,9 @@ rm -rf glibc-build
 %endif
 
 %changelog
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.13-1
+- Upgrade to 2.13
+
 * Sat Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.12.2-1
 - Upgrade to 2.12.2
 
