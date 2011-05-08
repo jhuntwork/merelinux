@@ -1,18 +1,15 @@
 Summary: The MPFR Library
 Name: mpfr
-Version: 3.0.0
+Version: 3.0.1
 Release: 1
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.mpfr.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-upstream_fixes-1.patch
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, gmp
-BuildRequires: digest(%{SOURCE0}) = f45bac3584922c8004a10060ab1a8f9f
-BuildRequires: digest(%{PATCH0}) = 551a91642f6e0c8e76598e5dd0e06815
+BuildRequires: digest(sha1:%{SOURCE0}) = fbf402fc196724ae60ef01eb6ca8490b1ea4db69
 BuildRequires: gmp-devel
 
 %description
@@ -22,8 +19,7 @@ computations with correct rounding.
 %package devel
 Summary: Headers, object files and info pages for developing with %{name}
 Group: Development/Libraries
-Requires: %{name}
-Requires(post): texinfo, bash, ncurses, readline
+Requires: %{name} >= %{version}
 
 %description devel
 Provides headers, object files and info pages for use in developing
@@ -31,13 +27,14 @@ applications using %{name}.
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-./configure --prefix=/usr --enable-thread-safe --libdir=/usr/%{_lib}
-make
+./configure \
+  --prefix=/usr \
+  --enable-thread-safe \
+  --libdir=/usr/%{_lib}
+make %{PMFLAGS}
 make check
-make html
 
 %install
 make DESTDIR=%{buildroot} install
@@ -70,6 +67,9 @@ rm -rf %{buildroot}
 /usr/share/doc/mpfr
 
 %changelog
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.1-1
+- Upgrade to 3.0.1
+
 * Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.0-1
 - Upgrade to 3.0.0
 
