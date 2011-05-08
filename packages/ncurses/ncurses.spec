@@ -1,24 +1,23 @@
 Summary: Ncurses Library
 Name: ncurses
-Version: 5.7
-Release: 3
+Version: 5.9
+Release: 1
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/ncurses
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = cce05daf61a64501ef6cd8da1f727ec6
+BuildRequires: digest(sha1:%{SOURCE0}) = 3e042e5f2c7223bffdaac9646a533b8c758b65b5
+
+%description
+Ncurses is an API for writing text-based user interfaces.
 
 %package devel
 Summary: Headers and libraries for developing with %{name} 
 Group: Development
-Requires: %{name}
-
-%description
-%{name} is an API for writing text-based user interfaces.
+Requires: %{name} >= %{version}
 
 %description devel
 Headers and libraries for developing with %{name}
@@ -27,11 +26,15 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
 export LDFLAGS="%{LDFLAGS}"
-./configure --prefix=/usr --mandir=/usr/share/man --with-shared \
- --without-debug --enable-widec --libdir=/usr/%{_lib}
-make
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib} \
+  --with-shared \
+  --without-debug \
+  --enable-widec \
+  --mandir=/usr/share/man
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -50,6 +53,7 @@ ln -sfv libncurses.so %{buildroot}/usr/%{_lib}/libcurses.so
 ln -sfv libncurses++w.a %{buildroot}/usr/%{_lib}/libncurses++.a
 ln -sfv libncursesw.a %{buildroot}/usr/%{_lib}/libcursesw.a
 ln -sfv libncurses.a %{buildroot}/usr/%{_lib}/libcurses.a
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -64,6 +68,7 @@ rm -rf %{buildroot}
 /usr/bin/infocmp
 /usr/bin/infotocap
 /usr/bin/reset
+/usr/bin/tabs
 /usr/bin/tic
 /usr/bin/toe
 /usr/bin/tput
@@ -76,9 +81,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/terminfo
 %endif
 /usr/share/man/man1/*
-/usr/share/man/man5/term.5
-/usr/share/man/man5/terminfo.5
-/usr/share/man/man7/term.7
+/usr/share/man/man5/*
+/usr/share/man/man7/*
 /usr/share/tabset
 /usr/share/terminfo/*
 
@@ -111,6 +115,9 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.9-1
+- Upgrade to 5.9
+
 * Fri Apr 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.7-3
 - Add missing link for libncurses++w.a
 
