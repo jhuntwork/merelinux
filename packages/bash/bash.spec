@@ -1,7 +1,7 @@
 Summary: GNU Bash
 Name: bash
 Version: 4.2
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,10 +9,13 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/bash
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-rpm_requires-1.patch
+Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-fixes-2.patch
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 487840ab7134eb7901fbb2e49b0ee3d22de15cb8
 BuildRequires: digest(sha1:%{PATCH0})  = b84164630c0c1353730cc8695d0d49304bcb8141
+BuildRequires: digest(sha1:%{PATCH1})  = 61c5ecf5d4844fbb8bdece38b02e2d0a793f4085
 BuildRequires: readline-devel
+BuildRequires: ncurses-devel
 
 %description
 Bash is an sh-compatible shell that incorporates useful features from the
@@ -28,9 +31,9 @@ Extensive documentation for the GNU Bash shell
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
-export CFLAGS="%{CFLAGS}"
 export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
@@ -38,11 +41,11 @@ export LDFLAGS="%{LDFLAGS}"
   --without-bash-malloc \
   --htmldir=/usr/share/doc/%{name}-%{version} \
   --with-installed-readline
-make
+make %{PMFLAGS}
 #sed -i 's/LANG/LC_ALL/' tests/intl.tests
 #sed -i 's@tests@& </dev/tty@' tests/run-test
-#chown -Rv nobody ./
-#su nobody -s /bin/bash -c "make tests"
+chown -Rv nobody ./
+su nobody -s /bin/bash -c "make tests"
 
 %install
 make DESTDIR=%{buildroot} install
@@ -58,14 +61,27 @@ NORMAL="\[\e[0m\]"
 RED="\[\e[1;31m\]"
 GREEN="\[\e[1;32m\]"
 if [[ $EUID == 0 ]] ; then
-        PS1="$RED\u$NORMAL@\h $RED[ $NORMAL\w$RED ]# $NORMAL"
+        PS1="$RED\u$NORMAL@\h \w$RED \\$ $NORMAL"
 else
-        PS1="$GREEN\u$NORMAL@\h $GREEN[ $NORMAL\w$GREEN ]\$ $NORMAL"
+        PS1="$GREEN\u$NORMAL@\h \w$GREEN \\$ $NORMAL"
 fi
+PS2=' '
 
 if [ "`locale charmap 2>/dev/null`" = "UTF-8" ]
 then
 	stty iutf8
+fi
+
+shopt -s checkwinsize
+
+# Set the titlebar text for X terminals.
+if [    "$TERM" = "xterm" -o \
+        "$TERM" = "xterm-color" -o \
+        "$TERM" = "xterm-256color" -o \
+        "$TERM" = "xterm-xfree86" -o \
+        "$TERM" = "rxvt" -o \
+        "$TERM" = "rxvt-unicode" ]; then
+        export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
 fi
 EOF
 cat > %{buildroot}/etc/profile << "EOF"
@@ -73,7 +89,9 @@ export PATH=/bin:/usr/bin:/sbin:/usr/sbin
 export INPUTRC=/etc/inputrc
 export PKG_CONFIG_PATH="/usr/%{_lib}/pkgconfig:/usr/share/pkgconfig"
 export HISTSIZE=1000
+export HISTFILESIZE=2000
 export HISTTIMEFORMAT="%%F %%T :: "
+export HISTCONTROL=ignoredups:ignorespace
 source /etc/bashrc
 EOF
 rm -f %{buildroot}/usr/share/info/dir
@@ -104,6 +122,9 @@ rm -rf %{buildroot}
 /usr/share/info/bash.info
 
 %changelog
+* Fri May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2-2
+- Add some upstream fixes, and properly link against ncurses
+
 * Fri Mar 04 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2-1
 - Upgrade to 4.2
 
