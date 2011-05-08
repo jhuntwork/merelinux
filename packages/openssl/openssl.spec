@@ -1,6 +1,6 @@
 Summary: OpenSSL
 Name: openssl
-Version: 1.0.0c
+Version: 1.0.0d
 Release: 1
 Group: System Environment/Libraries
 License: BSD
@@ -10,7 +10,7 @@ URL: http://www.openssl.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-ldflags-1.patch
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 5a2d74fa7fe90c80915332404b9700044ef676a1
+BuildRequires: digest(sha1:%{SOURCE0}) = 32ca934f380a547061ddab7221b1a34e4e07e8d5
 BuildRequires: digest(sha1:%{PATCH0})  = 443872eca56c0f5c6f34ec8b07f70a549e830994
 BuildRequires: zlib-devel
 
@@ -23,7 +23,7 @@ cryptography library.
 %package devel
 Summary: Headers and libraries for developing with %{name}
 Group: Development/Libraries
-Requires: %{name}
+Requires: %{name} >= %{version}
 
 %description devel
 Headers and libraries for developing with %{name}
@@ -31,7 +31,7 @@ Headers and libraries for developing with %{name}
 %package misc
 Summary: Miscellaneous OpenSSL related tools
 Group: System Environment/Utilities
-Requires: %{name}
+Requires: %{name} >= %{version}
 
 %description misc
 Miscellaneous OpenSSL related tools
@@ -90,6 +90,9 @@ rm -rf %{buildroot}
 /etc/ssl/misc
 
 %changelog
+* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0d-1
+- Upgrade to 1.0.0d
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0c-1
 - Upgrade to 1.0.0c
 
