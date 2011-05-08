@@ -1,6 +1,6 @@
 Summary: The GNU Compiler Collection
 Name: gcc
-Version: 4.5.2
+Version: 4.5.3
 Release: 1
 Group: Development/Tools
 License: GPLv2
@@ -9,8 +9,7 @@ Vendor: LightCube Solutions
 URL: http://gcc.gnu.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(sha1:%{SOURCE0}) = ad5c440526c98fd17a74eab80c031af6b64d9c90
+BuildRequires: digest(sha1:%{SOURCE0}) = 73c45dfda5eef6b124be53e56828b5925198cc1b
 BuildRequires: gmp-devel
 BuildRequires: mpfr-devel
 BuildRequires: mpc-devel
@@ -18,6 +17,9 @@ BuildRequires: ppl-devel
 BuildRequires: cloog-ppl-devel
 BuildRequires: zlib-devel
 BuildRequires: elfutils-devel
+BuildRequires: tcl
+BuildRequires: expect
+BuildRequires: dejagnu
 
 %description
 The GNU Compiler Collection is required to compile various languages.
@@ -72,16 +74,19 @@ cd ../%{name}-build
   --enable-__cxa_atexit \
   --enable-clocale=gnu \
   --enable-languages=c,c++ \
-  --disable-bootstrap \
   --infodir=/usr/share/info \
   --mandir=/usr/share/man 
-make -j2 LDFLAGS="-s"
+make %{PMFLAGS} LDFLAGS="-s"
+make %{PMFLAGS} -k check || /bin/true
+../%{name}-%{version}/contrib/test_summary 2>&1 | grep -A7 Summ | tee check.log
 
 %install
 cd ../%{name}-build
 make DESTDIR=%{buildroot} install
-mkdir %{buildroot}/%{_lib}
+install -dv %{buildroot}/%{_lib}
+install -dv %{buildroot}/lib
 ln -sv ../usr/bin/cpp %{buildroot}/%{_lib}
+ln -sfv ../usr/bin/cpp %{buildroot}/lib
 ln -sv gcc %{buildroot}/usr/bin/cc
 mv %{buildroot}/usr/%{_lib}/*.py %{buildroot}/usr/share/gcc-%{version}/python/
 %if "%{_lib}" != "lib"
@@ -116,6 +121,9 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
+%if "%{_lib}" != "lib"
+/lib/cpp
+%endif
 /%{_lib}/cpp
 /usr/bin/cc
 /usr/bin/cpp
@@ -215,6 +223,9 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.3-1
+- Upgrade to 4.5.3, fix missing /lib/cpp symlink in 64bit arch
+
 * Sun Dec 19 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.2-1
 - Upgrade to 4.5.2
 
