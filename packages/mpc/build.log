@@ -1,0 +1,864 @@
+Fetching(Source0): http://dev.lightcube.us/sources/mpc/mpc-0.9.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.36801
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf mpc-0.9
++ /bin/gzip -dc /usr/src/rpm/SOURCES/mpc-0.9.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd mpc-0.9
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.36801
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd mpc-0.9
++ ./configure --prefix=/usr --libdir=/usr/lib64
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking for gmp.h... yes
+checking for grep that handles long lines and -e... /bin/grep
+checking for CC and CFLAGS in gmp.h... checking how to run the C preprocessor... gcc -E
+checking for egrep... /bin/grep -E
+checking for a sed that does not truncate output... /bin/sed
+yes CC=gcc -std=gnu99 CFLAGS=-O2 -pedantic -m64 -mtune=k8 -march=k8
+checking for CC=gcc -std=gnu99 and CFLAGS=-O2 -pedantic -m64 -mtune=k8 -march=k8... yes
+checking for a sed that does not truncate output... (cached) /bin/sed
+checking for fgrep... /bin/grep -F
+checking for ld used by gcc -std=gnu99... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 3458764513820540925
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for ar... ar
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc -std=gnu99 object... ok
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions... no
+checking for gcc -std=gnu99 option to produce PIC... -fPIC -DPIC
+checking if gcc -std=gnu99 PIC flag -fPIC -DPIC works... yes
+checking if gcc -std=gnu99 static flag -static works... yes
+checking if gcc -std=gnu99 supports -c -o file.o... yes
+checking if gcc -std=gnu99 supports -c -o file.o... (cached) yes
+checking whether the gcc -std=gnu99 linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for ANSI C header files... (cached) yes
+checking complex.h usability... yes
+checking complex.h presence... yes
+checking for complex.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking for inttypes.h... (cached) yes
+checking for stdint.h... (cached) yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking for unistd.h... (cached) yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking for an ANSI C-conforming const... yes
+checking for size_t... yes
+checking whether time.h and sys/time.h may both be included... yes
+checking for creal in -lm... yes
+checking for __gmpz_init in -lgmp... yes
+checking for MPFR... yes
+checking for recent GMP... yes
+checking for recent MPFR... yes
+checking for gettimeofday... yes
+checking for localeconv... yes
+checking for setlocale... yes
+checking for dup... yes
+checking for dup2... yes
+checking for fileno... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating tests/Makefile
+config.status: creating doc/Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
++ make -j24
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/src'
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT abs.lo -MD -MP -MF .deps/abs.Tpo -c -o abs.lo abs.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT acos.lo -MD -MP -MF .deps/acos.Tpo -c -o acos.lo acos.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT acosh.lo -MD -MP -MF .deps/acosh.Tpo -c -o acosh.lo acosh.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add.lo -MD -MP -MF .deps/add.Tpo -c -o add.lo add.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_fr.lo -MD -MP -MF .deps/add_fr.Tpo -c -o add_fr.lo add_fr.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_si.lo -MD -MP -MF .deps/add_si.Tpo -c -o add_si.lo add_si.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_ui.lo -MD -MP -MF .deps/add_ui.Tpo -c -o add_ui.lo add_ui.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT arg.lo -MD -MP -MF .deps/arg.Tpo -c -o arg.lo arg.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT asin.lo -MD -MP -MF .deps/asin.Tpo -c -o asin.lo asin.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT asinh.lo -MD -MP -MF .deps/asinh.Tpo -c -o asinh.lo asinh.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT atan.lo -MD -MP -MF .deps/atan.Tpo -c -o atan.lo atan.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT atanh.lo -MD -MP -MF .deps/atanh.Tpo -c -o atanh.lo atanh.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT clear.lo -MD -MP -MF .deps/clear.Tpo -c -o clear.lo clear.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cmp.lo -MD -MP -MF .deps/cmp.Tpo -c -o cmp.lo cmp.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cmp_si_si.lo -MD -MP -MF .deps/cmp_si_si.Tpo -c -o cmp_si_si.lo cmp_si_si.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT conj.lo -MD -MP -MF .deps/conj.Tpo -c -o conj.lo conj.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cosh.lo -MD -MP -MF .deps/cosh.Tpo -c -o cosh.lo cosh.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_2exp.lo -MD -MP -MF .deps/div_2exp.Tpo -c -o div_2exp.lo div_2exp.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div.lo -MD -MP -MF .deps/div.Tpo -c -o div.lo div.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_fr.lo -MD -MP -MF .deps/div_fr.Tpo -c -o div_fr.lo div_fr.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_ui.lo -MD -MP -MF .deps/div_ui.Tpo -c -o div_ui.lo div_ui.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT exp.lo -MD -MP -MF .deps/exp.Tpo -c -o exp.lo exp.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fma.lo -MD -MP -MF .deps/fma.Tpo -c -o fma.lo fma.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fr_div.lo -MD -MP -MF .deps/fr_div.Tpo -c -o fr_div.lo fr_div.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT abs.lo -MD -MP -MF .deps/abs.Tpo -c abs.c  -fPIC -DPIC -o .libs/abs.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT acosh.lo -MD -MP -MF .deps/acosh.Tpo -c acosh.c  -fPIC -DPIC -o .libs/acosh.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add.lo -MD -MP -MF .deps/add.Tpo -c add.c  -fPIC -DPIC -o .libs/add.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_fr.lo -MD -MP -MF .deps/add_fr.Tpo -c add_fr.c  -fPIC -DPIC -o .libs/add_fr.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT acos.lo -MD -MP -MF .deps/acos.Tpo -c acos.c  -fPIC -DPIC -o .libs/acos.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_si.lo -MD -MP -MF .deps/add_si.Tpo -c add_si.c  -fPIC -DPIC -o .libs/add_si.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT atanh.lo -MD -MP -MF .deps/atanh.Tpo -c atanh.c  -fPIC -DPIC -o .libs/atanh.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT asin.lo -MD -MP -MF .deps/asin.Tpo -c asin.c  -fPIC -DPIC -o .libs/asin.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT atan.lo -MD -MP -MF .deps/atan.Tpo -c atan.c  -fPIC -DPIC -o .libs/atan.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT asinh.lo -MD -MP -MF .deps/asinh.Tpo -c asinh.c  -fPIC -DPIC -o .libs/asinh.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_ui.lo -MD -MP -MF .deps/add_ui.Tpo -c add_ui.c  -fPIC -DPIC -o .libs/add_ui.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT arg.lo -MD -MP -MF .deps/arg.Tpo -c arg.c  -fPIC -DPIC -o .libs/arg.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cmp.lo -MD -MP -MF .deps/cmp.Tpo -c cmp.c  -fPIC -DPIC -o .libs/cmp.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cmp_si_si.lo -MD -MP -MF .deps/cmp_si_si.Tpo -c cmp_si_si.c  -fPIC -DPIC -o .libs/cmp_si_si.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT clear.lo -MD -MP -MF .deps/clear.Tpo -c clear.c  -fPIC -DPIC -o .libs/clear.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cosh.lo -MD -MP -MF .deps/cosh.Tpo -c cosh.c  -fPIC -DPIC -o .libs/cosh.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div.lo -MD -MP -MF .deps/div.Tpo -c div.c  -fPIC -DPIC -o .libs/div.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_fr.lo -MD -MP -MF .deps/div_fr.Tpo -c div_fr.c  -fPIC -DPIC -o .libs/div_fr.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_ui.lo -MD -MP -MF .deps/div_ui.Tpo -c div_ui.c  -fPIC -DPIC -o .libs/div_ui.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT exp.lo -MD -MP -MF .deps/exp.Tpo -c exp.c  -fPIC -DPIC -o .libs/exp.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_2exp.lo -MD -MP -MF .deps/div_2exp.Tpo -c div_2exp.c  -fPIC -DPIC -o .libs/div_2exp.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT conj.lo -MD -MP -MF .deps/conj.Tpo -c conj.c  -fPIC -DPIC -o .libs/conj.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fr_div.lo -MD -MP -MF .deps/fr_div.Tpo -c fr_div.c  -fPIC -DPIC -o .libs/fr_div.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fma.lo -MD -MP -MF .deps/fma.Tpo -c fma.c  -fPIC -DPIC -o .libs/fma.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT abs.lo -MD -MP -MF .deps/abs.Tpo -c abs.c -o abs.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT clear.lo -MD -MP -MF .deps/clear.Tpo -c clear.c -o clear.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT arg.lo -MD -MP -MF .deps/arg.Tpo -c arg.c -o arg.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_fr.lo -MD -MP -MF .deps/add_fr.Tpo -c add_fr.c -o add_fr.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cosh.lo -MD -MP -MF .deps/cosh.Tpo -c cosh.c -o cosh.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cmp.lo -MD -MP -MF .deps/cmp.Tpo -c cmp.c -o cmp.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fr_div.lo -MD -MP -MF .deps/fr_div.Tpo -c fr_div.c -o fr_div.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT cmp_si_si.lo -MD -MP -MF .deps/cmp_si_si.Tpo -c cmp_si_si.c -o cmp_si_si.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_si.lo -MD -MP -MF .deps/add_si.Tpo -c add_si.c -o add_si.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add.lo -MD -MP -MF .deps/add.Tpo -c add.c -o add.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT add_ui.lo -MD -MP -MF .deps/add_ui.Tpo -c add_ui.c -o add_ui.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT conj.lo -MD -MP -MF .deps/conj.Tpo -c conj.c -o conj.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_fr.lo -MD -MP -MF .deps/div_fr.Tpo -c div_fr.c -o div_fr.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_2exp.lo -MD -MP -MF .deps/div_2exp.Tpo -c div_2exp.c -o div_2exp.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div_ui.lo -MD -MP -MF .deps/div_ui.Tpo -c div_ui.c -o div_ui.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT asinh.lo -MD -MP -MF .deps/asinh.Tpo -c asinh.c -o asinh.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT atanh.lo -MD -MP -MF .deps/atanh.Tpo -c atanh.c -o atanh.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT acosh.lo -MD -MP -MF .deps/acosh.Tpo -c acosh.c -o acosh.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fma.lo -MD -MP -MF .deps/fma.Tpo -c fma.c -o fma.o >/dev/null 2>&1
+mv -f .deps/abs.Tpo .deps/abs.Plo
+mv -f .deps/clear.Tpo .deps/clear.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fr_sub.lo -MD -MP -MF .deps/fr_sub.Tpo -c -o fr_sub.lo fr_sub.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get.lo -MD -MP -MF .deps/get.Tpo -c -o get.lo get.c
+mv -f .deps/arg.Tpo .deps/arg.Plo
+mv -f .deps/conj.Tpo .deps/conj.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_prec2.lo -MD -MP -MF .deps/get_prec2.Tpo -c -o get_prec2.lo get_prec2.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_prec.lo -MD -MP -MF .deps/get_prec.Tpo -c -o get_prec.lo get_prec.c
+mv -f .deps/add_fr.Tpo .deps/add_fr.Plo
+mv -f .deps/cosh.Tpo .deps/cosh.Plo
+mv -f .deps/fr_div.Tpo .deps/fr_div.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_str.lo -MD -MP -MF .deps/get_str.Tpo -c -o get_str.lo get_str.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_version.lo -MD -MP -MF .deps/get_version.Tpo -c -o get_version.lo get_version.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT imag.lo -MD -MP -MF .deps/imag.Tpo -c -o imag.lo imag.c
+mv -f .deps/cmp_si_si.Tpo .deps/cmp_si_si.Plo
+mv -f .deps/add_si.Tpo .deps/add_si.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT init2.lo -MD -MP -MF .deps/init2.Tpo -c -o init2.lo init2.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT init3.lo -MD -MP -MF .deps/init3.Tpo -c -o init3.lo init3.c
+mv -f .deps/cmp.Tpo .deps/cmp.Plo
+mv -f .deps/add_ui.Tpo .deps/add_ui.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT inp_str.lo -MD -MP -MF .deps/inp_str.Tpo -c -o inp_str.lo inp_str.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT exp.lo -MD -MP -MF .deps/exp.Tpo -c exp.c -o exp.o >/dev/null 2>&1
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT log.lo -MD -MP -MF .deps/log.Tpo -c -o log.lo log.c
+mv -f .deps/add.Tpo .deps/add.Plo
+mv -f .deps/div_ui.Tpo .deps/div_ui.Plo
+mv -f .deps/div_2exp.Tpo .deps/div_2exp.Plo
+mv -f .deps/div_fr.Tpo .deps/div_fr.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mem.lo -MD -MP -MF .deps/mem.Tpo -c -o mem.lo mem.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_2exp.lo -MD -MP -MF .deps/mul_2exp.Tpo -c -o mul_2exp.lo mul_2exp.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul.lo -MD -MP -MF .deps/mul.Tpo -c -o mul.lo mul.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_fr.lo -MD -MP -MF .deps/mul_fr.Tpo -c -o mul_fr.lo mul_fr.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT asin.lo -MD -MP -MF .deps/asin.Tpo -c asin.c -o asin.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fr_sub.lo -MD -MP -MF .deps/fr_sub.Tpo -c fr_sub.c  -fPIC -DPIC -o .libs/fr_sub.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get.lo -MD -MP -MF .deps/get.Tpo -c get.c  -fPIC -DPIC -o .libs/get.o
+mv -f .deps/asinh.Tpo .deps/asinh.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_i.lo -MD -MP -MF .deps/mul_i.Tpo -c -o mul_i.lo mul_i.c
+mv -f .deps/atanh.Tpo .deps/atanh.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_prec.lo -MD -MP -MF .deps/get_prec.Tpo -c get_prec.c  -fPIC -DPIC -o .libs/get_prec.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_si.lo -MD -MP -MF .deps/mul_si.Tpo -c -o mul_si.lo mul_si.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_prec2.lo -MD -MP -MF .deps/get_prec2.Tpo -c get_prec2.c  -fPIC -DPIC -o .libs/get_prec2.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_str.lo -MD -MP -MF .deps/get_str.Tpo -c get_str.c  -fPIC -DPIC -o .libs/get_str.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT imag.lo -MD -MP -MF .deps/imag.Tpo -c imag.c  -fPIC -DPIC -o .libs/imag.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_version.lo -MD -MP -MF .deps/get_version.Tpo -c get_version.c  -fPIC -DPIC -o .libs/get_version.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT init2.lo -MD -MP -MF .deps/init2.Tpo -c init2.c  -fPIC -DPIC -o .libs/init2.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT init3.lo -MD -MP -MF .deps/init3.Tpo -c init3.c  -fPIC -DPIC -o .libs/init3.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT acos.lo -MD -MP -MF .deps/acos.Tpo -c acos.c -o acos.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT log.lo -MD -MP -MF .deps/log.Tpo -c log.c  -fPIC -DPIC -o .libs/log.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT inp_str.lo -MD -MP -MF .deps/inp_str.Tpo -c inp_str.c  -fPIC -DPIC -o .libs/inp_str.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_2exp.lo -MD -MP -MF .deps/mul_2exp.Tpo -c mul_2exp.c  -fPIC -DPIC -o .libs/mul_2exp.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mem.lo -MD -MP -MF .deps/mem.Tpo -c mem.c  -fPIC -DPIC -o .libs/mem.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul.lo -MD -MP -MF .deps/mul.Tpo -c mul.c  -fPIC -DPIC -o .libs/mul.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_fr.lo -MD -MP -MF .deps/mul_fr.Tpo -c mul_fr.c  -fPIC -DPIC -o .libs/mul_fr.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_i.lo -MD -MP -MF .deps/mul_i.Tpo -c mul_i.c  -fPIC -DPIC -o .libs/mul_i.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT atan.lo -MD -MP -MF .deps/atan.Tpo -c atan.c -o atan.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_si.lo -MD -MP -MF .deps/mul_si.Tpo -c mul_si.c  -fPIC -DPIC -o .libs/mul_si.o
+mv -f .deps/acosh.Tpo .deps/acosh.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_ui.lo -MD -MP -MF .deps/mul_ui.Tpo -c -o mul_ui.lo mul_ui.c
+mv -f .deps/fma.Tpo .deps/fma.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT neg.lo -MD -MP -MF .deps/neg.Tpo -c -o neg.lo neg.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT fr_sub.lo -MD -MP -MF .deps/fr_sub.Tpo -c fr_sub.c -o fr_sub.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get.lo -MD -MP -MF .deps/get.Tpo -c get.c -o get.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_prec2.lo -MD -MP -MF .deps/get_prec2.Tpo -c get_prec2.c -o get_prec2.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_prec.lo -MD -MP -MF .deps/get_prec.Tpo -c get_prec.c -o get_prec.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT imag.lo -MD -MP -MF .deps/imag.Tpo -c imag.c -o imag.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_version.lo -MD -MP -MF .deps/get_version.Tpo -c get_version.c -o get_version.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_ui.lo -MD -MP -MF .deps/mul_ui.Tpo -c mul_ui.c  -fPIC -DPIC -o .libs/mul_ui.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT init3.lo -MD -MP -MF .deps/init3.Tpo -c init3.c -o init3.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT init2.lo -MD -MP -MF .deps/init2.Tpo -c init2.c -o init2.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT neg.lo -MD -MP -MF .deps/neg.Tpo -c neg.c  -fPIC -DPIC -o .libs/neg.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_2exp.lo -MD -MP -MF .deps/mul_2exp.Tpo -c mul_2exp.c -o mul_2exp.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_fr.lo -MD -MP -MF .deps/mul_fr.Tpo -c mul_fr.c -o mul_fr.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mem.lo -MD -MP -MF .deps/mem.Tpo -c mem.c -o mem.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_si.lo -MD -MP -MF .deps/mul_si.Tpo -c mul_si.c -o mul_si.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_i.lo -MD -MP -MF .deps/mul_i.Tpo -c mul_i.c -o mul_i.o >/dev/null 2>&1
+mv -f .deps/exp.Tpo .deps/exp.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT norm.lo -MD -MP -MF .deps/norm.Tpo -c -o norm.lo norm.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT get_str.lo -MD -MP -MF .deps/get_str.Tpo -c get_str.c -o get_str.o >/dev/null 2>&1
+mv -f .deps/fr_sub.Tpo .deps/fr_sub.Plo
+mv -f .deps/imag.Tpo .deps/imag.Plo
+mv -f .deps/get_version.Tpo .deps/get_version.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT out_str.lo -MD -MP -MF .deps/out_str.Tpo -c -o out_str.lo out_str.c
+mv -f .deps/get_prec.Tpo .deps/get_prec.Plo
+mv -f .deps/init2.Tpo .deps/init2.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow.lo -MD -MP -MF .deps/pow.Tpo -c -o pow.lo pow.c
+mv -f .deps/init3.Tpo .deps/init3.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_fr.lo -MD -MP -MF .deps/pow_fr.Tpo -c -o pow_fr.lo pow_fr.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_ld.lo -MD -MP -MF .deps/pow_ld.Tpo -c -o pow_ld.lo pow_ld.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_d.lo -MD -MP -MF .deps/pow_d.Tpo -c -o pow_d.lo pow_d.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_si.lo -MD -MP -MF .deps/pow_si.Tpo -c -o pow_si.lo pow_si.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul_ui.lo -MD -MP -MF .deps/mul_ui.Tpo -c mul_ui.c -o mul_ui.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT log.lo -MD -MP -MF .deps/log.Tpo -c log.c -o log.o >/dev/null 2>&1
+mv -f .deps/get_prec2.Tpo .deps/get_prec2.Plo
+mv -f .deps/get.Tpo .deps/get.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_ui.lo -MD -MP -MF .deps/pow_ui.Tpo -c -o pow_ui.lo pow_ui.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT neg.lo -MD -MP -MF .deps/neg.Tpo -c neg.c -o neg.o >/dev/null 2>&1
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_z.lo -MD -MP -MF .deps/pow_z.Tpo -c -o pow_z.lo pow_z.c
+mv -f .deps/asin.Tpo .deps/asin.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT norm.lo -MD -MP -MF .deps/norm.Tpo -c norm.c  -fPIC -DPIC -o .libs/norm.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT proj.lo -MD -MP -MF .deps/proj.Tpo -c -o proj.lo proj.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT out_str.lo -MD -MP -MF .deps/out_str.Tpo -c out_str.c  -fPIC -DPIC -o .libs/out_str.o
+mv -f .deps/mul_2exp.Tpo .deps/mul_2exp.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow.lo -MD -MP -MF .deps/pow.Tpo -c pow.c  -fPIC -DPIC -o .libs/pow.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_fr.lo -MD -MP -MF .deps/pow_fr.Tpo -c pow_fr.c  -fPIC -DPIC -o .libs/pow_fr.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT real.lo -MD -MP -MF .deps/real.Tpo -c -o real.lo real.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_ld.lo -MD -MP -MF .deps/pow_ld.Tpo -c pow_ld.c  -fPIC -DPIC -o .libs/pow_ld.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_d.lo -MD -MP -MF .deps/pow_d.Tpo -c pow_d.c  -fPIC -DPIC -o .libs/pow_d.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_si.lo -MD -MP -MF .deps/pow_si.Tpo -c pow_si.c  -fPIC -DPIC -o .libs/pow_si.o
+mv -f .deps/mul_fr.Tpo .deps/mul_fr.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT urandom.lo -MD -MP -MF .deps/urandom.Tpo -c -o urandom.lo urandom.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_z.lo -MD -MP -MF .deps/pow_z.Tpo -c pow_z.c  -fPIC -DPIC -o .libs/pow_z.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_ui.lo -MD -MP -MF .deps/pow_ui.Tpo -c pow_ui.c  -fPIC -DPIC -o .libs/pow_ui.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT inp_str.lo -MD -MP -MF .deps/inp_str.Tpo -c inp_str.c -o inp_str.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT proj.lo -MD -MP -MF .deps/proj.Tpo -c proj.c  -fPIC -DPIC -o .libs/proj.o
+mv -f .deps/mul_si.Tpo .deps/mul_si.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set.lo -MD -MP -MF .deps/set.Tpo -c -o set.lo set.c
+mv -f .deps/mem.Tpo .deps/mem.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_prec.lo -MD -MP -MF .deps/set_prec.Tpo -c -o set_prec.lo set_prec.c
+mv -f .deps/acos.Tpo .deps/acos.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_str.lo -MD -MP -MF .deps/set_str.Tpo -c -o set_str.lo set_str.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT real.lo -MD -MP -MF .deps/real.Tpo -c real.c  -fPIC -DPIC -o .libs/real.o
+mv -f .deps/mul_i.Tpo .deps/mul_i.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT div.lo -MD -MP -MF .deps/div.Tpo -c div.c -o div.o >/dev/null 2>&1
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_x.lo -MD -MP -MF .deps/set_x.Tpo -c -o set_x.lo set_x.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT urandom.lo -MD -MP -MF .deps/urandom.Tpo -c urandom.c  -fPIC -DPIC -o .libs/urandom.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set.lo -MD -MP -MF .deps/set.Tpo -c set.c  -fPIC -DPIC -o .libs/set.o
+mv -f .deps/mul_ui.Tpo .deps/mul_ui.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_x_x.lo -MD -MP -MF .deps/set_x_x.Tpo -c -o set_x_x.lo set_x_x.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_prec.lo -MD -MP -MF .deps/set_prec.Tpo -c set_prec.c  -fPIC -DPIC -o .libs/set_prec.o
+mv -f .deps/neg.Tpo .deps/neg.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sin_cos.lo -MD -MP -MF .deps/sin_cos.Tpo -c -o sin_cos.lo sin_cos.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_str.lo -MD -MP -MF .deps/set_str.Tpo -c set_str.c  -fPIC -DPIC -o .libs/set_str.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_x.lo -MD -MP -MF .deps/set_x.Tpo -c set_x.c  -fPIC -DPIC -o .libs/set_x.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_si.lo -MD -MP -MF .deps/pow_si.Tpo -c pow_si.c -o pow_si.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_fr.lo -MD -MP -MF .deps/pow_fr.Tpo -c pow_fr.c -o pow_fr.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT out_str.lo -MD -MP -MF .deps/out_str.Tpo -c out_str.c -o out_str.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_d.lo -MD -MP -MF .deps/pow_d.Tpo -c pow_d.c -o pow_d.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_x_x.lo -MD -MP -MF .deps/set_x_x.Tpo -c set_x_x.c  -fPIC -DPIC -o .libs/set_x_x.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT norm.lo -MD -MP -MF .deps/norm.Tpo -c norm.c -o norm.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_ld.lo -MD -MP -MF .deps/pow_ld.Tpo -c pow_ld.c -o pow_ld.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sin_cos.lo -MD -MP -MF .deps/sin_cos.Tpo -c sin_cos.c  -fPIC -DPIC -o .libs/sin_cos.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT proj.lo -MD -MP -MF .deps/proj.Tpo -c proj.c -o proj.o >/dev/null 2>&1
+mv -f .deps/atan.Tpo .deps/atan.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sinh.lo -MD -MP -MF .deps/sinh.Tpo -c -o sinh.lo sinh.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_z.lo -MD -MP -MF .deps/pow_z.Tpo -c pow_z.c -o pow_z.o >/dev/null 2>&1
+mv -f .deps/get_str.Tpo .deps/get_str.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sqr.lo -MD -MP -MF .deps/sqr.Tpo -c -o sqr.lo sqr.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT real.lo -MD -MP -MF .deps/real.Tpo -c real.c -o real.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT urandom.lo -MD -MP -MF .deps/urandom.Tpo -c urandom.c -o urandom.o >/dev/null 2>&1
+mv -f .deps/log.Tpo .deps/log.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sqrt.lo -MD -MP -MF .deps/sqrt.Tpo -c -o sqrt.lo sqrt.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_prec.lo -MD -MP -MF .deps/set_prec.Tpo -c set_prec.c -o set_prec.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set.lo -MD -MP -MF .deps/set.Tpo -c set.c -o set.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sinh.lo -MD -MP -MF .deps/sinh.Tpo -c sinh.c  -fPIC -DPIC -o .libs/sinh.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sqr.lo -MD -MP -MF .deps/sqr.Tpo -c sqr.c  -fPIC -DPIC -o .libs/sqr.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_str.lo -MD -MP -MF .deps/set_str.Tpo -c set_str.c -o set_str.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sqrt.lo -MD -MP -MF .deps/sqrt.Tpo -c sqrt.c  -fPIC -DPIC -o .libs/sqrt.o
+mv -f .deps/pow_fr.Tpo .deps/pow_fr.Plo
+mv -f .deps/pow_si.Tpo .deps/pow_si.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT strtoc.lo -MD -MP -MF .deps/strtoc.Tpo -c -o strtoc.lo strtoc.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub.lo -MD -MP -MF .deps/sub.Tpo -c -o sub.lo sub.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow_ui.lo -MD -MP -MF .deps/pow_ui.Tpo -c pow_ui.c -o pow_ui.o >/dev/null 2>&1
+mv -f .deps/pow_d.Tpo .deps/pow_d.Plo
+mv -f .deps/pow_ld.Tpo .deps/pow_ld.Plo
+mv -f .deps/out_str.Tpo .deps/out_str.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub_fr.lo -MD -MP -MF .deps/sub_fr.Tpo -c -o sub_fr.lo sub_fr.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub_ui.lo -MD -MP -MF .deps/sub_ui.Tpo -c -o sub_ui.lo sub_ui.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT swap.lo -MD -MP -MF .deps/swap.Tpo -c -o swap.lo swap.c
+mv -f .deps/proj.Tpo .deps/proj.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tan.lo -MD -MP -MF .deps/tan.Tpo -c -o tan.lo tan.c
+mv -f .deps/real.Tpo .deps/real.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tanh.lo -MD -MP -MF .deps/tanh.Tpo -c -o tanh.lo tanh.c
+mv -f .deps/pow_z.Tpo .deps/pow_z.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT uceil_log2.lo -MD -MP -MF .deps/uceil_log2.Tpo -c -o uceil_log2.lo uceil_log2.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub.lo -MD -MP -MF .deps/sub.Tpo -c sub.c  -fPIC -DPIC -o .libs/sub.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT strtoc.lo -MD -MP -MF .deps/strtoc.Tpo -c strtoc.c  -fPIC -DPIC -o .libs/strtoc.o
+mv -f .deps/urandom.Tpo .deps/urandom.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT ui_div.lo -MD -MP -MF .deps/ui_div.Tpo -c -o ui_div.lo ui_div.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT mul.lo -MD -MP -MF .deps/mul.Tpo -c mul.c -o mul.o >/dev/null 2>&1
+mv -f .deps/set_prec.Tpo .deps/set_prec.Plo
+mv -f .deps/norm.Tpo .deps/norm.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..     -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT ui_ui_sub.lo -MD -MP -MF .deps/ui_ui_sub.Tpo -c -o ui_ui_sub.lo ui_ui_sub.c
+mv -f .deps/inp_str.Tpo .deps/inp_str.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub_fr.lo -MD -MP -MF .deps/sub_fr.Tpo -c sub_fr.c  -fPIC -DPIC -o .libs/sub_fr.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub_ui.lo -MD -MP -MF .deps/sub_ui.Tpo -c sub_ui.c  -fPIC -DPIC -o .libs/sub_ui.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_x.lo -MD -MP -MF .deps/set_x.Tpo -c set_x.c -o set_x.o >/dev/null 2>&1
+mv -f .deps/set.Tpo .deps/set.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tan.lo -MD -MP -MF .deps/tan.Tpo -c tan.c  -fPIC -DPIC -o .libs/tan.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT swap.lo -MD -MP -MF .deps/swap.Tpo -c swap.c  -fPIC -DPIC -o .libs/swap.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sinh.lo -MD -MP -MF .deps/sinh.Tpo -c sinh.c -o sinh.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT uceil_log2.lo -MD -MP -MF .deps/uceil_log2.Tpo -c uceil_log2.c  -fPIC -DPIC -o .libs/uceil_log2.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tanh.lo -MD -MP -MF .deps/tanh.Tpo -c tanh.c  -fPIC -DPIC -o .libs/tanh.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT ui_div.lo -MD -MP -MF .deps/ui_div.Tpo -c ui_div.c  -fPIC -DPIC -o .libs/ui_div.o
+mv -f .deps/set_str.Tpo .deps/set_str.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT ui_ui_sub.lo -MD -MP -MF .deps/ui_ui_sub.Tpo -c ui_ui_sub.c  -fPIC -DPIC -o .libs/ui_ui_sub.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT set_x_x.lo -MD -MP -MF .deps/set_x_x.Tpo -c set_x_x.c -o set_x_x.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub_fr.lo -MD -MP -MF .deps/sub_fr.Tpo -c sub_fr.c -o sub_fr.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub.lo -MD -MP -MF .deps/sub.Tpo -c sub.c -o sub.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT swap.lo -MD -MP -MF .deps/swap.Tpo -c swap.c -o swap.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT uceil_log2.lo -MD -MP -MF .deps/uceil_log2.Tpo -c uceil_log2.c -o uceil_log2.o >/dev/null 2>&1
+mv -f .deps/sinh.Tpo .deps/sinh.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sub_ui.lo -MD -MP -MF .deps/sub_ui.Tpo -c sub_ui.c -o sub_ui.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT strtoc.lo -MD -MP -MF .deps/strtoc.Tpo -c strtoc.c -o strtoc.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sqr.lo -MD -MP -MF .deps/sqr.Tpo -c sqr.c -o sqr.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT ui_div.lo -MD -MP -MF .deps/ui_div.Tpo -c ui_div.c -o ui_div.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tanh.lo -MD -MP -MF .deps/tanh.Tpo -c tanh.c -o tanh.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT ui_ui_sub.lo -MD -MP -MF .deps/ui_ui_sub.Tpo -c ui_ui_sub.c -o ui_ui_sub.o >/dev/null 2>&1
+mv -f .deps/pow_ui.Tpo .deps/pow_ui.Plo
+mv -f .deps/sub_fr.Tpo .deps/sub_fr.Plo
+mv -f .deps/swap.Tpo .deps/swap.Plo
+mv -f .deps/uceil_log2.Tpo .deps/uceil_log2.Plo
+mv -f .deps/set_x.Tpo .deps/set_x.Plo
+mv -f .deps/sub.Tpo .deps/sub.Plo
+mv -f .deps/sub_ui.Tpo .deps/sub_ui.Plo
+mv -f .deps/ui_ui_sub.Tpo .deps/ui_ui_sub.Plo
+mv -f .deps/set_x_x.Tpo .deps/set_x_x.Plo
+mv -f .deps/ui_div.Tpo .deps/ui_div.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sin_cos.lo -MD -MP -MF .deps/sin_cos.Tpo -c sin_cos.c -o sin_cos.o >/dev/null 2>&1
+mv -f .deps/tanh.Tpo .deps/tanh.Plo
+mv -f .deps/div.Tpo .deps/div.Plo
+mv -f .deps/strtoc.Tpo .deps/strtoc.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT sqrt.lo -MD -MP -MF .deps/sqrt.Tpo -c sqrt.c -o sqrt.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tan.lo -MD -MP -MF .deps/tan.Tpo -c tan.c -o tan.o >/dev/null 2>&1
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT pow.lo -MD -MP -MF .deps/pow.Tpo -c pow.c -o pow.o >/dev/null 2>&1
+mv -f .deps/sqr.Tpo .deps/sqr.Plo
+mv -f .deps/mul.Tpo .deps/mul.Plo
+mv -f .deps/sin_cos.Tpo .deps/sin_cos.Plo
+mv -f .deps/tan.Tpo .deps/tan.Plo
+mv -f .deps/sqrt.Tpo .deps/sqrt.Plo
+mv -f .deps/pow.Tpo .deps/pow.Plo
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8 -version-info 2:0:0  -o libmpc.la -rpath /usr/lib64 abs.lo acos.lo acosh.lo add.lo add_fr.lo add_si.lo add_ui.lo arg.lo asin.lo asinh.lo atan.lo atanh.lo clear.lo cmp.lo cmp_si_si.lo conj.lo cosh.lo div_2exp.lo div.lo div_fr.lo div_ui.lo exp.lo fma.lo fr_div.lo fr_sub.lo get.lo get_prec2.lo get_prec.lo get_str.lo get_version.lo imag.lo init2.lo init3.lo inp_str.lo log.lo mem.lo mul_2exp.lo mul.lo mul_fr.lo mul_i.lo mul_si.lo mul_ui.lo neg.lo norm.lo out_str.lo pow.lo pow_fr.lo pow_ld.lo pow_d.lo pow_si.lo pow_ui.lo pow_z.lo proj.lo real.lo urandom.lo set.lo set_prec.lo set_str.lo set_x.lo set_x_x.lo sin_cos.lo sinh.lo sqr.lo sqrt.lo strtoc.lo sub.lo sub_fr.lo sub_ui.lo swap.lo tan.lo tanh.lo uceil_log2.lo ui_div.lo ui_ui_sub.lo  -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -shared  .libs/abs.o .libs/acos.o .libs/acosh.o .libs/add.o .libs/add_fr.o .libs/add_si.o .libs/add_ui.o .libs/arg.o .libs/asin.o .libs/asinh.o .libs/atan.o .libs/atanh.o .libs/clear.o .libs/cmp.o .libs/cmp_si_si.o .libs/conj.o .libs/cosh.o .libs/div_2exp.o .libs/div.o .libs/div_fr.o .libs/div_ui.o .libs/exp.o .libs/fma.o .libs/fr_div.o .libs/fr_sub.o .libs/get.o .libs/get_prec2.o .libs/get_prec.o .libs/get_str.o .libs/get_version.o .libs/imag.o .libs/init2.o .libs/init3.o .libs/inp_str.o .libs/log.o .libs/mem.o .libs/mul_2exp.o .libs/mul.o .libs/mul_fr.o .libs/mul_i.o .libs/mul_si.o .libs/mul_ui.o .libs/neg.o .libs/norm.o .libs/out_str.o .libs/pow.o .libs/pow_fr.o .libs/pow_ld.o .libs/pow_d.o .libs/pow_si.o .libs/pow_ui.o .libs/pow_z.o .libs/proj.o .libs/real.o .libs/urandom.o .libs/set.o .libs/set_prec.o .libs/set_str.o .libs/set_x.o .libs/set_x_x.o .libs/sin_cos.o .libs/sinh.o .libs/sqr.o .libs/sqrt.o .libs/strtoc.o .libs/sub.o .libs/sub_fr.o .libs/sub_ui.o .libs/swap.o .libs/tan.o .libs/tanh.o .libs/uceil_log2.o .libs/ui_div.o .libs/ui_ui_sub.o   -Wl,-rpath -Wl,/usr/lib64 -Wl,-rpath -Wl,/usr/lib64 /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm  -m64 -mtune=k8 -march=k8   -Wl,-soname -Wl,libmpc.so.2 -o .libs/libmpc.so.2.0.0
+libtool: link: (cd ".libs" && rm -f "libmpc.so.2" && ln -s "libmpc.so.2.0.0" "libmpc.so.2")
+libtool: link: (cd ".libs" && rm -f "libmpc.so" && ln -s "libmpc.so.2.0.0" "libmpc.so")
+libtool: link: ar cru .libs/libmpc.a  abs.o acos.o acosh.o add.o add_fr.o add_si.o add_ui.o arg.o asin.o asinh.o atan.o atanh.o clear.o cmp.o cmp_si_si.o conj.o cosh.o div_2exp.o div.o div_fr.o div_ui.o exp.o fma.o fr_div.o fr_sub.o get.o get_prec2.o get_prec.o get_str.o get_version.o imag.o init2.o init3.o inp_str.o log.o mem.o mul_2exp.o mul.o mul_fr.o mul_i.o mul_si.o mul_ui.o neg.o norm.o out_str.o pow.o pow_fr.o pow_ld.o pow_d.o pow_si.o pow_ui.o pow_z.o proj.o real.o urandom.o set.o set_prec.o set_str.o set_x.o set_x_x.o sin_cos.o sinh.o sqr.o sqrt.o strtoc.o sub.o sub_fr.o sub_ui.o swap.o tan.o tanh.o uceil_log2.o ui_div.o ui_ui_sub.o
+libtool: link: ranlib .libs/libmpc.a
+libtool: link: ( cd ".libs" && rm -f "libmpc.la" && ln -s "../libmpc.la" "libmpc.la" )
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/src'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/doc'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9'
++ make check
+Making check in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/src'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/src'
+Making check in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+make  libmpc-tests.la tabs tacos tacosh tadd tadd_fr tadd_si tadd_ui targ tasin tasinh tatan tatanh tconj tcos tcosh tdiv tdiv_2exp tdiv_fr tdiv_ui texp tfma tfr_div tfr_sub timag tio_str tlog tmul tmul_2exp tmul_fr tmul_i tmul_si tmul_ui tneg tnorm tpow tpow_ld tpow_d tpow_fr tpow_si tpow_ui tpow_z tprec tproj treal treimref tset tsin tsin_cos tsinh tsqr tsqrt tstrtoc tsub tsub_fr tsub_ui ttan ttanh tui_div tui_ui_sub tget_version
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT random.lo -MD -MP -MF .deps/random.Tpo -c -o random.lo random.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT random.lo -MD -MP -MF .deps/random.Tpo -c random.c  -fPIC -DPIC -o .libs/random.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT random.lo -MD -MP -MF .deps/random.Tpo -c random.c -o random.o >/dev/null 2>&1
+mv -f .deps/random.Tpo .deps/random.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tgeneric.lo -MD -MP -MF .deps/tgeneric.Tpo -c -o tgeneric.lo tgeneric.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tgeneric.lo -MD -MP -MF .deps/tgeneric.Tpo -c tgeneric.c  -fPIC -DPIC -o .libs/tgeneric.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tgeneric.lo -MD -MP -MF .deps/tgeneric.Tpo -c tgeneric.c -o tgeneric.o >/dev/null 2>&1
+mv -f .deps/tgeneric.Tpo .deps/tgeneric.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT read_data.lo -MD -MP -MF .deps/read_data.Tpo -c -o read_data.lo read_data.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT read_data.lo -MD -MP -MF .deps/read_data.Tpo -c read_data.c  -fPIC -DPIC -o .libs/read_data.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT read_data.lo -MD -MP -MF .deps/read_data.Tpo -c read_data.c -o read_data.o >/dev/null 2>&1
+mv -f .deps/read_data.Tpo .deps/read_data.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT comparisons.lo -MD -MP -MF .deps/comparisons.Tpo -c -o comparisons.lo comparisons.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT comparisons.lo -MD -MP -MF .deps/comparisons.Tpo -c comparisons.c  -fPIC -DPIC -o .libs/comparisons.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT comparisons.lo -MD -MP -MF .deps/comparisons.Tpo -c comparisons.c -o comparisons.o >/dev/null 2>&1
+mv -f .deps/comparisons.Tpo .deps/comparisons.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT memory.lo -MD -MP -MF .deps/memory.Tpo -c -o memory.lo memory.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT memory.lo -MD -MP -MF .deps/memory.Tpo -c memory.c  -fPIC -DPIC -o .libs/memory.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../src -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT memory.lo -MD -MP -MF .deps/memory.Tpo -c memory.c -o memory.o >/dev/null 2>&1
+mv -f .deps/memory.Tpo .deps/memory.Plo
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o libmpc-tests.la  random.lo tgeneric.lo read_data.lo comparisons.lo memory.lo  -lmpfr -lgmp -lm 
+libtool: link: ar cru .libs/libmpc-tests.a .libs/random.o .libs/tgeneric.o .libs/read_data.o .libs/comparisons.o .libs/memory.o 
+libtool: link: ranlib .libs/libmpc-tests.a
+libtool: link: ( cd ".libs" && rm -f "libmpc-tests.la" && ln -s "../libmpc-tests.la" "libmpc-tests.la" )
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tabs.o -MD -MP -MF .deps/tabs.Tpo -c -o tabs.o tabs.c
+mv -f .deps/tabs.Tpo .deps/tabs.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tabs tabs.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tabs tabs.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tacos.o -MD -MP -MF .deps/tacos.Tpo -c -o tacos.o tacos.c
+mv -f .deps/tacos.Tpo .deps/tacos.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tacos tacos.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tacos tacos.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tacosh.o -MD -MP -MF .deps/tacosh.Tpo -c -o tacosh.o tacosh.c
+mv -f .deps/tacosh.Tpo .deps/tacosh.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tacosh tacosh.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tacosh tacosh.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tadd.o -MD -MP -MF .deps/tadd.Tpo -c -o tadd.o tadd.c
+mv -f .deps/tadd.Tpo .deps/tadd.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tadd tadd.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tadd tadd.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tadd_fr.o -MD -MP -MF .deps/tadd_fr.Tpo -c -o tadd_fr.o tadd_fr.c
+mv -f .deps/tadd_fr.Tpo .deps/tadd_fr.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tadd_fr tadd_fr.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tadd_fr tadd_fr.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tadd_si.o -MD -MP -MF .deps/tadd_si.Tpo -c -o tadd_si.o tadd_si.c
+mv -f .deps/tadd_si.Tpo .deps/tadd_si.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tadd_si tadd_si.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tadd_si tadd_si.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tadd_ui.o -MD -MP -MF .deps/tadd_ui.Tpo -c -o tadd_ui.o tadd_ui.c
+mv -f .deps/tadd_ui.Tpo .deps/tadd_ui.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tadd_ui tadd_ui.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tadd_ui tadd_ui.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT targ.o -MD -MP -MF .deps/targ.Tpo -c -o targ.o targ.c
+mv -f .deps/targ.Tpo .deps/targ.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o targ targ.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/targ targ.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tasin.o -MD -MP -MF .deps/tasin.Tpo -c -o tasin.o tasin.c
+mv -f .deps/tasin.Tpo .deps/tasin.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tasin tasin.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tasin tasin.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tasinh.o -MD -MP -MF .deps/tasinh.Tpo -c -o tasinh.o tasinh.c
+mv -f .deps/tasinh.Tpo .deps/tasinh.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tasinh tasinh.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tasinh tasinh.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tatan.o -MD -MP -MF .deps/tatan.Tpo -c -o tatan.o tatan.c
+mv -f .deps/tatan.Tpo .deps/tatan.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tatan tatan.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tatan tatan.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tatanh.o -MD -MP -MF .deps/tatanh.Tpo -c -o tatanh.o tatanh.c
+mv -f .deps/tatanh.Tpo .deps/tatanh.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tatanh tatanh.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tatanh tatanh.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tconj.o -MD -MP -MF .deps/tconj.Tpo -c -o tconj.o tconj.c
+mv -f .deps/tconj.Tpo .deps/tconj.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tconj tconj.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tconj tconj.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tcos.o -MD -MP -MF .deps/tcos.Tpo -c -o tcos.o tcos.c
+mv -f .deps/tcos.Tpo .deps/tcos.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tcos tcos.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tcos tcos.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tcosh.o -MD -MP -MF .deps/tcosh.Tpo -c -o tcosh.o tcosh.c
+mv -f .deps/tcosh.Tpo .deps/tcosh.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tcosh tcosh.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tcosh tcosh.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tdiv.o -MD -MP -MF .deps/tdiv.Tpo -c -o tdiv.o tdiv.c
+mv -f .deps/tdiv.Tpo .deps/tdiv.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tdiv tdiv.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tdiv tdiv.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tdiv_2exp.o -MD -MP -MF .deps/tdiv_2exp.Tpo -c -o tdiv_2exp.o tdiv_2exp.c
+mv -f .deps/tdiv_2exp.Tpo .deps/tdiv_2exp.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tdiv_2exp tdiv_2exp.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tdiv_2exp tdiv_2exp.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tdiv_fr.o -MD -MP -MF .deps/tdiv_fr.Tpo -c -o tdiv_fr.o tdiv_fr.c
+mv -f .deps/tdiv_fr.Tpo .deps/tdiv_fr.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tdiv_fr tdiv_fr.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tdiv_fr tdiv_fr.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tdiv_ui.o -MD -MP -MF .deps/tdiv_ui.Tpo -c -o tdiv_ui.o tdiv_ui.c
+mv -f .deps/tdiv_ui.Tpo .deps/tdiv_ui.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tdiv_ui tdiv_ui.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tdiv_ui tdiv_ui.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT texp.o -MD -MP -MF .deps/texp.Tpo -c -o texp.o texp.c
+mv -f .deps/texp.Tpo .deps/texp.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o texp texp.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/texp texp.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tfma.o -MD -MP -MF .deps/tfma.Tpo -c -o tfma.o tfma.c
+mv -f .deps/tfma.Tpo .deps/tfma.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tfma tfma.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tfma tfma.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tfr_div.o -MD -MP -MF .deps/tfr_div.Tpo -c -o tfr_div.o tfr_div.c
+mv -f .deps/tfr_div.Tpo .deps/tfr_div.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tfr_div tfr_div.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tfr_div tfr_div.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tfr_sub.o -MD -MP -MF .deps/tfr_sub.Tpo -c -o tfr_sub.o tfr_sub.c
+mv -f .deps/tfr_sub.Tpo .deps/tfr_sub.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tfr_sub tfr_sub.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tfr_sub tfr_sub.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT timag.o -MD -MP -MF .deps/timag.Tpo -c -o timag.o timag.c
+mv -f .deps/timag.Tpo .deps/timag.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o timag timag.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/timag timag.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tio_str.o -MD -MP -MF .deps/tio_str.Tpo -c -o tio_str.o tio_str.c
+mv -f .deps/tio_str.Tpo .deps/tio_str.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tio_str tio_str.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tio_str tio_str.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tlog.o -MD -MP -MF .deps/tlog.Tpo -c -o tlog.o tlog.c
+mv -f .deps/tlog.Tpo .deps/tlog.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tlog tlog.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tlog tlog.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tmul.o -MD -MP -MF .deps/tmul.Tpo -c -o tmul.o tmul.c
+mv -f .deps/tmul.Tpo .deps/tmul.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tmul tmul.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tmul tmul.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tmul_2exp.o -MD -MP -MF .deps/tmul_2exp.Tpo -c -o tmul_2exp.o tmul_2exp.c
+mv -f .deps/tmul_2exp.Tpo .deps/tmul_2exp.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tmul_2exp tmul_2exp.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tmul_2exp tmul_2exp.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tmul_fr.o -MD -MP -MF .deps/tmul_fr.Tpo -c -o tmul_fr.o tmul_fr.c
+mv -f .deps/tmul_fr.Tpo .deps/tmul_fr.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tmul_fr tmul_fr.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tmul_fr tmul_fr.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tmul_i.o -MD -MP -MF .deps/tmul_i.Tpo -c -o tmul_i.o tmul_i.c
+mv -f .deps/tmul_i.Tpo .deps/tmul_i.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tmul_i tmul_i.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tmul_i tmul_i.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tmul_si.o -MD -MP -MF .deps/tmul_si.Tpo -c -o tmul_si.o tmul_si.c
+mv -f .deps/tmul_si.Tpo .deps/tmul_si.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tmul_si tmul_si.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tmul_si tmul_si.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tmul_ui.o -MD -MP -MF .deps/tmul_ui.Tpo -c -o tmul_ui.o tmul_ui.c
+mv -f .deps/tmul_ui.Tpo .deps/tmul_ui.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tmul_ui tmul_ui.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tmul_ui tmul_ui.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tneg.o -MD -MP -MF .deps/tneg.Tpo -c -o tneg.o tneg.c
+mv -f .deps/tneg.Tpo .deps/tneg.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tneg tneg.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tneg tneg.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tnorm.o -MD -MP -MF .deps/tnorm.Tpo -c -o tnorm.o tnorm.c
+mv -f .deps/tnorm.Tpo .deps/tnorm.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tnorm tnorm.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tnorm tnorm.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tpow.o -MD -MP -MF .deps/tpow.Tpo -c -o tpow.o tpow.c
+mv -f .deps/tpow.Tpo .deps/tpow.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tpow tpow.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tpow tpow.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tpow_ld.o -MD -MP -MF .deps/tpow_ld.Tpo -c -o tpow_ld.o tpow_ld.c
+mv -f .deps/tpow_ld.Tpo .deps/tpow_ld.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tpow_ld tpow_ld.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tpow_ld tpow_ld.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tpow_d.o -MD -MP -MF .deps/tpow_d.Tpo -c -o tpow_d.o tpow_d.c
+mv -f .deps/tpow_d.Tpo .deps/tpow_d.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tpow_d tpow_d.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tpow_d tpow_d.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tpow_fr.o -MD -MP -MF .deps/tpow_fr.Tpo -c -o tpow_fr.o tpow_fr.c
+mv -f .deps/tpow_fr.Tpo .deps/tpow_fr.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tpow_fr tpow_fr.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tpow_fr tpow_fr.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tpow_si.o -MD -MP -MF .deps/tpow_si.Tpo -c -o tpow_si.o tpow_si.c
+mv -f .deps/tpow_si.Tpo .deps/tpow_si.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tpow_si tpow_si.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tpow_si tpow_si.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tpow_ui.o -MD -MP -MF .deps/tpow_ui.Tpo -c -o tpow_ui.o tpow_ui.c
+mv -f .deps/tpow_ui.Tpo .deps/tpow_ui.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tpow_ui tpow_ui.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tpow_ui tpow_ui.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tpow_z.o -MD -MP -MF .deps/tpow_z.Tpo -c -o tpow_z.o tpow_z.c
+mv -f .deps/tpow_z.Tpo .deps/tpow_z.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tpow_z tpow_z.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tpow_z tpow_z.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tprec.o -MD -MP -MF .deps/tprec.Tpo -c -o tprec.o tprec.c
+mv -f .deps/tprec.Tpo .deps/tprec.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tprec tprec.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tprec tprec.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tproj.o -MD -MP -MF .deps/tproj.Tpo -c -o tproj.o tproj.c
+mv -f .deps/tproj.Tpo .deps/tproj.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tproj tproj.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tproj tproj.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT treal.o -MD -MP -MF .deps/treal.Tpo -c -o treal.o treal.c
+mv -f .deps/treal.Tpo .deps/treal.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o treal treal.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/treal treal.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT treimref.o -MD -MP -MF .deps/treimref.Tpo -c -o treimref.o treimref.c
+mv -f .deps/treimref.Tpo .deps/treimref.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o treimref treimref.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/treimref treimref.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tset.o -MD -MP -MF .deps/tset.Tpo -c -o tset.o tset.c
+mv -f .deps/tset.Tpo .deps/tset.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tset tset.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tset tset.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tsin.o -MD -MP -MF .deps/tsin.Tpo -c -o tsin.o tsin.c
+mv -f .deps/tsin.Tpo .deps/tsin.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tsin tsin.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tsin tsin.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tsin_cos.o -MD -MP -MF .deps/tsin_cos.Tpo -c -o tsin_cos.o tsin_cos.c
+mv -f .deps/tsin_cos.Tpo .deps/tsin_cos.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tsin_cos tsin_cos.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tsin_cos tsin_cos.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tsinh.o -MD -MP -MF .deps/tsinh.Tpo -c -o tsinh.o tsinh.c
+mv -f .deps/tsinh.Tpo .deps/tsinh.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tsinh tsinh.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tsinh tsinh.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tsqr.o -MD -MP -MF .deps/tsqr.Tpo -c -o tsqr.o tsqr.c
+mv -f .deps/tsqr.Tpo .deps/tsqr.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tsqr tsqr.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tsqr tsqr.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tsqrt.o -MD -MP -MF .deps/tsqrt.Tpo -c -o tsqrt.o tsqrt.c
+mv -f .deps/tsqrt.Tpo .deps/tsqrt.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tsqrt tsqrt.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tsqrt tsqrt.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tstrtoc.o -MD -MP -MF .deps/tstrtoc.Tpo -c -o tstrtoc.o tstrtoc.c
+mv -f .deps/tstrtoc.Tpo .deps/tstrtoc.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tstrtoc tstrtoc.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tstrtoc tstrtoc.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tsub.o -MD -MP -MF .deps/tsub.Tpo -c -o tsub.o tsub.c
+mv -f .deps/tsub.Tpo .deps/tsub.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tsub tsub.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tsub tsub.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tsub_fr.o -MD -MP -MF .deps/tsub_fr.Tpo -c -o tsub_fr.o tsub_fr.c
+mv -f .deps/tsub_fr.Tpo .deps/tsub_fr.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tsub_fr tsub_fr.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tsub_fr tsub_fr.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tsub_ui.o -MD -MP -MF .deps/tsub_ui.Tpo -c -o tsub_ui.o tsub_ui.c
+mv -f .deps/tsub_ui.Tpo .deps/tsub_ui.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tsub_ui tsub_ui.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tsub_ui tsub_ui.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT ttan.o -MD -MP -MF .deps/ttan.Tpo -c -o ttan.o ttan.c
+mv -f .deps/ttan.Tpo .deps/ttan.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o ttan ttan.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/ttan ttan.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT ttanh.o -MD -MP -MF .deps/ttanh.Tpo -c -o ttanh.o ttanh.c
+mv -f .deps/ttanh.Tpo .deps/ttanh.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o ttanh ttanh.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/ttanh ttanh.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tui_div.o -MD -MP -MF .deps/tui_div.Tpo -c -o tui_div.o tui_div.c
+mv -f .deps/tui_div.Tpo .deps/tui_div.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tui_div tui_div.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tui_div tui_div.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tui_ui_sub.o -MD -MP -MF .deps/tui_ui_sub.Tpo -c -o tui_ui_sub.o tui_ui_sub.c
+mv -f .deps/tui_ui_sub.Tpo .deps/tui_ui_sub.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tui_ui_sub tui_ui_sub.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tui_ui_sub tui_ui_sub.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../src   -O2 -pedantic -m64 -mtune=k8 -march=k8 -MT tget_version.o -MD -MP -MF .deps/tget_version.Tpo -c -o tget_version.o tget_version.c
+mv -f .deps/tget_version.Tpo .deps/tget_version.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -std=gnu99  -O2 -pedantic -m64 -mtune=k8 -march=k8   -o tget_version tget_version.o libmpc-tests.la ../src/libmpc.la -lmpfr -lgmp -lm 
+libtool: link: gcc -std=gnu99 -O2 -pedantic -m64 -mtune=k8 -march=k8 -o .libs/tget_version tget_version.o  ./.libs/libmpc-tests.a ../src/.libs/libmpc.so /usr/lib64/libmpfr.so /usr/lib64/libgmp.so -lm -Wl,-rpath -Wl,/usr/lib64
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+make  check-TESTS
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+PASS: tabs
+PASS: tacos
+PASS: tacosh
+PASS: tadd
+PASS: tadd_fr
+PASS: tadd_si
+PASS: tadd_ui
+PASS: targ
+PASS: tasin
+PASS: tasinh
+PASS: tatan
+PASS: tatanh
+PASS: tconj
+PASS: tcos
+PASS: tcosh
+PASS: tdiv
+PASS: tdiv_2exp
+PASS: tdiv_fr
+PASS: tdiv_ui
+PASS: texp
+PASS: tfma
+PASS: tfr_div
+PASS: tfr_sub
+PASS: timag
+PASS: tio_str
+PASS: tlog
+PASS: tmul
+PASS: tmul_2exp
+PASS: tmul_fr
+PASS: tmul_i
+PASS: tmul_si
+PASS: tmul_ui
+PASS: tneg
+PASS: tnorm
+PASS: tpow
+PASS: tpow_ld
+PASS: tpow_d
+PASS: tpow_fr
+PASS: tpow_si
+PASS: tpow_ui
+PASS: tpow_z
+PASS: tprec
+PASS: tproj
+PASS: treal
+PASS: treimref
+PASS: tset
+PASS: tsin
+PASS: tsin_cos
+PASS: tsinh
+PASS: tsqr
+PASS: tsqrt
+PASS: tstrtoc
+PASS: tsub
+PASS: tsub_fr
+PASS: tsub_ui
+PASS: ttan
+PASS: ttanh
+PASS: tui_div
+PASS: tui_ui_sub
+GMP: include 5.0.1, lib 5.0.1
+MPFR: include 3.0.1, lib 3.0.1
+MPC: include 0.9, lib 0.9
+PASS: tget_version
+===================
+All 60 tests passed
+===================
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+Making check in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/doc'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/doc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.42006
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/mpc-root
++ /bin/mkdir -p /var/tmp/mpc-root
++ cd mpc-0.9
++ make DESTDIR=/var/tmp/mpc-root install
+Making install in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/src'
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/src'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/mpc-root/usr/lib64"
+ /bin/sh ../libtool   --mode=install /usr/bin/install -c   libmpc.la '/var/tmp/mpc-root/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/libmpc.so.2.0.0 /var/tmp/mpc-root/usr/lib64/libmpc.so.2.0.0
+libtool: install: (cd /var/tmp/mpc-root/usr/lib64 && { ln -s -f libmpc.so.2.0.0 libmpc.so.2 || { rm -f libmpc.so.2 && ln -s libmpc.so.2.0.0 libmpc.so.2; }; })
+libtool: install: (cd /var/tmp/mpc-root/usr/lib64 && { ln -s -f libmpc.so.2.0.0 libmpc.so || { rm -f libmpc.so && ln -s libmpc.so.2.0.0 libmpc.so; }; })
+libtool: install: /usr/bin/install -c .libs/libmpc.lai /var/tmp/mpc-root/usr/lib64/libmpc.la
+libtool: install: /usr/bin/install -c .libs/libmpc.a /var/tmp/mpc-root/usr/lib64/libmpc.a
+libtool: install: chmod 644 /var/tmp/mpc-root/usr/lib64/libmpc.a
+libtool: install: ranlib /var/tmp/mpc-root/usr/lib64/libmpc.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib64'
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/src'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/src'
+Making install in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/tests'
+Making install in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9/doc'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/info" || /bin/mkdir -p "/var/tmp/mpc-root/usr/share/info"
+ /usr/bin/install -c -m 644 ./mpc.info '/var/tmp/mpc-root/usr/share/info'
+ install-info --info-dir='/var/tmp/mpc-root/usr/share/info' '/var/tmp/mpc-root/usr/share/info/mpc.info'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/doc'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9/doc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9'
+make[2]: Entering directory `/usr/src/rpm/BUILD/mpc-0.9'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/include" || /bin/mkdir -p "/var/tmp/mpc-root/usr/include"
+ /usr/bin/install -c -m 644 src/mpc.h '/var/tmp/mpc-root/usr/include'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/mpc-0.9'
++ rm -f /var/tmp/mpc-root/usr/share/info/dir
++ exit 0
+Processing files: mpc-0.9-1.x86_64
+Provides: libmpc.so.2()(64bit)
+Requires(interp): /sbin/ldconfig /sbin/ldconfig
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libgmp.so.10()(64bit) libm.so.6()(64bit) libmpfr.so.4()(64bit)
+Processing files: mpc-devel-0.9-1.x86_64
+Provides: libtool(/usr/lib64/libmpc.la)
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /usr/bin/install-info /usr/bin/install-info
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/mpc-root
+Wrote: /usr/src/rpm/SRPMS/mpc-0.9-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/mpc-0.9-1.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/mpc-devel-0.9-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.92354
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd mpc-0.9
++ /bin/rm -rf /var/tmp/mpc-root

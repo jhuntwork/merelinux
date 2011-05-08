@@ -1,17 +1,17 @@
 Summary: The MPC Library
 Name: mpc
-Version: 0.8.2
+Version: 0.9
 Release: 1
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.multiprecision.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, gmp, mpfr
-BuildRequires: digest(%{SOURCE0}) = e98267ebd5648a39f881d66797122fb6
-BuildRequires: gmp-devel, mpfr-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 229722d553030734d49731844abfef7617b64f1a
+BuildRequires: gmp-devel
+BuildRequires: mpfr-devel
 
 %description
 Mpc is a C library for the arithmetic of complex numbers with arbitrarily
@@ -20,8 +20,7 @@ high precision and correct rounding of the result.
 %package devel
 Summary: Headers, object files and info pages for developing with %{name}
 Group: Development/Libraries
-Requires: %{name}
-Requires(post): texinfo, bash, ncurses, readline
+Requires: %{name} >= %{version}
 
 %description devel
 Provides headers, object files and info pages for use in developing
@@ -34,7 +33,7 @@ applications using %{name}.
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
-make
+make %{PMFLAGS}
 make check
 
 %install
@@ -67,5 +66,8 @@ rm -rf %{buildroot}
 /usr/include/mpc.h
 
 %changelog
+* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.9-1
+- Upgrade to 0.9
+
 * Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.8.2-1
 - Initial version
