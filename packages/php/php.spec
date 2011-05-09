@@ -1,6 +1,6 @@
 Summary: PHP Hypertext Preprocessor
 Name: php
-Version: 5.3.5
+Version: 5.3.6
 Release: 1
 Group: Development/Languages
 License: PHP v3.01
@@ -10,7 +10,7 @@ URL: http://www.php.net
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 Source1: http://dev.lightcube.us/sources/%{name}/%{name}-fpm.init
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 355701b723fcb497581c368be4d6e572c150a5ea
+BuildRequires: digest(sha1:%{SOURCE0}) = 0e0b9b4d9117f22080e2204afa9383469eb0dbbd
 BuildRequires: digest(sha1:%{SOURCE1}) = 8e2b3f62bb719db1c29345e0193ce814315e2bb0
 BuildRequires: zlib-devel
 BuildRequires: libxml2-devel
@@ -65,6 +65,7 @@ export LDFLAGS="%{LDFLAGS}"
   --localstatedir=/var \
   --with-config-file-path=/etc \
   --mandir=/usr/share/man \
+  --enable-sockets \
   --with-libdir=%{_lib} \
   --enable-calendar \
   --enable-bcmath \
@@ -85,6 +86,7 @@ export LDFLAGS="%{LDFLAGS}"
   --with-gd \
   --with-mysql=mysqlnd \
   --with-mysqli=mysqlnd \
+  --with-mysql-sock=/var/run/mysql/mysql.sock \
   --with-apxs2=/usr/sbin/apxs
 make
 cd ../%{name}-%{version}-fpm
@@ -96,6 +98,7 @@ cd ../%{name}-%{version}-fpm
   --with-config-file-path=/etc \
   --mandir=/usr/share/man \
   --with-libdir=%{_lib} \
+  --enable-sockets \
   --enable-calendar \
   --enable-bcmath \
   --with-openssl \
@@ -115,6 +118,7 @@ cd ../%{name}-%{version}-fpm
   --with-gd \
   --with-mysql=mysqlnd \
   --with-mysqli=mysqlnd \
+  --with-mysql-sock=/var/run/mysql/mysql.sock \
   --enable-fpm
 make
 
@@ -143,7 +147,9 @@ rm -rf %{buildroot}
 %post apache
 echo 'To activate this module, add the following lines to /etc/apache/httpd.conf:
 LoadModule php5_module %{_lib}/apache/libphp5.so
-AddType application/x-httpd-php .php'
+AddType application/x-httpd-php .php
+
+You may also what to edit "DirectoryIndex" to include index.php'
 
 %preun
 /usr/sbin/remove_initd php-fpm || /bin/true
@@ -179,6 +185,9 @@ AddType application/x-httpd-php .php'
 /usr/%{_lib}/apache/libphp5.so
 
 %changelog
+* Mon May 09 2011 Archaic <lc@8bitnet.com> - 5.3.6-1
+- Updated package version. Fixed default mysql.sock location. Enabled sockets.
+
 * Mon Feb 21 2011 Fitz Agard <fhagard@lightcubesolutions.com> - 5.3.5-1
 - Updating package 
 
