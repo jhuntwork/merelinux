@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Linux/x86_64 2.6.37.2 Kernel Configuration
-# Wed Apr  6 15:05:23 2011
+# Tue Jun 28 05:19:12 2011
 #
 CONFIG_64BIT=y
 # CONFIG_X86_32 is not set
@@ -523,12 +523,13 @@ CONFIG_XFRM_IPCOMP=y
 CONFIG_NET_KEY=y
 # CONFIG_NET_KEY_MIGRATE is not set
 CONFIG_INET=y
-# CONFIG_IP_MULTICAST is not set
+CONFIG_IP_MULTICAST=y
 # CONFIG_IP_ADVANCED_ROUTER is not set
 CONFIG_IP_FIB_HASH=y
 # CONFIG_IP_PNP is not set
 CONFIG_NET_IPIP=m
 # CONFIG_NET_IPGRE_DEMUX is not set
+# CONFIG_IP_MROUTE is not set
 # CONFIG_ARPD is not set
 CONFIG_SYN_COOKIES=y
 CONFIG_INET_AH=y
