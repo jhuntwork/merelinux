@@ -65,6 +65,7 @@ smart -o rpm-root=/mnt/"${pkg}" install base-system build-essential ${deps} -y
 
 # Some cleanup
 cp /etc/resolv.conf /mnt/"${pkg}"/etc
+cp /etc/rpm/macros /mnt/"${pkg}"/etc/rpm/
 mv /mnt/"${pkg}"/var/lib/rpm/log.* /mnt/"${pkg}"/var/lib/rpm/log
 
 # Copy the spec file to the chroot directory and build it
