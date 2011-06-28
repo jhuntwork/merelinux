@@ -1,6 +1,6 @@
 Summary: The Linux Kernel for Xen dom0 hosts
 Name: linux-xen
-Version: 2.6.32.26
+Version: 2.6.32.41
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -8,13 +8,15 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.kernel.org
 Source0: http://dev.lightcube.us/sources/linux-xen/%{name}-%{version}.tar.bz2
+Patch0:  http://dev.lightcube.us/svn/lightcubeos/!svn/bc/389/lightcube_os/trunk/packages/%{name}/%{name}-3ware_sas-1.patch
 
 Requires: base-layout
-BuildRequires: digest(sha1:%{SOURCE0}) = 2d674a097195f106b63d85de58bfe9aad41bcc86
+BuildRequires: digest(sha1:%{SOURCE0}) = 0ab6af3bfd68572a9c6623b1c23502acf4aa8a83
+BuildRequires: digest(sha1:%{PATCH0})  = dc5c4a8874bd986d85433a8c602fee27c0df1f31
 
 %ifarch x86_64
-Source1: http://dev.lightcube.us/sources/linux-xen/%{name}-config-%{version}-x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = ef4b9b74e08fee788f24608d68f2ed1cd64aa90d
+Source1:  http://dev.lightcube.us/svn/lightcubeos/!svn/bc/389/lightcube_os/trunk/packages/%{name}/%{name}-config.x86_64
+BuildRequires: digest(sha1:%{SOURCE1}) = 767c979e4b889a0a1454c3e6d7cc10538fc32bb5
 %endif
 
 %description
@@ -30,11 +32,12 @@ Kernel sources for installed kernel
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
 make mrproper
 cp %{SOURCE1} .config
-make -j2
+make %{PMFLAGS}
 
 %install
 # Install the modules
@@ -84,6 +87,10 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-xen/build
 
 %changelog
+* Fri Jun 24 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.32.41-1
+- Upgrade to 2.6.32.41
+- Add support for 3ware SAS card
+
 * Fri Dec 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.32.26-1
 - Upgrade to 2.6.32.26
 
