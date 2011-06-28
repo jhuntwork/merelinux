@@ -1,7 +1,7 @@
 Summary: The Linux Kernel
 Name: linux
 Version: 2.6.37.2
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -13,8 +13,8 @@ Requires(post): mkinitramfs
 BuildRequires: digest(sha1:%{SOURCE0}) = e2273eb385579fdf73b1f3ece2539c2156c06cd0
 
 %ifarch x86_64
-Source1: http://dev.lightcube.us/svn/lightcubeos/!svn/bc/349/lightcube_os/trunk/packages/%{name}/%{name}-config.x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = 9a5fdd3f06bd4f350ddf1def6c2289ea7f103570
+Source1: http://dev.lightcube.us/svn/lightcubeos/!svn/bc/390/lightcube_os/trunk/packages/%{name}/%{name}-config.x86_64
+BuildRequires: digest(sha1:%{SOURCE1}) = 48fe1e61aedf8f5592e7318280f4e0d260256fe2
 %endif
 
 %ifarch i686
@@ -56,7 +56,7 @@ find dest -name .install -exec rm -v '{}' \;
 find dest -name ..install.cmd -exec rm -v '{}' \;
 cp %{SOURCE1} .config
 sed -i 's@-LightCube@-%{release}@' .config
-make -j2
+make %{PMFLAGS}
 
 %install
 # Install the headers
@@ -129,7 +129,10 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-%{release}/build
 
 %changelog
-* Mon Apr 11 2001 Archaic <address@omit.ted> - 2.6.37.2-2
+* Mon May 23 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.37.2-3
+- Add IP Multicasting
+
+* Mon Apr 11 2011 Archaic <address@omit.ted> - 2.6.37.2-2
 - Change d/l location of the linux config file
 
 * Thu Mar 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.37.2-1
