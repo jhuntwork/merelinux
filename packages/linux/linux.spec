@@ -1,7 +1,7 @@
 Summary: The Linux Kernel
 Name: linux
-Version: 2.6.37.2
-Release: 3
+Version: 2.6.39.3
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -10,11 +10,11 @@ URL: http://www.kernel.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
 Requires(post): mkinitramfs
-BuildRequires: digest(sha1:%{SOURCE0}) = e2273eb385579fdf73b1f3ece2539c2156c06cd0
+BuildRequires: digest(sha1:%{SOURCE0}) = 950d52438087fd34d4d86a4ded7321cc3f90531d
 
 %ifarch x86_64
-Source1: http://dev.lightcube.us/svn/lightcubeos/!svn/bc/390/lightcube_os/trunk/packages/%{name}/%{name}-config.x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = 48fe1e61aedf8f5592e7318280f4e0d260256fe2
+Source1: http://dev.lightcube.us/svn/lightcubeos/!svn/bc/396/lightcube_os/trunk/packages/%{name}/%{name}-config.x86_64
+BuildRequires: digest(sha1:%{SOURCE1}) = 553590b2b9dc73f327024aef08dba33f167f6aae
 %endif
 
 %ifarch i686
@@ -56,6 +56,10 @@ find dest -name .install -exec rm -v '{}' \;
 find dest -name ..install.cmd -exec rm -v '{}' \;
 cp %{SOURCE1} .config
 sed -i 's@-LightCube@-%{release}@' .config
+sed -i 's@HAVE_KERNEL_BZIP2@& if !XEN@' arch/x86/Kconfig
+sed -i 's@HAVE_KERNEL_LZMA@& if !XEN@' arch/x86/Kconfig
+sed -i 's@HAVE_KERNEL_XZ@& if !XEN@' arch/x86/Kconfig
+sed -i 's@HAVE_KERNEL_LZO@& if !XEN@' arch/x86/Kconfig
 make %{PMFLAGS}
 
 %install
@@ -129,6 +133,11 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-%{release}/build
 
 %changelog
+* Sat Jul 16 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.39.3-1
+- Upgrade to 2.6.39.3
+- Add more modules/support for more features - start from allmodconfig and strip
+  down extras like debugging and kernel hacking
+
 * Mon May 23 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.37.2-3
 - Add IP Multicasting
 
