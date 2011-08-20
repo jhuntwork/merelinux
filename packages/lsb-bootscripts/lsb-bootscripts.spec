@@ -1,43 +1,25 @@
-Summary: LFS LSB Bootscripts
+Summary: LSB Bootscripts
 Name: lsb-bootscripts
-Version: 3
-Release: 4
+Version: 4.0
+Release: 1
 Group: System Environment/Base
-License: GPLv2
+License: MIT
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 Buildarch: noarch
-URL: http://www.linuxfromscratch.org/lfs
-Source0: http://dev.lightcube.us/sources/%{name}/lsb-v%{version}.tar.bz2
-Source1: http://dev.lightcube.us/sources/%{name}/service
-Patch0: http://dev.lightcube.us/sources/%{name}/lsb-v%{version}-dhclient-1.patch
-Patch1: http://dev.lightcube.us/sources/%{name}/lsb-v%{version}-random-1.patch
+URL: http://dev.lightcube.us/projects/lsb-bootscripts
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 8ccc03c42c4e29d579fa124743ebeef966485ece
-BuildRequires: digest(sha1:%{SOURCE1}) = d935be1993dbf647d9bba00f95b0d0982227d47a
-BuildRequires: digest(sha1:%{PATCH0}) = a63b4edc53572aa316417ad473dfa43dae0878d1
-BuildRequires: digest(sha1:%{PATCH1}) = ae9db357c772a4330a24e5c31817110977e19545
+BuildRequires: digest(sha1:%{SOURCE0}) = 9569a5023dc159aab8d4c6c5589e928bd43d3e87
 
 %description
-LSB compatible bootscripts from the LFS project.
+LSB compatible bootscripts adapted from the LFS project.
 
 %prep
-%setup -q -n lsb-v%{version}
-%patch0 -p1
-%patch1 -p1
+%setup -q
 
 %install
-# Fix syntax error
-sed -i 's@\]@& ; then@' init.d/sendsignals
-# LightCube specifics
-sed -i -e 's@Linux From Scratch@LightCube OS@g' \
-  -e 's/lfs-dev@linuxfromscratch.org/support@lightcube.us/' \
-  -e 's/DISTRO_MINI=.*/DISTRO_MINI="lightcube"/' \
-  -e 's@lfs-functions@lightcube-functions@' sysconfig/rc.site
-make DESTDIR=%{buildroot} install
-install -dv %{buildroot}/usr/sbin
-install -m 754 %{SOURCE1} %{buildroot}/usr/sbin/service
-mv -v %{buildroot}/etc/init.d/{lfs,lightcube}-functions
+make ETCDIR=/etc DESTDIR=%{buildroot} install
 
 %clean
 rm -rf %{buildroot}
@@ -45,8 +27,8 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /etc/init.d
+%dir /etc/network
 %config /etc/inittab
-/etc/lsb
 /etc/rc0.d
 /etc/rc1.d
 /etc/rc2.d
@@ -55,16 +37,22 @@ rm -rf %{buildroot}
 /etc/rc5.d
 /etc/rc6.d
 /etc/rcS.d
-/etc/sysconfig/createfiles
-/etc/sysconfig/modules
-/etc/sysconfig/network-devices
-/etc/sysconfig/rc
-/etc/sysconfig/rc.site
+/etc/default/createfiles
+/etc/default/modules
+/etc/default/rc
+%config /etc/default/rc.site
 /lib/lsb/init-functions
-/lib/lsb/manage-functions
-/usr/sbin/service
+/lib/network-services
+/sbin/ifdown
+/sbin/ifup
+/sbin/service
 
 %changelog
+* Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0-1
+- Fork from LFS project.
+- New directory layout.
+- New version: 4.0
+
 * Sat Sep 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3-4
 - Add random seed handling
 
