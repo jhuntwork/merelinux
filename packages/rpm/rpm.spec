@@ -1,7 +1,7 @@
 Summary: rpm package manager
 Name: rpm
-Version: 5.3.6
-Release: 2
+Version: 5.3.11
+Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -9,7 +9,8 @@ Vendor: LightCube Solutions
 URL: http://www.rpm5.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 9348c4072766554bffa367581dbfee100fa73eee
+BuildRequires: digest(sha1:%{SOURCE0}) = 65693e935a6706e3dce6e6d920f0cf50a9dca22b
+BuildRequires: beecrypt-devel
 BuildRequires: bzip2-devel
 BuildRequires: db-devel
 BuildRequires: elfutils-devel
@@ -58,10 +59,9 @@ Tools for building rpm packages
 
 %prep
 %setup -q
-sed -i 's@python_version="2.6@python_version="2.7 2.6@' configure
 cat > rpm-req << "EOF"
 #!/bin/sh
-%{__perl_requires} "$@" | sed -e '/perl(cases)/d'
+%{__perl_requires} "$@" | sed -e '/perl(MDK::Common)/d'
 EOF
 chmod +x rpm-req
 %define __perl_requires %{_builddir}/rpm-%{version}/rpm-req
@@ -73,9 +73,9 @@ sed -i '/^%%_lib/s/lib$/lib64/' macros/macros.in
 # FHS mods
 sed -i 's@_prefix}/info@_datadir}/info@' macros/macros.in
 sed -i 's@_prefix}/man@_datadir}/man@' macros/macros.in
-export CFLAGS="%{CFLAGS}  -I/usr/include/xar"
+export CFLAGS="-I/usr/include/xar"
 export LDFLAGS="%{LDFLAGS}"
-sed -i "/^PACKAGE_BUGREPORT=/s|'.*'|support@lightcube.us|" configure
+#sed -i "/^PACKAGE_BUGREPORT=/s|'.*'|support@lightcube.us|" configure
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
@@ -95,7 +95,7 @@ sed -i "/^PACKAGE_BUGREPORT=/s|'.*'|support@lightcube.us|" configure
   --with-xz=external \
   --with-zlib \
   --disable-openmp
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -104,6 +104,7 @@ install -dv %{buildroot}/etc/rpm
 install -dv %{buildroot}/usr/src/rpm
 echo "%%CFLAGS    -O2 -pipe" >> %{buildroot}/etc/rpm/macros
 echo "%%LDFLAGS   -s" >> %{buildroot}/etc/rpm/macros
+echo "%%PMFLAGS   -j1" >> %{buildroot}/etc/rpm/macros
 echo "%%compress_man	/usr/lib/rpm/compress_man.sh %%{buildroot}" >> %{buildroot}/etc/rpm/macros
 
 # Add compress man helper
@@ -147,6 +148,8 @@ rm -rf %{buildroot}
 /usr/bin/rpm
 /usr/bin/rpm2cpio
 /usr/bin/rpmconstant
+/usr/bin/multiarch-dispatch
+/usr/bin/multiarch-platform
 /usr/%{_lib}/librpm-5.3.so
 /usr/%{_lib}/librpmbuild-5.3.so
 /usr/%{_lib}/librpmconstant-5.3.so
@@ -196,6 +199,10 @@ rm -rf %{buildroot}
 /usr/lib/rpm/u_pkg.sh
 /usr/lib/rpm/vpkg-provides.sh
 /usr/lib/rpm/vpkg-provides2.sh
+/usr/lib/rpm/bin/dbconvert
+/usr/lib/rpm/check-multiarch-files
+/usr/lib/rpm/mkmultiarch
+/usr/lib/rpm/rubygems.rb
 %dir /var/lib/rpm
 /var/lib/rpm/DB_CONFIG
 %dir /var/lib/rpm/log
@@ -218,6 +225,7 @@ rm -rf %{buildroot}
 %files devel
 %defattr(-,root,root)
 /usr/include/rpm
+/usr/include/multiarch-dispatch.h
 /usr/%{_lib}/pkgconfig/rpm.pc
 /usr/%{_lib}/librpm.a
 /usr/%{_lib}/librpm.la
@@ -242,10 +250,11 @@ rm -rf %{buildroot}
 %files python
 %defattr(-,root,root)
 /usr/lib/python2.7/site-packages/rpm
+/usr/lib/rpm/pythoneggs.py
 
 %files build
 %defattr(-,root,root)
-/etc/rpm/macros
+%config /etc/rpm/macros
 /usr/bin/rpmbuild
 /usr/lib/rpm/brp-*
 /usr/lib/rpm/check-files
@@ -278,6 +287,9 @@ rm -rf %{buildroot}
 /usr/share/man/*/man8/rpmbuild.8.bz2
 
 %changelog
+* Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-1
+- Upgrade to 5.3.11 - Fixes an issue with honoring %config directives
+
 * Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.6-2
 - Add /usr/src/rpm directory to rpm-build
 - Remove dependency on external beecrypt
