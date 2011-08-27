@@ -1,10 +1,10 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.78936
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.39982
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
 + rm -rf openssl-1.0.0d
-+ /bin/gzip -dc /usr/src/rpm/SOURCES/openssl-1.0.0d.tar.gz
 + /bin/tar -xf -
++ /bin/gzip -dc /usr/src/rpm/SOURCES/openssl-1.0.0d.tar.gz
 + STATUS=0
 + '[' 0 -ne 0 ']'
 + cd openssl-1.0.0d
@@ -13,7 +13,7 @@ Patch #0 (openssl-1.0.0d-ldflags-1.patch):
 + /bin/cat /usr/src/rpm/SOURCES/openssl-1.0.0d-ldflags-1.patch
 + /usr/bin/patch -s -p1
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.78936
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.39982
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd openssl-1.0.0d
@@ -1473,7 +1473,7 @@ make[1]: Entering directory `/usr/src/rpm/BUILD/openssl-1.0.0d/tools'
 make[1]: Nothing to be done for `all'.
 make[1]: Leaving directory `/usr/src/rpm/BUILD/openssl-1.0.0d/tools'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.65868
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.17505
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/openssl-root
@@ -4949,25 +4949,26 @@ removed `/var/tmp/openssl-root/usr/share/man/man3/i2d_SSL_SESSION.3'
 `/var/tmp/openssl-root/usr/share/man/man3/i2d_SSL_SESSION.3.bz2' -> `d2i_SSL_SESSION.3.bz2'
 removed `/var/tmp/openssl-root/usr/share/man/man3/SSL.3'
 `/var/tmp/openssl-root/usr/share/man/man3/SSL.3.bz2' -> `ssl.3.bz2'
++ find /var/tmp/openssl-root -name passwd.1.bz2 -delete
 + exit 0
-Processing files: openssl-1.0.0d-1.x86_64
+Processing files: openssl-1.0.0d-2.x86_64
 Provides: libcrypto.so.1.0.0()(64bit) libssl.so.1.0.0()(64bit)
 Requires(interp): /sbin/ldconfig /sbin/ldconfig
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 Requires: /usr/bin/perl libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.7)(64bit) libcrypto.so.1.0.0()(64bit) libdl.so.2()(64bit) libdl.so.2(GLIBC_2.2.5)(64bit) libssl.so.1.0.0()(64bit)
-Processing files: openssl-devel-1.0.0d-1.x86_64
+Processing files: openssl-devel-1.0.0d-2.x86_64
 Provides: lib4758cca.so()(64bit) libaep.so()(64bit) libatalla.so()(64bit) libcapi.so()(64bit) libchil.so()(64bit) libcswift.so()(64bit) libgmp.so()(64bit) libgost.so()(64bit) libnuron.so()(64bit) libpadlock.so()(64bit) libsureware.so()(64bit) libubsec.so()(64bit) pkgconfig(libcrypto) = 1.0.0d pkgconfig(libssl) = 1.0.0d pkgconfig(openssl) = 1.0.0d
 Requires(rpmlib): rpmlib(VersionedDependencies) <= 3.0.3-1
 Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libcrypto.so.1.0.0()(64bit) libdl.so.2()(64bit) pkgconfig
-Processing files: openssl-misc-1.0.0d-1.x86_64
+Processing files: openssl-misc-1.0.0d-2.x86_64
 Requires: /bin/sh /usr/bin/perl perl(File::Basename) perl(Getopt::Std) perl(IO::Handle) perl(WWW::Curl::Easy) perl(strict) perl(vars)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/openssl-root
-Wrote: /usr/src/rpm/SRPMS/openssl-1.0.0d-1.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/openssl-1.0.0d-1.x86_64.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/openssl-devel-1.0.0d-1.x86_64.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/openssl-misc-1.0.0d-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.35394
+Wrote: /usr/src/rpm/SRPMS/openssl-1.0.0d-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/openssl-1.0.0d-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/openssl-devel-1.0.0d-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/openssl-misc-1.0.0d-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.53803
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd openssl-1.0.0d
