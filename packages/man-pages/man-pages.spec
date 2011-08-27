@@ -1,7 +1,7 @@
 Summary: Core System Man Pages
 Name: man-pages
 Version: 3.32
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -25,6 +25,8 @@ Group: Development
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
+# Remove passwd.5 man page because shadow will provide it
+find %{buildroot} -name "passwd.5.bz2" -delete
 
 %clean
 rm -rf %{buildroot}
@@ -44,6 +46,9 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Sat Aug 27 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.32-2
+- Remove passwd.5 man page
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.32-1
 - Upgrade to 3.32
 
