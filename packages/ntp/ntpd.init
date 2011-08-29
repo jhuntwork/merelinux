@@ -1,0 +1,57 @@
+#!/bin/sh
+# Begin /etc/init.d/ntpd
+
+### BEGIN INIT INFO
+# Provides:            ntpd
+# Required-Start:      hwclock $network
+# Should-Start:
+# Required-Stop:       $network
+# Should-Stop:         $remote_fs
+# Default-Start:       3 4 5
+# Default-Stop:        0 1 2 6
+# Short-Description:   NTP Network Time Protocal
+# Description:         NTP Syncronizes time with time servers worldwide
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+MESSAGE="Network Time Protocal Daemon"
+BIN_FILE="/usr/sbin/ntpd"
+CONFIG_FILE="/etc/ntp.conf"
+PIDFILE="/var/run/ntpd.pid"
+
+# Make certain that the binary exists, and that the config file exists
+chk_stat
+
+case "$1" in
+
+    start)
+        start_daemon -p "${PIDFILE}" "${BIN_FILE}" -g
+        evaluate_retval start
+    ;;
+
+    stop)
+        killproc -p "${PIDFILE}" "${BIN_FILE}"
+        evaluate_retval stop
+    ;;
+
+    restart)
+        # Restart service (if running) or start service
+        killproc -p "${PIDFILE}" "${BIN_FILE}"
+        sleep 1
+        start_daemon -p "${PIDFILE}" "${BIN_FILE}" -g
+        evaluate_retval restart
+    ;;
+
+    status)
+        statusproc
+    ;;
+
+    *)
+        echo "    Usage:  ${0}{start|stop|restart|status}"
+        exit 2
+    ;;
+
+esac
+
+# End /etc/init.d/ntpd
