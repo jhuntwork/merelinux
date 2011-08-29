@@ -1,6 +1,6 @@
 Summary: cURL groks URLs
 Name: curl
-Version: 7.21.6
+Version: 7.21.7
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -8,8 +8,10 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://curl.haxx.se
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source1: http://dev.lightcube.us/sources/%{name}/ca-bundle.crt
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 049a3aff13d283f6e4ea1f9aa3aa6abc067fd42e
+BuildRequires: digest(sha1:%{SOURCE0}) = 88aab0188ac86c3d13118bb5b6ee49a83e53b0ce
+BuildRequires: digest(sha1:%{SOURCE1}) = 91932530b34567e650c1d03521010d2296b50230
 BuildRequires: openssl-devel
 BuildRequires: zlib-devel
 
@@ -36,7 +38,8 @@ Libraries and headers for developing with curl.
 export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
-  --libdir=/usr/%{_lib}
+  --libdir=/usr/%{_lib} \
+  --with-ca-bundle=%{SOURCE1}
 make %{PMFLAGS}
 
 %install
@@ -64,8 +67,11 @@ rm -rf %{buildroot}
 /usr/share/man/man1/curl-config.1.bz2
 /usr/share/man/man3/*
 
-
 %changelog
+* Sun Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.21.7-1
+- Upgrade to 7.21.7
+- Add a full CA bundle
+
 * Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.21.6-1
 - Upgrade to 7.21.6
 
