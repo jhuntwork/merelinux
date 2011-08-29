@@ -1,7 +1,7 @@
 Summary: OpenSSL
 Name: openssl
 Version: 1.0.0d
-Release: 2
+Release: 3
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
@@ -52,6 +52,7 @@ make INSTALL_PREFIX=%{buildroot} LIBDIR=%{_lib} MANDIR=/usr/share/man install
 cp -r certs %{buildroot}/etc/ssl
 %{compress_man}
 find %{buildroot} -name "passwd.1.bz2" -delete
+mv -v %{buildroot}/usr/share/man/man3/{,SSL-}threads.3.bz2
 
 %clean
 rm -rf %{buildroot}
@@ -91,6 +92,9 @@ rm -rf %{buildroot}
 /etc/ssl/misc
 
 %changelog
+* Sun Aug 28 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0d-3
+- Rename threds.3.bz2, conflicts with perl
+
 * Sat Aug 27 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0d-2
 - Remove passwd.1.bz2, shadow provides
 
