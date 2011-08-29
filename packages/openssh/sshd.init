@@ -19,7 +19,6 @@ MESSAGE="SSH Server"
 BIN_FILE="/usr/sbin/sshd"
 
 chk_stat
-runlevel=$(set -- $(runlevel); eval "echo \$$#" )
 
 case "$1" in
     start)
@@ -29,10 +28,9 @@ case "$1" in
 
     stop)
         killproc "${BIN_FILE}"
-        if [ "x$runlevel" = x0 -o "x$runlevel" = x6 ] ; then
+        if pidof sshd &>/dev/null ; then
             trap '' TERM
-            killall sshd 2>/dev/null
-            trap TERM
+            killall sshd &>/dev/null
         fi
         evaluate_retval stop
         ;;
