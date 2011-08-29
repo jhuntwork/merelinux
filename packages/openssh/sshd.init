@@ -1,0 +1,62 @@
+#!/bin/sh
+# Begin /etc/init.d/sshd
+
+### BEGIN INIT INFO
+# Provides:            sshd
+# Required-Start:      $network
+# Should-Start:        $remote_fs
+# Required-Stop:       $network
+# Should-Stop:         $remote_fs
+# Default-Start:       3 4 5 
+# Default-Stop:        0 1 2 6
+# Short-Description:   Starts/Stops the Secure Shell daemon.
+# Description:         Starts and stops the Secure Shell sshd daemon.
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+MESSAGE="SSH Server"
+BIN_FILE="/usr/sbin/sshd"
+
+chk_stat
+runlevel=$(set -- $(runlevel); eval "echo \$$#" )
+
+case "$1" in
+    start)
+        start_daemon "${BIN_FILE}"
+        evaluate_retval start
+        ;;
+
+    stop)
+        killproc "${BIN_FILE}"
+        if [ "x$runlevel" = x0 -o "x$runlevel" = x6 ] ; then
+            trap '' TERM
+            killall sshd 2>/dev/null
+            trap TERM
+        fi
+        evaluate_retval stop
+        ;;
+
+    reload)
+        killproc "${BIN_FILE}" -HUP
+        evaluate_retval reload
+        ;;
+
+    restart)
+        killproc "$BIN_FILE"
+        sleep 1
+        start_daemon "${BIN_FILE}"
+        evaluate_retval restart
+        ;;
+
+    status)
+        statusproc "${BIN_FILE}"
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop|reload|restart|status}"
+        exit 1
+        ;;
+esac
+
+# End /etc/init.d/sshd
