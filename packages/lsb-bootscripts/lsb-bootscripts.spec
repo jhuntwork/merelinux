@@ -1,7 +1,7 @@
 Summary: LSB Bootscripts
 Name: lsb-bootscripts
-Version: 4.1.1
-Release: 1
+Version: 4.1.2
+Release: 2
 Group: System Environment/Base
 License: MIT
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ Buildarch: noarch
 URL: http://dev.lightcube.us/projects/lsb-bootscripts
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 1cb5de394c1ab71f3cf60de4447f50d8b1a5694e
+BuildRequires: digest(sha1:%{SOURCE0}) = 38a771fc7332bcfb9adfe3b0e59090c78da9d3f3
 
 %description
 LSB compatible bootscripts adapted from the LFS project.
@@ -37,6 +37,7 @@ rm -rf %{buildroot}
 /usr/sbin/install_initd random
 /usr/sbin/install_initd reboot
 /usr/sbin/install_initd sendsignals
+/usr/sbin/install_initd setclock
 /usr/sbin/install_initd sysklogd
 /usr/sbin/install_initd swap
 /usr/sbin/install_initd sysctl
@@ -47,6 +48,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %config /etc/inittab
 %config /etc/default/rc.site
+%config /etc/rc.local
 %dir /etc/network
 /etc/init.d
 /etc/rc0.d
@@ -67,9 +69,17 @@ rm -rf %{buildroot}
 /sbin/service
 
 %changelog
+* Mon Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.2-2
+- Install setclock scripts symlinks on post
+
+* Mon Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.2-1
+- Upgrade to version 4.1.2
+- Fixes to setclock script
+
 * Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.1-1
 - Upgrade version to 4.1.1
 - Fixes to install procedure
+- Add /etc/rc.local
 
 * Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-1
 - Upgrade version to 4.1 (matches LSB version)
