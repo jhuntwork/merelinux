@@ -1,19 +1,19 @@
 Summary: CrackLib
 Name: cracklib
-Version: 2.8.16
-Release: 2
+Version: 2.8.18
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://cracklib.sourceforge.net
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-words-20080507.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source1: http://dev.lightcube.us/sources/%{name}/%{name}-words-20080507.gz
 
-Requires: base-layout, glibc, zlib
-BuildRequires: digest(%{SOURCE0}) = 3bfb22db8fcffd019463ee415a1b25b7
-BuildRequires: digest(%{SOURCE1}) = 7fa6ba0cd50e7f9ccaf4707c810b14f1
-BuildRequires: zlib-devel, Python-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 3c4df51b13047fd7a85ae470f568abf8a8d6f92b
+BuildRequires: digest(sha1:%{SOURCE1}) = e0cea03e505e709b15b8b950d56cb493166607da
+BuildRequires: zlib-devel
+BuildRequires: Python-devel
 
 %description
 A Next generation version of the libCrack password checking library.
@@ -29,7 +29,7 @@ Requires: %{name} = %{version}
 %package devel
 Summary: Files for developing with %{name}
 Group: Development/Libraries
-Requires: %{name} = %{version}
+Requires: %{name} >= %{version}
 
 %description devel
 Libraries and Header files for developing with %{name}
@@ -38,9 +38,11 @@ Libraries and Header files for developing with %{name}
 %setup -q
 
 %build
-./configure --prefix=/usr --libdir=/usr/%{_lib} \
- --with-default-dict=/%{_lib}/cracklib/pw_dict
-make
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib} \
+  --with-default-dict=/%{_lib}/cracklib/pw_dict
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -53,7 +55,7 @@ ln -svf cracklib-words %{buildroot}/usr/share/dict/words
 %find_lang %{name}
 
 %post
-/usr/sbin/create-cracklib-dict /usr/share/dict/cracklib-words >/dev/null 2>&1
+/usr/sbin/create-cracklib-dict /usr/share/dict/cracklib-words
 
 %postun
 /bin/rm -rf /%{_lib}/cracklib
@@ -93,6 +95,9 @@ rm -rf %{buildroot}
 /usr/include/packer.h
 
 %changelog
+* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.18-1
+- Upgrade to 2.8.18
+
 * Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.16-2
 - Fixes to dependencies and ambiguous postun command.
 
