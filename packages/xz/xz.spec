@@ -1,6 +1,6 @@
 Summary: XZ Utils
 Name: xz
-Version: 5.0.1
+Version: 5.0.2
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: http://tukaani.org/xz
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = a87cef4f299fbeab60f2b2f18966d851eabc9661
+BuildRequires: digest(sha1:%{SOURCE0}) = c244dfffef4196b997035d7389e957f56a3a87d1
 
 %description
 XZ Utils is free general-purpose data compression software with high
@@ -31,8 +31,8 @@ export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
-make
-#make check
+make %{PMFLAGS}
+make check
 
 %install
 make DESTDIR=%{buildroot} install
@@ -41,6 +41,9 @@ make DESTDIR=%{buildroot} install
 
 %clean
 rm -rf %{buildroot}
+
+%post -p /sbin/ldconfig
+%postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
 %defattr(-,root,root)
@@ -81,6 +84,9 @@ rm -rf %{buildroot}
 /usr/include/lzma
 
 %changelog
+* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.2-1
+- Upgrade to 5.0.2
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.1-1
 - Upgrade to 5.0.1
 
