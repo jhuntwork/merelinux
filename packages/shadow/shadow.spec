@@ -1,7 +1,7 @@
 Summary: The shadow tool suite
 Name: shadow
-Version: 4.1.4.2
-Release: 2
+Version: 4.1.4.3
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: http://pkg-shadow.alioth.debian.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 43e29471057c671de51360b10e3ee2b419c78ffa
+BuildRequires: digest(sha1:%{SOURCE0}) = ad9b85b5531ce8e68f4695efc4ac53ba7266269e
 BuildRequires: Linux-PAM-devel
 
 %description
@@ -119,7 +119,7 @@ session     required        pam_warn.so
 
 # End /etc/pam.d/other
 EOF
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 %find_lang %{name}
 
 %clean
@@ -190,6 +190,9 @@ rm -rf %{buildroot}
 /usr/share/man/man8/*
 
 %changelog
+* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.3-1
+- Upgrade to 4.1.4.3
+
 * Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.2-2
 - Don't link directly to cracklib
 
