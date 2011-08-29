@@ -1,19 +1,19 @@
 Summary: Linux-PAM (Pluggable Authentication Modules for Linux)
 Name: Linux-PAM
-Version: 1.1.1
+Version: 1.1.4
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
-URL: http://www.kernel.org/pub/linux/%{_lib}s/pam/
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-docs.tar.bz2
+URL: http://www.kernel.org/pub/linux/lib/pam
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-Requires: base-layout, glibc, flex, cracklib, zlib
-BuildRequires: digest(%{SOURCE0}) = 9b3d952b173d5b9836cbc7e8de108bee
-BuildRequires: digest(%{SOURCE1}) = a8f77330be4a6bc73e0e584a599649b0
-BuildRequires: cracklib-devel, flex-devel, zlib-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 4634b09f9e059f384ce69dbaa4a67f88bef5cf7b
+BuildRequires: cracklib-devel
+BuildRequires: db-devel
+BuildRequires: flex-devel
+BuildRequires: zlib-devel
 
 %description
 Linux-PAM (Pluggable Authentication Modules for Linux) is a suite of shared
@@ -22,8 +22,8 @@ applications authenticate users.
 
 %package devel
 Summary: Libraries, headers and documentation for developing with %{name}
-Requires: %{name}
-Group: Development/Libs
+Group: Development/Libraries
+Requires: %{name} >= %{version}
 
 %description devel
 Libaries, headers and documentation for developing with %{_name}
@@ -32,17 +32,18 @@ Libaries, headers and documentation for developing with %{_name}
 %setup -q
 
 %build
-tar -xf %{SOURCE1} --strip-components=1
 ./configure \
   --docdir=/usr/share/doc/%{name}-%{version} \
   --libdir=/%{_lib} \
   --sbindir=/%{_lib}/security \
-  --enable-read-both-confs
-make
+  --enable-read-both-confs \
+  pam_cv_ld_no_undefined=no
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 install -dv %{buildroot}/etc/pam.d
+%{compress_man}
 %find_lang %{name}
 
 %clean
@@ -54,7 +55,7 @@ rm -rf %{buildroot}
 %dir /etc/pam.d
 /etc/security
 /%{_lib}/libpam.so.0
-/%{_lib}/libpam.so.0.82.2
+/%{_lib}/libpam.so.0.83.1
 /%{_lib}/libpam_misc.so.0
 /%{_lib}/libpam_misc.so.0.82.0
 /%{_lib}/libpamc.so.0
@@ -76,6 +77,12 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Wed Jul 27 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.4-1
+- Upgrade to 1.1.4
+
+* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.3-1
+- Upgrade to 1.1.3
+
 * Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.1-1
 - Upgrade to 1.1.1
 
