@@ -1,7 +1,7 @@
 Summary: PHP Hypertext Preprocessor
 Name: php
 Version: 5.3.6
-Release: 1
+Release: 2
 Group: Development/Languages
 License: PHP v3.01
 Distribution: LightCube OS
@@ -83,6 +83,7 @@ export LDFLAGS="%{LDFLAGS}"
   --enable-sqlite-utf8 \
   --with-gdbm \
   --enable-soap \
+  --enable-ftp \
   --with-gd \
   --with-mysql=mysqlnd \
   --with-mysqli=mysqlnd \
@@ -115,6 +116,7 @@ cd ../%{name}-%{version}-fpm
   --enable-sqlite-utf8 \
   --with-gdbm \
   --enable-soap \
+  --enable-ftp \
   --with-gd \
   --with-mysql=mysqlnd \
   --with-mysqli=mysqlnd \
@@ -185,6 +187,9 @@ You may also what to edit "DirectoryIndex" to include index.php'
 /usr/%{_lib}/apache/libphp5.so
 
 %changelog
+* Thu Aug 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.6-2
+- Enable support for FTP
+
 * Mon May 09 2011 Archaic <lc@8bitnet.com> - 5.3.6-1
 - Updated package version. Fixed default mysql.sock location. Enabled sockets.
 
