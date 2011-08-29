@@ -1,17 +1,17 @@
 Summary: OpenSSH
 Name: openssh
-Version: 5.5p1
-Release: 2
+Version: 5.8p2
+Release: 1
 Group: Services
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.openssl.com
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/sources/%{name}/sshd.init
+Source1: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/415/lightcube_os/trunk/packages/%{name}/sshd.init
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 361c6335e74809b26ea096b34062ba8ff6c97cd6
-BuildRequires: digest(sha1:%{SOURCE1}) = de7e20c23da063a29222ad9c753d57702e49e6cb
+BuildRequires: digest(sha1:%{SOURCE0}) = 64798328d310e4f06c9f01228107520adbc8b3e5
+BuildRequires: digest(sha1:%{SOURCE1}) = 7896901876368bb3b57e9950454f3d91d827c726
 BuildRequires: openssl-devel
 BuildRequires: zlib-devel
 
@@ -29,7 +29,7 @@ OpenSSH is a free version of the SSH connectivity tools.
   --libexecdir=/usr/sbin \
   --with-md5-passwords \
   --with-privsep-path=/var/lib/sshd
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -67,6 +67,9 @@ fi
 if [ ! -f /etc/ssh/ssh_host_dsa_key ]
    then /usr/bin/ssh-keygen -t dsa -f /etc/ssh/ssh_host_dsa_key -N "" >/dev/null 2>&1
 fi
+if [ ! -f /etc/ssh/ssh_host_ecdsa_key ]
+   then /usr/bin/ssh-keygen -t ecdsa -f /etc/ssh/ssh_host_ecdsa_key -N "" >/dev/null 2>&1
+fi
 
 %preun
 /usr/sbin/remove_initd sshd
@@ -91,6 +94,10 @@ rm -rf %{buildroot}
 /var/lib/sshd
 
 %changelog
+* Sun Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.8p2-1
+- Upgrade to 5.8p2
+- Kill asctive ssh connections on shutdown or reboot
+
 * Sat Sep 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.5p1-2
 - Add host keys on install, if they don't exist
 
