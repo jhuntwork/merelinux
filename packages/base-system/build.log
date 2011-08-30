@@ -1,0 +1,9 @@
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.98959
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/base-system-root
++ /bin/mkdir -p /var/tmp/base-system-root
++ exit 0
+Processing files: base-system-0.1-3.noarch
+Wrote: /usr/src/rpm/SRPMS/base-system-0.1-3.src.rpm
+Wrote: /usr/src/rpm/RPMS/noarch/base-system-0.1-3.noarch.rpm

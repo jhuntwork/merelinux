@@ -1,7 +1,7 @@
 Summary: LightCube OS Base System Meta-Package
 Name: base-system
 Version: 0.1
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -47,6 +47,7 @@ Requires: gzip
 Requires: less
 Requires: iproute2
 Requires: inetutils
+Requires: net-tools
 Requires: tar
 Requires: sed
 Requires: ntp
@@ -67,6 +68,9 @@ packages are installed.
 %files
 
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-3
+- Add net-tools as a requirement
+
 * Fri Sep 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-2
 - Add linux, grub and dhcp as requirements
 
