@@ -1,0 +1,118 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.37233
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf sysvinit-2.88dsf
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/sysvinit-2.88dsf.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd sysvinit-2.88dsf
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.37233
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd sysvinit-2.88dsf
++ sed -i 's@Sending processes@& configured via /etc/inittab@g' src/init.c
++ sed -i -e 's/utmpdump wall/utmpdump/' -e 's/mountpoint.1 wall.1//' src/Makefile
++ sed -i s@/lib/@/lib64/@ src/Makefile
++ make -C src
+make: Entering directory `/usr/src/rpm/BUILD/sysvinit-2.88dsf/src'
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o mountpoint.o mountpoint.c
+cc   mountpoint.o   -o mountpoint
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o init.o init.c
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE -DINIT_MAIN -c -o init_utmp.o utmp.c
+cc   init.o init_utmp.o    -o init
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o halt.o halt.c
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o ifdown.o ifdown.c
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o hddown.o hddown.c
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o utmp.o utmp.c
+cc   halt.o ifdown.o hddown.o utmp.o reboot.h   -o halt
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o shutdown.o shutdown.c
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o dowall.o dowall.c
+cc   shutdown.o dowall.o utmp.o reboot.h   -o shutdown
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o runlevel.o runlevel.c
+cc   runlevel.o   -o runlevel
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE    killall5.c   -o killall5
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE    fstab-decode.c   -o fstab-decode
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o sulogin.o sulogin.c
+cc   sulogin.o   -lcrypt  -o sulogin
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o bootlogd.o bootlogd.c
+cc   bootlogd.o  -lutil -o bootlogd
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o last.o last.c
+cc   last.o oldutmp.h   -o last
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o mesg.o mesg.c
+cc   mesg.o   -o mesg
+cc -ansi -O2 -fomit-frame-pointer -W -Wall -D_GNU_SOURCE   -c -o utmpdump.o utmpdump.c
+cc   utmpdump.o   -o utmpdump
+make: Leaving directory `/usr/src/rpm/BUILD/sysvinit-2.88dsf/src'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.90507
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/sysvinit-root
++ /bin/mkdir -p /var/tmp/sysvinit-root
++ cd sysvinit-2.88dsf
++ install -dv /var/tmp/sysvinit-root/bin /var/tmp/sysvinit-root/sbin /var/tmp/sysvinit-root/usr/bin /var/tmp/sysvinit-root/usr/include /var/tmp/sysvinit-root/usr/share/man/man1 /var/tmp/sysvinit-root/usr/share/man/man5 /var/tmp/sysvinit-root/usr/share/man/man8
+install: creating directory `/var/tmp/sysvinit-root/bin'
+install: creating directory `/var/tmp/sysvinit-root/sbin'
+install: creating directory `/var/tmp/sysvinit-root/usr'
+install: creating directory `/var/tmp/sysvinit-root/usr/bin'
+install: creating directory `/var/tmp/sysvinit-root/usr/include'
+install: creating directory `/var/tmp/sysvinit-root/usr/share'
+install: creating directory `/var/tmp/sysvinit-root/usr/share/man'
+install: creating directory `/var/tmp/sysvinit-root/usr/share/man/man1'
+install: creating directory `/var/tmp/sysvinit-root/usr/share/man/man5'
+install: creating directory `/var/tmp/sysvinit-root/usr/share/man/man8'
++ make ROOT=/var/tmp/sysvinit-root -C src install
+make: Entering directory `/usr/src/rpm/BUILD/sysvinit-2.88dsf/src'
+install -m 755 -d /var/tmp/sysvinit-root/bin/ /var/tmp/sysvinit-root/sbin/
+install -m 755 -d /var/tmp/sysvinit-root/usr/bin/
+for i in  mountpoint; do \
+		install -o root -g root -m 755 $i /var/tmp/sysvinit-root/bin/ ; \
+	done
+for i in init halt shutdown runlevel killall5 fstab-decode sulogin bootlogd; do \
+		install -o root -g root -m 755 $i /var/tmp/sysvinit-root/sbin/ ; \
+	done
+for i in last mesg utmpdump; do \
+		install -o root -g root -m 755 $i /var/tmp/sysvinit-root/usr/bin/ ; \
+	done
+# install -m 755 -d /var/tmp/sysvinit-root/etc/
+# install -o root -g root -m 755 initscript.sample /var/tmp/sysvinit-root/etc/
+ln -sf halt /var/tmp/sysvinit-root/sbin/reboot
+ln -sf halt /var/tmp/sysvinit-root/sbin/poweroff
+ln -sf init /var/tmp/sysvinit-root/sbin/telinit
+ln -sf /sbin/killall5 /var/tmp/sysvinit-root/bin/pidof
+if [ ! -f /var/tmp/sysvinit-root/usr/bin/lastb ]; then \
+		ln -sf last /var/tmp/sysvinit-root/usr/bin/lastb; \
+	fi
+install -m 755 -d /var/tmp/sysvinit-root/usr/include/
+install -o root -g root -m 644 initreq.h /var/tmp/sysvinit-root/usr/include/
+install -m 755 -d /var/tmp/sysvinit-root/usr/share/man/man1/
+install -m 755 -d /var/tmp/sysvinit-root/usr/share/man/man5/
+install -m 755 -d /var/tmp/sysvinit-root/usr/share/man/man8/
+for i in last.1 lastb.1 mesg.1 utmpdump.1 ; do \
+		install -o root -g root -m 644 ../man/$i /var/tmp/sysvinit-root/usr/share/man/man1/; \
+	done
+for i in initscript.5 inittab.5; do \
+		install -o root -g root -m 644 ../man/$i /var/tmp/sysvinit-root/usr/share/man/man5/; \
+	done
+for i in halt.8 init.8 killall5.8 pidof.8 poweroff.8 reboot.8 runlevel.8 shutdown.8 telinit.8 fstab-decode.8 sulogin.8 bootlogd.8; do \
+		install -o root -g root -m 644 ../man/$i /var/tmp/sysvinit-root/usr/share/man/man8/; \
+	done
+make: Leaving directory `/usr/src/rpm/BUILD/sysvinit-2.88dsf/src'
++ rm -f /var/tmp/sysvinit-root/bin/mountpoint
++ rm -rfv /var/tmp/sysvinit-root/usr/include
+removed `/var/tmp/sysvinit-root/usr/include/initreq.h'
+removed directory: `/var/tmp/sysvinit-root/usr/include'
++ exit 0
+Processing files: sysvinit-2.88dsf-3.x86_64
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libcrypt.so.1()(64bit) libcrypt.so.1(GLIBC_2.2.5)(64bit) libutil.so.1()(64bit) libutil.so.1(GLIBC_2.2.5)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/sysvinit-root
+Wrote: /usr/src/rpm/SRPMS/sysvinit-2.88dsf-3.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/sysvinit-2.88dsf-3.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.36919
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd sysvinit-2.88dsf
++ /bin/rm -rf /var/tmp/sysvinit-root

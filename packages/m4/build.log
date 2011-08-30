@@ -1,0 +1,2451 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.14840
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf m4-1.4.16
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/m4-1.4.16.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd m4-1.4.16
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.48508
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd m4-1.4.16
++ export LDFLAGS=-s
++ LDFLAGS=-s
++ ./configure --prefix=/usr
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking for ranlib... ranlib
+checking whether gcc and cc understand -c and -o together... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking for gcc option to accept ISO C99... -std=gnu99
+checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+configure: autobuild project... GNU M4
+configure: autobuild revision... 1.4.16
+configure: autobuild hostname... build1.lightcube.us
+configure: autobuild timestamp... 20110829T024610Z
+checking for unsigned long long int... yes
+checking for long long int... yes
+checking for unsigned long long int... (cached) yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking for btowc... yes
+checking for setrlimit... yes
+checking for sigaltstack... yes
+checking for canonicalize_file_name... yes
+checking for getcwd... yes
+checking for readlink... yes
+checking for realpath... yes
+checking for dup2... yes
+checking for fcntl... yes
+checking for mempcpy... yes
+checking for __fpending... yes
+checking for fpurge... no
+checking for __fpurge... yes
+checking for __freading... yes
+checking for getdtablesize... yes
+checking for gettimeofday... yes
+checking for lstat... yes
+checking for mbsinit... yes
+checking for mbrtowc... yes
+checking for mprotect... yes
+checking for memchr... yes
+checking for mkstemp... yes
+checking for nl_langinfo... yes
+checking for pathconf... yes
+checking for pipe2... yes
+checking for posix_spawn... yes
+checking for isblank... yes
+checking for iswctype... yes
+checking for wcscoll... yes
+checking for sigaction... yes
+checking for siginterrupt... yes
+checking for strndup... yes
+checking for pipe... yes
+checking for vasnprintf... no
+checking for wcrtomb... yes
+checking for iswcntrl... yes
+checking for link... yes
+checking for newlocale... yes
+checking for setenv... yes
+checking for strdup... yes
+checking for symlink... yes
+checking for wctob... yes
+checking for nl_langinfo and CODESET... yes
+checking for a traditional french locale... fr_FR
+checking for ucontext.h... yes
+checking for unistd.h... (cached) yes
+checking for sys/param.h... yes
+checking for stdio_ext.h... yes
+checking for getopt.h... yes
+checking for sys/time.h... yes
+checking for langinfo.h... yes
+checking for math.h... yes
+checking for sys/mman.h... yes
+checking for sched.h... yes
+checking for spawn.h... yes
+checking for wchar.h... yes
+checking for stdint.h... (cached) yes
+checking for sys/socket.h... yes
+checking for sys/stat.h... (cached) yes
+checking for sys/wait.h... yes
+checking for features.h... yes
+checking for wctype.h... yes
+checking for xlocale.h... yes
+checking for working C stack overflow detection... yes
+checking for correct stack_t interpretation... yes
+checking for precise C stack overflow detection... no
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking for libsigsegv... no, consider installing GNU libsigsegv
+checking whether // is distinct from /... no
+checking whether realpath works... yes
+checking if environ is properly declared... yes
+checking whether the preprocessor supports include_next... yes
+checking whether system header files limit the line length... no
+checking for complete errno.h... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... yes
+checking whether strerror_r returns char *... yes
+checking for inline... inline
+checking for mode_t... yes
+checking for sig_atomic_t... yes
+checking for working fcntl.h... yes
+checking for fseeko... yes
+checking whether frexp() can be used without linking with libm... yes
+checking whether stdin defaults to large file offsets... yes
+checking whether fseeko is declared... yes
+checking whether ftello is declared... yes
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... yes
+checking whether getenv is declared... yes
+checking for C/C++ restrict keyword... __restrict
+checking for struct timeval... yes
+checking where to find the exponent in a 'float'... word 0 bit 23
+checking whether byte ordering is bigendian... no
+checking whether getc_unlocked is declared... yes
+checking whether we are using the GNU C Library >= 2.1 or uClibc... yes
+checking for multithread API to use... none
+checking whether lstat correctly handles trailing slash... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for mbstate_t... yes
+checking for a traditional japanese locale... ja_JP
+checking for a transitional chinese locale... zh_CN.GB18030
+checking for a french Unicode locale... fr_FR.UTF-8
+checking for mmap... yes
+checking for MAP_ANONYMOUS... yes
+checking whether memchr works... yes
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for promoted mode_t type... mode_t
+checking whether posix_spawn works... yes
+checking whether posix_spawnattr_setschedpolicy is supported... yes
+checking whether posix_spawnattr_setschedparam is supported... yes
+checking for uid_t in sys/types.h... yes
+checking whether snprintf returns a byte count as in C99... yes
+checking whether snprintf is declared... yes
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for wchar_t... yes
+checking for working strerror function... yes
+checking whether strndup is declared... yes
+checking whether strnlen is declared... yes
+checking whether strsignal is declared... yes
+checking whether sys_siglist is declared... yes
+checking whether strstr works... yes
+checking whether strtod is declared... yes
+checking whether ldexp() can be used without linking with libm... yes
+checking whether stat file-mode macros are broken... no
+checking for struct timespec in <time.h>... yes
+checking whether clearerr_unlocked is declared... yes
+checking whether feof_unlocked is declared... yes
+checking whether ferror_unlocked is declared... yes
+checking whether fflush_unlocked is declared... yes
+checking whether fgets_unlocked is declared... yes
+checking whether fputc_unlocked is declared... yes
+checking whether fputs_unlocked is declared... yes
+checking whether fread_unlocked is declared... yes
+checking whether fwrite_unlocked is declared... yes
+checking whether getchar_unlocked is declared... yes
+checking whether putc_unlocked is declared... yes
+checking whether putchar_unlocked is declared... yes
+checking for wint_t... yes
+checking for size_t... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for intmax_t... yes
+checking for snprintf... yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... (cached) yes
+checking for wcrtomb... (cached) yes
+checking whether _snprintf is declared... no
+checking whether printf supports size specifiers as in C99... yes
+checking whether printf supports 'long double' arguments... yes
+checking whether printf supports infinite 'double' arguments... yes
+checking whether printf supports infinite 'long double' arguments... no
+checking whether printf supports the 'a' and 'A' directives... yes
+checking whether printf supports the 'F' directive... yes
+checking whether printf supports the 'n' directive... yes
+checking whether printf supports the 'ls' directive... yes
+checking whether printf supports POSIX/XSI format strings with positions... yes
+checking whether printf supports the grouping flag... yes
+checking whether printf supports the left-adjust flag correctly... yes
+checking whether printf supports the zero flag correctly... yes
+checking whether printf supports large precisions... yes
+checking whether printf survives out-of-memory conditions... yes
+checking whether to use C++... no
+checking whether ungetc works on arbitrary bytes... yes
+checking for LC_MESSAGES... yes
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking whether setenv is declared... yes
+checking whether setenv validates arguments... yes
+checking search.h usability... yes
+checking search.h presence... yes
+checking for search.h... yes
+checking for tsearch... yes
+checking whether strdup is declared... yes
+checking whether alarm is declared... yes
+checking whether unsetenv is declared... yes
+checking for alloca as a compiler built-in... yes
+checking whether to enable assertions... yes
+checking whether btowc(0) is correct... yes
+checking whether btowc(EOF) is correct... yes
+checking whether sigaltstack is declared... yes
+checking for stack_t... yes
+checking whether // is distinct from /... (cached) no
+checking whether dup2 works... yes
+checking for error_at_line... yes
+checking whether fcntl handles F_DUPFD correctly... yes
+checking whether fcntl understands F_DUPFD_CLOEXEC... needs runtime check
+checking whether fflush works on input streams... no
+checking whether fopen recognizes a trailing slash... yes
+checking whether __fpending is declared... yes
+checking whether fpurge is declared... no
+checking whether frexp works... yes
+checking whether frexpl is declared... yes
+checking whether frexpl() can be used without linking with libm... yes
+checking whether frexpl works... yes
+checking for ftello... yes
+checking whether ftello works... yes
+checking whether gettimeofday clobbers localtime buffer... no
+checking for gettimeofday with POSIX signature... almost
+checking whether the compiler generally respects inline... yes
+checking whether isnan(double) can be used without linking with libm... yes
+checking whether isnan(float) can be used without linking with libm... yes
+checking whether isnan(float) works... yes
+checking whether isnan(long double) can be used without linking with libm... yes
+checking whether isnanl works... no
+checking where to find the exponent in a 'long double'... word 2 bit 0
+checking whether langinfo.h defines CODESET... yes
+checking whether langinfo.h defines T_FMT_AMPM... yes
+checking whether langinfo.h defines ERA... yes
+checking whether langinfo.h defines YESEXPR... yes
+checking for libsigsegv... (cached) no, consider installing GNU libsigsegv
+checking whether lseek detects pipes... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... (cached) yes
+checking whether NAN macro works... yes
+checking whether HUGE_VAL works... yes
+checking whether mbrtowc handles incomplete characters... yes
+checking whether mbrtowc works as well as mbtowc... yes
+checking whether mbrtowc handles a NULL pwc argument... yes
+checking whether mbrtowc handles a NULL string argument... yes
+checking whether mbrtowc has a correct return value... yes
+checking whether mbrtowc returns 0 when parsing a NUL character... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking for mkdtemp... yes
+checking for working mkstemp... yes
+checking whether YESEXPR works... yes
+checking for obstacks... yes
+checking whether open recognizes a trailing slash... yes
+checking whether frexp works... (cached) yes
+checking whether ldexp can be used without linking with libm... (cached) yes
+checking whether frexpl() can be used without linking with libm... (cached) yes
+checking whether frexpl works... (cached) yes
+checking whether frexpl is declared... (cached) yes
+checking whether ldexpl() can be used without linking with libm... yes
+checking whether ldexpl works... yes
+checking whether ldexpl is declared... yes
+checking whether program_invocation_name is declared... yes
+checking whether program_invocation_short_name is declared... yes
+checking for rawmemchr... yes
+checking whether readlink signature is correct... yes
+checking whether readlink handles trailing slash correctly... yes
+checking for working re_compile_pattern... yes
+checking whether rename honors trailing slash on destination... yes
+checking whether rename honors trailing slash on source... yes
+checking whether rename manages hard links correctly... yes
+checking whether rename manages existing destinations correctly... yes
+checking whether rmdir works... yes
+checking for struct sigaction.sa_sigaction... yes
+checking for volatile sig_atomic_t... yes
+checking for signbit macro... yes
+checking for signbit compiler built-ins... yes
+checking for sigprocmask... yes
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking for snprintf... (cached) yes
+checking whether snprintf respects a size of 1... yes
+checking for posix_spawnattr_t... yes
+checking for posix_spawn_file_actions_t... yes
+checking for ssize_t... yes
+checking whether stat handles trailing slashes on directories... yes
+checking whether stat handles trailing slashes on files... yes
+checking for va_copy... yes
+checking whether NULL can be used in arbitrary expressions... yes
+checking whether stdint.h conforms to C99... yes
+checking for strchrnul... yes
+checking for working strndup... yes
+checking for working strnlen... yes
+checking for strsignal... yes
+checking whether strsignal always returns a string... yes
+checking whether strstr works in linear time... no
+checking whether strstr works... (cached) yes
+checking whether strtod obeys C99... yes
+checking for strtol... yes
+checking for nlink_t... yes
+checking for __secure_getenv... yes
+checking for ptrdiff_t... yes
+checking for vasprintf... yes
+checking for vasprintf... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for waitid... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether wcrtomb return value is correct... yes
+checking whether iswcntrl works... yes
+checking for wctype_t... yes
+checking for wctrans_t... yes
+checking for stdint.h... (cached) yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional french locale... (cached) fr_FR
+checking for a turkish Unicode locale... tr_TR.UTF-8
+checking for getpagesize... yes
+checking whether getpagesize is declared... yes
+checking where to find the exponent in a 'double'... word 1 bit 20
+checking where to find the exponent in a 'float'... (cached) word 0 bit 23
+checking where to find the exponent in a 'long double'... (cached) word 2 bit 0
+checking whether link handles trailing slash correctly... yes
+checking whether locale.h conforms to POSIX:2001... yes
+checking whether locale.h defines locale_t... yes
+checking for setlocale... yes
+checking for uselocale... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... yes
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for putenv compatible with GNU and SVID... yes
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for wchar_t... (cached) yes
+checking for wint_t... (cached) yes
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... yes
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... yes
+checking whether symlink handles trailing slash correctly... yes
+checking for unsetenv... yes
+checking for unsetenv() return type... int
+checking whether unsetenv obeys POSIX... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking whether wctob works... yes
+checking whether wctob is declared... yes
+checking whether an open file can be renamed... yes
+checking if changeword is wanted... no
+checking which shell to use for syscmd... /bin/sh
+checking if malloc debugging is wanted... no
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating lib/Makefile
+config.status: creating src/Makefile
+config.status: creating tests/Makefile
+config.status: creating checks/Makefile
+config.status: creating examples/Makefile
+config.status: creating lib/config.h
+config.status: executing depfiles commands
+config.status: executing stamp-h commands
++ make -j24
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16'
+Making all in .
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16'
+Making all in examples
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/examples'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/examples'
+Making all in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+rm -f alloca.h-t alloca.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  cat ./alloca.in.h; \
+} > alloca.h-t && \
+mv -f alloca.h-t alloca.h
+rm -f arg-nonnull.h-t arg-nonnull.h && \
+sed -n -e '/GL_ARG_NONNULL/,$p' \
+  < ../build-aux/arg-nonnull.h \
+  > arg-nonnull.h-t && \
+mv arg-nonnull.h-t arg-nonnull.h
+rm -f c++defs.h-t c++defs.h && \
+sed -n -e '/_GL_CXXDEFS/,$p' \
+  < ../build-aux/c++defs.h \
+  > c++defs.h-t && \
+mv c++defs.h-t c++defs.h
+rm -f configmake.h-t && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  echo '#define PREFIX "/usr"'; \
+  echo '#define EXEC_PREFIX "/usr"'; \
+  echo '#define BINDIR "/usr/bin"'; \
+  echo '#define SBINDIR "/usr/sbin"'; \
+  echo '#define LIBEXECDIR "/usr/libexec"'; \
+  echo '#define DATAROOTDIR "/usr/share"'; \
+  echo '#define DATADIR "/usr/share"'; \
+  echo '#define SYSCONFDIR "/usr/etc"'; \
+  echo '#define SHAREDSTATEDIR "/usr/com"'; \
+  echo '#define LOCALSTATEDIR "/usr/var"'; \
+  echo '#define INCLUDEDIR "/usr/include"'; \
+  echo '#define OLDINCLUDEDIR "/usr/include"'; \
+  echo '#define DOCDIR "/usr/share/doc/m4"'; \
+  echo '#define INFODIR "/usr/share/info"'; \
+  echo '#define HTMLDIR "/usr/share/doc/m4"'; \
+  echo '#define DVIDIR "/usr/share/doc/m4"'; \
+  echo '#define PDFDIR "/usr/share/doc/m4"'; \
+  echo '#define PSDIR "/usr/share/doc/m4"'; \
+  echo '#define LIBDIR "/usr/lib"'; \
+  echo '#define LISPDIR "/usr/share/emacs/site-lisp"'; \
+  echo '#define LOCALEDIR "/usr/share/locale"'; \
+  echo '#define MANDIR "/usr/share/man"'; \
+  echo '#define MANEXT ""'; \
+  echo '#define PKGDATADIR "/usr/share/m4"'; \
+  echo '#define PKGINCLUDEDIR "/usr/include/m4"'; \
+  echo '#define PKGLIBDIR "/usr/lib/m4"'; \
+  echo '#define PKGLIBEXECDIR "/usr/libexec/m4"'; \
+} | sed '/""/d' > configmake.h-t && \
+if test -f configmake.h && cmp configmake.h-t configmake.h > /dev/null; then \
+  rm -f configmake.h-t; \
+else \
+  rm -f configmake.h; mv configmake.h-t configmake.h; \
+fi
+rm -f warn-on-use.h-t warn-on-use.h && \
+sed -n -e '/^.ifndef/,$p' \
+  < ../build-aux/warn-on-use.h \
+  > warn-on-use.h-t && \
+mv warn-on-use.h-t warn-on-use.h
+rm -f fcntl.h-t fcntl.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_FCNTL_H''@|<fcntl.h>|g' \
+      -e 's|@''GNULIB_FCNTL''@|1|g' \
+      -e 's|@''GNULIB_OPEN''@|1|g' \
+      -e 's|@''GNULIB_OPENAT''@|0|g' \
+      -e 's|@''HAVE_FCNTL''@|1|g' \
+      -e 's|@''HAVE_OPENAT''@|1|g' \
+      -e 's|@''REPLACE_FCNTL''@|1|g' \
+      -e 's|@''REPLACE_OPEN''@|0|g' \
+      -e 's|@''REPLACE_OPENAT''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./fcntl.in.h; \
+} > fcntl.h-t && \
+mv fcntl.h-t fcntl.h
+rm -f langinfo.h-t langinfo.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''HAVE_LANGINFO_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_LANGINFO_H''@|<langinfo.h>|g' \
+      -e 's|@''GNULIB_NL_LANGINFO''@|1|g' \
+      -e 's|@''HAVE_LANGINFO_CODESET''@|1|g' \
+      -e 's|@''HAVE_LANGINFO_T_FMT_AMPM''@|1|g' \
+      -e 's|@''HAVE_LANGINFO_ERA''@|1|g' \
+      -e 's|@''HAVE_LANGINFO_YESEXPR''@|1|g' \
+      -e 's|@''HAVE_NL_LANGINFO''@|1|g' \
+      -e 's|@''REPLACE_NL_LANGINFO''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./langinfo.in.h; \
+} > langinfo.h-t && \
+mv langinfo.h-t langinfo.h
+rm -f math.h-t math.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT_AS_FIRST_DIRECTIVE''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_AS_FIRST_DIRECTIVE_MATH_H''@|<math.h>|g' \
+      -e 's|@''GNULIB_ACOSL''@|0|g' \
+      -e 's|@''GNULIB_ASINL''@|0|g' \
+      -e 's|@''GNULIB_ATANL''@|0|g' \
+      -e 's|@''GNULIB_CEIL''@|0|g' \
+      -e 's|@''GNULIB_CEILF''@|0|g' \
+      -e 's|@''GNULIB_CEILL''@|0|g' \
+      -e 's|@''GNULIB_COSL''@|0|g' \
+      -e 's|@''GNULIB_EXPL''@|0|g' \
+      -e 's|@''GNULIB_FLOOR''@|0|g' \
+      -e 's|@''GNULIB_FLOORF''@|0|g' \
+      -e 's|@''GNULIB_FLOORL''@|0|g' \
+      -e 's|@''GNULIB_FREXP''@|1|g' \
+      -e 's|@''GNULIB_FREXPL''@|1|g' \
+      -e 's|@''GNULIB_ISFINITE''@|0|g' \
+      -e 's|@''GNULIB_ISINF''@|0|g' \
+      -e 's|@''GNULIB_ISNAN''@|0|g' \
+      -e 's|@''GNULIB_ISNANF''@|0|g' \
+      -e 's|@''GNULIB_ISNAND''@|0|g' \
+      -e 's|@''GNULIB_ISNANL''@|0|g' \
+      -e 's|@''GNULIB_LDEXPL''@|0|g' \
+      -e 's|@''GNULIB_LOGB''@|0|g' \
+      -e 's|@''GNULIB_LOGL''@|0|g' \
+      -e 's|@''GNULIB_ROUND''@|0|g' \
+      -e 's|@''GNULIB_ROUNDF''@|0|g' \
+      -e 's|@''GNULIB_ROUNDL''@|0|g' \
+      -e 's|@''GNULIB_SIGNBIT''@|1|g' \
+      -e 's|@''GNULIB_SINL''@|0|g' \
+      -e 's|@''GNULIB_SQRTL''@|0|g' \
+      -e 's|@''GNULIB_TANL''@|0|g' \
+      -e 's|@''GNULIB_TRUNC''@|0|g' \
+      -e 's|@''GNULIB_TRUNCF''@|0|g' \
+      -e 's|@''GNULIB_TRUNCL''@|0|g' \
+      < ./math.in.h | \
+  sed -e 's|@''HAVE_ACOSL''@|1|g' \
+      -e 's|@''HAVE_ASINL''@|1|g' \
+      -e 's|@''HAVE_ATANL''@|1|g' \
+      -e 's|@''HAVE_COSL''@|1|g' \
+      -e 's|@''HAVE_EXPL''@|1|g' \
+      -e 's|@''HAVE_ISNANF''@|1|g' \
+      -e 's|@''HAVE_ISNAND''@|1|g' \
+      -e 's|@''HAVE_ISNANL''@|1|g' \
+      -e 's|@''HAVE_LOGL''@|1|g' \
+      -e 's|@''HAVE_SINL''@|1|g' \
+      -e 's|@''HAVE_SQRTL''@|1|g' \
+      -e 's|@''HAVE_TANL''@|1|g' \
+      -e 's|@''HAVE_DECL_ACOSL''@|1|g' \
+      -e 's|@''HAVE_DECL_ASINL''@|1|g' \
+      -e 's|@''HAVE_DECL_ATANL''@|1|g' \
+      -e 's|@''HAVE_DECL_CEILF''@|1|g' \
+      -e 's|@''HAVE_DECL_CEILL''@|1|g' \
+      -e 's|@''HAVE_DECL_COSL''@|1|g' \
+      -e 's|@''HAVE_DECL_EXPL''@|1|g' \
+      -e 's|@''HAVE_DECL_FLOORF''@|1|g' \
+      -e 's|@''HAVE_DECL_FLOORL''@|1|g' \
+      -e 's|@''HAVE_DECL_FREXPL''@|1|g' \
+      -e 's|@''HAVE_DECL_LDEXPL''@|1|g' \
+      -e 's|@''HAVE_DECL_LOGB''@|1|g' \
+      -e 's|@''HAVE_DECL_LOGL''@|1|g' \
+      -e 's|@''HAVE_DECL_ROUND''@|1|g' \
+      -e 's|@''HAVE_DECL_ROUNDF''@|1|g' \
+      -e 's|@''HAVE_DECL_ROUNDL''@|1|g' \
+      -e 's|@''HAVE_DECL_SINL''@|1|g' \
+      -e 's|@''HAVE_DECL_SQRTL''@|1|g' \
+      -e 's|@''HAVE_DECL_TANL''@|1|g' \
+      -e 's|@''HAVE_DECL_TRUNC''@|1|g' \
+      -e 's|@''HAVE_DECL_TRUNCF''@|1|g' \
+      -e 's|@''HAVE_DECL_TRUNCL''@|1|g' \
+  | \
+  sed -e 's|@''REPLACE_CEIL''@|0|g' \
+      -e 's|@''REPLACE_CEILF''@|0|g' \
+      -e 's|@''REPLACE_CEILL''@|0|g' \
+      -e 's|@''REPLACE_FLOOR''@|0|g' \
+      -e 's|@''REPLACE_FLOORF''@|0|g' \
+      -e 's|@''REPLACE_FLOORL''@|0|g' \
+      -e 's|@''REPLACE_FREXP''@|0|g' \
+      -e 's|@''REPLACE_FREXPL''@|0|g' \
+      -e 's|@''REPLACE_HUGE_VAL''@|0|g' \
+      -e 's|@''REPLACE_ISFINITE''@|0|g' \
+      -e 's|@''REPLACE_ISINF''@|0|g' \
+      -e 's|@''REPLACE_ISNAN''@|0|g' \
+      -e 's|@''REPLACE_LDEXPL''@|0|g' \
+      -e 's|@''REPLACE_NAN''@|0|g' \
+      -e 's|@''REPLACE_ROUND''@|0|g' \
+      -e 's|@''REPLACE_ROUNDF''@|0|g' \
+      -e 's|@''REPLACE_ROUNDL''@|0|g' \
+      -e 's|@''REPLACE_SIGNBIT''@|0|g' \
+      -e 's|@''REPLACE_SIGNBIT_USING_GCC''@|1|g' \
+      -e 's|@''REPLACE_TRUNC''@|0|g' \
+      -e 's|@''REPLACE_TRUNCF''@|0|g' \
+      -e 's|@''REPLACE_TRUNCL''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > math.h-t && \
+mv math.h-t math.h
+rm -f signal.h-t signal.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SIGNAL_H''@|<signal.h>|g' \
+      -e 's|@''GNULIB_SIGNAL_H_SIGPIPE''@|0|g' \
+      -e 's|@''GNULIB_SIGPROCMASK''@|1|g' \
+      -e 's|@''GNULIB_SIGACTION''@|1|g' \
+      -e 's|@''HAVE_POSIX_SIGNALBLOCKING''@|1|g' \
+      -e 's|@''HAVE_SIGSET_T''@|1|g' \
+      -e 's|@''HAVE_SIGINFO_T''@|1|g' \
+      -e 's|@''HAVE_SIGACTION''@|1|g' \
+      -e 's|@''HAVE_STRUCT_SIGACTION_SA_SIGACTION''@|1|g' \
+      -e 's|@''HAVE_TYPE_VOLATILE_SIG_ATOMIC_T''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./signal.in.h; \
+} > signal.h-t && \
+mv signal.h-t signal.h
+rm -f spawn.h-t spawn.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''HAVE_SPAWN_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SPAWN_H''@|<spawn.h>|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNP''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_INIT''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDCLOSE''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDDUP2''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDOPEN''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_DESTROY''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_INIT''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETFLAGS''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETFLAGS''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETPGROUP''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETPGROUP''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETSCHEDPARAM''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETSCHEDPARAM''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETSCHEDPOLICY''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETSCHEDPOLICY''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETSIGDEFAULT''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETSIGDEFAULT''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETSIGMASK''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETSIGMASK''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_DESTROY''@|1|g' \
+      -e 's|@''HAVE_POSIX_SPAWN''@|1|g' \
+      -e 's|@''HAVE_POSIX_SPAWNATTR_T''@|1|g' \
+      -e 's|@''HAVE_POSIX_SPAWN_FILE_ACTIONS_T''@|1|g' \
+      -e 's|@''REPLACE_POSIX_SPAWN''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./spawn.in.h; \
+} > spawn.h-t && \
+mv spawn.h-t spawn.h
+rm -f stdio.h-t stdio.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STDIO_H''@|<stdio.h>|g' \
+      -e 's|@''GNULIB_DPRINTF''@|0|g' \
+      -e 's|@''GNULIB_FCLOSE''@|1|g' \
+      -e 's|@''GNULIB_FFLUSH''@|1|g' \
+      -e 's|@''GNULIB_FOPEN''@|1|g' \
+      -e 's|@''GNULIB_FPRINTF''@|1|g' \
+      -e 's|@''GNULIB_FPRINTF_POSIX''@|0|g' \
+      -e 's|@''GNULIB_FPURGE''@|1|g' \
+      -e 's|@''GNULIB_FPUTC''@|1|g' \
+      -e 's|@''GNULIB_FPUTS''@|1|g' \
+      -e 's|@''GNULIB_FREOPEN''@|0|g' \
+      -e 's|@''GNULIB_FSEEK''@|0|g' \
+      -e 's|@''GNULIB_FSEEKO''@|1|g' \
+      -e 's|@''GNULIB_FTELL''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_FTELLO''@|1|g' \
+      -e 's|@''GNULIB_FWRITE''@|1|g' \
+      -e 's|@''GNULIB_GETDELIM''@|0|g' \
+      -e 's|@''GNULIB_GETLINE''@|0|g' \
+      -e 's|@''GNULIB_OBSTACK_PRINTF''@|0|g' \
+      -e 's|@''GNULIB_OBSTACK_PRINTF_POSIX''@|0|g' \
+      -e 's|@''GNULIB_PERROR''@|0|g' \
+      -e 's|@''GNULIB_POPEN''@|0|g' \
+      -e 's|@''GNULIB_PRINTF''@|1|g' \
+      -e 's|@''GNULIB_PRINTF_POSIX''@|0|g' \
+      -e 's|@''GNULIB_PUTC''@|1|g' \
+      -e 's|@''GNULIB_PUTCHAR''@|1|g' \
+      -e 's|@''GNULIB_PUTS''@|1|g' \
+      -e 's|@''GNULIB_REMOVE''@|0|g' \
+      -e 's|@''GNULIB_RENAME''@|1|g' \
+      -e 's|@''GNULIB_RENAMEAT''@|0|g' \
+      -e 's|@''GNULIB_SNPRINTF''@|1|g' \
+      -e 's|@''GNULIB_SPRINTF_POSIX''@|0|g' \
+      -e 's|@''GNULIB_STDIO_H_SIGPIPE''@|0|g' \
+      -e 's|@''GNULIB_TMPFILE''@|0|g' \
+      -e 's|@''GNULIB_VASPRINTF''@|1|g' \
+      -e 's|@''GNULIB_VDPRINTF''@|0|g' \
+      -e 's|@''GNULIB_VFPRINTF''@|1|g' \
+      -e 's|@''GNULIB_VFPRINTF_POSIX''@|0|g' \
+      -e 's|@''GNULIB_VPRINTF''@|1|g' \
+      -e 's|@''GNULIB_VPRINTF_POSIX''@|0|g' \
+      -e 's|@''GNULIB_VSNPRINTF''@|0|g' \
+      -e 's|@''GNULIB_VSPRINTF_POSIX''@|0|g' \
+      < ./stdio.in.h | \
+  sed -e 's|@''HAVE_DECL_FPURGE''@|0|g' \
+      -e 's|@''HAVE_DECL_FSEEKO''@|1|g' \
+      -e 's|@''HAVE_DECL_FTELLO''@|1|g' \
+      -e 's|@''HAVE_DECL_GETDELIM''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLINE''@|1|g' \
+      -e 's|@''HAVE_DECL_OBSTACK_PRINTF''@|1|g' \
+      -e 's|@''HAVE_DECL_SNPRINTF''@|1|g' \
+      -e 's|@''HAVE_DECL_VSNPRINTF''@|1|g' \
+      -e 's|@''HAVE_DPRINTF''@|1|g' \
+      -e 's|@''HAVE_FSEEKO''@|1|g' \
+      -e 's|@''HAVE_FTELLO''@|1|g' \
+      -e 's|@''HAVE_RENAMEAT''@|1|g' \
+      -e 's|@''HAVE_VASPRINTF''@|1|g' \
+      -e 's|@''HAVE_VDPRINTF''@|1|g' \
+      -e 's|@''REPLACE_DPRINTF''@|0|g' \
+      -e 's|@''REPLACE_FCLOSE''@|0|g' \
+      -e 's|@''REPLACE_FFLUSH''@|1|g' \
+      -e 's|@''REPLACE_FOPEN''@|0|g' \
+      -e 's|@''REPLACE_FPRINTF''@|0|g' \
+      -e 's|@''REPLACE_FPURGE''@|0|g' \
+      -e 's|@''REPLACE_FREOPEN''@|0|g' \
+      -e 's|@''REPLACE_FSEEK''@|0|g' \
+      -e 's|@''REPLACE_FSEEKO''@|1|g' \
+      -e 's|@''REPLACE_FTELL''@|0|g' \
+      -e 's|@''REPLACE_FTELLO''@|0|g' \
+      -e 's|@''REPLACE_GETDELIM''@|0|g' \
+      -e 's|@''REPLACE_GETLINE''@|0|g' \
+      -e 's|@''REPLACE_OBSTACK_PRINTF''@|0|g' \
+      -e 's|@''REPLACE_PERROR''@|0|g' \
+      -e 's|@''REPLACE_POPEN''@|0|g' \
+      -e 's|@''REPLACE_PRINTF''@|0|g' \
+      -e 's|@''REPLACE_REMOVE''@|0|g' \
+      -e 's|@''REPLACE_RENAME''@|0|g' \
+      -e 's|@''REPLACE_RENAMEAT''@|0|g' \
+      -e 's|@''REPLACE_SNPRINTF''@|0|g' \
+      -e 's|@''REPLACE_SPRINTF''@|0|g' \
+      -e 's|@''REPLACE_STDIO_WRITE_FUNCS''@|0|g' \
+      -e 's|@''REPLACE_TMPFILE''@|0|g' \
+      -e 's|@''REPLACE_VASPRINTF''@|1|g' \
+      -e 's|@''REPLACE_VDPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VFPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VSNPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VSPRINTF''@|0|g' \
+      -e 's|@''ASM_SYMBOL_PREFIX''@||g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > stdio.h-t && \
+mv stdio.h-t stdio.h
+rm -f stdlib.h-t stdlib.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STDLIB_H''@|<stdlib.h>|g' \
+      -e 's|@''GNULIB__EXIT''@|0|g' \
+      -e 's|@''GNULIB_ATOLL''@|0|g' \
+      -e 's|@''GNULIB_CALLOC_POSIX''@|0|g' \
+      -e 's|@''GNULIB_CANONICALIZE_FILE_NAME''@|1|g' \
+      -e 's|@''GNULIB_GETLOADAVG''@|0|g' \
+      -e 's|@''GNULIB_GETSUBOPT''@|0|g' \
+      -e 's|@''GNULIB_GRANTPT''@|0|g' \
+      -e 's|@''GNULIB_MALLOC_POSIX''@|1|g' \
+      -e 's|@''GNULIB_MBTOWC''@|1|g' \
+      -e 's|@''GNULIB_MKDTEMP''@|1|g' \
+      -e 's|@''GNULIB_MKOSTEMP''@|0|g' \
+      -e 's|@''GNULIB_MKOSTEMPS''@|0|g' \
+      -e 's|@''GNULIB_MKSTEMP''@|1|g' \
+      -e 's|@''GNULIB_MKSTEMPS''@|0|g' \
+      -e 's|@''GNULIB_PTSNAME''@|0|g' \
+      -e 's|@''GNULIB_PUTENV''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_RANDOM_R''@|0|g' \
+      -e 's|@''GNULIB_REALLOC_POSIX''@|0|g' \
+      -e 's|@''GNULIB_REALPATH''@|1|g' \
+      -e 's|@''GNULIB_RPMATCH''@|0|g' \
+      -e 's|@''GNULIB_SETENV''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_STRTOD''@|1|g' \
+      -e 's|@''GNULIB_STRTOLL''@|0|g' \
+      -e 's|@''GNULIB_STRTOULL''@|0|g' \
+      -e 's|@''GNULIB_SYSTEM_POSIX''@|0|g' \
+      -e 's|@''GNULIB_UNLOCKPT''@|0|g' \
+      -e 's|@''GNULIB_UNSETENV''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_WCTOMB''@|IN_M4_GNULIB_TESTS|g' \
+      < ./stdlib.in.h | \
+  sed -e 's|@''HAVE__EXIT''@|1|g' \
+      -e 's|@''HAVE_ATOLL''@|1|g' \
+      -e 's|@''HAVE_CANONICALIZE_FILE_NAME''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLOADAVG''@|1|g' \
+      -e 's|@''HAVE_GETSUBOPT''@|1|g' \
+      -e 's|@''HAVE_GRANTPT''@|1|g' \
+      -e 's|@''HAVE_MKDTEMP''@|1|g' \
+      -e 's|@''HAVE_MKOSTEMP''@|1|g' \
+      -e 's|@''HAVE_MKOSTEMPS''@|1|g' \
+      -e 's|@''HAVE_MKSTEMP''@|1|g' \
+      -e 's|@''HAVE_MKSTEMPS''@|1|g' \
+      -e 's|@''HAVE_PTSNAME''@|1|g' \
+      -e 's|@''HAVE_RANDOM_H''@|1|g' \
+      -e 's|@''HAVE_RANDOM_R''@|1|g' \
+      -e 's|@''HAVE_REALPATH''@|1|g' \
+      -e 's|@''HAVE_RPMATCH''@|1|g' \
+      -e 's|@''HAVE_DECL_SETENV''@|1|g' \
+      -e 's|@''HAVE_STRTOD''@|1|g' \
+      -e 's|@''HAVE_STRTOLL''@|1|g' \
+      -e 's|@''HAVE_STRTOULL''@|1|g' \
+      -e 's|@''HAVE_STRUCT_RANDOM_DATA''@|1|g' \
+      -e 's|@''HAVE_SYS_LOADAVG_H''@|0|g' \
+      -e 's|@''HAVE_UNLOCKPT''@|1|g' \
+      -e 's|@''HAVE_DECL_UNSETENV''@|1|g' \
+      -e 's|@''REPLACE_CALLOC''@|0|g' \
+      -e 's|@''REPLACE_CANONICALIZE_FILE_NAME''@|0|g' \
+      -e 's|@''REPLACE_MALLOC''@|0|g' \
+      -e 's|@''REPLACE_MBTOWC''@|0|g' \
+      -e 's|@''REPLACE_MKSTEMP''@|0|g' \
+      -e 's|@''REPLACE_PUTENV''@|0|g' \
+      -e 's|@''REPLACE_REALLOC''@|0|g' \
+      -e 's|@''REPLACE_REALPATH''@|0|g' \
+      -e 's|@''REPLACE_SETENV''@|0|g' \
+      -e 's|@''REPLACE_STRTOD''@|0|g' \
+      -e 's|@''REPLACE_UNSETENV''@|0|g' \
+      -e 's|@''REPLACE_WCTOMB''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > stdlib.h-t && \
+mv stdlib.h-t stdlib.h
+rm -f string.h-t string.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STRING_H''@|<string.h>|g' \
+      -e 's|@''GNULIB_MBSLEN''@|0|g' \
+      -e 's|@''GNULIB_MBSNLEN''@|0|g' \
+      -e 's|@''GNULIB_MBSCHR''@|0|g' \
+      -e 's|@''GNULIB_MBSRCHR''@|0|g' \
+      -e 's|@''GNULIB_MBSSTR''@|0|g' \
+      -e 's|@''GNULIB_MBSCASECMP''@|0|g' \
+      -e 's|@''GNULIB_MBSNCASECMP''@|0|g' \
+      -e 's|@''GNULIB_MBSPCASECMP''@|0|g' \
+      -e 's|@''GNULIB_MBSCASESTR''@|0|g' \
+      -e 's|@''GNULIB_MBSCSPN''@|0|g' \
+      -e 's|@''GNULIB_MBSPBRK''@|0|g' \
+      -e 's|@''GNULIB_MBSSPN''@|0|g' \
+      -e 's|@''GNULIB_MBSSEP''@|0|g' \
+      -e 's|@''GNULIB_MBSTOK_R''@|0|g' \
+      -e 's|@''GNULIB_MEMCHR''@|1|g' \
+      -e 's|@''GNULIB_MEMMEM''@|0|g' \
+      -e 's|@''GNULIB_MEMPCPY''@|0|g' \
+      -e 's|@''GNULIB_MEMRCHR''@|0|g' \
+      -e 's|@''GNULIB_RAWMEMCHR''@|1|g' \
+      -e 's|@''GNULIB_STPCPY''@|0|g' \
+      -e 's|@''GNULIB_STPNCPY''@|0|g' \
+      -e 's|@''GNULIB_STRCHRNUL''@|1|g' \
+      -e 's|@''GNULIB_STRDUP''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_STRNCAT''@|0|g' \
+      -e 's|@''GNULIB_STRNDUP''@|1|g' \
+      -e 's|@''GNULIB_STRNLEN''@|1|g' \
+      -e 's|@''GNULIB_STRPBRK''@|0|g' \
+      -e 's|@''GNULIB_STRSEP''@|0|g' \
+      -e 's|@''GNULIB_STRSTR''@|1|g' \
+      -e 's|@''GNULIB_STRCASESTR''@|0|g' \
+      -e 's|@''GNULIB_STRTOK_R''@|0|g' \
+      -e 's|@''GNULIB_STRERROR''@|1|g' \
+      -e 's|@''GNULIB_STRERROR_R''@|0|g' \
+      -e 's|@''GNULIB_STRSIGNAL''@|1|g' \
+      -e 's|@''GNULIB_STRVERSCMP''@|0|g' \
+      < ./string.in.h | \
+  sed -e 's|@''HAVE_MBSLEN''@|0|g' \
+      -e 's|@''HAVE_MEMCHR''@|1|g' \
+      -e 's|@''HAVE_DECL_MEMMEM''@|1|g' \
+      -e 's|@''HAVE_MEMPCPY''@|1|g' \
+      -e 's|@''HAVE_DECL_MEMRCHR''@|1|g' \
+      -e 's|@''HAVE_RAWMEMCHR''@|1|g' \
+      -e 's|@''HAVE_STPCPY''@|1|g' \
+      -e 's|@''HAVE_STPNCPY''@|1|g' \
+      -e 's|@''HAVE_STRCHRNUL''@|1|g' \
+      -e 's|@''HAVE_DECL_STRDUP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNDUP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNLEN''@|1|g' \
+      -e 's|@''HAVE_STRPBRK''@|1|g' \
+      -e 's|@''HAVE_STRSEP''@|1|g' \
+      -e 's|@''HAVE_STRCASESTR''@|1|g' \
+      -e 's|@''HAVE_DECL_STRTOK_R''@|1|g' \
+      -e 's|@''HAVE_DECL_STRERROR_R''@|1|g' \
+      -e 's|@''HAVE_DECL_STRSIGNAL''@|1|g' \
+      -e 's|@''HAVE_STRVERSCMP''@|1|g' \
+      -e 's|@''REPLACE_STPNCPY''@|0|g' \
+      -e 's|@''REPLACE_MEMCHR''@|0|g' \
+      -e 's|@''REPLACE_MEMMEM''@|0|g' \
+      -e 's|@''REPLACE_STRCASESTR''@|0|g' \
+      -e 's|@''REPLACE_STRDUP''@|0|g' \
+      -e 's|@''REPLACE_STRSTR''@|1|g' \
+      -e 's|@''REPLACE_STRERROR''@|0|g' \
+      -e 's|@''REPLACE_STRERROR_R''@|0|g' \
+      -e 's|@''REPLACE_STRNCAT''@|0|g' \
+      -e 's|@''REPLACE_STRNDUP''@|0|g' \
+      -e 's|@''REPLACE_STRNLEN''@|0|g' \
+      -e 's|@''REPLACE_STRSIGNAL''@|0|g' \
+      -e 's|@''REPLACE_STRTOK_R''@|0|g' \
+      -e 's|@''UNDEFINE_STRTOK_R''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+      < ./string.in.h; \
+} > string.h-t && \
+mv string.h-t string.h
+/bin/mkdir -p sys
+/bin/mkdir -p sys
+/bin/mkdir -p sys
+rm -f time.h-t time.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_TIME_H''@|<time.h>|g' \
+      -e 's|@''GNULIB_MKTIME''@|0|g' \
+      -e 's|@''GNULIB_NANOSLEEP''@|0|g' \
+      -e 's|@''GNULIB_STRPTIME''@|0|g' \
+      -e 's|@''GNULIB_TIMEGM''@|0|g' \
+      -e 's|@''GNULIB_TIME_R''@|0|g' \
+      -e 's|@''HAVE_DECL_LOCALTIME_R''@|1|g' \
+      -e 's|@''HAVE_NANOSLEEP''@|1|g' \
+      -e 's|@''HAVE_STRPTIME''@|1|g' \
+      -e 's|@''HAVE_TIMEGM''@|1|g' \
+      -e 's|@''REPLACE_LOCALTIME_R''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_MKTIME''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_NANOSLEEP''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_TIMEGM''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''PTHREAD_H_DEFINES_STRUCT_TIMESPEC''@|0|g' \
+      -e 's|@''SYS_TIME_H_DEFINES_STRUCT_TIMESPEC''@|0|g' \
+      -e 's|@''TIME_H_DEFINES_STRUCT_TIMESPEC''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./time.in.h; \
+} > time.h-t && \
+mv time.h-t time.h
+rm -f sys/stat.h-t sys/stat.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_STAT_H''@|<sys/stat.h>|g' \
+      -e 's|@''GNULIB_FCHMODAT''@|0|g' \
+      -e 's|@''GNULIB_FSTATAT''@|0|g' \
+      -e 's|@''GNULIB_FUTIMENS''@|0|g' \
+      -e 's|@''GNULIB_LCHMOD''@|0|g' \
+      -e 's|@''GNULIB_LSTAT''@|1|g' \
+      -e 's|@''GNULIB_MKDIRAT''@|0|g' \
+      -e 's|@''GNULIB_MKFIFO''@|0|g' \
+      -e 's|@''GNULIB_MKFIFOAT''@|0|g' \
+      -e 's|@''GNULIB_MKNOD''@|0|g' \
+      -e 's|@''GNULIB_MKNODAT''@|0|g' \
+      -e 's|@''GNULIB_STAT''@|1|g' \
+      -e 's|@''GNULIB_UTIMENSAT''@|0|g' \
+      -e 's|@''HAVE_FCHMODAT''@|1|g' \
+      -e 's|@''HAVE_FSTATAT''@|1|g' \
+      -e 's|@''HAVE_FUTIMENS''@|1|g' \
+      -e 's|@''HAVE_LCHMOD''@|1|g' \
+      -e 's|@''HAVE_LSTAT''@|1|g' \
+      -e 's|@''HAVE_MKDIRAT''@|1|g' \
+      -e 's|@''HAVE_MKFIFO''@|1|g' \
+      -e 's|@''HAVE_MKFIFOAT''@|1|g' \
+      -e 's|@''HAVE_MKNOD''@|1|g' \
+      -e 's|@''HAVE_MKNODAT''@|1|g' \
+      -e 's|@''HAVE_UTIMENSAT''@|1|g' \
+      -e 's|@''REPLACE_FSTAT''@|0|g' \
+      -e 's|@''REPLACE_FSTATAT''@|0|g' \
+      -e 's|@''REPLACE_FUTIMENS''@|0|g' \
+      -e 's|@''REPLACE_LSTAT''@|0|g' \
+      -e 's|@''REPLACE_MKDIR''@|0|g' \
+      -e 's|@''REPLACE_MKFIFO''@|0|g' \
+      -e 's|@''REPLACE_MKNOD''@|0|g' \
+      -e 's|@''REPLACE_STAT''@|0|g' \
+      -e 's|@''REPLACE_UTIMENSAT''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_stat.in.h; \
+} > sys/stat.h-t && \
+mv sys/stat.h-t sys/stat.h
+rm -f sys/time.h-t sys/time.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's/@''HAVE_SYS_TIME_H''@/1/g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_TIME_H''@|<sys/time.h>|g' \
+      -e 's/@''GNULIB_GETTIMEOFDAY''@/1/g' \
+      -e 's/@''HAVE_GETTIMEOFDAY''@/1/g' \
+      -e 's/@''HAVE_STRUCT_TIMEVAL''@/1/g' \
+      -e 's/@''REPLACE_GETTIMEOFDAY''@/0/g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_time.in.h; \
+} > sys/time.h-t && \
+mv sys/time.h-t sys/time.h
+rm -f sys/wait.h-t sys/wait.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_WAIT_H''@|<sys/wait.h>|g' \
+      -e 's|@''GNULIB_WAITPID''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_wait.in.h; \
+} > sys/wait.h-t && \
+mv sys/wait.h-t sys/wait.h
+rm -f unistd.h-t unistd.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''HAVE_UNISTD_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_UNISTD_H''@|<unistd.h>|g' \
+      -e 's|@''GNULIB_CHOWN''@|0|g' \
+      -e 's|@''GNULIB_CLOSE''@|1|g' \
+      -e 's|@''GNULIB_DUP2''@|1|g' \
+      -e 's|@''GNULIB_DUP3''@|0|g' \
+      -e 's|@''GNULIB_ENVIRON''@|1|g' \
+      -e 's|@''GNULIB_EUIDACCESS''@|0|g' \
+      -e 's|@''GNULIB_FACCESSAT''@|0|g' \
+      -e 's|@''GNULIB_FCHDIR''@|0|g' \
+      -e 's|@''GNULIB_FCHOWNAT''@|0|g' \
+      -e 's|@''GNULIB_FSYNC''@|0|g' \
+      -e 's|@''GNULIB_FTRUNCATE''@|0|g' \
+      -e 's|@''GNULIB_GETCWD''@|0|g' \
+      -e 's|@''GNULIB_GETDOMAINNAME''@|0|g' \
+      -e 's|@''GNULIB_GETDTABLESIZE''@|1|g' \
+      -e 's|@''GNULIB_GETGROUPS''@|0|g' \
+      -e 's|@''GNULIB_GETHOSTNAME''@|0|g' \
+      -e 's|@''GNULIB_GETLOGIN''@|0|g' \
+      -e 's|@''GNULIB_GETLOGIN_R''@|0|g' \
+      -e 's|@''GNULIB_GETPAGESIZE''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_GETUSERSHELL''@|0|g' \
+      -e 's|@''GNULIB_LCHOWN''@|0|g' \
+      -e 's|@''GNULIB_LINK''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_LINKAT''@|0|g' \
+      -e 's|@''GNULIB_LSEEK''@|1|g' \
+      -e 's|@''GNULIB_PIPE''@|0|g' \
+      -e 's|@''GNULIB_PIPE2''@|1|g' \
+      -e 's|@''GNULIB_PREAD''@|0|g' \
+      -e 's|@''GNULIB_PWRITE''@|0|g' \
+      -e 's|@''GNULIB_READLINK''@|1|g' \
+      -e 's|@''GNULIB_READLINKAT''@|0|g' \
+      -e 's|@''GNULIB_RMDIR''@|1|g' \
+      -e 's|@''GNULIB_SLEEP''@|0|g' \
+      -e 's|@''GNULIB_SYMLINK''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_SYMLINKAT''@|0|g' \
+      -e 's|@''GNULIB_TTYNAME_R''@|0|g' \
+      -e 's|@''GNULIB_UNISTD_H_GETOPT''@|0|g' \
+      -e 's|@''GNULIB_UNISTD_H_SIGPIPE''@|0|g' \
+      -e 's|@''GNULIB_UNLINK''@|0|g' \
+      -e 's|@''GNULIB_UNLINKAT''@|0|g' \
+      -e 's|@''GNULIB_USLEEP''@|0|g' \
+      -e 's|@''GNULIB_WRITE''@|0|g' \
+      < ./unistd.in.h | \
+  sed -e 's|@''HAVE_CHOWN''@|1|g' \
+      -e 's|@''HAVE_DUP2''@|1|g' \
+      -e 's|@''HAVE_DUP3''@|1|g' \
+      -e 's|@''HAVE_EUIDACCESS''@|1|g' \
+      -e 's|@''HAVE_FACCESSAT''@|1|g' \
+      -e 's|@''HAVE_FCHDIR''@|1|g' \
+      -e 's|@''HAVE_FCHOWNAT''@|1|g' \
+      -e 's|@''HAVE_FSYNC''@|1|g' \
+      -e 's|@''HAVE_FTRUNCATE''@|1|g' \
+      -e 's|@''HAVE_GETDTABLESIZE''@|1|g' \
+      -e 's|@''HAVE_GETGROUPS''@|1|g' \
+      -e 's|@''HAVE_GETHOSTNAME''@|1|g' \
+      -e 's|@''HAVE_GETLOGIN''@|1|g' \
+      -e 's|@''HAVE_GETPAGESIZE''@|1|g' \
+      -e 's|@''HAVE_LCHOWN''@|1|g' \
+      -e 's|@''HAVE_LINK''@|1|g' \
+      -e 's|@''HAVE_LINKAT''@|1|g' \
+      -e 's|@''HAVE_PIPE''@|1|g' \
+      -e 's|@''HAVE_PIPE2''@|1|g' \
+      -e 's|@''HAVE_PREAD''@|1|g' \
+      -e 's|@''HAVE_PWRITE''@|1|g' \
+      -e 's|@''HAVE_READLINK''@|1|g' \
+      -e 's|@''HAVE_READLINKAT''@|1|g' \
+      -e 's|@''HAVE_SLEEP''@|1|g' \
+      -e 's|@''HAVE_SYMLINK''@|1|g' \
+      -e 's|@''HAVE_SYMLINKAT''@|1|g' \
+      -e 's|@''HAVE_UNLINKAT''@|1|g' \
+      -e 's|@''HAVE_USLEEP''@|1|g' \
+      -e 's|@''HAVE_DECL_ENVIRON''@|1|g' \
+      -e 's|@''HAVE_DECL_FCHDIR''@|1|g' \
+      -e 's|@''HAVE_DECL_GETDOMAINNAME''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLOGIN_R''@|1|g' \
+      -e 's|@''HAVE_DECL_GETPAGESIZE''@|1|g' \
+      -e 's|@''HAVE_DECL_GETUSERSHELL''@|1|g' \
+      -e 's|@''HAVE_DECL_TTYNAME_R''@|1|g' \
+      -e 's|@''HAVE_OS_H''@|0|g' \
+      -e 's|@''HAVE_SYS_PARAM_H''@|0|g' \
+  | \
+  sed -e 's|@''REPLACE_CHOWN''@|0|g' \
+      -e 's|@''REPLACE_CLOSE''@|0|g' \
+      -e 's|@''REPLACE_DUP''@|0|g' \
+      -e 's|@''REPLACE_DUP2''@|0|g' \
+      -e 's|@''REPLACE_FCHOWNAT''@|0|g' \
+      -e 's|@''REPLACE_GETCWD''@|0|g' \
+      -e 's|@''REPLACE_GETDOMAINNAME''@|0|g' \
+      -e 's|@''REPLACE_GETLOGIN_R''@|0|g' \
+      -e 's|@''REPLACE_GETGROUPS''@|0|g' \
+      -e 's|@''REPLACE_GETPAGESIZE''@|0|g' \
+      -e 's|@''REPLACE_LCHOWN''@|0|g' \
+      -e 's|@''REPLACE_LINK''@|0|g' \
+      -e 's|@''REPLACE_LINKAT''@|0|g' \
+      -e 's|@''REPLACE_LSEEK''@|0|g' \
+      -e 's|@''REPLACE_PREAD''@|0|g' \
+      -e 's|@''REPLACE_PWRITE''@|0|g' \
+      -e 's|@''REPLACE_READLINK''@|0|g' \
+      -e 's|@''REPLACE_RMDIR''@|0|g' \
+      -e 's|@''REPLACE_SLEEP''@|0|g' \
+      -e 's|@''REPLACE_SYMLINK''@|0|g' \
+      -e 's|@''REPLACE_TTYNAME_R''@|0|g' \
+      -e 's|@''REPLACE_UNLINK''@|0|g' \
+      -e 's|@''REPLACE_UNLINKAT''@|0|g' \
+      -e 's|@''REPLACE_USLEEP''@|0|g' \
+      -e 's|@''REPLACE_WRITE''@|0|g' \
+      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H''@|0|g' \
+      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > unistd.h-t && \
+mv unistd.h-t unistd.h
+rm -f wchar.h-t wchar.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''HAVE_FEATURES_H''@|1|g' \
+      -e 's|@''NEXT_WCHAR_H''@|<wchar.h>|g' \
+      -e 's|@''HAVE_WCHAR_H''@|1|g' \
+      -e 's|@''GNULIB_BTOWC''@|1|g' \
+      -e 's|@''GNULIB_WCTOB''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_MBSINIT''@|1|g' \
+      -e 's|@''GNULIB_MBRTOWC''@|1|g' \
+      -e 's|@''GNULIB_MBRLEN''@|0|g' \
+      -e 's|@''GNULIB_MBSRTOWCS''@|0|g' \
+      -e 's|@''GNULIB_MBSNRTOWCS''@|0|g' \
+      -e 's|@''GNULIB_WCRTOMB''@|1|g' \
+      -e 's|@''GNULIB_WCSRTOMBS''@|0|g' \
+      -e 's|@''GNULIB_WCSNRTOMBS''@|0|g' \
+      -e 's|@''GNULIB_WCWIDTH''@|0|g' \
+      -e 's|@''GNULIB_WMEMCHR''@|0|g' \
+      -e 's|@''GNULIB_WMEMCMP''@|0|g' \
+      -e 's|@''GNULIB_WMEMCPY''@|0|g' \
+      -e 's|@''GNULIB_WMEMMOVE''@|0|g' \
+      -e 's|@''GNULIB_WMEMSET''@|0|g' \
+      -e 's|@''GNULIB_WCSLEN''@|0|g' \
+      -e 's|@''GNULIB_WCSNLEN''@|0|g' \
+      -e 's|@''GNULIB_WCSCPY''@|0|g' \
+      -e 's|@''GNULIB_WCPCPY''@|0|g' \
+      -e 's|@''GNULIB_WCSNCPY''@|0|g' \
+      -e 's|@''GNULIB_WCPNCPY''@|0|g' \
+      -e 's|@''GNULIB_WCSCAT''@|0|g' \
+      -e 's|@''GNULIB_WCSNCAT''@|0|g' \
+      -e 's|@''GNULIB_WCSCMP''@|0|g' \
+      -e 's|@''GNULIB_WCSNCMP''@|0|g' \
+      -e 's|@''GNULIB_WCSCASECMP''@|0|g' \
+      -e 's|@''GNULIB_WCSNCASECMP''@|0|g' \
+      -e 's|@''GNULIB_WCSCOLL''@|0|g' \
+      -e 's|@''GNULIB_WCSXFRM''@|0|g' \
+      -e 's|@''GNULIB_WCSDUP''@|0|g' \
+      -e 's|@''GNULIB_WCSCHR''@|0|g' \
+      -e 's|@''GNULIB_WCSRCHR''@|0|g' \
+      -e 's|@''GNULIB_WCSCSPN''@|0|g' \
+      -e 's|@''GNULIB_WCSSPN''@|0|g' \
+      -e 's|@''GNULIB_WCSPBRK''@|0|g' \
+      -e 's|@''GNULIB_WCSSTR''@|0|g' \
+      -e 's|@''GNULIB_WCSTOK''@|0|g' \
+      -e 's|@''GNULIB_WCSWIDTH''@|0|g' \
+      < ./wchar.in.h | \
+  sed -e 's|@''HAVE_WINT_T''@|1|g' \
+      -e 's|@''HAVE_BTOWC''@|1|g' \
+      -e 's|@''HAVE_MBSINIT''@|1|g' \
+      -e 's|@''HAVE_MBRTOWC''@|1|g' \
+      -e 's|@''HAVE_MBRLEN''@|1|g' \
+      -e 's|@''HAVE_MBSRTOWCS''@|1|g' \
+      -e 's|@''HAVE_MBSNRTOWCS''@|1|g' \
+      -e 's|@''HAVE_WCRTOMB''@|1|g' \
+      -e 's|@''HAVE_WCSRTOMBS''@|1|g' \
+      -e 's|@''HAVE_WCSNRTOMBS''@|1|g' \
+      -e 's|@''HAVE_WMEMCHR''@|1|g' \
+      -e 's|@''HAVE_WMEMCMP''@|1|g' \
+      -e 's|@''HAVE_WMEMCPY''@|1|g' \
+      -e 's|@''HAVE_WMEMMOVE''@|1|g' \
+      -e 's|@''HAVE_WMEMSET''@|1|g' \
+      -e 's|@''HAVE_WCSLEN''@|1|g' \
+      -e 's|@''HAVE_WCSNLEN''@|1|g' \
+      -e 's|@''HAVE_WCSCPY''@|1|g' \
+      -e 's|@''HAVE_WCPCPY''@|1|g' \
+      -e 's|@''HAVE_WCSNCPY''@|1|g' \
+      -e 's|@''HAVE_WCPNCPY''@|1|g' \
+      -e 's|@''HAVE_WCSCAT''@|1|g' \
+      -e 's|@''HAVE_WCSNCAT''@|1|g' \
+      -e 's|@''HAVE_WCSCMP''@|1|g' \
+      -e 's|@''HAVE_WCSNCMP''@|1|g' \
+      -e 's|@''HAVE_WCSCASECMP''@|1|g' \
+      -e 's|@''HAVE_WCSNCASECMP''@|1|g' \
+      -e 's|@''HAVE_WCSCOLL''@|1|g' \
+      -e 's|@''HAVE_WCSXFRM''@|1|g' \
+      -e 's|@''HAVE_WCSDUP''@|1|g' \
+      -e 's|@''HAVE_WCSCHR''@|1|g' \
+      -e 's|@''HAVE_WCSRCHR''@|1|g' \
+      -e 's|@''HAVE_WCSCSPN''@|1|g' \
+      -e 's|@''HAVE_WCSSPN''@|1|g' \
+      -e 's|@''HAVE_WCSPBRK''@|1|g' \
+      -e 's|@''HAVE_WCSSTR''@|1|g' \
+      -e 's|@''HAVE_WCSTOK''@|1|g' \
+      -e 's|@''HAVE_WCSWIDTH''@|1|g' \
+      -e 's|@''HAVE_DECL_WCTOB''@|1|g' \
+      -e 's|@''HAVE_DECL_WCWIDTH''@|1|g' \
+  | \
+  sed -e 's|@''REPLACE_MBSTATE_T''@|0|g' \
+      -e 's|@''REPLACE_BTOWC''@|0|g' \
+      -e 's|@''REPLACE_WCTOB''@|0|g' \
+      -e 's|@''REPLACE_MBSINIT''@|0|g' \
+      -e 's|@''REPLACE_MBRTOWC''@|0|g' \
+      -e 's|@''REPLACE_MBRLEN''@|0|g' \
+      -e 's|@''REPLACE_MBSRTOWCS''@|0|g' \
+      -e 's|@''REPLACE_MBSNRTOWCS''@|0|g' \
+      -e 's|@''REPLACE_WCRTOMB''@|0|g' \
+      -e 's|@''REPLACE_WCSRTOMBS''@|0|g' \
+      -e 's|@''REPLACE_WCSNRTOMBS''@|0|g' \
+      -e 's|@''REPLACE_WCWIDTH''@|0|g' \
+      -e 's|@''REPLACE_WCSWIDTH''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > wchar.h-t && \
+mv wchar.h-t wchar.h
+rm -f wctype.h-t wctype.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's/@''HAVE_WCTYPE_H''@/1/g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_WCTYPE_H''@|<wctype.h>|g' \
+      -e 's/@''GNULIB_ISWBLANK''@/0/g' \
+      -e 's/@''GNULIB_WCTYPE''@/0/g' \
+      -e 's/@''GNULIB_ISWCTYPE''@/0/g' \
+      -e 's/@''GNULIB_WCTRANS''@/0/g' \
+      -e 's/@''GNULIB_TOWCTRANS''@/0/g' \
+      -e 's/@''HAVE_ISWBLANK''@/1/g' \
+      -e 's/@''HAVE_ISWCNTRL''@/1/g' \
+      -e 's/@''HAVE_WCTYPE_T''@/1/g' \
+      -e 's/@''HAVE_WCTRANS_T''@/1/g' \
+      -e 's/@''HAVE_WINT_T''@/1/g' \
+      -e 's/@''REPLACE_ISWBLANK''@/0/g' \
+      -e 's/@''REPLACE_ISWCNTRL''@/0/g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./wctype.in.h; \
+} > wctype.h-t && \
+mv wctype.h-t wctype.h
+make  all-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+gcc -std=gnu99  -I.     -g -O2 -MT gl_avltree_oset.o -MD -MP -MF .deps/gl_avltree_oset.Tpo -c -o gl_avltree_oset.o gl_avltree_oset.c
+gcc -std=gnu99  -I.     -g -O2 -MT c-ctype.o -MD -MP -MF .deps/c-ctype.Tpo -c -o c-ctype.o c-ctype.c
+gcc -std=gnu99  -I.     -g -O2 -MT c-stack.o -MD -MP -MF .deps/c-stack.Tpo -c -o c-stack.o c-stack.c
+gcc -std=gnu99  -I.     -g -O2 -MT clean-temp.o -MD -MP -MF .deps/clean-temp.Tpo -c -o clean-temp.o clean-temp.c
+gcc -std=gnu99  -I.     -g -O2 -MT close-hook.o -MD -MP -MF .deps/close-hook.Tpo -c -o close-hook.o close-hook.c
+gcc -std=gnu99  -I.     -g -O2 -MT execute.o -MD -MP -MF .deps/execute.Tpo -c -o execute.o execute.c
+gcc -std=gnu99  -I.     -g -O2 -MT exitfail.o -MD -MP -MF .deps/exitfail.Tpo -c -o exitfail.o exitfail.c
+gcc -std=gnu99  -I.     -g -O2 -MT fatal-signal.o -MD -MP -MF .deps/fatal-signal.Tpo -c -o fatal-signal.o fatal-signal.c
+gcc -std=gnu99  -I.     -g -O2 -MT fd-safer-flag.o -MD -MP -MF .deps/fd-safer-flag.Tpo -c -o fd-safer-flag.o fd-safer-flag.c
+gcc -std=gnu99  -I.     -g -O2 -MT dup-safer-flag.o -MD -MP -MF .deps/dup-safer-flag.Tpo -c -o dup-safer-flag.o dup-safer-flag.c
+gcc -std=gnu99  -I.     -g -O2 -MT freadahead.o -MD -MP -MF .deps/freadahead.Tpo -c -o freadahead.o freadahead.c
+gcc -std=gnu99  -I.     -g -O2 -MT freading.o -MD -MP -MF .deps/freading.Tpo -c -o freading.o freading.c
+gcc -std=gnu99  -I.     -g -O2 -MT gl_linkedhash_list.o -MD -MP -MF .deps/gl_linkedhash_list.Tpo -c -o gl_linkedhash_list.o gl_linkedhash_list.c
+gcc -std=gnu99  -I.     -g -O2 -MT gl_list.o -MD -MP -MF .deps/gl_list.Tpo -c -o gl_list.o gl_list.c
+gcc -std=gnu99  -I.     -g -O2 -MT localcharset.o -MD -MP -MF .deps/localcharset.Tpo -c -o localcharset.o localcharset.c
+gcc -std=gnu99  -I.     -g -O2 -MT lock.o -MD -MP -MF .deps/lock.Tpo -c -o lock.o `test -f 'glthread/lock.c' || echo './'`glthread/lock.c
+gcc -std=gnu99  -I.     -g -O2 -MT malloca.o -MD -MP -MF .deps/malloca.Tpo -c -o malloca.o malloca.c
+gcc -std=gnu99  -I.     -g -O2 -MT memchr2.o -MD -MP -MF .deps/memchr2.Tpo -c -o memchr2.o memchr2.c
+gcc -std=gnu99  -I.     -g -O2 -MT gl_oset.o -MD -MP -MF .deps/gl_oset.Tpo -c -o gl_oset.o gl_oset.c
+gcc -std=gnu99  -I.     -g -O2 -MT pipe2.o -MD -MP -MF .deps/pipe2.Tpo -c -o pipe2.o pipe2.c
+gcc -std=gnu99  -I.     -g -O2 -MT pipe2-safer.o -MD -MP -MF .deps/pipe2-safer.Tpo -c -o pipe2-safer.o pipe2-safer.c
+gcc -std=gnu99  -I.     -g -O2 -MT printf-frexp.o -MD -MP -MF .deps/printf-frexp.Tpo -c -o printf-frexp.o printf-frexp.c
+gcc -std=gnu99  -I.     -g -O2 -MT printf-frexpl.o -MD -MP -MF .deps/printf-frexpl.Tpo -c -o printf-frexpl.o printf-frexpl.c
+gcc -std=gnu99  -I.     -g -O2 -MT progname.o -MD -MP -MF .deps/progname.Tpo -c -o progname.o progname.c
+mv -f .deps/gl_oset.Tpo .deps/gl_oset.Po
+mv -f .deps/gl_list.Tpo .deps/gl_list.Po
+gcc -std=gnu99  -I.     -g -O2 -MT spawn-pipe.o -MD -MP -MF .deps/spawn-pipe.Tpo -c -o spawn-pipe.o spawn-pipe.c
+gcc -std=gnu99  -I.     -g -O2 -MT threadlib.o -MD -MP -MF .deps/threadlib.Tpo -c -o threadlib.o `test -f 'glthread/threadlib.c' || echo './'`glthread/threadlib.c
+mv -f .deps/exitfail.Tpo .deps/exitfail.Po
+gcc -std=gnu99  -I.     -g -O2 -MT tls.o -MD -MP -MF .deps/tls.Tpo -c -o tls.o `test -f 'glthread/tls.c' || echo './'`glthread/tls.c
+mv -f .deps/close-hook.Tpo .deps/close-hook.Po
+mv -f .deps/lock.Tpo .deps/lock.Po
+mv -f .deps/freading.Tpo .deps/freading.Po
+gcc -std=gnu99  -I.     -g -O2 -MT tmpdir.o -MD -MP -MF .deps/tmpdir.Tpo -c -o tmpdir.o tmpdir.c
+gcc -std=gnu99  -I.     -g -O2 -MT verror.o -MD -MP -MF .deps/verror.Tpo -c -o verror.o verror.c
+gcc -std=gnu99  -I.     -g -O2 -MT version-etc.o -MD -MP -MF .deps/version-etc.Tpo -c -o version-etc.o version-etc.c
+mv -f .deps/dup-safer-flag.Tpo .deps/dup-safer-flag.Po
+mv -f .deps/fd-safer-flag.Tpo .deps/fd-safer-flag.Po
+gcc -std=gnu99  -I.     -g -O2 -MT version-etc-fsf.o -MD -MP -MF .deps/version-etc-fsf.Tpo -c -o version-etc-fsf.o version-etc-fsf.c
+gcc -std=gnu99  -I.     -g -O2 -MT wait-process.o -MD -MP -MF .deps/wait-process.Tpo -c -o wait-process.o wait-process.c
+mv -f .deps/printf-frexp.Tpo .deps/printf-frexp.Po
+mv -f .deps/printf-frexpl.Tpo .deps/printf-frexpl.Po
+gcc -std=gnu99  -I.     -g -O2 -MT xalloc-die.o -MD -MP -MF .deps/xalloc-die.Tpo -c -o xalloc-die.o xalloc-die.c
+mv -f .deps/pipe2-safer.Tpo .deps/pipe2-safer.Po
+gcc -std=gnu99  -I.     -g -O2 -MT gl_xlist.o -MD -MP -MF .deps/gl_xlist.Tpo -c -o gl_xlist.o gl_xlist.c
+gcc -std=gnu99  -I.     -g -O2 -MT xmalloca.o -MD -MP -MF .deps/xmalloca.Tpo -c -o xmalloca.o xmalloca.c
+mv -f .deps/freadahead.Tpo .deps/freadahead.Po
+mv -f .deps/threadlib.Tpo .deps/threadlib.Po
+gcc -std=gnu99  -I.     -g -O2 -MT gl_xoset.o -MD -MP -MF .deps/gl_xoset.Tpo -c -o gl_xoset.o gl_xoset.c
+gcc -std=gnu99  -I.     -g -O2 -MT xprintf.o -MD -MP -MF .deps/xprintf.Tpo -c -o xprintf.o xprintf.c
+mv -f .deps/malloca.Tpo .deps/malloca.Po
+gcc -std=gnu99  -I.     -g -O2 -MT xstrndup.o -MD -MP -MF .deps/xstrndup.Tpo -c -o xstrndup.o xstrndup.c
+mv -f .deps/c-ctype.Tpo .deps/c-ctype.Po
+gcc -std=gnu99  -I.     -g -O2 -MT xvasprintf.o -MD -MP -MF .deps/xvasprintf.Tpo -c -o xvasprintf.o xvasprintf.c
+mv -f .deps/progname.Tpo .deps/progname.Po
+gcc -std=gnu99  -I.     -g -O2 -MT xasprintf.o -MD -MP -MF .deps/xasprintf.Tpo -c -o xasprintf.o xasprintf.c
+mv -f .deps/memchr2.Tpo .deps/memchr2.Po
+gcc -std=gnu99  -I.     -g -O2 -MT asnprintf.o -MD -MP -MF .deps/asnprintf.Tpo -c -o asnprintf.o asnprintf.c
+mv -f .deps/pipe2.Tpo .deps/pipe2.Po
+mv -f .deps/c-stack.Tpo .deps/c-stack.Po
+mv -f .deps/tls.Tpo .deps/tls.Po
+gcc -std=gnu99  -I.     -g -O2 -MT asprintf.o -MD -MP -MF .deps/asprintf.Tpo -c -o asprintf.o asprintf.c
+gcc -std=gnu99  -I.     -g -O2 -MT basename.o -MD -MP -MF .deps/basename.Tpo -c -o basename.o basename.c
+mv -f .deps/gl_xlist.Tpo .deps/gl_xlist.Po
+gcc -std=gnu99  -I.     -g -O2 -MT basename-lgpl.o -MD -MP -MF .deps/basename-lgpl.Tpo -c -o basename-lgpl.o basename-lgpl.c
+gcc -std=gnu99  -I.     -g -O2 -MT cloexec.o -MD -MP -MF .deps/cloexec.Tpo -c -o cloexec.o cloexec.c
+mv -f .deps/gl_xoset.Tpo .deps/gl_xoset.Po
+gcc -std=gnu99  -I.     -g -O2 -MT close-stream.o -MD -MP -MF .deps/close-stream.Tpo -c -o close-stream.o close-stream.c
+mv -f .deps/version-etc-fsf.Tpo .deps/version-etc-fsf.Po
+gcc -std=gnu99  -I.     -g -O2 -MT closein.o -MD -MP -MF .deps/closein.Tpo -c -o closein.o closein.c
+mv -f .deps/xmalloca.Tpo .deps/xmalloca.Po
+gcc -std=gnu99  -I.     -g -O2 -MT closeout.o -MD -MP -MF .deps/closeout.Tpo -c -o closeout.o closeout.c
+mv -f .deps/verror.Tpo .deps/verror.Po
+gcc -std=gnu99  -I.     -g -O2 -MT dirname.o -MD -MP -MF .deps/dirname.Tpo -c -o dirname.o dirname.c
+mv -f .deps/execute.Tpo .deps/execute.Po
+gcc -std=gnu99  -I.     -g -O2 -MT dirname-lgpl.o -MD -MP -MF .deps/dirname-lgpl.Tpo -c -o dirname-lgpl.o dirname-lgpl.c
+mv -f .deps/xalloc-die.Tpo .deps/xalloc-die.Po
+mv -f .deps/xasprintf.Tpo .deps/xasprintf.Po
+gcc -std=gnu99  -I.     -g -O2 -MT dup-safer.o -MD -MP -MF .deps/dup-safer.Tpo -c -o dup-safer.o dup-safer.c
+gcc -std=gnu99  -I.     -g -O2 -MT fcntl.o -MD -MP -MF .deps/fcntl.Tpo -c -o fcntl.o fcntl.c
+mv -f .deps/xstrndup.Tpo .deps/xstrndup.Po
+mv -f .deps/asnprintf.Tpo .deps/asnprintf.Po
+gcc -std=gnu99  -I.     -g -O2 -MT fd-safer.o -MD -MP -MF .deps/fd-safer.Tpo -c -o fd-safer.o fd-safer.c
+gcc -std=gnu99  -I.     -g -O2 -MT fflush.o -MD -MP -MF .deps/fflush.Tpo -c -o fflush.o fflush.c
+mv -f .deps/fatal-signal.Tpo .deps/fatal-signal.Po
+gcc -std=gnu99  -I.     -g -O2 -MT filenamecat.o -MD -MP -MF .deps/filenamecat.Tpo -c -o filenamecat.o filenamecat.c
+mv -f .deps/basename.Tpo .deps/basename.Po
+mv -f .deps/asprintf.Tpo .deps/asprintf.Po
+gcc -std=gnu99  -I.     -g -O2 -MT filenamecat-lgpl.o -MD -MP -MF .deps/filenamecat-lgpl.Tpo -c -o filenamecat-lgpl.o filenamecat-lgpl.c
+gcc -std=gnu99  -I.     -g -O2 -MT fopen-safer.o -MD -MP -MF .deps/fopen-safer.Tpo -c -o fopen-safer.o fopen-safer.c
+mv -f .deps/tmpdir.Tpo .deps/tmpdir.Po
+mv -f .deps/xprintf.Tpo .deps/xprintf.Po
+mv -f .deps/basename-lgpl.Tpo .deps/basename-lgpl.Po
+mv -f .deps/cloexec.Tpo .deps/cloexec.Po
+gcc -std=gnu99  -I.     -g -O2 -MT fpurge.o -MD -MP -MF .deps/fpurge.Tpo -c -o fpurge.o fpurge.c
+gcc -std=gnu99  -I.     -g -O2 -MT fseeko.o -MD -MP -MF .deps/fseeko.Tpo -c -o fseeko.o fseeko.c
+gcc -std=gnu99  -I.     -g -O2 -MT isnanl.o -MD -MP -MF .deps/isnanl.Tpo -c -o isnanl.o isnanl.c
+mv -f .deps/close-stream.Tpo .deps/close-stream.Po
+gcc -std=gnu99  -I.     -g -O2 -MT mkstemp-safer.o -MD -MP -MF .deps/mkstemp-safer.Tpo -c -o mkstemp-safer.o mkstemp-safer.c
+mv -f .deps/localcharset.Tpo .deps/localcharset.Po
+gcc -std=gnu99  -I.     -g -O2 -MT pipe-safer.o -MD -MP -MF .deps/pipe-safer.Tpo -c -o pipe-safer.o pipe-safer.c
+gcc -std=gnu99  -I.     -g -O2 -MT printf-args.o -MD -MP -MF .deps/printf-args.Tpo -c -o printf-args.o printf-args.c
+mv -f .deps/dup-safer.Tpo .deps/dup-safer.Po
+gcc -std=gnu99  -I.     -g -O2 -MT printf-parse.o -MD -MP -MF .deps/printf-parse.Tpo -c -o printf-parse.o printf-parse.c
+mv -f .deps/version-etc.Tpo .deps/version-etc.Po
+mv -f .deps/fd-safer.Tpo .deps/fd-safer.Po
+gcc -std=gnu99  -I.     -g -O2 -MT quotearg.o -MD -MP -MF .deps/quotearg.Tpo -c -o quotearg.o quotearg.c
+mv -f .deps/dirname.Tpo .deps/dirname.Po
+gcc -std=gnu99  -I.     -g -O2 -MT stripslash.o -MD -MP -MF .deps/stripslash.Tpo -c -o stripslash.o stripslash.c
+gcc -std=gnu99  -I.     -g -O2 -MT strstr.o -MD -MP -MF .deps/strstr.Tpo -c -o strstr.o strstr.c
+mv -f .deps/xvasprintf.Tpo .deps/xvasprintf.Po
+gcc -std=gnu99  -I.     -g -O2 -MT tempname.o -MD -MP -MF .deps/tempname.Tpo -c -o tempname.o tempname.c
+mv -f .deps/closein.Tpo .deps/closein.Po
+gcc -std=gnu99  -I.     -g -O2 -MT vasnprintf.o -MD -MP -MF .deps/vasnprintf.Tpo -c -o vasnprintf.o vasnprintf.c
+mv -f .deps/wait-process.Tpo .deps/wait-process.Po
+gcc -std=gnu99  -I.     -g -O2 -MT vasprintf.o -MD -MP -MF .deps/vasprintf.Tpo -c -o vasprintf.o vasprintf.c
+mv -f .deps/dirname-lgpl.Tpo .deps/dirname-lgpl.Po
+mv -f .deps/filenamecat.Tpo .deps/filenamecat.Po
+gcc -std=gnu99  -I.     -g -O2 -MT xmalloc.o -MD -MP -MF .deps/xmalloc.Tpo -c -o xmalloc.o xmalloc.c
+mv -f .deps/closeout.Tpo .deps/closeout.Po
+mv -f .deps/fflush.Tpo .deps/fflush.Po
+rm -f t-charset.alias charset.alias && \
+/bin/sh ./config.charset 'x86_64-unknown-linux-gnu' > t-charset.alias && \
+mv t-charset.alias charset.alias
+rm -f t-ref-add.sed ref-add.sed && \
+sed -e '/^#/d' -e 's/@''PACKAGE''@/m4/g' ref-add.sin > t-ref-add.sed && \
+mv t-ref-add.sed ref-add.sed
+rm -f t-ref-del.sed ref-del.sed && \
+sed -e '/^#/d' -e 's/@''PACKAGE''@/m4/g' ref-del.sin > t-ref-del.sed && \
+mv t-ref-del.sed ref-del.sed
+mv -f .deps/fcntl.Tpo .deps/fcntl.Po
+mv -f .deps/mkstemp-safer.Tpo .deps/mkstemp-safer.Po
+mv -f .deps/isnanl.Tpo .deps/isnanl.Po
+mv -f .deps/pipe-safer.Tpo .deps/pipe-safer.Po
+mv -f .deps/spawn-pipe.Tpo .deps/spawn-pipe.Po
+mv -f .deps/stripslash.Tpo .deps/stripslash.Po
+mv -f .deps/fpurge.Tpo .deps/fpurge.Po
+mv -f .deps/fseeko.Tpo .deps/fseeko.Po
+mv -f .deps/filenamecat-lgpl.Tpo .deps/filenamecat-lgpl.Po
+mv -f .deps/fopen-safer.Tpo .deps/fopen-safer.Po
+mv -f .deps/vasprintf.Tpo .deps/vasprintf.Po
+mv -f .deps/printf-args.Tpo .deps/printf-args.Po
+mv -f .deps/gl_avltree_oset.Tpo .deps/gl_avltree_oset.Po
+mv -f .deps/xmalloc.Tpo .deps/xmalloc.Po
+mv -f .deps/tempname.Tpo .deps/tempname.Po
+mv -f .deps/clean-temp.Tpo .deps/clean-temp.Po
+mv -f .deps/strstr.Tpo .deps/strstr.Po
+mv -f .deps/printf-parse.Tpo .deps/printf-parse.Po
+mv -f .deps/gl_linkedhash_list.Tpo .deps/gl_linkedhash_list.Po
+mv -f .deps/quotearg.Tpo .deps/quotearg.Po
+mv -f .deps/vasnprintf.Tpo .deps/vasnprintf.Po
+rm -f libm4.a
+ar cru libm4.a gl_avltree_oset.o c-ctype.o c-stack.o clean-temp.o close-hook.o execute.o exitfail.o fatal-signal.o fd-safer-flag.o dup-safer-flag.o freadahead.o freading.o gl_linkedhash_list.o gl_list.o localcharset.o lock.o malloca.o memchr2.o gl_oset.o pipe2.o pipe2-safer.o printf-frexp.o printf-frexpl.o progname.o spawn-pipe.o threadlib.o tls.o tmpdir.o verror.o version-etc.o version-etc-fsf.o wait-process.o xalloc-die.o gl_xlist.o xmalloca.o gl_xoset.o xprintf.o xstrndup.o xvasprintf.o xasprintf.o asnprintf.o asprintf.o basename.o basename-lgpl.o cloexec.o close-stream.o closein.o closeout.o dirname.o dirname-lgpl.o dup-safer.o fcntl.o fd-safer.o fflush.o filenamecat.o filenamecat-lgpl.o fopen-safer.o fpurge.o fseeko.o isnanl.o mkstemp-safer.o pipe-safer.o printf-args.o printf-parse.o quotearg.o stripslash.o strstr.o tempname.o vasnprintf.o vasprintf.o xmalloc.o
+ranlib libm4.a
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/src'
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT m4.o -MD -MP -MF .deps/m4.Tpo -c -o m4.o m4.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT builtin.o -MD -MP -MF .deps/builtin.Tpo -c -o builtin.o builtin.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT debug.o -MD -MP -MF .deps/debug.Tpo -c -o debug.o debug.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT eval.o -MD -MP -MF .deps/eval.Tpo -c -o eval.o eval.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT format.o -MD -MP -MF .deps/format.Tpo -c -o format.o format.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT freeze.o -MD -MP -MF .deps/freeze.Tpo -c -o freeze.o freeze.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT input.o -MD -MP -MF .deps/input.Tpo -c -o input.o input.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT macro.o -MD -MP -MF .deps/macro.Tpo -c -o macro.o macro.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT output.o -MD -MP -MF .deps/output.Tpo -c -o output.o output.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT path.o -MD -MP -MF .deps/path.Tpo -c -o path.o path.c
+gcc -std=gnu99    -I../lib -I../lib    -g -O2 -MT symtab.o -MD -MP -MF .deps/symtab.Tpo -c -o symtab.o symtab.c
+mv -f .deps/path.Tpo .deps/path.Po
+mv -f .deps/symtab.Tpo .deps/symtab.Po
+mv -f .deps/m4.Tpo .deps/m4.Po
+mv -f .deps/macro.Tpo .deps/macro.Po
+mv -f .deps/debug.Tpo .deps/debug.Po
+mv -f .deps/format.Tpo .deps/format.Po
+mv -f .deps/freeze.Tpo .deps/freeze.Po
+mv -f .deps/eval.Tpo .deps/eval.Po
+mv -f .deps/output.Tpo .deps/output.Po
+mv -f .deps/input.Tpo .deps/input.Po
+mv -f .deps/builtin.Tpo .deps/builtin.Po
+gcc -std=gnu99   -g -O2  -s -o m4 m4.o builtin.o debug.o eval.o format.o freeze.o input.o macro.o output.o path.o symtab.o ../lib/libm4.a    
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/src'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/doc'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/doc'
+Making all in checks
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/checks'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/checks'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+rm -f arg-nonnull.h-t arg-nonnull.h && \
+sed -n -e '/GL_ARG_NONNULL/,$p' \
+  < ../build-aux/arg-nonnull.h \
+  > arg-nonnull.h-t && \
+mv arg-nonnull.h-t arg-nonnull.h
+rm -f c++defs.h-t c++defs.h && \
+sed -n -e '/_GL_CXXDEFS/,$p' \
+  < ../build-aux/c++defs.h \
+  > c++defs.h-t && \
+mv c++defs.h-t c++defs.h
+rm -f warn-on-use.h-t warn-on-use.h && \
+sed -n -e '/^.ifndef/,$p' \
+  < ../build-aux/warn-on-use.h \
+  > warn-on-use.h-t && \
+mv warn-on-use.h-t warn-on-use.h
+rm -f test-posix_spawn1.sh-t test-posix_spawn1.sh && \
+cp ./test-posix_spawn1.in.sh test-posix_spawn1.sh-t && \
+mv test-posix_spawn1.sh-t test-posix_spawn1.sh
+rm -f test-posix_spawn2.sh-t test-posix_spawn2.sh && \
+cp ./test-posix_spawn2.in.sh test-posix_spawn2.sh-t && \
+mv test-posix_spawn2.sh-t test-posix_spawn2.sh
+rm -f locale.h-t locale.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_LOCALE_H''@|<locale.h>|g' \
+      -e 's|@''GNULIB_SETLOCALE''@|IN_M4_GNULIB_TESTS|g' \
+      -e 's|@''GNULIB_DUPLOCALE''@|0|g' \
+      -e 's|@''HAVE_DUPLOCALE''@|1|g' \
+      -e 's|@''HAVE_XLOCALE_H''@|1|g' \
+      -e 's|@''REPLACE_SETLOCALE''@|0|g' \
+      -e 's|@''REPLACE_DUPLOCALE''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./locale.in.h; \
+} > locale.h-t && \
+mv locale.h-t locale.h
+make  all-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+Making all in .
+make[4]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[4]: Nothing to be done for `all-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16'
++ make check
+if test -d ./.git; then			\
+  cd . &&						\
+  git submodule --quiet foreach test '$(git rev-parse $sha1)'	\
+      = '$(git merge-base origin $sha1)'			\
+    || { echo 'maint.mk: found non-public submodule commit' >&2;	\
+	 exit 1; };						\
+else								\
+  : ;								\
+fi
+make  check-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16'
+Making check in .
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16'
+make[2]: Nothing to be done for `check-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16'
+Making check in examples
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/examples'
+make[2]: Nothing to be done for `check'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/examples'
+Making check in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+make  check-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+Making check in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/src'
+make[2]: Nothing to be done for `check'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/src'
+Making check in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/doc'
+make[2]: Nothing to be done for `check'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/doc'
+Making check in checks
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/checks'
+PATH=`pwd`/../src":"$PATH; export PATH; \
+./check-them -I ./../examples ./*[0-9][0-9][0-9].* ./stackovf.test
+m4 (GNU M4) 1.4.16
+Copyright (C) 2011 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+This is free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.
+
+Written by Rene' Seindal.
+Checking ./001.preprocess
+Checking ./002.debugging_
+Checking ./003.command_li
+Checking ./004.command_li
+Checking ./005.command_li
+Checking ./006.command_li
+Checking ./007.command_li
+Checking ./008.comments
+Checking ./009.comments
+Checking ./010.input_proc
+Checking ./011.input_proc
+Checking ./012.inhibiting
+Checking ./013.inhibiting
+Checking ./014.inhibiting
+Checking ./015.inhibiting
+Checking ./016.inhibiting
+Checking ./017.inhibiting
+Checking ./018.inhibiting
+Checking ./019.inhibiting
+Checking ./020.macro_argu
+Checking ./021.macro_argu
+Checking ./022.macro_argu
+Checking ./023.macro_argu
+Checking ./024.macro_argu
+Checking ./025.quoting_ar
+Checking ./026.macro_expa
+Checking ./027.macro_expa
+Checking ./028.define
+Checking ./029.define
+Checking ./030.define
+Checking ./031.arguments
+Checking ./032.arguments
+Checking ./033.arguments
+Checking ./034.arguments
+Checking ./035.arguments
+Checking ./036.arguments
+Checking ./037.pseudo_arg
+Checking ./038.pseudo_arg
+Checking ./039.pseudo_arg
+Checking ./040.pseudo_arg
+Checking ./041.pseudo_arg
+Checking ./042.pseudo_arg
+Checking ./043.pseudo_arg
+Checking ./044.pseudo_arg
+Checking ./045.pseudo_arg
+Checking ./046.undefine
+Checking ./047.undefine
+Checking ./048.defn
+Checking ./049.defn
+Checking ./050.defn
+Checking ./051.defn
+Checking ./052.defn
+Checking ./053.defn
+Checking ./054.defn
+Checking ./055.pushdef
+Checking ./056.pushdef
+Checking ./057.indir
+Checking ./058.indir
+Checking ./059.indir
+Checking ./060.builtin
+Checking ./061.builtin
+Checking ./062.builtin
+Checking ./063.builtin
+Checking ./064.builtin
+Checking ./065.ifdef
+Checking ./066.ifelse
+Checking ./067.ifelse
+Checking ./068.ifelse
+Checking ./069.ifelse
+Checking ./070.ifelse
+Checking ./071.shift
+Checking ./072.shift
+Checking ./073.shift
+Checking ./074.shift
+Checking ./075.shift
+Checking ./076.shift
+Checking ./077.shift
+Checking ./078.shift
+Checking ./079.forloop
+Checking ./080.forloop
+Checking ./081.forloop
+Checking ./082.foreach
+Checking ./083.foreach
+Checking ./084.foreach
+Checking ./085.foreach
+Checking ./086.foreach
+Checking ./087.foreach
+Checking ./088.stacks
+Checking ./089.stacks
+Checking ./090.compositio
+Checking ./091.compositio
+Checking ./092.compositio
+Checking ./093.compositio
+Checking ./094.dumpdef
+Checking ./095.dumpdef
+Checking ./096.trace
+Checking ./097.trace
+Checking ./098.trace
+Checking ./099.trace
+Checking ./100.trace
+Checking ./101.debug_leve
+Checking ./102.debug_leve
+Checking ./103.debug_leve
+Checking ./104.debug_outp
+Checking ./105.dnl
+Checking ./106.dnl
+Checking ./107.dnl
+Checking ./108.changequot
+Checking ./109.changequot
+Checking ./110.changequot
+Checking ./111.changequot
+Checking ./112.changequot
+Checking ./113.changequot
+Checking ./114.changequot
+Checking ./115.changequot
+Checking ./116.changequot
+Checking ./117.changequot
+Checking ./118.changequot
+Checking ./119.changecom
+Checking ./120.changecom
+Checking ./121.changecom
+Checking ./122.changecom
+Checking ./123.changecom
+Checking ./124.changecom
+Checking ./125.changeword
+ skipping: no changeword support
+Checking ./126.changeword
+ skipping: no changeword support
+Checking ./127.changeword
+ skipping: no changeword support
+Checking ./128.changeword
+ skipping: no changeword support
+Checking ./129.changeword
+ skipping: no changeword support
+Checking ./130.changeword
+ skipping: no changeword support
+Checking ./131.m4wrap
+Checking ./132.m4wrap
+Checking ./133.m4wrap
+Checking ./134.m4wrap
+Checking ./135.m4wrap
+Checking ./136.m4wrap
+Checking ./137.include
+Checking ./138.include
+Checking ./139.include
+Checking ./140.include
+Checking ./141.include
+Checking ./142.include
+Checking ./143.diversions
+Checking ./144.diversions
+Checking ./145.diversions
+Checking ./146.diversions
+Checking ./147.divert
+Checking ./148.divert
+Checking ./149.divert
+Checking ./150.divert
+Checking ./151.divert
+Checking ./152.undivert
+Checking ./153.undivert
+Checking ./154.undivert
+Checking ./155.undivert
+Checking ./156.undivert
+Checking ./157.undivert
+Checking ./158.divnum
+Checking ./159.cleardiver
+Checking ./160.cleardiver
+Checking ./161.len
+Checking ./162.index_macr
+Checking ./163.index_macr
+Checking ./164.index_macr
+Checking ./165.index_macr
+Checking ./166.regexp
+Checking ./167.regexp
+Checking ./168.regexp
+Checking ./169.substr
+Checking ./170.substr
+Checking ./171.translit
+Checking ./172.translit
+Checking ./173.translit
+Checking ./174.translit
+Checking ./175.patsubst
+Checking ./176.patsubst
+Checking ./177.patsubst
+Checking ./178.patsubst
+Checking ./179.patsubst
+Checking ./180.format
+Checking ./181.format
+Checking ./182.format
+Checking ./183.format
+Checking ./184.incr
+Checking ./185.eval
+Checking ./186.eval
+Checking ./187.eval
+Checking ./188.eval
+Checking ./189.eval
+Checking ./190.eval
+Checking ./191.platform_m
+Checking ./192.platform_m
+Checking ./193.platform_m
+Checking ./194.syscmd
+Checking ./195.syscmd
+Checking ./196.esyscmd
+Checking ./197.sysval
+Checking ./198.sysval
+Checking ./199.mkstemp
+Checking ./200.mkstemp
+Checking ./201.mkstemp
+Checking ./202.errprint
+Checking ./203.location
+Checking ./204.location
+Checking ./205.location
+Checking ./206.m4exit
+Checking ./207.m4exit
+Checking ./208.using_froz
+Checking ./209.using_froz
+Checking ./210.using_froz
+Checking ./211.extensions
+Checking ./212.other_inco
+Checking ./213.other_inco
+Checking ./214.improved_e
+Checking ./215.improved_f
+Checking ./216.improved_f
+Checking ./217.improved_f
+Checking ./218.improved_f
+Checking ./219.improved_f
+Checking ./220.improved_f
+Checking ./221.improved_f
+Checking ./222.improved_f
+Checking ./223.improved_f
+Checking ./224.improved_f
+Checking ./225.improved_f
+Checking ./226.improved_f
+Checking ./227.improved_f
+Checking ./228.improved_f
+Checking ./229.improved_c
+Checking ./230.improved_c
+Checking ./231.improved_m
+Checking ./232.improved_m
+Checking ./233.improved_c
+Checking ./234.improved_c
+Checking ./235.improved_c
+Checking ./236.improved_f
+Checking ./stackovf.test
+Stack soft limit set to 300K
+Pass
+
+Skipped checks were:
+  ./125.changeword ./126.changeword ./127.changeword ./128.changeword ./129.changeword ./130.changeword
+All checks successful
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/checks'
+Making check in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make  check-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+Making check in .
+make[4]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make  libtests.a test-alloca-opt test-array_list test-array_oset test-avltree_oset test-binary-io test-btowc test-c-ctype test-c-stack test-c-strcasecmp test-c-strncasecmp test-canonicalize-lgpl test-cloexec test-closein test-dirname test-dup2 test-environ test-errno  test-fcntl-h test-fcntl test-fflush test-fflush2 test-filenamecat test-fopen-safer test-fopen test-fpending test-fpurge test-freadahead test-freading test-frexp-nolibm test-frexpl-nolibm test-fseeko test-ftell test-ftell3 test-ftello test-ftello3 test-getdtablesize test-getopt test-gettimeofday test-ignore-value test-isnand-nolibm test-isnanf-nolibm test-isnanl-nolibm  test-langinfo test-link test-linkedhash_list  test-locale test-localename test-lseek test-lstat test-malloc-gnu test-malloca  test-math test-mbrtowc test-mbrtowc-w32 test-mbsinit test-memchr test-memchr2 test-nl_langinfo test-open test-pipe2 test-posix_spawn1 test-posix_spawn2 test-printf-frexp test-printf-frexpl test-quotearg-simple test-rawmemchr test-readlink test-rename test-rmdir test-sched test-setenv test-setlocale1 test-setlocale2 test-sigaction  test-signal test-signbit test-snprintf  test-spawn-pipe test-spawn test-stat test-stdbool test-stddef test-stdint  test-stdio  test-stdlib test-strchrnul test-strerror  test-string test-strnlen test-strsignal test-strstr test-strtod test-symlink  test-sys_stat  test-sys_time  test-sys_wait  test-time  test-dup-safer test-unistd test-unsetenv test-vasnprintf test-vasprintf-posix test-vasprintf test-verify test-version-etc  test-wchar test-wcrtomb test-wcrtomb-w32  test-wctype-h test-xalloc-die test-xvasprintf
+make[5]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT gl_array_list.o -MD -MP -MF .deps/gl_array_list.Tpo -c -o gl_array_list.o gl_array_list.c
+mv -f .deps/gl_array_list.Tpo .deps/gl_array_list.Po
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT gl_array_oset.o -MD -MP -MF .deps/gl_array_oset.Tpo -c -o gl_array_oset.o gl_array_oset.c
+mv -f .deps/gl_array_oset.Tpo .deps/gl_array_oset.Po
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT c-strcasecmp.o -MD -MP -MF .deps/c-strcasecmp.Tpo -c -o c-strcasecmp.o c-strcasecmp.c
+mv -f .deps/c-strcasecmp.Tpo .deps/c-strcasecmp.Po
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT c-strncasecmp.o -MD -MP -MF .deps/c-strncasecmp.Tpo -c -o c-strncasecmp.o c-strncasecmp.c
+mv -f .deps/c-strncasecmp.Tpo .deps/c-strncasecmp.Po
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT localename.o -MD -MP -MF .deps/localename.Tpo -c -o localename.o localename.c
+mv -f .deps/localename.Tpo .deps/localename.Po
+rm -f libtests.a
+ar cru libtests.a gl_array_list.o gl_array_oset.o c-strcasecmp.o c-strncasecmp.o localename.o 
+ranlib libtests.a
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-alloca-opt.o -MD -MP -MF .deps/test-alloca-opt.Tpo -c -o test-alloca-opt.o test-alloca-opt.c
+mv -f .deps/test-alloca-opt.Tpo .deps/test-alloca-opt.Po
+gcc -std=gnu99  -g -O2  -s -o test-alloca-opt test-alloca-opt.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-array_list.o -MD -MP -MF .deps/test-array_list.Tpo -c -o test-array_list.o test-array_list.c
+mv -f .deps/test-array_list.Tpo .deps/test-array_list.Po
+gcc -std=gnu99  -g -O2  -s -o test-array_list test-array_list.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-array_oset.o -MD -MP -MF .deps/test-array_oset.Tpo -c -o test-array_oset.o test-array_oset.c
+mv -f .deps/test-array_oset.Tpo .deps/test-array_oset.Po
+gcc -std=gnu99  -g -O2  -s -o test-array_oset test-array_oset.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-avltree_oset.o -MD -MP -MF .deps/test-avltree_oset.Tpo -c -o test-avltree_oset.o test-avltree_oset.c
+mv -f .deps/test-avltree_oset.Tpo .deps/test-avltree_oset.Po
+gcc -std=gnu99  -g -O2  -s -o test-avltree_oset test-avltree_oset.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-binary-io.o -MD -MP -MF .deps/test-binary-io.Tpo -c -o test-binary-io.o test-binary-io.c
+mv -f .deps/test-binary-io.Tpo .deps/test-binary-io.Po
+gcc -std=gnu99  -g -O2  -s -o test-binary-io test-binary-io.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-btowc.o -MD -MP -MF .deps/test-btowc.Tpo -c -o test-btowc.o test-btowc.c
+mv -f .deps/test-btowc.Tpo .deps/test-btowc.Po
+gcc -std=gnu99  -g -O2  -s -o test-btowc test-btowc.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-c-ctype.o -MD -MP -MF .deps/test-c-ctype.Tpo -c -o test-c-ctype.o test-c-ctype.c
+mv -f .deps/test-c-ctype.Tpo .deps/test-c-ctype.Po
+gcc -std=gnu99  -g -O2  -s -o test-c-ctype test-c-ctype.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-c-stack.o -MD -MP -MF .deps/test-c-stack.Tpo -c -o test-c-stack.o test-c-stack.c
+mv -f .deps/test-c-stack.Tpo .deps/test-c-stack.Po
+gcc -std=gnu99  -g -O2  -s -o test-c-stack test-c-stack.o libtests.a ../lib/libm4.a libtests.a    
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-c-strcasecmp.o -MD -MP -MF .deps/test-c-strcasecmp.Tpo -c -o test-c-strcasecmp.o test-c-strcasecmp.c
+mv -f .deps/test-c-strcasecmp.Tpo .deps/test-c-strcasecmp.Po
+gcc -std=gnu99  -g -O2  -s -o test-c-strcasecmp test-c-strcasecmp.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-c-strncasecmp.o -MD -MP -MF .deps/test-c-strncasecmp.Tpo -c -o test-c-strncasecmp.o test-c-strncasecmp.c
+mv -f .deps/test-c-strncasecmp.Tpo .deps/test-c-strncasecmp.Po
+gcc -std=gnu99  -g -O2  -s -o test-c-strncasecmp test-c-strncasecmp.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-canonicalize-lgpl.o -MD -MP -MF .deps/test-canonicalize-lgpl.Tpo -c -o test-canonicalize-lgpl.o test-canonicalize-lgpl.c
+mv -f .deps/test-canonicalize-lgpl.Tpo .deps/test-canonicalize-lgpl.Po
+gcc -std=gnu99  -g -O2  -s -o test-canonicalize-lgpl test-canonicalize-lgpl.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-cloexec.o -MD -MP -MF .deps/test-cloexec.Tpo -c -o test-cloexec.o test-cloexec.c
+mv -f .deps/test-cloexec.Tpo .deps/test-cloexec.Po
+gcc -std=gnu99  -g -O2  -s -o test-cloexec test-cloexec.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-closein.o -MD -MP -MF .deps/test-closein.Tpo -c -o test-closein.o test-closein.c
+mv -f .deps/test-closein.Tpo .deps/test-closein.Po
+gcc -std=gnu99  -g -O2  -s -o test-closein test-closein.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-dirname.o -MD -MP -MF .deps/test-dirname.Tpo -c -o test-dirname.o test-dirname.c
+mv -f .deps/test-dirname.Tpo .deps/test-dirname.Po
+gcc -std=gnu99  -g -O2  -s -o test-dirname test-dirname.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-dup2.o -MD -MP -MF .deps/test-dup2.Tpo -c -o test-dup2.o test-dup2.c
+mv -f .deps/test-dup2.Tpo .deps/test-dup2.Po
+gcc -std=gnu99  -g -O2  -s -o test-dup2 test-dup2.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-environ.o -MD -MP -MF .deps/test-environ.Tpo -c -o test-environ.o test-environ.c
+mv -f .deps/test-environ.Tpo .deps/test-environ.Po
+gcc -std=gnu99  -g -O2  -s -o test-environ test-environ.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-errno.o -MD -MP -MF .deps/test-errno.Tpo -c -o test-errno.o test-errno.c
+mv -f .deps/test-errno.Tpo .deps/test-errno.Po
+gcc -std=gnu99  -g -O2  -s -o test-errno test-errno.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fcntl-h.o -MD -MP -MF .deps/test-fcntl-h.Tpo -c -o test-fcntl-h.o test-fcntl-h.c
+mv -f .deps/test-fcntl-h.Tpo .deps/test-fcntl-h.Po
+gcc -std=gnu99  -g -O2  -s -o test-fcntl-h test-fcntl-h.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fcntl.o -MD -MP -MF .deps/test-fcntl.Tpo -c -o test-fcntl.o test-fcntl.c
+mv -f .deps/test-fcntl.Tpo .deps/test-fcntl.Po
+gcc -std=gnu99  -g -O2  -s -o test-fcntl test-fcntl.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fflush.o -MD -MP -MF .deps/test-fflush.Tpo -c -o test-fflush.o test-fflush.c
+mv -f .deps/test-fflush.Tpo .deps/test-fflush.Po
+gcc -std=gnu99  -g -O2  -s -o test-fflush test-fflush.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fflush2.o -MD -MP -MF .deps/test-fflush2.Tpo -c -o test-fflush2.o test-fflush2.c
+mv -f .deps/test-fflush2.Tpo .deps/test-fflush2.Po
+gcc -std=gnu99  -g -O2  -s -o test-fflush2 test-fflush2.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-filenamecat.o -MD -MP -MF .deps/test-filenamecat.Tpo -c -o test-filenamecat.o test-filenamecat.c
+mv -f .deps/test-filenamecat.Tpo .deps/test-filenamecat.Po
+gcc -std=gnu99  -g -O2  -s -o test-filenamecat test-filenamecat.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fopen-safer.o -MD -MP -MF .deps/test-fopen-safer.Tpo -c -o test-fopen-safer.o test-fopen-safer.c
+mv -f .deps/test-fopen-safer.Tpo .deps/test-fopen-safer.Po
+gcc -std=gnu99  -g -O2  -s -o test-fopen-safer test-fopen-safer.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fopen.o -MD -MP -MF .deps/test-fopen.Tpo -c -o test-fopen.o test-fopen.c
+mv -f .deps/test-fopen.Tpo .deps/test-fopen.Po
+gcc -std=gnu99  -g -O2  -s -o test-fopen test-fopen.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fpending.o -MD -MP -MF .deps/test-fpending.Tpo -c -o test-fpending.o test-fpending.c
+mv -f .deps/test-fpending.Tpo .deps/test-fpending.Po
+gcc -std=gnu99  -g -O2  -s -o test-fpending test-fpending.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fpurge.o -MD -MP -MF .deps/test-fpurge.Tpo -c -o test-fpurge.o test-fpurge.c
+mv -f .deps/test-fpurge.Tpo .deps/test-fpurge.Po
+gcc -std=gnu99  -g -O2  -s -o test-fpurge test-fpurge.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-freadahead.o -MD -MP -MF .deps/test-freadahead.Tpo -c -o test-freadahead.o test-freadahead.c
+mv -f .deps/test-freadahead.Tpo .deps/test-freadahead.Po
+gcc -std=gnu99  -g -O2  -s -o test-freadahead test-freadahead.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-freading.o -MD -MP -MF .deps/test-freading.Tpo -c -o test-freading.o test-freading.c
+mv -f .deps/test-freading.Tpo .deps/test-freading.Po
+gcc -std=gnu99  -g -O2  -s -o test-freading test-freading.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-frexp.o -MD -MP -MF .deps/test-frexp.Tpo -c -o test-frexp.o test-frexp.c
+mv -f .deps/test-frexp.Tpo .deps/test-frexp.Po
+gcc -std=gnu99  -g -O2  -s -o test-frexp-nolibm test-frexp.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-frexpl.o -MD -MP -MF .deps/test-frexpl.Tpo -c -o test-frexpl.o test-frexpl.c
+mv -f .deps/test-frexpl.Tpo .deps/test-frexpl.Po
+gcc -std=gnu99  -g -O2  -s -o test-frexpl-nolibm test-frexpl.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-fseeko.o -MD -MP -MF .deps/test-fseeko.Tpo -c -o test-fseeko.o test-fseeko.c
+mv -f .deps/test-fseeko.Tpo .deps/test-fseeko.Po
+gcc -std=gnu99  -g -O2  -s -o test-fseeko test-fseeko.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-ftell.o -MD -MP -MF .deps/test-ftell.Tpo -c -o test-ftell.o test-ftell.c
+mv -f .deps/test-ftell.Tpo .deps/test-ftell.Po
+gcc -std=gnu99  -g -O2  -s -o test-ftell test-ftell.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-ftell3.o -MD -MP -MF .deps/test-ftell3.Tpo -c -o test-ftell3.o test-ftell3.c
+mv -f .deps/test-ftell3.Tpo .deps/test-ftell3.Po
+gcc -std=gnu99  -g -O2  -s -o test-ftell3 test-ftell3.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-ftello.o -MD -MP -MF .deps/test-ftello.Tpo -c -o test-ftello.o test-ftello.c
+mv -f .deps/test-ftello.Tpo .deps/test-ftello.Po
+gcc -std=gnu99  -g -O2  -s -o test-ftello test-ftello.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-ftello3.o -MD -MP -MF .deps/test-ftello3.Tpo -c -o test-ftello3.o test-ftello3.c
+mv -f .deps/test-ftello3.Tpo .deps/test-ftello3.Po
+gcc -std=gnu99  -g -O2  -s -o test-ftello3 test-ftello3.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-getdtablesize.o -MD -MP -MF .deps/test-getdtablesize.Tpo -c -o test-getdtablesize.o test-getdtablesize.c
+mv -f .deps/test-getdtablesize.Tpo .deps/test-getdtablesize.Po
+gcc -std=gnu99  -g -O2  -s -o test-getdtablesize test-getdtablesize.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-getopt.o -MD -MP -MF .deps/test-getopt.Tpo -c -o test-getopt.o test-getopt.c
+mv -f .deps/test-getopt.Tpo .deps/test-getopt.Po
+gcc -std=gnu99  -g -O2  -s -o test-getopt test-getopt.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-gettimeofday.o -MD -MP -MF .deps/test-gettimeofday.Tpo -c -o test-gettimeofday.o test-gettimeofday.c
+mv -f .deps/test-gettimeofday.Tpo .deps/test-gettimeofday.Po
+gcc -std=gnu99  -g -O2  -s -o test-gettimeofday test-gettimeofday.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-ignore-value.o -MD -MP -MF .deps/test-ignore-value.Tpo -c -o test-ignore-value.o test-ignore-value.c
+mv -f .deps/test-ignore-value.Tpo .deps/test-ignore-value.Po
+gcc -std=gnu99  -g -O2  -s -o test-ignore-value test-ignore-value.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-isnand-nolibm.o -MD -MP -MF .deps/test-isnand-nolibm.Tpo -c -o test-isnand-nolibm.o test-isnand-nolibm.c
+mv -f .deps/test-isnand-nolibm.Tpo .deps/test-isnand-nolibm.Po
+gcc -std=gnu99  -g -O2  -s -o test-isnand-nolibm test-isnand-nolibm.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-isnanf-nolibm.o -MD -MP -MF .deps/test-isnanf-nolibm.Tpo -c -o test-isnanf-nolibm.o test-isnanf-nolibm.c
+mv -f .deps/test-isnanf-nolibm.Tpo .deps/test-isnanf-nolibm.Po
+gcc -std=gnu99  -g -O2  -s -o test-isnanf-nolibm test-isnanf-nolibm.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-isnanl-nolibm.o -MD -MP -MF .deps/test-isnanl-nolibm.Tpo -c -o test-isnanl-nolibm.o test-isnanl-nolibm.c
+mv -f .deps/test-isnanl-nolibm.Tpo .deps/test-isnanl-nolibm.Po
+gcc -std=gnu99  -g -O2  -s -o test-isnanl-nolibm test-isnanl-nolibm.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-langinfo.o -MD -MP -MF .deps/test-langinfo.Tpo -c -o test-langinfo.o test-langinfo.c
+mv -f .deps/test-langinfo.Tpo .deps/test-langinfo.Po
+gcc -std=gnu99  -g -O2  -s -o test-langinfo test-langinfo.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-link.o -MD -MP -MF .deps/test-link.Tpo -c -o test-link.o test-link.c
+mv -f .deps/test-link.Tpo .deps/test-link.Po
+gcc -std=gnu99  -g -O2  -s -o test-link test-link.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-linkedhash_list.o -MD -MP -MF .deps/test-linkedhash_list.Tpo -c -o test-linkedhash_list.o test-linkedhash_list.c
+mv -f .deps/test-linkedhash_list.Tpo .deps/test-linkedhash_list.Po
+gcc -std=gnu99  -g -O2  -s -o test-linkedhash_list test-linkedhash_list.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-locale.o -MD -MP -MF .deps/test-locale.Tpo -c -o test-locale.o test-locale.c
+mv -f .deps/test-locale.Tpo .deps/test-locale.Po
+gcc -std=gnu99  -g -O2  -s -o test-locale test-locale.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-localename.o -MD -MP -MF .deps/test-localename.Tpo -c -o test-localename.o test-localename.c
+mv -f .deps/test-localename.Tpo .deps/test-localename.Po
+gcc -std=gnu99  -g -O2  -s -o test-localename test-localename.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-lseek.o -MD -MP -MF .deps/test-lseek.Tpo -c -o test-lseek.o test-lseek.c
+mv -f .deps/test-lseek.Tpo .deps/test-lseek.Po
+gcc -std=gnu99  -g -O2  -s -o test-lseek test-lseek.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-lstat.o -MD -MP -MF .deps/test-lstat.Tpo -c -o test-lstat.o test-lstat.c
+mv -f .deps/test-lstat.Tpo .deps/test-lstat.Po
+gcc -std=gnu99  -g -O2  -s -o test-lstat test-lstat.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-malloc-gnu.o -MD -MP -MF .deps/test-malloc-gnu.Tpo -c -o test-malloc-gnu.o test-malloc-gnu.c
+mv -f .deps/test-malloc-gnu.Tpo .deps/test-malloc-gnu.Po
+gcc -std=gnu99  -g -O2  -s -o test-malloc-gnu test-malloc-gnu.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-malloca.o -MD -MP -MF .deps/test-malloca.Tpo -c -o test-malloca.o test-malloca.c
+mv -f .deps/test-malloca.Tpo .deps/test-malloca.Po
+gcc -std=gnu99  -g -O2  -s -o test-malloca test-malloca.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-math.o -MD -MP -MF .deps/test-math.Tpo -c -o test-math.o test-math.c
+mv -f .deps/test-math.Tpo .deps/test-math.Po
+gcc -std=gnu99  -g -O2  -s -o test-math test-math.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-mbrtowc.o -MD -MP -MF .deps/test-mbrtowc.Tpo -c -o test-mbrtowc.o test-mbrtowc.c
+mv -f .deps/test-mbrtowc.Tpo .deps/test-mbrtowc.Po
+gcc -std=gnu99  -g -O2  -s -o test-mbrtowc test-mbrtowc.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-mbrtowc-w32.o -MD -MP -MF .deps/test-mbrtowc-w32.Tpo -c -o test-mbrtowc-w32.o test-mbrtowc-w32.c
+mv -f .deps/test-mbrtowc-w32.Tpo .deps/test-mbrtowc-w32.Po
+gcc -std=gnu99  -g -O2  -s -o test-mbrtowc-w32 test-mbrtowc-w32.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-mbsinit.o -MD -MP -MF .deps/test-mbsinit.Tpo -c -o test-mbsinit.o test-mbsinit.c
+mv -f .deps/test-mbsinit.Tpo .deps/test-mbsinit.Po
+gcc -std=gnu99  -g -O2  -s -o test-mbsinit test-mbsinit.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-memchr.o -MD -MP -MF .deps/test-memchr.Tpo -c -o test-memchr.o test-memchr.c
+mv -f .deps/test-memchr.Tpo .deps/test-memchr.Po
+gcc -std=gnu99  -g -O2  -s -o test-memchr test-memchr.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-memchr2.o -MD -MP -MF .deps/test-memchr2.Tpo -c -o test-memchr2.o test-memchr2.c
+mv -f .deps/test-memchr2.Tpo .deps/test-memchr2.Po
+gcc -std=gnu99  -g -O2  -s -o test-memchr2 test-memchr2.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-nl_langinfo.o -MD -MP -MF .deps/test-nl_langinfo.Tpo -c -o test-nl_langinfo.o test-nl_langinfo.c
+mv -f .deps/test-nl_langinfo.Tpo .deps/test-nl_langinfo.Po
+gcc -std=gnu99  -g -O2  -s -o test-nl_langinfo test-nl_langinfo.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-open.o -MD -MP -MF .deps/test-open.Tpo -c -o test-open.o test-open.c
+mv -f .deps/test-open.Tpo .deps/test-open.Po
+gcc -std=gnu99  -g -O2  -s -o test-open test-open.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-pipe2.o -MD -MP -MF .deps/test-pipe2.Tpo -c -o test-pipe2.o test-pipe2.c
+mv -f .deps/test-pipe2.Tpo .deps/test-pipe2.Po
+gcc -std=gnu99  -g -O2  -s -o test-pipe2 test-pipe2.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-posix_spawn1.o -MD -MP -MF .deps/test-posix_spawn1.Tpo -c -o test-posix_spawn1.o test-posix_spawn1.c
+mv -f .deps/test-posix_spawn1.Tpo .deps/test-posix_spawn1.Po
+gcc -std=gnu99  -g -O2  -s -o test-posix_spawn1 test-posix_spawn1.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-posix_spawn2.o -MD -MP -MF .deps/test-posix_spawn2.Tpo -c -o test-posix_spawn2.o test-posix_spawn2.c
+mv -f .deps/test-posix_spawn2.Tpo .deps/test-posix_spawn2.Po
+gcc -std=gnu99  -g -O2  -s -o test-posix_spawn2 test-posix_spawn2.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-printf-frexp.o -MD -MP -MF .deps/test-printf-frexp.Tpo -c -o test-printf-frexp.o test-printf-frexp.c
+mv -f .deps/test-printf-frexp.Tpo .deps/test-printf-frexp.Po
+gcc -std=gnu99  -g -O2  -s -o test-printf-frexp test-printf-frexp.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-printf-frexpl.o -MD -MP -MF .deps/test-printf-frexpl.Tpo -c -o test-printf-frexpl.o test-printf-frexpl.c
+mv -f .deps/test-printf-frexpl.Tpo .deps/test-printf-frexpl.Po
+gcc -std=gnu99  -g -O2  -s -o test-printf-frexpl test-printf-frexpl.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-quotearg-simple.o -MD -MP -MF .deps/test-quotearg-simple.Tpo -c -o test-quotearg-simple.o test-quotearg-simple.c
+mv -f .deps/test-quotearg-simple.Tpo .deps/test-quotearg-simple.Po
+gcc -std=gnu99  -g -O2  -s -o test-quotearg-simple test-quotearg-simple.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-rawmemchr.o -MD -MP -MF .deps/test-rawmemchr.Tpo -c -o test-rawmemchr.o test-rawmemchr.c
+mv -f .deps/test-rawmemchr.Tpo .deps/test-rawmemchr.Po
+gcc -std=gnu99  -g -O2  -s -o test-rawmemchr test-rawmemchr.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-readlink.o -MD -MP -MF .deps/test-readlink.Tpo -c -o test-readlink.o test-readlink.c
+mv -f .deps/test-readlink.Tpo .deps/test-readlink.Po
+gcc -std=gnu99  -g -O2  -s -o test-readlink test-readlink.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-rename.o -MD -MP -MF .deps/test-rename.Tpo -c -o test-rename.o test-rename.c
+mv -f .deps/test-rename.Tpo .deps/test-rename.Po
+gcc -std=gnu99  -g -O2  -s -o test-rename test-rename.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-rmdir.o -MD -MP -MF .deps/test-rmdir.Tpo -c -o test-rmdir.o test-rmdir.c
+mv -f .deps/test-rmdir.Tpo .deps/test-rmdir.Po
+gcc -std=gnu99  -g -O2  -s -o test-rmdir test-rmdir.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-sched.o -MD -MP -MF .deps/test-sched.Tpo -c -o test-sched.o test-sched.c
+mv -f .deps/test-sched.Tpo .deps/test-sched.Po
+gcc -std=gnu99  -g -O2  -s -o test-sched test-sched.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-setenv.o -MD -MP -MF .deps/test-setenv.Tpo -c -o test-setenv.o test-setenv.c
+mv -f .deps/test-setenv.Tpo .deps/test-setenv.Po
+gcc -std=gnu99  -g -O2  -s -o test-setenv test-setenv.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-setlocale1.o -MD -MP -MF .deps/test-setlocale1.Tpo -c -o test-setlocale1.o test-setlocale1.c
+mv -f .deps/test-setlocale1.Tpo .deps/test-setlocale1.Po
+gcc -std=gnu99  -g -O2  -s -o test-setlocale1 test-setlocale1.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-setlocale2.o -MD -MP -MF .deps/test-setlocale2.Tpo -c -o test-setlocale2.o test-setlocale2.c
+mv -f .deps/test-setlocale2.Tpo .deps/test-setlocale2.Po
+gcc -std=gnu99  -g -O2  -s -o test-setlocale2 test-setlocale2.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-sigaction.o -MD -MP -MF .deps/test-sigaction.Tpo -c -o test-sigaction.o test-sigaction.c
+mv -f .deps/test-sigaction.Tpo .deps/test-sigaction.Po
+gcc -std=gnu99  -g -O2  -s -o test-sigaction test-sigaction.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-signal.o -MD -MP -MF .deps/test-signal.Tpo -c -o test-signal.o test-signal.c
+mv -f .deps/test-signal.Tpo .deps/test-signal.Po
+gcc -std=gnu99  -g -O2  -s -o test-signal test-signal.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-signbit.o -MD -MP -MF .deps/test-signbit.Tpo -c -o test-signbit.o test-signbit.c
+mv -f .deps/test-signbit.Tpo .deps/test-signbit.Po
+gcc -std=gnu99  -g -O2  -s -o test-signbit test-signbit.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-snprintf.o -MD -MP -MF .deps/test-snprintf.Tpo -c -o test-snprintf.o test-snprintf.c
+mv -f .deps/test-snprintf.Tpo .deps/test-snprintf.Po
+gcc -std=gnu99  -g -O2  -s -o test-snprintf test-snprintf.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-spawn-pipe.o -MD -MP -MF .deps/test-spawn-pipe.Tpo -c -o test-spawn-pipe.o test-spawn-pipe.c
+mv -f .deps/test-spawn-pipe.Tpo .deps/test-spawn-pipe.Po
+gcc -std=gnu99  -g -O2  -s -o test-spawn-pipe test-spawn-pipe.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-spawn.o -MD -MP -MF .deps/test-spawn.Tpo -c -o test-spawn.o test-spawn.c
+mv -f .deps/test-spawn.Tpo .deps/test-spawn.Po
+gcc -std=gnu99  -g -O2  -s -o test-spawn test-spawn.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-stat.o -MD -MP -MF .deps/test-stat.Tpo -c -o test-stat.o test-stat.c
+mv -f .deps/test-stat.Tpo .deps/test-stat.Po
+gcc -std=gnu99  -g -O2  -s -o test-stat test-stat.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-stdbool.o -MD -MP -MF .deps/test-stdbool.Tpo -c -o test-stdbool.o test-stdbool.c
+mv -f .deps/test-stdbool.Tpo .deps/test-stdbool.Po
+gcc -std=gnu99  -g -O2  -s -o test-stdbool test-stdbool.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-stddef.o -MD -MP -MF .deps/test-stddef.Tpo -c -o test-stddef.o test-stddef.c
+mv -f .deps/test-stddef.Tpo .deps/test-stddef.Po
+gcc -std=gnu99  -g -O2  -s -o test-stddef test-stddef.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-stdint.o -MD -MP -MF .deps/test-stdint.Tpo -c -o test-stdint.o test-stdint.c
+mv -f .deps/test-stdint.Tpo .deps/test-stdint.Po
+gcc -std=gnu99  -g -O2  -s -o test-stdint test-stdint.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-stdio.o -MD -MP -MF .deps/test-stdio.Tpo -c -o test-stdio.o test-stdio.c
+mv -f .deps/test-stdio.Tpo .deps/test-stdio.Po
+gcc -std=gnu99  -g -O2  -s -o test-stdio test-stdio.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-stdlib.o -MD -MP -MF .deps/test-stdlib.Tpo -c -o test-stdlib.o test-stdlib.c
+mv -f .deps/test-stdlib.Tpo .deps/test-stdlib.Po
+gcc -std=gnu99  -g -O2  -s -o test-stdlib test-stdlib.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-strchrnul.o -MD -MP -MF .deps/test-strchrnul.Tpo -c -o test-strchrnul.o test-strchrnul.c
+mv -f .deps/test-strchrnul.Tpo .deps/test-strchrnul.Po
+gcc -std=gnu99  -g -O2  -s -o test-strchrnul test-strchrnul.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-strerror.o -MD -MP -MF .deps/test-strerror.Tpo -c -o test-strerror.o test-strerror.c
+mv -f .deps/test-strerror.Tpo .deps/test-strerror.Po
+gcc -std=gnu99  -g -O2  -s -o test-strerror test-strerror.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-string.o -MD -MP -MF .deps/test-string.Tpo -c -o test-string.o test-string.c
+mv -f .deps/test-string.Tpo .deps/test-string.Po
+gcc -std=gnu99  -g -O2  -s -o test-string test-string.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-strnlen.o -MD -MP -MF .deps/test-strnlen.Tpo -c -o test-strnlen.o test-strnlen.c
+mv -f .deps/test-strnlen.Tpo .deps/test-strnlen.Po
+gcc -std=gnu99  -g -O2  -s -o test-strnlen test-strnlen.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-strsignal.o -MD -MP -MF .deps/test-strsignal.Tpo -c -o test-strsignal.o test-strsignal.c
+mv -f .deps/test-strsignal.Tpo .deps/test-strsignal.Po
+gcc -std=gnu99  -g -O2  -s -o test-strsignal test-strsignal.o libtests.a ../lib/libm4.a libtests.a    
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-strstr.o -MD -MP -MF .deps/test-strstr.Tpo -c -o test-strstr.o test-strstr.c
+mv -f .deps/test-strstr.Tpo .deps/test-strstr.Po
+gcc -std=gnu99  -g -O2  -s -o test-strstr test-strstr.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-strtod.o -MD -MP -MF .deps/test-strtod.Tpo -c -o test-strtod.o test-strtod.c
+mv -f .deps/test-strtod.Tpo .deps/test-strtod.Po
+gcc -std=gnu99  -g -O2  -s -o test-strtod test-strtod.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-symlink.o -MD -MP -MF .deps/test-symlink.Tpo -c -o test-symlink.o test-symlink.c
+mv -f .deps/test-symlink.Tpo .deps/test-symlink.Po
+gcc -std=gnu99  -g -O2  -s -o test-symlink test-symlink.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-sys_stat.o -MD -MP -MF .deps/test-sys_stat.Tpo -c -o test-sys_stat.o test-sys_stat.c
+mv -f .deps/test-sys_stat.Tpo .deps/test-sys_stat.Po
+gcc -std=gnu99  -g -O2  -s -o test-sys_stat test-sys_stat.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-sys_time.o -MD -MP -MF .deps/test-sys_time.Tpo -c -o test-sys_time.o test-sys_time.c
+mv -f .deps/test-sys_time.Tpo .deps/test-sys_time.Po
+gcc -std=gnu99  -g -O2  -s -o test-sys_time test-sys_time.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-sys_wait.o -MD -MP -MF .deps/test-sys_wait.Tpo -c -o test-sys_wait.o test-sys_wait.c
+mv -f .deps/test-sys_wait.Tpo .deps/test-sys_wait.Po
+gcc -std=gnu99  -g -O2  -s -o test-sys_wait test-sys_wait.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-time.o -MD -MP -MF .deps/test-time.Tpo -c -o test-time.o test-time.c
+mv -f .deps/test-time.Tpo .deps/test-time.Po
+gcc -std=gnu99  -g -O2  -s -o test-time test-time.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-dup-safer.o -MD -MP -MF .deps/test-dup-safer.Tpo -c -o test-dup-safer.o test-dup-safer.c
+mv -f .deps/test-dup-safer.Tpo .deps/test-dup-safer.Po
+gcc -std=gnu99  -g -O2  -s -o test-dup-safer test-dup-safer.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-unistd.o -MD -MP -MF .deps/test-unistd.Tpo -c -o test-unistd.o test-unistd.c
+mv -f .deps/test-unistd.Tpo .deps/test-unistd.Po
+gcc -std=gnu99  -g -O2  -s -o test-unistd test-unistd.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-unsetenv.o -MD -MP -MF .deps/test-unsetenv.Tpo -c -o test-unsetenv.o test-unsetenv.c
+mv -f .deps/test-unsetenv.Tpo .deps/test-unsetenv.Po
+gcc -std=gnu99  -g -O2  -s -o test-unsetenv test-unsetenv.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-vasnprintf.o -MD -MP -MF .deps/test-vasnprintf.Tpo -c -o test-vasnprintf.o test-vasnprintf.c
+mv -f .deps/test-vasnprintf.Tpo .deps/test-vasnprintf.Po
+gcc -std=gnu99  -g -O2  -s -o test-vasnprintf test-vasnprintf.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-vasprintf-posix.o -MD -MP -MF .deps/test-vasprintf-posix.Tpo -c -o test-vasprintf-posix.o test-vasprintf-posix.c
+mv -f .deps/test-vasprintf-posix.Tpo .deps/test-vasprintf-posix.Po
+gcc -std=gnu99  -g -O2  -s -o test-vasprintf-posix test-vasprintf-posix.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-vasprintf.o -MD -MP -MF .deps/test-vasprintf.Tpo -c -o test-vasprintf.o test-vasprintf.c
+mv -f .deps/test-vasprintf.Tpo .deps/test-vasprintf.Po
+gcc -std=gnu99  -g -O2  -s -o test-vasprintf test-vasprintf.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-verify.o -MD -MP -MF .deps/test-verify.Tpo -c -o test-verify.o test-verify.c
+mv -f .deps/test-verify.Tpo .deps/test-verify.Po
+gcc -std=gnu99  -g -O2  -s -o test-verify test-verify.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-version-etc.o -MD -MP -MF .deps/test-version-etc.Tpo -c -o test-version-etc.o test-version-etc.c
+mv -f .deps/test-version-etc.Tpo .deps/test-version-etc.Po
+gcc -std=gnu99  -g -O2  -s -o test-version-etc test-version-etc.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-wchar.o -MD -MP -MF .deps/test-wchar.Tpo -c -o test-wchar.o test-wchar.c
+mv -f .deps/test-wchar.Tpo .deps/test-wchar.Po
+gcc -std=gnu99  -g -O2  -s -o test-wchar test-wchar.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-wcrtomb.o -MD -MP -MF .deps/test-wcrtomb.Tpo -c -o test-wcrtomb.o test-wcrtomb.c
+mv -f .deps/test-wcrtomb.Tpo .deps/test-wcrtomb.Po
+gcc -std=gnu99  -g -O2  -s -o test-wcrtomb test-wcrtomb.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-wcrtomb-w32.o -MD -MP -MF .deps/test-wcrtomb-w32.Tpo -c -o test-wcrtomb-w32.o test-wcrtomb-w32.c
+mv -f .deps/test-wcrtomb-w32.Tpo .deps/test-wcrtomb-w32.Po
+gcc -std=gnu99  -g -O2  -s -o test-wcrtomb-w32 test-wcrtomb-w32.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-wctype-h.o -MD -MP -MF .deps/test-wctype-h.Tpo -c -o test-wctype-h.o test-wctype-h.c
+mv -f .deps/test-wctype-h.Tpo .deps/test-wctype-h.Po
+gcc -std=gnu99  -g -O2  -s -o test-wctype-h test-wctype-h.o libtests.a ../lib/libm4.a libtests.a  
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-xalloc-die.o -MD -MP -MF .deps/test-xalloc-die.Tpo -c -o test-xalloc-die.o test-xalloc-die.c
+mv -f .deps/test-xalloc-die.Tpo .deps/test-xalloc-die.Po
+gcc -std=gnu99  -g -O2  -s -o test-xalloc-die test-xalloc-die.o libtests.a ../lib/libm4.a libtests.a   
+gcc -std=gnu99  -I. -I../lib  -DIN_M4_GNULIB_TESTS=1 -I. -I. -I.. -I./.. -I../lib -I./../lib   -g -O2 -MT test-xvasprintf.o -MD -MP -MF .deps/test-xvasprintf.Tpo -c -o test-xvasprintf.o test-xvasprintf.c
+mv -f .deps/test-xvasprintf.Tpo .deps/test-xvasprintf.Po
+gcc -std=gnu99  -g -O2  -s -o test-xvasprintf test-xvasprintf.o libtests.a ../lib/libm4.a libtests.a   
+make[5]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make  check-TESTS
+make[5]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[6]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+PASS: test-alloca-opt
+PASS: test-array_list
+PASS: test-array_oset
+PASS: test-avltree_oset
+PASS: test-binary-io.sh
+PASS: test-btowc1.sh
+PASS: test-btowc2.sh
+PASS: test-c-ctype
+PASS: test-c-stack.sh
+SKIP: test-c-stack2.sh
+PASS: test-c-strcase.sh
+PASS: test-canonicalize-lgpl
+PASS: test-cloexec
+PASS: test-closein.sh
+PASS: test-dirname
+PASS: test-dup2
+PASS: test-environ
+PASS: test-errno
+PASS: test-fcntl-h
+PASS: test-fcntl
+PASS: test-fflush
+PASS: test-fflush2.sh
+PASS: test-filenamecat
+PASS: test-fopen-safer
+PASS: test-fopen
+PASS: test-fpending.sh
+PASS: test-fpurge
+PASS: test-freadahead.sh
+PASS: test-freading
+PASS: test-frexp-nolibm
+PASS: test-frexpl-nolibm
+PASS: test-fseeko.sh
+PASS: test-fseeko2.sh
+PASS: test-ftell.sh
+PASS: test-ftell2.sh
+PASS: test-ftell3
+PASS: test-ftello.sh
+PASS: test-ftello2.sh
+PASS: test-ftello3
+PASS: test-getdtablesize
+PASS: test-getopt
+PASS: test-gettimeofday
+PASS: test-ignore-value
+PASS: test-isnand-nolibm
+PASS: test-isnanf-nolibm
+PASS: test-isnanl-nolibm
+PASS: test-langinfo
+PASS: test-link
+PASS: test-linkedhash_list
+PASS: test-locale
+PASS: test-localename
+PASS: test-lseek.sh
+PASS: test-lstat
+PASS: test-malloc-gnu
+PASS: test-malloca
+PASS: test-math
+PASS: test-mbrtowc1.sh
+PASS: test-mbrtowc2.sh
+PASS: test-mbrtowc3.sh
+PASS: test-mbrtowc4.sh
+SKIP: test-mbrtowc-w32-1.sh
+SKIP: test-mbrtowc-w32-2.sh
+SKIP: test-mbrtowc-w32-3.sh
+SKIP: test-mbrtowc-w32-4.sh
+SKIP: test-mbrtowc-w32-5.sh
+PASS: test-mbsinit.sh
+PASS: test-memchr
+PASS: test-memchr2
+PASS: test-nl_langinfo.sh
+PASS: test-open
+PASS: test-pipe2
+PASS: test-posix_spawn1
+PASS: test-posix_spawn2
+PASS: test-printf-frexp
+PASS: test-printf-frexpl
+PASS: test-quotearg-simple
+PASS: test-rawmemchr
+PASS: test-readlink
+PASS: test-rename
+PASS: test-rmdir
+PASS: test-sched
+PASS: test-setenv
+PASS: test-setlocale1.sh
+PASS: test-setlocale2.sh
+PASS: test-sigaction
+PASS: test-signal
+PASS: test-signbit
+PASS: test-snprintf
+PASS: test-spawn-pipe.sh
+PASS: test-spawn
+PASS: test-stat
+PASS: test-stdbool
+PASS: test-stddef
+PASS: test-stdint
+PASS: test-stdio
+PASS: test-stdlib
+PASS: test-strchrnul
+PASS: test-strerror
+PASS: test-string
+PASS: test-strnlen
+PASS: test-strsignal
+PASS: test-strstr
+PASS: test-strtod
+PASS: test-symlink
+PASS: test-sys_stat
+PASS: test-sys_time
+PASS: test-sys_wait
+PASS: test-time
+PASS: test-dup-safer
+PASS: test-unistd
+PASS: test-unsetenv
+PASS: test-update-copyright.sh
+PASS: test-vasnprintf
+PASS: test-vasprintf-posix
+PASS: test-vasprintf
+PASS: test-vc-list-files-git.sh
+SKIP: test-vc-list-files-cvs.sh
+PASS: test-verify
+PASS: test-verify.sh
+PASS: test-version-etc.sh
+PASS: test-wchar
+PASS: test-wcrtomb.sh
+SKIP: test-wcrtomb-w32-1.sh
+SKIP: test-wcrtomb-w32-2.sh
+SKIP: test-wcrtomb-w32-3.sh
+SKIP: test-wcrtomb-w32-4.sh
+SKIP: test-wcrtomb-w32-5.sh
+PASS: test-wctype-h
+PASS: test-xalloc-die.sh
+PASS: test-xvasprintf
+=======================
+All 118 tests passed
+(12 tests were not run)
+=======================
+make[6]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[5]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.84034
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/m4-root
++ /bin/mkdir -p /var/tmp/m4-root
++ cd m4-1.4.16
++ make DESTDIR=/var/tmp/m4-root install
+make  install-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16'
+Making install in .
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16'
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16'
+Making install in examples
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/examples'
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/examples'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/examples'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/examples'
+Making install in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+make  install-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+if test yes = no; then \
+  case 'linux-gnu' in \
+    darwin[56]*) \
+      need_charset_alias=true ;; \
+    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
+      need_charset_alias=false ;; \
+    *) \
+      need_charset_alias=true ;; \
+  esac ; \
+else \
+  need_charset_alias=false ; \
+fi ; \
+if $need_charset_alias; then \
+  /bin/sh /usr/src/rpm/BUILD/m4-1.4.16/build-aux/install-sh -d /var/tmp/m4-root/usr/lib ; \
+fi ; \
+if test -f /var/tmp/m4-root/usr/lib/charset.alias; then \
+  sed -f ref-add.sed /var/tmp/m4-root/usr/lib/charset.alias > /var/tmp/m4-root/usr/lib/charset.tmp ; \
+  /usr/bin/install -c -m 644 /var/tmp/m4-root/usr/lib/charset.tmp /var/tmp/m4-root/usr/lib/charset.alias ; \
+  rm -f /var/tmp/m4-root/usr/lib/charset.tmp ; \
+else \
+  if $need_charset_alias; then \
+    sed -f ref-add.sed charset.alias > /var/tmp/m4-root/usr/lib/charset.tmp ; \
+    /usr/bin/install -c -m 644 /var/tmp/m4-root/usr/lib/charset.tmp /var/tmp/m4-root/usr/lib/charset.alias ; \
+    rm -f /var/tmp/m4-root/usr/lib/charset.tmp ; \
+  fi ; \
+fi
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/lib'
+Making install in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/src'
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/src'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/m4-root/usr/bin"
+  /usr/bin/install -c m4 '/var/tmp/m4-root/usr/bin'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/src'
+Making install in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/doc'
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/doc'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/info" || /bin/mkdir -p "/var/tmp/m4-root/usr/share/info"
+ /usr/bin/install -c -m 644 ./m4.info ./m4.info-1 ./m4.info-2 '/var/tmp/m4-root/usr/share/info'
+ install-info --info-dir='/var/tmp/m4-root/usr/share/info' '/var/tmp/m4-root/usr/share/info/m4.info'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/m4-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 ./m4.1 '/var/tmp/m4-root/usr/share/man/man1'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/doc'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/doc'
+Making install in checks
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/checks'
+make[2]: Nothing to be done for `install'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/checks'
+Making install in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make  install-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+Making install in .
+make[4]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[5]: Entering directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[5]: Nothing to be done for `install-exec-am'.
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/m4-1.4.16'
++ rm -f /var/tmp/m4-root/usr/share/info/dir
++ /usr/lib/rpm/compress_man.sh /var/tmp/m4-root
++ exit 0
+Processing files: m4-1.4.16-1.x86_64
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/m4-root
+Wrote: /usr/src/rpm/SRPMS/m4-1.4.16-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/m4-1.4.16-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.84034
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd m4-1.4.16
++ /bin/rm -rf /var/tmp/m4-root

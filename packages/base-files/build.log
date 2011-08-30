@@ -1,0 +1,36 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.25962
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf base-files-0.1
++ /bin/mkdir -p base-files-0.1
++ cd base-files-0.1
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.25962
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/base-files-root
++ /bin/mkdir -p /var/tmp/base-files-root
++ cd base-files-0.1
++ install -dv /var/tmp/base-files-root/etc /var/tmp/base-files-root/dev /var/tmp/base-files-root/var
+install: creating directory `/var/tmp/base-files-root/etc'
+install: creating directory `/var/tmp/base-files-root/dev'
+install: creating directory `/var/tmp/base-files-root/var'
++ install -dv /var/tmp/base-files-root/var/run /var/tmp/base-files-root/var/log
+install: creating directory `/var/tmp/base-files-root/var/run'
+install: creating directory `/var/tmp/base-files-root/var/log'
++ install -dv /var/tmp/base-files-root/dev /var/tmp/base-files-root/etc /var/tmp/base-files-root/var
++ install -dv /var/tmp/base-files-root/var/log /var/tmp/base-files-root/var/run
++ install -m0644 /usr/src/rpm/SOURCES/passwd /var/tmp/base-files-root/etc/passwd
++ install -m0644 /usr/src/rpm/SOURCES/group /var/tmp/base-files-root/etc/group
++ install -m0644 /usr/src/rpm/SOURCES/inputrc /var/tmp/base-files-root/etc/inputrc
++ exit 0
+Processing files: base-files-0.1-3.noarch
+Provides: config(base-files) = 0:0.1-3
+Requires(interp): /bin/sh /bin/sh
+Requires(pre): /bin/sh /bin/true executable(mv)
+Requires(post): /bin/mknod /bin/sh /bin/true executable(cat) executable(mv)
+Requires: /bin/mknod /bin/true /bin/true executable(cat) executable(mv) executable(mv)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/base-files-root
+Wrote: /usr/src/rpm/SRPMS/base-files-0.1-3.src.rpm
+Wrote: /usr/src/rpm/RPMS/noarch/base-files-0.1-3.noarch.rpm

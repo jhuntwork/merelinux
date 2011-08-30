@@ -1,0 +1,79 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.54317
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf lsb-bootscripts-4.1.2
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/lsb-bootscripts-4.1.2.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd lsb-bootscripts-4.1.2
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.54317
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/lsb-bootscripts-root
++ /bin/mkdir -p /var/tmp/lsb-bootscripts-root
++ cd lsb-bootscripts-4.1.2
++ make DESTDIR=/var/tmp/lsb-bootscripts-root minimal
+if test ! -d //var/tmp/lsb-bootscripts-root; then install -d -m 755 /var/tmp/lsb-bootscripts-root/etc; fi
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/rc0.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/rc1.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/rc2.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/rc3.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/rc4.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/rc5.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/rc6.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/rcS.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/init.d
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/default
+install -d -m 755 /var/tmp/lsb-bootscripts-root/etc/network
+install -d -m 755 /var/tmp/lsb-bootscripts-root/sbin
+install -d -m 755 /var/tmp/lsb-bootscripts-root/lib/lsb
+install -d -m 755 /var/tmp/lsb-bootscripts-root/lib/network-services
+install -m 754 etc/init.d/checkfs               /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/cleanfs               /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/halt                  /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/console               /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/localnet              /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/modules               /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/mountfs               /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/mountvirtfs           /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/network               /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/random                /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/rc                    /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/reboot                /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/sendsignals           /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/setclock              /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/sysklogd              /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/swap                  /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/sysctl                /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/udev                  /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 754 etc/init.d/udev_retry            /var/tmp/lsb-bootscripts-root/etc/init.d/
+install -m 644 lib/lsb/init-functions       /var/tmp/lsb-bootscripts-root/lib/lsb/
+install -m 754 etc/rc.local /var/tmp/lsb-bootscripts-root/etc/
+if [ ! -f /var/tmp/lsb-bootscripts-root/etc/default/createfiles ]; then install -m 644 etc/default/createfiles /var/tmp/lsb-bootscripts-root/etc/default/; fi
+if [ ! -f /var/tmp/lsb-bootscripts-root/etc/default/modules     ]; then install -m 644 etc/default/modules     /var/tmp/lsb-bootscripts-root/etc/default/; fi
+if [ ! -f /var/tmp/lsb-bootscripts-root/etc/default/rc          ]; then install -m 644 etc/default/rc          /var/tmp/lsb-bootscripts-root/etc/default/; fi
+if [ ! -f /var/tmp/lsb-bootscripts-root/etc/default/rc.site     ]; then install -m 644 etc/default/rc.site     /var/tmp/lsb-bootscripts-root/etc/default/; fi
+install                   -m 644 etc/inittab /var/tmp/lsb-bootscripts-root/etc/
+install                   -m 754 sbin/ifup    /var/tmp/lsb-bootscripts-root/sbin/
+install                   -m 754 sbin/ifdown  /var/tmp/lsb-bootscripts-root/sbin/
+install                   -m 754 sbin/service /var/tmp/lsb-bootscripts-root/sbin/
+install                   -m 754 lib/network-services/dhclient          /var/tmp/lsb-bootscripts-root/lib/network-services/
+install                   -m 754 lib/network-services/ipv4-static       /var/tmp/lsb-bootscripts-root/lib/network-services/
+install                   -m 754 lib/network-services/ipv4-static-route /var/tmp/lsb-bootscripts-root/lib/network-services/
++ exit 0
+Processing files: lsb-bootscripts-4.1.2-2.noarch
+Provides: config(lsb-bootscripts) = 0:4.1.2-2
+Requires(interp): /bin/sh
+Requires(post): /bin/sh /usr/sbin/install_initd
+Requires: /bin/sh /usr/sbin/install_initd
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/lsb-bootscripts-root
+Wrote: /usr/src/rpm/SRPMS/lsb-bootscripts-4.1.2-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/noarch/lsb-bootscripts-4.1.2-2.noarch.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.54317
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd lsb-bootscripts-4.1.2
++ /bin/rm -rf /var/tmp/lsb-bootscripts-root

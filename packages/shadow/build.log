@@ -1,0 +1,2 @@
+error: Failed build dependencies:
+	Linux-PAM-devel is needed by shadow-4.1.4.3-1.src

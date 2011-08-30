@@ -1,0 +1,422 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.25379
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf file-5.06
++ /bin/gzip -dc /usr/src/rpm/SOURCES/file-5.06.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd file-5.06
++ sed -i s/misc/file/ configure
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.25379
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd file-5.06
++ ./configure --prefix=/usr --libdir=/usr/lib64
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for builtin ELF support... yes
+checking for ELF core file support... yes
+checking for file formats in man section 5... no
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking whether gcc and cc understand -c and -o together... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether ln -s works... yes
+checking for a sed that does not truncate output... /bin/sed
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for fgrep... /bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking the maximum length of command line arguments... 1572864
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for ar... ar
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for ANSI C header files... (cached) yes
+checking whether sys/types.h defines makedev... yes
+checking for sys/wait.h that is POSIX.1 compatible... yes
+checking for stdint.h... (cached) yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking for stdint.h... (cached) yes
+checking for inttypes.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking utime.h usability... yes
+checking utime.h presence... yes
+checking for utime.h... yes
+checking wchar.h usability... yes
+checking wchar.h presence... yes
+checking for wchar.h... yes
+checking wctype.h usability... yes
+checking wctype.h presence... yes
+checking for wctype.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking err.h usability... yes
+checking err.h presence... yes
+checking for err.h... yes
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking for sys/stat.h... (cached) yes
+checking for sys/types.h... (cached) yes
+checking sys/utime.h usability... no
+checking sys/utime.h presence... no
+checking for sys/utime.h... no
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking zlib.h usability... yes
+checking zlib.h presence... yes
+checking for zlib.h... yes
+checking for an ANSI C-conforming const... yes
+checking for off_t... yes
+checking for size_t... yes
+checking for struct stat.st_rdev... yes
+checking whether struct tm is in sys/time.h or time.h... time.h
+checking for struct tm.tm_gmtoff... no
+checking for struct tm.tm_zone... no
+checking for tm_zone in struct tm... yes
+checking whether tzname is declared... yes
+checking for tzname... yes
+checking for tm_isdst in struct tm... yes
+checking whether daylight is declared... yes
+checking for daylight... yes
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking for mbstate_t... yes
+checking for struct option in getopt... yes
+checking for uint8_t... yes
+checking for uint16_t... yes
+checking for uint32_t... yes
+checking for int32_t... yes
+checking for uint64_t... yes
+checking for int64_t... yes
+checking for long long... yes
+checking size of long long... 8
+checking for gcc compiler warnings... yes
+checking for mmap... yes
+checking for strerror... yes
+checking for strndup... yes
+checking for strtoul... yes
+checking for mbrtowc... yes
+checking for mkstemp... yes
+checking for utimes... yes
+checking for utime... yes
+checking for wcwidth... yes
+checking for strtof... yes
+checking for fork... yes
+checking for getopt_long... yes
+checking for asprintf... yes
+checking for vasprintf... yes
+checking for strlcpy... no
+checking for strlcat... no
+checking for getline... yes
+checking for gzopen in -lz... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating magic/Makefile
+config.status: creating tests/Makefile
+config.status: creating doc/Makefile
+config.status: creating python/Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
++ make -j24
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/src'
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT magic.lo -MD -MP -MF .deps/magic.Tpo -c -o magic.lo magic.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT apprentice.lo -MD -MP -MF .deps/apprentice.Tpo -c -o apprentice.lo apprentice.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT softmagic.lo -MD -MP -MF .deps/softmagic.Tpo -c -o softmagic.lo softmagic.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT ascmagic.lo -MD -MP -MF .deps/ascmagic.Tpo -c -o ascmagic.lo ascmagic.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT encoding.lo -MD -MP -MF .deps/encoding.Tpo -c -o encoding.lo encoding.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT compress.lo -MD -MP -MF .deps/compress.Tpo -c -o compress.lo compress.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT is_tar.lo -MD -MP -MF .deps/is_tar.Tpo -c -o is_tar.lo is_tar.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT readelf.lo -MD -MP -MF .deps/readelf.Tpo -c -o readelf.lo readelf.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT print.lo -MD -MP -MF .deps/print.Tpo -c -o print.lo print.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT fsmagic.lo -MD -MP -MF .deps/fsmagic.Tpo -c -o fsmagic.lo fsmagic.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT funcs.lo -MD -MP -MF .deps/funcs.Tpo -c -o funcs.lo funcs.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT apptype.lo -MD -MP -MF .deps/apptype.Tpo -c -o apptype.lo apptype.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT cdf.lo -MD -MP -MF .deps/cdf.Tpo -c -o cdf.lo cdf.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT cdf_time.lo -MD -MP -MF .deps/cdf_time.Tpo -c -o cdf_time.lo cdf_time.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT readcdf.lo -MD -MP -MF .deps/readcdf.Tpo -c -o readcdf.lo readcdf.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT strlcpy.lo -MD -MP -MF .deps/strlcpy.Tpo -c -o strlcpy.lo strlcpy.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT strlcat.lo -MD -MP -MF .deps/strlcat.Tpo -c -o strlcat.lo strlcat.c
+gcc -DHAVE_CONFIG_H -I. -I..  -DMAGIC='"/usr/share/file/magic"'  -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT file.o -MD -MP -MF .deps/file.Tpo -c -o file.o file.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT apprentice.lo -MD -MP -MF .deps/apprentice.Tpo -c apprentice.c  -fPIC -DPIC -o .libs/apprentice.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT softmagic.lo -MD -MP -MF .deps/softmagic.Tpo -c softmagic.c  -fPIC -DPIC -o .libs/softmagic.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT magic.lo -MD -MP -MF .deps/magic.Tpo -c magic.c  -fPIC -DPIC -o .libs/magic.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT readelf.lo -MD -MP -MF .deps/readelf.Tpo -c readelf.c  -fPIC -DPIC -o .libs/readelf.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT compress.lo -MD -MP -MF .deps/compress.Tpo -c compress.c  -fPIC -DPIC -o .libs/compress.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT ascmagic.lo -MD -MP -MF .deps/ascmagic.Tpo -c ascmagic.c  -fPIC -DPIC -o .libs/ascmagic.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT is_tar.lo -MD -MP -MF .deps/is_tar.Tpo -c is_tar.c  -fPIC -DPIC -o .libs/is_tar.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT print.lo -MD -MP -MF .deps/print.Tpo -c print.c  -fPIC -DPIC -o .libs/print.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT cdf.lo -MD -MP -MF .deps/cdf.Tpo -c cdf.c  -fPIC -DPIC -o .libs/cdf.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT encoding.lo -MD -MP -MF .deps/encoding.Tpo -c encoding.c  -fPIC -DPIC -o .libs/encoding.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT funcs.lo -MD -MP -MF .deps/funcs.Tpo -c funcs.c  -fPIC -DPIC -o .libs/funcs.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT strlcat.lo -MD -MP -MF .deps/strlcat.Tpo -c strlcat.c  -fPIC -DPIC -o .libs/strlcat.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT apptype.lo -MD -MP -MF .deps/apptype.Tpo -c apptype.c  -fPIC -DPIC -o .libs/apptype.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT readcdf.lo -MD -MP -MF .deps/readcdf.Tpo -c readcdf.c  -fPIC -DPIC -o .libs/readcdf.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT fsmagic.lo -MD -MP -MF .deps/fsmagic.Tpo -c fsmagic.c  -fPIC -DPIC -o .libs/fsmagic.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT cdf_time.lo -MD -MP -MF .deps/cdf_time.Tpo -c cdf_time.c  -fPIC -DPIC -o .libs/cdf_time.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT strlcpy.lo -MD -MP -MF .deps/strlcpy.Tpo -c strlcpy.c  -fPIC -DPIC -o .libs/strlcpy.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT strlcat.lo -MD -MP -MF .deps/strlcat.Tpo -c strlcat.c -o strlcat.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT apptype.lo -MD -MP -MF .deps/apptype.Tpo -c apptype.c -o apptype.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT is_tar.lo -MD -MP -MF .deps/is_tar.Tpo -c is_tar.c -o is_tar.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT strlcpy.lo -MD -MP -MF .deps/strlcpy.Tpo -c strlcpy.c -o strlcpy.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT cdf_time.lo -MD -MP -MF .deps/cdf_time.Tpo -c cdf_time.c -o cdf_time.o >/dev/null 2>&1
+mv -f .deps/strlcat.Tpo .deps/strlcat.Plo
+mv -f .deps/apptype.Tpo .deps/apptype.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT magic.lo -MD -MP -MF .deps/magic.Tpo -c magic.c -o magic.o >/dev/null 2>&1
+mv -f .deps/is_tar.Tpo .deps/is_tar.Plo
+mv -f .deps/strlcpy.Tpo .deps/strlcpy.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT print.lo -MD -MP -MF .deps/print.Tpo -c print.c -o print.o >/dev/null 2>&1
+mv -f .deps/cdf_time.Tpo .deps/cdf_time.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT fsmagic.lo -MD -MP -MF .deps/fsmagic.Tpo -c fsmagic.c -o fsmagic.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT readcdf.lo -MD -MP -MF .deps/readcdf.Tpo -c readcdf.c -o readcdf.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT encoding.lo -MD -MP -MF .deps/encoding.Tpo -c encoding.c -o encoding.o >/dev/null 2>&1
+mv -f .deps/file.Tpo .deps/file.Po
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT compress.lo -MD -MP -MF .deps/compress.Tpo -c compress.c -o compress.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT ascmagic.lo -MD -MP -MF .deps/ascmagic.Tpo -c ascmagic.c -o ascmagic.o >/dev/null 2>&1
+mv -f .deps/print.Tpo .deps/print.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT funcs.lo -MD -MP -MF .deps/funcs.Tpo -c funcs.c -o funcs.o >/dev/null 2>&1
+mv -f .deps/magic.Tpo .deps/magic.Plo
+mv -f .deps/fsmagic.Tpo .deps/fsmagic.Plo
+mv -f .deps/readcdf.Tpo .deps/readcdf.Plo
+mv -f .deps/encoding.Tpo .deps/encoding.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT cdf.lo -MD -MP -MF .deps/cdf.Tpo -c cdf.c -o cdf.o >/dev/null 2>&1
+mv -f .deps/compress.Tpo .deps/compress.Plo
+mv -f .deps/funcs.Tpo .deps/funcs.Plo
+mv -f .deps/ascmagic.Tpo .deps/ascmagic.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT readelf.lo -MD -MP -MF .deps/readelf.Tpo -c readelf.c -o readelf.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT softmagic.lo -MD -MP -MF .deps/softmagic.Tpo -c softmagic.c -o softmagic.o >/dev/null 2>&1
+mv -f .deps/cdf.Tpo .deps/cdf.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DMAGIC=\"/usr/share/file/magic\" -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -MT apprentice.lo -MD -MP -MF .deps/apprentice.Tpo -c apprentice.c -o apprentice.o >/dev/null 2>&1
+mv -f .deps/softmagic.Tpo .deps/softmagic.Plo
+mv -f .deps/readelf.Tpo .deps/readelf.Plo
+mv -f .deps/apprentice.Tpo .deps/apprentice.Plo
+/bin/sh ../libtool --tag=CC   --mode=link gcc -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -no-undefined -version-info 1:0:0  -o libmagic.la -rpath /usr/lib64 magic.lo apprentice.lo softmagic.lo ascmagic.lo encoding.lo compress.lo is_tar.lo readelf.lo print.lo fsmagic.lo funcs.lo apptype.lo cdf.lo cdf_time.lo readcdf.lo strlcpy.lo strlcat.lo  -lz 
+libtool: link: gcc -shared  .libs/magic.o .libs/apprentice.o .libs/softmagic.o .libs/ascmagic.o .libs/encoding.o .libs/compress.o .libs/is_tar.o .libs/readelf.o .libs/print.o .libs/fsmagic.o .libs/funcs.o .libs/apptype.o .libs/cdf.o .libs/cdf_time.o .libs/readcdf.o .libs/strlcpy.o .libs/strlcat.o   -lz    -Wl,-soname -Wl,libmagic.so.1 -o .libs/libmagic.so.1.0.0
+libtool: link: (cd ".libs" && rm -f "libmagic.so.1" && ln -s "libmagic.so.1.0.0" "libmagic.so.1")
+libtool: link: (cd ".libs" && rm -f "libmagic.so" && ln -s "libmagic.so.1.0.0" "libmagic.so")
+libtool: link: ar cru .libs/libmagic.a  magic.o apprentice.o softmagic.o ascmagic.o encoding.o compress.o is_tar.o readelf.o print.o fsmagic.o funcs.o apptype.o cdf.o cdf_time.o readcdf.o strlcpy.o strlcat.o
+libtool: link: ranlib .libs/libmagic.a
+libtool: link: ( cd ".libs" && rm -f "libmagic.la" && ln -s "../libmagic.la" "libmagic.la" )
+/bin/sh ../libtool --tag=CC   --mode=link gcc -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith        -Wmissing-declarations -Wredundant-decls -Wnested-externs        -Wsign-compare -Wreturn-type -Wswitch -Wshadow        -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2   -o file file.o libmagic.la -lz 
+libtool: link: gcc -Wall -Wstrict-prototypes -Wmissing-prototypes -Wpointer-arith -Wmissing-declarations -Wredundant-decls -Wnested-externs -Wsign-compare -Wreturn-type -Wswitch -Wshadow -Wcast-qual -Wwrite-strings -Wextra -Wunused-parameter -g -O2 -o .libs/file file.o  ./.libs/libmagic.so -lz -Wl,-rpath -Wl,/usr/lib64
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/src'
+Making all in magic
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/magic'
+../src/file -C -m magic
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/magic'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/tests'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/tests'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/doc'
+sed -e s@__CSECTION__@1@g \
+    -e s@__FSECTION__@4@g \
+    -e s@__VERSION__@5.06@g \
+    -e s@__MAGIC__@/usr/share/file/magic@g ./file.man > file.1
+sed -e s@__CSECTION__@1@g \
+    -e s@__FSECTION__@4@g \
+    -e s@__VERSION__@5.06@g \
+    -e s@__MAGIC__@/usr/share/file/magic@g ./magic.man > magic.4
+sed -e s@__CSECTION__@1@g \
+    -e s@__FSECTION__@4@g \
+    -e s@__VERSION__@5.06@g \
+    -e s@__MAGIC__@/usr/share/file/magic@g ./libmagic.man > libmagic.3
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/doc'
+Making all in python
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/python'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/python'
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06'
++ make check
+Making check in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/src'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/src'
+Making check in magic
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/magic'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/magic'
+Making check in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/tests'
+make  test
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/tests'
+gcc -DHAVE_CONFIG_H -I. -I..  -I../src   -g -O2 -MT test-test.o -MD -MP -MF .deps/test-test.Tpo -c -o test-test.o `test -f 'test.c' || echo './'`test.c
+mv -f .deps/test-test.Tpo .deps/test-test.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc  -g -O2   -o test test-test.o ../src/libmagic.la -lz 
+libtool: link: gcc -g -O2 -o .libs/test test-test.o  ../src/.libs/libmagic.so -lz -Wl,-rpath -Wl,/usr/lib64
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/tests'
+make  check-local
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/tests'
+MAGIC=../magic/magic ./test
+for i in ../tests/*.testfile; do MAGIC=../tests/${i%%.testfile}.magic ../tests/test ../tests/$i ../tests/${i%%.testfile}.result; done
+../tests/../tests/gedcom.testfile: GEDCOM genealogy data version 5.5
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/tests'
+Making check in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/doc'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/doc'
+Making check in python
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/python'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/python'
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.41677
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/file-root
++ /bin/mkdir -p /var/tmp/file-root
++ cd file-5.06
++ make DESTDIR=/var/tmp/file-root install
+Making install in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/src'
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/src'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/file-root/usr/lib64"
+ /bin/sh ../libtool --mode=install /usr/bin/install -c  'libmagic.la' '/var/tmp/file-root/usr/lib64/libmagic.la'
+libtool: install: /usr/bin/install -c .libs/libmagic.so.1.0.0 /var/tmp/file-root/usr/lib64/libmagic.so.1.0.0
+libtool: install: (cd /var/tmp/file-root/usr/lib64 && { ln -s -f libmagic.so.1.0.0 libmagic.so.1 || { rm -f libmagic.so.1 && ln -s libmagic.so.1.0.0 libmagic.so.1; }; })
+libtool: install: (cd /var/tmp/file-root/usr/lib64 && { ln -s -f libmagic.so.1.0.0 libmagic.so || { rm -f libmagic.so && ln -s libmagic.so.1.0.0 libmagic.so; }; })
+libtool: install: /usr/bin/install -c .libs/libmagic.lai /var/tmp/file-root/usr/lib64/libmagic.la
+libtool: install: /usr/bin/install -c .libs/libmagic.a /var/tmp/file-root/usr/lib64/libmagic.a
+libtool: install: chmod 644 /var/tmp/file-root/usr/lib64/libmagic.a
+libtool: install: ranlib /var/tmp/file-root/usr/lib64/libmagic.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib64'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/file-root/usr/bin"
+  /bin/sh ../libtool --mode=install /usr/bin/install -c 'file' '/var/tmp/file-root/usr/bin/file'
+libtool: install: warning: `libmagic.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/file /var/tmp/file-root/usr/bin/file
+test -z "/usr/include" || /bin/mkdir -p "/var/tmp/file-root/usr/include"
+ /usr/bin/install -c -m 644 'magic.h' '/var/tmp/file-root/usr/include/magic.h'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/src'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/src'
+Making install in magic
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/magic'
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/magic'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/file" || /bin/mkdir -p "/var/tmp/file-root/usr/share/file"
+ /usr/bin/install -c -m 644 'magic.mgc' '/var/tmp/file-root/usr/share/file/magic.mgc'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/magic'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/magic'
+Making install in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/tests'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/tests'
+Making install in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/doc'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/file-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 './file.1' '/var/tmp/file-root/usr/share/man/man1/file.1'
+test -z "/usr/share/man/man3" || /bin/mkdir -p "/var/tmp/file-root/usr/share/man/man3"
+ /usr/bin/install -c -m 644 './libmagic.3' '/var/tmp/file-root/usr/share/man/man3/libmagic.3'
+test -z "/usr/share/man/man4" || /bin/mkdir -p "/var/tmp/file-root/usr/share/man/man4"
+ /usr/bin/install -c -m 644 './magic.4' '/var/tmp/file-root/usr/share/man/man4/magic.4'
+test -z "/usr/share/man/man5" || /bin/mkdir -p "/var/tmp/file-root/usr/share/man/man5"
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/doc'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/doc'
+Making install in python
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06/python'
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06/python'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/python'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06/python'
+make[1]: Entering directory `/usr/src/rpm/BUILD/file-5.06'
+make[2]: Entering directory `/usr/src/rpm/BUILD/file-5.06'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/file-5.06'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/file-5.06'
++ /usr/lib/rpm/compress_man.sh /var/tmp/file-root
++ exit 0
+Processing files: file-5.06-1.x86_64
+Provides: libmagic.so.1()(64bit)
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libmagic.so.1()(64bit) libz.so.1()(64bit)
+Processing files: file-devel-5.06-1.x86_64
+Provides: libtool(/usr/lib64/libmagic.la)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/file-root
+Wrote: /usr/src/rpm/SRPMS/file-5.06-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/file-5.06-1.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/file-devel-5.06-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.24506
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd file-5.06
++ /bin/rm -rf /var/tmp/file-root

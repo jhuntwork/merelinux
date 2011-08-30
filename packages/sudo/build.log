@@ -1,15 +1,15 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.8556
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.72682
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
 + rm -rf sudo-1.8.1p1
-+ /bin/gzip -dc /usr/src/rpm/SOURCES/sudo-1.8.1p1.tar.gz
 + /bin/tar -xf -
++ /bin/gzip -dc /usr/src/rpm/SOURCES/sudo-1.8.1p1.tar.gz
 + STATUS=0
 + '[' 0 -ne 0 ']'
 + cd sudo-1.8.1p1
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.8556
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.72682
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd sudo-1.8.1p1
@@ -317,11 +317,11 @@ make[1]: Entering directory `/usr/src/rpm/BUILD/sudo-1.8.1p1/common'
 libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./fileops.c  -fPIC -DPIC -o .libs/fileops.o
 libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./alloc.c  -fPIC -DPIC -o .libs/alloc.o
 libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./atobool.c  -fPIC -DPIC -o .libs/atobool.o
-libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./lbuf.c  -fPIC -DPIC -o .libs/lbuf.o
-libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./list.c  -fPIC -DPIC -o .libs/list.o
 libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./fmt_string.c  -fPIC -DPIC -o .libs/fmt_string.o
-libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./zero_bytes.c  -fPIC -DPIC -o .libs/zero_bytes.o
+libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./lbuf.c  -fPIC -DPIC -o .libs/lbuf.o
 libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./term.c  -fPIC -DPIC -o .libs/term.o
+libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./list.c  -fPIC -DPIC -o .libs/list.o
+libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./zero_bytes.c  -fPIC -DPIC -o .libs/zero_bytes.o
 libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./zero_bytes.c -o zero_bytes.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./fmt_string.c -o fmt_string.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I. -I.. -I../include -g -O2 -D_GNU_SOURCE ./atobool.c -o atobool.o >/dev/null 2>&1
@@ -360,68 +360,68 @@ make[1]: Entering directory `/usr/src/rpm/BUILD/sudo-1.8.1p1/plugins/sudoers'
 /bin/sh ../../libtool --mode=compile gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./pwutil.c
 /bin/sh ../../libtool --mode=compile gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./timestr.c
 /bin/sh ../../libtool --mode=compile gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./toke.c
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./boottime.c  -fPIC -DPIC -o .libs/boottime.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./auth/sudo_auth.c  -fPIC -DPIC -o .libs/sudo_auth.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./auth/pam.c  -fPIC -DPIC -o .libs/pam.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./env.c  -fPIC -DPIC -o .libs/env.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./check.c  -fPIC -DPIC -o .libs/check.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./goodpath.c  -fPIC -DPIC -o .libs/goodpath.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./interfaces.c  -fPIC -DPIC -o .libs/interfaces.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./auth/sudo_auth.c  -fPIC -DPIC -o .libs/sudo_auth.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./group_plugin.c  -fPIC -DPIC -o .libs/group_plugin.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./boottime.c  -fPIC -DPIC -o .libs/boottime.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./find_path.c  -fPIC -DPIC -o .libs/find_path.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./logging.c  -fPIC -DPIC -o .libs/logging.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./goodpath.c  -fPIC -DPIC -o .libs/goodpath.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./set_perms.c  -fPIC -DPIC -o .libs/set_perms.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./sudoers.c  -fPIC -DPIC -o .libs/sudoers.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./check.c  -fPIC -DPIC -o .libs/check.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./interfaces.c  -fPIC -DPIC -o .libs/interfaces.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./sudo_nss.c  -fPIC -DPIC -o .libs/sudo_nss.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./iolog_path.c  -fPIC -DPIC -o .libs/iolog_path.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./audit.c  -fPIC -DPIC -o .libs/audit.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./gram.c  -fPIC -DPIC -o .libs/gram.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./defaults.c  -fPIC -DPIC -o .libs/defaults.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./match.c  -fPIC -DPIC -o .libs/match.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./gram.c  -fPIC -DPIC -o .libs/gram.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./timestr.c  -fPIC -DPIC -o .libs/timestr.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./iolog.c  -fPIC -DPIC -o .libs/iolog.o
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./plugin_error.c  -fPIC -DPIC -o .libs/plugin_error.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./alias.c  -fPIC -DPIC -o .libs/alias.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./iolog.c  -fPIC -DPIC -o .libs/iolog.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./pwutil.c  -fPIC -DPIC -o .libs/pwutil.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./audit.c  -fPIC -DPIC -o .libs/audit.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./iolog_path.c  -fPIC -DPIC -o .libs/iolog_path.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./timestr.c  -fPIC -DPIC -o .libs/timestr.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./toke.c  -fPIC -DPIC -o .libs/toke.o
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./plugin_error.c  -fPIC -DPIC -o .libs/plugin_error.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./audit.c -o audit.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./timestr.c -o timestr.o >/dev/null 2>&1
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./goodpath.c -o goodpath.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./boottime.c -o boottime.o >/dev/null 2>&1
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./interfaces.c -o interfaces.o >/dev/null 2>&1
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./goodpath.c -o goodpath.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./plugin_error.c -o plugin_error.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./find_path.c -o find_path.o >/dev/null 2>&1
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./interfaces.c -o interfaces.o >/dev/null 2>&1
 /bin/sh ../../libtool --mode=compile gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./toke_util.c
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./alias.c -o alias.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./sudo_nss.c -o sudo_nss.o >/dev/null 2>&1
 /bin/sh ../../libtool --mode=compile gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./redblack.c
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./group_plugin.c -o group_plugin.o >/dev/null 2>&1
-gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./visudo.c
-gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 goodpath.c
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./toke_util.c  -fPIC -DPIC -o .libs/toke_util.o
+gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./visudo.c
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./auth/pam.c -o pam.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./redblack.c  -fPIC -DPIC -o .libs/redblack.o
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./iolog_path.c -o iolog_path.o >/dev/null 2>&1
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./auth/pam.c -o pam.o >/dev/null 2>&1
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./auth/sudo_auth.c -o sudo_auth.o >/dev/null 2>&1
 gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ../../src/error.c
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./auth/sudo_auth.c -o sudo_auth.o >/dev/null 2>&1
 gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./getdate.c
 gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./sudoreplay.c
-gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 interfaces.c
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./set_perms.c -o set_perms.o >/dev/null 2>&1
 gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./testsudoers.c
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./set_perms.c -o set_perms.o >/dev/null 2>&1
 gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./tsgetgrpw.c
 gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 group_plugin.c
 gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ../../src/net_ifs.c
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./pwutil.c -o pwutil.o >/dev/null 2>&1
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./toke_util.c -o toke_util.o >/dev/null 2>&1
 /bin/sh ../../libtool --mode=compile gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./parse.c
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./check.c -o check.o >/dev/null 2>&1
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./defaults.c -o defaults.o >/dev/null 2>&1
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./redblack.c -o redblack.o >/dev/null 2>&1
-gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 find_path.c
-libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./iolog.c -o iolog.o >/dev/null 2>&1
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./toke_util.c -o toke_util.o >/dev/null 2>&1
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./pwutil.c -o pwutil.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./parse.c  -fPIC -DPIC -o .libs/parse.o
+gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 goodpath.c
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./redblack.c -o redblack.o >/dev/null 2>&1
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./check.c -o check.o >/dev/null 2>&1
+gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 find_path.c
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./defaults.c -o defaults.o >/dev/null 2>&1
+libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./iolog.c -o iolog.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./env.c -o env.o >/dev/null 2>&1
+gcc -c -I../../include -I../.. -I. -I../..  -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 interfaces.c
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./logging.c -o logging.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./match.c -o match.o >/dev/null 2>&1
 libtool: compile:  gcc -c -I../../include -I../.. -I. -I../.. -g -O2 -D_GNU_SOURCE -D_PATH_SUDOERS=\"/etc/sudoers\" -DSUDOERS_UID=0 -DSUDOERS_GID=0 -DSUDOERS_MODE=0440 ./gram.c -o gram.o >/dev/null 2>&1
@@ -477,10 +477,10 @@ make[1]: Entering directory `/usr/src/rpm/BUILD/sudo-1.8.1p1/doc'
 (cd .. && /bin/sh config.status --file=doc/sudoers.ldap.man)
 (cd .. && /bin/sh config.status --file=doc/sudoreplay.man)
 (cd .. && /bin/sh config.status --file=doc/sudo_plugin.man)
-config.status: creating doc/sudo.man
-config.status: creating doc/visudo.man
 config.status: creating doc/sudoers.man
 config.status: creating doc/sudoers.ldap.man
+config.status: creating doc/visudo.man
+config.status: creating doc/sudo.man
 config.status: creating doc/sudoreplay.man
 config.status: creating doc/sudo_plugin.man
 make[1]: Leaving directory `/usr/src/rpm/BUILD/sudo-1.8.1p1/doc'
@@ -507,7 +507,7 @@ libtool: link:  gcc -shared  .libs/sample_group.o .libs/getgrent.o  -Wl,--whole-
 libtool: link: ( cd ".libs" && rm -f "sample_group.la" && ln -s "../sample_group.la" "sample_group.la" )
 make[1]: Leaving directory `/usr/src/rpm/BUILD/sudo-1.8.1p1/plugins/sample_group'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.30931
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.76677
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/sudo-root
@@ -627,7 +627,7 @@ Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.11)(64bit) libc.so.6(GLIBC_2.2.5)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/sudo-root
 Wrote: /usr/src/rpm/SRPMS/sudo-1.8.1p1-1.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/sudo-1.8.1p1-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.62109
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.21990
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd sudo-1.8.1p1
