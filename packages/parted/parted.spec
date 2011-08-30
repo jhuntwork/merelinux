@@ -1,18 +1,18 @@
 Summary: GNU Parted
 Name: parted
-Version: 2.3
+Version: 3.0
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/parted
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc, util-linux-ng, readline, ncurses
-Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = 30ceb6df7e8681891e865e2fe5a7903d
-BuildRequires: util-linux-ng-devel, readline-devel, ncurses-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 6e8f7a2b042ba6222e8ea245a05136669fccec7f
+BuildRequires: util-linux-devel
+BuildRequires: readline-devel
+BuildRequires: ncurses-devel
 
 %description
 GNU Parted manipulates partition tables. This is useful for creating
@@ -33,15 +33,17 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
+export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --disable-device-mapper
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
+%{compress_man}
 %find_lang %{name}
 
 %post
@@ -55,13 +57,13 @@ rm -rf %{buildroot}
 
 %files -f %{name}.lang
 %defattr(-,root,root)
-/usr/%{_lib}/libparted.so.0
-/usr/%{_lib}/libparted.so.0.0.1
+/usr/%{_lib}/libparted.so.1
+/usr/%{_lib}/libparted.so.1.0.0
 /usr/sbin/parted
 /usr/sbin/partprobe
 /usr/share/info/parted.info
-/usr/share/man/man8/parted.8
-/usr/share/man/man8/partprobe.8
+/usr/share/man/man8/parted.8.bz2
+/usr/share/man/man8/partprobe.8.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -72,5 +74,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/libparted.pc
 
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0-1
+- Upgrade to 3.0
+
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.3-1
 - Initial version
