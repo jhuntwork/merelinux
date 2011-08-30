@@ -1,17 +1,17 @@
 Summary: OpenSSH
 Name: openssh
 Version: 5.8p2
-Release: 1
+Release: 2
 Group: Services
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.openssl.com
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/415/lightcube_os/trunk/packages/%{name}/sshd.init
+Source1: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/427/lightcube_os/trunk/packages/%{name}/sshd.init
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 64798328d310e4f06c9f01228107520adbc8b3e5
-BuildRequires: digest(sha1:%{SOURCE1}) = 7896901876368bb3b57e9950454f3d91d827c726
+BuildRequires: digest(sha1:%{SOURCE1}) = 197058b8edd71a82d3e5cc708326a8b601189c5b
 BuildRequires: openssl-devel
 BuildRequires: zlib-devel
 
@@ -94,7 +94,10 @@ rm -rf %{buildroot}
 /var/lib/sshd
 
 %changelog
-* Sun Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.8p2-1
+* Mon Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.8p2-2
+- Improve sshd.init script, shutdown behavior
+
+* Sun Aug 28 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.8p2-1
 - Upgrade to 5.8p2
 - Kill asctive ssh connections on shutdown or reboot
 
