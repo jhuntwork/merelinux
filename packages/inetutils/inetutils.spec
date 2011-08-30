@@ -1,16 +1,15 @@
 Summary: GNU Inetutils
 Name: inetutils
-# Using a dev snapshot due to fixes in ifconfig - looking forward to 1.9
-Version: 20100910
-Release: 1
+Version: 1.8
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/inetutils
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 2a1ca7f1e72ec26861e44efd8cf5f2111616684e
+BuildRequires: digest(sha1:%{SOURCE0}) = 598445859b511f73681e4d74a41d65cd6ae0f83e
 BuildRequires: readline-devel
 BuildRequires: ncurses-devel
 
@@ -22,27 +21,27 @@ telnet, ping, hostname and traceroute
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
 export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libexecdir=/usr/sbin \
   --localstatedir=/var \
+  --disable-ifconfig \
   --disable-logger \
   --disable-syslogd \
   --disable-whois \
   --disable-servers
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 mkdir -v %{buildroot}/{,s}bin
 mv -v %{buildroot}/usr/bin/ping %{buildroot}/bin
+mv -v %{buildroot}/usr/bin/ping6 %{buildroot}/bin
 mv -v %{buildroot}/usr/bin/hostname %{buildroot}/bin
-mv -v %{buildroot}/usr/bin/ifconfig %{buildroot}/bin
 mv -v %{buildroot}/usr/bin/traceroute %{buildroot}/sbin
 rm -f %{buildroot}/usr/share/info/dir
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -56,11 +55,10 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /bin/hostname
-/bin/ifconfig
 /bin/ping
+/bin/ping6
 /sbin/traceroute
 /usr/bin/ftp
-/usr/bin/ping6
 /usr/bin/rcp
 /usr/bin/rexec
 /usr/bin/rlogin
@@ -71,7 +69,6 @@ rm -rf %{buildroot}
 /usr/share/info/inetutils.info
 /usr/share/man/man1/ftp.1.bz2
 /usr/share/man/man1/hostname.1.bz2
-/usr/share/man/man1/ifconfig.1.bz2
 /usr/share/man/man1/rcp.1.bz2
 /usr/share/man/man1/rexec.1.bz2
 /usr/share/man/man1/rlogin.1.bz2
@@ -84,6 +81,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/ping6.1.bz2
 
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8-2
+- Revert to 1.8. ifconfig provided in net-tools
+
 * Fri Sep 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 20100910-1
 - Upgrade to 20100910
 

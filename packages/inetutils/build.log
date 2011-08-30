@@ -1,0 +1,1463 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.36276
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf inetutils-1.8
++ /bin/gzip -dc /usr/src/rpm/SOURCES/inetutils-1.8.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd inetutils-1.8
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.36276
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd inetutils-1.8
++ export LDFLAGS=-s
++ LDFLAGS=-s
++ ./configure --prefix=/usr --libexecdir=/usr/sbin --localstatedir=/var --disable-ifconfig --disable-logger --disable-syslogd --disable-whois --disable-servers
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for style of include used by make... GNU
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking dependency style of gcc... gcc3
+checking dependency style of gcc... (cached) gcc3
+checking for library containing strerror... none required
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking dependency style of gcc... (cached) gcc3
+checking dependency style of gcc... (cached) gcc3
+checking for ranlib... ranlib
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking for gcc option to accept ISO C99... -std=gnu99
+checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+configure: autobuild project... GNU inetutils
+configure: autobuild revision... 1.8
+configure: autobuild hostname... build1.lightcube.us
+configure: autobuild timestamp... 20110830T100959Z
+checking for ar... ar
+checking for rm... /bin/rm
+checking how to run the C preprocessor... gcc -E
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether make sets $(MAKE)... (cached) yes
+checking for ranlib... (cached) ranlib
+checking for bison... bison -y
+checking whether ln -s works... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for inline... inline
+checking for C/C++ restrict keyword... __restrict
+checking whether getenv is declared... yes
+checking whether clearerr_unlocked is declared... yes
+checking whether feof_unlocked is declared... yes
+checking whether ferror_unlocked is declared... yes
+checking whether fflush_unlocked is declared... yes
+checking whether fgets_unlocked is declared... yes
+checking whether fputc_unlocked is declared... yes
+checking whether fputs_unlocked is declared... yes
+checking whether fread_unlocked is declared... yes
+checking whether fwrite_unlocked is declared... yes
+checking whether getc_unlocked is declared... yes
+checking whether getchar_unlocked is declared... yes
+checking whether putc_unlocked is declared... yes
+checking whether putchar_unlocked is declared... yes
+checking for flockfile... yes
+checking for funlockfile... yes
+checking for btowc... yes
+checking for chown... yes
+checking for fchown... yes
+checking for dup2... yes
+checking for fchdir... yes
+checking for fcntl... yes
+checking for fdopendir... yes
+checking for isblank... yes
+checking for iswctype... yes
+checking for mbsrtowcs... yes
+checking for mempcpy... yes
+checking for wmemchr... yes
+checking for wmemcpy... yes
+checking for wmempcpy... yes
+checking for getdelim... yes
+checking for getdtablesize... yes
+checking for getlogin_r... yes
+checking for __fsetlocking... yes
+checking for tcgetattr... yes
+checking for tcsetattr... yes
+checking for getusershell... yes
+checking for fstatat... yes
+checking for getpwnam_r... yes
+checking for lchmod... no
+checking for login_tty... no
+checking for lstat... yes
+checking for mbsinit... yes
+checking for mbrtowc... yes
+checking for mprotect... yes
+checking for memchr... yes
+checking for nl_langinfo... yes
+checking for utmpname... yes
+checking for utmpxname... yes
+checking for wcscoll... yes
+checking for setenv... yes
+checking for sleep... yes
+checking for strdup... yes
+checking for strndup... yes
+checking for pipe... yes
+checking for vasnprintf... no
+checking for wcrtomb... yes
+checking for iswcntrl... yes
+checking for iswblank... yes
+checking features.h usability... yes
+checking features.h presence... yes
+checking for features.h... yes
+checking linewrap.h usability... no
+checking linewrap.h presence... no
+checking for linewrap.h... no
+checking arpa/inet.h usability... yes
+checking arpa/inet.h presence... yes
+checking for arpa/inet.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking dirent.h usability... yes
+checking dirent.h presence... yes
+checking for dirent.h... yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking float.h usability... yes
+checking float.h presence... yes
+checking for float.h... yes
+checking wctype.h usability... yes
+checking wctype.h presence... yes
+checking for wctype.h... yes
+checking pty.h usability... yes
+checking pty.h presence... yes
+checking for pty.h... yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking stdio_ext.h usability... yes
+checking stdio_ext.h presence... yes
+checking for stdio_ext.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking sys/cdefs.h usability... yes
+checking sys/cdefs.h presence... yes
+checking for sys/cdefs.h... yes
+checking for unistd.h... (cached) yes
+checking langinfo.h usability... yes
+checking langinfo.h presence... yes
+checking for langinfo.h... yes
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/filio.h usability... no
+checking sys/filio.h presence... no
+checking for sys/filio.h... no
+checking utmp.h usability... yes
+checking utmp.h presence... yes
+checking for utmp.h... yes
+checking utmpx.h usability... yes
+checking utmpx.h presence... yes
+checking for utmpx.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking sys/select.h usability... yes
+checking sys/select.h presence... yes
+checking for sys/select.h... yes
+checking stdarg.h usability... yes
+checking stdarg.h presence... yes
+checking for stdarg.h... yes
+checking stddef.h usability... yes
+checking stddef.h presence... yes
+checking for stddef.h... yes
+checking for stdint.h... (cached) yes
+checking wchar.h usability... yes
+checking wchar.h presence... yes
+checking for wchar.h... yes
+checking stdio.h usability... yes
+checking stdio.h presence... yes
+checking for stdio.h... yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for strings.h... (cached) yes
+checking for sys/stat.h... (cached) yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking sysexits.h usability... yes
+checking sysexits.h presence... yes
+checking for sysexits.h... yes
+checking time.h usability... yes
+checking time.h presence... yes
+checking for time.h... yes
+checking whether the preprocessor supports include_next... yes
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking for nl_langinfo and CODESET... yes
+checking for a traditional french locale... fr_FR
+checking for uid_t in sys/types.h... yes
+checking for unistd.h... (cached) yes
+checking for working chown... yes
+checking whether chown dereferences symlinks... yes
+checking whether chown honors trailing slash... yes
+checking whether chown always updates ctime... yes
+checking whether system is Windows or MSDOS... no
+checking whether // is distinct from /... no
+checking if environ is properly declared... yes
+checking for complete errno.h... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... yes
+checking whether strerror_r returns char *... yes
+checking for mode_t... yes
+checking for promoted mode_t type... mode_t
+checking for working fcntl.h... yes
+checking for st_dm_mode in struct stat... no
+checking whether strmode is declared... no
+checking for mbstate_t... yes
+checking for library containing forkpty... -lutil
+checking whether forkpty is declared without a macro... yes
+checking whether openpty is declared without a macro... yes
+checking for fseeko... yes
+checking whether stdin defaults to large file offsets... yes
+checking whether <sys/socket.h> is self-contained... yes
+checking for shutdown... yes
+checking whether <sys/socket.h> defines the SHUT_* macros... yes
+checking for struct sockaddr_storage... yes
+checking for sa_family_t... yes
+checking whether socket is declared without a macro... no
+checking whether connect is declared without a macro... no
+checking whether accept is declared without a macro... no
+checking whether bind is declared without a macro... no
+checking whether getpeername is declared without a macro... no
+checking whether getsockname is declared without a macro... no
+checking whether getsockopt is declared without a macro... no
+checking whether listen is declared without a macro... no
+checking whether recv is declared without a macro... no
+checking whether send is declared without a macro... no
+checking whether recvfrom is declared without a macro... no
+checking whether sendto is declared without a macro... no
+checking whether setsockopt is declared without a macro... no
+checking whether shutdown is declared without a macro... no
+checking whether accept4 is declared without a macro... no
+checking whether getaddrinfo is declared without a macro... yes
+checking whether freeaddrinfo is declared without a macro... yes
+checking whether gai_strerror is declared without a macro... yes
+checking whether getnameinfo is declared without a macro... yes
+checking for library containing gethostbyname... none required
+checking for gethostbyname... yes
+checking for library containing getservbyname... none required
+checking for getservbyname... yes
+checking for IPv4 sockets... yes
+checking for IPv6 sockets... yes
+checking for library containing inet_ntop... none required
+checking whether inet_ntop is declared... yes
+checking whether getcwd (NULL, 0) allocates memory for result... yes
+checking whether getcwd is declared... yes
+checking whether getdelim is declared... yes
+checking whether getline is declared... yes
+checking whether getlogin is declared... yes
+checking whether getlogin_r is declared... yes
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether optreset is declared... no
+checking whether getopt_clip is declared... no
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... yes
+checking whether getpass is declared... yes
+checking whether flockfile is declared... yes
+checking whether funlockfile is declared... yes
+checking for off_t... yes
+checking whether we are using the GNU C Library 2.1 or newer... yes
+checking whether lstat dereferences a symlink specified with a trailing slash... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for long long int... yes
+checking for a traditional japanese locale... ja_JP
+checking for a transitional chinese locale... zh_CN.GB18030
+checking for a french Unicode locale... fr_FR.UTF-8
+checking for mmap... yes
+checking for MAP_ANONYMOUS... yes
+checking whether memchr works... yes
+checking whether memrchr is declared... yes
+checking whether <limits.h> defines MIN and MAX... no
+checking whether <sys/param.h> defines MIN and MAX... yes
+checking whether unlink honors trailing slashes... yes
+checking whether unlink of a parent directory fails is it should... guessing yes
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking whether <sys/select.h> is self-contained... yes
+checking whether select is declared without a macro... yes
+checking for library containing setsockopt... none needed
+checking whether setenv validates arguments... yes
+checking search.h usability... yes
+checking search.h presence... yes
+checking for search.h... yes
+checking for tsearch... yes
+checking whether snprintf is declared... yes
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for wchar_t... yes
+checking for unsigned long long int... yes
+checking whether strdup is declared... yes
+checking for working strerror function... yes
+checking whether memmem is declared without a macro... yes
+checking whether mempcpy is declared without a macro... yes
+checking whether memrchr is declared without a macro... yes
+checking whether rawmemchr is declared without a macro... yes
+checking whether stpcpy is declared without a macro... yes
+checking whether stpncpy is declared without a macro... yes
+checking whether strchrnul is declared without a macro... yes
+checking whether strdup is declared without a macro... yes
+checking whether strncat is declared without a macro... yes
+checking whether strndup is declared without a macro... yes
+checking whether strnlen is declared without a macro... yes
+checking whether strpbrk is declared without a macro... yes
+checking whether strsep is declared without a macro... yes
+checking whether strcasestr is declared without a macro... yes
+checking whether strtok_r is declared without a macro... yes
+checking whether strsignal is declared without a macro... yes
+checking whether strverscmp is declared without a macro... yes
+checking whether strcasecmp is declared without a macro... yes
+checking whether strncasecmp is declared without a macro... yes
+checking whether strndup is declared... (cached) yes
+checking whether strnlen is declared... (cached) yes
+checking whether stat file-mode macros are broken... no
+checking for struct timeval... yes
+checking whether gettimeofday is declared without a macro... yes
+checking for struct timespec in <time.h>... yes
+checking for wint_t... yes
+checking for size_t... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for intmax_t... yes
+checking whether snprintf returns a byte count as in C99... yes
+checking for snprintf... yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... (cached) yes
+checking for wcrtomb... (cached) yes
+checking whether _snprintf is declared... no
+checking whether vsnprintf is declared... yes
+checking for alloca as a compiler built-in... yes
+checking whether program_invocation_name is declared... yes
+checking whether program_invocation_short_name is declared... yes
+checking whether program_invocation_name is defined... yes
+checking whether program_invocation_short_name is defined... yes
+checking whether inet_ntop is declared without a macro... yes
+checking whether inet_pton is declared without a macro... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking whether btowc(0) is correct... yes
+checking whether btowc(EOF) is correct... yes
+checking whether this system has an arbitrary file name length limit... yes
+checking for d_ino member in directory struct... yes
+checking for d_type member in directory struct... yes
+checking whether alphasort is declared without a macro... yes
+checking whether dirfd is declared without a macro... yes
+checking whether fdopendir is declared without a macro... yes
+checking whether scandir is declared without a macro... yes
+checking for dirfd... yes
+checking whether dirfd is declared... (cached) yes
+checking whether dirfd is a macro... no
+checking whether // is distinct from /... (cached) no
+checking whether dup2 works... yes
+checking for error_at_line... yes
+checking whether fcntl handles F_DUPFD correctly... yes
+checking whether fcntl understands F_DUPFD_CLOEXEC... needs runtime check
+checking whether fcntl is declared without a macro... yes
+checking whether openat is declared without a macro... yes
+checking whether fdopendir is declared... (cached) yes
+checking whether fdopendir works... yes
+checking for working POSIX fnmatch... yes
+checking whether fopen recognizes a trailing slash... yes
+checking whether forkpty is declared... (cached) yes
+checking for const-safe forkpty signature... yes
+configure: checking how to do getaddrinfo, freeaddrinfo and getnameinfo
+checking for library containing getaddrinfo... none required
+checking for getaddrinfo... yes
+checking for gai_strerror (possibly via ws2tcpip.h)... yes
+checking for struct sockaddr.sa_len... no
+checking whether getaddrinfo is declared... (cached) yes
+checking whether freeaddrinfo is declared... (cached) yes
+checking whether gai_strerror is declared... (cached) yes
+checking whether getnameinfo is declared... (cached) yes
+checking for struct addrinfo... yes
+checking whether getcwd handles long file names properly... no, but it is partly working
+checking for getpagesize... yes
+checking whether getcwd aborts when 4k < cwd_length < 16k... no
+checking for working getdelim function... yes
+checking for getdomainname... yes
+checking for gethostname... yes
+checking for HOST_NAME_MAX... yes
+checking for getline... yes
+checking for working getline function... yes
+checking for getpass... yes
+checking whether getusershell is declared... yes
+checking glob.h usability... yes
+checking glob.h presence... yes
+checking for glob.h... yes
+checking for GNU glob interface version 1... yes
+checking whether glob lists broken symlinks... no
+checking for library containing gethostbyname... (cached) none required
+checking for gethostbyname... (cached) yes
+checking for library containing inet_ntop... (cached) none required
+checking whether inet_ntop is declared... (cached) yes
+checking whether the compiler generally respects inline... yes
+checking for ioctl... yes
+checking for ioctl with POSIX signature... no
+checking whether langinfo.h defines CODESET... yes
+checking whether langinfo.h defines ERA... yes
+checking whether nl_langinfo is declared without a macro... yes
+checking for lchown... yes
+checking whether lseek detects pipes... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... (cached) yes
+checking whether mbrtowc handles incomplete characters... yes
+checking whether mbrtowc works as well as mbtowc... yes
+checking whether mbrtowc handles a NULL string argument... yes
+checking whether mbrtowc has a correct return value... yes
+checking whether mbrtowc returns 0 when parsing a NUL character... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mbsrtowcs works... yes
+checking for mempcpy... (cached) yes
+checking for memrchr... yes
+checking whether mkdir handles trailing slash... yes
+checking whether mkdir handles trailing dot... yes
+checking whether getaddrinfo is declared without a macro... (cached) yes
+checking whether freeaddrinfo is declared without a macro... (cached) yes
+checking whether gai_strerror is declared without a macro... (cached) yes
+checking whether getnameinfo is declared without a macro... (cached) yes
+checking whether <netinet/in.h> is self-contained... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for obstacks... yes
+checking whether open recognizes a trailing slash... yes
+checking for fchmodat... yes
+checking for fstatat... (cached) yes
+checking for mkdirat... yes
+checking for openat... yes
+checking for unlinkat... yes
+checking for fchownat... yes
+checking whether fchownat works with AT_SYMLINK_NOFOLLOW... yes
+checking whether openpty is declared... (cached) yes
+checking for const-safe openpty signature... yes
+checking poll.h usability... yes
+checking poll.h presence... yes
+checking for poll.h... yes
+checking for poll... yes
+checking whether program_invocation_name is declared... (cached) yes
+checking whether program_invocation_short_name is declared... (cached) yes
+checking for rawmemchr... yes
+checking for readline...  -l
+checking how to link with libreadline... -lreadline
+checking readline/readline.h usability... yes
+checking readline/readline.h presence... yes
+checking for readline/readline.h... yes
+checking whether getutent is declared... yes
+checking for struct utmpx.ut_user... yes
+checking for struct utmp.ut_user... yes
+checking for struct utmpx.ut_name... yes
+checking for struct utmp.ut_name... yes
+checking for struct utmpx.ut_type... yes
+checking for struct utmp.ut_type... yes
+checking for struct utmpx.ut_pid... yes
+checking for struct utmp.ut_pid... yes
+checking for struct utmpx.ut_id... yes
+checking for struct utmp.ut_id... yes
+checking for struct utmpx.ut_exit... yes
+checking for struct utmp.ut_exit... yes
+checking for struct utmpx.ut_exit.ut_exit... no
+checking for struct utmp.ut_exit.ut_exit... no
+checking for struct utmpx.ut_exit.e_exit... yes
+checking for struct utmp.ut_exit.e_exit... yes
+checking for struct utmpx.ut_exit.ut_termination... no
+checking for struct utmp.ut_exit.ut_termination... no
+checking for struct utmpx.ut_exit.e_termination... yes
+checking for struct utmp.ut_exit.e_termination... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... yes
+checking for working re_compile_pattern... no
+checking libintl.h usability... yes
+checking libintl.h presence... yes
+checking for libintl.h... yes
+checking whether isblank is declared... yes
+checking whether rmdir works... yes
+checking whether select supports a 0 argument... yes
+checking for library containing getservbyname... (cached) none required
+checking for getservbyname... (cached) yes
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking whether sleep is declared... yes
+checking for working sleep... yes
+checking for snprintf... (cached) yes
+checking whether snprintf respects a size of 1... yes
+checking for library containing setsockopt... (cached) none needed
+checking for socklen_t... yes
+checking for ssize_t... yes
+checking whether stat handles trailing slashes on directories... yes
+checking whether stat handles trailing slashes on files... yes
+checking for va_copy... yes
+checking whether NULL can be used in arbitrary expressions... yes
+checking whether stdint.h conforms to C99... yes
+checking whether dprintf is declared without a macro... yes
+checking whether fpurge is declared without a macro... no
+checking whether fseeko is declared without a macro... yes
+checking whether ftello is declared without a macro... yes
+checking whether getdelim is declared without a macro... yes
+checking whether getline is declared without a macro... yes
+checking whether popen is declared without a macro... yes
+checking whether renameat is declared without a macro... yes
+checking whether snprintf is declared without a macro... yes
+checking whether tmpfile is declared without a macro... yes
+checking whether vdprintf is declared without a macro... yes
+checking whether vsnprintf is declared without a macro... yes
+checking for random.h... no
+checking for struct random_data... yes
+checking whether atoll is declared without a macro... yes
+checking whether canonicalize_file_name is declared without a macro... yes
+checking whether getloadavg is declared without a macro... yes
+checking whether getsubopt is declared without a macro... yes
+checking whether grantpt is declared without a macro... yes
+checking whether mkdtemp is declared without a macro... yes
+checking whether mkostemp is declared without a macro... yes
+checking whether mkostemps is declared without a macro... yes
+checking whether mkstemp is declared without a macro... yes
+checking whether mkstemps is declared without a macro... yes
+checking whether ptsname is declared without a macro... yes
+checking whether random_r is declared without a macro... yes
+checking whether initstat_r is declared without a macro... no
+checking whether srandom_r is declared without a macro... yes
+checking whether setstate_r is declared without a macro... yes
+checking whether realpath is declared without a macro... yes
+checking whether rpmatch is declared without a macro... yes
+checking whether setenv is declared without a macro... yes
+checking whether strtod is declared without a macro... yes
+checking whether strtoll is declared without a macro... yes
+checking whether strtoull is declared without a macro... yes
+checking whether unlockpt is declared without a macro... yes
+checking whether unsetenv is declared without a macro... yes
+checking for strcasecmp... yes
+checking for strncasecmp... yes
+checking whether strncasecmp is declared... (cached) yes
+checking for strchrnul... yes
+checking for working strndup... yes
+checking for working strnlen... yes
+checking whether <sys/ioctl.h> declares ioctl... yes
+checking whether ioctl is declared without a macro... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking whether <sys/select.h> is self-contained... (cached) yes
+checking whether select is declared without a macro... (cached) yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking whether <sys/socket.h> is self-contained... (cached) yes
+checking for shutdown... (cached) yes
+checking whether <sys/socket.h> defines the SHUT_* macros... (cached) yes
+checking for struct sockaddr_storage... (cached) yes
+checking for sa_family_t... (cached) yes
+checking whether socket is declared without a macro... (cached) no
+checking whether connect is declared without a macro... (cached) no
+checking whether accept is declared without a macro... (cached) no
+checking whether bind is declared without a macro... (cached) no
+checking whether getpeername is declared without a macro... (cached) no
+checking whether getsockname is declared without a macro... (cached) no
+checking whether getsockopt is declared without a macro... (cached) no
+checking whether listen is declared without a macro... (cached) no
+checking whether recv is declared without a macro... (cached) no
+checking whether send is declared without a macro... (cached) no
+checking whether recvfrom is declared without a macro... (cached) no
+checking whether sendto is declared without a macro... (cached) no
+checking whether setsockopt is declared without a macro... (cached) no
+checking whether shutdown is declared without a macro... (cached) no
+checking whether accept4 is declared without a macro... (cached) no
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for nlink_t... yes
+checking whether fchmodat is declared without a macro... yes
+checking whether fstatat is declared without a macro... yes
+checking whether futimens is declared without a macro... yes
+checking whether lchmod is declared without a macro... yes
+checking whether lstat is declared without a macro... yes
+checking whether mkdirat is declared without a macro... yes
+checking whether mkfifo is declared without a macro... yes
+checking whether mkfifoat is declared without a macro... yes
+checking whether mknod is declared without a macro... yes
+checking whether mknodat is declared without a macro... yes
+checking whether stat is declared without a macro... yes
+checking whether utimensat is declared without a macro... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking whether chown is declared without a macro... yes
+checking whether dup2 is declared without a macro... yes
+checking whether dup3 is declared without a macro... yes
+checking whether environ is declared without a macro... yes
+checking whether euidaccess is declared without a macro... yes
+checking whether faccessat is declared without a macro... yes
+checking whether fchdir is declared without a macro... yes
+checking whether fchownat is declared without a macro... yes
+checking whether fsync is declared without a macro... yes
+checking whether ftruncate is declared without a macro... yes
+checking whether getcwd is declared without a macro... yes
+checking whether getdomainname is declared without a macro... yes
+checking whether getdtablesize is declared without a macro... yes
+checking whether getgroups is declared without a macro... yes
+checking whether gethostname is declared without a macro... yes
+checking whether getlogin is declared without a macro... yes
+checking whether getlogin_r is declared without a macro... yes
+checking whether getpagesize is declared without a macro... yes
+checking whether getusershell is declared without a macro... yes
+checking whether setusershell is declared without a macro... yes
+checking whether endusershell is declared without a macro... yes
+checking whether lchown is declared without a macro... yes
+checking whether link is declared without a macro... yes
+checking whether linkat is declared without a macro... yes
+checking whether lseek is declared without a macro... yes
+checking whether pipe2 is declared without a macro... yes
+checking whether pread is declared without a macro... yes
+checking whether pwrite is declared without a macro... yes
+checking whether readlink is declared without a macro... yes
+checking whether readlinkat is declared without a macro... yes
+checking whether rmdir is declared without a macro... yes
+checking whether sleep is declared without a macro... yes
+checking whether symlink is declared without a macro... yes
+checking whether symlinkat is declared without a macro... yes
+checking whether ttyname_r is declared without a macro... yes
+checking whether unlink is declared without a macro... yes
+checking whether unlinkat is declared without a macro... yes
+checking whether usleep is declared without a macro... yes
+checking whether unlink honors trailing slashes... (cached) yes
+checking whether unlink of a parent directory fails is it should... (cached) guessing yes
+checking for ptrdiff_t... yes
+checking for vasprintf... yes
+checking for vsnprintf... yes
+checking whether snprintf respects a size of 1... (cached) yes
+checking whether btowc is declared without a macro... yes
+checking whether wctob is declared without a macro... yes
+checking whether mbsinit is declared without a macro... yes
+checking whether mbrtowc is declared without a macro... yes
+checking whether mbrlen is declared without a macro... yes
+checking whether mbsrtowcs is declared without a macro... yes
+checking whether mbsnrtowcs is declared without a macro... yes
+checking whether wcrtomb is declared without a macro... yes
+checking whether wcsrtombs is declared without a macro... yes
+checking whether wcsnrtombs is declared without a macro... yes
+checking whether wcwidth is declared without a macro... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether wcrtomb return value is correct... yes
+checking whether iswcntrl works... yes
+checking for stdint.h... (cached) yes
+checking for inet_ntoa in -lnsl... yes
+checking for gethostname in -lresolv... yes
+checking for getpeername in -lsocket... no
+checking for opiegenerator in -lopie... no
+checking for initscr in -lncurses... yes
+checking for ncurses include dir... none
+checking for tgetent in -lcurses... yes
+checking for rl_bind_key in -lreadline... yes
+checking for add_history in -lhistory... yes
+checking for crypt in -lcrypt... yes
+checking for logout in -lutil... yes
+checking for initscr in -lcurses... yes
+checking for AF_INET6... yes
+checking for IPV6_V6ONLY... yes
+checking for struct sockaddr_storage... (cached) yes
+checking for struct sockaddr_in6... yes
+checking for struct addrinfo... (cached) yes
+checking for getnameinfo... yes
+checking for netinet/icmp6.h... yes
+checking for netinet/ip6.h... yes
+checking for struct icmp6_filter... yes
+checking for struct icmp6_hdr... yes
+checking for IPV6_RECVHOPLIMIT... yes
+checking for ICMP6_DST_UNREACH_BEYONDSCOPE... yes
+checking for ANSI C header files... (cached) yes
+checking whether time.h and sys/time.h may both be included... yes
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking for arpa/nameser.h... yes
+checking for des.h... no
+checking for errno.h... (cached) yes
+checking for fcntl.h... (cached) yes
+checking for features.h... (cached) yes
+checking for glob.h... (cached) yes
+checking for krb.h... no
+checking for memory.h... (cached) yes
+checking for malloc.h... yes
+checking for netinet/in_systm.h... yes
+checking for netinet/ip.h... yes
+checking for netinet/ip_icmp.h... yes
+checking for netinet/ip_var.h... no
+checking for readline/readline.h... (cached) yes
+checking for security/pam_appl.h... no
+checking for shadow.h... yes
+checking for stdarg.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for stropts.h... yes
+checking for sys/tty.h... no
+checking for sys/utsname.h... yes
+checking for sys/ptyvar.h... no
+checking for sys/msgbuf.h... no
+checking for sys/filio.h... (cached) no
+checking for sys/ioctl_compat.h... no
+checking for sys/cdefs.h... (cached) yes
+checking for sys/stream.h... no
+checking for sys/mkdev.h... no
+checking for sys/sockio.h... no
+checking for sys/sysmacros.h... yes
+checking for sys/param.h... (cached) yes
+checking for sys/file.h... yes
+checking for sys/proc.h... no
+checking for sys/select.h... (cached) yes
+checking for sys/time.h... (cached) yes
+checking for sys/wait.h... yes
+checking for sys/resource.h... yes
+checking for stropts.h... (cached) yes
+checking for tcpd.h... no
+checking for termio.h... yes
+checking for termios.h... (cached) yes
+checking for utmp.h... (cached) yes
+checking for utmpx.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking for vis.h... no
+checking return type of signal handlers... void
+checking for socklen_t... (cached) yes
+checking for struct osockaddr... yes
+checking for struct if_nameindex... yes
+checking for sig_t... yes
+checking for sigset_t... yes
+checking for sig_atomic_t... yes
+checking for cc_t... yes
+checking for long long... yes
+checking for long double... yes
+checking for struct sockaddr_in.sin_len... no
+checking for struct lastlog... yes
+checking for struct utmp.ut_type... (cached) yes
+checking for struct utmp.ut_pid... (cached) yes
+checking for struct utmp.ut_id... (cached) yes
+checking for struct utmp.ut_user... (cached) yes
+checking for struct utmp.ut_host... yes
+checking for struct utmp.ut_tv... yes
+checking for struct utmp.ut_exit... (cached) yes
+checking for struct utmpx.ut_tv... yes
+checking for struct ifreq.ifr_index... no
+checking for struct ifreq.ifr_netmask... yes
+checking for struct ifreq.ifr_broadaddr... yes
+checking for struct ifreq.ifr_map... yes
+checking for struct sockaddr.sa_len... (cached) no
+checking for struct hostent.h_addr_list... yes
+checking for struct stat.st_blksize... no
+checking for function prototypes... yes
+checking for string.h... (cached) yes
+checking for an ANSI C-conforming const... yes
+checking whether gcc weak references work... yes
+checking whether pragma weak references work... yes
+checking whether closedir returns void... no
+checking for working alloca.h... (cached) yes
+checking for alloca... (cached) yes
+checking for pid_t... yes
+checking vfork.h usability... no
+checking vfork.h presence... no
+checking for vfork.h... no
+checking for fork... yes
+checking for vfork... yes
+checking for working fork... yes
+checking for working vfork... (cached) yes
+checking for working strcoll... yes
+checking for stdlib.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking for getpagesize... (cached) yes
+checking for working mmap... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... (cached) yes
+checking for bcopy... yes
+checking for bcmp... yes
+checking for bzero... yes
+checking for cfsetspeed... yes
+checking for cgetent... no
+checking for dirfd... (cached) yes
+checking for fchdir... (cached) yes
+checking for flock... yes
+checking for fpathconf... yes
+checking for ftruncate... yes
+checking for getcwd... yes
+checking for getmsg... no
+checking for getspnam... yes
+checking for initgroups... yes
+checking for initsetproctitle... no
+checking for killpg... yes
+checking for mkstemp... yes
+checking for ptsname... yes
+checking for setegid... yes
+checking for seteuid... yes
+checking for setpgid... yes
+checking for setsid... yes
+checking for setregid... yes
+checking for setreuid... yes
+checking for setresgid... yes
+checking for setresuid... yes
+checking for setutent_r... no
+checking for sigaction... yes
+checking for sigvec... yes
+checking for strchr... yes
+checking for setproctitle... no
+checking for tcgetattr... (cached) yes
+checking for tzset... yes
+checking for utimes... yes
+checking for utime... yes
+checking for uname... yes
+checking for updwtmp... yes
+checking for updwtmpx... yes
+checking for vhangup... yes
+checking for wait3... yes
+checking for wait4... yes
+checking for opendir2... no
+checking for getpass... (cached) yes
+checking for getusershell... (cached) yes
+checking for memcmp... yes
+checking for memcpy... yes
+checking for memmove... yes
+checking for memset... yes
+checking for setenv... (cached) yes
+checking for strdup... (cached) yes
+checking for poll... (cached) yes
+checking for crypt... yes
+checking for _obstack_free... yes
+checking for setpgid... (cached) yes
+checking for getopt_long... yes
+checking for poll.h... (cached) yes
+checking for snprintf... (cached) yes
+checking for vsnprintf... (cached) yes
+checking for strerror... yes
+checking for hstrerror... yes
+checking whether hstrerror is declared... yes
+checking whether sys_siglist is declared... yes
+checking whether crypt is declared... yes
+checking for EWOULDBLOCK... yes
+checking whether errno is declared... yes
+checking for syslog internal macros... yes
+checking for CODE... yes
+checking whether prioritynames is declared... yes
+checking whether fclose is declared... yes
+checking whether pclose is declared... yes
+checking whether getcwd is declared... (cached) yes
+checking whether getlogin is declared... (cached) yes
+checking whether getpass is declared... (cached) yes
+checking whether getusershell is declared... (cached) yes
+checking whether ttyname is declared... yes
+checking whether getgrnam is declared... yes
+checking whether initgroups is declared... yes
+checking whether htons is declared... yes
+checking whether environ is declared... (cached) yes
+checking for h_errno... yes
+checking whether h_errno is declared... yes
+checking for SEEK_ macros... yes
+checking for _FILENO macros... yes
+checking for fd_set macros... yes
+checking paths.h usability... yes
+checking paths.h presence... yes
+checking for paths.h... yes
+checking for value of PATH_BSHELL... from _PATH_BSHELL in <paths.h>
+checking for value of PATH_CONSOLE... from _PATH_CONSOLE in <paths.h>
+checking for value of PATH_CP... /bin/cp
+checking for value of PATH_DEFPATH... from _PATH_DEFPATH in <paths.h>
+checking for value of PATH_DEV... from _PATH_DEV in <paths.h>
+checking for value of PATH_TTY_PFX... from _PATH_DEV in <paths.h>
+checking for value of PATH_DEVNULL... from _PATH_DEVNULL in <paths.h>
+checking for value of PATH_FTPLOGINMESG... (default) /etc/motd
+checking for value of PATH_FTPUSERS... (default) $(sysconfdir)/ftpusers
+checking for value of PATH_FTPCHROOT... (default) $(sysconfdir)/ftpchroot
+checking for value of PATH_FTPWELCOME... (default) $(sysconfdir)/ftpwelcome
+checking for value of PATH_FTPDPID... (default) $(localstatedir)/run/ftpd.pid
+checking for value of PATH_INETDCONF... (default) $(sysconfdir)/inetd.conf
+checking for value of PATH_INETDDIR... (default) $(sysconfdir)/inetd.d
+checking for value of PATH_INETDPID... (default) $(localstatedir)/run/inetd.pid
+checking for value of PATH_UTMP... from _PATH_UTMP in <paths.h>
+checking for value of PATH_UTMPX... from _PATH_UTMPX in <utmpx.h>
+checking for value of PATH_WTMP... from _PATH_WTMP in <paths.h>
+checking for value of PATH_WTMPX... from _PATH_WTMPX in <utmpx.h>
+checking for value of PATH_LASTLOG... from _PATH_LASTLOG in <paths.h>
+checking for value of PATH_LOG... from _PATH_LOG in <syslog.h>
+checking for value of PATH_KLOG... from _PATH_KLOG in <paths.h>
+checking for value of PATH_LOGCONF... (default) $(sysconfdir)/syslog.conf
+checking for value of PATH_LOGIN... /bin/login
+checking for value of PATH_LOGPID... (default) $(localstatedir)/run/syslog.pid
+checking for value of PATH_NOLOGIN... from _PATH_NOLOGIN in <paths.h>
+checking for value of PATH_RLOGIN... (default) $(bindir)/rlogin
+checking for value of PATH_RSH... (default) $(bindir)/rsh
+checking for value of PATH_TMP... from _PATH_TMP in <paths.h>
+checking for value of PATH_TTY... from _PATH_TTY in <paths.h>
+checking for value of PATH_UUCICO... (default) $(libexecdir)/uucp/uucico
+checking for value of PATH_HEQUIV... from _PATH_HEQUIV in <netdb.h>
+checking for value of PATH_PROCNET_DEV... /proc/net/dev
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating lib/Makefile
+config.status: creating libinetutils/Makefile
+config.status: creating libtelnet/Makefile
+config.status: creating libicmp/Makefile
+config.status: creating libls/Makefile
+config.status: creating src/Makefile
+config.status: creating telnet/Makefile
+config.status: creating telnetd/Makefile
+config.status: creating ftp/Makefile
+config.status: creating ftpd/Makefile
+config.status: creating talk/Makefile
+config.status: creating talkd/Makefile
+config.status: creating whois/Makefile
+config.status: creating ping/Makefile
+config.status: creating ifconfig/Makefile
+config.status: creating ifconfig/system/Makefile
+config.status: creating doc/Makefile
+config.status: creating man/Makefile
+config.status: creating tests/Makefile
+config.status: creating confpaths.h
+config.status: creating config.h
+config.status: executing depfiles commands
++ make -j24
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8'
+Making all in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+  GEN    alloca.h
+  GEN    arg-nonnull.h
+  GEN    warn-on-use.h
+  GEN    c++defs.h
+  GEN    configmake.h
+  GEN    getopt.h
+  GEN    netdb.h
+  GEN    strings.h
+  GEN    arpa/inet.h
+  GEN    sys/ioctl.h
+  GEN    sys/select.h
+  GEN    sys/socket.h
+  GEN    sys/stat.h
+  GEN    time.h
+  GEN    sys/time.h
+  GEN    wctype.h
+  GEN    unistd.h
+  GEN    wchar.h
+  GEN    dirent.h
+  GEN    langinfo.h
+  GEN    fcntl.h
+  GEN    glob.h
+  GEN    pty.h
+  GEN    string.h
+  GEN    stdio.h
+  GEN    stdlib.h
+make  all-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+  CC     argp-ba.o
+  CC     argp-eexst.o
+  CC     argp-fmtstream.o
+  CC     argp-fs-xinl.o
+  CC     argp-help.o
+  CC     argp-parse.o
+  CC     argp-pin.o
+  CC     argp-pv.o
+  CC     argp-pvh.o
+  CC     argp-xinl.o
+  CC     argp-version-etc.o
+  CC     close-hook.o
+  CC     exitfail.o
+  CC     localcharset.o
+  CC     malloca.o
+  CC     openat-die.o
+  CC     progname.o
+  CC     sockets.o
+  CC     strnlen1.o
+  CC     version-etc.o
+  CC     version-etc-fsf.o
+  CC     xalloc-die.o
+  CC     xgetdomainname.o
+  CC     xgethostname.o
+  CC     xvasprintf.o
+  CC     xasprintf.o
+  CC     asnprintf.o
+  CC     basename-lgpl.o
+  CC     chdir-long.o
+  CC     cloexec.o
+  CC     dirname-lgpl.o
+  CC     dup-safer.o
+  CC     fcntl.o
+  CC     fd-safer.o
+  CC     filemode.o
+  CC     getcwd.o
+  CC     fopen-safer.o
+  CC     getopt.o
+  CC     getopt1.o
+  CC     glob.o
+  CC     imaxtostr.o
+  CC     ioctl.o
+  CC     login_tty.o
+  CC     offtostr.o
+  CC     openat-proc.o
+  CC     pipe-safer.o
+  CC     printf-args.o
+  CC     printf-parse.o
+  CC     readutmp.o
+  CC     regex.o
+  CC     save-cwd.o
+  CC     stripslash.o
+  CC     uinttostr.o
+  CC     umaxtostr.o
+  CC     vasnprintf.o
+  CC     xgetcwd.o
+  CC     xmalloc.o
+  GEN    charset.alias
+  GEN    ref-add.sed
+  GEN    ref-del.sed
+  AR     libgnu.a
+make[4]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+Making all in libinetutils
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libinetutils'
+  CC     argcv.o
+  CC     cleansess.o
+  CC     daemon.o
+  CC     defauthors.o
+  CC     des_rw.o
+  CC     kcmd.o
+  CC     krcmd.o
+  CC     localhost.o
+  CC     logwtmpko.o
+  CC     setsig.o
+  CC     shishi.o
+  CC     tftpsubs.o
+  CC     utmp_init.o
+  CC     ttymsg.o
+  CC     utmp_logout.o
+tftpsubs.c: In function 'write_behind':
+tftpsubs.c:260:12: warning: call to 'fseek' declared with attribute warning: fseek cannot handle files larger than 4 GB on 32-bit platforms - use fseeko function for handling of large files
+  AR     libinetutils.a
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libinetutils'
+Making all in libtelnet
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
+  CC     auth.o
+  CC     enc_des.o
+  CC     encrypt.o
+  CC     forward.o
+  CC     genget.o
+  CC     getent.o
+  CC     kerberos.o
+  CC     kerberos5.o
+  CC     misc.o
+  CC     shishi.o
+  CC     read_passwd.o
+  AR     libtelnet.a
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
+Making all in libicmp
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libicmp'
+  CC     icmp_echo.o
+  CC     icmp_timestamp.o
+  CC     icmp_address.o
+  CC     icmp_cksum.o
+  AR     libicmp.a
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libicmp'
+Making all in libls
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libls'
+  CC     cmp.o
+  CC     stat_flags.o
+  CC     ls.o
+  CC     print.o
+  CC     util.o
+  CC     fts.o
+  AR     libls.a
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libls'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
+  CC     hostname.o
+  CC     rcp.o
+  CC     rexec.o
+  CC     rlogin.o
+  CC     rsh.o
+  CC     tftp.o
+  CC     traceroute.o
+  CCLD   hostname
+  CCLD   rexec
+  CCLD   rsh
+  CCLD   traceroute
+  CCLD   rlogin
+  CCLD   tftp
+  CCLD   rcp
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
+Making all in telnet
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/telnet'
+  CC     authenc.o
+  CC     commands.o
+  CC     main.o
+  CC     network.o
+  CC     ring.o
+  CC     sys_bsd.o
+  CC     telnet.o
+  CC     terminal.o
+  CC     tn3270.o
+  CC     utilities.o
+  CCLD   telnet
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/telnet'
+Making all in telnetd
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/telnetd'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/telnetd'
+Making all in ftp
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ftp'
+  CC     cmds.o
+  CC     cmdtab.o
+  CC     domacro.o
+  CC     ftp.o
+  CC     main.o
+  CC     ruserpass.o
+ftp.c: In function 'sendrequest':
+ftp.c:636:7: warning: call to 'fseek' declared with attribute warning: fseek cannot handle files larger than 4 GB on 32-bit platforms - use fseeko function for handling of large files
+ftp.c: In function 'recvrequest':
+ftp.c:1002:14: warning: call to 'fseek' declared with attribute warning: fseek cannot handle files larger than 4 GB on 32-bit platforms - use fseeko function for handling of large files
+ftp.c:1012:14: warning: call to 'fseek' declared with attribute warning: fseek cannot handle files larger than 4 GB on 32-bit platforms - use fseeko function for handling of large files
+  CCLD   ftp
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ftp'
+Making all in ftpd
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ftpd'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ftpd'
+Making all in talk
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/talk'
+  CC     ctl.o
+  CC     ctl_transact.o
+  CC     display.o
+  CC     get_addrs.o
+  CC     get_names.o
+  CC     init_disp.o
+  CC     invite.o
+  CC     io.o
+  CC     look_up.o
+  CC     msgs.o
+  CC     talk.o
+  CCLD   talk
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/talk'
+Making all in talkd
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/talkd'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/talkd'
+Making all in whois
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+make  all-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+Making all in ping
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+  CC     ping.o
+  CC     ping_common.o
+  CC     ping_echo.o
+  CC     ping_address.o
+  CC     ping_router.o
+  CC     ping_timestamp.o
+  CC     libping.o
+  CC     ping6.o
+  CCLD   ping
+  CCLD   ping6
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+Making all in ifconfig
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+Making all in system
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig/system'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig/system'
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/doc'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/doc'
+Making all in man
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/tests'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.98886
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/inetutils-root
++ /bin/mkdir -p /var/tmp/inetutils-root
++ cd inetutils-1.8
++ make DESTDIR=/var/tmp/inetutils-root install
+Making install in lib
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make  install-recursive
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+if test yes = no; then \
+  case 'linux-gnu' in \
+    darwin[56]*) \
+      need_charset_alias=true ;; \
+    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
+      need_charset_alias=false ;; \
+    *) \
+      need_charset_alias=true ;; \
+  esac ; \
+else \
+  need_charset_alias=false ; \
+fi ; \
+if $need_charset_alias; then \
+  /bin/sh /usr/src/rpm/BUILD/inetutils-1.8/build-aux/install-sh -d /var/tmp/inetutils-root/usr/lib ; \
+fi ; \
+if test -f /var/tmp/inetutils-root/usr/lib/charset.alias; then \
+  sed -f ref-add.sed /var/tmp/inetutils-root/usr/lib/charset.alias > /var/tmp/inetutils-root/usr/lib/charset.tmp ; \
+  /usr/bin/install -c -m 644 /var/tmp/inetutils-root/usr/lib/charset.tmp /var/tmp/inetutils-root/usr/lib/charset.alias ; \
+  rm -f /var/tmp/inetutils-root/usr/lib/charset.tmp ; \
+else \
+  if $need_charset_alias; then \
+    sed -f ref-add.sed charset.alias > /var/tmp/inetutils-root/usr/lib/charset.tmp ; \
+    /usr/bin/install -c -m 644 /var/tmp/inetutils-root/usr/lib/charset.tmp /var/tmp/inetutils-root/usr/lib/charset.alias ; \
+    rm -f /var/tmp/inetutils-root/usr/lib/charset.tmp ; \
+  fi ; \
+fi
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
+Making install in libinetutils
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libinetutils'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libinetutils'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libinetutils'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libinetutils'
+Making install in libtelnet
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
+Making install in libicmp
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libicmp'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libicmp'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libicmp'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libicmp'
+Making install in libls
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libls'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libls'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libls'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libls'
+Making install in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/bin"
+  /usr/bin/install -c hostname rcp rexec rlogin rsh tftp traceroute '/var/tmp/inetutils-root/usr/bin'
+make  install-exec-hook
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/sbin"
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
+Making install in telnet
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/telnet'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/telnet'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/bin"
+  /usr/bin/install -c telnet '/var/tmp/inetutils-root/usr/bin'
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/telnet'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/telnet'
+Making install in telnetd
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/telnetd'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/telnetd'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/sbin"
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/telnetd'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/telnetd'
+Making install in ftp
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ftp'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ftp'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/bin"
+  /usr/bin/install -c ftp '/var/tmp/inetutils-root/usr/bin'
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ftp'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ftp'
+Making install in ftpd
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ftpd'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ftpd'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/sbin"
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ftpd'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ftpd'
+Making install in talk
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/talk'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/talk'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/bin"
+  /usr/bin/install -c talk '/var/tmp/inetutils-root/usr/bin'
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/talk'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/talk'
+Making install in talkd
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/talkd'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/talkd'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/sbin"
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/talkd'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/talkd'
+Making install in whois
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+make  install-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/bin"
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
+Making install in ping
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/bin"
+  /usr/bin/install -c ping ping6 '/var/tmp/inetutils-root/usr/bin'
+make  install-exec-hook
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+Making install in ifconfig
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+Making install in system
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig/system'
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig/system'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig/system'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig/system'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/bin"
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
+Making install in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/doc'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/info" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/share/info"
+ /usr/bin/install -c -m 644 ./inetutils.info '/var/tmp/inetutils-root/usr/share/info'
+ install-info --info-dir='/var/tmp/inetutils-root/usr/share/info' '/var/tmp/inetutils-root/usr/share/info/inetutils.info'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/doc'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/doc'
+Making install in man
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 hostname.1 ftp.1 ping.1 ping6.1 rcp.1 rexec.1 rlogin.1 rsh.1 talk.1 telnet.1 tftp.1 traceroute.1 '/var/tmp/inetutils-root/usr/share/man/man1'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
+Making install in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/tests'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/tests'
+make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8'
+make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
++ mkdir -v /var/tmp/inetutils-root/bin /var/tmp/inetutils-root/sbin
+mkdir: created directory `/var/tmp/inetutils-root/bin'
+mkdir: created directory `/var/tmp/inetutils-root/sbin'
++ mv -v /var/tmp/inetutils-root/usr/bin/ping /var/tmp/inetutils-root/bin
+`/var/tmp/inetutils-root/usr/bin/ping' -> `/var/tmp/inetutils-root/bin/ping'
++ mv -v /var/tmp/inetutils-root/usr/bin/ping6 /var/tmp/inetutils-root/bin
+`/var/tmp/inetutils-root/usr/bin/ping6' -> `/var/tmp/inetutils-root/bin/ping6'
++ mv -v /var/tmp/inetutils-root/usr/bin/hostname /var/tmp/inetutils-root/bin
+`/var/tmp/inetutils-root/usr/bin/hostname' -> `/var/tmp/inetutils-root/bin/hostname'
++ mv -v /var/tmp/inetutils-root/usr/bin/traceroute /var/tmp/inetutils-root/sbin
+`/var/tmp/inetutils-root/usr/bin/traceroute' -> `/var/tmp/inetutils-root/sbin/traceroute'
++ rm -f /var/tmp/inetutils-root/usr/share/info/dir
++ /usr/lib/rpm/compress_man.sh /var/tmp/inetutils-root
++ exit 0
+Processing files: inetutils-1.8-2.x86_64
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.4)(64bit) libcrypt.so.1()(64bit) libhistory.so.6()(64bit) libncursesw.so.5()(64bit) libnsl.so.1()(64bit) libreadline.so.6()(64bit) libresolv.so.2()(64bit) libutil.so.1()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/inetutils-root
+Wrote: /usr/src/rpm/SRPMS/inetutils-1.8-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/inetutils-1.8-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.51608
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd inetutils-1.8
++ /bin/rm -rf /var/tmp/inetutils-root
