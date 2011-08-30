@@ -1,0 +1,293 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.64683
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf net-tools-1.60
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/net-tools-1.60.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd net-tools-1.60
++ echo 'Patch #0 (net-tools-1.60-debian_fixes-1.patch):'
+Patch #0 (net-tools-1.60-debian_fixes-1.patch):
++ /bin/cat /usr/src/rpm/SOURCES/net-tools-1.60-debian_fixes-1.patch
++ /usr/bin/patch -s -p1
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.64683
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd net-tools-1.60
++ yes ''
++ make config
+rm -f config.h
+Configuring the Linux net-tools (NET-3 Base Utilities)...
+
+*
+*
+*              Internationalization
+*
+* The net-tools package has currently been translated to French,
+* German and Brazilian Portugese.  Other translations are, of
+* course, welcome.  Answer `n' here if you have no support for
+* internationalization on your system.
+*
+Does your system support GNU gettext? (I18N) [n] *
+*
+*             Protocol Families.
+* 
+UNIX protocol family (HAVE_AFUNIX) [y] INET (TCP/IP) protocol family (HAVE_AFINET) [y] INET6 (IPv6) protocol family (HAVE_AFINET6) [y] Novell IPX/SPX protocol family (HAVE_AFIPX) [y] Appletalk DDP protocol family (HAVE_AFATALK) [y] AX25 (packet radio) protocol family (HAVE_AFAX25) [y] NET/ROM (packet radio) protocol family (HAVE_AFNETROM) [y] Rose (packet radio) protocol family (HAVE_AFROSE) [y] X.25 (CCITT) protocol family (HAVE_AFX25) [y] Econet protocol family (HAVE_AFECONET) [y] DECnet protocol family (HAVE_AFDECnet) [n] Ash protocol family (HAVE_AFASH) [y] *
+*
+*            Device Hardware types.
+*
+Ethernet (generic) support (HAVE_HWETHER) [y] ARCnet support (HAVE_HWARC) [y] SLIP (serial line) support (HAVE_HWSLIP) [y] PPP (serial line) support (HAVE_HWPPP) [y] IPIP Tunnel support (HAVE_HWTUNNEL) [y] STRIP (Metricom radio) support (HAVE_HWSTRIP) [y] Token ring (generic) support (HAVE_HWTR) [y] AX25 (packet radio) support (HAVE_HWAX25) [y] Rose (packet radio) support (HAVE_HWROSE) [y] NET/ROM (packet radio) support (HAVE_HWNETROM) [y] X.25 (generic) support (HAVE_HWX25) [y] DLCI/FRAD (frame relay) support (HAVE_HWFR) [y] SIT (IPv6-in-IPv4) support (HAVE_HWSIT) [y] FDDI (generic) support (HAVE_HWFDDI) [y] HIPPI (generic) support (HAVE_HWHIPPI) [y] Ash hardware support (HAVE_HWASH) [y] (Cisco)-HDLC/LAPB support (HAVE_HWHDLCLAPB) [y] IrDA support (HAVE_HWIRDA) [y] Econet hardware support (HAVE_HWEC) [y] Generic EUI-64 hardware support (HAVE_HWEUI64) [y] InfiniBand hardware support (HAVE_HWIB) [y] *
+*
+*           Other Features.
+*
+IP Masquerading support (HAVE_FW_MASQUERADE) [y] Build iptunnel and ipmaddr (HAVE_IP_TOOLS) [y] Build mii-tool (HAVE_MII) [y] + make
+make[1]: Entering directory `/usr/src/rpm/BUILD/net-tools-1.60/man'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/net-tools-1.60/man'
+make[1]: Entering directory `/usr/src/rpm/BUILD/net-tools-1.60/lib'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o activate.o activate.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o af.o af.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o arcnet.o arcnet.c
+arcnet.c: In function 'in_arcnet':
+arcnet.c:55:9: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ash.o ash.c
+ash.c: In function 'in_ash':
+ash.c:67:9: warning: pointer targets in assignment differ in signedness
+ash.c: In function 'pr_sash':
+ash.c:112:5: warning: pointer targets in passing argument 1 of 'pr_ash' differ in signedness
+ash.c:35:1: note: expected 'unsigned char *' but argument is of type 'char *'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ax25.o ax25.c
+ax25.c: In function 'AX25_sprint':
+ax25.c:76:33: warning: pointer targets in passing argument 1 of 'AX25_print' differ in signedness
+ax25.c:50:14: note: expected 'unsigned char *' but argument is of type 'char *'
+ax25.c: In function 'AX25_input':
+ax25.c:87:9: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ax25_gr.o ax25_gr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ddp.o ddp.c
+ddp.c: In function 'ddp_sprint':
+ddp.c:51:5: warning: pointer targets in passing argument 1 of 'ddp_print' differ in signedness
+ddp.c:35:14: note: expected 'unsigned char *' but argument is of type 'char *'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ddp_gr.o ddp_gr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ec_hw.o ec_hw.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o econet.o econet.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ether.o ether.c
+ether.c: In function 'in_ether':
+ether.c:59:9: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o eui64.o eui64.c
+eui64.c: In function 'in_eui64':
+eui64.c:72:6: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o fddi.o fddi.c
+fddi.c: In function 'in_fddi':
+fddi.c:70:9: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o frame.o frame.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o getargs.o getargs.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o getroute.o getroute.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o hdlclapb.o hdlclapb.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o hippi.o hippi.c
+hippi.c: In function 'in_hippi':
+hippi.c:69:9: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o hw.o hw.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ib.o ib.c
+ib.c: In function 'in_ib':
+ib.c:69:9: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o inet.o inet.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o inet6.o inet6.c
+inet6.c: In function 'fix_v4_address':
+inet6.c:49:2: warning: dereferencing type-punned pointer will break strict-aliasing rules
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o inet6_gr.o inet6_gr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o inet6_sr.o inet6_sr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o inet_gr.o inet_gr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o inet_sr.o inet_sr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o interface.o interface.c
+interface.c: In function 'if_fetch':
+interface.c:446:21: warning: cast from pointer to integer of different size
+interface.c:453:23: warning: cast from pointer to integer of different size
+interface.c: In function 'ife_print_long':
+interface.c:693:2: warning: pointer targets in passing argument 1 of 'hw->print' differ in signedness
+interface.c:693:2: note: expected 'unsigned char *' but argument is of type 'char *'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ipx.o ipx.c
+ipx.c: In function 'IPX_sprint':
+ipx.c:82:5: warning: pointer targets in passing argument 1 of 'IPX_print' differ in signedness
+ipx.c:45:14: note: expected 'unsigned char *' but argument is of type 'char *'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ipx_gr.o ipx_gr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ipx_sr.o ipx_sr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o irda.o irda.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o loopback.o loopback.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o masq_info.o masq_info.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o netrom.o netrom.c
+netrom.c: In function 'NETROM_sprint':
+netrom.c:79:35: warning: pointer targets in passing argument 1 of 'NETROM_print' differ in signedness
+netrom.c:55:14: note: expected 'unsigned char *' but argument is of type 'char *'
+netrom.c: In function 'NETROM_input':
+netrom.c:90:9: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o netrom_gr.o netrom_gr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o netrom_sr.o netrom_sr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o nstrcmp.o nstrcmp.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ppp.o ppp.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o ppp_ac.o ppp_ac.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o proc.o proc.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o rose.o rose.c
+rose.c: In function 'ROSE_sprint':
+rose.c:73:33: warning: pointer targets in passing argument 1 of 'ROSE_print' differ in signedness
+rose.c:57:2: note: expected 'unsigned char *' but argument is of type 'char *'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o rose_gr.o rose_gr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o setroute.o setroute.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o sit.o sit.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o slip.o slip.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o slip_ac.o slip_ac.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o sockets.o sockets.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o strip.o strip.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o tr.o tr.c
+tr.c: In function 'in_tr':
+tr.c:71:9: warning: pointer targets in assignment differ in signedness
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o tunnel.o tunnel.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o unix.o unix.c
+unix.c: In function 'UNSPEC_sprint':
+unix.c:57:5: warning: pointer targets in passing argument 1 of 'UNSPEC_print' differ in signedness
+unix.c:35:14: note: expected 'unsigned char *' but argument is of type 'char *'
+unix.c: In function 'UNIX_print':
+unix.c:66:5: warning: pointer targets in return differ in signedness
+unix.c: In function 'UNIX_sprint':
+unix.c:77:5: warning: pointer targets in passing argument 1 of 'UNIX_print' differ in signedness
+unix.c:64:14: note: expected 'unsigned char *' but argument is of type 'char *'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o util-ank.o util-ank.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o util.o util.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o x25.o x25.c
+x25.c: In function 'X25_print':
+x25.c:58:3: warning: pointer targets in passing argument 2 of '__builtin_strncpy' differ in signedness
+x25.c:58:3: note: expected 'const char *' but argument is of type 'unsigned char *'
+x25.c: In function 'X25_sprint':
+x25.c:71:29: warning: pointer targets in passing argument 1 of 'X25_print' differ in signedness
+x25.c:54:1: note: expected 'unsigned char *' but argument is of type 'char *'
+x25.c: In function 'X25_input':
+x25.c:86:7: warning: pointer targets in assignment differ in signedness
+x25.c:117:3: warning: pointer targets in passing argument 1 of '__builtin_strncpy' differ in signedness
+x25.c:117:3: note: expected 'char *' but argument is of type 'unsigned char *'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o x25_gr.o x25_gr.c
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib -I/usr/src/rpm/BUILD/net-tools-1.60 -idirafter /usr/src/rpm/BUILD/net-tools-1.60/include    -c -o x25_sr.o x25_sr.c
+Building libnet-tools.a
+make[1]: Leaving directory `/usr/src/rpm/BUILD/net-tools-1.60/lib'
+make[1]: Entering directory `/usr/src/rpm/BUILD/net-tools-1.60/lib'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/net-tools-1.60/lib'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o ifconfig.o ifconfig.c
+ifconfig.c: In function 'main':
+ifconfig.c:500:21: warning: cast to pointer from integer of different size
+ifconfig.c:514:21: warning: cast to pointer from integer of different size
+cc  -Llib -o ifconfig ifconfig.o -lnet-tools 
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o hostname.o hostname.c
+cc  -Llib -o hostname hostname.o 
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o arp.o arp.c
+arp.c: In function 'arp_getdevhw':
+arp.c:262:2: warning: pointer targets in passing argument 1 of 'xhw->print' differ in signedness
+arp.c:262:2: note: expected 'unsigned char *' but argument is of type 'char *'
+cc  -Llib -o arp arp.o -lnet-tools 
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o netstat.o netstat.c
+netstat.c: In function 'tcp_do_one':
+netstat.c:838:9: warning: field width should have type 'int', but argument 5 has type 'size_t'
+netstat.c:838:9: warning: field width should have type 'int', but argument 7 has type 'size_t'
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o statistics.o statistics.c
+cc  -Llib -o netstat netstat.o statistics.o -lnet-tools 
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o route.o route.c
+cc  -Llib -o route route.o -lnet-tools 
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o rarp.o rarp.c
+cc  -Llib -o rarp rarp.o -lnet-tools
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o slattach.o slattach.c
+cc  -Llib -o slattach slattach.o -lnet-tools
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o plipconfig.o plipconfig.c
+cc  -Llib -o plipconfig plipconfig.o -lnet-tools
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o nameif.o nameif.c
+cc  -Llib -o nameif nameif.o 
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o iptunnel.o iptunnel.c
+cc  -Llib -o iptunnel iptunnel.o -lnet-tools 
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o ipmaddr.o ipmaddr.c
+ipmaddr.c: In function 'multiaddr_modify':
+ipmaddr.c:351:4: warning: pointer targets in passing argument 2 of 'parse_lla' differ in signedness
+ipmaddr.c:78:12: note: expected 'unsigned char *' but argument is of type 'char *'
+cc  -Llib -o ipmaddr ipmaddr.o -lnet-tools 
+cc -D_GNU_SOURCE -O2 -Wall -g  -I. -idirafter ./include/ -Ilib   -c -o mii-tool.o mii-tool.c
+cc  -Llib -o mii-tool mii-tool.o
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.60447
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/net-tools-root
++ /bin/mkdir -p /var/tmp/net-tools-root
++ cd net-tools-1.60
++ make BASEDIR=/var/tmp/net-tools-root install
+make[1]: Entering directory `/usr/src/rpm/BUILD/net-tools-1.60/man'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/net-tools-1.60/man'
+make[1]: Entering directory `/usr/src/rpm/BUILD/net-tools-1.60/lib'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/net-tools-1.60/lib'
+make[1]: Entering directory `/usr/src/rpm/BUILD/net-tools-1.60/lib'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/net-tools-1.60/lib'
+Saved.
+install -m 0755 -d /var/tmp/net-tools-root/sbin
+install -m 0755 -d /var/tmp/net-tools-root/bin
+install -m 0755 arp        /var/tmp/net-tools-root/sbin
+install -m 0755 hostname   /var/tmp/net-tools-root/bin
+install -m 0755 ifconfig   /var/tmp/net-tools-root/sbin
+install -m 0755 nameif     /var/tmp/net-tools-root/sbin
+install -m 0755 netstat    /var/tmp/net-tools-root/bin
+install -m 0755 plipconfig /var/tmp/net-tools-root/sbin
+install -m 0755 rarp       /var/tmp/net-tools-root/sbin
+install -m 0755 route      /var/tmp/net-tools-root/sbin
+install -m 0755 slattach   /var/tmp/net-tools-root/sbin
+install -m 0755 ipmaddr    /var/tmp/net-tools-root/sbin
+install -m 0755 iptunnel   /var/tmp/net-tools-root/sbin
+install -m 0755 mii-tool   /var/tmp/net-tools-root/sbin
+ln -fs hostname /var/tmp/net-tools-root/bin/dnsdomainname
+ln -fs hostname /var/tmp/net-tools-root/bin/ypdomainname
+ln -fs hostname /var/tmp/net-tools-root/bin/nisdomainname
+ln -fs hostname /var/tmp/net-tools-root/bin/domainname
+make -C man install
+make[1]: Entering directory `/usr/src/rpm/BUILD/net-tools-1.60/man'
+LANGS=en_US ; \
+	for LANG in $LANGS; do \
+		cd $LANG; \
+		for SECTION in 1 5 8; do \
+			if [ "$LANG" = "en_US" ] ; then \
+				MAN_DIR=/var/tmp/net-tools-root/usr/share/man/man$SECTION; \
+			else \
+				MAN_DIR=/var/tmp/net-tools-root/usr/share/man/$LANG/man$SECTION; \
+			fi ; \
+			CMDS=`ls *.$SECTION`; \
+			[ -z "$CMDS" ] && continue; \
+			install -d -m 755 $MAN_DIR; \
+			for CMD in $CMDS; do \
+				install -m 644 $CMD $MAN_DIR; \
+			done; \
+		done; \
+		cd ..; \
+	done
+make[1]: Leaving directory `/usr/src/rpm/BUILD/net-tools-1.60/man'
+make -C po install
+make[1]: Entering directory `/usr/src/rpm/BUILD/net-tools-1.60/po'
+catalogs=''; \
+for n in $catalogs; do \
+    l=`basename $n .mo`; \
+    install -c -m 755 -d /var/tmp/net-tools-root/usr/share/locale/$l; \
+    install -c -m 755 -d /var/tmp/net-tools-root/usr/share/locale/$l/LC_MESSAGES; \
+    install -c -m 644 $n /var/tmp/net-tools-root/usr/share/locale/$l/LC_MESSAGES/net-tools.mo; \
+done
+make[1]: Leaving directory `/usr/src/rpm/BUILD/net-tools-1.60/po'
++ rm -f /var/tmp/net-tools-root/bin/hostname
++ rm -f /var/tmp/net-tools-root/usr/share/man/man1/hostname.1
++ /usr/lib/rpm/compress_man.sh /var/tmp/net-tools-root
++ exit 0
+Processing files: net-tools-1.60-1.x86_64
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/net-tools-root
+Wrote: /usr/src/rpm/SRPMS/net-tools-1.60-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/net-tools-1.60-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.82608
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd net-tools-1.60
++ /bin/rm -rf /var/tmp/net-tools-root
