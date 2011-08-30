@@ -1,0 +1,1623 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.94770
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf util-linux-2.20
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/util-linux-2.20.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd util-linux-2.20
+++ grep -rl /etc/adjtime .
++ sed -i s@etc/adjtime@var/lib/hwclock/adjtime@g ./po/zh_TW.po ./po/vi.po ./po/ja.po ./po/sl.po ./po/da.po ./po/fr.po ./po/nl.po ./po/es.po ./po/fi.po ./po/et.po ./po/tr.po ./po/sv.po ./po/pt_BR.po ./po/hu.po ./po/ca.po ./po/uk.po ./po/ru.po ./po/de.po ./po/it.po ./po/id.po ./po/nl.gmo ./po/cs.po ./include/pathnames.h ./sys-utils/rtcwake.8 ./sys-utils/rtcwake.c ./docs/v2.14-ReleaseNotes ./hwclock/hwclock.8 ./hwclock/hwclock.c ./NEWS
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.33066
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd util-linux-2.20
++ export LDFLAGS=-s
++ LDFLAGS=-s
++ ./configure --enable-arch --enable-partx --enable-write --libdir=/lib64
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+configure: Default --exec-prefix detected.
+configure:   --bindir defaults to /bin
+configure:   --sbindir defaults to /sbin
+checking for style of include used by make... GNU
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking dependency style of gcc... gcc3
+checking whether gcc and cc understand -c and -o together... yes
+checking for gcc option to accept ISO C99... -std=gnu99
+checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+checking how to run the C preprocessor... gcc -std=gnu99 -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for an ANSI C-conforming const... yes
+checking for working volatile... yes
+checking whether byte ordering is bigendian... no
+checking how to print strings... printf
+checking for a sed that does not truncate output... /bin/sed
+checking for fgrep... /bin/grep -F
+checking for ld used by gcc -std=gnu99... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking how to convert x86_64-unknown-linux-gnu file names to x86_64-unknown-linux-gnu format... func_convert_file_noop
+checking how to convert x86_64-unknown-linux-gnu file names to toolchain format... func_convert_file_noop
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for dlltool... no
+checking how to associate runtime and link libraries... printf %s\n
+checking for ar... ar
+checking for archiver @FILE support... @
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc -std=gnu99 object... ok
+checking for sysroot... no
+checking for mt... no
+checking if : is a manifest tool... no
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc -std=gnu99 supports -fno-rtti -fno-exceptions... no
+checking for gcc -std=gnu99 option to produce PIC... -fPIC -DPIC
+checking if gcc -std=gnu99 PIC flag -fPIC -DPIC works... yes
+checking if gcc -std=gnu99 static flag -static works... yes
+checking if gcc -std=gnu99 supports -c -o file.o... yes
+checking if gcc -std=gnu99 supports -c -o file.o... (cached) yes
+checking whether the gcc -std=gnu99 linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking whether to build gtk-doc documentation... no
+checking for gtkdoc-check... no
+checking for xsltproc... /usr/bin/xsltproc
+checking for perl... /usr/bin/perl
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for linux/compiler.h... no
+checking for linux/blkpg.h... yes
+checking for linux/major.h... yes
+checking err.h usability... yes
+checking err.h presence... yes
+checking for err.h... yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking linux/fd.h usability... yes
+checking linux/fd.h presence... yes
+checking for linux/fd.h... yes
+checking linux/tiocl.h usability... yes
+checking linux/tiocl.h presence... yes
+checking for linux/tiocl.h... yes
+checking linux/version.h usability... yes
+checking linux/version.h presence... yes
+checking for linux/version.h... yes
+checking linux/falloc.h usability... yes
+checking linux/falloc.h presence... yes
+checking for linux/falloc.h... yes
+checking linux/cdrom.h usability... yes
+checking linux/cdrom.h presence... yes
+checking for linux/cdrom.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking for stdint.h... (cached) yes
+checking for inttypes.h... (cached) yes
+checking paths.h usability... yes
+checking paths.h presence... yes
+checking for paths.h... yes
+checking pty.h usability... yes
+checking pty.h presence... yes
+checking for pty.h... yes
+checking mntent.h usability... yes
+checking mntent.h presence... yes
+checking for mntent.h... yes
+checking net/if.h usability... yes
+checking net/if.h presence... yes
+checking for net/if.h... yes
+checking net/if_dl.h usability... no
+checking net/if_dl.h presence... no
+checking for net/if_dl.h... no
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking rpcsvc/nfs_prot.h usability... yes
+checking rpcsvc/nfs_prot.h presence... yes
+checking for rpcsvc/nfs_prot.h... yes
+checking for stdlib.h... (cached) yes
+checking asm/io.h usability... no
+checking asm/io.h presence... no
+checking for asm/io.h... no
+checking sys/disk.h usability... no
+checking sys/disk.h presence... no
+checking for sys/disk.h... no
+checking sys/disklabel.h usability... no
+checking sys/disklabel.h presence... no
+checking for sys/disklabel.h... no
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/ioccom.h usability... no
+checking sys/ioccom.h presence... no
+checking for sys/ioccom.h... no
+checking sys/io.h usability... yes
+checking sys/io.h presence... yes
+checking for sys/io.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking sys/mkdev.h usability... no
+checking sys/mkdev.h presence... no
+checking for sys/mkdev.h... no
+checking sys/prctl.h usability... yes
+checking sys/prctl.h presence... yes
+checking for sys/prctl.h... yes
+checking sys/queue.h usability... yes
+checking sys/queue.h presence... yes
+checking for sys/queue.h... yes
+checking sys/sockio.h usability... no
+checking sys/sockio.h presence... no
+checking for sys/sockio.h... no
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/syscall.h usability... yes
+checking sys/syscall.h presence... yes
+checking for sys/syscall.h... yes
+checking sys/file.h usability... yes
+checking sys/file.h presence... yes
+checking for sys/file.h... yes
+checking for sys/ioctl.h... (cached) yes
+checking for sys/stat.h... (cached) yes
+checking for sys/types.h... (cached) yes
+checking sys/un.h usability... yes
+checking sys/un.h presence... yes
+checking for sys/un.h... yes
+checking sys/user.h usability... yes
+checking sys/user.h presence... yes
+checking for sys/user.h... yes
+checking sys/resource.h usability... yes
+checking sys/resource.h presence... yes
+checking for sys/resource.h... yes
+checking for unistd.h... (cached) yes
+checking linux/raw.h usability... yes
+checking linux/raw.h presence... yes
+checking for linux/raw.h... yes
+checking langinfo.h usability... yes
+checking langinfo.h presence... yes
+checking for langinfo.h... yes
+checking whether _NL_TIME_WEEK_1STDAY is declared... yes
+checking whether llseek is declared... no
+checking whether lseek64 is declared... yes
+checking for inet_aton... yes
+checking for err... yes
+checking for errx... yes
+checking for futimens... yes
+checking for fstat64... yes
+checking for fsync... yes
+checking for getdomainname... yes
+checking for get_current_dir_name... yes
+checking for usleep... yes
+checking for nanosleep... yes
+checking for personality... yes
+checking for updwtmp... yes
+checking for jrand48... yes
+checking for lchown... yes
+checking for llseek... yes
+checking for lseek64... yes
+checking for strtoull... yes
+checking for sysconf... yes
+checking for getdtablesize... yes
+checking for getexecname... no
+checking for getrlimit... yes
+checking for sigqueue... yes
+checking for srandom... yes
+checking for setresgid... yes
+checking for setresuid... yes
+checking for strndup... yes
+checking for strnlen... yes
+checking for strnchr... no
+checking for inotify_init... yes
+checking for prctl... yes
+checking for posix_fadvise... yes
+checking for getmntinfo... no
+checking for __secure_getenv... yes
+checking for warn... yes
+checking for warnx... yes
+checking for rpmatch... yes
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking for openat... yes
+checking for fstatat... yes
+checking for unlinkat... yes
+checking for ioperm... yes
+checking for iopl... yes
+checking for struct sockaddr.sa_len... no
+checking for library containing gethostbyname... none required
+checking for library containing socket... none required
+checking for dirfd... yes
+checking whether program_invocation_short_name is defined... yes
+checking whether __progname is defined... yes
+checking whether the target supports thread-local storage... yes
+checking for openpty in -lutil... yes
+checking for tgetnum in -ltermcap... no
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for ld used by GCC... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking for shared library run path origin... done
+checking whether NLS is requested... yes
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking ncurses.h usability... yes
+checking ncurses.h presence... yes
+checking for ncurses.h... yes
+checking for initscr in -lncursesw... yes
+checking ncursesw/ncurses.h usability... no
+checking ncursesw/ncurses.h presence... no
+checking for ncursesw/ncurses.h... no
+checking ncurses/ncurses.h usability... no
+checking ncurses/ncurses.h presence... no
+checking for ncurses/ncurses.h... no
+checking for tgetent in -ltinfo... no
+checking crypt.h usability... yes
+checking crypt.h presence... yes
+checking for crypt.h... yes
+checking for union semun... no
+checking for loff_t... yes
+checking for syscall pivot_root... SYS_pivot_root
+checking for syscall sched_getaffinity... SYS_sched_getaffinity
+checking for syscall ioprio_set... SYS_ioprio_set
+checking for syscall ioprio_get... SYS_ioprio_get
+checking for syscall fallocate... SYS_fallocate
+checking for valid fallocate() function... yes
+checking for syscall unshare... SYS_unshare
+checking for unshare... yes
+checking for struct termios.c_line... yes
+checking for struct stat.st_mtim.tv_nsec... yes
+checking whether UNAME26 is declared... no
+checking whether ADDR_NO_RANDOMIZE is declared... yes
+checking whether FDPIC_FUNCPTRS is declared... yes
+checking whether MMAP_PAGE_ZERO is declared... yes
+checking whether ADDR_COMPAT_LAYOUT is declared... yes
+checking whether READ_IMPLIES_EXEC is declared... yes
+checking whether ADDR_LIMIT_32BIT is declared... yes
+checking whether WHOLE_SECONDS is declared... yes
+checking whether STICKY_TIMEOUTS is declared... yes
+checking whether ADDR_LIMIT_3GB is declared... yes
+checking sys/swap.h usability... yes
+checking sys/swap.h presence... yes
+checking for sys/swap.h... yes
+checking for cpu_set_t... yes
+checking whether CPU_ALLOC is declared... yes
+checking for crc32 in -lz... yes
+configure: creating ./config.status
+config.status: creating disk-utils/Makefile
+config.status: creating fdisk/Makefile
+config.status: creating fsck/Makefile
+config.status: creating getopt/Makefile
+config.status: creating hwclock/Makefile
+config.status: creating include/Makefile
+config.status: creating lib/Makefile
+config.status: creating login-utils/Makefile
+config.status: creating Makefile
+config.status: creating man/ru/Makefile
+config.status: creating misc-utils/chkdupexe
+config.status: creating misc-utils/Makefile
+config.status: creating mount/Makefile
+config.status: creating partx/Makefile
+config.status: creating po/Makefile.in
+config.status: creating schedutils/Makefile
+config.status: creating libblkid/blkid.pc
+config.status: creating libblkid/Makefile
+config.status: creating libblkid/docs/Makefile
+config.status: creating libblkid/docs/version.xml
+config.status: creating libblkid/src/Makefile
+config.status: creating libblkid/src/blkid.h
+config.status: creating libblkid/src/superblocks/Makefile
+config.status: creating libblkid/src/topology/Makefile
+config.status: creating libblkid/src/partitions/Makefile
+config.status: creating libblkid/samples/Makefile
+config.status: creating libmount/mount.pc
+config.status: creating libmount/Makefile
+config.status: creating libmount/src/Makefile
+config.status: creating libmount/src/libmount.h
+config.status: creating libmount/docs/Makefile
+config.status: creating libmount/docs/version.xml
+config.status: creating libmount/samples/Makefile
+config.status: creating libuuid/uuid.pc
+config.status: creating libuuid/Makefile
+config.status: creating libuuid/man/Makefile
+config.status: creating libuuid/src/Makefile
+config.status: creating sys-utils/Makefile
+config.status: creating term-utils/Makefile
+config.status: creating tests/commands.sh
+config.status: creating tests/helpers/Makefile
+config.status: creating tests/Makefile
+config.status: creating text-utils/Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+config.status: executing default-1 commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
++ make -j24
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20'
+Making all in include
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/include'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/include'
+Making all in disk-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/disk-utils'
+  CC     mkfs.o
+  CC     mkswap-mkswap.o
+make -C ../libuuid/src
+  CC     mkswap-blkdev.o
+make -C ../libblkid/src
+  CC     mkswap-linux_version.o
+  CC     mkswap-wholedisk.o
+  CC     mkswap-strutils.o
+  CC     fsck.minix.o
+  CC     ismounted.o
+  CC     mkfs.minix.o
+  CC     blkdev.o
+  CC     linux_version.o
+  CC     strutils.o
+  CC     mkfs.bfs.o
+  CC     blockdev.o
+  CC     swaplabel-swaplabel.o
+  CC     swaplabel-blkdev.o
+  CC     swaplabel-linux_version.o
+  CC     fsck.cramfs.o
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+  CC     cramfs_common.o
+  CC     mkfs.cramfs.o
+  CC     clear.lo
+  CC     md5.o
+  CC     compare.lo
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+Making all in superblocks
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
+  CC     superblocks.lo
+  CC     cramfs.lo
+  CC     swap.lo
+  CC     adaptec_raid.lo
+  CC     ddf_raid.lo
+  CC     isw_raid.lo
+  CC     copy.lo
+  CC     isosize.o
+  CC     jmicron_raid.lo
+  CC     lsi_raid.lo
+  CC     fdformat.o
+  CCLD   mkfs
+  CC     nvidia_raid.lo
+  CC     promise_raid.lo
+  CC     gen_uuid.lo
+  CCLD   fsck.cramfs
+  CC     silicon_raid.lo
+  CC     isnull.lo
+  CCLD   mkfs.bfs
+  CC     pack.lo
+  CC     parse.lo
+  CCLD   isosize
+  CC     unpack.lo
+  CCLD   blockdev
+  CC     unparse.lo
+  CCLD   fdformat
+  CC     via_raid.lo
+  CC     uuid_time.lo
+  CC     linux_raid.lo
+  CC     jfs.lo
+  CC     xfs.lo
+  CC     ext.lo
+  CC     tst_uuid.o
+  CC     gfs.lo
+  CC     ocfs.lo
+  CC     reiserfs.lo
+  CC     romfs.lo
+  CC     ntfs.lo
+  CC     hfs.lo
+  CC     iso9660.lo
+  CC     udf.lo
+  CC     vfat.lo
+  CC     luks.lo
+  CC     highpoint_raid.lo
+  CC     vxfs.lo
+  CC     minix.lo
+  CCLD   mkfs.cramfs
+  CC     ufs.lo
+  CC     hpfs.lo
+  CC     squashfs.lo
+  CC     netware.lo
+  CC     sysv.lo
+  CC     btrfs.lo
+  CC     lvm.lo
+  CC     zfs.lo
+  CC     ubifs.lo
+  CC     bfs.lo
+  CC     drbd.lo
+  CC     vmfs.lo
+  CC     befs.lo
+  CC     nilfs.lo
+  CC     exfat.lo
+  CCLD   mkfs.minix
+  CCLD   libuuid.la
+  CCLD   tst_uuid
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+  CCLD   fsck.minix
+  CCLD   libblkid_superblocks.la
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
+Making all in topology
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/topology'
+  CC     topology.lo
+  CC     sysfs.lo
+  CC     dm.lo
+  CC     lvm.lo
+  CC     ioctl.lo
+  CC     md.lo
+  CC     evms.lo
+  CCLD   libblkid_topology.la
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/topology'
+Making all in partitions
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/partitions'
+  CC     partitions.lo
+  CC     aix.lo
+  CC     bsd.lo
+  CC     unixware.lo
+  CC     solaris_x86.lo
+  CC     sun.lo
+  CC     sgi.lo
+  CC     mac.lo
+  CC     dos.lo
+  CC     minix.lo
+  CC     ultrix.lo
+  CC     gpt.lo
+  CCLD   libblkid_partitions.la
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/partitions'
+Making all in .
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+  CC     cache.lo
+  CC     dev.lo
+  CC     devname.lo
+  CC     devno.lo
+  CC     getsize.lo
+  CC     llseek.lo
+  CC     probe.lo
+  CC     read.lo
+  CC     resolve.lo
+  CC     save.lo
+  CC     tag.lo
+  CC     version.lo
+  CC     verify.lo
+  CC     encode.lo
+  CC     evaluate.lo
+  CC     config.lo
+  CC     blkdev.lo
+  CC     linux_version.lo
+  CC     canonicalize.lo
+  CC     md5.lo
+  CC     crc32.lo
+  CC     strutils.lo
+  CC     at.lo
+  CC     env.lo
+  CC     sysfs.lo
+  CCLD   libblkid.la
+copying selected object files to avoid basename conflicts...
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+  CCLD   mkswap
+  CCLD   swaplabel
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/disk-utils'
+Making all in fdisk
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/fdisk'
+  CC     fdisk-fdisk.o
+  CC     fdisk-fdiskbsdlabel.o
+  CC     fdisk-fdisksgilabel.o
+  CC     fdisk-fdisksunlabel.o
+  CC     fdisk-fdiskaixlabel.o
+  CC     fdisk-fdiskmaclabel.o
+  CC     fdisk-partname.o
+  CC     fdisk-i386_sys_types.o
+  CC     fdisk-gpt.o
+  CC     fdisk-blkdev.o
+  CC     fdisk-wholedisk.o
+  CC     fdisk-mbsalign.o
+  CC     fdisk-canonicalize.o
+  CC     fdisk-linux_version.o
+  CC     partname.o
+  CC     sfdisk.o
+  CC     gpt.o
+  CC     blkdev.o
+  CC     wholedisk.o
+  CC     mbsalign.o
+  CC     linux_version.o
+  CC     canonicalize.o
+  CC     i386_sys_types.o
+  CC     cfdisk-cfdisk.o
+  CC     cfdisk-i386_sys_types.o
+  CC     cfdisk-gpt.o
+  CC     cfdisk-blkdev.o
+  CC     cfdisk-wholedisk.o
+  CC     cfdisk-mbsalign.o
+  CC     cfdisk-linux_version.o
+  CCLD   cfdisk
+  CCLD   sfdisk
+  CCLD   fdisk
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/fdisk'
+Making all in getopt
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/getopt'
+  CC     getopt.o
+  CCLD   getopt
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/getopt'
+Making all in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/lib'
+  CC     blkdev.o
+  CC     linux_version.o
+  CC     ismounted.o
+  CC     wholedisk.o
+  CC     mangle.o
+  CC     tt.o
+  CC     mbsalign.o
+  CC     test_canonicalize-canonicalize.o
+  CC     strutils.o
+  CC     procutils.o
+  CC     test_at-at.o
+  CC     cpuset.o
+  CC     test_sysfs-at.o
+  CC     test_sysfs-sysfs.o
+  CC     test_loopdev-sysfs.o
+  CC     test_loopdev-loopdev.o
+  CC     test_loopdev-at.o
+  CC     test_loopdev-linux_version.o
+  CC     test_loopdev-canonicalize.o
+  CCLD   test_wholedisk
+  CCLD   test_at
+  CCLD   test_ismounted
+  CCLD   test_procutils
+  CCLD   test_blkdev
+  CCLD   test_mangle
+  CCLD   test_canonicalize
+  CCLD   test_sysfs
+  CCLD   test_strutils
+  CCLD   test_cpuset
+  CCLD   test_loopdev
+  CCLD   test_tt
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/lib'
+Making all in libuuid
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+Making all in src
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+Making all in man
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/man'
+  GEN    uuid_generate_random.3
+  GEN    uuid_generate_time.3
+  GEN    uuid_generate_time_safe.3
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/man'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+Making all in libblkid
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+Making all in src
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+Making all in superblocks
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
+Making all in topology
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/topology'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/topology'
+Making all in partitions
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/partitions'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/partitions'
+Making all in .
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+make[4]: Nothing to be done for `all-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+Making all in samples
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/samples'
+  CC     topology.o
+  CC     partitions.o
+  CC     mkfs.o
+  CC     superblocks.o
+  CCLD   mkfs
+  CCLD   superblocks
+  CCLD   topology
+  CCLD   partitions
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/samples'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+Making all in libmount
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+Making all in src
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
+  CC     version.lo
+  CC     utils.lo
+  CC     test.lo
+  CC     init.lo
+  CC     cache.lo
+  CC     optstr.lo
+  CC     optmap.lo
+  CC     iter.lo
+  CC     lock.lo
+  CC     fs.lo
+  CC     tab.lo
+  CC     tab_update.lo
+  CC     tab_parse.lo
+  CC     tab_diff.lo
+  CC     context.lo
+  CC     context_mount.lo
+  CC     context_umount.lo
+  CC     context_loopdev.lo
+  CC     at.lo
+  CC     mangle.lo
+  CC     canonicalize.lo
+  CC     strutils.lo
+  CC     loopdev.lo
+  CC     env.lo
+  CC     sysfs.lo
+  CC     linux_version.lo
+  CCLD   libmount.la
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
+Making all in samples
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/samples'
+  CC     mount.o
+  CCLD   mount
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/samples'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+Making all in man/ru
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/man/ru'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/man/ru'
+Making all in login-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/login-utils'
+  CC     checktty_test-checktty.o
+  CC     islocal_test-islocal.o
+  CCLD   islocal_test
+  CCLD   checktty_test
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/login-utils'
+Making all in misc-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
+  CC     lsblk-lsblk.o
+  CC     lsblk-canonicalize.o
+  CC     lsblk-ismounted.o
+  CC     lsblk-tt.o
+  CC     lsblk-mbsalign.o
+  CC     lsblk-strutils.o
+  CC     lsblk-sysfs.o
+  CC     lsblk-at.o
+  CC     findmnt-findmnt.o
+  CC     findmnt-tt.o
+  CC     findmnt-mbsalign.o
+  CC     findmnt-strutils.o
+  CC     blkid-blkid.o
+  CC     blkid-ismounted.o
+  CC     blkid-strutils.o
+  CC     findfs-findfs.o
+  CC     wipefs-wipefs.o
+  CC     wipefs-strutils.o
+  CC     cal.o
+  CC     mbsalign.o
+  CC     logger.o
+  CC     look.o
+  CC     strutils.o
+  CC     mcookie.o
+  CC     md5.o
+  CC     namei.o
+  CC     whereis.o
+  CC     uuidgen-uuidgen.o
+  CC     rename.o
+  CC     uuidd-uuidd.o
+  CCLD   findfs
+  CCLD   look
+  CCLD   uuidgen
+  CCLD   rename
+  CCLD   logger
+  CCLD   wipefs
+  CCLD   mcookie
+  CCLD   whereis
+  CCLD   namei
+  CCLD   cal
+  CCLD   findmnt
+  CCLD   blkid
+  CCLD   uuidd
+  CCLD   lsblk
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
+Making all in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/po'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/po'
+Making all in sys-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
+  CC     dmesg.o
+  CC     strutils.o
+  CC     mountpoint-mountpoint.o
+  CC     arch.o
+  CC     ctrlaltdel.o
+  CC     fsfreeze.o
+  CC     fstrim.o
+  CC     pivot_root.o
+  CC     switch_root.o
+  CC     flock.o
+  CC     ipcrm.o
+  CC     ipcs.o
+  CC     ipcmk.o
+  CC     renice.o
+  CC     setsid.o
+  CC     cytune.o
+  CC     setarch.o
+  CC     lscpu.o
+  CC     fallocate.o
+  CC     cpuset.o
+  CC     unshare.o
+  CC     readprofile.o
+  CC     ldattach.o
+  CC     tunelp.o
+  CC     rtcwake.o
+  GEN    linux32.8
+  GEN    linux64.8
+  GEN    i386.8
+  GEN    x86_64.8
+  CCLD   arch
+  CCLD   pivot_root
+  CCLD   setsid
+  CCLD   ctrlaltdel
+  CCLD   unshare
+  CCLD   fsfreeze
+  CCLD   ipcmk
+  CCLD   mountpoint
+  CCLD   switch_root
+  CCLD   renice
+  CCLD   setarch
+  CCLD   tunelp
+  CCLD   ldattach
+  CCLD   ipcrm
+  CCLD   flock
+  CCLD   fstrim
+  CCLD   fallocate
+  CCLD   readprofile
+  CCLD   cytune
+  CCLD   ipcs
+  CCLD   dmesg
+  CCLD   rtcwake
+  CCLD   lscpu
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
+Making all in term-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/term-utils'
+  CC     agetty.o
+  CC     script.o
+  CC     scriptreplay.o
+  CC     setterm.o
+  CC     wall-wall.o
+  CC     wall-ttymsg.o
+  CC     wall-strutils.o
+  CC     write-write.o
+  CCLD   scriptreplay
+  CCLD   write
+  CCLD   script
+  CCLD   wall
+  CCLD   setterm
+  CCLD   agetty
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/term-utils'
+Making all in text-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/text-utils'
+  CC     more.o
+  CC     col.o
+  CC     strutils.o
+  CC     colcrt.o
+  CC     colrm.o
+  CC     column.o
+  CC     hexdump.o
+  CC     conv.o
+  CC     display.o
+  CC     parse.o
+  CC     hexsyntax.o
+  CC     rev.o
+  CC     tailf.o
+  CC     ul.o
+  CC     pg.o
+  CCLD   colcrt
+  CCLD   rev
+  CCLD   colrm
+  CCLD   tailf
+  CCLD   hexdump
+  CCLD   col
+  CCLD   ul
+  CCLD   column
+  CCLD   more
+  CCLD   pg
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/text-utils'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+Making all in helpers
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests/helpers'
+  CC     test_sysinfo.o
+  CC     test_pathnames.o
+  CC     test_byteswap.o
+  CC     test_md5.o
+  CC     md5.o
+  CCLD   test_pathnames
+  CCLD   test_byteswap
+  CCLD   test_sysinfo
+  CCLD   test_md5
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/tests/helpers'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+Making all in hwclock
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/hwclock'
+  CC     hwclock.o
+  CC     cmos.o
+  CC     kd.o
+  CC     strutils.o
+  CC     rtc.o
+  CCLD   hwclock
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/hwclock'
+Making all in partx
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/partx'
+  CC     addpart.o
+  CC     delpart.o
+  CC     partx-partx.o
+  CC     partx-blkdev.o
+  CC     partx-sysfs.o
+  CC     partx-tt.o
+  CC     partx-at.o
+  CC     partx-mbsalign.o
+  CC     partx-strutils.o
+  CC     partx-linux_version.o
+  CCLD   delpart
+  CCLD   addpart
+  CCLD   partx
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/partx'
+Making all in mount
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
+  CC     mount-mount.o
+  CC     mount-fstab.o
+  CC     mount-mount_mntent.o
+  CC     mount-getusername.o
+  CC     mount-lomount.o
+  CC     mount-devname.o
+  CC     mount-sundries.o
+  CC     mount-xmalloc.o
+  CC     mount-canonicalize.o
+  CC     mount-env.o
+  CC     mount-linux_version.o
+  CC     mount-blkdev.o
+  CC     mount-fsprobe.o
+  CC     mount-mangle.o
+  CC     mount-setproctitle.o
+  CC     mount-strutils.o
+  CC     umount-umount.o
+  CC     umount-mount_mntent.o
+  CC     umount-fstab.o
+  CC     umount-getusername.o
+  CC     umount-lomount.o
+  CC     umount-devname.o
+  CC     umount-sundries.o
+  CC     umount-xmalloc.o
+  CC     umount-canonicalize.o
+  CC     umount-env.o
+  CC     umount-linux_version.o
+  CC     umount-blkdev.o
+  CC     umount-fsprobe.o
+  CC     umount-mangle.o
+  CC     umount-strutils.o
+  CC     mtab_lock_test-fstab.o
+  CC     mtab_lock_test-sundries.o
+  CC     mtab_lock_test-xmalloc.o
+  CC     mtab_lock_test-canonicalize.o
+  CC     losetup-lomount.o
+  CC     losetup-sundries.o
+  CC     losetup-xmalloc.o
+  CC     losetup-canonicalize.o
+  CC     losetup-strutils.o
+  CC     swapon-swapon.o
+  CC     swapon-linux_version.o
+  CC     swapon-blkdev.o
+  CC     swapon-canonicalize.o
+  CC     swapon-fsprobe.o
+  CC     swapon-mangle.o
+  CCLD   umount
+  CCLD   mtab_lock_test
+  CCLD   swapon
+  CCLD   losetup
+  CCLD   mount
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
+Making all in fsck
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/fsck'
+  CC     fsck-fsck.o
+  CC     fsck-ismounted.o
+  CC     fsck-fsprobe.o
+  CC     fsck-canonicalize.o
+  CCLD   fsck
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/fsck'
+Making all in schedutils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/schedutils'
+  CC     chrt.o
+  CC     strutils.o
+  CC     procutils.o
+  CC     ionice.o
+  CC     taskset.o
+  CC     cpuset.o
+  CCLD   chrt
+  CCLD   taskset
+  CCLD   ionice
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/schedutils'
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.13160
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/util-linux-root
++ /bin/mkdir -p /var/tmp/util-linux-root
++ cd util-linux-2.20
++ make DESTDIR=/var/tmp/util-linux-root install
+make  install-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20'
+Making install in include
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/include'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/include'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/include'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/include'
+Making install in disk-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/disk-utils'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/disk-utils'
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c mkfs mkswap fsck.minix mkfs.minix mkfs.bfs blockdev swaplabel fsck.cramfs mkfs.cramfs '/var/tmp/util-linux-root/sbin'
+libtool: install: /usr/bin/install -c mkfs /var/tmp/util-linux-root/sbin/mkfs
+libtool: install: warning: `../libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/mkswap /var/tmp/util-linux-root/sbin/mkswap
+libtool: install: /usr/bin/install -c fsck.minix /var/tmp/util-linux-root/sbin/fsck.minix
+libtool: install: /usr/bin/install -c mkfs.minix /var/tmp/util-linux-root/sbin/mkfs.minix
+libtool: install: /usr/bin/install -c mkfs.bfs /var/tmp/util-linux-root/sbin/mkfs.bfs
+libtool: install: /usr/bin/install -c blockdev /var/tmp/util-linux-root/sbin/blockdev
+libtool: install: warning: `../libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/swaplabel /var/tmp/util-linux-root/sbin/swaplabel
+libtool: install: /usr/bin/install -c fsck.cramfs /var/tmp/util-linux-root/sbin/fsck.cramfs
+libtool: install: /usr/bin/install -c mkfs.cramfs /var/tmp/util-linux-root/sbin/mkfs.cramfs
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c isosize '/var/tmp/util-linux-root/usr/bin'
+libtool: install: /usr/bin/install -c isosize /var/tmp/util-linux-root/usr/bin/isosize
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c fdformat '/var/tmp/util-linux-root/usr/sbin'
+libtool: install: /usr/bin/install -c fdformat /var/tmp/util-linux-root/usr/sbin/fdformat
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 isosize.8 mkfs.8 mkswap.8 fsck.minix.8 mkfs.minix.8 mkfs.bfs.8 fdformat.8 blockdev.8 swaplabel.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/disk-utils'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/disk-utils'
+Making install in fdisk
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/fdisk'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/fdisk'
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c fdisk sfdisk cfdisk '/var/tmp/util-linux-root/sbin'
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/fdisk /var/tmp/util-linux-root/sbin/fdisk
+libtool: install: /usr/bin/install -c sfdisk /var/tmp/util-linux-root/sbin/sfdisk
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/cfdisk /var/tmp/util-linux-root/sbin/cfdisk
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 fdisk.8 sfdisk.8 cfdisk.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/fdisk'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/fdisk'
+Making install in getopt
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/getopt'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/getopt'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c getopt '/var/tmp/util-linux-root/usr/bin'
+libtool: install: /usr/bin/install -c getopt /var/tmp/util-linux-root/usr/bin/getopt
+test -z "/usr/share/getopt/" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/getopt/"
+ /usr/bin/install -c getopt-parse.bash getopt-parse.tcsh '/var/tmp/util-linux-root/usr/share/getopt/'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 getopt.1 '/var/tmp/util-linux-root/usr/share/man/man1'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/getopt'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/getopt'
+Making install in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/lib'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/lib'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/lib'
+Making install in libuuid
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+Making install in src
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/lib64"
+ /bin/sh ../../libtool   --mode=install /usr/bin/install -c   libuuid.la '/var/tmp/util-linux-root/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/libuuid.so.1.3.0 /var/tmp/util-linux-root/usr/lib64/libuuid.so.1.3.0
+libtool: install: (cd /var/tmp/util-linux-root/usr/lib64 && { ln -s -f libuuid.so.1.3.0 libuuid.so.1 || { rm -f libuuid.so.1 && ln -s libuuid.so.1.3.0 libuuid.so.1; }; })
+libtool: install: (cd /var/tmp/util-linux-root/usr/lib64 && { ln -s -f libuuid.so.1.3.0 libuuid.so || { rm -f libuuid.so && ln -s libuuid.so.1.3.0 libuuid.so; }; })
+libtool: install: /usr/bin/install -c .libs/libuuid.lai /var/tmp/util-linux-root/usr/lib64/libuuid.la
+libtool: install: /usr/bin/install -c .libs/libuuid.a /var/tmp/util-linux-root/usr/lib64/libuuid.a
+libtool: install: chmod 644 /var/tmp/util-linux-root/usr/lib64/libuuid.a
+libtool: install: ranlib /var/tmp/util-linux-root/usr/lib64/libuuid.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib64'
+make  install-exec-hook
+make[5]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+if test "/usr/lib64" != "/lib64"; then \
+	mkdir -p /var/tmp/util-linux-root/lib64; \
+	mv /var/tmp/util-linux-root/usr/lib64/libuuid.so.* /var/tmp/util-linux-root/lib64; \
+	so_img_name=$(readlink /var/tmp/util-linux-root/usr/lib64/libuuid.so); \
+	so_img_rel_target=$(echo /usr/lib64 | sed 's,\(^/\|\)[^/][^/]*,..,g'); \
+	(cd /var/tmp/util-linux-root/usr/lib64 && \
+		rm -f libuuid.so && \
+		ln -s $so_img_rel_target/lib64/$so_img_name libuuid.so); \
+fi
+make[5]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+test -z "/usr/include/uuid" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/include/uuid"
+ /usr/bin/install -c -m 644 uuid.h '/var/tmp/util-linux-root/usr/include/uuid'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
+Making install in man
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/man'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/man'
+make[4]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man3" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man3"
+ /usr/bin/install -c -m 644 uuid.3 uuid_clear.3 uuid_compare.3 uuid_copy.3 uuid_generate.3 uuid_is_null.3 uuid_parse.3 uuid_time.3 uuid_unparse.3 uuid_generate_random.3 uuid_generate_time.3 uuid_generate_time_safe.3 '/var/tmp/util-linux-root/usr/share/man/man3'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/man'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/man'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+make[4]: Nothing to be done for `install-exec-am'.
+test -z "/usr/lib64/pkgconfig" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/lib64/pkgconfig"
+ /usr/bin/install -c -m 644 uuid.pc '/var/tmp/util-linux-root/usr/lib64/pkgconfig'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
+Making install in libblkid
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+Making install in src
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+Making install in superblocks
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
+make[5]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
+make[5]: Nothing to be done for `install-exec-am'.
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
+Making install in topology
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/topology'
+make[5]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/topology'
+make[5]: Nothing to be done for `install-exec-am'.
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/topology'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/topology'
+Making install in partitions
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/partitions'
+make[5]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/partitions'
+make[5]: Nothing to be done for `install-exec-am'.
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/partitions'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/partitions'
+Making install in .
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+make[5]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/lib64"
+ /bin/sh ../../libtool   --mode=install /usr/bin/install -c   libblkid.la '/var/tmp/util-linux-root/usr/lib64'
+libtool: install: warning: relinking `libblkid.la'
+libtool: install: (cd /usr/src/rpm/BUILD/util-linux-2.20/libblkid/src; /bin/sh /usr/src/rpm/BUILD/util-linux-2.20/libtool  --silent --tag CC --mode=relink gcc -std=gnu99 -fsigned-char -g -O2 -Wl,--version-script=../../libblkid/src/blkid.sym -version-info 2:0:1 -s -o libblkid.la -rpath /usr/lib64 cache.lo dev.lo devname.lo devno.lo getsize.lo llseek.lo probe.lo read.lo resolve.lo save.lo tag.lo version.lo verify.lo encode.lo config.lo evaluate.lo blkdev.lo linux_version.lo canonicalize.lo md5.lo crc32.lo env.lo strutils.lo at.lo sysfs.lo superblocks/libblkid_superblocks.la topology/libblkid_topology.la partitions/libblkid_partitions.la ../../libuuid/src/libuuid.la -inst-prefix-dir /var/tmp/util-linux-root)
+libtool: install: /usr/bin/install -c .libs/libblkid.so.1.1.0T /var/tmp/util-linux-root/usr/lib64/libblkid.so.1.1.0
+libtool: install: (cd /var/tmp/util-linux-root/usr/lib64 && { ln -s -f libblkid.so.1.1.0 libblkid.so.1 || { rm -f libblkid.so.1 && ln -s libblkid.so.1.1.0 libblkid.so.1; }; })
+libtool: install: (cd /var/tmp/util-linux-root/usr/lib64 && { ln -s -f libblkid.so.1.1.0 libblkid.so || { rm -f libblkid.so && ln -s libblkid.so.1.1.0 libblkid.so; }; })
+libtool: install: /usr/bin/install -c .libs/libblkid.lai /var/tmp/util-linux-root/usr/lib64/libblkid.la
+libtool: install: /usr/bin/install -c .libs/libblkid.a /var/tmp/util-linux-root/usr/lib64/libblkid.a
+libtool: install: chmod 644 /var/tmp/util-linux-root/usr/lib64/libblkid.a
+libtool: install: ranlib /var/tmp/util-linux-root/usr/lib64/libblkid.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib64'
+make  install-exec-hook
+make[6]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+if test "/usr/lib64" != "/lib64"; then \
+	mkdir -p /var/tmp/util-linux-root/lib64; \
+	mv /var/tmp/util-linux-root/usr/lib64/libblkid.so.* /var/tmp/util-linux-root/lib64; \
+	so_img_name=$(readlink /var/tmp/util-linux-root/usr/lib64/libblkid.so); \
+	so_img_rel_target=$(echo /usr/lib64 | sed 's,\(^/\|\)[^/][^/]*,..,g'); \
+	(cd /var/tmp/util-linux-root/usr/lib64 && \
+		rm -f libblkid.so && \
+		ln -s $so_img_rel_target/lib64/$so_img_name libblkid.so); \
+fi
+make[6]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+test -z "/usr/include/blkid" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/include/blkid"
+ /usr/bin/install -c -m 644 blkid.h '/var/tmp/util-linux-root/usr/include/blkid'
+make[5]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
+Making install in samples
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/samples'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/samples'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/samples'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/samples'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+make[4]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man3" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man3"
+ /usr/bin/install -c -m 644 libblkid.3 '/var/tmp/util-linux-root/usr/share/man/man3'
+test -z "/usr/lib64/pkgconfig" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/lib64/pkgconfig"
+ /usr/bin/install -c -m 644 blkid.pc '/var/tmp/util-linux-root/usr/lib64/pkgconfig'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid'
+Making install in libmount
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+Making install in src
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/lib64"
+ /bin/sh ../../libtool   --mode=install /usr/bin/install -c   libmount.la '/var/tmp/util-linux-root/usr/lib64'
+libtool: install: warning: relinking `libmount.la'
+libtool: install: (cd /usr/src/rpm/BUILD/util-linux-2.20/libmount/src; /bin/sh /usr/src/rpm/BUILD/util-linux-2.20/libtool  --silent --tag CC --mode=relink gcc -std=gnu99 -fsigned-char -g -O2 -Wl,--version-script=../../libmount/src/libmount.sym -version-info 2:0:1 -s -o libmount.la -rpath /usr/lib64 version.lo utils.lo test.lo init.lo cache.lo optstr.lo optmap.lo iter.lo lock.lo fs.lo tab.lo tab_parse.lo tab_update.lo tab_diff.lo context.lo context_mount.lo context_umount.lo context_loopdev.lo at.lo mangle.lo canonicalize.lo strutils.lo env.lo loopdev.lo sysfs.lo linux_version.lo ../../libblkid/src/libblkid.la -inst-prefix-dir /var/tmp/util-linux-root)
+libtool: install: /usr/bin/install -c .libs/libmount.so.1.1.0T /var/tmp/util-linux-root/usr/lib64/libmount.so.1.1.0
+libtool: install: (cd /var/tmp/util-linux-root/usr/lib64 && { ln -s -f libmount.so.1.1.0 libmount.so.1 || { rm -f libmount.so.1 && ln -s libmount.so.1.1.0 libmount.so.1; }; })
+libtool: install: (cd /var/tmp/util-linux-root/usr/lib64 && { ln -s -f libmount.so.1.1.0 libmount.so || { rm -f libmount.so && ln -s libmount.so.1.1.0 libmount.so; }; })
+libtool: install: /usr/bin/install -c .libs/libmount.lai /var/tmp/util-linux-root/usr/lib64/libmount.la
+libtool: install: /usr/bin/install -c .libs/libmount.a /var/tmp/util-linux-root/usr/lib64/libmount.a
+libtool: install: chmod 644 /var/tmp/util-linux-root/usr/lib64/libmount.a
+libtool: install: ranlib /var/tmp/util-linux-root/usr/lib64/libmount.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib64'
+make  install-exec-hook
+make[5]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
+if test "/usr/lib64" != "/lib64"; then \
+	mkdir -p /var/tmp/util-linux-root/lib64; \
+	mv /var/tmp/util-linux-root/usr/lib64/libmount.so.* /var/tmp/util-linux-root/lib64; \
+	so_img_name=$(readlink /var/tmp/util-linux-root/usr/lib64/libmount.so); \
+	so_img_rel_target=$(echo /usr/lib64 | sed 's,\(^/\|\)[^/][^/]*,..,g'); \
+	(cd /var/tmp/util-linux-root/usr/lib64 && \
+		rm -f libmount.so && \
+		ln -s $so_img_rel_target/lib64/$so_img_name libmount.so); \
+fi
+make[5]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
+test -z "/usr/include/libmount" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/include/libmount"
+ /usr/bin/install -c -m 644 libmount.h '/var/tmp/util-linux-root/usr/include/libmount'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
+Making install in samples
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/samples'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/samples'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/samples'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/samples'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+make[4]: Nothing to be done for `install-exec-am'.
+test -z "/usr/lib64/pkgconfig" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/lib64/pkgconfig"
+ /usr/bin/install -c -m 644 mount.pc '/var/tmp/util-linux-root/usr/lib64/pkgconfig'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount'
+Making install in man/ru
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/man/ru'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/man/ru'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/ru/man1" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/ru/man1"
+ /usr/bin/install -c -m 644 ddate.1 '/var/tmp/util-linux-root/usr/share/man/ru/man1'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/man/ru'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/man/ru'
+Making install in login-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/login-utils'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/login-utils'
+test -z "/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/bin"
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/sbin"
+make  install-exec-hook
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/login-utils'
+make[4]: Nothing to be done for `install-exec-hook'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/login-utils'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man1"
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/login-utils'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/login-utils'
+Making install in misc-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
+test -z "/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c lsblk findmnt '/var/tmp/util-linux-root/bin'
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/lsblk /var/tmp/util-linux-root/bin/lsblk
+libtool: install: warning: `../libmount/src/libmount.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/findmnt /var/tmp/util-linux-root/bin/findmnt
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c blkid findfs wipefs '/var/tmp/util-linux-root/sbin'
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/blkid /var/tmp/util-linux-root/sbin/blkid
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/findfs /var/tmp/util-linux-root/sbin/findfs
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/wipefs /var/tmp/util-linux-root/sbin/wipefs
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c cal logger look mcookie namei whereis uuidgen rename '/var/tmp/util-linux-root/usr/bin'
+libtool: install: /usr/bin/install -c cal /var/tmp/util-linux-root/usr/bin/cal
+libtool: install: /usr/bin/install -c logger /var/tmp/util-linux-root/usr/bin/logger
+libtool: install: /usr/bin/install -c look /var/tmp/util-linux-root/usr/bin/look
+libtool: install: /usr/bin/install -c mcookie /var/tmp/util-linux-root/usr/bin/mcookie
+libtool: install: /usr/bin/install -c namei /var/tmp/util-linux-root/usr/bin/namei
+libtool: install: /usr/bin/install -c whereis /var/tmp/util-linux-root/usr/bin/whereis
+libtool: install: warning: `../libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/uuidgen /var/tmp/util-linux-root/usr/bin/uuidgen
+libtool: install: /usr/bin/install -c rename /var/tmp/util-linux-root/usr/bin/rename
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+ /usr/bin/install -c chkdupexe '/var/tmp/util-linux-root/usr/bin'
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c uuidd '/var/tmp/util-linux-root/usr/sbin'
+libtool: install: warning: `../libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/uuidd /var/tmp/util-linux-root/usr/sbin/uuidd
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 cal.1 chkdupexe.1 logger.1 look.1 mcookie.1 namei.1 whereis.1 uuidgen.1 rename.1 '/var/tmp/util-linux-root/usr/share/man/man1'
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 uuidd.8 blkid.8 findfs.8 wipefs.8 lsblk.8 findmnt.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
+Making install in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/po'
+/bin/sh ../config/mkinstalldirs /var/tmp/util-linux-root/usr/share
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/ca/LC_MESSAGES
+installing ca.gmo as /var/tmp/util-linux-root/usr/share/locale/ca/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/cs/LC_MESSAGES
+installing cs.gmo as /var/tmp/util-linux-root/usr/share/locale/cs/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/da/LC_MESSAGES
+installing da.gmo as /var/tmp/util-linux-root/usr/share/locale/da/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/de/LC_MESSAGES
+installing de.gmo as /var/tmp/util-linux-root/usr/share/locale/de/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/es/LC_MESSAGES
+installing es.gmo as /var/tmp/util-linux-root/usr/share/locale/es/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/et/LC_MESSAGES
+installing et.gmo as /var/tmp/util-linux-root/usr/share/locale/et/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/eu/LC_MESSAGES
+installing eu.gmo as /var/tmp/util-linux-root/usr/share/locale/eu/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/fi/LC_MESSAGES
+installing fi.gmo as /var/tmp/util-linux-root/usr/share/locale/fi/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/fr/LC_MESSAGES
+installing fr.gmo as /var/tmp/util-linux-root/usr/share/locale/fr/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/gl/LC_MESSAGES
+installing gl.gmo as /var/tmp/util-linux-root/usr/share/locale/gl/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/hu/LC_MESSAGES
+installing hu.gmo as /var/tmp/util-linux-root/usr/share/locale/hu/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/id/LC_MESSAGES
+installing id.gmo as /var/tmp/util-linux-root/usr/share/locale/id/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/it/LC_MESSAGES
+installing it.gmo as /var/tmp/util-linux-root/usr/share/locale/it/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/ja/LC_MESSAGES
+installing ja.gmo as /var/tmp/util-linux-root/usr/share/locale/ja/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/nl/LC_MESSAGES
+installing nl.gmo as /var/tmp/util-linux-root/usr/share/locale/nl/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/pl/LC_MESSAGES
+installing pl.gmo as /var/tmp/util-linux-root/usr/share/locale/pl/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/pt_BR/LC_MESSAGES
+installing pt_BR.gmo as /var/tmp/util-linux-root/usr/share/locale/pt_BR/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/ru/LC_MESSAGES
+installing ru.gmo as /var/tmp/util-linux-root/usr/share/locale/ru/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/sl/LC_MESSAGES
+installing sl.gmo as /var/tmp/util-linux-root/usr/share/locale/sl/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/sv/LC_MESSAGES
+installing sv.gmo as /var/tmp/util-linux-root/usr/share/locale/sv/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/tr/LC_MESSAGES
+installing tr.gmo as /var/tmp/util-linux-root/usr/share/locale/tr/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/uk/LC_MESSAGES
+installing uk.gmo as /var/tmp/util-linux-root/usr/share/locale/uk/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/vi/LC_MESSAGES
+installing vi.gmo as /var/tmp/util-linux-root/usr/share/locale/vi/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/zh_CN/LC_MESSAGES
+installing zh_CN.gmo as /var/tmp/util-linux-root/usr/share/locale/zh_CN/LC_MESSAGES/util-linux.mo
+mkdir -p -- /var/tmp/util-linux-root/usr/share/locale/zh_TW/LC_MESSAGES
+installing zh_TW.gmo as /var/tmp/util-linux-root/usr/share/locale/zh_TW/LC_MESSAGES/util-linux.mo
+if test "util-linux" = "gettext-tools"; then \
+  /bin/sh ../config/mkinstalldirs /var/tmp/util-linux-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/util-linux-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/util-linux-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/po'
+Making install in sys-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
+test -z "/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c dmesg mountpoint arch '/var/tmp/util-linux-root/bin'
+libtool: install: /usr/bin/install -c dmesg /var/tmp/util-linux-root/bin/dmesg
+libtool: install: warning: `../libmount/src/libmount.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/mountpoint /var/tmp/util-linux-root/bin/mountpoint
+libtool: install: /usr/bin/install -c arch /var/tmp/util-linux-root/bin/arch
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c ctrlaltdel fsfreeze fstrim pivot_root switch_root '/var/tmp/util-linux-root/sbin'
+libtool: install: /usr/bin/install -c ctrlaltdel /var/tmp/util-linux-root/sbin/ctrlaltdel
+libtool: install: /usr/bin/install -c fsfreeze /var/tmp/util-linux-root/sbin/fsfreeze
+libtool: install: /usr/bin/install -c fstrim /var/tmp/util-linux-root/sbin/fstrim
+libtool: install: /usr/bin/install -c pivot_root /var/tmp/util-linux-root/sbin/pivot_root
+libtool: install: /usr/bin/install -c switch_root /var/tmp/util-linux-root/sbin/switch_root
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c flock ipcrm ipcs ipcmk renice setsid cytune setarch lscpu fallocate unshare '/var/tmp/util-linux-root/usr/bin'
+libtool: install: /usr/bin/install -c flock /var/tmp/util-linux-root/usr/bin/flock
+libtool: install: /usr/bin/install -c ipcrm /var/tmp/util-linux-root/usr/bin/ipcrm
+libtool: install: /usr/bin/install -c ipcs /var/tmp/util-linux-root/usr/bin/ipcs
+libtool: install: /usr/bin/install -c ipcmk /var/tmp/util-linux-root/usr/bin/ipcmk
+libtool: install: /usr/bin/install -c renice /var/tmp/util-linux-root/usr/bin/renice
+libtool: install: /usr/bin/install -c setsid /var/tmp/util-linux-root/usr/bin/setsid
+libtool: install: /usr/bin/install -c cytune /var/tmp/util-linux-root/usr/bin/cytune
+libtool: install: /usr/bin/install -c setarch /var/tmp/util-linux-root/usr/bin/setarch
+libtool: install: /usr/bin/install -c lscpu /var/tmp/util-linux-root/usr/bin/lscpu
+libtool: install: /usr/bin/install -c fallocate /var/tmp/util-linux-root/usr/bin/fallocate
+libtool: install: /usr/bin/install -c unshare /var/tmp/util-linux-root/usr/bin/unshare
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c readprofile ldattach tunelp rtcwake '/var/tmp/util-linux-root/usr/sbin'
+libtool: install: /usr/bin/install -c readprofile /var/tmp/util-linux-root/usr/sbin/readprofile
+libtool: install: /usr/bin/install -c ldattach /var/tmp/util-linux-root/usr/sbin/ldattach
+libtool: install: /usr/bin/install -c tunelp /var/tmp/util-linux-root/usr/sbin/tunelp
+libtool: install: /usr/bin/install -c rtcwake /var/tmp/util-linux-root/usr/sbin/rtcwake
+make  install-exec-hook
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
+for I in linux32 linux64   i386 x86_64     ; do \
+	cd /var/tmp/util-linux-root/usr/bin && ln -sf setarch $I ; \
+done
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 flock.1 ipcrm.1 ipcs.1 ipcmk.1 renice.1 setsid.1 readprofile.1 dmesg.1 lscpu.1 mountpoint.1 fallocate.1 unshare.1 arch.1 '/var/tmp/util-linux-root/usr/share/man/man1'
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 ctrlaltdel.8 cytune.8 setarch.8 ldattach.8 tunelp.8 rtcwake.8 fsfreeze.8 fstrim.8 pivot_root.8 switch_root.8 linux32.8 linux64.8 i386.8 x86_64.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
+Making install in term-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/term-utils'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/term-utils'
+test -z "/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/bin"
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c agetty '/var/tmp/util-linux-root/sbin'
+libtool: install: /usr/bin/install -c agetty /var/tmp/util-linux-root/sbin/agetty
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c script scriptreplay setterm wall write '/var/tmp/util-linux-root/usr/bin'
+libtool: install: /usr/bin/install -c script /var/tmp/util-linux-root/usr/bin/script
+libtool: install: /usr/bin/install -c scriptreplay /var/tmp/util-linux-root/usr/bin/scriptreplay
+libtool: install: /usr/bin/install -c setterm /var/tmp/util-linux-root/usr/bin/setterm
+libtool: install: /usr/bin/install -c wall /var/tmp/util-linux-root/usr/bin/wall
+libtool: install: /usr/bin/install -c write /var/tmp/util-linux-root/usr/bin/write
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/sbin"
+make  install-exec-hook
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/term-utils'
+chgrp tty /var/tmp/util-linux-root/usr/bin/wall
+chmod g+s /var/tmp/util-linux-root/usr/bin/wall
+chgrp tty /var/tmp/util-linux-root/usr/bin/write
+chmod g+s /var/tmp/util-linux-root/usr/bin/write
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/term-utils'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 script.1 scriptreplay.1 setterm.1 wall.1 write.1 '/var/tmp/util-linux-root/usr/share/man/man1'
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 agetty.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/term-utils'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/term-utils'
+Making install in text-utils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/text-utils'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/text-utils'
+test -z "/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c more '/var/tmp/util-linux-root/bin'
+libtool: install: /usr/bin/install -c more /var/tmp/util-linux-root/bin/more
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c col colcrt colrm column hexdump rev tailf ul pg '/var/tmp/util-linux-root/usr/bin'
+libtool: install: /usr/bin/install -c col /var/tmp/util-linux-root/usr/bin/col
+libtool: install: /usr/bin/install -c colcrt /var/tmp/util-linux-root/usr/bin/colcrt
+libtool: install: /usr/bin/install -c colrm /var/tmp/util-linux-root/usr/bin/colrm
+libtool: install: /usr/bin/install -c column /var/tmp/util-linux-root/usr/bin/column
+libtool: install: /usr/bin/install -c hexdump /var/tmp/util-linux-root/usr/bin/hexdump
+libtool: install: /usr/bin/install -c rev /var/tmp/util-linux-root/usr/bin/rev
+libtool: install: /usr/bin/install -c tailf /var/tmp/util-linux-root/usr/bin/tailf
+libtool: install: /usr/bin/install -c ul /var/tmp/util-linux-root/usr/bin/ul
+libtool: install: /usr/bin/install -c pg /var/tmp/util-linux-root/usr/bin/pg
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 col.1 colcrt.1 colrm.1 column.1 hexdump.1 rev.1 tailf.1 ul.1 more.1 pg.1 '/var/tmp/util-linux-root/usr/share/man/man1'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/text-utils'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/text-utils'
+Making install in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+Making install in helpers
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests/helpers'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests/helpers'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/tests/helpers'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/tests/helpers'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
+Making install in hwclock
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/hwclock'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/hwclock'
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c hwclock '/var/tmp/util-linux-root/sbin'
+libtool: install: /usr/bin/install -c hwclock /var/tmp/util-linux-root/sbin/hwclock
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 hwclock.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/hwclock'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/hwclock'
+Making install in partx
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/partx'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/partx'
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c addpart delpart partx '/var/tmp/util-linux-root/usr/sbin'
+libtool: install: /usr/bin/install -c addpart /var/tmp/util-linux-root/usr/sbin/addpart
+libtool: install: /usr/bin/install -c delpart /var/tmp/util-linux-root/usr/sbin/delpart
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/partx /var/tmp/util-linux-root/usr/sbin/partx
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 addpart.8 delpart.8 partx.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/partx'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/partx'
+Making install in mount
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
+test -z "/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c mount umount '/var/tmp/util-linux-root/bin'
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/mount /var/tmp/util-linux-root/bin/mount
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/umount /var/tmp/util-linux-root/bin/umount
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c losetup swapon '/var/tmp/util-linux-root/sbin'
+libtool: install: /usr/bin/install -c losetup /var/tmp/util-linux-root/sbin/losetup
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/swapon /var/tmp/util-linux-root/sbin/swapon
+make  install-exec-hook
+make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
+cd /var/tmp/util-linux-root/sbin && ln -sf swapon swapoff
+chmod 4755 /var/tmp/util-linux-root/bin/mount
+chmod 4755 /var/tmp/util-linux-root/bin/umount
+make[4]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
+test -z "/usr/share/man/man5" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man5"
+ /usr/bin/install -c -m 644 fstab.5 '/var/tmp/util-linux-root/usr/share/man/man5'
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 mount.8 swapoff.8 swapon.8 umount.8 losetup.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
+Making install in fsck
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/fsck'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/fsck'
+test -z "/sbin" || /bin/mkdir -p "/var/tmp/util-linux-root/sbin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c fsck '/var/tmp/util-linux-root/sbin'
+libtool: install: warning: `../libblkid/src/libblkid.la' has not been installed in `/usr/lib64'
+libtool: install: warning: `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src/libuuid.la' has not been installed in `/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/fsck /var/tmp/util-linux-root/sbin/fsck
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 fsck.8 '/var/tmp/util-linux-root/usr/share/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/fsck'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/fsck'
+Making install in schedutils
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/schedutils'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/schedutils'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/bin"
+  /bin/sh ../libtool   --mode=install /usr/bin/install -c chrt ionice taskset '/var/tmp/util-linux-root/usr/bin'
+libtool: install: /usr/bin/install -c chrt /var/tmp/util-linux-root/usr/bin/chrt
+libtool: install: /usr/bin/install -c ionice /var/tmp/util-linux-root/usr/bin/ionice
+libtool: install: /usr/bin/install -c taskset /var/tmp/util-linux-root/usr/bin/taskset
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/util-linux-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 chrt.1 ionice.1 taskset.1 '/var/tmp/util-linux-root/usr/share/man/man1'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/schedutils'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/schedutils'
+make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20'
+make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20'
++ rm -vf /var/tmp/util-linux-root/usr/share/info/dir
++ rm /var/tmp/util-linux-root/usr/share/getopt/getopt-parse.tcsh
++ install -dv /var/tmp/util-linux-root/var/lib/hwclock
+install: creating directory `/var/tmp/util-linux-root/var'
+install: creating directory `/var/tmp/util-linux-root/var/lib'
+install: creating directory `/var/tmp/util-linux-root/var/lib/hwclock'
++ rm -f /var/tmp/util-linux-root/usr/share/man/ru/man1/ddate.1
++ /usr/lib/rpm/compress_man.sh /var/tmp/util-linux-root
++ /usr/lib/rpm/find-lang.sh /var/tmp/util-linux-root util-linux
++ exit 0
+Processing files: util-linux-2.20-1.x86_64
+Provides: libblkid.so.1()(64bit) libblkid.so.1(BLKID_1.0)(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libblkid.so.1(BLKID_2.18)(64bit) libblkid.so.1(BLKID_2.20)(64bit) libmount.so.1()(64bit) libmount.so.1(MOUNT_2.19)(64bit) libmount.so.1(MOUNT_2.20)(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUIDD_PRIVATE)(64bit) libuuid.so.1(UUID_1.0)(64bit) libuuid.so.1(UUID_2.20)(64bit)
+Requires(interp): /bin/sh /sbin/ldconfig /sbin/ldconfig
+Requires(pre): /bin/sh /bin/true /usr/bin/rpm
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+Requires: /bin/bash /bin/true /usr/bin/perl /usr/bin/rpm ld-linux-x86-64.so.2()(64bit) ld-linux-x86-64.so.2(GLIBC_2.3)(64bit) libblkid.so.1()(64bit) libblkid.so.1(BLKID_1.0)(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libblkid.so.1(BLKID_2.18)(64bit) libblkid.so.1(BLKID_2.20)(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.10)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.4)(64bit) libc.so.6(GLIBC_2.6)(64bit) libc.so.6(GLIBC_2.7)(64bit) libmount.so.1()(64bit) libmount.so.1(MOUNT_2.19)(64bit) libmount.so.1(MOUNT_2.20)(64bit) libncursesw.so.5()(64bit) libutil.so.1()(64bit) libutil.so.1(GLIBC_2.2.5)(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUIDD_PRIVATE)(64bit) libuuid.so.1(UUID_1.0)(64bit) libz.so.1()(64bit)
+Processing files: util-linux-devel-2.20-1.x86_64
+Provides: pkgconfig(blkid) = 2.20.0 pkgconfig(mount) = 2.20.0 pkgconfig(uuid) = 2.20.0
+Requires(rpmlib): rpmlib(VersionedDependencies) <= 3.0.3-1
+Requires: pkgconfig
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/util-linux-root
+Wrote: /usr/src/rpm/SRPMS/util-linux-2.20-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/util-linux-2.20-1.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/util-linux-devel-2.20-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.4790
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd util-linux-2.20
++ /bin/rm -rf /var/tmp/util-linux-root

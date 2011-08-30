@@ -1,15 +1,15 @@
 Summary: Util-Linux Next Generation
-Name: util-linux-ng
-Version: 2.18
-Release: 2
+Name: util-linux
+Version: 2.20
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
-URL: http://userweb.kernel.org/~kzak/util-linux-ng
+URL: http://www.kernel.org/pub/linux/utils/util-linux
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 154db0512caae0b6e90eee4b7312d4caf3d6b978
+BuildRequires: digest(sha1:%{SOURCE0}) = e8cd2c8e968cdbdc097d82cceaf15d536e0254c1
 BuildRequires: ncurses-devel
 BuildRequires: zlib-devel
 
@@ -26,38 +26,44 @@ Headers and libraries for libblkid and libuuid
 
 %prep
 %setup -q
+sed -i 's@etc/adjtime@var/lib/hwclock/adjtime@g' $(grep -rl '/etc/adjtime' .)
 
 %build
 export LDFLAGS="%{LDFLAGS}"
-sed -i 's@etc/adjtime@var/lib/hwclock/adjtime@g' $(grep -rl '/etc/adjtime' .)
-./configure --enable-arch --enable-partx --enable-write --libdir=/%{_lib}
+./configure \
+  --enable-arch \
+  --enable-partx \
+  --enable-write \
+  --libdir=/%{_lib}
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 rm -vf %{buildroot}/usr/share/info/dir
 rm %{buildroot}/usr/share/getopt/*.tcsh
+install -dv %{buildroot}/var/lib/hwclock
+# Spurious man page - binary not built
+rm -f %{buildroot}/usr/share/man/ru/man1/ddate.1
 %{compress_man}
 %find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
 
+%pre
+/usr/bin/rpm -e --nodeps util-linux-ng &>/dev/null || /bin/true
+
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
-
-%post devel
-/usr/bin/install-info /usr/share/info/ipc.info /usr/share/info/dir
-
-%preun devel
-/usr/bin/install-info --delete /usr/share/info/ipc.info /usr/share/info/dir
 
 %files -f %{name}.lang
 %defattr(-,root,root)
 /bin/arch
 /bin/dmesg
+/bin/lsblk
 /bin/more
 /bin/mount
+/bin/mountpoint
 /bin/umount
 /bin/findmnt
 /%{_lib}/libmount.so.1
@@ -66,6 +72,7 @@ rm -rf %{buildroot}
 /%{_lib}/libuuid.so.*
 /sbin/agetty
 /sbin/fsfreeze
+/sbin/fstrim
 /sbin/swaplabel
 /sbin/blkid
 /sbin/blockdev
@@ -97,7 +104,6 @@ rm -rf %{buildroot}
 /usr/bin/colrm
 /usr/bin/column
 /usr/bin/cytune
-/usr/bin/ddate
 /usr/bin/fallocate
 /usr/bin/flock
 /usr/bin/getopt
@@ -107,7 +113,6 @@ rm -rf %{buildroot}
 /usr/bin/ipcrm
 /usr/bin/ipcs
 /usr/bin/isosize
-/usr/bin/line
 /usr/bin/linux32
 /usr/bin/linux64
 /usr/bin/logger
@@ -157,14 +162,14 @@ rm -rf %{buildroot}
 /usr/bin/i386
 /usr/bin/x86_64
 %endif
+%dir /var/lib/hwclock
 
 %files devel
 %defattr(-,root,root)
-/usr/share/info/ipc.info
 /usr/share/man/man3/*
 /usr/include/blkid
+/usr/include/libmount
 /usr/include/uuid
-/usr/include/mount
 /usr/%{_lib}/libblkid.la
 /usr/%{_lib}/libmount.la
 /usr/%{_lib}/libuuid.la
@@ -179,6 +184,10 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/uuid.pc
 
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-1
+- Package name changed to util-linux
+- Upgrade to version 2.20
+
 * Thu Apr 28 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.18-2
 - Fix hwclock to use /var/lib/hwclock/adjtime
 
