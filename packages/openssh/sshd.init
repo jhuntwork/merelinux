@@ -41,7 +41,7 @@ case "$1" in
         ;;
 
     restart)
-        killproc "$BIN_FILE"
+        killproc "${BIN_FILE}"
         sleep 1
         start_daemon "${BIN_FILE}"
         evaluate_retval restart
