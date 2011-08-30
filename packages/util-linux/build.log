@@ -1,4 +1,4 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.94770
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.97813
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -11,7 +11,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.94770
 ++ grep -rl /etc/adjtime .
 + sed -i s@etc/adjtime@var/lib/hwclock/adjtime@g ./po/zh_TW.po ./po/vi.po ./po/ja.po ./po/sl.po ./po/da.po ./po/fr.po ./po/nl.po ./po/es.po ./po/fi.po ./po/et.po ./po/tr.po ./po/sv.po ./po/pt_BR.po ./po/hu.po ./po/ca.po ./po/uk.po ./po/ru.po ./po/de.po ./po/it.po ./po/id.po ./po/nl.gmo ./po/cs.po ./include/pathnames.h ./sys-utils/rtcwake.8 ./sys-utils/rtcwake.c ./docs/v2.14-ReleaseNotes ./hwclock/hwclock.8 ./hwclock/hwclock.c ./NEWS
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.33066
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.37015
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd util-linux-2.20
@@ -409,8 +409,8 @@ make -C ../libblkid/src
   CC     ismounted.o
   CC     mkfs.minix.o
   CC     blkdev.o
-  CC     linux_version.o
   CC     strutils.o
+  CC     linux_version.o
   CC     mkfs.bfs.o
   CC     blockdev.o
   CC     swaplabel-swaplabel.o
@@ -420,45 +420,45 @@ make -C ../libblkid/src
 make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
   CC     cramfs_common.o
   CC     mkfs.cramfs.o
-  CC     clear.lo
   CC     md5.o
-  CC     compare.lo
+  CC     isosize.o
+  CC     clear.lo
 make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
 Making all in superblocks
 make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/superblocks'
   CC     superblocks.lo
   CC     cramfs.lo
+  CC     compare.lo
   CC     swap.lo
   CC     adaptec_raid.lo
-  CC     ddf_raid.lo
-  CC     isw_raid.lo
   CC     copy.lo
-  CC     isosize.o
-  CC     jmicron_raid.lo
-  CC     lsi_raid.lo
-  CC     fdformat.o
-  CCLD   mkfs
-  CC     nvidia_raid.lo
-  CC     promise_raid.lo
   CC     gen_uuid.lo
-  CCLD   fsck.cramfs
-  CC     silicon_raid.lo
   CC     isnull.lo
-  CCLD   mkfs.bfs
   CC     pack.lo
   CC     parse.lo
-  CCLD   isosize
   CC     unpack.lo
-  CCLD   blockdev
+  CC     fdformat.o
   CC     unparse.lo
-  CCLD   fdformat
-  CC     via_raid.lo
+  CCLD   mkfs
+  CCLD   fsck.cramfs
+  CC     ddf_raid.lo
+  CC     isw_raid.lo
+  CC     jmicron_raid.lo
   CC     uuid_time.lo
+  CC     tst_uuid.o
+  CCLD   mkfs.bfs
+  CCLD   isosize
+  CC     lsi_raid.lo
+  CCLD   fdformat
+  CC     nvidia_raid.lo
+  CCLD   blockdev
+  CC     promise_raid.lo
+  CC     via_raid.lo
+  CC     silicon_raid.lo
   CC     linux_raid.lo
   CC     jfs.lo
   CC     xfs.lo
   CC     ext.lo
-  CC     tst_uuid.o
   CC     gfs.lo
   CC     ocfs.lo
   CC     reiserfs.lo
@@ -466,13 +466,13 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/sup
   CC     ntfs.lo
   CC     hfs.lo
   CC     iso9660.lo
-  CC     udf.lo
   CC     vfat.lo
+  CC     udf.lo
   CC     luks.lo
   CC     highpoint_raid.lo
   CC     vxfs.lo
-  CC     minix.lo
   CCLD   mkfs.cramfs
+  CC     minix.lo
   CC     ufs.lo
   CC     hpfs.lo
   CC     squashfs.lo
@@ -488,8 +488,8 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src/sup
   CC     befs.lo
   CC     nilfs.lo
   CC     exfat.lo
-  CCLD   mkfs.minix
   CCLD   libuuid.la
+  CCLD   mkfs.minix
   CCLD   tst_uuid
 make[3]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid/src'
   CCLD   fsck.minix
@@ -537,17 +537,17 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libblkid/src'
   CC     tag.lo
   CC     version.lo
   CC     verify.lo
+  CC     config.lo
   CC     encode.lo
   CC     evaluate.lo
-  CC     config.lo
   CC     blkdev.lo
   CC     linux_version.lo
   CC     canonicalize.lo
   CC     md5.lo
   CC     crc32.lo
-  CC     strutils.lo
-  CC     at.lo
   CC     env.lo
+  CC     at.lo
+  CC     strutils.lo
   CC     sysfs.lo
   CCLD   libblkid.la
 copying selected object files to avoid basename conflicts...
@@ -570,27 +570,27 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/fdisk'
   CC     fdisk-blkdev.o
   CC     fdisk-wholedisk.o
   CC     fdisk-mbsalign.o
-  CC     fdisk-canonicalize.o
   CC     fdisk-linux_version.o
-  CC     partname.o
   CC     sfdisk.o
+  CC     fdisk-canonicalize.o
+  CC     partname.o
+  CC     i386_sys_types.o
   CC     gpt.o
   CC     blkdev.o
   CC     wholedisk.o
   CC     mbsalign.o
   CC     linux_version.o
-  CC     canonicalize.o
-  CC     i386_sys_types.o
   CC     cfdisk-cfdisk.o
+  CC     canonicalize.o
   CC     cfdisk-i386_sys_types.o
   CC     cfdisk-gpt.o
   CC     cfdisk-blkdev.o
   CC     cfdisk-wholedisk.o
-  CC     cfdisk-mbsalign.o
   CC     cfdisk-linux_version.o
+  CC     cfdisk-mbsalign.o
   CCLD   cfdisk
-  CCLD   sfdisk
   CCLD   fdisk
+  CCLD   sfdisk
 make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/fdisk'
 Making all in getopt
 make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/getopt'
@@ -611,25 +611,25 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/lib'
   CC     procutils.o
   CC     test_at-at.o
   CC     cpuset.o
-  CC     test_sysfs-at.o
   CC     test_sysfs-sysfs.o
-  CC     test_loopdev-sysfs.o
+  CC     test_sysfs-at.o
   CC     test_loopdev-loopdev.o
+  CC     test_loopdev-sysfs.o
   CC     test_loopdev-at.o
   CC     test_loopdev-linux_version.o
   CC     test_loopdev-canonicalize.o
+  CCLD   test_procutils
   CCLD   test_wholedisk
+  CCLD   test_mangle
   CCLD   test_at
   CCLD   test_ismounted
-  CCLD   test_procutils
   CCLD   test_blkdev
-  CCLD   test_mangle
   CCLD   test_canonicalize
-  CCLD   test_sysfs
-  CCLD   test_strutils
   CCLD   test_cpuset
-  CCLD   test_loopdev
+  CCLD   test_strutils
+  CCLD   test_sysfs
   CCLD   test_tt
+  CCLD   test_loopdev
 make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/lib'
 Making all in libuuid
 make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libuuid'
@@ -698,8 +698,8 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
   CC     lock.lo
   CC     fs.lo
   CC     tab.lo
-  CC     tab_update.lo
   CC     tab_parse.lo
+  CC     tab_update.lo
   CC     tab_diff.lo
   CC     context.lo
   CC     context_mount.lo
@@ -709,8 +709,8 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/libmount/src'
   CC     mangle.lo
   CC     canonicalize.lo
   CC     strutils.lo
-  CC     loopdev.lo
   CC     env.lo
+  CC     loopdev.lo
   CC     sysfs.lo
   CC     linux_version.lo
   CCLD   libmount.la
@@ -744,11 +744,11 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
   CC     lsblk-mbsalign.o
   CC     lsblk-strutils.o
   CC     lsblk-sysfs.o
-  CC     lsblk-at.o
   CC     findmnt-findmnt.o
+  CC     lsblk-at.o
   CC     findmnt-tt.o
-  CC     findmnt-mbsalign.o
   CC     findmnt-strutils.o
+  CC     findmnt-mbsalign.o
   CC     blkid-blkid.o
   CC     blkid-ismounted.o
   CC     blkid-strutils.o
@@ -757,9 +757,9 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
   CC     wipefs-strutils.o
   CC     cal.o
   CC     mbsalign.o
-  CC     logger.o
-  CC     look.o
   CC     strutils.o
+  CC     look.o
+  CC     logger.o
   CC     mcookie.o
   CC     md5.o
   CC     namei.o
@@ -770,17 +770,17 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
   CCLD   findfs
   CCLD   look
   CCLD   uuidgen
-  CCLD   rename
-  CCLD   logger
   CCLD   wipefs
+  CCLD   logger
+  CCLD   rename
   CCLD   mcookie
   CCLD   whereis
-  CCLD   namei
   CCLD   cal
+  CCLD   namei
   CCLD   findmnt
-  CCLD   blkid
   CCLD   uuidd
   CCLD   lsblk
+  CCLD   blkid
 make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/misc-utils'
 Making all in po
 make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/po'
@@ -803,15 +803,15 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
   CC     ipcmk.o
   CC     renice.o
   CC     setsid.o
-  CC     cytune.o
   CC     setarch.o
+  CC     cytune.o
   CC     lscpu.o
-  CC     fallocate.o
   CC     cpuset.o
+  CC     fallocate.o
   CC     unshare.o
   CC     readprofile.o
-  CC     ldattach.o
   CC     tunelp.o
+  CC     ldattach.o
   CC     rtcwake.o
   GEN    linux32.8
   GEN    linux64.8
@@ -829,16 +829,16 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
   CCLD   renice
   CCLD   setarch
   CCLD   tunelp
-  CCLD   ldattach
   CCLD   ipcrm
+  CCLD   ldattach
   CCLD   flock
-  CCLD   fstrim
   CCLD   fallocate
+  CCLD   fstrim
   CCLD   readprofile
   CCLD   cytune
-  CCLD   ipcs
   CCLD   dmesg
   CCLD   rtcwake
+  CCLD   ipcs
   CCLD   lscpu
 make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/sys-utils'
 Making all in term-utils
@@ -869,22 +869,22 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/text-utils'
   CC     hexdump.o
   CC     conv.o
   CC     display.o
-  CC     parse.o
   CC     hexsyntax.o
+  CC     parse.o
   CC     rev.o
   CC     tailf.o
   CC     ul.o
   CC     pg.o
-  CCLD   colcrt
   CCLD   rev
+  CCLD   colcrt
   CCLD   colrm
   CCLD   tailf
-  CCLD   hexdump
-  CCLD   col
-  CCLD   ul
   CCLD   column
-  CCLD   more
+  CCLD   hexdump
+  CCLD   ul
+  CCLD   col
   CCLD   pg
+  CCLD   more
 make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/text-utils'
 Making all in tests
 make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/tests'
@@ -942,19 +942,19 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
   CC     mount-canonicalize.o
   CC     mount-env.o
   CC     mount-linux_version.o
-  CC     mount-blkdev.o
   CC     mount-fsprobe.o
+  CC     mount-blkdev.o
   CC     mount-mangle.o
-  CC     mount-setproctitle.o
   CC     mount-strutils.o
+  CC     mount-setproctitle.o
   CC     umount-umount.o
-  CC     umount-mount_mntent.o
   CC     umount-fstab.o
+  CC     umount-mount_mntent.o
   CC     umount-getusername.o
   CC     umount-lomount.o
   CC     umount-devname.o
-  CC     umount-sundries.o
   CC     umount-xmalloc.o
+  CC     umount-sundries.o
   CC     umount-canonicalize.o
   CC     umount-env.o
   CC     umount-linux_version.o
@@ -974,11 +974,11 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/mount'
   CC     swapon-swapon.o
   CC     swapon-linux_version.o
   CC     swapon-blkdev.o
-  CC     swapon-canonicalize.o
   CC     swapon-fsprobe.o
+  CC     swapon-canonicalize.o
   CC     swapon-mangle.o
-  CCLD   umount
   CCLD   mtab_lock_test
+  CCLD   umount
   CCLD   swapon
   CCLD   losetup
   CCLD   mount
@@ -1000,14 +1000,14 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20/schedutils'
   CC     taskset.o
   CC     cpuset.o
   CCLD   chrt
-  CCLD   taskset
   CCLD   ionice
+  CCLD   taskset
 make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20/schedutils'
 make[2]: Entering directory `/usr/src/rpm/BUILD/util-linux-2.20'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/util-linux-2.20'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.13160
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.28186
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/util-linux-root
@@ -1601,22 +1601,22 @@ install: creating directory `/var/tmp/util-linux-root/var/lib/hwclock'
 + /usr/lib/rpm/compress_man.sh /var/tmp/util-linux-root
 + /usr/lib/rpm/find-lang.sh /var/tmp/util-linux-root util-linux
 + exit 0
-Processing files: util-linux-2.20-1.x86_64
+Processing files: util-linux-2.20-2.x86_64
 Provides: libblkid.so.1()(64bit) libblkid.so.1(BLKID_1.0)(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libblkid.so.1(BLKID_2.18)(64bit) libblkid.so.1(BLKID_2.20)(64bit) libmount.so.1()(64bit) libmount.so.1(MOUNT_2.19)(64bit) libmount.so.1(MOUNT_2.20)(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUIDD_PRIVATE)(64bit) libuuid.so.1(UUID_1.0)(64bit) libuuid.so.1(UUID_2.20)(64bit)
-Requires(interp): /bin/sh /sbin/ldconfig /sbin/ldconfig
-Requires(pre): /bin/sh /bin/true /usr/bin/rpm
+Requires(interp): /sbin/ldconfig /sbin/ldconfig
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
-Requires: /bin/bash /bin/true /usr/bin/perl /usr/bin/rpm ld-linux-x86-64.so.2()(64bit) ld-linux-x86-64.so.2(GLIBC_2.3)(64bit) libblkid.so.1()(64bit) libblkid.so.1(BLKID_1.0)(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libblkid.so.1(BLKID_2.18)(64bit) libblkid.so.1(BLKID_2.20)(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.10)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.4)(64bit) libc.so.6(GLIBC_2.6)(64bit) libc.so.6(GLIBC_2.7)(64bit) libmount.so.1()(64bit) libmount.so.1(MOUNT_2.19)(64bit) libmount.so.1(MOUNT_2.20)(64bit) libncursesw.so.5()(64bit) libutil.so.1()(64bit) libutil.so.1(GLIBC_2.2.5)(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUIDD_PRIVATE)(64bit) libuuid.so.1(UUID_1.0)(64bit) libz.so.1()(64bit)
-Processing files: util-linux-devel-2.20-1.x86_64
+Requires: /bin/bash /usr/bin/perl ld-linux-x86-64.so.2()(64bit) ld-linux-x86-64.so.2(GLIBC_2.3)(64bit) libblkid.so.1()(64bit) libblkid.so.1(BLKID_1.0)(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libblkid.so.1(BLKID_2.18)(64bit) libblkid.so.1(BLKID_2.20)(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.10)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.4)(64bit) libc.so.6(GLIBC_2.6)(64bit) libc.so.6(GLIBC_2.7)(64bit) libmount.so.1()(64bit) libmount.so.1(MOUNT_2.19)(64bit) libmount.so.1(MOUNT_2.20)(64bit) libncursesw.so.5()(64bit) libutil.so.1()(64bit) libutil.so.1(GLIBC_2.2.5)(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUIDD_PRIVATE)(64bit) libuuid.so.1(UUID_1.0)(64bit) libz.so.1()(64bit)
+Obsoletes: util-linux-ng
+Processing files: util-linux-devel-2.20-2.x86_64
 Provides: pkgconfig(blkid) = 2.20.0 pkgconfig(mount) = 2.20.0 pkgconfig(uuid) = 2.20.0
 Requires(rpmlib): rpmlib(VersionedDependencies) <= 3.0.3-1
 Requires: pkgconfig
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/util-linux-root
-Wrote: /usr/src/rpm/SRPMS/util-linux-2.20-1.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/util-linux-2.20-1.x86_64.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/util-linux-devel-2.20-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.4790
+Wrote: /usr/src/rpm/SRPMS/util-linux-2.20-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/util-linux-2.20-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/util-linux-devel-2.20-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.25707
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd util-linux-2.20

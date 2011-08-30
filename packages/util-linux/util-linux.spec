@@ -1,7 +1,7 @@
 Summary: Util-Linux Next Generation
 Name: util-linux
 Version: 2.20
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,6 +9,7 @@ Vendor: LightCube Solutions
 URL: http://www.kernel.org/pub/linux/utils/util-linux
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
+Obsoletes: util-linux-ng
 BuildRequires: digest(sha1:%{SOURCE0}) = e8cd2c8e968cdbdc097d82cceaf15d536e0254c1
 BuildRequires: ncurses-devel
 BuildRequires: zlib-devel
@@ -49,9 +50,6 @@ rm -f %{buildroot}/usr/share/man/ru/man1/ddate.1
 
 %clean
 rm -rf %{buildroot}
-
-%pre
-/usr/bin/rpm -e --nodeps util-linux-ng &>/dev/null || /bin/true
 
 %post -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -184,6 +182,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/uuid.pc
 
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-2
+- Use the Obsoletes tag to override util-linux-ng packages
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-1
 - Package name changed to util-linux
 - Upgrade to version 2.20
