@@ -1,17 +1,17 @@
 Summary: mkinitramfs
 Name: mkinitramfs
 Version: 0.5.2
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 Buildarch: noarch
 URL: http://dev.lightcube.us/projects/lightcubeos
-Source0: Makefile.mkinitramfs
-Source1: init.in
-Source2: initcd.in
-Source3: mkinitramfs.orig
+Source0: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/419/lightcube_os/trunk/packages/%{name}/Makefile.mkinitramfs
+Source1: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/419/lightcube_os/trunk/packages/%{name}/init.in
+Source2: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/419/lightcube_os/trunk/packages/%{name}/initcd.in
+Source3: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/419/lightcube_os/trunk/packages/%{name}/mkinitramfs.orig
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 7dfa2af5c2455c3f9107103cf4f3ab2a34d3fe62
 BuildRequires: digest(sha1:%{SOURCE1}) = b3b2eabb64918a03500485f188e31012b4a12b23
@@ -28,7 +28,7 @@ Requires: ncurses
 Requires: readline
 Requires: psmisc
 Requires: module-init-tools
-Requires: util-linux-ng
+Requires: util-linux
 Requires: LVM2
 
 %description
@@ -52,6 +52,9 @@ rm -rf %{buildroot}
 /usr/share/mkinitramfs
 
 %changelog
+* Mon Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.5.2-2
+- Change Requires from util-linux-ng to util-linux
+
 * Sun Mar 06 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.5.2-1
 - Upgrade to 0.5.2
 - Fixes some brokenness in the CD init
