@@ -1,6 +1,6 @@
 Summary: The Linux Kernel for Xen dom0 hosts
 Name: linux-xen
-Version: 2.6.32.41
+Version: 2.6.32.45
 Release: 1
 Group: System Environment/Base
 License: GPLv2
@@ -11,7 +11,7 @@ Source0: http://dev.lightcube.us/sources/linux-xen/%{name}-%{version}.tar.bz2
 Patch0:  http://dev.lightcube.us/svn/lightcubeos/!svn/bc/389/lightcube_os/trunk/packages/%{name}/%{name}-3ware_sas-1.patch
 
 Requires: base-layout
-BuildRequires: digest(sha1:%{SOURCE0}) = 0ab6af3bfd68572a9c6623b1c23502acf4aa8a83
+BuildRequires: digest(sha1:%{SOURCE0}) = f6ae29d5cdc6193c219c9104d22c2759cdcf51ba
 BuildRequires: digest(sha1:%{PATCH0})  = dc5c4a8874bd986d85433a8c602fee27c0df1f31
 
 %ifarch x86_64
@@ -87,6 +87,9 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-xen/build
 
 %changelog
+* Fri Aug 19 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.32.45-1
+- Upgrade to 2.6.32.45
+
 * Fri Jun 24 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.32.41-1
 - Upgrade to 2.6.32.41
 - Add support for 3ware SAS card
