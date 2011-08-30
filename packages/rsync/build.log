@@ -1,0 +1,401 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.4433
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf rsync-3.0.8
++ /bin/gzip -dc /usr/src/rpm/SOURCES/rsync-3.0.8.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd rsync-3.0.8
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.29941
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd rsync-3.0.8
++ export LDFLAGS=-s
++ LDFLAGS=-s
++ ./configure --prefix=/usr
+configure.sh: Configuring rsync 3.0.8
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking whether to include debugging symbols... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for gcc option to accept ISO C99... -std=gnu99
+checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+checking for remsh... 0
+checking for yodl2man... 0
+checking the group for user "nobody"... nogroup
+checking for broken largefile support... no
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking ipv6 stack type... linux-glibc
+checking for library containing getaddrinfo... none required
+checking whether to call shutdown on all sockets... no
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking whether byte ordering is bigendian... no
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking whether time.h and sys/time.h may both be included... yes
+checking for sys/wait.h that is POSIX.1 compatible... yes
+checking sys/fcntl.h usability... yes
+checking sys/fcntl.h presence... yes
+checking for sys/fcntl.h... yes
+checking sys/select.h usability... yes
+checking sys/select.h presence... yes
+checking for sys/select.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking sys/unistd.h usability... yes
+checking sys/unistd.h presence... yes
+checking for sys/unistd.h... yes
+checking for unistd.h... (cached) yes
+checking utime.h usability... yes
+checking utime.h presence... yes
+checking for utime.h... yes
+checking grp.h usability... yes
+checking grp.h presence... yes
+checking for grp.h... yes
+checking compat.h usability... no
+checking compat.h presence... no
+checking for compat.h... no
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking ctype.h usability... yes
+checking ctype.h presence... yes
+checking for ctype.h... yes
+checking for sys/wait.h... (cached) yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/filio.h usability... no
+checking sys/filio.h presence... no
+checking for sys/filio.h... no
+checking for string.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/mode.h usability... no
+checking sys/mode.h presence... no
+checking for sys/mode.h... no
+checking sys/un.h usability... yes
+checking sys/un.h presence... yes
+checking for sys/un.h... yes
+checking sys/attr.h usability... no
+checking sys/attr.h presence... no
+checking for sys/attr.h... no
+checking mcheck.h usability... yes
+checking mcheck.h presence... yes
+checking for mcheck.h... yes
+checking arpa/inet.h usability... yes
+checking arpa/inet.h presence... yes
+checking for arpa/inet.h... yes
+checking arpa/nameser.h usability... yes
+checking arpa/nameser.h presence... yes
+checking for arpa/nameser.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking malloc.h usability... yes
+checking malloc.h presence... yes
+checking for malloc.h... yes
+checking float.h usability... yes
+checking float.h presence... yes
+checking for float.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking iconv.h usability... yes
+checking iconv.h presence... yes
+checking for iconv.h... yes
+checking libcharset.h usability... no
+checking libcharset.h presence... no
+checking for libcharset.h... no
+checking langinfo.h usability... yes
+checking langinfo.h presence... yes
+checking for langinfo.h... yes
+checking sys/acl.h usability... no
+checking sys/acl.h presence... no
+checking for sys/acl.h... no
+checking acl/libacl.h usability... no
+checking acl/libacl.h presence... no
+checking for acl/libacl.h... no
+checking attr/xattr.h usability... no
+checking attr/xattr.h presence... no
+checking for attr/xattr.h... no
+checking sys/xattr.h usability... yes
+checking sys/xattr.h presence... yes
+checking for sys/xattr.h... yes
+checking sys/extattr.h usability... no
+checking sys/extattr.h presence... no
+checking for sys/extattr.h... no
+checking popt.h usability... yes
+checking popt.h presence... yes
+checking for popt.h... yes
+checking popt/popt.h usability... no
+checking popt/popt.h presence... no
+checking for popt/popt.h... no
+checking whether sys/types.h defines makedev... yes
+checking if makedev takes 3 args... no
+checking size of int... 4
+checking size of long... 8
+checking size of long long... 8
+checking size of short... 2
+checking size of int16_t... 2
+checking size of uint16_t... 2
+checking size of int32_t... 4
+checking size of uint32_t... 4
+checking size of int64_t... 8
+checking size of off_t... 8
+checking size of off64_t... 8
+checking size of time_t... 8
+checking for inline... inline
+checking for long double with more range or precision than double... yes
+checking return type of signal handlers... void
+checking for uid_t in sys/types.h... yes
+checking for mode_t... yes
+checking for off_t... yes
+checking for size_t... yes
+checking for pid_t... yes
+checking for id_t... yes
+checking type of array argument to getgroups... gid_t
+checking for struct stat.st_rdev... yes
+checking for socklen_t... yes
+checking for errno in errno.h... yes
+checking for connect... yes
+checking for library containing inet_ntop... none required
+checking for library containing iconv_open... none required
+checking for library containing libiconv_open... no
+checking for iconv declaration... 
+         extern size_t iconv (iconv_t cd, char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);
+checking for inet_ntop... yes
+checking for inet_pton... yes
+checking for struct addrinfo... yes
+checking for struct sockaddr_storage... yes
+checking whether defines needed by getaddrinfo exist... yes
+checking for getaddrinfo... yes
+checking for struct sockaddr.sa_len... no
+checking for struct sockaddr_in.sin_len... no
+checking for struct sockaddr_un.sun_len... no
+checking for struct sockaddr_in6.sin6_scope_id... yes
+checking for struct stat64... yes
+checking for strcasecmp... yes
+checking for aclsort... no
+checking for aclsort in -lsec... no
+checking for utime.h... (cached) yes
+checking whether utime accepts a null argument... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for waitpid... yes
+checking for wait4... yes
+checking for getcwd... yes
+checking for strdup... yes
+checking for chown... yes
+checking for chmod... yes
+checking for lchmod... no
+checking for mknod... yes
+checking for mkfifo... yes
+checking for fchmod... yes
+checking for fstat... yes
+checking for ftruncate... yes
+checking for strchr... yes
+checking for readlink... yes
+checking for link... yes
+checking for utime... yes
+checking for utimes... yes
+checking for lutimes... yes
+checking for strftime... yes
+checking for memmove... yes
+checking for lchown... yes
+checking for vsnprintf... yes
+checking for snprintf... yes
+checking for vasprintf... yes
+checking for asprintf... yes
+checking for setsid... yes
+checking for strpbrk... yes
+checking for strlcat... no
+checking for strlcpy... no
+checking for strtol... yes
+checking for mallinfo... yes
+checking for getgroups... yes
+checking for setgroups... yes
+checking for geteuid... yes
+checking for getegid... yes
+checking for setlocale... yes
+checking for setmode... no
+checking for open64... yes
+checking for lseek64... yes
+checking for mkstemp64... yes
+checking for mtrace... yes
+checking for va_copy... no
+checking for __va_copy... no
+checking for seteuid... yes
+checking for strerror... yes
+checking for putenv... yes
+checking for iconv_open... yes
+checking for locale_charset... no
+checking for nl_langinfo... yes
+checking for getxattr... yes
+checking for extattr_get_link... no
+checking for sigaction... yes
+checking for sigprocmask... yes
+checking for setattrlist... no
+checking for utimensat... yes
+checking for getpgrp... yes
+checking for tcgetpgrp... yes
+checking whether getpgrp requires zero arguments... yes
+checking whether chown() modifies symlinks... no
+checking whether link() can hard-link symlinks... yes
+checking whether link() can hard-link special files... yes
+checking for working socketpair... yes
+checking for poptGetContext in -lpopt... yes
+checking whether to use included libpopt... no
+checking for unsigned char... yes
+checking for broken readdir... no
+checking for utimbuf... yes
+checking if gettimeofday takes tz argument... yes
+checking for C99 vsnprintf... yes
+checking for secure mkstemp... yes
+checking if mknod creates FIFOs... yes
+checking if mknod creates sockets... yes
+checking whether -c -o works... yes
+checking for _acl... no
+checking for __acl... no
+checking for _facl... no
+checking for __facl... no
+checking whether to support ACLs... running tests:
+checking for acl_get_file in -lacl... no
+checking for ACL support... no
+checking ACL test results... No ACL support found
+checking whether to support extended attributes... Using Linux xattrs
+configure.sh: creating ./config.status
+config.status: creating Makefile
+config.status: creating lib/dummy
+config.status: creating zlib/dummy
+config.status: creating popt/dummy
+config.status: creating shconfig
+config.status: creating config.h
+
+    rsync 3.0.8 configuration successful
+
++ make -j24
+perl ./mkproto.pl ./*.c ./lib/compat.c
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c rsync.c -o rsync.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c generator.c -o generator.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c receiver.c -o receiver.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c cleanup.c -o cleanup.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c sender.c -o sender.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c exclude.c -o exclude.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c util.c -o util.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c main.c -o main.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c checksum.c -o checksum.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c match.c -o match.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c syscall.c -o syscall.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c log.c -o log.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c backup.c -o backup.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c options.c -o options.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c io.c -o io.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c compat.c -o compat.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c hlink.c -o hlink.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c token.c -o token.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c uidlist.c -o uidlist.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c socket.c -o socket.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c hashtable.c -o hashtable.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c fileio.c -o fileio.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c batch.c -o batch.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c clientname.c -o clientname.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c chmod.c -o chmod.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c acls.c -o acls.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c xattrs.c -o xattrs.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c progress.c -o progress.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c pipe.c -o pipe.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c params.c -o params.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c loadparm.c -o loadparm.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c clientserver.c -o clientserver.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c access.c -o access.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c connection.c -o connection.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c authenticate.c -o authenticate.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/wildmatch.c -o lib/wildmatch.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/compat.c -o lib/compat.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/snprintf.c -o lib/snprintf.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/mdfour.c -o lib/mdfour.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/md5.c -o lib/md5.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/permstring.c -o lib/permstring.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/pool_alloc.c -o lib/pool_alloc.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/sysacls.c -o lib/sysacls.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c lib/sysxattrs.c -o lib/sysxattrs.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/deflate.c -o zlib/deflate.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/inffast.c -o zlib/inffast.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/inflate.c -o zlib/inflate.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/inftrees.c -o zlib/inftrees.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/trees.c -o zlib/trees.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/zutil.c -o zlib/zutil.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/adler32.c -o zlib/adler32.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/compress.c -o zlib/compress.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c zlib/crc32.c -o zlib/crc32.o
+gcc -std=gnu99 -I. -I. -g -O2 -DHAVE_CONFIG_H -Wall -W  -c flist.c -o flist.o
+gcc -std=gnu99 -g -O2 -DHAVE_CONFIG_H -Wall -W -s -o rsync flist.o rsync.o generator.o receiver.o cleanup.o sender.o exclude.o util.o main.o checksum.o match.o syscall.o log.o backup.o options.o io.o compat.o hlink.o token.o uidlist.o socket.o hashtable.o fileio.o batch.o clientname.o chmod.o acls.o xattrs.o progress.o pipe.o params.o loadparm.o clientserver.o access.o connection.o authenticate.o lib/wildmatch.o lib/compat.o lib/snprintf.o lib/mdfour.o lib/md5.o lib/permstring.o lib/pool_alloc.o lib/sysacls.o lib/sysxattrs.o  zlib/deflate.o zlib/inffast.o zlib/inflate.o zlib/inftrees.o zlib/trees.o zlib/zutil.o zlib/adler32.o zlib/compress.o zlib/crc32.o  -lpopt 
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.98189
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/rsync-root
++ /bin/mkdir -p /var/tmp/rsync-root
++ cd rsync-3.0.8
++ make DESTDIR=/var/tmp/rsync-root install
+mkdir -p /var/tmp/rsync-root/usr/bin
+/usr/bin/install -c  -m 755 rsync /var/tmp/rsync-root/usr/bin
+mkdir -p /var/tmp/rsync-root/usr/share/man/man1
+mkdir -p /var/tmp/rsync-root/usr/share/man/man5
+if test -f rsync.1; then /usr/bin/install -c -m 644 rsync.1 /var/tmp/rsync-root/usr/share/man/man1; fi
+if test -f rsyncd.conf.5; then /usr/bin/install -c -m 644 rsyncd.conf.5 /var/tmp/rsync-root/usr/share/man/man5; fi
++ install -dv /var/tmp/rsync-root/etc/init.d
+install: creating directory `/var/tmp/rsync-root/etc'
+install: creating directory `/var/tmp/rsync-root/etc/init.d'
++ install -m 754 /usr/src/rpm/SOURCES/rsyncd.init /var/tmp/rsync-root/etc/init.d/rsyncd
++ /usr/lib/rpm/compress_man.sh /var/tmp/rsync-root
++ cat
++ exit 0
+Processing files: rsync-3.0.8-1.x86_64
+Provides: config(rsync) = 0:3.0.8-1
+Requires(interp): /bin/sh
+Requires(preun): /bin/sh /bin/true /usr/sbin/remove_initd
+Requires: /bin/sh /bin/true /usr/sbin/remove_initd libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.6)(64bit) libpopt.so.0()(64bit) libpopt.so.0(LIBPOPT_0)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/rsync-root
+Wrote: /usr/src/rpm/SRPMS/rsync-3.0.8-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/rsync-3.0.8-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.98189
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd rsync-3.0.8
++ /bin/rm -rf /var/tmp/rsync-root
