@@ -1,7 +1,7 @@
 Summary: The MySQL Database
 Name: mysql
 Version: 5.1.50
-Release: 2
+Release: 3
 Group: Services
 License: GPL
 Distribution: LightCube OS
@@ -73,6 +73,7 @@ rm -f %{buildroot}/usr/share/info/dir
 rm -rf %{buildroot}/usr/{sql-bench,mysql-test}
 # Add the default configuration file
 install -vm0644 %{buildroot}/usr/share/mysql/my-medium.cnf %{buildroot}/etc/my.cnf
+sed -i 's@skip-locking@skip-external-locking@' %{buildroot}/etc/my.cnf
 sed -i 's@\(dirname\|touch\)@/usr/bin/&@' %{buildroot}/usr/bin/mysqld_safe 
 
 %post
@@ -199,6 +200,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/mysql/plugin/mypluglib.so
 
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.50-3
+- Remove a deprecated option from the default config
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.50-2
 - Fix readline support
 
