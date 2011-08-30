@@ -1,21 +1,21 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.36276
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.95280
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
 + rm -rf inetutils-1.8
-+ /bin/gzip -dc /usr/src/rpm/SOURCES/inetutils-1.8.tar.gz
 + /bin/tar -xf -
++ /bin/gzip -dc /usr/src/rpm/SOURCES/inetutils-1.8.tar.gz
 + STATUS=0
 + '[' 0 -ne 0 ']'
 + cd inetutils-1.8
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.36276
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.95280
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd inetutils-1.8
 + export LDFLAGS=-s
 + LDFLAGS=-s
-+ ./configure --prefix=/usr --libexecdir=/usr/sbin --localstatedir=/var --disable-ifconfig --disable-logger --disable-syslogd --disable-whois --disable-servers
++ ./configure --prefix=/usr --libexecdir=/usr/sbin --localstatedir=/var --disable-ifconfig --disable-logger --disable-syslogd --disable-whois --disable-ping --disable-ping6 --disable-servers
 checking build system type... x86_64-unknown-linux-gnu
 checking host system type... x86_64-unknown-linux-gnu
 checking target system type... x86_64-unknown-linux-gnu
@@ -67,7 +67,7 @@ checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu
 configure: autobuild project... GNU inetutils
 configure: autobuild revision... 1.8
 configure: autobuild hostname... build1.lightcube.us
-configure: autobuild timestamp... 20110830T100959Z
+configure: autobuild timestamp... 20110830T105802Z
 checking for ar... ar
 checking for rm... /bin/rm
 checking how to run the C preprocessor... gcc -E
@@ -979,26 +979,26 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
   GEN    c++defs.h
   GEN    configmake.h
   GEN    getopt.h
-  GEN    netdb.h
-  GEN    strings.h
+  GEN    dirent.h
+  GEN    fcntl.h
   GEN    arpa/inet.h
+  GEN    glob.h
+  GEN    langinfo.h
+  GEN    netdb.h
+  GEN    pty.h
+  GEN    stdio.h
+  GEN    stdlib.h
+  GEN    string.h
+  GEN    strings.h
   GEN    sys/ioctl.h
   GEN    sys/select.h
   GEN    sys/socket.h
-  GEN    sys/stat.h
   GEN    time.h
   GEN    sys/time.h
+  GEN    sys/stat.h
+  GEN    wchar.h
   GEN    wctype.h
   GEN    unistd.h
-  GEN    wchar.h
-  GEN    dirent.h
-  GEN    langinfo.h
-  GEN    fcntl.h
-  GEN    glob.h
-  GEN    pty.h
-  GEN    string.h
-  GEN    stdio.h
-  GEN    stdlib.h
 make  all-recursive
 make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
 make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
@@ -1024,10 +1024,10 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
   CC     version-etc.o
   CC     version-etc-fsf.o
   CC     xalloc-die.o
-  CC     xgetdomainname.o
   CC     xgethostname.o
-  CC     xvasprintf.o
+  CC     xgetdomainname.o
   CC     xasprintf.o
+  CC     xvasprintf.o
   CC     asnprintf.o
   CC     basename-lgpl.o
   CC     chdir-long.o
@@ -1037,10 +1037,10 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
   CC     fcntl.o
   CC     fd-safer.o
   CC     filemode.o
-  CC     getcwd.o
   CC     fopen-safer.o
-  CC     getopt.o
+  CC     getcwd.o
   CC     getopt1.o
+  CC     getopt.o
   CC     glob.o
   CC     imaxtostr.o
   CC     ioctl.o
@@ -1080,8 +1080,8 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libinetutils'
   CC     setsig.o
   CC     shishi.o
   CC     tftpsubs.o
-  CC     utmp_init.o
   CC     ttymsg.o
+  CC     utmp_init.o
   CC     utmp_logout.o
 tftpsubs.c: In function 'write_behind':
 tftpsubs.c:260:12: warning: call to 'fseek' declared with attribute warning: fseek cannot handle files larger than 4 GB on 32-bit platforms - use fseeko function for handling of large files
@@ -1097,9 +1097,9 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
   CC     getent.o
   CC     kerberos.o
   CC     kerberos5.o
+  CC     read_passwd.o
   CC     misc.o
   CC     shishi.o
-  CC     read_passwd.o
   AR     libtelnet.a
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
 Making all in libicmp
@@ -1202,16 +1202,7 @@ make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/whois'
 Making all in ping
 make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
-  CC     ping.o
-  CC     ping_common.o
-  CC     ping_echo.o
-  CC     ping_address.o
-  CC     ping_router.o
-  CC     ping_timestamp.o
-  CC     libping.o
-  CC     ping6.o
-  CCLD   ping
-  CCLD   ping6
+make[2]: Nothing to be done for `all'.
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
 Making all in ifconfig
 make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ifconfig'
@@ -1239,7 +1230,7 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.98886
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.65907
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/inetutils-root
@@ -1381,9 +1372,9 @@ Making install in ping
 make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
 make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
 test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/bin"
-  /usr/bin/install -c ping ping6 '/var/tmp/inetutils-root/usr/bin'
 make  install-exec-hook
 make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
+make[3]: Nothing to be done for `install-exec-hook'.
 make[3]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
 make[2]: Nothing to be done for `install-data-am'.
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/ping'
@@ -1418,7 +1409,7 @@ make[1]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
 make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
 make[2]: Nothing to be done for `install-exec-am'.
 test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/inetutils-root/usr/share/man/man1"
- /usr/bin/install -c -m 644 hostname.1 ftp.1 ping.1 ping6.1 rcp.1 rexec.1 rlogin.1 rsh.1 talk.1 telnet.1 tftp.1 traceroute.1 '/var/tmp/inetutils-root/usr/share/man/man1'
+ /usr/bin/install -c -m 644 hostname.1 ftp.1 rcp.1 rexec.1 rlogin.1 rsh.1 talk.1 telnet.1 tftp.1 traceroute.1 '/var/tmp/inetutils-root/usr/share/man/man1'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/man'
 Making install in tests
@@ -1437,10 +1428,6 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
 + mkdir -v /var/tmp/inetutils-root/bin /var/tmp/inetutils-root/sbin
 mkdir: created directory `/var/tmp/inetutils-root/bin'
 mkdir: created directory `/var/tmp/inetutils-root/sbin'
-+ mv -v /var/tmp/inetutils-root/usr/bin/ping /var/tmp/inetutils-root/bin
-`/var/tmp/inetutils-root/usr/bin/ping' -> `/var/tmp/inetutils-root/bin/ping'
-+ mv -v /var/tmp/inetutils-root/usr/bin/ping6 /var/tmp/inetutils-root/bin
-`/var/tmp/inetutils-root/usr/bin/ping6' -> `/var/tmp/inetutils-root/bin/ping6'
 + mv -v /var/tmp/inetutils-root/usr/bin/hostname /var/tmp/inetutils-root/bin
 `/var/tmp/inetutils-root/usr/bin/hostname' -> `/var/tmp/inetutils-root/bin/hostname'
 + mv -v /var/tmp/inetutils-root/usr/bin/traceroute /var/tmp/inetutils-root/sbin
@@ -1448,15 +1435,15 @@ mkdir: created directory `/var/tmp/inetutils-root/sbin'
 + rm -f /var/tmp/inetutils-root/usr/share/info/dir
 + /usr/lib/rpm/compress_man.sh /var/tmp/inetutils-root
 + exit 0
-Processing files: inetutils-1.8-2.x86_64
+Processing files: inetutils-1.8-3.x86_64
 Requires(interp): /bin/sh /bin/sh
 Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
 Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.4)(64bit) libcrypt.so.1()(64bit) libhistory.so.6()(64bit) libncursesw.so.5()(64bit) libnsl.so.1()(64bit) libreadline.so.6()(64bit) libresolv.so.2()(64bit) libutil.so.1()(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/inetutils-root
-Wrote: /usr/src/rpm/SRPMS/inetutils-1.8-2.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/inetutils-1.8-2.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.51608
+Wrote: /usr/src/rpm/SRPMS/inetutils-1.8-3.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/inetutils-1.8-3.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.17983
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd inetutils-1.8

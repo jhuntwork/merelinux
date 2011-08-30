@@ -1,7 +1,7 @@
 Summary: GNU Inetutils
 Name: inetutils
 Version: 1.8
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -15,7 +15,7 @@ BuildRequires: ncurses-devel
 
 %description
 Inetutils is a collection of common networking programs including ftp,
-telnet, ping, hostname and traceroute
+telnet, hostname and traceroute
 
 %prep
 %setup -q
@@ -30,14 +30,14 @@ export LDFLAGS="%{LDFLAGS}"
   --disable-logger \
   --disable-syslogd \
   --disable-whois \
+  --disable-ping \
+  --disable-ping6 \
   --disable-servers
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 mkdir -v %{buildroot}/{,s}bin
-mv -v %{buildroot}/usr/bin/ping %{buildroot}/bin
-mv -v %{buildroot}/usr/bin/ping6 %{buildroot}/bin
 mv -v %{buildroot}/usr/bin/hostname %{buildroot}/bin
 mv -v %{buildroot}/usr/bin/traceroute %{buildroot}/sbin
 rm -f %{buildroot}/usr/share/info/dir
@@ -55,8 +55,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /bin/hostname
-/bin/ping
-/bin/ping6
 /sbin/traceroute
 /usr/bin/ftp
 /usr/bin/rcp
@@ -77,10 +75,11 @@ rm -rf %{buildroot}
 /usr/share/man/man1/telnet.1.bz2
 /usr/share/man/man1/tftp.1.bz2
 /usr/share/man/man1/traceroute.1.bz2
-/usr/share/man/man1/ping.1.bz2
-/usr/share/man/man1/ping6.1.bz2
 
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8-3
+- Remove ping and ping6 - better one provided in iputils
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8-2
 - Revert to 1.8. ifconfig provided in net-tools
 
