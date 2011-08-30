@@ -1,6 +1,6 @@
 Summary: The Xen hypervisor
 Name: xen
-Version: 4.0.1
+Version: 4.1.1
 Release: 1
 Group: Virtualization
 License: GPL
@@ -8,28 +8,23 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.xen.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-gcc4.5-1.patch
-Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-python-1.patch
-Patch2: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-xmlproc-1.patch
 
 Requires: python-lxml
 Requires: linux-xen
-BuildRequires: digest(sha1:%{SOURCE0}) = 964a56b6aeb54d6ba3ddaacf19657de8a20d193e
-BuildRequires: digest(sha1:%{PATCH0}) = bfa62bc88b0d56db7ef35fec0dfc35f5886981c4
-BuildRequires: digest(sha1:%{PATCH1}) = 4284e82bef8d92123e437991cd32bd6fd12f33cb
-BuildRequires: digest(sha1:%{PATCH2}) = 063d1cad4b4b2856c39cb8c9fac85ed42ae26447
+Requires: bridge-utils
+BuildRequires: digest(sha1:%{SOURCE0}) = f1b5ef4b663c339faf9c77fc895327cfbcc9776c
 BuildRequires: openssl-devel
 BuildRequires: ncurses-devel
 BuildRequires: zlib-devel
 BuildRequires: Python-devel
-BuildRequires: util-linux-ng-devel
+BuildRequires: util-linux-devel
 BuildRequires: pciutils-devel
 BuildRequires: bridge-utils-devel
 BuildRequires: dev86
 BuildRequires: iasl
 
 %description
-The Xen hyperviso offers a powerful, efficient, and secure feature set for
+The Xen hypervisor offers a powerful, efficient, and secure feature set for
 virtualization of x86, x86_64, IA64, ARM, and other CPU architectures.
 
 %package devel
@@ -42,14 +37,6 @@ Headers and libraries for developing with xen
 
 %prep
 %setup -q
-# GCC 4.5 compatible fixes
-%patch0 -p1
-sed -i 's@Winline$@& -Wno-uninitialized@' extras/mini-os/minios.mk
-sed -i 's@void shared_info@char shared_info[PAGE_SIZE]@' extras/mini-os/arch/x86/mm.c
-%patch1 -p1
-sed -i 's@^#define WRITE.*$@#undef WRITE\n&@' tools/blktap/lib/blktaplib.h
-sed -i 's@^#define WRITE.*$@#undef WRITE\n&@' tools/blktap2/include/blktaplib.h
-%patch2 -p1
 
 %build
 make xen
@@ -61,31 +48,38 @@ make DESTDIR=%{buildroot} install-xen
 make DESTDIR=%{buildroot} install-tools
 make DESTDIR=%{buildroot} install-stubdom
 # Fix some defaults to be more sane with our setup
+sed -i 's@\$remote_fs@@' %{buildroot}/etc/init.d/xend
 sed -i '/relocation-server yes/s@^@#@' %{buildroot}/etc/xen/xend-config.sxp
 sed -i '/unix-server/s@.*$@&\n\(xend-unix-server yes\)@' %{buildroot}/etc/xen/xend-config.sxp
 %{compress_man}
 rm -rf %{buildroot}/usr/src
 rm -rf %{buildroot}/etc/bash*
 
+%preun
+/usr/sbin/remove_initd xencommons &>/dev/null || /bin/true
+/usr/sbin/remove_initd xend &>/dev/null || /bin/true
+
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/boot/xen-4.0.1.gz
-/boot/xen-4.0.gz
+/boot/xen-%{version}.gz
+/boot/xen-4.1.gz
 /boot/xen-4.gz
-/boot/xen-syms-4.0.1
 /boot/xen.gz
+/boot/xen-syms-%{version}
 /etc/init.d/xend
 /etc/init.d/xendomains
-%config /etc/sysconfig/xend
+/etc/init.d/xen-watchdog
+/etc/init.d/xencommons
+%config /etc/sysconfig/xencommons
 %config /etc/sysconfig/xendomains
 /etc/udev/rules.d/xen-backend.rules
 /etc/udev/rules.d/xend.rules
-/etc/udev/xen-backend.rules
-/etc/udev/xend.rules
 %dir /etc/xen
+/etc/xen/cpupool
+/etc/xen/xl.conf
 /etc/xen/README
 /etc/xen/README.incompatibilities
 /etc/xen/scripts
@@ -115,6 +109,7 @@ rm -rf %{buildroot}
 /usr/bin/xenstore-ls
 /usr/bin/xenstore-read
 /usr/bin/xenstore-rm
+/usr/bin/xenstore-watch
 /usr/bin/xenstore-write
 /usr/bin/xentrace
 /usr/bin/xentrace_format
@@ -144,12 +139,18 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libxenstore.so.3.0.0
 /usr/%{_lib}/libxlutil.so.1.0
 /usr/%{_lib}/libxlutil.so.1.0.0
+/usr/%{_lib}/libblktapctl.so.1.0
+/usr/%{_lib}/libblktapctl.so.1.0.0
 /usr/%{_lib}/xen
+/usr/sbin/xenwatchdogd
+/usr/sbin/xen-hptool
+/usr/sbin/xen-hvmcrash
+/usr/sbin/kdd
+/usr/sbin/tap-ctl
 /usr/sbin/blktapctrl
 /usr/sbin/flask-getenforce
 /usr/sbin/flask-loadpolicy
 /usr/sbin/flask-setenforce
-/usr/sbin/fs-backend
 /usr/sbin/gdbsx
 /usr/sbin/gtracestat
 /usr/sbin/gtraceview
@@ -202,10 +203,17 @@ rm -rf %{buildroot}
 /usr/include/xenguest.h
 /usr/include/xs.h
 /usr/include/xs_lib.h
+/usr/include/_libxl_types.h
+/usr/include/libxl_uuid.h
+/usr/include/xenctrlosdep.h
+/usr/include/xentoollog.h
 /usr/%{_lib}/*.a
 /usr/%{_lib}/*.so
 
 %changelog
+* Mon Jun 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.1-1
+- Upgrade to 4.1.1
+
 * Fri Dec 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0.1-2
 - Fix blktap issues and dependencies on deprecated xmlproc code
 
