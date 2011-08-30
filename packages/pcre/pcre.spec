@@ -1,7 +1,7 @@
 Summary: PCRE - Perl Compatible Regular Expressions
 Name: pcre
-Version: 8.10
-Release: 2
+Version: 8.13
+Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://www.pcre.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 Patch0: http://dev.lightcube.us/sources/%{name}/pcreposix.patch
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 8b345da0f835b2caabff071b0b5bab40564652be
+BuildRequires: digest(sha1:%{SOURCE0}) = 4dedf8f2e1d7fb29bd00e62bcd26ca3ba71ff9bb
 BuildRequires: digest(sha1:%{PATCH0}) = ea2dab6648c0ccb43d4e3783932f5e3d87db73a8
 BuildRequires: bzip2-devel
 BuildRequires: readline-devel
@@ -41,10 +41,11 @@ Headers and libraries for developing with %{name}
   --enable-pcregrep-libz \
   --enable-pcretest-libreadline \
   --enable-pcregrep-libbz2
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
+%{compress_man}
 
 %clean
 rm -rf %{buildroot}
@@ -60,8 +61,8 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libpcrecpp.so.*
 /usr/%{_lib}/libpcreposix.so.*
 /usr/share/doc/pcre
-/usr/share/man/man1/pcregrep.1
-/usr/share/man/man1/pcretest.1
+/usr/share/man/man1/pcregrep.1.bz2
+/usr/share/man/man1/pcretest.1.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -84,10 +85,13 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/libpcre.pc
 /usr/%{_lib}/pkgconfig/libpcrecpp.pc
 /usr/%{_lib}/pkgconfig/libpcreposix.pc
-/usr/share/man/man1/pcre-config.1
+/usr/share/man/man1/pcre-config.1.bz2
 /usr/share/man/man3/*
 
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.13-1
+- Upgrade to 8.13
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.10-2
 - Add patch for pcreposix which avoids duplicate function names from other
   packages
