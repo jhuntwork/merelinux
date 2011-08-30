@@ -1,7 +1,7 @@
 Summary: The Linux Kernel
 Name: linux
 Version: 2.6.39.3
-Release: 1
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -13,8 +13,8 @@ Requires(post): mkinitramfs
 BuildRequires: digest(sha1:%{SOURCE0}) = 950d52438087fd34d4d86a4ded7321cc3f90531d
 
 %ifarch x86_64
-Source1: http://dev.lightcube.us/svn/lightcubeos/!svn/bc/396/lightcube_os/trunk/packages/%{name}/%{name}-config.x86_64
-BuildRequires: digest(sha1:%{SOURCE1}) = 553590b2b9dc73f327024aef08dba33f167f6aae
+Source1: http://dev.lightcube.us/svn/lightcubeos/!svn/bc/433/lightcube_os/trunk/packages/%{name}/%{name}-config.x86_64
+BuildRequires: digest(sha1:%{SOURCE1}) = ba1d862687594fa773b416fad7a2075a8261c51a
 %endif
 
 %ifarch i686
@@ -133,6 +133,12 @@ rm -fr %{buildroot}
 /lib/modules/%{version}-%{release}/build
 
 %changelog
+* Thu Aug 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.39.3-3
+- Remove several debugging features, build dm-mod into kernel
+
+* Thu Jul 21 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.39.3-2
+- Build loop and core usb support directly into kernel
+
 * Sat Jul 16 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.39.3-1
 - Upgrade to 2.6.39.3
 - Add more modules/support for more features - start from allmodconfig and strip
