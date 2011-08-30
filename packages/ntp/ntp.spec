@@ -1,17 +1,17 @@
 Summary: Network Time Protocol utilities
 Name: ntp
-Version: 4.2.6p2
+Version: 4.2.6p3
 Release: 1
 Group: Services
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.ntp.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/~jhuntwork/sources/%{name}/ntpd.init
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source1: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/419/lightcube_os/trunk/packages/%{name}/ntpd.init
 
-BuildRequires: digest(%{SOURCE0}) = cf73cd85f248232c62f8029e6eb05938
-BuildRequires: digest(%{SOURCE1}) = 89566c4ddf46fd78fdff5ae9f13340f0
+BuildRequires: digest(sha1:%{SOURCE0}) = 1d560cf689054a14e0d7446cb7bab50a92ead647
+BuildRequires: digest(sha1:%{SOURCE1}) = fb8868cd559a97a8e7dc1397617935f3b42f4f70
 
 %description
 NTP is a protocol designed to synchronize the clocks of computers over a
@@ -21,16 +21,16 @@ network.
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
 export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --sysconfdir=/etc \
   --with-binsubdir=sbin
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
+%{compress_man}
 install -dv %{buildroot}/etc/init.d
 install -m 754 %{SOURCE1} %{buildroot}/etc/init.d/ntpd
 cat > %{buildroot}/etc/ntp.conf << "EOF"
@@ -65,13 +65,12 @@ rm -rf %{buildroot}
 /usr/sbin/ntptrace
 /usr/sbin/sntp
 /usr/sbin/tickadj
-/usr/share/man/man1/ntp-keygen.1
-/usr/share/man/man1/ntpd.1
-/usr/share/man/man1/ntpdc.1
-/usr/share/man/man1/ntpq.1
-/usr/share/man/man1/ntpsnmpd.1
-/usr/share/man/man1/sntp.1
+/usr/share/man/man1/*
 
 %changelog
+* Mon Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.6p3-1
+- Upgrade to 4.2.6p3
+- Fixes to init script
+
 * Mon Aug 23 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.6p2-1
 - Initial version
