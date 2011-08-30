@@ -1,0 +1,1275 @@
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.67205
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf nmap-5.51
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/nmap-5.51.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd nmap-5.51
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.18356
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd nmap-5.51
++ ./configure --prefix=/usr --libdir=/usr/lib64 --without-zenmap --with-libpcap=included --with-liblua=included
+checking whether NLS is requested... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for inline... inline
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking for ranlib... ranlib
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for __func__... yes
+checking for strip... /usr/bin/strip
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking pwd.h usability... yes
+checking pwd.h presence... yes
+checking for pwd.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking sys/sockio.h usability... no
+checking sys/sockio.h presence... no
+checking for sys/sockio.h... no
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking for net/if.h... yes
+checking for library containing setsockopt... none required
+checking for library containing gethostbyname... none required
+checking for a Python interpreter with version >= 2.4... python
+checking for python... /usr/bin/python
+checking for python version... 2.7
+checking for python platform... linux2
+checking for python script directory... ${prefix}/lib/python2.7/site-packages
+checking for python extension module directory... ${exec_prefix}/lib/python2.7/site-packages
+checking openssl/ssl.h usability... yes
+checking openssl/ssl.h presence... yes
+checking for openssl/ssl.h... yes
+checking for BIO_int_ctrl in -lcrypto... yes
+checking for SSL_new in -lssl... yes
+checking pcre.h usability... yes
+checking pcre.h presence... yes
+checking for pcre.h... yes
+checking for pcre_version in -lpcre... yes
+checking pcre/pcre.h usability... no
+checking pcre/pcre.h presence... no
+checking for pcre/pcre.h... no
+checking for library containing dlopen... -ldl
+checking for library containing nl_handle_alloc... no
+yes
+checking if sockaddr{} has sa_len member... no
+checking whether byte ordering is bigendian... no
+checking if struct in_addr is a wacky huge structure (some Sun boxes)... no
+checking if struct icmp exists... yes
+checking if struct ip exists... yes
+checking if struct ip has ip_sum member... yes
+checking for strerror... yes
+checking for type of 6th argument to recvfrom()... socklen_t
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: WARNING:  'Makefile.in' seems to ignore the --datarootdir setting
+config.status: creating libnetutil/Makefile
+config.status: creating nmap_config.h
+=== configuring in nping (/usr/src/rpm/BUILD/nmap-5.51/nping)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr'  '--libdir=/usr/lib64' '--without-zenmap' '--with-libpcap=included' '--with-liblua=included' --cache-file=/dev/null --srcdir=.
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for inline... inline
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether the compiler is gcc 4 or greater... yes
+checking for __func__... yes
+checking for strip... /usr/bin/strip
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking pwd.h usability... yes
+checking pwd.h presence... yes
+checking for pwd.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking sys/sockio.h usability... no
+checking sys/sockio.h presence... no
+checking for sys/sockio.h... no
+checking for library containing setsockopt... none required
+checking for library containing gethostbyname... none required
+checking openssl/ssl.h usability... yes
+checking openssl/ssl.h presence... yes
+checking for openssl/ssl.h... yes
+checking for BIO_int_ctrl in -lcrypto... yes
+checking for SSL_new in -lssl... yes
+checking for EVP_sha256... yes
+checking for library containing dlopen... -ldl
+checking for library containing nl_handle_alloc... no
+checking if sockaddr{} has sa_len member... no
+checking if sockaddr_in{} has sin_len member... no
+checking if sockaddr_in6{} has sin6_len member... no
+checking whether byte ordering is bigendian... no
+checking if struct in_addr is a wacky huge structure (some Sun boxes)... no
+checking if struct ip has ip_sum member... yes
+checking if function signal is accessible... yes
+checking for strerror... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: WARNING:  'Makefile.in' seems to ignore the --datarootdir setting
+config.status: creating nping_config.h
+                        o         
+                         o        
+                          o       
+                   o       o      
+                    o       o     
+                     o       o    
+               o      o       o   
+                o      o      o   
+    888b    888  o     o      o   
+    8888b   888  o     o      o   
+    88888b  888  o     o      o   
+    888Y88b 888               o   
+    888 Y88b888               o   
+    888  Y88888                   
+    888   Y8888                   
+    888    Y888                   
+                                  
+    --[NPING]--                   
+Configuration complete.  Type make (or gmake on some *BSD machines) to compile.
+=== configuring in libpcap (/usr/src/rpm/BUILD/nmap-5.51/libpcap)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr'  '--libdir=/usr/lib64' '--without-zenmap' '--with-libpcap=included' '--with-liblua=included' --cache-file=/dev/null --srcdir=.
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking gcc version... 4
+checking for inline... inline
+checking for __attribute__... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking sys/bitypes.h usability... yes
+checking sys/bitypes.h presence... yes
+checking for sys/bitypes.h... yes
+checking for int8_t... yes
+checking for u_int8_t... yes
+checking for int16_t... yes
+checking for u_int16_t... yes
+checking for int32_t... yes
+checking for u_int32_t... yes
+checking for int64_t... yes
+checking for u_int64_t... yes
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking sys/ioccom.h usability... no
+checking sys/ioccom.h presence... no
+checking for sys/ioccom.h... no
+checking sys/sockio.h usability... no
+checking sys/sockio.h presence... no
+checking for sys/sockio.h... no
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking paths.h usability... yes
+checking paths.h presence... yes
+checking for paths.h... yes
+checking for net/pfvar.h... no
+checking for netinet/if_ether.h... yes
+checking for ANSI ioctl definitions... yes
+checking for strerror... yes
+checking for strlcpy... no
+checking for vsnprintf... yes
+checking for snprintf... yes
+checking for library containing gethostbyname... none required
+checking for library containing socket... none required
+checking for library containing putmsg... none required
+checking for ether_hostton... yes
+checking whether ether_hostton is declared... no
+checking netinet/ether.h usability... yes
+checking netinet/ether.h presence... yes
+checking for netinet/ether.h... yes
+checking whether ether_hostton is declared... yes
+checking if --disable-protochain option is specified... enabled
+checking packet capture type... linux
+checking Linux kernel version... 2
+checking for linux/wireless.h... yes
+checking for nl_handle_alloc in -lnl... no
+checking if if_packet.h has tpacket_stats defined... yes
+checking if tpacket_auxdata struct has tp_vlan_tci member... no
+checking for getifaddrs... yes
+checking ifaddrs.h usability... yes
+checking ifaddrs.h presence... yes
+checking for ifaddrs.h... yes
+checking for socklen_t... yes
+checking for getaddrinfo... yes
+checking whether to build optimizer debugging code... no
+checking whether to build parser debugging code... no
+checking whether we have DAG API headers... no (/usr/local/include)
+checking whether we have the DAG API... no
+checking whether we have Septel API... no
+checking whether we have Myricom Sniffer API... no (/opt/snf)
+checking for ranlib... ranlib
+checking if sockaddr struct has the sa_len member... no
+checking if sockaddr_storage struct exists... yes
+checking if dl_hp_ppa_info_t struct has dl_module_id_1 member... no
+checking if unaligned accesses fail... no
+checking for USB sniffing support... yes
+configure: Device for USB sniffing is /dev/usbmon
+checking linux/usbdevice_fs.h usability... yes
+checking linux/usbdevice_fs.h presence... yes
+checking for linux/usbdevice_fs.h... yes
+checking if usbdevfs_ctrltransfer struct has bRequestType member... yes
+checking bluetooth/bluetooth.h usability... no
+checking bluetooth/bluetooth.h presence... no
+checking for bluetooth/bluetooth.h... no
+configure: Bluetooth sniffing is not supported; install bluez-lib devel to enable it
+checking for linux/can.h... yes
+configure: CAN sniffing is supported
+checking for a BSD-compatible install... /usr/bin/install -c
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating pcap-filter.manmisc
+config.status: creating pcap-linktype.manmisc
+config.status: creating pcap-savefile.manfile
+config.status: creating pcap.3pcap
+config.status: creating pcap_compile.3pcap
+config.status: creating pcap_datalink.3pcap
+config.status: creating pcap_dump_open.3pcap
+config.status: creating pcap_list_datalinks.3pcap
+config.status: creating pcap_open_dead.3pcap
+config.status: creating pcap_open_offline.3pcap
+config.status: creating config.h
+=== configuring in libdnet-stripped (/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr'  '--libdir=/usr/lib64' '--without-zenmap' '--with-libpcap=included' '--with-liblua=included' --cache-file=/dev/null --srcdir=.
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for a sed that does not truncate output... /bin/sed
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for fgrep... /bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for ar... ar
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking for shl_load... no
+checking for shl_load in -ldld... no
+checking for dlopen... no
+checking for dlopen in -ldl... yes
+checking whether a program can dlopen itself... yes
+checking whether a statically linked program can dlopen itself... no
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... no
+checking whether to build static libraries... yes
+checking for Python... checking for gethostbyname... yes
+checking for socket... yes
+checking for putmsg in -lstr... no
+checking for open_mib in -lnm... no
+checking for Check... no
+checking for ANSI C header files... (cached) yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking for unistd.h... (cached) yes
+checking sys/bufmod.h usability... no
+checking sys/bufmod.h presence... no
+checking for sys/bufmod.h... no
+checking sys/dlpi.h usability... no
+checking sys/dlpi.h presence... no
+checking for sys/dlpi.h... no
+checking sys/dlpihdr.h usability... no
+checking sys/dlpihdr.h presence... no
+checking for sys/dlpihdr.h... no
+checking sys/dlpi_ext.h usability... no
+checking sys/dlpi_ext.h presence... no
+checking for sys/dlpi_ext.h... no
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/mib.h usability... no
+checking sys/mib.h presence... no
+checking for sys/mib.h... no
+checking sys/ndd_var.h usability... no
+checking sys/ndd_var.h presence... no
+checking for sys/ndd_var.h... no
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/sockio.h usability... no
+checking sys/sockio.h presence... no
+checking for sys/sockio.h... no
+checking sys/sysctl.h usability... yes
+checking sys/sysctl.h presence... yes
+checking for sys/sysctl.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking net/bpf.h usability... no
+checking net/bpf.h presence... no
+checking for net/bpf.h... no
+checking net/if.h usability... yes
+checking net/if.h presence... yes
+checking for net/if.h... yes
+checking net/if_var.h usability... no
+checking net/if_var.h presence... no
+checking for net/if_var.h... no
+checking net/if_arp.h usability... yes
+checking net/if_arp.h presence... yes
+checking for net/if_arp.h... yes
+checking net/if_dl.h usability... no
+checking net/if_dl.h presence... no
+checking for net/if_dl.h... no
+checking net/pfilt.h usability... no
+checking net/pfilt.h presence... no
+checking for net/pfilt.h... no
+checking net/pfvar.h usability... no
+checking net/pfvar.h presence... no
+checking for net/pfvar.h... no
+checking net/radix.h usability... no
+checking net/radix.h presence... no
+checking for net/radix.h... no
+checking net/raw.h usability... no
+checking net/raw.h presence... no
+checking for net/raw.h... no
+checking net/route.h usability... yes
+checking net/route.h presence... yes
+checking for net/route.h... yes
+checking netinet/in_var.h usability... no
+checking netinet/in_var.h presence... no
+checking for netinet/in_var.h... no
+checking net/if_tun.h usability... no
+checking net/if_tun.h presence... no
+checking for net/if_tun.h... no
+checking linux/if_tun.h usability... yes
+checking linux/if_tun.h presence... yes
+checking for linux/if_tun.h... yes
+checking netinet/ip_fw.h usability... no
+checking netinet/ip_fw.h presence... no
+checking for netinet/ip_fw.h... no
+checking linux/ip_fw.h usability... no
+checking linux/ip_fw.h presence... no
+checking for linux/ip_fw.h... no
+checking linux/ip_fwchains.h usability... no
+checking linux/ip_fwchains.h presence... no
+checking for linux/ip_fwchains.h... no
+checking linux/netfilter_ipv4/ipchains_core.h usability... no
+checking linux/netfilter_ipv4/ipchains_core.h presence... no
+checking for linux/netfilter_ipv4/ipchains_core.h... no
+checking ip_fil_compat.h usability... no
+checking ip_fil_compat.h presence... no
+checking for ip_fil_compat.h... no
+checking netinet/ip_fil_compat.h usability... no
+checking netinet/ip_fil_compat.h presence... no
+checking for netinet/ip_fil_compat.h... no
+checking ip_compat.h usability... no
+checking ip_compat.h presence... no
+checking for ip_compat.h... no
+checking netinet/ip_compat.h usability... no
+checking netinet/ip_compat.h presence... no
+checking for netinet/ip_compat.h... no
+checking ip_fil.h usability... no
+checking ip_fil.h presence... no
+checking for ip_fil.h... no
+checking netinet/ip_fil.h usability... no
+checking netinet/ip_fil.h presence... no
+checking for netinet/ip_fil.h... no
+checking hpsecurity.h usability... no
+checking hpsecurity.h presence... no
+checking for hpsecurity.h... no
+checking stropts.h usability... yes
+checking stropts.h presence... yes
+checking for stropts.h... yes
+checking for an ANSI C-conforming const... yes
+checking for inline... inline
+checking for pid_t... yes
+checking for size_t... yes
+checking for sockaddr_in6 struct in <netinet/in.h>... yes
+checking for sa_len in sockaddr struct... no
+checking for arp_dev in arpreq struct... yes
+checking for rt_msghdr struct in <net/route.h>... no
+checking whether gcc needs -traditional... no
+checking for socklen_t... yes
+checking for working memcmp... yes
+checking for err... yes
+checking for strlcat... no
+checking for strlcpy... no
+checking for strsep... yes
+checking for Berkeley Packet Filter... no
+checking for Linux proc filesystem... yes
+checking whether ETH_P_ALL is declared... yes
+checking for Linux PF_PACKET sockets... yes
+checking for SNMP MIB2 STREAMS... no
+checking for route(7) STREAMS... no
+checking for arp(7) ioctls... yes
+checking for raw IP sockets ip_{len,off} host byte ordering... no
+checking for cooked raw IP sockets... no
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating dnet-config
+config.status: creating include/Makefile
+config.status: creating include/dnet/Makefile
+config.status: creating src/Makefile
+config.status: creating include/config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
+config.status: executing default commands
+=== configuring in nbase (/usr/src/rpm/BUILD/nmap-5.51/nbase)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr'  '--libdir=/usr/lib64' '--without-zenmap' '--with-libpcap=included' '--with-liblua=included' --cache-file=/dev/null --srcdir=.
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for ranlib... ranlib
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for inline... inline
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for string.h... (cached) yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking for strings.h... (cached) yes
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking for unistd.h... (cached) yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking for sys/types.h... (cached) yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking arpa/inet.h usability... yes
+checking arpa/inet.h presence... yes
+checking for arpa/inet.h... yes
+checking for sys/stat.h... (cached) yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking sys/wait.h usability... yes
+checking sys/wait.h presence... yes
+checking for sys/wait.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking sys/resource.h usability... yes
+checking sys/resource.h presence... yes
+checking for sys/resource.h... yes
+checking for inttypes.h... (cached) yes
+checking whether time.h and sys/time.h may both be included... yes
+checking for sys/socket.h... (cached) yes
+checking for net/if.h... yes
+checking for __attribute__... yes
+checking whether byte ordering is bigendian... no
+checking for int8_t... yes
+checking for int16_t... yes
+checking for int32_t... yes
+checking for int64_t... yes
+checking for uint8_t... yes
+checking for uint16_t... yes
+checking for uint32_t... yes
+checking for uint64_t... yes
+checking for snprintf... yes
+checking for vsnprintf... yes
+checking for nanosleep... yes
+checking for strerror... yes
+checking for strcasestr... yes
+checking for strcasecmp... yes
+checking for strncasecmp... yes
+checking for signal... yes
+checking for vsnprintf... (cached) yes
+checking for snprintf... (cached) yes
+checking for asprintf... yes
+checking for asnprintf... no
+checking for vasprintf... yes
+checking for vasnprintf... no
+checking for getopt... yes
+checking for getopt_long_only... yes
+checking for usleep... yes
+checking for gettimeofday... yes
+checking for sleep... yes
+checking for getopt_long_only... (cached) yes
+checking for strcasecmp... (cached) yes
+checking for strncasecmp... (cached) yes
+checking for library containing getaddrinfo... none required
+checking for library containing gai_strerror... none required
+checking for library containing getnameinfo... none required
+checking for gai_strerror... yes
+checking for inet_ntop... yes
+checking for inet_pton... yes
+checking for working getaddrinfo... yes
+checking for library containing inet_addr... none required
+checking for working getnameinfo... yes
+checking for sockaddr_in6... yes
+checking for sockaddr_storage... yes
+checking for AF_INET6 definition... yes
+checking for IPv6 support... yes
+checking openssl/ssl.h usability... yes
+checking openssl/ssl.h presence... yes
+checking for openssl/ssl.h... yes
+checking openssl/err.h usability... yes
+checking openssl/err.h presence... yes
+checking for openssl/err.h... yes
+checking openssl/rand.h usability... yes
+checking openssl/rand.h presence... yes
+checking for openssl/rand.h... yes
+checking for BIO_int_ctrl in -lcrypto... yes
+checking for SSL_new in -lssl... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: WARNING:  'Makefile.in' seems to ignore the --datarootdir setting
+config.status: creating nbase_config.h
+=== configuring in nsock/src (/usr/src/rpm/BUILD/nmap-5.51/nsock/src)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr'  '--libdir=/usr/lib64' '--without-zenmap' '--with-libpcap=included' '--with-liblua=included' --cache-file=/dev/null --srcdir=.
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for ranlib... ranlib
+checking for gethostent... ./configure: line 1472: ac_fn_c_try_link: command not found
+no
+checking for gethostent in -lnsl... yes
+checking for setsockopt... yes
+checking for nanosleep... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking net/bpf.h usability... no
+checking net/bpf.h presence... no
+checking for net/bpf.h... no
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking openssl/ssl.h usability... yes
+checking openssl/ssl.h presence... yes
+checking for openssl/ssl.h... yes
+checking for BIO_int_ctrl in -lcrypto... yes
+checking for SSL_new in -lssl... yes
+checking for library containing dlopen... -ldl
+checking for SSL_set_tlsext_host_name... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating ../include/nsock_config.h
+=== configuring in ncat (/usr/src/rpm/BUILD/nmap-5.51/ncat)
+configure: running /bin/sh ./configure --disable-option-checking '--prefix=/usr'  '--libdir=/usr/lib64' '--without-zenmap' '--with-libpcap=included' '--with-liblua=included' --cache-file=/dev/null --srcdir=.
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for strip... /usr/bin/strip
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/wait.h that is POSIX.1 compatible... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for strings.h... (cached) yes
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking sys/timeb.h usability... yes
+checking sys/timeb.h presence... yes
+checking for sys/timeb.h... yes
+checking for unistd.h... (cached) yes
+checking whether stat file-mode macros are broken... no
+checking for an ANSI C-conforming const... yes
+checking whether time.h and sys/time.h may both be included... yes
+checking for pid_t... yes
+checking vfork.h usability... no
+checking vfork.h presence... no
+checking for vfork.h... no
+checking for fork... yes
+checking for vfork... yes
+checking for working fork... yes
+checking for working vfork... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... yes
+checking sys/select.h usability... yes
+checking sys/select.h presence... yes
+checking for sys/select.h... yes
+checking for sys/socket.h... (cached) yes
+checking types of arguments for select... int,fd_set *,struct timeval *
+checking return type of signal handlers... void
+checking for vprintf... yes
+checking for _doprnt... no
+checking for dup2... yes
+checking for gettimeofday... yes
+checking for inet_ntoa... yes
+checking for memset... yes
+checking for select... yes
+checking for socket... yes
+checking for strcasecmp... yes
+checking for strchr... yes
+checking for strdup... yes
+checking for strerror... yes
+checking for strncasecmp... yes
+checking for strtol... yes
+checking for library containing setsockopt... none required
+checking for library containing gethostbyname... none required
+checking for library containing dlopen... -ldl
+checking openssl/ssl.h usability... yes
+checking openssl/ssl.h presence... yes
+checking for openssl/ssl.h... yes
+checking openssl/err.h usability... yes
+checking openssl/err.h presence... yes
+checking for openssl/err.h... yes
+checking openssl/rand.h usability... yes
+checking openssl/rand.h presence... yes
+checking for openssl/rand.h... yes
+checking for BIO_int_ctrl in -lcrypto... yes
+checking for SSL_new in -lssl... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: WARNING:  'Makefile.in' seems to ignore the --datarootdir setting
+config.status: creating config.h
+            .       .
+            \`-"'"-'/
+             } 6 6 {
+            ==. Y ,==
+              /^^^\  .
+             /     \  )  Ncat: A modern interpretation of classic Netcat
+            (  )-(  )/
+            -""---""---   /
+           /   Ncat    \_/
+          (     ____
+           \_.=|____E
+Configuration complete.
+   (  )   /\   _                 (
+    \ |  (  \ ( \.(               )                      _____
+  \  \ \  `  `   ) \             (  ___                 / _   \
+ (_`    \+   . x  ( .\            \/   \____-----------/ (o)   \_
+- .-               \+  ;          (  O                           \____
+(__                +- .( -'.- <.   \_____________  `              \  /
+(_____            ._._: <_ - <- _- _  VVVVVVV VV V\                \/
+  .    /./.+-  . .- /  +--  - .    (--_AAAAAAA__A_/                |
+  (__ ' /x  / x _/ (                \______________//_              \_______
+ , x / ( '  . / .  /                                  \___'          \     /
+    /  /  _/ /    +                                       |           \   /
+   '  (__/                                               /              \/
+                                                       /                  \
+             NMAP IS A POWERFUL TOOL -- USE CAREFULLY AND RESPONSIBLY
+Configuration complete.  Type make (or gmake on some *BSD machines) to compile.
++ make -j24
+Makefile:375: makefile.dep: No such file or directory
+g++ -MM -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 main.cc nmap.cc targets.cc tcpip.cc nmap_error.cc utils.cc idle_scan.cc osscan.cc osscan2.cc output.cc payload.cc scan_engine.cc timing.cc charpool.cc services.cc protocols.cc nmap_rpc.cc portlist.cc NmapOps.cc TargetGroup.cc Target.cc FingerPrintResults.cc service_scan.cc NmapOutputTable.cc MACLookup.cc nmap_tty.cc nmap_dns.cc traceroute.cc portreasons.cc xml.cc nse_main.cc nse_utility.cc nse_nsock.cc nse_dnet.cc nse_fs.cc nse_nmaplib.cc nse_debug.cc nse_pcrelib.cc nse_binlib.cc nse_bit.cc nse_openssl.cc nse_ssl_cert.cc  > makefile.dep
+Compiling liblua
+Compiling libpcap
+Compiling libdnet
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/liblua'
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lapi.o lapi.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lcode.o lcode.c
+Compiling libnbase
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o ldebug.o ldebug.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o ldo.o ldo.c
+cd nbase && make
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o ldump.o ldump.c
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libpcap'
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lfunc.o lfunc.c
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped'
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./pcap-linux.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lgc.o lgc.c
+Compiling libnetutil
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o llex.o llex.c
+cd libnetutil && make
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lmem.o lmem.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./pcap-usb-linux.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./pcap-can-linux.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lobject.o lobject.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./fad-getad.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lopcodes.o lopcodes.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lparser.o lparser.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lstate.o lstate.c
+if grep GIT ./VERSION >/dev/null; then \
+	read ver <./VERSION; \
+	echo $ver | tr -d '\012'; \
+	date +_%Y_%m_%d; \
+else \
+	cat ./VERSION; \
+fi | sed -e 's/.*/static const char pcap_version_string[] = "libpcap version &";/' > version.h
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./inet.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lstring.o lstring.c
+Making all in include
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nbase'
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libnetutil'
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./gencode.c
+Makefile:41: makefile.dep: No such file or directory
+gcc -g -O2 -Wall    -DHAVE_CONFIG_H -D_FORTIFY_SOURCE=2    -c -o snprintf.o snprintf.c
+g++ -MM -I../liblua -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -DHAVE_CONFIG_H -D_FORTIFY_SOURCE=2 ./netutil.cc > makefile.dep
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o ltable.o ltable.c
+make[2]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/include'
+make  all-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/include'
+Making all in dnet
+make[4]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/include/dnet'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/include/dnet'
+make[4]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/include'
+gcc -g -O2 -Wall    -DHAVE_CONFIG_H -D_FORTIFY_SOURCE=2    -c -o nbase_str.o nbase_str.c
+make[4]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/include'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/include'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/include'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/src'
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o addr-util.lo addr-util.c
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libnetutil'
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libnetutil'
+g++ -c -I../liblua -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -DHAVE_CONFIG_H -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing netutil.cc -o netutil.o
+gcc -g -O2 -Wall    -DHAVE_CONFIG_H -D_FORTIFY_SOURCE=2    -c -o nbase_misc.o nbase_misc.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c addr-util.c -o addr-util.o
+gcc -g -O2 -Wall    -DHAVE_CONFIG_H -D_FORTIFY_SOURCE=2    -c -o nbase_memalloc.o nbase_memalloc.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o addr.lo addr.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c addr.c -o addr.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o blob.lo blob.c
+gcc -g -O2 -Wall    -DHAVE_CONFIG_H -D_FORTIFY_SOURCE=2    -c -o nbase_rnd.o nbase_rnd.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./optimize.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c blob.c -o blob.o
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./nametoaddr.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./etherent.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./savefile.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./sf-pcap.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o ltm.o ltm.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lundump.o lundump.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./sf-pcap-ng.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./pcap-common.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lvm.o lvm.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lzio.o lzio.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./bpf_image.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lauxlib.o lauxlib.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./bpf_dump.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lbaselib.o lbaselib.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c scanner.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o ldblib.o ldblib.c
+rm -f libnbase.a
+ar cr libnbase.a snprintf.o nbase_str.o nbase_misc.o nbase_memalloc.o nbase_rnd.o
+ranlib libnbase.a
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nbase'
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o ip-util.lo ip-util.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o ip6.lo ip6.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -Dyylval=pcap_lval -c grammar.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c ip-util.c -o ip-util.o
+rm -f bpf_filter.c
+ln -s ./bpf/net/bpf_filter.c bpf_filter.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o rand.lo rand.c
+Compiling libnsock
+cd nsock/src && make
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c ip6.c -o ip6.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o strlcat.lo strlcat.c
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nsock/src'
+Makefile:80: makefile.dep: No such file or directory
+gcc -MM -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap error.c filespace.c gh_list.c nsock_connect.c nsock_core.c nsock_iod.c nsock_read.c nsock_timers.c nsock_write.c nsock_ssl.c nsock_event.c nsock_pool.c netutils.c nsock_pcap.c  > makefile.dep
+if grep GIT ./VERSION >/dev/null; then \
+	read ver <./VERSION; \
+	echo $ver | tr -d '\012'; \
+	date +_%Y_%m_%d; \
+else \
+	cat ./VERSION; \
+fi | sed -e 's/.*/char pcap_version[] = "&";/' > version.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o strlcpy.lo strlcpy.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c rand.c -o rand.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o arp-ioctl.lo arp-ioctl.c
+sed -e 's|@includedir[@]|/usr/include|g' \
+    -e 's|@libdir[@]|/usr/lib64|g' \
+    -e 's|@LIBS[@]||g' \
+    -e 's|@V_RPATH_OPT[@]|-Wl,-rpath,|g' \
+    ./pcap-config.in >pcap-config.tmp
+mv pcap-config.tmp pcap-config
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c strlcat.c -o strlcat.o
+chmod a+x pcap-config
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c ./pcap.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c strlcpy.c -o strlcpy.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c arp-ioctl.c -o arp-ioctl.o
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c bpf_filter.c
+gcc -g -O2 -O2 -fpic -I.  -DHAVE_CONFIG_H  -D_U_="__attribute__((unused))" -c version.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o eth-linux.lo eth-linux.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o liolib.o liolib.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lmathlib.o lmathlib.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o loslib.o loslib.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c eth-linux.c -o eth-linux.o
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o ltablib.o ltablib.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o fw-none.lo fw-none.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c fw-none.c -o fw-none.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o intf.lo intf.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o ip.lo ip.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c intf.c -o intf.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c ip.c -o ip.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o route-linux.lo route-linux.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o lstrlib.o lstrlib.c
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o loadlib.o loadlib.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../include  -I../include   -g -O2 -Wall -c -o tun-linux.lo tun-linux.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c route-linux.c -o route-linux.o
+gcc -O2 -Wall -g -O2 -Wall -fno-strict-aliasing   -DLUA_USE_POSIX -DLUA_USE_DLOPEN   -c -o linit.o linit.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../include -I../include -g -O2 -Wall -c tun-linux.c -o tun-linux.o
+/bin/sh ../libtool --tag=CC   --mode=link gcc  -g -O2 -Wall -version-info 1:1:0  -o libdnet.la -rpath /usr/lib64 addr-util.lo addr.lo blob.lo ip-util.lo ip6.lo rand.lo strlcat.lo strlcpy.lo arp-ioctl.lo eth-linux.lo fw-none.lo intf.lo ip.lo route-linux.lo tun-linux.lo 
+libtool: link: ar cru .libs/libdnet.a  addr-util.o addr.o blob.o ip-util.o ip6.o rand.o strlcat.o strlcpy.o arp-ioctl.o eth-linux.o fw-none.o intf.o ip.o route-linux.o tun-linux.o
+libtool: link: ranlib .libs/libdnet.a
+libtool: link: ( cd ".libs" && rm -f "libdnet.la" && ln -s "../libdnet.la" "libdnet.la" )
+make[2]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped/src'
+make[2]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libdnet-stripped'
+ar rcu liblua.a lapi.o lcode.o ldebug.o ldo.o ldump.o lfunc.o lgc.o llex.o lmem.o lobject.o lopcodes.o lparser.o lstate.o lstring.o ltable.o ltm.o lundump.o lvm.o lzio.o lauxlib.o lbaselib.o ldblib.o liolib.o lmathlib.o loslib.o ltablib.o lstrlib.o loadlib.o linit.o
+ranlib liblua.a
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/liblua'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nsock/src'
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nsock/src'
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   error.c -o error.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   filespace.c -o filespace.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   gh_list.c -o gh_list.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_connect.c -o nsock_connect.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_core.c -o nsock_core.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_iod.c -o nsock_iod.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_read.c -o nsock_read.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_timers.c -o nsock_timers.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_write.c -o nsock_write.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_ssl.c -o nsock_ssl.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_event.c -o nsock_event.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_pool.c -o nsock_pool.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   netutils.c -o netutils.o
+gcc -c -I../../nbase -DHAVE_CONFIG_H -DNSOCK_VERSION=\"0.02\" -D_FORTIFY_SOURCE=2 -I../include -I../../libpcap -g -O2 -Wall   nsock_pcap.c -o nsock_pcap.o
+ar rc libpcap.a pcap-linux.o pcap-usb-linux.o pcap-can-linux.o fad-getad.o pcap.o inet.o gencode.o optimize.o nametoaddr.o etherent.o savefile.o sf-pcap.o sf-pcap-ng.o pcap-common.o bpf_image.o bpf_dump.o  scanner.o grammar.o bpf_filter.o version.o  
+VER=`cat ./VERSION`; \
+MAJOR_VER=`sed 's/\([0-9][0-9]*\)\..*/\1/' ./VERSION`; \
+gcc -shared -Wl,-soname,libpcap.so.$MAJOR_VER  \
+    -o libpcap.so.$VER pcap-linux.o pcap-usb-linux.o pcap-can-linux.o fad-getad.o pcap.o inet.o gencode.o optimize.o nametoaddr.o etherent.o savefile.o sf-pcap.o sf-pcap-ng.o pcap-common.o bpf_image.o bpf_dump.o  scanner.o grammar.o bpf_filter.o version.o   
+ranlib libpcap.a
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libpcap'
+rm -f libnetutil.a
+ar cr libnetutil.a netutil.o
+ranlib libnetutil.a
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libnetutil'
+rm -f libnsock.a
+ar cr libnsock.a error.o filespace.o gh_list.o nsock_connect.o nsock_core.o nsock_iod.o nsock_read.o nsock_timers.o nsock_write.o nsock_ssl.o nsock_event.o nsock_pool.o netutils.o nsock_pcap.o 
+ranlib libnsock.a
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nsock/src'
+cd ncat && make
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/ncat'
+Makefile:176: makefile.dep: No such file or directory
+gcc -MM -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase ncat_main.c ncat_connect.c ncat_core.c ncat_posix.c ncat_listen.c ncat_proxy.c ncat_broker.c ncat_hostmatch.c ncat_ssl.c base64.c http.c util.c sys_wrap.c http_digest.c > makefile.dep
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/ncat'
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/ncat'
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_main.c -o ncat_main.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_connect.c -o ncat_connect.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_core.c -o ncat_core.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_posix.c -o ncat_posix.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_listen.c -o ncat_listen.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_proxy.c -o ncat_proxy.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_broker.c -o ncat_broker.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_hostmatch.c -o ncat_hostmatch.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c ncat_ssl.c -o ncat_ssl.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c base64.c -o base64.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c http.c -o http.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c util.c -o util.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c sys_wrap.c -o sys_wrap.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c http_digest.c -o http_digest.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c test/addrset.c -o test/addrset.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c test/test-uri.c -o test/test-uri.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c test/test-cmdline-split.c -o test/test-cmdline-split.o
+gcc -I../libpcap -DHAVE_CONFIG_H -DNCAT_DATADIR="\"/usr/share/ncat\"" -D_FORTIFY_SOURCE=2 -I. -I.. -I../nsock/include/ -I../nbase -g -O2 -Wall -c test/test-wildcard.c -o test/test-wildcard.o
+test/test-wildcard.c: In function 'test':
+test/test-wildcard.c:159:5: warning: value computed is not used
+gcc -o test/addrset -g -O2 -Wall -L../libpcap  test/addrset.o ncat_core.o ncat_hostmatch.o sys_wrap.o util.o ../nsock/src/libnsock.a ../nbase/libnbase.a -lssl -lcrypto -lpcap -lssl -lcrypto -ldl 
+gcc -o test/test-cmdline-split -g -O2 -Wall -L../libpcap  test/test-cmdline-split.o ncat_posix.o ncat_core.o ncat_hostmatch.o sys_wrap.o util.o ../nsock/src/libnsock.a ../nbase/libnbase.a -lssl -lcrypto -lpcap -lssl -lcrypto -ldl 
+gcc -o test/test-wildcard -g -O2 -Wall -L../libpcap  test/test-wildcard.o ncat_core.o ncat_hostmatch.o ncat_ssl.o sys_wrap.o util.o ../nsock/src/libnsock.a ../nbase/libnbase.a -lssl -lcrypto -lpcap -lssl -lcrypto -ldl 
+gcc -o ncat -g -O2 -Wall -L../libpcap  ncat_main.o ncat_connect.o ncat_core.o ncat_posix.o ncat_listen.o ncat_proxy.o ncat_broker.o ncat_hostmatch.o ncat_ssl.o base64.o http.o util.o sys_wrap.o http_digest.o ../nsock/src/libnsock.a ../nbase/libnbase.a -lssl -lcrypto -lpcap -lssl -lcrypto -ldl 
+gcc -o test/test-uri -g -O2 -Wall -L../libpcap  test/test-uri.o base64.o http.o ncat_core.o ncat_hostmatch.o sys_wrap.o util.o ../nsock/src/libnsock.a ../nbase/libnbase.a -lssl -lcrypto -lpcap -lssl -lcrypto -ldl 
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/ncat'
+make nmap  build-ndiff build-nping
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51'
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   main.cc -o main.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nmap.cc -o nmap.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   targets.cc -o targets.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   tcpip.cc -o tcpip.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nmap_error.cc -o nmap_error.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   utils.cc -o utils.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   idle_scan.cc -o idle_scan.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   osscan.cc -o osscan.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   osscan2.cc -o osscan2.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   output.cc -o output.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   payload.cc -o payload.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   scan_engine.cc -o scan_engine.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   timing.cc -o timing.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   charpool.cc -o charpool.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   services.cc -o services.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   protocols.cc -o protocols.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nmap_rpc.cc -o nmap_rpc.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   portlist.cc -o portlist.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   NmapOps.cc -o NmapOps.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   TargetGroup.cc -o TargetGroup.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   Target.cc -o Target.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   FingerPrintResults.cc -o FingerPrintResults.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   service_scan.cc -o service_scan.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   NmapOutputTable.cc -o NmapOutputTable.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   MACLookup.cc -o MACLookup.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nmap_tty.cc -o nmap_tty.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nmap_dns.cc -o nmap_dns.o
+TargetGroup.cc: In member function 'int TargetGroup::parse_expr(const char*, int)':
+TargetGroup.cc:270:13: warning: value computed is not used
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   traceroute.cc -o traceroute.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   portreasons.cc -o portreasons.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   xml.cc -o xml.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_main.cc -o nse_main.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_utility.cc -o nse_utility.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_nsock.cc -o nse_nsock.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_dnet.cc -o nse_dnet.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_fs.cc -o nse_fs.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_nmaplib.cc -o nse_nmaplib.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_debug.cc -o nse_debug.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_pcrelib.cc -o nse_pcrelib.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_binlib.cc -o nse_binlib.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_bit.cc -o nse_bit.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_openssl.cc -o nse_openssl.o
+g++ -c -I./liblua -I./libdnet-stripped/include  -I./libpcap -I./nbase -I./nsock/include -DHAVE_CONFIG_H -DNMAP_NAME=\"Nmap\" -DNMAP_URL=\"http://nmap.org\" -DNMAP_PLATFORM=\"x86_64-unknown-linux-gnu\" -DNMAPDATADIR=\"/usr/share/nmap\" -D_FORTIFY_SOURCE=2 -g -O2 -Wall -fno-strict-aliasing   nse_ssl_cert.cc -o nse_ssl_cert.o
+cd ndiff && /usr/bin/python setup.py build 
+Compiling libnbase
+cd nbase && make
+make[2]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nbase'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nbase'
+Compiling libnetutil
+cd libnetutil && make
+make[2]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/libnetutil'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/libnetutil'
+Compiling libnsock
+cd nsock/src && make
+make[2]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nsock/src'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nsock/src'
+running build
+running build_scripts
+creating build
+creating build/scripts-2.7
+copying and adjusting ndiff -> build/scripts-2.7
+changing mode of build/scripts-2.7/ndiff from 644 to 755
+make[2]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nping'
+Makefile:167: makefile.dep: No such file or directory
+g++ -MM -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include ArgParser.cc NetworkLayerElement.cc PacketElement.cc common.cc common_modified.cc nping.cc RawData.cc UDPHeader.cc NpingOps.cc TCPHeader.cc utils.cc utils_net.cc IPv4Header.cc IPv6Header.cc ICMPv4Header.cc output.cc TransportLayerElement.cc stats.cc NpingTargets.cc NpingTarget.cc EthernetHeader.cc ARPHeader.cc EchoHeader.cc EchoServer.cc EchoClient.cc ProbeMode.cc NEPContext.cc Crypto.cc PacketDiff.cc  > makefile.dep
+make[2]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nping'
+make[2]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nping'
+make nping
+make[3]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nping'
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 ArgParser.cc -o ArgParser.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 NetworkLayerElement.cc -o NetworkLayerElement.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 PacketElement.cc -o PacketElement.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 common.cc -o common.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 common_modified.cc -o common_modified.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 nping.cc -o nping.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 RawData.cc -o RawData.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 UDPHeader.cc -o UDPHeader.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 NpingOps.cc -o NpingOps.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 TCPHeader.cc -o TCPHeader.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 utils.cc -o utils.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 utils_net.cc -o utils_net.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 IPv4Header.cc -o IPv4Header.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 ICMPv4Header.cc -o ICMPv4Header.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 IPv6Header.cc -o IPv6Header.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 output.cc -o output.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 TransportLayerElement.cc -o TransportLayerElement.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 stats.cc -o stats.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 NpingTargets.cc -o NpingTargets.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 NpingTarget.cc -o NpingTarget.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 EthernetHeader.cc -o EthernetHeader.o
+common_modified.cc: In member function 'int TargetGroup::parse_expr(const char*, int)':
+common_modified.cc:483:13: warning: value computed is not used
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 ARPHeader.cc -o ARPHeader.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 EchoHeader.cc -o EchoHeader.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 EchoServer.cc -o EchoServer.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 EchoClient.cc -o EchoClient.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 ProbeMode.cc -o ProbeMode.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 NEPContext.cc -o NEPContext.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 Crypto.cc -o Crypto.o
+g++ -c -I../libdnet-stripped/include  -I../libpcap -I../nbase -I../nsock/include -g -O2 -Wall  -fno-strict-aliasing   -DHAVE_CONFIG_H -DNPING_NAME=\"Nping\" -DNPING_URL=\"http://nmap.org/nping\" -DNPING_PLATFORM=\"x86_64-unknown-linux-gnu\" -D_FORTIFY_SOURCE=2 PacketDiff.cc -o PacketDiff.o
+Compiling nmap
+rm -f nmap
+g++ -Wl,-E  -Lnbase -Lnsock/src/   -o nmap main.o nmap.o targets.o tcpip.o nmap_error.o utils.o idle_scan.o osscan.o osscan2.o output.o payload.o scan_engine.o timing.o charpool.o services.o protocols.o nmap_rpc.o portlist.o NmapOps.o TargetGroup.o Target.o FingerPrintResults.o service_scan.o NmapOutputTable.o MACLookup.o nmap_tty.o nmap_dns.o  traceroute.o portreasons.o xml.o nse_main.o nse_utility.o nse_nsock.o nse_dnet.o nse_fs.o nse_nmaplib.o nse_debug.o nse_pcrelib.o nse_binlib.o nse_bit.o nse_openssl.o nse_ssl_cert.o  -lnbase -lnsock -lpcre libpcap/libpcap.a -lssl -lcrypto libnetutil/libnetutil.a ./libdnet-stripped/src/.libs/libdnet.a ./liblua/liblua.a -ldl 
+Compiling nping
+rm -f nping
+g++   -o nping ArgParser.o NetworkLayerElement.o PacketElement.o common.o common_modified.o nping.o RawData.o UDPHeader.o  NpingOps.o TCPHeader.o utils.o utils_net.o IPv4Header.o ICMPv4Header.o IPv6Header.o output.o TransportLayerElement.o stats.o NpingTargets.o NpingTarget.o EthernetHeader.o ARPHeader.o EchoHeader.o EchoServer.o EchoClient.o ProbeMode.o NEPContext.o Crypto.o PacketDiff.o  ../nbase/libnbase.a ../nsock/src/libnsock.a ../libnetutil/libnetutil.a -lssl -lcrypto ../libpcap/libpcap.a ../libdnet-stripped/src/.libs/libdnet.a -ldl  -lpthread
+Nping compiled successfully!
+make[3]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nping'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nping'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.41663
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/nmap-root
++ /bin/mkdir -p /var/tmp/nmap-root
++ cd nmap-5.51
++ make DESTDIR=/var/tmp/nmap-root install
+/usr/bin/install -c -d /var/tmp/nmap-root/usr/bin /var/tmp/nmap-root/usr/share/man/man1 /var/tmp/nmap-root/usr/share/nmap
+/usr/bin/install -c -c -m 755 nmap /var/tmp/nmap-root/usr/bin/nmap
+/usr/bin/strip -x /var/tmp/nmap-root/usr/bin/nmap
+/usr/bin/install -c -c -m 644 docs/nmap.1 /var/tmp/nmap-root/usr/share/man/man1/
+if [ "yes" = "yes" ]; then \
+  for ll in de es fr hr hu it jp pl pt_BR pt_PT ro ru sk zh; do \
+    /usr/bin/install -c -d /var/tmp/nmap-root/usr/share/man/$ll/man1; \
+    /usr/bin/install -c -c -m 644 docs/man-xlate/nmap-$ll.1 /var/tmp/nmap-root/usr/share/man/$ll/man1/nmap.1; \
+  done; \
+fi
+/usr/bin/install -c -c -m 644 docs/nmap.xsl /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 docs/nmap.dtd /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 nmap-services /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 nmap-payloads /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 nmap-rpc /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 nmap-os-db /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 nmap-service-probes /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 nmap-protocols /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 nmap-mac-prefixes /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -d /var/tmp/nmap-root/usr/share/nmap/scripts
+/usr/bin/install -c -d /var/tmp/nmap-root/usr/share/nmap/nselib
+(cd /var/tmp/nmap-root/usr/share/nmap/scripts && rm -f anonFTP.nse ASN.nse brutePOP3.nse bruteTelnet.nse chargenTest.nse daytimeTest.nse dns-safe-recursion-port.nse dns-safe-recursion-txid.nse dns-test-open-recursion.nse domino-enum-passwords.nse echoTest.nse ftpbounce.nse HTTPAuth.nse HTTP_open_proxy.nse HTTPpasswd.nse HTTPtrace.nse iax2Detect.nse ircServerInfo.nse ircZombieTest.nse MSSQLm.nse MySQLinfo.nse netbios-smb-os-discovery.nse nfs-acls.nse nfs-dirlist.nse popcapa.nse PPTPversion.nse promiscuous.nse RealVNC_auth_bypass.nse ripeQuery.nse robots.nse showHTMLTitle.nse showHTTPVersion.nse showOwner.nse showSMTPVersion.nse showSSHVersion.nse skype_v2-version.nse smb-enumdomains.nse smb-enumsessions.nse smb-enumshares.nse smb-enumusers.nse smb-serverstats.nse smb-systeminfo.nse SMTPcommands.nse SMTP_openrelay_test.nse SNMPcommunitybrute.nse SNMPsysdescr.nse SQLInject.nse SSH-hostkey.nse SSHv1-support.nse SSLv2-support.nse strangeSMTPport.nse UPnP-info.nse xamppDefaultPass.nse zoneTrans.nse db2-info.nse db2-brute.nse html-title.nse robots.txt.nse)
+/usr/bin/install -c -c -m 644 nse_main.lua /var/tmp/nmap-root/usr/share/nmap/
+/usr/bin/install -c -c -m 644 scripts/script.db scripts/*.nse /var/tmp/nmap-root/usr/share/nmap/scripts
+/usr/bin/install -c -c -m 644 nselib/*.lua /var/tmp/nmap-root/usr/share/nmap/nselib
+/usr/bin/install -c -d /var/tmp/nmap-root/usr/share/nmap/nselib/data
+for f in `find nselib/data -name .svn -prune -o -type d -print`; do \
+	/usr/bin/install -c -d /var/tmp/nmap-root/usr/share/nmap/$f; \
+done
+for f in `find nselib/data -name .svn -prune -o -type f -print`; do \
+	/usr/bin/install -c -c -m 644 $f /var/tmp/nmap-root/usr/share/nmap/$f; \
+done
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/ncat'
+Installing Ncat
+../shtool mkdir -f -p -m 755 /var/tmp/nmap-root/usr/bin /var/tmp/nmap-root/usr/share/man/man1
+/usr/bin/install -c -c -m 755 ncat /var/tmp/nmap-root/usr/bin/ncat
+/usr/bin/strip -x /var/tmp/nmap-root/usr/bin/ncat
+if [ -n "certs/ca-bundle.crt" ]; then \
+	../shtool mkdir -f -p -m 755 /var/tmp/nmap-root/usr/share/ncat; \
+	/usr/bin/install -c -c -m 644 certs/ca-bundle.crt /var/tmp/nmap-root/usr/share/ncat/; \
+fi
+/usr/bin/install -c -c -m 644 docs/ncat.1 /var/tmp/nmap-root/usr/share/man/man1/ncat.1
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/ncat'
+cd ndiff && /usr/bin/python setup.py install --prefix "/usr" --root "/var/tmp/nmap-root"
+running install
+running build
+running build_scripts
+running install_scripts
+copying build/scripts-2.7/ndiff -> /var/tmp/nmap-root/usr/bin
+changing mode of /var/tmp/nmap-root/usr/bin/ndiff to 755
+running install_data
+copying docs/ndiff.1 -> /var/tmp/nmap-root/usr/share/man/man1
+running install_egg_info
+make[1]: Entering directory `/usr/src/rpm/BUILD/nmap-5.51/nping'
+/usr/bin/install -c -d /var/tmp/nmap-root/usr/bin /var/tmp/nmap-root/usr/share/man/man1
+/usr/bin/install -c -c -m 755 nping /var/tmp/nmap-root/usr/bin/nping
+/usr/bin/strip -x /var/tmp/nmap-root/usr/bin/nping
+/usr/bin/install -c -c -m 644 docs/nping.1 /var/tmp/nmap-root/usr/share/man/man1/
+NPING SUCCESSFULLY INSTALLED
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nmap-5.51/nping'
+NMAP SUCCESSFULLY INSTALLED
++ rm -rf /var/tmp/nmap-root/usr/share/man/jp /var/tmp/nmap-root/usr/share/man/pt_PT /var/tmp/nmap-root/usr/share/man/zh
++ /usr/lib/rpm/compress_man.sh /var/tmp/nmap-root
++ exit 0
+Processing files: nmap-5.51-1.x86_64
+Requires: /usr/bin/python libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.7)(64bit) libcrypto.so.1.0.0()(64bit) libdl.so.2()(64bit) libdl.so.2(GLIBC_2.2.5)(64bit) libgcc_s.so.1()(64bit) libgcc_s.so.1(GCC_3.0)(64bit) libm.so.6()(64bit) libm.so.6(GLIBC_2.2.5)(64bit) libpcre.so.0()(64bit) libpthread.so.0()(64bit) libpthread.so.0(GLIBC_2.2.5)(64bit) libssl.so.1.0.0()(64bit) libstdc++.so.6()(64bit) libstdc++.so.6(CXXABI_1.3)(64bit) libstdc++.so.6(GLIBCXX_3.4)(64bit) libstdc++.so.6(GLIBCXX_3.4.11)(64bit) libstdc++.so.6(GLIBCXX_3.4.14)(64bit) libstdc++.so.6(GLIBCXX_3.4.9)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/nmap-root
+Wrote: /usr/src/rpm/SRPMS/nmap-5.51-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/nmap-5.51-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.29106
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd nmap-5.51
++ /bin/rm -rf /var/tmp/nmap-root
