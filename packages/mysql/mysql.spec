@@ -1,7 +1,7 @@
 Summary: The MySQL Database
 Name: mysql
 Version: 5.1.50
-Release: 1
+Release: 2
 Group: Services
 License: GPL
 Distribution: LightCube OS
@@ -51,8 +51,9 @@ CXXFLAGS="-O3 -pipe -felide-constructors -fno-exceptions -fno-rtti" \
   --with-extra-charsets=all \
   --enable-assembler \
   --with-ssl=/usr \
-  --with-plugins=innobase,myisam,federated
-make
+  --with-plugins=innobase,myisam,federated \
+  --without-readline  # Not intuitive, but this switch is to "Use system readline instead of bundled copy."
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -66,7 +67,7 @@ cd %{buildroot}/usr/%{_lib} ; ln -vs mysql/libmysqlclient{,_r}.so* .
 # Create necessry runtime directories
 install -dv %{buildroot}{/srv,/var/run}/mysql
 # Compress man pages
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
 rm -f %{buildroot}/usr/share/info/dir
 # don't need the test or bench items
 rm -rf %{buildroot}/usr/{sql-bench,mysql-test}
@@ -197,7 +198,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/mysql/plugin/mypluglib.la
 /usr/%{_lib}/mysql/plugin/mypluglib.so
 
-
 %changelog
+* Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.50-2
+- Fix readline support
+
 * Thu Sep 02 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.50-1
 - Initial version
