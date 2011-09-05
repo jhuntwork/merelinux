@@ -1,7 +1,7 @@
 Summary: DHCP
 Name: dhcp
 Version: 4.1.1
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: BSD
 Distribution: LightCube OS
@@ -47,7 +47,7 @@ export LDFLAGS="%{LDFLAGS}"
   --with-srv6-lease-file=/var/lib/dhcp/dhcpd6.leases \
   --with-cli-lease-file=/var/lib/dhcp/dhclient.leases \
   --with-cli6-lease-file=/var/lib/dhcp/dhclient6.leases
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -62,12 +62,13 @@ require subnet-mask, domain-name-servers;
 EOF
 sed -e '/^[ \t]*route/s@route@\$\{ip\} &@' \
     -e 's@ gw @ via @g' \
+    -e 's@ifconfig@/sbin/&@g' \
     client/scripts/linux > %{buildroot}/sbin/dhclient-script
 install %{SOURCE1} %{buildroot}/etc/init.d/dhcpd
 %{compress_man}
 
 %preun server
-/usr/sbin/remove_initd dhcpd || /bin/true
+/usr/sbin/remove_initd dhcpd 2>/dev/null || /bin/true
 
 %clean
 rm -rf %{buildroot}
@@ -110,5 +111,8 @@ rm -rf %{buildroot}
 /usr/share/man/man8/dhcrelay.8.bz2
 
 %changelog
+* Mon Sep 05 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.1-2
+- Fix call to ifconfig to use full path in /sbin/dhclient-script
+
 * Fri Sep 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.1-1
 - Initial version
