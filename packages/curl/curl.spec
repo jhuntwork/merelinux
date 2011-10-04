@@ -1,7 +1,7 @@
 Summary: cURL groks URLs
 Name: curl
 Version: 7.21.7
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -39,11 +39,13 @@ export LDFLAGS="%{LDFLAGS}"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
-  --with-ca-bundle=%{SOURCE1}
+  --with-ca-bundle=/usr/share/curl/ca-bundle.crt
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
+install -dv %{buildroot}/usr/share/curl
+install -m 0644 %{SOURCE1} %{buildroot}/usr/share/curl/
 %{compress_man}
 
 %clean
@@ -52,6 +54,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /usr/bin/curl
+/usr/share/curl
 /usr/share/man/man1/curl.1.bz2
 /usr/%{_lib}/libcurl.so.4
 /usr/%{_lib}/libcurl.so.4.2.0
@@ -68,6 +71,9 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Mon Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.21.7-2
+- Fix included certificate bundle
+
 * Sun Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.21.7-1
 - Upgrade to 7.21.7
 - Add a full CA bundle
