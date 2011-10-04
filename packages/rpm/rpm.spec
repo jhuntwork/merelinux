@@ -1,7 +1,7 @@
 Summary: rpm package manager
 Name: rpm
 Version: 5.3.11
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -44,7 +44,9 @@ Headers and libraries for developing with %{name}
 %package python
 Summary: Libraries for using %{name} with Python
 Group: Development/Libraries
-Requires: %{name}, Python
+Requires: %{name} >= %{version}
+Requires: Python
+Requires: setuptools
 
 %description python
 Libraries for using %{name} with Python
@@ -287,6 +289,9 @@ rm -rf %{buildroot}
 /usr/share/man/*/man8/rpmbuild.8.bz2
 
 %changelog
+* Mon Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-2
+- Fix requires for rpm-python, add dep on setuptools
+
 * Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-1
 - Upgrade to 5.3.11 - Fixes an issue with honoring %config directives
 
