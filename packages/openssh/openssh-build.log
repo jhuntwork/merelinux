@@ -1,0 +1,1197 @@
+Fetching(Source1): https://dev.lightcube.us/svn/lightcubeos/!svn/bc/427/lightcube_os/trunk/packages/openssh/sshd.init
+Fetching(Source0): http://dev.lightcube.us/sources/openssh/openssh-5.8p2.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.98647
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf openssh-5.8p2
++ /bin/gzip -dc /usr/src/rpm/SOURCES/openssh-5.8p2.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd openssh-5.8p2
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.98647
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd openssh-5.8p2
++ ./configure --prefix=/usr --sysconfdir=/etc/ssh --datadir=/usr/share/sshd --libexecdir=/usr/sbin --with-md5-passwords --with-privsep-path=/var/lib/sshd
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking whether byte ordering is bigendian... no
+checking for gawk... gawk
+checking how to run the C preprocessor... gcc -E
+checking for ranlib... ranlib
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for egrep... (cached) /bin/grep -E
+checking for ar... /usr/bin/ar
+checking for cat... /bin/cat
+checking for kill... /bin/kill
+checking for perl5... no
+checking for perl... /usr/bin/perl
+checking for sed... /bin/sed
+checking for ent... no
+checking for bash... /bin/bash
+checking for ksh... (cached) /bin/bash
+checking for sh... (cached) /bin/bash
+checking for sh... /bin/sh
+checking for groff... /usr/bin/groff
+checking for nroff... /usr/bin/nroff
+checking for mandoc... no
+checking for groupadd... /usr/sbin/groupadd
+checking for useradd... /usr/sbin/useradd
+checking for pkgmk... no
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for login... /bin/login
+checking for passwd... /bin/passwd
+checking for inline... inline
+checking whether LLONG_MAX is declared... yes
+checking if gcc supports -Wall... yes
+checking if gcc supports -Wpointer-arith... yes
+checking if gcc supports -Wuninitialized... yes
+checking if gcc supports -Wsign-compare... yes
+checking if gcc supports -Wformat-security... yes
+checking if gcc supports -Wno-pointer-sign... yes
+checking if gcc supports -Wno-unused-result... yes
+checking if gcc supports -fno-strict-aliasing... yes
+checking gcc version... 4.5.3
+checking if gcc accepts -fno-builtin-memset... yes
+checking if gcc supports -fstack-protector-all... yes
+checking if -fstack-protector-all works... yes
+checking bstring.h usability... no
+checking bstring.h presence... no
+checking for bstring.h... no
+checking crypt.h usability... yes
+checking crypt.h presence... yes
+checking for crypt.h... yes
+checking crypto/sha2.h usability... no
+checking crypto/sha2.h presence... no
+checking for crypto/sha2.h... no
+checking dirent.h usability... yes
+checking dirent.h presence... yes
+checking for dirent.h... yes
+checking endian.h usability... yes
+checking endian.h presence... yes
+checking for endian.h... yes
+checking features.h usability... yes
+checking features.h presence... yes
+checking for features.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking floatingpoint.h usability... no
+checking floatingpoint.h presence... no
+checking for floatingpoint.h... no
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking glob.h usability... yes
+checking glob.h presence... yes
+checking for glob.h... yes
+checking ia.h usability... no
+checking ia.h presence... no
+checking for ia.h... no
+checking iaf.h usability... no
+checking iaf.h presence... no
+checking for iaf.h... no
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking login.h usability... no
+checking login.h presence... no
+checking for login.h... no
+checking maillock.h usability... no
+checking maillock.h presence... no
+checking for maillock.h... no
+checking ndir.h usability... no
+checking ndir.h presence... no
+checking for ndir.h... no
+checking net/if_tun.h usability... no
+checking net/if_tun.h presence... no
+checking for net/if_tun.h... no
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking netgroup.h usability... no
+checking netgroup.h presence... no
+checking for netgroup.h... no
+checking pam/pam_appl.h usability... no
+checking pam/pam_appl.h presence... no
+checking for pam/pam_appl.h... no
+checking paths.h usability... yes
+checking paths.h presence... yes
+checking for paths.h... yes
+checking poll.h usability... yes
+checking poll.h presence... yes
+checking for poll.h... yes
+checking pty.h usability... yes
+checking pty.h presence... yes
+checking for pty.h... yes
+checking readpassphrase.h usability... no
+checking readpassphrase.h presence... no
+checking for readpassphrase.h... no
+checking rpc/types.h usability... yes
+checking rpc/types.h presence... yes
+checking for rpc/types.h... yes
+checking security/pam_appl.h usability... no
+checking security/pam_appl.h presence... no
+checking for security/pam_appl.h... no
+checking sha2.h usability... no
+checking sha2.h presence... no
+checking for sha2.h... no
+checking shadow.h usability... yes
+checking shadow.h presence... yes
+checking for shadow.h... yes
+checking stddef.h usability... yes
+checking stddef.h presence... yes
+checking for stddef.h... yes
+checking for stdint.h... (cached) yes
+checking for string.h... (cached) yes
+checking for strings.h... (cached) yes
+checking sys/audit.h usability... no
+checking sys/audit.h presence... no
+checking for sys/audit.h... no
+checking sys/bitypes.h usability... yes
+checking sys/bitypes.h presence... yes
+checking for sys/bitypes.h... yes
+checking sys/bsdtty.h usability... no
+checking sys/bsdtty.h presence... no
+checking for sys/bsdtty.h... no
+checking sys/cdefs.h usability... yes
+checking sys/cdefs.h presence... yes
+checking for sys/cdefs.h... yes
+checking sys/dir.h usability... yes
+checking sys/dir.h presence... yes
+checking for sys/dir.h... yes
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking sys/ndir.h usability... no
+checking sys/ndir.h presence... no
+checking for sys/ndir.h... no
+checking sys/poll.h usability... yes
+checking sys/poll.h presence... yes
+checking for sys/poll.h... yes
+checking sys/prctl.h usability... yes
+checking sys/prctl.h presence... yes
+checking for sys/prctl.h... yes
+checking sys/pstat.h usability... no
+checking sys/pstat.h presence... no
+checking for sys/pstat.h... no
+checking sys/select.h usability... yes
+checking sys/select.h presence... yes
+checking for sys/select.h... yes
+checking for sys/stat.h... (cached) yes
+checking sys/stream.h usability... no
+checking sys/stream.h presence... no
+checking for sys/stream.h... no
+checking sys/stropts.h usability... yes
+checking sys/stropts.h presence... yes
+checking for sys/stropts.h... yes
+checking sys/strtio.h usability... no
+checking sys/strtio.h presence... no
+checking for sys/strtio.h... no
+checking sys/statvfs.h usability... yes
+checking sys/statvfs.h presence... yes
+checking for sys/statvfs.h... yes
+checking sys/sysmacros.h usability... yes
+checking sys/sysmacros.h presence... yes
+checking for sys/sysmacros.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking sys/timers.h usability... no
+checking sys/timers.h presence... no
+checking for sys/timers.h... no
+checking sys/un.h usability... yes
+checking sys/un.h presence... yes
+checking for sys/un.h... yes
+checking time.h usability... yes
+checking time.h presence... yes
+checking for time.h... yes
+checking tmpdir.h usability... no
+checking tmpdir.h presence... no
+checking for tmpdir.h... no
+checking ttyent.h usability... yes
+checking ttyent.h presence... yes
+checking for ttyent.h... yes
+checking ucred.h usability... no
+checking ucred.h presence... no
+checking for ucred.h... no
+checking for unistd.h... (cached) yes
+checking usersec.h usability... no
+checking usersec.h presence... no
+checking for usersec.h... no
+checking util.h usability... no
+checking util.h presence... no
+checking for util.h... no
+checking utime.h usability... yes
+checking utime.h presence... yes
+checking for utime.h... yes
+checking utmp.h usability... yes
+checking utmp.h presence... yes
+checking for utmp.h... yes
+checking utmpx.h usability... yes
+checking utmpx.h presence... yes
+checking for utmpx.h... yes
+checking vis.h usability... no
+checking vis.h presence... no
+checking for vis.h... no
+checking for lastlog.h... yes
+checking for sys/ptms.h... no
+checking for login_cap.h... no
+checking for sys/mount.h... yes
+checking linux/if_tun.h usability... yes
+checking linux/if_tun.h presence... yes
+checking for linux/if_tun.h... yes
+checking compiler and flags for sanity... yes
+checking for yp_match... no
+checking for yp_match in -lnsl... yes
+checking for setsockopt... yes
+checking for dirname... yes
+checking libgen.h usability... yes
+checking libgen.h presence... yes
+checking for libgen.h... yes
+checking for getspnam... yes
+checking for library containing basename... none required
+checking zlib.h usability... yes
+checking zlib.h presence... yes
+checking for zlib.h... yes
+checking for deflate in -lz... yes
+checking for possibly buggy zlib... no
+checking for strcasecmp... yes
+checking for utimes... yes
+checking libutil.h usability... no
+checking libutil.h presence... no
+checking for libutil.h... no
+checking for library containing login... -lutil
+checking for fmt_scaled... no
+checking for logout... yes
+checking for updwtmp... yes
+checking for logwtmp... yes
+checking for strftime... yes
+checking for GLOB_ALTDIRFUNC support... yes
+checking for gl_matchc field in glob_t... no
+checking for gl_statv and GLOB_KEEPSTAT extensions for glob... no
+checking whether GLOB_NOMATCH is declared... yes
+checking whether struct dirent allocates space for d_name... yes
+checking for /proc/pid/fd directory... yes
+checking for arc4random... no
+checking for arc4random_buf... no
+checking for arc4random_uniform... no
+checking for asprintf... yes
+checking for b64_ntop... no
+checking for __b64_ntop... no
+checking for b64_pton... no
+checking for __b64_pton... no
+checking for bcopy... yes
+checking for bindresvport_sa... no
+checking for clock... yes
+checking for closefrom... no
+checking for dirfd... yes
+checking for fchmod... yes
+checking for fchown... yes
+checking for freeaddrinfo... yes
+checking for fstatvfs... yes
+checking for futimes... yes
+checking for getaddrinfo... yes
+checking for getcwd... yes
+checking for getgrouplist... yes
+checking for getnameinfo... yes
+checking for getopt... yes
+checking for getpeereid... no
+checking for getpeerucred... no
+checking for _getpty... no
+checking for getrlimit... yes
+checking for getttyent... yes
+checking for glob... yes
+checking for group_from_gid... no
+checking for inet_aton... yes
+checking for inet_ntoa... yes
+checking for inet_ntop... yes
+checking for innetgr... yes
+checking for login_getcapbool... no
+checking for md5_crypt... no
+checking for memmove... yes
+checking for mkdtemp... yes
+checking for mmap... yes
+checking for ngetaddrinfo... no
+checking for nsleep... no
+checking for ogetaddrinfo... no
+checking for openlog_r... no
+checking for openpty... yes
+checking for poll... yes
+checking for prctl... yes
+checking for pstat... no
+checking for readpassphrase... no
+checking for realpath... yes
+checking for recvmsg... yes
+checking for rresvport_af... yes
+checking for sendmsg... yes
+checking for setdtablesize... no
+checking for setegid... yes
+checking for setenv... yes
+checking for seteuid... yes
+checking for setgroupent... no
+checking for setgroups... yes
+checking for setlogin... no
+checking for setpassent... no
+checking for setpcred... no
+checking for setproctitle... no
+checking for setregid... yes
+checking for setreuid... yes
+checking for setrlimit... yes
+checking for setsid... yes
+checking for setvbuf... yes
+checking for sigaction... yes
+checking for sigvec... yes
+checking for snprintf... yes
+checking for socketpair... yes
+checking for statfs... yes
+checking for statvfs... yes
+checking for strdup... yes
+checking for strerror... yes
+checking for strlcat... no
+checking for strlcpy... no
+checking for strmode... no
+checking for strnvis... no
+checking for strptime... yes
+checking for strtonum... no
+checking for strtoll... yes
+checking for strtoul... yes
+checking for swap32... no
+checking for sysconf... yes
+checking for tcgetpgrp... yes
+checking for timingsafe_bcmp... no
+checking for truncate... yes
+checking for unsetenv... yes
+checking for updwtmpx... yes
+checking for user_from_uid... no
+checking for vasprintf... yes
+checking for vhangup... yes
+checking for vsnprintf... yes
+checking for waitpid... yes
+checking for library containing dlopen... -ldl
+checking for gai_strerror... yes
+checking for library containing nanosleep... none required
+checking whether getrusage is declared... no
+checking whether strsep is declared... yes
+checking for strsep... yes
+checking whether tcsendbreak is declared... yes
+checking whether h_errno is declared... yes
+checking whether SHUT_RD is declared... yes
+checking whether O_NONBLOCK is declared... yes
+checking whether writev is declared... yes
+checking whether MAXSYMLINKS is declared... yes
+checking whether offsetof is declared... yes
+checking for setresuid... yes
+checking if setresuid seems to work... yes
+checking for setresgid... yes
+checking if setresgid seems to work... yes
+checking for gettimeofday... yes
+checking for time... yes
+checking for endutent... yes
+checking for getutent... yes
+checking for getutid... yes
+checking for getutline... yes
+checking for pututline... yes
+checking for setutent... yes
+checking for utmpname... yes
+checking for endutxent... yes
+checking for getutxent... yes
+checking for getutxid... yes
+checking for getutxline... yes
+checking for getutxuser... no
+checking for pututxline... yes
+checking for setutxdb... no
+checking for setutxent... yes
+checking for utmpxname... yes
+checking for getlastlogxbyname... no
+checking for daemon... yes
+checking for getpagesize... yes
+checking whether snprintf correctly terminates long strings... yes
+checking whether snprintf can declare const char *fmt... yes
+checking whether system supports SO_PEERCRED getsockopt... yes
+checking for (overly) strict mkstemp... yes
+checking if openpty correctly handles controlling tty... yes
+checking whether getpgrp requires zero arguments... yes
+checking OpenSSL header version... 1000004f (OpenSSL 1.0.0d 8 Feb 2011)
+checking OpenSSL library version... 1000004f (OpenSSL 1.0.0d 8 Feb 2011)
+checking whether OpenSSL's headers match the library... yes
+checking if programs using OpenSSL functions will link... yes
+checking for RSA_generate_key_ex... yes
+checking for DSA_generate_parameters_ex... yes
+checking for BN_is_prime_ex... yes
+checking for RSA_get_default_method... yes
+checking whether OpenSSL has crippled AES support... no
+checking if EVP_DigestUpdate returns an int... yes
+checking for crypt in -lcrypt... yes
+checking for SHA256_Update... yes
+checking for EVP_sha256... yes
+checking whether OpenSSL has complete ECC support... yes
+checking for ia_openinfo in -liaf... no
+checking whether OpenSSL's PRNG is internally seeded... yes
+checking for ls... /bin/ls
+checking for netstat... /bin/netstat
+checking for arp... /sbin/arp
+checking for ifconfig... /sbin/ifconfig
+checking for jstat... no
+checking for ps... /bin/ps
+checking for sar... no
+checking for w... /usr/bin/w
+checking for who... /usr/bin/who
+checking for last... /usr/bin/last
+checking for lastlog... /usr/bin/lastlog
+checking for df... /bin/df
+checking for vmstat... /usr/bin/vmstat
+checking for uptime... /usr/bin/uptime
+checking for ipcs... /usr/bin/ipcs
+checking for tail... /usr/bin/tail
+checking for long long... yes
+checking for unsigned long long... yes
+checking for long double... yes
+checking for char... yes
+checking size of char... 1
+checking for short int... yes
+checking size of short int... 2
+checking for int... yes
+checking size of int... 4
+checking for long int... yes
+checking size of long int... 8
+checking for long long int... yes
+checking size of long long int... 8
+checking for u_int type... yes
+checking for intXX_t types... yes
+checking for int64_t type... yes
+checking for u_intXX_t types... yes
+checking for u_int64_t types... yes
+checking for uintXX_t types in stdint.h... yes
+checking for u_char... yes
+checking for socklen_t... yes
+checking for sig_atomic_t... yes
+checking for fsblkcnt_t... yes
+checking for fsfilcnt_t... yes
+checking for in_addr_t... yes
+checking for in_port_t... yes
+checking for size_t... yes
+checking for ssize_t... yes
+checking for clock_t... yes
+checking for sa_family_t... yes
+checking for pid_t... yes
+checking for mode_t... yes
+checking for struct sockaddr_storage... yes
+checking for struct sockaddr_in6... yes
+checking for struct in6_addr... yes
+checking for struct sockaddr_in6.sin6_scope_id... yes
+checking for struct addrinfo... yes
+checking for struct timeval... yes
+checking for struct timespec... yes
+checking for ut_host field in utmp.h... yes
+checking for ut_host field in utmpx.h... yes
+checking for syslen field in utmpx.h... no
+checking for ut_pid field in utmp.h... yes
+checking for ut_type field in utmp.h... yes
+checking for ut_type field in utmpx.h... yes
+checking for ut_tv field in utmp.h... yes
+checking for ut_id field in utmp.h... yes
+checking for ut_id field in utmpx.h... yes
+checking for ut_addr field in utmp.h... yes
+checking for ut_addr field in utmpx.h... yes
+checking for ut_addr_v6 field in utmp.h... yes
+checking for ut_addr_v6 field in utmpx.h... yes
+checking for ut_exit field in utmp.h... yes
+checking for ut_time field in utmp.h... no
+checking for ut_time field in utmpx.h... no
+checking for ut_tv field in utmpx.h... yes
+checking for struct stat.st_blksize... yes
+checking for struct __res_state.retrans... yes
+checking for ss_family field in struct sockaddr_storage... yes
+checking for __ss_family field in struct sockaddr_storage... no
+checking for pw_class field in struct passwd... no
+checking for pw_expire field in struct passwd... no
+checking for pw_change field in struct passwd... no
+checking for msg_accrights field in struct msghdr... no
+checking if struct statvfs.f_fsid is integral type... yes
+checking for msg_control field in struct msghdr... yes
+checking if libc defines __progname... yes
+checking whether gcc implements __FUNCTION__... yes
+checking whether gcc implements __func__... yes
+checking whether va_copy exists... yes
+checking whether __va_copy exists... yes
+checking whether getopt has optreset support... no
+checking if libc defines sys_errlist... yes
+checking if libc defines sys_nerr... yes
+checking for library containing getrrsetbyname... no
+checking for library containing res_query... no
+checking for library containing dn_expand... no
+checking if res_query will link... no
+checking for res_query in -lresolv... yes
+checking for _getshort... yes
+checking for _getlong... yes
+checking whether _getshort is declared... no
+checking whether _getlong is declared... no
+checking for HEADER.ad... yes
+checking if struct __res_state _res is an extern... yes
+checking for xauth... no
+checking for "/dev/ptc"... no
+checking for nroff... (cached) /usr/bin/nroff
+checking if the systems has expire shadow information... yes
+checking for "/etc/default/login"... no
+checking if we need to convert IPv4 in IPv6-mapped addresses... yes (default)
+checking if your system defines LASTLOG_FILE... no
+checking if your system defines _PATH_LASTLOG... yes
+checking if your system defines UTMP_FILE... yes
+checking if your system defines WTMP_FILE... yes
+checking if your system defines WTMPX_FILE... no
+checking whether BROKEN_GETADDRINFO is declared... no
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating buildpkg.sh
+config.status: creating opensshd.init
+config.status: creating openssh.xml
+config.status: creating openbsd-compat/Makefile
+config.status: creating openbsd-compat/regress/Makefile
+config.status: creating ssh_prng_cmds
+config.status: creating survey.sh
+config.status: creating config.h
+
+OpenSSH has been configured with the following options:
+                     User binaries: /usr/bin
+                   System binaries: /usr/sbin
+               Configuration files: /etc/ssh
+                   Askpass program: /usr/sbin/ssh-askpass
+                      Manual pages: /usr/share/man/manX
+                          PID file: /var/run
+  Privilege separation chroot path: /var/lib/sshd
+            sshd default user PATH: /usr/bin:/bin:/usr/sbin:/sbin
+                    Manpage format: doc
+                       PAM support: no
+                   OSF SIA support: no
+                 KerberosV support: no
+                   SELinux support: no
+                 Smartcard support: 
+                     S/KEY support: no
+              TCP Wrappers support: no
+              MD5 password support: yes
+                   libedit support: no
+  Solaris process contract support: no
+           Solaris project support: no
+       IP address in $DISPLAY hack: no
+           Translate v4 in v6 hack: yes
+                  BSD Auth support: no
+              Random number source: OpenSSL internal ONLY
+
+              Host: x86_64-unknown-linux-gnu
+          Compiler: gcc
+    Compiler flags: -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all 
+Preprocessor flags: 
+      Linker flags:  -fstack-protector-all
+         Libraries: -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+
++ make -j4
+conffile=`echo sshd_config.out | sed 's/.out$//'`; \
+/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ./${conffile} > sshd_config.out
+conffile=`echo ssh_config.out | sed 's/.out$//'`; \
+/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ./${conffile} > ssh_config.out
+conffile=`echo moduli.out | sed 's/.out$//'`; \
+/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ./${conffile} > moduli.out
+if test ! -z ""; then \
+	/usr/bin/perl ./fixprogs ssh_prng_cmds ; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo moduli.5.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo moduli.5.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > moduli.5.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > moduli.5.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo scp.1.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo scp.1.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > scp.1.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > scp.1.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh-add.1.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh-add.1.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh-add.1.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh-add.1.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh-agent.1.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh-agent.1.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh-agent.1.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh-agent.1.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh-keygen.1.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh-keygen.1.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh-keygen.1.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh-keygen.1.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh-keyscan.1.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh-keyscan.1.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh-keyscan.1.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh-keyscan.1.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh.1.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh.1.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh.1.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh.1.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo sshd.8.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo sshd.8.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > sshd.8.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > sshd.8.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo sftp-server.8.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo sftp-server.8.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > sftp-server.8.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > sftp-server.8.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo sftp.1.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo sftp.1.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > sftp.1.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > sftp.1.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh-rand-helper.8.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh-rand-helper.8.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh-rand-helper.8.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh-rand-helper.8.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh-keysign.8.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh-keysign.8.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh-keysign.8.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh-keysign.8.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh-pkcs11-helper.8.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh-pkcs11-helper.8.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh-pkcs11-helper.8.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh-pkcs11-helper.8.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo sshd_config.5.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo sshd_config.5.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > sshd_config.5.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > sshd_config.5.out; \
+fi
+if test "doc" = "cat"; then \
+	manpage=./`echo ssh_config.5.out | sed 's/\.[1-9]\.out$/\.0/'`; \
+else \
+	manpage=./`echo ssh_config.5.out | sed 's/\.out$//'`; \
+fi; \
+if test "doc" = "man"; then \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} | gawk -f ./mdoc2man.awk > ssh_config.5.out; \
+else \
+	/bin/sed -e 's|/etc/ssh/ssh_prng_cmds|/etc/ssh/ssh_prng_cmds|g' -e 's|/etc/ssh/ssh_config|/etc/ssh/ssh_config|g' -e 's|/etc/ssh/ssh_known_hosts|/etc/ssh/ssh_known_hosts|g' -e 's|/etc/ssh/sshd_config|/etc/ssh/sshd_config|g' -e 's|/usr/libexec|/usr/sbin|g' -e 's|/etc/shosts.equiv|/etc/ssh/shosts.equiv|g' -e 's|/etc/ssh/ssh_host_key|/etc/ssh/ssh_host_key|g' -e 's|/etc/ssh/ssh_host_ecdsa_key|/etc/ssh/ssh_host_ecdsa_key|g' -e 's|/etc/ssh/ssh_host_dsa_key|/etc/ssh/ssh_host_dsa_key|g' -e 's|/etc/ssh/ssh_host_rsa_key|/etc/ssh/ssh_host_rsa_key|g' -e 's|/var/run/sshd.pid|/var/run/sshd.pid|g' -e 's|/etc/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/moduli|/etc/ssh/moduli|g' -e 's|/etc/ssh/sshrc|/etc/ssh/sshrc|g' -e 's|/usr/X11R6/bin/xauth|undefined|g' -e 's|/var/empty|/var/lib/sshd|g' -e 's|/usr/bin:/bin:/usr/sbin:/sbin|/usr/bin:/bin:/usr/sbin:/sbin|g' ${manpage} > ssh_config.5.out; \
+fi
+(cd openbsd-compat && make)
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c acss.c
+make[1]: Entering directory `/usr/src/rpm/BUILD/openssh-5.8p2/openbsd-compat'
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-arc4random.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c authfd.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c authfile.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c bufaux.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-asprintf.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-closefrom.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c bufbn.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-cray.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-cygwin_util.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c buffer.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c canohost.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-getpeereid.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-misc.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c channels.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c cipher.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c cipher-acss.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-nextstep.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c cipher-aes.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-openpty.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c cipher-bf1.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c cipher-ctr.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-poll.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c cipher-3des1.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-snprintf.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c cleanup.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-statvfs.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c compat.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c compress.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bsd-waitpid.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c fake-rfc2553.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c crc32.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c deattack.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c openssl-compat.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c fatal.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c hostfile.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c xmmap.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c log.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c xcrypt.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c match.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c base64.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c basename.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c md-sha256.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c bindresvport.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c daemon.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c moduli.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c dirname.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c fmt_scaled.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c getcwd.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c getgrouplist.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c getopt.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c getrrsetbyname.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c glob.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c inet_aton.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c inet_ntoa.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c inet_ntop.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c mktemp.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c pwcache.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c readpassphrase.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c realpath.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c rresvport.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c setenv.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c setproctitle.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c sha2.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c sigact.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c strlcat.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c strlcpy.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c strmode.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c strptime.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c strsep.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c strtonum.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c strtoll.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c strtoul.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c timingsafe_bcmp.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c vis.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c port-aix.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c port-irix.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c port-linux.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c port-solaris.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c port-tun.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.. -I. -I./..  -DHAVE_CONFIG_H -c port-uw.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c nchan.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c packet.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c readpass.c
+/usr/bin/ar rv libopenbsd-compat.a bsd-arc4random.o bsd-asprintf.o bsd-closefrom.o bsd-cray.o bsd-cygwin_util.o bsd-getpeereid.o bsd-misc.o bsd-nextstep.o bsd-openpty.o bsd-poll.o bsd-snprintf.o bsd-statvfs.o bsd-waitpid.o fake-rfc2553.o openssl-compat.o xmmap.o xcrypt.o base64.o basename.o bindresvport.o daemon.o dirname.o fmt_scaled.o getcwd.o getgrouplist.o getopt.o getrrsetbyname.o glob.o inet_aton.o inet_ntoa.o inet_ntop.o mktemp.o pwcache.o readpassphrase.o realpath.o rresvport.o setenv.o setproctitle.o sha2.o sigact.o strlcat.o strlcpy.o strmode.o strptime.o strsep.o strtonum.o strtoll.o strtoul.o timingsafe_bcmp.o vis.o port-aix.o port-irix.o port-linux.o port-solaris.o port-tun.o port-uw.o
+/usr/bin/ar: creating libopenbsd-compat.a
+a - bsd-arc4random.o
+a - bsd-asprintf.o
+a - bsd-closefrom.o
+a - bsd-cray.o
+a - bsd-cygwin_util.o
+a - bsd-getpeereid.o
+a - bsd-misc.o
+a - bsd-nextstep.o
+a - bsd-openpty.o
+a - bsd-poll.o
+a - bsd-snprintf.o
+a - bsd-statvfs.o
+a - bsd-waitpid.o
+a - fake-rfc2553.o
+a - openssl-compat.o
+a - xmmap.o
+a - xcrypt.o
+a - base64.o
+a - basename.o
+a - bindresvport.o
+a - daemon.o
+a - dirname.o
+a - fmt_scaled.o
+a - getcwd.o
+a - getgrouplist.o
+a - getopt.o
+a - getrrsetbyname.o
+a - glob.o
+a - inet_aton.o
+a - inet_ntoa.o
+a - inet_ntop.o
+a - mktemp.o
+a - pwcache.o
+a - readpassphrase.o
+a - realpath.o
+a - rresvport.o
+a - setenv.o
+a - setproctitle.o
+a - sha2.o
+a - sigact.o
+a - strlcat.o
+a - strlcpy.o
+a - strmode.o
+a - strptime.o
+a - strsep.o
+a - strtonum.o
+a - strtoll.o
+a - strtoul.o
+a - timingsafe_bcmp.o
+a - vis.o
+a - port-aix.o
+a - port-irix.o
+a - port-linux.o
+a - port-solaris.o
+a - port-tun.o
+a - port-uw.o
+ranlib libopenbsd-compat.a
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c rsa.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ttymodes.c
+make[1]: Leaving directory `/usr/src/rpm/BUILD/openssh-5.8p2/openbsd-compat'
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c xmalloc.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c addrmatch.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c atomicio.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c key.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c dispatch.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kex.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c mac.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c uidswap.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c uuencode.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c misc.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c monitor_fdpass.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c rijndael.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-dss.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-ecdsa.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-rsa.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c dh.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexdh.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexgex.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexdhc.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexgexc.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c bufec.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexecdh.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexecdhc.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c msg.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c progressmeter.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c dns.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c entropy.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c gss-genr.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c umac.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c jpake.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c schnorr.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-pkcs11.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c readconf.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c clientloop.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sshtty.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sshconnect.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sshconnect1.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sshconnect2.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c mux.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c roaming_common.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c roaming_client.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sshd.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-rhosts.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-passwd.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-rsa.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-rh-rsa.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c audit.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c audit-bsm.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c audit-linux.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c platform.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sshpty.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sshlogin.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c servconf.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c serverloop.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth1.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-options.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c session.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-chall.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2-chall.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c groupaccess.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-skey.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-bsdauth.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2-hostbased.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2-kbdint.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2-none.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2-passwd.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2-pubkey.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2-jpake.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c monitor_mm.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c monitor.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c monitor_wrap.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexdhs.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexgexs.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c kexecdhs.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-krb5.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth2-gss.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c gss-serv.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c gss-serv-krb5.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c loginrec.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-pam.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-shadow.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c auth-sia.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c md5crypt.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sftp-server.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sftp-common.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c roaming_serv.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-add.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-keygen.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-keyscan.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c roaming_dummy.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-keysign.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-pkcs11-helper.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-agent.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-pkcs11-client.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c scp.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c ssh-rand-helper.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sftp.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sftp-server-main.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sftp-client.c
+gcc -g -O2 -Wall -Wpointer-arith -Wuninitialized -Wsign-compare -Wformat-security -Wno-pointer-sign -Wno-unused-result -fno-strict-aliasing -fno-builtin-memset -fstack-protector-all  -I. -I.  -DSSHDIR=\"/etc/ssh\" -D_PATH_SSH_PROGRAM=\"/usr/bin/ssh\" -D_PATH_SSH_ASKPASS_DEFAULT=\"/usr/sbin/ssh-askpass\" -D_PATH_SFTP_SERVER=\"/usr/sbin/sftp-server\" -D_PATH_SSH_KEY_SIGN=\"/usr/sbin/ssh-keysign\" -D_PATH_SSH_PKCS11_HELPER=\"/usr/sbin/ssh-pkcs11-helper\" -D_PATH_SSH_PIDDIR=\"/var/run\" -D_PATH_PRIVSEP_CHROOT_DIR=\"/var/lib/sshd\" -DSSH_RAND_HELPER=\"/usr/sbin/ssh-rand-helper\" -DHAVE_CONFIG_H -c sftp-glob.c
+/usr/bin/ar rv libssh.a acss.o authfd.o authfile.o bufaux.o bufbn.o buffer.o canohost.o channels.o cipher.o cipher-acss.o cipher-aes.o cipher-bf1.o cipher-ctr.o cipher-3des1.o cleanup.o compat.o compress.o crc32.o deattack.o fatal.o hostfile.o log.o match.o md-sha256.o moduli.o nchan.o packet.o readpass.o rsa.o ttymodes.o xmalloc.o addrmatch.o atomicio.o key.o dispatch.o kex.o mac.o uidswap.o uuencode.o misc.o monitor_fdpass.o rijndael.o ssh-dss.o ssh-ecdsa.o ssh-rsa.o dh.o kexdh.o kexgex.o kexdhc.o kexgexc.o bufec.o kexecdh.o kexecdhc.o msg.o progressmeter.o dns.o entropy.o gss-genr.o umac.o jpake.o schnorr.o ssh-pkcs11.o
+/usr/bin/ar: creating libssh.a
+a - acss.o
+a - authfd.o
+a - authfile.o
+a - bufaux.o
+a - bufbn.o
+a - buffer.o
+a - canohost.o
+a - channels.o
+a - cipher.o
+a - cipher-acss.o
+a - cipher-aes.o
+a - cipher-bf1.o
+a - cipher-ctr.o
+a - cipher-3des1.o
+a - cleanup.o
+a - compat.o
+a - compress.o
+a - crc32.o
+a - deattack.o
+a - fatal.o
+a - hostfile.o
+a - log.o
+a - match.o
+a - md-sha256.o
+a - moduli.o
+a - nchan.o
+a - packet.o
+a - readpass.o
+a - rsa.o
+a - ttymodes.o
+a - xmalloc.o
+a - addrmatch.o
+a - atomicio.o
+a - key.o
+a - dispatch.o
+a - kex.o
+a - mac.o
+a - uidswap.o
+a - uuencode.o
+a - misc.o
+a - monitor_fdpass.o
+a - rijndael.o
+a - ssh-dss.o
+a - ssh-ecdsa.o
+a - ssh-rsa.o
+a - dh.o
+a - kexdh.o
+a - kexgex.o
+a - kexdhc.o
+a - kexgexc.o
+a - bufec.o
+a - kexecdh.o
+a - kexecdhc.o
+a - msg.o
+a - progressmeter.o
+a - dns.o
+a - entropy.o
+a - gss-genr.o
+a - umac.o
+a - jpake.o
+a - schnorr.o
+a - ssh-pkcs11.o
+ranlib libssh.a
+gcc -o ssh ssh.o readconf.o clientloop.o sshtty.o sshconnect.o sshconnect1.o sshconnect2.o mux.o roaming_common.o roaming_client.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat  -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o sshd sshd.o auth-rhosts.o auth-passwd.o auth-rsa.o auth-rh-rsa.o audit.o audit-bsm.o audit-linux.o platform.o sshpty.o sshlogin.o servconf.o serverloop.o auth.o auth1.o auth2.o auth-options.o session.o auth-chall.o auth2-chall.o groupaccess.o auth-skey.o auth-bsdauth.o auth2-hostbased.o auth2-kbdint.o auth2-none.o auth2-passwd.o auth2-pubkey.o auth2-jpake.o monitor_mm.o monitor.o monitor_wrap.o kexdhs.o kexgexs.o kexecdhs.o auth-krb5.o auth2-gss.o gss-serv.o gss-serv-krb5.o loginrec.o auth-pam.o auth-shadow.o auth-sia.o md5crypt.o sftp-server.o sftp-common.o roaming_common.o roaming_serv.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat  -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o ssh-add ssh-add.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o ssh-keygen ssh-keygen.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o ssh-keyscan ssh-keyscan.o roaming_dummy.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lssh -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o ssh-keysign ssh-keysign.o readconf.o roaming_dummy.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o ssh-pkcs11-helper ssh-pkcs11-helper.o ssh-pkcs11.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o ssh-agent ssh-agent.o ssh-pkcs11-client.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o scp scp.o progressmeter.o bufaux.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o ssh-rand-helper ssh-rand-helper.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o sftp-server sftp-server.o sftp-common.o sftp-server-main.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv
+gcc -o sftp progressmeter.o sftp.o sftp-client.o sftp-common.o sftp-glob.o -L. -Lopenbsd-compat/  -fstack-protector-all -lssh -lopenbsd-compat -lcrypto -ldl -lutil -lz -lnsl  -lcrypt -lresolv 
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.15506
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/openssh-root
++ /bin/mkdir -p /var/tmp/openssh-root
++ cd openssh-5.8p2
++ make DESTDIR=/var/tmp/openssh-root install
+if test ! -z ""; then \
+	/usr/bin/perl ./fixprogs ssh_prng_cmds ; \
+fi
+(cd openbsd-compat && make)
+make[1]: Entering directory `/usr/src/rpm/BUILD/openssh-5.8p2/openbsd-compat'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/openssh-5.8p2/openbsd-compat'
+./mkinstalldirs /var/tmp/openssh-root/usr/bin
+mkdir /var/tmp/openssh-root/usr
+mkdir /var/tmp/openssh-root/usr/bin
+./mkinstalldirs /var/tmp/openssh-root/usr/sbin
+mkdir /var/tmp/openssh-root/usr/sbin
+./mkinstalldirs /var/tmp/openssh-root/usr/share/man
+mkdir /var/tmp/openssh-root/usr/share
+mkdir /var/tmp/openssh-root/usr/share/man
+./mkinstalldirs /var/tmp/openssh-root/usr/share/man/man1
+mkdir /var/tmp/openssh-root/usr/share/man/man1
+./mkinstalldirs /var/tmp/openssh-root/usr/share/man/man5
+mkdir /var/tmp/openssh-root/usr/share/man/man5
+./mkinstalldirs /var/tmp/openssh-root/usr/share/man/man8
+mkdir /var/tmp/openssh-root/usr/share/man/man8
+./mkinstalldirs /var/tmp/openssh-root/usr/sbin
+(umask 022 ; ./mkinstalldirs /var/tmp/openssh-root/var/lib/sshd)
+mkdir /var/tmp/openssh-root/var
+mkdir /var/tmp/openssh-root/var/lib
+mkdir /var/tmp/openssh-root/var/lib/sshd
+/usr/bin/install -c -m 0755 -s ssh /var/tmp/openssh-root/usr/bin/ssh
+/usr/bin/install -c -m 0755 -s scp /var/tmp/openssh-root/usr/bin/scp
+/usr/bin/install -c -m 0755 -s ssh-add /var/tmp/openssh-root/usr/bin/ssh-add
+/usr/bin/install -c -m 0755 -s ssh-agent /var/tmp/openssh-root/usr/bin/ssh-agent
+/usr/bin/install -c -m 0755 -s ssh-keygen /var/tmp/openssh-root/usr/bin/ssh-keygen
+/usr/bin/install -c -m 0755 -s ssh-keyscan /var/tmp/openssh-root/usr/bin/ssh-keyscan
+/usr/bin/install -c -m 0755 -s sshd /var/tmp/openssh-root/usr/sbin/sshd
+if test ! -z "" ; then \
+	/usr/bin/install -c -m 0755 -s ssh-rand-helper /var/tmp/openssh-root/usr/sbin/ssh-rand-helper ; \
+fi
+/usr/bin/install -c -m 4711 -s ssh-keysign /var/tmp/openssh-root/usr/sbin/ssh-keysign
+/usr/bin/install -c -m 0755 -s ssh-pkcs11-helper /var/tmp/openssh-root/usr/sbin/ssh-pkcs11-helper
+/usr/bin/install -c -m 0755 -s sftp /var/tmp/openssh-root/usr/bin/sftp
+/usr/bin/install -c -m 0755 -s sftp-server /var/tmp/openssh-root/usr/sbin/sftp-server
+/usr/bin/install -c -m 644 ssh.1.out /var/tmp/openssh-root/usr/share/man/man1/ssh.1
+/usr/bin/install -c -m 644 scp.1.out /var/tmp/openssh-root/usr/share/man/man1/scp.1
+/usr/bin/install -c -m 644 ssh-add.1.out /var/tmp/openssh-root/usr/share/man/man1/ssh-add.1
+/usr/bin/install -c -m 644 ssh-agent.1.out /var/tmp/openssh-root/usr/share/man/man1/ssh-agent.1
+/usr/bin/install -c -m 644 ssh-keygen.1.out /var/tmp/openssh-root/usr/share/man/man1/ssh-keygen.1
+/usr/bin/install -c -m 644 ssh-keyscan.1.out /var/tmp/openssh-root/usr/share/man/man1/ssh-keyscan.1
+/usr/bin/install -c -m 644 moduli.5.out /var/tmp/openssh-root/usr/share/man/man5/moduli.5
+/usr/bin/install -c -m 644 sshd_config.5.out /var/tmp/openssh-root/usr/share/man/man5/sshd_config.5
+/usr/bin/install -c -m 644 ssh_config.5.out /var/tmp/openssh-root/usr/share/man/man5/ssh_config.5
+/usr/bin/install -c -m 644 sshd.8.out /var/tmp/openssh-root/usr/share/man/man8/sshd.8
+if [ ! -z "" ]; then \
+	/usr/bin/install -c -m 644 ssh-rand-helper.8.out /var/tmp/openssh-root/usr/share/man/man8/ssh-rand-helper.8 ; \
+fi
+/usr/bin/install -c -m 644 sftp.1.out /var/tmp/openssh-root/usr/share/man/man1/sftp.1
+/usr/bin/install -c -m 644 sftp-server.8.out /var/tmp/openssh-root/usr/share/man/man8/sftp-server.8
+/usr/bin/install -c -m 644 ssh-keysign.8.out /var/tmp/openssh-root/usr/share/man/man8/ssh-keysign.8
+/usr/bin/install -c -m 644 ssh-pkcs11-helper.8.out /var/tmp/openssh-root/usr/share/man/man8/ssh-pkcs11-helper.8
+rm -f /var/tmp/openssh-root/usr/bin/slogin
+ln -s ./ssh /var/tmp/openssh-root/usr/bin/slogin
+rm -f /var/tmp/openssh-root/usr/share/man/man1/slogin.1
+ln -s ./ssh.1 /var/tmp/openssh-root/usr/share/man/man1/slogin.1
+if [ ! -d /var/tmp/openssh-root/etc/ssh ]; then \
+	./mkinstalldirs /var/tmp/openssh-root/etc/ssh; \
+fi
+mkdir /var/tmp/openssh-root/etc
+mkdir /var/tmp/openssh-root/etc/ssh
+/var/tmp/openssh-root/usr/sbin/sshd -t -f /var/tmp/openssh-root/etc/ssh/sshd_config
++ install -dv /var/tmp/openssh-root/var/lib/sshd
++ install -dv /var/tmp/openssh-root/etc/pam.d /var/tmp/openssh-root/etc/init.d
+install: creating directory `/var/tmp/openssh-root/etc/pam.d'
+install: creating directory `/var/tmp/openssh-root/etc/init.d'
++ install -m754 /usr/src/rpm/SOURCES/sshd.init /var/tmp/openssh-root/etc/init.d/sshd
++ cat
++ exit 0
+Processing files: openssh-5.8p2-3.x86_64
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/ssh-keygen /usr/sbin/install_initd base-files initd-tools lsb-bootscripts
+Requires(preun): /bin/sh /usr/sbin/remove_initd
+Requires: /bin/sh /usr/bin/ssh-keygen /usr/sbin/install_initd /usr/sbin/remove_initd libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.4)(64bit) libcrypt.so.1()(64bit) libcrypt.so.1(GLIBC_2.2.5)(64bit) libcrypto.so.1.0.0()(64bit) libdl.so.2()(64bit) libdl.so.2(GLIBC_2.2.5)(64bit) libnsl.so.1()(64bit) libresolv.so.2()(64bit) libresolv.so.2(GLIBC_2.2.5)(64bit) libutil.so.1()(64bit) libutil.so.1(GLIBC_2.2.5)(64bit) libz.so.1()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/openssh-root
+warning: Could not canonicalize hostname: zaphod.lightcube.us
+Wrote: /usr/src/rpm/SRPMS/openssh-5.8p2-3.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/openssh-5.8p2-3.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.7508
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd openssh-5.8p2
++ /bin/rm -rf /var/tmp/openssh-root

@@ -1,7 +1,7 @@
 Summary: CrackLib
 Name: cracklib
 Version: 2.8.18
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -10,6 +10,7 @@ URL: http://cracklib.sourceforge.net
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 Source1: http://dev.lightcube.us/sources/%{name}/%{name}-words-20080507.gz
 
+Requires(post): grep
 BuildRequires: digest(sha1:%{SOURCE0}) = 3c4df51b13047fd7a85ae470f568abf8a8d6f92b
 BuildRequires: digest(sha1:%{SOURCE1}) = e0cea03e505e709b15b8b950d56cb493166607da
 BuildRequires: zlib-devel
@@ -55,7 +56,7 @@ ln -svf cracklib-words %{buildroot}/usr/share/dict/words
 %find_lang %{name}
 
 %post
-/usr/sbin/create-cracklib-dict /usr/share/dict/cracklib-words
+/usr/sbin/create-cracklib-dict /usr/share/dict/cracklib-words &>/dev/null
 
 %postun
 /bin/rm -rf /%{_lib}/cracklib
@@ -95,6 +96,9 @@ rm -rf %{buildroot}
 /usr/include/packer.h
 
 %changelog
+* Mon Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.18-2
+- Fix post requirements
+
 * Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.18-1
 - Upgrade to 2.8.18
 
