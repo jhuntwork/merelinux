@@ -17,6 +17,13 @@
 
 MESSAGE="SSH Server"
 BIN_FILE="/usr/sbin/sshd"
+RESTART_WAIT=10
+RESTART_MESSAGE="Restarting ${MESSAGE} in ${RESTART_WAIT} seconds...
+
+NOTE: This will close all active connections!
+If this is not what you intended, press Ctrl-C and instead run:
+
+${0} reload"
 
 chk_stat
 
@@ -41,10 +48,12 @@ case "$1" in
         ;;
 
     restart)
-        killproc "${BIN_FILE}"
+        log_warning_msg "${RESTART_MESSAGE}"
+        sleep ${RESTART_WAIT}
+        nohup /bin/sh -c "
+        ${0} stop    
         sleep 1
-        start_daemon "${BIN_FILE}"
-        evaluate_retval restart
+        ${0} start" &>/dev/null & 
         ;;
 
     status)
@@ -52,7 +61,7 @@ case "$1" in
         ;;
 
     *)
-        echo "Usage: $0 {start|stop|reload|restart|status}"
+        echo "Usage: ${0} {start|stop|reload|restart|status}"
         exit 1
         ;;
 esac
