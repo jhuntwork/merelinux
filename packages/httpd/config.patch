@@ -1,0 +1,96 @@
+diff -Naur httpd-2.2.0-orig/config.layout httpd-2.2.0/config.layout
+--- httpd-2.2.0-orig/config.layout	2004-11-21 18:50:36.000000000 +0000
++++ httpd-2.2.0/config.layout	2005-12-14 21:07:24.000000000 +0000
+@@ -322,3 +322,28 @@
+     installbuilddir: ${prefix}/etc/apache2/build
+     errordir:      ${datadir}/error
+ </Layout>
++
++# BLFS FHS layout
++<Layout FHS>
++    prefix:             /usr
++    exec_prefix:        ${prefix}
++    bindir:             ${exec_prefix}/bin
++    sbindir:            ${exec_prefix}/sbin
++    libdir:             ${exec_prefix}/lib
++    libexecdir:         ${exec_prefix}/lib/httpd
++    mandir:             ${prefix}/share/man
++    sysconfdir:         /etc/httpd
++    datadir:            /srv/httpd
++    installbuilddir:    ${libexecdir}/build
++    errordir:           ${datadir}/error
++    iconsdir:           ${datadir}/icons
++    htdocsdir:          ${datadir}/htdocs
++    manualdir:          ${datadir}/manual
++    cgidir:             ${datadir}/cgi-bin
++    includedir:         ${prefix}/include/httpd
++    localstatedir:      ${datadir}
++    runtimedir:         /var/run
++    logfiledir:         /var/log/httpd
++    proxycachedir:      /var/cache/httpd/proxy
++</Layout>
++
+
+diff -Naur httpd-2.2.0-orig/srclib/apr/config.layout httpd-2.2.0/srclib/apr/config.layout
+--- httpd-2.2.0-orig/srclib/apr/config.layout	2004-11-24 22:51:51.000000000 +0000
++++ httpd-2.2.0/srclib/apr/config.layout	2005-12-14 21:06:37.000000000 +0000
+@@ -11,18 +11,18 @@
+ 
+ #   Classical APR path layout designed for parallel installs.
+ <Layout apr>
+-    prefix:        /usr/local/apr
++    prefix:        /usr
+     exec_prefix:   ${prefix}
+     bindir:        ${exec_prefix}/bin
+-    sbindir:       ${exec_prefix}/bin
++    sbindir:       ${exec_prefix}/sbin
+     libdir:        ${exec_prefix}/lib
+-    libexecdir:    ${exec_prefix}/modules
+-    mandir:        ${prefix}/man
+-    sysconfdir:    ${prefix}/conf
+-    datadir:       ${prefix}
+-    installbuilddir: ${datadir}/build-${APR_MAJOR_VERSION}
+-    includedir:    ${prefix}/include/apr-${APR_MAJOR_VERSION}
+-    localstatedir: ${prefix}
++    libexecdir:    ${exec_prefix}/lib/httpd
++    mandir:        ${prefix}/share/man
++    sysconfdir:    /etc/apache
++    datadir:       /srv/httpd
++    installbuilddir: ${libexecdir}/build
++    includedir:    ${prefix}/include/httpd
++    localstatedir: ${datadir}
+     libsuffix:     -${APR_MAJOR_VERSION}
+ </Layout>
+ 
+
+diff -Naur httpd-2.2.0-orig/srclib/apr-util/config.layout httpd-2.2.0/srclib/apr-util/config.layout
+--- httpd-2.2.0-orig/srclib/apr-util/config.layout	2005-02-09 12:18:43.000000000 +0000
++++ httpd-2.2.0/srclib/apr-util/config.layout	2005-12-14 21:06:37.000000000 +0000
+@@ -11,18 +11,18 @@
+ 
+ #   Classical APR-util path layout designed for parallel installs.
+ <Layout apr-util>
+-    prefix:        /usr/local/apr
++    prefix:        /usr
+     exec_prefix:   ${prefix}
+     bindir:        ${exec_prefix}/bin
+-    sbindir:       ${exec_prefix}/bin
++    sbindir:       ${exec_prefix}/sbin
+     libdir:        ${exec_prefix}/lib
+-    libexecdir:    ${exec_prefix}/modules
+-    mandir:        ${prefix}/man
+-    sysconfdir:    ${prefix}/conf
+-    datadir:       ${prefix}
+-    installbuilddir: ${datadir}/build
+-    includedir:    ${prefix}/include/apr-${APRUTIL_MAJOR_VERSION}
+-    localstatedir: ${prefix}
++    libexecdir:    ${exec_prefix}/lib/httpd
++    mandir:        ${prefix}/share/man
++    sysconfdir:    /etc/httpd
++    datadir:       /srv/httpd
++    installbuilddir: ${libexecdir}/build
++    includedir:    ${prefix}/include/httpd
++    localstatedir: ${datadir}
+     libsuffix:     -${APRUTIL_MAJOR_VERSION}
+ </Layout>
+ 
