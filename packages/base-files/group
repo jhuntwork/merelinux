@@ -16,8 +16,7 @@ usb:x:14:
 cdrom:x:15:
 messagebus:x:18:
 fcron:x:22:
-apache:x:25:
-nginx:x:26:
+www:x:25:
 postfix:x:32:
 postdrop:x:33:
 mail:x:34:
