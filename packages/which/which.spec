@@ -1,17 +1,15 @@
 Summary: GNU Which
 Name: which
 Version: 2.20
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.xs4all.nl/~carlo17/which
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: ftp://ftp.gnu.org/gnu/which/which-2.20.tar.gz
 
-Requires: base-layout, glibc
-Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = 95be0501a466e515422cde4af46b2744
+BuildRequires: digest(sha1:%{SOURCE0}) = 3bcd6d87aa5231917ba7123319eedcae90cfa0fd
 
 %description
 Which is a utility that prints out the full path of the executables that
@@ -25,13 +23,16 @@ that match any directory in PATH.
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
+%{compress_man}
+%{strip}
 
 %post
 /usr/bin/install-info /usr/share/info/which.info /usr/share/info/dir
@@ -46,8 +47,11 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/bin/which
 /usr/share/info/which.info
-/usr/share/man/man1/which.1
+/usr/share/man/man1/which.1.bz2
 
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-2
+- Optimize for size
+
 * Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-1
 - Initial version
