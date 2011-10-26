@@ -94,8 +94,9 @@ smart -o remove-packages=false -o rpm-root=/mnt/"${pkg}" install \
   tar \
   ${deps} -y
 
-# Some cleanup
+# Necessary mods to the chroot env
 cp /etc/resolv.conf /mnt/"${pkg}"/etc
+cp /etc/hosts /mnt/"${pkg}"/etc
 cp /etc/rpm/macros /mnt/"${pkg}"/etc/rpm/
 mv /mnt/"${pkg}"/var/lib/rpm/log.* /mnt/"${pkg}"/var/lib/rpm/log
 
