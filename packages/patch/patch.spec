@@ -1,33 +1,34 @@
 Summary: GNU Patch
 Name: patch
 Version: 2.6.1
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://savannah.gnu.org/projects/patch
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}-test_fix-1.patch
+Source0: ftp://ftp.gnu.org/gnu/patch/patch-2.6.1.tar.xz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 0818d1763ae0c4281bcdc63cdac0b2c0
-BuildRequires: digest(%{PATCH0}) = c51e1a95bfc5310635d05081472c3534
+BuildRequires: digest(sha1:%{SOURCE0}) = 8cc3485aa433b8feb70f6783efb766554230fee8
+BuildRequires: ed 
 
 %description
 Patch allows merging of textual changes
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
-./configure --prefix=/usr
-make
+export CFLAGS='-Os -pipe'
+./configure \
+  --prefix=/usr
+make %{PMFLAGS}
 make check
 
 %install
 make prefix=%{buildroot}/usr mandir=%{buildroot}/usr/share/man install
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -35,9 +36,13 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /usr/bin/patch
-/usr/share/man/man1/patch.1
+/usr/share/man/man1/patch.1.bz2
 
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.1-3
+- Optimize for size
+- Remove testsuite patch since ed is available
+
 * Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.1-2
 - Add in a patch for the testsuite
 
