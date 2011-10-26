@@ -1,17 +1,16 @@
 Summary: GNU Bison
 Name: bison
-Version: 2.4.3
+Version: 2.5
 Release: 1
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/bison
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: ftp://ftp.gnu.org/gnu/bison/bison-2.5.tar.bz2
 
-Requires: base-layout, glibc, m4
-Requires(post): texinfo, bash, ncurses, readline
-BuildRequires: digest(%{SOURCE0}) = c1d3ea81bc370dbd43b6f0b2cd21287e
+Requires: m4
+BuildRequires: digest(sha1:%{SOURCE0}) = 907319624fe4f4c5f9e2c3e23601041ac636ae31
 
 %description
 %{name} is a general purpose parser generator.
@@ -20,14 +19,18 @@ BuildRequires: digest(%{SOURCE0}) = c1d3ea81bc370dbd43b6f0b2cd21287e
 %setup -q
 
 %build
-./configure --prefix=/usr --libdir=/usr/%{_lib}
-echo '#define YYENABLE_NLS 1' >> lib/config.h
-make
-#make check
+export CFLAGS='-Os -pipe'
+./configure \
+  --prefix=/usr \
+  --libdir=/usr/%{_lib}
+make %{PMFLAGS}
+make check
 
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
+%{compress_man}
+%{strip}
 %find_lang %{name}
 %find_lang %{name}-runtime
 cat %{name}.lang %{name}-runtime.lang > %{name}.files
@@ -49,10 +52,14 @@ rm -rf %{buildroot}
 /usr/share/aclocal/bison-i18n.m4
 /usr/share/bison
 /usr/share/info/bison.info
-/usr/share/man/man1/bison.1
-/usr/share/man/man1/yacc.1
+/usr/share/man/man1/bison.1.bz2
+/usr/share/man/man1/yacc.1.bz2
 
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5-1
+- Upgrade to 2.5
+- Optimize for size
+
 * Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.4.3-1
 - Upgrade to 2.4.3
 

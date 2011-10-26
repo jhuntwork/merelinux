@@ -1,0 +1,2654 @@
+Fetching(Source0): ftp://ftp.gnu.org/gnu/bison/bison-2.5.tar.bz2
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.72784
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf bison-2.5
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/bison-2.5.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd bison-2.5
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.59498
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd bison-2.5
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --libdir=/usr/lib64
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for style of include used by make... GNU
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking dependency style of gcc... gcc3
+checking for gcc option to accept ISO C99... -std=gnu99
+checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+checking for ranlib... ranlib
+checking whether gcc -std=gnu99 and cc understand -c and -o together... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking how to run the C preprocessor... gcc -std=gnu99 -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for flex... no
+checking for lex... no
+checking for bison... bison -y
+checking for ranlib... (cached) ranlib
+checking for GNU M4 that supports accurate traces... /usr/bin/m4
+checking whether /usr/bin/m4 accepts --gnu... yes
+checking how m4 supports trace files... --debugfile
+checking for xsltproc... no
+checking for locale.h... yes
+checking for sys/socket.h... yes
+checking for unistd.h... (cached) yes
+checking for features.h... yes
+checking for getopt.h... yes
+checking for wchar.h... yes
+checking for stdint.h... (cached) yes
+checking for inttypes.h... (cached) yes
+checking for wctype.h... yes
+checking for math.h... yes
+checking for sys/mman.h... yes
+checking for sched.h... yes
+checking for spawn.h... yes
+checking for sys/ioctl.h... yes
+checking for sys/stat.h... (cached) yes
+checking for sys/wait.h... yes
+checking for sys/time.h... yes
+checking for inline... inline
+checking for working alloca.h... yes
+checking for alloca... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking whether // is distinct from /... no
+checking for dup2... yes
+checking for fcntl... yes
+checking for vasnprintf... no
+checking for getdtablesize... yes
+checking for iswcntrl... yes
+checking for iswblank... yes
+checking for mbsinit... yes
+checking for mbrtowc... yes
+checking for isascii... yes
+checking for mprotect... yes
+checking for memchr... yes
+checking for lstat... yes
+checking for pipe... yes
+checking for pipe2... yes
+checking for posix_spawn... yes
+checking for sigaction... yes
+checking for sigaltstack... yes
+checking for siginterrupt... yes
+checking for strdup... yes
+checking for strndup... yes
+checking for wcwidth... yes
+checking for setlocale... yes
+checking if environ is properly declared... yes
+checking whether the preprocessor supports include_next... yes
+checking whether system header files limit the line length... no
+checking for complete errno.h... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... yes
+checking whether strerror_r returns char *... yes
+checking for sig_atomic_t... yes
+checking for working fcntl.h... yes
+checking for stdint.h... yes
+checking for inttypes.h... yes
+checking whether printf supports size specifiers as in C99... yes
+checking whether printf supports 'long double' arguments... yes
+checking whether printf supports infinite 'double' arguments... yes
+checking whether byte ordering is bigendian... no
+checking whether printf supports infinite 'long double' arguments... no
+checking whether printf supports the 'a' and 'A' directives... yes
+checking whether printf supports the 'F' directive... yes
+checking whether printf supports the 'n' directive... yes
+checking whether printf supports the 'ls' directive... yes
+checking whether printf supports POSIX/XSI format strings with positions... yes
+checking whether printf supports the grouping flag... yes
+checking whether printf supports the left-adjust flag correctly... yes
+checking whether printf supports the zero flag correctly... yes
+checking whether printf supports large precisions... yes
+checking whether printf survives out-of-memory conditions... yes
+checking for unsigned long long int... yes
+checking for long long int... yes
+checking for wchar_t... yes
+checking for wint_t... yes
+checking for size_t... yes
+checking for intmax_t... yes
+checking whether snprintf returns a byte count as in C99... yes
+checking for snprintf... yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... (cached) yes
+checking for wcrtomb... yes
+checking whether _snprintf is declared... no
+checking whether frexp() can be used without linking with libm... yes
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... yes
+checking whether getenv is declared... yes
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking whether stdint.h conforms to C99... yes
+checking for inttypes.h... (cached) yes
+checking whether the inttypes.h PRIxNN macros are broken... no
+checking whether imaxabs is declared... yes
+checking whether imaxdiv is declared... yes
+checking whether strtoimax is declared... yes
+checking whether strtoumax is declared... yes
+checking whether <sys/socket.h> is self-contained... yes
+checking for shutdown... yes
+checking whether <sys/socket.h> defines the SHUT_* macros... yes
+checking for struct sockaddr_storage... yes
+checking for sa_family_t... yes
+checking for struct sockaddr_storage.ss_family... yes
+checking whether socket is declared without a macro... yes
+checking whether connect is declared without a macro... yes
+checking whether accept is declared without a macro... yes
+checking whether bind is declared without a macro... yes
+checking whether getpeername is declared without a macro... yes
+checking whether getsockname is declared without a macro... yes
+checking whether getsockopt is declared without a macro... yes
+checking whether listen is declared without a macro... yes
+checking whether recv is declared without a macro... yes
+checking whether send is declared without a macro... yes
+checking whether recvfrom is declared without a macro... yes
+checking whether sendto is declared without a macro... yes
+checking whether setsockopt is declared without a macro... yes
+checking whether shutdown is declared without a macro... yes
+checking whether accept4 is declared without a macro... yes
+checking where to find the exponent in a 'float'... word 0 bit 23
+checking whether isnan(float) can be used without linking with libm... yes
+checking whether isnan(float) works... yes
+checking whether isnan(double) can be used without linking with libm... yes
+checking whether isnan(long double) can be used without linking with libm... yes
+checking whether isnanl works... no
+checking where to find the exponent in a 'long double'... word 2 bit 0
+checking whether iswcntrl works... yes
+checking for wctype_t... yes
+checking for wctrans_t... yes
+checking whether wctype is declared without a macro... yes
+checking whether iswctype is declared without a macro... yes
+checking whether wctrans is declared without a macro... yes
+checking whether towctrans is declared without a macro... yes
+checking whether iswblank is declared... no
+checking for nl_langinfo and CODESET... yes
+checking whether getc_unlocked is declared... yes
+checking whether we are using the GNU C Library >= 2.1 or uClibc... yes
+checking for mbstate_t... yes
+checking for a traditional japanese locale... ja_JP
+checking for a transitional chinese locale... zh_CN.GB18030
+checking for a french Unicode locale... fr_FR.UTF-8
+checking for mmap... yes
+checking for MAP_ANONYMOUS... yes
+checking whether memchr works... yes
+checking for mode_t... yes
+checking for promoted mode_t type... mode_t
+checking whether posix_spawn works... yes
+checking whether posix_spawnattr_setschedpolicy is supported... yes
+checking whether posix_spawnattr_setschedparam is supported... yes
+checking for ptrdiff_t... yes
+checking whether C symbols are prefixed with underscore at the linker level... no
+checking for C/C++ restrict keyword... __restrict
+checking for uid_t in sys/types.h... yes
+checking whether snprintf is declared... yes
+checking whether strdup is declared... yes
+checking for working strerror function... yes
+checking whether memmem is declared without a macro... yes
+checking whether mempcpy is declared without a macro... yes
+checking whether memrchr is declared without a macro... yes
+checking whether rawmemchr is declared without a macro... yes
+checking whether stpcpy is declared without a macro... yes
+checking whether stpncpy is declared without a macro... yes
+checking whether strchrnul is declared without a macro... yes
+checking whether strdup is declared without a macro... yes
+checking whether strncat is declared without a macro... yes
+checking whether strndup is declared without a macro... yes
+checking whether strnlen is declared without a macro... yes
+checking whether strpbrk is declared without a macro... yes
+checking whether strsep is declared without a macro... yes
+checking whether strcasestr is declared without a macro... yes
+checking whether strtok_r is declared without a macro... yes
+checking whether strerror_r is declared without a macro... yes
+checking whether strsignal is declared without a macro... yes
+checking whether strverscmp is declared without a macro... yes
+checking whether strndup is declared... (cached) yes
+checking whether strnlen is declared... (cached) yes
+checking whether stat file-mode macros are broken... no
+checking for struct timespec in <time.h>... yes
+checking whether clearerr_unlocked is declared... yes
+checking whether feof_unlocked is declared... yes
+checking whether ferror_unlocked is declared... yes
+checking whether fflush_unlocked is declared... yes
+checking whether fgets_unlocked is declared... yes
+checking whether fputc_unlocked is declared... yes
+checking whether fputs_unlocked is declared... yes
+checking whether fread_unlocked is declared... yes
+checking whether fwrite_unlocked is declared... yes
+checking whether getchar_unlocked is declared... yes
+checking whether putc_unlocked is declared... yes
+checking whether putchar_unlocked is declared... yes
+checking whether unsetenv is declared... yes
+checking whether vsnprintf is declared... yes
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking for alloca as a compiler built-in... yes
+checking whether to enable assertions... yes
+checking whether // is distinct from /... (cached) no
+checking whether dup2 works... yes
+checking for error_at_line... yes
+checking whether fcntl handles F_DUPFD correctly... yes
+checking whether fcntl understands F_DUPFD_CLOEXEC... needs runtime check
+checking whether fcntl is declared without a macro... yes
+checking whether openat is declared without a macro... yes
+checking whether fopen recognizes a trailing slash... yes
+checking for ptrdiff_t... (cached) yes
+checking whether frexp works... yes
+checking whether frexpl is declared... yes
+checking whether frexpl() can be used without linking with libm... yes
+checking whether frexpl works... yes
+checking whether the compiler generally respects inline... yes
+checking whether inttypes.h conforms to C99... yes
+checking whether INT32_MAX < INTMAX_MAX... yes
+checking whether INT64_MAX == LONG_MAX... yes
+checking whether UINT32_MAX < UINTMAX_MAX... yes
+checking whether UINT64_MAX == ULONG_MAX... yes
+checking whether imaxabs is declared without a macro... yes
+checking whether imaxdiv is declared without a macro... yes
+checking whether strtoimax is declared without a macro... yes
+checking whether strtoumax is declared without a macro... yes
+checking for ioctl... yes
+checking for ioctl with POSIX signature... no
+checking whether isnan macro works... no
+checking where to find the exponent in a 'float'... (cached) word 0 bit 23
+checking where to find the exponent in a 'double'... word 1 bit 20
+checking where to find the exponent in a 'long double'... (cached) word 2 bit 0
+checking whether isnan(double) can be used without linking with libm... (cached) yes
+checking whether isnan(double) can be used without linking with libm... (cached) yes
+checking whether isnan(float) can be used without linking with libm... (cached) yes
+checking whether isnan(float) works... (cached) yes
+checking whether isnan(float) can be used without linking with libm... (cached) yes
+checking whether isnan(float) works... (cached) yes
+checking whether isnan(long double) can be used without linking with libm... (cached) yes
+checking whether isnanl works... (cached) no
+checking where to find the exponent in a 'long double'... (cached) word 2 bit 0
+checking whether isnan(long double) can be used without linking with libm... (cached) yes
+checking whether isnanl works... (cached) no
+checking where to find the exponent in a 'long double'... (cached) word 2 bit 0
+checking whether ldexpl is declared... yes
+checking whether ldexpl() can be used without linking with libm... yes
+checking whether ldexpl works... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking whether NAN macro works... yes
+checking whether HUGE_VAL works... yes
+checking whether acosl is declared without a macro... yes
+checking whether asinl is declared without a macro... yes
+checking whether atanl is declared without a macro... yes
+checking whether ceilf is declared without a macro... yes
+checking whether ceill is declared without a macro... yes
+checking whether cosl is declared without a macro... yes
+checking whether expl is declared without a macro... yes
+checking whether floorf is declared without a macro... yes
+checking whether floorl is declared without a macro... yes
+checking whether frexpl is declared without a macro... yes
+checking whether ldexpl is declared without a macro... yes
+checking whether logb is declared without a macro... yes
+checking whether logl is declared without a macro... yes
+checking whether round is declared without a macro... yes
+checking whether roundf is declared without a macro... yes
+checking whether roundl is declared without a macro... yes
+checking whether sinl is declared without a macro... yes
+checking whether sqrtl is declared without a macro... yes
+checking whether tanl is declared without a macro... yes
+checking whether trunc is declared without a macro... yes
+checking whether truncf is declared without a macro... yes
+checking whether truncl is declared without a macro... yes
+checking whether mbrtowc handles incomplete characters... yes
+checking whether mbrtowc works as well as mbtowc... yes
+checking whether mbrtowc handles a NULL pwc argument... yes
+checking whether mbrtowc handles a NULL string argument... yes
+checking whether mbrtowc has a correct return value... yes
+checking whether mbrtowc returns 0 when parsing a NUL character... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mbswidth is declared in <wchar.h>... no
+checking for mbstate_t... (cached) yes
+checking for obstacks... yes
+checking whether open recognizes a trailing slash... yes
+checking whether frexp works... (cached) yes
+checking whether ldexp can be used without linking with libm... yes
+checking whether frexpl() can be used without linking with libm... (cached) yes
+checking whether frexpl works... (cached) yes
+checking whether frexpl is declared... (cached) yes
+checking whether ldexpl() can be used without linking with libm... (cached) yes
+checking whether ldexpl works... (cached) yes
+checking whether ldexpl is declared... (cached) yes
+checking for rawmemchr... yes
+checking for struct sigaction.sa_sigaction... yes
+checking for volatile sig_atomic_t... yes
+checking whether sigaction is declared without a macro... yes
+checking whether sigaddset is declared without a macro... yes
+checking whether sigdelset is declared without a macro... yes
+checking whether sigemptyset is declared without a macro... yes
+checking whether sigfillset is declared without a macro... yes
+checking whether sigismember is declared without a macro... yes
+checking whether sigpending is declared without a macro... yes
+checking whether sigprocmask is declared without a macro... yes
+checking for signbit macro... yes
+checking for signbit compiler built-ins... yes
+checking for sigprocmask... yes
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking for snprintf... (cached) yes
+checking whether snprintf respects a size of 1... yes
+checking for snprintf... (cached) yes
+checking whether snprintf truncates the result as in C99... yes
+checking whether snprintf fully supports the 'n' directive... yes
+checking whether snprintf respects a size of 1... (cached) yes
+checking whether vsnprintf respects a zero size as in C99... yes
+checking for ptrdiff_t... (cached) yes
+checking for socklen_t... yes
+checking for posix_spawnattr_t... yes
+checking for posix_spawn_file_actions_t... yes
+checking whether posix_spawn is declared without a macro... yes
+checking whether posix_spawnp is declared without a macro... yes
+checking whether posix_spawnattr_init is declared without a macro... yes
+checking whether posix_spawnattr_destroy is declared without a macro... yes
+checking whether posix_spawnattr_getsigdefault is declared without a macro... yes
+checking whether posix_spawnattr_setsigdefault is declared without a macro... yes
+checking whether posix_spawnattr_getsigmask is declared without a macro... yes
+checking whether posix_spawnattr_setsigmask is declared without a macro... yes
+checking whether posix_spawnattr_getflags is declared without a macro... yes
+checking whether posix_spawnattr_setflags is declared without a macro... yes
+checking whether posix_spawnattr_getpgroup is declared without a macro... yes
+checking whether posix_spawnattr_setpgroup is declared without a macro... yes
+checking whether posix_spawnattr_getschedpolicy is declared without a macro... yes
+checking whether posix_spawnattr_setschedpolicy is declared without a macro... yes
+checking whether posix_spawnattr_getschedparam is declared without a macro... yes
+checking whether posix_spawnattr_setschedparam is declared without a macro... yes
+checking whether posix_spawn_file_actions_init is declared without a macro... yes
+checking whether posix_spawn_file_actions_destroy is declared without a macro... yes
+checking whether posix_spawn_file_actions_addopen is declared without a macro... yes
+checking whether posix_spawn_file_actions_addclose is declared without a macro... yes
+checking whether posix_spawn_file_actions_adddup2 is declared without a macro... yes
+checking for ptrdiff_t... (cached) yes
+checking whether stat handles trailing slashes on directories... yes
+checking whether stat handles trailing slashes on files... yes
+checking whether NULL can be used in arbitrary expressions... yes
+checking whether stdint.h conforms to C99... (cached) yes
+checking whether dprintf is declared without a macro... yes
+checking whether fpurge is declared without a macro... no
+checking whether fseeko is declared without a macro... yes
+checking whether ftello is declared without a macro... yes
+checking whether getdelim is declared without a macro... yes
+checking whether getline is declared without a macro... yes
+checking whether popen is declared without a macro... yes
+checking whether renameat is declared without a macro... yes
+checking whether snprintf is declared without a macro... yes
+checking whether tmpfile is declared without a macro... yes
+checking whether vdprintf is declared without a macro... yes
+checking whether vsnprintf is declared without a macro... yes
+checking whether _Exit is declared without a macro... yes
+checking whether atoll is declared without a macro... yes
+checking whether canonicalize_file_name is declared without a macro... yes
+checking whether getloadavg is declared without a macro... yes
+checking whether getsubopt is declared without a macro... yes
+checking whether grantpt is declared without a macro... yes
+checking whether mkdtemp is declared without a macro... yes
+checking whether mkostemp is declared without a macro... yes
+checking whether mkostemps is declared without a macro... yes
+checking whether mkstemp is declared without a macro... yes
+checking whether mkstemps is declared without a macro... yes
+checking whether ptsname is declared without a macro... yes
+checking whether random_r is declared without a macro... yes
+checking whether initstat_r is declared without a macro... no
+checking whether srandom_r is declared without a macro... yes
+checking whether setstate_r is declared without a macro... yes
+checking whether realpath is declared without a macro... yes
+checking whether rpmatch is declared without a macro... yes
+checking whether setenv is declared without a macro... yes
+checking whether strtod is declared without a macro... yes
+checking whether strtoll is declared without a macro... yes
+checking whether strtoull is declared without a macro... yes
+checking whether unlockpt is declared without a macro... yes
+checking whether unsetenv is declared without a macro... yes
+checking for stpcpy... yes
+checking for strchrnul... yes
+checking for working strndup... yes
+checking for working strnlen... yes
+checking for strtol... yes
+checking for strtoul... yes
+checking for strverscmp... yes
+checking whether <sys/ioctl.h> declares ioctl... yes
+checking whether ioctl is declared without a macro... yes
+checking whether <sys/socket.h> is self-contained... (cached) yes
+checking for shutdown... (cached) yes
+checking whether <sys/socket.h> defines the SHUT_* macros... (cached) yes
+checking for struct sockaddr_storage... (cached) yes
+checking for sa_family_t... (cached) yes
+checking for struct sockaddr_storage.ss_family... (cached) yes
+checking whether socket is declared without a macro... (cached) yes
+checking whether connect is declared without a macro... (cached) yes
+checking whether accept is declared without a macro... (cached) yes
+checking whether bind is declared without a macro... (cached) yes
+checking whether getpeername is declared without a macro... (cached) yes
+checking whether getsockname is declared without a macro... (cached) yes
+checking whether getsockopt is declared without a macro... (cached) yes
+checking whether listen is declared without a macro... (cached) yes
+checking whether recv is declared without a macro... (cached) yes
+checking whether send is declared without a macro... (cached) yes
+checking whether recvfrom is declared without a macro... (cached) yes
+checking whether sendto is declared without a macro... (cached) yes
+checking whether setsockopt is declared without a macro... (cached) yes
+checking whether shutdown is declared without a macro... (cached) yes
+checking whether accept4 is declared without a macro... (cached) yes
+checking for nlink_t... yes
+checking whether fchmodat is declared without a macro... yes
+checking whether fstatat is declared without a macro... yes
+checking whether futimens is declared without a macro... yes
+checking whether lchmod is declared without a macro... yes
+checking whether lstat is declared without a macro... yes
+checking whether mkdirat is declared without a macro... yes
+checking whether mkfifo is declared without a macro... yes
+checking whether mkfifoat is declared without a macro... yes
+checking whether mknod is declared without a macro... yes
+checking whether mknodat is declared without a macro... yes
+checking whether stat is declared without a macro... yes
+checking whether utimensat is declared without a macro... yes
+checking whether waitpid is declared without a macro... yes
+checking whether chown is declared without a macro... yes
+checking whether dup2 is declared without a macro... yes
+checking whether dup3 is declared without a macro... yes
+checking whether environ is declared without a macro... yes
+checking whether euidaccess is declared without a macro... yes
+checking whether faccessat is declared without a macro... yes
+checking whether fchdir is declared without a macro... yes
+checking whether fchownat is declared without a macro... yes
+checking whether fsync is declared without a macro... yes
+checking whether ftruncate is declared without a macro... yes
+checking whether getcwd is declared without a macro... yes
+checking whether getdomainname is declared without a macro... yes
+checking whether getdtablesize is declared without a macro... yes
+checking whether getgroups is declared without a macro... yes
+checking whether gethostname is declared without a macro... yes
+checking whether getlogin is declared without a macro... yes
+checking whether getlogin_r is declared without a macro... yes
+checking whether getpagesize is declared without a macro... yes
+checking whether getusershell is declared without a macro... yes
+checking whether setusershell is declared without a macro... yes
+checking whether endusershell is declared without a macro... yes
+checking whether lchown is declared without a macro... yes
+checking whether link is declared without a macro... yes
+checking whether linkat is declared without a macro... yes
+checking whether lseek is declared without a macro... yes
+checking whether pipe is declared without a macro... yes
+checking whether pipe2 is declared without a macro... yes
+checking whether pread is declared without a macro... yes
+checking whether pwrite is declared without a macro... yes
+checking whether readlink is declared without a macro... yes
+checking whether readlinkat is declared without a macro... yes
+checking whether rmdir is declared without a macro... yes
+checking whether sleep is declared without a macro... yes
+checking whether symlink is declared without a macro... yes
+checking whether symlinkat is declared without a macro... yes
+checking whether ttyname_r is declared without a macro... yes
+checking whether unlink is declared without a macro... yes
+checking whether unlinkat is declared without a macro... yes
+checking whether usleep is declared without a macro... yes
+checking for unsetenv... yes
+checking for unsetenv() return type... int
+checking whether unsetenv obeys POSIX... yes
+checking for ptrdiff_t... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for vsnprintf... yes
+checking whether snprintf respects a size of 1... (cached) yes
+checking for vsnprintf... (cached) yes
+checking whether snprintf truncates the result as in C99... (cached) yes
+checking whether snprintf fully supports the 'n' directive... (cached) yes
+checking whether snprintf respects a size of 1... (cached) yes
+checking whether vsnprintf respects a zero size as in C99... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for ptrdiff_t... (cached) yes
+checking for waitid... yes
+checking whether btowc is declared without a macro... yes
+checking whether wctob is declared without a macro... yes
+checking whether mbsinit is declared without a macro... yes
+checking whether mbrtowc is declared without a macro... yes
+checking whether mbrlen is declared without a macro... yes
+checking whether mbsrtowcs is declared without a macro... yes
+checking whether mbsnrtowcs is declared without a macro... yes
+checking whether wcrtomb is declared without a macro... yes
+checking whether wcsrtombs is declared without a macro... yes
+checking whether wcsnrtombs is declared without a macro... yes
+checking whether wcwidth is declared without a macro... yes
+checking whether wmemchr is declared without a macro... yes
+checking whether wmemcmp is declared without a macro... yes
+checking whether wmemcpy is declared without a macro... yes
+checking whether wmemmove is declared without a macro... yes
+checking whether wmemset is declared without a macro... yes
+checking whether wcslen is declared without a macro... yes
+checking whether wcsnlen is declared without a macro... yes
+checking whether wcscpy is declared without a macro... yes
+checking whether wcpcpy is declared without a macro... yes
+checking whether wcsncpy is declared without a macro... yes
+checking whether wcpncpy is declared without a macro... yes
+checking whether wcscat is declared without a macro... yes
+checking whether wcsncat is declared without a macro... yes
+checking whether wcscmp is declared without a macro... yes
+checking whether wcsncmp is declared without a macro... yes
+checking whether wcscasecmp is declared without a macro... yes
+checking whether wcsncasecmp is declared without a macro... yes
+checking whether wcscoll is declared without a macro... yes
+checking whether wcsxfrm is declared without a macro... yes
+checking whether wcsdup is declared without a macro... yes
+checking whether wcschr is declared without a macro... yes
+checking whether wcsrchr is declared without a macro... yes
+checking whether wcscspn is declared without a macro... yes
+checking whether wcsspn is declared without a macro... yes
+checking whether wcspbrk is declared without a macro... yes
+checking whether wcsstr is declared without a macro... yes
+checking whether wcstok is declared without a macro... yes
+checking whether wcswidth is declared without a macro... yes
+checking whether iswcntrl works... (cached) yes
+checking for wctype_t... (cached) yes
+checking for wctrans_t... (cached) yes
+checking whether wctype is declared without a macro... (cached) yes
+checking whether iswctype is declared without a macro... (cached) yes
+checking whether wctrans is declared without a macro... (cached) yes
+checking whether towctrans is declared without a macro... (cached) yes
+checking whether wcwidth is declared... (cached) yes
+checking whether wcwidth works reasonably in UTF-8 locales... yes
+checking for stdint.h... (cached) yes
+checking if malloc debugging is wanted... no
+checking for pid_t... yes
+checking for sys/wait.h that is POSIX.1 compatible... (cached) yes
+checking for dup2... (cached) yes
+checking for waitpid... yes
+checking vfork.h usability... no
+checking vfork.h presence... no
+checking for vfork.h... no
+checking for fork... yes
+checking for vfork... yes
+checking for working fork... yes
+checking for working vfork... (cached) yes
+checking for sys/time.h... (cached) yes
+checking sys/times.h usability... yes
+checking sys/times.h presence... yes
+checking for sys/times.h... yes
+checking for sys/resource.h... yes
+checking for times... yes
+checking whether getrusage is declared... yes
+checking whether times is declared... yes
+checking whether clock is declared... no
+checking whether sysconf is declared... yes
+checking for clock_t... yes
+checking for struct tms... yes
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking for valgrind... no
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking dependency style of g++... gcc3
+checking whether g++ builds executables that work... yes
+checking for Java virtual machine... no
+checking for Java compiler... no
+checking for Java virtual machine... no
+configure: creating ./config.status
+config.status: creating javacomp.sh
+config.status: creating javaexec.sh
+config.status: creating runtime-po/Makefile.in
+config.status: creating etc/bench.pl
+config.status: creating tests/Makefile
+config.status: creating tests/atlocal
+config.status: creating tests/bison
+config.status: creating Makefile
+config.status: creating build-aux/Makefile
+config.status: creating po/Makefile.in
+config.status: creating data/Makefile
+config.status: creating etc/Makefile
+config.status: creating examples/Makefile
+config.status: creating examples/calc++/Makefile
+config.status: creating lib/Makefile
+config.status: creating src/Makefile
+config.status: creating doc/Makefile
+config.status: creating doc/yacc.1
+config.status: creating lib/config.h
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating runtime-po/POTFILES
+config.status: creating runtime-po/Makefile
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
+config.status: executing tests/atconfig commands
++ make -j4
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/bison-2.5'
+Making all in build-aux
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/build-aux'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/build-aux'
+Making all in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/po'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/po'
+Making all in runtime-po
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/runtime-po'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/runtime-po'
+Making all in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+rm -f alloca.h-t alloca.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  cat ./alloca.in.h; \
+} > alloca.h-t && \
+mv -f alloca.h-t alloca.h
+rm -f arg-nonnull.h-t arg-nonnull.h && \
+sed -n -e '/GL_ARG_NONNULL/,$p' \
+  < ../build-aux/arg-nonnull.h \
+  > arg-nonnull.h-t && \
+mv arg-nonnull.h-t arg-nonnull.h
+rm -f c++defs.h-t c++defs.h && \
+sed -n -e '/_GL_CXXDEFS/,$p' \
+  < ../build-aux/c++defs.h \
+  > c++defs.h-t && \
+mv c++defs.h-t c++defs.h
+rm -f configmake.h-t && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  echo '#define PREFIX "/usr"'; \
+  echo '#define EXEC_PREFIX "/usr"'; \
+  echo '#define BINDIR "/usr/bin"'; \
+  echo '#define SBINDIR "/usr/sbin"'; \
+  echo '#define LIBEXECDIR "/usr/libexec"'; \
+  echo '#define DATAROOTDIR "/usr/share"'; \
+  echo '#define DATADIR "/usr/share"'; \
+  echo '#define SYSCONFDIR "/usr/etc"'; \
+  echo '#define SHAREDSTATEDIR "/usr/com"'; \
+  echo '#define LOCALSTATEDIR "/usr/var"'; \
+  echo '#define INCLUDEDIR "/usr/include"'; \
+  echo '#define OLDINCLUDEDIR "/usr/include"'; \
+  echo '#define DOCDIR "/usr/share/doc/bison"'; \
+  echo '#define INFODIR "/usr/share/info"'; \
+  echo '#define HTMLDIR "/usr/share/doc/bison"'; \
+  echo '#define DVIDIR "/usr/share/doc/bison"'; \
+  echo '#define PDFDIR "/usr/share/doc/bison"'; \
+  echo '#define PSDIR "/usr/share/doc/bison"'; \
+  echo '#define LIBDIR "/usr/lib64"'; \
+  echo '#define LISPDIR "/usr/share/emacs/site-lisp"'; \
+  echo '#define LOCALEDIR "/usr/share/locale"'; \
+  echo '#define MANDIR "/usr/share/man"'; \
+  echo '#define MANEXT ""'; \
+  echo '#define PKGDATADIR "/usr/share/bison"'; \
+  echo '#define PKGINCLUDEDIR "/usr/include/bison"'; \
+  echo '#define PKGLIBDIR "/usr/lib64/bison"'; \
+  echo '#define PKGLIBEXECDIR "/usr/libexec/bison"'; \
+} | sed '/""/d' > configmake.h-t && \
+if test -f configmake.h && cmp configmake.h-t configmake.h > /dev/null; then \
+  rm -f configmake.h-t; \
+else \
+  rm -f configmake.h; mv configmake.h-t configmake.h; \
+fi
+rm -f warn-on-use.h-t warn-on-use.h && \
+sed -n -e '/^.ifndef/,$p' \
+  < ../build-aux/warn-on-use.h \
+  > warn-on-use.h-t && \
+mv warn-on-use.h-t warn-on-use.h
+rm -f unitypes.h-t unitypes.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  cat ./unitypes.in.h; \
+} > unitypes.h-t && \
+mv -f unitypes.h-t unitypes.h
+rm -f uniwidth.h-t uniwidth.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  cat ./uniwidth.in.h; \
+} > uniwidth.h-t && \
+mv -f uniwidth.h-t uniwidth.h
+rm -f fcntl.h-t fcntl.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_FCNTL_H''@|<fcntl.h>|g' \
+      -e 's|@''GNULIB_FCNTL''@|1|g' \
+      -e 's|@''GNULIB_NONBLOCKING''@|1|g' \
+      -e 's|@''GNULIB_OPEN''@|1|g' \
+      -e 's|@''GNULIB_OPENAT''@|0|g' \
+      -e 's|@''HAVE_FCNTL''@|1|g' \
+      -e 's|@''HAVE_OPENAT''@|1|g' \
+      -e 's|@''REPLACE_FCNTL''@|1|g' \
+      -e 's|@''REPLACE_OPEN''@|0|g' \
+      -e 's|@''REPLACE_OPENAT''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./fcntl.in.h; \
+} > fcntl.h-t && \
+mv fcntl.h-t fcntl.h
+rm -f inttypes.h-t inttypes.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's/@''HAVE_INTTYPES_H''@/1/g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_INTTYPES_H''@|<inttypes.h>|g' \
+      -e 's/@''PRI_MACROS_BROKEN''@/0/g' \
+      -e 's/@''APPLE_UNIVERSAL_BUILD''@/0/g' \
+      -e 's/@''HAVE_LONG_LONG_INT''@/1/g' \
+      -e 's/@''HAVE_UNSIGNED_LONG_LONG_INT''@/1/g' \
+      -e 's/@''PRIPTR_PREFIX''@/"l"/g' \
+      -e 's/@''GNULIB_IMAXABS''@/0/g' \
+      -e 's/@''GNULIB_IMAXDIV''@/0/g' \
+      -e 's/@''GNULIB_STRTOIMAX''@/0/g' \
+      -e 's/@''GNULIB_STRTOUMAX''@/0/g' \
+      -e 's/@''HAVE_DECL_IMAXABS''@/1/g' \
+      -e 's/@''HAVE_DECL_IMAXDIV''@/1/g' \
+      -e 's/@''HAVE_DECL_STRTOIMAX''@/1/g' \
+      -e 's/@''HAVE_DECL_STRTOUMAX''@/1/g' \
+      -e 's/@''INT32_MAX_LT_INTMAX_MAX''@/1/g' \
+      -e 's/@''INT64_MAX_EQ_LONG_MAX''@/1/g' \
+      -e 's/@''UINT32_MAX_LT_UINTMAX_MAX''@/1/g' \
+      -e 's/@''UINT64_MAX_EQ_ULONG_MAX''@/1/g' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./inttypes.in.h; \
+} > inttypes.h-t && \
+mv inttypes.h-t inttypes.h
+rm -f math.h-t math.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT_AS_FIRST_DIRECTIVE''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_AS_FIRST_DIRECTIVE_MATH_H''@|<math.h>|g' \
+      -e 's|@''GNULIB_ACOSL''@|0|g' \
+      -e 's|@''GNULIB_ASINL''@|0|g' \
+      -e 's|@''GNULIB_ATANL''@|0|g' \
+      -e 's|@''GNULIB_CEIL''@|0|g' \
+      -e 's|@''GNULIB_CEILF''@|0|g' \
+      -e 's|@''GNULIB_CEILL''@|0|g' \
+      -e 's|@''GNULIB_COSL''@|0|g' \
+      -e 's|@''GNULIB_EXPL''@|0|g' \
+      -e 's|@''GNULIB_FLOOR''@|0|g' \
+      -e 's|@''GNULIB_FLOORF''@|0|g' \
+      -e 's|@''GNULIB_FLOORL''@|0|g' \
+      -e 's|@''GNULIB_FREXP''@|1|g' \
+      -e 's|@''GNULIB_FREXPL''@|1|g' \
+      -e 's|@''GNULIB_ISFINITE''@|0|g' \
+      -e 's|@''GNULIB_ISINF''@|0|g' \
+      -e 's|@''GNULIB_ISNAN''@|1|g' \
+      -e 's|@''GNULIB_ISNANF''@|1|g' \
+      -e 's|@''GNULIB_ISNAND''@|1|g' \
+      -e 's|@''GNULIB_ISNANL''@|1|g' \
+      -e 's|@''GNULIB_LDEXPL''@|1|g' \
+      -e 's|@''GNULIB_LOGB''@|0|g' \
+      -e 's|@''GNULIB_LOGL''@|0|g' \
+      -e 's|@''GNULIB_ROUND''@|0|g' \
+      -e 's|@''GNULIB_ROUNDF''@|0|g' \
+      -e 's|@''GNULIB_ROUNDL''@|0|g' \
+      -e 's|@''GNULIB_SIGNBIT''@|1|g' \
+      -e 's|@''GNULIB_SINL''@|0|g' \
+      -e 's|@''GNULIB_SQRTL''@|0|g' \
+      -e 's|@''GNULIB_TANL''@|0|g' \
+      -e 's|@''GNULIB_TRUNC''@|0|g' \
+      -e 's|@''GNULIB_TRUNCF''@|0|g' \
+      -e 's|@''GNULIB_TRUNCL''@|0|g' \
+      < ./math.in.h | \
+  sed -e 's|@''HAVE_ACOSL''@|1|g' \
+      -e 's|@''HAVE_ASINL''@|1|g' \
+      -e 's|@''HAVE_ATANL''@|1|g' \
+      -e 's|@''HAVE_COSL''@|1|g' \
+      -e 's|@''HAVE_EXPL''@|1|g' \
+      -e 's|@''HAVE_ISNANF''@|1|g' \
+      -e 's|@''HAVE_ISNAND''@|1|g' \
+      -e 's|@''HAVE_ISNANL''@|0|g' \
+      -e 's|@''HAVE_LOGL''@|1|g' \
+      -e 's|@''HAVE_SINL''@|1|g' \
+      -e 's|@''HAVE_SQRTL''@|1|g' \
+      -e 's|@''HAVE_TANL''@|1|g' \
+      -e 's|@''HAVE_DECL_ACOSL''@|1|g' \
+      -e 's|@''HAVE_DECL_ASINL''@|1|g' \
+      -e 's|@''HAVE_DECL_ATANL''@|1|g' \
+      -e 's|@''HAVE_DECL_CEILF''@|1|g' \
+      -e 's|@''HAVE_DECL_CEILL''@|1|g' \
+      -e 's|@''HAVE_DECL_COSL''@|1|g' \
+      -e 's|@''HAVE_DECL_EXPL''@|1|g' \
+      -e 's|@''HAVE_DECL_FLOORF''@|1|g' \
+      -e 's|@''HAVE_DECL_FLOORL''@|1|g' \
+      -e 's|@''HAVE_DECL_FREXPL''@|1|g' \
+      -e 's|@''HAVE_DECL_LDEXPL''@|1|g' \
+      -e 's|@''HAVE_DECL_LOGB''@|1|g' \
+      -e 's|@''HAVE_DECL_LOGL''@|1|g' \
+      -e 's|@''HAVE_DECL_ROUND''@|1|g' \
+      -e 's|@''HAVE_DECL_ROUNDF''@|1|g' \
+      -e 's|@''HAVE_DECL_ROUNDL''@|1|g' \
+      -e 's|@''HAVE_DECL_SINL''@|1|g' \
+      -e 's|@''HAVE_DECL_SQRTL''@|1|g' \
+      -e 's|@''HAVE_DECL_TANL''@|1|g' \
+      -e 's|@''HAVE_DECL_TRUNC''@|1|g' \
+      -e 's|@''HAVE_DECL_TRUNCF''@|1|g' \
+      -e 's|@''HAVE_DECL_TRUNCL''@|1|g' \
+  | \
+  sed -e 's|@''REPLACE_CEIL''@|0|g' \
+      -e 's|@''REPLACE_CEILF''@|0|g' \
+      -e 's|@''REPLACE_CEILL''@|0|g' \
+      -e 's|@''REPLACE_FLOOR''@|0|g' \
+      -e 's|@''REPLACE_FLOORF''@|0|g' \
+      -e 's|@''REPLACE_FLOORL''@|0|g' \
+      -e 's|@''REPLACE_FREXP''@|0|g' \
+      -e 's|@''REPLACE_FREXPL''@|0|g' \
+      -e 's|@''REPLACE_HUGE_VAL''@|0|g' \
+      -e 's|@''REPLACE_ISFINITE''@|0|g' \
+      -e 's|@''REPLACE_ISINF''@|0|g' \
+      -e 's|@''REPLACE_ISNAN''@|1|g' \
+      -e 's|@''REPLACE_LDEXPL''@|0|g' \
+      -e 's|@''REPLACE_NAN''@|0|g' \
+      -e 's|@''REPLACE_ROUND''@|0|g' \
+      -e 's|@''REPLACE_ROUNDF''@|0|g' \
+      -e 's|@''REPLACE_ROUNDL''@|0|g' \
+      -e 's|@''REPLACE_SIGNBIT''@|0|g' \
+      -e 's|@''REPLACE_SIGNBIT_USING_GCC''@|1|g' \
+      -e 's|@''REPLACE_TRUNC''@|0|g' \
+      -e 's|@''REPLACE_TRUNCF''@|0|g' \
+      -e 's|@''REPLACE_TRUNCL''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > math.h-t && \
+mv math.h-t math.h
+rm -f signal.h-t signal.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SIGNAL_H''@|<signal.h>|g' \
+      -e 's|@''GNULIB_SIGNAL_H_SIGPIPE''@|0|g' \
+      -e 's|@''GNULIB_SIGPROCMASK''@|1|g' \
+      -e 's|@''GNULIB_SIGACTION''@|1|g' \
+      -e 's|@''HAVE_POSIX_SIGNALBLOCKING''@|1|g' \
+      -e 's|@''HAVE_SIGSET_T''@|1|g' \
+      -e 's|@''HAVE_SIGINFO_T''@|1|g' \
+      -e 's|@''HAVE_SIGACTION''@|1|g' \
+      -e 's|@''HAVE_STRUCT_SIGACTION_SA_SIGACTION''@|1|g' \
+      -e 's|@''HAVE_TYPE_VOLATILE_SIG_ATOMIC_T''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./signal.in.h; \
+} > signal.h-t && \
+mv signal.h-t signal.h
+rm -f spawn.h-t spawn.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''HAVE_SPAWN_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SPAWN_H''@|<spawn.h>|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNP''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_INIT''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDCLOSE''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDDUP2''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDOPEN''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_DESTROY''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_INIT''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETFLAGS''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETFLAGS''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETPGROUP''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETPGROUP''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETSCHEDPARAM''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETSCHEDPARAM''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETSCHEDPOLICY''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETSCHEDPOLICY''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETSIGDEFAULT''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETSIGDEFAULT''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_GETSIGMASK''@|0|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_SETSIGMASK''@|1|g' \
+      -e 's|@''GNULIB_POSIX_SPAWNATTR_DESTROY''@|1|g' \
+      -e 's|@''HAVE_POSIX_SPAWN''@|1|g' \
+      -e 's|@''HAVE_POSIX_SPAWNATTR_T''@|1|g' \
+      -e 's|@''HAVE_POSIX_SPAWN_FILE_ACTIONS_T''@|1|g' \
+      -e 's|@''REPLACE_POSIX_SPAWN''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./spawn.in.h; \
+} > spawn.h-t && \
+mv spawn.h-t spawn.h
+rm -f stdio.h-t stdio.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STDIO_H''@|<stdio.h>|g' \
+      -e 's|@''GNULIB_DPRINTF''@|0|g' \
+      -e 's|@''GNULIB_FCLOSE''@|1|g' \
+      -e 's|@''GNULIB_FFLUSH''@|0|g' \
+      -e 's|@''GNULIB_FOPEN''@|1|g' \
+      -e 's|@''GNULIB_FPRINTF''@|1|g' \
+      -e 's|@''GNULIB_FPRINTF_POSIX''@|1|g' \
+      -e 's|@''GNULIB_FPURGE''@|0|g' \
+      -e 's|@''GNULIB_FPUTC''@|1|g' \
+      -e 's|@''GNULIB_FPUTS''@|1|g' \
+      -e 's|@''GNULIB_FREOPEN''@|0|g' \
+      -e 's|@''GNULIB_FSEEK''@|0|g' \
+      -e 's|@''GNULIB_FSEEKO''@|0|g' \
+      -e 's|@''GNULIB_FTELL''@|0|g' \
+      -e 's|@''GNULIB_FTELLO''@|0|g' \
+      -e 's|@''GNULIB_FWRITE''@|1|g' \
+      -e 's|@''GNULIB_GETDELIM''@|0|g' \
+      -e 's|@''GNULIB_GETLINE''@|0|g' \
+      -e 's|@''GNULIB_OBSTACK_PRINTF''@|0|g' \
+      -e 's|@''GNULIB_OBSTACK_PRINTF_POSIX''@|0|g' \
+      -e 's|@''GNULIB_PERROR''@|1|g' \
+      -e 's|@''GNULIB_POPEN''@|0|g' \
+      -e 's|@''GNULIB_PRINTF''@|1|g' \
+      -e 's|@''GNULIB_PRINTF_POSIX''@|1|g' \
+      -e 's|@''GNULIB_PUTC''@|1|g' \
+      -e 's|@''GNULIB_PUTCHAR''@|1|g' \
+      -e 's|@''GNULIB_PUTS''@|1|g' \
+      -e 's|@''GNULIB_REMOVE''@|0|g' \
+      -e 's|@''GNULIB_RENAME''@|0|g' \
+      -e 's|@''GNULIB_RENAMEAT''@|0|g' \
+      -e 's|@''GNULIB_SNPRINTF''@|1|g' \
+      -e 's|@''GNULIB_SPRINTF_POSIX''@|1|g' \
+      -e 's|@''GNULIB_STDIO_H_SIGPIPE''@|0|g' \
+      -e 's|@''GNULIB_TMPFILE''@|0|g' \
+      -e 's|@''GNULIB_VASPRINTF''@|0|g' \
+      -e 's|@''GNULIB_VDPRINTF''@|0|g' \
+      -e 's|@''GNULIB_VFPRINTF''@|1|g' \
+      -e 's|@''GNULIB_VFPRINTF_POSIX''@|1|g' \
+      -e 's|@''GNULIB_VPRINTF''@|1|g' \
+      -e 's|@''GNULIB_VPRINTF_POSIX''@|0|g' \
+      -e 's|@''GNULIB_VSNPRINTF''@|1|g' \
+      -e 's|@''GNULIB_VSPRINTF_POSIX''@|1|g' \
+      < ./stdio.in.h | \
+  sed -e 's|@''HAVE_DECL_FPURGE''@|1|g' \
+      -e 's|@''HAVE_DECL_FSEEKO''@|1|g' \
+      -e 's|@''HAVE_DECL_FTELLO''@|1|g' \
+      -e 's|@''HAVE_DECL_GETDELIM''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLINE''@|1|g' \
+      -e 's|@''HAVE_DECL_OBSTACK_PRINTF''@|1|g' \
+      -e 's|@''HAVE_DECL_SNPRINTF''@|1|g' \
+      -e 's|@''HAVE_DECL_VSNPRINTF''@|1|g' \
+      -e 's|@''HAVE_DPRINTF''@|1|g' \
+      -e 's|@''HAVE_FSEEKO''@|1|g' \
+      -e 's|@''HAVE_FTELLO''@|1|g' \
+      -e 's|@''HAVE_RENAMEAT''@|1|g' \
+      -e 's|@''HAVE_VASPRINTF''@|1|g' \
+      -e 's|@''HAVE_VDPRINTF''@|1|g' \
+      -e 's|@''REPLACE_DPRINTF''@|0|g' \
+      -e 's|@''REPLACE_FCLOSE''@|0|g' \
+      -e 's|@''REPLACE_FFLUSH''@|0|g' \
+      -e 's|@''REPLACE_FOPEN''@|0|g' \
+      -e 's|@''REPLACE_FPRINTF''@|1|g' \
+      -e 's|@''REPLACE_FPURGE''@|0|g' \
+      -e 's|@''REPLACE_FREOPEN''@|0|g' \
+      -e 's|@''REPLACE_FSEEK''@|0|g' \
+      -e 's|@''REPLACE_FSEEKO''@|0|g' \
+      -e 's|@''REPLACE_FTELL''@|0|g' \
+      -e 's|@''REPLACE_FTELLO''@|0|g' \
+      -e 's|@''REPLACE_GETDELIM''@|0|g' \
+      -e 's|@''REPLACE_GETLINE''@|0|g' \
+      -e 's|@''REPLACE_OBSTACK_PRINTF''@|0|g' \
+      -e 's|@''REPLACE_PERROR''@|0|g' \
+      -e 's|@''REPLACE_POPEN''@|0|g' \
+      -e 's|@''REPLACE_PRINTF''@|1|g' \
+      -e 's|@''REPLACE_REMOVE''@|0|g' \
+      -e 's|@''REPLACE_RENAME''@|0|g' \
+      -e 's|@''REPLACE_RENAMEAT''@|0|g' \
+      -e 's|@''REPLACE_SNPRINTF''@|1|g' \
+      -e 's|@''REPLACE_SPRINTF''@|1|g' \
+      -e 's|@''REPLACE_STDIO_WRITE_FUNCS''@|0|g' \
+      -e 's|@''REPLACE_TMPFILE''@|0|g' \
+      -e 's|@''REPLACE_VASPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VDPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VFPRINTF''@|1|g' \
+      -e 's|@''REPLACE_VPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VSNPRINTF''@|1|g' \
+      -e 's|@''REPLACE_VSPRINTF''@|1|g' \
+      -e 's|@''ASM_SYMBOL_PREFIX''@|""|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > stdio.h-t && \
+mv stdio.h-t stdio.h
+rm -f stdlib.h-t stdlib.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STDLIB_H''@|<stdlib.h>|g' \
+      -e 's|@''GNULIB__EXIT''@|0|g' \
+      -e 's|@''GNULIB_ATOLL''@|0|g' \
+      -e 's|@''GNULIB_CALLOC_POSIX''@|1|g' \
+      -e 's|@''GNULIB_CANONICALIZE_FILE_NAME''@|0|g' \
+      -e 's|@''GNULIB_GETLOADAVG''@|0|g' \
+      -e 's|@''GNULIB_GETSUBOPT''@|0|g' \
+      -e 's|@''GNULIB_GRANTPT''@|0|g' \
+      -e 's|@''GNULIB_MALLOC_POSIX''@|1|g' \
+      -e 's|@''GNULIB_MBTOWC''@|0|g' \
+      -e 's|@''GNULIB_MKDTEMP''@|0|g' \
+      -e 's|@''GNULIB_MKOSTEMP''@|0|g' \
+      -e 's|@''GNULIB_MKOSTEMPS''@|0|g' \
+      -e 's|@''GNULIB_MKSTEMP''@|0|g' \
+      -e 's|@''GNULIB_MKSTEMPS''@|0|g' \
+      -e 's|@''GNULIB_PTSNAME''@|0|g' \
+      -e 's|@''GNULIB_PUTENV''@|0|g' \
+      -e 's|@''GNULIB_RANDOM_R''@|0|g' \
+      -e 's|@''GNULIB_REALLOC_POSIX''@|1|g' \
+      -e 's|@''GNULIB_REALPATH''@|0|g' \
+      -e 's|@''GNULIB_RPMATCH''@|0|g' \
+      -e 's|@''GNULIB_SETENV''@|0|g' \
+      -e 's|@''GNULIB_STRTOD''@|0|g' \
+      -e 's|@''GNULIB_STRTOLL''@|0|g' \
+      -e 's|@''GNULIB_STRTOULL''@|0|g' \
+      -e 's|@''GNULIB_SYSTEM_POSIX''@|0|g' \
+      -e 's|@''GNULIB_UNLOCKPT''@|0|g' \
+      -e 's|@''GNULIB_UNSETENV''@|1|g' \
+      -e 's|@''GNULIB_WCTOMB''@|0|g' \
+      < ./stdlib.in.h | \
+  sed -e 's|@''HAVE__EXIT''@|1|g' \
+      -e 's|@''HAVE_ATOLL''@|1|g' \
+      -e 's|@''HAVE_CANONICALIZE_FILE_NAME''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLOADAVG''@|1|g' \
+      -e 's|@''HAVE_GETSUBOPT''@|1|g' \
+      -e 's|@''HAVE_GRANTPT''@|1|g' \
+      -e 's|@''HAVE_MKDTEMP''@|1|g' \
+      -e 's|@''HAVE_MKOSTEMP''@|1|g' \
+      -e 's|@''HAVE_MKOSTEMPS''@|1|g' \
+      -e 's|@''HAVE_MKSTEMP''@|1|g' \
+      -e 's|@''HAVE_MKSTEMPS''@|1|g' \
+      -e 's|@''HAVE_PTSNAME''@|1|g' \
+      -e 's|@''HAVE_RANDOM_H''@|1|g' \
+      -e 's|@''HAVE_RANDOM_R''@|1|g' \
+      -e 's|@''HAVE_REALPATH''@|1|g' \
+      -e 's|@''HAVE_RPMATCH''@|1|g' \
+      -e 's|@''HAVE_DECL_SETENV''@|1|g' \
+      -e 's|@''HAVE_STRTOD''@|1|g' \
+      -e 's|@''HAVE_STRTOLL''@|1|g' \
+      -e 's|@''HAVE_STRTOULL''@|1|g' \
+      -e 's|@''HAVE_STRUCT_RANDOM_DATA''@|1|g' \
+      -e 's|@''HAVE_SYS_LOADAVG_H''@|0|g' \
+      -e 's|@''HAVE_UNLOCKPT''@|1|g' \
+      -e 's|@''HAVE_DECL_UNSETENV''@|1|g' \
+      -e 's|@''REPLACE_CALLOC''@|0|g' \
+      -e 's|@''REPLACE_CANONICALIZE_FILE_NAME''@|0|g' \
+      -e 's|@''REPLACE_MALLOC''@|0|g' \
+      -e 's|@''REPLACE_MBTOWC''@|0|g' \
+      -e 's|@''REPLACE_MKSTEMP''@|0|g' \
+      -e 's|@''REPLACE_PUTENV''@|0|g' \
+      -e 's|@''REPLACE_REALLOC''@|0|g' \
+      -e 's|@''REPLACE_REALPATH''@|0|g' \
+      -e 's|@''REPLACE_SETENV''@|0|g' \
+      -e 's|@''REPLACE_STRTOD''@|0|g' \
+      -e 's|@''REPLACE_UNSETENV''@|0|g' \
+      -e 's|@''REPLACE_WCTOMB''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > stdlib.h-t && \
+mv stdlib.h-t stdlib.h
+rm -f string.h-t string.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STRING_H''@|<string.h>|g' \
+      -e 's|@''GNULIB_MBSLEN''@|0|g' \
+      -e 's|@''GNULIB_MBSNLEN''@|0|g' \
+      -e 's|@''GNULIB_MBSCHR''@|1|g' \
+      -e 's|@''GNULIB_MBSRCHR''@|1|g' \
+      -e 's|@''GNULIB_MBSSTR''@|0|g' \
+      -e 's|@''GNULIB_MBSCASECMP''@|0|g' \
+      -e 's|@''GNULIB_MBSNCASECMP''@|0|g' \
+      -e 's|@''GNULIB_MBSPCASECMP''@|0|g' \
+      -e 's|@''GNULIB_MBSCASESTR''@|0|g' \
+      -e 's|@''GNULIB_MBSCSPN''@|0|g' \
+      -e 's|@''GNULIB_MBSPBRK''@|0|g' \
+      -e 's|@''GNULIB_MBSSPN''@|0|g' \
+      -e 's|@''GNULIB_MBSSEP''@|0|g' \
+      -e 's|@''GNULIB_MBSTOK_R''@|0|g' \
+      -e 's|@''GNULIB_MEMCHR''@|1|g' \
+      -e 's|@''GNULIB_MEMMEM''@|0|g' \
+      -e 's|@''GNULIB_MEMPCPY''@|0|g' \
+      -e 's|@''GNULIB_MEMRCHR''@|0|g' \
+      -e 's|@''GNULIB_RAWMEMCHR''@|1|g' \
+      -e 's|@''GNULIB_STPCPY''@|1|g' \
+      -e 's|@''GNULIB_STPNCPY''@|0|g' \
+      -e 's|@''GNULIB_STRCHRNUL''@|1|g' \
+      -e 's|@''GNULIB_STRDUP''@|1|g' \
+      -e 's|@''GNULIB_STRNCAT''@|0|g' \
+      -e 's|@''GNULIB_STRNDUP''@|1|g' \
+      -e 's|@''GNULIB_STRNLEN''@|1|g' \
+      -e 's|@''GNULIB_STRPBRK''@|0|g' \
+      -e 's|@''GNULIB_STRSEP''@|0|g' \
+      -e 's|@''GNULIB_STRSTR''@|0|g' \
+      -e 's|@''GNULIB_STRCASESTR''@|0|g' \
+      -e 's|@''GNULIB_STRTOK_R''@|0|g' \
+      -e 's|@''GNULIB_STRERROR''@|1|g' \
+      -e 's|@''GNULIB_STRERROR_R''@|0|g' \
+      -e 's|@''GNULIB_STRSIGNAL''@|0|g' \
+      -e 's|@''GNULIB_STRVERSCMP''@|1|g' \
+      < ./string.in.h | \
+  sed -e 's|@''HAVE_MBSLEN''@|0|g' \
+      -e 's|@''HAVE_MEMCHR''@|1|g' \
+      -e 's|@''HAVE_DECL_MEMMEM''@|1|g' \
+      -e 's|@''HAVE_MEMPCPY''@|1|g' \
+      -e 's|@''HAVE_DECL_MEMRCHR''@|1|g' \
+      -e 's|@''HAVE_RAWMEMCHR''@|1|g' \
+      -e 's|@''HAVE_STPCPY''@|1|g' \
+      -e 's|@''HAVE_STPNCPY''@|1|g' \
+      -e 's|@''HAVE_STRCHRNUL''@|1|g' \
+      -e 's|@''HAVE_DECL_STRDUP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNDUP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNLEN''@|1|g' \
+      -e 's|@''HAVE_STRPBRK''@|1|g' \
+      -e 's|@''HAVE_STRSEP''@|1|g' \
+      -e 's|@''HAVE_STRCASESTR''@|1|g' \
+      -e 's|@''HAVE_DECL_STRTOK_R''@|1|g' \
+      -e 's|@''HAVE_DECL_STRERROR_R''@|1|g' \
+      -e 's|@''HAVE_DECL_STRSIGNAL''@|1|g' \
+      -e 's|@''HAVE_STRVERSCMP''@|1|g' \
+      -e 's|@''REPLACE_STPNCPY''@|0|g' \
+      -e 's|@''REPLACE_MEMCHR''@|0|g' \
+      -e 's|@''REPLACE_MEMMEM''@|0|g' \
+      -e 's|@''REPLACE_STRCASESTR''@|0|g' \
+      -e 's|@''REPLACE_STRDUP''@|0|g' \
+      -e 's|@''REPLACE_STRSTR''@|0|g' \
+      -e 's|@''REPLACE_STRERROR''@|0|g' \
+      -e 's|@''REPLACE_STRERROR_R''@|0|g' \
+      -e 's|@''REPLACE_STRNCAT''@|0|g' \
+      -e 's|@''REPLACE_STRNDUP''@|0|g' \
+      -e 's|@''REPLACE_STRNLEN''@|0|g' \
+      -e 's|@''REPLACE_STRSIGNAL''@|0|g' \
+      -e 's|@''REPLACE_STRTOK_R''@|0|g' \
+      -e 's|@''UNDEFINE_STRTOK_R''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+      < ./string.in.h; \
+} > string.h-t && \
+mv string.h-t string.h
+/bin/mkdir -p sys
+rm -f sys/ioctl.h-t sys/ioctl.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''HAVE_SYS_IOCTL_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_IOCTL_H''@|<sys/ioctl.h>|g' \
+      -e 's|@''GNULIB_IOCTL''@|1|g' \
+      -e 's|@''SYS_IOCTL_H_HAVE_WINSOCK2_H''@|0|g' \
+      -e 's|@''SYS_IOCTL_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS''@|0|g' \
+      -e 's|@''REPLACE_IOCTL''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_ioctl.in.h; \
+} > sys/ioctl.h-t && \
+mv sys/ioctl.h-t sys/ioctl.h
+/bin/mkdir -p sys
+rm -f sys/socket.h-t sys/socket.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_SOCKET_H''@|<sys/socket.h>|g' \
+      -e 's|@''HAVE_SYS_SOCKET_H''@|1|g' \
+      -e 's|@''GNULIB_CLOSE''@|1|g' \
+      -e 's|@''GNULIB_SOCKET''@|0|g' \
+      -e 's|@''GNULIB_CONNECT''@|0|g' \
+      -e 's|@''GNULIB_ACCEPT''@|0|g' \
+      -e 's|@''GNULIB_BIND''@|0|g' \
+      -e 's|@''GNULIB_GETPEERNAME''@|0|g' \
+      -e 's|@''GNULIB_GETSOCKNAME''@|0|g' \
+      -e 's|@''GNULIB_GETSOCKOPT''@|0|g' \
+      -e 's|@''GNULIB_LISTEN''@|0|g' \
+      -e 's|@''GNULIB_RECV''@|0|g' \
+      -e 's|@''GNULIB_SEND''@|0|g' \
+      -e 's|@''GNULIB_RECVFROM''@|0|g' \
+      -e 's|@''GNULIB_SENDTO''@|0|g' \
+      -e 's|@''GNULIB_SETSOCKOPT''@|0|g' \
+      -e 's|@''GNULIB_SHUTDOWN''@|0|g' \
+      -e 's|@''GNULIB_ACCEPT4''@|0|g' \
+      -e 's|@''HAVE_WINSOCK2_H''@|0|g' \
+      -e 's|@''HAVE_WS2TCPIP_H''@|0|g' \
+      -e 's|@''HAVE_STRUCT_SOCKADDR_STORAGE''@|1|g' \
+      -e 's|@''HAVE_STRUCT_SOCKADDR_STORAGE_SS_FAMILY''@|1|g' \
+      -e 's|@''HAVE_SA_FAMILY_T''@|1|g' \
+      -e 's|@''HAVE_ACCEPT4''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_socket.in.h; \
+} > sys/socket.h-t && \
+mv -f sys/socket.h-t sys/socket.h
+/bin/mkdir -p sys
+/bin/mkdir -p sys
+rm -f sys/stat.h-t sys/stat.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_STAT_H''@|<sys/stat.h>|g' \
+      -e 's|@''GNULIB_FCHMODAT''@|0|g' \
+      -e 's|@''GNULIB_FSTATAT''@|0|g' \
+      -e 's|@''GNULIB_FUTIMENS''@|0|g' \
+      -e 's|@''GNULIB_LCHMOD''@|0|g' \
+      -e 's|@''GNULIB_LSTAT''@|0|g' \
+      -e 's|@''GNULIB_MKDIRAT''@|0|g' \
+      -e 's|@''GNULIB_MKFIFO''@|0|g' \
+      -e 's|@''GNULIB_MKFIFOAT''@|0|g' \
+      -e 's|@''GNULIB_MKNOD''@|0|g' \
+      -e 's|@''GNULIB_MKNODAT''@|0|g' \
+      -e 's|@''GNULIB_STAT''@|1|g' \
+      -e 's|@''GNULIB_UTIMENSAT''@|0|g' \
+      -e 's|@''HAVE_FCHMODAT''@|1|g' \
+      -e 's|@''HAVE_FSTATAT''@|1|g' \
+      -e 's|@''HAVE_FUTIMENS''@|1|g' \
+      -e 's|@''HAVE_LCHMOD''@|1|g' \
+      -e 's|@''HAVE_LSTAT''@|1|g' \
+      -e 's|@''HAVE_MKDIRAT''@|1|g' \
+      -e 's|@''HAVE_MKFIFO''@|1|g' \
+      -e 's|@''HAVE_MKFIFOAT''@|1|g' \
+      -e 's|@''HAVE_MKNOD''@|1|g' \
+      -e 's|@''HAVE_MKNODAT''@|1|g' \
+      -e 's|@''HAVE_UTIMENSAT''@|1|g' \
+      -e 's|@''REPLACE_FSTAT''@|0|g' \
+      -e 's|@''REPLACE_FSTATAT''@|0|g' \
+      -e 's|@''REPLACE_FUTIMENS''@|0|g' \
+      -e 's|@''REPLACE_LSTAT''@|0|g' \
+      -e 's|@''REPLACE_MKDIR''@|0|g' \
+      -e 's|@''REPLACE_MKFIFO''@|0|g' \
+      -e 's|@''REPLACE_MKNOD''@|0|g' \
+      -e 's|@''REPLACE_STAT''@|0|g' \
+      -e 's|@''REPLACE_UTIMENSAT''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_stat.in.h; \
+} > sys/stat.h-t && \
+mv sys/stat.h-t sys/stat.h
+rm -f sys/wait.h-t sys/wait.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_WAIT_H''@|<sys/wait.h>|g' \
+      -e 's|@''GNULIB_WAITPID''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_wait.in.h; \
+} > sys/wait.h-t && \
+mv sys/wait.h-t sys/wait.h
+rm -f time.h-t time.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_TIME_H''@|<time.h>|g' \
+      -e 's|@''GNULIB_MKTIME''@|0|g' \
+      -e 's|@''GNULIB_NANOSLEEP''@|0|g' \
+      -e 's|@''GNULIB_STRPTIME''@|0|g' \
+      -e 's|@''GNULIB_TIMEGM''@|0|g' \
+      -e 's|@''GNULIB_TIME_R''@|0|g' \
+      -e 's|@''HAVE_DECL_LOCALTIME_R''@|1|g' \
+      -e 's|@''HAVE_NANOSLEEP''@|1|g' \
+      -e 's|@''HAVE_STRPTIME''@|1|g' \
+      -e 's|@''HAVE_TIMEGM''@|1|g' \
+      -e 's|@''REPLACE_LOCALTIME_R''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_MKTIME''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_NANOSLEEP''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_TIMEGM''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''PTHREAD_H_DEFINES_STRUCT_TIMESPEC''@|0|g' \
+      -e 's|@''SYS_TIME_H_DEFINES_STRUCT_TIMESPEC''@|0|g' \
+      -e 's|@''TIME_H_DEFINES_STRUCT_TIMESPEC''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./time.in.h; \
+} > time.h-t && \
+mv time.h-t time.h
+rm -f unistd.h-t unistd.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''HAVE_UNISTD_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_UNISTD_H''@|<unistd.h>|g' \
+      -e 's|@''GNULIB_CHOWN''@|0|g' \
+      -e 's|@''GNULIB_CLOSE''@|1|g' \
+      -e 's|@''GNULIB_DUP2''@|1|g' \
+      -e 's|@''GNULIB_DUP3''@|0|g' \
+      -e 's|@''GNULIB_ENVIRON''@|1|g' \
+      -e 's|@''GNULIB_EUIDACCESS''@|0|g' \
+      -e 's|@''GNULIB_FACCESSAT''@|0|g' \
+      -e 's|@''GNULIB_FCHDIR''@|0|g' \
+      -e 's|@''GNULIB_FCHOWNAT''@|0|g' \
+      -e 's|@''GNULIB_FSYNC''@|0|g' \
+      -e 's|@''GNULIB_FTRUNCATE''@|0|g' \
+      -e 's|@''GNULIB_GETCWD''@|0|g' \
+      -e 's|@''GNULIB_GETDOMAINNAME''@|0|g' \
+      -e 's|@''GNULIB_GETDTABLESIZE''@|1|g' \
+      -e 's|@''GNULIB_GETGROUPS''@|0|g' \
+      -e 's|@''GNULIB_GETHOSTNAME''@|0|g' \
+      -e 's|@''GNULIB_GETLOGIN''@|0|g' \
+      -e 's|@''GNULIB_GETLOGIN_R''@|0|g' \
+      -e 's|@''GNULIB_GETPAGESIZE''@|0|g' \
+      -e 's|@''GNULIB_GETUSERSHELL''@|0|g' \
+      -e 's|@''GNULIB_LCHOWN''@|0|g' \
+      -e 's|@''GNULIB_LINK''@|0|g' \
+      -e 's|@''GNULIB_LINKAT''@|0|g' \
+      -e 's|@''GNULIB_LSEEK''@|0|g' \
+      -e 's|@''GNULIB_PIPE''@|1|g' \
+      -e 's|@''GNULIB_PIPE2''@|1|g' \
+      -e 's|@''GNULIB_PREAD''@|0|g' \
+      -e 's|@''GNULIB_PWRITE''@|0|g' \
+      -e 's|@''GNULIB_READLINK''@|0|g' \
+      -e 's|@''GNULIB_READLINKAT''@|0|g' \
+      -e 's|@''GNULIB_RMDIR''@|0|g' \
+      -e 's|@''GNULIB_SLEEP''@|0|g' \
+      -e 's|@''GNULIB_SYMLINK''@|0|g' \
+      -e 's|@''GNULIB_SYMLINKAT''@|0|g' \
+      -e 's|@''GNULIB_TTYNAME_R''@|0|g' \
+      -e 's|@''GNULIB_UNISTD_H_GETOPT''@|0|g' \
+      -e 's|@''GNULIB_UNISTD_H_SIGPIPE''@|0|g' \
+      -e 's|@''GNULIB_UNLINK''@|0|g' \
+      -e 's|@''GNULIB_UNLINKAT''@|0|g' \
+      -e 's|@''GNULIB_USLEEP''@|0|g' \
+      -e 's|@''GNULIB_WRITE''@|0|g' \
+      < ./unistd.in.h | \
+  sed -e 's|@''HAVE_CHOWN''@|1|g' \
+      -e 's|@''HAVE_DUP2''@|1|g' \
+      -e 's|@''HAVE_DUP3''@|1|g' \
+      -e 's|@''HAVE_EUIDACCESS''@|1|g' \
+      -e 's|@''HAVE_FACCESSAT''@|1|g' \
+      -e 's|@''HAVE_FCHDIR''@|1|g' \
+      -e 's|@''HAVE_FCHOWNAT''@|1|g' \
+      -e 's|@''HAVE_FSYNC''@|1|g' \
+      -e 's|@''HAVE_FTRUNCATE''@|1|g' \
+      -e 's|@''HAVE_GETDTABLESIZE''@|1|g' \
+      -e 's|@''HAVE_GETGROUPS''@|1|g' \
+      -e 's|@''HAVE_GETHOSTNAME''@|1|g' \
+      -e 's|@''HAVE_GETLOGIN''@|1|g' \
+      -e 's|@''HAVE_GETPAGESIZE''@|1|g' \
+      -e 's|@''HAVE_LCHOWN''@|1|g' \
+      -e 's|@''HAVE_LINK''@|1|g' \
+      -e 's|@''HAVE_LINKAT''@|1|g' \
+      -e 's|@''HAVE_PIPE''@|1|g' \
+      -e 's|@''HAVE_PIPE2''@|1|g' \
+      -e 's|@''HAVE_PREAD''@|1|g' \
+      -e 's|@''HAVE_PWRITE''@|1|g' \
+      -e 's|@''HAVE_READLINK''@|1|g' \
+      -e 's|@''HAVE_READLINKAT''@|1|g' \
+      -e 's|@''HAVE_SLEEP''@|1|g' \
+      -e 's|@''HAVE_SYMLINK''@|1|g' \
+      -e 's|@''HAVE_SYMLINKAT''@|1|g' \
+      -e 's|@''HAVE_UNLINKAT''@|1|g' \
+      -e 's|@''HAVE_USLEEP''@|1|g' \
+      -e 's|@''HAVE_DECL_ENVIRON''@|1|g' \
+      -e 's|@''HAVE_DECL_FCHDIR''@|1|g' \
+      -e 's|@''HAVE_DECL_GETDOMAINNAME''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLOGIN_R''@|1|g' \
+      -e 's|@''HAVE_DECL_GETPAGESIZE''@|1|g' \
+      -e 's|@''HAVE_DECL_GETUSERSHELL''@|1|g' \
+      -e 's|@''HAVE_DECL_TTYNAME_R''@|1|g' \
+      -e 's|@''HAVE_OS_H''@|0|g' \
+      -e 's|@''HAVE_SYS_PARAM_H''@|0|g' \
+  | \
+  sed -e 's|@''REPLACE_CHOWN''@|0|g' \
+      -e 's|@''REPLACE_CLOSE''@|0|g' \
+      -e 's|@''REPLACE_DUP''@|0|g' \
+      -e 's|@''REPLACE_DUP2''@|0|g' \
+      -e 's|@''REPLACE_FCHOWNAT''@|0|g' \
+      -e 's|@''REPLACE_GETCWD''@|0|g' \
+      -e 's|@''REPLACE_GETDOMAINNAME''@|0|g' \
+      -e 's|@''REPLACE_GETLOGIN_R''@|0|g' \
+      -e 's|@''REPLACE_GETGROUPS''@|0|g' \
+      -e 's|@''REPLACE_GETPAGESIZE''@|0|g' \
+      -e 's|@''REPLACE_LCHOWN''@|0|g' \
+      -e 's|@''REPLACE_LINK''@|0|g' \
+      -e 's|@''REPLACE_LINKAT''@|0|g' \
+      -e 's|@''REPLACE_LSEEK''@|0|g' \
+      -e 's|@''REPLACE_PREAD''@|0|g' \
+      -e 's|@''REPLACE_PWRITE''@|0|g' \
+      -e 's|@''REPLACE_READLINK''@|0|g' \
+      -e 's|@''REPLACE_RMDIR''@|0|g' \
+      -e 's|@''REPLACE_SLEEP''@|0|g' \
+      -e 's|@''REPLACE_SYMLINK''@|0|g' \
+      -e 's|@''REPLACE_TTYNAME_R''@|0|g' \
+      -e 's|@''REPLACE_UNLINK''@|0|g' \
+      -e 's|@''REPLACE_UNLINKAT''@|0|g' \
+      -e 's|@''REPLACE_USLEEP''@|0|g' \
+      -e 's|@''REPLACE_WRITE''@|0|g' \
+      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H''@|0|g' \
+      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > unistd.h-t && \
+mv unistd.h-t unistd.h
+rm -f wchar.h-t wchar.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''HAVE_FEATURES_H''@|1|g' \
+      -e 's|@''NEXT_WCHAR_H''@|<wchar.h>|g' \
+      -e 's|@''HAVE_WCHAR_H''@|1|g' \
+      -e 's|@''GNULIB_BTOWC''@|0|g' \
+      -e 's|@''GNULIB_WCTOB''@|0|g' \
+      -e 's|@''GNULIB_MBSINIT''@|1|g' \
+      -e 's|@''GNULIB_MBRTOWC''@|1|g' \
+      -e 's|@''GNULIB_MBRLEN''@|0|g' \
+      -e 's|@''GNULIB_MBSRTOWCS''@|0|g' \
+      -e 's|@''GNULIB_MBSNRTOWCS''@|0|g' \
+      -e 's|@''GNULIB_WCRTOMB''@|0|g' \
+      -e 's|@''GNULIB_WCSRTOMBS''@|0|g' \
+      -e 's|@''GNULIB_WCSNRTOMBS''@|0|g' \
+      -e 's|@''GNULIB_WCWIDTH''@|1|g' \
+      -e 's|@''GNULIB_WMEMCHR''@|0|g' \
+      -e 's|@''GNULIB_WMEMCMP''@|0|g' \
+      -e 's|@''GNULIB_WMEMCPY''@|0|g' \
+      -e 's|@''GNULIB_WMEMMOVE''@|0|g' \
+      -e 's|@''GNULIB_WMEMSET''@|0|g' \
+      -e 's|@''GNULIB_WCSLEN''@|0|g' \
+      -e 's|@''GNULIB_WCSNLEN''@|0|g' \
+      -e 's|@''GNULIB_WCSCPY''@|0|g' \
+      -e 's|@''GNULIB_WCPCPY''@|0|g' \
+      -e 's|@''GNULIB_WCSNCPY''@|0|g' \
+      -e 's|@''GNULIB_WCPNCPY''@|0|g' \
+      -e 's|@''GNULIB_WCSCAT''@|0|g' \
+      -e 's|@''GNULIB_WCSNCAT''@|0|g' \
+      -e 's|@''GNULIB_WCSCMP''@|0|g' \
+      -e 's|@''GNULIB_WCSNCMP''@|0|g' \
+      -e 's|@''GNULIB_WCSCASECMP''@|0|g' \
+      -e 's|@''GNULIB_WCSNCASECMP''@|0|g' \
+      -e 's|@''GNULIB_WCSCOLL''@|0|g' \
+      -e 's|@''GNULIB_WCSXFRM''@|0|g' \
+      -e 's|@''GNULIB_WCSDUP''@|0|g' \
+      -e 's|@''GNULIB_WCSCHR''@|0|g' \
+      -e 's|@''GNULIB_WCSRCHR''@|0|g' \
+      -e 's|@''GNULIB_WCSCSPN''@|0|g' \
+      -e 's|@''GNULIB_WCSSPN''@|0|g' \
+      -e 's|@''GNULIB_WCSPBRK''@|0|g' \
+      -e 's|@''GNULIB_WCSSTR''@|0|g' \
+      -e 's|@''GNULIB_WCSTOK''@|0|g' \
+      -e 's|@''GNULIB_WCSWIDTH''@|0|g' \
+      < ./wchar.in.h | \
+  sed -e 's|@''HAVE_WINT_T''@|1|g' \
+      -e 's|@''HAVE_BTOWC''@|1|g' \
+      -e 's|@''HAVE_MBSINIT''@|1|g' \
+      -e 's|@''HAVE_MBRTOWC''@|1|g' \
+      -e 's|@''HAVE_MBRLEN''@|1|g' \
+      -e 's|@''HAVE_MBSRTOWCS''@|1|g' \
+      -e 's|@''HAVE_MBSNRTOWCS''@|1|g' \
+      -e 's|@''HAVE_WCRTOMB''@|1|g' \
+      -e 's|@''HAVE_WCSRTOMBS''@|1|g' \
+      -e 's|@''HAVE_WCSNRTOMBS''@|1|g' \
+      -e 's|@''HAVE_WMEMCHR''@|1|g' \
+      -e 's|@''HAVE_WMEMCMP''@|1|g' \
+      -e 's|@''HAVE_WMEMCPY''@|1|g' \
+      -e 's|@''HAVE_WMEMMOVE''@|1|g' \
+      -e 's|@''HAVE_WMEMSET''@|1|g' \
+      -e 's|@''HAVE_WCSLEN''@|1|g' \
+      -e 's|@''HAVE_WCSNLEN''@|1|g' \
+      -e 's|@''HAVE_WCSCPY''@|1|g' \
+      -e 's|@''HAVE_WCPCPY''@|1|g' \
+      -e 's|@''HAVE_WCSNCPY''@|1|g' \
+      -e 's|@''HAVE_WCPNCPY''@|1|g' \
+      -e 's|@''HAVE_WCSCAT''@|1|g' \
+      -e 's|@''HAVE_WCSNCAT''@|1|g' \
+      -e 's|@''HAVE_WCSCMP''@|1|g' \
+      -e 's|@''HAVE_WCSNCMP''@|1|g' \
+      -e 's|@''HAVE_WCSCASECMP''@|1|g' \
+      -e 's|@''HAVE_WCSNCASECMP''@|1|g' \
+      -e 's|@''HAVE_WCSCOLL''@|1|g' \
+      -e 's|@''HAVE_WCSXFRM''@|1|g' \
+      -e 's|@''HAVE_WCSDUP''@|1|g' \
+      -e 's|@''HAVE_WCSCHR''@|1|g' \
+      -e 's|@''HAVE_WCSRCHR''@|1|g' \
+      -e 's|@''HAVE_WCSCSPN''@|1|g' \
+      -e 's|@''HAVE_WCSSPN''@|1|g' \
+      -e 's|@''HAVE_WCSPBRK''@|1|g' \
+      -e 's|@''HAVE_WCSSTR''@|1|g' \
+      -e 's|@''HAVE_WCSTOK''@|1|g' \
+      -e 's|@''HAVE_WCSWIDTH''@|1|g' \
+      -e 's|@''HAVE_DECL_WCTOB''@|1|g' \
+      -e 's|@''HAVE_DECL_WCWIDTH''@|1|g' \
+  | \
+  sed -e 's|@''REPLACE_MBSTATE_T''@|0|g' \
+      -e 's|@''REPLACE_BTOWC''@|0|g' \
+      -e 's|@''REPLACE_WCTOB''@|0|g' \
+      -e 's|@''REPLACE_MBSINIT''@|0|g' \
+      -e 's|@''REPLACE_MBRTOWC''@|0|g' \
+      -e 's|@''REPLACE_MBRLEN''@|0|g' \
+      -e 's|@''REPLACE_MBSRTOWCS''@|0|g' \
+      -e 's|@''REPLACE_MBSNRTOWCS''@|0|g' \
+      -e 's|@''REPLACE_WCRTOMB''@|0|g' \
+      -e 's|@''REPLACE_WCSRTOMBS''@|0|g' \
+      -e 's|@''REPLACE_WCSNRTOMBS''@|0|g' \
+      -e 's|@''REPLACE_WCWIDTH''@|0|g' \
+      -e 's|@''REPLACE_WCSWIDTH''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > wchar.h-t && \
+mv wchar.h-t wchar.h
+rm -f wctype.h-t wctype.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's/@''HAVE_WCTYPE_H''@/1/g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_WCTYPE_H''@|<wctype.h>|g' \
+      -e 's/@''GNULIB_ISWBLANK''@/1/g' \
+      -e 's/@''GNULIB_WCTYPE''@/0/g' \
+      -e 's/@''GNULIB_ISWCTYPE''@/0/g' \
+      -e 's/@''GNULIB_WCTRANS''@/0/g' \
+      -e 's/@''GNULIB_TOWCTRANS''@/0/g' \
+      -e 's/@''HAVE_ISWBLANK''@/1/g' \
+      -e 's/@''HAVE_ISWCNTRL''@/1/g' \
+      -e 's/@''HAVE_WCTYPE_T''@/1/g' \
+      -e 's/@''HAVE_WCTRANS_T''@/1/g' \
+      -e 's/@''HAVE_WINT_T''@/1/g' \
+      -e 's/@''REPLACE_ISWBLANK''@/0/g' \
+      -e 's/@''REPLACE_ISWCNTRL''@/0/g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./wctype.in.h; \
+} > wctype.h-t && \
+mv wctype.h-t wctype.h
+make  all-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+depbase=`echo main.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT main.o -MD -MP -MF $depbase.Tpo -c -o main.o main.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo yyerror.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT yyerror.o -MD -MP -MF $depbase.Tpo -c -o yyerror.o yyerror.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo c-ctype.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT c-ctype.o -MD -MP -MF $depbase.Tpo -c -o c-ctype.o c-ctype.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo c-strcasecmp.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT c-strcasecmp.o -MD -MP -MF $depbase.Tpo -c -o c-strcasecmp.o c-strcasecmp.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo c-strncasecmp.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT c-strncasecmp.o -MD -MP -MF $depbase.Tpo -c -o c-strncasecmp.o c-strncasecmp.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo close-hook.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT close-hook.o -MD -MP -MF $depbase.Tpo -c -o close-hook.o close-hook.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo exitfail.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT exitfail.o -MD -MP -MF $depbase.Tpo -c -o exitfail.o exitfail.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fatal-signal.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT fatal-signal.o -MD -MP -MF $depbase.Tpo -c -o fatal-signal.o fatal-signal.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fd-safer-flag.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT fd-safer-flag.o -MD -MP -MF $depbase.Tpo -c -o fd-safer-flag.o fd-safer-flag.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo dup-safer-flag.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT dup-safer-flag.o -MD -MP -MF $depbase.Tpo -c -o dup-safer-flag.o dup-safer-flag.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fseterr.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT fseterr.o -MD -MP -MF $depbase.Tpo -c -o fseterr.o fseterr.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo localcharset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT localcharset.o -MD -MP -MF $depbase.Tpo -c -o localcharset.o localcharset.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbchar.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT mbchar.o -MD -MP -MF $depbase.Tpo -c -o mbchar.o mbchar.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbschr.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT mbschr.o -MD -MP -MF $depbase.Tpo -c -o mbschr.o mbschr.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbsrchr.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT mbsrchr.o -MD -MP -MF $depbase.Tpo -c -o mbsrchr.o mbsrchr.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbswidth.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT mbswidth.o -MD -MP -MF $depbase.Tpo -c -o mbswidth.o mbswidth.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo nonblocking.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT nonblocking.o -MD -MP -MF $depbase.Tpo -c -o nonblocking.o nonblocking.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo pipe2.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT pipe2.o -MD -MP -MF $depbase.Tpo -c -o pipe2.o pipe2.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo pipe2-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT pipe2-safer.o -MD -MP -MF $depbase.Tpo -c -o pipe2-safer.o pipe2-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo printf-frexp.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT printf-frexp.o -MD -MP -MF $depbase.Tpo -c -o printf-frexp.o printf-frexp.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo printf-frexpl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT printf-frexpl.o -MD -MP -MF $depbase.Tpo -c -o printf-frexpl.o printf-frexpl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo spawn-pipe.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT spawn-pipe.o -MD -MP -MF $depbase.Tpo -c -o spawn-pipe.o spawn-pipe.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo strnlen1.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT strnlen1.o -MD -MP -MF $depbase.Tpo -c -o strnlen1.o strnlen1.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo wait-process.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT wait-process.o -MD -MP -MF $depbase.Tpo -c -o wait-process.o wait-process.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo xalloc-die.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT xalloc-die.o -MD -MP -MF $depbase.Tpo -c -o xalloc-die.o xalloc-die.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo xstrndup.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT xstrndup.o -MD -MP -MF $depbase.Tpo -c -o xstrndup.o xstrndup.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo get-errno.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT get-errno.o -MD -MP -MF $depbase.Tpo -c -o get-errno.o get-errno.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo abitset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT abitset.o -MD -MP -MF $depbase.Tpo -c -o abitset.o abitset.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo bitset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT bitset.o -MD -MP -MF $depbase.Tpo -c -o bitset.o bitset.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo bitset_stats.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT bitset_stats.o -MD -MP -MF $depbase.Tpo -c -o bitset_stats.o bitset_stats.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo bitsetv.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT bitsetv.o -MD -MP -MF $depbase.Tpo -c -o bitsetv.o bitsetv.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo ebitset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT ebitset.o -MD -MP -MF $depbase.Tpo -c -o ebitset.o ebitset.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo lbitset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT lbitset.o -MD -MP -MF $depbase.Tpo -c -o lbitset.o lbitset.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo vbitset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT vbitset.o -MD -MP -MF $depbase.Tpo -c -o vbitset.o vbitset.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo bitsetv-print.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT bitsetv-print.o -MD -MP -MF $depbase.Tpo -c -o bitsetv-print.o bitsetv-print.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo timevar.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT timevar.o -MD -MP -MF $depbase.Tpo -c -o timevar.o timevar.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo argmatch.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT argmatch.o -MD -MP -MF $depbase.Tpo -c -o argmatch.o argmatch.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo asnprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT asnprintf.o -MD -MP -MF $depbase.Tpo -c -o asnprintf.o asnprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo basename.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT basename.o -MD -MP -MF $depbase.Tpo -c -o basename.o basename.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo basename-lgpl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT basename-lgpl.o -MD -MP -MF $depbase.Tpo -c -o basename-lgpl.o basename-lgpl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo cloexec.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT cloexec.o -MD -MP -MF $depbase.Tpo -c -o cloexec.o cloexec.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo dirname.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT dirname.o -MD -MP -MF $depbase.Tpo -c -o dirname.o dirname.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo dirname-lgpl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT dirname-lgpl.o -MD -MP -MF $depbase.Tpo -c -o dirname-lgpl.o dirname-lgpl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo dup-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT dup-safer.o -MD -MP -MF $depbase.Tpo -c -o dup-safer.o dup-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fcntl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT fcntl.o -MD -MP -MF $depbase.Tpo -c -o fcntl.o fcntl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fd-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT fd-safer.o -MD -MP -MF $depbase.Tpo -c -o fd-safer.o fd-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fopen-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT fopen-safer.o -MD -MP -MF $depbase.Tpo -c -o fopen-safer.o fopen-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT fprintf.o -MD -MP -MF $depbase.Tpo -c -o fprintf.o fprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo hash.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT hash.o -MD -MP -MF $depbase.Tpo -c -o hash.o hash.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo ioctl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT ioctl.o -MD -MP -MF $depbase.Tpo -c -o ioctl.o ioctl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo isnand.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT isnand.o -MD -MP -MF $depbase.Tpo -c -o isnand.o isnand.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo isnanf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT isnanf.o -MD -MP -MF $depbase.Tpo -c -o isnanf.o isnanf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo isnanl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT isnanl.o -MD -MP -MF $depbase.Tpo -c -o isnanl.o isnanl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo pipe-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT pipe-safer.o -MD -MP -MF $depbase.Tpo -c -o pipe-safer.o pipe-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo printf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT printf.o -MD -MP -MF $depbase.Tpo -c -o printf.o printf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo printf-args.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT printf-args.o -MD -MP -MF $depbase.Tpo -c -o printf-args.o printf-args.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo printf-parse.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT printf-parse.o -MD -MP -MF $depbase.Tpo -c -o printf-parse.o printf-parse.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo quote.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT quote.o -MD -MP -MF $depbase.Tpo -c -o quote.o quote.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo quotearg.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT quotearg.o -MD -MP -MF $depbase.Tpo -c -o quotearg.o quotearg.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo snprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT snprintf.o -MD -MP -MF $depbase.Tpo -c -o snprintf.o snprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo sprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT sprintf.o -MD -MP -MF $depbase.Tpo -c -o sprintf.o sprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo stripslash.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT stripslash.o -MD -MP -MF $depbase.Tpo -c -o stripslash.o stripslash.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo vasnprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT vasnprintf.o -MD -MP -MF $depbase.Tpo -c -o vasnprintf.o vasnprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo vfprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT vfprintf.o -MD -MP -MF $depbase.Tpo -c -o vfprintf.o vfprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo vsnprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT vsnprintf.o -MD -MP -MF $depbase.Tpo -c -o vsnprintf.o vsnprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo vsprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT vsprintf.o -MD -MP -MF $depbase.Tpo -c -o vsprintf.o vsprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo xmalloc.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT xmalloc.o -MD -MP -MF $depbase.Tpo -c -o xmalloc.o xmalloc.c &&\
+mv -f $depbase.Tpo $depbase.Po
+rm -f t-charset.alias charset.alias && \
+/bin/sh ./config.charset 'x86_64-unknown-linux-gnu' > t-charset.alias && \
+mv t-charset.alias charset.alias
+rm -f t-ref-add.sed ref-add.sed && \
+sed -e '/^#/d' -e 's/@''PACKAGE''@/bison/g' ref-add.sin > t-ref-add.sed && \
+mv t-ref-add.sed ref-add.sed
+rm -f t-ref-del.sed ref-del.sed && \
+sed -e '/^#/d' -e 's/@''PACKAGE''@/bison/g' ref-del.sin > t-ref-del.sed && \
+mv t-ref-del.sed ref-del.sed
+rm -f liby.a
+ar cru liby.a main.o yyerror.o 
+ranlib liby.a
+depbase=`echo uniwidth/width.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -std=gnu99  -I.     -Os -pipe -MT uniwidth/width.o -MD -MP -MF $depbase.Tpo -c -o uniwidth/width.o uniwidth/width.c &&\
+mv -f $depbase.Tpo $depbase.Po
+rm -f libbison.a
+ar cru libbison.a c-ctype.o c-strcasecmp.o c-strncasecmp.o close-hook.o exitfail.o fatal-signal.o fd-safer-flag.o dup-safer-flag.o fseterr.o localcharset.o mbchar.o mbschr.o mbsrchr.o mbswidth.o nonblocking.o pipe2.o pipe2-safer.o printf-frexp.o printf-frexpl.o spawn-pipe.o strnlen1.o uniwidth/width.o wait-process.o xalloc-die.o xstrndup.o get-errno.o abitset.o bitset.o bitset_stats.o bitsetv.o ebitset.o lbitset.o vbitset.o bitsetv-print.o timevar.o argmatch.o asnprintf.o basename.o basename-lgpl.o cloexec.o dirname.o dirname-lgpl.o dup-safer.o fcntl.o fd-safer.o fopen-safer.o fprintf.o hash.o ioctl.o isnand.o isnanf.o isnanl.o pipe-safer.o printf.o printf-args.o printf-parse.o quote.o quotearg.o snprintf.o sprintf.o stripslash.o vasnprintf.o vfprintf.o vsnprintf.o vsprintf.o xmalloc.o
+ranlib libbison.a
+make[4]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+Making all in data
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/data'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/data'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make  all-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/src'
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT AnnotationList.o -MD -MP -MF .deps/AnnotationList.Tpo -c -o AnnotationList.o AnnotationList.c
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT InadequacyList.o -MD -MP -MF .deps/InadequacyList.Tpo -c -o InadequacyList.o InadequacyList.c
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT LR0.o -MD -MP -MF .deps/LR0.Tpo -c -o LR0.o LR0.c
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT Sbitset.o -MD -MP -MF .deps/Sbitset.Tpo -c -o Sbitset.o Sbitset.c
+mv -f .deps/InadequacyList.Tpo .deps/InadequacyList.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT assoc.o -MD -MP -MF .deps/assoc.Tpo -c -o assoc.o assoc.c
+mv -f .deps/Sbitset.Tpo .deps/Sbitset.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT closure.o -MD -MP -MF .deps/closure.Tpo -c -o closure.o closure.c
+mv -f .deps/LR0.Tpo .deps/LR0.Po
+mv -f .deps/assoc.Tpo .deps/assoc.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT complain.o -MD -MP -MF .deps/complain.Tpo -c -o complain.o complain.c
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT conflicts.o -MD -MP -MF .deps/conflicts.Tpo -c -o conflicts.o conflicts.c
+mv -f .deps/closure.Tpo .deps/closure.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT derives.o -MD -MP -MF .deps/derives.Tpo -c -o derives.o derives.c
+mv -f .deps/complain.Tpo .deps/complain.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT files.o -MD -MP -MF .deps/files.Tpo -c -o files.o files.c
+mv -f .deps/derives.Tpo .deps/derives.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT getargs.o -MD -MP -MF .deps/getargs.Tpo -c -o getargs.o getargs.c
+mv -f .deps/AnnotationList.Tpo .deps/AnnotationList.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT gram.o -MD -MP -MF .deps/gram.Tpo -c -o gram.o gram.c
+mv -f .deps/files.Tpo .deps/files.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT lalr.o -MD -MP -MF .deps/lalr.Tpo -c -o lalr.o lalr.c
+mv -f .deps/conflicts.Tpo .deps/conflicts.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT ielr.o -MD -MP -MF .deps/ielr.Tpo -c -o ielr.o ielr.c
+mv -f .deps/getargs.Tpo .deps/getargs.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT location.o -MD -MP -MF .deps/location.Tpo -c -o location.o location.c
+mv -f .deps/gram.Tpo .deps/gram.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT main.o -MD -MP -MF .deps/main.Tpo -c -o main.o main.c
+mv -f .deps/main.Tpo .deps/main.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT muscle-tab.o -MD -MP -MF .deps/muscle-tab.Tpo -c -o muscle-tab.o muscle-tab.c
+mv -f .deps/location.Tpo .deps/location.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT named-ref.o -MD -MP -MF .deps/named-ref.Tpo -c -o named-ref.o named-ref.c
+mv -f .deps/lalr.Tpo .deps/lalr.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT nullable.o -MD -MP -MF .deps/nullable.Tpo -c -o nullable.o nullable.c
+mv -f .deps/named-ref.Tpo .deps/named-ref.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT output.o -MD -MP -MF .deps/output.Tpo -c -o output.o output.c
+mv -f .deps/nullable.Tpo .deps/nullable.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT parse-gram.o -MD -MP -MF .deps/parse-gram.Tpo -c -o parse-gram.o parse-gram.c
+mv -f .deps/ielr.Tpo .deps/ielr.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT print.o -MD -MP -MF .deps/print.Tpo -c -o print.o print.c
+mv -f .deps/muscle-tab.Tpo .deps/muscle-tab.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT print_graph.o -MD -MP -MF .deps/print_graph.Tpo -c -o print_graph.o print_graph.c
+mv -f .deps/print.Tpo .deps/print.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT print-xml.o -MD -MP -MF .deps/print-xml.Tpo -c -o print-xml.o print-xml.c
+mv -f .deps/print_graph.Tpo .deps/print_graph.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT reader.o -MD -MP -MF .deps/reader.Tpo -c -o reader.o reader.c
+mv -f .deps/parse-gram.Tpo .deps/parse-gram.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT reduce.o -MD -MP -MF .deps/reduce.Tpo -c -o reduce.o reduce.c
+mv -f .deps/print-xml.Tpo .deps/print-xml.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT relation.o -MD -MP -MF .deps/relation.Tpo -c -o relation.o relation.c
+mv -f .deps/reader.Tpo .deps/reader.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT scan-code-c.o -MD -MP -MF .deps/scan-code-c.Tpo -c -o scan-code-c.o scan-code-c.c
+mv -f .deps/reduce.Tpo .deps/reduce.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT scan-gram-c.o -MD -MP -MF .deps/scan-gram-c.Tpo -c -o scan-gram-c.o scan-gram-c.c
+mv -f .deps/relation.Tpo .deps/relation.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT scan-skel-c.o -MD -MP -MF .deps/scan-skel-c.Tpo -c -o scan-skel-c.o scan-skel-c.c
+mv -f .deps/output.Tpo .deps/output.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT state.o -MD -MP -MF .deps/state.Tpo -c -o state.o state.c
+mv -f .deps/scan-skel-c.Tpo .deps/scan-skel-c.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT symlist.o -MD -MP -MF .deps/symlist.Tpo -c -o symlist.o symlist.c
+mv -f .deps/state.Tpo .deps/state.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT symtab.o -MD -MP -MF .deps/symtab.Tpo -c -o symtab.o symtab.c
+mv -f .deps/symlist.Tpo .deps/symlist.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT tables.o -MD -MP -MF .deps/tables.Tpo -c -o tables.o tables.c
+mv -f .deps/scan-code-c.Tpo .deps/scan-code-c.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT uniqstr.o -MD -MP -MF .deps/uniqstr.Tpo -c -o uniqstr.o uniqstr.c
+mv -f .deps/uniqstr.Tpo .deps/uniqstr.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT graphviz.o -MD -MP -MF .deps/graphviz.Tpo -c -o graphviz.o graphviz.c
+mv -f .deps/symtab.Tpo .deps/symtab.Po
+echo '#! /bin/sh' >yacc
+echo "exec '/usr/bin/bison' -y "'"$@"' >>yacc
+chmod a+x yacc
+mv -f .deps/graphviz.Tpo .deps/graphviz.Po
+mv -f .deps/tables.Tpo .deps/tables.Po
+mv -f .deps/scan-gram-c.Tpo .deps/scan-gram-c.Po
+gcc -std=gnu99   -Os -pipe   -o bison AnnotationList.o InadequacyList.o LR0.o Sbitset.o assoc.o closure.o complain.o conflicts.o derives.o files.o getargs.o gram.o lalr.o ielr.o location.o main.o muscle-tab.o named-ref.o nullable.o output.o parse-gram.o print.o print_graph.o print-xml.o reader.o reduce.o relation.o scan-code-c.o scan-gram-c.o scan-skel-c.o state.o symlist.o symtab.o tables.o uniqstr.o graphviz.o ../lib/libbison.a  
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/src'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/doc'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/doc'
+Making all in examples
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+Making all in calc++
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make  all-am
+make[4]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[4]: Nothing to be done for `all-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+Making all in etc
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/etc'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/etc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
++ make check
+if test -d ./.git; then			\
+  cd . &&						\
+  git submodule --quiet foreach test '$(git rev-parse $sha1)'	\
+      = '$(git merge-base origin $sha1)'			\
+    || { echo 'maint.mk: found non-public submodule commit' >&2;	\
+	 exit 1; };						\
+else								\
+  : ;								\
+fi
+make  check-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/bison-2.5'
+Making check in build-aux
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/build-aux'
+make[2]: Nothing to be done for `check'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/build-aux'
+Making check in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/po'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/po'
+Making check in runtime-po
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/runtime-po'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/runtime-po'
+Making check in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make  check-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+Making check in data
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/data'
+make[2]: Nothing to be done for `check'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/data'
+Making check in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make  check-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make[3]: Nothing to be done for `check-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/src'
+Making check in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/doc'
+make[2]: Nothing to be done for `check'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/doc'
+Making check in examples
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+Making check in calc++
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make  check-am
+make[4]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make  calc++
+make[5]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+g++  -I. -I.     -g -O2 -MT calc++-scanner.o -MD -MP -MF .deps/calc++-scanner.Tpo -c -o calc++-scanner.o calc++-scanner.cc
+mv -f .deps/calc++-scanner.Tpo .deps/calc++-scanner.Po
+g++  -I. -I.     -g -O2 -MT calc++.o -MD -MP -MF .deps/calc++.Tpo -c -o calc++.o `test -f './calc++.cc' || echo './'`./calc++.cc
+mv -f .deps/calc++.Tpo .deps/calc++.Po
+g++  -I. -I.     -g -O2 -MT calc++-driver.o -MD -MP -MF .deps/calc++-driver.Tpo -c -o calc++-driver.o `test -f './calc++-driver.cc' || echo './'`./calc++-driver.cc
+mv -f .deps/calc++-driver.Tpo .deps/calc++-driver.Po
+g++  -I. -I.     -g -O2 -MT calc++-parser.o -MD -MP -MF .deps/calc++-parser.Tpo -c -o calc++-parser.o `test -f './calc++-parser.cc' || echo './'`./calc++-parser.cc
+mv -f .deps/calc++-parser.Tpo .deps/calc++-parser.Po
+g++  -g -O2   -o calc++ calc++-scanner.o calc++.o calc++-driver.o calc++-parser.o  
+make[5]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make  check-TESTS
+make[5]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+PASS: test
+=============
+1 test passed
+=============
+make[5]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+make[3]: Nothing to be done for `check-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+Making check in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+make  bison
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+make[3]: `bison' is up to date.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+make  check-local
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+/bin/sh ./testsuite 
+## ------------------------- ##
+## GNU Bison 2.5 test suite. ##
+## ------------------------- ##
+
+Input Processing.
+
+  1: Invalid $n and @n                               ok
+  2: Type Clashes                                    ok
+  3: Unused values                                   ok
+  4: Unused values before symbol declarations        ok
+  5: Default %printer and %destructor redeclared     ok
+  6: Per-type %printer and %destructor redeclared    ok
+  7: Unused values with default %destructor          ok
+  8: Unused values with per-type %destructor         ok
+  9: Incompatible Aliases                            ok
+ 10: Torturing the Scanner                           ok
+ 11: Typed symbol aliases                            ok
+ 12: Require 1.0                                     ok
+ 13: Require 2.5                                     ok
+ 14: Require 100.0                                   ok
+ 15: String aliases for character tokens             ok
+ 16: Symbols                                         ok
+ 17: Numbered tokens                                 ok
+ 18: Unclosed constructs                             ok
+ 19: %start after first rule                         ok
+ 20: %prec takes a token                             ok
+ 21: %prec's token must be defined                   ok
+ 22: Reject unused %code qualifiers                  ok
+ 23: %define errors                                  ok
+ 24: %define, --define, --force-define               ok
+ 25: %define Boolean variables                       ok
+ 26: %define enum variables                          ok
+ 27: %define backward compatibility                  ok
+ 28: Unused %define api.pure                         ok
+ 29: C++ namespace reference errors                  ok
+ 30: Bad character literals                          ok
+ 31: Bad escapes in literals                         ok
+ 32: LAC: Errors for %define                         ok
+ 33: -Werror is not affected by -Wnone and -Wall     ok
+
+Named references tests.
+
+ 34: Tutorial calculator                             ok
+ 35: Undefined and ambiguous references              ok
+ 36: Misleading references                           ok
+ 37: Many kinds of errors                            ok
+ 38: Missing identifiers in brackets                 ok
+ 39: Redundant words in brackets                     ok
+ 40: Comments in brackets                            ok
+ 41: Stray symbols in brackets                       ok
+ 42: Redundant words in LHS brackets                 ok
+ 43: Factored LHS                                    ok
+ 44: Unresolved references                           ok
+ 45: $ or @ followed by . or -                       ok
+
+Output file names.
+
+ 46: Output files:  -dv                              ok
+ 47: Output files:  -dv >&-                          ok
+ 48: Output files:  -dv -o foo.c                     ok
+ 49: Output files:  -dv -o foo.tab.c                 ok
+ 50: Output files:  -dv -y                           ok
+ 51: Output files:  -dv -b bar                       ok
+ 52: Output files:  -dv -g -o foo.c                  ok
+ 53: Output files: %defines %verbose                 ok
+ 54: Output files: %defines %verbose %yacc           ok
+ 55: Output files: %defines %verbose %yacc           ok
+ 56: Output files: %file-prefix "bar" %defines %verbose   ok
+ 57: Output files: %output="bar.c" %defines %verbose %yacc   ok
+ 58: Output files: %file-prefix="baz" %output "bar.c" %defines %verbose %yacc   ok
+ 59: Output files: %defines %verbose                 ok
+ 60: Output files: %defines %verbose  -o foo.c       ok
+ 61: Output files:  --defines=foo.hpp -o foo.c++     ok
+ 62: Output files: %defines "foo.hpp" -o foo.c++     ok
+ 63: Output files:  -o foo.c++ --graph=foo.gph       ok
+ 64: Output files: %skeleton "lalr1.cc" %defines %verbose   ok
+ 65: Output files: %skeleton "lalr1.cc" %defines %verbose   ok
+ 66: Output files: %skeleton "lalr1.cc" %defines %verbose -o subdir/foo.cc  ok
+ 67: Output files: %skeleton "lalr1.cc" %defines %verbose %file-prefix "output_dir/foo"   ok
+ 68: Conflicting output files:  --graph="foo.tab.c"  ok
+ 69: Conflicting output files: %defines "foo.output" -v ok
+ 70: Conflicting output files: %skeleton "lalr1.cc" %defines --graph="location.hh" ok
+ 71: Conflicting output files:  -o foo.y             ok
+ 72: Output file name: `~!@#$%^&*()-=_+{}[]|\:;<>, .' ok
+ 73: Output file name: (                             ok
+ 74: Output file name: )                             ok
+ 75: Output file name: #                             ok
+ 76: Output file name: @@                            ok
+ 77: Output file name: @{                            ok
+ 78: Output file name: @}                            ok
+ 79: Output file name: [                             ok
+ 80: Output file name: ]                             ok
+
+Skeleton Support.
+
+ 81: Relative skeleton file names                    ok
+ 82: Installed skeleton file names                   ok
+ 83: %define Boolean variables: invalid skeleton defaults ok
+ 84: Complaining during macro argument expansion     ok
+ 85: Fatal errors make M4 exit immediately           ok
+ 86: Fatal errors but M4 continues producing output  ok
+
+Grammar Sets (Firsts etc.).
+
+ 87: Nullable                                        ok
+ 88: Broken Closure                                  ok
+ 89: Firsts                                          ok
+ 90: Accept                                          ok
+
+Grammar Reduction.
+
+ 91: Useless Terminals                               ok
+ 92: Useless Nonterminals                            ok
+ 93: Useless Rules                                   ok
+ 94: Reduced Automaton                               ok
+ 95: Underivable Rules                               ok
+ 96: Empty Language                                  ok
+ 97: no %define lr.type: Single State Split          ok
+ 98: %define lr.type lalr: Single State Split        ok
+ 99: %define lr.type ielr: Single State Split        ok
+100: %define lr.type canonical-lr: Single State Split ok
+101: no %define lr.type: Lane Split                  ok
+102: %define lr.type lalr: Lane Split                ok
+103: %define lr.type ielr: Lane Split                ok
+104: %define lr.type canonical-lr: Lane Split        ok
+105: no %define lr.type: Complex Lane Split          ok
+106: %define lr.type lalr: Complex Lane Split        ok
+107: %define lr.type ielr: Complex Lane Split        ok
+108: %define lr.type canonical-lr: Complex Lane Split ok
+109: no %define lr.type: Split During Added Lookahead Propagation ok
+110: %define lr.type lalr: Split During Added Lookahead Propagation ok
+111: %define lr.type ielr: Split During Added Lookahead Propagation ok
+112: %define lr.type canonical-lr: Split During Added Lookahead Propagation ok
+113: no %define lr.default-reductions                ok
+114: %define lr.default-reductions most              ok
+115: %define lr.default-reductions consistent        ok
+116: %define lr.default-reductions accepting         ok
+
+User Actions.
+
+117: Prologue synch line                             ok
+118: %union synch line                               ok
+119: Postprologue synch line                         ok
+120: Action synch line                               ok
+121: Epilogue synch line                             ok
+
+Parser Headers.
+
+122: %union and --defines                            ok
+123: Invalid CPP guards: input/input                 ok
+124: Invalid CPP guards: 9foo                        ok
+125: export YYLTYPE                                  ok
+
+User Actions.
+
+126: Mid-rule actions                                ok
+127: Exotic Dollars                                  ok
+128: Printers and Destructors :                      ok
+129: Printers and Destructors with union:            ok
+130: Printers and Destructors : %defines %skeleton "lalr1.cc" ok
+131: Printers and Destructors with union: %defines %skeleton "lalr1.cc" ok
+132: Printers and Destructors : %glr-parser          ok
+133: Printers and Destructors with union: %glr-parser ok
+134: Default tagless %printer and %destructor        ok
+135: Default tagged and per-type %printer and %destructor ok
+136: Default %printer and %destructor for user-defined end token ok
+137: Default %printer and %destructor are not for error or $undefined ok
+138: Default %printer and %destructor are not for $accept ok
+139: Default %printer and %destructor for mid-rule values ok
+140: @$ in %initial-action implies %locations        ok
+141: @$ in %destructor implies %locations            ok
+142: @$ in %printer implies %locations               ok
+143: Fix user actions without a trailing semicolon   ok
+144: Destroying lookahead assigned by semantic action ok
+
+Conflicts.
+
+145: S/R in initial                                  ok
+146: %nonassoc and eof                               ok
+147: %error-verbose and consistent errors            skipped (conflicts.at:330)
+148: LAC: %nonassoc requires splitting canonical LR states ok
+149: Unresolved SR Conflicts                         ok
+150: Resolved SR Conflicts                           ok
+151: Defaulted Conflicted Reduction                  ok
+152: %expect not enough                              ok
+153: %expect right                                   ok
+154: %expect too much                                ok
+155: %expect with reduce conflicts                   ok
+156: %prec with user string                          ok
+157: %no-default-prec without %prec                  ok
+158: %no-default-prec with %prec                     ok
+159: %default-prec                                   ok
+160: Unreachable States After Conflict Resolution    ok
+161: Solved conflicts report for multiple reductions in a state ok
+162: %nonassoc error actions for multiple reductions in a state ok
+163: -W versus %expect and %expect-rr                ok
+
+Simple LALR(1) Calculator.
+
+164: Calculator                                      ok
+165: Calculator %defines                             ok
+166: Calculator %locations                           ok
+167: Calculator %name-prefix="calc"                  ok
+168: Calculator %verbose                             ok
+169: Calculator %yacc                                ok
+170: Calculator %error-verbose                       ok
+171: Calculator %define api.pure %locations          ok
+172: Calculator %define api.push-pull both %define api.pure %locations ok
+173: Calculator %error-verbose %locations            ok
+174: Calculator %error-verbose %locations %defines %name-prefix "calc" %verbose %yacc ok
+175: Calculator %debug                               ok
+176: Calculator %error-verbose %debug %locations %defines %name-prefix "calc" %verbose %yacc ok
+177: Calculator %define api.pure %error-verbose %debug %locations %defines %name-prefix "calc" %verbose %yacc ok
+178: Calculator %define api.push-pull both %define api.pure %error-verbose %debug %locations %defines %name-prefix "calc" %verbose %yacc ok
+179: Calculator %define api.pure %error-verbose %debug %locations %defines %name-prefix "calc" %verbose %yacc %parse-param {semantic_value *result} %parse-param {int *count} ok
+
+Simple GLR Calculator.
+
+180: Calculator %glr-parser                          ok
+181: Calculator %glr-parser %defines                 ok
+182: Calculator %glr-parser %locations               ok
+183: Calculator %glr-parser %name-prefix "calc"      ok
+184: Calculator %glr-parser %verbose                 ok
+185: Calculator %glr-parser %yacc                    ok
+186: Calculator %glr-parser %error-verbose           ok
+187: Calculator %glr-parser %define api.pure %locations ok
+188: Calculator %glr-parser %error-verbose %locations ok
+189: Calculator %glr-parser %error-verbose %locations %defines %name-prefix "calc" %verbose %yacc ok
+190: Calculator %glr-parser %debug                   ok
+191: Calculator %glr-parser %error-verbose %debug %locations %defines %name-prefix "calc" %verbose %yacc ok
+192: Calculator %glr-parser %define api.pure %error-verbose %debug %locations %defines %name-prefix "calc" %verbose %yacc ok
+193: Calculator %glr-parser %define api.pure %error-verbose %debug %locations %defines %name-prefix "calc" %verbose %yacc %parse-param {semantic_value *result} %parse-param {int *count} ok
+
+Simple LALR(1) C++ Calculator.
+
+194: Calculator %skeleton "lalr1.cc" %defines %locations ok
+195: Calculator %language "C++" %defines %locations  ok
+196: Calculator %language "C++" %defines %locations %define location_type Span ok
+197: Calculator %language "C++" %defines %locations %error-verbose %name-prefix "calc" %verbose %yacc ok
+198: Calculator %language "C++" %defines %locations %error-verbose %debug %name-prefix "calc" %verbose %yacc ok
+199: Calculator %language "C++" %defines %locations %pure-parser %error-verbose %debug %name-prefix "calc" %verbose %yacc ok
+200: Calculator %language "C++" %defines %locations %pure-parser %error-verbose %debug %name-prefix "calc" %verbose %yacc %parse-param {semantic_value *result} %parse-param {int *count} ok
+
+Simple GLR C++ Calculator.
+
+201: Calculator %skeleton "glr.cc" %defines %locations ok
+202: Calculator %language "C++" %glr-parser %defines %locations  ok
+203: Calculator %language "C++" %glr-parser %defines %locations %define location_type Span ok
+204: Calculator %language "C++" %glr-parser %defines %locations %error-verbose %name-prefix "calc" %verbose %yacc ok
+205: Calculator %language "C++" %glr-parser %defines %locations %debug ok
+206: Calculator %language "C++" %glr-parser %defines %locations %error-verbose %debug %name-prefix "calc" %verbose %yacc ok
+207: Calculator %language "C++" %glr-parser %defines %locations %pure-parser %error-verbose %debug %name-prefix "calc" %verbose %yacc ok
+208: Calculator %language "C++" %glr-parser %defines %locations %pure-parser %error-verbose %debug %name-prefix "calc" %verbose %yacc %parse-param {semantic_value *result} %parse-param {int *count} ok
+
+Torture Tests.
+
+209: Big triangle                                    ok
+210: Big horizontal                                  ok
+211: Many lookahead tokens                           ok
+212: Exploding the Stack Size with Alloca            ok
+213: Exploding the Stack Size with Malloc            ok
+
+Existing Grammars.
+
+214: GNU AWK 3.1.0 Grammar: LALR(1)                  ok
+215: GNU AWK 3.1.0 Grammar: IELR(1)                  ok
+216: GNU AWK 3.1.0 Grammar: Canonical LR(1)          ok
+217: GNU Cim Grammar: LALR(1)                        ok
+218: GNU Cim Grammar: IELR(1)                        ok
+219: GNU Cim Grammar: Canonical LR(1)                ok
+220: GNU pic (Groff 1.18.1) Grammar: LALR(1)         ok
+221: GNU pic (Groff 1.18.1) Grammar: IELR(1)         ok
+222: GNU pic (Groff 1.18.1) Grammar: Canonical LR(1) ok
+
+Regression tests.
+
+223: Trivial grammars                                ok
+224: YYSTYPE typedef                                 ok
+225: Early token definitions with --yacc             ok
+226: Early token definitions without --yacc          ok
+227: Braces parsing                                  ok
+228: Duplicate string                                ok
+229: Rule Line Numbers                               ok
+230: Mixing %token styles                            ok
+231: Invalid inputs                                  ok
+232: Invalid inputs with {}                          ok
+233: Token definitions                               ok
+234: Characters Escapes                              ok
+235: Web2c Report                                    ok
+236: Web2c Actions                                   ok
+237: Dancer                                          ok
+238: Dancer %glr-parser                              ok
+239: Dancer %skeleton "lalr1.cc"                     ok
+240: Expecting two tokens                            ok
+241: Expecting two tokens %glr-parser                ok
+242: Expecting two tokens %skeleton "lalr1.cc"       ok
+243: Braced code in declaration in rules section     ok
+244: String alias declared after use                 ok
+245: Extra lookahead sets in report                  ok
+246: Token number in precedence declaration          ok
+247: parse-gram.y: LALR = IELR                       ok
+248: %error-verbose and YYSTACK_USE_ALLOCA           ok
+249: %error-verbose overflow                         ok
+250: LAC: Exploratory stack                          ok
+251: LAC: Memory exhaustion                          ok
+
+C++ Features.
+
+252: Doxygen Public Documentation                    skipped (c++.at:102)
+253: Doxygen Private Documentation                   skipped (c++.at:103)
+254: Relative namespace references                   ok
+255: Absolute namespace references                   ok
+256: Syntactically invalid namespace references      ok
+
+Java Calculator.
+
+257: Calculator                                      skipped (java.at:370)
+258: Calculator %error-verbose                       skipped (java.at:370)
+259: Calculator %locations                           skipped (java.at:370)
+260: Calculator %error-verbose %locations            skipped (java.at:370)
+261: Calculator %lex-param { InputStream is }        skipped (java.at:379)
+262: Calculator %error-verbose %lex-param { InputStream is }  skipped (java.at:379)
+263: Calculator %locations %lex-param { InputStream is }  skipped (java.at:379)
+264: Calculator %error-verbose %locations %lex-param { InputStream is }  skipped (java.at:379)
+
+Java Parameters.
+
+265: Java parser class and package names             skipped (java.at:467)
+266: Java parser class modifiers                     skipped (java.at:488)
+267: Java parser class extends and implements        skipped (java.at:546)
+268: Java %parse-param and %lex-param                skipped (java.at:566)
+269: Java throws specifications                      skipped (java.at:698)
+270: Java stype, position_class and location_class   skipped (java.at:729)
+
+C++ Type Syntax (GLR).
+
+271: GLR: Resolve ambiguity, impure, no locations    ok
+272: GLR: Resolve ambiguity, impure, locations       ok
+273: GLR: Resolve ambiguity, pure, no locations      ok
+274: GLR: Resolve ambiguity, pure, locations         ok
+275: GLR: Merge conflicting parses, impure, no locations ok
+276: GLR: Merge conflicting parses, impure, locations ok
+277: GLR: Merge conflicting parses, pure, no locations ok
+278: GLR: Merge conflicting parses, pure, locations  ok
+279: GLR: Verbose messages, resolve ambiguity, impure, no locations ok
+
+GLR Regression Tests
+
+280: Badly Collapsed GLR States                      ok
+281: Improper handling of embedded actions and dollar(-N) in GLR parsers ok
+282: Improper merging of GLR delayed action sets     ok
+283: Duplicate representation of merged trees        ok
+284: User destructor for unresolved GLR semantic value ok
+285: User destructor after an error during a split parse ok
+286: Duplicated user destructor for lookahead        ok
+287: Incorrectly initialized location for empty right-hand side in GLR ok
+288: No users destructors if stack 0 deleted         ok
+289: Corrupted semantic options if user action cuts parse ok
+290: Undesirable destructors if user action cuts parse ok
+291: Leaked semantic values if user action cuts parse ok
+292: Incorrect lookahead during deterministic GLR    ok
+293: Incorrect lookahead during nondeterministic GLR ok
+294: Leaked semantic values when reporting ambiguity ok
+295: Leaked lookahead after nondeterministic parse syntax error ok
+296: Uninitialized location when reporting ambiguity ok
+297: Missed %merge type warnings when LHS type is declared later ok
+
+Push Parsing Tests
+
+298: Memory Leak for Early Deletion                  ok
+299: Multiple impure instances                       ok
+300: Unsupported Skeletons                           ok
+
+## ------------- ##
+## Test results. ##
+## ------------- ##
+
+283 tests were successful.
+17 tests were skipped.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+Making check in etc
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/etc'
+make[2]: Nothing to be done for `check'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/etc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5'
+make[2]: Nothing to be done for `check-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.55867
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/bison-root
++ /bin/mkdir -p /var/tmp/bison-root
++ cd bison-2.5
++ make DESTDIR=/var/tmp/bison-root install
+make  install-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/bison-2.5'
+Making install in build-aux
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/build-aux'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/build-aux'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/build-aux'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/build-aux'
+Making install in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/po'
+installing da.gmo as /var/tmp/bison-root/usr/share/locale/da/LC_MESSAGES/bison.mo
+installing de.gmo as /var/tmp/bison-root/usr/share/locale/de/LC_MESSAGES/bison.mo
+installing el.gmo as /var/tmp/bison-root/usr/share/locale/el/LC_MESSAGES/bison.mo
+installing es.gmo as /var/tmp/bison-root/usr/share/locale/es/LC_MESSAGES/bison.mo
+installing et.gmo as /var/tmp/bison-root/usr/share/locale/et/LC_MESSAGES/bison.mo
+installing fi.gmo as /var/tmp/bison-root/usr/share/locale/fi/LC_MESSAGES/bison.mo
+installing fr.gmo as /var/tmp/bison-root/usr/share/locale/fr/LC_MESSAGES/bison.mo
+installing ga.gmo as /var/tmp/bison-root/usr/share/locale/ga/LC_MESSAGES/bison.mo
+installing hr.gmo as /var/tmp/bison-root/usr/share/locale/hr/LC_MESSAGES/bison.mo
+installing id.gmo as /var/tmp/bison-root/usr/share/locale/id/LC_MESSAGES/bison.mo
+installing it.gmo as /var/tmp/bison-root/usr/share/locale/it/LC_MESSAGES/bison.mo
+installing ja.gmo as /var/tmp/bison-root/usr/share/locale/ja/LC_MESSAGES/bison.mo
+installing ms.gmo as /var/tmp/bison-root/usr/share/locale/ms/LC_MESSAGES/bison.mo
+installing nb.gmo as /var/tmp/bison-root/usr/share/locale/nb/LC_MESSAGES/bison.mo
+installing nl.gmo as /var/tmp/bison-root/usr/share/locale/nl/LC_MESSAGES/bison.mo
+installing pl.gmo as /var/tmp/bison-root/usr/share/locale/pl/LC_MESSAGES/bison.mo
+installing pt.gmo as /var/tmp/bison-root/usr/share/locale/pt/LC_MESSAGES/bison.mo
+installing pt_BR.gmo as /var/tmp/bison-root/usr/share/locale/pt_BR/LC_MESSAGES/bison.mo
+installing ro.gmo as /var/tmp/bison-root/usr/share/locale/ro/LC_MESSAGES/bison.mo
+installing ru.gmo as /var/tmp/bison-root/usr/share/locale/ru/LC_MESSAGES/bison.mo
+installing sv.gmo as /var/tmp/bison-root/usr/share/locale/sv/LC_MESSAGES/bison.mo
+installing tr.gmo as /var/tmp/bison-root/usr/share/locale/tr/LC_MESSAGES/bison.mo
+installing uk.gmo as /var/tmp/bison-root/usr/share/locale/uk/LC_MESSAGES/bison.mo
+installing vi.gmo as /var/tmp/bison-root/usr/share/locale/vi/LC_MESSAGES/bison.mo
+installing zh_TW.gmo as /var/tmp/bison-root/usr/share/locale/zh_TW/LC_MESSAGES/bison.mo
+if test "bison" = "gettext-tools"; then \
+  /bin/mkdir -p /var/tmp/bison-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/bison-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/bison-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/po'
+Making install in runtime-po
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/runtime-po'
+installing ast.gmo as /var/tmp/bison-root/usr/share/locale/ast/LC_MESSAGES/bison-runtime.mo
+installing da.gmo as /var/tmp/bison-root/usr/share/locale/da/LC_MESSAGES/bison-runtime.mo
+installing de.gmo as /var/tmp/bison-root/usr/share/locale/de/LC_MESSAGES/bison-runtime.mo
+installing el.gmo as /var/tmp/bison-root/usr/share/locale/el/LC_MESSAGES/bison-runtime.mo
+installing eo.gmo as /var/tmp/bison-root/usr/share/locale/eo/LC_MESSAGES/bison-runtime.mo
+installing es.gmo as /var/tmp/bison-root/usr/share/locale/es/LC_MESSAGES/bison-runtime.mo
+installing et.gmo as /var/tmp/bison-root/usr/share/locale/et/LC_MESSAGES/bison-runtime.mo
+installing fi.gmo as /var/tmp/bison-root/usr/share/locale/fi/LC_MESSAGES/bison-runtime.mo
+installing fr.gmo as /var/tmp/bison-root/usr/share/locale/fr/LC_MESSAGES/bison-runtime.mo
+installing ga.gmo as /var/tmp/bison-root/usr/share/locale/ga/LC_MESSAGES/bison-runtime.mo
+installing gl.gmo as /var/tmp/bison-root/usr/share/locale/gl/LC_MESSAGES/bison-runtime.mo
+installing hr.gmo as /var/tmp/bison-root/usr/share/locale/hr/LC_MESSAGES/bison-runtime.mo
+installing hu.gmo as /var/tmp/bison-root/usr/share/locale/hu/LC_MESSAGES/bison-runtime.mo
+installing id.gmo as /var/tmp/bison-root/usr/share/locale/id/LC_MESSAGES/bison-runtime.mo
+installing it.gmo as /var/tmp/bison-root/usr/share/locale/it/LC_MESSAGES/bison-runtime.mo
+installing ja.gmo as /var/tmp/bison-root/usr/share/locale/ja/LC_MESSAGES/bison-runtime.mo
+installing ky.gmo as /var/tmp/bison-root/usr/share/locale/ky/LC_MESSAGES/bison-runtime.mo
+installing lt.gmo as /var/tmp/bison-root/usr/share/locale/lt/LC_MESSAGES/bison-runtime.mo
+installing lv.gmo as /var/tmp/bison-root/usr/share/locale/lv/LC_MESSAGES/bison-runtime.mo
+installing ms.gmo as /var/tmp/bison-root/usr/share/locale/ms/LC_MESSAGES/bison-runtime.mo
+installing nb.gmo as /var/tmp/bison-root/usr/share/locale/nb/LC_MESSAGES/bison-runtime.mo
+installing nl.gmo as /var/tmp/bison-root/usr/share/locale/nl/LC_MESSAGES/bison-runtime.mo
+installing pl.gmo as /var/tmp/bison-root/usr/share/locale/pl/LC_MESSAGES/bison-runtime.mo
+installing pt.gmo as /var/tmp/bison-root/usr/share/locale/pt/LC_MESSAGES/bison-runtime.mo
+installing pt_BR.gmo as /var/tmp/bison-root/usr/share/locale/pt_BR/LC_MESSAGES/bison-runtime.mo
+installing ro.gmo as /var/tmp/bison-root/usr/share/locale/ro/LC_MESSAGES/bison-runtime.mo
+installing ru.gmo as /var/tmp/bison-root/usr/share/locale/ru/LC_MESSAGES/bison-runtime.mo
+installing sl.gmo as /var/tmp/bison-root/usr/share/locale/sl/LC_MESSAGES/bison-runtime.mo
+installing sv.gmo as /var/tmp/bison-root/usr/share/locale/sv/LC_MESSAGES/bison-runtime.mo
+installing th.gmo as /var/tmp/bison-root/usr/share/locale/th/LC_MESSAGES/bison-runtime.mo
+installing tr.gmo as /var/tmp/bison-root/usr/share/locale/tr/LC_MESSAGES/bison-runtime.mo
+installing uk.gmo as /var/tmp/bison-root/usr/share/locale/uk/LC_MESSAGES/bison-runtime.mo
+installing vi.gmo as /var/tmp/bison-root/usr/share/locale/vi/LC_MESSAGES/bison-runtime.mo
+installing zh_CN.gmo as /var/tmp/bison-root/usr/share/locale/zh_CN/LC_MESSAGES/bison-runtime.mo
+installing zh_TW.gmo as /var/tmp/bison-root/usr/share/locale/zh_TW/LC_MESSAGES/bison-runtime.mo
+if test "bison" = "gettext-tools"; then \
+  /bin/mkdir -p /var/tmp/bison-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/bison-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/bison-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/runtime-po'
+Making install in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make  install-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[5]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+if test yes = no; then \
+  case 'linux-gnu' in \
+    darwin[56]*) \
+      need_charset_alias=true ;; \
+    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
+      need_charset_alias=false ;; \
+    *) \
+      need_charset_alias=true ;; \
+  esac ; \
+else \
+  need_charset_alias=false ; \
+fi ; \
+if $need_charset_alias; then \
+  /bin/sh /usr/src/rpm/BUILD/bison-2.5/build-aux/install-sh -d /var/tmp/bison-root/usr/lib64 ; \
+fi ; \
+if test -f /var/tmp/bison-root/usr/lib64/charset.alias; then \
+  sed -f ref-add.sed /var/tmp/bison-root/usr/lib64/charset.alias > /var/tmp/bison-root/usr/lib64/charset.tmp ; \
+  /usr/bin/install -c -m 644 /var/tmp/bison-root/usr/lib64/charset.tmp /var/tmp/bison-root/usr/lib64/charset.alias ; \
+  rm -f /var/tmp/bison-root/usr/lib64/charset.tmp ; \
+else \
+  if $need_charset_alias; then \
+    sed -f ref-add.sed charset.alias > /var/tmp/bison-root/usr/lib64/charset.tmp ; \
+    /usr/bin/install -c -m 644 /var/tmp/bison-root/usr/lib64/charset.tmp /var/tmp/bison-root/usr/lib64/charset.alias ; \
+    rm -f /var/tmp/bison-root/usr/lib64/charset.tmp ; \
+  fi ; \
+fi
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/bison-root/usr/lib64"
+ /usr/bin/install -c -m 644  liby.a '/var/tmp/bison-root/usr/lib64'
+ ( cd '/var/tmp/bison-root/usr/lib64' && ranlib liby.a )
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/lib'
+Making install in data
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/data'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/data'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/bison/m4sugar" || /bin/mkdir -p "/var/tmp/bison-root/usr/share/bison/m4sugar"
+ /usr/bin/install -c -m 644 m4sugar/m4sugar.m4 m4sugar/foreach.m4 '/var/tmp/bison-root/usr/share/bison/m4sugar'
+test -z "/usr/share/bison" || /bin/mkdir -p "/var/tmp/bison-root/usr/share/bison"
+ /usr/bin/install -c -m 644 README bison.m4 c-skel.m4 c.m4 yacc.c glr.c c++-skel.m4 c++.m4 location.cc lalr1.cc glr.cc java-skel.m4 java.m4 lalr1.java '/var/tmp/bison-root/usr/share/bison'
+test -z "/usr/share/bison/xslt" || /bin/mkdir -p "/var/tmp/bison-root/usr/share/bison/xslt"
+ /usr/bin/install -c -m 644 xslt/bison.xsl xslt/xml2dot.xsl xslt/xml2text.xsl xslt/xml2xhtml.xsl '/var/tmp/bison-root/usr/share/bison/xslt'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/data'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/data'
+Making install in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make  install-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make[4]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/src'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/bison-root/usr/bin"
+  /usr/bin/install -c bison '/var/tmp/bison-root/usr/bin'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/bison-root/usr/bin"
+ /usr/bin/install -c yacc '/var/tmp/bison-root/usr/bin'
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/src'
+Making install in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/doc'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/doc'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/info" || /bin/mkdir -p "/var/tmp/bison-root/usr/share/info"
+ /usr/bin/install -c -m 644 ./bison.info '/var/tmp/bison-root/usr/share/info'
+ install-info --info-dir='/var/tmp/bison-root/usr/share/info' '/var/tmp/bison-root/usr/share/info/bison.info'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/bison-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 ./bison.1 yacc.1 '/var/tmp/bison-root/usr/share/man/man1'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/doc'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/doc'
+Making install in examples
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+Making install in calc++
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make  install-am
+make[4]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[5]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[5]: Nothing to be done for `install-exec-am'.
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples/calc++'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+make[4]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/examples'
+Making install in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/tests'
+Making install in etc
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/etc'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5/etc'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/etc'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5/etc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/bison-2.5'
+make[3]: Entering directory `/usr/src/rpm/BUILD/bison-2.5'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/aclocal" || /bin/mkdir -p "/var/tmp/bison-root/usr/share/aclocal"
+ /usr/bin/install -c -m 644 m4/bison-i18n.m4 '/var/tmp/bison-root/usr/share/aclocal'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
++ rm -f /var/tmp/bison-root/usr/share/info/dir
++ /usr/lib/rpm/compress_man.sh /var/tmp/bison-root
++ /usr/lib/rpm/strip.sh /var/tmp/bison-root
++ /usr/lib/rpm/find-lang.sh /var/tmp/bison-root bison
++ /usr/lib/rpm/find-lang.sh /var/tmp/bison-root bison-runtime
++ cat bison.lang bison-runtime.lang
++ exit 0
+Processing files: bison-2.5-1.x86_64
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /bin/sh /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/bison-root
+warning: Could not canonicalize hostname: zaphod.lightcube.us
+Wrote: /usr/src/rpm/SRPMS/bison-2.5-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/bison-2.5-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.61598
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd bison-2.5
++ /bin/rm -rf /var/tmp/bison-root
