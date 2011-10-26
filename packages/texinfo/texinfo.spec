@@ -1,7 +1,7 @@
 Summary: The GNU Documentation System
 Name: texinfo
 Version: 4.13a
-Release: 3
+Release: 4
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -37,6 +37,7 @@ make check
 %install
 make DESTDIR=%{buildroot} install
 make DESTDIR=%{buildroot} TEXMF=/usr/share/texmf install-tex
+rm -f %{buildroot}/usr/share/info/dir
 %{compress_man}
 %{strip}
 %find_lang %{name}
@@ -54,7 +55,6 @@ rm -rf %{buildroot}
 /usr/bin/texi2dvi
 /usr/bin/texi2pdf
 /usr/bin/texindex
-/usr/share/info/dir
 /usr/share/info/info-stnd.info
 /usr/share/info/info.info
 /usr/share/info/texinfo
@@ -78,6 +78,9 @@ rm -rf %{buildroot}
 /usr/share/texmf
 
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.13a-4
+- /usr/share/info/dir shouldn't be packaged
+
 * Tue Oct 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.13a-3
 - Optimize for size
 
