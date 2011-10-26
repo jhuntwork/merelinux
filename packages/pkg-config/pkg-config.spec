@@ -1,18 +1,17 @@
 Summary: pkg-config 
 Name: pkg-config
 Version: 0.25
-Release: 1
+Release: 2
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://pkg-config.freedesktop.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
-
-BuildRequires: digest(%{SOURCE0}) = a3270bab3f4b69b7dc6dbdacbcae9745
-
-Requires: base-layout, glibc
+Source0: http://pkgconfig.freedesktop.org/releases/pkg-config-0.25.tar.gz
 Provides: pkgconfig
+
+BuildRequires: digest(sha1:%{SOURCE0}) = 8922aeb4edeff7ed554cc1969cbb4ad5a4e6b26e
+
 
 %description
 pkg-config is a helper tool used when compiling applications and libraries. It can
@@ -23,12 +22,17 @@ installed libraries.
 %setup -q
 
 %build
-./configure --prefix=/usr --with-pc-path=/usr/%{_lib}/pkgconfig
-make
+export CFLAGS='-Os -pipe'
+./configure \
+  --prefix=/usr \
+  --with-pc-path=/usr/%{_lib}/pkgconfig
+make %{PMFLAGS}
 make check
 
 %install
 make DESTDIR=%{buildroot} install
+%{compress_man}
+%{strip}
 install -dv %{buildroot}/usr/share/pkgconfig
 install -dv %{buildroot}/usr/%{_lib}/pkgconfig
 
@@ -39,12 +43,15 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/bin/pkg-config
 /usr/share/aclocal/pkg.m4
-/usr/share/pkgconfig
-/usr/%{_lib}/pkgconfig
-/usr/share/man/man1/pkg-config.1
+%dir /usr/share/pkgconfig
+%dir /usr/%{_lib}/pkgconfig
+/usr/share/man/man1/pkg-config.1.bz2
 /usr/share/doc/pkg-config
 
 %changelog
+* Tue Oct 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.25-2
+- Optimize for size
+
 * Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.25-1
 - Upgrade to 0.25
 
