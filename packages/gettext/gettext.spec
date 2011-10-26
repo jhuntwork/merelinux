@@ -1,18 +1,16 @@
 Summary: GNU Gettext
 Name: gettext
 Version: 0.18.1.1 
-Release: 2
+Release: 3
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/gettext
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/gettext/gettext-0.18.1.1.tar.gz
 
-BuildRequires: digest(%{SOURCE0}) = 3dd55b952826d2b32f51308f2f91aa89
+BuildRequires: digest(sha1:%{SOURCE0}) = 5009deb02f67fc3c59c8ce6b82408d1d35d4e38f
 BuildRequires: ncurses-devel
-BuildRequires: libxml2-devel
-BuildRequires: bison
 
 %description
 The GNU `gettext' utilities are a set of tools that provides a framework to help
@@ -38,20 +36,20 @@ Extensive documentation on how to implement gettext in development
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS="-Os -pipe"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
 %find_lang %{name}-runtime
 %find_lang %{name}-tools
 cat %{name}-runtime.lang %{name}-tools.lang > %{name}.lang
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -119,7 +117,7 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libgettextsrc.so
 /usr/share/aclocal/*
 /usr/share/gettext/intl
-/usr/share/gettext/archive.git.tar.gz
+/usr/share/gettext/archive.dir.tar.gz
 /usr/share/gettext/config.rpath
 /usr/share/gettext/gettext.h
 /usr/share/gettext/javaversion.class
@@ -132,6 +130,10 @@ rm -rf %{buildroot}
 /usr/share/gettext/projects
 
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.18.1.1-3
+- Optimize for size
+- Build without external libxml2 support
+
 * Mon Sep 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.18.1.1-2
 - Better organize subpackages
 
