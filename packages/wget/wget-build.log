@@ -1,0 +1,2048 @@
+Fetching(Source0): ftp://ftp.gnu.org/gnu/wget/wget-1.13.4.tar.xz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.29405
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf wget-1.13.4
++ /usr/bin/xz -dc /usr/src/rpm/SOURCES/wget-1.13.4.tar.xz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd wget-1.13.4
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.93996
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd wget-1.13.4
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --sysconfdir=/etc --with-ssl=openssl
+configure: configuring for GNU Wget 1.13.4
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking whether gcc and cc understand -c and -o together... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for Minix Amsterdam compiler... no
+checking for ar... ar
+checking for ranlib... ranlib
+checking for _LARGEFILE_SOURCE value needed for large files... no
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking for ranlib... (cached) ranlib
+checking for flex... no
+checking for lex... no
+checking for an ANSI C-conforming const... yes
+checking for inline... inline
+checking for working volatile... yes
+checking for ANSI C header files... (cached) yes
+checking for special C compiler options needed for large files... (cached) no
+checking for _FILE_OFFSET_BITS value needed for large files... (cached) no
+checking size of off_t... 8
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for unistd.h... (cached) yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/select.h usability... yes
+checking sys/select.h presence... yes
+checking for sys/select.h... yes
+checking utime.h usability... yes
+checking utime.h presence... yes
+checking for utime.h... yes
+checking sys/utime.h usability... no
+checking sys/utime.h presence... no
+checking for sys/utime.h... no
+checking for stdint.h... (cached) yes
+checking for inttypes.h... (cached) yes
+checking pwd.h usability... yes
+checking pwd.h presence... yes
+checking for pwd.h... yes
+checking wchar.h usability... yes
+checking wchar.h presence... yes
+checking for wchar.h... yes
+checking whether h_errno is declared... yes
+checking size of short... 2
+checking size of int... 4
+checking size of long... 8
+checking size of long long... 8
+checking size of void *... 8
+checking for size_t... yes
+checking for pid_t... yes
+checking for uint32_t... yes
+checking for uintptr_t... yes
+checking for intptr_t... yes
+checking for int64_t... yes
+checking for sig_atomic_t... yes
+checking for sys/socket.h... yes
+checking for arpa/inet.h... yes
+checking for features.h... yes
+checking for unistd.h... (cached) yes
+checking for netdb.h... yes
+checking for netinet/in.h... yes
+checking for getopt.h... yes
+checking for stdio_ext.h... yes
+checking for termios.h... (cached) yes
+checking for sys/time.h... (cached) yes
+checking for iconv.h... yes
+checking for sys/mman.h... yes
+checking for sched.h... yes
+checking for sys/select.h... (cached) yes
+checking for spawn.h... yes
+checking for wchar.h... (cached) yes
+checking for stdint.h... (cached) yes
+checking for strings.h... (cached) yes
+checking for sys/ioctl.h... (cached) yes
+checking for sys/stat.h... (cached) yes
+checking for sys/uio.h... yes
+checking for sys/wait.h... yes
+checking for utime.h... (cached) yes
+checking for wctype.h... yes
+checking for stdlib.h... (cached) yes
+checking for sys/param.h... yes
+checking whether the preprocessor supports include_next... yes
+checking whether system header files limit the line length... no
+checking whether <sys/socket.h> is self-contained... yes
+checking for shutdown... yes
+checking whether <sys/socket.h> defines the SHUT_* macros... yes
+checking for struct sockaddr_storage... yes
+checking for sa_family_t... yes
+checking for struct sockaddr_storage.ss_family... yes
+checking whether socket is declared without a macro... yes
+checking whether connect is declared without a macro... yes
+checking whether accept is declared without a macro... yes
+checking whether bind is declared without a macro... yes
+checking whether getpeername is declared without a macro... yes
+checking whether getsockname is declared without a macro... yes
+checking whether getsockopt is declared without a macro... yes
+checking whether listen is declared without a macro... yes
+checking whether recv is declared without a macro... yes
+checking whether send is declared without a macro... yes
+checking whether recvfrom is declared without a macro... yes
+checking whether sendto is declared without a macro... yes
+checking whether setsockopt is declared without a macro... yes
+checking whether shutdown is declared without a macro... yes
+checking whether accept4 is declared without a macro... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking whether byte ordering is bigendian... no
+checking whether // is distinct from /... no
+checking if environ is properly declared... yes
+checking for complete errno.h... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... yes
+checking whether strerror_r returns char *... yes
+checking for sig_atomic_t... (cached) yes
+checking for fcntl... yes
+checking for symlink... yes
+checking for futimens... yes
+checking for getdelim... yes
+checking for getdtablesize... yes
+checking for __fsetlocking... yes
+checking for tcgetattr... yes
+checking for tcsetattr... yes
+checking for gettimeofday... yes
+checking for nanotime... no
+checking for lstat... yes
+checking for mbsinit... yes
+checking for mbrtowc... yes
+checking for mprotect... yes
+checking for pipe2... yes
+checking for posix_spawn... yes
+checking for sigaction... yes
+checking for sigaltstack... yes
+checking for siginterrupt... yes
+checking for snprintf... yes
+checking for strerror_r... (cached) yes
+checking for __xpg_strerror_r... yes
+checking for catgets... yes
+checking for pipe... yes
+checking for futimes... yes
+checking for futimesat... yes
+checking for utimensat... yes
+checking for lutimes... yes
+checking for vasnprintf... no
+checking for iswcntrl... yes
+checking for working fcntl.h... yes
+checking whether stdin defaults to large file offsets... yes
+checking whether fseeko is declared... yes
+checking for fseeko... yes
+checking whether getaddrinfo is declared without a macro... yes
+checking whether freeaddrinfo is declared without a macro... yes
+checking whether gai_strerror is declared without a macro... yes
+checking whether getnameinfo is declared without a macro... yes
+checking for library containing gethostbyname... none required
+checking for gethostbyname... yes
+checking for library containing getservbyname... none required
+checking for getservbyname... yes
+checking for C/C++ restrict keyword... __restrict
+checking for library containing inet_ntop... none required
+checking whether inet_ntop is declared... yes
+checking for IPv4 sockets... yes
+checking for IPv6 sockets... yes
+checking whether getdelim is declared... yes
+checking whether getline is declared... yes
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... no
+checking whether getenv is declared... yes
+checking whether getpass is declared... yes
+checking whether fflush_unlocked is declared... yes
+checking whether flockfile is declared... yes
+checking whether fputs_unlocked is declared... yes
+checking whether funlockfile is declared... yes
+checking whether putc_unlocked is declared... yes
+checking for struct timeval... yes
+checking whether gettimeofday is declared without a macro... yes
+checking for iconv... yes
+checking for working iconv... yes
+checking for iconv declaration... 
+         extern size_t iconv (iconv_t cd, char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);
+checking for nl_langinfo and CODESET... yes
+checking whether getc_unlocked is declared... yes
+checking whether we are using the GNU C Library >= 2.1 or uClibc... yes
+checking whether imported symbols can be declared weak... yes
+checking pthread.h usability... yes
+checking pthread.h presence... yes
+checking for pthread.h... yes
+checking for pthread_kill in -lpthread... yes
+checking for multithread API to use... posix
+checking whether lstat correctly handles trailing slash... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking for mbstate_t... yes
+checking for a traditional japanese locale... ja_JP
+checking for a transitional chinese locale... zh_CN.GB18030
+checking for a french Unicode locale... fr_FR.UTF-8
+checking for mmap... yes
+checking for MAP_ANONYMOUS... yes
+checking whether memchr works... yes
+checking for mode_t... yes
+checking for promoted mode_t type... mode_t
+checking whether posix_spawn works... yes
+checking whether posix_spawnattr_setschedpolicy is supported... yes
+checking whether posix_spawnattr_setschedparam is supported... yes
+checking whether <sys/select.h> is self-contained... yes
+checking whether pselect is declared without a macro... yes
+checking whether select is declared without a macro... yes
+checking for library containing setsockopt... none needed
+checking for uid_t in sys/types.h... yes
+checking for sigset_t... yes
+checking for SIGPIPE... yes
+checking whether C symbols are prefixed with underscore at the linker level... no
+checking whether snprintf returns a byte count as in C99... yes
+checking whether snprintf is declared... yes
+checking for stdbool.h that conforms to C99... (cached) yes
+checking for _Bool... (cached) yes
+checking for wchar_t... yes
+checking for unsigned long long int... yes
+checking for long long int... yes
+checking whether stdint.h conforms to C99... yes
+checking for strcasestr... yes
+checking whether strcasestr works... yes
+checking whether strerror(0) succeeds... yes
+checking for strerror_r with POSIX signature... no
+checking whether __xpg_strerror_r works... no
+checking whether strerror_r is declared... (cached) yes
+checking whether ffsl is declared without a macro... yes
+checking whether ffsll is declared without a macro... yes
+checking whether memmem is declared without a macro... yes
+checking whether mempcpy is declared without a macro... yes
+checking whether memrchr is declared without a macro... yes
+checking whether rawmemchr is declared without a macro... yes
+checking whether stpcpy is declared without a macro... yes
+checking whether stpncpy is declared without a macro... yes
+checking whether strchrnul is declared without a macro... yes
+checking whether strdup is declared without a macro... yes
+checking whether strncat is declared without a macro... yes
+checking whether strndup is declared without a macro... yes
+checking whether strnlen is declared without a macro... yes
+checking whether strpbrk is declared without a macro... yes
+checking whether strsep is declared without a macro... yes
+checking whether strcasestr is declared without a macro... yes
+checking whether strtok_r is declared without a macro... yes
+checking whether strerror_r is declared without a macro... yes
+checking whether strsignal is declared without a macro... yes
+checking whether strverscmp is declared without a macro... yes
+checking whether ffs is declared without a macro... yes
+checking whether strcasecmp is declared without a macro... yes
+checking whether strncasecmp is declared without a macro... yes
+checking whether stat file-mode macros are broken... no
+checking for struct timespec in <time.h>... yes
+checking whether clearerr_unlocked is declared... yes
+checking whether feof_unlocked is declared... yes
+checking whether ferror_unlocked is declared... yes
+checking whether fgets_unlocked is declared... yes
+checking whether fputc_unlocked is declared... yes
+checking whether fread_unlocked is declared... yes
+checking whether fwrite_unlocked is declared... yes
+checking whether getchar_unlocked is declared... yes
+checking whether putchar_unlocked is declared... yes
+checking whether the utimes function works... yes
+checking for struct utimbuf... yes
+checking for wint_t... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for intmax_t... yes
+checking for snprintf... (cached) yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... (cached) yes
+checking for wcrtomb... yes
+checking whether _snprintf is declared... no
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking for alloca as a compiler built-in... yes
+checking whether inet_ntop is declared without a macro... yes
+checking whether inet_pton is declared without a macro... yes
+checking for library containing clock_gettime... -lrt
+checking for clock_gettime... yes
+checking for clock_settime... yes
+checking whether // is distinct from /... (cached) no
+checking whether dup2 works... yes
+checking for error_at_line... yes
+checking whether fcntl handles F_DUPFD correctly... yes
+checking whether fcntl understands F_DUPFD_CLOEXEC... needs runtime check
+checking whether fcntl is declared without a macro... yes
+checking whether openat is declared without a macro... yes
+checking for fseeko... (cached) yes
+checking whether futimens works... needs runtime check
+configure: checking how to do getaddrinfo, freeaddrinfo and getnameinfo
+checking for library containing getaddrinfo... none required
+checking for getaddrinfo... yes
+checking whether gai_strerror is declared... (cached) yes
+checking whether gai_strerrorA is declared... no
+checking for gai_strerror with POSIX signature... yes
+checking for struct sockaddr.sa_len... no
+checking whether getaddrinfo is declared... (cached) yes
+checking whether freeaddrinfo is declared... (cached) yes
+checking whether getnameinfo is declared... (cached) yes
+checking for struct addrinfo... yes
+checking for working getdelim function... yes
+checking for getline... yes
+checking for working getline function... yes
+checking whether __fsetlocking is declared... yes
+checking whether gettimeofday clobbers localtime buffer... no
+checking for gettimeofday with POSIX signature... almost
+checking for library containing gethostbyname... (cached) none required
+checking for gethostbyname... (cached) yes
+checking for library containing inet_ntop... (cached) none required
+checking whether inet_ntop is declared... (cached) yes
+checking whether the compiler generally respects inline... yes
+checking for ioctl... yes
+checking for ioctl with POSIX signature... no
+checking for pthread_rwlock_t... yes
+checking whether lseek detects pipes... yes
+checking whether mbrtowc handles incomplete characters... yes
+checking whether mbrtowc works as well as mbtowc... yes
+checking whether mbrtowc handles a NULL pwc argument... yes
+checking whether mbrtowc handles a NULL string argument... yes
+checking whether mbrtowc has a correct return value... yes
+checking whether mbrtowc returns 0 when parsing a NUL character... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mkdir handles trailing slash... yes
+checking whether mkdir handles trailing dot... yes
+checking whether getaddrinfo is declared without a macro... (cached) yes
+checking whether freeaddrinfo is declared without a macro... (cached) yes
+checking whether gai_strerror is declared without a macro... (cached) yes
+checking whether getnameinfo is declared without a macro... (cached) yes
+checking whether <netinet/in.h> is self-contained... yes
+checking whether open recognizes a trailing slash... yes
+checking for rawmemchr... yes
+checking whether select supports a 0 argument... yes
+checking for library containing getservbyname... (cached) none required
+checking for getservbyname... (cached) yes
+checking for struct sigaction.sa_sigaction... yes
+checking for volatile sig_atomic_t... yes
+checking for sighandler_t... yes
+checking whether pthread_sigmask is declared without a macro... yes
+checking whether sigaction is declared without a macro... yes
+checking whether sigaddset is declared without a macro... yes
+checking whether sigdelset is declared without a macro... yes
+checking whether sigemptyset is declared without a macro... yes
+checking whether sigfillset is declared without a macro... yes
+checking whether sigismember is declared without a macro... yes
+checking whether sigpending is declared without a macro... yes
+checking whether sigprocmask is declared without a macro... yes
+checking for sigprocmask... yes
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking for snprintf... (cached) yes
+checking whether snprintf respects a size of 1... yes
+checking whether printf supports POSIX/XSI format strings with positions... yes
+checking for library containing setsockopt... (cached) none needed
+checking for socklen_t... yes
+checking for posix_spawnattr_t... yes
+checking for posix_spawn_file_actions_t... yes
+checking whether posix_spawn is declared without a macro... yes
+checking whether posix_spawnp is declared without a macro... yes
+checking whether posix_spawnattr_init is declared without a macro... yes
+checking whether posix_spawnattr_destroy is declared without a macro... yes
+checking whether posix_spawnattr_getsigdefault is declared without a macro... yes
+checking whether posix_spawnattr_setsigdefault is declared without a macro... yes
+checking whether posix_spawnattr_getsigmask is declared without a macro... yes
+checking whether posix_spawnattr_setsigmask is declared without a macro... yes
+checking whether posix_spawnattr_getflags is declared without a macro... yes
+checking whether posix_spawnattr_setflags is declared without a macro... yes
+checking whether posix_spawnattr_getpgroup is declared without a macro... yes
+checking whether posix_spawnattr_setpgroup is declared without a macro... yes
+checking whether posix_spawnattr_getschedpolicy is declared without a macro... yes
+checking whether posix_spawnattr_setschedpolicy is declared without a macro... yes
+checking whether posix_spawnattr_getschedparam is declared without a macro... yes
+checking whether posix_spawnattr_setschedparam is declared without a macro... yes
+checking whether posix_spawn_file_actions_init is declared without a macro... yes
+checking whether posix_spawn_file_actions_destroy is declared without a macro... yes
+checking whether posix_spawn_file_actions_addopen is declared without a macro... yes
+checking whether posix_spawn_file_actions_addclose is declared without a macro... yes
+checking whether posix_spawn_file_actions_adddup2 is declared without a macro... yes
+checking whether stat handles trailing slashes on directories... yes
+checking whether stat handles trailing slashes on files... yes
+checking for struct stat.st_atim.tv_nsec... yes
+checking whether struct stat.st_atim is of type struct timespec... yes
+checking for struct stat.st_birthtimespec.tv_nsec... no
+checking for struct stat.st_birthtimensec... no
+checking for struct stat.st_birthtim.tv_nsec... no
+checking whether NULL can be used in arbitrary expressions... yes
+checking whether dprintf is declared without a macro... yes
+checking whether fpurge is declared without a macro... no
+checking whether fseeko is declared without a macro... yes
+checking whether ftello is declared without a macro... yes
+checking whether getdelim is declared without a macro... yes
+checking whether getline is declared without a macro... yes
+checking whether popen is declared without a macro... yes
+checking whether renameat is declared without a macro... yes
+checking whether snprintf is declared without a macro... yes
+checking whether tmpfile is declared without a macro... yes
+checking whether vdprintf is declared without a macro... yes
+checking whether vsnprintf is declared without a macro... yes
+checking whether _Exit is declared without a macro... yes
+checking whether atoll is declared without a macro... yes
+checking whether canonicalize_file_name is declared without a macro... yes
+checking whether getloadavg is declared without a macro... yes
+checking whether getsubopt is declared without a macro... yes
+checking whether grantpt is declared without a macro... yes
+checking whether mkdtemp is declared without a macro... yes
+checking whether mkostemp is declared without a macro... yes
+checking whether mkostemps is declared without a macro... yes
+checking whether mkstemp is declared without a macro... yes
+checking whether mkstemps is declared without a macro... yes
+checking whether ptsname is declared without a macro... yes
+checking whether random_r is declared without a macro... yes
+checking whether initstat_r is declared without a macro... no
+checking whether srandom_r is declared without a macro... yes
+checking whether setstate_r is declared without a macro... yes
+checking whether realpath is declared without a macro... yes
+checking whether rpmatch is declared without a macro... yes
+checking whether setenv is declared without a macro... yes
+checking whether strtod is declared without a macro... yes
+checking whether strtoll is declared without a macro... yes
+checking whether strtoull is declared without a macro... yes
+checking whether unlockpt is declared without a macro... yes
+checking whether unsetenv is declared without a macro... yes
+checking for strcasecmp... yes
+checking for strncasecmp... yes
+checking whether strncasecmp is declared... (cached) yes
+checking whether strcasestr works in linear time... yes
+checking for strcasestr... (cached) yes
+checking whether strcasestr works... (cached) yes
+checking for strchrnul... yes
+checking whether strchrnul works... yes
+checking for working strerror function... yes
+checking whether <sys/ioctl.h> declares ioctl... yes
+checking whether ioctl is declared without a macro... yes
+checking whether <sys/select.h> is self-contained... (cached) yes
+checking whether pselect is declared without a macro... (cached) yes
+checking whether select is declared without a macro... (cached) yes
+checking whether <sys/socket.h> is self-contained... (cached) yes
+checking for shutdown... (cached) yes
+checking whether <sys/socket.h> defines the SHUT_* macros... (cached) yes
+checking for struct sockaddr_storage... (cached) yes
+checking for sa_family_t... (cached) yes
+checking for struct sockaddr_storage.ss_family... (cached) yes
+checking whether socket is declared without a macro... (cached) yes
+checking whether connect is declared without a macro... (cached) yes
+checking whether accept is declared without a macro... (cached) yes
+checking whether bind is declared without a macro... (cached) yes
+checking whether getpeername is declared without a macro... (cached) yes
+checking whether getsockname is declared without a macro... (cached) yes
+checking whether getsockopt is declared without a macro... (cached) yes
+checking whether listen is declared without a macro... (cached) yes
+checking whether recv is declared without a macro... (cached) yes
+checking whether send is declared without a macro... (cached) yes
+checking whether recvfrom is declared without a macro... (cached) yes
+checking whether sendto is declared without a macro... (cached) yes
+checking whether setsockopt is declared without a macro... (cached) yes
+checking whether shutdown is declared without a macro... (cached) yes
+checking whether accept4 is declared without a macro... (cached) yes
+checking for nlink_t... yes
+checking whether fchmodat is declared without a macro... yes
+checking whether fstatat is declared without a macro... yes
+checking whether futimens is declared without a macro... yes
+checking whether lchmod is declared without a macro... yes
+checking whether lstat is declared without a macro... yes
+checking whether mkdirat is declared without a macro... yes
+checking whether mkfifo is declared without a macro... yes
+checking whether mkfifoat is declared without a macro... yes
+checking whether mknod is declared without a macro... yes
+checking whether mknodat is declared without a macro... yes
+checking whether stat is declared without a macro... yes
+checking whether utimensat is declared without a macro... yes
+checking whether waitpid is declared without a macro... yes
+checking whether chown is declared without a macro... yes
+checking whether dup2 is declared without a macro... yes
+checking whether dup3 is declared without a macro... yes
+checking whether environ is declared without a macro... yes
+checking whether euidaccess is declared without a macro... yes
+checking whether faccessat is declared without a macro... yes
+checking whether fchdir is declared without a macro... yes
+checking whether fchownat is declared without a macro... yes
+checking whether fsync is declared without a macro... yes
+checking whether ftruncate is declared without a macro... yes
+checking whether getcwd is declared without a macro... yes
+checking whether getdomainname is declared without a macro... yes
+checking whether getdtablesize is declared without a macro... yes
+checking whether getgroups is declared without a macro... yes
+checking whether gethostname is declared without a macro... yes
+checking whether getlogin is declared without a macro... yes
+checking whether getlogin_r is declared without a macro... yes
+checking whether getpagesize is declared without a macro... yes
+checking whether getusershell is declared without a macro... yes
+checking whether setusershell is declared without a macro... yes
+checking whether endusershell is declared without a macro... yes
+checking whether group_member is declared without a macro... yes
+checking whether lchown is declared without a macro... yes
+checking whether link is declared without a macro... yes
+checking whether linkat is declared without a macro... yes
+checking whether lseek is declared without a macro... yes
+checking whether pipe is declared without a macro... yes
+checking whether pipe2 is declared without a macro... yes
+checking whether pread is declared without a macro... yes
+checking whether pwrite is declared without a macro... yes
+checking whether readlink is declared without a macro... yes
+checking whether readlinkat is declared without a macro... yes
+checking whether rmdir is declared without a macro... yes
+checking whether sleep is declared without a macro... yes
+checking whether symlink is declared without a macro... yes
+checking whether symlinkat is declared without a macro... yes
+checking whether ttyname_r is declared without a macro... yes
+checking whether unlink is declared without a macro... yes
+checking whether unlinkat is declared without a macro... yes
+checking whether usleep is declared without a macro... yes
+checking for ptrdiff_t... yes
+checking for vasprintf... yes
+checking for waitid... yes
+checking whether btowc is declared without a macro... yes
+checking whether wctob is declared without a macro... yes
+checking whether mbsinit is declared without a macro... yes
+checking whether mbrtowc is declared without a macro... yes
+checking whether mbrlen is declared without a macro... yes
+checking whether mbsrtowcs is declared without a macro... yes
+checking whether mbsnrtowcs is declared without a macro... yes
+checking whether wcrtomb is declared without a macro... yes
+checking whether wcsrtombs is declared without a macro... yes
+checking whether wcsnrtombs is declared without a macro... yes
+checking whether wcwidth is declared without a macro... yes
+checking whether wmemchr is declared without a macro... yes
+checking whether wmemcmp is declared without a macro... yes
+checking whether wmemcpy is declared without a macro... yes
+checking whether wmemmove is declared without a macro... yes
+checking whether wmemset is declared without a macro... yes
+checking whether wcslen is declared without a macro... yes
+checking whether wcsnlen is declared without a macro... yes
+checking whether wcscpy is declared without a macro... yes
+checking whether wcpcpy is declared without a macro... yes
+checking whether wcsncpy is declared without a macro... yes
+checking whether wcpncpy is declared without a macro... yes
+checking whether wcscat is declared without a macro... yes
+checking whether wcsncat is declared without a macro... yes
+checking whether wcscmp is declared without a macro... yes
+checking whether wcsncmp is declared without a macro... yes
+checking whether wcscasecmp is declared without a macro... yes
+checking whether wcsncasecmp is declared without a macro... yes
+checking whether wcscoll is declared without a macro... yes
+checking whether wcsxfrm is declared without a macro... yes
+checking whether wcsdup is declared without a macro... yes
+checking whether wcschr is declared without a macro... yes
+checking whether wcsrchr is declared without a macro... yes
+checking whether wcscspn is declared without a macro... yes
+checking whether wcsspn is declared without a macro... yes
+checking whether wcspbrk is declared without a macro... yes
+checking whether wcsstr is declared without a macro... yes
+checking whether wcstok is declared without a macro... yes
+checking whether wcswidth is declared without a macro... yes
+checking whether iswcntrl works... yes
+checking for towlower... yes
+checking for wctype_t... yes
+checking for wctrans_t... yes
+checking whether wctype is declared without a macro... yes
+checking whether iswctype is declared without a macro... yes
+checking whether wctrans is declared without a macro... yes
+checking whether towctrans is declared without a macro... yes
+checking for stdint.h... (cached) yes
+checking for getpagesize... yes
+checking for working mmap... yes
+checking for _LARGEFILE_SOURCE value needed for large files... (cached) no
+checking for strptime... yes
+checking for timegm... yes
+checking for vsnprintf... yes
+checking for vasprintf... (cached) yes
+checking for drand48... yes
+checking for strtoll... yes
+checking for usleep... yes
+checking for ftello... yes
+checking for sigblock... yes
+checking for sigsetjmp... no
+checking for memrchr... yes
+checking for wcwidth... yes
+checking for mbtowc... yes
+checking for sleep... yes
+checking for symlink... (cached) yes
+checking for utime... yes
+checking for struct utimbuf... yes
+checking for working fnmatch.h... yes
+checking for nanosleep... yes
+checking for clock_gettime... (cached) yes
+checking for gethostbyname... (cached) yes
+checking for inet_ntoa... yes
+checking for socket in -lsocket... no
+checking for compress in -lz... yes
+checking for dlopen in -ldl... yes
+checking for libssl... yes
+checking how to link with libssl... -lssl -lcrypto -lz
+configure: compiling in support for SSL via OpenSSL
+checking for INET6 protocol support... yes
+checking for struct sockaddr_in6... yes
+checking for struct sockaddr_storage... (cached) yes
+checking for struct sockaddr_in6.sin6_scope_id... yes
+configure: Enabling support for IPv6.
+checking for makeinfo... ${SHELL} /usr/src/rpm/BUILD/wget-1.13.4/build-aux/missing --run makeinfo
+checking for perl5... no
+checking for perl... /usr/bin/perl
+checking for pod2man... /usr/bin/pod2man
+checking idna.h usability... no
+checking idna.h presence... no
+checking for idna.h... no
+checking idn/idn-int.h usability... no
+checking idn/idn-int.h presence... no
+checking for idn/idn-int.h... no
+configure: WARNING: Libidn not found
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating doc/Makefile
+config.status: creating util/Makefile
+config.status: creating po/Makefile.in
+config.status: creating tests/Makefile
+config.status: creating tests/WgetTest.pm
+config.status: creating lib/Makefile
+config.status: creating src/config.h
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
++ make -j4
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4'
+Making all in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+rm -f alloca.h-t alloca.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  cat ./alloca.in.h; \
+} > alloca.h-t && \
+mv -f alloca.h-t alloca.h
+rm -f c++defs.h-t c++defs.h && \
+sed -n -e '/_GL_CXXDEFS/,$p' \
+  < ../build-aux/snippet/c++defs.h \
+  > c++defs.h-t && \
+mv c++defs.h-t c++defs.h
+rm -f warn-on-use.h-t warn-on-use.h && \
+sed -n -e '/^.ifndef/,$p' \
+  < ../build-aux/snippet/warn-on-use.h \
+  > warn-on-use.h-t && \
+mv warn-on-use.h-t warn-on-use.h
+rm -f arg-nonnull.h-t arg-nonnull.h && \
+sed -n -e '/GL_ARG_NONNULL/,$p' \
+  < ../build-aux/snippet/arg-nonnull.h \
+  > arg-nonnull.h-t && \
+mv arg-nonnull.h-t arg-nonnull.h
+rm -f configmake.h-t && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  echo '#define PREFIX "/usr"'; \
+  echo '#define EXEC_PREFIX "/usr"'; \
+  echo '#define BINDIR "/usr/bin"'; \
+  echo '#define SBINDIR "/usr/sbin"'; \
+  echo '#define LIBEXECDIR "/usr/libexec"'; \
+  echo '#define DATAROOTDIR "/usr/share"'; \
+  echo '#define DATADIR "/usr/share"'; \
+  echo '#define SYSCONFDIR "/etc"'; \
+  echo '#define SHAREDSTATEDIR "/usr/com"'; \
+  echo '#define LOCALSTATEDIR "/usr/var"'; \
+  echo '#define INCLUDEDIR "/usr/include"'; \
+  echo '#define OLDINCLUDEDIR "/usr/include"'; \
+  echo '#define DOCDIR "/usr/share/doc/wget"'; \
+  echo '#define INFODIR "/usr/share/info"'; \
+  echo '#define HTMLDIR "/usr/share/doc/wget"'; \
+  echo '#define DVIDIR "/usr/share/doc/wget"'; \
+  echo '#define PDFDIR "/usr/share/doc/wget"'; \
+  echo '#define PSDIR "/usr/share/doc/wget"'; \
+  echo '#define LIBDIR "/usr/lib"'; \
+  echo '#define LISPDIR "/usr/share/emacs/site-lisp"'; \
+  echo '#define LOCALEDIR "/usr/share/locale"'; \
+  echo '#define MANDIR "/usr/share/man"'; \
+  echo '#define MANEXT ""'; \
+  echo '#define PKGDATADIR "/usr/share/wget"'; \
+  echo '#define PKGINCLUDEDIR "/usr/include/wget"'; \
+  echo '#define PKGLIBDIR "/usr/lib/wget"'; \
+  echo '#define PKGLIBEXECDIR "/usr/libexec/wget"'; \
+} | sed '/""/d' > configmake.h-t
+/bin/mkdir -p sys
+/bin/mkdir -p sys
+/bin/mkdir -p sys
+rm -f sys/types.h-t sys/types.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_TYPES_H''@|<sys/types.h>|g' \
+      < ./sys_types.in.h; \
+} > sys/types.h-t && \
+mv sys/types.h-t sys/types.h
+rm -f sys/uio.h-t sys/uio.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_UIO_H''@|<sys/uio.h>|g' \
+      -e 's|@''HAVE_SYS_UIO_H''@|1|g' \
+      < ./sys_uio.in.h; \
+} > sys/uio.h-t && \
+mv -f sys/uio.h-t sys/uio.h
+rm -f sys/wait.h-t sys/wait.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_WAIT_H''@|<sys/wait.h>|g' \
+      -e 's/@''GNULIB_WAITPID''@/1/g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_wait.in.h; \
+} > sys/wait.h-t && \
+mv sys/wait.h-t sys/wait.h
+mv -f configmake.h-t configmake.h
+rm -f time.h-t time.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_TIME_H''@|<time.h>|g' \
+      -e 's/@''GNULIB_MKTIME''@/0/g' \
+      -e 's/@''GNULIB_NANOSLEEP''@/0/g' \
+      -e 's/@''GNULIB_STRPTIME''@/0/g' \
+      -e 's/@''GNULIB_TIMEGM''@/0/g' \
+      -e 's/@''GNULIB_TIME_R''@/0/g' \
+      -e 's|@''HAVE_DECL_LOCALTIME_R''@|1|g' \
+      -e 's|@''HAVE_NANOSLEEP''@|1|g' \
+      -e 's|@''HAVE_STRPTIME''@|1|g' \
+      -e 's|@''HAVE_TIMEGM''@|1|g' \
+      -e 's|@''REPLACE_LOCALTIME_R''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_MKTIME''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_NANOSLEEP''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''REPLACE_TIMEGM''@|GNULIB_PORTCHECK|g' \
+      -e 's|@''PTHREAD_H_DEFINES_STRUCT_TIMESPEC''@|0|g' \
+      -e 's|@''SYS_TIME_H_DEFINES_STRUCT_TIMESPEC''@|0|g' \
+      -e 's|@''TIME_H_DEFINES_STRUCT_TIMESPEC''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./time.in.h; \
+} > time.h-t && \
+mv time.h-t time.h
+rm -f unistd.h-t unistd.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''HAVE_UNISTD_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_UNISTD_H''@|<unistd.h>|g' \
+      -e 's/@''GNULIB_CHOWN''@/0/g' \
+      -e 's/@''GNULIB_CLOSE''@/1/g' \
+      -e 's/@''GNULIB_DUP2''@/1/g' \
+      -e 's/@''GNULIB_DUP3''@/0/g' \
+      -e 's/@''GNULIB_ENVIRON''@/1/g' \
+      -e 's/@''GNULIB_EUIDACCESS''@/0/g' \
+      -e 's/@''GNULIB_FACCESSAT''@/0/g' \
+      -e 's/@''GNULIB_FCHDIR''@/0/g' \
+      -e 's/@''GNULIB_FCHOWNAT''@/0/g' \
+      -e 's/@''GNULIB_FSYNC''@/0/g' \
+      -e 's/@''GNULIB_FTRUNCATE''@/0/g' \
+      -e 's/@''GNULIB_GETCWD''@/0/g' \
+      -e 's/@''GNULIB_GETDOMAINNAME''@/0/g' \
+      -e 's/@''GNULIB_GETDTABLESIZE''@/1/g' \
+      -e 's/@''GNULIB_GETGROUPS''@/0/g' \
+      -e 's/@''GNULIB_GETHOSTNAME''@/0/g' \
+      -e 's/@''GNULIB_GETLOGIN''@/0/g' \
+      -e 's/@''GNULIB_GETLOGIN_R''@/0/g' \
+      -e 's/@''GNULIB_GETPAGESIZE''@/0/g' \
+      -e 's/@''GNULIB_GETUSERSHELL''@/0/g' \
+      -e 's/@''GNULIB_GROUP_MEMBER''@/0/g' \
+      -e 's/@''GNULIB_LCHOWN''@/0/g' \
+      -e 's/@''GNULIB_LINK''@/0/g' \
+      -e 's/@''GNULIB_LINKAT''@/0/g' \
+      -e 's/@''GNULIB_LSEEK''@/1/g' \
+      -e 's/@''GNULIB_PIPE''@/0/g' \
+      -e 's/@''GNULIB_PIPE2''@/1/g' \
+      -e 's/@''GNULIB_PREAD''@/0/g' \
+      -e 's/@''GNULIB_PWRITE''@/0/g' \
+      -e 's/@''GNULIB_READ''@/0/g' \
+      -e 's/@''GNULIB_READLINK''@/0/g' \
+      -e 's/@''GNULIB_READLINKAT''@/0/g' \
+      -e 's/@''GNULIB_RMDIR''@/0/g' \
+      -e 's/@''GNULIB_SLEEP''@/0/g' \
+      -e 's/@''GNULIB_SYMLINK''@/0/g' \
+      -e 's/@''GNULIB_SYMLINKAT''@/0/g' \
+      -e 's/@''GNULIB_TTYNAME_R''@/0/g' \
+      -e 's/@''GNULIB_UNISTD_H_GETOPT''@/1/g' \
+      -e 's/@''GNULIB_UNISTD_H_NONBLOCKING''@/0/g' \
+      -e 's/@''GNULIB_UNISTD_H_SIGPIPE''@/1/g' \
+      -e 's/@''GNULIB_UNLINK''@/0/g' \
+      -e 's/@''GNULIB_UNLINKAT''@/0/g' \
+      -e 's/@''GNULIB_USLEEP''@/0/g' \
+      -e 's/@''GNULIB_WRITE''@/1/g' \
+      < ./unistd.in.h | \
+  sed -e 's|@''HAVE_CHOWN''@|1|g' \
+      -e 's|@''HAVE_DUP2''@|1|g' \
+      -e 's|@''HAVE_DUP3''@|1|g' \
+      -e 's|@''HAVE_EUIDACCESS''@|1|g' \
+      -e 's|@''HAVE_FACCESSAT''@|1|g' \
+      -e 's|@''HAVE_FCHDIR''@|1|g' \
+      -e 's|@''HAVE_FCHOWNAT''@|1|g' \
+      -e 's|@''HAVE_FSYNC''@|1|g' \
+      -e 's|@''HAVE_FTRUNCATE''@|1|g' \
+      -e 's|@''HAVE_GETDTABLESIZE''@|1|g' \
+      -e 's|@''HAVE_GETGROUPS''@|1|g' \
+      -e 's|@''HAVE_GETHOSTNAME''@|1|g' \
+      -e 's|@''HAVE_GETLOGIN''@|1|g' \
+      -e 's|@''HAVE_GETPAGESIZE''@|1|g' \
+      -e 's|@''HAVE_GROUP_MEMBER''@|1|g' \
+      -e 's|@''HAVE_LCHOWN''@|1|g' \
+      -e 's|@''HAVE_LINK''@|1|g' \
+      -e 's|@''HAVE_LINKAT''@|1|g' \
+      -e 's|@''HAVE_PIPE''@|1|g' \
+      -e 's|@''HAVE_PIPE2''@|1|g' \
+      -e 's|@''HAVE_PREAD''@|1|g' \
+      -e 's|@''HAVE_PWRITE''@|1|g' \
+      -e 's|@''HAVE_READLINK''@|1|g' \
+      -e 's|@''HAVE_READLINKAT''@|1|g' \
+      -e 's|@''HAVE_SLEEP''@|1|g' \
+      -e 's|@''HAVE_SYMLINK''@|1|g' \
+      -e 's|@''HAVE_SYMLINKAT''@|1|g' \
+      -e 's|@''HAVE_UNLINKAT''@|1|g' \
+      -e 's|@''HAVE_USLEEP''@|1|g' \
+      -e 's|@''HAVE_DECL_ENVIRON''@|1|g' \
+      -e 's|@''HAVE_DECL_FCHDIR''@|1|g' \
+      -e 's|@''HAVE_DECL_GETDOMAINNAME''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLOGIN_R''@|1|g' \
+      -e 's|@''HAVE_DECL_GETPAGESIZE''@|1|g' \
+      -e 's|@''HAVE_DECL_GETUSERSHELL''@|1|g' \
+      -e 's|@''HAVE_DECL_TTYNAME_R''@|1|g' \
+      -e 's|@''HAVE_OS_H''@|0|g' \
+      -e 's|@''HAVE_SYS_PARAM_H''@|0|g' \
+  | \
+  sed -e 's|@''REPLACE_CHOWN''@|0|g' \
+      -e 's|@''REPLACE_CLOSE''@|0|g' \
+      -e 's|@''REPLACE_DUP''@|0|g' \
+      -e 's|@''REPLACE_DUP2''@|0|g' \
+      -e 's|@''REPLACE_FCHOWNAT''@|0|g' \
+      -e 's|@''REPLACE_GETCWD''@|0|g' \
+      -e 's|@''REPLACE_GETDOMAINNAME''@|0|g' \
+      -e 's|@''REPLACE_GETLOGIN_R''@|0|g' \
+      -e 's|@''REPLACE_GETGROUPS''@|0|g' \
+      -e 's|@''REPLACE_GETPAGESIZE''@|0|g' \
+      -e 's|@''REPLACE_LCHOWN''@|0|g' \
+      -e 's|@''REPLACE_LINK''@|0|g' \
+      -e 's|@''REPLACE_LINKAT''@|0|g' \
+      -e 's|@''REPLACE_LSEEK''@|0|g' \
+      -e 's|@''REPLACE_PREAD''@|0|g' \
+      -e 's|@''REPLACE_PWRITE''@|0|g' \
+      -e 's|@''REPLACE_READ''@|0|g' \
+      -e 's|@''REPLACE_READLINK''@|0|g' \
+      -e 's|@''REPLACE_RMDIR''@|0|g' \
+      -e 's|@''REPLACE_SLEEP''@|0|g' \
+      -e 's|@''REPLACE_SYMLINK''@|0|g' \
+      -e 's|@''REPLACE_TTYNAME_R''@|0|g' \
+      -e 's|@''REPLACE_UNLINK''@|0|g' \
+      -e 's|@''REPLACE_UNLINKAT''@|0|g' \
+      -e 's|@''REPLACE_USLEEP''@|0|g' \
+      -e 's|@''REPLACE_WRITE''@|0|g' \
+      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H''@|0|g' \
+      -e 's|@''UNISTD_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > unistd.h-t && \
+mv unistd.h-t unistd.h
+rm -f wchar.h-t wchar.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''HAVE_FEATURES_H''@|1|g' \
+      -e 's|@''NEXT_WCHAR_H''@|<wchar.h>|g' \
+      -e 's|@''HAVE_WCHAR_H''@|1|g' \
+      -e 's/@''GNULIB_BTOWC''@/0/g' \
+      -e 's/@''GNULIB_WCTOB''@/0/g' \
+      -e 's/@''GNULIB_MBSINIT''@/1/g' \
+      -e 's/@''GNULIB_MBRTOWC''@/1/g' \
+      -e 's/@''GNULIB_MBRLEN''@/0/g' \
+      -e 's/@''GNULIB_MBSRTOWCS''@/0/g' \
+      -e 's/@''GNULIB_MBSNRTOWCS''@/0/g' \
+      -e 's/@''GNULIB_WCRTOMB''@/0/g' \
+      -e 's/@''GNULIB_WCSRTOMBS''@/0/g' \
+      -e 's/@''GNULIB_WCSNRTOMBS''@/0/g' \
+      -e 's/@''GNULIB_WCWIDTH''@/0/g' \
+      -e 's/@''GNULIB_WMEMCHR''@/0/g' \
+      -e 's/@''GNULIB_WMEMCMP''@/0/g' \
+      -e 's/@''GNULIB_WMEMCPY''@/0/g' \
+      -e 's/@''GNULIB_WMEMMOVE''@/0/g' \
+      -e 's/@''GNULIB_WMEMSET''@/0/g' \
+      -e 's/@''GNULIB_WCSLEN''@/0/g' \
+      -e 's/@''GNULIB_WCSNLEN''@/0/g' \
+      -e 's/@''GNULIB_WCSCPY''@/0/g' \
+      -e 's/@''GNULIB_WCPCPY''@/0/g' \
+      -e 's/@''GNULIB_WCSNCPY''@/0/g' \
+      -e 's/@''GNULIB_WCPNCPY''@/0/g' \
+      -e 's/@''GNULIB_WCSCAT''@/0/g' \
+      -e 's/@''GNULIB_WCSNCAT''@/0/g' \
+      -e 's/@''GNULIB_WCSCMP''@/0/g' \
+      -e 's/@''GNULIB_WCSNCMP''@/0/g' \
+      -e 's/@''GNULIB_WCSCASECMP''@/0/g' \
+      -e 's/@''GNULIB_WCSNCASECMP''@/0/g' \
+      -e 's/@''GNULIB_WCSCOLL''@/0/g' \
+      -e 's/@''GNULIB_WCSXFRM''@/0/g' \
+      -e 's/@''GNULIB_WCSDUP''@/0/g' \
+      -e 's/@''GNULIB_WCSCHR''@/0/g' \
+      -e 's/@''GNULIB_WCSRCHR''@/0/g' \
+      -e 's/@''GNULIB_WCSCSPN''@/0/g' \
+      -e 's/@''GNULIB_WCSSPN''@/0/g' \
+      -e 's/@''GNULIB_WCSPBRK''@/0/g' \
+      -e 's/@''GNULIB_WCSSTR''@/0/g' \
+      -e 's/@''GNULIB_WCSTOK''@/0/g' \
+      -e 's/@''GNULIB_WCSWIDTH''@/0/g' \
+      < ./wchar.in.h | \
+  sed -e 's|@''HAVE_WINT_T''@|1|g' \
+      -e 's|@''HAVE_BTOWC''@|1|g' \
+      -e 's|@''HAVE_MBSINIT''@|1|g' \
+      -e 's|@''HAVE_MBRTOWC''@|1|g' \
+      -e 's|@''HAVE_MBRLEN''@|1|g' \
+      -e 's|@''HAVE_MBSRTOWCS''@|1|g' \
+      -e 's|@''HAVE_MBSNRTOWCS''@|1|g' \
+      -e 's|@''HAVE_WCRTOMB''@|1|g' \
+      -e 's|@''HAVE_WCSRTOMBS''@|1|g' \
+      -e 's|@''HAVE_WCSNRTOMBS''@|1|g' \
+      -e 's|@''HAVE_WMEMCHR''@|1|g' \
+      -e 's|@''HAVE_WMEMCMP''@|1|g' \
+      -e 's|@''HAVE_WMEMCPY''@|1|g' \
+      -e 's|@''HAVE_WMEMMOVE''@|1|g' \
+      -e 's|@''HAVE_WMEMSET''@|1|g' \
+      -e 's|@''HAVE_WCSLEN''@|1|g' \
+      -e 's|@''HAVE_WCSNLEN''@|1|g' \
+      -e 's|@''HAVE_WCSCPY''@|1|g' \
+      -e 's|@''HAVE_WCPCPY''@|1|g' \
+      -e 's|@''HAVE_WCSNCPY''@|1|g' \
+      -e 's|@''HAVE_WCPNCPY''@|1|g' \
+      -e 's|@''HAVE_WCSCAT''@|1|g' \
+      -e 's|@''HAVE_WCSNCAT''@|1|g' \
+      -e 's|@''HAVE_WCSCMP''@|1|g' \
+      -e 's|@''HAVE_WCSNCMP''@|1|g' \
+      -e 's|@''HAVE_WCSCASECMP''@|1|g' \
+      -e 's|@''HAVE_WCSNCASECMP''@|1|g' \
+      -e 's|@''HAVE_WCSCOLL''@|1|g' \
+      -e 's|@''HAVE_WCSXFRM''@|1|g' \
+      -e 's|@''HAVE_WCSDUP''@|1|g' \
+      -e 's|@''HAVE_WCSCHR''@|1|g' \
+      -e 's|@''HAVE_WCSRCHR''@|1|g' \
+      -e 's|@''HAVE_WCSCSPN''@|1|g' \
+      -e 's|@''HAVE_WCSSPN''@|1|g' \
+      -e 's|@''HAVE_WCSPBRK''@|1|g' \
+      -e 's|@''HAVE_WCSSTR''@|1|g' \
+      -e 's|@''HAVE_WCSTOK''@|1|g' \
+      -e 's|@''HAVE_WCSWIDTH''@|1|g' \
+      -e 's|@''HAVE_DECL_WCTOB''@|1|g' \
+      -e 's|@''HAVE_DECL_WCWIDTH''@|1|g' \
+  | \
+  sed -e 's|@''REPLACE_MBSTATE_T''@|0|g' \
+      -e 's|@''REPLACE_BTOWC''@|0|g' \
+      -e 's|@''REPLACE_WCTOB''@|0|g' \
+      -e 's|@''REPLACE_MBSINIT''@|0|g' \
+      -e 's|@''REPLACE_MBRTOWC''@|0|g' \
+      -e 's|@''REPLACE_MBRLEN''@|0|g' \
+      -e 's|@''REPLACE_MBSRTOWCS''@|0|g' \
+      -e 's|@''REPLACE_MBSNRTOWCS''@|0|g' \
+      -e 's|@''REPLACE_WCRTOMB''@|0|g' \
+      -e 's|@''REPLACE_WCSRTOMBS''@|0|g' \
+      -e 's|@''REPLACE_WCSNRTOMBS''@|0|g' \
+      -e 's|@''REPLACE_WCWIDTH''@|0|g' \
+      -e 's|@''REPLACE_WCSWIDTH''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > wchar.h-t && \
+mv wchar.h-t wchar.h
+rm -f wctype.h-t wctype.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's/@''HAVE_WCTYPE_H''@/1/g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_WCTYPE_H''@|<wctype.h>|g' \
+      -e 's/@''GNULIB_ISWBLANK''@/0/g' \
+      -e 's/@''GNULIB_WCTYPE''@/0/g' \
+      -e 's/@''GNULIB_ISWCTYPE''@/0/g' \
+      -e 's/@''GNULIB_WCTRANS''@/0/g' \
+      -e 's/@''GNULIB_TOWCTRANS''@/0/g' \
+      -e 's/@''HAVE_ISWBLANK''@/1/g' \
+      -e 's/@''HAVE_ISWCNTRL''@/1/g' \
+      -e 's/@''HAVE_WCTYPE_T''@/1/g' \
+      -e 's/@''HAVE_WCTRANS_T''@/1/g' \
+      -e 's/@''HAVE_WINT_T''@/1/g' \
+      -e 's/@''REPLACE_ISWBLANK''@/0/g' \
+      -e 's/@''REPLACE_ISWCNTRL''@/0/g' \
+      -e 's/@''REPLACE_TOWLOWER''@/0/g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./wctype.in.h; \
+} > wctype.h-t && \
+mv wctype.h-t wctype.h
+/bin/mkdir -p arpa
+rm -f arpa/inet.h-t arpa/inet.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''HAVE_FEATURES_H''@|1|g' \
+      -e 's|@''NEXT_ARPA_INET_H''@|<arpa/inet.h>|g' \
+      -e 's|@''HAVE_ARPA_INET_H''@|1|g' \
+      -e 's/@''GNULIB_INET_NTOP''@/1/g' \
+      -e 's/@''GNULIB_INET_PTON''@/0/g' \
+      -e 's|@''HAVE_DECL_INET_NTOP''@|1|g' \
+      -e 's|@''HAVE_DECL_INET_PTON''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./arpa_inet.in.h; \
+} > arpa/inet.h-t && \
+mv arpa/inet.h-t arpa/inet.h
+rm -f fcntl.h-t fcntl.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_FCNTL_H''@|<fcntl.h>|g' \
+      -e 's/@''GNULIB_FCNTL''@/1/g' \
+      -e 's/@''GNULIB_NONBLOCKING''@/0/g' \
+      -e 's/@''GNULIB_OPEN''@/1/g' \
+      -e 's/@''GNULIB_OPENAT''@/0/g' \
+      -e 's|@''HAVE_FCNTL''@|1|g' \
+      -e 's|@''HAVE_OPENAT''@|1|g' \
+      -e 's|@''REPLACE_FCNTL''@|1|g' \
+      -e 's|@''REPLACE_OPEN''@|0|g' \
+      -e 's|@''REPLACE_OPENAT''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./fcntl.in.h; \
+} > fcntl.h-t && \
+mv fcntl.h-t fcntl.h
+rm -f getopt.h-t getopt.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''HAVE_GETOPT_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_GETOPT_H''@|<getopt.h>|g' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      < ./getopt.in.h; \
+} > getopt.h-t && \
+mv -f getopt.h-t getopt.h
+rm -f netdb.h-t netdb.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_NETDB_H''@|<netdb.h>|g' \
+      -e 's|@''HAVE_NETDB_H''@|1|g' \
+      -e 's/@''GNULIB_GETADDRINFO''@/1/g' \
+      -e 's|@''HAVE_STRUCT_ADDRINFO''@|1|g' \
+      -e 's|@''HAVE_DECL_FREEADDRINFO''@|1|g' \
+      -e 's|@''HAVE_DECL_GAI_STRERROR''@|1|g' \
+      -e 's|@''HAVE_DECL_GETADDRINFO''@|1|g' \
+      -e 's|@''HAVE_DECL_GETNAMEINFO''@|1|g' \
+      -e 's|@''REPLACE_GAI_STRERROR''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./netdb.in.h; \
+} > netdb.h-t && \
+mv netdb.h-t netdb.h
+rm -f signal.h-t signal.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SIGNAL_H''@|<signal.h>|g' \
+      -e 's|@''GNULIB_PTHREAD_SIGMASK''@|0|g' \
+      -e 's/@''GNULIB_SIGNAL_H_SIGPIPE''@/1/g' \
+      -e 's/@''GNULIB_SIGPROCMASK''@/1/g' \
+      -e 's/@''GNULIB_SIGACTION''@/1/g' \
+      -e 's|@''HAVE_POSIX_SIGNALBLOCKING''@|1|g' \
+      -e 's|@''HAVE_PTHREAD_SIGMASK''@|1|g' \
+      -e 's|@''HAVE_SIGSET_T''@|1|g' \
+      -e 's|@''HAVE_SIGINFO_T''@|1|g' \
+      -e 's|@''HAVE_SIGACTION''@|1|g' \
+      -e 's|@''HAVE_STRUCT_SIGACTION_SA_SIGACTION''@|1|g' \
+      -e 's|@''HAVE_TYPE_VOLATILE_SIG_ATOMIC_T''@|1|g' \
+      -e 's|@''HAVE_SIGHANDLER_T''@|1|g' \
+      -e 's|@''REPLACE_PTHREAD_SIGMASK''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./signal.in.h; \
+} > signal.h-t && \
+mv signal.h-t signal.h
+rm -f spawn.h-t spawn.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''HAVE_SPAWN_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SPAWN_H''@|<spawn.h>|g' \
+      -e 's/@''GNULIB_POSIX_SPAWN''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNP''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_INIT''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDCLOSE''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDDUP2''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_ADDOPEN''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWN_FILE_ACTIONS_DESTROY''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_INIT''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_GETFLAGS''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_SETFLAGS''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_GETPGROUP''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_SETPGROUP''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_GETSCHEDPARAM''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_SETSCHEDPARAM''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_GETSCHEDPOLICY''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_SETSCHEDPOLICY''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_GETSIGDEFAULT''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_SETSIGDEFAULT''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_GETSIGMASK''@/0/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_SETSIGMASK''@/1/g' \
+      -e 's/@''GNULIB_POSIX_SPAWNATTR_DESTROY''@/1/g' \
+      -e 's|@''HAVE_POSIX_SPAWN''@|1|g' \
+      -e 's|@''HAVE_POSIX_SPAWNATTR_T''@|1|g' \
+      -e 's|@''HAVE_POSIX_SPAWN_FILE_ACTIONS_T''@|1|g' \
+      -e 's|@''REPLACE_POSIX_SPAWN''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./spawn.in.h; \
+} > spawn.h-t && \
+mv spawn.h-t spawn.h
+rm -f stdio.h-t stdio.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STDIO_H''@|<stdio.h>|g' \
+      -e 's/@''GNULIB_DPRINTF''@/0/g' \
+      -e 's/@''GNULIB_FCLOSE''@/0/g' \
+      -e 's/@''GNULIB_FFLUSH''@/0/g' \
+      -e 's/@''GNULIB_FGETC''@/1/g' \
+      -e 's/@''GNULIB_FGETS''@/1/g' \
+      -e 's/@''GNULIB_FOPEN''@/0/g' \
+      -e 's/@''GNULIB_FPRINTF''@/1/g' \
+      -e 's/@''GNULIB_FPRINTF_POSIX''@/0/g' \
+      -e 's/@''GNULIB_FPURGE''@/0/g' \
+      -e 's/@''GNULIB_FPUTC''@/1/g' \
+      -e 's/@''GNULIB_FPUTS''@/1/g' \
+      -e 's/@''GNULIB_FREAD''@/1/g' \
+      -e 's/@''GNULIB_FREOPEN''@/0/g' \
+      -e 's/@''GNULIB_FSCANF''@/1/g' \
+      -e 's/@''GNULIB_FSEEK''@/1/g' \
+      -e 's/@''GNULIB_FSEEKO''@/1/g' \
+      -e 's/@''GNULIB_FTELL''@/0/g' \
+      -e 's/@''GNULIB_FTELLO''@/0/g' \
+      -e 's/@''GNULIB_FWRITE''@/1/g' \
+      -e 's/@''GNULIB_GETC''@/1/g' \
+      -e 's/@''GNULIB_GETCHAR''@/1/g' \
+      -e 's/@''GNULIB_GETDELIM''@/1/g' \
+      -e 's/@''GNULIB_GETLINE''@/1/g' \
+      -e 's/@''GNULIB_GETS''@/1/g' \
+      -e 's/@''GNULIB_OBSTACK_PRINTF''@/0/g' \
+      -e 's/@''GNULIB_OBSTACK_PRINTF_POSIX''@/0/g' \
+      -e 's/@''GNULIB_PERROR''@/0/g' \
+      -e 's/@''GNULIB_POPEN''@/0/g' \
+      -e 's/@''GNULIB_PRINTF''@/1/g' \
+      -e 's/@''GNULIB_PRINTF_POSIX''@/0/g' \
+      -e 's/@''GNULIB_PUTC''@/1/g' \
+      -e 's/@''GNULIB_PUTCHAR''@/1/g' \
+      -e 's/@''GNULIB_PUTS''@/1/g' \
+      -e 's/@''GNULIB_REMOVE''@/0/g' \
+      -e 's/@''GNULIB_RENAME''@/0/g' \
+      -e 's/@''GNULIB_RENAMEAT''@/0/g' \
+      -e 's/@''GNULIB_SCANF''@/1/g' \
+      -e 's/@''GNULIB_SNPRINTF''@/1/g' \
+      -e 's/@''GNULIB_SPRINTF_POSIX''@/0/g' \
+      -e 's/@''GNULIB_STDIO_H_NONBLOCKING''@/0/g' \
+      -e 's/@''GNULIB_STDIO_H_SIGPIPE''@/1/g' \
+      -e 's/@''GNULIB_TMPFILE''@/0/g' \
+      -e 's/@''GNULIB_VASPRINTF''@/1/g' \
+      -e 's/@''GNULIB_VDPRINTF''@/0/g' \
+      -e 's/@''GNULIB_VFPRINTF''@/1/g' \
+      -e 's/@''GNULIB_VFPRINTF_POSIX''@/0/g' \
+      -e 's/@''GNULIB_VFSCANF''@/0/g' \
+      -e 's/@''GNULIB_VSCANF''@/0/g' \
+      -e 's/@''GNULIB_VPRINTF''@/1/g' \
+      -e 's/@''GNULIB_VPRINTF_POSIX''@/0/g' \
+      -e 's/@''GNULIB_VSNPRINTF''@/0/g' \
+      -e 's/@''GNULIB_VSPRINTF_POSIX''@/0/g' \
+      < ./stdio.in.h | \
+  sed -e 's|@''HAVE_DECL_FPURGE''@|1|g' \
+      -e 's|@''HAVE_DECL_FSEEKO''@|1|g' \
+      -e 's|@''HAVE_DECL_FTELLO''@|1|g' \
+      -e 's|@''HAVE_DECL_GETDELIM''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLINE''@|1|g' \
+      -e 's|@''HAVE_DECL_OBSTACK_PRINTF''@|1|g' \
+      -e 's|@''HAVE_DECL_SNPRINTF''@|1|g' \
+      -e 's|@''HAVE_DECL_VSNPRINTF''@|1|g' \
+      -e 's|@''HAVE_DPRINTF''@|1|g' \
+      -e 's|@''HAVE_FSEEKO''@|1|g' \
+      -e 's|@''HAVE_FTELLO''@|1|g' \
+      -e 's|@''HAVE_RENAMEAT''@|1|g' \
+      -e 's|@''HAVE_VASPRINTF''@|1|g' \
+      -e 's|@''HAVE_VDPRINTF''@|1|g' \
+      -e 's|@''REPLACE_DPRINTF''@|0|g' \
+      -e 's|@''REPLACE_FCLOSE''@|0|g' \
+      -e 's|@''REPLACE_FFLUSH''@|0|g' \
+      -e 's|@''REPLACE_FOPEN''@|0|g' \
+      -e 's|@''REPLACE_FPRINTF''@|0|g' \
+      -e 's|@''REPLACE_FPURGE''@|0|g' \
+      -e 's|@''REPLACE_FREOPEN''@|0|g' \
+      -e 's|@''REPLACE_FSEEK''@|0|g' \
+      -e 's|@''REPLACE_FSEEKO''@|0|g' \
+      -e 's|@''REPLACE_FTELL''@|0|g' \
+      -e 's|@''REPLACE_FTELLO''@|0|g' \
+      -e 's|@''REPLACE_GETDELIM''@|0|g' \
+      -e 's|@''REPLACE_GETLINE''@|0|g' \
+      -e 's|@''REPLACE_OBSTACK_PRINTF''@|0|g' \
+      -e 's|@''REPLACE_PERROR''@|0|g' \
+      -e 's|@''REPLACE_POPEN''@|0|g' \
+      -e 's|@''REPLACE_PRINTF''@|0|g' \
+      -e 's|@''REPLACE_REMOVE''@|0|g' \
+      -e 's|@''REPLACE_RENAME''@|0|g' \
+      -e 's|@''REPLACE_RENAMEAT''@|0|g' \
+      -e 's|@''REPLACE_SNPRINTF''@|0|g' \
+      -e 's|@''REPLACE_SPRINTF''@|0|g' \
+      -e 's|@''REPLACE_STDIO_READ_FUNCS''@|0|g' \
+      -e 's|@''REPLACE_STDIO_WRITE_FUNCS''@|0|g' \
+      -e 's|@''REPLACE_TMPFILE''@|0|g' \
+      -e 's|@''REPLACE_VASPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VDPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VFPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VSNPRINTF''@|0|g' \
+      -e 's|@''REPLACE_VSPRINTF''@|0|g' \
+      -e 's|@''ASM_SYMBOL_PREFIX''@|""|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > stdio.h-t && \
+mv stdio.h-t stdio.h
+rm -f stdlib.h-t stdlib.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STDLIB_H''@|<stdlib.h>|g' \
+      -e 's/@''GNULIB__EXIT''@/0/g' \
+      -e 's/@''GNULIB_ATOLL''@/0/g' \
+      -e 's/@''GNULIB_CALLOC_POSIX''@/0/g' \
+      -e 's/@''GNULIB_CANONICALIZE_FILE_NAME''@/0/g' \
+      -e 's/@''GNULIB_GETLOADAVG''@/0/g' \
+      -e 's/@''GNULIB_GETSUBOPT''@/0/g' \
+      -e 's/@''GNULIB_GRANTPT''@/0/g' \
+      -e 's/@''GNULIB_MALLOC_POSIX''@/1/g' \
+      -e 's/@''GNULIB_MBTOWC''@/1/g' \
+      -e 's/@''GNULIB_MKDTEMP''@/0/g' \
+      -e 's/@''GNULIB_MKOSTEMP''@/0/g' \
+      -e 's/@''GNULIB_MKOSTEMPS''@/0/g' \
+      -e 's/@''GNULIB_MKSTEMP''@/0/g' \
+      -e 's/@''GNULIB_MKSTEMPS''@/0/g' \
+      -e 's/@''GNULIB_PTSNAME''@/0/g' \
+      -e 's/@''GNULIB_PUTENV''@/0/g' \
+      -e 's/@''GNULIB_RANDOM_R''@/0/g' \
+      -e 's/@''GNULIB_REALLOC_POSIX''@/1/g' \
+      -e 's/@''GNULIB_REALPATH''@/0/g' \
+      -e 's/@''GNULIB_RPMATCH''@/0/g' \
+      -e 's/@''GNULIB_SETENV''@/0/g' \
+      -e 's/@''GNULIB_STRTOD''@/0/g' \
+      -e 's/@''GNULIB_STRTOLL''@/0/g' \
+      -e 's/@''GNULIB_STRTOULL''@/0/g' \
+      -e 's/@''GNULIB_SYSTEM_POSIX''@/0/g' \
+      -e 's/@''GNULIB_UNLOCKPT''@/0/g' \
+      -e 's/@''GNULIB_UNSETENV''@/0/g' \
+      -e 's/@''GNULIB_WCTOMB''@/0/g' \
+      < ./stdlib.in.h | \
+  sed -e 's|@''HAVE__EXIT''@|1|g' \
+      -e 's|@''HAVE_ATOLL''@|1|g' \
+      -e 's|@''HAVE_CANONICALIZE_FILE_NAME''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLOADAVG''@|1|g' \
+      -e 's|@''HAVE_GETSUBOPT''@|1|g' \
+      -e 's|@''HAVE_GRANTPT''@|1|g' \
+      -e 's|@''HAVE_MKDTEMP''@|1|g' \
+      -e 's|@''HAVE_MKOSTEMP''@|1|g' \
+      -e 's|@''HAVE_MKOSTEMPS''@|1|g' \
+      -e 's|@''HAVE_MKSTEMP''@|1|g' \
+      -e 's|@''HAVE_MKSTEMPS''@|1|g' \
+      -e 's|@''HAVE_PTSNAME''@|1|g' \
+      -e 's|@''HAVE_RANDOM_H''@|1|g' \
+      -e 's|@''HAVE_RANDOM_R''@|1|g' \
+      -e 's|@''HAVE_REALPATH''@|1|g' \
+      -e 's|@''HAVE_RPMATCH''@|1|g' \
+      -e 's|@''HAVE_DECL_SETENV''@|1|g' \
+      -e 's|@''HAVE_STRTOD''@|1|g' \
+      -e 's|@''HAVE_STRTOLL''@|1|g' \
+      -e 's|@''HAVE_STRTOULL''@|1|g' \
+      -e 's|@''HAVE_STRUCT_RANDOM_DATA''@|1|g' \
+      -e 's|@''HAVE_SYS_LOADAVG_H''@|0|g' \
+      -e 's|@''HAVE_UNLOCKPT''@|1|g' \
+      -e 's|@''HAVE_DECL_UNSETENV''@|1|g' \
+      -e 's|@''REPLACE_CALLOC''@|0|g' \
+      -e 's|@''REPLACE_CANONICALIZE_FILE_NAME''@|0|g' \
+      -e 's|@''REPLACE_MALLOC''@|0|g' \
+      -e 's|@''REPLACE_MBTOWC''@|0|g' \
+      -e 's|@''REPLACE_MKSTEMP''@|0|g' \
+      -e 's|@''REPLACE_PUTENV''@|0|g' \
+      -e 's|@''REPLACE_REALLOC''@|0|g' \
+      -e 's|@''REPLACE_REALPATH''@|0|g' \
+      -e 's|@''REPLACE_SETENV''@|0|g' \
+      -e 's|@''REPLACE_STRTOD''@|0|g' \
+      -e 's|@''REPLACE_UNSETENV''@|0|g' \
+      -e 's|@''REPLACE_WCTOMB''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _Noreturn/r ../build-aux/snippet/_Noreturn.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+} > stdlib.h-t && \
+mv stdlib.h-t stdlib.h
+rm -f string.h-t string.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STRING_H''@|<string.h>|g' \
+      -e 's/@''GNULIB_FFSL''@/0/g' \
+      -e 's/@''GNULIB_FFSLL''@/0/g' \
+      -e 's/@''GNULIB_MBSLEN''@/0/g' \
+      -e 's/@''GNULIB_MBSNLEN''@/0/g' \
+      -e 's/@''GNULIB_MBSCHR''@/0/g' \
+      -e 's/@''GNULIB_MBSRCHR''@/0/g' \
+      -e 's/@''GNULIB_MBSSTR''@/0/g' \
+      -e 's/@''GNULIB_MBSCASECMP''@/0/g' \
+      -e 's/@''GNULIB_MBSNCASECMP''@/0/g' \
+      -e 's/@''GNULIB_MBSPCASECMP''@/0/g' \
+      -e 's/@''GNULIB_MBSCASESTR''@/0/g' \
+      -e 's/@''GNULIB_MBSCSPN''@/0/g' \
+      -e 's/@''GNULIB_MBSPBRK''@/0/g' \
+      -e 's/@''GNULIB_MBSSPN''@/0/g' \
+      -e 's/@''GNULIB_MBSSEP''@/0/g' \
+      -e 's/@''GNULIB_MBSTOK_R''@/0/g' \
+      -e 's/@''GNULIB_MEMCHR''@/1/g' \
+      -e 's/@''GNULIB_MEMMEM''@/0/g' \
+      -e 's/@''GNULIB_MEMPCPY''@/0/g' \
+      -e 's/@''GNULIB_MEMRCHR''@/0/g' \
+      -e 's/@''GNULIB_RAWMEMCHR''@/1/g' \
+      -e 's/@''GNULIB_STPCPY''@/0/g' \
+      -e 's/@''GNULIB_STPNCPY''@/0/g' \
+      -e 's/@''GNULIB_STRCHRNUL''@/1/g' \
+      -e 's/@''GNULIB_STRDUP''@/0/g' \
+      -e 's/@''GNULIB_STRNCAT''@/0/g' \
+      -e 's/@''GNULIB_STRNDUP''@/0/g' \
+      -e 's/@''GNULIB_STRNLEN''@/0/g' \
+      -e 's/@''GNULIB_STRPBRK''@/0/g' \
+      -e 's/@''GNULIB_STRSEP''@/0/g' \
+      -e 's/@''GNULIB_STRSTR''@/0/g' \
+      -e 's/@''GNULIB_STRCASESTR''@/1/g' \
+      -e 's/@''GNULIB_STRTOK_R''@/0/g' \
+      -e 's/@''GNULIB_STRERROR''@/1/g' \
+      -e 's/@''GNULIB_STRERROR_R''@/1/g' \
+      -e 's/@''GNULIB_STRSIGNAL''@/0/g' \
+      -e 's/@''GNULIB_STRVERSCMP''@/0/g' \
+      < ./string.in.h | \
+  sed -e 's|@''HAVE_FFSL''@|1|g' \
+      -e 's|@''HAVE_FFSLL''@|1|g' \
+      -e 's|@''HAVE_MBSLEN''@|0|g' \
+      -e 's|@''HAVE_MEMCHR''@|1|g' \
+      -e 's|@''HAVE_DECL_MEMMEM''@|1|g' \
+      -e 's|@''HAVE_MEMPCPY''@|1|g' \
+      -e 's|@''HAVE_DECL_MEMRCHR''@|1|g' \
+      -e 's|@''HAVE_RAWMEMCHR''@|1|g' \
+      -e 's|@''HAVE_STPCPY''@|1|g' \
+      -e 's|@''HAVE_STPNCPY''@|1|g' \
+      -e 's|@''HAVE_STRCHRNUL''@|1|g' \
+      -e 's|@''HAVE_DECL_STRDUP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNDUP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNLEN''@|1|g' \
+      -e 's|@''HAVE_STRPBRK''@|1|g' \
+      -e 's|@''HAVE_STRSEP''@|1|g' \
+      -e 's|@''HAVE_STRCASESTR''@|1|g' \
+      -e 's|@''HAVE_DECL_STRTOK_R''@|1|g' \
+      -e 's|@''HAVE_DECL_STRERROR_R''@|1|g' \
+      -e 's|@''HAVE_DECL_STRSIGNAL''@|1|g' \
+      -e 's|@''HAVE_STRVERSCMP''@|1|g' \
+      -e 's|@''REPLACE_STPNCPY''@|0|g' \
+      -e 's|@''REPLACE_MEMCHR''@|0|g' \
+      -e 's|@''REPLACE_MEMMEM''@|0|g' \
+      -e 's|@''REPLACE_STRCASESTR''@|0|g' \
+      -e 's|@''REPLACE_STRCHRNUL''@|0|g' \
+      -e 's|@''REPLACE_STRDUP''@|0|g' \
+      -e 's|@''REPLACE_STRSTR''@|0|g' \
+      -e 's|@''REPLACE_STRERROR''@|1|g' \
+      -e 's|@''REPLACE_STRERROR_R''@|1|g' \
+      -e 's|@''REPLACE_STRNCAT''@|0|g' \
+      -e 's|@''REPLACE_STRNDUP''@|0|g' \
+      -e 's|@''REPLACE_STRNLEN''@|0|g' \
+      -e 's|@''REPLACE_STRSIGNAL''@|0|g' \
+      -e 's|@''REPLACE_STRTOK_R''@|0|g' \
+      -e 's|@''UNDEFINE_STRTOK_R''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h'; \
+      < ./string.in.h; \
+} > string.h-t && \
+mv string.h-t string.h
+rm -f strings.h-t strings.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''HAVE_STRINGS_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_STRINGS_H''@|<strings.h>|g' \
+      -e 's|@''GNULIB_FFS''@|0|g' \
+      -e 's|@''HAVE_FFS''@|1|g' \
+      -e 's|@''HAVE_STRCASECMP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNCASECMP''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./strings.in.h; \
+} > strings.h-t && \
+mv strings.h-t strings.h
+/bin/mkdir -p sys
+rm -f sys/ioctl.h-t sys/ioctl.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''HAVE_SYS_IOCTL_H''@|1|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_IOCTL_H''@|<sys/ioctl.h>|g' \
+      -e 's/@''GNULIB_IOCTL''@/1/g' \
+      -e 's|@''SYS_IOCTL_H_HAVE_WINSOCK2_H''@|0|g' \
+      -e 's|@''SYS_IOCTL_H_HAVE_WINSOCK2_H_AND_USE_SOCKETS''@|0|g' \
+      -e 's|@''REPLACE_IOCTL''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_ioctl.in.h; \
+} > sys/ioctl.h-t && \
+mv sys/ioctl.h-t sys/ioctl.h
+/bin/mkdir -p sys
+/bin/mkdir -p sys
+rm -f sys/select.h-t sys/select.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_SELECT_H''@|<sys/select.h>|g' \
+      -e 's|@''HAVE_SYS_SELECT_H''@|1|g' \
+      -e 's/@''GNULIB_PSELECT''@/0/g' \
+      -e 's/@''GNULIB_SELECT''@/1/g' \
+      -e 's|@''HAVE_WINSOCK2_H''@|0|g' \
+      -e 's|@''HAVE_PSELECT''@|1|g' \
+      -e 's|@''REPLACE_PSELECT''@|0|g' \
+      -e 's|@''REPLACE_SELECT''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_select.in.h; \
+} > sys/select.h-t && \
+mv sys/select.h-t sys/select.h
+rm -f sys/socket.h-t sys/socket.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_SOCKET_H''@|<sys/socket.h>|g' \
+      -e 's|@''HAVE_SYS_SOCKET_H''@|1|g' \
+      -e 's/@''GNULIB_CLOSE''@/1/g' \
+      -e 's/@''GNULIB_SOCKET''@/1/g' \
+      -e 's/@''GNULIB_CONNECT''@/1/g' \
+      -e 's/@''GNULIB_ACCEPT''@/1/g' \
+      -e 's/@''GNULIB_BIND''@/1/g' \
+      -e 's/@''GNULIB_GETPEERNAME''@/1/g' \
+      -e 's/@''GNULIB_GETSOCKNAME''@/1/g' \
+      -e 's/@''GNULIB_GETSOCKOPT''@/0/g' \
+      -e 's/@''GNULIB_LISTEN''@/1/g' \
+      -e 's/@''GNULIB_RECV''@/1/g' \
+      -e 's/@''GNULIB_SEND''@/1/g' \
+      -e 's/@''GNULIB_RECVFROM''@/0/g' \
+      -e 's/@''GNULIB_SENDTO''@/0/g' \
+      -e 's/@''GNULIB_SETSOCKOPT''@/1/g' \
+      -e 's/@''GNULIB_SHUTDOWN''@/0/g' \
+      -e 's/@''GNULIB_ACCEPT4''@/0/g' \
+      -e 's|@''HAVE_WINSOCK2_H''@|0|g' \
+      -e 's|@''HAVE_WS2TCPIP_H''@|0|g' \
+      -e 's|@''HAVE_STRUCT_SOCKADDR_STORAGE''@|1|g' \
+      -e 's|@''HAVE_STRUCT_SOCKADDR_STORAGE_SS_FAMILY''@|1|g' \
+      -e 's|@''HAVE_SA_FAMILY_T''@|1|g' \
+      -e 's|@''HAVE_ACCEPT4''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_socket.in.h; \
+} > sys/socket.h-t && \
+mv -f sys/socket.h-t sys/socket.h
+/bin/mkdir -p sys
+rm -f sys/stat.h-t sys/stat.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_STAT_H''@|<sys/stat.h>|g' \
+      -e 's/@''GNULIB_FCHMODAT''@/0/g' \
+      -e 's/@''GNULIB_FSTATAT''@/0/g' \
+      -e 's/@''GNULIB_FUTIMENS''@/1/g' \
+      -e 's/@''GNULIB_LCHMOD''@/0/g' \
+      -e 's/@''GNULIB_LSTAT''@/1/g' \
+      -e 's/@''GNULIB_MKDIRAT''@/0/g' \
+      -e 's/@''GNULIB_MKFIFO''@/0/g' \
+      -e 's/@''GNULIB_MKFIFOAT''@/0/g' \
+      -e 's/@''GNULIB_MKNOD''@/0/g' \
+      -e 's/@''GNULIB_MKNODAT''@/0/g' \
+      -e 's/@''GNULIB_STAT''@/1/g' \
+      -e 's/@''GNULIB_UTIMENSAT''@/0/g' \
+      -e 's|@''HAVE_FCHMODAT''@|1|g' \
+      -e 's|@''HAVE_FSTATAT''@|1|g' \
+      -e 's|@''HAVE_FUTIMENS''@|1|g' \
+      -e 's|@''HAVE_LCHMOD''@|1|g' \
+      -e 's|@''HAVE_LSTAT''@|1|g' \
+      -e 's|@''HAVE_MKDIRAT''@|1|g' \
+      -e 's|@''HAVE_MKFIFO''@|1|g' \
+      -e 's|@''HAVE_MKFIFOAT''@|1|g' \
+      -e 's|@''HAVE_MKNOD''@|1|g' \
+      -e 's|@''HAVE_MKNODAT''@|1|g' \
+      -e 's|@''HAVE_UTIMENSAT''@|1|g' \
+      -e 's|@''REPLACE_FSTAT''@|0|g' \
+      -e 's|@''REPLACE_FSTATAT''@|0|g' \
+      -e 's|@''REPLACE_FUTIMENS''@|1|g' \
+      -e 's|@''REPLACE_LSTAT''@|0|g' \
+      -e 's|@''REPLACE_MKDIR''@|0|g' \
+      -e 's|@''REPLACE_MKFIFO''@|0|g' \
+      -e 's|@''REPLACE_MKNOD''@|0|g' \
+      -e 's|@''REPLACE_STAT''@|0|g' \
+      -e 's|@''REPLACE_UTIMENSAT''@|0|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_stat.in.h; \
+} > sys/stat.h-t && \
+mv sys/stat.h-t sys/stat.h
+/bin/mkdir -p sys
+rm -f sys/time.h-t sys/time.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's/@''HAVE_SYS_TIME_H''@/1/g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''NEXT_SYS_TIME_H''@|<sys/time.h>|g' \
+      -e 's/@''GNULIB_GETTIMEOFDAY''@/1/g' \
+      -e 's/@''HAVE_GETTIMEOFDAY''@/1/g' \
+      -e 's/@''HAVE_STRUCT_TIMEVAL''@/1/g' \
+      -e 's/@''REPLACE_GETTIMEOFDAY''@/0/g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./sys_time.in.h; \
+} > sys/time.h-t && \
+mv sys/time.h-t sys/time.h
+make  all-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+depbase=`echo c-ctype.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT c-ctype.o -MD -MP -MF $depbase.Tpo -c -o c-ctype.o c-ctype.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo cloexec.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT cloexec.o -MD -MP -MF $depbase.Tpo -c -o cloexec.o cloexec.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo md5.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT md5.o -MD -MP -MF $depbase.Tpo -c -o md5.o md5.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo dirname-lgpl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT dirname-lgpl.o -MD -MP -MF $depbase.Tpo -c -o dirname-lgpl.o dirname-lgpl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo basename-lgpl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT basename-lgpl.o -MD -MP -MF $depbase.Tpo -c -o basename-lgpl.o basename-lgpl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo stripslash.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT stripslash.o -MD -MP -MF $depbase.Tpo -c -o stripslash.o stripslash.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo exitfail.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT exitfail.o -MD -MP -MF $depbase.Tpo -c -o exitfail.o exitfail.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fatal-signal.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT fatal-signal.o -MD -MP -MF $depbase.Tpo -c -o fatal-signal.o fatal-signal.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fd-hook.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT fd-hook.o -MD -MP -MF $depbase.Tpo -c -o fd-hook.o fd-hook.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fd-safer-flag.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT fd-safer-flag.o -MD -MP -MF $depbase.Tpo -c -o fd-safer-flag.o fd-safer-flag.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo dup-safer-flag.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT dup-safer-flag.o -MD -MP -MF $depbase.Tpo -c -o dup-safer-flag.o dup-safer-flag.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo gettime.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT gettime.o -MD -MP -MF $depbase.Tpo -c -o gettime.o gettime.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo localcharset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT localcharset.o -MD -MP -MF $depbase.Tpo -c -o localcharset.o localcharset.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo pipe2.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT pipe2.o -MD -MP -MF $depbase.Tpo -c -o pipe2.o pipe2.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo pipe2-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT pipe2-safer.o -MD -MP -MF $depbase.Tpo -c -o pipe2-safer.o pipe2-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo quote.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT quote.o -MD -MP -MF $depbase.Tpo -c -o quote.o quote.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo quotearg.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT quotearg.o -MD -MP -MF $depbase.Tpo -c -o quotearg.o quotearg.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo sockets.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT sockets.o -MD -MP -MF $depbase.Tpo -c -o sockets.o sockets.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo spawn-pipe.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT spawn-pipe.o -MD -MP -MF $depbase.Tpo -c -o spawn-pipe.o spawn-pipe.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo glthread/threadlib.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT glthread/threadlib.o -MD -MP -MF $depbase.Tpo -c -o glthread/threadlib.o glthread/threadlib.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo dup-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT dup-safer.o -MD -MP -MF $depbase.Tpo -c -o dup-safer.o dup-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fd-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT fd-safer.o -MD -MP -MF $depbase.Tpo -c -o fd-safer.o fd-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo pipe-safer.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT pipe-safer.o -MD -MP -MF $depbase.Tpo -c -o pipe-safer.o pipe-safer.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo utimens.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT utimens.o -MD -MP -MF $depbase.Tpo -c -o utimens.o utimens.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo wait-process.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT wait-process.o -MD -MP -MF $depbase.Tpo -c -o wait-process.o wait-process.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo xmalloc.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT xmalloc.o -MD -MP -MF $depbase.Tpo -c -o xmalloc.o xmalloc.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo xalloc-die.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT xalloc-die.o -MD -MP -MF $depbase.Tpo -c -o xalloc-die.o xalloc-die.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo asnprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT asnprintf.o -MD -MP -MF $depbase.Tpo -c -o asnprintf.o asnprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo fcntl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT fcntl.o -MD -MP -MF $depbase.Tpo -c -o fcntl.o fcntl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo futimens.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT futimens.o -MD -MP -MF $depbase.Tpo -c -o futimens.o futimens.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo getopt.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT getopt.o -MD -MP -MF $depbase.Tpo -c -o getopt.o getopt.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo getopt1.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT getopt1.o -MD -MP -MF $depbase.Tpo -c -o getopt1.o getopt1.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo getpass.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT getpass.o -MD -MP -MF $depbase.Tpo -c -o getpass.o getpass.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo ioctl.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT ioctl.o -MD -MP -MF $depbase.Tpo -c -o ioctl.o ioctl.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo printf-args.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT printf-args.o -MD -MP -MF $depbase.Tpo -c -o printf-args.o printf-args.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo printf-parse.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT printf-parse.o -MD -MP -MF $depbase.Tpo -c -o printf-parse.o printf-parse.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo strerror.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT strerror.o -MD -MP -MF $depbase.Tpo -c -o strerror.o strerror.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo strerror_r.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT strerror_r.o -MD -MP -MF $depbase.Tpo -c -o strerror_r.o strerror_r.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo vasnprintf.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT vasnprintf.o -MD -MP -MF $depbase.Tpo -c -o vasnprintf.o vasnprintf.c &&\
+mv -f $depbase.Tpo $depbase.Po
+rm -f t-charset.alias charset.alias && \
+/bin/sh ./config.charset 'x86_64-unknown-linux-gnu' > t-charset.alias && \
+mv t-charset.alias charset.alias
+rm -f t-ref-add.sed ref-add.sed && \
+sed -e '/^#/d' -e 's/@''PACKAGE''@/wget/g' ref-add.sin > t-ref-add.sed && \
+mv t-ref-add.sed ref-add.sed
+rm -f t-ref-del.sed ref-del.sed && \
+sed -e '/^#/d' -e 's/@''PACKAGE''@/wget/g' ref-del.sin > t-ref-del.sed && \
+mv t-ref-del.sed ref-del.sed
+depbase=`echo glthread/lock.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../src     -Os -pipe -MT glthread/lock.o -MD -MP -MF $depbase.Tpo -c -o glthread/lock.o glthread/lock.c &&\
+mv -f $depbase.Tpo $depbase.Po
+rm -f libgnu.a
+ar cru libgnu.a c-ctype.o cloexec.o md5.o dirname-lgpl.o basename-lgpl.o stripslash.o exitfail.o fatal-signal.o fd-hook.o fd-safer-flag.o dup-safer-flag.o gettime.o localcharset.o glthread/lock.o pipe2.o pipe2-safer.o quote.o quotearg.o sockets.o spawn-pipe.o glthread/threadlib.o dup-safer.o fd-safer.o pipe-safer.o utimens.o wait-process.o xmalloc.o xalloc-die.o asnprintf.o fcntl.o futimens.o getopt.o getopt1.o getpass.o ioctl.o printf-args.o printf-parse.o strerror.o strerror_r.o vasnprintf.o 
+ranlib libgnu.a
+make[4]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
+make  all-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT cmpt.o -MD -MP -MF .deps/cmpt.Tpo -c -o cmpt.o cmpt.c
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT connect.o -MD -MP -MF .deps/connect.Tpo -c -o connect.o connect.c
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT convert.o -MD -MP -MF .deps/convert.Tpo -c -o convert.o convert.c
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT cookies.o -MD -MP -MF .deps/cookies.Tpo -c -o cookies.o cookies.c
+mv -f .deps/cmpt.Tpo .deps/cmpt.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ftp.o -MD -MP -MF .deps/ftp.Tpo -c -o ftp.o ftp.c
+mv -f .deps/connect.Tpo .deps/connect.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT css_.o -MD -MP -MF .deps/css_.Tpo -c -o css_.o css_.c
+mv -f .deps/convert.Tpo .deps/convert.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT css-url.o -MD -MP -MF .deps/css-url.Tpo -c -o css-url.o css-url.c
+mv -f .deps/cookies.Tpo .deps/cookies.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ftp-basic.o -MD -MP -MF .deps/ftp-basic.Tpo -c -o ftp-basic.o ftp-basic.c
+mv -f .deps/css-url.Tpo .deps/css-url.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ftp-ls.o -MD -MP -MF .deps/ftp-ls.Tpo -c -o ftp-ls.o ftp-ls.c
+mv -f .deps/ftp.Tpo .deps/ftp.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT hash.o -MD -MP -MF .deps/hash.Tpo -c -o hash.o hash.c
+mv -f .deps/css_.Tpo .deps/css_.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT host.o -MD -MP -MF .deps/host.Tpo -c -o host.o host.c
+mv -f .deps/ftp-basic.Tpo .deps/ftp-basic.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT html-parse.o -MD -MP -MF .deps/html-parse.Tpo -c -o html-parse.o html-parse.c
+mv -f .deps/ftp-ls.Tpo .deps/ftp-ls.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT html-url.o -MD -MP -MF .deps/html-url.Tpo -c -o html-url.o html-url.c
+mv -f .deps/hash.Tpo .deps/hash.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT http.o -MD -MP -MF .deps/http.Tpo -c -o http.o http.c
+mv -f .deps/host.Tpo .deps/host.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT init.o -MD -MP -MF .deps/init.Tpo -c -o init.o init.c
+mv -f .deps/html-url.Tpo .deps/html-url.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT log.o -MD -MP -MF .deps/log.Tpo -c -o log.o log.c
+mv -f .deps/html-parse.Tpo .deps/html-parse.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT main.o -MD -MP -MF .deps/main.Tpo -c -o main.o main.c
+mv -f .deps/log.Tpo .deps/log.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT netrc.o -MD -MP -MF .deps/netrc.Tpo -c -o netrc.o netrc.c
+mv -f .deps/init.Tpo .deps/init.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT progress.o -MD -MP -MF .deps/progress.Tpo -c -o progress.o progress.c
+mv -f .deps/netrc.Tpo .deps/netrc.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ptimer.o -MD -MP -MF .deps/ptimer.Tpo -c -o ptimer.o ptimer.c
+mv -f .deps/main.Tpo .deps/main.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT recur.o -MD -MP -MF .deps/recur.Tpo -c -o recur.o recur.c
+mv -f .deps/ptimer.Tpo .deps/ptimer.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT res.o -MD -MP -MF .deps/res.Tpo -c -o res.o res.c
+mv -f .deps/progress.Tpo .deps/progress.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT retr.o -MD -MP -MF .deps/retr.Tpo -c -o retr.o retr.c
+mv -f .deps/recur.Tpo .deps/recur.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT spider.o -MD -MP -MF .deps/spider.Tpo -c -o spider.o spider.c
+mv -f .deps/res.Tpo .deps/res.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT url.o -MD -MP -MF .deps/url.Tpo -c -o url.o url.c
+mv -f .deps/spider.Tpo .deps/spider.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT utils.o -MD -MP -MF .deps/utils.Tpo -c -o utils.o utils.c
+mv -f .deps/http.Tpo .deps/http.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT exits.o -MD -MP -MF .deps/exits.Tpo -c -o exits.o exits.c
+mv -f .deps/retr.Tpo .deps/retr.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT build_info.o -MD -MP -MF .deps/build_info.Tpo -c -o build_info.o build_info.c
+mv -f .deps/exits.Tpo .deps/exits.Po
+echo '/* version.c */' > version.c
+echo '/* Autogenerated by Makefile - DO NOT EDIT */' >> version.c
+echo '' >> version.c
+echo 'const char *version_string = "1.13.4";' >> version.c
+echo 'const char *compilation_string = "'gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe'";' \
+    | sed -e 's/[\\"]/\\&/g' -e 's/\\"/"/' -e 's/\\";$/";/' >> version.c
+echo 'const char *link_string = "'gcc  -Os -pipe \
+  -lssl -lcrypto -lz -ldl -lz  -lrt ftp-opie.o openssl.o http-ntlm.o ../lib/libgnu.a'";' \
+    | sed -e 's/[\\"]/\\&/g' -e 's/\\"/"/' -e 's/\\";$/";/' >> version.c
+mv -f .deps/build_info.Tpo .deps/build_info.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ftp-opie.o -MD -MP -MF .deps/ftp-opie.Tpo -c -o ftp-opie.o ftp-opie.c
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT openssl.o -MD -MP -MF .deps/openssl.Tpo -c -o openssl.o openssl.c
+mv -f .deps/ftp-opie.Tpo .deps/ftp-opie.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT http-ntlm.o -MD -MP -MF .deps/http-ntlm.Tpo -c -o http-ntlm.o http-ntlm.c
+mv -f .deps/url.Tpo .deps/url.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT version.o -MD -MP -MF .deps/version.Tpo -c -o version.o version.c
+mv -f .deps/version.Tpo .deps/version.Po
+mv -f .deps/openssl.Tpo .deps/openssl.Po
+mv -f .deps/http-ntlm.Tpo .deps/http-ntlm.Po
+mv -f .deps/utils.Tpo .deps/utils.Po
+gcc  -Os -pipe   -o wget cmpt.o connect.o convert.o cookies.o ftp.o css_.o css-url.o ftp-basic.o ftp-ls.o hash.o host.o html-parse.o html-url.o http.o init.o log.o main.o netrc.o progress.o ptimer.o recur.o res.o retr.o spider.o url.o utils.o exits.o build_info.o  version.o ftp-opie.o openssl.o http-ntlm.o ../lib/libgnu.a -lssl -lcrypto -lz -ldl -lz  -lrt
+make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/doc'
+./texi2pod.pl -D VERSION="1.13.4" ./wget.texi wget.pod
+/usr/bin/pod2man --center="GNU Wget" --release="GNU Wget 1.13.4" wget.pod > wget.1
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/doc'
+Making all in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/po'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/po'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/tests'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/tests'
+Making all in util
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/util'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/util'
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4'
+make[2]: Nothing to be done for `all-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.60270
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/wget-root
++ /bin/mkdir -p /var/tmp/wget-root
++ cd wget-1.13.4
++ make DESTDIR=/var/tmp/wget-root install
+make  install-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4'
+Making install in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make  install-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make[5]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+if test yes = no; then \
+  case 'linux-gnu' in \
+    darwin[56]*) \
+      need_charset_alias=true ;; \
+    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
+      need_charset_alias=false ;; \
+    *) \
+      need_charset_alias=true ;; \
+  esac ; \
+else \
+  need_charset_alias=false ; \
+fi ; \
+if $need_charset_alias; then \
+  /bin/sh /usr/src/rpm/BUILD/wget-1.13.4/build-aux/install-sh -d /var/tmp/wget-root/usr/lib ; \
+fi ; \
+if test -f /var/tmp/wget-root/usr/lib/charset.alias; then \
+  sed -f ref-add.sed /var/tmp/wget-root/usr/lib/charset.alias > /var/tmp/wget-root/usr/lib/charset.tmp ; \
+  /usr/bin/install -c -m 644 /var/tmp/wget-root/usr/lib/charset.tmp /var/tmp/wget-root/usr/lib/charset.alias ; \
+  rm -f /var/tmp/wget-root/usr/lib/charset.tmp ; \
+else \
+  if $need_charset_alias; then \
+    sed -f ref-add.sed charset.alias > /var/tmp/wget-root/usr/lib/charset.tmp ; \
+    /usr/bin/install -c -m 644 /var/tmp/wget-root/usr/lib/charset.tmp /var/tmp/wget-root/usr/lib/charset.alias ; \
+    rm -f /var/tmp/wget-root/usr/lib/charset.tmp ; \
+  fi ; \
+fi
+make[5]: Nothing to be done for `install-data-am'.
+make[5]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make[4]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/lib'
+Making install in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
+make[3]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/wget-root/usr/bin"
+  /usr/bin/install -c wget '/var/tmp/wget-root/usr/bin'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
+Making install in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/doc'
+make[3]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/doc'
+make[3]: Nothing to be done for `install-exec-am'.
+/bin/sh /usr/src/rpm/BUILD/wget-1.13.4/build-aux/install-sh -d /var/tmp/wget-root/etc
+/bin/sh /usr/src/rpm/BUILD/wget-1.13.4/build-aux/install-sh -d /var/tmp/wget-root/usr/share/man/man1
+/usr/bin/install -c -m 644 wget.1 /var/tmp/wget-root/usr/share/man/man1/wget.1
+test -z "/usr/share/info" || /bin/mkdir -p "/var/tmp/wget-root/usr/share/info"
+ /usr/bin/install -c -m 644 ./wget.info '/var/tmp/wget-root/usr/share/info'
+ install-info --info-dir='/var/tmp/wget-root/usr/share/info' '/var/tmp/wget-root/usr/share/info/wget.info'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/doc'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/doc'
+Making install in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/po'
+/bin/mkdir -p /var/tmp/wget-root/usr/share
+installing be.gmo as /var/tmp/wget-root/usr/share/locale/be/LC_MESSAGES/wget.mo
+installing bg.gmo as /var/tmp/wget-root/usr/share/locale/bg/LC_MESSAGES/wget.mo
+installing ca.gmo as /var/tmp/wget-root/usr/share/locale/ca/LC_MESSAGES/wget.mo
+installing cs.gmo as /var/tmp/wget-root/usr/share/locale/cs/LC_MESSAGES/wget.mo
+installing da.gmo as /var/tmp/wget-root/usr/share/locale/da/LC_MESSAGES/wget.mo
+installing de.gmo as /var/tmp/wget-root/usr/share/locale/de/LC_MESSAGES/wget.mo
+installing el.gmo as /var/tmp/wget-root/usr/share/locale/el/LC_MESSAGES/wget.mo
+installing en_GB.gmo as /var/tmp/wget-root/usr/share/locale/en_GB/LC_MESSAGES/wget.mo
+installing eo.gmo as /var/tmp/wget-root/usr/share/locale/eo/LC_MESSAGES/wget.mo
+installing es.gmo as /var/tmp/wget-root/usr/share/locale/es/LC_MESSAGES/wget.mo
+installing et.gmo as /var/tmp/wget-root/usr/share/locale/et/LC_MESSAGES/wget.mo
+installing eu.gmo as /var/tmp/wget-root/usr/share/locale/eu/LC_MESSAGES/wget.mo
+installing fi.gmo as /var/tmp/wget-root/usr/share/locale/fi/LC_MESSAGES/wget.mo
+installing fr.gmo as /var/tmp/wget-root/usr/share/locale/fr/LC_MESSAGES/wget.mo
+installing ga.gmo as /var/tmp/wget-root/usr/share/locale/ga/LC_MESSAGES/wget.mo
+installing gl.gmo as /var/tmp/wget-root/usr/share/locale/gl/LC_MESSAGES/wget.mo
+installing he.gmo as /var/tmp/wget-root/usr/share/locale/he/LC_MESSAGES/wget.mo
+installing hr.gmo as /var/tmp/wget-root/usr/share/locale/hr/LC_MESSAGES/wget.mo
+installing hu.gmo as /var/tmp/wget-root/usr/share/locale/hu/LC_MESSAGES/wget.mo
+installing id.gmo as /var/tmp/wget-root/usr/share/locale/id/LC_MESSAGES/wget.mo
+installing it.gmo as /var/tmp/wget-root/usr/share/locale/it/LC_MESSAGES/wget.mo
+installing ja.gmo as /var/tmp/wget-root/usr/share/locale/ja/LC_MESSAGES/wget.mo
+installing lt.gmo as /var/tmp/wget-root/usr/share/locale/lt/LC_MESSAGES/wget.mo
+installing nb.gmo as /var/tmp/wget-root/usr/share/locale/nb/LC_MESSAGES/wget.mo
+installing nl.gmo as /var/tmp/wget-root/usr/share/locale/nl/LC_MESSAGES/wget.mo
+installing pl.gmo as /var/tmp/wget-root/usr/share/locale/pl/LC_MESSAGES/wget.mo
+installing pt.gmo as /var/tmp/wget-root/usr/share/locale/pt/LC_MESSAGES/wget.mo
+installing pt_BR.gmo as /var/tmp/wget-root/usr/share/locale/pt_BR/LC_MESSAGES/wget.mo
+installing ro.gmo as /var/tmp/wget-root/usr/share/locale/ro/LC_MESSAGES/wget.mo
+installing ru.gmo as /var/tmp/wget-root/usr/share/locale/ru/LC_MESSAGES/wget.mo
+installing sk.gmo as /var/tmp/wget-root/usr/share/locale/sk/LC_MESSAGES/wget.mo
+installing sl.gmo as /var/tmp/wget-root/usr/share/locale/sl/LC_MESSAGES/wget.mo
+installing sr.gmo as /var/tmp/wget-root/usr/share/locale/sr/LC_MESSAGES/wget.mo
+installing sv.gmo as /var/tmp/wget-root/usr/share/locale/sv/LC_MESSAGES/wget.mo
+installing tr.gmo as /var/tmp/wget-root/usr/share/locale/tr/LC_MESSAGES/wget.mo
+installing uk.gmo as /var/tmp/wget-root/usr/share/locale/uk/LC_MESSAGES/wget.mo
+installing vi.gmo as /var/tmp/wget-root/usr/share/locale/vi/LC_MESSAGES/wget.mo
+installing zh_CN.gmo as /var/tmp/wget-root/usr/share/locale/zh_CN/LC_MESSAGES/wget.mo
+installing zh_TW.gmo as /var/tmp/wget-root/usr/share/locale/zh_TW/LC_MESSAGES/wget.mo
+if test "wget" = "gettext-tools"; then \
+  /bin/mkdir -p /var/tmp/wget-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/wget-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/wget-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/po'
+Making install in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/tests'
+make[3]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/tests'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/tests'
+Making install in util
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/util'
+make[3]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4/util'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/util'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/util'
+make[2]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4'
+make[3]: Entering directory `/usr/src/rpm/BUILD/wget-1.13.4'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
++ rm -f /var/tmp/wget-root/usr/share/info/dir
++ /usr/lib/rpm/find-lang.sh /var/tmp/wget-root wget
++ /usr/lib/rpm/compress_man.sh /var/tmp/wget-root
++ /usr/lib/rpm/strip.sh /var/tmp/wget-root
++ exit 0
+Processing files: wget-1.13.4-1.x86_64
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libcrypto.so.1.0.0()(64bit) libdl.so.2()(64bit) librt.so.1()(64bit) librt.so.1(GLIBC_2.2.5)(64bit) libssl.so.1.0.0()(64bit) libz.so.1()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/wget-root
+Wrote: /usr/src/rpm/SRPMS/wget-1.13.4-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/wget-1.13.4-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.54364
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd wget-1.13.4
++ /bin/rm -rf /var/tmp/wget-root
