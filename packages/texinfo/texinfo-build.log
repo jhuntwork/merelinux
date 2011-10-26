@@ -1,0 +1,1077 @@
+Fetching(Source0): http://ftp.gnu.org/gnu/texinfo/texinfo-4.13a.tar.lzma
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.7254
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf texinfo-4.13
++ /bin/tar -xf /usr/src/rpm/SOURCES/texinfo-4.13a.tar.lzma
++ cd texinfo-4.13
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.278
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd texinfo-4.13
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking for ranlib... ranlib
+checking whether gcc and cc understand -c and -o together... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for C/C++ restrict keyword... __restrict
+checking whether strerror_r is declared... yes
+checking for strerror_r... yes
+checking whether strerror_r returns char *... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking for getopt_long_only... yes
+checking whether optreset is declared... no
+checking for working GNU getopt function... yes
+checking whether getenv is declared... yes
+checking whether the preprocessor supports include_next... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking wchar.h usability... yes
+checking wchar.h presence... yes
+checking for wchar.h... yes
+checking for unistd.h... (cached) yes
+checking for stdint.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for sys/stat.h... (cached) yes
+checking wctype.h usability... yes
+checking wctype.h presence... yes
+checking for wctype.h... yes
+checking for struct timeval... yes
+checking for gettimeofday... yes
+checking for isascii... yes
+checking for mbsinit... yes
+checking for setenv... yes
+checking for lstat... yes
+checking for iswcntrl... yes
+checking for wcwidth... yes
+checking for inline... inline
+checking for nl_langinfo and CODESET... yes
+checking whether getc_unlocked is declared... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking whether we are using the GNU C Library 2.1 or newer... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for long long int... yes
+checking for mbstate_t... yes
+checking whether mbrtowc and mbstate_t are properly declared... yes
+checking whether memmem is declared... yes
+checking for memmem... yes
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for unsigned long long int... yes
+checking whether strdup is declared... yes
+checking for working strerror function... yes
+checking whether strndup is declared... yes
+checking whether strnlen is declared... yes
+checking whether stat file-mode macros are broken... no
+checking for wint_t... yes
+checking for wchar_t... yes
+checking for alloca as a compiler built-in... yes
+checking for argz.h... yes
+checking for error_t... yes
+checking for argz_replace... yes
+checking if argz actually works... yes
+checking if environ is properly declared... yes
+checking for error_at_line... yes
+checking for gettimeofday with POSIX signature... yes
+checking whether gettimeofday clobbers localtime buffer... no
+checking whether the compiler generally respects inline... yes
+checking whether mbrtowc and mbstate_t are properly declared... (cached) yes
+checking whether mbswidth is declared in <wchar.h>... no
+checking for mbstate_t... (cached) yes
+checking for memchr... yes
+checking for working memcmp... yes
+checking for memcpy... yes
+checking whether memmem works in linear time... yes
+checking for memmem... (cached) yes
+checking for memmove... yes
+checking for mempcpy... yes
+checking for working mkstemp... yes
+checking whether stdint.h conforms to C99... yes
+checking for stpcpy... yes
+checking for strdup... yes
+checking for working strndup... yes
+checking for working strnlen... yes
+checking for nlink_t... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for unsetenv... yes
+checking for unsetenv() return type... int
+checking whether <wchar.h> is standalone... yes
+checking whether iswcntrl works... yes
+checking whether wcwidth is declared... yes
+checking whether wcwidth works reasonably in UTF-8 locales... yes
+checking for ranlib... (cached) ranlib
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether make sets $(MAKE)... (cached) yes
+checking for sigblock... yes
+checking whether stat file-mode macros are broken... (cached) no
+checking for ANSI C header files... (cached) yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking io.h usability... no
+checking io.h presence... no
+checking for io.h... no
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking pwd.h usability... yes
+checking pwd.h presence... yes
+checking for pwd.h... yes
+checking for string.h... (cached) yes
+checking for strings.h... (cached) yes
+checking termcap.h usability... yes
+checking termcap.h presence... yes
+checking for termcap.h... yes
+checking termio.h usability... yes
+checking termio.h presence... yes
+checking for termio.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking for unistd.h... (cached) yes
+checking sys/fcntl.h usability... yes
+checking sys/fcntl.h presence... yes
+checking for sys/fcntl.h... yes
+checking sys/file.h usability... yes
+checking sys/file.h presence... yes
+checking for sys/file.h... yes
+checking sys/stream.h usability... no
+checking sys/stream.h presence... no
+checking for sys/stream.h... no
+checking for sys/time.h... (cached) yes
+checking sys/ttold.h usability... no
+checking sys/ttold.h presence... no
+checking for sys/ttold.h... no
+checking sys/wait.h usability... yes
+checking sys/wait.h presence... yes
+checking for sys/wait.h... yes
+checking for sys/ptem.h... no
+checking POSIX termios... yes
+checking whether termios.h defines TIOCGWINSZ... no
+checking whether sys/ioctl.h defines TIOCGWINSZ... yes
+checking for off_t... yes
+checking return type of signal handlers... void
+checking for an ANSI C-conforming const... yes
+checking whether struct tm is in sys/time.h or time.h... time.h
+checking whether memchr is declared... yes
+checking whether strcoll is declared... yes
+checking whether strerror is declared... yes
+checking for working strcoll... yes
+checking for vprintf... yes
+checking for _doprnt... no
+checking for bzero... yes
+checking for getcwd... yes
+checking for memset... yes
+checking for setlocale... yes
+checking for setvbuf... yes
+checking for sigaction... yes
+checking for sigprocmask... yes
+checking for sigsetmask... yes
+checking for strchr... yes
+checking for memcpy... (cached) yes
+checking for memmove... (cached) yes
+checking for strdup... (cached) yes
+checking for strerror... yes
+checking build system type... (cached) x86_64-unknown-linux-gnu
+checking for tgetent in -lncurses... yes
+checking for library with termcap variables... ncurses
+checking ncurses/termcap.h usability... no
+checking ncurses/termcap.h presence... no
+checking for ncurses/termcap.h... no
+checking host system type... (cached) x86_64-unknown-linux-gnu
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking for hevea... no
+checking for tex... no
+configure: creating ./config.status
+config.status: creating install-info/tests/defs
+config.status: creating util/defs
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating gnulib/lib/Makefile
+config.status: creating info/Makefile
+config.status: creating install-info/Makefile
+config.status: creating install-info/tests/Makefile
+config.status: creating lib/Makefile
+config.status: creating makeinfo/Makefile
+config.status: creating makeinfo/tests/Makefile
+config.status: creating po/Makefile.in
+config.status: creating util/Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
++ make -j4
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13'
+Making all in gnulib/lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  cat ./alloca.in.h; \
+} > alloca.h-t
+rm -f configmake.h-t configmake.h
+rm -f stdlib.h-t stdlib.h
+rm -f string.h-t string.h
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  echo '#define PREFIX "/usr"'; \
+  echo '#define EXEC_PREFIX "/usr"'; \
+  echo '#define BINDIR "/usr/bin"'; \
+  echo '#define SBINDIR "/usr/sbin"'; \
+  echo '#define LIBEXECDIR "/usr/libexec"'; \
+  echo '#define DATAROOTDIR "/usr/share"'; \
+  echo '#define DATADIR "/usr/share"'; \
+  echo '#define SYSCONFDIR "/usr/etc"'; \
+  echo '#define SHAREDSTATEDIR "/usr/com"'; \
+  echo '#define LOCALSTATEDIR "/usr/var"'; \
+  echo '#define INCLUDEDIR "/usr/include"'; \
+  echo '#define OLDINCLUDEDIR "/usr/include"'; \
+  echo '#define DOCDIR "/usr/share/doc/texinfo"'; \
+  echo '#define INFODIR "/usr/share/info"'; \
+  echo '#define HTMLDIR "/usr/share/doc/texinfo"'; \
+  echo '#define DVIDIR "/usr/share/doc/texinfo"'; \
+  echo '#define PDFDIR "/usr/share/doc/texinfo"'; \
+  echo '#define PSDIR "/usr/share/doc/texinfo"'; \
+  echo '#define LIBDIR "/usr/lib"'; \
+  echo '#define LISPDIR ""'; \
+  echo '#define LOCALEDIR "/usr/share/locale"'; \
+  echo '#define MANDIR "/usr/share/man"'; \
+  echo '#define MANEXT ""'; \
+  echo '#define PKGDATADIR "/usr/share/texinfo"'; \
+  echo '#define PKGINCLUDEDIR "/usr/include/texinfo"'; \
+  echo '#define PKGLIBDIR "/usr/lib/texinfo"'; \
+  echo '#define PKGLIBEXECDIR ""'; \
+} | sed '/""/d' > configmake.h-t
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
+      -e 's|@''NEXT_STDLIB_H''@|<stdlib.h>|g' \
+      -e 's|@''GNULIB_MALLOC_POSIX''@|1|g' \
+      -e 's|@''GNULIB_REALLOC_POSIX''@|0|g' \
+      -e 's|@''GNULIB_CALLOC_POSIX''@|0|g' \
+      -e 's|@''GNULIB_GETSUBOPT''@|0|g' \
+      -e 's|@''GNULIB_MKDTEMP''@|0|g' \
+      -e 's|@''GNULIB_MKSTEMP''@|1|g' \
+      -e 's|@''GNULIB_PUTENV''@|0|g' \
+      -e 's|@''GNULIB_RPMATCH''@|0|g' \
+      -e 's|@''GNULIB_SETENV''@|1|g' \
+      -e 's|@''GNULIB_STRTOD''@|0|g' \
+      -e 's|@''GNULIB_UNSETENV''@|1|g' \
+      -e 's|@''HAVE_CALLOC_POSIX''@|1|g' \
+      -e 's|@''HAVE_GETSUBOPT''@|1|g' \
+      -e 's|@''HAVE_MALLOC_POSIX''@|1|g' \
+      -e 's|@''HAVE_MKDTEMP''@|1|g' \
+      -e 's|@''HAVE_REALLOC_POSIX''@|1|g' \
+      -e 's|@''HAVE_RPMATCH''@|1|g' \
+      -e 's|@''HAVE_SETENV''@|1|g' \
+      -e 's|@''HAVE_STRTOD''@|1|g' \
+      -e 's|@''HAVE_UNSETENV''@|1|g' \
+      -e 's|@''REPLACE_MKSTEMP''@|0|g' \
+      -e 's|@''REPLACE_PUTENV''@|0|g' \
+      -e 's|@''REPLACE_STRTOD''@|0|g' \
+      -e 's|@''VOID_UNSETENV''@|0|g' \
+      -e '/definition of GL_LINK_WARNING/r ../../build-aux/link-warning.h' \
+      < ./stdlib.in.h; \
+} > stdlib.h-t
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
+  sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
+      -e 's|@''NEXT_STRING_H''@|<string.h>|g' \
+      -e 's|@''GNULIB_MBSLEN''@|1|g' \
+      -e 's|@''GNULIB_MBSNLEN''@|0|g' \
+      -e 's|@''GNULIB_MBSCHR''@|1|g' \
+      -e 's|@''GNULIB_MBSRCHR''@|0|g' \
+      -e 's|@''GNULIB_MBSSTR''@|1|g' \
+      -e 's|@''GNULIB_MBSCASECMP''@|1|g' \
+      -e 's|@''GNULIB_MBSNCASECMP''@|1|g' \
+      -e 's|@''GNULIB_MBSPCASECMP''@|0|g' \
+      -e 's|@''GNULIB_MBSCASESTR''@|0|g' \
+      -e 's|@''GNULIB_MBSCSPN''@|0|g' \
+      -e 's|@''GNULIB_MBSPBRK''@|0|g' \
+      -e 's|@''GNULIB_MBSSPN''@|0|g' \
+      -e 's|@''GNULIB_MBSSEP''@|0|g' \
+      -e 's|@''GNULIB_MBSTOK_R''@|0|g' \
+      -e 's|@''GNULIB_MEMMEM''@|1|g' \
+      -e 's|@''GNULIB_MEMPCPY''@|1|g' \
+      -e 's|@''GNULIB_MEMRCHR''@|0|g' \
+      -e 's|@''GNULIB_RAWMEMCHR''@|0|g' \
+      -e 's|@''GNULIB_STPCPY''@|1|g' \
+      -e 's|@''GNULIB_STPNCPY''@|0|g' \
+      -e 's|@''GNULIB_STRCHRNUL''@|0|g' \
+      -e 's|@''GNULIB_STRDUP''@|1|g' \
+      -e 's|@''GNULIB_STRNDUP''@|1|g' \
+      -e 's|@''GNULIB_STRNLEN''@|1|g' \
+      -e 's|@''GNULIB_STRPBRK''@|0|g' \
+      -e 's|@''GNULIB_STRSEP''@|0|g' \
+      -e 's|@''GNULIB_STRSTR''@|0|g' \
+      -e 's|@''GNULIB_STRCASESTR''@|0|g' \
+      -e 's|@''GNULIB_STRTOK_R''@|0|g' \
+      -e 's|@''GNULIB_STRERROR''@|1|g' \
+      -e 's|@''GNULIB_STRSIGNAL''@|0|g' \
+      -e 's|@''HAVE_DECL_MEMMEM''@|1|g' \
+      -e 's|@''HAVE_MEMPCPY''@|1|g' \
+      -e 's|@''HAVE_DECL_MEMRCHR''@|1|g' \
+      -e 's|@''HAVE_RAWMEMCHR''@|1|g' \
+      -e 's|@''HAVE_STPCPY''@|1|g' \
+      -e 's|@''HAVE_STPNCPY''@|1|g' \
+      -e 's|@''HAVE_STRCHRNUL''@|1|g' \
+      -e 's|@''HAVE_DECL_STRDUP''@|1|g' \
+      -e 's|@''HAVE_STRNDUP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNDUP''@|1|g' \
+      -e 's|@''HAVE_DECL_STRNLEN''@|1|g' \
+      -e 's|@''HAVE_STRPBRK''@|1|g' \
+      -e 's|@''HAVE_STRSEP''@|1|g' \
+      -e 's|@''HAVE_STRCASESTR''@|1|g' \
+      -e 's|@''HAVE_DECL_STRTOK_R''@|1|g' \
+      -e 's|@''HAVE_DECL_STRERROR''@|1|g' \
+      -e 's|@''HAVE_DECL_STRSIGNAL''@|1|g' \
+      -e 's|@''REPLACE_MEMMEM''@|0|g' \
+      -e 's|@''REPLACE_STRCASESTR''@|0|g' \
+      -e 's|@''REPLACE_STRSTR''@|0|g' \
+      -e 's|@''REPLACE_STRERROR''@|0|g' \
+      -e 's|@''REPLACE_STRSIGNAL''@|0|g' \
+      -e '/definition of GL_LINK_WARNING/r ../../build-aux/link-warning.h' \
+      < ./string.in.h; \
+} > string.h-t
+mv -f alloca.h-t alloca.h
+/bin/mkdir -p sys
+mv configmake.h-t configmake.h
+rm -f sys/stat.h-t sys/stat.h
+rm -f unistd.h-t unistd.h
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''HAVE_UNISTD_H''@|1|g' \
+      -e 's/@''INCLUDE_NEXT''@/include_next/g' \
+      -e 's|@''NEXT_UNISTD_H''@|<unistd.h>|g' \
+      -e 's|@''GNULIB_CHOWN''@|0|g' \
+      -e 's|@''GNULIB_DUP2''@|0|g' \
+      -e 's|@''GNULIB_ENVIRON''@|1|g' \
+      -e 's|@''GNULIB_FCHDIR''@|0|g' \
+      -e 's|@''GNULIB_FTRUNCATE''@|0|g' \
+      -e 's|@''GNULIB_GETCWD''@|0|g' \
+      -e 's|@''GNULIB_GETLOGIN_R''@|0|g' \
+      -e 's|@''GNULIB_GETPAGESIZE''@|0|g' \
+      -e 's|@''GNULIB_LCHOWN''@|0|g' \
+      -e 's|@''GNULIB_LSEEK''@|0|g' \
+      -e 's|@''GNULIB_READLINK''@|0|g' \
+      -e 's|@''GNULIB_SLEEP''@|0|g' \
+      -e 's|@''HAVE_DUP2''@|1|g' \
+      -e 's|@''HAVE_FTRUNCATE''@|1|g' \
+      -e 's|@''HAVE_GETPAGESIZE''@|1|g' \
+      -e 's|@''HAVE_READLINK''@|1|g' \
+      -e 's|@''HAVE_SLEEP''@|1|g' \
+      -e 's|@''HAVE_DECL_ENVIRON''@|1|g' \
+      -e 's|@''HAVE_DECL_GETLOGIN_R''@|1|g' \
+      -e 's|@''HAVE_OS_H''@|0|g' \
+      -e 's|@''HAVE_SYS_PARAM_H''@|0|g' \
+      -e 's|@''REPLACE_CHOWN''@|0|g' \
+      -e 's|@''REPLACE_FCHDIR''@|0|g' \
+      -e 's|@''REPLACE_GETCWD''@|0|g' \
+      -e 's|@''REPLACE_GETPAGESIZE''@|0|g' \
+      -e 's|@''REPLACE_LCHOWN''@|0|g' \
+      -e 's|@''REPLACE_LSEEK''@|0|g' \
+      < ./unistd.in.h; \
+} > unistd.h-t
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
+      -e 's|@''NEXT_SYS_STAT_H''@|<sys/stat.h>|g' \
+      -e 's|@''HAVE_LSTAT''@|1|g' \
+      -e 's|@''REPLACE_MKDIR''@|0|g' \
+      < ./sys_stat.in.h; \
+} > sys/stat.h-t
+mv stdlib.h-t stdlib.h
+mv sys/stat.h-t sys/stat.h
+mv unistd.h-t unistd.h
+mv string.h-t string.h
+make  all-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+depbase=`echo localcharset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT localcharset.o -MD -MP -MF $depbase.Tpo -c -o localcharset.o localcharset.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo malloca.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT malloca.o -MD -MP -MF $depbase.Tpo -c -o malloca.o malloca.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbchar.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT mbchar.o -MD -MP -MF $depbase.Tpo -c -o mbchar.o mbchar.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbscasecmp.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT mbscasecmp.o -MD -MP -MF $depbase.Tpo -c -o mbscasecmp.o mbscasecmp.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbschr.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT mbschr.o -MD -MP -MF $depbase.Tpo -c -o mbschr.o mbschr.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbslen.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT mbslen.o -MD -MP -MF $depbase.Tpo -c -o mbslen.o mbslen.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbsncasecmp.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT mbsncasecmp.o -MD -MP -MF $depbase.Tpo -c -o mbsncasecmp.o mbsncasecmp.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbsstr.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT mbsstr.o -MD -MP -MF $depbase.Tpo -c -o mbsstr.o mbsstr.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo mbswidth.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT mbswidth.o -MD -MP -MF $depbase.Tpo -c -o mbswidth.o mbswidth.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo strnlen1.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT strnlen1.o -MD -MP -MF $depbase.Tpo -c -o strnlen1.o strnlen1.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo xalloc-die.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT xalloc-die.o -MD -MP -MF $depbase.Tpo -c -o xalloc-die.o xalloc-die.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo xsetenv.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT xsetenv.o -MD -MP -MF $depbase.Tpo -c -o xsetenv.o xsetenv.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo exitfail.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT exitfail.o -MD -MP -MF $depbase.Tpo -c -o exitfail.o exitfail.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo tempname.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT tempname.o -MD -MP -MF $depbase.Tpo -c -o tempname.o tempname.c &&\
+mv -f $depbase.Tpo $depbase.Po
+depbase=`echo xmalloc.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT xmalloc.o -MD -MP -MF $depbase.Tpo -c -o xmalloc.o xmalloc.c &&\
+mv -f $depbase.Tpo $depbase.Po
+rm -f t-charset.alias charset.alias
+/bin/sh ./config.charset 'x86_64-unknown-linux-gnu' > t-charset.alias
+rm -f t-ref-add.sed ref-add.sed
+sed -e '/^#/d' -e 's/@''PACKAGE''@/texinfo/g' ref-add.sin > t-ref-add.sed
+mv t-charset.alias charset.alias
+rm -f t-ref-del.sed ref-del.sed
+sed -e '/^#/d' -e 's/@''PACKAGE''@/texinfo/g' ref-del.sin > t-ref-del.sed
+mv t-ref-add.sed ref-add.sed
+depbase=`echo uniwidth/width.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
+gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT uniwidth/width.o -MD -MP -MF $depbase.Tpo -c -o uniwidth/width.o uniwidth/width.c &&\
+mv -f $depbase.Tpo $depbase.Po
+mv t-ref-del.sed ref-del.sed
+rm -f libgnu.a
+ar cru libgnu.a localcharset.o malloca.o mbchar.o mbscasecmp.o mbschr.o mbslen.o mbsncasecmp.o mbsstr.o mbswidth.o strnlen1.o uniwidth/width.o xalloc-die.o xsetenv.o exitfail.o tempname.o xmalloc.o
+ranlib libgnu.a
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+Making all in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT substring.o -MD -MP -MF .deps/substring.Tpo -c -o substring.o substring.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT xexit.o -MD -MP -MF .deps/xexit.Tpo -c -o xexit.o xexit.c
+mv -f .deps/substring.Tpo .deps/substring.Po
+mv -f .deps/xexit.Tpo .deps/xexit.Po
+rm -f libtxi.a
+ar cru libtxi.a substring.o xexit.o 
+ranlib libtxi.a
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
+Making all in install-info
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+Making all in tests
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT install-info.o -MD -MP -MF .deps/install-info.Tpo -c -o install-info.o install-info.c
+mv -f .deps/install-info.Tpo .deps/install-info.Po
+gcc  -Os -pipe   -o ginstall-info install-info.o ../lib/libtxi.a ../gnulib/lib/libgnu.a  
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+Making all in info
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT makedoc.o -MD -MP -MF .deps/makedoc.Tpo -c -o makedoc.o makedoc.c
+mv -f .deps/makedoc.Tpo .deps/makedoc.Po
+gcc  -Os -pipe   -o makedoc makedoc.o ../lib/libtxi.a ../gnulib/lib/libgnu.a -lncurses  
+rm -f doc.c key.c funs.h
+..//info/makedoc ./session.c ./echo-area.c ./infodoc.c ./m-x.c ./indices.c ./nodemenu.c ./footnotes.c ./variables.c
+make  all-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT dir.o -MD -MP -MF .deps/dir.Tpo -c -o dir.o dir.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT display.o -MD -MP -MF .deps/display.Tpo -c -o display.o display.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT dribble.o -MD -MP -MF .deps/dribble.Tpo -c -o dribble.o dribble.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT echo-area.o -MD -MP -MF .deps/echo-area.Tpo -c -o echo-area.o echo-area.c
+mv -f .deps/dribble.Tpo .deps/dribble.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT filesys.o -MD -MP -MF .deps/filesys.Tpo -c -o filesys.o filesys.c
+mv -f .deps/dir.Tpo .deps/dir.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT footnotes.o -MD -MP -MF .deps/footnotes.Tpo -c -o footnotes.o footnotes.c
+mv -f .deps/display.Tpo .deps/display.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT gc.o -MD -MP -MF .deps/gc.Tpo -c -o gc.o gc.c
+mv -f .deps/footnotes.Tpo .deps/footnotes.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT indices.o -MD -MP -MF .deps/indices.Tpo -c -o indices.o indices.c
+mv -f .deps/gc.Tpo .deps/gc.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT info-utils.o -MD -MP -MF .deps/info-utils.Tpo -c -o info-utils.o info-utils.c
+mv -f .deps/filesys.Tpo .deps/filesys.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT info.o -MD -MP -MF .deps/info.Tpo -c -o info.o info.c
+mv -f .deps/echo-area.Tpo .deps/echo-area.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT infodoc.o -MD -MP -MF .deps/infodoc.Tpo -c -o infodoc.o infodoc.c
+mv -f .deps/info.Tpo .deps/info.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT infomap.o -MD -MP -MF .deps/infomap.Tpo -c -o infomap.o infomap.c
+mv -f .deps/indices.Tpo .deps/indices.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT m-x.o -MD -MP -MF .deps/m-x.Tpo -c -o m-x.o m-x.c
+mv -f .deps/info-utils.Tpo .deps/info-utils.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT man.o -MD -MP -MF .deps/man.Tpo -c -o man.o man.c
+mv -f .deps/m-x.Tpo .deps/m-x.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT nodemenu.o -MD -MP -MF .deps/nodemenu.Tpo -c -o nodemenu.o nodemenu.c
+mv -f .deps/infomap.Tpo .deps/infomap.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT nodes.o -MD -MP -MF .deps/nodes.Tpo -c -o nodes.o nodes.c
+mv -f .deps/infodoc.Tpo .deps/infodoc.Po
+mv -f .deps/man.Tpo .deps/man.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT search.o -MD -MP -MF .deps/search.Tpo -c -o search.o search.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT session.o -MD -MP -MF .deps/session.Tpo -c -o session.o session.c
+mv -f .deps/nodemenu.Tpo .deps/nodemenu.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT signals.o -MD -MP -MF .deps/signals.Tpo -c -o signals.o signals.c
+mv -f .deps/signals.Tpo .deps/signals.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT terminal.o -MD -MP -MF .deps/terminal.Tpo -c -o terminal.o terminal.c
+mv -f .deps/nodes.Tpo .deps/nodes.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT tilde.o -MD -MP -MF .deps/tilde.Tpo -c -o tilde.o tilde.c
+mv -f .deps/search.Tpo .deps/search.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT variables.o -MD -MP -MF .deps/variables.Tpo -c -o variables.o variables.c
+mv -f .deps/terminal.Tpo .deps/terminal.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT window.o -MD -MP -MF .deps/window.Tpo -c -o window.o window.c
+mv -f .deps/tilde.Tpo .deps/tilde.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT doc.o -MD -MP -MF .deps/doc.Tpo -c -o doc.o doc.c
+mv -f .deps/variables.Tpo .deps/variables.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT infokey.o -MD -MP -MF .deps/infokey.Tpo -c -o infokey.o infokey.c
+window.c: In function 'process_node_text':
+window.c:1600:4: warning: passing argument 2 of 'ansi_escape' from incompatible pointer type
+window.c:1453:1: note: expected 'size_t *' but argument is of type 'int *'
+window.c:1605:4: warning: passing argument 3 of 'info_tag' from incompatible pointer type
+window.c:1495:1: note: expected 'size_t *' but argument is of type 'int *'
+window.c:1615:7: warning: passing argument 4 of 'printed_representation' from incompatible pointer type
+info-utils.h:101:14: note: expected 'size_t *' but argument is of type 'int *'
+window.c:1624:10: warning: passing argument 4 of 'printed_representation' from incompatible pointer type
+info-utils.h:101:14: note: expected 'size_t *' but argument is of type 'int *'
+window.c: In function 'clean_manpage':
+window.c:1766:4: warning: passing argument 2 of 'ansi_escape' from incompatible pointer type
+window.c:1453:1: note: expected 'size_t *' but argument is of type 'int *'
+window.c: In function 'window_scan_line':
+window.c:1872:4: warning: passing argument 2 of 'ansi_escape' from incompatible pointer type
+window.c:1453:1: note: expected 'size_t *' but argument is of type 'int *'
+window.c:1877:4: warning: passing argument 3 of 'info_tag' from incompatible pointer type
+window.c:1495:1: note: expected 'size_t *' but argument is of type 'int *'
+window.c:1887:11: warning: passing argument 4 of 'printed_representation' from incompatible pointer type
+info-utils.h:101:14: note: expected 'size_t *' but argument is of type 'int *'
+window.c:1895:7: warning: passing argument 4 of 'printed_representation' from incompatible pointer type
+info-utils.h:101:14: note: expected 'size_t *' but argument is of type 'int *'
+mv -f .deps/doc.Tpo .deps/doc.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT key.o -MD -MP -MF .deps/key.Tpo -c -o key.o key.c
+mv -f .deps/key.Tpo .deps/key.Po
+mv -f .deps/infokey.Tpo .deps/infokey.Po
+gcc  -Os -pipe   -o infokey infokey.o key.o ../lib/libtxi.a ../gnulib/lib/libgnu.a  
+mv -f .deps/window.Tpo .deps/window.Po
+mv -f .deps/session.Tpo .deps/session.Po
+gcc  -Os -pipe   -o ginfo dir.o display.o dribble.o echo-area.o filesys.o footnotes.o gc.o indices.o info-utils.o info.o infodoc.o infomap.o m-x.o man.o nodemenu.o nodes.o search.o session.o signals.o terminal.o tilde.o variables.o window.o doc.o ../lib/libtxi.a ../gnulib/lib/libgnu.a -lncurses  
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+Making all in makeinfo
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+Making all in tests
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT cmds.o -MD -MP -MF .deps/cmds.Tpo -c -o cmds.o cmds.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT defun.o -MD -MP -MF .deps/defun.Tpo -c -o defun.o defun.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT files.o -MD -MP -MF .deps/files.Tpo -c -o files.o files.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT float.o -MD -MP -MF .deps/float.Tpo -c -o float.o float.c
+mv -f .deps/float.Tpo .deps/float.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT footnote.o -MD -MP -MF .deps/footnote.Tpo -c -o footnote.o footnote.c
+mv -f .deps/defun.Tpo .deps/defun.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT html.o -MD -MP -MF .deps/html.Tpo -c -o html.o html.c
+mv -f .deps/files.Tpo .deps/files.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT index.o -MD -MP -MF .deps/index.Tpo -c -o index.o index.c
+mv -f .deps/footnote.Tpo .deps/footnote.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT insertion.o -MD -MP -MF .deps/insertion.Tpo -c -o insertion.o insertion.c
+mv -f .deps/html.Tpo .deps/html.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT lang.o -MD -MP -MF .deps/lang.Tpo -c -o lang.o lang.c
+mv -f .deps/cmds.Tpo .deps/cmds.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT macro.o -MD -MP -MF .deps/macro.Tpo -c -o macro.o macro.c
+mv -f .deps/index.Tpo .deps/index.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT makeinfo.o -MD -MP -MF .deps/makeinfo.Tpo -c -o makeinfo.o makeinfo.c
+mv -f .deps/lang.Tpo .deps/lang.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT multi.o -MD -MP -MF .deps/multi.Tpo -c -o multi.o multi.c
+mv -f .deps/insertion.Tpo .deps/insertion.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT node.o -MD -MP -MF .deps/node.Tpo -c -o node.o node.c
+mv -f .deps/macro.Tpo .deps/macro.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT sectioning.o -MD -MP -MF .deps/sectioning.Tpo -c -o sectioning.o sectioning.c
+mv -f .deps/multi.Tpo .deps/multi.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT toc.o -MD -MP -MF .deps/toc.Tpo -c -o toc.o toc.c
+mv -f .deps/sectioning.Tpo .deps/sectioning.Po
+mv -f .deps/toc.Tpo .deps/toc.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT xml.o -MD -MP -MF .deps/xml.Tpo -c -o xml.o xml.c
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT xref.o -MD -MP -MF .deps/xref.Tpo -c -o xref.o xref.c
+mv -f .deps/node.Tpo .deps/node.Po
+mv -f .deps/xref.Tpo .deps/xref.Po
+mv -f .deps/xml.Tpo .deps/xml.Po
+mv -f .deps/makeinfo.Tpo .deps/makeinfo.Po
+gcc  -Os -pipe   -o makeinfo cmds.o defun.o files.o float.o footnote.o html.o index.o insertion.o lang.o macro.o makeinfo.o multi.o node.o sectioning.o toc.o xml.o xref.o ../lib/libtxi.a ../gnulib/lib/libgnu.a  
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+Making all in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/po'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/po'
+Making all in util
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT texindex.o -MD -MP -MF .deps/texindex.Tpo -c -o texindex.o texindex.c
+sed 's/__VERSION__/4.13/g' ./texinfo-cat.in >texinfo.cat
+mv -f .deps/texindex.Tpo .deps/texindex.Po
+gcc  -Os -pipe   -o texindex texindex.o ../lib/libtxi.a ../gnulib/lib/libgnu.a  
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+restore=: && backupdir=".am$$" && \
+rm -rf $backupdir && mkdir $backupdir && \
+if (..//makeinfo/makeinfo --version) >/dev/null 2>&1; then \
+  for f in texinfo texinfo-[0-9] texinfo-[0-9][0-9] texinfo.i[0-9] texinfo.i[0-9][0-9]; do \
+    if test -f $f; then mv $f $backupdir; restore=mv; else :; fi; \
+  done; \
+else :; fi && \
+if ..//makeinfo/makeinfo   -I . \
+ -o texinfo `test -f 'texinfo.txi' || echo './'`texinfo.txi; \
+then \
+  rc=0; \
+else \
+  rc=$?; \
+  $restore $backupdir/* `echo "./texinfo" | sed 's|[^/]*$||'`; \
+fi; \
+rm -rf $backupdir; exit $rc
+restore=: && backupdir=".am$$" && \
+rm -rf $backupdir && mkdir $backupdir && \
+if (..//makeinfo/makeinfo --version) >/dev/null 2>&1; then \
+  for f in info-stnd.info info-stnd.info-[0-9] info-stnd.info-[0-9][0-9] info-stnd.i[0-9] info-stnd.i[0-9][0-9]; do \
+    if test -f $f; then mv $f $backupdir; restore=mv; else :; fi; \
+  done; \
+else :; fi && \
+if ..//makeinfo/makeinfo   -I . \
+ -o info-stnd.info `test -f 'info-stnd.texi' || echo './'`info-stnd.texi; \
+then \
+  rc=0; \
+else \
+  rc=$?; \
+  $restore $backupdir/* `echo "./info-stnd.info" | sed 's|[^/]*$||'`; \
+fi; \
+rm -rf $backupdir; exit $rc
+restore=: && backupdir=".am$$" && \
+rm -rf $backupdir && mkdir $backupdir && \
+if (..//makeinfo/makeinfo --version) >/dev/null 2>&1; then \
+  for f in info.info info.info-[0-9] info.info-[0-9][0-9] info.i[0-9] info.i[0-9][0-9]; do \
+    if test -f $f; then mv $f $backupdir; restore=mv; else :; fi; \
+  done; \
+else :; fi && \
+if ..//makeinfo/makeinfo   -I . \
+ -o info.info `test -f 'info.texi' || echo './'`info.texi; \
+then \
+  rc=0; \
+else \
+  rc=$?; \
+  $restore $backupdir/* `echo "./info.info" | sed 's|[^/]*$||'`; \
+fi; \
+rm -rf $backupdir; exit $rc
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13'
++ make check
+Making check in gnulib/lib
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+make  check-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+make[2]: Nothing to be done for `check-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+Making check in lib
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
+Making check in install-info
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+Making check in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make  check-TESTS
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+PASS: ii-0001-test
+PASS: ii-0002-test
+PASS: ii-0003-test
+PASS: ii-0004-test
+PASS: ii-0005-test
+PASS: ii-0006-test
+PASS: ii-0007-test
+PASS: ii-0008-test
+PASS: ii-0009-test
+PASS: ii-0010-test
+PASS: ii-0011-test
+PASS: ii-0012-test
+PASS: ii-0013-test
+PASS: ii-0014-test
+PASS: ii-0015-test
+PASS: ii-0016-test
+PASS: ii-0017-test
+PASS: ii-0018-test
+PASS: ii-0019-test
+PASS: ii-0020-test
+PASS: ii-0021-test
+PASS: ii-0022-test
+PASS: ii-0023-test
+PASS: ii-0024-test
+PASS: ii-0025-test
+PASS: ii-0026-test
+PASS: ii-0027-test
+PASS: ii-0028-test
+PASS: ii-0029-test
+PASS: ii-0030-test
+PASS: ii-0031-test
+PASS: ii-0032-test
+PASS: ii-0033-test
+PASS: ii-0034-test
+PASS: ii-0035-test
+PASS: ii-0036-test
+PASS: ii-0037-test
+PASS: ii-0038-test
+PASS: ii-0039-test
+PASS: ii-0040-test
+PASS: ii-0041-test
+PASS: ii-0042-test
+PASS: ii-0043-test
+PASS: ii-0044-test
+PASS: ii-0045-test
+PASS: ii-0046-test
+PASS: ii-0047-test
+PASS: ii-0048-test
+PASS: ii-0049-test
+PASS: ii-0050-test
+PASS: ii-0051-test
+PASS: ii-0052-test
+PASS: ii-0053-test
+===================
+All 53 tests passed
+===================
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+make[2]: Nothing to be done for `check-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+Making check in info
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+make  check-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+make[2]: Nothing to be done for `check-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+Making check in makeinfo
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+Making check in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make  check-TESTS
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+PASS: accent
+PASS: accentenc
+PASS: cond
+PASS: copying
+PASS: defxcond
+PASS: emph-option
+PASS: html-docdesc
+PASS: html-extrali
+PASS: html-min
+PASS: html-manuals
+PASS: html-para
+PASS: html-title
+PASS: html-top
+PASS: include-value
+PASS: macro-at
+PASS: menu-whitespace
+PASS: no-headers
+PASS: node-expand
+PASS: node-value
+PASS: node-whitespace
+PASS: quote-args
+PASS: top
+PASS: twofiles
+===================
+All 23 tests passed
+===================
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+make[2]: Nothing to be done for `check-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+Making check in po
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/po'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/po'
+Making check in util
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+make  
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+make  check-TESTS
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+==================
+All 0 tests passed
+==================
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+Making check in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+make[1]: Nothing to be done for `check'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.27024
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/texinfo-root
++ /bin/mkdir -p /var/tmp/texinfo-root
++ cd texinfo-4.13
++ make DESTDIR=/var/tmp/texinfo-root install
+Making install in gnulib/lib
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+make  install-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+test yes != no || /bin/sh /usr/src/rpm/BUILD/texinfo-4.13/build-aux/install-sh -d /var/tmp/texinfo-root/usr/lib
+if test -f /var/tmp/texinfo-root/usr/lib/charset.alias; then \
+  sed -f ref-add.sed /var/tmp/texinfo-root/usr/lib/charset.alias > /var/tmp/texinfo-root/usr/lib/charset.tmp ; \
+  /usr/bin/install -c -m 644 /var/tmp/texinfo-root/usr/lib/charset.tmp /var/tmp/texinfo-root/usr/lib/charset.alias ; \
+  rm -f /var/tmp/texinfo-root/usr/lib/charset.tmp ; \
+else \
+  if test yes = no; then \
+    sed -f ref-add.sed charset.alias > /var/tmp/texinfo-root/usr/lib/charset.tmp ; \
+    /usr/bin/install -c -m 644 /var/tmp/texinfo-root/usr/lib/charset.tmp /var/tmp/texinfo-root/usr/lib/charset.alias ; \
+    rm -f /var/tmp/texinfo-root/usr/lib/charset.tmp ; \
+  fi ; \
+fi
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
+Making install in lib
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
+Making install in install-info
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+Making install in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/bin"
+  /usr/bin/install -c 'ginstall-info' '/var/tmp/texinfo-root/usr/bin/install-info'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/install-info'
+Making install in info
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+make  install-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/bin"
+  /usr/bin/install -c 'ginfo' '/var/tmp/texinfo-root/usr/bin/info'
+  /usr/bin/install -c 'infokey' '/var/tmp/texinfo-root/usr/bin/infokey'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/info'
+Making install in makeinfo
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+Making install in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/bin"
+  /usr/bin/install -c 'makeinfo' '/var/tmp/texinfo-root/usr/bin/makeinfo'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/makeinfo'
+Making install in po
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/po'
+/bin/mkdir -p /var/tmp/texinfo-root/usr/share
+installing cs.gmo as /var/tmp/texinfo-root/usr/share/locale/cs/LC_MESSAGES/texinfo.mo
+installing da.gmo as /var/tmp/texinfo-root/usr/share/locale/da/LC_MESSAGES/texinfo.mo
+installing de.gmo as /var/tmp/texinfo-root/usr/share/locale/de/LC_MESSAGES/texinfo.mo
+installing de_AT.gmo as /var/tmp/texinfo-root/usr/share/locale/de_AT/LC_MESSAGES/texinfo.mo
+installing eo.gmo as /var/tmp/texinfo-root/usr/share/locale/eo/LC_MESSAGES/texinfo.mo
+installing es.gmo as /var/tmp/texinfo-root/usr/share/locale/es/LC_MESSAGES/texinfo.mo
+installing fr.gmo as /var/tmp/texinfo-root/usr/share/locale/fr/LC_MESSAGES/texinfo.mo
+installing he.gmo as /var/tmp/texinfo-root/usr/share/locale/he/LC_MESSAGES/texinfo.mo
+installing hr.gmo as /var/tmp/texinfo-root/usr/share/locale/hr/LC_MESSAGES/texinfo.mo
+installing hu.gmo as /var/tmp/texinfo-root/usr/share/locale/hu/LC_MESSAGES/texinfo.mo
+installing ja.gmo as /var/tmp/texinfo-root/usr/share/locale/ja/LC_MESSAGES/texinfo.mo
+installing nl.gmo as /var/tmp/texinfo-root/usr/share/locale/nl/LC_MESSAGES/texinfo.mo
+installing nb.gmo as /var/tmp/texinfo-root/usr/share/locale/nb/LC_MESSAGES/texinfo.mo
+installing pl.gmo as /var/tmp/texinfo-root/usr/share/locale/pl/LC_MESSAGES/texinfo.mo
+installing ro.gmo as /var/tmp/texinfo-root/usr/share/locale/ro/LC_MESSAGES/texinfo.mo
+installing ru.gmo as /var/tmp/texinfo-root/usr/share/locale/ru/LC_MESSAGES/texinfo.mo
+installing rw.gmo as /var/tmp/texinfo-root/usr/share/locale/rw/LC_MESSAGES/texinfo.mo
+installing sv.gmo as /var/tmp/texinfo-root/usr/share/locale/sv/LC_MESSAGES/texinfo.mo
+installing tr.gmo as /var/tmp/texinfo-root/usr/share/locale/tr/LC_MESSAGES/texinfo.mo
+installing vi.gmo as /var/tmp/texinfo-root/usr/share/locale/vi/LC_MESSAGES/texinfo.mo
+installing zh_CN.gmo as /var/tmp/texinfo-root/usr/share/locale/zh_CN/LC_MESSAGES/texinfo.mo
+installing zh_TW.gmo as /var/tmp/texinfo-root/usr/share/locale/zh_TW/LC_MESSAGES/texinfo.mo
+if test "texinfo" = "gettext-tools"; then \
+  /bin/mkdir -p /var/tmp/texinfo-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/texinfo-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/texinfo-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/po'
+Making install in util
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/bin"
+  /usr/bin/install -c 'texindex' '/var/tmp/texinfo-root/usr/bin/texindex'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/bin"
+ /usr/bin/install -c 'texi2dvi' '/var/tmp/texinfo-root/usr/bin/texi2dvi'
+ /usr/bin/install -c 'texi2pdf' '/var/tmp/texinfo-root/usr/bin/texi2pdf'
+ /usr/bin/install -c 'pdftexi2dvi' '/var/tmp/texinfo-root/usr/bin/pdftexi2dvi'
+test -z "/usr/share/texinfo" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/share/texinfo"
+ /usr/bin/install -c -m 644 'texinfo.dtd' '/var/tmp/texinfo-root/usr/share/texinfo/texinfo.dtd'
+ /usr/bin/install -c -m 644 'texinfo.xsl' '/var/tmp/texinfo-root/usr/share/texinfo/texinfo.xsl'
+test -z "/usr/share/texinfo" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/share/texinfo"
+ /usr/bin/install -c -m 644 'texinfo.cat' '/var/tmp/texinfo-root/usr/share/texinfo/texinfo.cat'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/util'
+Making install in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+make[2]: Nothing to be done for `install-exec-am'.
+
+WARNING: If your texmf tree does not already contain
+         up-to-date versions, you must install
+             texinfo.tex and txi-??.tex manually,
+         perhaps in TEXMF/tex/texinfo/,
+         where TEXMF is a root of your TeX tree.
+         See doc/README for some considerations.
+         You can run make TEXMF=/your/texmf install-tex to do this.
+
+         You may also need to install epsf.tex in
+         TEXMF/tex/generic/dvips, if your TeX
+         installation did not include it.
+test -z "/usr/share/info" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/share/info"
+ /usr/bin/install -c -m 644 './texinfo' '/var/tmp/texinfo-root/usr/share/info/texinfo'
+ /usr/bin/install -c -m 644 './texinfo-1' '/var/tmp/texinfo-root/usr/share/info/texinfo-1'
+ /usr/bin/install -c -m 644 './texinfo-2' '/var/tmp/texinfo-root/usr/share/info/texinfo-2'
+ /usr/bin/install -c -m 644 './texinfo-3' '/var/tmp/texinfo-root/usr/share/info/texinfo-3'
+ /usr/bin/install -c -m 644 './info-stnd.info' '/var/tmp/texinfo-root/usr/share/info/info-stnd.info'
+ /usr/bin/install -c -m 644 './info.info' '/var/tmp/texinfo-root/usr/share/info/info.info'
+ install-info --info-dir='/var/tmp/texinfo-root/usr/share/info' '/var/tmp/texinfo-root/usr/share/info/texinfo'
+ install-info --info-dir='/var/tmp/texinfo-root/usr/share/info' '/var/tmp/texinfo-root/usr/share/info/info-stnd.info'
+ install-info --info-dir='/var/tmp/texinfo-root/usr/share/info' '/var/tmp/texinfo-root/usr/share/info/info.info'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 './info.1' '/var/tmp/texinfo-root/usr/share/man/man1/info.1'
+ /usr/bin/install -c -m 644 './infokey.1' '/var/tmp/texinfo-root/usr/share/man/man1/infokey.1'
+ /usr/bin/install -c -m 644 './install-info.1' '/var/tmp/texinfo-root/usr/share/man/man1/install-info.1'
+ /usr/bin/install -c -m 644 './makeinfo.1' '/var/tmp/texinfo-root/usr/share/man/man1/makeinfo.1'
+ /usr/bin/install -c -m 644 './texindex.1' '/var/tmp/texinfo-root/usr/share/man/man1/texindex.1'
+ /usr/bin/install -c -m 644 './texi2dvi.1' '/var/tmp/texinfo-root/usr/share/man/man1/texi2dvi.1'
+ /usr/bin/install -c -m 644 './texi2pdf.1' '/var/tmp/texinfo-root/usr/share/man/man1/texi2pdf.1'
+ /usr/bin/install -c -m 644 './pdftexi2dvi.1' '/var/tmp/texinfo-root/usr/share/man/man1/pdftexi2dvi.1'
+test -z "/usr/share/man/man5" || /bin/mkdir -p "/var/tmp/texinfo-root/usr/share/man/man5"
+ /usr/bin/install -c -m 644 './info.5' '/var/tmp/texinfo-root/usr/share/man/man5/info.5'
+ /usr/bin/install -c -m 644 './texinfo.5' '/var/tmp/texinfo-root/usr/share/man/man5/texinfo.5'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13'
+make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13'
++ make DESTDIR=/var/tmp/texinfo-root TEXMF=/usr/share/texmf install-tex
+cd doc && make TEXMF=/usr/share/texmf install-tex
+make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
+test -n "/usr/share/texmf" || (echo "TEXMF must be set." >&2; exit 1)
+/bin/sh /usr/src/rpm/BUILD/texinfo-4.13/build-aux/install-sh -d /var/tmp/texinfo-root/usr/share/texmf/tex/texinfo /var/tmp/texinfo-root/usr/share/texmf/tex/generic/epsf
+/usr/bin/install -c -m 644 ./texinfo.tex /var/tmp/texinfo-root/usr/share/texmf/tex/texinfo/texinfo.tex
+/usr/bin/install -c -m 644 ./epsf.tex /var/tmp/texinfo-root/usr/share/texmf/tex/generic/epsf/epsf.tex
+for f in txi-cs.tex txi-de.tex txi-en.tex txi-es.tex txi-fr.tex txi-it.tex txi-nl.tex txi-nb.tex txi-pl.tex txi-pt.tex txi-ru.tex txi-sr.tex txi-tr.tex txi-uk.tex; do \
+  /usr/bin/install -c -m 644 ./$f /var/tmp/texinfo-root/usr/share/texmf/tex/texinfo/$f; done
+make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
++ /usr/lib/rpm/compress_man.sh /var/tmp/texinfo-root
++ /usr/lib/rpm/strip.sh /var/tmp/texinfo-root
++ /usr/lib/rpm/find-lang.sh /var/tmp/texinfo-root texinfo
++ exit 0
+Processing files: texinfo-4.13a-3.x86_64
+Requires: /bin/sh libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libncursesw.so.5()(64bit)
+Processing files: texinfo-tex-4.13a-3.x86_64
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/texinfo-root
+warning: Could not canonicalize hostname: zaphod.lightcube.us
+Wrote: /usr/src/rpm/SRPMS/texinfo-4.13a-3.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/texinfo-4.13a-3.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/texinfo-tex-4.13a-3.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.6736
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd texinfo-4.13
++ /bin/rm -rf /var/tmp/texinfo-root

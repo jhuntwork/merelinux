@@ -1,16 +1,15 @@
 Summary: The GNU Documentation System
 Name: texinfo
 Version: 4.13a
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/texinfo
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/texinfo/texinfo-4.13a.tar.lzma
 
-Requires: base-layout, glibc, ncurses, bash
-BuildRequires: digest(%{SOURCE0}) = 71ba711519209b5fb583fed2b3d86fcb
+BuildRequires: digest(sha1:%{SOURCE0}) = 676ec9aa25a97c05dff66fba5225f9e101160063
 BuildRequires: ncurses-devel
 
 %package tex
@@ -29,13 +28,17 @@ Tools for formatting texinfo docs for printing using TeX.
 %setup -q -n %{name}-4.13
 
 %build
-./configure --prefix=/usr
-make
+export CFLAGS='-Os -pipe'
+./configure \
+  --prefix=/usr
+make %{PMFLAGS}
 make check
 
 %install
 make DESTDIR=%{buildroot} install
 make DESTDIR=%{buildroot} TEXMF=/usr/share/texmf install-tex
+%{compress_man}
+%{strip}
 %find_lang %{name}
 
 %clean
@@ -58,16 +61,16 @@ rm -rf %{buildroot}
 /usr/share/info/texinfo-1
 /usr/share/info/texinfo-2
 /usr/share/info/texinfo-3
-/usr/share/man/man1/info.1
-/usr/share/man/man1/infokey.1
-/usr/share/man/man1/install-info.1
-/usr/share/man/man1/makeinfo.1
-/usr/share/man/man1/pdftexi2dvi.1
-/usr/share/man/man1/texi2dvi.1
-/usr/share/man/man1/texi2pdf.1
-/usr/share/man/man1/texindex.1
-/usr/share/man/man5/info.5
-/usr/share/man/man5/texinfo.5
+/usr/share/man/man1/info.1.bz2
+/usr/share/man/man1/infokey.1.bz2
+/usr/share/man/man1/install-info.1.bz2
+/usr/share/man/man1/makeinfo.1.bz2
+/usr/share/man/man1/pdftexi2dvi.1.bz2
+/usr/share/man/man1/texi2dvi.1.bz2
+/usr/share/man/man1/texi2pdf.1.bz2
+/usr/share/man/man1/texindex.1.bz2
+/usr/share/man/man5/info.5.bz2
+/usr/share/man/man5/texinfo.5.bz2
 /usr/share/texinfo
 
 %files tex
@@ -75,6 +78,9 @@ rm -rf %{buildroot}
 /usr/share/texmf
 
 %changelog
+* Tue Oct 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.13a-3
+- Optimize for size
+
 * Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.13a-2
 - Add Build requirement for ncurses-devel
 
