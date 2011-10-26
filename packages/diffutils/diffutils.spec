@@ -1,16 +1,15 @@
 Summary: GNU Diffutils
 Name: diffutils
-Version: 3.0
+Version: 3.2
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/diffutils
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/diffutils/diffutils-3.2.tar.xz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 684aaba1baab743a2a90e52162ff07da
+BuildRequires: digest(sha1:%{SOURCE0}) = 59b9742e96e2512d4d6f9af7964d71b6ea5a9ef0
 
 %description
 Utilities for comparing differences between files.
@@ -19,22 +18,25 @@ Utilities for comparing differences between files.
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --mandir=/usr/share/man \
   --infodir=/usr/share/info
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
 %find_lang %{name}
+%{compress_man}
+%{strip}
 
 %post
-/usr/bin/install-info /usr/share/info/diff.info /usr/share/info/dir
+/usr/bin/install-info /usr/share/info/diffutils.info /usr/share/info/dir
 
 %preun
-/usr/bin/install-info --delete /usr/share/info/diff.info /usr/share/info/dir
+/usr/bin/install-info --delete /usr/share/info/diffutils.info /usr/share/info/dir
 
 %clean
 rm -rf %{buildroot}
@@ -45,13 +47,17 @@ rm -rf %{buildroot}
 /usr/bin/diff
 /usr/bin/diff3
 /usr/bin/sdiff
-/usr/share/info/diff.info
-/usr/share/man/man1/cmp.1
-/usr/share/man/man1/diff.1
-/usr/share/man/man1/diff3.1
-/usr/share/man/man1/sdiff.1
+/usr/share/info/diffutils.info
+/usr/share/man/man1/cmp.1.bz2
+/usr/share/man/man1/diff.1.bz2
+/usr/share/man/man1/diff3.1.bz2
+/usr/share/man/man1/sdiff.1.bz2
 
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.2-1
+- Upgrade to 3.2
+- Optimize for size
+
 * Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0-1
 - Upgrade to 3.0
 

@@ -1,0 +1,955 @@
+Fetching(Source0): http://ftp.gnu.org/gnu/diffutils/diffutils-3.2.tar.xz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.72420
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf diffutils-3.2
++ /usr/bin/xz -dc /usr/src/rpm/SOURCES/diffutils-3.2.tar.xz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd diffutils-3.2
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.72420
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd diffutils-3.2
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --mandir=/usr/share/man --infodir=/usr/share/info
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for gawk... (cached) gawk
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking dependency style of gcc... (cached) gcc3
+checking for ranlib... ranlib
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ranlib... (cached) ranlib
+checking whether gcc and cc understand -c and -o together... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for gcc option to accept ISO C99... -std=gnu99
+checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+checking for size_t... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for inline... inline
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking for btowc... yes
+checking for setrlimit... yes
+checking for sigaltstack... yes
+checking for fcntl... yes
+checking for mempcpy... yes
+checking for isblank... yes
+checking for iswctype... yes
+checking for mbsrtowcs... yes
+checking for wmemchr... yes
+checking for wmemcpy... yes
+checking for wmempcpy... yes
+checking for getdtablesize... yes
+checking for gettimeofday... yes
+checking for nanotime... no
+checking for iswcntrl... yes
+checking for iswblank... yes
+checking for lstat... yes
+checking for mbsinit... yes
+checking for mbrtowc... yes
+checking for mbslen... no
+checking for mprotect... yes
+checking for mkstemp... yes
+checking for alarm... yes
+checking for nl_langinfo... yes
+checking for wcscoll... yes
+checking for sigaction... yes
+checking for siginterrupt... yes
+checking for strerror_r... yes
+checking for __xpg_strerror_r... yes
+checking for tzset... yes
+checking for strndup... yes
+checking for strptime... yes
+checking for strtoumax... yes
+checking for localtime_r... yes
+checking for wcrtomb... yes
+checking for wcwidth... yes
+checking for newlocale... yes
+checking for setenv... yes
+checking for sleep... yes
+checking for symlink... yes
+checking for usleep... yes
+checking for vasnprintf... no
+checking for wctob... yes
+checking for sigprocmask... yes
+checking for strcasecoll... no
+checking for stricoll... no
+checking for nl_langinfo and CODESET... yes
+checking for a traditional french locale... fr_FR
+checking ucontext.h usability... yes
+checking ucontext.h presence... yes
+checking for ucontext.h... yes
+checking for unistd.h... (cached) yes
+checking wctype.h usability... yes
+checking wctype.h presence... yes
+checking for wctype.h... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking iconv.h usability... yes
+checking iconv.h presence... yes
+checking for iconv.h... yes
+checking wchar.h usability... yes
+checking wchar.h presence... yes
+checking for wchar.h... yes
+checking for stdint.h... (cached) yes
+checking for inttypes.h... (cached) yes
+checking langinfo.h usability... yes
+checking langinfo.h presence... yes
+checking for langinfo.h... yes
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking for strings.h... (cached) yes
+checking for sys/stat.h... (cached) yes
+checking sys/wait.h usability... yes
+checking sys/wait.h presence... yes
+checking for sys/wait.h... yes
+checking features.h usability... yes
+checking features.h presence... yes
+checking for features.h... yes
+checking xlocale.h usability... yes
+checking xlocale.h presence... yes
+checking for xlocale.h... yes
+checking for working C stack overflow detection... yes
+checking for correct stack_t interpretation... yes
+checking for precise C stack overflow detection... no
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking for libsigsegv... no, consider installing GNU libsigsegv
+checking whether // is distinct from /... no
+checking whether the preprocessor supports include_next... yes
+checking whether system header files limit the line length... no
+checking for complete errno.h... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... (cached) yes
+checking whether strerror_r returns char *... yes
+checking for working fcntl.h... yes
+checking for mbstate_t... yes
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... no
+checking whether getenv is declared... yes
+checking for C/C++ restrict keyword... __restrict
+checking for struct timeval... yes
+checking whether gettimeofday is declared without a macro... yes
+checking for iconv... yes
+checking for working iconv... yes
+checking for iconv declaration... 
+         extern size_t iconv (iconv_t cd, char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);
+checking for off_t... yes
+checking for long long int... yes
+checking for unsigned long long int... yes
+checking whether stdint.h conforms to C99... yes
+checking whether imaxabs is declared without a macro... yes
+checking whether imaxdiv is declared without a macro... yes
+checking whether strtoimax is declared without a macro... yes
+checking whether strtoumax is declared without a macro... yes
+checking for inttypes.h... (cached) yes
+checking whether the inttypes.h PRIxNN macros are broken... no
+checking for wint_t... yes
+checking whether iswcntrl works... yes
+checking for towlower... yes
+checking for wctype_t... yes
+checking for wctrans_t... yes
+checking whether wctype is declared without a macro... yes
+checking whether iswctype is declared without a macro... yes
+checking whether wctrans is declared without a macro... yes
+checking whether towctrans is declared without a macro... yes
+checking whether getc_unlocked is declared... yes
+checking whether we are using the GNU C Library 2.1 or newer... yes
+checking whether lstat correctly handles trailing slash... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for a traditional japanese locale... ja_JP
+checking for a transitional chinese locale... zh_CN.GB18030
+checking for a french Unicode locale... fr_FR.UTF-8
+checking for mmap... yes
+checking for MAP_ANONYMOUS... yes
+checking whether memchr works... yes
+checking for mode_t... yes
+checking for promoted mode_t type... mode_t
+checking for uid_t in sys/types.h... yes
+checking for sigset_t... yes
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for wchar_t... yes
+checking whether strerror(0) succeeds... yes
+checking for strerror_r with POSIX signature... no
+checking whether __xpg_strerror_r works... no
+checking whether struct tm is in sys/time.h or time.h... time.h
+checking for struct tm.tm_zone... yes
+checking for struct tm.tm_gmtoff... yes
+checking whether ffsl is declared without a macro... yes
+checking whether ffsll is declared without a macro... yes
+checking whether memmem is declared without a macro... yes
+checking whether mempcpy is declared without a macro... yes
+checking whether memrchr is declared without a macro... yes
+checking whether rawmemchr is declared without a macro... yes
+checking whether stpcpy is declared without a macro... yes
+checking whether stpncpy is declared without a macro... yes
+checking whether strchrnul is declared without a macro... yes
+checking whether strdup is declared without a macro... yes
+checking whether strncat is declared without a macro... yes
+checking whether strndup is declared without a macro... yes
+checking whether strnlen is declared without a macro... yes
+checking whether strpbrk is declared without a macro... yes
+checking whether strsep is declared without a macro... yes
+checking whether strcasestr is declared without a macro... yes
+checking whether strtok_r is declared without a macro... yes
+checking whether strerror_r is declared without a macro... yes
+checking whether strsignal is declared without a macro... yes
+checking whether strverscmp is declared without a macro... yes
+checking whether ffs is declared without a macro... yes
+checking whether strcasecmp is declared without a macro... yes
+checking whether strncasecmp is declared without a macro... yes
+checking whether strndup is declared... (cached) yes
+checking whether strnlen is declared... (cached) yes
+checking whether strtoumax is declared... (cached) yes
+checking whether stat file-mode macros are broken... no
+checking for struct timespec in <time.h>... yes
+checking whether localtime_r is declared... no
+checking whether clearerr_unlocked is declared... yes
+checking whether feof_unlocked is declared... yes
+checking whether ferror_unlocked is declared... yes
+checking whether fflush_unlocked is declared... yes
+checking whether fgets_unlocked is declared... yes
+checking whether fputc_unlocked is declared... yes
+checking whether fputs_unlocked is declared... yes
+checking whether fread_unlocked is declared... yes
+checking whether fwrite_unlocked is declared... yes
+checking whether getchar_unlocked is declared... yes
+checking whether putc_unlocked is declared... yes
+checking whether putchar_unlocked is declared... yes
+checking if environ is properly declared... yes
+checking whether getcwd (NULL, 0) allocates memory for result... yes
+checking for getcwd with POSIX signature... yes
+checking whether setenv is declared... yes
+checking search.h usability... yes
+checking search.h presence... yes
+checking for search.h... yes
+checking for tsearch... yes
+checking whether alarm is declared... yes
+checking whether snprintf returns a byte count as in C99... yes
+checking whether snprintf is declared... yes
+checking whether unsetenv is declared... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for intmax_t... yes
+checking for snprintf... yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... (cached) yes
+checking for wcrtomb... (cached) yes
+checking whether _snprintf is declared... no
+checking for alloca as a compiler built-in... yes
+checking whether btowc(0) is correct... yes
+checking whether btowc(EOF) is correct... yes
+checking whether sigaltstack is declared... yes
+checking for stack_t... yes
+checking for library containing clock_gettime... -lrt
+checking for clock_gettime... yes
+checking for clock_settime... yes
+checking whether // is distinct from /... (cached) no
+checking whether dup2 works... yes
+checking for error_at_line... yes
+checking whether fcntl handles F_DUPFD correctly... yes
+checking whether fcntl understands F_DUPFD_CLOEXEC... needs runtime check
+checking whether fcntl is declared without a macro... yes
+checking whether openat is declared without a macro... yes
+checking for working GNU fnmatch... yes
+checking whether gettimeofday clobbers localtime buffer... no
+checking for gettimeofday with POSIX signature... almost
+checking whether the compiler generally respects inline... yes
+checking whether INT32_MAX < INTMAX_MAX... yes
+checking whether INT64_MAX == LONG_MAX... yes
+checking whether UINT32_MAX < UINTMAX_MAX... yes
+checking whether UINT64_MAX == ULONG_MAX... yes
+checking whether iswblank is declared... yes
+checking whether langinfo.h defines CODESET... yes
+checking whether langinfo.h defines T_FMT_AMPM... yes
+checking whether langinfo.h defines ERA... yes
+checking whether langinfo.h defines YESEXPR... yes
+checking whether nl_langinfo is declared without a macro... yes
+checking for libsigsegv... (cached) no, consider installing GNU libsigsegv
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... (cached) yes
+checking whether mbrtowc handles incomplete characters... yes
+checking whether mbrtowc works as well as mbtowc... yes
+checking whether mbrtowc handles a NULL pwc argument... yes
+checking whether mbrtowc handles a NULL string argument... yes
+checking whether mbrtowc has a correct return value... yes
+checking whether mbrtowc returns 0 when parsing a NUL character... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mbsrtowcs works... yes
+checking for working mkstemp... yes
+checking for working mktime... yes
+checking whether YESEXPR works... yes
+checking whether open recognizes a trailing slash... yes
+checking whether program_invocation_name is declared... yes
+checking whether program_invocation_short_name is declared... yes
+checking for working re_compile_pattern... yes
+checking for struct sigaction.sa_sigaction... yes
+checking for volatile sig_atomic_t... yes
+checking for sighandler_t... yes
+checking whether pthread_sigmask is declared without a macro... yes
+checking whether sigaction is declared without a macro... yes
+checking whether sigaddset is declared without a macro... yes
+checking whether sigdelset is declared without a macro... yes
+checking whether sigemptyset is declared without a macro... yes
+checking whether sigfillset is declared without a macro... yes
+checking whether sigismember is declared without a macro... yes
+checking whether sigpending is declared without a macro... yes
+checking whether sigprocmask is declared without a macro... yes
+checking for sigprocmask... (cached) yes
+checking for ssize_t... yes
+checking whether stat handles trailing slashes on directories... yes
+checking whether stat handles trailing slashes on files... yes
+checking for struct stat.st_atim.tv_nsec... yes
+checking whether struct stat.st_atim is of type struct timespec... yes
+checking for struct stat.st_birthtimespec.tv_nsec... no
+checking for struct stat.st_birthtimensec... no
+checking for struct stat.st_birthtim.tv_nsec... no
+checking for va_copy... yes
+checking whether NULL can be used in arbitrary expressions... yes
+checking whether dprintf is declared without a macro... yes
+checking whether fpurge is declared without a macro... no
+checking whether fseeko is declared without a macro... yes
+checking whether ftello is declared without a macro... yes
+checking whether getdelim is declared without a macro... yes
+checking whether getline is declared without a macro... yes
+checking whether popen is declared without a macro... yes
+checking whether renameat is declared without a macro... yes
+checking whether snprintf is declared without a macro... yes
+checking whether tmpfile is declared without a macro... yes
+checking whether vdprintf is declared without a macro... yes
+checking whether vsnprintf is declared without a macro... yes
+checking whether _Exit is declared without a macro... yes
+checking whether atoll is declared without a macro... yes
+checking whether canonicalize_file_name is declared without a macro... yes
+checking whether getloadavg is declared without a macro... yes
+checking whether getsubopt is declared without a macro... yes
+checking whether grantpt is declared without a macro... yes
+checking whether mkdtemp is declared without a macro... yes
+checking whether mkostemp is declared without a macro... yes
+checking whether mkostemps is declared without a macro... yes
+checking whether mkstemp is declared without a macro... yes
+checking whether mkstemps is declared without a macro... yes
+checking whether ptsname is declared without a macro... yes
+checking whether random_r is declared without a macro... yes
+checking whether initstat_r is declared without a macro... no
+checking whether srandom_r is declared without a macro... yes
+checking whether setstate_r is declared without a macro... yes
+checking whether realpath is declared without a macro... yes
+checking whether rpmatch is declared without a macro... yes
+checking whether setenv is declared without a macro... yes
+checking whether strtod is declared without a macro... yes
+checking whether strtoll is declared without a macro... yes
+checking whether strtoull is declared without a macro... yes
+checking whether unlockpt is declared without a macro... yes
+checking whether unsetenv is declared without a macro... yes
+checking for strcasecmp... yes
+checking for strncasecmp... yes
+checking whether strncasecmp is declared... (cached) yes
+checking for working strerror function... yes
+checking for working strndup... yes
+checking for working strnlen... yes
+checking for strtoull... yes
+checking for nlink_t... yes
+checking whether fchmodat is declared without a macro... yes
+checking whether fstatat is declared without a macro... yes
+checking whether futimens is declared without a macro... yes
+checking whether lchmod is declared without a macro... yes
+checking whether lstat is declared without a macro... yes
+checking whether mkdirat is declared without a macro... yes
+checking whether mkfifo is declared without a macro... yes
+checking whether mkfifoat is declared without a macro... yes
+checking whether mknod is declared without a macro... yes
+checking whether mknodat is declared without a macro... yes
+checking whether stat is declared without a macro... yes
+checking whether utimensat is declared without a macro... yes
+checking whether waitpid is declared without a macro... yes
+checking whether localtime_r is compatible with its POSIX signature... yes
+checking whether chown is declared without a macro... yes
+checking whether dup2 is declared without a macro... yes
+checking whether dup3 is declared without a macro... yes
+checking whether environ is declared without a macro... yes
+checking whether euidaccess is declared without a macro... yes
+checking whether faccessat is declared without a macro... yes
+checking whether fchdir is declared without a macro... yes
+checking whether fchownat is declared without a macro... yes
+checking whether fsync is declared without a macro... yes
+checking whether ftruncate is declared without a macro... yes
+checking whether getcwd is declared without a macro... yes
+checking whether getdomainname is declared without a macro... yes
+checking whether getdtablesize is declared without a macro... yes
+checking whether getgroups is declared without a macro... yes
+checking whether gethostname is declared without a macro... yes
+checking whether getlogin is declared without a macro... yes
+checking whether getlogin_r is declared without a macro... yes
+checking whether getpagesize is declared without a macro... yes
+checking whether getusershell is declared without a macro... yes
+checking whether setusershell is declared without a macro... yes
+checking whether endusershell is declared without a macro... yes
+checking whether group_member is declared without a macro... yes
+checking whether lchown is declared without a macro... yes
+checking whether link is declared without a macro... yes
+checking whether linkat is declared without a macro... yes
+checking whether lseek is declared without a macro... yes
+checking whether pipe is declared without a macro... yes
+checking whether pipe2 is declared without a macro... yes
+checking whether pread is declared without a macro... yes
+checking whether pwrite is declared without a macro... yes
+checking whether readlink is declared without a macro... yes
+checking whether readlinkat is declared without a macro... yes
+checking whether rmdir is declared without a macro... yes
+checking whether sleep is declared without a macro... yes
+checking whether symlink is declared without a macro... yes
+checking whether symlinkat is declared without a macro... yes
+checking whether ttyname_r is declared without a macro... yes
+checking whether unlink is declared without a macro... yes
+checking whether unlinkat is declared without a macro... yes
+checking whether usleep is declared without a macro... yes
+checking whether btowc is declared without a macro... yes
+checking whether wctob is declared without a macro... yes
+checking whether mbsinit is declared without a macro... yes
+checking whether mbrtowc is declared without a macro... yes
+checking whether mbrlen is declared without a macro... yes
+checking whether mbsrtowcs is declared without a macro... yes
+checking whether mbsnrtowcs is declared without a macro... yes
+checking whether wcrtomb is declared without a macro... yes
+checking whether wcsrtombs is declared without a macro... yes
+checking whether wcsnrtombs is declared without a macro... yes
+checking whether wcwidth is declared without a macro... yes
+checking whether wmemchr is declared without a macro... yes
+checking whether wmemcmp is declared without a macro... yes
+checking whether wmemcpy is declared without a macro... yes
+checking whether wmemmove is declared without a macro... yes
+checking whether wmemset is declared without a macro... yes
+checking whether wcslen is declared without a macro... yes
+checking whether wcsnlen is declared without a macro... yes
+checking whether wcscpy is declared without a macro... yes
+checking whether wcpcpy is declared without a macro... yes
+checking whether wcsncpy is declared without a macro... yes
+checking whether wcpncpy is declared without a macro... yes
+checking whether wcscat is declared without a macro... yes
+checking whether wcsncat is declared without a macro... yes
+checking whether wcscmp is declared without a macro... yes
+checking whether wcsncmp is declared without a macro... yes
+checking whether wcscasecmp is declared without a macro... yes
+checking whether wcsncasecmp is declared without a macro... yes
+checking whether wcscoll is declared without a macro... yes
+checking whether wcsxfrm is declared without a macro... yes
+checking whether wcsdup is declared without a macro... yes
+checking whether wcschr is declared without a macro... yes
+checking whether wcsrchr is declared without a macro... yes
+checking whether wcscspn is declared without a macro... yes
+checking whether wcsspn is declared without a macro... yes
+checking whether wcspbrk is declared without a macro... yes
+checking whether wcsstr is declared without a macro... yes
+checking whether wcstok is declared without a macro... yes
+checking whether wcswidth is declared without a macro... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether wcrtomb return value is correct... yes
+checking whether iswcntrl works... (cached) yes
+checking for towlower... (cached) yes
+checking for wctype_t... (cached) yes
+checking for wctrans_t... (cached) yes
+checking whether wctype is declared without a macro... (cached) yes
+checking whether iswctype is declared without a macro... (cached) yes
+checking whether wctrans is declared without a macro... (cached) yes
+checking whether towctrans is declared without a macro... (cached) yes
+checking whether wcwidth is declared... (cached) yes
+checking whether wcwidth works reasonably in UTF-8 locales... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional french locale... (cached) fr_FR
+checking for a turkish Unicode locale... tr_TR.UTF-8
+checking for getpagesize... yes
+checking whether getpagesize is declared... (cached) yes
+checking whether locale.h conforms to POSIX:2001... yes
+checking whether locale.h defines locale_t... yes
+checking whether setlocale is declared without a macro... yes
+checking whether duplocale is declared without a macro... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for a turkish Unicode locale... (cached) tr_TR.UTF-8
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for putenv compatible with GNU and SVID... yes
+checking whether setenv validates arguments... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking whether sleep is declared... (cached) yes
+checking for working sleep... yes
+checking for snprintf... (cached) yes
+checking whether snprintf respects a size of 1... yes
+checking whether printf supports POSIX/XSI format strings with positions... yes
+checking for wchar_t... (cached) yes
+checking for wint_t... (cached) yes
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... yes
+checking whether symlink handles trailing slash correctly... yes
+checking for unsetenv... yes
+checking for unsetenv() return type... int
+checking whether unsetenv obeys POSIX... yes
+checking for useconds_t... yes
+checking whether usleep allows large arguments... yes
+checking for ptrdiff_t... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking whether wctob works... yes
+checking whether wctob is declared... (cached) yes
+checking for stdint.h... (cached) yes
+checking for inline... (cached) inline
+checking for variable-length arrays... yes
+checking for pr... /usr/bin/pr
+checking for struct stat.st_blksize... yes
+checking for struct stat.st_rdev... yes
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking for sys/wait.h that is POSIX.1 compatible... (cached) yes
+checking for pid_t... yes
+checking whether closedir returns void... no
+checking vfork.h usability... no
+checking vfork.h presence... no
+checking for vfork.h... no
+checking for fork... yes
+checking for vfork... yes
+checking for working fork... yes
+checking for working vfork... (cached) yes
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating lib/Makefile
+config.status: creating src/Makefile
+config.status: creating tests/Makefile
+config.status: creating gnulib-tests/Makefile
+config.status: creating man/Makefile
+config.status: creating po/Makefile.in
+config.status: creating ms/Makefile
+config.status: creating lib/config.h
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
++ make -j4
+Making all in lib
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+  GEN      alloca.h
+  GEN      configmake.h
+  GEN      c++defs.h
+  GEN      arg-nonnull.h
+mv -f configmake.h-t configmake.h
+  GEN      warn-on-use.h
+  GEN      unused-parameter.h
+  GEN      unistr.h
+  GEN      unitypes.h
+  GEN      uniwidth.h
+  GEN      wctype.h
+  GEN      wchar.h
+  GEN      fcntl.h
+  GEN      getopt.h
+  GEN      iconv.h
+  GEN      inttypes.h
+  GEN      langinfo.h
+  GEN      signal.h
+  GEN      stdio.h
+  GEN      stdlib.h
+  GEN      string.h
+  GEN      strings.h
+  GEN      sys/stat.h
+  GEN      sys/time.h
+  GEN      time.h
+  GEN      sys/wait.h
+  GEN      unistd.h
+make  all-recursive
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make[3]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+  CC       c-ctype.o
+  CC       c-stack.o
+  CC       c-strcasecmp.o
+  CC       c-strncasecmp.o
+  CC       dirname.o
+  CC       basename.o
+  CC       dirname-lgpl.o
+  CC       basename-lgpl.o
+  CC       stripslash.o
+  CC       exclude.o
+  CC       exitfail.o
+  CC       file-type.o
+  CC       filenamecat.o
+  CC       filenamecat-lgpl.o
+  CC       freopen-safer.o
+  CC       gettime.o
+  CC       hard-locale.o
+  CC       hash.o
+  CC       imaxtostr.o
+  CC       inttostr.o
+  CC       offtostr.o
+  CC       uinttostr.o
+  CC       umaxtostr.o
+  CC       localcharset.o
+  CC       malloca.o
+  CC       mbchar.o
+  CC       mbscasecmp.o
+  CC       mbsstr.o
+  CC       mbslen.o
+  CC       progname.o
+  CC       propername.o
+  CC       quote.o
+  CC       quotearg.o
+  CC       sh-quote.o
+  CC       strftime.o
+  CC       striconv.o
+  CC       strnlen1.o
+  CC       tempname.o
+  CC       trim.o
+  CC       version-etc.o
+  CC       version-etc-fsf.o
+  CC       xmalloc.o
+  CC       xalloc-die.o
+  CC       xfreopen.o
+  CC       xstriconv.o
+  CC       xstrndup.o
+  CC       xstrtol.o
+  CC       xstrtoul.o
+  CC       xstrtol-error.o
+  CC       xstrtoumax.o
+  CC       cmpbuf.o
+  CC       prepargs.o
+  CC       fcntl.o
+  CC       getopt.o
+  CC       getopt1.o
+  CC       strerror.o
+  GEN      charset.alias
+  GEN      ref-add.sed
+  GEN      ref-del.sed
+  CC       unistr/u8-mbtoucr.o
+  CC       unistr/u8-uctomb.o
+  CC       unistr/u8-uctomb-aux.o
+  CC       uniwidth/width.o
+  AR       libdiffutils.a
+make[3]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+Making all in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+  GEN      paths.h
+  GEN      version.c
+  GEN      version.h
+make  all-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+  CC       version.o
+  CC       cmp.o
+  CC       analyze.o
+  CC       context.o
+  CC       diff.o
+  CC       dir.o
+  CC       ed.o
+  CC       ifdef.o
+  CC       io.o
+  CC       normal.o
+  CC       side.o
+  CC       util.o
+  CC       diff3.o
+  CC       sdiff.o
+  AR       libver.a
+  CCLD     cmp
+  CCLD     diff
+  CCLD     sdiff
+  CCLD     diff3
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+Making all in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/tests'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/tests'
+Making all in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/doc'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/doc'
+Making all in man
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/man'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/man'
+Making all in po
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/po'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/po'
+Making all in ms
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/ms'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/ms'
+Making all in gnulib-tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+  GEN      c++defs.h
+  GEN      arg-nonnull.h
+  GEN      warn-on-use.h
+  GEN      unused-parameter.h
+  GEN      locale.h
+make  all-recursive
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+Making all in .
+make[3]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2'
+make[1]: Nothing to be done for `all-am'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.39379
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/diffutils-root
++ /bin/mkdir -p /var/tmp/diffutils-root
++ cd diffutils-3.2
++ make DESTDIR=/var/tmp/diffutils-root install
+Making install in lib
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make  install-recursive
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make[3]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+if test yes = no; then \
+  case 'linux-gnu' in \
+    darwin[56]*) \
+      need_charset_alias=true ;; \
+    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
+      need_charset_alias=false ;; \
+    *) \
+      need_charset_alias=true ;; \
+  esac ; \
+else \
+  need_charset_alias=false ; \
+fi ; \
+if $need_charset_alias; then \
+  /bin/sh ../build-aux/mkinstalldirs /var/tmp/diffutils-root/usr/lib ; \
+fi ; \
+if test -f /var/tmp/diffutils-root/usr/lib/charset.alias; then \
+  sed -f ref-add.sed /var/tmp/diffutils-root/usr/lib/charset.alias > /var/tmp/diffutils-root/usr/lib/charset.tmp ; \
+  /usr/bin/install -c -m 644 /var/tmp/diffutils-root/usr/lib/charset.tmp /var/tmp/diffutils-root/usr/lib/charset.alias ; \
+  rm -f /var/tmp/diffutils-root/usr/lib/charset.tmp ; \
+else \
+  if $need_charset_alias; then \
+    sed -f ref-add.sed charset.alias > /var/tmp/diffutils-root/usr/lib/charset.tmp ; \
+    /usr/bin/install -c -m 644 /var/tmp/diffutils-root/usr/lib/charset.tmp /var/tmp/diffutils-root/usr/lib/charset.alias ; \
+    rm -f /var/tmp/diffutils-root/usr/lib/charset.tmp ; \
+  fi ; \
+fi
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
+Making install in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+make  install-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+make[3]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/diffutils-root/usr/bin"
+  /usr/bin/install -c cmp diff diff3 sdiff '/var/tmp/diffutils-root/usr/bin'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
+Making install in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/tests'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/tests'
+Making install in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/doc'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/info" || /bin/mkdir -p "/var/tmp/diffutils-root/usr/share/info"
+ /usr/bin/install -c -m 644 ./diffutils.info '/var/tmp/diffutils-root/usr/share/info'
+ install-info --info-dir='/var/tmp/diffutils-root/usr/share/info' '/var/tmp/diffutils-root/usr/share/info/diffutils.info'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/doc'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/doc'
+Making install in man
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/man'
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/man'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/diffutils-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 cmp.1 diff.1 diff3.1 sdiff.1 '/var/tmp/diffutils-root/usr/share/man/man1'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/man'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/man'
+Making install in po
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/po'
+/bin/mkdir -p /var/tmp/diffutils-root/usr/share
+installing ca.gmo as /var/tmp/diffutils-root/usr/share/locale/ca/LC_MESSAGES/diffutils.mo
+installing cs.gmo as /var/tmp/diffutils-root/usr/share/locale/cs/LC_MESSAGES/diffutils.mo
+installing da.gmo as /var/tmp/diffutils-root/usr/share/locale/da/LC_MESSAGES/diffutils.mo
+installing de.gmo as /var/tmp/diffutils-root/usr/share/locale/de/LC_MESSAGES/diffutils.mo
+installing el.gmo as /var/tmp/diffutils-root/usr/share/locale/el/LC_MESSAGES/diffutils.mo
+installing eo.gmo as /var/tmp/diffutils-root/usr/share/locale/eo/LC_MESSAGES/diffutils.mo
+installing es.gmo as /var/tmp/diffutils-root/usr/share/locale/es/LC_MESSAGES/diffutils.mo
+installing fi.gmo as /var/tmp/diffutils-root/usr/share/locale/fi/LC_MESSAGES/diffutils.mo
+installing fr.gmo as /var/tmp/diffutils-root/usr/share/locale/fr/LC_MESSAGES/diffutils.mo
+installing ga.gmo as /var/tmp/diffutils-root/usr/share/locale/ga/LC_MESSAGES/diffutils.mo
+installing gl.gmo as /var/tmp/diffutils-root/usr/share/locale/gl/LC_MESSAGES/diffutils.mo
+installing he.gmo as /var/tmp/diffutils-root/usr/share/locale/he/LC_MESSAGES/diffutils.mo
+installing hu.gmo as /var/tmp/diffutils-root/usr/share/locale/hu/LC_MESSAGES/diffutils.mo
+installing id.gmo as /var/tmp/diffutils-root/usr/share/locale/id/LC_MESSAGES/diffutils.mo
+installing it.gmo as /var/tmp/diffutils-root/usr/share/locale/it/LC_MESSAGES/diffutils.mo
+installing ja.gmo as /var/tmp/diffutils-root/usr/share/locale/ja/LC_MESSAGES/diffutils.mo
+installing lv.gmo as /var/tmp/diffutils-root/usr/share/locale/lv/LC_MESSAGES/diffutils.mo
+installing ms.gmo as /var/tmp/diffutils-root/usr/share/locale/ms/LC_MESSAGES/diffutils.mo
+installing nl.gmo as /var/tmp/diffutils-root/usr/share/locale/nl/LC_MESSAGES/diffutils.mo
+installing pl.gmo as /var/tmp/diffutils-root/usr/share/locale/pl/LC_MESSAGES/diffutils.mo
+installing pt_BR.gmo as /var/tmp/diffutils-root/usr/share/locale/pt_BR/LC_MESSAGES/diffutils.mo
+installing ro.gmo as /var/tmp/diffutils-root/usr/share/locale/ro/LC_MESSAGES/diffutils.mo
+installing ru.gmo as /var/tmp/diffutils-root/usr/share/locale/ru/LC_MESSAGES/diffutils.mo
+installing sr.gmo as /var/tmp/diffutils-root/usr/share/locale/sr/LC_MESSAGES/diffutils.mo
+installing sv.gmo as /var/tmp/diffutils-root/usr/share/locale/sv/LC_MESSAGES/diffutils.mo
+installing tr.gmo as /var/tmp/diffutils-root/usr/share/locale/tr/LC_MESSAGES/diffutils.mo
+installing uk.gmo as /var/tmp/diffutils-root/usr/share/locale/uk/LC_MESSAGES/diffutils.mo
+installing vi.gmo as /var/tmp/diffutils-root/usr/share/locale/vi/LC_MESSAGES/diffutils.mo
+installing zh_CN.gmo as /var/tmp/diffutils-root/usr/share/locale/zh_CN/LC_MESSAGES/diffutils.mo
+installing zh_TW.gmo as /var/tmp/diffutils-root/usr/share/locale/zh_TW/LC_MESSAGES/diffutils.mo
+if test "diffutils" = "gettext-tools"; then \
+  /bin/mkdir -p /var/tmp/diffutils-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/diffutils-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/diffutils-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/po'
+Making install in ms
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/ms'
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/ms'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/ms'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/ms'
+Making install in gnulib-tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make  install-recursive
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+Making install in .
+make[3]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[4]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
+make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2'
+make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2'
++ rm -f /var/tmp/diffutils-root/usr/share/info/dir
++ /usr/lib/rpm/find-lang.sh /var/tmp/diffutils-root diffutils
++ /usr/lib/rpm/compress_man.sh /var/tmp/diffutils-root
++ /usr/lib/rpm/strip.sh /var/tmp/diffutils-root
++ exit 0
+Processing files: diffutils-3.2-1.x86_64
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) librt.so.1()(64bit) librt.so.1(GLIBC_2.2.5)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/diffutils-root
+warning: Could not canonicalize hostname: zaphod.lightcube.us
+Wrote: /usr/src/rpm/SRPMS/diffutils-3.2-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/diffutils-3.2-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.78496
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd diffutils-3.2
++ /bin/rm -rf /var/tmp/diffutils-root
