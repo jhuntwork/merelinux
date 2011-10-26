@@ -79,7 +79,20 @@ mount "${pkg}"sys  -t sysfs /mnt/"${pkg}"/sys
 
 # Install the required dependencies
 smart update
-smart -o remove-packages=false -o rpm-root=/mnt/"${pkg}" install base-system build-essential ${deps} -y
+smart -o remove-packages=false -o rpm-root=/mnt/"${pkg}" install \
+  build-essential \
+  coreutils \
+  diffutils \
+  file \
+  findutils \
+  gawk \
+  gettext \
+  gzip \
+  grep \
+  rpm-python \
+  sed \
+  tar \
+  ${deps} -y
 
 # Some cleanup
 cp /etc/resolv.conf /mnt/"${pkg}"/etc
