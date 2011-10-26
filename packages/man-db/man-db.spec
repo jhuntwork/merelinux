@@ -1,17 +1,23 @@
 Summary: man-db
 Name: man-db
-Version: 2.5.9
-Release: 2
+Version: 2.6.0.2
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://man-db.nongnu.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Patch0: https://raw.github.com/jhuntwork/LightCube-OS/730e7e214cb0fcef1b4f9611e33162e620570852/packages/man-db/flock.h.patch
 
 Requires: groff
-BuildRequires: digest(sha1:%{SOURCE0}) = e307ec4c440b82c20c9c20984852046d01426333
-BuildRequires: gdbm-devel
+BuildRequires: digest(sha1:%{SOURCE0}) = 864e79e9369f993bfce0934132d41f29a687a6f4
+BuildRequires: digest(sha1:%{PATCH0})  = 93d2affc08e75ad06c79a2344423ec6aee8311e9
+BuildRequires: db-devel
+BuildRequires: flex
+BuildRequires: less
+BuildRequires: libpipeline-devel
+BuildRequires: util-linux
 BuildRequires: zlib-devel
 
 %description
@@ -21,20 +27,19 @@ database in place of the traditional flat-text whatis databases
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --libexecdir=/usr/%{_lib} \
   --sysconfdir=/etc \
-  --disable-setuid \
-  --with-browser=/usr/bin/lynx \
-  --with-vgrind=/usr/bin/vgrind \
-  --with-grap=/usr/bin/grap
-make
+  --with-db=db5 \
+  --disable-silent-rules \
+  --disable-setuid
+make %{PMFLAGS}
 make check
 
 %install
@@ -43,6 +48,7 @@ rm -rf %{buildroot}/usr/share/man/{de,es,fr,it,ja}
 %{compress_man}
 %find_lang %{name}
 %find_lang %{name}-gnulib
+%{strip}
 cat %{name}-gnulib.lang >> %{name}.lang
 
 %clean
@@ -67,6 +73,10 @@ rm -rf %{buildroot}
 /usr/share/man/man8/*
 
 %changelog
+* Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.0.2-1
+- Upgrade to 2.6.0.2
+- Use Berkeley DB instead of gdbm, since db is part of the base system
+
 * Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.9-2
 - Rebuild with groff dependency, fix broken rpm package.
 
