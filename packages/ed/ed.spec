@@ -22,10 +22,9 @@ sense that it is the original editor for Unix, and thus widely available.
 %setup -q
 
 %build
-export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr
-make %{PMFLAGS}
+make %{PMFLAGS} CFLAGS='-Os -pipe -Wall -W'
 make check
 
 %install
