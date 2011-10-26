@@ -92,6 +92,7 @@ smart -o remove-packages=false -o rpm-root=/mnt/"${pkg}" install \
   rpm-python \
   sed \
   tar \
+  which \
   ${deps} -y
 
 # Necessary mods to the chroot env
