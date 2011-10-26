@@ -1,0 +1,69 @@
+Bug #371937
+
+=== modified file 'NEWS'
+--- a/NEWS	2011-04-13 10:57:54 +0000
++++ a/NEWS	2011-06-16 11:22:10 +0000
+@@ -1,3 +1,13 @@
++man-db 2.6.1
++============
++
++Major changes since man-db 2.6.0.2:
++
++	Fixes:
++	------
++
++	o --with-db=db* and --with-db=ndbm compile again.
++
+ man-db 2.6.0.2 (13 April 2011)
+ ==============================
+ 
+
+=== modified file 'libdb/db_btree.c'
+--- a/libdb/db_btree.c	2010-09-26 21:08:59 +0000
++++ a/libdb/db_btree.c	2011-06-16 11:22:10 +0000
+@@ -32,10 +32,7 @@
+ #include <errno.h>
+ #include <string.h>
+ 
+-#if HAVE_SYS_FILE_H
+-#  include <sys/file.h> /* for flock() */
+-#endif
+-
++#include <sys/file.h> /* for flock() */
+ #include <sys/types.h> /* for open() */
+ #include <sys/stat.h>
+ 
+@@ -48,7 +45,6 @@
+ #include "manconfig.h"
+ 
+ #include "error.h"
+-#include "flock.h"
+ #include "hashtable.h"
+ 
+ #include "mydbm.h"
+
+=== modified file 'libdb/db_ndbm.c'
+--- a/libdb/db_ndbm.c	2008-12-03 10:57:14 +0000
++++ a/libdb/db_ndbm.c	2011-06-16 11:22:10 +0000
+@@ -29,10 +29,7 @@
+ #include <stdlib.h>
+ #include <stdio.h>
+ 
+-#if HAVE_SYS_FILE_H
+-#  include <sys/file.h> /* for flock() */
+-#endif
+-
++#include <sys/file.h> /* for flock() */
+ #include <sys/types.h> /* for open() */
+ #include <sys/stat.h>
+ 
+@@ -46,8 +43,6 @@
+ 
+ #include "manconfig.h"
+ 
+-#include "flock.h"
+-
+ #include "mydbm.h"
+ #include "db_storage.h"
+ 
+
