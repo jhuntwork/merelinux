@@ -1,16 +1,15 @@
 Summary: GNU Findutils
 Name: findutils
 Version: 4.4.2
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/findutils
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/findutils/findutils-4.4.2.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 351cc4adb07d54877fa15f75fb77d39f
+BuildRequires: digest(sha1:%{SOURCE0}) = e8dd88fa2cc58abffd0bfc1eddab9020231bb024
 
 %description
 Utilities for searching files in a directory hierarchy.
@@ -19,9 +18,12 @@ Utilities for searching files in a directory hierarchy.
 %setup -q
 
 %build
-./configure --prefix=/usr --libexecdir=/usr/%{_lib}/findutils \
-    --localstatedir=/var/lib/locate
-make
+export CFLAGS='-Os -pipe'
+./configure \
+  --prefix=/usr \
+  --libexecdir=/usr/%{_lib}/findutils \
+  --localstatedir=/var/lib/locate
+make %{PMFLAGS}
 make check
 
 %install
@@ -31,6 +33,8 @@ mv -v %{buildroot}/usr/bin/find %{buildroot}/bin
 sed -i 's/find:=${BINDIR}/find:=\/bin/' %{buildroot}/usr/bin/updatedb
 rm -f %{buildroot}/usr/share/info/dir
 %find_lang %{name}
+%{compress_man}
+%{strip}
 
 %post
 /usr/bin/install-info /usr/share/info/find.info /usr/share/info/dir
@@ -53,14 +57,17 @@ rm -rf %{buildroot}
 /usr/%{_lib}/findutils
 /usr/share/info/find-maint.info
 /usr/share/info/find.info
-/usr/share/man/man1/find.1
-/usr/share/man/man1/locate.1
-/usr/share/man/man1/updatedb.1
-/usr/share/man/man1/xargs.1
-/usr/share/man/man5/locatedb.5
+/usr/share/man/man1/find.1.bz2
+/usr/share/man/man1/locate.1.bz2
+/usr/share/man/man1/updatedb.1.bz2
+/usr/share/man/man1/xargs.1.bz2
+/usr/share/man/man5/locatedb.5.bz2
 
 
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.2-3
+- Optimize for size
+
 * Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.4.2-2
 - Use FHS compatible info directories
 
