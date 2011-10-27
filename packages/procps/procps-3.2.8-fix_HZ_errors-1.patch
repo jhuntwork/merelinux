@@ -1,0 +1,54 @@
+Submitted By: DJ Lucas <dj_AT_linuxfromscratch_DOT_org>
+Date: 2010-09-20
+Initial Package Version: 3.2.8
+Origin: Debian 30_sysinfo_7numbers.patch
+Upstream Status: Submitted
+Description: Fixes "unknown HZ value (##)" errors in procps utils.
+
+diff -Naurp procps-3.2.8-orig//proc/sysinfo.c procps-3.2.8//proc/sysinfo.c
+--- procps-3.2.8-orig//proc/sysinfo.c	2008-03-23 23:33:43.000000000 -0500
++++ procps-3.2.8//proc/sysinfo.c	2010-09-20 01:13:36.000000000 -0500
+@@ -124,24 +124,25 @@ int uptime(double *restrict uptime_secs,
+ unsigned long long Hertz;
+ 
+ static void old_Hertz_hack(void){
+-  unsigned long long user_j, nice_j, sys_j, other_j;  /* jiffies (clock ticks) */
++  unsigned long long user_j, nice_j, sys_j, other_j, wait_j, hirq_j, sirq_j, stol_j;  /* jiffies (clock ticks) */
+   double up_1, up_2, seconds;
+   unsigned long long jiffies;
+   unsigned h;
+   char *restrict savelocale;
+ 
++  wait_j = hirq_j = sirq_j = stol_j = 0;
+   savelocale = setlocale(LC_NUMERIC, NULL);
+   setlocale(LC_NUMERIC, "C");
+   do{
+     FILE_TO_BUF(UPTIME_FILE,uptime_fd);  sscanf(buf, "%lf", &up_1);
+     /* uptime(&up_1, NULL); */
+     FILE_TO_BUF(STAT_FILE,stat_fd);
+-    sscanf(buf, "cpu %Lu %Lu %Lu %Lu", &user_j, &nice_j, &sys_j, &other_j);
++    sscanf(buf, "cpu %Lu %Lu %Lu %Lu %Lu %Lu %Lu %Lu", &user_j, &nice_j, &sys_j, &other_j, &wait_j, &hirq_j, &sirq_j, &stol_j);
+     FILE_TO_BUF(UPTIME_FILE,uptime_fd);  sscanf(buf, "%lf", &up_2);
+     /* uptime(&up_2, NULL); */
+   } while((long long)( (up_2-up_1)*1000.0/up_1 )); /* want under 0.1% error */
+   setlocale(LC_NUMERIC, savelocale);
+-  jiffies = user_j + nice_j + sys_j + other_j;
++  jiffies = user_j + nice_j + sys_j + other_j + wait_j + hirq_j + sirq_j + stol_j ;
+   seconds = (up_1 + up_2) / 2;
+   h = (unsigned)( (double)jiffies/seconds/smp_num_cpus );
+   /* actual values used by 2.4 kernels: 32 64 100 128 1000 1024 1200 */
+@@ -221,12 +222,13 @@ static void init_libproc(void){
+   // _SC_NPROCESSORS_ONLN returns 1, which should work OK
+   smp_num_cpus = sysconf(_SC_NPROCESSORS_ONLN);
+   if(smp_num_cpus<1) smp_num_cpus=1; /* SPARC glibc is buggy */
+-
++#ifdef __linux__
+   if(linux_version_code > LINUX_VERSION(2, 4, 0)){ 
+     Hertz = find_elf_note(AT_CLKTCK);
+     if(Hertz!=NOTE_NOT_FOUND) return;
+     fputs("2.4+ kernel w/o ELF notes? -- report this\n", stderr);
+   }
++#endif
+   old_Hertz_hack();
+ }
+ 
