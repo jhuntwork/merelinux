@@ -1,16 +1,15 @@
 Summary: popt
 Name: popt
 Version: 1.16
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://rpm5.org/files/popt
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://rpm5.org/files/popt/popt-1.16.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = 3743beefa3dd6247a73f8f7a32c14c33
+BuildRequires: digest(sha1:%{SOURCE0}) = cfe94a15a2404db85858a81ff8de27c8ff3e235e
 
 %description
 The popt library exists essentially for parsing command line options.
@@ -27,12 +26,11 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -40,6 +38,8 @@ make DESTDIR=%{buildroot} install
 mv %{buildroot}/usr/lib/pkgconfig %{buildroot}/usr/%{_lib}/
 %endif
 %find_lang %{name}
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -58,10 +58,13 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libpopt.la
 /usr/%{_lib}/libpopt.so
 /usr/%{_lib}/pkgconfig/popt.pc
-/usr/share/man/man3/popt.3
+/usr/share/man/man3/popt.3.bz2
 
 
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.16-2
+- Optimize for size
+
 * Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.16-1
 - Upgrade to 1.16
 
