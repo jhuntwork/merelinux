@@ -1,33 +1,35 @@
 Summary: Python Programming Language
-Name: Python
-Version: 2.7
+Name: python
+Version: 2.7.2
 Release: 1
 Group: Development/Languages
 License: Modified CNRI Open Source License
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.python.org
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://www.python.org/ftp/python/2.7.2/Python-2.7.2.tar.bz2
 %define abi 2.7
 
-BuildRequires:  digest(%{SOURCE0}) = 0e8c9ec32abf5b732bea7d91b38c3339
+Obsoletes: Python <= %{version}
+BuildRequires: digest(sha1:%{SOURCE0}) = 417bdeea77abfaf1b9257fc6b4a04aaa209f4547
 BuildRequires: ncurses-devel
 BuildRequires: zlib-devel
 BuildRequires: readline-devel
 BuildRequires: openssl-devel
 BuildRequires: bzip2-devel
-BuildRequires: gdbm-devel
-BuildRequires: sqlite-devel
 Provides: python(abi) = %{abi}
+Provides: Python
 
 %description
 Python is an interpreted, interactive, object-oriented programming
 language.
 
 %package devel
+Obsoletes: Python-devel <= %{version}
 Summary: The libraries and header files needed for Python extension development.
-Requires: %{name} = %{version}
+Requires: %{name} >= %{version}
 Group: Development/Libraries
+Provides: Python-devel
 
 %description devel
 The Python programming language's interpreter can be extended with
@@ -35,16 +37,23 @@ dynamically loaded extensions and can be embedded in other programs.
 This package contains the header files and libraries needed to do
 these types of tasks.
 
+%package test
+Summary: Extra tests shipped with Python
+Requires: %{name} >= %{version}
+Group: Development/Libraries
+
+%description test
+Test modules shipped with python, separated to save space.
+
 %prep
-%setup -q
+%setup -q -n Python-%{version}
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --enable-shared
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -55,12 +64,15 @@ sed -i '/#!/s@/local@@' %{buildroot}/usr/lib/python%{abi}/cgi.py
   mv -v %{buildroot}/usr/lib/libpython* %{buildroot}/usr/lib64/
 %endif
 find %{buildroot}/usr/lib/python%{abi} \
-  -mindepth 1 -maxdepth 1 -not -name config | sed "s|^%{buildroot}||" >python-files
+  -mindepth 1 -maxdepth 1 -not -name config \
+  -not -regex '^.*/test.*' -not -regex '^.*/unittest.*' \
+  | sed "s|^%{buildroot}||" >python-files
 find %{buildroot}/usr/lib/python%{abi}/config \
   -mindepth 1 -maxdepth 1 -not -name Makefile | sed "s|^%{buildroot}||" >devel-files
 find %{buildroot}/usr/include/python%{abi} \
   -mindepth 1 -maxdepth 1 -not -name pyconfig.h | sed "s|^%{buildroot}||" >>devel-files
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -75,6 +87,10 @@ rm -rf %{buildroot}
 /usr/bin/idle
 /usr/bin/pydoc
 /usr/bin/smtpd.py
+%dir /usr/lib/python%{abi}/test
+/usr/lib/python%{abi}/test/test_support.py*
+/usr/lib/python%{abi}/test/__init__.py*
+/usr/lib/python%{abi}/unittest
 %dir /usr/include/python%{abi}
 /usr/include/python%{abi}/pyconfig.h
 %dir /usr/lib/python%{abi}
@@ -89,7 +105,19 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/python-%{abi}.pc
 /usr/%{_lib}/pkgconfig/python.pc
 
+%files test
+%defattr(-,root,root)
+/usr/lib/python%{abi}/test/*
+%exclude /usr/lib/python%{abi}/test/test_support.py*
+%exclude /usr/lib/python%{abi}/test/__init__.py*
+
 %changelog
+* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.7.2
+- Upgrade to 2.7.2
+- Remove dependency on sqlite and gdbm
+- Optimize for size, separate out test modules
+- Rename package to 'python'
+
 * Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.7
 - Upgrade to 2.7
 
