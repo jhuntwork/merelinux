@@ -1,16 +1,15 @@
 Summary: The Expat XML Parser
 Name: expat
 Version: 2.0.1
-Release: 2
+Release: 3
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://expat.sourceforge.net
-Source: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = ee8b492592568805593f81f8cdf2a04c
+BuildRequires: digest(sha1:%{SOURCE0}) = 663548c37b996082db1f2f2c32af060d7aa15c2d
 
 %description
 Expat is an XML parser library written in C. It is a
@@ -29,16 +28,17 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS="-Os -pipe"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --mandir=/usr/share/man
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -50,7 +50,7 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 /usr/bin/xmlwf
 /usr/%{_lib}/libexpat.so.*
-/usr/share/man/man1/xmlwf.1
+/usr/share/man/man1/xmlwf.1.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -61,6 +61,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libexpat.so
 
 %changelog
+* Thu Oct 27 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.0.1-3
+- Optimize for size
+
 * Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.0.1-2
 - Fixes to mandir location
 
