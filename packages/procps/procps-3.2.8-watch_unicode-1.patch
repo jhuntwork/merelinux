@@ -1,0 +1,148 @@
+Submitted By:            Matt Burgess <matthew_at_linuxfromscratch_dot_org>
+Date:                    2009-05-11
+Initial Package Version: 3.2.8
+Upstream Status:         Submitted
+Origin:                  http://wiki.linuxfromscratch.org/lfs/ticket/2113
+Description:             Fixes a unicode related bug in the watch program
+
+diff -Naur procps-3.2.8.orig/Makefile procps-3.2.8/Makefile
+--- procps-3.2.8.orig/Makefile	2009-05-10 18:50:48.000000000 +0000
++++ procps-3.2.8/Makefile	2009-05-12 19:06:50.000000000 +0000
+@@ -67,7 +67,7 @@
+ # plus the top-level Makefile to make it work stand-alone.
+ _TARFILES := Makefile
+ 
+-CURSES := -lncurses
++CURSES := -lncursesw
+ 
+ # This seems about right for the dynamic library stuff.
+ # Something like this is probably needed to make the SE Linux
+diff -Naur procps-3.2.8.orig/watch.c procps-3.2.8/watch.c
+--- procps-3.2.8.orig/watch.c	2007-05-28 03:13:23.000000000 +0000
++++ procps-3.2.8/watch.c	2009-05-12 19:17:25.000000000 +0000
+@@ -25,6 +25,8 @@
+ #include <termios.h>
+ #include <locale.h>
+ #include "proc/procps.h"
++#include <wchar.h>
++#include <wctype.h>
+ 
+ #ifdef FORCE_8BIT
+ #undef isprint
+@@ -134,6 +136,27 @@
+ 	}
+ }
+ 
++static wint_t
++readwc(FILE *stream, mbstate_t *mbs)
++{
++	for (;;) {
++		int chr;
++		char c;
++		wchar_t wc;
++		size_t len;
++
++		chr = getc(stream);
++		if (chr == EOF)
++			return WEOF;
++		c = chr;
++		len = mbrtowc(&wc, &c, 1, mbs);
++		if (len == (size_t)-1)
++			memset(mbs, 0, sizeof(*mbs));
++		else if (len != (size_t)-2)
++			return wc;
++	}
++}
++
+ int
+ main(int argc, char *argv[])
+ {
+@@ -239,6 +262,7 @@
+ 		FILE *p;
+ 		int x, y;
+ 		int oldeolseen = 1;
++		mbstate_t mbs;
+ 
+ 		if (screen_size_changed) {
+ 			get_terminal_size();
+@@ -266,49 +290,65 @@
+ 			do_exit(2);
+ 		}
+ 
++		memset(&mbs, 0, sizeof(mbs));
+ 		for (y = show_title; y < height; y++) {
+ 			int eolseen = 0, tabpending = 0;
+ 			for (x = 0; x < width; x++) {
+-				int c = ' ';
+-				int attr = 0;
++				wint_t c = L' ';
++				int attr = 0, c_width;
++				cchar_t cc;
++				wchar_t wstr[2];
+ 
+ 				if (!eolseen) {
+ 					/* if there is a tab pending, just spit spaces until the
+ 					   next stop instead of reading characters */
+ 					if (!tabpending)
+ 						do
+-							c = getc(p);
+-						while (c != EOF && !isprint(c)
+-						       && c != '\n'
+-						       && c != '\t');
+-					if (c == '\n')
++							c = readwc(p, &mbs);
++						while (c != WEOF && !iswprint(c)
++						       && c != L'\n'
++						       && c != L'\t');
++					if (c == L'\n')
+ 						if (!oldeolseen && x == 0) {
+ 							x = -1;
+ 							continue;
+ 						} else
+ 							eolseen = 1;
+-					else if (c == '\t')
++					else if (c == L'\t')
+ 						tabpending = 1;
+-					if (c == EOF || c == '\n' || c == '\t')
+-						c = ' ';
++					if (c == WEOF || c == L'\n' || c == L'\t')
++						c = L' ';
+ 					if (tabpending && (((x + 1) % 8) == 0))
+ 						tabpending = 0;
+ 				}
++				wstr[0] = c;
++				wstr[1] = 0;
++				setcchar (&cc, wstr, 0, 0, NULL);
+ 				move(y, x);
+ 				if (option_differences) {
+-					chtype oldch = inch();
+-					char oldc = oldch & A_CHARTEXT;
++					cchar_t oldc;
++					wchar_t oldwstr[2];
++					attr_t attrs;
++					short colors;
++
++					in_wch(&oldc);
++					getcchar(&oldc, oldwstr, &attrs, &colors, NULL);
+ 					attr = !first_screen
+-					    && ((char)c != oldc
++					    && (wstr[0] != oldwstr[0]
+ 						||
+ 						(option_differences_cumulative
+-						 && (oldch & A_ATTRIBUTES)));
++						 && attrs));
+ 				}
+ 				if (attr)
+ 					standout();
+-				addch(c);
++				add_wch(&cc);
++
+ 				if (attr)
+ 					standend();
++				c_width = wcwidth(c);
++				if (c_width > 1)
++					x += c_width - 1;
++
+ 			}
+ 			oldeolseen = eolseen;
+ 		}
