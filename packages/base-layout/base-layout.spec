@@ -1,21 +1,28 @@
 Summary: Base directory layout
 Name: base-layout
-Version: 0.2
+Version: 0.3
 Release: 1 
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
-Source0: http://dev.lightcube.us/sources/%{name}/lang-iso
-Source1: http://dev.lightcube.us/sources/%{name}/lang-exceptions
+Source0: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/lang-iso
+Source1: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/lang-exceptions
+Source2: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/passwd
+Source3: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/group
+Source4: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/inputrc
 
 Requires(postun): /
 BuildRequires: digest(sha1:%{SOURCE0}) = 9b091c035b2959b085ef7e46f242451bce844d4c
 BuildRequires: digest(sha1:%{SOURCE1}) = 890e047e6b8a2a34f84f0214bbd4a6fcf7bd1d05
+BuildRequires: digest(sha1:%{SOURCE2}) = ad00fdd5d578743a617f1cc9bb4eee4e25da3038
+BuildRequires: digest(sha1:%{SOURCE3}) = 5b9663e555e16a3d671df05c537e51f7b9910ace
+BuildRequires: digest(sha1:%{SOURCE4}) = b5b083ef90b918b68c67b7c54f37c91e46b5b706
+Obsoletes: base-files
 
 %description
 Provides an empty filesystem layout with all necessary
-directories for a standard system.
+directories for a standard system as well as a few base system files
 
 %prep
 %setup -T -c
@@ -32,6 +39,9 @@ install -dv %{buildroot}/usr/{,local/}share/{man,misc,terminfo,zoneinfo}
 install -dv %{buildroot}/var/{lock,log,mail,run,spool,tmp}
 install -dv %{buildroot}/var/spool/repackage
 install -dv %{buildroot}/var/{opt,cache,lib/{hwclock,misc,locate},local}
+install -m0644 %{SOURCE2} %{buildroot}/etc/passwd
+install -m0644 %{SOURCE3} %{buildroot}/etc/group
+install -m0644 %{SOURCE4} %{buildroot}/etc/inputrc
 
 %ifarch ppc
 install -dv %{buildroot}/usr/%{_lib}/nof
@@ -79,6 +89,9 @@ rm -rf %{buildroot}
 %dir /boot
 %dir /dev
 %dir /etc
+%config(noreplace) /etc/passwd
+%config(noreplace) /etc/group
+%config /etc/inputrc
 %dir /etc/default
 %dir /home
 %dir /lib
@@ -149,6 +162,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.3-1
+- Merge base-files into base-layout
+
 * Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.2-1
 - Remove /etc/sysconfig, add /etc/default
 

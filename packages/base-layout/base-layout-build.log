@@ -1,19 +1,22 @@
-Fetching(Source1): http://dev.lightcube.us/sources/base-layout/lang-exceptions
-Fetching(Source0): http://dev.lightcube.us/sources/base-layout/lang-iso
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.88835
+Fetching(Source4): https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/inputrc
+Fetching(Source3): https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/group
+Fetching(Source2): https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/passwd
+Fetching(Source1): https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/lang-exceptions
+Fetching(Source0): https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/lang-iso
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.56420
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
-+ rm -rf base-layout-0.2
-+ /bin/mkdir -p base-layout-0.2
-+ cd base-layout-0.2
++ rm -rf base-layout-0.3
++ /bin/mkdir -p base-layout-0.3
++ cd base-layout-0.3
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.88835
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.56420
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/base-layout-root
 + /bin/mkdir -p /var/tmp/base-layout-root
-+ cd base-layout-0.2
++ cd base-layout-0.3
 + install -dv /var/tmp/base-layout-root/bin /var/tmp/base-layout-root/boot /var/tmp/base-layout-root/dev /var/tmp/base-layout-root/etc/default /var/tmp/base-layout-root/home /var/tmp/base-layout-root/lib /var/tmp/base-layout-root/media /var/tmp/base-layout-root/mnt /var/tmp/base-layout-root/opt /var/tmp/base-layout-root/proc /var/tmp/base-layout-root/root /var/tmp/base-layout-root/sbin /var/tmp/base-layout-root/srv /var/tmp/base-layout-root/sys /var/tmp/base-layout-root/tmp /var/tmp/base-layout-root/usr /var/tmp/base-layout-root/var
 install: creating directory `/var/tmp/base-layout-root/bin'
 install: creating directory `/var/tmp/base-layout-root/boot'
@@ -94,6 +97,9 @@ install: creating directory `/var/tmp/base-layout-root/var/lib/hwclock'
 install: creating directory `/var/tmp/base-layout-root/var/lib/misc'
 install: creating directory `/var/tmp/base-layout-root/var/lib/locate'
 install: creating directory `/var/tmp/base-layout-root/var/local'
++ install -m0644 /usr/src/rpm/SOURCES/passwd /var/tmp/base-layout-root/etc/passwd
++ install -m0644 /usr/src/rpm/SOURCES/group /var/tmp/base-layout-root/etc/group
++ install -m0644 /usr/src/rpm/SOURCES/inputrc /var/tmp/base-layout-root/etc/inputrc
 + for man in 'man{{1..9}{,x},{0,1,3}p,n}'
 + mkdir -p /var/tmp/base-layout-root/usr/share/man/man1
 + echo '%dir %ghost /usr/share/man/man1'
@@ -306,8 +312,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(zh_TW) /usr/share/man/zh_TW/*'
 + egrep -vh '^($|#)' /usr/src/rpm/SOURCES/lang-iso /usr/src/rpm/SOURCES/lang-exceptions
 + read loc
-+ grep -q @
 + echo aa
++ grep -q @
 + locale=aa
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/aa/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/aa/LC_TIME
 + echo '%dir %ghost %lang(aa) /usr/share/locale/aa'
@@ -370,8 +376,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(afh) /usr/share/locale/afh/LC_MESSAGES'
 + echo '%dir %ghost %lang(afh) /usr/share/locale/afh/LC_TIME'
 + read loc
-+ grep -q @
 + echo af
++ grep -q @
 + locale=af
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/af/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/af/LC_TIME
 + echo '%dir %ghost %lang(af) /usr/share/locale/af'
@@ -1362,16 +1368,16 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(fj) /usr/share/locale/fj/LC_MESSAGES'
 + echo '%dir %ghost %lang(fj) /usr/share/locale/fj/LC_TIME'
 + read loc
-+ echo fil
 + grep -q @
++ echo fil
 + locale=fil
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/fil/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/fil/LC_TIME
 + echo '%dir %ghost %lang(fil) /usr/share/locale/fil'
 + echo '%dir %ghost %lang(fil) /usr/share/locale/fil/LC_MESSAGES'
 + echo '%dir %ghost %lang(fil) /usr/share/locale/fil/LC_TIME'
 + read loc
-+ echo fi
 + grep -q @
++ echo fi
 + locale=fi
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/fi/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/fi/LC_TIME
 + echo '%dir %ghost %lang(fi) /usr/share/locale/fi'
@@ -4775,13 +4781,15 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 install: creating directory `/var/tmp/base-layout-root/usr/lib64'
 install: creating directory `/var/tmp/base-layout-root/lib64'
 + exit 0
-Processing files: base-layout-0.2-1.x86_64
+Processing files: base-layout-0.3-1.x86_64
+Provides: config(base-layout) = 0:0.3-1
 Requires(postun): /
+Obsoletes: base-files
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/base-layout-root
-Wrote: /usr/src/rpm/SRPMS/base-layout-0.2-1.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/base-layout-0.2-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.22490
+Wrote: /usr/src/rpm/SRPMS/base-layout-0.3-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/base-layout-0.3-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.67249
 + umask 022
 + cd /usr/src/rpm/BUILD
-+ cd base-layout-0.2
++ cd base-layout-0.3
 + /bin/rm -rf /var/tmp/base-layout-root
