@@ -132,7 +132,6 @@ rm -rf %{buildroot}
 /bin/login
 /bin/passwd
 /bin/su
-%dir /etc/default
 %config /etc/default/useradd
 %config /etc/login.defs
 %dir /etc/pam.d
