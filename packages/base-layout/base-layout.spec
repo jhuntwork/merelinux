@@ -1,7 +1,7 @@
 Summary: Base directory layout
 Name: base-layout
-Version: 0.1
-Release: 7
+Version: 0.2
+Release: 1 
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -18,10 +18,11 @@ Provides an empty filesystem layout with all necessary
 directories for a standard system.
 
 %prep
+%setup -T -c
 
 %install
 # Top-level directories
-install -dv %{buildroot}/{bin,boot,dev,etc/sysconfig,home,lib,media,mnt,opt,proc,root,sbin,srv,sys,tmp,usr,var}
+install -dv %{buildroot}/{bin,boot,dev,etc/default,home,lib,media,mnt,opt,proc,root,sbin,srv,sys,tmp,usr,var}
 install -dv %{buildroot}/lib/{lsb,modules}
 install -dv %{buildroot}/media/{floppy,cdrom}
 install -dv %{buildroot}/usr/{,local/}{bin,include,lib/lsb,sbin,src}
@@ -78,7 +79,7 @@ rm -rf %{buildroot}
 %dir /boot
 %dir /dev
 %dir /etc
-%dir /etc/sysconfig
+%dir /etc/default
 %dir /home
 %dir /lib
 %dir /lib/lsb
@@ -148,6 +149,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.2-1
+- Remove /etc/sysconfig, add /etc/default
+
 * Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-7
 - Remove /usr/share/gtk-doc
 

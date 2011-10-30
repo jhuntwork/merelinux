@@ -1,18 +1,25 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.35460
+Fetching(Source1): http://dev.lightcube.us/sources/base-layout/lang-exceptions
+Fetching(Source0): http://dev.lightcube.us/sources/base-layout/lang-iso
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.88835
 + umask 022
 + cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf base-layout-0.2
++ /bin/mkdir -p base-layout-0.2
++ cd base-layout-0.2
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.35460
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.88835
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/base-layout-root
 + /bin/mkdir -p /var/tmp/base-layout-root
-+ install -dv /var/tmp/base-layout-root/bin /var/tmp/base-layout-root/boot /var/tmp/base-layout-root/dev /var/tmp/base-layout-root/etc/sysconfig /var/tmp/base-layout-root/home /var/tmp/base-layout-root/lib /var/tmp/base-layout-root/media /var/tmp/base-layout-root/mnt /var/tmp/base-layout-root/opt /var/tmp/base-layout-root/proc /var/tmp/base-layout-root/root /var/tmp/base-layout-root/sbin /var/tmp/base-layout-root/srv /var/tmp/base-layout-root/sys /var/tmp/base-layout-root/tmp /var/tmp/base-layout-root/usr /var/tmp/base-layout-root/var
++ cd base-layout-0.2
++ install -dv /var/tmp/base-layout-root/bin /var/tmp/base-layout-root/boot /var/tmp/base-layout-root/dev /var/tmp/base-layout-root/etc/default /var/tmp/base-layout-root/home /var/tmp/base-layout-root/lib /var/tmp/base-layout-root/media /var/tmp/base-layout-root/mnt /var/tmp/base-layout-root/opt /var/tmp/base-layout-root/proc /var/tmp/base-layout-root/root /var/tmp/base-layout-root/sbin /var/tmp/base-layout-root/srv /var/tmp/base-layout-root/sys /var/tmp/base-layout-root/tmp /var/tmp/base-layout-root/usr /var/tmp/base-layout-root/var
 install: creating directory `/var/tmp/base-layout-root/bin'
 install: creating directory `/var/tmp/base-layout-root/boot'
 install: creating directory `/var/tmp/base-layout-root/dev'
 install: creating directory `/var/tmp/base-layout-root/etc'
-install: creating directory `/var/tmp/base-layout-root/etc/sysconfig'
+install: creating directory `/var/tmp/base-layout-root/etc/default'
 install: creating directory `/var/tmp/base-layout-root/home'
 install: creating directory `/var/tmp/base-layout-root/lib'
 install: creating directory `/var/tmp/base-layout-root/media'
@@ -299,8 +306,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(zh_TW) /usr/share/man/zh_TW/*'
 + egrep -vh '^($|#)' /usr/src/rpm/SOURCES/lang-iso /usr/src/rpm/SOURCES/lang-exceptions
 + read loc
-+ echo aa
 + grep -q @
++ echo aa
 + locale=aa
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/aa/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/aa/LC_TIME
 + echo '%dir %ghost %lang(aa) /usr/share/locale/aa'
@@ -331,8 +338,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(ach) /usr/share/locale/ach/LC_MESSAGES'
 + echo '%dir %ghost %lang(ach) /usr/share/locale/ach/LC_TIME'
 + read loc
-+ grep -q @
 + echo ada
++ grep -q @
 + locale=ada
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/ada/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/ada/LC_TIME
 + echo '%dir %ghost %lang(ada) /usr/share/locale/ada'
@@ -363,8 +370,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(afh) /usr/share/locale/afh/LC_MESSAGES'
 + echo '%dir %ghost %lang(afh) /usr/share/locale/afh/LC_TIME'
 + read loc
-+ echo af
 + grep -q @
++ echo af
 + locale=af
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/af/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/af/LC_TIME
 + echo '%dir %ghost %lang(af) /usr/share/locale/af'
@@ -507,16 +514,16 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(arw) /usr/share/locale/arw/LC_MESSAGES'
 + echo '%dir %ghost %lang(arw) /usr/share/locale/arw/LC_TIME'
 + read loc
-+ grep -q @
 + echo as
++ grep -q @
 + locale=as
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/as/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/as/LC_TIME
 + echo '%dir %ghost %lang(as) /usr/share/locale/as'
 + echo '%dir %ghost %lang(as) /usr/share/locale/as/LC_MESSAGES'
 + echo '%dir %ghost %lang(as) /usr/share/locale/as/LC_TIME'
 + read loc
-+ grep -q @
 + echo ast
++ grep -q @
 + locale=ast
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/ast/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/ast/LC_TIME
 + echo '%dir %ghost %lang(ast) /usr/share/locale/ast'
@@ -587,8 +594,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(bad) /usr/share/locale/bad/LC_MESSAGES'
 + echo '%dir %ghost %lang(bad) /usr/share/locale/bad/LC_TIME'
 + read loc
-+ grep -q @
 + echo bai
++ grep -q @
 + locale=bai
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/bai/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/bai/LC_TIME
 + echo '%dir %ghost %lang(bai) /usr/share/locale/bai'
@@ -1307,8 +1314,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(ee) /usr/share/locale/ee/LC_MESSAGES'
 + echo '%dir %ghost %lang(ee) /usr/share/locale/ee/LC_TIME'
 + read loc
-+ grep -q @
 + echo ewo
++ grep -q @
 + locale=ewo
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/ewo/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/ewo/LC_TIME
 + echo '%dir %ghost %lang(ewo) /usr/share/locale/ewo'
@@ -1739,8 +1746,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(hu) /usr/share/locale/hu/LC_MESSAGES'
 + echo '%dir %ghost %lang(hu) /usr/share/locale/hu/LC_TIME'
 + read loc
-+ grep -q @
 + echo hup
++ grep -q @
 + locale=hup
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/hup/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/hup/LC_TIME
 + echo '%dir %ghost %lang(hup) /usr/share/locale/hup'
@@ -1827,8 +1834,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(ia) /usr/share/locale/ia/LC_MESSAGES'
 + echo '%dir %ghost %lang(ia) /usr/share/locale/ia/LC_TIME'
 + read loc
-+ grep -q @
 + echo inc
++ grep -q @
 + locale=inc
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/inc/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/inc/LC_TIME
 + echo '%dir %ghost %lang(inc) /usr/share/locale/inc'
@@ -2083,8 +2090,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(ki) /usr/share/locale/ki/LC_MESSAGES'
 + echo '%dir %ghost %lang(ki) /usr/share/locale/ki/LC_TIME'
 + read loc
-+ grep -q @
 + echo rw
++ grep -q @
 + locale=rw
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/rw/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/rw/LC_TIME
 + echo '%dir %ghost %lang(rw) /usr/share/locale/rw'
@@ -2259,8 +2266,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(la) /usr/share/locale/la/LC_MESSAGES'
 + echo '%dir %ghost %lang(la) /usr/share/locale/la/LC_TIME'
 + read loc
-+ grep -q @
 + echo lv
++ grep -q @
 + locale=lv
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/lv/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/lv/LC_TIME
 + echo '%dir %ghost %lang(lv) /usr/share/locale/lv'
@@ -2275,8 +2282,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(lez) /usr/share/locale/lez/LC_MESSAGES'
 + echo '%dir %ghost %lang(lez) /usr/share/locale/lez/LC_TIME'
 + read loc
-+ grep -q @
 + echo li
++ grep -q @
 + locale=li
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/li/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/li/LC_TIME
 + echo '%dir %ghost %lang(li) /usr/share/locale/li'
@@ -2883,8 +2890,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(ny) /usr/share/locale/ny/LC_MESSAGES'
 + echo '%dir %ghost %lang(ny) /usr/share/locale/ny/LC_TIME'
 + read loc
-+ grep -q @
 + echo nym
++ grep -q @
 + locale=nym
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/nym/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/nym/LC_TIME
 + echo '%dir %ghost %lang(nym) /usr/share/locale/nym'
@@ -3155,8 +3162,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(rar) /usr/share/locale/rar/LC_MESSAGES'
 + echo '%dir %ghost %lang(rar) /usr/share/locale/rar/LC_TIME'
 + read loc
-+ grep -q @
 + echo roa
++ grep -q @
 + locale=roa
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/roa/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/roa/LC_TIME
 + echo '%dir %ghost %lang(roa) /usr/share/locale/roa'
@@ -3387,8 +3394,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(sk) /usr/share/locale/sk/LC_MESSAGES'
 + echo '%dir %ghost %lang(sk) /usr/share/locale/sk/LC_TIME'
 + read loc
-+ grep -q @
 + echo sl
++ grep -q @
 + locale=sl
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/sl/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/sl/LC_TIME
 + echo '%dir %ghost %lang(sl) /usr/share/locale/sl'
@@ -3475,32 +3482,32 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(snk) /usr/share/locale/snk/LC_MESSAGES'
 + echo '%dir %ghost %lang(snk) /usr/share/locale/snk/LC_TIME'
 + read loc
-+ grep -q @
 + echo sog
++ grep -q @
 + locale=sog
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/sog/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/sog/LC_TIME
 + echo '%dir %ghost %lang(sog) /usr/share/locale/sog'
 + echo '%dir %ghost %lang(sog) /usr/share/locale/sog/LC_MESSAGES'
 + echo '%dir %ghost %lang(sog) /usr/share/locale/sog/LC_TIME'
 + read loc
-+ grep -q @
 + echo so
++ grep -q @
 + locale=so
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/so/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/so/LC_TIME
 + echo '%dir %ghost %lang(so) /usr/share/locale/so'
 + echo '%dir %ghost %lang(so) /usr/share/locale/so/LC_MESSAGES'
 + echo '%dir %ghost %lang(so) /usr/share/locale/so/LC_TIME'
 + read loc
-+ grep -q @
 + echo son
++ grep -q @
 + locale=son
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/son/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/son/LC_TIME
 + echo '%dir %ghost %lang(son) /usr/share/locale/son'
 + echo '%dir %ghost %lang(son) /usr/share/locale/son/LC_MESSAGES'
 + echo '%dir %ghost %lang(son) /usr/share/locale/son/LC_TIME'
 + read loc
-+ grep -q @
 + echo st
++ grep -q @
 + locale=st
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/st/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/st/LC_TIME
 + echo '%dir %ghost %lang(st) /usr/share/locale/st'
@@ -3531,8 +3538,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(sc) /usr/share/locale/sc/LC_MESSAGES'
 + echo '%dir %ghost %lang(sc) /usr/share/locale/sc/LC_TIME'
 + read loc
-+ grep -q @
 + echo srn
++ grep -q @
 + locale=srn
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/srn/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/srn/LC_TIME
 + echo '%dir %ghost %lang(srn) /usr/share/locale/srn'
@@ -3547,8 +3554,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(sr) /usr/share/locale/sr/LC_MESSAGES'
 + echo '%dir %ghost %lang(sr) /usr/share/locale/sr/LC_TIME'
 + read loc
-+ grep -q @
 + echo srr
++ grep -q @
 + locale=srr
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/srr/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/srr/LC_TIME
 + echo '%dir %ghost %lang(srr) /usr/share/locale/srr'
@@ -3579,8 +3586,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(suk) /usr/share/locale/suk/LC_MESSAGES'
 + echo '%dir %ghost %lang(suk) /usr/share/locale/suk/LC_TIME'
 + read loc
-+ grep -q @
 + echo su
++ grep -q @
 + locale=su
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/su/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/su/LC_TIME
 + echo '%dir %ghost %lang(su) /usr/share/locale/su'
@@ -3595,8 +3602,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(sus) /usr/share/locale/sus/LC_MESSAGES'
 + echo '%dir %ghost %lang(sus) /usr/share/locale/sus/LC_TIME'
 + read loc
-+ grep -q @
 + echo sux
++ grep -q @
 + locale=sux
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/sux/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/sux/LC_TIME
 + echo '%dir %ghost %lang(sux) /usr/share/locale/sux'
@@ -3619,8 +3626,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(sv) /usr/share/locale/sv/LC_MESSAGES'
 + echo '%dir %ghost %lang(sv) /usr/share/locale/sv/LC_TIME'
 + read loc
-+ grep -q @
 + echo syc
++ grep -q @
 + locale=syc
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/syc/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/syc/LC_TIME
 + echo '%dir %ghost %lang(syc) /usr/share/locale/syc'
@@ -3643,8 +3650,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(ty) /usr/share/locale/ty/LC_MESSAGES'
 + echo '%dir %ghost %lang(ty) /usr/share/locale/ty/LC_TIME'
 + read loc
-+ grep -q @
 + echo tai
++ grep -q @
 + locale=tai
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/tai/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/tai/LC_TIME
 + echo '%dir %ghost %lang(tai) /usr/share/locale/tai'
@@ -3667,8 +3674,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(tt) /usr/share/locale/tt/LC_MESSAGES'
 + echo '%dir %ghost %lang(tt) /usr/share/locale/tt/LC_TIME'
 + read loc
-+ grep -q @
 + echo te
++ grep -q @
 + locale=te
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/te/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/te/LC_TIME
 + echo '%dir %ghost %lang(te) /usr/share/locale/te'
@@ -3715,24 +3722,24 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(tl) /usr/share/locale/tl/LC_MESSAGES'
 + echo '%dir %ghost %lang(tl) /usr/share/locale/tl/LC_TIME'
 + read loc
-+ grep -q @
 + echo th
++ grep -q @
 + locale=th
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/th/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/th/LC_TIME
 + echo '%dir %ghost %lang(th) /usr/share/locale/th'
 + echo '%dir %ghost %lang(th) /usr/share/locale/th/LC_MESSAGES'
 + echo '%dir %ghost %lang(th) /usr/share/locale/th/LC_TIME'
 + read loc
-+ grep -q @
 + echo tig
++ grep -q @
 + locale=tig
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/tig/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/tig/LC_TIME
 + echo '%dir %ghost %lang(tig) /usr/share/locale/tig'
 + echo '%dir %ghost %lang(tig) /usr/share/locale/tig/LC_MESSAGES'
 + echo '%dir %ghost %lang(tig) /usr/share/locale/tig/LC_TIME'
 + read loc
-+ grep -q @
 + echo ti
++ grep -q @
 + locale=ti
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/ti/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/ti/LC_TIME
 + echo '%dir %ghost %lang(ti) /usr/share/locale/ti'
@@ -3931,8 +3938,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(umb) /usr/share/locale/umb/LC_MESSAGES'
 + echo '%dir %ghost %lang(umb) /usr/share/locale/umb/LC_TIME'
 + read loc
-+ grep -q @
 + echo und
++ grep -q @
 + locale=und
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/und/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/und/LC_TIME
 + echo '%dir %ghost %lang(und) /usr/share/locale/und'
@@ -4163,8 +4170,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(zu) /usr/share/locale/zu/LC_MESSAGES'
 + echo '%dir %ghost %lang(zu) /usr/share/locale/zu/LC_TIME'
 + read loc
-+ grep -q @
 + echo zun
++ grep -q @
 + locale=zun
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/zun/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/zun/LC_TIME
 + echo '%dir %ghost %lang(zun) /usr/share/locale/zun'
@@ -4227,8 +4234,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(bn_IN) /usr/share/locale/bn_IN/LC_MESSAGES'
 + echo '%dir %ghost %lang(bn_IN) /usr/share/locale/bn_IN/LC_TIME'
 + read loc
-+ grep -q @
 + echo ca_ES
++ grep -q @
 + locale=ca_ES
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/ca_ES/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/ca_ES/LC_TIME
 + echo '%dir %ghost %lang(ca_ES) /usr/share/locale/ca_ES'
@@ -4339,8 +4346,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(es_CL) /usr/share/locale/es_CL/LC_MESSAGES'
 + echo '%dir %ghost %lang(es_CL) /usr/share/locale/es_CL/LC_TIME'
 + read loc
-+ grep -q @
 + echo es_CO
++ grep -q @
 + locale=es_CO
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/es_CO/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/es_CO/LC_TIME
 + echo '%dir %ghost %lang(es_CO) /usr/share/locale/es_CO'
@@ -4731,8 +4738,8 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 + echo '%dir %ghost %lang(sr) /usr/share/locale/sr@ije/LC_MESSAGES'
 + echo '%dir %ghost %lang(sr) /usr/share/locale/sr@ije/LC_TIME'
 + read loc
-+ grep -q @
 + echo sr@latin
++ grep -q @
 + locale=sr
 + mkdir -p /var/tmp/base-layout-root/usr/share/locale/sr@latin/LC_MESSAGES /var/tmp/base-layout-root/usr/share/locale/sr@latin/LC_TIME
 + echo '%dir %ghost %lang(sr) /usr/share/locale/sr@latin'
@@ -4768,12 +4775,13 @@ install: creating directory `/var/tmp/base-layout-root/var/local'
 install: creating directory `/var/tmp/base-layout-root/usr/lib64'
 install: creating directory `/var/tmp/base-layout-root/lib64'
 + exit 0
-Processing files: base-layout-0.1-7.x86_64
+Processing files: base-layout-0.2-1.x86_64
 Requires(postun): /
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/base-layout-root
-Wrote: /usr/src/rpm/SRPMS/base-layout-0.1-7.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/base-layout-0.1-7.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.69637
+Wrote: /usr/src/rpm/SRPMS/base-layout-0.2-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/base-layout-0.2-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.22490
 + umask 022
 + cd /usr/src/rpm/BUILD
++ cd base-layout-0.2
 + /bin/rm -rf /var/tmp/base-layout-root
