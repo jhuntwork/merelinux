@@ -1,6 +1,6 @@
 Summary: Base directory layout
 Name: base-layout
-Version: 0.3
+Version: 0.4
 Release: 1 
 Group: System Environment/Base
 License: GPLv2
@@ -11,14 +11,21 @@ Source1: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layo
 Source2: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/passwd
 Source3: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/group
 Source4: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/inputrc
+Source5: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/protocols
+Source6: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/base-layout/services
 
-Requires(postun): /
 BuildRequires: digest(sha1:%{SOURCE0}) = 9b091c035b2959b085ef7e46f242451bce844d4c
 BuildRequires: digest(sha1:%{SOURCE1}) = 890e047e6b8a2a34f84f0214bbd4a6fcf7bd1d05
 BuildRequires: digest(sha1:%{SOURCE2}) = ad00fdd5d578743a617f1cc9bb4eee4e25da3038
 BuildRequires: digest(sha1:%{SOURCE3}) = 5b9663e555e16a3d671df05c537e51f7b9910ace
 BuildRequires: digest(sha1:%{SOURCE4}) = b5b083ef90b918b68c67b7c54f37c91e46b5b706
+BuildRequires: digest(sha1:%{SOURCE5}) = a6546de3329331caf3b43a726dde6cdc6951a28a
+BuildRequires: digest(sha1:%{SOURCE6}) = 9153e46648c575b2c5a7ed69346d8ac42255c1d0
 Obsoletes: base-files
+Obsoletes: iana-etc
+Provides: /
+# Remove once base-files is gone from packages
+Provides: base-files
 
 %description
 Provides an empty filesystem layout with all necessary
@@ -42,6 +49,10 @@ install -dv %{buildroot}/var/{opt,cache,lib/{hwclock,misc,locate},local}
 install -m0644 %{SOURCE2} %{buildroot}/etc/passwd
 install -m0644 %{SOURCE3} %{buildroot}/etc/group
 install -m0644 %{SOURCE4} %{buildroot}/etc/inputrc
+# The following two files were generated from the iana-etc package
+# located at http://sethwklein.net/iana-etc
+install -m0644 %{SOURCE5} %{buildroot}/etc/protocols
+install -m0644 %{SOURCE6} %{buildroot}/etc/services
 
 %ifarch ppc
 install -dv %{buildroot}/usr/%{_lib}/nof
@@ -92,6 +103,8 @@ rm -rf %{buildroot}
 %config(noreplace) /etc/passwd
 %config(noreplace) /etc/group
 %config /etc/inputrc
+%config /etc/protocols
+%config /etc/services
 %dir /etc/default
 %dir /home
 %dir /lib
@@ -162,6 +175,9 @@ rm -rf %{buildroot}
 %attr(1777,root,root) %dir /var/tmp
 
 %changelog
+* Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.4-1
+- Merge iana-etc into base-layout
+
 * Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.3-1
 - Merge base-files into base-layout
 
