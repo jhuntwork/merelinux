@@ -1,7 +1,7 @@
 Summary: rpm package manager
 Name: rpm
 Version: 5.3.11
-Release: 3
+Release: 4
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -98,12 +98,15 @@ make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
-install -dv %{buildroot}/var/lib/rpm/{log,tmp}
+install -dv %{buildroot}/var/lib/rpm/tmp
 install -dv %{buildroot}/etc/rpm
 install -dv %{buildroot}/usr/src/rpm
 echo "%%PMFLAGS   -j1" >> %{buildroot}/etc/rpm/macros
 echo "%%compress_man	/usr/lib/rpm/compress_man.sh %%{buildroot}" >> %{buildroot}/etc/rpm/macros
 echo "%%strip		/usr/lib/rpm/strip.sh %%{buildroot}" >> %{buildroot}/etc/rpm/macros
+
+# Keep log files in top /var/lib/rpm dir for consistency
+sed -i 's@/log@@' %{buildroot}/var/lib/rpm/DB_CONFIG
 
 # Add compress man helper
 cat > %{buildroot}/usr/lib/rpm/compress_man.sh << "EOF"
@@ -144,7 +147,12 @@ EOF
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
+%post
+/sbin/ldconfig
+if [ -d "/var/lib/rpm/log/" ] ; then
+    /bin/mv /var/lib/rpm/log/* /var/lib/rpm/ 2>/dev/null
+fi
+
 %postun -p /sbin/ldconfig
 
 %files -f %{name}.lang
@@ -211,7 +219,6 @@ rm -rf %{buildroot}
 /usr/lib/rpm/rubygems.rb
 %dir /var/lib/rpm
 /var/lib/rpm/DB_CONFIG
-%dir /var/lib/rpm/log
 %dir /var/lib/rpm/tmp
 /usr/share/man/man1/gendiff.1.bz2
 /usr/share/man/*/man1/gendiff.1.bz2
@@ -294,6 +301,9 @@ rm -rf %{buildroot}
 /usr/share/man/*/man8/rpmbuild.8.bz2
 
 %changelog
+* Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-4
+- Keep log files in /var/lib/rpm for consistency
+
 * Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-3
 - Remove dependency on sqlite, libxml2, xar - unused
 - Add strip macro support
