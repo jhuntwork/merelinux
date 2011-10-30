@@ -1,5 +1,5 @@
 Fetching(Source0): http://ftp.gnu.org/gnu/findutils/findutils-4.4.2.tar.gz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.61201
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.96163
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.61201
 + '[' 0 -ne 0 ']'
 + cd findutils-4.4.2
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.61201
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.96163
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd findutils-4.4.2
@@ -461,7 +461,6 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/findutils-4.4.2/gnulib/lib'
 } > alloca.h-t
 rm -f configmake.h-t configmake.h
 rm -f fcntl.h-t fcntl.h
-rm -f inttypes.h-t inttypes.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   echo '#define PREFIX "/usr"'; \
   echo '#define EXEC_PREFIX "/usr"'; \
@@ -491,6 +490,7 @@ rm -f inttypes.h-t inttypes.h
   echo '#define PKGLIBDIR "/usr/lib/findutils"'; \
   echo '#define PKGLIBEXECDIR ""'; \
 } | sed '/""/d' > configmake.h-t
+rm -f inttypes.h-t inttypes.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
       -e 's|@''NEXT_FCNTL_H''@|<fcntl.h>|g' \
@@ -498,6 +498,7 @@ rm -f inttypes.h-t inttypes.h
       -e 's|@''REPLACE_OPEN''@|0|g' \
       < ./fcntl.in.h; \
 } > fcntl.h-t
+mv -f alloca.h-t alloca.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's/@''HAVE_INTTYPES_H''@/1/g' \
       -e 's/@''INCLUDE_NEXT''@/include_next/g' \
@@ -521,7 +522,6 @@ rm -f inttypes.h-t inttypes.h
       -e '/definition of GL_LINK_WARNING/r ../../build-aux/link-warning.h' \
       < ./inttypes.in.h; \
 } > inttypes.h-t
-mv -f alloca.h-t alloca.h
 rm -f stdio.h-t stdio.h
 mv configmake.h-t configmake.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
@@ -570,9 +570,7 @@ mv configmake.h-t configmake.h
       -e '/definition of GL_LINK_WARNING/r ../../build-aux/link-warning.h' \
       < ./stdio.in.h; \
 } > stdio.h-t
-mv fcntl.h-t fcntl.h
 rm -f stdlib.h-t stdlib.h
-rm -f string.h-t string.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
   sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
       -e 's|@''NEXT_STDLIB_H''@|<stdlib.h>|g' \
@@ -593,6 +591,8 @@ rm -f string.h-t string.h
       -e '/definition of GL_LINK_WARNING/r ../../build-aux/link-warning.h' \
       < ./stdlib.in.h; \
 } > stdlib.h-t
+mv fcntl.h-t fcntl.h
+rm -f string.h-t string.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
   sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
       -e 's|@''NEXT_STRING_H''@|<string.h>|g' \
@@ -644,10 +644,9 @@ rm -f string.h-t string.h
       -e '/definition of GL_LINK_WARNING/r ../../build-aux/link-warning.h' \
       < ./string.in.h; \
 } > string.h-t
-mv inttypes.h-t inttypes.h
+mv stdlib.h-t stdlib.h
 /bin/mkdir -p sys
 rm -f sys/stat.h-t sys/stat.h
-mv stdlib.h-t stdlib.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
       -e 's|@''NEXT_SYS_STAT_H''@|<sys/stat.h>|g' \
@@ -656,6 +655,7 @@ mv stdlib.h-t stdlib.h
       -e 's|@''HAVE_DECL_MKDIR''@|1|g' \
       < ./sys_stat.in.h; \
 } > sys/stat.h-t
+mv inttypes.h-t inttypes.h
 rm -f time.h-t time.h
 mv stdio.h-t stdio.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
@@ -669,6 +669,7 @@ mv stdio.h-t stdio.h
       -e 's|@TIME_H_DEFINES_STRUCT_TIMESPEC''@|1|g' \
       < ./time.in.h; \
 } > time.h-t
+mv sys/stat.h-t sys/stat.h
 rm -f unistd.h-t unistd.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''HAVE_UNISTD_H''@|1|g' \
@@ -700,9 +701,8 @@ rm -f unistd.h-t unistd.h
       -e 's|@''REPLACE_LSEEK''@|0|g' \
       < ./unistd.in.h; \
 } > unistd.h-t
-mv sys/stat.h-t sys/stat.h
-mv string.h-t string.h
 mv time.h-t time.h
+mv string.h-t string.h
 mv unistd.h-t unistd.h
 make  all-am
 make[4]: Entering directory `/usr/src/rpm/BUILD/findutils-4.4.2/gnulib/lib'
@@ -959,19 +959,19 @@ mv -f .deps/nextelem.Tpo .deps/nextelem.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../gnulib/lib     -Os -pipe -MT savedirinfo.o -MD -MP -MF .deps/savedirinfo.Tpo -c -o savedirinfo.o savedirinfo.c
 mv -f .deps/extendbuf.Tpo .deps/extendbuf.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../gnulib/lib     -Os -pipe -MT forcefindlib.o -MD -MP -MF .deps/forcefindlib.Tpo -c -o forcefindlib.o forcefindlib.c
-mv -f .deps/listfile.Tpo .deps/listfile.Po
-gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../gnulib/lib     -Os -pipe -MT qmark.o -MD -MP -MF .deps/qmark.Tpo -c -o qmark.o qmark.c
 mv -f .deps/forcefindlib.Tpo .deps/forcefindlib.Po
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../gnulib/lib     -Os -pipe -MT qmark.o -MD -MP -MF .deps/qmark.Tpo -c -o qmark.o qmark.c
+mv -f .deps/listfile.Tpo .deps/listfile.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../gnulib/lib     -Os -pipe -MT printquoted.o -MD -MP -MF .deps/printquoted.Tpo -c -o printquoted.o printquoted.c
 mv -f .deps/buildcmd.Tpo .deps/buildcmd.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../gnulib/lib     -Os -pipe -MT regextype.o -MD -MP -MF .deps/regextype.Tpo -c -o regextype.o regextype.c
 mv -f .deps/savedirinfo.Tpo .deps/savedirinfo.Po
-mv -f .deps/qmark.Tpo .deps/qmark.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../gnulib/lib     -Os -pipe -MT dircallback.o -MD -MP -MF .deps/dircallback.Tpo -c -o dircallback.o dircallback.c
+mv -f .deps/qmark.Tpo .deps/qmark.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../gnulib/lib     -Os -pipe -MT regexprops.o -MD -MP -MF .deps/regexprops.Tpo -c -o regexprops.o regexprops.c
 mv -f .deps/printquoted.Tpo .deps/printquoted.Po
-mv -f .deps/regextype.Tpo .deps/regextype.Po
 mv -f .deps/dircallback.Tpo .deps/dircallback.Po
+mv -f .deps/regextype.Tpo .deps/regextype.Po
 rm -f libfind.a
 ar cru libfind.a gnulib-version.o findutils-version.o listfile.o nextelem.o extendbuf.o buildcmd.o savedirinfo.o forcefindlib.o qmark.o printquoted.o regextype.o dircallback.o forcefindlib.o
 ranlib libfind.a
@@ -997,10 +997,10 @@ mv -f .deps/tree.Tpo .deps/tree.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../gnulib/lib -I../lib -I../gnulib/lib -I../intl -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -MT find.o -MD -MP -MF .deps/find.Tpo -c -o find.o find.c
 mv -f .deps/ftsfind.Tpo .deps/ftsfind.Po
 mv -f .deps/pred.Tpo .deps/pred.Po
+mv -f .deps/find.Tpo .deps/find.Po
 mv -f .deps/parser.Tpo .deps/parser.Po
 rm -f libfindtools.a
 ar cru libfindtools.a finddata.o fstype.o parser.o pred.o tree.o util.o 
-mv -f .deps/find.Tpo .deps/find.Po
 ranlib libfindtools.a
 gcc -std=gnu99  -Os -pipe   -o find ftsfind.o ./libfindtools.a ../lib/libfind.a ../gnulib/lib/libgnulib.a  -lrt -lm -lm  
 gcc -std=gnu99  -Os -pipe   -o oldfind find.o ./libfindtools.a ../lib/libfind.a ../gnulib/lib/libgnulib.a  -lrt -lm -lm  
@@ -1036,7 +1036,7 @@ gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../lib -I../gnulib/lib -I../gnulib/lib
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../lib -I../gnulib/lib -I../gnulib/lib -I../intl -DLOCATE_DB=\"/var/lib/locate/locatedb\" -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -MT code.o -MD -MP -MF .deps/code.Tpo -c -o code.o code.c
 mv -f .deps/word_io.Tpo .deps/word_io.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../lib -I../gnulib/lib -I../gnulib/lib -I../intl -DLOCATE_DB=\"/var/lib/locate/locatedb\" -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -MT bigram.o -MD -MP -MF .deps/bigram.Tpo -c -o bigram.o bigram.c
-mv -f .deps/code.Tpo .deps/code.Po
+mv -f .deps/frcode.Tpo .deps/frcode.Po
 rm -f updatedb
 find=`echo find|sed 's,x,x,'`; \
 frcode=`echo frcode|sed 's,x,x,'`; \
@@ -1055,7 +1055,7 @@ sed \
 -e "s,@""SORT""@,/usr/bin/sort," \
 -e "s,@""SORT_SUPPORTS_Z""@,true," \
 ./updatedb.sh > updatedb
-mv -f .deps/frcode.Tpo .deps/frcode.Po
+mv -f .deps/code.Tpo .deps/code.Po
 gcc -std=gnu99  -Os -pipe   -o frcode frcode.o ../lib/libfind.a ../gnulib/lib/libgnulib.a  
 mv -f .deps/bigram.Tpo .deps/bigram.Po
 gcc -std=gnu99  -Os -pipe   -o code code.o word_io.o ../lib/libfind.a ../gnulib/lib/libgnulib.a  
@@ -1431,7 +1431,7 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/findutils-4.4.2/m4'
 make[1]: Entering directory `/usr/src/rpm/BUILD/findutils-4.4.2'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/findutils-4.4.2'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.47561
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.3804
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/findutils-root
@@ -1705,10 +1705,9 @@ Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
 Requires: /bin/sh /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.4)(64bit) libm.so.6()(64bit) libm.so.6(GLIBC_2.2.5)(64bit) librt.so.1()(64bit) librt.so.1(GLIBC_2.2.5)(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/findutils-root
-warning: Could not canonicalize hostname: zaphod.lightcube.us
 Wrote: /usr/src/rpm/SRPMS/findutils-4.4.2-3.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/findutils-4.4.2-3.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.18260
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.70331
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd findutils-4.4.2

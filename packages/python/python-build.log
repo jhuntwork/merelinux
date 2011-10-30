@@ -1,5 +1,5 @@
 Fetching(Source0): http://www.python.org/ftp/python/2.7.2/Python-2.7.2.tar.bz2
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.33789
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.14372
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.33789
 + '[' 0 -ne 0 ']'
 + cd Python-2.7.2
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.89571
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.93101
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd Python-2.7.2
@@ -816,7 +816,7 @@ gdbm               imageop            sunaudiodev
 To find the necessary bits, look in setup.py in detect_modules() for the module's name.
 
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.98369
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.50921
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/python-root
@@ -5317,136 +5317,136 @@ To find the necessary bits, look in setup.py in detect_modules() for the module'
 running build_scripts
 running install_lib
 creating /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_struct.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_ctypes_test.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/array.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/cmath.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/math.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/strop.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/time.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/datetime.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/itertools.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/future_builtins.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_random.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_collections.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_bisect.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_heapq.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/operator.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_io.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_functools.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_json.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_testcapi.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_hotshot.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_lsprof.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/unicodedata.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_locale.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/fcntl.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/grp.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/spwd.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/select.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/parser.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/cStringIO.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/cPickle.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/mmap.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/syslog.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/audioop.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/readline.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/crypt.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_csv.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_socket.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_ssl.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_hashlib.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/termios.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/resource.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/nis.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_curses.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_curses_panel.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/zlib.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/binascii.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/bz2.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/pyexpat.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_elementtree.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_multibytecodec.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_codecs_kr.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_codecs_jp.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_codecs_cn.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_codecs_tw.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_codecs_hk.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_codecs_iso2022.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/_multiprocessing.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/linuxaudiodev.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-copying build/lib.linux-x86_64-2.7/ossaudiodev.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
 copying build/lib.linux-x86_64-2.7/_ctypes.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_struct.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_ctypes_test.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/array.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/cmath.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/math.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/strop.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/time.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/datetime.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/itertools.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/future_builtins.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_random.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_collections.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_bisect.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_heapq.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/operator.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_io.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_functools.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_json.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_testcapi.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_hotshot.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_lsprof.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/unicodedata.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_locale.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/fcntl.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/grp.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/spwd.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/select.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/parser.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/cStringIO.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/cPickle.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/mmap.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/syslog.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/audioop.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/readline.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/crypt.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_csv.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_socket.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_ssl.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_hashlib.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/termios.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/resource.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/nis.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_curses.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_curses_panel.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/zlib.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/binascii.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/bz2.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/pyexpat.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_elementtree.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_multibytecodec.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_kr.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_jp.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_cn.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_tw.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_hk.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_iso2022.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_multiprocessing.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/linuxaudiodev.so to 755
-changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/ossaudiodev.so to 755
+copying build/lib.linux-x86_64-2.7/ossaudiodev.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/linuxaudiodev.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_multiprocessing.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_codecs_iso2022.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_codecs_hk.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_codecs_tw.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_codecs_cn.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_codecs_jp.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_codecs_kr.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_multibytecodec.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_elementtree.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/pyexpat.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/bz2.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/binascii.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/zlib.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_curses_panel.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_curses.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/nis.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/resource.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/termios.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_hashlib.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_ssl.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_socket.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_csv.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/crypt.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/readline.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/audioop.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/syslog.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/mmap.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/cPickle.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/cStringIO.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/parser.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/select.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/spwd.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/grp.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/fcntl.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_locale.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/unicodedata.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_lsprof.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_hotshot.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_testcapi.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_json.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_functools.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_io.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/operator.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_heapq.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_bisect.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_collections.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_random.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/future_builtins.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/itertools.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/datetime.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/time.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/strop.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/math.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/cmath.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/array.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_ctypes_test.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
+copying build/lib.linux-x86_64-2.7/_struct.so -> /var/tmp/python-root/usr/lib/python2.7/lib-dynload
 changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_ctypes.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/ossaudiodev.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/linuxaudiodev.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_multiprocessing.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_iso2022.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_hk.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_tw.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_cn.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_jp.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_codecs_kr.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_multibytecodec.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_elementtree.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/pyexpat.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/bz2.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/binascii.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/zlib.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_curses_panel.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_curses.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/nis.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/resource.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/termios.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_hashlib.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_ssl.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_socket.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_csv.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/crypt.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/readline.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/audioop.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/syslog.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/mmap.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/cPickle.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/cStringIO.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/parser.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/select.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/spwd.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/grp.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/fcntl.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_locale.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/unicodedata.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_lsprof.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_hotshot.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_testcapi.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_json.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_functools.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_io.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/operator.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_heapq.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_bisect.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_collections.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_random.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/future_builtins.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/itertools.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/datetime.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/time.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/strop.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/math.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/cmath.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/array.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_ctypes_test.so to 755
+changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/_struct.so to 755
 changing mode of /var/tmp/python-root/usr/lib/python2.7/lib-dynload/ to 755
 running install_scripts
-copying build/scripts-2.7/pydoc -> /var/tmp/python-root/usr/bin
-copying build/scripts-2.7/idle -> /var/tmp/python-root/usr/bin
-copying build/scripts-2.7/2to3 -> /var/tmp/python-root/usr/bin
 copying build/scripts-2.7/smtpd.py -> /var/tmp/python-root/usr/bin
-changing mode of /var/tmp/python-root/usr/bin/pydoc to 755
-changing mode of /var/tmp/python-root/usr/bin/idle to 755
-changing mode of /var/tmp/python-root/usr/bin/2to3 to 755
+copying build/scripts-2.7/2to3 -> /var/tmp/python-root/usr/bin
+copying build/scripts-2.7/idle -> /var/tmp/python-root/usr/bin
+copying build/scripts-2.7/pydoc -> /var/tmp/python-root/usr/bin
 changing mode of /var/tmp/python-root/usr/bin/smtpd.py to 755
+changing mode of /var/tmp/python-root/usr/bin/2to3 to 755
+changing mode of /var/tmp/python-root/usr/bin/idle to 755
+changing mode of /var/tmp/python-root/usr/bin/pydoc to 755
 running install_egg_info
 Writing /var/tmp/python-root/usr/lib/python2.7/lib-dynload/Python-2.7.2-py2.7.egg-info
 if test -f /var/tmp/python-root/usr/bin/python -o -h /var/tmp/python-root/usr/bin/python; \
@@ -5497,7 +5497,7 @@ Wrote: /usr/src/rpm/SRPMS/python-2.7.2-1.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/python-2.7.2-1.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/python-devel-2.7.2-1.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/python-test-2.7.2-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.92291
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.96003
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd Python-2.7.2

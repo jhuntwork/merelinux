@@ -1,5 +1,5 @@
 Fetching(Source0): http://zlib.net/zlib-1.2.5.tar.bz2
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.85892
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.99646
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.85892
 + '[' 0 -ne 0 ']'
 + cd zlib-1.2.5
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.85892
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.99646
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd zlib-1.2.5
@@ -65,8 +65,8 @@ gcc -Os -pipe -D_LARGEFILE64_SOURCE=1 -D_FILE_OFFSET_BITS=64 -c -o minigzip64.o 
 ar rc libz.a adler32.o compress.o crc32.o deflate.o gzclose.o gzlib.o gzread.o gzwrite.o infback.o inffast.o inflate.o inftrees.o trees.o uncompr.o zutil.o 
 gcc -Os -pipe -D_LARGEFILE64_SOURCE=1 -o example example.o -L. libz.a
 gcc -Os -pipe -D_LARGEFILE64_SOURCE=1 -o minigzip minigzip.o -L. libz.a
-gcc -Os -pipe -D_LARGEFILE64_SOURCE=1 -o example64 example64.o -L. libz.a
 gcc -Os -pipe -D_LARGEFILE64_SOURCE=1 -o minigzip64 minigzip64.o -L. libz.a
+gcc -Os -pipe -D_LARGEFILE64_SOURCE=1 -o example64 example64.o -L. libz.a
 gcc -shared -Wl,-soname,libz.so.1,--version-script,zlib.map -Os -pipe -fPIC -D_LARGEFILE64_SOURCE=1 -o libz.so.1.2.5 adler32.lo compress.lo crc32.lo deflate.lo gzclose.lo gzlib.lo gzread.lo gzwrite.lo infback.lo inffast.lo inflate.lo inftrees.lo trees.lo uncompr.lo zutil.lo  -lc -L. libz.a
 rm -f libz.so libz.so.1
 ln -s libz.so.1.2.5 libz.so
@@ -74,7 +74,7 @@ ln -s libz.so.1.2.5 libz.so.1
 gcc -Os -pipe -D_LARGEFILE64_SOURCE=1 -o examplesh example.o -L. libz.so.1.2.5
 gcc -Os -pipe -D_LARGEFILE64_SOURCE=1 -o minigzipsh minigzip.o -L. libz.so.1.2.5
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.50407
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.45701
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/zlib-root
@@ -114,7 +114,7 @@ Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/zlib-root
 Wrote: /usr/src/rpm/SRPMS/zlib-1.2.5-2.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/zlib-1.2.5-2.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/zlib-devel-1.2.5-2.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.50407
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.45701
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd zlib-1.2.5

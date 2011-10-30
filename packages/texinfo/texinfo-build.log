@@ -1,5 +1,5 @@
 Fetching(Source0): http://ftp.gnu.org/gnu/texinfo/texinfo-4.13a.tar.lzma
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.32885
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.7762
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -7,7 +7,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.32885
 + /bin/tar -xf /usr/src/rpm/SOURCES/texinfo-4.13a.tar.lzma
 + cd texinfo-4.13
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.32885
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.7762
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd texinfo-4.13
@@ -271,7 +271,6 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
 } > alloca.h-t
 rm -f configmake.h-t configmake.h
 rm -f stdlib.h-t stdlib.h
-rm -f string.h-t string.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   echo '#define PREFIX "/usr"'; \
   echo '#define EXEC_PREFIX "/usr"'; \
@@ -301,6 +300,7 @@ rm -f string.h-t string.h
   echo '#define PKGLIBDIR "/usr/lib/texinfo"'; \
   echo '#define PKGLIBEXECDIR ""'; \
 } | sed '/""/d' > configmake.h-t
+rm -f string.h-t string.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */' && \
   sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
       -e 's|@''NEXT_STDLIB_H''@|<stdlib.h>|g' \
@@ -391,17 +391,10 @@ rm -f string.h-t string.h
       < ./string.in.h; \
 } > string.h-t
 mv -f alloca.h-t alloca.h
-/bin/mkdir -p sys
 mv configmake.h-t configmake.h
-rm -f sys/stat.h-t sys/stat.h
+/bin/mkdir -p sys
 rm -f unistd.h-t unistd.h
-{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-  sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
-      -e 's|@''NEXT_SYS_STAT_H''@|<sys/stat.h>|g' \
-      -e 's|@''HAVE_LSTAT''@|1|g' \
-      -e 's|@''REPLACE_MKDIR''@|0|g' \
-      < ./sys_stat.in.h; \
-} > sys/stat.h-t
+rm -f sys/stat.h-t sys/stat.h
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''HAVE_UNISTD_H''@|1|g' \
       -e 's/@''INCLUDE_NEXT''@/include_next/g' \
@@ -435,10 +428,17 @@ rm -f unistd.h-t unistd.h
       -e 's|@''REPLACE_LSEEK''@|0|g' \
       < ./unistd.in.h; \
 } > unistd.h-t
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's/@''INCLUDE_NEXT''@/include_next/g' \
+      -e 's|@''NEXT_SYS_STAT_H''@|<sys/stat.h>|g' \
+      -e 's|@''HAVE_LSTAT''@|1|g' \
+      -e 's|@''REPLACE_MKDIR''@|0|g' \
+      < ./sys_stat.in.h; \
+} > sys/stat.h-t
 mv stdlib.h-t stdlib.h
 mv sys/stat.h-t sys/stat.h
-mv string.h-t string.h
 mv unistd.h-t unistd.h
+mv string.h-t string.h
 make  all-am
 make[3]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/gnulib/lib'
 depbase=`echo localcharset.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
@@ -487,13 +487,13 @@ depbase=`echo xmalloc.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
 gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT xmalloc.o -MD -MP -MF $depbase.Tpo -c -o xmalloc.o xmalloc.c &&\
 mv -f $depbase.Tpo $depbase.Po
 rm -f t-charset.alias charset.alias
-rm -f t-ref-add.sed ref-add.sed
 /bin/sh ./config.charset 'x86_64-unknown-linux-gnu' > t-charset.alias
+rm -f t-ref-add.sed ref-add.sed
 sed -e '/^#/d' -e 's/@''PACKAGE''@/texinfo/g' ref-add.sin > t-ref-add.sed
-mv t-charset.alias charset.alias
-rm -f t-ref-del.sed ref-del.sed
 mv t-ref-add.sed ref-add.sed
+rm -f t-ref-del.sed ref-del.sed
 sed -e '/^#/d' -e 's/@''PACKAGE''@/texinfo/g' ref-del.sin > t-ref-del.sed
+mv t-charset.alias charset.alias
 depbase=`echo uniwidth/width.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
 gcc -DHAVE_CONFIG_H -I. -I../..  -I../../intl   -Os -pipe -MT uniwidth/width.o -MD -MP -MF $depbase.Tpo -c -o uniwidth/width.o uniwidth/width.c &&\
 mv -f $depbase.Tpo $depbase.Po
@@ -507,8 +507,8 @@ Making all in lib
 make[2]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13/lib'
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT substring.o -MD -MP -MF .deps/substring.Tpo -c -o substring.o substring.c
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT xexit.o -MD -MP -MF .deps/xexit.Tpo -c -o xexit.o xexit.c
-mv -f .deps/xexit.Tpo .deps/xexit.Po
 mv -f .deps/substring.Tpo .deps/substring.Po
+mv -f .deps/xexit.Tpo .deps/xexit.Po
 rm -f libtxi.a
 ar cru libtxi.a substring.o xexit.o 
 ranlib libtxi.a
@@ -544,9 +544,9 @@ mv -f .deps/dir.Tpo .deps/dir.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT footnotes.o -MD -MP -MF .deps/footnotes.Tpo -c -o footnotes.o footnotes.c
 mv -f .deps/display.Tpo .deps/display.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT gc.o -MD -MP -MF .deps/gc.Tpo -c -o gc.o gc.c
-mv -f .deps/filesys.Tpo .deps/filesys.Po
 mv -f .deps/footnotes.Tpo .deps/footnotes.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT indices.o -MD -MP -MF .deps/indices.Tpo -c -o indices.o indices.c
+mv -f .deps/filesys.Tpo .deps/filesys.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT info-utils.o -MD -MP -MF .deps/info-utils.Tpo -c -o info-utils.o info-utils.c
 mv -f .deps/gc.Tpo .deps/gc.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT info.o -MD -MP -MF .deps/info.Tpo -c -o info.o info.c
@@ -554,19 +554,19 @@ mv -f .deps/echo-area.Tpo .deps/echo-area.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT infodoc.o -MD -MP -MF .deps/infodoc.Tpo -c -o infodoc.o infodoc.c
 mv -f .deps/info.Tpo .deps/info.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT infomap.o -MD -MP -MF .deps/infomap.Tpo -c -o infomap.o infomap.c
-mv -f .deps/info-utils.Tpo .deps/info-utils.Po
-gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT m-x.o -MD -MP -MF .deps/m-x.Tpo -c -o m-x.o m-x.c
 mv -f .deps/indices.Tpo .deps/indices.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT m-x.o -MD -MP -MF .deps/m-x.Tpo -c -o m-x.o m-x.c
+mv -f .deps/info-utils.Tpo .deps/info-utils.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT man.o -MD -MP -MF .deps/man.Tpo -c -o man.o man.c
 mv -f .deps/m-x.Tpo .deps/m-x.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT nodemenu.o -MD -MP -MF .deps/nodemenu.Tpo -c -o nodemenu.o nodemenu.c
 mv -f .deps/infomap.Tpo .deps/infomap.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT nodes.o -MD -MP -MF .deps/nodes.Tpo -c -o nodes.o nodes.c
 mv -f .deps/infodoc.Tpo .deps/infodoc.Po
-gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT search.o -MD -MP -MF .deps/search.Tpo -c -o search.o search.c
-mv -f .deps/man.Tpo .deps/man.Po
 mv -f .deps/nodemenu.Tpo .deps/nodemenu.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT search.o -MD -MP -MF .deps/search.Tpo -c -o search.o search.c
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT session.o -MD -MP -MF .deps/session.Tpo -c -o session.o session.c
+mv -f .deps/man.Tpo .deps/man.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT signals.o -MD -MP -MF .deps/signals.Tpo -c -o signals.o signals.c
 mv -f .deps/signals.Tpo .deps/signals.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT terminal.o -MD -MP -MF .deps/terminal.Tpo -c -o terminal.o terminal.c
@@ -576,8 +576,6 @@ mv -f .deps/nodes.Tpo .deps/nodes.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT variables.o -MD -MP -MF .deps/variables.Tpo -c -o variables.o variables.c
 mv -f .deps/terminal.Tpo .deps/terminal.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT window.o -MD -MP -MF .deps/window.Tpo -c -o window.o window.c
-mv -f .deps/tilde.Tpo .deps/tilde.Po
-gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT doc.o -MD -MP -MF .deps/doc.Tpo -c -o doc.o doc.c
 window.c: In function 'process_node_text':
 window.c:1600:4: warning: passing argument 2 of 'ansi_escape' from incompatible pointer type
 window.c:1453:1: note: expected 'size_t *' but argument is of type 'int *'
@@ -599,6 +597,8 @@ window.c:1887:11: warning: passing argument 4 of 'printed_representation' from i
 info-utils.h:101:14: note: expected 'size_t *' but argument is of type 'int *'
 window.c:1895:7: warning: passing argument 4 of 'printed_representation' from incompatible pointer type
 info-utils.h:101:14: note: expected 'size_t *' but argument is of type 'int *'
+mv -f .deps/tilde.Tpo .deps/tilde.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT doc.o -MD -MP -MF .deps/doc.Tpo -c -o doc.o doc.c
 mv -f .deps/variables.Tpo .deps/variables.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -DINFODIR=\"/usr/share/info\" -DINFODIR2=\"/usr/share/info\"   -Os -pipe -MT infokey.o -MD -MP -MF .deps/infokey.Tpo -c -o infokey.o infokey.c
 mv -f .deps/doc.Tpo .deps/doc.Po
@@ -640,16 +640,16 @@ mv -f .deps/lang.Tpo .deps/lang.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT multi.o -MD -MP -MF .deps/multi.Tpo -c -o multi.o multi.c
 mv -f .deps/insertion.Tpo .deps/insertion.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT node.o -MD -MP -MF .deps/node.Tpo -c -o node.o node.c
-mv -f .deps/macro.Tpo .deps/macro.Po
-gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT sectioning.o -MD -MP -MF .deps/sectioning.Tpo -c -o sectioning.o sectioning.c
 mv -f .deps/multi.Tpo .deps/multi.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT sectioning.o -MD -MP -MF .deps/sectioning.Tpo -c -o sectioning.o sectioning.c
+mv -f .deps/macro.Tpo .deps/macro.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT toc.o -MD -MP -MF .deps/toc.Tpo -c -o toc.o toc.c
 mv -f .deps/toc.Tpo .deps/toc.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT xml.o -MD -MP -MF .deps/xml.Tpo -c -o xml.o xml.c
 mv -f .deps/sectioning.Tpo .deps/sectioning.Po
 gcc -DHAVE_CONFIG_H -I. -I..  -I.. -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"   -Os -pipe -MT xref.o -MD -MP -MF .deps/xref.Tpo -c -o xref.o xref.c
-mv -f .deps/node.Tpo .deps/node.Po
 mv -f .deps/xref.Tpo .deps/xref.Po
+mv -f .deps/node.Tpo .deps/node.Po
 mv -f .deps/xml.Tpo .deps/xml.Po
 mv -f .deps/makeinfo.Tpo .deps/makeinfo.Po
 gcc  -Os -pipe   -o makeinfo cmds.o defun.o files.o float.o footnote.o html.o index.o insertion.o lang.o macro.o makeinfo.o multi.o node.o sectioning.o toc.o xml.o xref.o ../lib/libtxi.a ../gnulib/lib/libgnu.a  
@@ -867,7 +867,7 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13/doc'
 make[1]: Entering directory `/usr/src/rpm/BUILD/texinfo-4.13'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/texinfo-4.13'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.34073
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.36583
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/texinfo-root
@@ -1067,10 +1067,11 @@ Processing files: texinfo-4.13a-4.x86_64
 Requires: /bin/sh libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libncursesw.so.5()(64bit)
 Processing files: texinfo-tex-4.13a-4.x86_64
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/texinfo-root
+warning: Could not canonicalize hostname: build1.lightcube.us
 Wrote: /usr/src/rpm/SRPMS/texinfo-4.13a-4.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/texinfo-4.13a-4.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/texinfo-tex-4.13a-4.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.58903
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.63865
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd texinfo-4.13
