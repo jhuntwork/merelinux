@@ -99,7 +99,6 @@ smart -o remove-packages=false -o rpm-root=/mnt/"${pkg}" install \
 cp /etc/resolv.conf /mnt/"${pkg}"/etc
 cp /etc/hosts /mnt/"${pkg}"/etc
 cp /etc/rpm/macros /mnt/"${pkg}"/etc/rpm/
-mv /mnt/"${pkg}"/var/lib/rpm/log.* /mnt/"${pkg}"/var/lib/rpm/log
 
 # Copy the spec file to the chroot directory and build it
 cp "${fullspec}" /mnt/"${pkg}"/"${spec}"
