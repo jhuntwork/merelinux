@@ -1,7 +1,7 @@
 Summary: GNU C Library
 Name: glibc
 Version: 2.13
-Release: 1
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,7 +9,9 @@ Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/libc
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
+Requires(pre): base-layout
 BuildRequires: digest(sha1:%{SOURCE0}) = 14d83dced873a21a3da6a0bfa0926f40d82ef980
+BuildRequires: texinfo
 
 %description
 The system C library which defines run-time functions for all
@@ -61,7 +63,7 @@ CC="gcc -m32" CXX="g++ -m32" \
   libc_cv_c_cleanup=yes
 make PARALLELMFLAGS="%{PMFLAGS}"
 cp -v ../glibc-%{version}-32/iconvdata/gconv-modules iconvdata
-make PARALLELMFLAGS="%{PMFLAGS}" -k check 2>&1 | tee glibc-check-log
+#make PARALLELMFLAGS="%{PMFLAGS}" -k check 2>&1 | tee glibc-check-log
 cd ../glibc-%{version}
 %endif
 sed -i '/vi_VN.TCVN/d' localedata/SUPPORTED
@@ -83,7 +85,7 @@ echo "slibdir=/lib64" > configparms
   --libdir=/usr/%{_lib}
 make PARALLELMFLAGS="%{PMFLAGS}"
 cp -v ../glibc-%{version}/iconvdata/gconv-modules iconvdata
-make PARALLELMFLAGS="%{PMFLAGS}" -k check 2>&1 | tee glibc-check-log
+#make PARALLELMFLAGS="%{PMFLAGS}" -k check 2>&1 | tee glibc-check-log
 
 %install
 install -dv %{buildroot}/etc
@@ -121,6 +123,7 @@ cat > %{buildroot}/etc/ld.so.conf << "EOF"
 
 # End /etc/ld.so.conf
 EOF
+%{strip}
 %find_lang libc
 
 %post -p /sbin/ldconfig
@@ -143,7 +146,8 @@ rm -rf glibc-build
 %config /etc/nsswitch.conf
 %config /etc/rpc
 /%{_lib}/*
-/sbin/*
+/sbin/ldconfig
+/sbin/sln
 /usr/bin/catchsegv
 /usr/bin/gencat
 /usr/bin/getconf
@@ -163,7 +167,11 @@ rm -rf glibc-build
 /usr/%{_lib}/gconv
 /usr/%{_lib}/locale
 /usr/share/locale/locale.alias
-/usr/sbin/*
+/usr/sbin/iconvconfig
+/usr/sbin/nscd
+/usr/sbin/rpcinfo
+/usr/sbin/zdump
+/usr/sbin/zic
 /usr/share/zoneinfo/*
 /usr/share/i18n
 %ifarch x86_64
@@ -186,6 +194,12 @@ rm -rf glibc-build
 %endif
 
 %changelog
+* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.13-3
+- Optimize for size
+
+* Mon Oct 17 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.13-2
+- Minor fix to ensure that base-layout and base-files are installed early
+
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.13-1
 - Upgrade to 2.13
 
