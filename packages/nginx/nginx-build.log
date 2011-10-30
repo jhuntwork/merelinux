@@ -1,0 +1,613 @@
+Fetching(Source1): http://dev.lightcube.us/sources/nginx/nginx.init
+Fetching(Source0): http://dev.lightcube.us/sources/nginx/nginx-1.0.8.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.51958
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf nginx-1.0.8
++ /bin/gzip -dc /usr/src/rpm/SOURCES/nginx-1.0.8.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd nginx-1.0.8
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.51958
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd nginx-1.0.8
++ export 'CFLAGS=-Os -pipe -Wall'
++ CFLAGS='-Os -pipe -Wall'
++ ./configure --prefix=/srv/nginx --user=nginx --group=nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --pid-path=/var/run/nginx.pid --lock-path=/var/lock/nginx.lock --error-log-path=/var/log/nginx-error.log --http-log-path=/var/log/nginx-access.log --with-http_ssl_module --with-debug
+checking for OS
+ + Linux 2.6.39.3-3 x86_64
+checking for C compiler ... found
+ + using GNU C compiler
+checking for gcc builtin atomic operations ... found
+checking for C99 variadic macros ... found
+checking for gcc variadic macros ... found
+checking for unistd.h ... found
+checking for inttypes.h ... found
+checking for limits.h ... found
+checking for sys/filio.h ... not found
+checking for sys/param.h ... found
+checking for sys/mount.h ... found
+checking for sys/statvfs.h ... found
+checking for crypt.h ... found
+checking for Linux specific features
+checking for epoll ... found
+checking for sendfile() ... found
+checking for sendfile64() ... found
+checking for sys/prctl.h ... found
+checking for prctl(PR_SET_DUMPABLE) ... found
+checking for sched_setaffinity() ... found
+checking for crypt_r() ... found
+checking for sys/vfs.h ... found
+checking for poll() ... found
+checking for /dev/poll ... not found
+checking for kqueue ... not found
+checking for crypt() ... not found
+checking for crypt() in libcrypt ... found
+checking for F_READAHEAD ... not found
+checking for posix_fadvise() ... found
+checking for O_DIRECT ... found
+checking for F_NOCACHE ... not found
+checking for directio() ... not found
+checking for statfs() ... found
+checking for statvfs() ... found
+checking for dlopen() ... not found
+checking for dlopen() in libdl ... found
+checking for sched_yield() ... found
+checking for SO_SETFIB ... not found
+checking for accept4() ... found
+checking for int size ... 4 bytes
+checking for long size ... 8 bytes
+checking for long long size ... 8 bytes
+checking for void * size ... 8 bytes
+checking for uint64_t ... found
+checking for sig_atomic_t ... found
+checking for sig_atomic_t size ... 4 bytes
+checking for socklen_t ... found
+checking for in_addr_t ... found
+checking for in_port_t ... found
+checking for rlim_t ... found
+checking for uintptr_t ... uintptr_t found
+checking for system endianess ... little endianess
+checking for size_t size ... 8 bytes
+checking for off_t size ... 8 bytes
+checking for time_t size ... 8 bytes
+checking for setproctitle() ... not found
+checking for pread() ... found
+checking for pwrite() ... found
+checking for sys_nerr ... found
+checking for localtime_r() ... found
+checking for posix_memalign() ... found
+checking for memalign() ... found
+checking for mmap(MAP_ANON|MAP_SHARED) ... found
+checking for mmap("/dev/zero", MAP_SHARED) ... found
+checking for System V shared memory ... found
+checking for POSIX semaphores ... not found
+checking for POSIX semaphores in libpthread ... found
+checking for struct msghdr.msg_control ... found
+checking for ioctl(FIONBIO) ... found
+checking for struct tm.tm_gmtoff ... found
+checking for struct dirent.d_namlen ... not found
+checking for struct dirent.d_type ... found
+checking for PCRE library ... found
+checking for OpenSSL library ... found
+checking for zlib library ... found
+creating objs/Makefile
+
+Configuration summary
+  + using system PCRE library
+  + using system OpenSSL library
+  + md5: using OpenSSL library
+  + sha1: using OpenSSL library
+  + using system zlib library
+
+  nginx path prefix: "/srv/nginx"
+  nginx binary file: "/usr/sbin/nginx"
+  nginx configuration prefix: "/etc/nginx"
+  nginx configuration file: "/etc/nginx/nginx.conf"
+  nginx pid file: "/var/run/nginx.pid"
+  nginx error log file: "/var/log/nginx-error.log"
+  nginx http access log file: "/var/log/nginx-access.log"
+  nginx http client request body temporary files: "client_body_temp"
+  nginx http proxy temporary files: "proxy_temp"
+  nginx http fastcgi temporary files: "fastcgi_temp"
+  nginx http uwsgi temporary files: "uwsgi_temp"
+  nginx http scgi temporary files: "scgi_temp"
++ make -j4
+make -f objs/Makefile
+make[1]: Entering directory `/usr/src/rpm/BUILD/nginx-1.0.8'
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/nginx.o \
+	src/core/nginx.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_log.o \
+	src/core/ngx_log.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_palloc.o \
+	src/core/ngx_palloc.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_array.o \
+	src/core/ngx_array.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_list.o \
+	src/core/ngx_list.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_hash.o \
+	src/core/ngx_hash.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_buf.o \
+	src/core/ngx_buf.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_queue.o \
+	src/core/ngx_queue.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_output_chain.o \
+	src/core/ngx_output_chain.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_string.o \
+	src/core/ngx_string.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_parse.o \
+	src/core/ngx_parse.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_inet.o \
+	src/core/ngx_inet.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_file.o \
+	src/core/ngx_file.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_crc32.o \
+	src/core/ngx_crc32.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_murmurhash.o \
+	src/core/ngx_murmurhash.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_md5.o \
+	src/core/ngx_md5.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_rbtree.o \
+	src/core/ngx_rbtree.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_radix_tree.o \
+	src/core/ngx_radix_tree.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_slab.o \
+	src/core/ngx_slab.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_times.o \
+	src/core/ngx_times.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_shmtx.o \
+	src/core/ngx_shmtx.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_connection.o \
+	src/core/ngx_connection.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_cycle.o \
+	src/core/ngx_cycle.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_spinlock.o \
+	src/core/ngx_spinlock.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_cpuinfo.o \
+	src/core/ngx_cpuinfo.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_conf_file.o \
+	src/core/ngx_conf_file.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_resolver.o \
+	src/core/ngx_resolver.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_open_file_cache.o \
+	src/core/ngx_open_file_cache.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_crypt.o \
+	src/core/ngx_crypt.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event.o \
+	src/event/ngx_event.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_timer.o \
+	src/event/ngx_event_timer.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_posted.o \
+	src/event/ngx_event_posted.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_busy_lock.o \
+	src/event/ngx_event_busy_lock.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_accept.o \
+	src/event/ngx_event_accept.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_connect.o \
+	src/event/ngx_event_connect.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_pipe.o \
+	src/event/ngx_event_pipe.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_time.o \
+	src/os/unix/ngx_time.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_errno.o \
+	src/os/unix/ngx_errno.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_alloc.o \
+	src/os/unix/ngx_alloc.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_files.o \
+	src/os/unix/ngx_files.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_socket.o \
+	src/os/unix/ngx_socket.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_recv.o \
+	src/os/unix/ngx_recv.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_readv_chain.o \
+	src/os/unix/ngx_readv_chain.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_udp_recv.o \
+	src/os/unix/ngx_udp_recv.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_send.o \
+	src/os/unix/ngx_send.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_writev_chain.o \
+	src/os/unix/ngx_writev_chain.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_channel.o \
+	src/os/unix/ngx_channel.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_shmem.o \
+	src/os/unix/ngx_shmem.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_process.o \
+	src/os/unix/ngx_process.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_daemon.o \
+	src/os/unix/ngx_daemon.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_setproctitle.o \
+	src/os/unix/ngx_setproctitle.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_posix_init.o \
+	src/os/unix/ngx_posix_init.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_user.o \
+	src/os/unix/ngx_user.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_process_cycle.o \
+	src/os/unix/ngx_process_cycle.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_linux_init.o \
+	src/os/unix/ngx_linux_init.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/modules/ngx_epoll_module.o \
+	src/event/modules/ngx_epoll_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/os/unix/ngx_linux_sendfile_chain.o \
+	src/os/unix/ngx_linux_sendfile_chain.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/event/ngx_event_openssl.o \
+	src/event/ngx_event_openssl.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/src/core/ngx_regex.o \
+	src/core/ngx_regex.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http.o \
+	src/http/ngx_http.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_core_module.o \
+	src/http/ngx_http_core_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_special_response.o \
+	src/http/ngx_http_special_response.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_request.o \
+	src/http/ngx_http_request.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_parse.o \
+	src/http/ngx_http_parse.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_header_filter_module.o \
+	src/http/ngx_http_header_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_write_filter_module.o \
+	src/http/ngx_http_write_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_copy_filter_module.o \
+	src/http/ngx_http_copy_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_log_module.o \
+	src/http/modules/ngx_http_log_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_request_body.o \
+	src/http/ngx_http_request_body.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_variables.o \
+	src/http/ngx_http_variables.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_script.o \
+	src/http/ngx_http_script.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_upstream.o \
+	src/http/ngx_http_upstream.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_upstream_round_robin.o \
+	src/http/ngx_http_upstream_round_robin.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_parse_time.o \
+	src/http/ngx_http_parse_time.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_static_module.o \
+	src/http/modules/ngx_http_static_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_index_module.o \
+	src/http/modules/ngx_http_index_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_chunked_filter_module.o \
+	src/http/modules/ngx_http_chunked_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_range_filter_module.o \
+	src/http/modules/ngx_http_range_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_headers_filter_module.o \
+	src/http/modules/ngx_http_headers_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_not_modified_filter_module.o \
+	src/http/modules/ngx_http_not_modified_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_busy_lock.o \
+	src/http/ngx_http_busy_lock.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_file_cache.o \
+	src/http/ngx_http_file_cache.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_gzip_filter_module.o \
+	src/http/modules/ngx_http_gzip_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/ngx_http_postpone_filter_module.o \
+	src/http/ngx_http_postpone_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_ssi_filter_module.o \
+	src/http/modules/ngx_http_ssi_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_charset_filter_module.o \
+	src/http/modules/ngx_http_charset_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_userid_filter_module.o \
+	src/http/modules/ngx_http_userid_filter_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_autoindex_module.o \
+	src/http/modules/ngx_http_autoindex_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_auth_basic_module.o \
+	src/http/modules/ngx_http_auth_basic_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_access_module.o \
+	src/http/modules/ngx_http_access_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_limit_zone_module.o \
+	src/http/modules/ngx_http_limit_zone_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_limit_req_module.o \
+	src/http/modules/ngx_http_limit_req_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_geo_module.o \
+	src/http/modules/ngx_http_geo_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_map_module.o \
+	src/http/modules/ngx_http_map_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_split_clients_module.o \
+	src/http/modules/ngx_http_split_clients_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_referer_module.o \
+	src/http/modules/ngx_http_referer_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_rewrite_module.o \
+	src/http/modules/ngx_http_rewrite_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_ssl_module.o \
+	src/http/modules/ngx_http_ssl_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_proxy_module.o \
+	src/http/modules/ngx_http_proxy_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_fastcgi_module.o \
+	src/http/modules/ngx_http_fastcgi_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_uwsgi_module.o \
+	src/http/modules/ngx_http_uwsgi_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_scgi_module.o \
+	src/http/modules/ngx_http_scgi_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_memcached_module.o \
+	src/http/modules/ngx_http_memcached_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_empty_gif_module.o \
+	src/http/modules/ngx_http_empty_gif_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_browser_module.o \
+	src/http/modules/ngx_http_browser_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs -I src/http -I src/http/modules \
+	-o objs/src/http/modules/ngx_http_upstream_ip_hash_module.o \
+	src/http/modules/ngx_http_upstream_ip_hash_module.c
+gcc -c -Os -pipe -Wall  -I src/core -I src/event -I src/event/modules -I src/os/unix -I objs \
+	-o objs/ngx_modules.o \
+	objs/ngx_modules.c
+gcc -o objs/nginx \
+objs/src/core/nginx.o \
+objs/src/core/ngx_log.o \
+objs/src/core/ngx_palloc.o \
+objs/src/core/ngx_array.o \
+objs/src/core/ngx_list.o \
+objs/src/core/ngx_hash.o \
+objs/src/core/ngx_buf.o \
+objs/src/core/ngx_queue.o \
+objs/src/core/ngx_output_chain.o \
+objs/src/core/ngx_string.o \
+objs/src/core/ngx_parse.o \
+objs/src/core/ngx_inet.o \
+objs/src/core/ngx_file.o \
+objs/src/core/ngx_crc32.o \
+objs/src/core/ngx_murmurhash.o \
+objs/src/core/ngx_md5.o \
+objs/src/core/ngx_rbtree.o \
+objs/src/core/ngx_radix_tree.o \
+objs/src/core/ngx_slab.o \
+objs/src/core/ngx_times.o \
+objs/src/core/ngx_shmtx.o \
+objs/src/core/ngx_connection.o \
+objs/src/core/ngx_cycle.o \
+objs/src/core/ngx_spinlock.o \
+objs/src/core/ngx_cpuinfo.o \
+objs/src/core/ngx_conf_file.o \
+objs/src/core/ngx_resolver.o \
+objs/src/core/ngx_open_file_cache.o \
+objs/src/core/ngx_crypt.o \
+objs/src/event/ngx_event.o \
+objs/src/event/ngx_event_timer.o \
+objs/src/event/ngx_event_posted.o \
+objs/src/event/ngx_event_busy_lock.o \
+objs/src/event/ngx_event_accept.o \
+objs/src/event/ngx_event_connect.o \
+objs/src/event/ngx_event_pipe.o \
+objs/src/os/unix/ngx_time.o \
+objs/src/os/unix/ngx_errno.o \
+objs/src/os/unix/ngx_alloc.o \
+objs/src/os/unix/ngx_files.o \
+objs/src/os/unix/ngx_socket.o \
+objs/src/os/unix/ngx_recv.o \
+objs/src/os/unix/ngx_readv_chain.o \
+objs/src/os/unix/ngx_udp_recv.o \
+objs/src/os/unix/ngx_send.o \
+objs/src/os/unix/ngx_writev_chain.o \
+objs/src/os/unix/ngx_channel.o \
+objs/src/os/unix/ngx_shmem.o \
+objs/src/os/unix/ngx_process.o \
+objs/src/os/unix/ngx_daemon.o \
+objs/src/os/unix/ngx_setproctitle.o \
+objs/src/os/unix/ngx_posix_init.o \
+objs/src/os/unix/ngx_user.o \
+objs/src/os/unix/ngx_process_cycle.o \
+objs/src/os/unix/ngx_linux_init.o \
+objs/src/event/modules/ngx_epoll_module.o \
+objs/src/os/unix/ngx_linux_sendfile_chain.o \
+objs/src/event/ngx_event_openssl.o \
+objs/src/core/ngx_regex.o \
+objs/src/http/ngx_http.o \
+objs/src/http/ngx_http_core_module.o \
+objs/src/http/ngx_http_special_response.o \
+objs/src/http/ngx_http_request.o \
+objs/src/http/ngx_http_parse.o \
+objs/src/http/ngx_http_header_filter_module.o \
+objs/src/http/ngx_http_write_filter_module.o \
+objs/src/http/ngx_http_copy_filter_module.o \
+objs/src/http/modules/ngx_http_log_module.o \
+objs/src/http/ngx_http_request_body.o \
+objs/src/http/ngx_http_variables.o \
+objs/src/http/ngx_http_script.o \
+objs/src/http/ngx_http_upstream.o \
+objs/src/http/ngx_http_upstream_round_robin.o \
+objs/src/http/ngx_http_parse_time.o \
+objs/src/http/modules/ngx_http_static_module.o \
+objs/src/http/modules/ngx_http_index_module.o \
+objs/src/http/modules/ngx_http_chunked_filter_module.o \
+objs/src/http/modules/ngx_http_range_filter_module.o \
+objs/src/http/modules/ngx_http_headers_filter_module.o \
+objs/src/http/modules/ngx_http_not_modified_filter_module.o \
+objs/src/http/ngx_http_busy_lock.o \
+objs/src/http/ngx_http_file_cache.o \
+objs/src/http/modules/ngx_http_gzip_filter_module.o \
+objs/src/http/ngx_http_postpone_filter_module.o \
+objs/src/http/modules/ngx_http_ssi_filter_module.o \
+objs/src/http/modules/ngx_http_charset_filter_module.o \
+objs/src/http/modules/ngx_http_userid_filter_module.o \
+objs/src/http/modules/ngx_http_autoindex_module.o \
+objs/src/http/modules/ngx_http_auth_basic_module.o \
+objs/src/http/modules/ngx_http_access_module.o \
+objs/src/http/modules/ngx_http_limit_zone_module.o \
+objs/src/http/modules/ngx_http_limit_req_module.o \
+objs/src/http/modules/ngx_http_geo_module.o \
+objs/src/http/modules/ngx_http_map_module.o \
+objs/src/http/modules/ngx_http_split_clients_module.o \
+objs/src/http/modules/ngx_http_referer_module.o \
+objs/src/http/modules/ngx_http_rewrite_module.o \
+objs/src/http/modules/ngx_http_ssl_module.o \
+objs/src/http/modules/ngx_http_proxy_module.o \
+objs/src/http/modules/ngx_http_fastcgi_module.o \
+objs/src/http/modules/ngx_http_uwsgi_module.o \
+objs/src/http/modules/ngx_http_scgi_module.o \
+objs/src/http/modules/ngx_http_memcached_module.o \
+objs/src/http/modules/ngx_http_empty_gif_module.o \
+objs/src/http/modules/ngx_http_browser_module.o \
+objs/src/http/modules/ngx_http_upstream_ip_hash_module.o \
+objs/ngx_modules.o \
+-lpthread -lcrypt -lpcre -lssl -lcrypto -ldl -lz
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nginx-1.0.8'
+make -f objs/Makefile manpage
+make[1]: Entering directory `/usr/src/rpm/BUILD/nginx-1.0.8'
+sed -e "s|%%PREFIX%%|/srv/nginx|" \
+	-e "s|%%PID_PATH%%|/var/run/nginx.pid|" \
+	-e "s|%%CONF_PATH%%|/etc/nginx/nginx.conf|" \
+	-e "s|%%ERROR_LOG_PATH%%|/var/log/nginx-error.log|" \
+	< man/nginx.8 > objs/nginx.8
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nginx-1.0.8'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.60733
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/nginx-root
++ /bin/mkdir -p /var/tmp/nginx-root
++ cd nginx-1.0.8
++ make DESTDIR=/var/tmp/nginx-root install
+make -f objs/Makefile install
+make[1]: Entering directory `/usr/src/rpm/BUILD/nginx-1.0.8'
+test -d '/var/tmp/nginx-root/srv/nginx' || mkdir -p '/var/tmp/nginx-root/srv/nginx'
+test -d '/var/tmp/nginx-root/usr/sbin' 		|| mkdir -p '/var/tmp/nginx-root/usr/sbin'
+test ! -f '/var/tmp/nginx-root/usr/sbin/nginx' 		|| mv '/var/tmp/nginx-root/usr/sbin/nginx' 			'/var/tmp/nginx-root/usr/sbin/nginx.old'
+cp objs/nginx '/var/tmp/nginx-root/usr/sbin/nginx'
+test -d '/var/tmp/nginx-root/etc/nginx' 		|| mkdir -p '/var/tmp/nginx-root/etc/nginx'
+cp conf/koi-win '/var/tmp/nginx-root/etc/nginx'
+cp conf/koi-utf '/var/tmp/nginx-root/etc/nginx'
+cp conf/win-utf '/var/tmp/nginx-root/etc/nginx'
+test -f '/var/tmp/nginx-root/etc/nginx/mime.types' 		|| cp conf/mime.types '/var/tmp/nginx-root/etc/nginx'
+cp conf/mime.types '/var/tmp/nginx-root/etc/nginx/mime.types.default'
+test -f '/var/tmp/nginx-root/etc/nginx/fastcgi_params' 		|| cp conf/fastcgi_params '/var/tmp/nginx-root/etc/nginx'
+cp conf/fastcgi_params 		'/var/tmp/nginx-root/etc/nginx/fastcgi_params.default'
+test -f '/var/tmp/nginx-root/etc/nginx/fastcgi.conf' 		|| cp conf/fastcgi.conf '/var/tmp/nginx-root/etc/nginx'
+cp conf/fastcgi.conf '/var/tmp/nginx-root/etc/nginx/fastcgi.conf.default'
+test -f '/var/tmp/nginx-root/etc/nginx/uwsgi_params' 		|| cp conf/uwsgi_params '/var/tmp/nginx-root/etc/nginx'
+cp conf/uwsgi_params 		'/var/tmp/nginx-root/etc/nginx/uwsgi_params.default'
+test -f '/var/tmp/nginx-root/etc/nginx/scgi_params' 		|| cp conf/scgi_params '/var/tmp/nginx-root/etc/nginx'
+cp conf/scgi_params 		'/var/tmp/nginx-root/etc/nginx/scgi_params.default'
+test -f '/var/tmp/nginx-root/etc/nginx/nginx.conf' 		|| cp conf/nginx.conf '/var/tmp/nginx-root/etc/nginx/nginx.conf'
+cp conf/nginx.conf '/var/tmp/nginx-root/etc/nginx/nginx.conf.default'
+test -d '/var/tmp/nginx-root/var/run' 		|| mkdir -p '/var/tmp/nginx-root/var/run'
+test -d '/var/tmp/nginx-root/var/log' || 		mkdir -p '/var/tmp/nginx-root/var/log'
+test -d '/var/tmp/nginx-root/srv/nginx/html' 		|| cp -r html '/var/tmp/nginx-root/srv/nginx'
+test -d '/var/tmp/nginx-root/var/log' || 		mkdir -p '/var/tmp/nginx-root/var/log'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/nginx-1.0.8'
++ install -dv /var/tmp/nginx-root/etc/init.d
+install: creating directory `/var/tmp/nginx-root/etc/init.d'
++ sed -i 's@SCRIPT_FILENAME.*/script@SCRIPT_FILENAME $document_root$fastcgi_script_name;@' /var/tmp/nginx-root/etc/nginx/nginx.conf
++ install -m0754 /usr/src/rpm/SOURCES/nginx.init /var/tmp/nginx-root/etc/init.d/nginx
++ /usr/lib/rpm/strip.sh /var/tmp/nginx-root
++ exit 0
+Processing files: nginx-1.0.8-1.x86_64
+Requires(interp): /bin/sh
+Requires(preun): /bin/sh /bin/true /usr/sbin/remove_initd
+Requires: /bin/sh /bin/true /usr/sbin/remove_initd libc.so.6()(64bit) libc.so.6(GLIBC_2.10)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.2)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libcrypt.so.1()(64bit) libcrypt.so.1(GLIBC_2.2.5)(64bit) libcrypto.so.1.0.0()(64bit) libdl.so.2()(64bit) libpcre.so.0()(64bit) libpthread.so.0()(64bit) libpthread.so.0(GLIBC_2.2.5)(64bit) libssl.so.1.0.0()(64bit) libz.so.1()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/nginx-root
+Wrote: /usr/src/rpm/SRPMS/nginx-1.0.8-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/nginx-1.0.8-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.60678
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd nginx-1.0.8
++ /bin/rm -rf /var/tmp/nginx-root
