@@ -1,5 +1,5 @@
 Fetching(Source0): http://dev.lightcube.us/sources/xar/xar-1.5.2.tar.gz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.21266
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.30312
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.21266
 + '[' 0 -ne 0 ']'
 + cd xar-1.5.2
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.21266
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.30312
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd xar-1.5.2
@@ -163,8 +163,8 @@ gcc -Os -s   -Iinclude -Iinclude -D_GNU_SOURCE -I/usr/include/libxml2 -c lib/uti
 gcc -Os -s   -Iinclude -Iinclude -D_GNU_SOURCE -I/usr/include/libxml2 -c lib/zxar.c -o lib/zxar.static.o
 gcc -Os -s   -Iinclude -Iinclude -D_GNU_SOURCE -I/usr/include/libxml2 -c lib/script.c -o lib/script.static.o
 gcc -Os -s   -Iinclude -Iinclude -D_GNU_SOURCE -I/usr/include/libxml2 -c lib/macho.c -o lib/macho.static.o
-sed -e s/@LIBXAR_SNAME@/libxar.so.1/ -e s/@LIBXAR_LNAME@/libxar.so/ -e s/@LIBXAR_ANAME@/libxar.a/ < lib/libxar.la.in > lib/libxar.la
 gcc -Os -s  -Iinclude -Iinclude -D_GNU_SOURCE -I/usr/include/libxml2 -c src/xar.c -o src/xar.o
+sed -e s/@LIBXAR_SNAME@/libxar.so.1/ -e s/@LIBXAR_LNAME@/libxar.so/ -e s/@LIBXAR_ANAME@/libxar.a/ < lib/libxar.la.in > lib/libxar.la
 gcc -shared -Wl,-soname,libxar.so.1 -o lib/librxar.so.1 lib/archive.o lib/arcmod.o lib/b64.o lib/bzxar.o lib/darwinattr.o lib/data.o lib/ea.o lib/err.o lib/ext2.o lib/fbsdattr.o lib/filetree.o lib/io.o lib/linuxattr.o lib/hash.o lib/signature.o lib/stat.o lib/subdoc.o lib/util.o lib/zxar.o lib/script.o lib/macho.o -lbz2 -lz -lcrypto  -lxml2 -lz -lm
 gcc -shared -Wl,-soname,libxar.so.1 -o lib/libxar.so.1 lib/archive.o lib/arcmod.o lib/b64.o lib/bzxar.o lib/darwinattr.o lib/data.o lib/ea.o lib/err.o lib/ext2.o lib/fbsdattr.o lib/filetree.o lib/io.o lib/linuxattr.o lib/hash.o lib/signature.o lib/stat.o lib/subdoc.o lib/util.o lib/zxar.o lib/script.o lib/macho.o -lbz2 -lz -lcrypto  -lxml2 -lz -lm
 rm -f lib/librxar.so
@@ -198,7 +198,7 @@ gcc -Os -s  -o src/xar src/xar.o -Wl,-rpath,/usr/src/rpm/BUILD/xar-1.5.2/lib -Ll
 gcc -Os -s  -o src/ixar src/xar.o -Wl,-rpath,/usr/lib64 -Llib  lib/libxar.so.1 -lbz2 -lz -lcrypto  -lxml2 -lz -lm
 rm src/xar.o
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.87606
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.79857
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/xar-root
@@ -233,7 +233,7 @@ Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/xar-root
 Wrote: /usr/src/rpm/SRPMS/xar-1.5.2-2.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/xar-1.5.2-2.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/xar-devel-1.5.2-2.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.25106
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.7823
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd xar-1.5.2

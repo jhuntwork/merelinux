@@ -1,5 +1,5 @@
 Fetching(Source0): http://pkgconfig.freedesktop.org/releases/pkg-config-0.25.tar.gz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.59925
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.59324
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.59925
 + '[' 0 -ne 0 ']'
 + cd pkg-config-0.25
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.59925
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.44779
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd pkg-config-0.25
@@ -320,115 +320,118 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/pkg-config-0.25/glib-1.2.10'
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gcache.lo -MD -MP -MF .deps/gcache.Tpo -c -o gcache.lo gcache.c
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gcompletion.lo -MD -MP -MF .deps/gcompletion.Tpo -c -o gcompletion.lo gcompletion.c
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gdataset.lo -MD -MP -MF .deps/gdataset.Tpo -c -o gdataset.lo gdataset.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gcache.lo -MD -MP -MF .deps/gcache.Tpo -c gcache.c  -fPIC -DPIC -o .libs/gcache.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gdataset.lo -MD -MP -MF .deps/gdataset.Tpo -c gdataset.c  -fPIC -DPIC -o .libs/gdataset.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT garray.lo -MD -MP -MF .deps/garray.Tpo -c garray.c  -fPIC -DPIC -o .libs/garray.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gcompletion.lo -MD -MP -MF .deps/gcompletion.Tpo -c gcompletion.c  -fPIC -DPIC -o .libs/gcompletion.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gcache.lo -MD -MP -MF .deps/gcache.Tpo -c gcache.c  -fPIC -DPIC -o .libs/gcache.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gcache.lo -MD -MP -MF .deps/gcache.Tpo -c gcache.c -o gcache.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gcompletion.lo -MD -MP -MF .deps/gcompletion.Tpo -c gcompletion.c -o gcompletion.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT garray.lo -MD -MP -MF .deps/garray.Tpo -c garray.c -o garray.o >/dev/null 2>&1
 mv -f .deps/gcache.Tpo .deps/gcache.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gdate.lo -MD -MP -MF .deps/gdate.Tpo -c -o gdate.lo gdate.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gcompletion.lo -MD -MP -MF .deps/gcompletion.Tpo -c gcompletion.c -o gcompletion.o >/dev/null 2>&1
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gdate.lo -MD -MP -MF .deps/gdate.Tpo -c gdate.c  -fPIC -DPIC -o .libs/gdate.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gdataset.lo -MD -MP -MF .deps/gdataset.Tpo -c gdataset.c -o gdataset.o >/dev/null 2>&1
-gdate.c: In function 'g_date_fill_parse_tokens':
-gdate.c:463:5: warning: pointer targets in assignment differ in signedness
 mv -f .deps/gcompletion.Tpo .deps/gcompletion.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gerror.lo -MD -MP -MF .deps/gerror.Tpo -c -o gerror.lo gerror.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gdate.lo -MD -MP -MF .deps/gdate.Tpo -c gdate.c  -fPIC -DPIC -o .libs/gdate.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gdataset.lo -MD -MP -MF .deps/gdataset.Tpo -c gdataset.c -o gdataset.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gerror.lo -MD -MP -MF .deps/gerror.Tpo -c gerror.c  -fPIC -DPIC -o .libs/gerror.o
+gdate.c: In function 'g_date_fill_parse_tokens':
+gdate.c:463:5: warning: pointer targets in assignment differ in signedness
 mv -f .deps/garray.Tpo .deps/garray.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT ghash.lo -MD -MP -MF .deps/ghash.Tpo -c -o ghash.lo ghash.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT ghash.lo -MD -MP -MF .deps/ghash.Tpo -c ghash.c  -fPIC -DPIC -o .libs/ghash.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gerror.lo -MD -MP -MF .deps/gerror.Tpo -c gerror.c -o gerror.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT ghash.lo -MD -MP -MF .deps/ghash.Tpo -c ghash.c  -fPIC -DPIC -o .libs/ghash.o
 mv -f .deps/gdataset.Tpo .deps/gdataset.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT ghook.lo -MD -MP -MF .deps/ghook.Tpo -c -o ghook.lo ghook.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT ghook.lo -MD -MP -MF .deps/ghook.Tpo -c ghook.c  -fPIC -DPIC -o .libs/ghook.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT ghash.lo -MD -MP -MF .deps/ghash.Tpo -c ghash.c -o ghash.o >/dev/null 2>&1
 mv -f .deps/gerror.Tpo .deps/gerror.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT giochannel.lo -MD -MP -MF .deps/giochannel.Tpo -c -o giochannel.lo giochannel.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT ghash.lo -MD -MP -MF .deps/ghash.Tpo -c ghash.c -o ghash.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT giochannel.lo -MD -MP -MF .deps/giochannel.Tpo -c giochannel.c  -fPIC -DPIC -o .libs/giochannel.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT giochannel.lo -MD -MP -MF .deps/giochannel.Tpo -c giochannel.c -o giochannel.o >/dev/null 2>&1
 mv -f .deps/ghash.Tpo .deps/ghash.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT giounix.lo -MD -MP -MF .deps/giounix.Tpo -c -o giounix.lo giounix.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT ghook.lo -MD -MP -MF .deps/ghook.Tpo -c ghook.c -o ghook.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT giounix.lo -MD -MP -MF .deps/giounix.Tpo -c giounix.c  -fPIC -DPIC -o .libs/giounix.o
 mv -f .deps/giochannel.Tpo .deps/giochannel.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT glist.lo -MD -MP -MF .deps/glist.Tpo -c -o glist.lo glist.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT ghook.lo -MD -MP -MF .deps/ghook.Tpo -c ghook.c -o ghook.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gdate.lo -MD -MP -MF .deps/gdate.Tpo -c gdate.c -o gdate.o >/dev/null 2>&1
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT giounix.lo -MD -MP -MF .deps/giounix.Tpo -c giounix.c -o giounix.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT glist.lo -MD -MP -MF .deps/glist.Tpo -c glist.c  -fPIC -DPIC -o .libs/glist.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT giounix.lo -MD -MP -MF .deps/giounix.Tpo -c giounix.c -o giounix.o >/dev/null 2>&1
 mv -f .deps/giounix.Tpo .deps/giounix.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gmain.lo -MD -MP -MF .deps/gmain.Tpo -c -o gmain.lo gmain.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmain.lo -MD -MP -MF .deps/gmain.Tpo -c gmain.c  -fPIC -DPIC -o .libs/gmain.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT glist.lo -MD -MP -MF .deps/glist.Tpo -c glist.c -o glist.o >/dev/null 2>&1
 mv -f .deps/ghook.Tpo .deps/ghook.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gmem.lo -MD -MP -MF .deps/gmem.Tpo -c -o gmem.lo gmem.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT glist.lo -MD -MP -MF .deps/glist.Tpo -c glist.c -o glist.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmain.lo -MD -MP -MF .deps/gmain.Tpo -c gmain.c  -fPIC -DPIC -o .libs/gmain.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmem.lo -MD -MP -MF .deps/gmem.Tpo -c gmem.c  -fPIC -DPIC -o .libs/gmem.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmem.lo -MD -MP -MF .deps/gmem.Tpo -c gmem.c -o gmem.o >/dev/null 2>&1
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmain.lo -MD -MP -MF .deps/gmain.Tpo -c gmain.c -o gmain.o >/dev/null 2>&1
 mv -f .deps/glist.Tpo .deps/glist.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gmessages.lo -MD -MP -MF .deps/gmessages.Tpo -c -o gmessages.lo gmessages.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmessages.lo -MD -MP -MF .deps/gmessages.Tpo -c gmessages.c  -fPIC -DPIC -o .libs/gmessages.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmem.lo -MD -MP -MF .deps/gmem.Tpo -c gmem.c -o gmem.o >/dev/null 2>&1
 mv -f .deps/gdate.Tpo .deps/gdate.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gmutex.lo -MD -MP -MF .deps/gmutex.Tpo -c -o gmutex.lo gmutex.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmessages.lo -MD -MP -MF .deps/gmessages.Tpo -c gmessages.c  -fPIC -DPIC -o .libs/gmessages.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmutex.lo -MD -MP -MF .deps/gmutex.Tpo -c gmutex.c  -fPIC -DPIC -o .libs/gmutex.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmain.lo -MD -MP -MF .deps/gmain.Tpo -c gmain.c -o gmain.o >/dev/null 2>&1
 mv -f .deps/gmem.Tpo .deps/gmem.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gnode.lo -MD -MP -MF .deps/gnode.Tpo -c -o gnode.lo gnode.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gnode.lo -MD -MP -MF .deps/gnode.Tpo -c gnode.c  -fPIC -DPIC -o .libs/gnode.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmutex.lo -MD -MP -MF .deps/gmutex.Tpo -c gmutex.c -o gmutex.o >/dev/null 2>&1
-mv -f .deps/gmain.Tpo .deps/gmain.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmessages.lo -MD -MP -MF .deps/gmessages.Tpo -c gmessages.c -o gmessages.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gnode.lo -MD -MP -MF .deps/gnode.Tpo -c gnode.c  -fPIC -DPIC -o .libs/gnode.o
+mv -f .deps/gmutex.Tpo .deps/gmutex.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gprimes.lo -MD -MP -MF .deps/gprimes.Tpo -c -o gprimes.lo gprimes.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gprimes.lo -MD -MP -MF .deps/gprimes.Tpo -c gprimes.c  -fPIC -DPIC -o .libs/gprimes.o
-mv -f .deps/gmutex.Tpo .deps/gmutex.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gprimes.lo -MD -MP -MF .deps/gprimes.Tpo -c gprimes.c -o gprimes.o >/dev/null 2>&1
+mv -f .deps/gmain.Tpo .deps/gmain.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT grel.lo -MD -MP -MF .deps/grel.Tpo -c -o grel.lo grel.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gmessages.lo -MD -MP -MF .deps/gmessages.Tpo -c gmessages.c -o gmessages.o >/dev/null 2>&1
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT grel.lo -MD -MP -MF .deps/grel.Tpo -c grel.c  -fPIC -DPIC -o .libs/grel.o
-mv -f .deps/gprimes.Tpo .deps/gprimes.Plo
-/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gscanner.lo -MD -MP -MF .deps/gscanner.Tpo -c -o gscanner.lo gscanner.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT grel.lo -MD -MP -MF .deps/grel.Tpo -c grel.c -o grel.o >/dev/null 2>&1
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gscanner.lo -MD -MP -MF .deps/gscanner.Tpo -c gscanner.c  -fPIC -DPIC -o .libs/gscanner.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gnode.lo -MD -MP -MF .deps/gnode.Tpo -c gnode.c -o gnode.o >/dev/null 2>&1
 mv -f .deps/gmessages.Tpo .deps/gmessages.Plo
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gscanner.lo -MD -MP -MF .deps/gscanner.Tpo -c -o gscanner.lo gscanner.c
+mv -f .deps/gprimes.Tpo .deps/gprimes.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gslist.lo -MD -MP -MF .deps/gslist.Tpo -c -o gslist.lo gslist.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT grel.lo -MD -MP -MF .deps/grel.Tpo -c grel.c  -fPIC -DPIC -o .libs/grel.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gscanner.lo -MD -MP -MF .deps/gscanner.Tpo -c gscanner.c  -fPIC -DPIC -o .libs/gscanner.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gslist.lo -MD -MP -MF .deps/gslist.Tpo -c gslist.c  -fPIC -DPIC -o .libs/gslist.o
-mv -f .deps/grel.Tpo .deps/grel.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gnode.lo -MD -MP -MF .deps/gnode.Tpo -c gnode.c -o gnode.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT grel.lo -MD -MP -MF .deps/grel.Tpo -c grel.c -o grel.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gslist.lo -MD -MP -MF .deps/gslist.Tpo -c gslist.c -o gslist.o >/dev/null 2>&1
+mv -f .deps/gnode.Tpo .deps/gnode.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gstrfuncs.lo -MD -MP -MF .deps/gstrfuncs.Tpo -c -o gstrfuncs.lo gstrfuncs.c
+mv -f .deps/grel.Tpo .deps/grel.Plo
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gstring.lo -MD -MP -MF .deps/gstring.Tpo -c -o gstring.lo gstring.c
+mv -f .deps/gslist.Tpo .deps/gslist.Plo
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gtimer.lo -MD -MP -MF .deps/gtimer.Tpo -c -o gtimer.lo gtimer.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gstrfuncs.lo -MD -MP -MF .deps/gstrfuncs.Tpo -c gstrfuncs.c  -fPIC -DPIC -o .libs/gstrfuncs.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gstring.lo -MD -MP -MF .deps/gstring.Tpo -c gstring.c  -fPIC -DPIC -o .libs/gstring.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gtimer.lo -MD -MP -MF .deps/gtimer.Tpo -c gtimer.c  -fPIC -DPIC -o .libs/gtimer.o
 gstrfuncs.c: In function 'g_strdown':
-gstrfuncs.c:1139:5: warning: pointer targets in assignment differ in signedness
+gstrfuncs.c:1139:5: warning: pointer targets in assignment differ in signednessgstring.c: In function 'g_string_down':
+
+gstring.c:446:5: warning: pointer targets in assignment differ in signedness
 gstrfuncs.c: In function 'g_strup':
 gstrfuncs.c:1155:5: warning: pointer targets in assignment differ in signedness
+gstring.c: In function 'g_string_up':
+gstring.c:465:5: warning: pointer targets in assignment differ in signedness
 gstrfuncs.c: In function 'g_strchug':
 gstrfuncs.c:1314:14: warning: pointer targets in assignment differ in signedness
 gstrfuncs.c:1317:3: warning: pointer targets in passing argument 1 of 'strlen' differ in signedness
 /usr/include/string.h:399:15: note: expected 'const char *' but argument is of type 'guchar *'
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gslist.lo -MD -MP -MF .deps/gslist.Tpo -c gslist.c -o gslist.o >/dev/null 2>&1
-mv -f .deps/gnode.Tpo .deps/gnode.Plo
-/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gstring.lo -MD -MP -MF .deps/gstring.Tpo -c -o gstring.lo gstring.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gstring.lo -MD -MP -MF .deps/gstring.Tpo -c gstring.c  -fPIC -DPIC -o .libs/gstring.o
-gstring.c: In function 'g_string_down':
-gstring.c:446:5: warning: pointer targets in assignment differ in signedness
-gstring.c: In function 'g_string_up':
-gstring.c:465:5: warning: pointer targets in assignment differ in signedness
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gstring.lo -MD -MP -MF .deps/gstring.Tpo -c gstring.c -o gstring.o >/dev/null 2>&1
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gscanner.lo -MD -MP -MF .deps/gscanner.Tpo -c gscanner.c -o gscanner.o >/dev/null 2>&1
-mv -f .deps/gslist.Tpo .deps/gslist.Plo
-/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gtimer.lo -MD -MP -MF .deps/gtimer.Tpo -c -o gtimer.lo gtimer.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gstrfuncs.lo -MD -MP -MF .deps/gstrfuncs.Tpo -c gstrfuncs.c -o gstrfuncs.o >/dev/null 2>&1
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gtimer.lo -MD -MP -MF .deps/gtimer.Tpo -c gtimer.c  -fPIC -DPIC -o .libs/gtimer.o
-mv -f .deps/gstring.Tpo .deps/gstring.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gtimer.lo -MD -MP -MF .deps/gtimer.Tpo -c gtimer.c -o gtimer.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gscanner.lo -MD -MP -MF .deps/gscanner.Tpo -c gscanner.c -o gscanner.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gstring.lo -MD -MP -MF .deps/gstring.Tpo -c gstring.c -o gstring.o >/dev/null 2>&1
+mv -f .deps/gtimer.Tpo .deps/gtimer.Plo
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gtree.lo -MD -MP -MF .deps/gtree.Tpo -c -o gtree.lo gtree.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gtree.lo -MD -MP -MF .deps/gtree.Tpo -c gtree.c  -fPIC -DPIC -o .libs/gtree.o
-mv -f .deps/gtimer.Tpo .deps/gtimer.Plo
-/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gutils.lo -MD -MP -MF .deps/gutils.Tpo -c -o gutils.lo gutils.c
 gtree.c:717:1: warning: 'g_tree_node_check' defined but not used
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gstrfuncs.lo -MD -MP -MF .deps/gstrfuncs.Tpo -c gstrfuncs.c -o gstrfuncs.o >/dev/null 2>&1
+mv -f .deps/gstring.Tpo .deps/gstring.Plo
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT gutils.lo -MD -MP -MF .deps/gutils.Tpo -c -o gutils.lo gutils.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gutils.lo -MD -MP -MF .deps/gutils.Tpo -c gutils.c  -fPIC -DPIC -o .libs/gutils.o
-mv -f .deps/gscanner.Tpo .deps/gscanner.Plo
-gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT testglib.o -MD -MP -MF .deps/testglib.Tpo -c -o testglib.o testglib.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gtree.lo -MD -MP -MF .deps/gtree.Tpo -c gtree.c -o gtree.o >/dev/null 2>&1
 mv -f .deps/gstrfuncs.Tpo .deps/gstrfuncs.Plo
+gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT testglib.o -MD -MP -MF .deps/testglib.Tpo -c -o testglib.o testglib.c
+mv -f .deps/gscanner.Tpo .deps/gscanner.Plo
 gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT testgdate.o -MD -MP -MF .deps/testgdate.Tpo -c -o testgdate.o testgdate.c
+mv -f .deps/gtree.Tpo .deps/gtree.Plo
+gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT testgdateparser.o -MD -MP -MF .deps/testgdateparser.Tpo -c -o testgdateparser.o testgdateparser.c
 testglib.c: In function 'g_node_test':
 testglib.c:86:3: warning: reading through null pointer (argument 5)
 testglib.c:90:3: warning: reading through null pointer (argument 5)
@@ -436,6 +439,7 @@ testglib.c:98:3: warning: reading through null pointer (argument 5)
 testglib.c:108:3: warning: reading through null pointer (argument 5)
 testglib.c:109:3: warning: reading through null pointer (argument 5)
 testglib.c:110:3: warning: reading through null pointer (argument 5)
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gutils.lo -MD -MP -MF .deps/gutils.Tpo -c gutils.c -o gutils.o >/dev/null 2>&1
 testglib.c:111:3: warning: reading through null pointer (argument 5)
 testglib.c:112:3: warning: reading through null pointer (argument 5)
 testglib.c:113:3: warning: reading through null pointer (argument 5)
@@ -453,25 +457,21 @@ testglib.c:359:3: warning: reading through null pointer (argument 5)
 testglib.c:361:3: warning: reading through null pointer (argument 5)
 testglib.c:363:3: warning: reading through null pointer (argument 5)
 testglib.c:366:3: warning: reading through null pointer (argument 5)
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gtree.lo -MD -MP -MF .deps/gtree.Tpo -c gtree.c -o gtree.o >/dev/null 2>&1
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib -Os -pipe -Wall -D_REENTRANT -MT gutils.lo -MD -MP -MF .deps/gutils.Tpo -c gutils.c -o gutils.o >/dev/null 2>&1
-mv -f .deps/gtree.Tpo .deps/gtree.Plo
-gcc -DHAVE_CONFIG_H -I. -DG_LOG_DOMAIN=g_log_domain_glib     -Os -pipe -Wall  -D_REENTRANT -MT testgdateparser.o -MD -MP -MF .deps/testgdateparser.Tpo -c -o testgdateparser.o testgdateparser.c
+mv -f .deps/testgdateparser.Tpo .deps/testgdateparser.Po
 mv -f .deps/gutils.Tpo .deps/gutils.Plo
 /bin/sh ./libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT -version-info 0:10:0 -release 1.2 -export-dynamic  -o libglib.la  garray.lo gcache.lo gcompletion.lo gdataset.lo gdate.lo gerror.lo ghash.lo ghook.lo giochannel.lo giounix.lo glist.lo gmain.lo gmem.lo gmessages.lo gmutex.lo gnode.lo gprimes.lo grel.lo gscanner.lo gslist.lo gstrfuncs.lo gstring.lo gtimer.lo gtree.lo gutils.lo  
-mv -f .deps/testgdateparser.Tpo .deps/testgdateparser.Po
-mv -f .deps/testglib.Tpo .deps/testglib.Po
 libtool: link: warning: `-version-info/-version-number' is ignored for convenience libraries
 libtool: link: warning: `-release' is ignored for convenience libraries
-mv -f .deps/testgdate.Tpo .deps/testgdate.Po
 libtool: link: ar cru .libs/libglib.a .libs/garray.o .libs/gcache.o .libs/gcompletion.o .libs/gdataset.o .libs/gdate.o .libs/gerror.o .libs/ghash.o .libs/ghook.o .libs/giochannel.o .libs/giounix.o .libs/glist.o .libs/gmain.o .libs/gmem.o .libs/gmessages.o .libs/gmutex.o .libs/gnode.o .libs/gprimes.o .libs/grel.o .libs/gscanner.o .libs/gslist.o .libs/gstrfuncs.o .libs/gstring.o .libs/gtimer.o .libs/gtree.o .libs/gutils.o 
 libtool: link: ranlib .libs/libglib.a
 libtool: link: ( cd ".libs" && rm -f "libglib.la" && ln -s "../libglib.la" "libglib.la" )
+/bin/sh ./libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o testgdateparser testgdateparser.o libglib.la 
+mv -f .deps/testglib.Tpo .deps/testglib.Po
+mv -f .deps/testgdate.Tpo .deps/testgdate.Po
 /bin/sh ./libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o testglib testglib.o libglib.la 
 /bin/sh ./libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o testgdate testgdate.o libglib.la 
-/bin/sh ./libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o testgdateparser testgdateparser.o libglib.la 
-libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o testgdate testgdate.o  ./.libs/libglib.a
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o testgdateparser testgdateparser.o  ./.libs/libglib.a
+libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o testgdate testgdate.o  ./.libs/libglib.a
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o testglib testglib.o  ./.libs/libglib.a
 make[4]: Leaving directory `/usr/src/rpm/BUILD/pkg-config-0.25/glib-1.2.10'
 Making all in gmodule
@@ -482,11 +482,11 @@ make[5]: Entering directory `/usr/src/rpm/BUILD/pkg-config-0.25/glib-1.2.10/gmod
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\"     -Os -pipe -Wall  -D_REENTRANT -MT libgplugin_a.lo -MD -MP -MF .deps/libgplugin_a.Tpo -c -o libgplugin_a.lo libgplugin_a.c
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\"     -Os -pipe -Wall  -D_REENTRANT -MT libgplugin_b.lo -MD -MP -MF .deps/libgplugin_b.Tpo -c -o libgplugin_b.lo libgplugin_b.c
 gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\"     -Os -pipe -Wall  -D_REENTRANT -MT testgmodule.o -MD -MP -MF .deps/testgmodule.Tpo -c -o testgmodule.o testgmodule.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\" -Os -pipe -Wall -D_REENTRANT -MT gmodule.lo -MD -MP -MF .deps/gmodule.Tpo -c gmodule.c  -fPIC -DPIC -o .libs/gmodule.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\" -Os -pipe -Wall -D_REENTRANT -MT libgplugin_b.lo -MD -MP -MF .deps/libgplugin_b.Tpo -c libgplugin_b.c  -fPIC -DPIC -o .libs/libgplugin_b.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\" -Os -pipe -Wall -D_REENTRANT -MT libgplugin_a.lo -MD -MP -MF .deps/libgplugin_a.Tpo -c libgplugin_a.c  -fPIC -DPIC -o .libs/libgplugin_a.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\" -Os -pipe -Wall -D_REENTRANT -MT libgplugin_b.lo -MD -MP -MF .deps/libgplugin_b.Tpo -c libgplugin_b.c -o libgplugin_b.o >/dev/null 2>&1
 mv -f .deps/testgmodule.Tpo .deps/testgmodule.Po
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\" -Os -pipe -Wall -D_REENTRANT -MT gmodule.lo -MD -MP -MF .deps/gmodule.Tpo -c gmodule.c  -fPIC -DPIC -o .libs/gmodule.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\" -Os -pipe -Wall -D_REENTRANT -MT libgplugin_b.lo -MD -MP -MF .deps/libgplugin_b.Tpo -c libgplugin_b.c -o libgplugin_b.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN=\"GModule\" -Os -pipe -Wall -D_REENTRANT -MT libgplugin_a.lo -MD -MP -MF .deps/libgplugin_a.Tpo -c libgplugin_a.c -o libgplugin_a.o >/dev/null 2>&1
 mv -f .deps/libgplugin_b.Tpo .deps/libgplugin_b.Plo
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT -rdynamic -avoid-version -module  -o libgplugin_b.la  libgplugin_b.lo -ldl  
@@ -496,8 +496,8 @@ libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gmodule -DG_LOG_DOMAIN
 libtool: link: ar cru .libs/libgplugin_b.a .libs/libgplugin_b.o 
 libtool: link: ranlib .libs/libgplugin_b.a
 libtool: link: ar cru .libs/libgplugin_a.a .libs/libgplugin_a.o 
-libtool: link: ( cd ".libs" && rm -f "libgplugin_b.la" && ln -s "../libgplugin_b.la" "libgplugin_b.la" )
 libtool: link: ranlib .libs/libgplugin_a.a
+libtool: link: ( cd ".libs" && rm -f "libgplugin_b.la" && ln -s "../libgplugin_b.la" "libgplugin_b.la" )
 mv -f .deps/gmodule.Tpo .deps/gmodule.Plo
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT -rdynamic -version-info 0:10:0 -release 1.2 -export-dynamic  -o libgmodule.la  gmodule.lo -ldl  
 libtool: link: ( cd ".libs" && rm -f "libgplugin_a.la" && ln -s "../libgplugin_a.la" "libgplugin_a.la" )
@@ -534,12 +534,12 @@ In file included from testgthread.c:6:0:
 ../testglib.c:127:5: warning: reading through null pointer (argument 5)
 ../testglib.c:182:3: warning: reading through null pointer (argument 5)
 ../testglib.c:183:3: warning: reading through null pointer (argument 5)
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gthread -DG_LOG_DOMAIN=\"GThread\" -Os -pipe -Wall -D_REENTRANT -MT gthread.lo -MD -MP -MF .deps/gthread.Tpo -c gthread.c  -fPIC -DPIC -o .libs/gthread.o
 ../testglib.c: In function 'testglib_main':
 ../testglib.c:359:3: warning: reading through null pointer (argument 5)
 ../testglib.c:361:3: warning: reading through null pointer (argument 5)
 ../testglib.c:363:3: warning: reading through null pointer (argument 5)
 ../testglib.c:366:3: warning: reading through null pointer (argument 5)
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gthread -DG_LOG_DOMAIN=\"GThread\" -Os -pipe -Wall -D_REENTRANT -MT gthread.lo -MD -MP -MF .deps/gthread.Tpo -c gthread.c  -fPIC -DPIC -o .libs/gthread.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I.. -I../gthread -DG_LOG_DOMAIN=\"GThread\" -Os -pipe -Wall -D_REENTRANT -MT gthread.lo -MD -MP -MF .deps/gthread.Tpo -c gthread.c -o gthread.o >/dev/null 2>&1
 mv -f .deps/gthread.Tpo .deps/gthread.Plo
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT -version-info 0:10:0 -release 1.2 -export-dynamic  -o libgthread.la  gthread.lo -lpthread 
@@ -566,12 +566,10 @@ hash-test.c:178:13: warning: 'not_even_foreach' defined but not used
 hash-test.c:203:17: warning: 'remove_even_foreach' defined but not used
 mv -f .deps/dirname-test.Tpo .deps/dirname-test.Po
 gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT node-test.o -MD -MP -MF .deps/node-test.Tpo -c -o node-test.o node-test.c
-mv -f .deps/hash-test.Tpo .deps/hash-test.Po
+mv -f .deps/array-test.Tpo .deps/array-test.Po
 gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT relation-test.o -MD -MP -MF .deps/relation-test.Tpo -c -o relation-test.o relation-test.c
 mv -f .deps/list-test.Tpo .deps/list-test.Po
 gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT slist-test.o -MD -MP -MF .deps/slist-test.Tpo -c -o slist-test.o slist-test.c
-mv -f .deps/array-test.Tpo .deps/array-test.Po
-gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT string-test.o -MD -MP -MF .deps/string-test.Tpo -c -o string-test.o string-test.c
 node-test.c: In function 'g_node_test':
 node-test.c:99:3: warning: reading through null pointer (argument 5)
 node-test.c:103:3: warning: reading through null pointer (argument 5)
@@ -591,37 +589,39 @@ node-test.c:136:7: warning: reading through null pointer (argument 5)
 node-test.c:140:5: warning: reading through null pointer (argument 5)
 node-test.c:195:3: warning: reading through null pointer (argument 5)
 node-test.c:196:3: warning: reading through null pointer (argument 5)
-mv -f .deps/relation-test.Tpo .deps/relation-test.Po
-gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT strfunc-test.o -MD -MP -MF .deps/strfunc-test.Tpo -c -o strfunc-test.o strfunc-test.c
+mv -f .deps/hash-test.Tpo .deps/hash-test.Po
+gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT string-test.o -MD -MP -MF .deps/string-test.Tpo -c -o string-test.o string-test.c
 mv -f .deps/slist-test.Tpo .deps/slist-test.Po
+gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT strfunc-test.o -MD -MP -MF .deps/strfunc-test.Tpo -c -o strfunc-test.o strfunc-test.c
+mv -f .deps/relation-test.Tpo .deps/relation-test.Po
 gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT tree-test.o -MD -MP -MF .deps/tree-test.Tpo -c -o tree-test.o tree-test.c
+mv -f .deps/string-test.Tpo .deps/string-test.Po
 mv -f .deps/node-test.Tpo .deps/node-test.Po
 gcc -DHAVE_CONFIG_H -I. -I.. -I..    -Os -pipe -Wall  -D_REENTRANT -MT type-test.o -MD -MP -MF .deps/type-test.Tpo -c -o type-test.o type-test.c
-mv -f .deps/tree-test.Tpo .deps/tree-test.Po
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o array-test array-test.o ../libglib.la 
-mv -f .deps/string-test.Tpo .deps/string-test.Po
-mv -f .deps/type-test.Tpo .deps/type-test.Po
-/bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o dirname-test dirname-test.o ../libglib.la 
 mv -f .deps/strfunc-test.Tpo .deps/strfunc-test.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o dirname-test dirname-test.o ../libglib.la 
+mv -f .deps/tree-test.Tpo .deps/tree-test.Po
+mv -f .deps/type-test.Tpo .deps/type-test.Po
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o hash-test hash-test.o ../libglib.la 
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o list-test list-test.o ../libglib.la 
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o array-test array-test.o  ../.libs/libglib.a
-/bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o node-test node-test.o ../libglib.la 
-libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o list-test list-test.o  ../.libs/libglib.a
-libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o dirname-test dirname-test.o  ../.libs/libglib.a
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o hash-test hash-test.o  ../.libs/libglib.a
+/bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o node-test node-test.o ../libglib.la 
+libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o dirname-test dirname-test.o  ../.libs/libglib.a
+libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o list-test list-test.o  ../.libs/libglib.a
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o relation-test relation-test.o ../libglib.la 
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o slist-test slist-test.o ../libglib.la 
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o string-test string-test.o ../libglib.la 
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o node-test node-test.o  ../.libs/libglib.a
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o relation-test relation-test.o  ../.libs/libglib.a
-libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o slist-test slist-test.o  ../.libs/libglib.a
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o strfunc-test strfunc-test.o ../libglib.la 
-/bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o tree-test tree-test.o ../libglib.la 
+libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o slist-test slist-test.o  ../.libs/libglib.a
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o string-test string-test.o  ../.libs/libglib.a
+/bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o tree-test tree-test.o ../libglib.la 
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall  -D_REENTRANT   -o type-test type-test.o ../libglib.la 
-libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o tree-test tree-test.o  ../.libs/libglib.a
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o strfunc-test strfunc-test.o  ../.libs/libglib.a
+libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o tree-test tree-test.o  ../.libs/libglib.a
 libtool: link: gcc -Os -pipe -Wall -D_REENTRANT -o type-test type-test.o  ../.libs/libglib.a
 make[4]: Leaving directory `/usr/src/rpm/BUILD/pkg-config-0.25/glib-1.2.10/tests'
 make[3]: Leaving directory `/usr/src/rpm/BUILD/pkg-config-0.25/glib-1.2.10'
@@ -634,18 +634,18 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/pkg-config-0.25/popt'
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..     -Os -pipe -MT poptparse.lo -MD -MP -MF .deps/poptparse.Tpo -c -o poptparse.lo poptparse.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT popthelp.lo -MD -MP -MF .deps/popthelp.Tpo -c popthelp.c  -fPIC -DPIC -o .libs/popthelp.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT poptconfig.lo -MD -MP -MF .deps/poptconfig.Tpo -c poptconfig.c  -fPIC -DPIC -o .libs/poptconfig.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT popt.lo -MD -MP -MF .deps/popt.Tpo -c popt.c  -fPIC -DPIC -o .libs/popt.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT poptparse.lo -MD -MP -MF .deps/poptparse.Tpo -c poptparse.c  -fPIC -DPIC -o .libs/poptparse.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT poptconfig.lo -MD -MP -MF .deps/poptconfig.Tpo -c poptconfig.c -o poptconfig.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT popt.lo -MD -MP -MF .deps/popt.Tpo -c popt.c  -fPIC -DPIC -o .libs/popt.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT poptparse.lo -MD -MP -MF .deps/poptparse.Tpo -c poptparse.c -o poptparse.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT popthelp.lo -MD -MP -MF .deps/popthelp.Tpo -c popthelp.c -o popthelp.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT poptconfig.lo -MD -MP -MF .deps/poptconfig.Tpo -c poptconfig.c -o poptconfig.o >/dev/null 2>&1
 mv -f .deps/poptparse.Tpo .deps/poptparse.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..     -Os -pipe -MT findme.lo -MD -MP -MF .deps/findme.Tpo -c -o findme.lo findme.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT findme.lo -MD -MP -MF .deps/findme.Tpo -c findme.c  -fPIC -DPIC -o .libs/findme.o
+mv -f .deps/popthelp.Tpo .deps/popthelp.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT popt.lo -MD -MP -MF .deps/popt.Tpo -c popt.c -o popt.o >/dev/null 2>&1
 mv -f .deps/poptconfig.Tpo .deps/poptconfig.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -Os -pipe -MT findme.lo -MD -MP -MF .deps/findme.Tpo -c findme.c -o findme.o >/dev/null 2>&1
-mv -f .deps/popthelp.Tpo .deps/popthelp.Plo
 mv -f .deps/findme.Tpo .deps/findme.Plo
 mv -f .deps/popt.Tpo .deps/popt.Plo
 /bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe   -o libpopt.la  popt.lo poptconfig.lo popthelp.lo poptparse.lo findme.lo  
@@ -739,7 +739,7 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/pkg-config-0.25/check'
 make[1]: Entering directory `/usr/src/rpm/BUILD/pkg-config-0.25'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/pkg-config-0.25'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.84603
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.86488
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/pkg-config-root
@@ -829,10 +829,9 @@ Processing files: pkg-config-0.25-2.x86_64
 Provides: pkgconfig
 Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/pkg-config-root
-warning: Could not canonicalize hostname: zaphod.lightcube.us
 Wrote: /usr/src/rpm/SRPMS/pkg-config-0.25-2.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/pkg-config-0.25-2.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.22829
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.86488
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd pkg-config-0.25

@@ -1,5 +1,5 @@
 Fetching(Source0): ftp://ftp.gnu.org/gnu/cpio/cpio-2.11.tar.bz2
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.85776
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.60771
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.85776
 + '[' 0 -ne 0 ']'
 + cd cpio-2.11
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.17984
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.69783
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd cpio-2.11
@@ -679,18 +679,18 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/cpio-2.11/gnu'
   GEN    string.h
   GEN    strings.h
   GEN    sys/stat.h
-  GEN    time.h
   GEN    sys/time.h
+  GEN    time.h
   GEN    unistd.h
   GEN    wchar.h
   GEN    wctype.h
 make  all-recursive
 make[3]: Entering directory `/usr/src/rpm/BUILD/cpio-2.11/gnu'
 make[4]: Entering directory `/usr/src/rpm/BUILD/cpio-2.11/gnu'
-  CC     argp-ba.o
   CC     argp-eexst.o
   CC     argp-fmtstream.o
   CC     argp-fs-xinl.o
+  CC     argp-ba.o
   CC     argp-help.o
   CC     argp-parse.o
   CC     argp-pin.o
@@ -763,8 +763,8 @@ make  all-am
 make[3]: Entering directory `/usr/src/rpm/BUILD/cpio-2.11/lib'
   CC     exit.o
   CC     rtapelib.o
-  CC     sysdep.o
   CC     error.o
+  CC     sysdep.o
   CC     names.o
   AR     libpax.a
 make[3]: Leaving directory `/usr/src/rpm/BUILD/cpio-2.11/lib'
@@ -778,8 +778,8 @@ Making all in src
 make[2]: Entering directory `/usr/src/rpm/BUILD/cpio-2.11/src'
   CC     copyin.o
   CC     copyout.o
-  CC     defer.o
   CC     copypass.o
+  CC     defer.o
   CC     dstring.o
   CC     global.o
   CC     fatal.o
@@ -872,7 +872,7 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/cpio-2.11/tests'
 make[1]: Entering directory `/usr/src/rpm/BUILD/cpio-2.11'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/cpio-2.11'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.24815
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.47824
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/cpio-root
@@ -1023,7 +1023,7 @@ Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/cpio-root
 Wrote: /usr/src/rpm/SRPMS/cpio-2.11-2.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/cpio-2.11-2.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.46486
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.18512
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd cpio-2.11

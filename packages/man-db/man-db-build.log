@@ -1,6 +1,6 @@
 Fetching(Patch0): https://raw.github.com/jhuntwork/LightCube-OS/730e7e214cb0fcef1b4f9611e33162e620570852/packages/man-db/flock.h.patch
 Fetching(Source0): http://dev.lightcube.us/sources/man-db/man-db-2.6.0.2.tar.gz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.89535
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.68081
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -15,7 +15,7 @@ Patch #0 (flock.h.patch):
 + /bin/cat /usr/src/rpm/SOURCES/flock.h.patch
 + /usr/bin/patch -s -p1
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.89535
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.58123
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd man-db-2.6.0.2
@@ -1182,6 +1182,7 @@ rm -f sys/file.h-t sys/file.h && \
 } > sys/file.h-t && \
 mv sys/file.h-t sys/file.h
 /bin/mkdir -p sys
+/bin/mkdir -p sys
 rm -f sys/stat.h-t sys/stat.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
@@ -1226,7 +1227,6 @@ rm -f sys/stat.h-t sys/stat.h && \
       < ./sys_stat.in.h; \
 } > sys/stat.h-t && \
 mv sys/stat.h-t sys/stat.h
-/bin/mkdir -p sys
 rm -f sys/time.h-t sys/time.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's/@''HAVE_SYS_TIME_H''@/1/g' \
@@ -1537,10 +1537,10 @@ mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo argp-fmtstream.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-fmtstream.lo -MD -MP -MF $depbase.Tpo -c -o argp-fmtstream.lo argp-fmtstream.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-fmtstream.lo -MD -MP -MF .deps/argp-fmtstream.Tpo -c argp-fmtstream.c  -fPIC -DPIC -o .libs/argp-fmtstream.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-ba.lo -MD -MP -MF .deps/argp-ba.Tpo -c argp-ba.c  -fPIC -DPIC -o .libs/argp-ba.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-eexst.lo -MD -MP -MF .deps/argp-eexst.Tpo -c argp-eexst.c  -fPIC -DPIC -o .libs/argp-eexst.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-fmtstream.lo -MD -MP -MF .deps/argp-fmtstream.Tpo -c argp-fmtstream.c  -fPIC -DPIC -o .libs/argp-fmtstream.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT areadlink-with-size.lo -MD -MP -MF .deps/areadlink-with-size.Tpo -c areadlink-with-size.c  -fPIC -DPIC -o .libs/areadlink-with-size.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-ba.lo -MD -MP -MF .deps/argp-ba.Tpo -c argp-ba.c  -fPIC -DPIC -o .libs/argp-ba.o
 depbase=`echo argp-fs-xinl.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-fs-xinl.lo -MD -MP -MF $depbase.Tpo -c -o argp-fs-xinl.lo argp-fs-xinl.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -1550,8 +1550,8 @@ mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo argp-parse.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-parse.lo -MD -MP -MF $depbase.Tpo -c -o argp-parse.lo argp-parse.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-fs-xinl.lo -MD -MP -MF .deps/argp-fs-xinl.Tpo -c argp-fs-xinl.c  -fPIC -DPIC -o .libs/argp-fs-xinl.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-help.lo -MD -MP -MF .deps/argp-help.Tpo -c argp-help.c  -fPIC -DPIC -o .libs/argp-help.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-fs-xinl.lo -MD -MP -MF .deps/argp-fs-xinl.Tpo -c argp-fs-xinl.c  -fPIC -DPIC -o .libs/argp-fs-xinl.o
 depbase=`echo argp-pin.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-pin.lo -MD -MP -MF $depbase.Tpo -c -o argp-pin.lo argp-pin.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -1564,9 +1564,6 @@ argp-help.c: In function 'until_short':
 argp-help.c:600:71: warning: unused parameter 'real'
 argp-help.c:601:26: warning: unused parameter 'domain'
 argp-help.c:601:40: warning: unused parameter 'cookie'
-depbase=`echo argp-pv.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
-/bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-pv.lo -MD -MP -MF $depbase.Tpo -c -o argp-pv.lo argp-pv.c &&\
-mv -f $depbase.Tpo $depbase.Plo
 argp-help.c: In function 'hol_append':
 argp-help.c:883:13: warning: comparison is always true due to limited range of data type
 argp-help.c: In function 'add_argless_short_opt':
@@ -1577,11 +1574,14 @@ argp-help.c:962:1: warning: shadowed declaration is here
 argp-help.c: In function 'usage_long_opt':
 argp-help.c:1318:15: warning: declaration of 'arg' shadows a global declaration
 argp-help.c:962:1: warning: shadowed declaration is here
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-pin.lo -MD -MP -MF .deps/argp-pin.Tpo -c argp-pin.c  -fPIC -DPIC -o .libs/argp-pin.o
 argp-parse.c: In function 'argp_version_parser':
 argp-parse.c:147:37: warning: unused parameter 'arg'
 argp-parse.c: In function 'convert_options':
 argp-parse.c:379:16: warning: declaration of 'index' shadows a global declaration
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-pin.lo -MD -MP -MF .deps/argp-pin.Tpo -c argp-pin.c  -fPIC -DPIC -o .libs/argp-pin.o
+depbase=`echo argp-pv.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
+/bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-pv.lo -MD -MP -MF $depbase.Tpo -c -o argp-pv.lo argp-pv.c &&\
+mv -f $depbase.Tpo $depbase.Plo
 argp-parse.c: In function 'parser_parse_arg':
 argp-parse.c:669:7: warning: declaration of 'index' shadows a global declaration
 argp-parse.c: In function 'parser_parse_opt':
@@ -1594,38 +1594,39 @@ depbase=`echo argp-xinl.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-xinl.lo -MD -MP -MF $depbase.Tpo -c -o argp-xinl.lo argp-xinl.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-pvh.lo -MD -MP -MF .deps/argp-pvh.Tpo -c argp-pvh.c  -fPIC -DPIC -o .libs/argp-pvh.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-xinl.lo -MD -MP -MF .deps/argp-xinl.Tpo -c argp-xinl.c  -fPIC -DPIC -o .libs/argp-xinl.o
 depbase=`echo close-hook.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT close-hook.lo -MD -MP -MF $depbase.Tpo -c -o close-hook.lo close-hook.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT argp-xinl.lo -MD -MP -MF .deps/argp-xinl.Tpo -c argp-xinl.c  -fPIC -DPIC -o .libs/argp-xinl.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT close-hook.lo -MD -MP -MF .deps/close-hook.Tpo -c close-hook.c  -fPIC -DPIC -o .libs/close-hook.o
 depbase=`echo exitfail.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT exitfail.lo -MD -MP -MF $depbase.Tpo -c -o exitfail.lo exitfail.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo file-set.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT file-set.lo -MD -MP -MF $depbase.Tpo -c -o file-set.lo file-set.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT exitfail.lo -MD -MP -MF .deps/exitfail.Tpo -c exitfail.c  -fPIC -DPIC -o .libs/exitfail.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT close-hook.lo -MD -MP -MF .deps/close-hook.Tpo -c close-hook.c  -fPIC -DPIC -o .libs/close-hook.o
 depbase=`echo hash-pjw.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT hash-pjw.lo -MD -MP -MF $depbase.Tpo -c -o hash-pjw.lo hash-pjw.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT exitfail.lo -MD -MP -MF .deps/exitfail.Tpo -c exitfail.c  -fPIC -DPIC -o .libs/exitfail.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT file-set.lo -MD -MP -MF .deps/file-set.Tpo -c file-set.c  -fPIC -DPIC -o .libs/file-set.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT hash-pjw.lo -MD -MP -MF .deps/hash-pjw.Tpo -c hash-pjw.c  -fPIC -DPIC -o .libs/hash-pjw.o
 depbase=`echo hash-triple.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT hash-triple.lo -MD -MP -MF $depbase.Tpo -c -o hash-triple.lo hash-triple.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT hash-pjw.lo -MD -MP -MF .deps/hash-pjw.Tpo -c hash-pjw.c  -fPIC -DPIC -o .libs/hash-pjw.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT hash-triple.lo -MD -MP -MF .deps/hash-triple.Tpo -c hash-triple.c  -fPIC -DPIC -o .libs/hash-triple.o
 depbase=`echo idpriv-drop.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT idpriv-drop.lo -MD -MP -MF $depbase.Tpo -c -o idpriv-drop.lo idpriv-drop.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo idpriv-droptemp.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT idpriv-droptemp.lo -MD -MP -MF $depbase.Tpo -c -o idpriv-droptemp.lo idpriv-droptemp.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT hash-triple.lo -MD -MP -MF .deps/hash-triple.Tpo -c hash-triple.c  -fPIC -DPIC -o .libs/hash-triple.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT idpriv-drop.lo -MD -MP -MF .deps/idpriv-drop.Tpo -c idpriv-drop.c  -fPIC -DPIC -o .libs/idpriv-drop.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT idpriv-droptemp.lo -MD -MP -MF .deps/idpriv-droptemp.Tpo -c idpriv-droptemp.c  -fPIC -DPIC -o .libs/idpriv-droptemp.o
 depbase=`echo localcharset.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT localcharset.lo -MD -MP -MF $depbase.Tpo -c -o localcharset.lo localcharset.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT idpriv-drop.lo -MD -MP -MF .deps/idpriv-drop.Tpo -c idpriv-drop.c  -fPIC -DPIC -o .libs/idpriv-drop.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT localcharset.lo -MD -MP -MF .deps/localcharset.Tpo -c localcharset.c  -fPIC -DPIC -o .libs/localcharset.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT idpriv-droptemp.lo -MD -MP -MF .deps/idpriv-droptemp.Tpo -c idpriv-droptemp.c  -fPIC -DPIC -o .libs/idpriv-droptemp.o
 idpriv-drop.c: In function 'idpriv_drop':
 idpriv-drop.c:91:17: warning: comparison between signed and unsigned integer expressions
 idpriv-drop.c:92:22: warning: comparison between signed and unsigned integer expressions
@@ -1656,16 +1657,16 @@ mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo strnlen1.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT strnlen1.lo -MD -MP -MF $depbase.Tpo -c -o strnlen1.lo strnlen1.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT localcharset.lo -MD -MP -MF .deps/localcharset.Tpo -c localcharset.c  -fPIC -DPIC -o .libs/localcharset.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT malloca.lo -MD -MP -MF .deps/malloca.Tpo -c malloca.c  -fPIC -DPIC -o .libs/malloca.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT openat-die.lo -MD -MP -MF .deps/openat-die.Tpo -c openat-die.c  -fPIC -DPIC -o .libs/openat-die.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT strnlen1.lo -MD -MP -MF .deps/strnlen1.Tpo -c strnlen1.c  -fPIC -DPIC -o .libs/strnlen1.o
 depbase=`echo glthread/threadlib.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT glthread/threadlib.lo -MD -MP -MF $depbase.Tpo -c -o glthread/threadlib.lo glthread/threadlib.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT openat-die.lo -MD -MP -MF .deps/openat-die.Tpo -c openat-die.c  -fPIC -DPIC -o .libs/openat-die.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT malloca.lo -MD -MP -MF .deps/malloca.Tpo -c malloca.c  -fPIC -DPIC -o .libs/malloca.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT strnlen1.lo -MD -MP -MF .deps/strnlen1.Tpo -c strnlen1.c  -fPIC -DPIC -o .libs/strnlen1.o
 depbase=`echo xalloc-die.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xalloc-die.lo -MD -MP -MF $depbase.Tpo -c -o xalloc-die.lo xalloc-die.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT glthread/threadlib.lo -MD -MP -MF glthread/.deps/threadlib.Tpo -c glthread/threadlib.c  -fPIC -DPIC -o glthread/.libs/threadlib.o
 depbase=`echo xstrndup.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xstrndup.lo -MD -MP -MF $depbase.Tpo -c -o xstrndup.lo xstrndup.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -1673,12 +1674,11 @@ depbase=`echo xvasprintf.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xvasprintf.lo -MD -MP -MF $depbase.Tpo -c -o xvasprintf.lo xvasprintf.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xalloc-die.lo -MD -MP -MF .deps/xalloc-die.Tpo -c xalloc-die.c  -fPIC -DPIC -o .libs/xalloc-die.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT glthread/threadlib.lo -MD -MP -MF glthread/.deps/threadlib.Tpo -c glthread/threadlib.c  -fPIC -DPIC -o glthread/.libs/threadlib.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xstrndup.lo -MD -MP -MF .deps/xstrndup.Tpo -c xstrndup.c  -fPIC -DPIC -o .libs/xstrndup.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xvasprintf.lo -MD -MP -MF .deps/xvasprintf.Tpo -c xvasprintf.c  -fPIC -DPIC -o .libs/xvasprintf.o
 depbase=`echo xasprintf.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xasprintf.lo -MD -MP -MF $depbase.Tpo -c -o xasprintf.lo xasprintf.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xvasprintf.lo -MD -MP -MF .deps/xvasprintf.Tpo -c xvasprintf.c  -fPIC -DPIC -o .libs/xvasprintf.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xstrndup.lo -MD -MP -MF .deps/xstrndup.Tpo -c xstrndup.c  -fPIC -DPIC -o .libs/xstrndup.o
 depbase=`echo asnprintf.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT asnprintf.lo -MD -MP -MF $depbase.Tpo -c -o asnprintf.lo asnprintf.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -1689,38 +1689,38 @@ depbase=`echo basename-lgpl.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT basename-lgpl.lo -MD -MP -MF $depbase.Tpo -c -o basename-lgpl.lo basename-lgpl.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xasprintf.lo -MD -MP -MF .deps/xasprintf.Tpo -c xasprintf.c  -fPIC -DPIC -o .libs/xasprintf.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT basename.lo -MD -MP -MF .deps/basename.Tpo -c basename.c  -fPIC -DPIC -o .libs/basename.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT asnprintf.lo -MD -MP -MF .deps/asnprintf.Tpo -c asnprintf.c  -fPIC -DPIC -o .libs/asnprintf.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT basename-lgpl.lo -MD -MP -MF .deps/basename-lgpl.Tpo -c basename-lgpl.c  -fPIC -DPIC -o .libs/basename-lgpl.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT basename.lo -MD -MP -MF .deps/basename.Tpo -c basename.c  -fPIC -DPIC -o .libs/basename.o
 depbase=`echo canonicalize.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT canonicalize.lo -MD -MP -MF $depbase.Tpo -c -o canonicalize.lo canonicalize.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo chdir-long.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT chdir-long.lo -MD -MP -MF $depbase.Tpo -c -o chdir-long.lo chdir-long.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT basename-lgpl.lo -MD -MP -MF .deps/basename-lgpl.Tpo -c basename-lgpl.c  -fPIC -DPIC -o .libs/basename-lgpl.o
 depbase=`echo cloexec.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT cloexec.lo -MD -MP -MF $depbase.Tpo -c -o cloexec.lo cloexec.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT canonicalize.lo -MD -MP -MF .deps/canonicalize.Tpo -c canonicalize.c  -fPIC -DPIC -o .libs/canonicalize.o
 depbase=`echo dirname.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT dirname.lo -MD -MP -MF $depbase.Tpo -c -o dirname.lo dirname.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT chdir-long.lo -MD -MP -MF .deps/chdir-long.Tpo -c chdir-long.c  -fPIC -DPIC -o .libs/chdir-long.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT canonicalize.lo -MD -MP -MF .deps/canonicalize.Tpo -c canonicalize.c  -fPIC -DPIC -o .libs/canonicalize.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT cloexec.lo -MD -MP -MF .deps/cloexec.Tpo -c cloexec.c  -fPIC -DPIC -o .libs/cloexec.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT dirname.lo -MD -MP -MF .deps/dirname.Tpo -c dirname.c  -fPIC -DPIC -o .libs/dirname.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT chdir-long.lo -MD -MP -MF .deps/chdir-long.Tpo -c chdir-long.c  -fPIC -DPIC -o .libs/chdir-long.o
 depbase=`echo dirname-lgpl.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT dirname-lgpl.lo -MD -MP -MF $depbase.Tpo -c -o dirname-lgpl.lo dirname-lgpl.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT dirname.lo -MD -MP -MF .deps/dirname.Tpo -c dirname.c  -fPIC -DPIC -o .libs/dirname.o
 depbase=`echo dup-safer.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT dup-safer.lo -MD -MP -MF $depbase.Tpo -c -o dup-safer.lo dup-safer.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo fcntl.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT fcntl.lo -MD -MP -MF $depbase.Tpo -c -o fcntl.lo fcntl.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT dirname-lgpl.lo -MD -MP -MF .deps/dirname-lgpl.Tpo -c dirname-lgpl.c  -fPIC -DPIC -o .libs/dirname-lgpl.o
 depbase=`echo fd-safer.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT fd-safer.lo -MD -MP -MF $depbase.Tpo -c -o fd-safer.lo fd-safer.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT dirname-lgpl.lo -MD -MP -MF .deps/dirname-lgpl.Tpo -c dirname-lgpl.c  -fPIC -DPIC -o .libs/dirname-lgpl.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT dup-safer.lo -MD -MP -MF .deps/dup-safer.Tpo -c dup-safer.c  -fPIC -DPIC -o .libs/dup-safer.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT fcntl.lo -MD -MP -MF .deps/fcntl.Tpo -c fcntl.c  -fPIC -DPIC -o .libs/fcntl.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT fd-safer.lo -MD -MP -MF .deps/fd-safer.Tpo -c fd-safer.c  -fPIC -DPIC -o .libs/fd-safer.o
@@ -1746,8 +1746,8 @@ mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo openat-proc.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT openat-proc.lo -MD -MP -MF $depbase.Tpo -c -o openat-proc.lo openat-proc.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT hash.lo -MD -MP -MF .deps/hash.Tpo -c hash.c  -fPIC -DPIC -o .libs/hash.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT openat-proc.lo -MD -MP -MF .deps/openat-proc.Tpo -c openat-proc.c  -fPIC -DPIC -o .libs/openat-proc.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT hash.lo -MD -MP -MF .deps/hash.Tpo -c hash.c  -fPIC -DPIC -o .libs/hash.o
 depbase=`echo pipe-safer.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT pipe-safer.lo -MD -MP -MF $depbase.Tpo -c -o pipe-safer.lo pipe-safer.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -1755,21 +1755,21 @@ depbase=`echo printf-args.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT printf-args.lo -MD -MP -MF $depbase.Tpo -c -o printf-args.lo printf-args.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT pipe-safer.lo -MD -MP -MF .deps/pipe-safer.Tpo -c pipe-safer.c  -fPIC -DPIC -o .libs/pipe-safer.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT printf-args.lo -MD -MP -MF .deps/printf-args.Tpo -c printf-args.c  -fPIC -DPIC -o .libs/printf-args.o
 depbase=`echo printf-parse.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT printf-parse.lo -MD -MP -MF $depbase.Tpo -c -o printf-parse.lo printf-parse.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT printf-args.lo -MD -MP -MF .deps/printf-args.Tpo -c printf-args.c  -fPIC -DPIC -o .libs/printf-args.o
 depbase=`echo same.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT same.lo -MD -MP -MF $depbase.Tpo -c -o same.lo same.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 depbase=`echo save-cwd.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT save-cwd.lo -MD -MP -MF $depbase.Tpo -c -o save-cwd.lo save-cwd.c &&\
 mv -f $depbase.Tpo $depbase.Plo
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT printf-parse.lo -MD -MP -MF .deps/printf-parse.Tpo -c printf-parse.c  -fPIC -DPIC -o .libs/printf-parse.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT same.lo -MD -MP -MF .deps/same.Tpo -c same.c  -fPIC -DPIC -o .libs/same.o
 depbase=`echo stripslash.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT stripslash.lo -MD -MP -MF $depbase.Tpo -c -o stripslash.lo stripslash.c &&\
 mv -f $depbase.Tpo $depbase.Plo
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT printf-parse.lo -MD -MP -MF .deps/printf-parse.Tpo -c printf-parse.c  -fPIC -DPIC -o .libs/printf-parse.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT same.lo -MD -MP -MF .deps/same.Tpo -c same.c  -fPIC -DPIC -o .libs/same.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT save-cwd.lo -MD -MP -MF .deps/save-cwd.Tpo -c save-cwd.c  -fPIC -DPIC -o .libs/save-cwd.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT stripslash.lo -MD -MP -MF .deps/stripslash.Tpo -c stripslash.c  -fPIC -DPIC -o .libs/stripslash.o
 depbase=`echo tempname.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
@@ -1782,15 +1782,14 @@ depbase=`echo xgetcwd.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xgetcwd.lo -MD -MP -MF $depbase.Tpo -c -o xgetcwd.lo xgetcwd.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT tempname.lo -MD -MP -MF .deps/tempname.Tpo -c tempname.c  -fPIC -DPIC -o .libs/tempname.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT vasnprintf.lo -MD -MP -MF .deps/vasnprintf.Tpo -c vasnprintf.c  -fPIC -DPIC -o .libs/vasnprintf.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xgetcwd.lo -MD -MP -MF .deps/xgetcwd.Tpo -c xgetcwd.c  -fPIC -DPIC -o .libs/xgetcwd.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT vasnprintf.lo -MD -MP -MF .deps/vasnprintf.Tpo -c vasnprintf.c  -fPIC -DPIC -o .libs/vasnprintf.o
 depbase=`echo xmalloc.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xmalloc.lo -MD -MP -MF $depbase.Tpo -c -o xmalloc.lo xmalloc.c &&\
 mv -f $depbase.Tpo $depbase.Plo
 rm -f t-charset.alias charset.alias && \
 /bin/sh ./config.charset 'x86_64-unknown-linux-gnu' > t-charset.alias && \
 mv t-charset.alias charset.alias
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xmalloc.lo -MD -MP -MF .deps/xmalloc.Tpo -c xmalloc.c  -fPIC -DPIC -o .libs/xmalloc.o
 vasnprintf.c: In function 'vasnprintf':
 vasnprintf.c:5091:35: warning: comparison between signed and unsigned integer expressions
 rm -f t-ref-add.sed ref-add.sed && \
@@ -1799,6 +1798,7 @@ mv t-ref-add.sed ref-add.sed
 rm -f t-ref-del.sed ref-del.sed && \
 sed -e '/^#/d' -e 's/@''PACKAGE''@/man-db/g' ref-del.sin > t-ref-del.sed && \
 mv t-ref-del.sed ref-del.sed
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../.. -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT xmalloc.lo -MD -MP -MF .deps/xmalloc.Tpo -c xmalloc.c  -fPIC -DPIC -o .libs/xmalloc.o
 depbase=`echo glthread/lock.lo | sed 's|[^/]*$|.deps/&|;s|\.lo$||'`;\
 /bin/sh ../../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I../..  -DDEFAULT_TEXT_DOMAIN=\"man-db-gnulib\" -I../../intl   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT glthread/lock.lo -MD -MP -MF $depbase.Tpo -c -o glthread/lock.lo glthread/lock.c &&\
 mv -f $depbase.Tpo $depbase.Plo
@@ -1819,31 +1819,31 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/lib'
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-cleanup.lo -MD -MP -MF .deps/libman_la-cleanup.Tpo -c -o libman_la-cleanup.lo `test -f 'cleanup.c' || echo './'`cleanup.c
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-debug.lo -MD -MP -MF .deps/libman_la-debug.Tpo -c -o libman_la-debug.lo `test -f 'debug.c' || echo './'`debug.c
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-decompress.lo -MD -MP -MF .deps/libman_la-decompress.Tpo -c -o libman_la-decompress.lo `test -f 'decompress.c' || echo './'`decompress.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-cleanup.lo -MD -MP -MF .deps/libman_la-cleanup.Tpo -c cleanup.c  -fPIC -DPIC -o .libs/libman_la-cleanup.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-decompress.lo -MD -MP -MF .deps/libman_la-decompress.Tpo -c decompress.c  -fPIC -DPIC -o .libs/libman_la-decompress.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-debug.lo -MD -MP -MF .deps/libman_la-debug.Tpo -c debug.c  -fPIC -DPIC -o .libs/libman_la-debug.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-appendstr.lo -MD -MP -MF .deps/libman_la-appendstr.Tpo -c appendstr.c  -fPIC -DPIC -o .libs/libman_la-appendstr.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-decompress.lo -MD -MP -MF .deps/libman_la-decompress.Tpo -c decompress.c  -fPIC -DPIC -o .libs/libman_la-decompress.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-cleanup.lo -MD -MP -MF .deps/libman_la-cleanup.Tpo -c cleanup.c  -fPIC -DPIC -o .libs/libman_la-cleanup.o
 mv -f .deps/libman_la-appendstr.Tpo .deps/libman_la-appendstr.Plo
-/bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-encodings.lo -MD -MP -MF .deps/libman_la-encodings.Tpo -c -o libman_la-encodings.lo `test -f 'encodings.c' || echo './'`encodings.c
 mv -f .deps/libman_la-debug.Tpo .deps/libman_la-debug.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-encodings.lo -MD -MP -MF .deps/libman_la-encodings.Tpo -c -o libman_la-encodings.lo `test -f 'encodings.c' || echo './'`encodings.c
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-hashtable.lo -MD -MP -MF .deps/libman_la-hashtable.Tpo -c -o libman_la-hashtable.lo `test -f 'hashtable.c' || echo './'`hashtable.c
-mv -f .deps/libman_la-decompress.Tpo .deps/libman_la-decompress.Plo
-/bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-linelength.lo -MD -MP -MF .deps/libman_la-linelength.Tpo -c -o libman_la-linelength.lo `test -f 'linelength.c' || echo './'`linelength.c
 mv -f .deps/libman_la-cleanup.Tpo .deps/libman_la-cleanup.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-linelength.lo -MD -MP -MF .deps/libman_la-linelength.Tpo -c -o libman_la-linelength.lo `test -f 'linelength.c' || echo './'`linelength.c
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-encodings.lo -MD -MP -MF .deps/libman_la-encodings.Tpo -c encodings.c  -fPIC -DPIC -o .libs/libman_la-encodings.o
-/bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-lower.lo -MD -MP -MF .deps/libman_la-lower.Tpo -c -o libman_la-lower.lo `test -f 'lower.c' || echo './'`lower.c
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-hashtable.lo -MD -MP -MF .deps/libman_la-hashtable.Tpo -c hashtable.c  -fPIC -DPIC -o .libs/libman_la-hashtable.o
+mv -f .deps/libman_la-decompress.Tpo .deps/libman_la-decompress.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-lower.lo -MD -MP -MF .deps/libman_la-lower.Tpo -c -o libman_la-lower.lo `test -f 'lower.c' || echo './'`lower.c
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-linelength.lo -MD -MP -MF .deps/libman_la-linelength.Tpo -c linelength.c  -fPIC -DPIC -o .libs/libman_la-linelength.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-lower.lo -MD -MP -MF .deps/libman_la-lower.Tpo -c lower.c  -fPIC -DPIC -o .libs/libman_la-lower.o
 mv -f .deps/libman_la-hashtable.Tpo .deps/libman_la-hashtable.Plo
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-pathsearch.lo -MD -MP -MF .deps/libman_la-pathsearch.Tpo -c -o libman_la-pathsearch.lo `test -f 'pathsearch.c' || echo './'`pathsearch.c
 mv -f .deps/libman_la-lower.Tpo .deps/libman_la-lower.Plo
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-security.lo -MD -MP -MF .deps/libman_la-security.Tpo -c -o libman_la-security.lo `test -f 'security.c' || echo './'`security.c
-mv -f .deps/libman_la-linelength.Tpo .deps/libman_la-linelength.Plo
-/bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-tempfile.lo -MD -MP -MF .deps/libman_la-tempfile.Tpo -c -o libman_la-tempfile.lo `test -f 'tempfile.c' || echo './'`tempfile.c
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-pathsearch.lo -MD -MP -MF .deps/libman_la-pathsearch.Tpo -c pathsearch.c  -fPIC -DPIC -o .libs/libman_la-pathsearch.o
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-security.lo -MD -MP -MF .deps/libman_la-security.Tpo -c security.c  -fPIC -DPIC -o .libs/libman_la-security.o
 mv -f .deps/libman_la-encodings.Tpo .deps/libman_la-encodings.Plo
+/bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-tempfile.lo -MD -MP -MF .deps/libman_la-tempfile.Tpo -c -o libman_la-tempfile.lo `test -f 'tempfile.c' || echo './'`tempfile.c
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-security.lo -MD -MP -MF .deps/libman_la-security.Tpo -c security.c  -fPIC -DPIC -o .libs/libman_la-security.o
+mv -f .deps/libman_la-linelength.Tpo .deps/libman_la-linelength.Plo
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-util.lo -MD -MP -MF .deps/libman_la-util.Tpo -c -o libman_la-util.lo `test -f 'util.c' || echo './'`util.c
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -DLOCALEDIR=\"/usr/share/locale\" -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libman_la-tempfile.lo -MD -MP -MF .deps/libman_la-tempfile.Tpo -c tempfile.c  -fPIC -DPIC -o .libs/libman_la-tempfile.o
 mv -f .deps/libman_la-security.Tpo .deps/libman_la-security.Plo
@@ -1868,10 +1868,10 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/libdb'
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_delete.lo -MD -MP -MF .deps/libmandb_la-db_delete.Tpo -c -o libmandb_la-db_delete.lo `test -f 'db_delete.c' || echo './'`db_delete.c
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_gdbm.lo -MD -MP -MF .deps/libmandb_la-db_gdbm.Tpo -c -o libmandb_la-db_gdbm.lo `test -f 'db_gdbm.c' || echo './'`db_gdbm.c
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_lookup.lo -MD -MP -MF .deps/libmandb_la-db_lookup.Tpo -c -o libmandb_la-db_lookup.lo `test -f 'db_lookup.c' || echo './'`db_lookup.c
-libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_lookup.lo -MD -MP -MF .deps/libmandb_la-db_lookup.Tpo -c db_lookup.c  -fPIC -DPIC -o .libs/libmandb_la-db_lookup.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_gdbm.lo -MD -MP -MF .deps/libmandb_la-db_gdbm.Tpo -c db_gdbm.c  -fPIC -DPIC -o .libs/libmandb_la-db_gdbm.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_delete.lo -MD -MP -MF .deps/libmandb_la-db_delete.Tpo -c db_delete.c  -fPIC -DPIC -o .libs/libmandb_la-db_delete.o
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_btree.lo -MD -MP -MF .deps/libmandb_la-db_btree.Tpo -c db_btree.c  -fPIC -DPIC -o .libs/libmandb_la-db_btree.o
+libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_lookup.lo -MD -MP -MF .deps/libmandb_la-db_lookup.Tpo -c db_lookup.c  -fPIC -DPIC -o .libs/libmandb_la-db_lookup.o
 mv -f .deps/libmandb_la-db_gdbm.Tpo .deps/libmandb_la-db_gdbm.Plo
 /bin/sh ../libtool  --tag=CC   --mode=compile gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib   -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_ndbm.lo -MD -MP -MF .deps/libmandb_la-db_ndbm.Tpo -c -o libmandb_la-db_ndbm.lo `test -f 'db_ndbm.c' || echo './'`db_ndbm.c
 libtool: compile:  gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I.. -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT libmandb_la-db_ndbm.lo -MD -MP -MF .deps/libmandb_la-db_ndbm.Tpo -c db_ndbm.c  -fPIC -DPIC -o .libs/libmandb_la-db_ndbm.o
@@ -1903,39 +1903,39 @@ gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnuli
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT descriptions.o -MD -MP -MF .deps/descriptions.Tpo -c -o descriptions.o descriptions.c
 catman.c: In function 'add_arg':
 catman.c:223:2: warning: format '%d' expects type 'int', but argument 3 has type 'size_t'
-mv -f .deps/compression.Tpo .deps/compression.Po
-gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT filenames.o -MD -MP -MF .deps/filenames.Tpo -c -o filenames.o filenames.c
 mv -f .deps/descriptions.Tpo .deps/descriptions.Po
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT filenames.o -MD -MP -MF .deps/filenames.Tpo -c -o filenames.o filenames.c
+mv -f .deps/compression.Tpo .deps/compression.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT lexgrog.o -MD -MP -MF .deps/lexgrog.Tpo -c -o lexgrog.o lexgrog.c
 mv -f .deps/filenames.Tpo .deps/filenames.Po
-gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT lexgrog_test.o -MD -MP -MF .deps/lexgrog_test.Tpo -c -o lexgrog_test.o lexgrog_test.c
 mv -f .deps/catman.Tpo .deps/catman.Po
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT lexgrog_test.o -MD -MP -MF .deps/lexgrog_test.Tpo -c -o lexgrog_test.o lexgrog_test.c
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT manconv.o -MD -MP -MF .deps/manconv.Tpo -c -o manconv.o manconv.c
 lexgrog.c:4239:16: warning: 'input' defined but not used
 mv -f .deps/lexgrog_test.Tpo .deps/lexgrog_test.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT manconv_client.o -MD -MP -MF .deps/manconv_client.Tpo -c -o manconv_client.o manconv_client.c
 mv -f .deps/manconv.Tpo .deps/manconv.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT ult_src.o -MD -MP -MF .deps/ult_src.Tpo -c -o ult_src.o ult_src.c
-mv -f .deps/manp.Tpo .deps/manp.Po
-gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT convert_name.o -MD -MP -MF .deps/convert_name.Tpo -c -o convert_name.o convert_name.c
 mv -f .deps/manconv_client.Tpo .deps/manconv_client.Po
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT convert_name.o -MD -MP -MF .deps/convert_name.Tpo -c -o convert_name.o convert_name.c
+mv -f .deps/manp.Tpo .deps/manp.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT globbing.o -MD -MP -MF .deps/globbing.Tpo -c -o globbing.o globbing.c
 mv -f .deps/convert_name.Tpo .deps/convert_name.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT man.o -MD -MP -MF .deps/man.Tpo -c -o man.o man.c
 mv -f .deps/ult_src.Tpo .deps/ult_src.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT zsoelim.o -MD -MP -MF .deps/zsoelim.Tpo -c -o zsoelim.o zsoelim.c
 zsoelim.c:1718:16: warning: 'input' defined but not used
+mv -f .deps/lexgrog.Tpo .deps/lexgrog.Po
 mv -f .deps/globbing.Tpo .deps/globbing.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT check_mandirs.o -MD -MP -MF .deps/check_mandirs.Tpo -c -o check_mandirs.o check_mandirs.c
-mv -f .deps/lexgrog.Tpo .deps/lexgrog.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT descriptions_store.o -MD -MP -MF .deps/descriptions_store.Tpo -c -o descriptions_store.o descriptions_store.c
 descriptions_store.c: In function 'store_descriptions':
 descriptions_store.c:75:11: warning: format '%d' expects type 'int', but argument 2 has type 'size_t'
 mv -f .deps/descriptions_store.Tpo .deps/descriptions_store.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT mandb.o -MD -MP -MF .deps/mandb.Tpo -c -o mandb.o mandb.c
 mv -f .deps/zsoelim.Tpo .deps/zsoelim.Po
-gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT straycats.o -MD -MP -MF .deps/straycats.Tpo -c -o straycats.o straycats.c
 mv -f .deps/check_mandirs.Tpo .deps/check_mandirs.Po
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT straycats.o -MD -MP -MF .deps/straycats.Tpo -c -o straycats.o straycats.c
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT manpath.o -MD -MP -MF .deps/manpath.Tpo -c -o manpath.o manpath.c
 mv -f .deps/mandb.Tpo .deps/mandb.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT whatis.o -MD -MP -MF .deps/whatis.Tpo -c -o whatis.o whatis.c
@@ -1945,11 +1945,11 @@ mv -f .deps/straycats.Tpo .deps/straycats.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT globbing_test.o -MD -MP -MF .deps/globbing_test.Tpo -c -o globbing_test.o globbing_test.c
 mv -f .deps/zsoelim_main.Tpo .deps/zsoelim_main.Po
 gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT manconv_main.o -MD -MP -MF .deps/manconv_main.Tpo -c -o manconv_main.o manconv_main.c
-mv -f .deps/globbing_test.Tpo .deps/globbing_test.Po
-gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT accessdb.o -MD -MP -MF .deps/accessdb.Tpo -c -o accessdb.o accessdb.c
-mv -f .deps/manconv_main.Tpo .deps/manconv_main.Po
-/bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o catman catman.o manp.o ../libdb/libmandb.la ../lib/libman.la ../gnulib/lib/libgnu.la  -ldb-5 -L/usr/lib64 -lpipeline   
 mv -f .deps/whatis.Tpo .deps/whatis.Po
+gcc -std=gnu99 -DHAVE_CONFIG_H -I. -I..  -I../include -I../gnulib/lib -I../gnulib/lib -I../lib -I../libdb -DCONFIG_FILE=\"/etc/man_db.conf\" -DAPROPOS=\"/usr/bin/apropos\" -DAPROPOS_NAME=\"apropos\" -DMAN=\"/usr/bin/man\" -DMANCONV=\"/usr/lib64/man-db/manconv\" -DMANDB=\"/usr/bin/mandb\" -DSOELIM=\"/usr/bin/zsoelim\" -DWHATIS=\"/usr/bin/whatis\"    -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -MT accessdb.o -MD -MP -MF .deps/accessdb.Tpo -c -o accessdb.o accessdb.c
+mv -f .deps/globbing_test.Tpo .deps/globbing_test.Po
+/bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o catman catman.o manp.o ../libdb/libmandb.la ../lib/libman.la ../gnulib/lib/libgnu.la  -ldb-5 -L/usr/lib64 -lpipeline   
+mv -f .deps/manconv_main.Tpo .deps/manconv_main.Po
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o lexgrog compression.o descriptions.o filenames.o lexgrog.o lexgrog_test.o manconv.o manconv_client.o ult_src.o ../lib/libman.la ../gnulib/lib/libgnu.la  -L/usr/lib64 -lpipeline    
 mv -f .deps/accessdb.Tpo .deps/accessdb.Po
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o mandb check_mandirs.o compression.o descriptions.o descriptions_store.o filenames.o globbing.o lexgrog.o manconv.o manconv_client.o mandb.o manp.o straycats.o ult_src.o ../libdb/libmandb.la ../lib/libman.la ../gnulib/lib/libgnu.la  -ldb-5 -L/usr/lib64 -lpipeline    
@@ -1957,20 +1957,20 @@ mv -f .deps/man.Tpo .deps/man.Po
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o manpath manp.o manpath.o ../lib/libman.la ../gnulib/lib/libgnu.la  
 libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/lexgrog compression.o descriptions.o filenames.o lexgrog.o lexgrog_test.o manconv.o manconv_client.o ult_src.o  ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
 libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/catman catman.o manp.o  ../libdb/.libs/libmandb.so ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -ldb-5 -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
+libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/manpath manp.o manpath.o  ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -Wl,-rpath -Wl,/usr/lib64/man-db
 libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/mandb check_mandirs.o compression.o descriptions.o descriptions_store.o filenames.o globbing.o lexgrog.o manconv.o manconv_client.o mandb.o manp.o straycats.o ult_src.o  ../libdb/.libs/libmandb.so ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -ldb-5 -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o whatis manconv.o manp.o whatis.o ../libdb/libmandb.la ../lib/libman.la ../gnulib/lib/libgnu.la  -ldb-5 -L/usr/lib64 -lpipeline    
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o zsoelim globbing.o manp.o zsoelim.o zsoelim_main.o ../lib/libman.la ../gnulib/lib/libgnu.la  -L/usr/lib64 -lpipeline   
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o globbing globbing.o globbing_test.o ../lib/libman.la ../gnulib/lib/libgnu.la  
-libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/manpath manp.o manpath.o  ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -Wl,-rpath -Wl,/usr/lib64/man-db
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o manconv manconv.o manconv_main.o ../lib/libman.la ../gnulib/lib/libgnu.la  -L/usr/lib64 -lpipeline    
-libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/zsoelim globbing.o manp.o zsoelim.o zsoelim_main.o  ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
 libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/globbing globbing.o globbing_test.o  ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -Wl,-rpath -Wl,/usr/lib64/man-db
-libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/whatis manconv.o manp.o whatis.o  ../libdb/.libs/libmandb.so ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -ldb-5 -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
+libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/zsoelim globbing.o manp.o zsoelim.o zsoelim_main.o  ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o accessdb accessdb.o ../libdb/libmandb.la ../lib/libman.la ../gnulib/lib/libgnu.la  -ldb-5 
+libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/whatis manconv.o manp.o whatis.o  ../libdb/.libs/libmandb.so ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -ldb-5 -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
+libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/manconv manconv.o manconv_main.o  ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
 /bin/sh ../libtool  --tag=CC   --mode=link gcc -std=gnu99  -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers   -o man compression.o convert_name.o filenames.o globbing.o man.o manconv.o manconv_client.o manp.o ult_src.o zsoelim.o ../libdb/libmandb.la ../lib/libman.la ../gnulib/lib/libgnu.la  -ldb-5 -L/usr/lib64 -lpipeline    
 rm -f apropos
 ln -s whatis apropos
-libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/manconv manconv.o manconv_main.o  ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
 libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/accessdb accessdb.o  ../libdb/.libs/libmandb.so ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -ldb-5 -Wl,-rpath -Wl,/usr/lib64/man-db
 libtool: link: gcc -std=gnu99 -Os -pipe -Wall -W -Wpointer-arith -Wwrite-strings -Wstrict-prototypes -Wshadow -Wformat-security -Wredundant-decls -Wno-missing-field-initializers -o .libs/man compression.o convert_name.o filenames.o globbing.o man.o manconv.o manconv_client.o manp.o ult_src.o zsoelim.o  ../libdb/.libs/libmandb.so ../lib/.libs/libman.so ../gnulib/lib/.libs/libgnu.a -ldb-5 -L/usr/lib64 /usr/lib64/libpipeline.so -Wl,-rpath -Wl,/usr/lib64/man-db -Wl,-rpath -Wl,/usr/lib64
 make[3]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/src'
@@ -1985,38 +1985,39 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 /bin/mkdir -p man1
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
-make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 program=`echo 'man1/apropos.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/apropos.man1 > man1/apropos.1
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
+make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
-program=`echo 'man1/man.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/man.man1 > man1/man.1
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
+make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 program=`echo 'man1/manpath.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/manpath.man1 > man1/manpath.1
 program=`echo 'man1/whatis.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/whatis.man1 > man1/whatis.1
 /bin/mkdir -p man1
-/bin/mkdir -p man5
-/bin/mkdir -p man8
-/bin/mkdir -p man8
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
+make[4]: `replace.sed' is up to date.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
+program=`echo 'man1/man.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/man.man1 > man1/man.1
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 program=`echo 'man1/zsoelim.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/zsoelim.man1 > man1/zsoelim.1
+/bin/mkdir -p man5
+/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 sed -f replace.sed man5/manpath.man5 > man5/manpath.5
+/bin/mkdir -p man8
+/bin/mkdir -p man8
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 program=`echo 'man8/accessdb.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
@@ -2026,7 +2027,6 @@ make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 program=`echo 'man8/catman.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man8/catman.man8 > man8/catman.8
-/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/de'
@@ -2044,45 +2044,45 @@ sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > repl
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
+make[4]: `replace.sed' is up to date.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
+make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 program=`echo 'man1/apropos.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/apropos.man1 > man1/apropos.1
+program=`echo 'man1/manpath.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/manpath.man1 > man1/manpath.1
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 program=`echo 'man1/man.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/man.man1 > man1/man.1
-program=`echo 'man1/manpath.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/manpath.man1 > man1/manpath.1
-make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 program=`echo 'man1/whatis.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/whatis.man1 > man1/whatis.1
 /bin/mkdir -p man1
-/bin/mkdir -p man5
-/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 program=`echo 'man1/zsoelim.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/zsoelim.man1 > man1/zsoelim.1
+/bin/mkdir -p man5
 /bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
+sed -f replace.sed man5/manpath.man5 > man5/manpath.5
+/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 program=`echo 'man8/accessdb.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man8/accessdb.man8 > man8/accessdb.8
-sed -f replace.sed man5/manpath.man5 > man5/manpath.5
+/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 program=`echo 'man8/catman.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man8/catman.man8 > man8/catman.8
-/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/es'
@@ -2094,51 +2094,51 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 /bin/mkdir -p man1
 /bin/mkdir -p man1
 /bin/mkdir -p man1
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
+sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
 /bin/mkdir -p man1
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
-make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 program=`echo 'man1/apropos.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/apropos.man1 > man1/apropos.1
-program=`echo 'man1/man.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/man.man1 > man1/man.1
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
+make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 program=`echo 'man1/manpath.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/manpath.man1 > man1/manpath.1
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
+make[4]: `replace.sed' is up to date.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
+program=`echo 'man1/man.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/man.man1 > man1/man.1
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
+make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 program=`echo 'man1/whatis.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/whatis.man1 > man1/whatis.1
 /bin/mkdir -p man1
 /bin/mkdir -p man5
-/bin/mkdir -p man8
-/bin/mkdir -p man8
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
-program=`echo 'man1/zsoelim.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/zsoelim.man1 > man1/zsoelim.1
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 sed -f replace.sed man5/manpath.man5 > man5/manpath.5
+program=`echo 'man1/zsoelim.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/zsoelim.man1 > man1/zsoelim.1
+/bin/mkdir -p man8
+/bin/mkdir -p man8
+/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 program=`echo 'man8/accessdb.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man8/accessdb.man8 > man8/accessdb.8
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 program=`echo 'man8/catman.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man8/catman.man8 > man8/catman.8
-/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/it'
@@ -2154,47 +2154,47 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
 sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../../man/replace.sin > replace.sed
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
+make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
-program=`echo 'man1/man.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/man.man1 > man1/man.1
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
-make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
+program=`echo 'man1/whatis.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/whatis.man1 > man1/whatis.1
+program=`echo 'man1/apropos.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/apropos.man1 > man1/apropos.1
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 program=`echo 'man1/manpath.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/manpath.man1 > man1/manpath.1
-program=`echo 'man1/apropos.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/apropos.man1 > man1/apropos.1
-program=`echo 'man1/whatis.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/whatis.man1 > man1/whatis.1
+make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
+program=`echo 'man1/man.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/man.man1 > man1/man.1
 /bin/mkdir -p man1
 /bin/mkdir -p man5
-/bin/mkdir -p man8
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
+make[4]: `replace.sed' is up to date.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
+program=`echo 'man1/zsoelim.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/zsoelim.man1 > man1/zsoelim.1
 /bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
+program=`echo 'man8/accessdb.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man8/accessdb.man8 > man8/accessdb.8
+/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
-program=`echo 'man1/zsoelim.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/zsoelim.man1 > man1/zsoelim.1
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 sed -f replace.sed man5/manpath.man5 > man5/manpath.5
+/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 make[4]: `replace.sed' is up to date.
-make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
-make[4]: `replace.sed' is up to date.
-program=`echo 'man8/accessdb.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man8/accessdb.man8 > man8/accessdb.8
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 program=`echo 'man8/catman.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man8/catman.man8 > man8/catman.8
-/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man/ja'
@@ -2207,14 +2207,13 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 /bin/mkdir -p man1
 /bin/mkdir -p man1
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
-sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../man/replace.sin > replace.sed
 sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../man/replace.sin > replace.sed
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../man/replace.sin > replace.sed
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../man/replace.sin > replace.sed
-make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
+sed -e 's,%REPLACE_CONFIG_FILE%,/etc/man_db.conf,g' ../man/replace.sin > replace.sed
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 program=`echo 'man1/apropos.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
@@ -2224,39 +2223,40 @@ program=`echo 'man1/lexgrog.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/lexgrog.man1 > man1/lexgrog.1
 program=`echo 'man1/man.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/man.man1 > man1/man.1
+make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 program=`echo 'man1/manconv.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/manconv.man1 > man1/manconv.1
 /bin/mkdir -p man1
 /bin/mkdir -p man1
 /bin/mkdir -p man1
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
-make[4]: `replace.sed' is up to date.
-make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
-make[4]: `replace.sed' is up to date.
-make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
-make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
-program=`echo 'man1/zsoelim.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
-sed -f replace.sed -e "s,%program%,$program,g" man1/zsoelim.man1 > man1/zsoelim.1
 program=`echo 'man1/manpath.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/manpath.man1 > man1/manpath.1
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
+make[4]: `replace.sed' is up to date.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 program=`echo 'man1/whatis.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man1/whatis.man1 > man1/whatis.1
 /bin/mkdir -p man5
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
+program=`echo 'man1/zsoelim.1' | sed -e 's/\.1//' -e 's,.*/,,' -e 's,x,x,'`; \
+sed -f replace.sed -e "s,%program%,$program,g" man1/zsoelim.man1 > man1/zsoelim.1
+make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
+make[4]: `replace.sed' is up to date.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
+/bin/mkdir -p man8
 sed -f replace.sed man5/manpath.man5 > man5/manpath.5
-/bin/mkdir -p man8
-/bin/mkdir -p man8
 /bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 program=`echo 'man8/accessdb.8' | sed -e 's/\.8//' -e 's,.*/,,' -e 's,x,x,'`; \
 sed -f replace.sed -e "s,%program%,$program,g" man8/accessdb.man8 > man8/accessdb.8
+/bin/mkdir -p man8
 make[4]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
 make[4]: `replace.sed' is up to date.
 make[4]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/man'
@@ -2497,7 +2497,7 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2/tools'
 make[1]: Entering directory `/usr/src/rpm/BUILD/man-db-2.6.0.2'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/man-db-2.6.0.2'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.58721
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.96669
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/man-db-root
@@ -2820,7 +2820,7 @@ Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/man-db-root
 Wrote: /usr/src/rpm/SRPMS/man-db-2.6.0.2-1.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/man-db-2.6.0.2-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.94800
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.3640
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd man-db-2.6.0.2

@@ -1,5 +1,5 @@
 Fetching(Source0): ftp://ftp.gnu.org/gnu/bison/bison-2.5.tar.bz2
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.72784
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.62586
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.72784
 + '[' 0 -ne 0 ']'
 + cd bison-2.5
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.59498
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.70298
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd bison-2.5
@@ -1205,6 +1205,7 @@ rm -f string.h-t string.h && \
 } > string.h-t && \
 mv string.h-t string.h
 /bin/mkdir -p sys
+/bin/mkdir -p sys
 rm -f sys/ioctl.h-t sys/ioctl.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''HAVE_SYS_IOCTL_H''@|1|g' \
@@ -1221,7 +1222,6 @@ rm -f sys/ioctl.h-t sys/ioctl.h && \
       < ./sys_ioctl.in.h; \
 } > sys/ioctl.h-t && \
 mv sys/ioctl.h-t sys/ioctl.h
-/bin/mkdir -p sys
 rm -f sys/socket.h-t sys/socket.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''INCLUDE_NEXT''@|include_next|g' \
@@ -1807,11 +1807,11 @@ rm -f t-ref-del.sed ref-del.sed && \
 sed -e '/^#/d' -e 's/@''PACKAGE''@/bison/g' ref-del.sin > t-ref-del.sed && \
 mv t-ref-del.sed ref-del.sed
 rm -f liby.a
-ar cru liby.a main.o yyerror.o 
-ranlib liby.a
 depbase=`echo uniwidth/width.o | sed 's|[^/]*$|.deps/&|;s|\.o$||'`;\
 gcc -std=gnu99  -I.     -Os -pipe -MT uniwidth/width.o -MD -MP -MF $depbase.Tpo -c -o uniwidth/width.o uniwidth/width.c &&\
 mv -f $depbase.Tpo $depbase.Po
+ar cru liby.a main.o yyerror.o 
+ranlib liby.a
 rm -f libbison.a
 ar cru libbison.a c-ctype.o c-strcasecmp.o c-strncasecmp.o close-hook.o exitfail.o fatal-signal.o fd-safer-flag.o dup-safer-flag.o fseterr.o localcharset.o mbchar.o mbschr.o mbsrchr.o mbswidth.o nonblocking.o pipe2.o pipe2-safer.o printf-frexp.o printf-frexpl.o spawn-pipe.o strnlen1.o uniwidth/width.o wait-process.o xalloc-die.o xstrndup.o get-errno.o abitset.o bitset.o bitset_stats.o bitsetv.o ebitset.o lbitset.o vbitset.o bitsetv-print.o timevar.o argmatch.o asnprintf.o basename.o basename-lgpl.o cloexec.o dirname.o dirname-lgpl.o dup-safer.o fcntl.o fd-safer.o fopen-safer.o fprintf.o hash.o ioctl.o isnand.o isnanf.o isnanl.o pipe-safer.o printf.o printf-args.o printf-parse.o quote.o quotearg.o snprintf.o sprintf.o stripslash.o vasnprintf.o vfprintf.o vsnprintf.o vsprintf.o xmalloc.o
 ranlib libbison.a
@@ -1835,8 +1835,8 @@ gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT assoc.o -MD -MP -MF .dep
 mv -f .deps/Sbitset.Tpo .deps/Sbitset.Po
 gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT closure.o -MD -MP -MF .deps/closure.Tpo -c -o closure.o closure.c
 mv -f .deps/LR0.Tpo .deps/LR0.Po
-mv -f .deps/assoc.Tpo .deps/assoc.Po
 gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT complain.o -MD -MP -MF .deps/complain.Tpo -c -o complain.o complain.c
+mv -f .deps/assoc.Tpo .deps/assoc.Po
 gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT conflicts.o -MD -MP -MF .deps/conflicts.Tpo -c -o conflicts.o conflicts.c
 mv -f .deps/closure.Tpo .deps/closure.Po
 gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT derives.o -MD -MP -MF .deps/derives.Tpo -c -o derives.o derives.c
@@ -1854,9 +1854,9 @@ mv -f .deps/getargs.Tpo .deps/getargs.Po
 gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT location.o -MD -MP -MF .deps/location.Tpo -c -o location.o location.c
 mv -f .deps/gram.Tpo .deps/gram.Po
 gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT main.o -MD -MP -MF .deps/main.Tpo -c -o main.o main.c
-mv -f .deps/main.Tpo .deps/main.Po
-gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT muscle-tab.o -MD -MP -MF .deps/muscle-tab.Tpo -c -o muscle-tab.o muscle-tab.c
 mv -f .deps/location.Tpo .deps/location.Po
+gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT muscle-tab.o -MD -MP -MF .deps/muscle-tab.Tpo -c -o muscle-tab.o muscle-tab.c
+mv -f .deps/main.Tpo .deps/main.Po
 gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT named-ref.o -MD -MP -MF .deps/named-ref.Tpo -c -o named-ref.o named-ref.c
 mv -f .deps/lalr.Tpo .deps/lalr.Po
 gcc -std=gnu99  -I. -I../lib  -I../lib    -Os -pipe -MT nullable.o -MD -MP -MF .deps/nullable.Tpo -c -o nullable.o nullable.c
@@ -2408,7 +2408,7 @@ make[2]: Nothing to be done for `check-am'.
 make[2]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/bison-2.5'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.55867
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.45705
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/bison-root
@@ -2644,10 +2644,9 @@ Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
 Requires: /bin/sh /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/bison-root
-warning: Could not canonicalize hostname: zaphod.lightcube.us
 Wrote: /usr/src/rpm/SRPMS/bison-2.5-1.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/bison-2.5-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.61598
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.36956
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd bison-2.5

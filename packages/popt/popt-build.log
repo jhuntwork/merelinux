@@ -1,5 +1,5 @@
 Fetching(Source0): http://rpm5.org/files/popt/popt-1.16.tar.gz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.24490
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.25977
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.24490
 + '[' 0 -ne 0 ']'
 + cd popt-1.16
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.24490
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.25977
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd popt-1.16
@@ -171,10 +171,10 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/popt-1.16'
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I.   -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptparse.lo -MD -MP -MF .deps/poptparse.Tpo -c -o poptparse.lo poptparse.c
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I.   -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptconfig.lo -MD -MP -MF .deps/poptconfig.Tpo -c -o poptconfig.lo poptconfig.c
 /bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I.  -I. -I.   -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT popthelp.lo -MD -MP -MF .deps/popthelp.Tpo -c -o popthelp.lo popthelp.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT popt.lo -MD -MP -MF .deps/popt.Tpo -c popt.c  -fPIC -DPIC -o .libs/popt.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT popthelp.lo -MD -MP -MF .deps/popthelp.Tpo -c popthelp.c  -fPIC -DPIC -o .libs/popthelp.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptconfig.lo -MD -MP -MF .deps/poptconfig.Tpo -c poptconfig.c  -fPIC -DPIC -o .libs/poptconfig.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptparse.lo -MD -MP -MF .deps/poptparse.Tpo -c poptparse.c  -fPIC -DPIC -o .libs/poptparse.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT popt.lo -MD -MP -MF .deps/popt.Tpo -c popt.c  -fPIC -DPIC -o .libs/popt.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptconfig.lo -MD -MP -MF .deps/poptconfig.Tpo -c poptconfig.c  -fPIC -DPIC -o .libs/poptconfig.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptparse.lo -MD -MP -MF .deps/poptparse.Tpo -c poptparse.c -o poptparse.o >/dev/null 2>&1
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptconfig.lo -MD -MP -MF .deps/poptconfig.Tpo -c poptconfig.c -o poptconfig.o >/dev/null 2>&1
 mv -f .deps/poptparse.Tpo .deps/poptparse.Plo
@@ -183,15 +183,15 @@ libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOU
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptint.lo -MD -MP -MF .deps/poptint.Tpo -c poptint.c  -fPIC -DPIC -o .libs/poptint.o
 mv -f .deps/poptconfig.Tpo .deps/poptconfig.Plo
 gcc -DHAVE_CONFIG_H -I.  -I. -I.   -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT test1.o -MD -MP -MF .deps/test1.Tpo -c -o test1.o test1.c
-test1.c:164:4: warning: suggest parentheses around arithmetic in operand of '|'
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT poptint.lo -MD -MP -MF .deps/poptint.Tpo -c poptint.c -o poptint.o >/dev/null 2>&1
+test1.c:164:4: warning: suggest parentheses around arithmetic in operand of '|'
 mv -f .deps/test1.Tpo .deps/test1.Po
 gcc -DHAVE_CONFIG_H -I.  -I. -I.   -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT test2.o -MD -MP -MF .deps/test2.Tpo -c -o test2.o test2.c
-mv -f .deps/test2.Tpo .deps/test2.Po
-gcc -DHAVE_CONFIG_H -I.  -I. -I.   -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT tdict.o -MD -MP -MF .deps/tdict.Tpo -c -o tdict.o tdict.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I. -I. -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT popt.lo -MD -MP -MF .deps/popt.Tpo -c popt.c -o popt.o >/dev/null 2>&1
+mv -f .deps/test2.Tpo .deps/test2.Po
 mv -f .deps/popthelp.Tpo .deps/popthelp.Plo
 mv -f .deps/poptint.Tpo .deps/poptint.Plo
+gcc -DHAVE_CONFIG_H -I.  -I. -I.   -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -MT tdict.o -MD -MP -MF .deps/tdict.Tpo -c -o tdict.o tdict.c
 mv -f .deps/tdict.Tpo .deps/tdict.Po
 mv -f .deps/popt.Tpo .deps/popt.Plo
 /bin/sh ./libtool --tag=CC   --mode=link gcc  -Os -pipe -Wall -W -D_GNU_SOURCE -D_REENTRANT -no-undefined -Wl,--version-script=./libpopt.vers  -o libpopt.la -rpath /usr/lib64 popt.lo poptparse.lo poptconfig.lo popthelp.lo poptint.lo  
@@ -214,7 +214,7 @@ make[2]: Nothing to be done for `all'.
 make[2]: Leaving directory `/usr/src/rpm/BUILD/popt-1.16/auto'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/popt-1.16'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.74942
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.40081
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/popt-root
@@ -320,7 +320,7 @@ Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/popt-root
 Wrote: /usr/src/rpm/SRPMS/popt-1.16-2.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/popt-1.16-2.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/popt-devel-1.16-2.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.43881
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.550
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd popt-1.16

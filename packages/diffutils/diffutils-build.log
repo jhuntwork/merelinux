@@ -1,5 +1,5 @@
 Fetching(Source0): http://ftp.gnu.org/gnu/diffutils/diffutils-3.2.tar.xz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.72420
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.37534
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.72420
 + '[' 0 -ne 0 ']'
 + cd diffutils-3.2
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.72420
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.37534
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd diffutils-3.2
@@ -622,16 +622,16 @@ Making all in lib
 make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
   GEN      alloca.h
   GEN      configmake.h
-  GEN      c++defs.h
   GEN      arg-nonnull.h
+  GEN      c++defs.h
 mv -f configmake.h-t configmake.h
   GEN      warn-on-use.h
   GEN      unused-parameter.h
   GEN      unistr.h
   GEN      unitypes.h
   GEN      uniwidth.h
-  GEN      wctype.h
   GEN      wchar.h
+  GEN      wctype.h
   GEN      fcntl.h
   GEN      getopt.h
   GEN      iconv.h
@@ -644,16 +644,16 @@ mv -f configmake.h-t configmake.h
   GEN      strings.h
   GEN      sys/stat.h
   GEN      sys/time.h
-  GEN      time.h
   GEN      sys/wait.h
+  GEN      time.h
   GEN      unistd.h
 make  all-recursive
 make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
 make[3]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
   CC       c-ctype.o
   CC       c-stack.o
-  CC       c-strcasecmp.o
   CC       c-strncasecmp.o
+  CC       c-strcasecmp.o
   CC       dirname.o
   CC       basename.o
   CC       dirname-lgpl.o
@@ -677,8 +677,8 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
   CC       malloca.o
   CC       mbchar.o
   CC       mbscasecmp.o
-  CC       mbsstr.o
   CC       mbslen.o
+  CC       mbsstr.o
   CC       progname.o
   CC       propername.o
   CC       quote.o
@@ -720,8 +720,8 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/lib'
 Making all in src
 make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
   GEN      paths.h
-  GEN      version.c
   GEN      version.h
+  GEN      version.c
 make  all-am
 make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/src'
   CC       version.o
@@ -767,9 +767,9 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2/ms'
 Making all in gnulib-tests
 make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
   GEN      c++defs.h
-  GEN      arg-nonnull.h
   GEN      warn-on-use.h
   GEN      unused-parameter.h
+  GEN      arg-nonnull.h
   GEN      locale.h
 make  all-recursive
 make[2]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2/gnulib-tests'
@@ -783,7 +783,7 @@ make[1]: Entering directory `/usr/src/rpm/BUILD/diffutils-3.2'
 make[1]: Nothing to be done for `all-am'.
 make[1]: Leaving directory `/usr/src/rpm/BUILD/diffutils-3.2'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.39379
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.82290
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/diffutils-root
@@ -945,10 +945,9 @@ Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
 Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) librt.so.1()(64bit) librt.so.1(GLIBC_2.2.5)(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/diffutils-root
-warning: Could not canonicalize hostname: zaphod.lightcube.us
 Wrote: /usr/src/rpm/SRPMS/diffutils-3.2-1.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/diffutils-3.2-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.78496
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.54303
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd diffutils-3.2

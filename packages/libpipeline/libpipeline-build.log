@@ -1,5 +1,5 @@
 Fetching(Source0): http://gnu.mirrors.pair.com/savannah/savannah/libpipeline/libpipeline-1.2.0.tar.gz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.76333
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.95490
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.76333
 + '[' 0 -ne 0 ']'
 + cd libpipeline-1.2.0
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.76333
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.95490
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd libpipeline-1.2.0
@@ -472,8 +472,8 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/libpipeline-1.2.0/gnulib/lib'
   GEN    c++defs.h
   GEN    warn-on-use.h
   GEN    signal.h
-  GEN    stdlib.h
   GEN    stdio.h
+  GEN    stdlib.h
   GEN    string.h
   GEN    sys/select.h
   GEN    sys/socket.h
@@ -502,9 +502,9 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/libpipeline-1.2.0/gnulib/lib'
   CC     stripslash.lo
   CC     vasnprintf.lo
   CC     xmalloc.lo
+  CC     glthread/lock.lo
 vasnprintf.c: In function 'vasnprintf':
 vasnprintf.c:5091:35: warning: comparison between signed and unsigned integer expressions
-  CC     glthread/lock.lo
   CC     glthread/threadlib.lo
   CC     glthread/tls.lo
   CCLD   libgnu.la
@@ -513,8 +513,8 @@ make[3]: Leaving directory `/usr/src/rpm/BUILD/libpipeline-1.2.0/gnulib/lib'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/libpipeline-1.2.0/gnulib/lib'
 Making all in lib
 make[2]: Entering directory `/usr/src/rpm/BUILD/libpipeline-1.2.0/lib'
-  CC     libpipeline_la-appendstr.lo
   CC     libpipeline_la-debug.lo
+  CC     libpipeline_la-appendstr.lo
   CC     libpipeline_la-pipeline.lo
   CCLD   libpipeline.la
 make[2]: Leaving directory `/usr/src/rpm/BUILD/libpipeline-1.2.0/lib'
@@ -546,7 +546,7 @@ make[1]: Leaving directory `/usr/src/rpm/BUILD/libpipeline-1.2.0/man'
 make[1]: Entering directory `/usr/src/rpm/BUILD/libpipeline-1.2.0'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/libpipeline-1.2.0'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.44432
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.89585
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/libpipeline-root
@@ -737,7 +737,7 @@ Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/libpipeline-r
 Wrote: /usr/src/rpm/SRPMS/libpipeline-1.2.0-1.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/libpipeline-1.2.0-1.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/libpipeline-devel-1.2.0-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.11749
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.88723
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd libpipeline-1.2.0

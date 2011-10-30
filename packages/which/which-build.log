@@ -1,5 +1,5 @@
 Fetching(Source0): ftp://ftp.gnu.org/gnu/which/which-2.20.tar.gz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.41022
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.25087
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.41022
 + '[' 0 -ne 0 ']'
 + cd which-2.20
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.41022
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.25087
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd which-2.20
@@ -119,7 +119,7 @@ gcc  -Os -pipe   -o which getopt.o getopt1.o bash.o which.o ./tilde/libtilde.a
 make[2]: Leaving directory `/usr/src/rpm/BUILD/which-2.20'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/which-2.20'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.92877
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.12885
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/which-root
@@ -160,7 +160,7 @@ Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/which-root
 Wrote: /usr/src/rpm/SRPMS/which-2.20-2.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/which-2.20-2.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.92877
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.95003
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd which-2.20

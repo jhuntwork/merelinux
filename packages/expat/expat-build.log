@@ -1,5 +1,5 @@
 Fetching(Source0): http://dev.lightcube.us/sources/expat/expat-2.0.1.tar.gz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.77933
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.63914
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.77933
 + '[' 0 -ne 0 ']'
 + cd expat-2.0.1
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.77933
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.63914
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd expat-2.0.1
@@ -138,14 +138,13 @@ config.status: creating expat_config.h
 /bin/sh ./libtool --silent --mode=compile gcc -I./lib -I. -Os -pipe -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions  -DHAVE_EXPAT_CONFIG_H -o lib/xmltok.lo -c lib/xmltok.c
 /bin/sh ./libtool --silent --mode=compile gcc -I./lib -I. -Os -pipe -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions  -DHAVE_EXPAT_CONFIG_H -o lib/xmlrole.lo -c lib/xmlrole.c
 gcc -I./lib -I. -Os -pipe -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions  -DHAVE_EXPAT_CONFIG_H -o xmlwf/xmlwf.o -c xmlwf/xmlwf.c
-mkdir: cannot create directory `lib/.libs': File exists
 gcc -I./lib -I. -Os -pipe -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions  -DHAVE_EXPAT_CONFIG_H -o xmlwf/xmlfile.o -c xmlwf/xmlfile.c
 gcc -I./lib -I. -Os -pipe -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions  -DHAVE_EXPAT_CONFIG_H -o xmlwf/codepage.o -c xmlwf/codepage.c
 gcc -I./lib -I. -Os -pipe -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions  -DHAVE_EXPAT_CONFIG_H -o xmlwf/unixfilemap.o -c xmlwf/unixfilemap.c
 /bin/sh ./libtool --silent --mode=link gcc -I./lib -I. -Os -pipe -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions  -DHAVE_EXPAT_CONFIG_H -no-undefined -version-info 6:2:5 -rpath /usr/lib64  -o libexpat.la lib/xmlparse.lo lib/xmltok.lo lib/xmlrole.lo
 /bin/sh ./libtool --silent --mode=link gcc -I./lib -I. -Os -pipe -Wall -Wmissing-prototypes -Wstrict-prototypes -fexceptions  -DHAVE_EXPAT_CONFIG_H  -o xmlwf/xmlwf xmlwf/xmlwf.o xmlwf/xmlfile.o xmlwf/codepage.o xmlwf/unixfilemap.o libexpat.la
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.81873
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.73690
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/expat-root
@@ -190,7 +189,7 @@ Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/expat-root
 Wrote: /usr/src/rpm/SRPMS/expat-2.0.1-3.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/expat-2.0.1-3.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/expat-devel-2.0.1-3.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.62822
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.36896
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd expat-2.0.1
