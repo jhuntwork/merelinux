@@ -1,7 +1,7 @@
 Summary: The Berkeley Database
 Name: db
 Version: 5.1.19
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: BSD
 Distribution: LightCube OS
@@ -10,7 +10,6 @@ URL: http://www.oracle.com/technology/products/berkeley-db/db
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 0c84ed9c6e16857ceb66193bedbb15b05ffbebd0
-BuildRequires: gcc-c++
 
 %package devel
 Summary: Libraries and headers for developing with %{name}
@@ -27,19 +26,20 @@ Libraries and headers for developing with %{name}
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 cd build_unix
 ../dist/configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --enable-compat185 \
   --enable-cxx \
-  --with-crytography=yes \
+  --enable-dbm \
   --enable-sql \
   --enable-sql_codegen \
   --enable-static \
-  --enable-shared
-make
+  --enable-shared \
+  --with-crytography=yes
+make %{PMFLAGS}
 
 %install
 cd build_unix
@@ -49,6 +49,7 @@ install -dv %{buildroot}/usr/include/db51
 for i in db.h db_185.h db_cxx.h dbsql.h ; do
     ln -sv ../$i %{buildroot}/usr/include/db51/
 done
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -70,25 +71,25 @@ rm -rf %{buildroot}
 /usr/bin/db_stat
 /usr/bin/db_upgrade
 /usr/bin/db_verify
-/usr/%{_lib}/libdb-5.1.a
 /usr/%{_lib}/libdb-5.1.so
-/usr/%{_lib}/libdb-5.so
-/usr/%{_lib}/libdb_cxx-5.1.a
 /usr/%{_lib}/libdb_cxx-5.1.so
-/usr/%{_lib}/libdb_cxx-5.so
-/usr/%{_lib}/libdb_sql-5.1.a
 /usr/%{_lib}/libdb_sql-5.1.so
-/usr/%{_lib}/libdb_sql-5.so
 
 %files devel
 %defattr(-,root,root)
+/usr/%{_lib}/libdb-5.1.a
 /usr/%{_lib}/libdb-5.1.la
+/usr/%{_lib}/libdb-5.so
 /usr/%{_lib}/libdb.a
 /usr/%{_lib}/libdb.so
+/usr/%{_lib}/libdb_cxx-5.1.a
 /usr/%{_lib}/libdb_cxx-5.1.la
+/usr/%{_lib}/libdb_cxx-5.so
 /usr/%{_lib}/libdb_cxx.a
 /usr/%{_lib}/libdb_cxx.so
+/usr/%{_lib}/libdb_sql-5.1.a
 /usr/%{_lib}/libdb_sql-5.1.la
+/usr/%{_lib}/libdb_sql-5.so
 /usr/%{_lib}/libdb_sql.a
 /usr/%{_lib}/libdb_sql.so
 /usr/include/db.h
@@ -99,6 +100,11 @@ rm -rf %{buildroot}
 /usr/share/doc/%{name}-%{version}
 
 %changelog
+* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.19-2
+- Enable dbm
+- Optimize for size
+- Fix some libs that belonged in devel
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.1.19-1
 - Upgrade to 5.1.19
 
