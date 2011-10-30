@@ -1,7 +1,7 @@
 Summary: The shadow tool suite
 Name: shadow
 Version: 4.1.4.3
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -24,9 +24,10 @@ find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
 sed -i -e 's/ ko//' -e 's/ zh_CN zh_TW//' man/Makefile.in
 sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
        -e 's@/var/spool/mail@/var/mail@' etc/login.defs
+export CFLAGS='-Os -pipe'
 ./configure \
   --sysconfdir=/etc
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -59,7 +60,7 @@ session     optional       pam_mail.so      dir=/var/mail standard
 session     optional       pam_lastlog.so
 session     required       pam_unix.so
 password    required       pam_cracklib.so  retry=3
-password    required       pam_unix.so      md5 shadow use_authtok
+password    required       pam_unix.so      sha512 shadow use_authtok
 
 # End /etc/pam.d/login
 EOF
@@ -67,11 +68,11 @@ cat > %{buildroot}/etc/pam.d/passwd << "EOF"
 # Begin /etc/pam.d/passwd
 
 password    required       pam_cracklib.so  type=Linux retry=1 \
-                                            difok=5 diffignore=23 minlen=9 \
+                                            difok=5 difignore=23 minlen=9 \
                                             dcredit=1 ucredit=1 lcredit=1 \
                                             ocredit=1 \
                                             dictpath=/%{_lib}/cracklib/pw_dict
-password    required       pam_unix.so      md5 shadow use_authtok
+password    required       pam_unix.so      sha512 shadow use_authtok
 
 # End /etc/pam.d/passwd
 EOF
@@ -120,6 +121,7 @@ session     required        pam_warn.so
 # End /etc/pam.d/other
 EOF
 %{compress_man}
+%{strip}
 %find_lang %{name}
 
 %clean
@@ -190,6 +192,11 @@ rm -rf %{buildroot}
 /usr/share/man/man8/*
 
 %changelog
+* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.3-2
+- Fix typo in /etc/pam.d/passwd
+- Use sha512 for passwords
+- Optimize for size
+
 * Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.3-1
 - Upgrade to 4.1.4.3
 
