@@ -1,5 +1,5 @@
 Fetching(Source0): ftp://ftp.gnu.org/gnu/wget/wget-1.13.4.tar.xz
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.29405
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.90460
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.29405
 + '[' 0 -ne 0 ']'
 + cd wget-1.13.4
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.93996
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.90460
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd wget-1.13.4
@@ -1074,25 +1074,6 @@ rm -f wctype.h-t wctype.h && \
 } > wctype.h-t && \
 mv wctype.h-t wctype.h
 /bin/mkdir -p arpa
-rm -f arpa/inet.h-t arpa/inet.h && \
-{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
-  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
-      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
-      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
-      -e 's|@''PRAGMA_COLUMNS''@||g' \
-      -e 's|@''HAVE_FEATURES_H''@|1|g' \
-      -e 's|@''NEXT_ARPA_INET_H''@|<arpa/inet.h>|g' \
-      -e 's|@''HAVE_ARPA_INET_H''@|1|g' \
-      -e 's/@''GNULIB_INET_NTOP''@/1/g' \
-      -e 's/@''GNULIB_INET_PTON''@/0/g' \
-      -e 's|@''HAVE_DECL_INET_NTOP''@|1|g' \
-      -e 's|@''HAVE_DECL_INET_PTON''@|1|g' \
-      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
-      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
-      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
-      < ./arpa_inet.in.h; \
-} > arpa/inet.h-t && \
-mv arpa/inet.h-t arpa/inet.h
 rm -f fcntl.h-t fcntl.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''GUARD_PREFIX''@|GL|g' \
@@ -1115,6 +1096,25 @@ rm -f fcntl.h-t fcntl.h && \
       < ./fcntl.in.h; \
 } > fcntl.h-t && \
 mv fcntl.h-t fcntl.h
+rm -f arpa/inet.h-t arpa/inet.h && \
+{ echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
+  sed -e 's|@''GUARD_PREFIX''@|GL|g' \
+      -e 's|@''INCLUDE_NEXT''@|include_next|g' \
+      -e 's|@''PRAGMA_SYSTEM_HEADER''@|#pragma GCC system_header|g' \
+      -e 's|@''PRAGMA_COLUMNS''@||g' \
+      -e 's|@''HAVE_FEATURES_H''@|1|g' \
+      -e 's|@''NEXT_ARPA_INET_H''@|<arpa/inet.h>|g' \
+      -e 's|@''HAVE_ARPA_INET_H''@|1|g' \
+      -e 's/@''GNULIB_INET_NTOP''@/1/g' \
+      -e 's/@''GNULIB_INET_PTON''@/0/g' \
+      -e 's|@''HAVE_DECL_INET_NTOP''@|1|g' \
+      -e 's|@''HAVE_DECL_INET_PTON''@|1|g' \
+      -e '/definitions of _GL_FUNCDECL_RPL/r c++defs.h' \
+      -e '/definition of _GL_ARG_NONNULL/r arg-nonnull.h' \
+      -e '/definition of _GL_WARN_ON_USE/r warn-on-use.h' \
+      < ./arpa_inet.in.h; \
+} > arpa/inet.h-t && \
+mv arpa/inet.h-t arpa/inet.h
 rm -f getopt.h-t getopt.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''GUARD_PREFIX''@|GL|g' \
@@ -1508,6 +1508,7 @@ rm -f strings.h-t strings.h && \
 } > strings.h-t && \
 mv strings.h-t strings.h
 /bin/mkdir -p sys
+/bin/mkdir -p sys
 rm -f sys/ioctl.h-t sys/ioctl.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''GUARD_PREFIX''@|GL|g' \
@@ -1525,8 +1526,6 @@ rm -f sys/ioctl.h-t sys/ioctl.h && \
       < ./sys_ioctl.in.h; \
 } > sys/ioctl.h-t && \
 mv sys/ioctl.h-t sys/ioctl.h
-/bin/mkdir -p sys
-/bin/mkdir -p sys
 rm -f sys/select.h-t sys/select.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''GUARD_PREFIX''@|GL|g' \
@@ -1546,6 +1545,8 @@ rm -f sys/select.h-t sys/select.h && \
       < ./sys_select.in.h; \
 } > sys/select.h-t && \
 mv sys/select.h-t sys/select.h
+/bin/mkdir -p sys
+/bin/mkdir -p sys
 rm -f sys/socket.h-t sys/socket.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''GUARD_PREFIX''@|GL|g' \
@@ -1582,7 +1583,6 @@ rm -f sys/socket.h-t sys/socket.h && \
       < ./sys_socket.in.h; \
 } > sys/socket.h-t && \
 mv -f sys/socket.h-t sys/socket.h
-/bin/mkdir -p sys
 rm -f sys/stat.h-t sys/stat.h && \
 { echo '/* DO NOT EDIT! GENERATED AUTOMATICALLY! */'; \
   sed -e 's|@''GUARD_PREFIX''@|GL|g' \
@@ -1803,9 +1803,9 @@ mv -f .deps/cookies.Tpo .deps/cookies.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ftp-basic.o -MD -MP -MF .deps/ftp-basic.Tpo -c -o ftp-basic.o ftp-basic.c
 mv -f .deps/css-url.Tpo .deps/css-url.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ftp-ls.o -MD -MP -MF .deps/ftp-ls.Tpo -c -o ftp-ls.o ftp-ls.c
-mv -f .deps/ftp.Tpo .deps/ftp.Po
-gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT hash.o -MD -MP -MF .deps/hash.Tpo -c -o hash.o hash.c
 mv -f .deps/css_.Tpo .deps/css_.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT hash.o -MD -MP -MF .deps/hash.Tpo -c -o hash.o hash.c
+mv -f .deps/ftp.Tpo .deps/ftp.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT host.o -MD -MP -MF .deps/host.Tpo -c -o host.o host.c
 mv -f .deps/ftp-basic.Tpo .deps/ftp-basic.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT html-parse.o -MD -MP -MF .deps/html-parse.Tpo -c -o html-parse.o html-parse.c
@@ -1821,9 +1821,9 @@ mv -f .deps/html-parse.Tpo .deps/html-parse.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT main.o -MD -MP -MF .deps/main.Tpo -c -o main.o main.c
 mv -f .deps/log.Tpo .deps/log.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT netrc.o -MD -MP -MF .deps/netrc.Tpo -c -o netrc.o netrc.c
-mv -f .deps/init.Tpo .deps/init.Po
-gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT progress.o -MD -MP -MF .deps/progress.Tpo -c -o progress.o progress.c
 mv -f .deps/netrc.Tpo .deps/netrc.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT progress.o -MD -MP -MF .deps/progress.Tpo -c -o progress.o progress.c
+mv -f .deps/init.Tpo .deps/init.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ptimer.o -MD -MP -MF .deps/ptimer.Tpo -c -o ptimer.o ptimer.c
 mv -f .deps/main.Tpo .deps/main.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT recur.o -MD -MP -MF .deps/recur.Tpo -c -o recur.o recur.c
@@ -1837,11 +1837,11 @@ mv -f .deps/res.Tpo .deps/res.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT url.o -MD -MP -MF .deps/url.Tpo -c -o url.o url.c
 mv -f .deps/spider.Tpo .deps/spider.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT utils.o -MD -MP -MF .deps/utils.Tpo -c -o utils.o utils.c
-mv -f .deps/http.Tpo .deps/http.Po
-gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT exits.o -MD -MP -MF .deps/exits.Tpo -c -o exits.o exits.c
 mv -f .deps/retr.Tpo .deps/retr.Po
-gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT build_info.o -MD -MP -MF .deps/build_info.Tpo -c -o build_info.o build_info.c
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT exits.o -MD -MP -MF .deps/exits.Tpo -c -o exits.o exits.c
 mv -f .deps/exits.Tpo .deps/exits.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT build_info.o -MD -MP -MF .deps/build_info.Tpo -c -o build_info.o build_info.c
+mv -f .deps/http.Tpo .deps/http.Po
 echo '/* version.c */' > version.c
 echo '/* Autogenerated by Makefile - DO NOT EDIT */' >> version.c
 echo '' >> version.c
@@ -1851,17 +1851,17 @@ echo 'const char *compilation_string = "'gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/
 echo 'const char *link_string = "'gcc  -Os -pipe \
   -lssl -lcrypto -lz -ldl -lz  -lrt ftp-opie.o openssl.o http-ntlm.o ../lib/libgnu.a'";' \
     | sed -e 's/[\\"]/\\&/g' -e 's/\\"/"/' -e 's/\\";$/";/' >> version.c
-mv -f .deps/build_info.Tpo .deps/build_info.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT ftp-opie.o -MD -MP -MF .deps/ftp-opie.Tpo -c -o ftp-opie.o ftp-opie.c
+mv -f .deps/build_info.Tpo .deps/build_info.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT openssl.o -MD -MP -MF .deps/openssl.Tpo -c -o openssl.o openssl.c
-mv -f .deps/ftp-opie.Tpo .deps/ftp-opie.Po
-gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT http-ntlm.o -MD -MP -MF .deps/http-ntlm.Tpo -c -o http-ntlm.o http-ntlm.c
 mv -f .deps/url.Tpo .deps/url.Po
+gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT http-ntlm.o -MD -MP -MF .deps/http-ntlm.Tpo -c -o http-ntlm.o http-ntlm.c
+mv -f .deps/ftp-opie.Tpo .deps/ftp-opie.Po
 gcc -DHAVE_CONFIG_H -DSYSTEM_WGETRC=\"/etc/wgetrc\" -DLOCALEDIR=\"/usr/share/locale\" -I.  -I../lib -I../lib   -Os -pipe -MT version.o -MD -MP -MF .deps/version.Tpo -c -o version.o version.c
 mv -f .deps/version.Tpo .deps/version.Po
-mv -f .deps/openssl.Tpo .deps/openssl.Po
 mv -f .deps/http-ntlm.Tpo .deps/http-ntlm.Po
 mv -f .deps/utils.Tpo .deps/utils.Po
+mv -f .deps/openssl.Tpo .deps/openssl.Po
 gcc  -Os -pipe   -o wget cmpt.o connect.o convert.o cookies.o ftp.o css_.o css-url.o ftp-basic.o ftp-ls.o hash.o host.o html-parse.o html-url.o http.o init.o log.o main.o netrc.o progress.o ptimer.o recur.o res.o retr.o spider.o url.o utils.o exits.o build_info.o  version.o ftp-opie.o openssl.o http-ntlm.o ../lib/libgnu.a -lssl -lcrypto -lz -ldl -lz  -lrt
 make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4/src'
@@ -1886,7 +1886,7 @@ make[2]: Nothing to be done for `all-am'.
 make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.60270
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.51919
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/wget-root
@@ -2029,19 +2029,23 @@ make[3]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/wget-1.13.4'
 + rm -f /var/tmp/wget-root/usr/share/info/dir
++ echo '
+# Set the certificate authority bundle file to the location provided by OpenSSL
+ca_certificate = /etc/ssl/certs/ca-bundle.crt'
 + /usr/lib/rpm/find-lang.sh /var/tmp/wget-root wget
 + /usr/lib/rpm/compress_man.sh /var/tmp/wget-root
 + /usr/lib/rpm/strip.sh /var/tmp/wget-root
 + exit 0
-Processing files: wget-1.13.4-1.x86_64
+Processing files: wget-1.13.4-2.x86_64
+Provides: config(wget) = 0:1.13.4-2
 Requires(interp): /bin/sh /bin/sh
 Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
 Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libcrypto.so.1.0.0()(64bit) libdl.so.2()(64bit) librt.so.1()(64bit) librt.so.1(GLIBC_2.2.5)(64bit) libssl.so.1.0.0()(64bit) libz.so.1()(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/wget-root
-Wrote: /usr/src/rpm/SRPMS/wget-1.13.4-1.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/wget-1.13.4-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.54364
+Wrote: /usr/src/rpm/SRPMS/wget-1.13.4-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/wget-1.13.4-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.84599
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd wget-1.13.4
