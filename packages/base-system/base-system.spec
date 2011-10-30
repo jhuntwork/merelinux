@@ -1,7 +1,7 @@
 Summary: LightCube OS Base System Meta-Package
 Name: base-system
-Version: 0.1
-Release: 4
+Version: 0.2
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -9,56 +9,51 @@ Vendor: LightCube Solutions
 Buildarch: noarch
 
 Requires: base-layout
-Requires: base-files
-Requires: linux
-Requires: grub
-Requires: procps
-Requires: psmisc
-Requires: pciutils
-Requires: cpio
-Requires: udev
-Requires: bash
-Requires: wget
-Requires: which
-Requires: sudo
-Requires: screen
-Requires: mkinitramfs
-Requires: cpio
-Requires: parted
 Requires: coreutils
+Requires: dhcp
+Requires: diffutils
+Requires: e2fsprogs
+Requires: fcron
+Requires: findutils
+Requires: gawk
+Requires: grep
+Requires: grub
+Requires: gettext
+Requires: gzip
+Requires: inetutils
+Requires: iproute2
+Requires: iputils
+Requires: kbd
+Requires: linux
+Requires: less
 Requires: logrotate
-Requires: sysklogd
-Requires: sysvinit
-Requires: iana-etc
+Requires: lsb-bootscripts
 Requires: man-db
 Requires: man-pages
-Requires: e2fsprogs
-Requires: gettext
-Requires: xfsprogs
-Requires: grep
-Requires: dhcp
-Requires: fcron
-Requires: gawk
-Requires: diffutils
-Requires: findutils
-Requires: lsb-bootscripts
-Requires: kbd
-Requires: gzip
-Requires: less
-Requires: iproute2
-Requires: inetutils
-Requires: iputils
-Requires: net-tools
-Requires: tar
-Requires: sed
-Requires: ntp
-Requires: shadow
-Requires: rsync
-Requires: openssh
+Requires: mkinitramfs
 Requires: module-init-tools
+Requires: net-tools
+Requires: ntp
+Requires: openssh
+Requires: parted
+Requires: pciutils
+Requires: procps
+Requires: psmisc
 Requires: rpm
+Requires: rsync
+Requires: screen
+Requires: sed
+Requires: shadow
 Requires: smart
+Requires: sysklogd
+Requires: sysvinit
+Requires: tar
+Requires: sudo
+Requires: udev
 Requires: vim
+Requires: wget
+Requires: which
+Requires: xfsprogs
 
 %description
 A metapackage which provides no files itself, but ensures that all base
@@ -69,6 +64,9 @@ packages are installed.
 %files
 
 %changelog
+* Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.2-1
+- Remove base-files and iana-etc, covered by base-layout
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-4
 - Add iputils as a requirement
 
