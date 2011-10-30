@@ -1,0 +1,486 @@
+Fetching(Patch0): https://raw.github.com/jhuntwork/LightCube-OS/6a2885478a7d5fe7f80deccd15a58fd7f4085e3d/packages/kbd/backspace.patch
+Fetching(Source0): http://dev.lightcube.us/sources/kbd/kbd-1.15.3-201110240419.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.75061
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf kbd-1.15.3
++ /bin/gzip -dc /usr/src/rpm/SOURCES/kbd-1.15.3-201110240419.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd kbd-1.15.3
++ echo 'Patch #0 (backspace.patch):'
+Patch #0 (backspace.patch):
++ /bin/cat /usr/src/rpm/SOURCES/backspace.patch
++ /usr/bin/patch -s -p1
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.75061
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd kbd-1.15.3
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --datadir=/lib/kbd
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking whether gcc and cc understand -c and -o together... yes
+checking for bison... bison -y
+checking for flex... no
+checking for lex... no
+checking for a sed that does not truncate output... /bin/sed
+checking whether ln -s works... yes
+checking whether make sets $(MAKE)... (cached) yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking whether NLS is requested... yes
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/wait.h that is POSIX.1 compatible... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking libintl.h usability... yes
+checking libintl.h presence... yes
+checking for libintl.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking for memory.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking sys/file.h usability... yes
+checking sys/file.h presence... yes
+checking for sys/file.h... yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking for unistd.h... (cached) yes
+checking for an ANSI C-conforming const... yes
+checking for inline... inline
+checking for size_t... yes
+checking whether struct tm is in sys/time.h or time.h... time.h
+checking for uid_t in sys/types.h... yes
+checking for unistd.h... (cached) yes
+checking for working chown... yes
+checking whether closedir returns void... no
+checking for pid_t... yes
+checking vfork.h usability... no
+checking vfork.h presence... no
+checking for vfork.h... no
+checking for fork... yes
+checking for vfork... yes
+checking for working fork... yes
+checking for working vfork... (cached) yes
+checking whether gcc needs -traditional... no
+checking return type of signal handlers... void
+checking whether lstat correctly handles trailing slash... yes
+checking whether stat accepts an empty string... no
+checking for alarm... yes
+checking for memset... yes
+checking for setlocale... yes
+checking for strcasecmp... yes
+checking for strchr... yes
+checking for strdup... yes
+checking for strerror... yes
+checking for strspn... yes
+checking for strstr... yes
+checking for strtol... yes
+checking for strtoul... yes
+checking for setpgrp... yes
+checking for malloc... yes
+checking for realloc... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating data/Makefile
+config.status: creating man/Makefile
+config.status: creating man/man1/Makefile
+config.status: creating man/man1/dumpkeys.1
+config.status: creating man/man1/loadkeys.1
+config.status: creating man/man1misc/Makefile
+config.status: creating man/man5/Makefile
+config.status: creating man/man8/Makefile
+config.status: creating man/man8/loadunimap.8
+config.status: creating man/man8/mapscrn.8
+config.status: creating man/man8/setfont.8
+config.status: creating man/man8misc/Makefile
+config.status: creating po/Makefile.in
+config.status: WARNING:  'po/Makefile.in.in' seems to ignore the --datarootdir setting
+config.status: creating src/Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing default-1 commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
++ make -j4
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+make  all-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT mapscrn-mapscrn.o -MD -MP -MF .deps/mapscrn-mapscrn.Tpo -c -o mapscrn-mapscrn.o `test -f 'mapscrn.c' || echo './'`mapscrn.c
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT mapscrn-findfile.o -MD -MP -MF .deps/mapscrn-findfile.Tpo -c -o mapscrn-findfile.o `test -f 'findfile.c' || echo './'`findfile.c
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT mapscrn-utf8.o -MD -MP -MF .deps/mapscrn-utf8.Tpo -c -o mapscrn-utf8.o `test -f 'utf8.c' || echo './'`utf8.c
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT mapscrn-xmalloc.o -MD -MP -MF .deps/mapscrn-xmalloc.Tpo -c -o mapscrn-xmalloc.o `test -f 'xmalloc.c' || echo './'`xmalloc.c
+mv -f .deps/mapscrn-utf8.Tpo .deps/mapscrn-utf8.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT mapscrn-getfd.o -MD -MP -MF .deps/mapscrn-getfd.Tpo -c -o mapscrn-getfd.o `test -f 'getfd.c' || echo './'`getfd.c
+mv -f .deps/mapscrn-xmalloc.Tpo .deps/mapscrn-xmalloc.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT mapscrn-kdmapop.o -MD -MP -MF .deps/mapscrn-kdmapop.Tpo -c -o mapscrn-kdmapop.o `test -f 'kdmapop.c' || echo './'`kdmapop.c
+mv -f .deps/mapscrn-getfd.Tpo .deps/mapscrn-getfd.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT loadunimap-loadunimap.o -MD -MP -MF .deps/loadunimap-loadunimap.Tpo -c -o loadunimap-loadunimap.o `test -f 'loadunimap.c' || echo './'`loadunimap.c
+mv -f .deps/mapscrn-kdmapop.Tpo .deps/mapscrn-kdmapop.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT loadunimap-findfile.o -MD -MP -MF .deps/loadunimap-findfile.Tpo -c -o loadunimap-findfile.o `test -f 'findfile.c' || echo './'`findfile.c
+mv -f .deps/mapscrn-findfile.Tpo .deps/mapscrn-findfile.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT loadunimap-psffontop.o -MD -MP -MF .deps/loadunimap-psffontop.Tpo -c -o loadunimap-psffontop.o `test -f 'psffontop.c' || echo './'`psffontop.c
+mv -f .deps/mapscrn-mapscrn.Tpo .deps/mapscrn-mapscrn.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT loadunimap-utf8.o -MD -MP -MF .deps/loadunimap-utf8.Tpo -c -o loadunimap-utf8.o `test -f 'utf8.c' || echo './'`utf8.c
+mv -f .deps/loadunimap-utf8.Tpo .deps/loadunimap-utf8.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT loadunimap-xmalloc.o -MD -MP -MF .deps/loadunimap-xmalloc.Tpo -c -o loadunimap-xmalloc.o `test -f 'xmalloc.c' || echo './'`xmalloc.c
+mv -f .deps/loadunimap-findfile.Tpo .deps/loadunimap-findfile.Po
+mv -f .deps/loadunimap-xmalloc.Tpo .deps/loadunimap-xmalloc.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT loadunimap-getfd.o -MD -MP -MF .deps/loadunimap-getfd.Tpo -c -o loadunimap-getfd.o `test -f 'getfd.c' || echo './'`getfd.c
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time  -DMAIN -Os -pipe -MT loadunimap-kdmapop.o -MD -MP -MF .deps/loadunimap-kdmapop.Tpo -c -o loadunimap-kdmapop.o `test -f 'kdmapop.c' || echo './'`kdmapop.c
+mv -f .deps/loadunimap-loadunimap.Tpo .deps/loadunimap-loadunimap.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT dumpkeys.o -MD -MP -MF .deps/dumpkeys.Tpo -c -o dumpkeys.o dumpkeys.c
+mv -f .deps/loadunimap-psffontop.Tpo .deps/loadunimap-psffontop.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT getfd.o -MD -MP -MF .deps/getfd.Tpo -c -o getfd.o getfd.c
+mv -f .deps/loadunimap-getfd.Tpo .deps/loadunimap-getfd.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT ksyms.o -MD -MP -MF .deps/ksyms.Tpo -c -o ksyms.o ksyms.c
+mv -f .deps/loadunimap-kdmapop.Tpo .deps/loadunimap-kdmapop.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT xmalloc.o -MD -MP -MF .deps/xmalloc.Tpo -c -o xmalloc.o xmalloc.c
+mv -f .deps/getfd.Tpo .deps/getfd.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT loadkeys.o -MD -MP -MF .deps/loadkeys.Tpo -c -o loadkeys.o loadkeys.c
+mv -f .deps/xmalloc.Tpo .deps/xmalloc.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT loadkeys.analyze.o -MD -MP -MF .deps/loadkeys.analyze.Tpo -c -o loadkeys.analyze.o loadkeys.analyze.c
+mv -f .deps/ksyms.Tpo .deps/ksyms.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT findfile.o -MD -MP -MF .deps/findfile.Tpo -c -o findfile.o findfile.c
+mv -f .deps/dumpkeys.Tpo .deps/dumpkeys.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT showkey.o -MD -MP -MF .deps/showkey.Tpo -c -o showkey.o showkey.c
+mv -f .deps/findfile.Tpo .deps/findfile.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT setfont.o -MD -MP -MF .deps/setfont.Tpo -c -o setfont.o setfont.c
+mv -f .deps/showkey.Tpo .deps/showkey.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT mapscrn.o -MD -MP -MF .deps/mapscrn.Tpo -c -o mapscrn.o mapscrn.c
+mv -f .deps/loadkeys.analyze.Tpo .deps/loadkeys.analyze.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT kdmapop.o -MD -MP -MF .deps/kdmapop.Tpo -c -o kdmapop.o kdmapop.c
+mv -f .deps/mapscrn.Tpo .deps/mapscrn.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT psffontop.o -MD -MP -MF .deps/psffontop.Tpo -c -o psffontop.o psffontop.c
+mv -f .deps/loadkeys.Tpo .deps/loadkeys.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT utf8.o -MD -MP -MF .deps/utf8.Tpo -c -o utf8.o utf8.c
+mv -f .deps/kdmapop.Tpo .deps/kdmapop.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT kdfontop.o -MD -MP -MF .deps/kdfontop.Tpo -c -o kdfontop.o kdfontop.c
+mv -f .deps/utf8.Tpo .deps/utf8.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT loadunimap.o -MD -MP -MF .deps/loadunimap.Tpo -c -o loadunimap.o loadunimap.c
+mv -f .deps/setfont.Tpo .deps/setfont.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT showconsolefont.o -MD -MP -MF .deps/showconsolefont.Tpo -c -o showconsolefont.o showconsolefont.c
+mv -f .deps/kdfontop.Tpo .deps/kdfontop.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT setleds.o -MD -MP -MF .deps/setleds.Tpo -c -o setleds.o setleds.c
+mv -f .deps/psffontop.Tpo .deps/psffontop.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT setmetamode.o -MD -MP -MF .deps/setmetamode.Tpo -c -o setmetamode.o setmetamode.c
+mv -f .deps/showconsolefont.Tpo .deps/showconsolefont.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT kbd_mode.o -MD -MP -MF .deps/kbd_mode.Tpo -c -o kbd_mode.o kbd_mode.c
+mv -f .deps/loadunimap.Tpo .deps/loadunimap.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT psfxtable.o -MD -MP -MF .deps/psfxtable.Tpo -c -o psfxtable.o psfxtable.c
+mv -f .deps/setmetamode.Tpo .deps/setmetamode.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT fgconsole.o -MD -MP -MF .deps/fgconsole.Tpo -c -o fgconsole.o fgconsole.c
+mv -f .deps/setleds.Tpo .deps/setleds.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT kbdrate.o -MD -MP -MF .deps/kbdrate.Tpo -c -o kbdrate.o kbdrate.c
+mv -f .deps/kbd_mode.Tpo .deps/kbd_mode.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT chvt.o -MD -MP -MF .deps/chvt.Tpo -c -o chvt.o chvt.c
+mv -f .deps/fgconsole.Tpo .deps/fgconsole.Po
+mv -f .deps/chvt.Tpo .deps/chvt.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT deallocvt.o -MD -MP -MF .deps/deallocvt.Tpo -c -o deallocvt.o deallocvt.c
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT openvt.o -MD -MP -MF .deps/openvt.Tpo -c -o openvt.o openvt.c
+mv -f .deps/kbdrate.Tpo .deps/kbdrate.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT kbdinfo.o -MD -MP -MF .deps/kbdinfo.Tpo -c -o kbdinfo.o kbdinfo.c
+mv -f .deps/deallocvt.Tpo .deps/deallocvt.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT setvtrgb.o -MD -MP -MF .deps/setvtrgb.Tpo -c -o setvtrgb.o setvtrgb.c
+mv -f .deps/psfxtable.Tpo .deps/psfxtable.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT getkeycodes.o -MD -MP -MF .deps/getkeycodes.Tpo -c -o getkeycodes.o getkeycodes.c
+mv -f .deps/kbdinfo.Tpo .deps/kbdinfo.Po
+gcc -DHAVE_CONFIG_H -I. -I..  -DDATADIR=\"/lib/kbd\" -DLOCALEDIR=\"/usr/share/locale\" -Wall -Wextra -Wmissing-noreturn -Wdisabled-optimization -Wcast-align -Wshadow -Wmissing-format-attribute -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -funit-at-a-time   -Os -pipe -MT setkeycodes.o -MD -MP -MF .deps/setkeycodes.Tpo -c -o setkeycodes.o setkeycodes.c
+mv -f .deps/getkeycodes.Tpo .deps/getkeycodes.Po
+gcc -DMAIN -Os -pipe   -o mapscrn  mapscrn-mapscrn.o mapscrn-findfile.o mapscrn-utf8.o mapscrn-xmalloc.o mapscrn-getfd.o mapscrn-kdmapop.o  
+mv -f .deps/setvtrgb.Tpo .deps/setvtrgb.Po
+gcc -DMAIN -Os -pipe   -o loadunimap  loadunimap-loadunimap.o loadunimap-findfile.o loadunimap-psffontop.o loadunimap-utf8.o loadunimap-xmalloc.o loadunimap-getfd.o loadunimap-kdmapop.o  
+mv -f .deps/setkeycodes.Tpo .deps/setkeycodes.Po
+gcc  -Os -pipe   -o dumpkeys  dumpkeys.o getfd.o ksyms.o xmalloc.o  
+mv -f .deps/openvt.Tpo .deps/openvt.Po
+gcc  -Os -pipe   -o loadkeys loadkeys.o loadkeys.analyze.o getfd.o ksyms.o xmalloc.o findfile.o  
+gcc  -Os -pipe   -o showkey  showkey.o getfd.o  
+gcc  -Os -pipe   -o setfont  setfont.o findfile.o xmalloc.o getfd.o mapscrn.o kdmapop.o psffontop.o utf8.o kdfontop.o loadunimap.o  
+gcc  -Os -pipe   -o showconsolefont  showconsolefont.o getfd.o xmalloc.o kdmapop.o kdfontop.o  
+gcc  -Os -pipe   -o setleds setleds.o  
+gcc  -Os -pipe   -o setmetamode setmetamode.o  
+gcc  -Os -pipe   -o kbd_mode  kbd_mode.o getfd.o  
+gcc  -Os -pipe   -o psfxtable  psfxtable.o psffontop.o xmalloc.o utf8.o getfd.o  
+gcc  -Os -pipe   -o fgconsole  fgconsole.o getfd.o  
+gcc  -Os -pipe   -o kbdrate kbdrate.o  
+gcc  -Os -pipe   -o chvt  chvt.o getfd.o  
+gcc  -Os -pipe   -o deallocvt  deallocvt.o getfd.o  
+gcc  -Os -pipe   -o openvt  openvt.o getfd.o xmalloc.o  
+gcc  -Os -pipe   -o kbdinfo  kbdinfo.o getfd.o  
+gcc  -Os -pipe   -o setvtrgb  setvtrgb.o getfd.o  
+gcc  -Os -pipe   -o getkeycodes  getkeycodes.o getfd.o  
+gcc  -Os -pipe   -o setkeycodes  setkeycodes.o getfd.o  
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+Making all in man
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+Making all in man1
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man1'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man1'
+Making all in man5
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man5'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man5'
+Making all in man8
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man8'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man8'
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+make[3]: Nothing to be done for `all-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+Making all in data
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/data'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/data'
+Making all in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/po'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/po'
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.77358
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/kbd-root
++ /bin/mkdir -p /var/tmp/kbd-root
++ cd kbd-1.15.3
++ make DESTDIR=/var/tmp/kbd-root install
+Making install in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+make  install-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/kbd-root/usr/bin"
+  /usr/bin/install -c mapscrn loadunimap dumpkeys loadkeys showkey setfont showconsolefont setleds setmetamode kbd_mode psfxtable fgconsole kbdrate chvt deallocvt openvt kbdinfo setvtrgb getkeycodes setkeycodes '/var/tmp/kbd-root/usr/bin'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/kbd-root/usr/bin"
+ /usr/bin/install -c unicode_start unicode_stop '/var/tmp/kbd-root/usr/bin'
+make  install-exec-hook
+make[4]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+for i in psfaddtable psfgettable psfstriptable; do \
+	rm -f /var/tmp/kbd-root/usr/bin/$i; \
+	ln -s psfxtable /var/tmp/kbd-root/usr/bin/$i || exit $?; \
+done
+make[4]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/src'
+Making install in man
+make[1]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+Making install in man1
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man1'
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man1'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/kbd-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 chvt.1 deallocvt.1 fgconsole.1 kbd_mode.1 openvt.1 psfaddtable.1 psfgettable.1 psfstriptable.1 psfxtable.1 setleds.1 setmetamode.1 showkey.1 unicode_start.1 unicode_stop.1 dumpkeys.1 loadkeys.1 '/var/tmp/kbd-root/usr/share/man/man1'
+make  install-data-hook
+make[4]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man1'
+cd /var/tmp/kbd-root/usr/share/man/man1 && \
+for f in dumpkeys.1 loadkeys.1; do \
+	/bin/sed -e "s#@DATADIR\@#/lib/kbd#g" "$f" > "$f.new"; \
+	mv -f -- "$f.new" "$f"; \
+done
+make[4]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man1'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man1'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man1'
+Making install in man5
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man5'
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man5'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man5" || /bin/mkdir -p "/var/tmp/kbd-root/usr/share/man/man5"
+ /usr/bin/install -c -m 644 keymaps.5 '/var/tmp/kbd-root/usr/share/man/man5'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man5'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man5'
+Making install in man8
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man8'
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man8'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/kbd-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 getkeycodes.8 kbdrate.8 resizecons.8 setkeycodes.8 showconsolefont.8 setvtrgb.8 loadunimap.8 mapscrn.8 setfont.8 '/var/tmp/kbd-root/usr/share/man/man8'
+make  install-data-hook
+make[4]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man8'
+cd /var/tmp/kbd-root/usr/share/man/man8 && \
+for f in loadunimap.8 mapscrn.8 setfont.8; do \
+	/bin/sed -e "s#@DATADIR\@#/lib/kbd#g" "$f" > "$f.new"; \
+	mv -f -- "$f.new" "$f"; \
+done
+make[4]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man8'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man8'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man/man8'
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/man'
+Making install in data
+make[1]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/data'
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/data'
+make[2]: Nothing to be done for `install-exec-am'.
+make  install-data-hook
+make[3]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/data'
+cp -r ./keymaps keymaps_Z
+chmod -R u+w keymaps_Z
+cd keymaps_Z && gzip -f -n -9 */*.map */*/*.map
+cp -r ./consolefonts consolefonts_Z
+cp -r ./partialfonts partialfonts_Z
+chmod -R u+w consolefonts_Z partialfonts_Z
+cd consolefonts_Z && gzip -f -n -9 * && gunzip ERRORS* README*
+cd partialfonts_Z && gzip -f -n -9 *
+install -d -m 755 /var/tmp/kbd-root/lib/kbd
+install -d -m 755 /var/tmp/kbd-root/lib/kbd/consolefonts
+install -m 644 consolefonts_Z/* /var/tmp/kbd-root/lib/kbd/consolefonts
+install -d -m 755 /var/tmp/kbd-root/lib/kbd/consolefonts/partialfonts
+install -m 644 partialfonts_Z/* /var/tmp/kbd-root/lib/kbd/consolefonts/partialfonts
+install -d -m 755 /var/tmp/kbd-root/lib/kbd/consoletrans
+install -m 644 ./consoletrans/* /var/tmp/kbd-root/lib/kbd/consoletrans
+install -d -m 755 /var/tmp/kbd-root/lib/kbd/unimaps
+install -m 644 ./unimaps/* /var/tmp/kbd-root/lib/kbd/unimaps
+install -d -m 755 /var/tmp/kbd-root/lib/kbd/keymaps
+install -d -m 755 /var/tmp/kbd-root/lib/kbd/keymaps/i386
+install -d -m 755 /var/tmp/kbd-root/lib/kbd/keymaps/mac
+for i in include sun amiga atari i386/azerty i386/dvorak i386/fgGIod i386/qwerty i386/qwertz i386/include i386/olpc i386/colemak mac/include mac/all; do \
+	install -d -m 755 /var/tmp/kbd-root/lib/kbd/keymaps/$i ;\
+	install -m 644 keymaps_Z/$i/* /var/tmp/kbd-root/lib/kbd/keymaps/$i ;\
+done
+rm -f /var/tmp/kbd-root/lib/kbd/keymaps/ppc; ln -s mac /var/tmp/kbd-root/lib/kbd/keymaps/ppc
+make[3]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/data'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/data'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/data'
+Making install in po
+make[1]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3/po'
+/bin/sh ../config/mkinstalldirs /var/tmp/kbd-root/lib/kbd
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/cs/LC_MESSAGES
+installing cs.gmo as /var/tmp/kbd-root/lib/kbd/locale/cs/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/da/LC_MESSAGES
+installing da.gmo as /var/tmp/kbd-root/lib/kbd/locale/da/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/de/LC_MESSAGES
+installing de.gmo as /var/tmp/kbd-root/lib/kbd/locale/de/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/el/LC_MESSAGES
+installing el.gmo as /var/tmp/kbd-root/lib/kbd/locale/el/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/eo/LC_MESSAGES
+installing eo.gmo as /var/tmp/kbd-root/lib/kbd/locale/eo/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/fr/LC_MESSAGES
+installing fr.gmo as /var/tmp/kbd-root/lib/kbd/locale/fr/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/gr/LC_MESSAGES
+installing gr.gmo as /var/tmp/kbd-root/lib/kbd/locale/gr/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/id/LC_MESSAGES
+installing id.gmo as /var/tmp/kbd-root/lib/kbd/locale/id/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/it/LC_MESSAGES
+installing it.gmo as /var/tmp/kbd-root/lib/kbd/locale/it/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/nl/LC_MESSAGES
+installing nl.gmo as /var/tmp/kbd-root/lib/kbd/locale/nl/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/pl/LC_MESSAGES
+installing pl.gmo as /var/tmp/kbd-root/lib/kbd/locale/pl/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/ro/LC_MESSAGES
+installing ro.gmo as /var/tmp/kbd-root/lib/kbd/locale/ro/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/ru/LC_MESSAGES
+installing ru.gmo as /var/tmp/kbd-root/lib/kbd/locale/ru/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/sv/LC_MESSAGES
+installing sv.gmo as /var/tmp/kbd-root/lib/kbd/locale/sv/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/tr/LC_MESSAGES
+installing tr.gmo as /var/tmp/kbd-root/lib/kbd/locale/tr/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/uk/LC_MESSAGES
+installing uk.gmo as /var/tmp/kbd-root/lib/kbd/locale/uk/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/vi/LC_MESSAGES
+installing vi.gmo as /var/tmp/kbd-root/lib/kbd/locale/vi/LC_MESSAGES/kbd.mo
+mkdir -p -- /var/tmp/kbd-root/lib/kbd/locale/zh_CN/LC_MESSAGES
+installing zh_CN.gmo as /var/tmp/kbd-root/lib/kbd/locale/zh_CN/LC_MESSAGES/kbd.mo
+if test "kbd" = "gettext-tools"; then \
+  /bin/sh ../config/mkinstalldirs /var/tmp/kbd-root/lib/kbd/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/kbd-root/lib/kbd/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/kbd-root/lib/kbd/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3/po'
+make[1]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3'
+make[2]: Entering directory `/usr/src/rpm/BUILD/kbd-1.15.3'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/kbd-1.15.3'
++ install -dv /var/tmp/kbd-root/bin
+install: creating directory `/var/tmp/kbd-root/bin'
++ mv -v /var/tmp/kbd-root/usr/bin/kbd_mode /var/tmp/kbd-root/usr/bin/loadkeys /var/tmp/kbd-root/usr/bin/openvt /var/tmp/kbd-root/usr/bin/setfont /var/tmp/kbd-root/bin
+`/var/tmp/kbd-root/usr/bin/kbd_mode' -> `/var/tmp/kbd-root/bin/kbd_mode'
+`/var/tmp/kbd-root/usr/bin/loadkeys' -> `/var/tmp/kbd-root/bin/loadkeys'
+`/var/tmp/kbd-root/usr/bin/openvt' -> `/var/tmp/kbd-root/bin/openvt'
+`/var/tmp/kbd-root/usr/bin/setfont' -> `/var/tmp/kbd-root/bin/setfont'
++ /usr/lib/rpm/compress_man.sh /var/tmp/kbd-root
++ /usr/lib/rpm/strip.sh /var/tmp/kbd-root
++ exit 0
+Processing files: kbd-1.15.3-1.x86_64
+Requires: /bin/sh libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.7)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/kbd-root
+Wrote: /usr/src/rpm/SRPMS/kbd-1.15.3-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/kbd-1.15.3-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.69763
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd kbd-1.15.3
++ /bin/rm -rf /var/tmp/kbd-root
