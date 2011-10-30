@@ -1,7 +1,7 @@
 Summary: The GNU Compiler Collection
 Name: gcc
 Version: 4.5.3
-Release: 1
+Release: 2
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
@@ -13,8 +13,6 @@ BuildRequires: digest(sha1:%{SOURCE0}) = 73c45dfda5eef6b124be53e56828b5925198cc1
 BuildRequires: gmp-devel
 BuildRequires: mpfr-devel
 BuildRequires: mpc-devel
-BuildRequires: ppl-devel
-BuildRequires: cloog-ppl-devel
 BuildRequires: zlib-devel
 BuildRequires: elfutils-devel
 BuildRequires: tcl
@@ -64,6 +62,7 @@ sed -i 's/^T_CFLAGS =$$/& -fomit-frame-pointer/' gcc/Makefile.in
 %endif
 mkdir -v ../%{name}-build
 cd ../%{name}-build
+export CFLAGS='-Os -pipe'
 ../%{name}-%{version}/configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
@@ -77,8 +76,8 @@ cd ../%{name}-build
   --infodir=/usr/share/info \
   --mandir=/usr/share/man 
 make %{PMFLAGS} LDFLAGS="-s"
-make %{PMFLAGS} -k check || /bin/true
-../%{name}-%{version}/contrib/test_summary 2>&1 | grep -A7 Summ | tee check.log
+#make %{PMFLAGS} -k check || /bin/true
+#../%{name}-%{version}/contrib/test_summary 2>&1 | grep -A7 Summ | tee check.log
 
 %install
 cd ../%{name}-build
@@ -93,6 +92,8 @@ mv %{buildroot}/usr/%{_lib}/*.py %{buildroot}/usr/share/gcc-%{version}/python/
 rm -f %{buildroot}/usr/lib/*.py
 %endif
 rm -f %{buildroot}/usr/share/info/dir
+%{compress_man}
+%{strip}
 %find_lang %{name}
 %find_lang cpplib
 %find_lang libstdc++
@@ -223,6 +224,10 @@ rm -rf %{buildroot}
 %endif
 
 %changelog
+* Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.3-2
+- Optimize for size
+- Remove dependency on ppl and cloog-ppl
+
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.5.3-1
 - Upgrade to 4.5.3, fix missing /lib/cpp symlink in 64bit arch
 
