@@ -116,7 +116,7 @@ case $1 in
     get_login
     # Attempt a quick login before sending any files
     DATA="json={\"action\":\"check\",\"user\":\"$user\",\"pass\":\"$pass\"}"
-    ret=$(curl -d ${DATA} ${URL} 2>/dev/null)
+    ret=$(curl --data-urlencode ${DATA} ${URL} 2>/dev/null)
     if [ "${ret}" = "OK" ] ; then
       source_spec
       for file in ${FILES} ; do
@@ -127,7 +127,7 @@ case $1 in
       done
       DATA="json={\"action\":\"update\",\"user\":\"$user\",\"pass\":\"$pass\",\"arch\":\"$arch\",\"files\":\"$files\",\"name\":\"$name\",\"subpkgs\":\"$subs\"}"
       echo -e "\nCreating the repository, sit tight for a few minutes...\n"
-      curl -d "${DATA}" ${URL}
+      curl --data-urlencode "${DATA}" ${URL}
     fi
   ;;  
 
