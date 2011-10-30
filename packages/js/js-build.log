@@ -1,0 +1,188 @@
+Fetching(Source0): http://dev.lightcube.us/sources/js/js-1.7.0.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.71485
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf js
++ /bin/gzip -dc /usr/src/rpm/SOURCES/js-1.7.0.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd js
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.71485
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd js
++ cd src
++ export 'CFLAGS=-DJS_C_STRINGS_ARE_UTF8 -Os -pipe'
++ CFLAGS='-DJS_C_STRINGS_ARE_UTF8 -Os -pipe'
++ export 'CXXFLAGS=-DJS_C_STRINGS_ARE_UTF8 -Os -pipe'
++ CXXFLAGS='-DJS_C_STRINGS_ARE_UTF8 -Os -pipe'
++ make -f Makefile.ref
+cat: ../../dist/Linux_All_DBG.OBJ/nspr/Version: No such file or directory
+cd editline; make -f Makefile.ref all
+make[1]: Entering directory `/usr/src/rpm/BUILD/js/src/editline'
+gcc -o Linux_All_DBG.OBJ/editline.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -DXP_UNIX -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root  -DJSFILE  -DANSI_ARROWS -DHAVE_TCGETATTR -DHIDE -DUSE_DIRENT -DSYS_UNIX -DHAVE_STDLIB -DUNIQUE_HISTORY editline.c
+editline.c: In function 'readline':
+editline.c:1038:2: warning: implicit declaration of function 'getpid'
+editline.c: In function 'add_history':
+editline.c:1051:5: warning: pointer targets in passing argument 2 of 'strcmp' differ in signedness
+/usr/include/string.h:143:12: note: expected 'const char *' but argument is of type 'CHAR *'
+gcc -o Linux_All_DBG.OBJ/sysunix.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -DXP_UNIX -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root  -DJSFILE  -DANSI_ARROWS -DHAVE_TCGETATTR -DHIDE -DUSE_DIRENT -DSYS_UNIX -DHAVE_STDLIB -DUNIQUE_HISTORY sysunix.c
+ar rv Linux_All_DBG.OBJ/libedit.a Linux_All_DBG.OBJ/editline.o Linux_All_DBG.OBJ/sysunix.o
+ar: creating Linux_All_DBG.OBJ/libedit.a
+a - Linux_All_DBG.OBJ/editline.o
+a - Linux_All_DBG.OBJ/sysunix.o
+echo Linux_All_DBG.OBJ/libedit.a
+Linux_All_DBG.OBJ/libedit.a
+make[1]: Leaving directory `/usr/src/rpm/BUILD/js/src/editline'
+make -f Makefile.ref  Linux_All_DBG.OBJ/libjs.a Linux_All_DBG.OBJ/libjs.so Linux_All_DBG.OBJ/js  Linux_All_DBG.OBJ/jsautocfg.h Linux_All_DBG.OBJ/jscpucfg Linux_All_DBG.OBJ/jscpucfg.o
+cat: ../../dist/Linux_All_DBG.OBJ/nspr/Version: No such file or directory
+make[1]: Entering directory `/usr/src/rpm/BUILD/js/src'
+make[1]: Circular jscpucfg.h <- Linux_All_DBG.OBJ/jsautocfg.h dependency dropped.
+gcc -o Linux_All_DBG.OBJ/jscpucfg.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jscpucfg.c
+gcc -o Linux_All_DBG.OBJ/jscpucfg Linux_All_DBG.OBJ/jscpucfg.o
+make[1]: Circular Linux_All_DBG.OBJ/jsautocfg.h <- Linux_All_DBG.OBJ/jsautocfg.h dependency dropped.
+rm -f Linux_All_DBG.OBJ/jsautocfg.h
+Linux_All_DBG.OBJ/jscpucfg > Linux_All_DBG.OBJ/jsautocfg.h
+gcc -o Linux_All_DBG.OBJ/jsapi.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsapi.c
+jsapi.c: In function 'JS_ConvertArgumentsVA':
+jsapi.c:267:39: warning: passing argument 5 of 'TryArgumentFormatter' from incompatible pointer type
+jsapi.c:136:1: note: expected 'struct __va_list_tag (*)[1]' but argument is of type 'struct __va_list_tag **'
+jsapi.c: In function 'JS_PushArgumentsVA':
+jsapi.c:370:39: warning: passing argument 5 of 'TryArgumentFormatter' from incompatible pointer type
+jsapi.c:136:1: note: expected 'struct __va_list_tag (*)[1]' but argument is of type 'struct __va_list_tag **'
+gcc -o Linux_All_DBG.OBJ/jsarena.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsarena.c
+gcc -o Linux_All_DBG.OBJ/jsarray.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsarray.c
+gcc -o Linux_All_DBG.OBJ/jsatom.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsatom.c
+gcc -o Linux_All_DBG.OBJ/jsbool.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsbool.c
+gcc -o Linux_All_DBG.OBJ/jscntxt.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jscntxt.c
+gcc -o Linux_All_DBG.OBJ/jsdate.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsdate.c
+gcc -o Linux_All_DBG.OBJ/jsdbgapi.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsdbgapi.c
+gcc -o Linux_All_DBG.OBJ/jsdhash.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsdhash.c
+gcc -o Linux_All_DBG.OBJ/jsdtoa.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsdtoa.c
+gcc -o Linux_All_DBG.OBJ/jsemit.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsemit.c
+gcc -o Linux_All_DBG.OBJ/jsexn.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsexn.c
+gcc -o Linux_All_DBG.OBJ/jsfun.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsfun.c
+gcc -o Linux_All_DBG.OBJ/jsgc.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsgc.c
+gcc -o Linux_All_DBG.OBJ/jshash.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jshash.c
+gcc -o Linux_All_DBG.OBJ/jsinterp.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsinterp.c
+gcc -o Linux_All_DBG.OBJ/jsiter.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsiter.c
+gcc -o Linux_All_DBG.OBJ/jslock.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jslock.c
+gcc -o Linux_All_DBG.OBJ/jslog2.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jslog2.c
+gcc -o Linux_All_DBG.OBJ/jslong.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jslong.c
+gcc -o Linux_All_DBG.OBJ/jsmath.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsmath.c
+gcc -o Linux_All_DBG.OBJ/jsnum.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsnum.c
+gcc -o Linux_All_DBG.OBJ/jsobj.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsobj.c
+gcc -o Linux_All_DBG.OBJ/jsopcode.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsopcode.c
+jsopcode.c: In function 'Decompile':
+jsopcode.c:1706:19: warning: case value '256' not in enumerated type 'JSOp'
+jsopcode.c:1709:19: warning: case value '257' not in enumerated type 'JSOp'
+jsopcode.c:3268:15: warning: case value '256' not in enumerated type 'JSOp'
+jsopcode.c:3331:15: warning: case value '257' not in enumerated type 'JSOp'
+gcc -o Linux_All_DBG.OBJ/jsparse.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsparse.c
+gcc -o Linux_All_DBG.OBJ/jsprf.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsprf.c
+jsprf.c: In function 'dosprintf':
+jsprf.c:952:17: warning: pointer targets in passing argument 1 of 'js_OneUcs4ToUtf8Char' differ in signedness
+jsstr.h:496:1: note: expected 'uint8 *' but argument is of type 'char *'
+gcc -o Linux_All_DBG.OBJ/jsregexp.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsregexp.c
+gcc -o Linux_All_DBG.OBJ/jskwgen.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jskwgen.c
+gcc -o Linux_All_DBG.OBJ/jskwgen -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ   -lm Linux_All_DBG.OBJ/jskwgen.o
+Linux_All_DBG.OBJ/jskwgen Linux_All_DBG.OBJ/jsautokw.h
+gcc -o Linux_All_DBG.OBJ/jsscan.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsscan.c
+gcc -o Linux_All_DBG.OBJ/jsscope.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsscope.c
+gcc -o Linux_All_DBG.OBJ/jsscript.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsscript.c
+gcc -o Linux_All_DBG.OBJ/jsstr.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsstr.c
+jsstr.c: In function 'js_InflateStringToBuffer':
+jsstr.c:2971:13: warning: pointer targets in passing argument 1 of 'Utf8ToOneUcs4Char' differ in signedness
+jsstr.c:267:1: note: expected 'const uint8 *' but argument is of type 'const char *'
+gcc -o Linux_All_DBG.OBJ/jsutil.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsutil.c
+gcc -o Linux_All_DBG.OBJ/jsxdrapi.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsxdrapi.c
+gcc -o Linux_All_DBG.OBJ/jsxml.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  jsxml.c
+gcc -o Linux_All_DBG.OBJ/prmjtime.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  prmjtime.c
+ar rv Linux_All_DBG.OBJ/libjs.a Linux_All_DBG.OBJ/jsapi.o Linux_All_DBG.OBJ/jsarena.o Linux_All_DBG.OBJ/jsarray.o Linux_All_DBG.OBJ/jsatom.o Linux_All_DBG.OBJ/jsbool.o Linux_All_DBG.OBJ/jscntxt.o Linux_All_DBG.OBJ/jsdate.o Linux_All_DBG.OBJ/jsdbgapi.o Linux_All_DBG.OBJ/jsdhash.o Linux_All_DBG.OBJ/jsdtoa.o Linux_All_DBG.OBJ/jsemit.o Linux_All_DBG.OBJ/jsexn.o Linux_All_DBG.OBJ/jsfun.o Linux_All_DBG.OBJ/jsgc.o Linux_All_DBG.OBJ/jshash.o Linux_All_DBG.OBJ/jsinterp.o Linux_All_DBG.OBJ/jsiter.o Linux_All_DBG.OBJ/jslock.o Linux_All_DBG.OBJ/jslog2.o Linux_All_DBG.OBJ/jslong.o Linux_All_DBG.OBJ/jsmath.o Linux_All_DBG.OBJ/jsnum.o Linux_All_DBG.OBJ/jsobj.o Linux_All_DBG.OBJ/jsopcode.o Linux_All_DBG.OBJ/jsparse.o Linux_All_DBG.OBJ/jsprf.o Linux_All_DBG.OBJ/jsregexp.o Linux_All_DBG.OBJ/jsscan.o Linux_All_DBG.OBJ/jsscope.o Linux_All_DBG.OBJ/jsscript.o Linux_All_DBG.OBJ/jsstr.o Linux_All_DBG.OBJ/jsutil.o Linux_All_DBG.OBJ/jsxdrapi.o Linux_All_DBG.OBJ/jsxml.o Linux_All_DBG.OBJ/prmjtime.o
+ar: creating Linux_All_DBG.OBJ/libjs.a
+a - Linux_All_DBG.OBJ/jsapi.o
+a - Linux_All_DBG.OBJ/jsarena.o
+a - Linux_All_DBG.OBJ/jsarray.o
+a - Linux_All_DBG.OBJ/jsatom.o
+a - Linux_All_DBG.OBJ/jsbool.o
+a - Linux_All_DBG.OBJ/jscntxt.o
+a - Linux_All_DBG.OBJ/jsdate.o
+a - Linux_All_DBG.OBJ/jsdbgapi.o
+a - Linux_All_DBG.OBJ/jsdhash.o
+a - Linux_All_DBG.OBJ/jsdtoa.o
+a - Linux_All_DBG.OBJ/jsemit.o
+a - Linux_All_DBG.OBJ/jsexn.o
+a - Linux_All_DBG.OBJ/jsfun.o
+a - Linux_All_DBG.OBJ/jsgc.o
+a - Linux_All_DBG.OBJ/jshash.o
+a - Linux_All_DBG.OBJ/jsinterp.o
+a - Linux_All_DBG.OBJ/jsiter.o
+a - Linux_All_DBG.OBJ/jslock.o
+a - Linux_All_DBG.OBJ/jslog2.o
+a - Linux_All_DBG.OBJ/jslong.o
+a - Linux_All_DBG.OBJ/jsmath.o
+a - Linux_All_DBG.OBJ/jsnum.o
+a - Linux_All_DBG.OBJ/jsobj.o
+a - Linux_All_DBG.OBJ/jsopcode.o
+a - Linux_All_DBG.OBJ/jsparse.o
+a - Linux_All_DBG.OBJ/jsprf.o
+a - Linux_All_DBG.OBJ/jsregexp.o
+a - Linux_All_DBG.OBJ/jsscan.o
+a - Linux_All_DBG.OBJ/jsscope.o
+a - Linux_All_DBG.OBJ/jsscript.o
+a - Linux_All_DBG.OBJ/jsstr.o
+a - Linux_All_DBG.OBJ/jsutil.o
+a - Linux_All_DBG.OBJ/jsxdrapi.o
+a - Linux_All_DBG.OBJ/jsxml.o
+a - Linux_All_DBG.OBJ/prmjtime.o
+echo Linux_All_DBG.OBJ/libjs.a
+Linux_All_DBG.OBJ/libjs.a
+ld -shared  -o Linux_All_DBG.OBJ/libjs.so Linux_All_DBG.OBJ/jsapi.o Linux_All_DBG.OBJ/jsarena.o Linux_All_DBG.OBJ/jsarray.o Linux_All_DBG.OBJ/jsatom.o Linux_All_DBG.OBJ/jsbool.o Linux_All_DBG.OBJ/jscntxt.o Linux_All_DBG.OBJ/jsdate.o Linux_All_DBG.OBJ/jsdbgapi.o Linux_All_DBG.OBJ/jsdhash.o Linux_All_DBG.OBJ/jsdtoa.o Linux_All_DBG.OBJ/jsemit.o Linux_All_DBG.OBJ/jsexn.o Linux_All_DBG.OBJ/jsfun.o Linux_All_DBG.OBJ/jsgc.o Linux_All_DBG.OBJ/jshash.o Linux_All_DBG.OBJ/jsinterp.o Linux_All_DBG.OBJ/jsiter.o Linux_All_DBG.OBJ/jslock.o Linux_All_DBG.OBJ/jslog2.o Linux_All_DBG.OBJ/jslong.o Linux_All_DBG.OBJ/jsmath.o Linux_All_DBG.OBJ/jsnum.o Linux_All_DBG.OBJ/jsobj.o Linux_All_DBG.OBJ/jsopcode.o Linux_All_DBG.OBJ/jsparse.o Linux_All_DBG.OBJ/jsprf.o Linux_All_DBG.OBJ/jsregexp.o Linux_All_DBG.OBJ/jsscan.o Linux_All_DBG.OBJ/jsscope.o Linux_All_DBG.OBJ/jsscript.o Linux_All_DBG.OBJ/jsstr.o Linux_All_DBG.OBJ/jsutil.o Linux_All_DBG.OBJ/jsxdrapi.o Linux_All_DBG.OBJ/jsxml.o Linux_All_DBG.OBJ/prmjtime.o   -lm 
+gcc -o Linux_All_DBG.OBJ/js.o -c -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  js.c
+gcc -o Linux_All_DBG.OBJ/js -DJS_C_STRINGS_ARE_UTF8 -Os -pipe -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  -Wall -Wno-format -g -DXP_UNIX -DSVR4 -DSYSV -D_BSD_SOURCE -DPOSIX_SOURCE -DHAVE_LOCALTIME_R -DHAVE_VA_COPY -DVA_COPY=va_copy -DPIC -fPIC  -DDEBUG -DDEBUG_root -DEDITLINE -ILinux_All_DBG.OBJ  Linux_All_DBG.OBJ/js.o Linux_All_DBG.OBJ/libjs.a  -lm  \
+    editline/Linux_All_DBG.OBJ/libedit.a
+make[1]: `Linux_All_DBG.OBJ/jsautocfg.h' is up to date.
+make[1]: `Linux_All_DBG.OBJ/jscpucfg' is up to date.
+make[1]: `Linux_All_DBG.OBJ/jscpucfg.o' is up to date.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/js/src'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.41782
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/js-root
++ /bin/mkdir -p /var/tmp/js-root
++ cd js
++ cd src
++ make JS_DIST=/var/tmp/js-root/usr -f Makefile.ref export
+cat: ../../dist/Linux_All_DBG.OBJ/nspr/Version: No such file or directory
+cd editline; make -f Makefile.ref export
+make[1]: Entering directory `/usr/src/rpm/BUILD/js/src/editline'
+make[1]: Nothing to be done for `export'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/js/src/editline'
+mkdir -p /var/tmp/js-root/usr/include /var/tmp/js-root/usr/lib64 /var/tmp/js-root/usr/bin
+cp jsarray.h jsatom.h jsbool.h jsconfig.h jscntxt.h jsdate.h jsemit.h jsexn.h jsfun.h jsgc.h jsinterp.h jsiter.h jslibmath.h jslock.h jsmath.h jsnum.h jsobj.h jsopcode.h jsparse.h jsarena.h jsclist.h jsdhash.h jsdtoa.h jshash.h jslong.h jsosdep.h jstypes.h jsprvtd.h jspubtd.h jsregexp.h jsscan.h jsscope.h jsscript.h jsstr.h jsxdrapi.h jsxml.h  jsapi.h jsdbgapi.h  jsbit.h jscompat.h jscpucfg.h jsotypes.h jsstddef.h prmjtime.h resource.h jsopcode.tbl jsproto.tbl js.msg jsshell.msg jskeyword.tbl  Linux_All_DBG.OBJ/jsautocfg.h Linux_All_DBG.OBJ/jsautokw.h /var/tmp/js-root/usr/include
+cp Linux_All_DBG.OBJ/libjs.a /var/tmp/js-root/usr/lib64
+cp Linux_All_DBG.OBJ/libjs.so /var/tmp/js-root/usr/lib64
+cp Linux_All_DBG.OBJ/js /var/tmp/js-root/usr/bin
++ /usr/lib/rpm/strip.sh /var/tmp/js-root
++ exit 0
+Processing files: js-1.7.0-2.x86_64
+Provides: libjs.so()(64bit)
+Requires(interp): /sbin/ldconfig /sbin/ldconfig
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libm.so.6()(64bit) libm.so.6(GLIBC_2.2.5)(64bit)
+Obsoletes: js-1.8.5
+Processing files: js-devel-1.7.0-2.x86_64
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/js-root
+Wrote: /usr/src/rpm/SRPMS/js-1.7.0-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/js-1.7.0-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/js-devel-1.7.0-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.28471
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd js
++ /bin/rm -rf /var/tmp/js-root

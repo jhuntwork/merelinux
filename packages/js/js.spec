@@ -1,18 +1,16 @@
 Summary: js
 Name: js
-Version: 1.8.5
-Release: 1
+Version: 1.7.0
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: https://developer.mozilla.org/en/SpiderMonkey
-Source: http://dev.lightcube.us/sources/%{name}/%{name}185-1.0.0.tar.gz
+Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 52a01449c48d7a117b35f213d3e4263578d846d6
-BuildRequires: nspr-devel
-BuildRequires: unzip
-BuildRequires: zip
+Obsoletes: js-1.8.5
+BuildRequires: digest(sha1:%{SOURCE0}) = 1a99e8e10cb6600a03ea98895583a8ed42136d1f
  
 %description
 SpiderMonkey is Gecko's JavaScript engine written in C. It is used in various
@@ -28,28 +26,19 @@ Requires: %{name}
 Headers and libraries for developing with %{name}
 
 %prep
-%setup -q
+%setup -q -n js
 
 %build
-cd js/src
-export CFLAGS="-DJS_C_STRINGS_ARE_UTF8"
-export CXXFLAGS="-DJS_C_STRINGS_ARE_UTF8"
-export LDFLAGS="%{LDFLAGS}"
-./configure \
-  --prefix=/usr \
-  --libdir=/usr/%{_lib} \
-  --with-pthreads \
-  --with-system-nspr \
-  --enable-strip
-make %{PMFLAGS}
+cd src
+export CFLAGS="-DJS_C_STRINGS_ARE_UTF8 -Os -pipe"
+export CXXFLAGS="-DJS_C_STRINGS_ARE_UTF8 -Os -pipe"
+# Can't handle ${PMFLAGS}
+make -f Makefile.ref
 
 %install
-cd js/src
-make DESTDIR=%{buildroot} install
-rm -f %{buildroot}/usr/%{_lib}/libmozjs185.so
-rm -f %{buildroot}/usr/%{_lib}/libmozjs185.so.1.0
-ln -sv libmozjs185.so.1.0 %{buildroot}/usr/%{_lib}/libmozjs185.so
-ln -sv libmozjs185.so.1.0.0 %{buildroot}/usr/%{_lib}/libmozjs185.so.1.0
+cd src
+make JS_DIST=%{buildroot}/usr -f Makefile.ref export
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -59,17 +48,21 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/usr/%{_lib}/libmozjs185.so.*
+/usr/bin/js
+/usr/%{_lib}/libjs.so
 
 %files devel
 %defattr(-,root,root)
-/usr/bin/js-config
-/usr/include/js
-/usr/%{_lib}/libmozjs185.so
-/usr/%{_lib}/libmozjs185-1.0.a
-/usr/%{_lib}/pkgconfig/mozjs185.pc
+/usr/include/*
+/usr/%{_lib}/libjs.a
 
 %changelog
+* Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.7.0-2
+- Optimize for size
+
+* Tue Oct 04 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.7.0-1
+- Revert to 1.7.0
+
 * Mon Apr 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8.5-1
 - Upgrade to 1.8.5
 
