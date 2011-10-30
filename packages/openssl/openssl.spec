@@ -1,18 +1,19 @@
 Summary: OpenSSL
 Name: openssl
-Version: 1.0.0d
-Release: 3
+Version: 1.0.0e
+Release: 1
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.openssl.org
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-ldflags-1.patch
+Source0: http://www.openssl.org/source/openssl-1.0.0e.tar.gz
+Source1: https://raw.github.com/jhuntwork/LightCube-OS/6ec15eae837af05a61f214bf3789004f22a51149/packages/openssl/mkcabundle.pl
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 32ca934f380a547061ddab7221b1a34e4e07e8d5
-BuildRequires: digest(sha1:%{PATCH0})  = 443872eca56c0f5c6f34ec8b07f70a549e830994
+BuildRequires: digest(sha1:%{SOURCE0}) = 235eb68e5a31b0f7a23bc05f52d7a39c596e2e69
+BuildRequires: digest(sha1:%{SOURCE1}) = e20db4e2e8a983e39bf19ce349da091abf62c7c1
 BuildRequires: zlib-devel
+BuildRequires: cvs
 
 %description
 OpenSSL provides a robust, commercial-grade, full-featured, and Open Source
@@ -38,19 +39,23 @@ Miscellaneous OpenSSL related tools
 
 %prep
 %setup -q
-%patch0 -p1
+chmod +x %{SOURCE1}
+sed -i 's@-O3 -Wall@& -Os -pipe -fno-strict-aliasing@' Configure
 
 %build
 ./config \
   --openssldir=/etc/ssl \
   --prefix=/usr \
   shared zlib-dynamic
-make LDFLAGS=%{LDFLAGS} LIBDIR=%{_lib} MANDIR=/usr/share/man
+# Doesn't make use of parallel builds - don't use %{PMFLAGS}
+make LIBDIR=%{_lib} MANDIR=/usr/share/man
 
 %install
 make INSTALL_PREFIX=%{buildroot} LIBDIR=%{_lib} MANDIR=/usr/share/man install
-cp -r certs %{buildroot}/etc/ssl
+install -dv %{buildroot}/etc/ssl/certs
+%{SOURCE1} > %{buildroot}/etc/ssl/certs/ca-bundle.crt
 %{compress_man}
+%{strip}
 find %{buildroot} -name "passwd.1.bz2" -delete
 mv -v %{buildroot}/usr/share/man/man3/{,SSL-}threads.3.bz2
 
@@ -92,6 +97,11 @@ rm -rf %{buildroot}
 /etc/ssl/misc
 
 %changelog
+* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0e-3
+- Upgrade to 1.0.0e - security and bug fixes
+- Optimize for size
+- Include a CA certificate bundle from Mozilla
+
 * Sun Aug 28 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.0d-3
 - Rename threds.3.bz2, conflicts with perl
 

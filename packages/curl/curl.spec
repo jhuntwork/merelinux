@@ -1,17 +1,15 @@
 Summary: cURL groks URLs
 Name: curl
-Version: 7.21.7
-Release: 2
+Version: 7.22.0
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://curl.haxx.se
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
-Source1: http://dev.lightcube.us/sources/%{name}/ca-bundle.crt
+Source0: http://curl.haxx.se/download/curl-7.22.0.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 88aab0188ac86c3d13118bb5b6ee49a83e53b0ce
-BuildRequires: digest(sha1:%{SOURCE1}) = 91932530b34567e650c1d03521010d2296b50230
+BuildRequires: digest(sha1:%{SOURCE0}) = 8e7b2b0ca933812614ec0eade2f83e77632247d6
 BuildRequires: openssl-devel
 BuildRequires: zlib-devel
 
@@ -35,18 +33,17 @@ Libraries and headers for developing with curl.
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
-  --with-ca-bundle=/usr/share/curl/ca-bundle.crt
+  --with-ca-bundle=/etc/ssl/ca-bundle.crt
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
-install -dv %{buildroot}/usr/share/curl
-install -m 0644 %{SOURCE1} %{buildroot}/usr/share/curl/
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -54,7 +51,6 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /usr/bin/curl
-/usr/share/curl
 /usr/share/man/man1/curl.1.bz2
 /usr/%{_lib}/libcurl.so.4
 /usr/%{_lib}/libcurl.so.4.2.0
@@ -68,9 +64,14 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libcurl.so
 /usr/%{_lib}/pkgconfig/libcurl.pc
 /usr/share/man/man1/curl-config.1.bz2
-/usr/share/man/man3/*
+/usr/share/man/man3/*.bz2
 
 %changelog
+* Mon Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.22.0-1
+- Upgrade to 7.22.0
+- Fix (again) the ca-bundle - use the one provided by OpenSSL
+- Optimize for size
+
 * Mon Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.21.7-2
 - Fix included certificate bundle
 

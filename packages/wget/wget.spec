@@ -1,7 +1,7 @@
 Summary: GNU Wget
 Name: wget
 Version: 1.13.4
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -33,6 +33,10 @@ make %{PMFLAGS}
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
+echo "
+# Set the certificate authority bundle file to the location provided by OpenSSL
+ca_certificate = /etc/ssl/certs/ca-bundle.crt" >> \
+  %{buildroot}/etc/wgetrc
 %find_lang %{name}
 %{compress_man}
 %{strip}
@@ -49,11 +53,14 @@ rm -rf %{buildroot}
 %files -f %{name}.lang
 %defattr(-,root,root)
 /usr/bin/wget
-/etc/wgetrc
+%config /etc/wgetrc
 /usr/share/info/wget.info
 /usr/share/man/man1/wget.1.bz2
 
 %changelog
+* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.13.4-2
+- Add default configuration for ca bundle included with OpenSSL
+
 * Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.13.4-1
 - Upgrade to 1.13.4
 - Optimize for size
