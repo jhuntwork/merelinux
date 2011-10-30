@@ -1,7 +1,7 @@
 Summary: Log Rotation Tool
 Name: logrotate
-Version: 3.7.9
-Release: 2
+Version: 3.8.1
+Release: 1
 Group: Services
 License: GPL
 Distribution: LightCube OS
@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: https://fedorahosted.org/logrotate
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-BuildRequires: digest(%{SOURCE0}) = eeba9dbca62a9210236f4b83195e4ea5
+BuildRequires: digest(sha1:%{SOURCE0}) = 1df36cee76a9c4c7438f35ca3599a7bdd68a09b5
 BuildRequires: popt-devel
 
 %description
@@ -23,25 +23,37 @@ a certain size.
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
-make BASEDIR="/usr"
+make BASEDIR="/usr" LFS='-Os -pipe'
 
 %install
 make PREFIX=%{buildroot} MANDIR="/usr/share/man" install
 install -dv %{buildroot}/etc/logrotate.d
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+install -dv %{buildroot}/usr/lib/logrotate
+install -m 0754 examples/logrotate.cron \
+  %{buildroot}/usr/lib/logrotate/logrotate.cron.sh
+sed 's@^#compress@compress@' examples/logrotate-default \
+  > %{buildroot}/etc/logrotate.conf
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
+%config /etc/logrotate.conf
 %dir /etc/logrotate.d
+/usr/lib/logrotate
 /usr/sbin/logrotate
 /usr/share/man/man5/logrotate.conf.5.bz2
 /usr/share/man/man8/logrotate.8.bz2
 
 %changelog
+* Tue Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.8.1-1
+- Upgrade to 3.8.1
+- Add a default logrotate.conf
+- Optimize for size
+
 * Sun Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.7.9-1
 - Fixes to /etc/logrotate.d directory
 

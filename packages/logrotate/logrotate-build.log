@@ -1,0 +1,70 @@
+Fetching(Source0): http://dev.lightcube.us/sources/logrotate/logrotate-3.8.1.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.98134
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf logrotate-3.8.1
++ /bin/gzip -dc /usr/src/rpm/SOURCES/logrotate-3.8.1.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd logrotate-3.8.1
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.98134
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd logrotate-3.8.1
++ make BASEDIR=/usr 'LFS=-Os -pipe'
+cc -E -Wall -D_GNU_SOURCE -DLinux -DVERSION=\"3.8.1\" -O2 -Os -pipe    -M logrotate.c log.c config.c basenames.c  > .depend
+cc -Wall -D_GNU_SOURCE -DLinux -DVERSION=\"3.8.1\" -O2 -Os -pipe      -c -o logrotate.o logrotate.c
+cc -Wall -D_GNU_SOURCE -DLinux -DVERSION=\"3.8.1\" -O2 -Os -pipe      -c -o log.o log.c
+cc -Wall -D_GNU_SOURCE -DLinux -DVERSION=\"3.8.1\" -O2 -Os -pipe      -c -o config.o config.c
+cc -Wall -D_GNU_SOURCE -DLinux -DVERSION=\"3.8.1\" -O2 -Os -pipe      -c -o basenames.o basenames.c
+cc    logrotate.o log.o config.o basenames.o -lpopt  -o logrotate
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.35429
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/logrotate-root
++ /bin/mkdir -p /var/tmp/logrotate-root
++ cd logrotate-3.8.1
++ make PREFIX=/var/tmp/logrotate-root MANDIR=/usr/share/man install
+[ -d /var/tmp/logrotate-root//usr/sbin ] || mkdir -p /var/tmp/logrotate-root//usr/sbin
+[ -d /var/tmp/logrotate-root//usr/share/man ] || mkdir -p /var/tmp/logrotate-root//usr/share/man
+[ -d /var/tmp/logrotate-root//usr/share/man/man8 ] || mkdir -p /var/tmp/logrotate-root//usr/share/man/man8
+[ -d /var/tmp/logrotate-root//usr/share/man/man5 ] || mkdir -p /var/tmp/logrotate-root//usr/share/man/man5
+if [ "Linux" = HP-UX ]; then \
+install logrotate /var/tmp/logrotate-root//usr/sbin 0755 bin bin; \
+install logrotate.8 /var/tmp/logrotate-root//usr/share/man/man`echo logrotate.8 | sed "s/.*\.//"` 0644 bin bin; \
+install logrotate.conf.5 /var/tmp/logrotate-root//usr/share/man/man`echo logrotate.conf.5 | sed "s/.*\.//"` 0644 bin bin; \
+else if [ "Linux" = FreeBSD ]; then \
+ logrotate /usr/sbin; \
+ logrotate.8 /usr/share/man/man`echo logrotate.8 | sed "s/.*\.//"`/logrotate.8; \
+ logrotate.conf.5 /usr/share/man/man`echo logrotate.conf.5 | sed "s/.*\.//"`/logrotate.conf.5; \
+else \
+install -m 755 logrotate /var/tmp/logrotate-root//usr/sbin; \
+install -m 644 logrotate.8 /var/tmp/logrotate-root//usr/share/man/man`echo logrotate.8 | sed "s/.*\.//"`/logrotate.8; \
+install -m 644 logrotate.conf.5 /var/tmp/logrotate-root//usr/share/man/man`echo logrotate.conf.5 | sed "s/.*\.//"`/logrotate.conf.5; \
+fi; fi
++ install -dv /var/tmp/logrotate-root/etc/logrotate.d
+install: creating directory `/var/tmp/logrotate-root/etc'
+install: creating directory `/var/tmp/logrotate-root/etc/logrotate.d'
++ install -dv /var/tmp/logrotate-root/usr/lib/logrotate
+install: creating directory `/var/tmp/logrotate-root/usr/lib'
+install: creating directory `/var/tmp/logrotate-root/usr/lib/logrotate'
++ install -m 0754 examples/logrotate.cron /var/tmp/logrotate-root/usr/lib/logrotate/logrotate.cron.sh
++ sed 's@^#compress@compress@' examples/logrotate-default
++ /usr/lib/rpm/compress_man.sh /var/tmp/logrotate-root
++ /usr/lib/rpm/strip.sh /var/tmp/logrotate-root
++ exit 0
+Processing files: logrotate-3.8.1-1.x86_64
+Provides: config(logrotate) = 0:3.8.1-1
+Requires: /bin/sh libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libpopt.so.0()(64bit) libpopt.so.0(LIBPOPT_0)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/logrotate-root
+Wrote: /usr/src/rpm/SRPMS/logrotate-3.8.1-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/logrotate-3.8.1-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.35429
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd logrotate-3.8.1
++ /bin/rm -rf /var/tmp/logrotate-root
