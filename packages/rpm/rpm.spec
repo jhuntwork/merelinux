@@ -1,7 +1,7 @@
 Summary: rpm package manager
 Name: rpm
 Version: 5.3.11
-Release: 2
+Release: 3
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -16,15 +16,12 @@ BuildRequires: db-devel
 BuildRequires: elfutils-devel
 BuildRequires: expat-devel
 BuildRequires: file-devel
-BuildRequires: libxml2-devel
 BuildRequires: neon-devel
 BuildRequires: openssl-devel
 BuildRequires: pcre-devel
 BuildRequires: popt-devel
-BuildRequires: Python-devel
+BuildRequires: python-devel
 BuildRequires: readline-devel
-BuildRequires: sqlite-devel
-BuildRequires: xar-devel
 BuildRequires: xz-devel
 BuildRequires: zlib-devel
 
@@ -36,7 +33,8 @@ Unix software packages.
 %package devel
 Summary: Headers and libraries for developing with %{name}
 Group: Development/Libraries
-Requires: %{name}, %{name}-build
+Requires: %{name} >= %{version}
+Requires: %{name}-build >= %{version}
 
 %description devel
 Headers and libraries for developing with %{name}
@@ -54,7 +52,7 @@ Libraries for using %{name} with Python
 %package build
 Summary: Tools for building rpm packages
 Group: Development/Utilities
-Requires: %{name}
+Requires: %{name} >= %{version}
 
 %description build
 Tools for building rpm packages
@@ -75,14 +73,15 @@ sed -i '/^%%_lib/s/lib$/lib64/' macros/macros.in
 # FHS mods
 sed -i 's@_prefix}/info@_datadir}/info@' macros/macros.in
 sed -i 's@_prefix}/man@_datadir}/man@' macros/macros.in
-export CFLAGS="-I/usr/include/xar"
-export LDFLAGS="%{LDFLAGS}"
-#sed -i "/^PACKAGE_BUGREPORT=/s|'.*'|support@lightcube.us|" configure
+export CFLAGS="-Os -pipe"
+# Use the internal (shipped) version of db due to the tight
+# coupling of rpm and db - upgrading is difficult otherwise
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
+  --disable-openmp \
   --with-bzip2=external \
-  --with-db=external \
+  --with-expat=external \
   --with-file=external \
   --with-libelf \
   --with-lua=internal \
@@ -92,11 +91,9 @@ export LDFLAGS="%{LDFLAGS}"
   --with-popt=external \
   --with-python \
   --without-selinux \
-  --with-sqlite=external \
-  --with-xar=external \
+  --with-readline \
   --with-xz=external \
-  --with-zlib \
-  --disable-openmp
+  --with-zlib
 make %{PMFLAGS}
 
 %install
@@ -104,10 +101,9 @@ make DESTDIR=%{buildroot} install
 install -dv %{buildroot}/var/lib/rpm/{log,tmp}
 install -dv %{buildroot}/etc/rpm
 install -dv %{buildroot}/usr/src/rpm
-echo "%%CFLAGS    -O2 -pipe" >> %{buildroot}/etc/rpm/macros
-echo "%%LDFLAGS   -s" >> %{buildroot}/etc/rpm/macros
 echo "%%PMFLAGS   -j1" >> %{buildroot}/etc/rpm/macros
 echo "%%compress_man	/usr/lib/rpm/compress_man.sh %%{buildroot}" >> %{buildroot}/etc/rpm/macros
+echo "%%strip		/usr/lib/rpm/strip.sh %%{buildroot}" >> %{buildroot}/etc/rpm/macros
 
 # Add compress man helper
 cat > %{buildroot}/usr/lib/rpm/compress_man.sh << "EOF"
@@ -123,8 +119,17 @@ done
 EOF
 chmod 0755 %{buildroot}/usr/lib/rpm/compress_man.sh
 
+# Add strip helper
+cat > %{buildroot}/usr/lib/rpm/strip.sh << "EOF"
+#!/bin/bash
+find ${1} -type f -exec strip --strip-unneeded -R .comment -R .note '{}' \; 2>/dev/null || /bin/true
+EOF
+chmod 0755 %{buildroot}/usr/lib/rpm/strip.sh
+
 # Compress man pages
 %{compress_man}
+# Strip
+find %{buildroot} -type f -exec strip --strip-unneeded -R .comment -R .note '{}' \; 2>/dev/null || /bin/true
 
 # Create /etc/rpm/platform
 cat > %{buildroot}/etc/rpm/platform << "EOF"
@@ -167,7 +172,6 @@ rm -rf %{buildroot}
 /usr/lib/rpm/bin/rpmdeps
 /usr/lib/rpm/bin/rpmdigest
 /usr/lib/rpm/bin/rpmspecdump
-/usr/lib/rpm/bin/txar
 /usr/lib/rpm/bin/wget
 /usr/lib/rpm/bin/abi-compliance-checker.pl
 /usr/lib/rpm/bin/api-sanity-autotest.pl
@@ -283,17 +287,24 @@ rm -rf %{buildroot}
 /usr/lib/rpm/perl.prov
 /usr/lib/rpm/php.prov
 /usr/lib/rpm/php.req
+/usr/lib/rpm/strip.sh
 /usr/lib/rpm/vcheck
 %dir /usr/src/rpm
 /usr/share/man/man8/rpmbuild.8.bz2
 /usr/share/man/*/man8/rpmbuild.8.bz2
 
 %changelog
+* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-3
+- Remove dependency on sqlite, libxml2, xar - unused
+- Add strip macro support
+- Optimize for size
+
 * Mon Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-2
 - Fix requires for rpm-python, add dep on setuptools
 
 * Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-1
 - Upgrade to 5.3.11 - Fixes an issue with honoring %config directives
+- Add external beecrypt since it is now mandatory
 
 * Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.6-2
 - Add /usr/src/rpm directory to rpm-build

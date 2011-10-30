@@ -1,7 +1,7 @@
 Summary: Linux-PAM (Pluggable Authentication Modules for Linux)
 Name: Linux-PAM
 Version: 1.1.4
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -32,18 +32,19 @@ Libaries, headers and documentation for developing with %{_name}
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --docdir=/usr/share/doc/%{name}-%{version} \
   --libdir=/%{_lib} \
   --sbindir=/%{_lib}/security \
-  --enable-read-both-confs \
-  pam_cv_ld_no_undefined=no
+  --enable-read-both-confs
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 install -dv %{buildroot}/etc/pam.d
 %{compress_man}
+%{strip}
 %find_lang %{name}
 
 %clean
@@ -77,6 +78,10 @@ rm -rf %{buildroot}
 /usr/share/man/man3/*
 
 %changelog
+* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.4-2
+- Properly link against db
+- Optimize for size
+
 * Wed Jul 27 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.4-1
 - Upgrade to 1.1.4
 
