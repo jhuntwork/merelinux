@@ -1,19 +1,21 @@
 Summary: The XSLT C library for GNOME
 Name: libxslt
 Version: 1.1.26
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.xmlsoft.org/XSLT
-Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: ftp://xmlsoft.org/libxslt/libxslt-1.1.26.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 69f74df8228b504a87e2b257c2d5238281c65154
 BuildRequires: libxml2-devel
-BuildRequires: Python-devel
+BuildRequires: libxml2-python
+BuildRequires: python-devel
 BuildRequires: libgcrypt-devel
 BuildRequires: libgpg-error-devel
+BuildRequires: zlib-devel
 
 %description
 Libxslt is the XSLT C library developed for the GNOME project. XSLT itself is
@@ -33,19 +35,20 @@ Headers and libraries for developing with %{name}
 %package python
 Summary: Libraries for developing with libxslt in Python
 Group: Development/Libraries
-Requires: %{name}, Python
+Requires: %{name}, python(abi) = 2.7
 
 %description python
-Libraries for developing with libxslt in Python
+Libraries for developing with libxslt in python
 
 %prep
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -54,6 +57,7 @@ make DESTDIR=%{buildroot} install
   mv -v %{buildroot}/usr/%{_lib}/python2.7 %{buildroot}/usr/lib/
 %endif
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -98,5 +102,8 @@ rm -rf %{buildroot}
 /usr/share/doc/libxslt-python-%{version}
 
 %changelog
+* Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.26-2
+- Optimize for size
+
 * Sat Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.1.26-1
 - Initial version
