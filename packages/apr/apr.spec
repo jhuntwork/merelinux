@@ -1,15 +1,15 @@
 Summary: Apache Portable Runtime
 Name: apr
-Version: 1.4.2
+Version: 1.4.5
 Release: 1
 Group: System Environment/Libraries
 License: Apache
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://apr.apache.org
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://apache.tradebit.com/pub//apr/apr-1.4.5.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = d48324efb0280749a5d7ccbb053d68545c568b4b
+BuildRequires: digest(sha1:%{SOURCE0}) = 517de5e3cc1e3be810d9bc95508ab66bb8ebe7cb
 
 %description
 Apache project core software libraries
@@ -26,14 +26,16 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --with-installbuilddir=/usr/share/apr-1
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -57,5 +59,9 @@ rm -rf %{buildroot}
 /usr/share/apr-1
 
 %changelog
+* Wed Nov 02 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4.5-1
+- Upgrade to 1.4.5
+- Optimize for size
+
 * Wed Apr 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4.2-1
 - Initial version

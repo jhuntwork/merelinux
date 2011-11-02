@@ -1,0 +1,783 @@
+Fetching(Source0): http://apache.tradebit.com/pub//apr/apr-1.4.5.tar.bz2
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.71069
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf apr-1.4.5
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/apr-1.4.5.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd apr-1.4.5
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.14456
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd apr-1.4.5
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --libdir=/usr/lib64 --with-installbuilddir=/usr/share/apr-1
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+Configuring APR library
+Platform: x86_64-unknown-linux-gnu
+checking for working mkdir -p... yes
+APR Version: 1.4.5
+checking for chosen layout... apr
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for a sed that does not truncate output... /bin/sed
+Applying APR hints file rules for x86_64-unknown-linux-gnu
+  setting CPPFLAGS to "-DLINUX=2"
+  adding "-D_REENTRANT" to CPPFLAGS
+  adding "-D_GNU_SOURCE" to CPPFLAGS
+(Default will be unix)
+checking whether make sets $(MAKE)... yes
+checking how to run the C preprocessor... gcc -E
+checking for gawk... gawk
+checking whether ln -s works... yes
+checking for ranlib... ranlib
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for rm... rm
+checking for as... as
+checking for cpp... cpp
+checking for ar... ar
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for library containing strerror... none required
+checking whether system uses EBCDIC... no
+performing libtool configuration...
+checking for a sed that does not truncate output... /bin/sed
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for BSD-compatible nm... /usr/bin/nm -B
+checking how to recognize dependent libraries... pass_all
+checking dlfcn.h usability... yes
+checking dlfcn.h presence... yes
+checking for dlfcn.h... yes
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking how to run the C++ preprocessor... g++ -E
+checking for g77... no
+checking for xlf... no
+checking for f77... no
+checking for frt... no
+checking for pgf77... no
+checking for cf77... no
+checking for fort77... no
+checking for fl32... no
+checking for af77... no
+checking for xlf90... no
+checking for f90... no
+checking for pgf90... no
+checking for pghpf... no
+checking for epcf90... no
+checking for gfortran... no
+checking for g95... no
+checking for xlf95... no
+checking for f95... no
+checking for fort... no
+checking for ifort... no
+checking for ifc... no
+checking for efc... no
+checking for pgf95... no
+checking for lf95... no
+checking for ftn... no
+checking whether we are using the GNU Fortran 77 compiler... no
+checking whether  accepts -g... no
+checking the maximum length of command line arguments... 1572864
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for objdir... .libs
+checking for ar... (cached) ar
+checking for ranlib... (cached) ranlib
+checking for strip... strip
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC
+checking if gcc PIC flag -fPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+configure: creating libtool
+appending configuration tag "CXX" to libtool
+checking for ld used by g++... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking for g++ option to produce PIC... -fPIC
+checking if g++ PIC flag -fPIC works... yes
+checking if g++ static flag -static works... yes
+checking if g++ supports -c -o file.o... yes
+checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... GNU/Linux ld.so
+(cached) (cached) checking how to hardcode library paths into programs... immediate
+appending configuration tag "F77" to libtool
+
+Check for compiler flags...
+checking whether the compiler provides atomic builtins... yes
+checking whether to enable -D_LARGEFILE64_SOURCE... no
+
+Checking for libraries...
+checking for library containing gethostbyname... none required
+checking for library containing gethostname... none required
+checking for library containing socket... none required
+checking for library containing crypt... -lcrypt
+checking for main in -ltruerand... no
+checking for library containing modf... none required
+
+Checking for Threads...
+checking pthread.h usability... yes
+checking pthread.h presence... yes
+checking for pthread.h... yes
+checking for CFLAGS needed for pthreads... -pthread
+  adding "-pthread" to CFLAGS
+checking for LIBS needed for pthreads... -lpthread
+  adding "-lpthread" to LIBS
+checking for pthread.h... (cached) yes
+checking whether pthread_getspecific takes two arguments... no
+checking whether pthread_attr_getdetachstate takes one argument... no
+checking for recursive mutex support... yes
+checking for pthread_key_delete... yes
+checking for pthread_rwlock_init... yes
+checking for pthread_attr_setguardsize... yes
+checking for pthread_yield... yes
+checking for pthread_rwlock_t... yes
+APR will use threads
+checking for readdir in -lc_r... no
+checking for gethostbyname in -lc_r... no
+checking for gethostbyaddr in -lc_r... no
+checking for getservbyname in -lc_r... no
+checking for gethostbyname_r... yes
+checking for gethostbyaddr_r... yes
+checking for getservbyname_r... yes
+checking for sigsuspend... yes
+checking for sigwait... yes
+checking for poll... yes
+checking for kqueue... no
+checking for port_create... no
+checking for epoll support... yes
+checking for epoll_create1 support... yes
+checking for dup3 support... yes
+checking for accept4 support... yes
+checking for SOCK_CLOEXEC support... yes
+checking for fdatasync... yes
+checking for epoll_create1 support... (cached) yes
+checking for dup3 support... (cached) yes
+checking for accept4 support... (cached) yes
+checking for SOCK_CLOEXEC support... (cached) yes
+checking for getpwnam_r... yes
+checking for getpwuid_r... yes
+checking for getgrnam_r... yes
+checking for getgrgid_r... yes
+
+Checking for Shared Memory Support...
+checking for library containing shm_open... -lrt
+checking for sys/types.h... (cached) yes
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking sys/ipc.h usability... yes
+checking sys/ipc.h presence... yes
+checking for sys/ipc.h... yes
+checking sys/mutex.h usability... no
+checking sys/mutex.h presence... no
+checking for sys/mutex.h... no
+checking sys/shm.h usability... yes
+checking sys/shm.h presence... yes
+checking for sys/shm.h... yes
+checking sys/file.h usability... yes
+checking sys/file.h presence... yes
+checking for sys/file.h... yes
+checking kernel/OS.h usability... no
+checking kernel/OS.h presence... no
+checking for kernel/OS.h... no
+checking os2.h usability... no
+checking os2.h presence... no
+checking for os2.h... no
+checking windows.h usability... no
+checking windows.h presence... no
+checking for windows.h... no
+checking for mmap... yes
+checking for munmap... yes
+checking for shm_open... yes
+checking for shm_unlink... yes
+checking for shmget... yes
+checking for shmat... yes
+checking for shmdt... yes
+checking for shmctl... yes
+checking for create_area... no
+checking for MAP_ANON in sys/mman.h... yes
+checking for /dev/zero... yes
+checking for mmap that can map /dev/zero... yes
+decision on anonymous shared memory allocation method... 4.4BSD-style mmap() via MAP_ANON
+decision on namebased memory allocation method... SysV IPC shmget()
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for calloc... yes
+checking for setsid... yes
+checking for isinf... yes
+checking for isnan... yes
+checking for getenv... yes
+checking for putenv... yes
+checking for setenv... yes
+checking for unsetenv... yes
+checking for writev... yes
+checking for getifaddrs... yes
+checking for utime... yes
+checking for utimes... yes
+checking for setrlimit... yes
+checking for getrlimit... yes
+checking for sendfilev in -lsendfile... no
+checking for sendfile... yes
+checking for send_file... no
+checking for sendfilev... no
+checking for sigaction... yes
+checking whether sys_siglist is declared... yes
+checking for fork... yes
+checking for inet_addr... yes
+checking for inet_network... yes
+checking for _getch... no
+checking for strerror_r... yes
+checking for type of return code from strerror_r... pointer
+checking for mmap... (cached) yes
+checking for memmove... yes
+checking for getpass... yes
+checking for getpassphrase... no
+checking for gmtime_r... yes
+checking for localtime_r... yes
+checking for mkstemp... yes
+checking whether sigwait takes one argument... no
+checking for ANSI C header files... (cached) yes
+checking ByteOrder.h usability... no
+checking ByteOrder.h presence... no
+checking for ByteOrder.h... no
+checking conio.h usability... no
+checking conio.h presence... no
+checking for conio.h... no
+checking crypt.h usability... yes
+checking crypt.h presence... yes
+checking for crypt.h... yes
+checking ctype.h usability... yes
+checking ctype.h presence... yes
+checking for ctype.h... yes
+checking dir.h usability... no
+checking dir.h presence... no
+checking for dir.h... no
+checking dirent.h usability... yes
+checking dirent.h presence... yes
+checking for dirent.h... yes
+checking dl.h usability... no
+checking dl.h presence... no
+checking for dl.h... no
+checking for dlfcn.h... (cached) yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking grp.h usability... yes
+checking grp.h presence... yes
+checking for grp.h... yes
+checking io.h usability... no
+checking io.h presence... no
+checking for io.h... no
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking mach-o/dyld.h usability... no
+checking mach-o/dyld.h presence... no
+checking for mach-o/dyld.h... no
+checking malloc.h usability... yes
+checking malloc.h presence... yes
+checking for malloc.h... yes
+checking for memory.h... (cached) yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking osreldate.h usability... no
+checking osreldate.h presence... no
+checking for osreldate.h... no
+checking poll.h usability... yes
+checking poll.h presence... yes
+checking for poll.h... yes
+checking process.h usability... no
+checking process.h presence... no
+checking for process.h... no
+checking pwd.h usability... yes
+checking pwd.h presence... yes
+checking for pwd.h... yes
+checking semaphore.h usability... yes
+checking semaphore.h presence... yes
+checking for semaphore.h... yes
+checking signal.h usability... yes
+checking signal.h presence... yes
+checking for signal.h... yes
+checking stdarg.h usability... yes
+checking stdarg.h presence... yes
+checking for stdarg.h... yes
+checking stddef.h usability... yes
+checking stddef.h presence... yes
+checking for stddef.h... yes
+checking stdio.h usability... yes
+checking stdio.h presence... yes
+checking for stdio.h... yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for strings.h... (cached) yes
+checking sysapi.h usability... no
+checking sysapi.h presence... no
+checking for sysapi.h... no
+checking sysgtime.h usability... no
+checking sysgtime.h presence... no
+checking for sysgtime.h... no
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking time.h usability... yes
+checking time.h presence... yes
+checking for time.h... yes
+checking tpfeq.h usability... no
+checking tpfeq.h presence... no
+checking for tpfeq.h... no
+checking tpfio.h usability... no
+checking tpfio.h presence... no
+checking for tpfio.h... no
+checking for unistd.h... (cached) yes
+checking unix.h usability... no
+checking unix.h presence... no
+checking for unix.h... no
+checking for windows.h... (cached) no
+checking winsock2.h usability... no
+checking winsock2.h presence... no
+checking for winsock2.h... no
+checking arpa/inet.h usability... yes
+checking arpa/inet.h presence... yes
+checking for arpa/inet.h... yes
+checking for kernel/OS.h... (cached) no
+checking net/errno.h usability... no
+checking net/errno.h presence... no
+checking for net/errno.h... no
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking netinet/sctp.h usability... no
+checking netinet/sctp.h presence... no
+checking for netinet/sctp.h... no
+checking netinet/sctp_uio.h usability... no
+checking netinet/sctp_uio.h presence... no
+checking for netinet/sctp_uio.h... no
+checking for sys/file.h... (cached) yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking for sys/mman.h... (cached) yes
+checking sys/param.h usability... yes
+checking sys/param.h presence... yes
+checking for sys/param.h... yes
+checking sys/poll.h usability... yes
+checking sys/poll.h presence... yes
+checking for sys/poll.h... yes
+checking sys/resource.h usability... yes
+checking sys/resource.h presence... yes
+checking for sys/resource.h... yes
+checking sys/select.h usability... yes
+checking sys/select.h presence... yes
+checking for sys/select.h... yes
+checking sys/sem.h usability... yes
+checking sys/sem.h presence... yes
+checking for sys/sem.h... yes
+checking sys/sendfile.h usability... yes
+checking sys/sendfile.h presence... yes
+checking for sys/sendfile.h... yes
+checking sys/signal.h usability... yes
+checking sys/signal.h presence... yes
+checking for sys/signal.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/sockio.h usability... no
+checking sys/sockio.h presence... no
+checking for sys/sockio.h... no
+checking for sys/stat.h... (cached) yes
+checking sys/sysctl.h usability... yes
+checking sys/sysctl.h presence... yes
+checking for sys/sysctl.h... yes
+checking sys/syslimits.h usability... no
+checking sys/syslimits.h presence... no
+checking for sys/syslimits.h... no
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking for sys/types.h... (cached) yes
+checking sys/uio.h usability... yes
+checking sys/uio.h presence... yes
+checking for sys/uio.h... yes
+checking sys/un.h usability... yes
+checking sys/un.h presence... yes
+checking for sys/un.h... yes
+checking sys/wait.h usability... yes
+checking sys/wait.h presence... yes
+checking for sys/wait.h... yes
+checking for netinet/tcp.h... yes
+checking for h_errno in netdb.h... yes
+checking for off_t... yes
+checking for pid_t... yes
+checking for size_t... yes
+checking for uid_t in sys/types.h... yes
+checking for ssize_t... yes
+checking for inline... inline
+checking for an ANSI C-conforming const... yes
+checking whether setpgrp takes no argument... yes
+checking for socklen_t... yes
+checking size of void*... 8
+checking size of char... 1
+checking size of int... 4
+checking size of long... 8
+checking size of short... 2
+checking size of long long... 8
+checking for INT64_C... yes
+checking size of pid_t... 4
+checking whether ssize_t and int are the same... no
+checking whether ssize_t and long are the same... yes
+checking whether size_t and unsigned int are the same... no
+checking whether size_t and unsigned long are the same... yes
+checking size of ssize_t... 8
+checking which format to use for apr_ssize_t... %ld
+checking size of size_t... 8
+checking which format to use for apr_size_t... %lu
+checking size of off_t... 8
+checking which type to use for apr_off_t... off_t
+checking size of ino_t... 8
+configure: using ino_t for ino_t
+checking whether byte ordering is bigendian... no
+checking size of struct iovec... 16
+checking for strnicmp... no
+checking for strncasecmp... yes
+checking for stricmp... no
+checking for strcasecmp... yes
+checking for strdup... yes
+checking for strstr... yes
+checking for memchr... yes
+checking for strtol... yes
+
+Checking for DSO...
+checking for dlopen... no
+checking for dlopen in -ldl... yes
+  adding "-ldl" to LIBS
+checking for dlsym... yes
+
+Checking for Processes...
+checking for waitpid... yes
+checking for Variable Length Arrays... yes
+checking struct rlimit... yes
+
+Checking for Locking...
+checking for semget... yes
+checking for semctl... yes
+checking for flock... yes
+checking for semaphore.h... (cached) yes
+checking OS.h usability... no
+checking OS.h presence... no
+checking for OS.h... no
+checking for library containing sem_open... none required
+checking for sem_close... yes
+checking for sem_unlink... yes
+checking for sem_post... yes
+checking for sem_wait... yes
+checking for create_sem... no
+checking for working sem_open... yes
+checking for union semun in sys/sem.h... no
+checking for LOCK_EX in sys/file.h... yes
+checking for F_SETLK in fcntl.h... yes
+checking for SEM_UNDO in sys/sem.h... yes
+checking for POLLIN in poll.h sys/poll.h... yes
+checking for PTHREAD_PROCESS_SHARED in pthread.h... yes
+checking for pthread_mutexattr_setpshared... yes
+checking for working PROCESS_SHARED locks... yes
+checking for robust cross-process mutex support... yes
+decision on apr_lock implementation method... SysV IPC semget()
+checking if fcntl returns EACCES when F_SETLK is already held... no
+checking if all interprocess locks affect threads... no
+checking if POSIX sems affect threads in the same process... no
+checking if SysV sems affect threads in the same process... no
+checking if fcntl locks affect threads in the same process... no
+checking if flock locks affect threads in the same process... no
+checking for entropy source... /dev/urandom
+
+Checking for File Info Support...
+checking for struct stat.st_blocks... yes
+checking for struct stat.st_atimensec... no
+checking for struct stat.st_ctimensec... no
+checking for struct stat.st_mtimensec... no
+checking for struct stat.st_atim.tv_nsec... yes
+checking for struct stat.st_ctim.tv_nsec... yes
+checking for struct stat.st_mtim.tv_nsec... yes
+checking for struct stat.st_atime_n... no
+checking for struct stat.st_ctime_n... no
+checking for struct stat.st_mtime_n... no
+checking for inode member of struct dirent... d_fileno
+checking for file type member of struct dirent... d_type
+
+Checking for OS UUID Support...
+checking uuid.h usability... no
+checking uuid.h presence... no
+checking for uuid.h... no
+checking uuid/uuid.h usability... no
+checking uuid/uuid.h presence... no
+checking for uuid/uuid.h... no
+checking sys/uuid.h usability... no
+checking sys/uuid.h presence... no
+checking for sys/uuid.h... no
+checking for library containing uuid_create... no
+checking for library containing uuid_generate... no
+checking for uuid_create... no
+checking for uuid_generate... no
+checking for os uuid usability... no
+
+Checking for Time Support...
+checking for struct tm.tm_gmtoff... yes
+checking for struct tm.__tm_gmtoff... no
+
+Checking for Networking support...
+checking for type in_addr... yes
+checking if fd == socket on this platform... yes
+checking style of gethostbyname_r routine... glibc2
+checking 3rd argument to the gethostbyname_r routines... char
+checking style of getservbyname_r routine... glibc2
+checking if TCP_NODELAY setting is inherited from listening sockets... yes
+checking if O_NONBLOCK setting is inherited from listening sockets... no
+checking whether TCP_NODELAY and TCP_CORK can both be enabled... yes
+checking for TCP_CORK in netinet/tcp.h... yes
+checking for TCP_NOPUSH in netinet/tcp.h... no
+checking for SO_ACCEPTFILTER in sys/socket.h... no
+checking whether SCTP is supported... no
+checking for struct ip_mreq... yes
+checking for set_h_errno... no
+
+Checking for IPv6 Networking support...
+checking for library containing getaddrinfo... none required
+checking for library containing gai_strerror... none required
+checking for library containing getnameinfo... none required
+checking for gai_strerror... yes
+checking for working getaddrinfo... yes
+checking for negative error codes for getaddrinfo... yes
+checking for working getnameinfo... yes
+checking for sockaddr_in6... yes
+checking for sockaddr_storage... yes
+checking for working AI_ADDRCONFIG... yes
+checking if APR supports IPv6... yes
+checking langinfo.h usability... yes
+checking langinfo.h presence... yes
+checking for langinfo.h... yes
+checking for nl_langinfo... yes
+  setting have_unicode_fs to "0"
+  setting apr_has_xthread_files to "0"
+  setting apr_procattr_user_set_requires_password to "0"
+  setting apr_thread_func to ""
+  setting apr_has_user to "1"
+
+Restore user-defined environment settings...
+  restoring CPPFLAGS to ""
+  setting EXTRA_CPPFLAGS to "-DLINUX=2 -D_REENTRANT -D_GNU_SOURCE"
+  restoring CFLAGS to "-Os -pipe"
+  setting EXTRA_CFLAGS to " -pthread"
+  restoring LDFLAGS to ""
+  setting EXTRA_LDFLAGS to ""
+  restoring LIBS to ""
+  setting EXTRA_LIBS to "-lrt -lcrypt  -lpthread -ldl"
+  restoring INCLUDES to ""
+  setting EXTRA_INCLUDES to ""
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating include/apr.h
+config.status: creating build/apr_rules.mk
+config.status: creating build/pkg/pkginfo
+config.status: creating apr-1-config
+config.status: creating apr.pc
+config.status: creating test/Makefile
+config.status: creating test/internal/Makefile
+config.status: creating include/arch/unix/apr_private.h
+config.status: executing default commands
++ make -j4
+make[1]: Entering directory `/usr/src/rpm/BUILD/apr-1.4.5'
+gawk -f /usr/src/rpm/BUILD/apr-1.4.5/build/make_exports.awk /usr/src/rpm/BUILD/apr-1.4.5/include/apr_allocator.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_atomic.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_dso.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_env.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_errno.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_file_info.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_file_io.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_fnmatch.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_general.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_getopt.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_global_mutex.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_hash.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_inherit.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_lib.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_mmap.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_network_io.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_poll.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_pools.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_portable.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_proc_mutex.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_random.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_ring.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_shm.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_signal.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_strings.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_support.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_tables.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_thread_cond.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_thread_mutex.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_thread_proc.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_thread_rwlock.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_time.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_user.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_version.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_want.h > exports.c
+gawk -f /usr/src/rpm/BUILD/apr-1.4.5/build/make_var_export.awk /usr/src/rpm/BUILD/apr-1.4.5/include/apr_allocator.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_atomic.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_dso.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_env.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_errno.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_file_info.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_file_io.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_fnmatch.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_general.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_getopt.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_global_mutex.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_hash.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_inherit.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_lib.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_mmap.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_network_io.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_poll.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_pools.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_portable.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_proc_mutex.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_random.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_ring.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_shm.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_signal.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_strings.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_support.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_tables.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_thread_cond.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_thread_mutex.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_thread_proc.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_thread_rwlock.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_time.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_user.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_version.h /usr/src/rpm/BUILD/apr-1.4.5/include/apr_want.h > export_vars.c
+sed 's,^\(location=\).*$,\1installed,' < apr-1-config > apr-config.out
+sed -e 's,^\(apr_build.*=\).*$,\1/usr/share/apr-1,' -e 's,^\(top_build.*=\).*$,\1/usr/share/apr-1,' < build/apr_rules.mk > build/apr_rules.out
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o passwd/apr_getpass.lo -c passwd/apr_getpass.c && touch passwd/apr_getpass.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o strings/apr_cpystrn.lo -c strings/apr_cpystrn.c && touch strings/apr_cpystrn.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o strings/apr_fnmatch.lo -c strings/apr_fnmatch.c && touch strings/apr_fnmatch.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o strings/apr_snprintf.lo -c strings/apr_snprintf.c && touch strings/apr_snprintf.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o strings/apr_strings.lo -c strings/apr_strings.c && touch strings/apr_strings.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o strings/apr_strnatcmp.lo -c strings/apr_strnatcmp.c && touch strings/apr_strnatcmp.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o strings/apr_strtok.lo -c strings/apr_strtok.c && touch strings/apr_strtok.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o tables/apr_hash.lo -c tables/apr_hash.c && touch tables/apr_hash.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o tables/apr_tables.lo -c tables/apr_tables.c && touch tables/apr_tables.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o atomic/unix/builtins.lo -c atomic/unix/builtins.c && touch atomic/unix/builtins.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o atomic/unix/ia32.lo -c atomic/unix/ia32.c && touch atomic/unix/ia32.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o atomic/unix/mutex.lo -c atomic/unix/mutex.c && touch atomic/unix/mutex.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o atomic/unix/ppc.lo -c atomic/unix/ppc.c && touch atomic/unix/ppc.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o atomic/unix/s390.lo -c atomic/unix/s390.c && touch atomic/unix/s390.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o atomic/unix/solaris.lo -c atomic/unix/solaris.c && touch atomic/unix/solaris.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o dso/unix/dso.lo -c dso/unix/dso.c && touch dso/unix/dso.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/buffer.lo -c file_io/unix/buffer.c && touch file_io/unix/buffer.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/copy.lo -c file_io/unix/copy.c && touch file_io/unix/copy.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/dir.lo -c file_io/unix/dir.c && touch file_io/unix/dir.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/fileacc.lo -c file_io/unix/fileacc.c && touch file_io/unix/fileacc.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/filedup.lo -c file_io/unix/filedup.c && touch file_io/unix/filedup.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/filepath.lo -c file_io/unix/filepath.c && touch file_io/unix/filepath.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/filepath_util.lo -c file_io/unix/filepath_util.c && touch file_io/unix/filepath_util.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/filestat.lo -c file_io/unix/filestat.c && touch file_io/unix/filestat.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/flock.lo -c file_io/unix/flock.c && touch file_io/unix/flock.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/fullrw.lo -c file_io/unix/fullrw.c && touch file_io/unix/fullrw.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/mktemp.lo -c file_io/unix/mktemp.c && touch file_io/unix/mktemp.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/open.lo -c file_io/unix/open.c && touch file_io/unix/open.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/pipe.lo -c file_io/unix/pipe.c && touch file_io/unix/pipe.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/readwrite.lo -c file_io/unix/readwrite.c && touch file_io/unix/readwrite.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/seek.lo -c file_io/unix/seek.c && touch file_io/unix/seek.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o file_io/unix/tempdir.lo -c file_io/unix/tempdir.c && touch file_io/unix/tempdir.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o locks/unix/global_mutex.lo -c locks/unix/global_mutex.c && touch locks/unix/global_mutex.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o locks/unix/proc_mutex.lo -c locks/unix/proc_mutex.c && touch locks/unix/proc_mutex.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o locks/unix/thread_cond.lo -c locks/unix/thread_cond.c && touch locks/unix/thread_cond.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o locks/unix/thread_mutex.lo -c locks/unix/thread_mutex.c && touch locks/unix/thread_mutex.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o locks/unix/thread_rwlock.lo -c locks/unix/thread_rwlock.c && touch locks/unix/thread_rwlock.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o memory/unix/apr_pools.lo -c memory/unix/apr_pools.c && touch memory/unix/apr_pools.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o misc/unix/charset.lo -c misc/unix/charset.c && touch misc/unix/charset.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o misc/unix/env.lo -c misc/unix/env.c && touch misc/unix/env.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o misc/unix/errorcodes.lo -c misc/unix/errorcodes.c && touch misc/unix/errorcodes.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o misc/unix/getopt.lo -c misc/unix/getopt.c && touch misc/unix/getopt.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o misc/unix/otherchild.lo -c misc/unix/otherchild.c && touch misc/unix/otherchild.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o misc/unix/rand.lo -c misc/unix/rand.c && touch misc/unix/rand.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o misc/unix/start.lo -c misc/unix/start.c && touch misc/unix/start.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o misc/unix/version.lo -c misc/unix/version.c && touch misc/unix/version.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o mmap/unix/common.lo -c mmap/unix/common.c && touch mmap/unix/common.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o mmap/unix/mmap.lo -c mmap/unix/mmap.c && touch mmap/unix/mmap.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o network_io/unix/inet_ntop.lo -c network_io/unix/inet_ntop.c && touch network_io/unix/inet_ntop.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o network_io/unix/inet_pton.lo -c network_io/unix/inet_pton.c && touch network_io/unix/inet_pton.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o network_io/unix/multicast.lo -c network_io/unix/multicast.c && touch network_io/unix/multicast.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o network_io/unix/sendrecv.lo -c network_io/unix/sendrecv.c && touch network_io/unix/sendrecv.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o network_io/unix/sockaddr.lo -c network_io/unix/sockaddr.c && touch network_io/unix/sockaddr.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o network_io/unix/socket_util.lo -c network_io/unix/socket_util.c && touch network_io/unix/socket_util.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o network_io/unix/sockets.lo -c network_io/unix/sockets.c && touch network_io/unix/sockets.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o network_io/unix/sockopt.lo -c network_io/unix/sockopt.c && touch network_io/unix/sockopt.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o poll/unix/epoll.lo -c poll/unix/epoll.c && touch poll/unix/epoll.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o poll/unix/kqueue.lo -c poll/unix/kqueue.c && touch poll/unix/kqueue.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o poll/unix/poll.lo -c poll/unix/poll.c && touch poll/unix/poll.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o poll/unix/pollcb.lo -c poll/unix/pollcb.c && touch poll/unix/pollcb.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o poll/unix/pollset.lo -c poll/unix/pollset.c && touch poll/unix/pollset.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o poll/unix/port.lo -c poll/unix/port.c && touch poll/unix/port.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o poll/unix/select.lo -c poll/unix/select.c && touch poll/unix/select.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o random/unix/apr_random.lo -c random/unix/apr_random.c && touch random/unix/apr_random.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o random/unix/sha2.lo -c random/unix/sha2.c && touch random/unix/sha2.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o random/unix/sha2_glue.lo -c random/unix/sha2_glue.c && touch random/unix/sha2_glue.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o shmem/unix/shm.lo -c shmem/unix/shm.c && touch shmem/unix/shm.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o support/unix/waitio.lo -c support/unix/waitio.c && touch support/unix/waitio.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o threadproc/unix/proc.lo -c threadproc/unix/proc.c && touch threadproc/unix/proc.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o threadproc/unix/procsup.lo -c threadproc/unix/procsup.c && touch threadproc/unix/procsup.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o threadproc/unix/signals.lo -c threadproc/unix/signals.c && touch threadproc/unix/signals.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o threadproc/unix/thread.lo -c threadproc/unix/thread.c && touch threadproc/unix/thread.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o threadproc/unix/threadpriv.lo -c threadproc/unix/threadpriv.c && touch threadproc/unix/threadpriv.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o time/unix/time.lo -c time/unix/time.c && touch time/unix/time.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o time/unix/timestr.lo -c time/unix/timestr.c && touch time/unix/timestr.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o user/unix/groupinfo.lo -c user/unix/groupinfo.c && touch user/unix/groupinfo.lo
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=compile gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -o user/unix/userinfo.lo -c user/unix/userinfo.c && touch user/unix/userinfo.lo
+gcc -E -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  exports.c | grep "ap_hack_" | sed -e 's/^.*[)]\(.*\);$/\1/' >> apr.exp
+gcc -E -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  export_vars.c | sed -e 's/^\#[^!]*//' | sed -e '/^$/d' >> apr.exp
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --silent --mode=link  gcc -pthread  -Os -pipe -DHAVE_CONFIG_H -DLINUX=2 -D_REENTRANT -D_GNU_SOURCE   -I./include -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I./include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include/arch/unix -I/usr/src/rpm/BUILD/apr-1.4.5/include  -version-info 4:5:4    -o libapr-1.la -rpath /usr/lib64 passwd/apr_getpass.lo strings/apr_cpystrn.lo strings/apr_fnmatch.lo strings/apr_snprintf.lo strings/apr_strings.lo strings/apr_strnatcmp.lo strings/apr_strtok.lo tables/apr_hash.lo tables/apr_tables.lo atomic/unix/builtins.lo atomic/unix/ia32.lo atomic/unix/mutex.lo atomic/unix/ppc.lo atomic/unix/s390.lo atomic/unix/solaris.lo dso/unix/dso.lo file_io/unix/buffer.lo file_io/unix/copy.lo file_io/unix/dir.lo file_io/unix/fileacc.lo file_io/unix/filedup.lo file_io/unix/filepath.lo file_io/unix/filepath_util.lo file_io/unix/filestat.lo file_io/unix/flock.lo file_io/unix/fullrw.lo file_io/unix/mktemp.lo file_io/unix/open.lo file_io/unix/pipe.lo file_io/unix/readwrite.lo file_io/unix/seek.lo file_io/unix/tempdir.lo locks/unix/global_mutex.lo locks/unix/proc_mutex.lo locks/unix/thread_cond.lo locks/unix/thread_mutex.lo locks/unix/thread_rwlock.lo memory/unix/apr_pools.lo misc/unix/charset.lo misc/unix/env.lo misc/unix/errorcodes.lo misc/unix/getopt.lo misc/unix/otherchild.lo misc/unix/rand.lo misc/unix/start.lo misc/unix/version.lo mmap/unix/common.lo mmap/unix/mmap.lo network_io/unix/inet_ntop.lo network_io/unix/inet_pton.lo network_io/unix/multicast.lo network_io/unix/sendrecv.lo network_io/unix/sockaddr.lo network_io/unix/socket_util.lo network_io/unix/sockets.lo network_io/unix/sockopt.lo poll/unix/epoll.lo poll/unix/kqueue.lo poll/unix/poll.lo poll/unix/pollcb.lo poll/unix/pollset.lo poll/unix/port.lo poll/unix/select.lo random/unix/apr_random.lo random/unix/sha2.lo random/unix/sha2_glue.lo shmem/unix/shm.lo support/unix/waitio.lo threadproc/unix/proc.lo threadproc/unix/procsup.lo threadproc/unix/signals.lo threadproc/unix/thread.lo threadproc/unix/threadpriv.lo time/unix/time.lo time/unix/timestr.lo user/unix/groupinfo.lo user/unix/userinfo.lo   -lrt -lcrypt  -lpthread -ldl
+make[1]: Leaving directory `/usr/src/rpm/BUILD/apr-1.4.5'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.52572
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/apr-root
++ /bin/mkdir -p /var/tmp/apr-root
++ cd apr-1.4.5
++ make DESTDIR=/var/tmp/apr-root install
+make[1]: Entering directory `/usr/src/rpm/BUILD/apr-1.4.5'
+make[1]: Nothing to be done for `local-all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/apr-1.4.5'
+/usr/src/rpm/BUILD/apr-1.4.5/build/mkdir.sh /var/tmp/apr-root/usr/lib64 /var/tmp/apr-root/usr/bin /var/tmp/apr-root/usr/share/apr-1 \
+	     /var/tmp/apr-root/usr/lib64/pkgconfig /var/tmp/apr-root/usr/include/apr-1
+mkdir /var/tmp/apr-root/usr
+mkdir /var/tmp/apr-root/usr/lib64
+mkdir /var/tmp/apr-root/usr/bin
+mkdir /var/tmp/apr-root/usr/share
+mkdir /var/tmp/apr-root/usr/share/apr-1
+mkdir /var/tmp/apr-root/usr/lib64/pkgconfig
+mkdir /var/tmp/apr-root/usr/include
+mkdir /var/tmp/apr-root/usr/include/apr-1
+/usr/bin/install -c -m 644 /usr/src/rpm/BUILD/apr-1.4.5/include/apr.h /var/tmp/apr-root/usr/include/apr-1
+for f in /usr/src/rpm/BUILD/apr-1.4.5/include/apr_*.h; do \
+    /usr/bin/install -c -m 644 ${f} /var/tmp/apr-root/usr/include/apr-1; \
+done
+/bin/sh /usr/src/rpm/BUILD/apr-1.4.5/libtool --mode=install /usr/bin/install -c -m 755 libapr-1.la /var/tmp/apr-root/usr/lib64
+/usr/bin/install -c -m 755 .libs/libapr-1.so.0.4.5 /var/tmp/apr-root/usr/lib64/libapr-1.so.0.4.5
+(cd /var/tmp/apr-root/usr/lib64 && { ln -s -f libapr-1.so.0.4.5 libapr-1.so.0 || { rm -f libapr-1.so.0 && ln -s libapr-1.so.0.4.5 libapr-1.so.0; }; })
+(cd /var/tmp/apr-root/usr/lib64 && { ln -s -f libapr-1.so.0.4.5 libapr-1.so || { rm -f libapr-1.so && ln -s libapr-1.so.0.4.5 libapr-1.so; }; })
+/usr/bin/install -c -m 755 .libs/libapr-1.lai /var/tmp/apr-root/usr/lib64/libapr-1.la
+/usr/bin/install -c -m 755 .libs/libapr-1.a /var/tmp/apr-root/usr/lib64/libapr-1.a
+chmod 644 /var/tmp/apr-root/usr/lib64/libapr-1.a
+ranlib /var/tmp/apr-root/usr/lib64/libapr-1.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib64'
+/usr/bin/install -c -m 644 apr.exp /var/tmp/apr-root/usr/lib64/apr.exp
+/usr/bin/install -c -m 644 apr.pc /var/tmp/apr-root/usr/lib64/pkgconfig/apr-1.pc
+for f in libtool shlibtool; do \
+    if test -f ${f}; then /usr/bin/install -c -m 755 ${f} /var/tmp/apr-root/usr/share/apr-1; fi; \
+done
+/usr/bin/install -c -m 755 /usr/src/rpm/BUILD/apr-1.4.5/build/mkdir.sh /var/tmp/apr-root/usr/share/apr-1
+for f in make_exports.awk make_var_export.awk; do \
+    /usr/bin/install -c -m 644 /usr/src/rpm/BUILD/apr-1.4.5/build/${f} /var/tmp/apr-root/usr/share/apr-1; \
+done
+/usr/bin/install -c -m 644 build/apr_rules.out /var/tmp/apr-root/usr/share/apr-1/apr_rules.mk
+/usr/bin/install -c -m 755 apr-config.out /var/tmp/apr-root/usr/bin/apr-1-config
++ /usr/lib/rpm/strip.sh /var/tmp/apr-root
++ exit 0
+Processing files: apr-1.4.5-1.x86_64
+Provides: libapr-1.so.0()(64bit)
+Requires(interp): /sbin/ldconfig /sbin/ldconfig
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.10)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.2)(64bit) libc.so.6(GLIBC_2.3.3)(64bit) libc.so.6(GLIBC_2.9)(64bit) libcrypt.so.1()(64bit) libdl.so.2()(64bit) libdl.so.2(GLIBC_2.2.5)(64bit) libpthread.so.0()(64bit) libpthread.so.0(GLIBC_2.2.5)(64bit) libpthread.so.0(GLIBC_2.3.2)(64bit) libpthread.so.0(GLIBC_2.4)(64bit) librt.so.1()(64bit)
+Processing files: apr-devel-1.4.5-1.x86_64
+Provides: libtool(/usr/lib64/libapr-1.la) pkgconfig(apr-1) = 1.4.5
+Requires(rpmlib): rpmlib(VersionedDependencies) <= 3.0.3-1
+Requires: /bin/sh pkgconfig
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/apr-root
+Wrote: /usr/src/rpm/SRPMS/apr-1.4.5-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/apr-1.4.5-1.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/apr-devel-1.4.5-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.91278
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd apr-1.4.5
++ /bin/rm -rf /var/tmp/apr-root
