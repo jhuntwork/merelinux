@@ -26,7 +26,7 @@ Group: Development/Libraries
 Requires: %{name} >= %{version}
 
 %description devel
-Libaries, headers and documentation for developing with %{_name}
+Libaries, headers and documentation for developing with %{name}
 
 %prep
 %setup -q

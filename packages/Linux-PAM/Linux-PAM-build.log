@@ -1,5 +1,5 @@
 Fetching(Source0): http://dev.lightcube.us/sources/Linux-PAM/Linux-PAM-1.1.4.tar.bz2
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.76489
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.7574
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,7 +10,7 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.76489
 + '[' 0 -ne 0 ']'
 + cd Linux-PAM-1.1.4
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.76489
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.46776
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd Linux-PAM-1.1.4
@@ -351,93 +351,93 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam'
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_auth.lo -MD -MP -MF .deps/pam_auth.Tpo -c -o pam_auth.lo pam_auth.c
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_data.lo -MD -MP -MF .deps/pam_data.Tpo -c -o pam_data.lo pam_data.c
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_delay.lo -MD -MP -MF .deps/pam_delay.Tpo -c -o pam_delay.lo pam_delay.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_delay.lo -MD -MP -MF .deps/pam_delay.Tpo -c pam_delay.c  -fPIC -DPIC -o .libs/pam_delay.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_data.lo -MD -MP -MF .deps/pam_data.Tpo -c pam_data.c  -fPIC -DPIC -o .libs/pam_data.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_account.lo -MD -MP -MF .deps/pam_account.Tpo -c pam_account.c  -fPIC -DPIC -o .libs/pam_account.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_auth.lo -MD -MP -MF .deps/pam_auth.Tpo -c pam_auth.c  -fPIC -DPIC -o .libs/pam_auth.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_delay.lo -MD -MP -MF .deps/pam_delay.Tpo -c pam_delay.c  -fPIC -DPIC -o .libs/pam_delay.o
 mv -f .deps/pam_account.Tpo .deps/pam_account.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_dispatch.lo -MD -MP -MF .deps/pam_dispatch.Tpo -c -o pam_dispatch.lo pam_dispatch.c
-mv -f .deps/pam_data.Tpo .deps/pam_data.Plo
-/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_end.lo -MD -MP -MF .deps/pam_end.Tpo -c -o pam_end.lo pam_end.c
 mv -f .deps/pam_auth.Tpo .deps/pam_auth.Plo
-/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_env.lo -MD -MP -MF .deps/pam_env.Tpo -c -o pam_env.lo pam_env.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_end.lo -MD -MP -MF .deps/pam_end.Tpo -c -o pam_end.lo pam_end.c
 mv -f .deps/pam_delay.Tpo .deps/pam_delay.Plo
+mv -f .deps/pam_data.Tpo .deps/pam_data.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_env.lo -MD -MP -MF .deps/pam_env.Tpo -c -o pam_env.lo pam_env.c
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_get_authtok.lo -MD -MP -MF .deps/pam_get_authtok.Tpo -c -o pam_get_authtok.lo pam_get_authtok.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_dispatch.lo -MD -MP -MF .deps/pam_dispatch.Tpo -c pam_dispatch.c  -fPIC -DPIC -o .libs/pam_dispatch.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_env.lo -MD -MP -MF .deps/pam_env.Tpo -c pam_env.c  -fPIC -DPIC -o .libs/pam_env.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_end.lo -MD -MP -MF .deps/pam_end.Tpo -c pam_end.c  -fPIC -DPIC -o .libs/pam_end.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_env.lo -MD -MP -MF .deps/pam_env.Tpo -c pam_env.c  -fPIC -DPIC -o .libs/pam_env.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_get_authtok.lo -MD -MP -MF .deps/pam_get_authtok.Tpo -c pam_get_authtok.c  -fPIC -DPIC -o .libs/pam_get_authtok.o
 mv -f .deps/pam_end.Tpo .deps/pam_end.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_handlers.lo -MD -MP -MF .deps/pam_handlers.Tpo -c -o pam_handlers.lo pam_handlers.c
 mv -f .deps/pam_dispatch.Tpo .deps/pam_dispatch.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_item.lo -MD -MP -MF .deps/pam_item.Tpo -c -o pam_item.lo pam_item.c
-mv -f .deps/pam_env.Tpo .deps/pam_env.Plo
-/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_misc.lo -MD -MP -MF .deps/pam_misc.Tpo -c -o pam_misc.lo pam_misc.c
 mv -f .deps/pam_get_authtok.Tpo .deps/pam_get_authtok.Plo
-/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_password.lo -MD -MP -MF .deps/pam_password.Tpo -c -o pam_password.lo pam_password.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_handlers.lo -MD -MP -MF .deps/pam_handlers.Tpo -c pam_handlers.c  -fPIC -DPIC -o .libs/pam_handlers.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_misc.lo -MD -MP -MF .deps/pam_misc.Tpo -c -o pam_misc.lo pam_misc.c
+mv -f .deps/pam_env.Tpo .deps/pam_env.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_password.lo -MD -MP -MF .deps/pam_password.Tpo -c -o pam_password.lo pam_password.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_item.lo -MD -MP -MF .deps/pam_item.Tpo -c pam_item.c  -fPIC -DPIC -o .libs/pam_item.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_password.lo -MD -MP -MF .deps/pam_password.Tpo -c pam_password.c  -fPIC -DPIC -o .libs/pam_password.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_misc.lo -MD -MP -MF .deps/pam_misc.Tpo -c pam_misc.c  -fPIC -DPIC -o .libs/pam_misc.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_password.lo -MD -MP -MF .deps/pam_password.Tpo -c pam_password.c  -fPIC -DPIC -o .libs/pam_password.o
 mv -f .deps/pam_password.Tpo .deps/pam_password.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_prelude.lo -MD -MP -MF .deps/pam_prelude.Tpo -c -o pam_prelude.lo pam_prelude.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_prelude.lo -MD -MP -MF .deps/pam_prelude.Tpo -c pam_prelude.c  -fPIC -DPIC -o .libs/pam_prelude.o
 mv -f .deps/pam_item.Tpo .deps/pam_item.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_session.lo -MD -MP -MF .deps/pam_session.Tpo -c -o pam_session.lo pam_session.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_prelude.lo -MD -MP -MF .deps/pam_prelude.Tpo -c pam_prelude.c  -fPIC -DPIC -o .libs/pam_prelude.o
-mv -f .deps/pam_misc.Tpo .deps/pam_misc.Plo
-/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_start.lo -MD -MP -MF .deps/pam_start.Tpo -c -o pam_start.lo pam_start.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_session.lo -MD -MP -MF .deps/pam_session.Tpo -c pam_session.c  -fPIC -DPIC -o .libs/pam_session.o
 mv -f .deps/pam_prelude.Tpo .deps/pam_prelude.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_start.lo -MD -MP -MF .deps/pam_start.Tpo -c -o pam_start.lo pam_start.c
+mv -f .deps/pam_misc.Tpo .deps/pam_misc.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_static.lo -MD -MP -MF .deps/pam_static.Tpo -c -o pam_static.lo pam_static.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_session.lo -MD -MP -MF .deps/pam_session.Tpo -c pam_session.c  -fPIC -DPIC -o .libs/pam_session.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_static.lo -MD -MP -MF .deps/pam_static.Tpo -c pam_static.c  -fPIC -DPIC -o .libs/pam_static.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_start.lo -MD -MP -MF .deps/pam_start.Tpo -c pam_start.c  -fPIC -DPIC -o .libs/pam_start.o
-mv -f .deps/pam_handlers.Tpo .deps/pam_handlers.Plo
+mv -f .deps/pam_static.Tpo .deps/pam_static.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_strerror.lo -MD -MP -MF .deps/pam_strerror.Tpo -c -o pam_strerror.lo pam_strerror.c
 mv -f .deps/pam_session.Tpo .deps/pam_session.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_vprompt.lo -MD -MP -MF .deps/pam_vprompt.Tpo -c -o pam_vprompt.lo pam_vprompt.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_static.lo -MD -MP -MF .deps/pam_static.Tpo -c pam_static.c  -fPIC -DPIC -o .libs/pam_static.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_strerror.lo -MD -MP -MF .deps/pam_strerror.Tpo -c pam_strerror.c  -fPIC -DPIC -o .libs/pam_strerror.o
-mv -f .deps/pam_static.Tpo .deps/pam_static.Plo
+mv -f .deps/pam_handlers.Tpo .deps/pam_handlers.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_syslog.lo -MD -MP -MF .deps/pam_syslog.Tpo -c -o pam_syslog.lo pam_syslog.c
 mv -f .deps/pam_start.Tpo .deps/pam_start.Plo
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_vprompt.lo -MD -MP -MF .deps/pam_vprompt.Tpo -c pam_vprompt.c  -fPIC -DPIC -o .libs/pam_vprompt.o
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_dynamic.lo -MD -MP -MF .deps/pam_dynamic.Tpo -c -o pam_dynamic.lo pam_dynamic.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_vprompt.lo -MD -MP -MF .deps/pam_vprompt.Tpo -c pam_vprompt.c  -fPIC -DPIC -o .libs/pam_vprompt.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_syslog.lo -MD -MP -MF .deps/pam_syslog.Tpo -c pam_syslog.c  -fPIC -DPIC -o .libs/pam_syslog.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_dynamic.lo -MD -MP -MF .deps/pam_dynamic.Tpo -c pam_dynamic.c  -fPIC -DPIC -o .libs/pam_dynamic.o
 mv -f .deps/pam_strerror.Tpo .deps/pam_strerror.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_audit.lo -MD -MP -MF .deps/pam_audit.Tpo -c -o pam_audit.lo pam_audit.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_dynamic.lo -MD -MP -MF .deps/pam_dynamic.Tpo -c pam_dynamic.c  -fPIC -DPIC -o .libs/pam_dynamic.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_audit.lo -MD -MP -MF .deps/pam_audit.Tpo -c pam_audit.c  -fPIC -DPIC -o .libs/pam_audit.o
+mv -f .deps/pam_syslog.Tpo .deps/pam_syslog.Plo
 mv -f .deps/pam_vprompt.Tpo .deps/pam_vprompt.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_cleanup.lo -MD -MP -MF .deps/pam_modutil_cleanup.Tpo -c -o pam_modutil_cleanup.lo pam_modutil_cleanup.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_audit.lo -MD -MP -MF .deps/pam_audit.Tpo -c pam_audit.c  -fPIC -DPIC -o .libs/pam_audit.o
-mv -f .deps/pam_dynamic.Tpo .deps/pam_dynamic.Plo
-mv -f .deps/pam_syslog.Tpo .deps/pam_syslog.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_getpwnam.lo -MD -MP -MF .deps/pam_modutil_getpwnam.Tpo -c -o pam_modutil_getpwnam.lo pam_modutil_getpwnam.c
+mv -f .deps/pam_dynamic.Tpo .deps/pam_dynamic.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_ioloop.lo -MD -MP -MF .deps/pam_modutil_ioloop.Tpo -c -o pam_modutil_ioloop.lo pam_modutil_ioloop.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_cleanup.lo -MD -MP -MF .deps/pam_modutil_cleanup.Tpo -c pam_modutil_cleanup.c  -fPIC -DPIC -o .libs/pam_modutil_cleanup.o
 mv -f .deps/pam_audit.Tpo .deps/pam_audit.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_getgrgid.lo -MD -MP -MF .deps/pam_modutil_getgrgid.Tpo -c -o pam_modutil_getgrgid.lo pam_modutil_getgrgid.c
-mv -f .deps/pam_modutil_cleanup.Tpo .deps/pam_modutil_cleanup.Plo
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_ioloop.lo -MD -MP -MF .deps/pam_modutil_ioloop.Tpo -c pam_modutil_ioloop.c  -fPIC -DPIC -o .libs/pam_modutil_ioloop.o
-/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_getpwuid.lo -MD -MP -MF .deps/pam_modutil_getpwuid.Tpo -c -o pam_modutil_getpwuid.lo pam_modutil_getpwuid.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getpwnam.lo -MD -MP -MF .deps/pam_modutil_getpwnam.Tpo -c pam_modutil_getpwnam.c  -fPIC -DPIC -o .libs/pam_modutil_getpwnam.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_ioloop.lo -MD -MP -MF .deps/pam_modutil_ioloop.Tpo -c pam_modutil_ioloop.c  -fPIC -DPIC -o .libs/pam_modutil_ioloop.o
+mv -f .deps/pam_modutil_cleanup.Tpo .deps/pam_modutil_cleanup.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_getpwuid.lo -MD -MP -MF .deps/pam_modutil_getpwuid.Tpo -c -o pam_modutil_getpwuid.lo pam_modutil_getpwuid.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getgrgid.lo -MD -MP -MF .deps/pam_modutil_getgrgid.Tpo -c pam_modutil_getgrgid.c  -fPIC -DPIC -o .libs/pam_modutil_getgrgid.o
-mv -f .deps/pam_modutil_ioloop.Tpo .deps/pam_modutil_ioloop.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getpwuid.lo -MD -MP -MF .deps/pam_modutil_getpwuid.Tpo -c pam_modutil_getpwuid.c  -fPIC -DPIC -o .libs/pam_modutil_getpwuid.o
+mv -f .deps/pam_modutil_ioloop.Tpo .deps/pam_modutil_ioloop.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_getgrnam.lo -MD -MP -MF .deps/pam_modutil_getgrnam.Tpo -c -o pam_modutil_getgrnam.lo pam_modutil_getgrnam.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getgrnam.lo -MD -MP -MF .deps/pam_modutil_getgrnam.Tpo -c pam_modutil_getgrnam.c  -fPIC -DPIC -o .libs/pam_modutil_getgrnam.o
-mv -f .deps/pam_modutil_getpwuid.Tpo .deps/pam_modutil_getpwuid.Plo
 mv -f .deps/pam_modutil_getpwnam.Tpo .deps/pam_modutil_getpwnam.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_getspnam.lo -MD -MP -MF .deps/pam_modutil_getspnam.Tpo -c -o pam_modutil_getspnam.lo pam_modutil_getspnam.c
-/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_getlogin.lo -MD -MP -MF .deps/pam_modutil_getlogin.Tpo -c -o pam_modutil_getlogin.lo pam_modutil_getlogin.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getlogin.lo -MD -MP -MF .deps/pam_modutil_getlogin.Tpo -c pam_modutil_getlogin.c  -fPIC -DPIC -o .libs/pam_modutil_getlogin.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getspnam.lo -MD -MP -MF .deps/pam_modutil_getspnam.Tpo -c pam_modutil_getspnam.c  -fPIC -DPIC -o .libs/pam_modutil_getspnam.o
 mv -f .deps/pam_modutil_getgrgid.Tpo .deps/pam_modutil_getgrgid.Plo
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_getlogin.lo -MD -MP -MF .deps/pam_modutil_getlogin.Tpo -c -o pam_modutil_getlogin.lo pam_modutil_getlogin.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getgrnam.lo -MD -MP -MF .deps/pam_modutil_getgrnam.Tpo -c pam_modutil_getgrnam.c  -fPIC -DPIC -o .libs/pam_modutil_getgrnam.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getspnam.lo -MD -MP -MF .deps/pam_modutil_getspnam.Tpo -c pam_modutil_getspnam.c  -fPIC -DPIC -o .libs/pam_modutil_getspnam.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_getlogin.lo -MD -MP -MF .deps/pam_modutil_getlogin.Tpo -c pam_modutil_getlogin.c  -fPIC -DPIC -o .libs/pam_modutil_getlogin.o
+mv -f .deps/pam_modutil_getpwuid.Tpo .deps/pam_modutil_getpwuid.Plo
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_ingroup.lo -MD -MP -MF .deps/pam_modutil_ingroup.Tpo -c -o pam_modutil_ingroup.lo pam_modutil_ingroup.c
 mv -f .deps/pam_modutil_getgrnam.Tpo .deps/pam_modutil_getgrnam.Plo
-/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_priv.lo -MD -MP -MF .deps/pam_modutil_priv.Tpo -c -o pam_modutil_priv.lo pam_modutil_priv.c
-mv -f .deps/pam_modutil_getlogin.Tpo .deps/pam_modutil_getlogin.Plo
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_ingroup.lo -MD -MP -MF .deps/pam_modutil_ingroup.Tpo -c pam_modutil_ingroup.c  -fPIC -DPIC -o .libs/pam_modutil_ingroup.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_priv.lo -MD -MP -MF .deps/pam_modutil_priv.Tpo -c pam_modutil_priv.c  -fPIC -DPIC -o .libs/pam_modutil_priv.o
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -MT pam_modutil_priv.lo -MD -MP -MF .deps/pam_modutil_priv.Tpo -c -o pam_modutil_priv.lo pam_modutil_priv.c
 mv -f .deps/pam_modutil_getspnam.Tpo .deps/pam_modutil_getspnam.Plo
+mv -f .deps/pam_modutil_getlogin.Tpo .deps/pam_modutil_getlogin.Plo
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include -DPAM_VERSION=\"1.1.4\" -Os -pipe -MT pam_modutil_priv.lo -MD -MP -MF .deps/pam_modutil_priv.Tpo -c pam_modutil_priv.c  -fPIC -DPIC -o .libs/pam_modutil_priv.o
 mv -f .deps/pam_modutil_ingroup.Tpo .deps/pam_modutil_ingroup.Plo
 mv -f .deps/pam_modutil_priv.Tpo .deps/pam_modutil_priv.Plo
 /bin/sh ../libtool --tag=CC   --mode=link gcc -DDEFAULT_MODULE_PATH=\"/lib64/security/\" -DLIBPAM_COMPILE -I./include  -DPAM_VERSION=\"1.1.4\"   -Os -pipe -no-undefined -version-info 83:1:83 -Wl,--version-script=./libpam.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o libpam.la -rpath /lib64 pam_account.lo pam_auth.lo pam_data.lo pam_delay.lo pam_dispatch.lo pam_end.lo pam_env.lo pam_get_authtok.lo pam_handlers.lo pam_item.lo pam_misc.lo pam_password.lo pam_prelude.lo pam_session.lo pam_start.lo pam_static.lo pam_strerror.lo pam_vprompt.lo pam_syslog.lo pam_dynamic.lo pam_audit.lo pam_modutil_cleanup.lo pam_modutil_getpwnam.lo pam_modutil_ioloop.lo pam_modutil_getgrgid.lo pam_modutil_getpwuid.lo pam_modutil_getgrnam.lo pam_modutil_getspnam.lo pam_modutil_getlogin.lo pam_modutil_ingroup.lo pam_modutil_priv.lo  -ldl  
@@ -460,9 +460,9 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpamc'
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -I../libpam/include -I./include -Os -pipe -MT pamc_client.lo -MD -MP -MF .deps/pamc_client.Tpo -c -o pamc_client.lo pamc_client.c
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -I../libpam/include -I./include -Os -pipe -MT pamc_converse.lo -MD -MP -MF .deps/pamc_converse.Tpo -c -o pamc_converse.lo pamc_converse.c
 /bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I..    -I../libpam/include -I./include -Os -pipe -MT pamc_load.lo -MD -MP -MF .deps/pamc_load.Tpo -c -o pamc_load.lo pamc_load.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../libpam/include -I./include -Os -pipe -MT pamc_client.lo -MD -MP -MF .deps/pamc_client.Tpo -c pamc_client.c  -fPIC -DPIC -o .libs/pamc_client.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../libpam/include -I./include -Os -pipe -MT pamc_load.lo -MD -MP -MF .deps/pamc_load.Tpo -c pamc_load.c  -fPIC -DPIC -o .libs/pamc_load.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../libpam/include -I./include -Os -pipe -MT pamc_converse.lo -MD -MP -MF .deps/pamc_converse.Tpo -c pamc_converse.c  -fPIC -DPIC -o .libs/pamc_converse.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I../libpam/include -I./include -Os -pipe -MT pamc_client.lo -MD -MP -MF .deps/pamc_client.Tpo -c pamc_client.c  -fPIC -DPIC -o .libs/pamc_client.o
 mv -f .deps/pamc_client.Tpo .deps/pamc_client.Plo
 mv -f .deps/pamc_converse.Tpo .deps/pamc_converse.Plo
 mv -f .deps/pamc_load.Tpo .deps/pamc_load.Plo
@@ -697,8 +697,8 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/modules/pam_name
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DSECURECONF_DIR=\"/etc/security/\" -Os -pipe -MT md5.lo -MD -MP -MF .deps/md5.Tpo -c -o md5.lo md5.c
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DSECURECONF_DIR=\"/etc/security/\" -Os -pipe -MT argv_parse.lo -MD -MP -MF .deps/argv_parse.Tpo -c -o argv_parse.lo argv_parse.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DSECURECONF_DIR=\"/etc/security/\" -Os -pipe -MT pam_namespace.lo -MD -MP -MF .deps/pam_namespace.Tpo -c pam_namespace.c  -fPIC -DPIC -o .libs/pam_namespace.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DSECURECONF_DIR=\"/etc/security/\" -Os -pipe -MT md5.lo -MD -MP -MF .deps/md5.Tpo -c md5.c  -fPIC -DPIC -o .libs/md5.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DSECURECONF_DIR=\"/etc/security/\" -Os -pipe -MT argv_parse.lo -MD -MP -MF .deps/argv_parse.Tpo -c argv_parse.c  -fPIC -DPIC -o .libs/argv_parse.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DSECURECONF_DIR=\"/etc/security/\" -Os -pipe -MT md5.lo -MD -MP -MF .deps/md5.Tpo -c md5.c  -fPIC -DPIC -o .libs/md5.o
 mv -f .deps/argv_parse.Tpo .deps/argv_parse.Plo
 mv -f .deps/md5.Tpo .deps/md5.Plo
 mv -f .deps/pam_namespace.Tpo .deps/pam_namespace.Plo
@@ -839,9 +839,9 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/modules/pam_time
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -Os -pipe -MT pam_timestamp_la-hmacsha1.lo -MD -MP -MF .deps/pam_timestamp_la-hmacsha1.Tpo -c -o pam_timestamp_la-hmacsha1.lo `test -f 'hmacsha1.c' || echo './'`hmacsha1.c
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -Os -pipe -MT pam_timestamp_la-sha1.lo -MD -MP -MF .deps/pam_timestamp_la-sha1.Tpo -c -o pam_timestamp_la-sha1.lo `test -f 'sha1.c' || echo './'`sha1.c
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -Os -pipe -MT hmacfile.o -MD -MP -MF .deps/hmacfile.Tpo -c -o hmacfile.o hmacfile.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -Os -pipe -MT pam_timestamp_la-pam_timestamp.lo -MD -MP -MF .deps/pam_timestamp_la-pam_timestamp.Tpo -c pam_timestamp.c  -fPIC -DPIC -o .libs/pam_timestamp_la-pam_timestamp.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -Os -pipe -MT pam_timestamp_la-hmacsha1.lo -MD -MP -MF .deps/pam_timestamp_la-hmacsha1.Tpo -c hmacsha1.c  -fPIC -DPIC -o .libs/pam_timestamp_la-hmacsha1.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -Os -pipe -MT pam_timestamp_la-sha1.lo -MD -MP -MF .deps/pam_timestamp_la-sha1.Tpo -c sha1.c  -fPIC -DPIC -o .libs/pam_timestamp_la-sha1.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -Os -pipe -MT pam_timestamp_la-hmacsha1.lo -MD -MP -MF .deps/pam_timestamp_la-hmacsha1.Tpo -c hmacsha1.c  -fPIC -DPIC -o .libs/pam_timestamp_la-hmacsha1.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -Os -pipe -MT pam_timestamp_la-pam_timestamp.lo -MD -MP -MF .deps/pam_timestamp_la-pam_timestamp.Tpo -c pam_timestamp.c  -fPIC -DPIC -o .libs/pam_timestamp_la-pam_timestamp.o
 mv -f .deps/hmacfile.Tpo .deps/hmacfile.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -Os -pipe -MT hmacsha1.o -MD -MP -MF .deps/hmacsha1.Tpo -c -o hmacsha1.o hmacsha1.c
 mv -f .deps/pam_timestamp_la-hmacsha1.Tpo .deps/pam_timestamp_la-hmacsha1.Plo
@@ -849,16 +849,16 @@ gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/includ
 mv -f .deps/hmacsha1.Tpo .deps/hmacsha1.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -fpie -Os -pipe -MT pam_timestamp_check-pam_timestamp_check.o -MD -MP -MF .deps/pam_timestamp_check-pam_timestamp_check.Tpo -c -o pam_timestamp_check-pam_timestamp_check.o `test -f 'pam_timestamp_check.c' || echo './'`pam_timestamp_check.c
 mv -f .deps/pam_timestamp_la-sha1.Tpo .deps/pam_timestamp_la-sha1.Plo
-mv -f .deps/pam_timestamp_la-pam_timestamp.Tpo .deps/pam_timestamp_la-pam_timestamp.Plo
-/bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -Os -pipe -no-undefined -avoid-version -module  -Wl,--version-script=./../modules.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o pam_timestamp.la -rpath /lib64/security pam_timestamp_la-pam_timestamp.lo pam_timestamp_la-hmacsha1.lo pam_timestamp_la-sha1.lo -L../../libpam -lpam 
 mv -f .deps/sha1.Tpo .deps/sha1.Po
 /bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -Os -pipe  -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o hmacfile hmacfile.o hmacsha1.o sha1.o -L../../libpam -lpam 
+mv -f .deps/pam_timestamp_la-pam_timestamp.Tpo .deps/pam_timestamp_la-pam_timestamp.Plo
+/bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -Os -pipe -no-undefined -avoid-version -module  -Wl,--version-script=./../modules.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o pam_timestamp.la -rpath /lib64/security pam_timestamp_la-pam_timestamp.lo pam_timestamp_la-hmacsha1.lo pam_timestamp_la-sha1.lo -L../../libpam -lpam 
 mv -f .deps/pam_timestamp_check-pam_timestamp_check.Tpo .deps/pam_timestamp_check-pam_timestamp_check.Po
 /bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -fpie -Os -pipe -pie -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o pam_timestamp_check pam_timestamp_check-pam_timestamp_check.o -L../../libpam -lpam 
-libtool: link: gcc -shared  .libs/pam_timestamp_la-pam_timestamp.o .libs/pam_timestamp_la-hmacsha1.o .libs/pam_timestamp_la-sha1.o   -Wl,-rpath -Wl,/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs -Wl,-rpath -Wl,/lib64 -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl  -Wl,--version-script=./../modules.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1   -Wl,-soname -Wl,pam_timestamp.so -o .libs/pam_timestamp.so
-libtool: link: ( cd ".libs" && rm -f "pam_timestamp.la" && ln -s "../pam_timestamp.la" "pam_timestamp.la" )
-libtool: link: gcc -I../../libpam/include -I../../libpamc/include -fpie -Os -pipe -pie -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o .libs/pam_timestamp_check pam_timestamp_check-pam_timestamp_check.o  -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -Wl,-rpath -Wl,/lib64
 libtool: link: gcc -I../../libpam/include -I../../libpamc/include -Os -pipe -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o .libs/hmacfile hmacfile.o hmacsha1.o sha1.o  -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -Wl,-rpath -Wl,/lib64
+libtool: link: gcc -shared  .libs/pam_timestamp_la-pam_timestamp.o .libs/pam_timestamp_la-hmacsha1.o .libs/pam_timestamp_la-sha1.o   -Wl,-rpath -Wl,/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs -Wl,-rpath -Wl,/lib64 -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl  -Wl,--version-script=./../modules.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1   -Wl,-soname -Wl,pam_timestamp.so -o .libs/pam_timestamp.so
+libtool: link: gcc -I../../libpam/include -I../../libpamc/include -fpie -Os -pipe -pie -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o .libs/pam_timestamp_check pam_timestamp_check-pam_timestamp_check.o  -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -Wl,-rpath -Wl,/lib64
+libtool: link: ( cd ".libs" && rm -f "pam_timestamp.la" && ln -s "../pam_timestamp.la" "pam_timestamp.la" )
 make[3]: Leaving directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/modules/pam_timestamp'
 Making all in pam_tty_audit
 make[3]: Entering directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/modules/pam_tty_audit'
@@ -880,25 +880,25 @@ make[3]: Entering directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/modules/pam_unix
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT pam_unix_auth.lo -MD -MP -MF .deps/pam_unix_auth.Tpo -c -o pam_unix_auth.lo pam_unix_auth.c
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT pam_unix_passwd.lo -MD -MP -MF .deps/pam_unix_passwd.Tpo -c -o pam_unix_passwd.lo pam_unix_passwd.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT pam_unix_acct.lo -MD -MP -MF .deps/pam_unix_acct.Tpo -c pam_unix_acct.c  -fPIC -DPIC -o .libs/pam_unix_acct.o
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT bigcrypt.lo -MD -MP -MF .deps/bigcrypt.Tpo -c bigcrypt.c  -fPIC -DPIC -o .libs/bigcrypt.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT pam_unix_passwd.lo -MD -MP -MF .deps/pam_unix_passwd.Tpo -c pam_unix_passwd.c  -fPIC -DPIC -o .libs/pam_unix_passwd.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT bigcrypt.lo -MD -MP -MF .deps/bigcrypt.Tpo -c bigcrypt.c  -fPIC -DPIC -o .libs/bigcrypt.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT pam_unix_auth.lo -MD -MP -MF .deps/pam_unix_auth.Tpo -c pam_unix_auth.c  -fPIC -DPIC -o .libs/pam_unix_auth.o
 mv -f .deps/bigcrypt.Tpo .deps/bigcrypt.Plo
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT pam_unix_sess.lo -MD -MP -MF .deps/pam_unix_sess.Tpo -c -o pam_unix_sess.lo pam_unix_sess.c
 mv -f .deps/pam_unix_auth.Tpo .deps/pam_unix_auth.Plo
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT support.lo -MD -MP -MF .deps/support.Tpo -c -o support.lo support.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT pam_unix_sess.lo -MD -MP -MF .deps/pam_unix_sess.Tpo -c pam_unix_sess.c  -fPIC -DPIC -o .libs/pam_unix_sess.o
 mv -f .deps/pam_unix_acct.Tpo .deps/pam_unix_acct.Plo
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT passverify.lo -MD -MP -MF .deps/passverify.Tpo -c -o passverify.lo passverify.c
-libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT pam_unix_sess.lo -MD -MP -MF .deps/pam_unix_sess.Tpo -c pam_unix_sess.c  -fPIC -DPIC -o .libs/pam_unix_sess.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT support.lo -MD -MP -MF .deps/support.Tpo -c support.c  -fPIC -DPIC -o .libs/support.o
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT passverify.lo -MD -MP -MF .deps/passverify.Tpo -c passverify.c  -fPIC -DPIC -o .libs/passverify.o
 mv -f .deps/pam_unix_sess.Tpo .deps/pam_unix_sess.Plo
-mv -f .deps/pam_unix_passwd.Tpo .deps/pam_unix_passwd.Plo
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT yppasswd_xdr.lo -MD -MP -MF .deps/yppasswd_xdr.Tpo -c -o yppasswd_xdr.lo yppasswd_xdr.c
-/bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT md5_good.lo -MD -MP -MF .deps/md5_good.Tpo -c -o md5_good.lo md5_good.c
 passverify.c: In function 'unix_update_shadow':
 passverify.c:931:18: warning: assignment discards qualifiers from pointer target type
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT yppasswd_xdr.lo -MD -MP -MF .deps/yppasswd_xdr.Tpo -c yppasswd_xdr.c  -fPIC -DPIC -o .libs/yppasswd_xdr.o
+mv -f .deps/pam_unix_passwd.Tpo .deps/pam_unix_passwd.Plo
+/bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT md5_good.lo -MD -MP -MF .deps/md5_good.Tpo -c -o md5_good.lo md5_good.c
 libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I../.. -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -MT md5_good.lo -MD -MP -MF .deps/md5_good.Tpo -c md5_good.c  -fPIC -DPIC -o .libs/md5_good.o
 mv -f .deps/yppasswd_xdr.Tpo .deps/yppasswd_xdr.Plo
 /bin/sh ../../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT md5_broken.lo -MD -MP -MF .deps/md5_broken.Tpo -c -o md5_broken.lo md5_broken.c
@@ -908,41 +908,41 @@ gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/includ
 mv -f .deps/support.Tpo .deps/support.Plo
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -MT bigcrypt-bigcrypt_main.o -MD -MP -MF .deps/bigcrypt-bigcrypt_main.Tpo -c -o bigcrypt-bigcrypt_main.o `test -f 'bigcrypt_main.c' || echo './'`bigcrypt_main.c
 mv -f .deps/md5_good.Tpo .deps/md5_good.Plo
-gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -MT unix_chkpwd-unix_chkpwd.o -MD -MP -MF .deps/unix_chkpwd-unix_chkpwd.Tpo -c -o unix_chkpwd-unix_chkpwd.o `test -f 'unix_chkpwd.c' || echo './'`unix_chkpwd.c
 mv -f .deps/bigcrypt-bigcrypt.Tpo .deps/bigcrypt-bigcrypt.Po
-mv -f .deps/bigcrypt-bigcrypt_main.Tpo .deps/bigcrypt-bigcrypt_main.Po
+gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -MT unix_chkpwd-unix_chkpwd.o -MD -MP -MF .deps/unix_chkpwd-unix_chkpwd.Tpo -c -o unix_chkpwd-unix_chkpwd.o `test -f 'unix_chkpwd.c' || echo './'`unix_chkpwd.c
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -MT unix_chkpwd-md5_good.o -MD -MP -MF .deps/unix_chkpwd-md5_good.Tpo -c -o unix_chkpwd-md5_good.o `test -f 'md5_good.c' || echo './'`md5_good.c
+mv -f .deps/bigcrypt-bigcrypt_main.Tpo .deps/bigcrypt-bigcrypt_main.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -MT unix_chkpwd-md5_broken.o -MD -MP -MF .deps/unix_chkpwd-md5_broken.Tpo -c -o unix_chkpwd-md5_broken.o `test -f 'md5_broken.c' || echo './'`md5_broken.c
-mv -f .deps/unix_chkpwd-unix_chkpwd.Tpo .deps/unix_chkpwd-unix_chkpwd.Po
-gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -MT unix_chkpwd-bigcrypt.o -MD -MP -MF .deps/unix_chkpwd-bigcrypt.Tpo -c -o unix_chkpwd-bigcrypt.o `test -f 'bigcrypt.c' || echo './'`bigcrypt.c
 mv -f .deps/md5_broken.Tpo .deps/md5_broken.Plo
+gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -MT unix_chkpwd-bigcrypt.o -MD -MP -MF .deps/unix_chkpwd-bigcrypt.Tpo -c -o unix_chkpwd-bigcrypt.o `test -f 'bigcrypt.c' || echo './'`bigcrypt.c
+mv -f .deps/unix_chkpwd-unix_chkpwd.Tpo .deps/unix_chkpwd-unix_chkpwd.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -MT unix_chkpwd-passverify.o -MD -MP -MF .deps/unix_chkpwd-passverify.Tpo -c -o unix_chkpwd-passverify.o `test -f 'passverify.c' || echo './'`passverify.c
 mv -f .deps/unix_chkpwd-bigcrypt.Tpo .deps/unix_chkpwd-bigcrypt.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_update\" -Os -pipe -MT unix_update-unix_update.o -MD -MP -MF .deps/unix_update-unix_update.Tpo -c -o unix_update-unix_update.o `test -f 'unix_update.c' || echo './'`unix_update.c
 passverify.c: In function 'unix_update_shadow':
 passverify.c:931:18: warning: assignment discards qualifiers from pointer target type
-mv -f .deps/unix_chkpwd-md5_broken.Tpo .deps/unix_chkpwd-md5_broken.Po
+mv -f .deps/unix_update-unix_update.Tpo .deps/unix_update-unix_update.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_update\" -Os -pipe -MT unix_update-md5_good.o -MD -MP -MF .deps/unix_update-md5_good.Tpo -c -o unix_update-md5_good.o `test -f 'md5_good.c' || echo './'`md5_good.c
 mv -f .deps/unix_chkpwd-md5_good.Tpo .deps/unix_chkpwd-md5_good.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_update\" -Os -pipe -MT unix_update-md5_broken.o -MD -MP -MF .deps/unix_update-md5_broken.Tpo -c -o unix_update-md5_broken.o `test -f 'md5_broken.c' || echo './'`md5_broken.c
-mv -f .deps/unix_update-unix_update.Tpo .deps/unix_update-unix_update.Po
+mv -f .deps/unix_chkpwd-md5_broken.Tpo .deps/unix_chkpwd-md5_broken.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_update\" -Os -pipe -MT unix_update-bigcrypt.o -MD -MP -MF .deps/unix_update-bigcrypt.Tpo -c -o unix_update-bigcrypt.o `test -f 'bigcrypt.c' || echo './'`bigcrypt.c
 mv -f .deps/unix_update-bigcrypt.Tpo .deps/unix_update-bigcrypt.Po
 gcc -DHAVE_CONFIG_H -I. -I../..    -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_update\" -Os -pipe -MT unix_update-passverify.o -MD -MP -MF .deps/unix_update-passverify.Tpo -c -o unix_update-passverify.o `test -f 'passverify.c' || echo './'`passverify.c
 passverify.c: In function 'unix_update_shadow':
 passverify.c:931:18: warning: assignment discards qualifiers from pointer target type
 mv -f .deps/unix_update-md5_good.Tpo .deps/unix_update-md5_good.Po
-/bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -no-undefined -avoid-version -module -Wl,--version-script=./../modules.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o pam_unix.la -rpath /lib64/security bigcrypt.lo pam_unix_acct.lo pam_unix_auth.lo pam_unix_passwd.lo pam_unix_sess.lo support.lo passverify.lo yppasswd_xdr.lo md5_good.lo md5_broken.lo -L../../libpam -lpam -lcrypt  -lnsl  
 mv -f .deps/unix_chkpwd-passverify.Tpo .deps/unix_chkpwd-passverify.Po
+/bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe -no-undefined -avoid-version -module -Wl,--version-script=./../modules.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o pam_unix.la -rpath /lib64/security bigcrypt.lo pam_unix_acct.lo pam_unix_auth.lo pam_unix_passwd.lo pam_unix_sess.lo support.lo passverify.lo yppasswd_xdr.lo md5_good.lo md5_broken.lo -L../../libpam -lpam -lcrypt  -lnsl  
 /bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -Os -pipe  -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o bigcrypt bigcrypt-bigcrypt.o bigcrypt-bigcrypt_main.o -lcrypt 
 mv -f .deps/unix_update-md5_broken.Tpo .deps/unix_update-md5_broken.Po
 /bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -pie -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o unix_chkpwd unix_chkpwd-unix_chkpwd.o unix_chkpwd-md5_good.o unix_chkpwd-md5_broken.o unix_chkpwd-bigcrypt.o unix_chkpwd-passverify.o -lcrypt   
-libtool: link: gcc -shared  .libs/bigcrypt.o .libs/pam_unix_acct.o .libs/pam_unix_auth.o .libs/pam_unix_passwd.o .libs/pam_unix_sess.o .libs/support.o .libs/passverify.o .libs/yppasswd_xdr.o .libs/md5_good.o .libs/md5_broken.o   -Wl,-rpath -Wl,/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs -Wl,-rpath -Wl,/lib64 -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -lcrypt -lnsl  -Wl,--version-script=./../modules.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1   -Wl,-soname -Wl,pam_unix.so -o .libs/pam_unix.so
-mv -f .deps/unix_update-passverify.Tpo .deps/unix_update-passverify.Po
-/bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_update\" -Os -pipe -pie -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o unix_update unix_update-unix_update.o unix_update-md5_good.o unix_update-md5_broken.o unix_update-bigcrypt.o unix_update-passverify.o -lcrypt  
 libtool: link: gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -Os -pipe -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o bigcrypt bigcrypt-bigcrypt.o bigcrypt-bigcrypt_main.o  -lcrypt
 libtool: link: gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -fpie -DHELPER_COMPILE=\"unix_chkpwd\" -Os -pipe -pie -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o unix_chkpwd unix_chkpwd-unix_chkpwd.o unix_chkpwd-md5_good.o unix_chkpwd-md5_broken.o unix_chkpwd-bigcrypt.o unix_chkpwd-passverify.o  -lcrypt
+libtool: link: gcc -shared  .libs/bigcrypt.o .libs/pam_unix_acct.o .libs/pam_unix_auth.o .libs/pam_unix_passwd.o .libs/pam_unix_sess.o .libs/support.o .libs/passverify.o .libs/yppasswd_xdr.o .libs/md5_good.o .libs/md5_broken.o   -Wl,-rpath -Wl,/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs -Wl,-rpath -Wl,/lib64 -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -lcrypt -lnsl  -Wl,--version-script=./../modules.map -Wl,--as-needed -Wl,--no-undefined -Wl,-O1   -Wl,-soname -Wl,pam_unix.so -o .libs/pam_unix.so
 libtool: link: ( cd ".libs" && rm -f "pam_unix.la" && ln -s "../pam_unix.la" "pam_unix.la" )
+mv -f .deps/unix_update-passverify.Tpo .deps/unix_update-passverify.Po
+/bin/sh ../../libtool --tag=CC   --mode=link gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\"   -fpie -DHELPER_COMPILE=\"unix_update\" -Os -pipe -pie -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o unix_update unix_update-unix_update.o unix_update-md5_good.o unix_update-md5_broken.o unix_update-bigcrypt.o unix_update-passverify.o -lcrypt  
 libtool: link: gcc -I../../libpam/include -I../../libpamc/include -DCHKPWD_HELPER=\"/lib64/security/unix_chkpwd\" -DUPDATE_HELPER=\"/lib64/security/unix_update\" -fpie -DHELPER_COMPILE=\"unix_update\" -Os -pipe -pie -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o unix_update unix_update-unix_update.o unix_update-md5_good.o unix_update-md5_broken.o unix_update-bigcrypt.o unix_update-passverify.o  -lcrypt
 make[3]: Leaving directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/modules/pam_unix'
 Making all in pam_userdb
@@ -1057,14 +1057,14 @@ mv -f .deps/vpass.Tpo .deps/vpass.Po
 mv -f .deps/check_user.Tpo .deps/check_user.Po
 /bin/sh ../libtool --tag=CC   --mode=link gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe  -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o vpass vpass.o -L../libpam -lpam -L../libpam_misc -lpam_misc 
 /bin/sh ../libtool --tag=CC   --mode=link gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe  -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o check_user check_user.o -L../libpam -lpam -L../libpam_misc -lpam_misc 
-mv -f .deps/xsh.Tpo .deps/xsh.Po
 mv -f .deps/blank.Tpo .deps/blank.Po
-/bin/sh ../libtool --tag=CC   --mode=link gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe  -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o xsh xsh.o -L../libpam -lpam -L../libpam_misc -lpam_misc 
 /bin/sh ../libtool --tag=CC   --mode=link gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe  -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o blank blank.o -L../libpam -lpam -L../libpam_misc -lpam_misc 
+mv -f .deps/xsh.Tpo .deps/xsh.Po
+/bin/sh ../libtool --tag=CC   --mode=link gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe  -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o xsh xsh.o -L../libpam -lpam -L../libpam_misc -lpam_misc 
+libtool: link: gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o .libs/check_user check_user.o  -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc/.libs/libpam_misc.so /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -Wl,-rpath -Wl,/lib64
 libtool: link: gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o .libs/vpass vpass.o  -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc/.libs/libpam_misc.so /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -Wl,-rpath -Wl,/lib64
 libtool: link: gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o .libs/blank blank.o  -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc/.libs/libpam_misc.so /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -Wl,-rpath -Wl,/lib64
 libtool: link: gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o .libs/xsh xsh.o  -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc/.libs/libpam_misc.so /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -Wl,-rpath -Wl,/lib64
-libtool: link: gcc -I../libpam/include -I../libpamc/include -I../libpam_misc/include -Os -pipe -Wl,--as-needed -Wl,--no-undefined -Wl,-O1 -o .libs/check_user check_user.o  -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam -L/usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam_misc/.libs/libpam_misc.so /usr/src/rpm/BUILD/Linux-PAM-1.1.4/libpam/.libs/libpam.so -ldl -Wl,-rpath -Wl,/lib64
 make[2]: Leaving directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/examples'
 Making all in xtests
 make[2]: Entering directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4/xtests'
@@ -1074,7 +1074,7 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/Linux-PAM-1.1.4'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.1338
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.96871
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/Linux-PAM-root
@@ -2160,7 +2160,7 @@ Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/Linux-PAM-roo
 Wrote: /usr/src/rpm/SRPMS/Linux-PAM-1.1.4-2.src.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/Linux-PAM-1.1.4-2.x86_64.rpm
 Wrote: /usr/src/rpm/RPMS/x86_64/Linux-PAM-devel-1.1.4-2.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.75441
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.69338
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd Linux-PAM-1.1.4
