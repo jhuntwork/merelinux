@@ -98,7 +98,12 @@ smart -o remove-packages=false -o rpm-root=/mnt/"${pkg}" install \
 # Necessary mods to the chroot env
 cp /etc/resolv.conf /mnt/"${pkg}"/etc
 cp /etc/hosts /mnt/"${pkg}"/etc
-cp /etc/rpm/macros /mnt/"${pkg}"/etc/rpm/
+
+# Used to do below, but relies on rpm-build installed and configured host-system
+# Instead just adjust %{PMFLAGS}, which at the moment should be the only change needed
+#cp /etc/rpm/macros /mnt/"${pkg}"/etc/rpm/
+cpus=`cat /proc/cpuinfo | grep processor | wc -l`
+sed -i "/PMFLAGS/s@-j.*@-j$cpus@" /mnt/"${pkg}"/etc/rpm/macros
 
 # Copy the spec file to the chroot directory and build it
 cp "${fullspec}" /mnt/"${pkg}"/"${spec}"
