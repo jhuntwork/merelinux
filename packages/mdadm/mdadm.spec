@@ -1,6 +1,6 @@
 Summary: mdadm
 Name: mdadm
-Version: 3.1.4
+Version: 3.2.2
 Release: 1
 Group: Utilities
 License: GPL
@@ -9,7 +9,7 @@ Vendor: LightCube Solutions
 URL: http://neil.brown.name/blog/mdadm
 Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 4ee43922d38b15a930daaaa026ef1b4efacdbc8a
+BuildRequires: digest(sha1:%{SOURCE0}) = 8ec366a7e7f3ae3a8765d8f43f1d62234a80c698
 
 %description
 mdadm is a tool for managing Linux Software RAID arrays.
@@ -18,13 +18,12 @@ mdadm is a tool for managing Linux Software RAID arrays.
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
-make
+make %{PMFLAGS} CC="gcc -Os -pipe"
 
 %install
 make DESTDIR=%{buildroot} install
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -40,5 +39,8 @@ rm -rf %{buildroot}
 /usr/share/man/man8/mdmon.8.bz2
 
 %changelog
+* Wed Nov 02 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.2.2-1
+- Initial version
+
 * Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.4-1
 - Initial version

@@ -1,0 +1,88 @@
+Fetching(Source0): http://dev.lightcube.us/sources/mdadm/mdadm-3.2.2.tar.bz2
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.41072
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf mdadm-3.2.2
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/mdadm-3.2.2.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd mdadm-3.2.2
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.41072
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd mdadm-3.2.2
++ make -j4 'CC=gcc -Os -pipe'
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o mdadm.o mdadm.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o config.o config.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o policy.o policy.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o mdstat.o mdstat.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o ReadMe.o ReadMe.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o util.o util.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o maps.o maps.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o lib.o lib.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Manage.o Manage.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Assemble.o Assemble.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Build.o Build.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Create.o Create.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Detail.o Detail.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Examine.o Examine.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Grow.o Grow.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Monitor.o Monitor.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o dlink.o dlink.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Kill.o Kill.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Query.o Query.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o Incremental.o Incremental.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o mdopen.o mdopen.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o super0.o super0.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o super1.o super1.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o super-ddf.o super-ddf.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o super-intel.o super-intel.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o bitmap.o bitmap.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o super-mbr.o super-mbr.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o super-gpt.o super-gpt.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o restripe.o restripe.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o sysfs.o sysfs.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS -DHAVE_STDINT_H -o sha1.o -c sha1.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o mapfile.o mapfile.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o crc32.o crc32.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o sg_io.o sg_io.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o msg.o msg.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o platform-intel.o platform-intel.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o probe_roms.o probe_roms.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o mdmon.o mdmon.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o monitor.o monitor.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS   -c -o managemon.o managemon.c
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS  -o mdadm mdadm.o config.o policy.o mdstat.o  ReadMe.o util.o maps.o lib.o Manage.o Assemble.o Build.o Create.o Detail.o Examine.o Grow.o Monitor.o dlink.o Kill.o Query.o Incremental.o mdopen.o super0.o super1.o super-ddf.o super-intel.o bitmap.o super-mbr.o super-gpt.o restripe.o sysfs.o sha1.o mapfile.o crc32.o sg_io.o msg.o platform-intel.o probe_roms.o 
+gcc -Os -pipe -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter -ggdb -DSendmail=\""/usr/sbin/sendmail -t"\" -DCONFFILE=\"/etc/mdadm.conf\" -DCONFFILE2=\"/etc/mdadm/mdadm.conf\" -DMAP_DIR=\"/dev/.mdadm\" -DMAP_FILE=\"map\" -DMDMON_DIR=\"/dev/.mdadm\" -DFAILED_SLOTS_DIR=\"/dev/.mdadm/failed-slots\" -DUSE_PTHREADS  -pthread -Wl,-z,now -o mdmon mdmon.o monitor.o managemon.o util.o maps.o mdstat.o sysfs.o config.o policy.o lib.o Kill.o sg_io.o dlink.o ReadMe.o super0.o super1.o super-intel.o super-mbr.o super-gpt.o super-ddf.o sha1.o crc32.o msg.o bitmap.o platform-intel.o probe_roms.o 
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.87191
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/mdadm-root
++ /bin/mkdir -p /var/tmp/mdadm-root
++ cd mdadm-3.2.2
++ make DESTDIR=/var/tmp/mdadm-root install
+sed -e 's/{DEFAULT_METADATA}/1.2/g' mdadm.8.in > mdadm.8
+/usr/bin/install -D -m 644 mdadm.8 /var/tmp/mdadm-root/usr/share/man/man8/mdadm.8
+/usr/bin/install -D -m 644 mdmon.8 /var/tmp/mdadm-root/usr/share/man/man8/mdmon.8
+/usr/bin/install -D -m 644 md.4 /var/tmp/mdadm-root/usr/share/man/man4/md.4
+/usr/bin/install -D -m 644 mdadm.conf.5 /var/tmp/mdadm-root/usr/share/man/man5/mdadm.conf.5
+/usr/bin/install -D -m 644 udev-md-raid.rules /var/tmp/mdadm-root/lib/udev/rules.d/64-md-raid.rules
+/usr/bin/install -D  -m 755 mdadm /var/tmp/mdadm-root/sbin/mdadm
+/usr/bin/install -D  -m 755 mdmon /var/tmp/mdadm-root/sbin/mdmon
++ /usr/lib/rpm/compress_man.sh /var/tmp/mdadm-root
++ /usr/lib/rpm/strip.sh /var/tmp/mdadm-root
++ exit 0
+Processing files: mdadm-3.2.2-1.x86_64
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.3)(64bit) libpthread.so.0()(64bit) libpthread.so.0(GLIBC_2.2.5)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/mdadm-root
+Wrote: /usr/src/rpm/SRPMS/mdadm-3.2.2-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/mdadm-3.2.2-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.27801
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd mdadm-3.2.2
++ /bin/rm -rf /var/tmp/mdadm-root
