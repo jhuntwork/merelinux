@@ -1,0 +1,198 @@
+Fetching(Source0): http://www.kernel.org/pub/linux/utils/kernel/module-init-tools/module-init-tools-3.15.tar.xz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.28149
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf module-init-tools-3.15
++ /usr/bin/xz -dc /usr/src/rpm/SOURCES/module-init-tools-3.15.tar.xz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd module-init-tools-3.15
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.28149
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd module-init-tools-3.15
++ DOCBOOKTOMAN=/bin/true
++ ./configure --prefix=/ --enable-zlib-dynamic --mandir=/usr/share/man
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+continue configure in default builddir "./build"
+....exec /bin/sh .././configure "--srcdir=.." "--enable-builddir=build" "linux
+gnu"
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+checking for gsed... sed
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking for ranlib... ranlib
+checking for docbook-to-man... /bin/true
+configure: Adding gcc options: -g -O2 -Wunused -Wall
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: executing buildir commands
+config.status: create top_srcdir/Makefile guessed from local Makefile
+config.status: build in build (HOST=)
+config.status: executing depfiles commands
++ make -j4
+MAKE x86_64-unknown-linux-gnu : 0 * all-all
+make[1]: Entering directory `/usr/src/rpm/BUILD/module-init-tools-3.15/build'
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..    -ffunction-sections -g -O2 -Wunused -Wall -MT libmodtools_a-util.o -MD -MP -MF .deps/libmodtools_a-util.Tpo -c -o libmodtools_a-util.o `test -f 'util.c' || echo '../'`util.c
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..    -ffunction-sections -g -O2 -Wunused -Wall -MT libmodtools_a-logging.o -MD -MP -MF .deps/libmodtools_a-logging.Tpo -c -o libmodtools_a-logging.o `test -f 'logging.c' || echo '../'`logging.c
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..    -ffunction-sections -g -O2 -Wunused -Wall -MT libmodtools_a-index.o -MD -MP -MF .deps/libmodtools_a-index.Tpo -c -o libmodtools_a-index.o `test -f 'index.c' || echo '../'`index.c
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..    -ffunction-sections -g -O2 -Wunused -Wall -MT libmodtools_a-config_filter.o -MD -MP -MF .deps/libmodtools_a-config_filter.Tpo -c -o libmodtools_a-config_filter.o `test -f 'config_filter.c' || echo '../'`config_filter.c
+mv -f .deps/libmodtools_a-config_filter.Tpo .deps/libmodtools_a-config_filter.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..    -ffunction-sections -g -O2 -Wunused -Wall -MT libmodtools_a-elfops.o -MD -MP -MF .deps/libmodtools_a-elfops.Tpo -c -o libmodtools_a-elfops.o `test -f 'elfops.c' || echo '../'`elfops.c
+mv -f .deps/libmodtools_a-logging.Tpo .deps/libmodtools_a-logging.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT lsmod.o -MD -MP -MF .deps/lsmod.Tpo -c -o lsmod.o ../lsmod.c
+mv -f .deps/libmodtools_a-util.Tpo .deps/libmodtools_a-util.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT modindex.o -MD -MP -MF .deps/modindex.Tpo -c -o modindex.o ../modindex.c
+mv -f .deps/lsmod.Tpo .deps/lsmod.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT zlibsupport.o -MD -MP -MF .deps/zlibsupport.Tpo -c -o zlibsupport.o ../zlibsupport.c
+mv -f .deps/modindex.Tpo .deps/modindex.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT insmod.o -MD -MP -MF .deps/insmod.Tpo -c -o insmod.o ../insmod.c
+mv -f .deps/zlibsupport.Tpo .deps/zlibsupport.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT modprobe.o -MD -MP -MF .deps/modprobe.Tpo -c -o modprobe.o ../modprobe.c
+mv -f .deps/insmod.Tpo .deps/insmod.Po
+mv -f .deps/libmodtools_a-index.Tpo .deps/libmodtools_a-index.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT rmmod.o -MD -MP -MF .deps/rmmod.Tpo -c -o rmmod.o ../rmmod.c
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT depmod.o -MD -MP -MF .deps/depmod.Tpo -c -o depmod.o ../depmod.c
+mv -f .deps/rmmod.Tpo .deps/rmmod.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT tables.o -MD -MP -MF .deps/tables.Tpo -c -o tables.o ../tables.c
+mv -f .deps/libmodtools_a-elfops.Tpo .deps/libmodtools_a-elfops.Po
+gcc -DPACKAGE_NAME=\"module-init-tools\" -DPACKAGE_TARNAME=\"module-init-tools\" -DPACKAGE_VERSION=\"3.15\" -DPACKAGE_STRING=\"module-init-tools\ 3.15\" -DPACKAGE_BUGREPORT=\"\" -DPACKAGE_URL=\"\" -DPACKAGE=\"module-init-tools\" -DVERSION=\"3.15\" -DCONFIG_USE_ZLIB=1 -I. -I..     -g -O2 -Wunused -Wall -MT modinfo.o -MD -MP -MF .deps/modinfo.Tpo -c -o modinfo.o ../modinfo.c
+mv -f .deps/modinfo.Tpo .deps/modinfo.Po
+if [ -h ../doc/depmod.conf.sgml ]; then                                                 \
+    ln -s $(basename $(readlink ../doc/depmod.conf.sgml) .sgml).5 depmod.conf.5;                 \
+elif [ "/bin/true" = "docbook2man" ]; then                   \
+    /bin/true ../doc/depmod.conf.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/depmod.conf.sgml 2>&1 > depmod.conf.5 | sed 's/^[^:]*://';              \
+fi
+if [ -h ../doc/depmod.d.sgml ]; then                                                 \
+    ln -s $(basename $(readlink ../doc/depmod.d.sgml) .sgml).5 depmod.d.5;                 \
+elif [ "/bin/true" = "docbook2man" ]; then                   \
+    /bin/true ../doc/depmod.d.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/depmod.d.sgml 2>&1 > depmod.d.5 | sed 's/^[^:]*://';              \
+fi
+if [ -h ../doc/modprobe.conf.sgml ]; then                                                 \
+    ln -s $(basename $(readlink ../doc/modprobe.conf.sgml) .sgml).5 modprobe.conf.5;                 \
+elif [ "/bin/true" = "docbook2man" ]; then                   \
+    /bin/true ../doc/modprobe.conf.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/modprobe.conf.sgml 2>&1 > modprobe.conf.5 | sed 's/^[^:]*://';              \
+fi
+if [ -h ../doc/modules.dep.sgml ]; then                                                 \
+    ln -s $(basename $(readlink ../doc/modules.dep.sgml) .sgml).5 modules.dep.5;                 \
+elif [ "/bin/true" = "docbook2man" ]; then                   \
+    /bin/true ../doc/modules.dep.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/modules.dep.sgml 2>&1 > modules.dep.5 | sed 's/^[^:]*://';              \
+fi
+if [ -h ../doc/modules.dep.bin.sgml ]; then                                                 \
+    ln -s $(basename $(readlink ../doc/modules.dep.bin.sgml) .sgml).5 modules.dep.bin.5;                 \
+elif [ "/bin/true" = "docbook2man" ]; then                   \
+    /bin/true ../doc/modules.dep.bin.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/modules.dep.bin.sgml 2>&1 > modules.dep.bin.5 | sed 's/^[^:]*://';              \
+fi
+if [ "/bin/true" = "docbook2man" ]; then                     \
+    /bin/true ../doc/depmod.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/depmod.sgml 2>&1 > depmod.8 | sed 's/^[^:]*://';              \
+fi
+if [ "/bin/true" = "docbook2man" ]; then                     \
+    /bin/true ../doc/insmod.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/insmod.sgml 2>&1 > insmod.8 | sed 's/^[^:]*://';              \
+fi
+if [ "/bin/true" = "docbook2man" ]; then                     \
+    /bin/true ../doc/lsmod.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/lsmod.sgml 2>&1 > lsmod.8 | sed 's/^[^:]*://';              \
+fi
+if [ "/bin/true" = "docbook2man" ]; then                     \
+    /bin/true ../doc/rmmod.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/rmmod.sgml 2>&1 > rmmod.8 | sed 's/^[^:]*://';              \
+fi
+if [ "/bin/true" = "docbook2man" ]; then                     \
+    /bin/true ../doc/modprobe.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/modprobe.sgml 2>&1 > modprobe.8 | sed 's/^[^:]*://';              \
+fi
+if [ "/bin/true" = "docbook2man" ]; then                     \
+    /bin/true ../doc/modinfo.sgml > /dev/null 2>&1;                           \
+else                                                               \
+    /bin/true ../doc/modinfo.sgml 2>&1 > modinfo.8 | sed 's/^[^:]*://';              \
+fi
+rm -f libmodtools.a
+ar cru libmodtools.a libmodtools_a-util.o libmodtools_a-logging.o libmodtools_a-index.o libmodtools_a-config_filter.o libmodtools_a-elfops.o 
+ranlib libmodtools.a
+gcc  -g -O2 -Wunused -Wall   -o lsmod lsmod.o -lz libmodtools.a 
+gcc  -g -O2 -Wunused -Wall   -o modindex modindex.o zlibsupport.o -lz libmodtools.a 
+mv -f .deps/modprobe.Tpo .deps/modprobe.Po
+gcc  -g -O2 -Wunused -Wall   -o insmod insmod.o -lz libmodtools.a 
+gcc  -g -O2 -Wunused -Wall   -o rmmod rmmod.o -lz libmodtools.a 
+mv -f .deps/depmod.Tpo .deps/depmod.Po
+gcc  -g -O2 -Wunused -Wall   -o modinfo modinfo.o zlibsupport.o -lz libmodtools.a 
+gcc  -g -O2 -Wunused -Wall -static  -o insmod.static insmod.o libmodtools.a 
+gcc  -g -O2 -Wunused -Wall   -o modprobe modprobe.o zlibsupport.o -lz libmodtools.a 
+mv -f .deps/tables.Tpo .deps/tables.Po
+gcc  -g -O2 -Wunused -Wall   -o depmod depmod.o zlibsupport.o tables.o -lz libmodtools.a 
+make[1]: Leaving directory `/usr/src/rpm/BUILD/module-init-tools-3.15/build'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.64265
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/module-init-tools-root
++ /bin/mkdir -p /var/tmp/module-init-tools-root
++ cd module-init-tools-3.15
++ make DESTDIR=/var/tmp/module-init-tools-root INSTALL=install install
+MAKE x86_64-unknown-linux-gnu : 0 * install
+make[1]: Entering directory `/usr/src/rpm/BUILD/module-init-tools-3.15/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/module-init-tools-3.15/build'
+test -z "//bin" || /bin/mkdir -p "/var/tmp/module-init-tools-root//bin"
+  install lsmod '/var/tmp/module-init-tools-root//bin'
+test -z "//sbin" || /bin/mkdir -p "/var/tmp/module-init-tools-root//sbin"
+  install insmod modprobe rmmod depmod modinfo insmod.static '/var/tmp/module-init-tools-root//sbin'
+test -z "/usr/share/man/man5" || /bin/mkdir -p "/var/tmp/module-init-tools-root/usr/share/man/man5"
+ install -m 644 depmod.conf.5 depmod.d.5 modprobe.conf.5 ../modprobe.d.5 modules.dep.5 modules.dep.bin.5 '/var/tmp/module-init-tools-root/usr/share/man/man5'
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/module-init-tools-root/usr/share/man/man8"
+ install -m 644 depmod.8 insmod.8 lsmod.8 rmmod.8 modprobe.8 modinfo.8 '/var/tmp/module-init-tools-root/usr/share/man/man8'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/module-init-tools-3.15/build'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/module-init-tools-3.15/build'
++ install -dv /var/tmp/module-init-tools-root/etc/modprobe.d
+install: creating directory `/var/tmp/module-init-tools-root/etc'
+install: creating directory `/var/tmp/module-init-tools-root/etc/modprobe.d'
++ /usr/lib/rpm/compress_man.sh /var/tmp/module-init-tools-root
++ /usr/lib/rpm/strip.sh /var/tmp/module-init-tools-root
++ exit 0
+Processing files: module-init-tools-3.15-1.x86_64
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.7)(64bit) libz.so.1()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/module-init-tools-root
+Wrote: /usr/src/rpm/SRPMS/module-init-tools-3.15-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/module-init-tools-3.15-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.64265
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd module-init-tools-3.15
++ /bin/rm -rf /var/tmp/module-init-tools-root

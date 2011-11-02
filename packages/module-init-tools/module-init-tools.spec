@@ -1,15 +1,15 @@
 Summary: module-init-tools
 Name: module-init-tools
-Version: 3.12
-Release: 3
+Version: 3.15
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.kernel.org/pub/linux/utils/kernel/module-init-tools
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://www.kernel.org/pub/linux/utils/kernel/module-init-tools/module-init-tools-3.15.tar.xz
 
-BuildRequires: digest(%{SOURCE0}) = 8b2257ce9abef74c4a44d825d23140f3
+BuildRequires: digest(sha1:%{SOURCE0}) = d044d4c737e92e9167a5cc015429af2ce3b57da9
 BuildRequires: zlib-devel
 
 %description
@@ -19,20 +19,17 @@ Tools for activating Linux kernel modules
 %setup -q
 
 %build
-# As per LFS instructiosn - avoid regenerating man pages
-echo '.so man5/modprobe.conf.5' > modprobe.d.5
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
-./configure \
+DOCBOOKTOMAN=/bin/true ./configure \
   --prefix=/ \
   --enable-zlib-dynamic \
   --mandir=/usr/share/man
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} INSTALL=install install
 install -dv %{buildroot}/etc/modprobe.d
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -48,9 +45,11 @@ rm -rf %{buildroot}
 /sbin/modprobe
 /sbin/rmmod
 /usr/share/man/man5/depmod.conf.5.bz2
+/usr/share/man/man5/depmod.d.5.bz2
 /usr/share/man/man5/modprobe.conf.5.bz2
 /usr/share/man/man5/modprobe.d.5.bz2
 /usr/share/man/man5/modules.dep.5.bz2
+/usr/share/man/man5/modules.dep.bin.5.bz2
 /usr/share/man/man8/depmod.8.bz2
 /usr/share/man/man8/insmod.8.bz2
 /usr/share/man/man8/lsmod.8.bz2
@@ -59,6 +58,10 @@ rm -rf %{buildroot}
 /usr/share/man/man8/rmmod.8.bz2
 
 %changelog
+* Wed Nov 02 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.15-1
+- Upgrade to 3.15
+- Optimize for size
+
 * Tue Sep 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.12-3
 - Add an /etc/modprobe.d directory
 
