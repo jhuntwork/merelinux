@@ -1,0 +1,585 @@
+Fetching(Source0): http://dev.lightcube.us/sources/xfsprogs/xfsprogs-3.1.6.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.34279
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf xfsprogs-3.1.6
++ /bin/gzip -dc /usr/src/rpm/SOURCES/xfsprogs-3.1.6.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd xfsprogs-3.1.6
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.34279
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd xfsprogs-3.1.6
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --sbindir=/sbin --libdir=/lib64 --enable-readline
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for a sed that does not truncate output... /bin/sed
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for fgrep... /bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for ar... ar
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking how to run the C preprocessor... gcc -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking for gmake... no
+checking for make... /usr/bin/make
+checking for tar... /bin/tar
+checking for gzip... /bin/gzip
+checking whether gcc -MM is supported... yes
+checking for awk... /bin/awk
+checking for sort... /usr/bin/sort
+checking whether ln -s works... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for msgmerge... /usr/bin/msgmerge
+checking for xgettext... /usr/bin/xgettext
+checking for rpm... /usr/bin/rpm
+checking for rpmbuild... /usr/bin/rpmbuild
+checking aio.h usability... yes
+checking aio.h presence... yes
+checking for aio.h... yes
+checking for lio_listio... no
+checking for lio_listio in -lrt... yes
+checking uuid.h usability... no
+checking uuid.h presence... no
+checking for uuid.h... no
+checking sys/uuid.h usability... no
+checking sys/uuid.h presence... no
+checking for sys/uuid.h... no
+checking uuid/uuid.h usability... yes
+checking uuid/uuid.h presence... yes
+checking for uuid/uuid.h... yes
+checking for uuid_compare... no
+checking for uuid_compare in -luuid... yes
+checking pthread.h usability... yes
+checking pthread.h presence... yes
+checking for pthread.h... yes
+checking for pthread_mutex_init in -lpthread... yes
+checking for fadvise ... yes
+checking for madvise ... yes
+checking for mincore ... yes
+checking for sendfile ... yes
+checking for getmntent ... yes
+checking for getmntinfo ... no
+checking for fallocate... yes
+checking linux/fiemap.h usability... yes
+checking linux/fiemap.h presence... yes
+checking for linux/fiemap.h... yes
+checking for library containing blkid_probe_all... -lblkid
+checking for blkid_probe_get_topology... yes
+checking for __psint_t ... no
+checking for __psunsigned_t ... no
+checking for __u32 ... yes
+checking size of long... 8
+checking size of char *... 8
+configure: creating ./config.status
+config.status: creating include/builddefs
+config.status: creating include/platform_defs.h
+config.status: executing libtool commands
++ make -j4
+Building include
+    [LN]     xfs
+    [LN]     disk
+Building libxfs
+Building libxlog
+Building libxcmd
+Building libhandle
+    [LTDEP]
+    [LTDEP]
+    [LTDEP]
+    [LTDEP]
+    [CC]     handle.lo
+    [CC]     xfs_log_recover.lo
+    [CC]     command.lo
+    [CC]     jdm.lo
+    [CC]     input.lo
+    [LD]     libhandle.la
+    [CC]     paths.lo
+    [CC]     util.lo
+    [CC]     cache.lo
+    [CC]     init.lo
+    [LD]     libxlog.la
+    [CC]     projects.lo
+    [CC]     help.lo
+    [CC]     kmem.lo
+Building libdisk
+    [LTDEP]
+    [CC]     quit.lo
+Building estimate
+    [DEP]
+    [CC]     xfs_estimate.o
+    [LD]     libxcmd.la
+    [CC]     logitem.lo
+Building fsck
+Building fsr
+    [LD]     xfs_estimate
+    [DEP]
+Building io
+    [DEP]
+    [CC]     xfs_fsr.o
+    [CC]     radix-tree.lo
+    [CC]     rdwr.lo
+    [CC]     init.o
+    [CC]     attr.o
+    [LD]     xfs_fsr
+Building quota
+    [DEP]
+    [CC]     trans.lo
+    [CC]     bmap.o
+    [CC]     file.o
+Building rtcp
+    [DEP]
+    [CC]     xfs_rtcp.o
+    [CC]     init.o
+    [CC]     freeze.o
+    [CC]     util.o
+    [CC]     fsync.o
+    [LD]     xfs_rtcp
+    [CC]     getrusage.o
+    [CC]     util.lo
+    [CC]     edit.o
+    [CC]     xfs_alloc.lo
+    [CC]     imap.o
+    [CC]     mmap.o
+    [CC]     free.o
+    [CC]     open.o
+    [CC]     path.o
+    [CC]     project.o
+    [CC]     xfs_ialloc.lo
+    [CC]     parent.o
+    [CC]     quot.o
+    [CC]     quota.o
+    [CC]     pread.o
+    [CC]     prealloc.o
+    [CC]     report.o
+    [CC]     pwrite.o
+    [CC]     shutdown.o
+    [CC]     state.o
+    [CC]     linux.o
+    [CC]     truncate.o
+    [CC]     xfs_inode.lo
+    [CC]     fadvise.o
+    [CC]     madvise.o
+    [LD]     xfs_quota
+    [CC]     mincore.o
+    [CC]     sendfile.o
+Building m4
+    [CC]     fiemap.o
+Building man
+Building man3
+Building man5
+    [CC]     inject.o
+Building man8
+    [CC]     resblks.o
+Building doc
+Building po
+    [ZIP]    CHANGES.gz
+    [CC]     xfs_btree.lo
+    [MSGFMT] de.mo
+    [LD]     xfs_io
+2356 translated messages.
+    [MSGFMT] pl.mo
+2364 translated messages.
+Building debian
+    [CC]     xfs_alloc_btree.lo
+    [CC]     xfs_ialloc_btree.lo
+    [CC]     xfs_bmap_btree.lo
+    [CC]     xfs_da_btree.lo
+    [CC]     xfs_dir2.lo
+    [CC]     xfs_dir2_leaf.lo
+    [CC]     xfs_attr_leaf.lo
+    [CC]     xfs_dir2_block.lo
+    [CC]     xfs_dir2_node.lo
+    [CC]     xfs_dir2_data.lo
+    [CC]     xfs_dir2_sf.lo
+    [CC]     xfs_bmap.lo
+    [CC]     xfs_mount.lo
+    [CC]     xfs_rtalloc.lo
+    [CC]     xfs_trans.lo
+    [CC]     xfs_attr.lo
+    [CC]     linux.lo
+    [LD]     libxfs.la
+Building copy
+Building db
+Building growfs
+Building logprint
+    [DEP]
+    [DEP]
+    [DEP]
+    [DEP]
+    [CC]     xfs_growfs.o
+    [CC]     xfs_copy.o
+    [CC]     logprint.o
+    [LD]     xfs_growfs
+    [CC]     log_copy.o
+    [CC]     log_dump.o
+Building mkfs
+    [DEP]
+    [CC]     log_misc.o
+    [CC]     maxtrres.o
+    [LD]     xfs_copy
+    [CC]     proto.o
+    [CC]     xfs_mkfs.o
+    [CC]     log_print_all.o
+Building mdrestore
+    [DEP]
+    [CC]     xfs_mdrestore.o
+    [CC]     addr.o
+    [CC]     agf.o
+    [CC]     log_print_trans.o
+    [LD]     xfs_mdrestore
+    [CC]     agfl.o
+    [LD]     xfs_logprint
+Building repair
+    [DEP]
+    [CC]     agi.o
+    [CC]     attr.o
+    [CC]     attrshort.o
+    [CC]     bit.o
+    [CC]     block.o
+    [CC]     bmap.o
+    [CC]     btblock.o
+    [CC]     bmroot.o
+    [CC]     check.o
+    [CC]     command.o
+    [CC]     agheader.o
+    [CC]     convert.o
+    [CC]     debug.o
+    [CC]     attr_repair.o
+    [CC]     dir.o
+    [LD]     mkfs.xfs
+    [CC]     dir2.o
+    [CC]     dir2sf.o
+    [CC]     avl.o
+    [CC]     dirshort.o
+    [CC]     avl64.o
+    [CC]     bmap.o
+    [CC]     btree.o
+    [CC]     dino_chunks.o
+    [CC]     dquot.o
+    [CC]     echo.o
+    [CC]     faddr.o
+    [CC]     field.o
+    [CC]     dinode.o
+    [CC]     dir.o
+    [CC]     flist.o
+    [CC]     fprint.o
+    [CC]     frag.o
+    [CC]     freesp.o
+    [CC]     hash.o
+    [CC]     help.o
+    [CC]     init.o
+    [CC]     dir2.o
+    [CC]     inode.o
+    [CC]     globals.o
+    [CC]     input.o
+    [CC]     io.o
+    [CC]     incore.o
+    [CC]     incore_bmc.o
+    [CC]     malloc.o
+    [CC]     metadump.o
+    [CC]     output.o
+    [CC]     init.o
+    [CC]     print.o
+    [CC]     quit.o
+    [CC]     sb.o
+    [CC]     incore_ext.o
+    [CC]     sig.o
+    [CC]     strvec.o
+    [CC]     incore_ino.o
+    [CC]     text.o
+    [CC]     type.o
+    [CC]     write.o
+    [CC]     phase1.o
+    [CC]     attrset.o
+    [CC]     phase2.o
+    [CC]     phase3.o
+    [CC]     phase4.o
+    [LD]     xfs_db
+    [CC]     phase5.o
+    [CC]     phase6.o
+    [CC]     phase7.o
+    [CC]     progress.o
+    [CC]     prefetch.o
+    [CC]     rt.o
+    [CC]     sb.o
+    [CC]     scan.o
+    [CC]     threads.o
+    [CC]     versions.o
+    [CC]     xfs_repair.o
+    [LD]     xfs_repair
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.63667
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/xfsprogs-root
++ /bin/mkdir -p /var/tmp/xfsprogs-root
++ cd xfsprogs-3.1.6
++ make prefix=/var/tmp/xfsprogs-root/usr PKG_SBIN_DIR=/var/tmp/xfsprogs-root/sbin PKG_ROOT_SBIN_DIR=/var/tmp/xfsprogs-root/sbin PKG_LIB_DIR=/var/tmp/xfsprogs-root/lib64 PKG_ROOT_LIB_DIR=/var/tmp/xfsprogs-root/lib64 install
+Installing include-install
+make[1]: Nothing to be done for `install'.
+Installing libxfs-install
+make[1]: Nothing to be done for `install'.
+Installing libxlog-install
+make[1]: Nothing to be done for `install'.
+Installing libxcmd-install
+make[1]: Nothing to be done for `install'.
+Installing libhandle-install
+cd ../libhandle/.libs; ../../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/lib64; ../../install-sh -o root -g root -m 644 -T so_dot_version libhandle.lai /var/tmp/xfsprogs-root/lib64; ../../install-sh -o root -g root -T so_dot_current libhandle.lai /var/tmp/xfsprogs-root/lib64
+Installing libdisk-install
+make[1]: Nothing to be done for `install'.
+Installing copy-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_copy /var/tmp/xfsprogs-root/sbin
+Installing db-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_db /var/tmp/xfsprogs-root/sbin
+../install-sh -o root -g root -m 755 xfs_admin.sh /var/tmp/xfsprogs-root/sbin/xfs_admin
+../install-sh -o root -g root -m 755 xfs_check.sh /var/tmp/xfsprogs-root/sbin/xfs_check
+../install-sh -o root -g root -m 755 xfs_ncheck.sh /var/tmp/xfsprogs-root/sbin/xfs_ncheck
+../install-sh -o root -g root -m 755 xfs_metadump.sh /var/tmp/xfsprogs-root/sbin/xfs_metadump
+Installing estimate-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_estimate /var/tmp/xfsprogs-root/sbin
+Installing fsck-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+../install-sh -o root -g root -m 755 xfs_fsck.sh /var/tmp/xfsprogs-root/sbin/fsck.xfs
+Installing fsr-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_fsr /var/tmp/xfsprogs-root/sbin
+libtool: install: warning: `../libhandle/libhandle.la' has not been installed in `/lib64'
+Installing growfs-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_growfs /var/tmp/xfsprogs-root/sbin
+../install-sh -o root -g root -m 755 xfs_info.sh /var/tmp/xfsprogs-root/sbin/xfs_info
+Installing io-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_io /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_bmap.sh /var/tmp/xfsprogs-root/sbin/xfs_bmap
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_freeze.sh /var/tmp/xfsprogs-root/sbin/xfs_freeze
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_mkfile.sh /var/tmp/xfsprogs-root/sbin/xfs_mkfile
+Installing logprint-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_logprint /var/tmp/xfsprogs-root/sbin
+Installing mkfs-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 mkfs.xfs /var/tmp/xfsprogs-root/sbin
+Installing quota-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_quota /var/tmp/xfsprogs-root/sbin
+Installing mdrestore-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_mdrestore /var/tmp/xfsprogs-root/sbin
+Installing repair-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_repair /var/tmp/xfsprogs-root/sbin
+Installing rtcp-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/sbin
+/bin/sh ../libtool --quiet --mode=install ../install-sh -o root -g root -m 755 xfs_rtcp /var/tmp/xfsprogs-root/sbin
+Installing m4-install
+make[1]: Nothing to be done for `install'.
+Installing man-install
+make[2]: Nothing to be done for `install'.
+../../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/usr/share/man/man5
+../../install-sh -o root -g root -m 644 projects.5 /var/tmp/xfsprogs-root/usr/share/man/man5/projects.5
+../../install-sh -o root -g root -m 644 projid.5 /var/tmp/xfsprogs-root/usr/share/man/man5/projid.5
+../../install-sh -o root -g root -m 644 xfs.5 /var/tmp/xfsprogs-root/usr/share/man/man5/xfs.5
+../../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/usr/share/man/man8
+../../install-sh -o root -g root -m 644 fsck.xfs.8 /var/tmp/xfsprogs-root/usr/share/man/man8/fsck.xfs.8
+../../install-sh -o root -g root -m 644 mkfs.xfs.8 /var/tmp/xfsprogs-root/usr/share/man/man8/mkfs.xfs.8
+../../install-sh -o root -g root -m 644 xfs_admin.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_admin.8
+../../install-sh -o root -g root -m 644 xfs_bmap.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_bmap.8
+../../install-sh -o root -g root -m 644 xfs_check.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_check.8
+../../install-sh -o root -g root -m 644 xfs_copy.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_copy.8
+../../install-sh -o root -g root -m 644 xfs_db.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_db.8
+../../install-sh -o root -g root -m 644 xfs_estimate.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_estimate.8
+../../install-sh -o root -g root -m 644 xfs_freeze.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_freeze.8
+../../install-sh -o root -g root -m 644 xfs_fsr.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_fsr.8
+../../install-sh -o root -g root -m 644 xfs_growfs.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_growfs.8
+../../install-sh -o root -g root -S xfs_growfs.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_info.8
+../../install-sh -o root -g root -m 644 xfs_io.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_io.8
+../../install-sh -o root -g root -m 644 xfs_logprint.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_logprint.8
+../../install-sh -o root -g root -m 644 xfs_mdrestore.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_mdrestore.8
+../../install-sh -o root -g root -m 644 xfs_metadump.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_metadump.8
+../../install-sh -o root -g root -m 644 xfs_mkfile.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_mkfile.8
+../../install-sh -o root -g root -m 644 xfs_ncheck.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_ncheck.8
+../../install-sh -o root -g root -m 644 xfs_quota.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_quota.8
+../../install-sh -o root -g root -m 644 xfs_repair.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_repair.8
+../../install-sh -o root -g root -m 644 xfs_rtcp.8 /var/tmp/xfsprogs-root/usr/share/man/man8/xfs_rtcp.8
+Installing doc-install
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/usr/share/doc/xfsprogs
+../install-sh -o root -g root -m 644 CHANGES.gz CREDITS /var/tmp/xfsprogs-root/usr/share/doc/xfsprogs
+../install-sh -o root -g root -m 644 COPYING /var/tmp/xfsprogs-root/usr/share/doc/xfsprogs
+Installing po-install
+Installing debian-install
+make[1]: Nothing to be done for `install'.
+./install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/usr/share/doc/xfsprogs
+./install-sh -o root -g root -m 644 README /var/tmp/xfsprogs-root/usr/share/doc/xfsprogs
++ make prefix=/var/tmp/xfsprogs-root/usr PKG_SBIN_DIR=/var/tmp/xfsprogs-root/sbin PKG_ROOT_SBIN_DIR=/var/tmp/xfsprogs-root/sbin PKG_LIB_DIR=/var/tmp/xfsprogs-root/lib64 PKG_ROOT_LIB_DIR=/var/tmp/xfsprogs-root/lib64 install-dev
+Installing include-install-dev
+../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/usr/include/xfs
+../install-sh -o root -g root -m 644 handle.h jdm.h xqm.h xfs.h xfs_fs.h linux.h /var/tmp/xfsprogs-root/usr/include/xfs
+../install-sh -o root -g root -m 644 platform_defs.h /var/tmp/xfsprogs-root/usr/include/xfs
+Installing libxfs-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing libxlog-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing libxcmd-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing libhandle-install-dev
+cd ../libhandle/.libs; ../../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/lib64; ../../install-sh -o root -g root -m 644 -T old_lib libhandle.lai /var/tmp/xfsprogs-root/lib64; ../../install-sh -o root -g root -m 644 libhandle.lai /var/tmp/xfsprogs-root/lib64/libhandle.la ; ../../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/lib64; ../../install-sh -o root -g root -T so_base libhandle.lai /var/tmp/xfsprogs-root/lib64; if test "x/var/tmp/xfsprogs-root/lib64" != "x/var/tmp/xfsprogs-root/lib64" ; then ../../install-sh -o root -g root -S /var/tmp/xfsprogs-root/lib64/libhandle.a /var/tmp/xfsprogs-root/lib64/libhandle.a; ../../install-sh -o root -g root -S /var/tmp/xfsprogs-root/lib64/libhandle.la /var/tmp/xfsprogs-root/lib64/libhandle.la; ../../install-sh -o root -g root -S /var/tmp/xfsprogs-root/lib64/libhandle.so /var/tmp/xfsprogs-root/lib64/libhandle.so; fi
+Installing libdisk-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing copy-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing db-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing estimate-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing fsck-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing fsr-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing growfs-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing io-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing logprint-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing mkfs-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing quota-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing mdrestore-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing repair-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing rtcp-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing m4-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing man-install-dev
+../../install-sh -o root -g root -m 755 -d /var/tmp/xfsprogs-root/usr/share/man/man3
+../../install-sh -o root -g root -m 644 handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/path_to_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/path_to_fshandle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/fd_to_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/handle_to_fshandle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/open_by_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/readlink_by_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/attr_multi_by_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/attr_list_by_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/fssetdm_by_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/free_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/getparents_by_handle.3
+../../install-sh -o root -g root -S path_to_handle.3 /var/tmp/xfsprogs-root/usr/share/man/man3/getparentpaths_by_handle.3
+../../install-sh -o root -g root -m 644 xfsctl.3 /var/tmp/xfsprogs-root/usr/share/man/man3/xfsctl.3
+make[2]: Nothing to be done for `install-dev'.
+make[2]: Nothing to be done for `install-dev'.
+Installing doc-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing po-install-dev
+make[1]: Nothing to be done for `install-dev'.
+Installing debian-install-dev
+make[1]: Nothing to be done for `install-dev'.
++ /usr/lib/rpm/compress_man.sh /var/tmp/xfsprogs-root
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/getparentpaths_by_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/getparentpaths_by_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/getparents_by_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/getparents_by_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/free_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/free_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/fssetdm_by_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/fssetdm_by_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/attr_list_by_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/attr_list_by_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/attr_multi_by_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/attr_multi_by_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/readlink_by_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/readlink_by_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/open_by_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/open_by_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/handle_to_fshandle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/handle_to_fshandle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/fd_to_handle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/fd_to_handle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man3/path_to_fshandle.3'
+`/var/tmp/xfsprogs-root/usr/share/man/man3/path_to_fshandle.3.bz2' -> `path_to_handle.3.bz2'
+removed `/var/tmp/xfsprogs-root/usr/share/man/man8/xfs_info.8'
+`/var/tmp/xfsprogs-root/usr/share/man/man8/xfs_info.8.bz2' -> `xfs_growfs.8.bz2'
++ /usr/lib/rpm/strip.sh /var/tmp/xfsprogs-root
++ /usr/lib/rpm/find-lang.sh /var/tmp/xfsprogs-root xfsprogs
++ exit 0
+Processing files: xfsprogs-3.1.6-1.x86_64
+Provides: libhandle.so.1()(64bit) libhandle.so.1(LIBHANDLE_1.0.3)(64bit)
+Requires: /bin/sh libblkid.so.1()(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.10)(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.3)(64bit) libhandle.so.1()(64bit) libhandle.so.1(LIBHANDLE_1.0.3)(64bit) libpthread.so.0()(64bit) libpthread.so.0(GLIBC_2.2.5)(64bit) libpthread.so.0(GLIBC_2.3.2)(64bit) libreadline.so.6()(64bit) librt.so.1()(64bit) librt.so.1(GLIBC_2.3.3)(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUID_1.0)(64bit)
+Processing files: xfsprogs-devel-3.1.6-1.x86_64
+Provides: libtool(/lib64/libhandle.la)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/xfsprogs-root
+Wrote: /usr/src/rpm/SRPMS/xfsprogs-3.1.6-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/xfsprogs-3.1.6-1.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/xfsprogs-devel-3.1.6-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.70721
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd xfsprogs-3.1.6
++ /bin/rm -rf /var/tmp/xfsprogs-root
