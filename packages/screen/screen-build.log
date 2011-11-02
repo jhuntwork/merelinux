@@ -1,0 +1,247 @@
+Fetching(Source0): http://ftp.gnu.org/gnu/screen/screen-4.0.3.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.61223
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf screen-4.0.3
++ /bin/gzip -dc /usr/src/rpm/SOURCES/screen-4.0.3.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd screen-4.0.3
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.61223
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd screen-4.0.3
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --with-sys-screenrc=/etc/screenrc --infodir=/usr/share/info --mandir=/usr/share/man
+this is screen version 4.0.3
+checking for gcc... gcc
+checking for C compiler default output... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ANSI C... none needed
+checking how to run the C preprocessor... gcc -E
+checking for egrep... grep -E
+checking whether gcc needs -traditional... no
+checking for library containing strerror... none required
+checking for gawk... gawk
+checking for a BSD-compatible install... /usr/bin/install -c
+configure: checking for buggy tools...
+- sh  is 'GNU bash, version 4.2.8(2)-release (x86_64-unknown-linux-gnu)'.
+- sed is 'GNU sed version 4.2.1'.
+checking if a system-wide socket dir should be used... yes
+checking for the socket dir... (eff_uid ? "/tmp/uscreens" : "/tmp/screens")
+configure: checking for MIPS...
+configure: checking for Ultrix...
+configure: checking for butterfly...
+configure: checking for POSIX.1...
+- you have a POSIX system
+configure: checking for System V...
+configure: checking for sequent/ptx...
+configure: checking SVR4...
+checking for ANSI C header files... no
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+configure: checking for Solaris 2.x...
+configure: checking BSD job jontrol...
+- you have jobcontrol
+configure: checking setreuid...
+configure: checking seteuid...
+configure: checking select...
+configure: checking fifos...
+- your fifos are usable
+configure: checking for broken fifo implementation...
+- your implementation is ok
+configure: checking sockets...
+- your sockets are usable
+configure: checking socket implementation...
+- you are normal
+- both sockets and fifos usable. let's take fifos.
+configure: checking select return value...
+- select is ok
+configure: checking for tgetent...
+configure: checking libcurses...
+- you use the terminfo database
+configure: checking ospeed...
+configure: checking for /dev/ptc...
+configure: checking for SVR4 ptys...
+checking for getpt... yes
+configure: checking for ptyranges...
+configure: checking default tty permissions/group...
+checking for write... no
+checking for xterm... no
+- can't determine - assume ptys are world accessable
+configure: checking getutent...
+configure: checking ut_host...
+checking utempter.h usability... no
+checking utempter.h presence... no
+checking for utempter.h... no
+configure: checking for libutil(s)...
+configure: checking getloadavg...
+assuming posix signal definition
+configure: checking for crypt and sec libraries...
+configure: checking crypt...
+configure: checking IRIX sun library...
+configure: checking syslog...
+configure: checking wait union...
+configure: checking for termio or termios...
+configure: checking getspnam...
+configure: checking getttyent...
+configure: checking fdwalk...
+configure: checking whether memcpy/memmove/bcopy handles overlapping arguments...
+checking long file names... yes
+checking for vsprintf... yes
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking for setenv... yes
+checking for nl_langinfo(CODESET)... yes
+checking for library containing gethostname... none required
+checking for rename... yes
+checking for fchmod... yes
+checking for fchown... yes
+checking for strerror... yes
+checking for lstat... yes
+checking for _exit... yes
+checking for utimes... yes
+checking for vsnprintf... yes
+checking for getcwd... yes
+checking for setlocale... yes
+checking for strftime... yes
+checking for the global screenrc file... "/etc/screenrc"
+checking for the utf8-encodings location... "/usr/share/screen/utf8encodings"
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating config.h
+config.status: executing default commands
+
+Now please check the pathnames in the Makefile and in the user
+configuration section in config.h.
+Then type 'make' to make screen. Good luck.
+
++ make -j4
+CPP="gcc -E " srcdir=. sh ./osdef.sh
+AWK=gawk CC="gcc -Os -pipe" srcdir=. sh ./comm.sh
+AWK=gawk srcdir=. sh ./term.sh
+sh ./tty.sh tty.c
+gcc -c -I. -I.    -Os -pipe putenv.c
+gcc -c -I. -I.    -Os -pipe term.c
+gcc -c -I. -I.    -Os -pipe kmapdef.c
+gcc -c -I. -I.    -Os -pipe comm.c
+gcc -c -I. -I.    -Os -pipe screen.c
+gcc -c -I. -I.    -Os -pipe ansi.c
+gcc -c -I. -I.    -Os -pipe fileio.c
+gcc -c -I. -I.    -Os -pipe mark.c
+gcc -c -I. -I.    -Os -pipe misc.c
+gcc -c -I. -I.    -Os -pipe resize.c
+gcc -c -I. -I.    -Os -pipe socket.c
+gcc -c -I. -I.    -Os -pipe search.c
+gcc -c -I. -I.    -Os -pipe tty.c
+gcc -c -I. -I.    -Os -pipe window.c
+gcc -c -I. -I.    -Os -pipe utmp.c
+gcc -c -I. -I.    -Os -pipe loadav.c
+gcc -c -I. -I.    -Os -pipe help.c
+gcc -c -I. -I.    -Os -pipe termcap.c
+gcc -c -I. -I.    -Os -pipe input.c
+gcc -c -I. -I.    -Os -pipe attacher.c
+gcc -c -I. -I.    -Os -pipe pty.c
+gcc -c -I. -I.    -Os -pipe process.c
+gcc -c -I. -I.    -Os -pipe display.c
+process.c: In function 'confirm_fn':
+process.c:5469:12: warning: cast from pointer to integer of different size
+gcc -c -I. -I.    -Os -pipe acls.c
+gcc -c -I. -I.    -Os -pipe braille.c
+gcc -c -I. -I.    -Os -pipe braille_tsi.c
+gcc -c -I. -I.    -Os -pipe logfile.c
+gcc -c -I. -I.    -Os -pipe layer.c
+gcc -c -I. -I.    -Os -pipe sched.c
+gcc -c -I. -I.    -Os -pipe teln.c
+gcc -c -I. -I.    -Os -pipe nethack.c
+gcc -c -I. -I.    -Os -pipe encoding.c
+gcc  -o screen screen.o ansi.o fileio.o mark.o misc.o resize.o socket.o search.o tty.o term.o window.o utmp.o loadav.o putenv.o help.o termcap.o input.o attacher.o pty.o process.o display.o comm.o kmapdef.o acls.o braille.o braille_tsi.o logfile.o layer.o sched.o teln.o nethack.o encoding.o -lcurses  -lutil -lcrypt
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.13716
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/screen-root
++ /bin/mkdir -p /var/tmp/screen-root
++ cd screen-4.0.3
++ make DESTDIR=/var/tmp/screen-root install
+./etc/mkinstalldirs /var/tmp/screen-root/usr/bin /var/tmp/screen-root`sed < config.h -n -e '/define SCREENENCODINGS/s/^.*"\([^"]*\)"/\1/p'`
+mkdir /var/tmp/screen-root/usr
+mkdir /var/tmp/screen-root/usr/bin
+mkdir /var/tmp/screen-root/usr/share
+mkdir /var/tmp/screen-root/usr/share/screen
+mkdir /var/tmp/screen-root/usr/share/screen/utf8encodings
+cd doc ; make installdirs
+make[1]: Entering directory `/usr/src/rpm/BUILD/screen-4.0.3/doc'
+./../etc/mkinstalldirs /var/tmp/screen-root/usr/share/man/man1 /var/tmp/screen-root/usr/share/info
+mkdir /var/tmp/screen-root/usr/share/man
+mkdir /var/tmp/screen-root/usr/share/man/man1
+mkdir /var/tmp/screen-root/usr/share/info
+make[1]: Leaving directory `/usr/src/rpm/BUILD/screen-4.0.3/doc'
+if [ -f /var/tmp/screen-root/usr/bin/screen-4.0.3 ] && [ ! -f /var/tmp/screen-root/usr/bin/screen-4.0.3.old ]; \
+	then mv /var/tmp/screen-root/usr/bin/screen-4.0.3 /var/tmp/screen-root/usr/bin/screen-4.0.3.old; fi
+/usr/bin/install -c screen /var/tmp/screen-root/usr/bin/screen-4.0.3
+chown root /var/tmp/screen-root/usr/bin/screen-4.0.3 && chmod 4755 /var/tmp/screen-root/usr/bin/screen-4.0.3
+if [ -f /var/tmp/screen-root/usr/bin/screen ] && [ ! -f /var/tmp/screen-root/usr/bin/screen.old ]; then mv /var/tmp/screen-root/usr/bin/screen /var/tmp/screen-root/usr/bin/screen.old; fi
+rm -f /var/tmp/screen-root/usr/bin/screen
+(cd /var/tmp/screen-root/usr/bin && ln -sf screen-4.0.3 screen)
+cp ./utf8encodings/?? /var/tmp/screen-root`sed < config.h -n -e '/define SCREENENCODINGS/s/^.*"\([^"]*\)"/\1/p'`
+cd doc ; make install
+make[1]: Entering directory `/usr/src/rpm/BUILD/screen-4.0.3/doc'
+./../etc/mkinstalldirs /var/tmp/screen-root/usr/share/man/man1 /var/tmp/screen-root/usr/share/info
+/usr/bin/install -c -m 644 ./screen.1 /var/tmp/screen-root/usr/share/man/man1/screen.1
+make screen.info
+make[2]: Entering directory `/usr/src/rpm/BUILD/screen-4.0.3/doc'
+make[2]: `screen.info' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/screen-4.0.3/doc'
+if test -f screen.info; then d=.; else d=.; fi; \
+if test -f $d/screen.info; then \
+for f in $d/screen.info*; do /usr/bin/install -c -m 644 $f /var/tmp/screen-root/usr/share/info;done; \
+if /bin/sh -c 'install-info --version' >/dev/null 2>&1; then \
+  install-info --info-dir=/var/tmp/screen-root/usr/share/info $d/screen.info; \
+else true; fi; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/screen-4.0.3/doc'
+if [ -d /usr/lib/terminfo ]; then \
+	PATH="$PATH:/usr/5bin" tic ./terminfo/screeninfo.src; \
+	chmod 644 /usr/lib/terminfo/s/screen*; \
+fi
+termcap entry (./terminfo/screencap) should be installed manually.
+You may also want to install ./etc/etcscreenrc in /etc/screenrc
++ install -dv /var/tmp/screen-root/etc
+install: creating directory `/var/tmp/screen-root/etc'
++ cat
++ /usr/lib/rpm/compress_man.sh /var/tmp/screen-root
++ /usr/lib/rpm/strip.sh /var/tmp/screen-root
++ rm -f /var/tmp/screen-root/usr/share/info/dir
++ exit 0
+Processing files: screen-4.0.3-2.x86_64
+Provides: config(screen) = 0:4.0.3-2
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libcrypt.so.1()(64bit) libcrypt.so.1(GLIBC_2.2.5)(64bit) libncursesw.so.5()(64bit) libutil.so.1()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/screen-root
+Wrote: /usr/src/rpm/SRPMS/screen-4.0.3-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/screen-4.0.3-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.99371
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd screen-4.0.3
++ /bin/rm -rf /var/tmp/screen-root

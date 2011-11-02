@@ -1,13 +1,13 @@
 Summary: GNU Screen
 Name: screen
 Version: 4.0.3
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/screen
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/screen/screen-4.0.3.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 7bc6e2f0959ffaae6f52d698c26c774e7dec3545
 BuildRequires: ncurses-devel
@@ -20,14 +20,13 @@ between several processes, typically interactive shells.
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS="-Os -pipe"
 ./configure \
   --prefix=/usr \
   --with-sys-screenrc=/etc/screenrc \
   --infodir=/usr/share/info \
   --mandir=/usr/share/man 
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -41,7 +40,8 @@ startup_message off
 # scrollback lines
 defscrollback 1000
 EOF
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
+%{compress_man}
+%{strip}
 rm -f %{buildroot}/usr/share/info/dir
 
 %clean
@@ -68,5 +68,8 @@ rm -rf %{buildroot}
 /usr/share/man/man1/screen.1.bz2
 
 %changelog
+* Wed Nov 02 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0.3-2
+- Optimize for size
+
 * Mon Sep 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0.3-1
 - Initial version
