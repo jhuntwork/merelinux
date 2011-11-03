@@ -1,15 +1,17 @@
 Summary: rpm package manager
 Name: rpm
 Version: 5.3.11
-Release: 4
+Release: 5
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.rpm5.org
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source1: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/rpm/compress_man.sh
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 65693e935a6706e3dce6e6d920f0cf50a9dca22b
+BuildRequires: digest(sha1:%{SOURCE1}) = f80ca67a748a2f99ed7f0963c611b7a047d9a67e
 BuildRequires: beecrypt-devel
 BuildRequires: bzip2-devel
 BuildRequires: db-devel
@@ -109,23 +111,13 @@ echo "%%strip		/usr/lib/rpm/strip.sh %%{buildroot}" >> %{buildroot}/etc/rpm/macr
 sed -i 's@/log@@' %{buildroot}/var/lib/rpm/DB_CONFIG
 
 # Add compress man helper
-cat > %{buildroot}/usr/lib/rpm/compress_man.sh << "EOF"
-#!/bin/bash
-find "$@/usr/share/man" -type f -exec bzip2 -9 '{}' \;
-for i in $(find "$@/usr/share/man" -type l) ; do
-    link=$(basename `readlink $i`)
-    fn=$(basename $i)
-    dn=$(dirname $i)
-    rm -vf $i
-    ln -sv $link.bz2 "$dn/$fn.bz2"
-done
-EOF
-chmod 0755 %{buildroot}/usr/lib/rpm/compress_man.sh
+install -m 0755 %{SOURCE1} \
+  %{buildroot}/usr/lib/rpm/compress_man.sh
 
 # Add strip helper
 cat > %{buildroot}/usr/lib/rpm/strip.sh << "EOF"
 #!/bin/bash
-find ${1} -type f -exec strip --strip-unneeded -R .comment -R .note '{}' \; 2>/dev/null || /bin/true
+find ${1} -type f -exec strip -v --strip-unneeded -R .comment -R .note '{}' \; 2>/dev/null || /bin/true
 EOF
 chmod 0755 %{buildroot}/usr/lib/rpm/strip.sh
 
@@ -301,6 +293,9 @@ fi
 /usr/share/man/*/man8/rpmbuild.8.bz2
 
 %changelog
+* Thu Nov 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-5
+- Improved compress_man script which handles hard links
+
 * Sun Oct 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.11-4
 - Keep log files in /var/lib/rpm for consistency
 
