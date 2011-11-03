@@ -1,7 +1,7 @@
 Summary: ext2, ext3 and ext4 File System Programs
 Name: e2fsprogs
 Version: 1.41.14
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://e2fsprogs.sourceforge.net
 Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 24f9364fa3d4c0d7d00cb627b819d0e51055d6c5
-BuildRequires: util-linux-ng-devel
+BuildRequires: util-linux-devel
 
 %package devel
 Summary: %{name} headers and libraries
@@ -27,7 +27,7 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 mkdir -v build
 cd build
 ../configure \
@@ -39,7 +39,7 @@ cd build
   --disable-libuuid \
   --disable-uuidd \
   --disable-fsck
-make
+make %{PMFLAGS}
 #make check
 
 %install
@@ -50,6 +50,7 @@ gunzip %{buildroot}/usr/share/info/libext2fs.info.gz
 makeinfo -o doc/com_err.info ../lib/et/com_err.texinfo
 install -v -m644 doc/com_err.info %{buildroot}/usr/share/info
 %{compress_man}
+%{strip}
 %find_lang %{name}
 
 %clean
@@ -92,16 +93,15 @@ rm -rf %{buildroot}
 /usr/bin/lsattr
 /usr/sbin/e2freefrag
 /usr/%{_lib}/e2initrd_helper
-/usr/%{_lib}/libcom_err.so
 /usr/%{_lib}/libcom_err.so.*
 /usr/%{_lib}/libe2p.so.*
 /usr/%{_lib}/libext2fs.so.*
 /usr/%{_lib}/libss.so.*
 /usr/sbin/filefrag
 /usr/sbin/mklost+found
-/usr/share/man/man1/*
-/usr/share/man/man5/*
-/usr/share/man/man8/*
+/usr/share/man/man1/*.bz2
+/usr/share/man/man5/*.bz2
+/usr/share/man/man8/*.bz2
 
 %files devel
 %defattr(-,root,root)
@@ -116,7 +116,6 @@ rm -rf %{buildroot}
 /usr/include/et
 /usr/include/ext2fs
 /usr/include/ss
-/usr/%{_lib}/e2initrd_helper
 /usr/%{_lib}/libcom_err.a
 /usr/%{_lib}/libcom_err.so
 /usr/%{_lib}/libe2p.a
@@ -131,6 +130,9 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/ss.pc
 
 %changelog
+* Thu Nov 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.14-2
+- Optimize for size
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.14-1
 - Upgrade to 1.41.14
 

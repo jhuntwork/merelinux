@@ -1,0 +1,1307 @@
+Fetching(Source0): http://dev.lightcube.us/sources/e2fsprogs/e2fsprogs-1.41.14.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.70449
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf e2fsprogs-1.41.14
++ /bin/gzip -dc /usr/src/rpm/SOURCES/e2fsprogs-1.41.14.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd e2fsprogs-1.41.14
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.70449
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd e2fsprogs-1.41.14
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ mkdir -v build
+mkdir: created directory `build'
++ cd build
++ ../configure --prefix=/usr --with-root-prefix= --enable-elf-shlibs --libdir=/usr/lib64 --disable-libblkid --disable-libuuid --disable-uuidd --disable-fsck
+Generating configuration file for e2fsprogs version 1.41.14
+Release date is December, 2010
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for dlopen in -ldl... yes
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking linux/fs.h usability... yes
+checking linux/fs.h presence... yes
+checking for linux/fs.h... yes
+checking for additional special compiler flags... (none)
+Disabling maintainer mode by default
+Disabling symlinks for install
+Disabling symlinks for build
+Disabling verbose make commands
+Disabling compression support by default
+Enabling htree directory support by default
+Enabling ELF shared libraries
+Disabling BSD shared libraries by default
+Disabling profiling libraries by default
+Disabling checker libraries by default
+Disabling journal debugging by default
+Disabling blkid debugging by default
+Enabling testio debugging by default
+checking for pkg-config... /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for uuid_generate in -luuid... yes
+Disabling private uuid library
+checking for pkg-config... (cached) /usr/bin/pkg-config
+checking pkg-config is at least version 0.9.0... yes
+checking for blkid_get_cache in -lblkid... yes
+Disabling private blkid library
+Enabling debugfs support by default
+Enabling e2image support by default
+Enabling e2resize support by default
+Not building fsck wrapper
+Building e2initrd helper by default
+Try using thread local support by default
+checking for thread local storage (TLS) class... __thread
+Not building uuidd
+checking whether make sets $(MAKE)... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for ranlib... ranlib
+checking for strerror in -lcposix... no
+checking for an ANSI C-conforming const... yes
+checking for signed... yes
+checking for inline... inline
+checking for off_t... yes
+checking for size_t... yes
+checking for long long... yes
+checking for long double... yes
+checking for wchar_t... yes
+checking for wint_t... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for intmax_t... yes
+checking whether printf() supports POSIX/XSI format strings... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for stdlib.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking for sys/param.h... yes
+checking for getpagesize... yes
+checking for working mmap... yes
+checking whether we are using the GNU C Library 2.1 or newer... yes
+checking whether integer division by zero raises SIGFPE... yes
+checking for unsigned long long... yes
+checking for inttypes.h... yes
+checking whether the inttypes.h PRIxNN macros are broken... no
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking for stdint.h... (cached) yes
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking for ptrdiff_t... yes
+checking argz.h usability... yes
+checking argz.h presence... yes
+checking for argz.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking nl_types.h usability... yes
+checking nl_types.h presence... yes
+checking for nl_types.h... yes
+checking malloc.h usability... yes
+checking malloc.h presence... yes
+checking for malloc.h... yes
+checking stddef.h usability... yes
+checking stddef.h presence... yes
+checking for stddef.h... yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking for unistd.h... (cached) yes
+checking for sys/param.h... (cached) yes
+checking for asprintf... yes
+checking for fwprintf... yes
+checking for getcwd... yes
+checking for getegid... yes
+checking for geteuid... yes
+checking for getgid... yes
+checking for getuid... yes
+checking for mempcpy... yes
+checking for munmap... yes
+checking for putenv... yes
+checking for setenv... yes
+checking for setlocale... yes
+checking for snprintf... yes
+checking for stpcpy... yes
+checking for strcasecmp... yes
+checking for strdup... yes
+checking for strtoul... yes
+checking for tsearch... yes
+checking for wcslen... yes
+checking for __argz_count... yes
+checking for __argz_stringify... yes
+checking for __argz_next... yes
+checking for __fsetlocking... yes
+checking whether _snprintf is declared... no
+checking whether _snwprintf is declared... no
+checking whether feof_unlocked is declared... yes
+checking whether fgets_unlocked is declared... no
+checking whether getc_unlocked is declared... yes
+checking for iconv... yes
+checking for iconv declaration... install-shextern size_t iconv (iconv_t cd, char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);
+checking for nl_langinfo and CODESET... yes
+checking for LC_MESSAGES... yes
+checking for bison... bison
+checking version of bison... 2.5, ok
+checking whether NLS is requested... yes
+checking whether included gettext is requested... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking whether make sets $(MAKE)... (cached) yes
+checking for GNU make... make
+checking for ln... /bin/ln
+checking whether ln -s works... yes
+checking for mv... /bin/mv
+checking for cp... /bin/cp
+checking for rm... /bin/rm
+checking for chmod... /bin/chmod
+checking for gawk... gawk
+checking for egrep... (cached) /bin/grep -E
+checking for sed... /bin/sed
+checking for perl... /usr/bin/perl
+checking for ldconfig... /sbin/ldconfig
+checking for ar... ar
+checking for ranlib... (cached) ranlib
+checking for strip... strip
+checking for makeinfo... makeinfo
+checking dirent.h usability... yes
+checking dirent.h presence... yes
+checking for dirent.h... yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking for malloc.h... (cached) yes
+checking mntent.h usability... yes
+checking mntent.h presence... yes
+checking for mntent.h... yes
+checking paths.h usability... yes
+checking paths.h presence... yes
+checking for paths.h... yes
+checking semaphore.h usability... yes
+checking semaphore.h presence... yes
+checking for semaphore.h... yes
+checking setjmp.h usability... yes
+checking setjmp.h presence... yes
+checking for setjmp.h... yes
+checking signal.h usability... yes
+checking signal.h presence... yes
+checking for signal.h... yes
+checking stdarg.h usability... yes
+checking stdarg.h presence... yes
+checking for stdarg.h... yes
+checking for stdint.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking termio.h usability... yes
+checking termio.h presence... yes
+checking for termio.h... yes
+checking for unistd.h... (cached) yes
+checking utime.h usability... yes
+checking utime.h presence... yes
+checking for utime.h... yes
+checking linux/fd.h usability... yes
+checking linux/fd.h presence... yes
+checking for linux/fd.h... yes
+checking linux/major.h usability... yes
+checking linux/major.h presence... yes
+checking for linux/major.h... yes
+checking net/if_dl.h usability... no
+checking net/if_dl.h presence... no
+checking for net/if_dl.h... no
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking sys/disklabel.h usability... no
+checking sys/disklabel.h presence... no
+checking for sys/disklabel.h... no
+checking sys/file.h usability... yes
+checking sys/file.h presence... yes
+checking for sys/file.h... yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/mkdev.h usability... no
+checking sys/mkdev.h presence... no
+checking for sys/mkdev.h... no
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking sys/prctl.h usability... yes
+checking sys/prctl.h presence... yes
+checking for sys/prctl.h... yes
+checking sys/queue.h usability... yes
+checking sys/queue.h presence... yes
+checking for sys/queue.h... yes
+checking sys/resource.h usability... yes
+checking sys/resource.h presence... yes
+checking for sys/resource.h... yes
+checking sys/select.h usability... yes
+checking sys/select.h presence... yes
+checking for sys/select.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/sockio.h usability... no
+checking sys/sockio.h presence... no
+checking for sys/sockio.h... no
+checking for sys/stat.h... (cached) yes
+checking sys/syscall.h usability... yes
+checking sys/syscall.h presence... yes
+checking for sys/syscall.h... yes
+checking sys/sysmacros.h usability... yes
+checking sys/sysmacros.h presence... yes
+checking for sys/sysmacros.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking for sys/types.h... (cached) yes
+checking sys/un.h usability... yes
+checking sys/un.h presence... yes
+checking for sys/un.h... yes
+checking sys/wait.h usability... yes
+checking sys/wait.h presence... yes
+checking for sys/wait.h... yes
+checking for sys/disk.h... no
+checking for sys/mount.h... yes
+checking for net/if.h... yes
+checking for vprintf... yes
+checking for _doprnt... no
+checking for struct dirent.d_reclen... yes
+checking for ssize_t... yes
+checking whether llseek is declared... no
+checking whether lseek64 is declared... yes
+checking size of short... 2
+checking size of int... 4
+checking size of long... 8
+checking size of long long... 8
+checking whether byte ordering is bigendian... no
+checking for inttypes.h... (cached) yes
+checking for intptr_t... yes
+checking whether struct stat has a st_flags field... no
+checking for struct sockaddr.sa_len... no
+checking for library containing blkid_probe_all... -lblkid
+checking for chflags... no
+checking for getrusage... yes
+checking for llseek... yes
+checking for lseek64... yes
+checking for open64... yes
+checking for fstat64... yes
+checking for ftruncate64... yes
+checking for getmntinfo... no
+checking for strtoull... yes
+checking for strcasecmp... (cached) yes
+checking for srandom... yes
+checking for jrand48... yes
+checking for fchown... yes
+checking for mallinfo... yes
+checking for fdatasync... yes
+checking for strnlen... yes
+checking for strptime... yes
+checking for strdup... (cached) yes
+checking for sysconf... yes
+checking for pathconf... yes
+checking for posix_memalign... yes
+checking for memalign... yes
+checking for valloc... yes
+checking for __secure_getenv... yes
+checking for prctl... yes
+checking for mmap... yes
+checking for utime... yes
+checking for setresuid... yes
+checking for setresgid... yes
+checking for usleep... yes
+checking for nanosleep... yes
+checking for getdtablesize... yes
+checking for getrlimit... yes
+checking for blkid_probe_get_topology... yes
+checking for mbstowcs... yes
+checking for socket in -lsocket... no
+checking for optreset... no
+checking for sem_init... no
+checking for sem_init in -lpthread... yes
+checking for unified diff option... -u
+Setting root_libdir to /usr/lib64
+checking whether linker accepts -static... yes
+configure: creating ./config.status
+config.status: creating MCONFIG
+config.status: creating Makefile
+config.status: creating e2fsprogs.spec
+config.status: creating util/Makefile
+config.status: creating util/subst.conf
+config.status: creating util/gen-tarball
+config.status: creating lib/et/Makefile
+config.status: creating lib/ss/Makefile
+config.status: creating lib/e2p/Makefile
+config.status: creating lib/ext2fs/Makefile
+config.status: creating lib/ext2fs/ext2_types.h
+config.status: creating lib/uuid/Makefile
+config.status: creating lib/uuid/uuid_types.h
+config.status: creating lib/blkid/Makefile
+config.status: creating lib/blkid/blkid_types.h
+config.status: creating lib/ss/ss.pc
+config.status: creating lib/uuid/uuid.pc
+config.status: creating lib/et/com_err.pc
+config.status: creating lib/e2p/e2p.pc
+config.status: creating lib/blkid/blkid.pc
+config.status: creating lib/ext2fs/ext2fs.pc
+config.status: creating misc/Makefile
+config.status: creating ext2ed/Makefile
+config.status: creating e2fsck/Makefile
+config.status: creating debugfs/Makefile
+config.status: creating tests/Makefile
+config.status: creating tests/progs/Makefile
+config.status: creating resize/Makefile
+config.status: creating doc/Makefile
+config.status: creating intl/Makefile
+config.status: creating intl/libgnuintl.h
+config.status: creating po/Makefile.in
+config.status: executing default-1 commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
++ make -j4
+cd ./util ; make subst
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/util'
+	CC ../../util/subst.c
+	LD subst
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/util'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+cd .; CONFIG_FILES=./lib/ext2fs/ext2_types.h ./config.status
+config.status: creating ./lib/ext2fs/ext2_types.h
+config.status: executing default-1 commands
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+cd .; CONFIG_FILES=./lib/blkid/blkid_types.h ./config.status
+config.status: creating ./lib/blkid/blkid_types.h
+config.status: executing default-1 commands
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+cd .; CONFIG_FILES=./lib/uuid/uuid_types.h ./config.status
+config.status: creating ./lib/uuid/uuid_types.h
+config.status: executing default-1 commands
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+	SUBST compile_et
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+	SUBST ext2_err.et
+	COMPILE_ET ext2_err.et
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+make libs
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: `lib/ext2fs/ext2_types.h' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: `lib/blkid/blkid_types.h' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: `lib/uuid/uuid_types.h' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[2]: `compile_et' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+make[2]: `ext2_err.h' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+making all in lib/et
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[3]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+	MKDIR elfshared
+make[3]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+	CC ../../../lib/et/error_message.c
+	CC ../../../lib/et/et_name.c
+	CC ../../../lib/et/init_et.c
+	CC ../../../lib/et/com_err.c
+	CC ../../../lib/et/com_right.c
+	GEN_LIB libcom_err.a
+	GEN_ELF_SOLIB libcom_err.so.2.1
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+making all in lib/ss
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+	SUBST mk_cmds
+	COMPILE_ET ss_err.et
+	COMPILE_ET ss_err.et
+make[3]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+	MK_CMDS std_rqs.c
+	MKDIR elfshared
+make[3]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+	CC ss_err.c
+	CC ../../../lib/ss/invocation.c
+	CC ../../../lib/ss/help.c
+	CC ../../../lib/ss/execute_cmd.c
+	CC ../../../lib/ss/listen.c
+	CC ../../../lib/ss/parse.c
+	CC ../../../lib/ss/error.c
+	CC ../../../lib/ss/prompt.c
+	CC ../../../lib/ss/request_tbl.c
+	CC ../../../lib/ss/list_rqs.c
+	CC ../../../lib/ss/pager.c
+	CC ../../../lib/ss/requests.c
+	CC ../../../lib/ss/data.c
+	CC ../../../lib/ss/get_readline.c
+	CC std_rqs.c
+	GEN_LIB libss.a
+	GEN_ELF_SOLIB libss.so.2.0
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+making all in lib/e2p
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+make[3]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+	MKDIR elfshared
+make[3]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+	CC ../../../lib/e2p/feature.c
+	CC ../../../lib/e2p/fgetflags.c
+	CC ../../../lib/e2p/fsetflags.c
+	CC ../../../lib/e2p/fgetversion.c
+	CC ../../../lib/e2p/fsetversion.c
+	CC ../../../lib/e2p/getflags.c
+	CC ../../../lib/e2p/getversion.c
+	CC ../../../lib/e2p/hashstr.c
+	CC ../../../lib/e2p/iod.c
+	CC ../../../lib/e2p/ls.c
+	CC ../../../lib/e2p/mntopts.c
+	CC ../../../lib/e2p/parse_num.c
+	CC ../../../lib/e2p/pe.c
+	CC ../../../lib/e2p/pf.c
+	CC ../../../lib/e2p/ps.c
+	CC ../../../lib/e2p/setflags.c
+	CC ../../../lib/e2p/setversion.c
+	CC ../../../lib/e2p/uuid.c
+	CC ../../../lib/e2p/ostype.c
+	CC ../../../lib/e2p/percent.c
+	GEN_LIB libe2p.a
+	GEN_ELF_SOLIB libe2p.so.2.3
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+making all in lib/ext2fs
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+make[3]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+	MKDIR elfshared
+make[3]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+	CC ../../../lib/ext2fs/bb_compat.c
+	CC ../../../lib/ext2fs/inode_io.c
+	CC ../../../lib/ext2fs/write_bb_file.c
+	CC ../../../lib/ext2fs/dupfs.c
+	CC ../../../lib/ext2fs/imager.c
+	CC ../../../lib/ext2fs/test_io.c
+	CC ext2_err.c
+	CC ../../../lib/ext2fs/alloc.c
+	CC ../../../lib/ext2fs/alloc_sb.c
+	CC ../../../lib/ext2fs/alloc_stats.c
+	CC ../../../lib/ext2fs/alloc_tables.c
+	CC ../../../lib/ext2fs/badblocks.c
+	CC ../../../lib/ext2fs/bb_inode.c
+	CC ../../../lib/ext2fs/bitmaps.c
+	CC ../../../lib/ext2fs/bitops.c
+	CC ../../../lib/ext2fs/block.c
+	CC ../../../lib/ext2fs/bmap.c
+	CC ../../../lib/ext2fs/check_desc.c
+	CC ../../../lib/ext2fs/closefs.c
+	CC ../../../lib/ext2fs/crc16.c
+	CC ../../../lib/ext2fs/csum.c
+	CC ../../../lib/ext2fs/dblist.c
+	CC ../../../lib/ext2fs/dblist_dir.c
+	CC ../../../lib/ext2fs/dirblock.c
+	CC ../../../lib/ext2fs/dirhash.c
+	CC ../../../lib/ext2fs/dir_iterate.c
+	CC ../../../lib/ext2fs/expanddir.c
+	CC ../../../lib/ext2fs/ext_attr.c
+	CC ../../../lib/ext2fs/extent.c
+	CC ../../../lib/ext2fs/fileio.c
+	CC ../../../lib/ext2fs/finddev.c
+	CC ../../../lib/ext2fs/flushb.c
+	CC ../../../lib/ext2fs/freefs.c
+	CC ../../../lib/ext2fs/gen_bitmap.c
+	CC ../../../lib/ext2fs/get_pathname.c
+	CC ../../../lib/ext2fs/getsize.c
+	CC ../../../lib/ext2fs/getsectsize.c
+	CC ../../../lib/ext2fs/i_block.c
+	CC ../../../lib/ext2fs/icount.c
+	CC ../../../lib/ext2fs/ind_block.c
+	CC ../../../lib/ext2fs/initialize.c
+	CC ../../../lib/ext2fs/inline.c
+	CC ../../../lib/ext2fs/inode.c
+	CC ../../../lib/ext2fs/io_manager.c
+	CC ../../../lib/ext2fs/ismounted.c
+	CC ../../../lib/ext2fs/link.c
+	CC ../../../lib/ext2fs/llseek.c
+	CC ../../../lib/ext2fs/lookup.c
+	CC ../../../lib/ext2fs/mkdir.c
+	CC ../../../lib/ext2fs/mkjournal.c
+	CC ../../../lib/ext2fs/namei.c
+	CC ../../../lib/ext2fs/native.c
+	CC ../../../lib/ext2fs/newdir.c
+	CC ../../../lib/ext2fs/openfs.c
+	CC ../../../lib/ext2fs/read_bb.c
+	CC ../../../lib/ext2fs/read_bb_file.c
+	CC ../../../lib/ext2fs/res_gdt.c
+	CC ../../../lib/ext2fs/rw_bitmaps.c
+	CC ../../../lib/ext2fs/swapfs.c
+	CC ../../../lib/ext2fs/tdb.c
+	CC ../../../lib/ext2fs/undo_io.c
+	CC ../../../lib/ext2fs/unix_io.c
+	CC ../../../lib/ext2fs/unlink.c
+	CC ../../../lib/ext2fs/valid_blk.c
+	CC ../../../lib/ext2fs/version.c
+	GEN_LIB libext2fs.a
+	GEN_ELF_SOLIB libext2fs.so.2.4
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+making all in intl
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make progs
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: `lib/ext2fs/ext2_types.h' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: `lib/blkid/blkid_types.h' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: `lib/uuid/uuid_types.h' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[2]: `compile_et' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+make[2]: `ext2_err.h' is up to date.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+making all in lib/et
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+making all in lib/ss
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+making all in lib/e2p
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+making all in lib/ext2fs
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+making all in intl
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+making all in e2fsck
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/e2fsck'
+	COMPILE_ET prof_err.et
+	CC gen_crc32table
+	CC ../../e2fsck/dict.c
+	COMPILE_ET prof_err.et
+	SUBST e2fsck.8
+	SUBST e2fsck.conf.5
+	CC ../../e2fsck/unix.c
+	CC ../../e2fsck/e2fsck.c
+	CC ../../e2fsck/super.c
+	CC ../../e2fsck/pass1.c
+	CC ../../e2fsck/pass1b.c
+	CC ../../e2fsck/pass2.c
+	CC ../../e2fsck/pass3.c
+	CC ../../e2fsck/pass4.c
+	CC ../../e2fsck/pass5.c
+	CC ../../e2fsck/journal.c
+	CC ../../e2fsck/badblocks.c
+	CC ../../e2fsck/util.c
+	CC ../../e2fsck/dirinfo.c
+	CC ../../e2fsck/dx_dirinfo.c
+	CC ../../e2fsck/ehandler.c
+	CC ../../e2fsck/problem.c
+	CC ../../e2fsck/message.c
+	CC ../../e2fsck/recovery.c
+	CC ../../e2fsck/region.c
+	CC ../../e2fsck/revoke.c
+	CC ../../e2fsck/ea_refcount.c
+	CC ../../e2fsck/rehash.c
+	CC ../../e2fsck/profile.c
+	CC prof_err.c
+	GEN32TABLE crc32table.h
+	CC ../../e2fsck/crc32.c
+	LD e2fsck
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/e2fsck'
+making all in debugfs
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/debugfs'
+	MK_CMDS debug_cmds.c
+	CC ../../debugfs/debugfs.c
+	CC ../../debugfs/util.c
+	CC ../../debugfs/ncheck.c
+	CC ../../debugfs/icheck.c
+	CC ../../debugfs/ls.c
+	CC ../../debugfs/lsdel.c
+	CC ../../debugfs/dump.c
+	CC ../../debugfs/set_fields.c
+	CC ../../debugfs/logdump.c
+	CC ../../debugfs/htree.c
+	CC ../../debugfs/unused.c
+	SUBST debugfs.8
+	CC debug_cmds.c
+	LD debugfs
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/debugfs'
+making all in misc
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/misc'
+	COMPILE_ET prof_err.et
+	CC ../../misc/util.c
+	COMPILE_ET prof_err.et
+	PROFILE_TO_C mke2fs.conf
+	CC ../../misc/badblocks.c
+	CC ../../misc/tune2fs.c
+	CC ../../misc/dumpe2fs.c
+	CC ../../misc/logsave.c
+	CC ../../misc/e2image.c
+	CC ../../misc/e2undo.c
+	CC ../../misc/chattr.c
+	CC ../../misc/lsattr.c
+	CC ../../misc/mklost+found.c
+	CC ../../misc/filefrag.c
+	CC ../../misc/e2freefrag.c
+	SUBST tune2fs.8
+	SUBST mklost+found.8
+	SUBST mke2fs.8
+	SUBST dumpe2fs.8
+	SUBST badblocks.8
+	SUBST e2label.8
+	SUBST e2image.8
+	SUBST logsave.8
+	SUBST filefrag.8
+	SUBST e2freefrag.8
+	SUBST e2undo.8
+	SUBST chattr.1
+	SUBST lsattr.1
+	SUBST mke2fs.conf.5
+	CC ../../misc/e2initrd_helper.c
+	CC ../../misc/mke2fs.c
+	CC ../../misc/../e2fsck/profile.c
+	CC prof_err.c
+	CC default_profile.c
+	LD badblocks
+	LD tune2fs
+	LD dumpe2fs
+	LD logsave
+	LD e2image
+	LD e2undo
+	LD chattr
+	LD lsattr
+	LD mklost+found
+	LD filefrag
+	LD e2freefrag
+	LD e2initrd_helper
+	LD mke2fs
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/misc'
+making all in resize
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/resize'
+	CC ../../resize/extent.c
+	CC ../../resize/resize2fs.c
+	CC ../../resize/main.c
+	CC ../../resize/online.c
+	CC ../../resize/sim_progress.c
+	CC ../../resize/test_extent.c
+	SUBST resize2fs.8
+	LD test_extent
+	LD resize2fs
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/resize'
+making all in tests/progs
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/tests/progs'
+	CC ../../../tests/progs/test_icount.c
+	MK_CMDS test_icount_cmds.c
+	CC test_icount_cmds.c
+	LD test_icount
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/tests/progs'
+making all in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/po'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/po'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make docs
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[2]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/doc'
+	MAKEINFO libext2fs.info
+make[2]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/doc'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.51067
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/e2fsprogs-root
++ /bin/mkdir -p /var/tmp/e2fsprogs-root
++ cd e2fsprogs-1.41.14
++ cd build
++ make DESTDIR=/var/tmp/e2fsprogs-root install
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: `lib/ext2fs/ext2_types.h' is up to date.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: `lib/blkid/blkid_types.h' is up to date.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: `lib/uuid/uuid_types.h' is up to date.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[1]: `compile_et' is up to date.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+make[1]: `ext2_err.h' is up to date.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+making all in lib/et
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+making all in lib/ss
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+making all in lib/e2p
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+making all in lib/ext2fs
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+making all in intl
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+making install in e2fsck
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/e2fsck'
+	MKINSTALLDIRS /sbin /usr/share/man/man8
+mkdir /var/tmp/e2fsprogs-root/sbin
+mkdir /var/tmp/e2fsprogs-root/usr
+mkdir /var/tmp/e2fsprogs-root/usr/share
+mkdir /var/tmp/e2fsprogs-root/usr/share/man
+mkdir /var/tmp/e2fsprogs-root/usr/share/man/man8
+mkdir /var/tmp/e2fsprogs-root/usr/share/man/man5
+	INSTALL /sbin/e2fsck
+	LINK /sbin/fsck.ext2
+	LINK /sbin/fsck.ext3
+	LINK /sbin/fsck.ext4
+	LINK /sbin/fsck.ext4dev
+	INSTALL_DATA /usr/share/man/man8/e2fsck.8
+	INSTALL_DATA /usr/share/man/man5/e2fsck.conf.5
+	LINK /usr/share/man/man8/fsck.ext2.8
+	LINK /usr/share/man/man8/fsck.ext3.8
+	LINK /usr/share/man/man8/fsck.ext4.8
+	LINK /usr/share/man/man8/fsck.ext4dev.8
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/e2fsck'
+making install in debugfs
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/debugfs'
+	MKINSTALLDIRS /sbin /usr/share/man/man8
+	INSTALL /sbin/debugfs
+	INSTALL_DATA /usr/share/man/man8/debugfs.8
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/debugfs'
+making install in misc
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/misc'
+	MKINSTALLDIRS /usr/sbin /sbin /usr/bin /usr/share/man/man1 /usr/share/man/man8 /usr/lib64 /etc
+mkdir /var/tmp/e2fsprogs-root/usr/sbin
+mkdir /var/tmp/e2fsprogs-root/usr/bin
+mkdir /var/tmp/e2fsprogs-root/usr/share/man/man1
+mkdir /var/tmp/e2fsprogs-root/usr/lib64
+mkdir /var/tmp/e2fsprogs-root/etc
+	INSTALL /sbin/mke2fs
+	INSTALL /sbin/badblocks
+	INSTALL /sbin/tune2fs
+	INSTALL /sbin/dumpe2fs
+	INSTALL /sbin/logsave
+	INSTALL /sbin/e2image
+	INSTALL /sbin/e2undo
+	INSTALL /usr/sbin/mklost+found
+	INSTALL /usr/sbin/filefrag
+	INSTALL /usr/sbin/e2freefrag
+	LINK /sbin/mkfs.ext2
+	LINK /sbin/mkfs.ext3
+	LINK /sbin/mkfs.ext4
+	LINK /sbin/mkfs.ext4dev
+	INSTALL /usr/bin/chattr
+	INSTALL /usr/bin/lsattr
+	INSTALL /usr/lib64/e2initrd_helper
+	INSTALL_DATA /usr/share/man/man8/tune2fs.8
+	INSTALL_DATA /usr/share/man/man8/mklost+found.8
+	INSTALL_DATA /usr/share/man/man8/mke2fs.8
+	INSTALL_DATA /usr/share/man/man8/dumpe2fs.8
+	INSTALL_DATA /usr/share/man/man8/badblocks.8
+	INSTALL_DATA /usr/share/man/man8/e2label.8
+	INSTALL_DATA /usr/share/man/man8/e2image.8
+	INSTALL_DATA /usr/share/man/man8/logsave.8
+	INSTALL_DATA /usr/share/man/man8/filefrag.8
+	INSTALL_DATA /usr/share/man/man8/e2freefrag.8
+	INSTALL_DATA /usr/share/man/man8/e2undo.8
+	LINK mkfs.ext2.8
+	LINK mkfs.ext3.8
+	LINK mkfs.ext4.8
+	LINK mkfs.ext4dev.8
+	INSTALL_DATA /usr/share/man/man1/chattr.1
+	INSTALL_DATA /usr/share/man/man1/lsattr.1
+	INSTALL_DATA /usr/share/man/man5/mke2fs.conf.5
+	INSTALL_DATA /etc/mke2fs.conf
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/misc'
+making install in resize
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/resize'
+	MKINSTALLDIRS /sbin /usr/share/man/man8
+	INSTALL /sbin/resize2fs
+	INSTALL_DATA /usr/share/man/man8/resize2fs.8
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/resize'
+making install in tests/progs
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/tests/progs'
+make[1]: Nothing to be done for `install'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/tests/progs'
+making install in po
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/po'
+/bin/sh ../../config/mkinstalldirs /var/tmp/e2fsprogs-root/usr/share
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/ca
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/ca/LC_MESSAGES
+installing ../../po/ca.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/ca/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/cs
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/cs/LC_MESSAGES
+installing ../../po/cs.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/cs/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/de
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/de/LC_MESSAGES
+installing ../../po/de.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/de/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/es
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/es/LC_MESSAGES
+installing ../../po/es.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/es/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/fr
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/fr/LC_MESSAGES
+installing ../../po/fr.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/fr/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/id
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/id/LC_MESSAGES
+installing ../../po/id.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/id/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/it
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/it/LC_MESSAGES
+installing ../../po/it.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/it/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/nl
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/nl/LC_MESSAGES
+installing ../../po/nl.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/nl/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/pl
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/pl/LC_MESSAGES
+installing ../../po/pl.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/pl/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/sv
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/sv/LC_MESSAGES
+installing ../../po/sv.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/sv/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/tr
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/tr/LC_MESSAGES
+installing ../../po/tr.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/tr/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/vi
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/vi/LC_MESSAGES
+installing ../../po/vi.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/vi/LC_MESSAGES/e2fsprogs.mo
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/zh_CN
+mkdir /var/tmp/e2fsprogs-root/usr/share/locale/zh_CN/LC_MESSAGES
+installing ../../po/zh_CN.gmo as /var/tmp/e2fsprogs-root/usr/share/locale/zh_CN/LC_MESSAGES/e2fsprogs.mo
+if test "e2fsprogs" = "gettext-tools"; then \
+  /bin/sh ../../config/mkinstalldirs /var/tmp/e2fsprogs-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ../../po/$file \
+		    /var/tmp/e2fsprogs-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/e2fsprogs-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/po'
+making install-shlibs in lib/et
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+	MKINSTALLDIRS /usr/lib64 /usr/lib64
+	INSTALL-ELF-LIB /usr/lib64/libcom_err.so.2.1
+	SYMLINK /usr/lib64/libcom_err.so.2
+	SYMLINK /usr/lib64/libcom_err.so
+	LDCONFIG
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+making install-shlibs in lib/ss
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+	MKINSTALLDIRS /usr/lib64 /usr/lib64
+	INSTALL-ELF-LIB /usr/lib64/libss.so.2.0
+	SYMLINK /usr/lib64/libss.so.2
+	SYMLINK /usr/lib64/libss.so
+	LDCONFIG
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+making install-shlibs in lib/e2p
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+	MKINSTALLDIRS /usr/lib64 /usr/lib64
+	INSTALL-ELF-LIB /usr/lib64/libe2p.so.2.3
+	SYMLINK /usr/lib64/libe2p.so.2
+	SYMLINK /usr/lib64/libe2p.so
+	LDCONFIG
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+making install-shlibs in lib/ext2fs
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+	MKINSTALLDIRS /usr/lib64 /usr/lib64
+	INSTALL-ELF-LIB /usr/lib64/libext2fs.so.2.4
+	SYMLINK /usr/lib64/libext2fs.so.2
+	SYMLINK /usr/lib64/libext2fs.so
+	LDCONFIG
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+making install-shlibs in intl
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+make[1]: Nothing to be done for `install-shlibs'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/doc'
+	TEXI2DVI libext2fs.dvi
+You don't have a working TeX binary (tex) installed anywhere in
+your PATH, and texi2dvi cannot proceed without one.  If you want to use
+this script, you'll need to install TeX (if you don't have it) or change
+your PATH or TEX environment variable (if you do).  See the --help
+output for more details.
+
+For information about obtaining TeX, please see http://www.tug.org.  If
+you happen to be using Debian, you can get it with this command:
+  apt-get install tetex-bin
+make[1]: [libext2fs.dvi] Error 1 (ignored)
+	MKINSTALLDIRS /usr/share/info
+mkdir /var/tmp/e2fsprogs-root/usr/share/info
+	INSTALL_DATA /usr/share/info/libext2fs.info
+	GZIP /usr/share/info/libext2fs.info*
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/doc'
+if test ! -d e2fsck && test ! -d debugfs && test ! -d misc && test ! -d ext2ed ; then make install-libs ; fi
++ make DESTDIR=/var/tmp/e2fsprogs-root install-libs
+making install in lib/et
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+	MKINSTALLDIRS /usr/lib64 /usr/lib64
+	INSTALL-ELF-LIB /usr/lib64/libcom_err.so.2.1
+	SYMLINK /usr/lib64/libcom_err.so.2
+	SYMLINK /usr/lib64/libcom_err.so
+	LDCONFIG
+	MKINSTALLDIRS /usr/lib64 /usr/include/et /usr/share/et /usr/bin /usr/share/man/man1 /usr/share/man/man3
+mkdir /var/tmp/e2fsprogs-root/usr/include
+mkdir /var/tmp/e2fsprogs-root/usr/include/et
+mkdir /var/tmp/e2fsprogs-root/usr/share/et
+mkdir /var/tmp/e2fsprogs-root/usr/share/man/man3
+mkdir /var/tmp/e2fsprogs-root/usr/lib64/pkgconfig
+	INSTALL_DATA /usr/lib64/libcom_err.a
+	INSTALL_DATA /usr/include/et/com_err.h
+	INSTALL_DATA /usr/share/et/et_c.awk
+	INSTALL_DATA /usr/share/et/et_h.awk
+	INSTALL_SCRIPT /usr/bin/compile_et
+	INSTALL_DATA /usr/share/man/man3/com_err.3
+	INSTALL_DATA /usr/share/man/man1/compile_et.1
+	INSTALL_DATA /usr/lib64/pkgconfig/com_err.pc
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/et'
+making install in lib/ss
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+	MKINSTALLDIRS /usr/lib64 /usr/lib64
+	INSTALL-ELF-LIB /usr/lib64/libss.so.2.0
+	SYMLINK /usr/lib64/libss.so.2
+	SYMLINK /usr/lib64/libss.so
+	LDCONFIG
+	MKINSTALLDIRS /usr/lib64 /usr/include/ss /usr/share/ss /usr/bin
+mkdir /var/tmp/e2fsprogs-root/usr/include/ss
+mkdir /var/tmp/e2fsprogs-root/usr/share/ss
+	INSTALL_DATA /var/tmp/e2fsprogs-root/usr/lib64/libss.a
+	INSTALL_DATA /var/tmp/e2fsprogs-root/usr/include/ss/ss.h
+	INSTALL_DATA /usr/include/ss/ss_err.h
+	INSTALL_DATA /var/tmp/e2fsprogs-root/usr/share/ss/ct_c.awk
+	INSTALL_DATA /var/tmp/e2fsprogs-root/usr/share/ss/ct_c.sed
+	INSTALL /usr/bin/mk_cmds
+	INSTALL_DATA /usr/share/man/man1/mk_cmds.1
+	INSTALL_DATA /usr/lib64/pkgconfig/ss.pc
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ss'
+making install in lib/e2p
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+	MKINSTALLDIRS /usr/lib64 /usr/lib64
+	INSTALL-ELF-LIB /usr/lib64/libe2p.so.2.3
+	SYMLINK /usr/lib64/libe2p.so.2
+	SYMLINK /usr/lib64/libe2p.so
+	LDCONFIG
+	MKINSTALLDIRS /usr/lib64 /usr/include/e2p
+mkdir /var/tmp/e2fsprogs-root/usr/include/e2p
+	INSTALL_DATA /usr/lib64/libe2p.a
+	INSTALL_DATA /usr/include/e2p/e2p.h
+	INSTALL_DATA /usr/lib64/pkgconfig/e2p.pc
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/e2p'
+making install in lib/ext2fs
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+	MKINSTALLDIRS /usr/lib64 /usr/lib64
+	INSTALL-ELF-LIB /usr/lib64/libext2fs.so.2.4
+	SYMLINK /usr/lib64/libext2fs.so.2
+	SYMLINK /usr/lib64/libext2fs.so
+	LDCONFIG
+	MKINSTALLDIRS /usr/lib64 /usr/include/ext2fs
+mkdir /var/tmp/e2fsprogs-root/usr/include/ext2fs
+	INSTALL_DATA /usr/lib64/libext2fs.a
+	INSTALL_DATA /usr/include/ext2fs/bitops.h
+	INSTALL_DATA /usr/include/ext2fs/ext2fs.h
+	INSTALL_DATA /usr/include/ext2fs/ext2_io.h
+	INSTALL_DATA /usr/include/ext2fs/ext2_fs.h
+	INSTALL_DATA /usr/include/ext2fs/ext2_ext_attr.h
+	INSTALL_DATA /usr/include/ext2fs/ext3_extents.h
+	INSTALL_DATA /usr/include/ext2fs/tdb.h
+	INSTALL_DATA /usr/include/ext2fs/ext2_err.h
+	INSTALL_DATA /usr/include/ext2fs/ext2_types.h
+	INSTALL_DATA /usr/lib64/pkgconfig/ext2fs.pc
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/lib/ext2fs'
+making install in intl
+make[1]: Entering directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
+if test 'no' = yes; then \
+  test yes != no || /bin/sh ../../config/mkinstalldirs /var/tmp/e2fsprogs-root/usr/lib64; \
+  temp=/var/tmp/e2fsprogs-root/usr/lib64/t-charset.alias; \
+  dest=/var/tmp/e2fsprogs-root/usr/lib64/charset.alias; \
+  if test -f /var/tmp/e2fsprogs-root/usr/lib64/charset.alias; then \
+    orig=/var/tmp/e2fsprogs-root/usr/lib64/charset.alias; \
+    sed -f ref-add.sed $orig > $temp; \
+    /usr/bin/install -c -m 644 $temp $dest; \
+    rm -f $temp; \
+  else \
+    if test yes = no; then \
+      orig=charset.alias; \
+      sed -f ref-add.sed $orig > $temp; \
+      /usr/bin/install -c -m 644 $temp $dest; \
+      rm -f $temp; \
+    fi; \
+  fi; \
+  /bin/sh ../../config/mkinstalldirs /var/tmp/e2fsprogs-root/usr/share/locale; \
+  test -f /var/tmp/e2fsprogs-root/usr/share/locale/locale.alias \
+    && orig=/var/tmp/e2fsprogs-root/usr/share/locale/locale.alias \
+    || orig=../../intl/locale.alias; \
+  temp=/var/tmp/e2fsprogs-root/usr/share/locale/t-locale.alias; \
+  dest=/var/tmp/e2fsprogs-root/usr/share/locale/locale.alias; \
+  sed -f ref-add.sed $orig > $temp; \
+  /usr/bin/install -c -m 644 $temp $dest; \
+  rm -f $temp; \
+else \
+  : ; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/e2fsprogs-1.41.14/build/intl'
++ gunzip /var/tmp/e2fsprogs-root/usr/share/info/libext2fs.info.gz
++ makeinfo -o doc/com_err.info ../lib/et/com_err.texinfo
++ install -v -m644 doc/com_err.info /var/tmp/e2fsprogs-root/usr/share/info
+`doc/com_err.info' -> `/var/tmp/e2fsprogs-root/usr/share/info/com_err.info'
++ /usr/lib/rpm/compress_man.sh /var/tmp/e2fsprogs-root
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext2.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext2.8' -> `e2fsck.8'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext3.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext3.8' -> `e2fsck.8'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext4.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext4.8' -> `e2fsck.8'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext4dev.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext4dev.8' -> `e2fsck.8'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext2.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext2.8' -> `mke2fs.8'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext3.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext3.8' -> `mke2fs.8'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext4.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext4.8' -> `mke2fs.8'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext4dev.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext4dev.8' -> `mke2fs.8'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext4dev.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext4dev.8.bz2' -> `mke2fs.8.bz2'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext4.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext4.8.bz2' -> `mke2fs.8.bz2'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext3.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext3.8.bz2' -> `mke2fs.8.bz2'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext2.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/mkfs.ext2.8.bz2' -> `mke2fs.8.bz2'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext4dev.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext4dev.8.bz2' -> `e2fsck.8.bz2'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext4.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext4.8.bz2' -> `e2fsck.8.bz2'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext3.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext3.8.bz2' -> `e2fsck.8.bz2'
+removed `/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext2.8'
+`/var/tmp/e2fsprogs-root/usr/share/man/man8/fsck.ext2.8.bz2' -> `e2fsck.8.bz2'
++ /usr/lib/rpm/strip.sh /var/tmp/e2fsprogs-root
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(bb_compat.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/bb_compat.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(inode_io.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/inode_io.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(write_bb_file.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/write_bb_file.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(dupfs.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/dupfs.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(imager.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/imager.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(test_io.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/test_io.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(ext2_err.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/ext2_err.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(alloc.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/alloc.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(alloc_sb.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/alloc_sb.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(alloc_stats.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/alloc_stats.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(alloc_tables.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/alloc_tables.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(badblocks.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/badblocks.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(bb_inode.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/bb_inode.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(bitmaps.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/bitmaps.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(bitops.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/bitops.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(block.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/block.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(bmap.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/bmap.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(check_desc.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/check_desc.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(closefs.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/closefs.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(crc16.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/crc16.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(csum.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/csum.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(dblist.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/dblist.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(dblist_dir.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/dblist_dir.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(dirblock.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/dirblock.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(dirhash.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/dirhash.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(dir_iterate.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/dir_iterate.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(expanddir.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/expanddir.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(ext_attr.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/ext_attr.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(extent.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/extent.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(fileio.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/fileio.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(finddev.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/finddev.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(flushb.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/flushb.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(freefs.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/freefs.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(gen_bitmap.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/gen_bitmap.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(get_pathname.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/get_pathname.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(getsize.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/getsize.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(getsectsize.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/getsectsize.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(i_block.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/i_block.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(icount.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/icount.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(ind_block.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/ind_block.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(initialize.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/initialize.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(inline.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/inline.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(inode.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/inode.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(io_manager.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/io_manager.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(ismounted.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/ismounted.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(link.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/link.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(llseek.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/llseek.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(lookup.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/lookup.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(mkdir.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/mkdir.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(mkjournal.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/mkjournal.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(namei.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/namei.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(native.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/native.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(newdir.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/newdir.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(openfs.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/openfs.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(read_bb.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/read_bb.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(read_bb_file.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/read_bb_file.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(res_gdt.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/res_gdt.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(rw_bitmaps.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/rw_bitmaps.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(swapfs.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/swapfs.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(tdb.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/tdb.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(undo_io.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/undo_io.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(unix_io.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/unix_io.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(unlink.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/unlink.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(valid_blk.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/valid_blk.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.a(version.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stekibZk/version.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libext2fs.so.2.4' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stM801N8' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(feature.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/feature.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(fgetflags.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/fgetflags.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(fsetflags.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/fsetflags.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(fgetversion.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/fgetversion.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(fsetversion.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/fsetversion.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(getflags.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/getflags.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(getversion.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/getversion.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(hashstr.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/hashstr.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(iod.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/iod.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(ls.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/ls.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(mntopts.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/mntopts.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(parse_num.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/parse_num.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(pe.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/pe.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(pf.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/pf.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(ps.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/ps.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(setflags.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/setflags.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(setversion.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/setversion.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(uuid.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/uuid.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(ostype.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/ostype.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.a(percent.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/sttw1yLj/percent.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libe2p.so.2.3' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stj5MyR8' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(ss_err.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/ss_err.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(std_rqs.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/std_rqs.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(invocation.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/invocation.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(help.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/help.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(execute_cmd.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/execute_cmd.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(listen.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/listen.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(parse.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/parse.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(error.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/error.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(prompt.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/prompt.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(request_tbl.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/request_tbl.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(list_rqs.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/list_rqs.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(pager.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/pager.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(requests.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/requests.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(data.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/data.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.a(get_readline.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/st8RYKsk/get_readline.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libss.so.2.0' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stOmBpy9' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libcom_err.a(error_message.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stMoXCEk/error_message.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libcom_err.a(et_name.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stMoXCEk/et_name.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libcom_err.a(init_et.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stMoXCEk/init_et.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libcom_err.a(com_err.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stMoXCEk/com_err.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libcom_err.a(com_right.o)' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stMoXCEk/com_right.o' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/libcom_err.so.2.1' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stB5XPrc' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/lib64/e2initrd_helper' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/lib64/stbV5KUc' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/bin/lsattr' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/bin/stpkpudd' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/bin/chattr' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/bin/stgVD96c' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/sbin/e2freefrag' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/sbin/stXT5g2c' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/sbin/filefrag' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/sbin/styvEiab' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/usr/sbin/mklost+found' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/usr/sbin/stfeYV0a' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/resize2fs' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stXxJish' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/e2label' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/styhUxlh' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/mkfs.ext4dev' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stphkoMh' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/mkfs.ext4' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stHZhFGh' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/mkfs.ext3' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stwLLk7h' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/mkfs.ext2' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stApTG1h' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/e2undo' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stQwDPUh' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/e2image' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stkq2q0f' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/logsave' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stO6ClTf' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/dumpe2fs' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stm3KOog' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/tune2fs' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stSzeCeg' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/badblocks' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stb9er7f' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/mke2fs' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/st4VtnDg' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/debugfs' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stk0x7sg' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/fsck.ext4dev' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stxhsyXg' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/fsck.ext4' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stQDndMg' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/fsck.ext3' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stZmLTyj' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/fsck.ext2' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stPEBetj' [elf64-x86-64]
+copy from `/var/tmp/e2fsprogs-root/sbin/e2fsck' [elf64-x86-64] to `/var/tmp/e2fsprogs-root/sbin/stLsElUj' [elf64-x86-64]
++ /usr/lib/rpm/find-lang.sh /var/tmp/e2fsprogs-root e2fsprogs
++ exit 0
+Processing files: e2fsprogs-1.41.14-2.x86_64
+Provides: libcom_err.so.2()(64bit) libe2p.so.2()(64bit) libext2fs.so.2()(64bit) libss.so.2()(64bit)
+Requires(interp): /sbin/ldconfig /sbin/ldconfig
+Requires(rpmlib): rpmlib(PartialHardlinkSets) <= 4.0.4-1
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+Requires: ld-linux-x86-64.so.2()(64bit) ld-linux-x86-64.so.2(GLIBC_2.3)(64bit) libblkid.so.1()(64bit) libblkid.so.1(BLKID_1.0)(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.7)(64bit) libcom_err.so.2()(64bit) libdl.so.2()(64bit) libdl.so.2(GLIBC_2.2.5)(64bit) libe2p.so.2()(64bit) libext2fs.so.2()(64bit) libpthread.so.0()(64bit) libpthread.so.0(GLIBC_2.2.5)(64bit) libss.so.2()(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUID_1.0)(64bit)
+Processing files: e2fsprogs-devel-1.41.14-2.x86_64
+Provides: pkgconfig(com_err) = 1.41.14 pkgconfig(e2p) = 1.41.14 pkgconfig(ext2fs) = 1.41.14 pkgconfig(ss) = 1.41.14
+Requires(interp): /bin/sh /bin/sh
+Requires(rpmlib): rpmlib(VersionedDependencies) <= 3.0.3-1
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /bin/sh /usr/bin/install-info /usr/bin/install-info pkgconfig
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/e2fsprogs-root
+Wrote: /usr/src/rpm/SRPMS/e2fsprogs-1.41.14-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/e2fsprogs-1.41.14-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/e2fsprogs-devel-1.41.14-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.85968
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd e2fsprogs-1.41.14
++ /bin/rm -rf /var/tmp/e2fsprogs-root
