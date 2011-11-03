@@ -1,0 +1,501 @@
+Fetching(Source1): https://raw.github.com/jhuntwork/LightCube-OS/master/packages/fcron/fcron.init
+Fetching(Source0): http://dev.lightcube.us/sources/fcron/fcron-3.0.6.src.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.64323
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf fcron-3.0.6
++ /bin/gzip -dc /usr/src/rpm/SOURCES/fcron-3.0.6.src.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd fcron-3.0.6
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.64323
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd fcron-3.0.6
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --sysconfdir=/etc --localstatedir=/var --with-boot-install=no
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for gmake... no
+checking for make... /usr/bin/make
+checking if make is actually GNU Make... yes
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether ln -s works... yes
+checking for strip... /usr/bin/strip
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/wait.h that is POSIX.1 compatible... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking sys/file.h usability... yes
+checking sys/file.h presence... yes
+checking for sys/file.h... yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking syslog.h usability... yes
+checking syslog.h presence... yes
+checking for syslog.h... yes
+checking for unistd.h... (cached) yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking sys/fcntl.h usability... yes
+checking sys/fcntl.h presence... yes
+checking for sys/fcntl.h... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking stdarg.h usability... yes
+checking stdarg.h presence... yes
+checking for stdarg.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking for strings.h... (cached) yes
+checking for sys/types.h... (cached) yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking sys/un.h usability... yes
+checking sys/un.h presence... yes
+checking for sys/un.h... yes
+checking security/pam_appl.h usability... yes
+checking security/pam_appl.h presence... yes
+checking for security/pam_appl.h... yes
+checking pam/pam_appl.h usability... no
+checking pam/pam_appl.h presence... no
+checking for pam/pam_appl.h... no
+checking crypt.h usability... yes
+checking crypt.h presence... yes
+checking for crypt.h... yes
+checking shadow.h usability... yes
+checking shadow.h presence... yes
+checking for shadow.h... yes
+checking sys/resource.h usability... yes
+checking sys/resource.h presence... yes
+checking for sys/resource.h... yes
+checking grp.h usability... yes
+checking grp.h presence... yes
+checking for grp.h... yes
+checking size of time_t... 8
+checking for an ANSI C-conforming const... yes
+checking for pid_t... yes
+checking for size_t... yes
+checking whether time.h and sys/time.h may both be included... yes
+checking whether struct tm is in sys/time.h or time.h... time.h
+checking for uid_t in sys/types.h... yes
+checking size of pid_t... 4
+checking size of time_t... (cached) 8
+checking size of short int... 2
+checking size of int... 4
+checking size of long int... 8
+checking size of long long int... 8
+checking whether gcc needs -traditional... no
+checking for working memcmp... yes
+checking return type of signal handlers... void
+checking for strftime... yes
+checking for wait3 that fills in rusage... yes
+checking for shutdown in -lxnet... no
+checking for getcon in -lselinux... no
+checking for getloadavg... yes
+checking for kstat_open in -lkstat... no
+checking for getloadavg... (cached) yes
+checking for pstat_getdynamic... no
+checking for kstat_open in -lkstat... (cached) no
+checking for getloadavg... (cached) yes
+checking whether getloadavg requires setgid... no
+checking function to use for lavg* options... getloadavg()
+checking for getcwd... yes
+checking for gettimeofday... yes
+checking for mktime... yes
+checking for putenv... yes
+checking for strerror... yes
+checking for setenv... yes
+checking for unsetenv... yes
+checking for gethostname... yes
+checking for getopt_long... yes
+checking for mkstemp... yes
+checking for flock... yes
+checking for lockf... yes
+checking for setlinebuf... yes
+checking for signal... yes
+checking for sigset... yes
+checking for seteuid... yes
+checking for setegid... yes
+checking for setresuid... yes
+checking for setresgid... yes
+checking for setpriority... yes
+checking for library containing getspnam... none required
+checking for crypt... no
+checking for crypt in -lcrypt... yes
+checking for sa_len... no
+checking for sendmail... /usr/sbin/sendmail
+checking sendmail... /usr/sbin/sendmail
+checking for sh... /bin/sh
+checking shell... /bin/sh
+checking for vi... /usr/bin/vi
+checking editor... /usr/bin/vi
+checking location of pid files... /var/run
+checking location of fifo files... /var/run
+checking location of spool directory... /var/spool/fcron
+checking location of doc directory... ${datarootdir}/doc
+checking run non-privileged... no
+checking if fcrondyn should be compiled... yes
+checking root's username... root
+checking root's groupname... root
+checking username to run fcrontab under... fcron
+checking groupname to run fcrontab under... fcron
+checking use a system fcrontab... yes
+checking install interactively a boot script... no
+checking automatic answer to make install's questions... no
+checking if pam should be used if available... yes
+checking for pam_acct_mgmt in -lpam... yes
+checking if SELinux should be used... not available
+checking for openjade... no
+checking for jade... no
+checking for docbook2man... no
+checking for db2man... no
+checking Looking for docbook2man converter... default: 
+checking for nsgmls... no
+checking for sgmlspl... no
+checking Looking for docbook2man-spec file... default
+checking Looking for dsssl stylsheets... default
+configure: WARNING:
+
+/usr/share/sgml/docbook/stylesheet/dsssl/modular/html/docbook.dsl does not exist. You will probably not be able to generate the documentation from the DocBook source files.
+configure: WARNING: Use --with-dsssl-dir to specify a directory.
+
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating doc/stylesheets/fcron-doc.dsl
+config.status: creating config.h
+
+Summary :
+-------
+
+run in debug mode by default :      no
+PAM :                               yes
+SELinux :                           no
+Run without root's rights :         no
+Load average support :              yes
+compile fcrondyn :                  yes
+fcron's user (resp. group) name :   fcron (resp. fcron)
+sysfcrontab :                       yes (systab)
+prefix:                             /usr
+exec_prefix:                        ${prefix}
+datarootdir:                        ${prefix}/share
+bin dir:                            ${exec_prefix}/bin
+sbin dir:                           ${exec_prefix}/sbin
+spool dir:                          /var/spool/fcron
+etc dir:                            /etc
+doc dir:                            ${datarootdir}/doc
+man dir:                            ${datarootdir}/man 
+
+You can now run '/usr/bin/make' to compile
+and then (as root) '/usr/bin/make install' to install fcron.
+
++ make -j4
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c fcron.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c subs.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c save.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c temp_file.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c log.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c database.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c job.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c conf.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c socket.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c fcronsighup.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c allow.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c fcrontab.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c fileconf.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c read_string.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c fcrondyn.c
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -DPIDFILE="\"/var/run/fcron.pid\"" \
+-DFIFOFILE="\"/var/run/fcron.fifo\"" -DETC="\"/etc\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DFCRON_CONF="\"fcron.conf\"" \
+-DFCRONTABS="\"/var/spool/fcron\"" \
+-DFCRON_ALLOW="\"fcron.allow\"" -DFCRON_DENY="\"fcron.deny\"" \
+-DFCRON_SHELL="\"/bin/sh\"" -DSENDMAIL="\"/usr/sbin/sendmail\"" \
+-DFCRON_EDITOR="\"/usr/bin/vi\"" -DBINDIREX="\"/usr/bin\"" \
+-c convert-fcrontab.c
+if test ! -d files; then mkdir files ; fi
+./script/gen-in.pl ./files/fcron.conf.in files/fcron.conf ./
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -o fcron fcron.o subs.o save.o temp_file.o log.o database.o job.o conf.o socket.o  -lpam  -lcrypt
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -o fcronsighup fcronsighup.o subs.o log.o allow.o -lpam  -lcrypt
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -o convert-fcrontab convert-fcrontab.o subs.o save.o log.o -lpam  -lcrypt
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -o fcrondyn fcrondyn.o subs.o log.o allow.o read_string.o -lpam  -lcrypt
+gcc -Os -pipe -O2 -Wall  -DHAVE_CONFIG_H  -I. -I. -o fcrontab fcrontab.o subs.o save.o temp_file.o  log.o fileconf.o allow.o read_string.o -lpam  -lcrypt
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.78486
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/fcron-root
++ /bin/mkdir -p /var/tmp/fcron-root
++ cd fcron-3.0.6
++ make DESTDIR=/var/tmp/fcron-root install
+echo `fcron -V 2>&1 | grep "^fcron "` > PREVIOUS_VERSION && chmod a+rw PREVIOUS_VERSION
+./script/user-group fcron fcron 2 .
+Checking if group fcron exists ... yes.
+Checking if user fcron exists ... yes.
+if test ! -d /var/tmp/fcron-root/usr/sbin; then /usr/bin/install -c -m 755 -d /var/tmp/fcron-root/usr/sbin ; fi
+if test ! -d /var/tmp/fcron-root/usr/bin; then /usr/bin/install -c -m 755 -d /var/tmp/fcron-root/usr/bin ; fi
+if test ! -d /var/tmp/fcron-root/etc; then /usr/bin/install -c -m 755 -d /var/tmp/fcron-root/etc ; fi
+if test ! -d /var/tmp/fcron-root/var/run; then /usr/bin/install -c -m 755 -d /var/tmp/fcron-root/var/run ; fi
+if test ! -d /var/tmp/fcron-root/var/run; then /usr/bin/install -c -m 755 -d /var/tmp/fcron-root/var/run ; fi
+/usr/bin/install -c -m 755 -d /var/tmp/fcron-root/var/spool/fcron
+/usr/bin/install -c -m 755 fcron /var/tmp/fcron-root/usr/sbin
+/usr/bin/install -c -m 755 fcrontab /var/tmp/fcron-root/usr/bin
+/usr/bin/install -c -m 755 fcronsighup /var/tmp/fcron-root/usr/bin
+/usr/bin/install -c -m 755 fcrondyn /var/tmp/fcron-root/usr/bin
+if test ! -f /var/tmp/fcron-root/etc/fcron.allow -a ! -f /var/tmp/fcron-root/etc/fcron.deny ; then /usr/bin/install -c -m 644 ./files/fcron.allow /var/tmp/fcron-root/etc ; /usr/bin/install -c -m 644 ./files/fcron.deny /var/tmp/fcron-root/etc ; fi
+test -f /var/tmp/fcron-root/etc/fcron.conf || /usr/bin/install -c -m 644 files/fcron.conf /var/tmp/fcron-root/etc
+make -C doc install-staged
+make[1]: Entering directory `/usr/src/rpm/BUILD/fcron-3.0.6/doc'
+Cleaning: /usr/src/rpm/BUILD/fcron-3.0.6/doc/stylesheets
+Cleaning: /usr/src/rpm/BUILD/fcron-3.0.6/doc/en
+Cleaning: /usr/src/rpm/BUILD/fcron-3.0.6/doc/fr
+Cleaning: /usr/src/rpm/BUILD/fcron-3.0.6/doc
+Installing man pages in /var/tmp/fcron-root/usr/share/man...
+Installing documentation files in /var/tmp/fcron-root/usr/share/doc/fcron-3.0.6...
+make[1]: Leaving directory `/usr/src/rpm/BUILD/fcron-3.0.6/doc'
+strip /var/tmp/fcron-root/usr/sbin/fcron
+strip /var/tmp/fcron-root/usr/bin/fcrontab
+strip /var/tmp/fcron-root/usr/bin/fcronsighup
+strip /var/tmp/fcron-root/usr/bin/fcrondyn
+chown root /var/tmp/fcron-root/usr/sbin 
+chgrp root /var/tmp/fcron-root/usr/sbin 
+chown root /var/tmp/fcron-root/usr/bin 
+chgrp root /var/tmp/fcron-root/usr/bin 
+chown root /var/tmp/fcron-root/etc 
+chgrp root /var/tmp/fcron-root/etc 
+chown root /var/tmp/fcron-root/var/run 
+chgrp root /var/tmp/fcron-root/var/run 
+chown root /var/tmp/fcron-root/var/run 
+chgrp root /var/tmp/fcron-root/var/run 
+chown fcron /var/tmp/fcron-root/var/spool/fcron
+chgrp fcron /var/tmp/fcron-root/var/spool/fcron
+chmod 770 /var/tmp/fcron-root/var/spool/fcron
+chown root /var/tmp/fcron-root/usr/sbin/fcron
+chgrp root /var/tmp/fcron-root/usr/sbin/fcron
+chmod 110 /var/tmp/fcron-root/usr/sbin/fcron
+chown fcron /var/tmp/fcron-root/usr/bin/fcrontab
+chgrp fcron /var/tmp/fcron-root/usr/bin/fcrontab
+chmod 6111 /var/tmp/fcron-root/usr/bin/fcrontab
+chown root /var/tmp/fcron-root/usr/bin/fcronsighup
+chgrp fcron /var/tmp/fcron-root/usr/bin/fcronsighup
+chmod 4110 /var/tmp/fcron-root/usr/bin/fcronsighup
+chown fcron /var/tmp/fcron-root/usr/bin/fcrondyn
+chgrp fcron /var/tmp/fcron-root/usr/bin/fcrondyn
+chmod 6111 /var/tmp/fcron-root/usr/bin/fcrondyn
+chown root /var/tmp/fcron-root/etc/fcron.allow /var/tmp/fcron-root/etc/fcron.deny
+chgrp fcron /var/tmp/fcron-root/etc/fcron.allow /var/tmp/fcron-root/etc/fcron.deny
+chmod 640 /var/tmp/fcron-root/etc/fcron.allow /var/tmp/fcron-root/etc/fcron.deny
+chown root /var/tmp/fcron-root/etc/fcron.conf
+chgrp fcron /var/tmp/fcron-root/etc/fcron.conf
+chmod 640 /var/tmp/fcron-root/etc/fcron.conf
+./script/install-pam-conf . /var/tmp/fcron-root/etc root root "/usr/bin/install -c"
+find /var/tmp/fcron-root/var/spool/fcron -type f \( -name "*.orig" -a ! -name "root.orig" -a ! -name "systab.orig" \) -exec chown fcron {} \; -exec chgrp fcron {} \; -exec chmod 640 {} \;
+find /var/tmp/fcron-root/var/spool/fcron -type f \( -name "root.orig" -o -name "systab.orig" \) -exec chown root {} \; -exec chgrp fcron {} \; -exec chmod 600 {} \;
+# First, remove the potential fcrontab.sig, or it could not get removed by fcronsighup if it becomes root:root 600
+rm -f /var/tmp/fcron-root/var/spool/fcron/fcrontab.sig
+find /var/tmp/fcron-root/var/spool/fcron -type f ! -name "*.orig" -exec chown root {} \; -exec chgrp root {} \; -exec chmod 600 {} \;
+make -C doc perms
+make[1]: Entering directory `/usr/src/rpm/BUILD/fcron-3.0.6/doc'
+for l in en fr; do \
+	if test "x$l" = "xen"; then \
+		DIR=/var/tmp/fcron-root/usr/share/man; \
+	else \
+		DIR=/var/tmp/fcron-root/usr/share/man/$l; \
+	fi ; \
+	chown root $DIR; \
+	chgrp root $DIR; \
+	for i in 1 3 5 8; do \
+		chown root $DIR/man$i; \
+		chgrp root $DIR/man$i; \
+	done ; \
+	for f in man1/fcrontab.1 man1/fcrondyn.1 man3/bitstring.3 \
+		man5/fcrontab.5 man5/fcron.conf.5 man8/fcron.8 ; do \
+		chown root $DIR/$f; \
+		chgrp root $DIR/$f; \
+	done ; \
+done
+chown root /var/tmp/fcron-root/usr/share/doc
+chgrp root /var/tmp/fcron-root/usr/share/doc
+chown root /var/tmp/fcron-root/usr/share/doc/fcron-3.0.6 
+chgrp root /var/tmp/fcron-root/usr/share/doc/fcron-3.0.6 
+for l in en fr; do \
+	DIR=/var/tmp/fcron-root/usr/share/doc/fcron-3.0.6/$l ; \
+	chown root $DIR ; \
+	chgrp root $DIR ; \
+	for i in txt HTML; do \
+		chown root $DIR/$i; \
+		chgrp root $DIR/$i; \
+		chown root $DIR/$i/*; \
+		chgrp root $DIR/$i/*; \
+	done ; \
+done
+make[1]: Leaving directory `/usr/src/rpm/BUILD/fcron-3.0.6/doc'
++ install -dv /var/tmp/fcron-root/etc/pam.d /var/tmp/fcron-root/etc/init.d
+install: creating directory `/var/tmp/fcron-root/etc/pam.d'
+install: creating directory `/var/tmp/fcron-root/etc/init.d'
++ install -m754 /usr/src/rpm/SOURCES/fcron.init /var/tmp/fcron-root/etc/init.d/fcron
++ rm -f /var/tmp/fcron-root/etc/pam.conf
++ cat
++ cat
++ ln -sv fcrontab /var/tmp/fcron-root/usr/bin/crontab
+`/var/tmp/fcron-root/usr/bin/crontab' -> `fcrontab'
++ /usr/lib/rpm/compress_man.sh /var/tmp/fcron-root
++ /usr/lib/rpm/strip.sh /var/tmp/fcron-root
++ exit 0
+Processing files: fcron-3.0.6-3.x86_64
+Provides: config(fcron) = 0:3.0.6-3
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /bin/true /usr/sbin/install_initd
+Requires(preun): /bin/sh /bin/true /usr/sbin/remove_initd
+Requires: /bin/sh /bin/true /bin/true /usr/sbin/install_initd /usr/sbin/remove_initd libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.7)(64bit) libcrypt.so.1()(64bit) libcrypt.so.1(GLIBC_2.2.5)(64bit) libpam.so.0()(64bit) libpam.so.0(LIBPAM_1.0)(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/fcron-root
+Wrote: /usr/src/rpm/SRPMS/fcron-3.0.6-3.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/fcron-3.0.6-3.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.53708
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd fcron-3.0.6
++ /bin/rm -rf /var/tmp/fcron-root
