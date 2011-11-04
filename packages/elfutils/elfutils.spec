@@ -1,15 +1,15 @@
 Summary: elfutils
 Name: elfutils
-Version: 0.151
+Version: 0.152
 Release: 1
 Group: Development/Utilities
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: https://fedorahosted.org/elfutils
-Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: https://fedorahosted.org/releases/e/l/elfutils/0.152/elfutils-0.152.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = d58369d03f821733cebed3e3b1bb7d0f373d7dee
+BuildRequires: digest(sha1:%{SOURCE0}) = b22380205ed3ad5145586b4074be190057eb2537
 BuildRequires: zlib-devel
 BuildRequires: bzip2-devel
 BuildRequires: xz-devel
@@ -37,12 +37,11 @@ Libraries and headers for developing with libelf
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS="-Os -pipe"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -50,6 +49,7 @@ for file in %{buildroot}/usr/bin/*
   do nm=$(basename $file)
   mv -v $file %{buildroot}/usr/bin/eu-$nm
 done
+%{strip}
 %find_lang %{name}
 
 %clean
@@ -122,6 +122,10 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libelf.so
 
 %changelog
+* Fri Nov 04 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.152-1
+- Upgrade to 0.152
+- Optimize for size
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.151-1
 - Upgrade to 0.151
 
