@@ -1,13 +1,13 @@
 Summary: bzip2 
 Name: bzip2
 Version: 1.0.6
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.bzip2.org
-Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://bzip.org/1.0.6/bzip2-1.0.6.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 3f89f861209ce81a6bab1fd1998c0ef311712002
 
@@ -17,20 +17,22 @@ Group: Development/Libraries
 Requires: %{name}
 
 %description
-%{name} is high-quality data compressor.
+bzip2 is high-quality data compressor.
 
 %description devel
 Libraries and headers for developing with %{name}
 
 %prep
 %setup -q
+sed -i 's@-O2@-Os -pipe@' Makefile
+sed -i 's@-O2@-Os -pipe@' Makefile-libbz2_so
 
 %build
 sed -i 's@\(ln -s -f \)$(PREFIX)/bin/@\1@' Makefile
 sed -i "s@(PREFIX)/man@(PREFIX)/share/man@g" Makefile
-make LDFLAGS="%{LDFLAGS}" -f Makefile-libbz2_so
+make %{PMFLAGS} -f Makefile-libbz2_so
 make clean
-make LDFLAGS="%{LDFLAGS}"
+make %{PMFLAGS}
 
 %install
 make PREFIX=%{buildroot}/usr install
@@ -46,6 +48,7 @@ rm -v %{buildroot}/usr/bin/{bunzip2,bzcat,bzip2}
 ln -sv bzip2 %{buildroot}/bin/bunzip2
 ln -sv bzip2 %{buildroot}/bin/bzcat
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -72,6 +75,9 @@ rm -rf %{buildroot}
 /usr/include/bzlib.h
 
 %changelog
+* Sat Nov 05 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.6-2
+- Optimize for size
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0.6-1
 - Upgrade to 1.0.6
 
