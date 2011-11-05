@@ -1,15 +1,15 @@
 Summary: neon HTTP and WebDAV client library
 Name: neon
-Version: 0.29.5
+Version: 0.29.6
 Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.webdav.org/neon
-Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://www.webdav.org/neon/neon-0.29.6.tar.gz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 46e85922b2dad60f50393e7d8d4075c880c7e03e
+BuildRequires: digest(sha1:%{SOURCE0}) = ae1109923303f67ed3421157927bc4bc29c58961
 BuildRequires: expat-devel
 BuildRequires: zlib-devel
 BuildRequires: openssl-devel
@@ -20,7 +20,7 @@ neon is an HTTP and WebDAV client library, with a C interface.
 %package devel
 Summary: Headers and libraries for developing with %{name}
 Group: Development/Libraries
-Requires: %{name}
+Requires: %{name} >= %{version}
 
 %description devel
 Headers and libraries for developing with %{name}
@@ -29,18 +29,18 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS="-Os -pipe"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --with-ssl \
   --enable-shared
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
+%{strip}
 %find_lang %{name}
 
 %clean
@@ -62,10 +62,14 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libneon.so
 /usr/%{_lib}/pkgconfig/neon.pc
 /usr/share/doc/%{name}-%{version}
-/usr/share/man/man1/*
-/usr/share/man/man3/*
+/usr/share/man/man1/*.bz2
+/usr/share/man/man3/*.bz2
 
 %changelog
+* Sat Nov 05 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.29.6-1
+- Upgrade to 0.29.6
+- Optimize for size
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.29.5-1
 - Upgrade to 0.29.5
 

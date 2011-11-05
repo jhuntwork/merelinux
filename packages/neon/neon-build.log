@@ -1,0 +1,371 @@
+Fetching(Source0): http://www.webdav.org/neon/neon-0.29.6.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.8012
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf neon-0.29.6
++ /bin/gzip -dc /usr/src/rpm/SOURCES/neon-0.29.6.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd neon-0.29.6
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.41607
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd neon-0.29.6
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --libdir=/usr/lib64 --with-ssl --enable-shared
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for inline... inline
+checking for an ANSI C-conforming const... yes
+checking for size_t... yes
+checking for off_t... yes
+checking for uname... Linux
+checking whether make sets $(MAKE)... yes
+checking size of int... 4
+checking size of long... 8
+checking size of long long... 8
+checking for gcc -Wformat -Werror sanity... yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking stdarg.h usability... yes
+checking stdarg.h presence... yes
+checking for stdarg.h... yes
+checking for string.h... (cached) yes
+checking for stdlib.h... (cached) yes
+checking size of size_t... 8
+checking how to print size_t... lu
+checking size of off_t... 8
+checking how to print off_t... ld
+checking size of ssize_t... 8
+checking how to print ssize_t... ld
+checking whether byte ordering is bigendian... no
+checking whether strerror_r is declared... yes
+checking for strerror_r... yes
+checking whether strerror_r returns char *... yes
+checking for snprintf... yes
+checking for vsnprintf... yes
+checking for sys/time.h... yes
+checking for limits.h... yes
+checking for sys/select.h... yes
+checking for arpa/inet.h... yes
+checking for libintl.h... yes
+checking for signal.h... yes
+checking for sys/socket.h... yes
+checking for netinet/in.h... yes
+checking for netinet/tcp.h... yes
+checking for netdb.h... yes
+checking for sys/poll.h... yes
+checking for sys/limits.h... no
+checking for fcntl.h... yes
+checking for iconv.h... yes
+checking for timezone global... yes
+configure: LFS support unnecessary, off_t is not 32-bit
+checking for strtoll... yes
+checking for strcasecmp... yes
+checking for signal... yes
+checking for setvbuf... yes
+checking for setsockopt... yes
+checking for stpcpy... yes
+checking for poll... yes
+checking for fcntl... yes
+checking for getsockopt... yes
+checking whether stpcpy is declared... yes
+checking for library containing socket... none needed
+checking for library containing getaddrinfo... none needed
+checking for gai_strerror... yes
+checking for getnameinfo... yes
+checking for inet_ntop... yes
+checking for inet_pton... yes
+configure: IPv6 support is enabled
+checking for working AI_ADDRCONFIG... yes
+checking for socklen_t... yes
+checking for struct tm.tm_gmtoff... yes
+checking for struct tm.__tm_gmtoff... no
+checking zlib.h usability... yes
+checking zlib.h presence... yes
+checking for zlib.h... yes
+checking for inflate in -lz... yes
+configure: zlib support enabled, using -lz
+checking whether to enable ACL support in neon... yes
+checking for pkg-config... /usr/bin/pkg-config
+checking for openssl pkg-config data... yes
+configure: using SSL library configuration from pkg-config
+checking openssl/ssl.h usability... yes
+checking openssl/ssl.h presence... yes
+checking for openssl/ssl.h... yes
+checking openssl/opensslv.h usability... yes
+checking openssl/opensslv.h presence... yes
+checking for openssl/opensslv.h... yes
+checking OpenSSL version is >= 0.9.7... yes
+configure: OpenSSL >= 0.9.7; EGD support not needed in neon
+configure: SSL support enabled, using OpenSSL (0.9.7 or later)
+checking for CRYPTO_set_idptr_callback... no
+checking for SSL_SESSION_cmp... no
+configure: Thread-safe SSL not supported
+checking for pkg-config... (cached) /usr/bin/pkg-config
+checking for pakchois pkg-config data... no
+configure: pakchois library not found; no PKCS#11 support
+checking for krb5-config... none
+checking for pkg-config... (cached) /usr/bin/pkg-config
+checking for libproxy-1.0 pkg-config data... no
+configure: libproxy support not enabled
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking how to print strings... printf
+checking for a sed that does not truncate output... /bin/sed
+checking for fgrep... /bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking whether ln -s works... yes
+checking the maximum length of command line arguments... 1572864
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for ar... ar
+checking for strip... strip
+checking for ranlib... ranlib
+checking for gawk... gawk
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for dlfcn.h... yes
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking size of time_t... 8
+checking how to print time_t... ld
+checking for pid_t... yes
+checking whether time.h and sys/time.h may both be included... yes
+checking for ar... /usr/bin/ar
+checking for ranlib... /usr/bin/ranlib
+checking for sys/time.h... (cached) yes
+checking for stdint.h... (cached) yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking for signal.h... (cached) yes
+checking for pipe... yes
+checking for isatty... yes
+checking for usleep... yes
+checking for shutdown... yes
+checking for setlocale... yes
+checking for gethostname... yes
+configure: WebDAV support is enabled
+checking expat.h usability... yes
+checking expat.h presence... yes
+checking for expat.h... yes
+checking for XML_SetXmlDeclHandler in -lexpat... yes
+checking for XML_Size... yes
+checking size of XML_Size... 8
+checking how to print XML_Size... ld
+configure: XML parser used: expat
+checking for library containing bindtextdomain... none needed
+checking for bind_textdomain_codeset... yes
+configure: Internationalization support enabled
+configure: debugging is enabled
+checking for openssl... /usr/bin/openssl
+checking for certutil... notfound
+checking for pk12util... notfound
+checking for pkg-config... (cached) /usr/bin/pkg-config
+checking if LD -Wl,--version-script works... yes
+configure: creating ./config.status
+config.status: creating neon-config
+config.status: creating Makefile
+config.status: creating src/Makefile
+config.status: creating test/Makefile
+config.status: creating neon.pc
+config.status: creating test/makekeys
+config.status: creating config.h
+config.status: executing libtool commands
+configure: Configured to build neon 0.29.6:
+
+  Install prefix:  /usr
+  Compiler:        gcc
+  XML Parser:      expat
+  SSL library:     SSL support enabled, using OpenSSL (0.9.7 or later)
+  zlib support:    zlib support enabled, using -lz
+  Build libraries: Shared=yes, Static=yes
+
++ make -j24
+make[1]: Entering directory `/usr/src/rpm/BUILD/neon-0.29.6/src'
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_request.c -o ne_request.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_session.c -o ne_session.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_basic.c -o ne_basic.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_string.c -o ne_string.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_uri.c -o ne_uri.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_dates.c -o ne_dates.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_alloc.c -o ne_alloc.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_md5.c -o ne_md5.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_utils.c -o ne_utils.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_socket.c -o ne_socket.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_auth.c -o ne_auth.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_redirect.c -o ne_redirect.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_compress.c -o ne_compress.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_i18n.c -o ne_i18n.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_pkcs11.c -o ne_pkcs11.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_socks.c -o ne_socks.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_ntlm.c -o ne_ntlm.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_207.c -o ne_207.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_xml.c -o ne_xml.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_props.c -o ne_props.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_locks.c -o ne_locks.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_xmlreq.c -o ne_xmlreq.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_oldacl.c -o ne_oldacl.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_acl3744.c -o ne_acl3744.lo
+/bin/sh ../libtool --quiet --mode=compile gcc -DHAVE_CONFIG_H    -I.. -Os -pipe -c ne_openssl.c -o ne_openssl.lo
+/bin/sh ../libtool --quiet --mode=link gcc -no-undefined  -rpath /usr/lib64 -version-info 29:6:2 -Wl,--version-script=../src/neon.vers -o libneon.la ne_request.lo ne_session.lo ne_basic.lo ne_string.lo ne_uri.lo ne_dates.lo ne_alloc.lo ne_md5.lo ne_utils.lo ne_socket.lo ne_auth.lo ne_redirect.lo ne_compress.lo ne_i18n.lo ne_pkcs11.lo ne_socks.lo ne_ntlm.lo ne_207.lo ne_xml.lo ne_props.lo ne_locks.lo ne_xmlreq.lo  ne_oldacl.lo ne_acl3744.lo ne_openssl.lo -lz -L/usr/lib64 -lssl -lcrypto -ldl   -lexpat 
+make[1]: Leaving directory `/usr/src/rpm/BUILD/neon-0.29.6/src'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.59653
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/neon-root
++ /bin/mkdir -p /var/tmp/neon-root
++ cd neon-0.29.6
++ make DESTDIR=/var/tmp/neon-root install
+make[1]: Entering directory `/usr/src/rpm/BUILD/neon-0.29.6/src'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/neon-0.29.6/src'
+/usr/bin/install -c -d /var/tmp/neon-root/usr/lib64
+/bin/sh ./libtool --mode=install /usr/bin/install -c src/libneon.la \
+	/var/tmp/neon-root/usr/lib64/libneon.la
+libtool: install: /usr/bin/install -c src/.libs/libneon.so.27.2.6 /var/tmp/neon-root/usr/lib64/libneon.so.27.2.6
+libtool: install: (cd /var/tmp/neon-root/usr/lib64 && { ln -s -f libneon.so.27.2.6 libneon.so.27 || { rm -f libneon.so.27 && ln -s libneon.so.27.2.6 libneon.so.27; }; })
+libtool: install: (cd /var/tmp/neon-root/usr/lib64 && { ln -s -f libneon.so.27.2.6 libneon.so || { rm -f libneon.so && ln -s libneon.so.27.2.6 libneon.so; }; })
+libtool: install: /usr/bin/install -c src/.libs/libneon.lai /var/tmp/neon-root/usr/lib64/libneon.la
+libtool: install: /usr/bin/install -c src/.libs/libneon.a /var/tmp/neon-root/usr/lib64/libneon.a
+libtool: install: chmod 644 /var/tmp/neon-root/usr/lib64/libneon.a
+libtool: install: /usr/bin/ranlib /var/tmp/neon-root/usr/lib64/libneon.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib64'
+/usr/bin/install -c -d /var/tmp/neon-root/usr/include/neon
+Installing ne_request.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_session.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_utils.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_uri.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_socket.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_basic.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_207.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_props.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_xml.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_dates.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_string.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_defs.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_locks.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_alloc.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_md5.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_i18n.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_redirect.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_auth.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_compress.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_acl.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_ssl.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_xmlreq.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_pkcs11.h into /var/tmp/neon-root/usr/include/neon
+Installing ne_acl3744.h into /var/tmp/neon-root/usr/include/neon
+/usr/bin/install -c -d /var/tmp/neon-root/usr/bin
+Installing neon-config into /var/tmp/neon-root/usr/bin
+/usr/bin/install -c -d /var/tmp/neon-root/usr/lib64/pkgconfig
+/usr/bin/install -c -m 644 neon.pc /var/tmp/neon-root/usr/lib64/pkgconfig/neon.pc
+/usr/bin/install -c -d /var/tmp/neon-root/usr/share/man/man3
+/usr/bin/install -c -d /var/tmp/neon-root/usr/share/man/man1
+for m in ./doc/man/*.3; do \
+ /usr/bin/install -c -m 644 $m /var/tmp/neon-root/usr/share/man/man3; done
+for m in ./doc/man/*.1; do \
+ /usr/bin/install -c -m 644 $m /var/tmp/neon-root/usr/share/man/man1; done
+/usr/bin/install -c -d /var/tmp/neon-root/usr/share/doc/neon-0.29.6/html
+for d in ./doc/html/*.html; do \
+	/usr/bin/install -c -m 644 $d /var/tmp/neon-root/usr/share/doc/neon-0.29.6/html; \
+done
++ /usr/lib/rpm/compress_man.sh /var/tmp/neon-root
++ /usr/lib/rpm/strip.sh /var/tmp/neon-root
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_request.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_request.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_session.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_session.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_basic.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_basic.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_string.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_string.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_uri.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_uri.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_dates.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_dates.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_alloc.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_alloc.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_md5.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_md5.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_utils.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_utils.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_socket.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_socket.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_auth.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_auth.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_redirect.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_redirect.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_compress.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_compress.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_i18n.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_i18n.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_pkcs11.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_pkcs11.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_socks.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_socks.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_ntlm.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_ntlm.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_207.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_207.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_xml.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_xml.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_props.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_props.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_locks.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_locks.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_xmlreq.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_xmlreq.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_oldacl.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_oldacl.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_acl3744.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_acl3744.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.a(ne_openssl.o)' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stUKE0vG/ne_openssl.o' [elf64-x86-64]
+copy from `/var/tmp/neon-root/usr/lib64/libneon.so.27.2.6' [elf64-x86-64] to `/var/tmp/neon-root/usr/lib64/stJHckQQ' [elf64-x86-64]
++ /usr/lib/rpm/find-lang.sh /var/tmp/neon-root neon
++ exit 0
+Processing files: neon-0.29.6-1.x86_64
+Provides: libneon.so.27()(64bit) libneon.so.27(NEON_0_29)(64bit)
+Requires(interp): /sbin/ldconfig /sbin/ldconfig
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libcrypto.so.1.0.0()(64bit) libdl.so.2()(64bit) libexpat.so.1()(64bit) libssl.so.1.0.0()(64bit) libz.so.1()(64bit)
+Processing files: neon-devel-0.29.6-1.x86_64
+Provides: pkgconfig(neon) = 0.29.6
+Requires(rpmlib): rpmlib(VersionedDependencies) <= 3.0.3-1
+Requires: /bin/sh pkgconfig
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/neon-root
+Wrote: /usr/src/rpm/SRPMS/neon-0.29.6-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/neon-0.29.6-1.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/neon-devel-0.29.6-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.53186
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd neon-0.29.6
++ /bin/rm -rf /var/tmp/neon-root
