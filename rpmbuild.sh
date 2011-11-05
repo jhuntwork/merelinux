@@ -55,7 +55,7 @@ if ! file -i "${1}" |grep -q text/plain; then
     printhelp
 else
     fullspec="${1}"
-    deps=$(grep ^.*Requires.*: ${fullspec} | sed -e 's@digest.*@@' -e 's@.*Requires.*:@@' -e 's@.*%.*@@' )
+    deps=$(grep ^BuildRequires.*: ${fullspec} | sed -e 's@digest.*@@' -e 's@.*Requires.*:@@' -e 's@.*%.*@@')
     spec="$(basename "${1}")"
     specdir="$(dirname "${1}")"
     # Big assumption that the specfile is named <something>.spec
