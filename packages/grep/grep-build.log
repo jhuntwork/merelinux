@@ -1,0 +1,867 @@
+Fetching(Source0): http://ftp.gnu.org/gnu/grep/grep-2.9.tar.xz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.1082
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf grep-2.9
++ /usr/bin/xz -dc /usr/src/rpm/SOURCES/grep-2.9.tar.xz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd grep-2.9
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.1082
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd grep-2.9
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --bindir=/bin
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for gawk... (cached) gawk
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking for ranlib... ranlib
+checking whether gcc and cc understand -c and -o together... yes
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... fn_grep
+checking for egrep... (cached) fn_grep
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for gcc option to accept ISO C99... -std=gnu99
+checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
+checking for ranlib... (cached) ranlib
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+checking for size_t... yes
+checking for an ANSI C-conforming const... yes
+checking for working alloca.h... yes
+checking for alloca... yes
+checking for inline... inline
+checking whether <wchar.h> uses 'inline' correctly... yes
+checking for btowc... yes
+checking for isblank... yes
+checking for iswctype... yes
+checking for mbsrtowcs... yes
+checking for mempcpy... yes
+checking for wmemchr... yes
+checking for wmemcpy... yes
+checking for wmempcpy... yes
+checking for __fpending... yes
+checking for iswcntrl... yes
+checking for iswblank... yes
+checking for mbsinit... yes
+checking for mbrtowc... yes
+checking for mbrlen... yes
+checking for mbslen... no
+checking for mprotect... yes
+checking for nl_langinfo... yes
+checking for lstat... yes
+checking for wcscoll... yes
+checking for strerror_r... yes
+checking for strndup... yes
+checking for wcrtomb... yes
+checking for wctob... yes
+checking for wcwidth... yes
+checking for fcntl... yes
+checking for dup2... yes
+checking for newlocale... yes
+checking for setenv... yes
+checking for symlink... yes
+checking for vasnprintf... no
+checking for isascii... yes
+checking for setlocale... yes
+checking for nl_langinfo and CODESET... yes
+checking for a traditional french locale... fr_FR
+checking whether the preprocessor supports include_next... yes
+checking whether system header files limit the line length... no
+checking dirent.h usability... yes
+checking dirent.h presence... yes
+checking for dirent.h... yes
+checking wctype.h usability... yes
+checking wctype.h presence... yes
+checking for wctype.h... yes
+checking stdio_ext.h usability... yes
+checking stdio_ext.h presence... yes
+checking for stdio_ext.h... yes
+checking getopt.h usability... yes
+checking getopt.h presence... yes
+checking for getopt.h... yes
+checking iconv.h usability... yes
+checking iconv.h presence... yes
+checking for iconv.h... yes
+checking wchar.h usability... yes
+checking wchar.h presence... yes
+checking for wchar.h... yes
+checking for stdint.h... (cached) yes
+checking for inttypes.h... (cached) yes
+checking langinfo.h usability... yes
+checking langinfo.h presence... yes
+checking for langinfo.h... yes
+checking xlocale.h usability... yes
+checking xlocale.h presence... yes
+checking for xlocale.h... yes
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking for sys/stat.h... (cached) yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking for unistd.h... (cached) yes
+checking features.h usability... yes
+checking features.h presence... yes
+checking for features.h... yes
+checking whether // is distinct from /... no
+checking for complete errno.h... yes
+checking whether strerror_r is declared... yes
+checking for strerror_r... (cached) yes
+checking whether strerror_r returns char *... yes
+checking for working fcntl.h... yes
+checking for mbstate_t... yes
+checking for getopt.h... (cached) yes
+checking for getopt_long_only... yes
+checking whether getopt is POSIX compatible... yes
+checking for working GNU getopt function... yes
+checking whether getenv is declared... yes
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking for iconv... yes
+checking for working iconv... yes
+checking for iconv declaration... 
+         extern size_t iconv (iconv_t cd, char * *inbuf, size_t *inbytesleft, char * *outbuf, size_t *outbytesleft);
+checking for unsigned long long int... yes
+checking for long long int... yes
+checking whether stdint.h conforms to C99... yes
+checking whether imaxabs is declared without a macro... yes
+checking whether imaxdiv is declared without a macro... yes
+checking whether strtoimax is declared without a macro... yes
+checking whether strtoumax is declared without a macro... yes
+checking for wint_t... yes
+checking whether iswcntrl works... yes
+checking for wctype_t... yes
+checking for wctrans_t... yes
+checking whether wctype is declared without a macro... yes
+checking whether iswctype is declared without a macro... yes
+checking whether wctrans is declared without a macro... yes
+checking whether towctrans is declared without a macro... yes
+checking whether iswblank is declared... no
+checking whether getc_unlocked is declared... yes
+checking whether we are using the GNU C Library >= 2.1 or uClibc... yes
+checking for wchar_t... yes
+checking whether NULL can be used in arbitrary expressions... yes
+checking whether malloc, realloc, calloc are POSIX compliant... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for a traditional japanese locale... ja_JP
+checking for a transitional chinese locale... zh_CN.GB18030
+checking for a french Unicode locale... fr_FR.UTF-8
+checking whether mbrtowc handles incomplete characters... yes
+checking whether mbrtowc works as well as mbtowc... yes
+checking whether mbrtowc handles a NULL pwc argument... yes
+checking whether mbrtowc handles a NULL string argument... yes
+checking whether mbrtowc has a correct return value... yes
+checking whether mbrtowc returns 0 when parsing a NUL character... yes
+checking for mmap... yes
+checking for MAP_ANONYMOUS... no
+checking whether memchr works... yes
+checking for C/C++ restrict keyword... __restrict
+checking whether <limits.h> defines MIN and MAX... no
+checking whether <sys/param.h> defines MIN and MAX... yes
+checking for mode_t... yes
+checking for promoted mode_t type... mode_t
+checking for stdbool.h that conforms to C99... yes
+checking for _Bool... yes
+checking for strerror_r with POSIX signature... no
+checking for __xpg_strerror_r... yes
+checking whether __xpg_strerror_r works... no
+checking whether memmem is declared without a macro... yes
+checking whether mempcpy is declared without a macro... yes
+checking whether memrchr is declared without a macro... yes
+checking whether rawmemchr is declared without a macro... yes
+checking whether stpcpy is declared without a macro... yes
+checking whether stpncpy is declared without a macro... yes
+checking whether strchrnul is declared without a macro... yes
+checking whether strdup is declared without a macro... yes
+checking whether strncat is declared without a macro... yes
+checking whether strndup is declared without a macro... yes
+checking whether strnlen is declared without a macro... yes
+checking whether strpbrk is declared without a macro... yes
+checking whether strsep is declared without a macro... yes
+checking whether strcasestr is declared without a macro... yes
+checking whether strtok_r is declared without a macro... yes
+checking whether strerror_r is declared without a macro... yes
+checking whether strsignal is declared without a macro... yes
+checking whether strverscmp is declared without a macro... yes
+checking whether strndup is declared... (cached) yes
+checking whether strnlen is declared... (cached) yes
+checking whether strtoumax is declared... (cached) yes
+checking whether stat file-mode macros are broken... no
+checking for struct timespec in <time.h>... yes
+checking whether clearerr_unlocked is declared... yes
+checking whether feof_unlocked is declared... yes
+checking whether ferror_unlocked is declared... yes
+checking whether fflush_unlocked is declared... yes
+checking whether fgets_unlocked is declared... yes
+checking whether fputc_unlocked is declared... yes
+checking whether fputs_unlocked is declared... yes
+checking whether fread_unlocked is declared... yes
+checking whether fwrite_unlocked is declared... yes
+checking whether getchar_unlocked is declared... yes
+checking whether putc_unlocked is declared... yes
+checking whether putchar_unlocked is declared... yes
+checking if environ is properly declared... yes
+checking whether getcwd (NULL, 0) allocates memory for result... yes
+checking for off_t... yes
+checking for inttypes.h... (cached) yes
+checking whether the inttypes.h PRIxNN macros are broken... no
+checking for LC_MESSAGES... yes
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking whether imported symbols can be declared weak... yes
+checking pthread.h usability... yes
+checking pthread.h presence... yes
+checking for pthread.h... yes
+checking for pthread_kill in -lpthread... yes
+checking for multithread API to use... posix
+checking whether lstat correctly handles trailing slash... yes
+checking whether setenv is declared... yes
+checking search.h usability... yes
+checking search.h presence... yes
+checking for search.h... yes
+checking for tsearch... yes
+checking whether snprintf returns a byte count as in C99... yes
+checking whether snprintf is declared... yes
+checking whether unsetenv is declared... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for intmax_t... yes
+checking for snprintf... yes
+checking for strnlen... yes
+checking for wcslen... yes
+checking for wcsnlen... yes
+checking for mbrtowc... (cached) yes
+checking for wcrtomb... (cached) yes
+checking whether _snprintf is declared... no
+checking for alloca as a compiler built-in... yes
+checking whether btowc(0) is correct... yes
+checking whether btowc(EOF) is correct... yes
+checking whether isblank is declared without a macro... yes
+checking whether alphasort is declared without a macro... yes
+checking whether dirfd is declared without a macro... yes
+checking whether fdopendir is declared without a macro... yes
+checking whether scandir is declared without a macro... yes
+checking whether // is distinct from /... (cached) no
+checking for error_at_line... yes
+checking whether fcntl is declared without a macro... yes
+checking whether openat is declared without a macro... yes
+checking for working POSIX fnmatch... yes
+checking whether __fpending is declared... yes
+checking for getpagesize... yes
+checking whether getpagesize is declared... yes
+checking whether the compiler generally respects inline... yes
+checking whether langinfo.h defines CODESET... yes
+checking whether langinfo.h defines T_FMT_AMPM... yes
+checking whether langinfo.h defines ERA... yes
+checking whether langinfo.h defines YESEXPR... yes
+checking whether nl_langinfo is declared without a macro... yes
+checking whether locale.h conforms to POSIX:2001... yes
+checking whether locale.h defines locale_t... yes
+checking whether setlocale is declared without a macro... yes
+checking whether duplocale is declared without a macro... yes
+checking whether lseek detects pipes... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... (cached) yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mbrtowc handles a NULL pwc argument... (cached) yes
+checking whether mbrtowc handles a NULL string argument... (cached) yes
+checking whether mbrtowc has a correct return value... (cached) yes
+checking whether mbrtowc returns 0 when parsing a NUL character... (cached) yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether mbsrtowcs works... yes
+checking for mempcpy... (cached) yes
+checking whether YESEXPR works... yes
+checking for obstacks... yes
+checking whether open recognizes a trailing slash... yes
+checking whether program_invocation_name is declared... yes
+checking whether program_invocation_short_name is declared... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... yes
+checking for working re_compile_pattern... yes
+checking for ssize_t... yes
+checking whether stat handles trailing slashes on directories... yes
+checking whether stat handles trailing slashes on files... yes
+checking for va_copy... yes
+checking whether NULL can be used in arbitrary expressions... (cached) yes
+checking whether _Exit is declared without a macro... yes
+checking whether atoll is declared without a macro... yes
+checking whether canonicalize_file_name is declared without a macro... yes
+checking whether getloadavg is declared without a macro... yes
+checking whether getsubopt is declared without a macro... yes
+checking whether grantpt is declared without a macro... yes
+checking whether mkdtemp is declared without a macro... yes
+checking whether mkostemp is declared without a macro... yes
+checking whether mkostemps is declared without a macro... yes
+checking whether mkstemp is declared without a macro... yes
+checking whether mkstemps is declared without a macro... yes
+checking whether ptsname is declared without a macro... yes
+checking whether random_r is declared without a macro... yes
+checking whether initstat_r is declared without a macro... no
+checking whether srandom_r is declared without a macro... yes
+checking whether setstate_r is declared without a macro... yes
+checking whether realpath is declared without a macro... yes
+checking whether rpmatch is declared without a macro... yes
+checking whether setenv is declared without a macro... yes
+checking whether strtod is declared without a macro... yes
+checking whether strtoll is declared without a macro... yes
+checking whether strtoull is declared without a macro... yes
+checking whether unlockpt is declared without a macro... yes
+checking whether unsetenv is declared without a macro... yes
+checking for stpcpy... yes
+checking for working strerror function... yes
+checking for working strndup... yes
+checking for working strnlen... yes
+checking for strtoull... yes
+checking for nlink_t... yes
+checking whether fchmodat is declared without a macro... yes
+checking whether fstatat is declared without a macro... yes
+checking whether futimens is declared without a macro... yes
+checking whether lchmod is declared without a macro... yes
+checking whether lstat is declared without a macro... yes
+checking whether mkdirat is declared without a macro... yes
+checking whether mkfifo is declared without a macro... yes
+checking whether mkfifoat is declared without a macro... yes
+checking whether mknod is declared without a macro... yes
+checking whether mknodat is declared without a macro... yes
+checking whether stat is declared without a macro... yes
+checking whether utimensat is declared without a macro... yes
+checking whether chown is declared without a macro... yes
+checking whether dup2 is declared without a macro... yes
+checking whether dup3 is declared without a macro... yes
+checking whether environ is declared without a macro... yes
+checking whether euidaccess is declared without a macro... yes
+checking whether faccessat is declared without a macro... yes
+checking whether fchdir is declared without a macro... yes
+checking whether fchownat is declared without a macro... yes
+checking whether fsync is declared without a macro... yes
+checking whether ftruncate is declared without a macro... yes
+checking whether getcwd is declared without a macro... yes
+checking whether getdomainname is declared without a macro... yes
+checking whether getdtablesize is declared without a macro... yes
+checking whether getgroups is declared without a macro... yes
+checking whether gethostname is declared without a macro... yes
+checking whether getlogin is declared without a macro... yes
+checking whether getlogin_r is declared without a macro... yes
+checking whether getpagesize is declared without a macro... yes
+checking whether getusershell is declared without a macro... yes
+checking whether setusershell is declared without a macro... yes
+checking whether endusershell is declared without a macro... yes
+checking whether group_member is declared without a macro... yes
+checking whether lchown is declared without a macro... yes
+checking whether link is declared without a macro... yes
+checking whether linkat is declared without a macro... yes
+checking whether lseek is declared without a macro... yes
+checking whether pipe is declared without a macro... yes
+checking whether pipe2 is declared without a macro... yes
+checking whether pread is declared without a macro... yes
+checking whether pwrite is declared without a macro... yes
+checking whether readlink is declared without a macro... yes
+checking whether readlinkat is declared without a macro... yes
+checking whether rmdir is declared without a macro... yes
+checking whether sleep is declared without a macro... yes
+checking whether symlink is declared without a macro... yes
+checking whether symlinkat is declared without a macro... yes
+checking whether ttyname_r is declared without a macro... yes
+checking whether unlink is declared without a macro... yes
+checking whether unlinkat is declared without a macro... yes
+checking whether usleep is declared without a macro... yes
+checking whether btowc is declared without a macro... yes
+checking whether wctob is declared without a macro... yes
+checking whether mbsinit is declared without a macro... yes
+checking whether mbrtowc is declared without a macro... yes
+checking whether mbrlen is declared without a macro... yes
+checking whether mbsrtowcs is declared without a macro... yes
+checking whether mbsnrtowcs is declared without a macro... yes
+checking whether wcrtomb is declared without a macro... yes
+checking whether wcsrtombs is declared without a macro... yes
+checking whether wcsnrtombs is declared without a macro... yes
+checking whether wcwidth is declared without a macro... yes
+checking whether wmemchr is declared without a macro... yes
+checking whether wmemcmp is declared without a macro... yes
+checking whether wmemcpy is declared without a macro... yes
+checking whether wmemmove is declared without a macro... yes
+checking whether wmemset is declared without a macro... yes
+checking whether wcslen is declared without a macro... yes
+checking whether wcsnlen is declared without a macro... yes
+checking whether wcscpy is declared without a macro... yes
+checking whether wcpcpy is declared without a macro... yes
+checking whether wcsncpy is declared without a macro... yes
+checking whether wcpncpy is declared without a macro... yes
+checking whether wcscat is declared without a macro... yes
+checking whether wcsncat is declared without a macro... yes
+checking whether wcscmp is declared without a macro... yes
+checking whether wcsncmp is declared without a macro... yes
+checking whether wcscasecmp is declared without a macro... yes
+checking whether wcsncasecmp is declared without a macro... yes
+checking whether wcscoll is declared without a macro... yes
+checking whether wcsxfrm is declared without a macro... yes
+checking whether wcsdup is declared without a macro... yes
+checking whether wcschr is declared without a macro... yes
+checking whether wcsrchr is declared without a macro... yes
+checking whether wcscspn is declared without a macro... yes
+checking whether wcsspn is declared without a macro... yes
+checking whether wcspbrk is declared without a macro... yes
+checking whether wcsstr is declared without a macro... yes
+checking whether wcstok is declared without a macro... yes
+checking whether wcswidth is declared without a macro... yes
+checking whether mbrtowc handles incomplete characters... (cached) yes
+checking whether mbrtowc works as well as mbtowc... (cached) yes
+checking whether wcrtomb return value is correct... yes
+checking whether wctob works... yes
+checking whether wctob is declared... (cached) yes
+checking whether iswcntrl works... (cached) yes
+checking for wctype_t... (cached) yes
+checking for wctrans_t... (cached) yes
+checking whether wctype is declared without a macro... (cached) yes
+checking whether iswctype is declared without a macro... (cached) yes
+checking whether wctrans is declared without a macro... (cached) yes
+checking whether towctrans is declared without a macro... (cached) yes
+checking whether wcwidth is declared... (cached) yes
+checking whether wcwidth works reasonably in UTF-8 locales... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional french locale... (cached) fr_FR
+checking for a turkish Unicode locale... tr_TR.UTF-8
+checking whether dup2 works... yes
+checking whether INT32_MAX < INTMAX_MAX... yes
+checking whether INT64_MAX == LONG_MAX... yes
+checking whether UINT32_MAX < UINTMAX_MAX... yes
+checking whether UINT64_MAX == ULONG_MAX... yes
+checking for setlocale... (cached) yes
+checking for uselocale... yes
+checking for pthread_rwlock_t... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for a turkish Unicode locale... (cached) tr_TR.UTF-8
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... no
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for putenv compatible with GNU and SVID... yes
+checking whether setenv validates arguments... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for stdint.h... (cached) yes
+checking for SIZE_MAX... yes
+checking for snprintf... (cached) yes
+checking whether snprintf respects a size of 1... yes
+checking for wchar_t... (cached) yes
+checking for wint_t... (cached) yes
+checking whether dprintf is declared without a macro... yes
+checking whether fpurge is declared without a macro... no
+checking whether fseeko is declared without a macro... yes
+checking whether ftello is declared without a macro... yes
+checking whether getdelim is declared without a macro... yes
+checking whether getline is declared without a macro... yes
+checking whether popen is declared without a macro... yes
+checking whether renameat is declared without a macro... yes
+checking whether snprintf is declared without a macro... yes
+checking whether tmpfile is declared without a macro... yes
+checking whether vdprintf is declared without a macro... yes
+checking whether vsnprintf is declared without a macro... yes
+checking for mmap... (cached) yes
+checking for MAP_ANONYMOUS... no
+checking whether symlink handles trailing slash correctly... yes
+checking for pthread_atfork... yes
+checking for unsetenv... yes
+checking for unsetenv() return type... int
+checking whether unsetenv obeys POSIX... yes
+checking for ptrdiff_t... yes
+checking for a traditional french locale... (cached) fr_FR
+checking for a french Unicode locale... (cached) fr_FR.UTF-8
+checking for a traditional japanese locale... (cached) ja_JP
+checking for a transitional chinese locale... (cached) zh_CN.GB18030
+checking for stdint.h... (cached) yes
+checking for sched_yield in -lrt... yes
+checking for ANSI C header files... (cached) yes
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking whether closedir returns void... no
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking for CFPreferencesCopyAppValue... (cached) no
+checking for CFLocaleCopyCurrent... (cached) no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+configure: WARNING: Included lib/regex.c not used
+checking pcre.h usability... yes
+checking pcre.h presence... yes
+checking for pcre.h... yes
+checking pcre/pcre.h usability... no
+checking pcre/pcre.h presence... no
+checking for pcre/pcre.h... no
+checking for library containing pcre_compile... -lpcre
+checking for pcre_compile... yes
+checking that generated files are newer than configure... done
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating lib/Makefile
+config.status: creating src/Makefile
+config.status: creating tests/Makefile
+config.status: creating po/Makefile.in
+config.status: creating doc/Makefile
+config.status: creating gnulib-tests/Makefile
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
++ make -j24
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/grep-2.9'
+Making all in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/po'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/po'
+Making all in lib
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+  GEN      alloca.h
+  GEN      arg-nonnull.h
+  GEN      c++defs.h
+  GEN      configmake.h
+  GEN      warn-on-use.h
+  GEN      unistr.h
+  GEN      unitypes.h
+  GEN      uniwidth.h
+  GEN      unused-parameter.h
+  GEN      ctype.h
+  GEN      dirent.h
+  GEN      fcntl.h
+  GEN      iconv.h
+  GEN      inttypes.h
+  GEN      langinfo.h
+  GEN      locale.h
+  GEN      string.h
+  GEN      stdlib.h
+  GEN      time.h
+  GEN      sys/stat.h
+  GEN      wctype.h
+  GEN      unistd.h
+  GEN      wchar.h
+make  all-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+  CC       argmatch.o
+  CC       c-ctype.o
+  CC       c-strcasecmp.o
+  CC       c-strncasecmp.o
+  CC       close-stream.o
+  CC       closeout.o
+  CC       dirname.o
+  CC       basename.o
+  CC       dirname-lgpl.o
+  CC       basename-lgpl.o
+  CC       stripslash.o
+  CC       exclude.o
+  CC       exitfail.o
+  CC       hard-locale.o
+  CC       hash.o
+  CC       isdir.o
+  CC       localcharset.o
+  CC       malloca.o
+  CC       mbchar.o
+  CC       mbscasecmp.o
+  CC       mbslen.o
+  CC       mbsstr.o
+  CC       progname.o
+  CC       propername.o
+  CC       quote.o
+  CC       quotearg.o
+  CC       striconv.o
+  CC       strnlen1.o
+  CC       trim.o
+  CC       version-etc.o
+  CC       version-etc-fsf.o
+  CC       xmalloc.o
+  CC       xalloc-die.o
+  CC       xstriconv.o
+  CC       xstrndup.o
+  CC       xstrtol.o
+  CC       xstrtoul.o
+  CC       xstrtol-error.o
+  CC       xstrtoumax.o
+  CC       savedir.o
+  CC       strerror.o
+  GEN      charset.alias
+  GEN      ref-add.sed
+  GEN      ref-del.sed
+  CC       unistr/u8-mbtoucr.o
+  CC       unistr/u8-uctomb.o
+  CC       uniwidth/width.o
+  CC       unistr/u8-uctomb-aux.o
+  AR       libgreputils.a
+make[4]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/doc'
+  GEN      grep.1
+  GEN      fgrep.1
+  GEN      egrep.1
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/doc'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/src'
+  CC       kwset.o
+  CC       dfa.o
+  CC       searchutils.o
+  CC       dfasearch.o
+  CC       kwsearch.o
+  CC       pcresearch.o
+  CC       main.o
+  CC       grep.o
+  CC       egrep.o
+  CC       fgrep.o
+  AR       libgrep.a
+  CCLD     grep
+  CCLD     egrep
+  CCLD     fgrep
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/src'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/tests'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/tests'
+Making all in gnulib-tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+  GEN      arg-nonnull.h
+  GEN      c++defs.h
+  GEN      warn-on-use.h
+  GEN      unused-parameter.h
+  GEN      stdio.h
+make  all-recursive
+make[3]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+Making all in .
+make[4]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[4]: Nothing to be done for `all-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.38376
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/grep-root
++ /bin/mkdir -p /var/tmp/grep-root
++ cd grep-2.9
++ make DESTDIR=/var/tmp/grep-root install
+Making install in po
+make[1]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/po'
+installing af.gmo as /var/tmp/grep-root/usr/share/locale/af/LC_MESSAGES/grep.mo
+installing be.gmo as /var/tmp/grep-root/usr/share/locale/be/LC_MESSAGES/grep.mo
+installing bg.gmo as /var/tmp/grep-root/usr/share/locale/bg/LC_MESSAGES/grep.mo
+installing ca.gmo as /var/tmp/grep-root/usr/share/locale/ca/LC_MESSAGES/grep.mo
+installing cs.gmo as /var/tmp/grep-root/usr/share/locale/cs/LC_MESSAGES/grep.mo
+installing da.gmo as /var/tmp/grep-root/usr/share/locale/da/LC_MESSAGES/grep.mo
+installing de.gmo as /var/tmp/grep-root/usr/share/locale/de/LC_MESSAGES/grep.mo
+installing el.gmo as /var/tmp/grep-root/usr/share/locale/el/LC_MESSAGES/grep.mo
+installing eo.gmo as /var/tmp/grep-root/usr/share/locale/eo/LC_MESSAGES/grep.mo
+installing es.gmo as /var/tmp/grep-root/usr/share/locale/es/LC_MESSAGES/grep.mo
+installing et.gmo as /var/tmp/grep-root/usr/share/locale/et/LC_MESSAGES/grep.mo
+installing eu.gmo as /var/tmp/grep-root/usr/share/locale/eu/LC_MESSAGES/grep.mo
+installing fi.gmo as /var/tmp/grep-root/usr/share/locale/fi/LC_MESSAGES/grep.mo
+installing fr.gmo as /var/tmp/grep-root/usr/share/locale/fr/LC_MESSAGES/grep.mo
+installing ga.gmo as /var/tmp/grep-root/usr/share/locale/ga/LC_MESSAGES/grep.mo
+installing gl.gmo as /var/tmp/grep-root/usr/share/locale/gl/LC_MESSAGES/grep.mo
+installing he.gmo as /var/tmp/grep-root/usr/share/locale/he/LC_MESSAGES/grep.mo
+installing hr.gmo as /var/tmp/grep-root/usr/share/locale/hr/LC_MESSAGES/grep.mo
+installing hu.gmo as /var/tmp/grep-root/usr/share/locale/hu/LC_MESSAGES/grep.mo
+installing id.gmo as /var/tmp/grep-root/usr/share/locale/id/LC_MESSAGES/grep.mo
+installing it.gmo as /var/tmp/grep-root/usr/share/locale/it/LC_MESSAGES/grep.mo
+installing ja.gmo as /var/tmp/grep-root/usr/share/locale/ja/LC_MESSAGES/grep.mo
+installing ko.gmo as /var/tmp/grep-root/usr/share/locale/ko/LC_MESSAGES/grep.mo
+installing ky.gmo as /var/tmp/grep-root/usr/share/locale/ky/LC_MESSAGES/grep.mo
+installing lt.gmo as /var/tmp/grep-root/usr/share/locale/lt/LC_MESSAGES/grep.mo
+installing nb.gmo as /var/tmp/grep-root/usr/share/locale/nb/LC_MESSAGES/grep.mo
+installing nl.gmo as /var/tmp/grep-root/usr/share/locale/nl/LC_MESSAGES/grep.mo
+installing pl.gmo as /var/tmp/grep-root/usr/share/locale/pl/LC_MESSAGES/grep.mo
+installing pt.gmo as /var/tmp/grep-root/usr/share/locale/pt/LC_MESSAGES/grep.mo
+installing pt_BR.gmo as /var/tmp/grep-root/usr/share/locale/pt_BR/LC_MESSAGES/grep.mo
+installing ro.gmo as /var/tmp/grep-root/usr/share/locale/ro/LC_MESSAGES/grep.mo
+installing ru.gmo as /var/tmp/grep-root/usr/share/locale/ru/LC_MESSAGES/grep.mo
+installing sk.gmo as /var/tmp/grep-root/usr/share/locale/sk/LC_MESSAGES/grep.mo
+installing sl.gmo as /var/tmp/grep-root/usr/share/locale/sl/LC_MESSAGES/grep.mo
+installing sr.gmo as /var/tmp/grep-root/usr/share/locale/sr/LC_MESSAGES/grep.mo
+installing sv.gmo as /var/tmp/grep-root/usr/share/locale/sv/LC_MESSAGES/grep.mo
+installing th.gmo as /var/tmp/grep-root/usr/share/locale/th/LC_MESSAGES/grep.mo
+installing tr.gmo as /var/tmp/grep-root/usr/share/locale/tr/LC_MESSAGES/grep.mo
+installing uk.gmo as /var/tmp/grep-root/usr/share/locale/uk/LC_MESSAGES/grep.mo
+installing vi.gmo as /var/tmp/grep-root/usr/share/locale/vi/LC_MESSAGES/grep.mo
+installing zh_CN.gmo as /var/tmp/grep-root/usr/share/locale/zh_CN/LC_MESSAGES/grep.mo
+installing zh_TW.gmo as /var/tmp/grep-root/usr/share/locale/zh_TW/LC_MESSAGES/grep.mo
+if test "grep" = "gettext-tools"; then \
+  /bin/mkdir -p /var/tmp/grep-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/grep-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/grep-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/po'
+Making install in lib
+make[1]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make  install-recursive
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make[3]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make[4]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+if test yes = no; then \
+  case 'linux-gnu' in \
+    darwin[56]*) \
+      need_charset_alias=true ;; \
+    darwin* | cygwin* | mingw* | pw32* | cegcc*) \
+      need_charset_alias=false ;; \
+    *) \
+      need_charset_alias=true ;; \
+  esac ; \
+else \
+  need_charset_alias=false ; \
+fi ; \
+if $need_charset_alias; then \
+  /bin/sh /usr/src/rpm/BUILD/grep-2.9/build-aux/install-sh -d /var/tmp/grep-root/usr/lib ; \
+fi ; \
+if test -f /var/tmp/grep-root/usr/lib/charset.alias; then \
+  sed -f ref-add.sed /var/tmp/grep-root/usr/lib/charset.alias > /var/tmp/grep-root/usr/lib/charset.tmp ; \
+  /usr/bin/install -c -m 644 /var/tmp/grep-root/usr/lib/charset.tmp /var/tmp/grep-root/usr/lib/charset.alias ; \
+  rm -f /var/tmp/grep-root/usr/lib/charset.tmp ; \
+else \
+  if $need_charset_alias; then \
+    sed -f ref-add.sed charset.alias > /var/tmp/grep-root/usr/lib/charset.tmp ; \
+    /usr/bin/install -c -m 644 /var/tmp/grep-root/usr/lib/charset.tmp /var/tmp/grep-root/usr/lib/charset.alias ; \
+    rm -f /var/tmp/grep-root/usr/lib/charset.tmp ; \
+  fi ; \
+fi
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/lib'
+Making install in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/doc'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/info" || /bin/mkdir -p "/var/tmp/grep-root/usr/share/info"
+ /usr/bin/install -c -m 644 ./grep.info '/var/tmp/grep-root/usr/share/info'
+ install-info --info-dir='/var/tmp/grep-root/usr/share/info' '/var/tmp/grep-root/usr/share/info/grep.info'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/grep-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 grep.1 fgrep.1 egrep.1 '/var/tmp/grep-root/usr/share/man/man1'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/doc'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/doc'
+Making install in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/src'
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/src'
+test -z "/bin" || /bin/mkdir -p "/var/tmp/grep-root/bin"
+  /usr/bin/install -c grep egrep fgrep '/var/tmp/grep-root/bin'
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/src'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/src'
+Making install in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/tests'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/tests'
+Making install in gnulib-tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make  install-recursive
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+Making install in .
+make[3]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[4]: Entering directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[4]: Nothing to be done for `install-exec-am'.
+make[4]: Nothing to be done for `install-data-am'.
+make[4]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9/gnulib-tests'
+make[1]: Entering directory `/usr/src/rpm/BUILD/grep-2.9'
+make[2]: Entering directory `/usr/src/rpm/BUILD/grep-2.9'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/grep-2.9'
++ rm -f /var/tmp/grep-root/usr/share/info/dir
++ /usr/lib/rpm/compress_man.sh /var/tmp/grep-root
++ /usr/lib/rpm/strip.sh /var/tmp/grep-root
+copy from `/var/tmp/grep-root/bin/fgrep' [elf64-x86-64] to `/var/tmp/grep-root/bin/stFiufUE' [elf64-x86-64]
+copy from `/var/tmp/grep-root/bin/egrep' [elf64-x86-64] to `/var/tmp/grep-root/bin/st80gXmF' [elf64-x86-64]
+copy from `/var/tmp/grep-root/bin/grep' [elf64-x86-64] to `/var/tmp/grep-root/bin/stXioDgF' [elf64-x86-64]
++ /usr/lib/rpm/find-lang.sh /var/tmp/grep-root grep
++ exit 0
+Processing files: grep-2.9-1.x86_64
+Requires(interp): /bin/sh /bin/sh
+Requires(post): /bin/sh /usr/bin/install-info
+Requires(preun): /bin/sh /usr/bin/install-info
+Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libpcre.so.0()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/grep-root
+Wrote: /usr/src/rpm/SRPMS/grep-2.9-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/grep-2.9-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.20654
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd grep-2.9
++ /bin/rm -rf /var/tmp/grep-root

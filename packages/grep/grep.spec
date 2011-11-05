@@ -1,15 +1,15 @@
 Summary: GNU Grep
 Name: grep
-Version: 2.7
+Version: 2.9
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/grep
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.xz
+Source0: http://ftp.gnu.org/gnu/grep/grep-2.9.tar.xz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 9ea94cd8d9c8ca4d0ebe7c45ceeabf380907efcb
+BuildRequires: digest(sha1:%{SOURCE0}) = 0395eddfbf23e8ef1475677fce7c19a631abea41
 BuildRequires: pcre-devel
 
 %description
@@ -20,16 +20,17 @@ containing a match to a specified pattern.
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --bindir=/bin
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
 %{compress_man}
+%{strip}
 %find_lang %{name}
 
 %clean
@@ -50,6 +51,10 @@ rm -rf %{buildroot}
 /usr/share/man/man1/*.bz2
 
 %changelog
+* Sat Nov 05 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.9-1
+- Upgrade to 2.9
+- Optimize for size
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.7-1
 - Upgrade to 2.7
 
