@@ -1,13 +1,13 @@
 Summary: GNU Troff (Groff)
 Name: groff
 Version: 1.21
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/groff
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/groff/groff-1.21.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = a513aca4a7530a6e63325addd6ba2d282c8f1608
 
@@ -26,12 +26,12 @@ Documentation for %{name}
 %setup -q
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS="-Os -pipe"
+export CXXFLAGS="-Os -pipe"
 PAGE=letter ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}/groff
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} docdir=/usr/share/doc/%{name}-%{version} install
@@ -39,6 +39,7 @@ ln -sv eqn %{buildroot}/usr/bin/geqn
 ln -sv tbl %{buildroot}/usr/bin/gtbl
 rm -f %{buildroot}/usr/share/info/dir
 %{compress_man}
+%{strip}
 
 %post
 /usr/bin/install-info /usr/share/info/groff.info /usr/share/info/dir
@@ -109,6 +110,9 @@ rm -rf %{buildroot}
 /usr/share/doc/%{name}-%{version}
 
 %changelog
+* Sat Nov 05 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.21-2
+- Optimize for size
+
 * Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.21-1
 - Upgrade to 1.21
 
