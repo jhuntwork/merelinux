@@ -1,0 +1,288 @@
+Fetching(Source0): http://dev.lightcube.us/sources/iproute2/iproute2-2.6.37.tar.bz2
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.34834
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf iproute2-2.6.37
++ /bin/bzip2 -dc /usr/src/rpm/SOURCES/iproute2-2.6.37.tar.bz2
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd iproute2-2.6.37
++ sed -i 's@-O2@-Os -pipe@' Makefile
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.34834
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd iproute2-2.6.37
++ make -j24 DESTDIR= LIBDIR=/lib64
+sh configure 
+TC schedulers
+ ATM	no
+ IPT	using iptables
+iptables modules directory: not found!
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/lib'
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o ll_map.o ll_map.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o libnetlink.o libnetlink.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o utils.o utils.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o rt_names.o rt_names.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o ll_types.o ll_types.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o ll_proto.o ll_proto.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o ll_addr.o ll_addr.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o inet_proto.o inet_proto.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o dnet_ntop.o dnet_ntop.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o dnet_pton.o dnet_pton.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o ipx_ntop.o ipx_ntop.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -fPIC   -c -o ipx_pton.o ipx_pton.c
+ar rcs libnetlink.a ll_map.o libnetlink.o
+ar rcs libutil.a utils.o rt_names.o ll_types.o ll_proto.o ll_addr.o inet_proto.o  dnet_ntop.o dnet_pton.o ipx_ntop.o ipx_pton.o
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/lib'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/ip'
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ip.o ip.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipaddress.o ipaddress.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipaddrlabel.o ipaddrlabel.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iproute.o iproute.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iprule.o iprule.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o rtm_map.o rtm_map.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iptunnel.o iptunnel.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ip6tunnel.o ip6tunnel.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o tunnel.o tunnel.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipneigh.o ipneigh.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipntable.o ipntable.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iplink.o iplink.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipmaddr.o ipmaddr.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipmonitor.o ipmonitor.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipmroute.o ipmroute.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipprefix.o ipprefix.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iptuntap.o iptuntap.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ipxfrm.o ipxfrm.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o xfrm_state.o xfrm_state.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o xfrm_policy.o xfrm_policy.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o xfrm_monitor.o xfrm_monitor.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iplink_vlan.o iplink_vlan.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o link_veth.o link_veth.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o link_gre.o link_gre.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iplink_can.o iplink_can.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iplink_macvlan.o iplink_macvlan.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o iplink_macvtap.o iplink_macvtap.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o rtmon.o rtmon.c
+gcc -Wl,-export-dynamic  rtmon.o ../lib/libnetlink.a ../lib/libutil.a  -lresolv -L../lib -lnetlink -lutil -ldl -o rtmon
+gcc -Wl,-export-dynamic  ip.o ipaddress.o ipaddrlabel.o iproute.o iprule.o rtm_map.o iptunnel.o ip6tunnel.o tunnel.o ipneigh.o ipntable.o iplink.o ipmaddr.o ipmonitor.o ipmroute.o ipprefix.o iptuntap.o ipxfrm.o xfrm_state.o xfrm_policy.o xfrm_monitor.o iplink_vlan.o link_veth.o link_gre.o iplink_can.o iplink_macvlan.o iplink_macvtap.o ../lib/libnetlink.a ../lib/libutil.a  -lresolv -L../lib -lnetlink -lutil -ldl -o ip
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/ip'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/tc'
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_core.o tc_core.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_red.o tc_red.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_cbq.o tc_cbq.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_estimator.o tc_estimator.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_stab.o tc_stab.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc.o tc.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_qdisc.o tc_qdisc.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_class.o tc_class.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_filter.o tc_filter.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_util.o tc_util.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o tc_monitor.o tc_monitor.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_police.o m_police.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_estimator.o m_estimator.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_action.o m_action.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_ematch.o m_ematch.c
+bison -d -t -v -o emp_ematch.yacc.c emp_ematch.y
+flex  -oemp_ematch.lex.c emp_ematch.l
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_fifo.o q_fifo.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_sfq.o q_sfq.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_red.o q_red.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_prio.o q_prio.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_tbf.o q_tbf.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_cbq.o q_cbq.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_rr.o q_rr.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_multiq.o q_multiq.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_netem.o q_netem.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o f_rsvp.o f_rsvp.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o f_u32.o f_u32.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o f_route.o f_route.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o f_fw.o f_fw.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o f_basic.o f_basic.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o f_flow.o f_flow.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o f_cgroup.o f_cgroup.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_dsmark.o q_dsmark.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_gred.o q_gred.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o f_tcindex.o f_tcindex.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_ingress.o q_ingress.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_hfsc.o q_hfsc.c
+f_u32.c: In function 'parse_ip6_class':
+f_u32.c:435:2: warning: suggest parentheses around assignment used as truth value
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_htb.o q_htb.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o q_drr.o q_drr.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_gact.o m_gact.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_mirred.o m_mirred.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_nat.o m_nat.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_pedit.o m_pedit.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_skbedit.o m_skbedit.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_csum.o m_csum.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o p_ip.o p_ip.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o p_icmp.o p_icmp.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o p_tcp.o p_tcp.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o p_udp.o p_udp.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o em_nbyte.o em_nbyte.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o em_cmp.o em_cmp.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o em_u32.o em_u32.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o em_meta.o em_meta.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o m_ipt.o m_ipt.c
+ar rcs libtc.a tc_core.o tc_red.o tc_cbq.o tc_estimator.o tc_stab.o
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o emp_ematch.yacc.o emp_ematch.yacc.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -DCONFIG_GACT -DCONFIG_GACT_PROB   -c -o emp_ematch.lex.o emp_ematch.lex.c
+emp_ematch.yacc.c: In function 'ematch_parse':
+emp_ematch.yacc.c:1622:9: warning: passing argument 1 of 'ematch_error' discards qualifiers from pointer target type
+emp_ematch.y:22:14: note: expected 'char *' but argument is of type 'const char *'
+emp_ematch.lex.c:1377:16: warning: 'input' defined but not used
+gcc -Wl,-export-dynamic  tc.o tc_qdisc.o tc_class.o tc_filter.o tc_util.o tc_monitor.o m_police.o m_estimator.o m_action.o m_ematch.o emp_ematch.yacc.o emp_ematch.lex.o q_fifo.o q_sfq.o q_red.o q_prio.o q_tbf.o q_cbq.o q_rr.o q_multiq.o q_netem.o f_rsvp.o f_u32.o f_route.o f_fw.o f_basic.o f_flow.o f_cgroup.o q_dsmark.o q_gred.o f_tcindex.o q_ingress.o q_hfsc.o q_htb.o q_drr.o m_gact.o m_mirred.o m_nat.o m_pedit.o m_skbedit.o m_csum.o p_ip.o p_icmp.o p_tcp.o p_udp.o em_nbyte.o em_cmp.o em_u32.o em_meta.o m_ipt.o ../lib/libnetlink.a ../lib/libutil.a tc_core.o tc_red.o tc_cbq.o tc_estimator.o tc_stab.o  -lresolv -L../lib -lnetlink -lutil -L. -ltc -lm -ldl -o tc
+rm emp_ematch.lex.c emp_ematch.yacc.c
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/tc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/misc'
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ss.o ss.c
+bison ssfilter.y -o ssfilter.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"  -o nstat nstat.c -lm
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"  -o ifstat ifstat.c ../lib/libnetlink.a ../lib/libutil.a -lm
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"  -o rtacct rtacct.c ../lib/libnetlink.a ../lib/libutil.a -lm
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\" -I/usr/include  -o arpd arpd.c ../lib/libnetlink.a ../lib/libutil.a -ldb -lpthread
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o lnstat.o lnstat.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o lnstat_util.o lnstat_util.c
+ssfilter.y: conflicts: 27 shift/reduce
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ssfilter.o ssfilter.c
+gcc   lnstat.o lnstat_util.o  -lresolv -L../lib -lnetlink -lutil -o lnstat
+gcc   ss.o ssfilter.o  -lresolv -L../lib -lnetlink -lutil -o ss
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/misc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/netem'
+gcc  -I../include -o maketable maketable.c -lm
+gcc  -I../include -o normal normal.c -lm
+gcc  -I../include -o pareto pareto.c -lm
+gcc  -I../include -o paretonormal paretonormal.c -lm
+./pareto > pareto.dist
+./normal > normal.dist
+./paretonormal > paretonormal.dist
+./maketable experimental.dat > experimental.dist
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/netem'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/genl'
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o genl.o genl.c
+gcc -D_GNU_SOURCE -Os -pipe -Wstrict-prototypes -Wall -I../include -DRESOLVE_HOSTNAMES -DLIBDIR=\"/lib64\"   -c -o ctrl.o ctrl.c
+gcc -Wl,-export-dynamic  genl.o ctrl.o ../lib/libnetlink.a ../lib/libutil.a  -lresolv -L../lib -lnetlink -lutil -lm -ldl -o genl
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/genl'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.50041
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/iproute2-root
++ /bin/mkdir -p /var/tmp/iproute2-root
++ cd iproute2-2.6.37
++ make DESTDIR=/var/tmp/iproute2-root SBINDIR=/sbin MANDIR=/usr/share/man LIBDIR=/lib64 DOCDIR=/usr/share/doc/iproute2-2.6.37 install
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/lib'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/lib'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/ip'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/ip'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/tc'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/tc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/misc'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/misc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/netem'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/netem'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/genl'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/genl'
+install -m 0755 -d /var/tmp/iproute2-root/sbin
+install -m 0755 -d /var/tmp/iproute2-root/etc/iproute2
+install -m 0755 -d /var/tmp/iproute2-root/var/lib/arpd
+install -m 0755 -d /var/tmp/iproute2-root/usr/share/doc/iproute2-2.6.37/examples
+install -m 0755 -d /var/tmp/iproute2-root/usr/share/doc/iproute2-2.6.37/examples/diffserv
+install -m 0644 README.iproute2+tc examples/gaiconf examples/dhcp-client-script examples/cbqinit.eth1 examples/cbq.init-v0.7.3 examples/SYN-DoS.rate.limit examples/README.cbq \
+	/var/tmp/iproute2-root/usr/share/doc/iproute2-2.6.37/examples
+install -m 0644 examples/diffserv/regression-testing examples/diffserv/efcbq examples/diffserv/ef-prio examples/diffserv/afcbq examples/diffserv/README examples/diffserv/Edge32-cb-u32 examples/diffserv/Edge32-cb-chains examples/diffserv/Edge32-ca-u32 examples/diffserv/Edge31-cb-chains examples/diffserv/Edge31-ca-u32 examples/diffserv/Edge2 examples/diffserv/Edge1 \
+	/var/tmp/iproute2-root/usr/share/doc/iproute2-2.6.37/examples/diffserv
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/lib'
+make[1]: Nothing to be done for `install'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/lib'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/ip'
+install -m 0755 ip rtmon /var/tmp/iproute2-root/sbin
+install -m 0755 ifcfg rtpr routel routef /var/tmp/iproute2-root/sbin
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/ip'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/tc'
+mkdir -p /var/tmp/iproute2-root/lib64/tc
+install -m 0755 tc /var/tmp/iproute2-root/sbin
+for i in ; \
+do install -m 755 $i /var/tmp/iproute2-root/lib64/tc; \
+done
+if [ ! -f /var/tmp/iproute2-root/lib64/tc/m_ipt.so ]; then \
+if [ -f /var/tmp/iproute2-root/lib64/tc/m_xt.so ]; \
+	then ln -s m_xt.so /var/tmp/iproute2-root/lib64/tc/m_ipt.so ; \
+elif [ -f /var/tmp/iproute2-root/lib64/tc/m_xt_old.so ]; \
+	then ln -s m_xt_old.so /var/tmp/iproute2-root/lib64/tc/m_ipt.so ; \
+fi; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/tc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/misc'
+install -m 0755 ss nstat ifstat rtacct arpd lnstat /var/tmp/iproute2-root/sbin
+ln -sf lnstat /var/tmp/iproute2-root/sbin/rtstat
+ln -sf lnstat /var/tmp/iproute2-root/sbin/ctstat
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/misc'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/netem'
+mkdir -p /var/tmp/iproute2-root/lib64/tc
+for i in normal.dist pareto.dist paretonormal.dist experimental.dist; \
+do install -m 644 $i /var/tmp/iproute2-root/lib64/tc; \
+done
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/netem'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/genl'
+install -m 0755 genl /var/tmp/iproute2-root/sbin
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/genl'
+make[1]: Entering directory `/usr/src/rpm/BUILD/iproute2-2.6.37/doc'
+install -m 0644 SNAPSHOT.tex api-ip6-flowlabels.tex ip-cref.tex ip-tunnels.tex preamble.tex /var/tmp/iproute2-root/usr/share/doc/iproute2-2.6.37
+install -m 0644 arpd.sgml nstat.sgml rtstat.sgml ss.sgml /var/tmp/iproute2-root/usr/share/doc/iproute2-2.6.37
+make[1]: Leaving directory `/usr/src/rpm/BUILD/iproute2-2.6.37/doc'
+install -m 0644 etc/iproute2/rt_tables etc/iproute2/rt_scopes etc/iproute2/rt_realms etc/iproute2/rt_protos etc/iproute2/rt_dsfield etc/iproute2/ematch_map /var/tmp/iproute2-root/etc/iproute2
+install -m 0755 -d /var/tmp/iproute2-root/usr/share/man/man8
+install -m 0644 man/man8/tc.8 man/man8/tc-tbf.8 man/man8/tc-sfq.8 man/man8/tc-red.8 man/man8/tc-prio.8 man/man8/tc-pfifo_fast.8 man/man8/tc-htb.8 man/man8/tc-drr.8 man/man8/tc-cbq.8 man/man8/tc-cbq-details.8 man/man8/tc-bfifo.8 man/man8/ss.8 man/man8/rtmon.8 man/man8/rtacct.8 man/man8/routel.8 man/man8/lnstat.8 man/man8/ip.8 man/man8/arpd.8 /var/tmp/iproute2-root/usr/share/man/man8
+ln -sf tc-bfifo.8  /var/tmp/iproute2-root/usr/share/man/man8/tc-pfifo.8
+ln -sf lnstat.8  /var/tmp/iproute2-root/usr/share/man/man8/rtstat.8
+ln -sf lnstat.8  /var/tmp/iproute2-root/usr/share/man/man8/ctstat.8
+ln -sf rtacct.8  /var/tmp/iproute2-root/usr/share/man/man8/nstat.8
+ln -sf routel.8  /var/tmp/iproute2-root/usr/share/man/man8/routef.8
+install -m 0755 -d /var/tmp/iproute2-root/usr/share/man/man3
+install -m 0644 man/man3/libnetlink.3 /var/tmp/iproute2-root/usr/share/man/man3
++ install -dv /var/tmp/iproute2-root/var/lib/arpd
++ rm -v /var/tmp/iproute2-root/usr/share/man/man3/libnetlink.3
+removed `/var/tmp/iproute2-root/usr/share/man/man3/libnetlink.3'
++ /usr/lib/rpm/compress_man.sh /var/tmp/iproute2-root
+removed `/var/tmp/iproute2-root/usr/share/man/man8/routef.8'
+`/var/tmp/iproute2-root/usr/share/man/man8/routef.8.bz2' -> `routel.8.bz2'
+removed `/var/tmp/iproute2-root/usr/share/man/man8/nstat.8'
+`/var/tmp/iproute2-root/usr/share/man/man8/nstat.8.bz2' -> `rtacct.8.bz2'
+removed `/var/tmp/iproute2-root/usr/share/man/man8/ctstat.8'
+`/var/tmp/iproute2-root/usr/share/man/man8/ctstat.8.bz2' -> `lnstat.8.bz2'
+removed `/var/tmp/iproute2-root/usr/share/man/man8/rtstat.8'
+`/var/tmp/iproute2-root/usr/share/man/man8/rtstat.8.bz2' -> `lnstat.8.bz2'
+removed `/var/tmp/iproute2-root/usr/share/man/man8/tc-pfifo.8'
+`/var/tmp/iproute2-root/usr/share/man/man8/tc-pfifo.8.bz2' -> `tc-bfifo.8.bz2'
++ /usr/lib/rpm/strip.sh /var/tmp/iproute2-root
+copy from `/var/tmp/iproute2-root/sbin/genl' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stMSC1nV' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/lnstat' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stPzXOkV' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/arpd' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/st8CORfV' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/rtacct' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stDEc5HV' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/ifstat' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stwCaqFV' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/nstat' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stzn4VAV' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/ss' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stiaZ43V' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/tc' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stfojN0V' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/rtmon' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stYk1ufW' [elf64-x86-64]
+copy from `/var/tmp/iproute2-root/sbin/ip' [elf64-x86-64] to `/var/tmp/iproute2-root/sbin/stndKtaW' [elf64-x86-64]
++ exit 0
+Processing files: iproute2-2.6.37-2.x86_64
+Requires: /bin/bash /bin/sh libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libdb-5.1.so()(64bit) libdl.so.2()(64bit) libdl.so.2(GLIBC_2.2.5)(64bit) libm.so.6()(64bit) libm.so.6(GLIBC_2.2.5)(64bit) libpthread.so.0()(64bit) libpthread.so.0(GLIBC_2.2.5)(64bit) libresolv.so.2()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/iproute2-root
+Wrote: /usr/src/rpm/SRPMS/iproute2-2.6.37-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/iproute2-2.6.37-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.50041
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd iproute2-2.6.37
++ /bin/rm -rf /var/tmp/iproute2-root
