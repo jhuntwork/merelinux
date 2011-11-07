@@ -1,15 +1,15 @@
 Summary: Fine Free File Command
 Name: file
-Version: 5.06
+Version: 5.09
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://darwinsys.com/file
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: ftp://ftp.astron.com/pub/file/file-5.09.tar.gz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = ad7cd2334a4e386c7647c69fba3cc8ec6b76c6ca
+BuildRequires: digest(sha1:%{SOURCE0}) = 9d905f9e50033c3f5be3728473cbb709a41550fb
 BuildRequires: zlib-devel
 
 %description
@@ -31,6 +31,7 @@ Libraries and headers for developing with libmagic
 sed -i 's/misc/file/' configure
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib}
@@ -40,6 +41,7 @@ make check
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -62,6 +64,10 @@ rm -rf %{buildroot}
 /usr/share/man/man3/libmagic.3.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.09-1
+- Upgrade to 5.09
+- Optimize for size
+
 * Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.06-1
 - Upgrade to 5.06
 
