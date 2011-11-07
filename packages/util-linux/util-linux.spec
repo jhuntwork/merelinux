@@ -1,7 +1,7 @@
 Summary: Util-Linux Next Generation
 Name: util-linux
 Version: 2.20
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -20,7 +20,7 @@ relating to the file system.
 
 %package devel
 Summary: %{name} headers and libraries
-Requires: %{name}
+Requires: %{name} >= %{version}
 
 %description devel
 Headers and libraries for libblkid and libuuid
@@ -30,7 +30,7 @@ Headers and libraries for libblkid and libuuid
 sed -i 's@etc/adjtime@var/lib/hwclock/adjtime@g' $(grep -rl '/etc/adjtime' .)
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --enable-arch \
   --enable-partx \
@@ -46,6 +46,7 @@ install -dv %{buildroot}/var/lib/hwclock
 # Spurious man page - binary not built
 rm -f %{buildroot}/usr/share/man/ru/man1/ddate.1
 %{compress_man}
+%{strip}
 %find_lang %{name}
 
 %clean
@@ -145,9 +146,9 @@ rm -rf %{buildroot}
 /usr/sbin/tunelp
 /usr/sbin/uuidd
 /usr/share/getopt
-/usr/share/man/man1/*
-/usr/share/man/man5/*
-/usr/share/man/man8/*
+/usr/share/man/man1/*.bz2
+/usr/share/man/man5/*.bz2
+/usr/share/man/man8/*.bz2
 %ifarch i686
 /usr/bin/i386
 %endif
@@ -164,7 +165,6 @@ rm -rf %{buildroot}
 
 %files devel
 %defattr(-,root,root)
-/usr/share/man/man3/*
 /usr/include/blkid
 /usr/include/libmount
 /usr/include/uuid
@@ -180,8 +180,12 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/mount.pc
 /usr/%{_lib}/pkgconfig/blkid.pc
 /usr/%{_lib}/pkgconfig/uuid.pc
+/usr/share/man/man3/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-3
+- Optimize for size 
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.20-2
 - Use the Obsoletes tag to override util-linux-ng packages
 
