@@ -1,20 +1,21 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.95280
+Fetching(Source0): http://ftp.gnu.org/gnu/inetutils/inetutils-1.8.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.4440
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
 + rm -rf inetutils-1.8
-+ /bin/tar -xf -
 + /bin/gzip -dc /usr/src/rpm/SOURCES/inetutils-1.8.tar.gz
++ /bin/tar -xf -
 + STATUS=0
 + '[' 0 -ne 0 ']'
 + cd inetutils-1.8
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.95280
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.33014
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd inetutils-1.8
-+ export LDFLAGS=-s
-+ LDFLAGS=-s
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
 + ./configure --prefix=/usr --libexecdir=/usr/sbin --localstatedir=/var --disable-ifconfig --disable-logger --disable-syslogd --disable-whois --disable-ping --disable-ping6 --disable-servers
 checking build system type... x86_64-unknown-linux-gnu
 checking host system type... x86_64-unknown-linux-gnu
@@ -66,8 +67,8 @@ checking for gcc option to accept ISO C99... -std=gnu99
 checking for gcc -std=gnu99 option to accept ISO Standard C... (cached) -std=gnu99
 configure: autobuild project... GNU inetutils
 configure: autobuild revision... 1.8
-configure: autobuild hostname... build1.lightcube.us
-configure: autobuild timestamp... 20110830T105802Z
+./configure: line 7975: hostname: command not found
+configure: autobuild timestamp... 20111107T203842Z
 checking for ar... ar
 checking for rm... /bin/rm
 checking how to run the C preprocessor... gcc -E
@@ -934,7 +935,7 @@ checking for value of PATH_LASTLOG... from _PATH_LASTLOG in <paths.h>
 checking for value of PATH_LOG... from _PATH_LOG in <syslog.h>
 checking for value of PATH_KLOG... from _PATH_KLOG in <paths.h>
 checking for value of PATH_LOGCONF... (default) $(sysconfdir)/syslog.conf
-checking for value of PATH_LOGIN... /bin/login
+checking for value of PATH_LOGIN... (default) $(bindir)/login
 checking for value of PATH_LOGPID... (default) $(localstatedir)/run/syslog.pid
 checking for value of PATH_NOLOGIN... from _PATH_NOLOGIN in <paths.h>
 checking for value of PATH_RLOGIN... (default) $(bindir)/rlogin
@@ -979,26 +980,26 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
   GEN    c++defs.h
   GEN    configmake.h
   GEN    getopt.h
-  GEN    dirent.h
-  GEN    fcntl.h
-  GEN    arpa/inet.h
-  GEN    glob.h
-  GEN    langinfo.h
   GEN    netdb.h
-  GEN    pty.h
-  GEN    stdio.h
-  GEN    stdlib.h
-  GEN    string.h
   GEN    strings.h
-  GEN    sys/ioctl.h
+  GEN    arpa/inet.h
   GEN    sys/select.h
+  GEN    sys/ioctl.h
   GEN    sys/socket.h
   GEN    time.h
   GEN    sys/time.h
   GEN    sys/stat.h
+  GEN    unistd.h
   GEN    wchar.h
   GEN    wctype.h
-  GEN    unistd.h
+  GEN    glob.h
+  GEN    dirent.h
+  GEN    fcntl.h
+  GEN    langinfo.h
+  GEN    pty.h
+  GEN    stdlib.h
+  GEN    stdio.h
+  GEN    string.h
 make  all-recursive
 make[3]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
 make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
@@ -1018,16 +1019,16 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
   CC     localcharset.o
   CC     malloca.o
   CC     openat-die.o
-  CC     progname.o
   CC     sockets.o
+  CC     progname.o
   CC     strnlen1.o
   CC     version-etc.o
   CC     version-etc-fsf.o
   CC     xalloc-die.o
-  CC     xgethostname.o
   CC     xgetdomainname.o
-  CC     xasprintf.o
+  CC     xgethostname.o
   CC     xvasprintf.o
+  CC     xasprintf.o
   CC     asnprintf.o
   CC     basename-lgpl.o
   CC     chdir-long.o
@@ -1037,17 +1038,17 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
   CC     fcntl.o
   CC     fd-safer.o
   CC     filemode.o
-  CC     fopen-safer.o
   CC     getcwd.o
-  CC     getopt1.o
   CC     getopt.o
+  CC     fopen-safer.o
+  CC     getopt1.o
   CC     glob.o
   CC     imaxtostr.o
   CC     ioctl.o
   CC     login_tty.o
-  CC     offtostr.o
   CC     openat-proc.o
   CC     pipe-safer.o
+  CC     offtostr.o
   CC     printf-args.o
   CC     printf-parse.o
   CC     readutmp.o
@@ -1056,8 +1057,8 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/lib'
   CC     stripslash.o
   CC     uinttostr.o
   CC     umaxtostr.o
-  CC     vasnprintf.o
   CC     xgetcwd.o
+  CC     vasnprintf.o
   CC     xmalloc.o
   GEN    charset.alias
   GEN    ref-add.sed
@@ -1078,10 +1079,10 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libinetutils'
   CC     localhost.o
   CC     logwtmpko.o
   CC     setsig.o
-  CC     shishi.o
   CC     tftpsubs.o
-  CC     ttymsg.o
+  CC     shishi.o
   CC     utmp_init.o
+  CC     ttymsg.o
   CC     utmp_logout.o
 tftpsubs.c: In function 'write_behind':
 tftpsubs.c:260:12: warning: call to 'fseek' declared with attribute warning: fseek cannot handle files larger than 4 GB on 32-bit platforms - use fseeko function for handling of large files
@@ -1097,8 +1098,8 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
   CC     getent.o
   CC     kerberos.o
   CC     kerberos5.o
-  CC     read_passwd.o
   CC     misc.o
+  CC     read_passwd.o
   CC     shishi.o
   AR     libtelnet.a
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/libtelnet'
@@ -1140,8 +1141,8 @@ make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/src'
 Making all in telnet
 make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/telnet'
   CC     authenc.o
-  CC     commands.o
   CC     main.o
+  CC     commands.o
   CC     network.o
   CC     ring.o
   CC     sys_bsd.o
@@ -1184,8 +1185,8 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8/talk'
   CC     init_disp.o
   CC     invite.o
   CC     io.o
-  CC     look_up.o
   CC     msgs.o
+  CC     look_up.o
   CC     talk.o
   CCLD   talk
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8/talk'
@@ -1230,7 +1231,7 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/inetutils-1.8'
 make[2]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/inetutils-1.8'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.65907
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.54576
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/inetutils-root
@@ -1434,16 +1435,27 @@ mkdir: created directory `/var/tmp/inetutils-root/sbin'
 `/var/tmp/inetutils-root/usr/bin/traceroute' -> `/var/tmp/inetutils-root/sbin/traceroute'
 + rm -f /var/tmp/inetutils-root/usr/share/info/dir
 + /usr/lib/rpm/compress_man.sh /var/tmp/inetutils-root
++ /usr/lib/rpm/strip.sh /var/tmp/inetutils-root
+copy from `/var/tmp/inetutils-root/sbin/traceroute' [elf64-x86-64] to `/var/tmp/inetutils-root/sbin/stdv2v2i' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/bin/hostname' [elf64-x86-64] to `/var/tmp/inetutils-root/bin/st4ZNyuj' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/usr/bin/talk' [elf64-x86-64] to `/var/tmp/inetutils-root/usr/bin/st4fl2Mm' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/usr/bin/ftp' [elf64-x86-64] to `/var/tmp/inetutils-root/usr/bin/stvxvwJm' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/usr/bin/telnet' [elf64-x86-64] to `/var/tmp/inetutils-root/usr/bin/stWwKoDm' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/usr/bin/rcp' [elf64-x86-64] to `/var/tmp/inetutils-root/usr/bin/stNxtW5m' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/usr/bin/rlogin' [elf64-x86-64] to `/var/tmp/inetutils-root/usr/bin/stO5oR2m' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/usr/bin/rsh' [elf64-x86-64] to `/var/tmp/inetutils-root/usr/bin/stzV9AUm' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/usr/bin/tftp' [elf64-x86-64] to `/var/tmp/inetutils-root/usr/bin/stIf7MRm' [elf64-x86-64]
+copy from `/var/tmp/inetutils-root/usr/bin/rexec' [elf64-x86-64] to `/var/tmp/inetutils-root/usr/bin/sthJJqkn' [elf64-x86-64]
 + exit 0
-Processing files: inetutils-1.8-3.x86_64
+Processing files: inetutils-1.8-4.x86_64
 Requires(interp): /bin/sh /bin/sh
 Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
 Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.4)(64bit) libcrypt.so.1()(64bit) libhistory.so.6()(64bit) libncursesw.so.5()(64bit) libnsl.so.1()(64bit) libreadline.so.6()(64bit) libresolv.so.2()(64bit) libutil.so.1()(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/inetutils-root
-Wrote: /usr/src/rpm/SRPMS/inetutils-1.8-3.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/inetutils-1.8-3.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.17983
+Wrote: /usr/src/rpm/SRPMS/inetutils-1.8-4.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/inetutils-1.8-4.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.8557
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd inetutils-1.8

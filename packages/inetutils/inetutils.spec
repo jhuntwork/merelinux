@@ -1,13 +1,13 @@
 Summary: GNU Inetutils
 Name: inetutils
 Version: 1.8
-Release: 3
+Release: 4
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/inetutils
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/inetutils/inetutils-1.8.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 598445859b511f73681e4d74a41d65cd6ae0f83e
 BuildRequires: readline-devel
@@ -21,7 +21,7 @@ telnet, hostname and traceroute
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libexecdir=/usr/sbin \
@@ -42,6 +42,7 @@ mv -v %{buildroot}/usr/bin/hostname %{buildroot}/bin
 mv -v %{buildroot}/usr/bin/traceroute %{buildroot}/sbin
 rm -f %{buildroot}/usr/share/info/dir
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -77,6 +78,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/traceroute.1.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8-4
+- Optimize for size
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8-3
 - Remove ping and ping6 - better one provided in iputils
 
