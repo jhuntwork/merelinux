@@ -1,15 +1,15 @@
 Summary: Gawk
 Name: gawk
-Version: 3.1.8
-Release: 2
+Version: 4.0.0
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/gawk
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://ftp.gnu.org/gnu/gawk/gawk-4.0.0.tar.bz2
 
-BuildRequires: digest(%{SOURCE0}) = 52b41c6c4418b3226dfb8f82076193bb
+BuildRequires: digest(sha1:%{SOURCE0}) = 9e1b7d86b5e80c85e699c269d59d6711753c51d1
 
 %description
 Gawk is the GNU implementation of the awk command. The utility
@@ -21,6 +21,7 @@ lines of code.
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libexecdir=/usr/%{_lib}
@@ -34,6 +35,8 @@ mv -v %{buildroot}/usr/bin/gawk %{buildroot}/bin
 rm -v %{buildroot}/usr/bin/awk
 ln -sv gawk %{buildroot}/bin/awk
 rm -f %{buildroot}/usr/share/info/dir
+%{compress_man}
+%{strip}
 %find_lang %{name}
 
 %post
@@ -52,6 +55,7 @@ rm -rf %{buildroot}
 /bin/awk
 /bin/gawk
 /usr/bin/gawk-%{version}
+/usr/bin/dgawk
 /usr/bin/igawk
 /usr/bin/pgawk
 /usr/bin/pgawk-%{version}
@@ -59,11 +63,15 @@ rm -rf %{buildroot}
 /usr/share/awk
 /usr/share/info/gawk.info
 /usr/share/info/gawkinet.info
-/usr/share/man/man1/gawk.1
-/usr/share/man/man1/igawk.1
-/usr/share/man/man1/pgawk.1
+/usr/share/man/man1/gawk.1.bz2
+/usr/share/man/man1/igawk.1.bz2
+/usr/share/man/man1/pgawk.1.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0.0-1
+- Upgrade to 4.0.0
+- Optimize for size
+
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.1.8-2
 - Move gawk and awk to /bin.
 
