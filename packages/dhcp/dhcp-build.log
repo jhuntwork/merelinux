@@ -1,0 +1,557 @@
+Fetching(Source1): https://raw.github.com/jhuntwork/LightCube-OS/master/packages/dhcp/dhcpd.init
+Fetching(Source0): ftp://ftp.isc.org/isc/dhcp/dhcp-4.2.3/dhcp-4.2.3.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.17148
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf dhcp-4.2.3
++ /bin/gzip -dc /usr/src/rpm/SOURCES/dhcp-4.2.3.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd dhcp-4.2.3
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.17148
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd dhcp-4.2.3
++ export 'CFLAGS=-g -Os -pipe  -Wall -pipe -fno-strict-aliasing'
++ CFLAGS='-g -Os -pipe  -Wall -pipe -fno-strict-aliasing'
++ ./configure --prefix=/usr --libdir=/usr/lib64 --sysconfdir=/etc --with-srv-lease-file=/var/lib/dhcp/dhcpd.leases --with-srv6-lease-file=/var/lib/dhcp/dhcpd6.leases --with-cli-lease-file=/var/lib/dhcp/dhclient.leases --with-cli6-lease-file=/var/lib/dhcp/dhclient6.leases
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking whether to enable maintainer-specific portions of Makefiles... no
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for AIX... no
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for ranlib... ranlib
+checking whether byte ordering is bigendian... no
+checking for dhcpd.leases location.../var/lib/dhcp/dhcpd.leases
+checking for dhcpd6.leases location.../var/lib/dhcp/dhcpd6.leases
+checking for dhclient.leases location.../var/lib/dhcp/dhclient.leases
+checking for dhclient6.leases location.../var/lib/dhcp/dhclient6.leases
+checking for int8_t... yes
+checking for int16_t... yes
+checking for int32_t... yes
+checking for int64_t... yes
+checking for u_int8_t... yes
+checking for u_int16_t... yes
+checking for u_int32_t... yes
+checking for u_int64_t... yes
+checking ifaddrs.h usability... yes
+checking ifaddrs.h presence... yes
+checking for ifaddrs.h... yes
+checking linux/types.h usability... yes
+checking linux/types.h presence... yes
+checking for linux/types.h... yes
+checking for linux/filter.h... yes
+checking for struct lifnum... no
+checking for struct if_laddrconf... no
+checking for struct if_laddrreq... no
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking net/if_dl.h usability... no
+checking net/if_dl.h presence... no
+checking for net/if_dl.h... no
+checking net/if6.h usability... no
+checking net/if6.h presence... no
+checking for net/if6.h... no
+checking regex.h usability... yes
+checking regex.h presence... yes
+checking for regex.h... yes
+checking for library containing socket... none required
+checking for library containing inet_ntoa... none required
+checking for library containing inet_aton... none required
+checking for library containing regcomp... none required
+checking for library containing if_nametoindex... none required
+checking for /dev/random... yes
+checking for struct sockaddr.sa_len... no
+checking for struct iaddr *... yes
+checking size of struct iaddr *... 8
+checking for struct msghdr.msg_control... yes
+checking for flexible array members... yes
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating client/Makefile
+config.status: creating common/Makefile
+config.status: creating common/tests/Makefile
+config.status: creating dhcpctl/Makefile
+config.status: creating dst/Makefile
+config.status: creating includes/Makefile
+config.status: creating omapip/Makefile
+config.status: creating relay/Makefile
+config.status: creating server/Makefile
+config.status: creating tests/Makefile
+config.status: creating includes/config.h
+config.status: executing depfiles commands
++ make
+Making all in bind
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/bind'
+Configuring BIND Export libraries for DHCP.
+Building BIND Export libraries - this takes some time.
+building in /usr/src/rpm/BUILD/dhcp-4.2.3/bind/bind-9.8.1/lib/export
+../../../../lib/isc/unix/time.c: In function 'isc_time_secondsastimet':
+../../../../lib/isc/unix/time.c:374:7: warning: left shift count >= width of type
+Installing BIND Export libraries to /usr/src/rpm/BUILD/dhcp-4.2.3/bind.
+mkdir /usr/src/rpm/BUILD/dhcp-4.2.3/bind/include
+mkdir /usr/src/rpm/BUILD/dhcp-4.2.3/bind/include/isc
+mkdir /usr/src/rpm/BUILD/dhcp-4.2.3/bind/lib
+mkdir /usr/src/rpm/BUILD/dhcp-4.2.3/bind/include/dns
+mkdir /usr/src/rpm/BUILD/dhcp-4.2.3/bind/include/dst
+mkdir /usr/src/rpm/BUILD/dhcp-4.2.3/bind/include/isccfg
+mkdir /usr/src/rpm/BUILD/dhcp-4.2.3/bind/include/irs
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/bind'
+Making all in includes
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/includes'
+make  all-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/includes'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/includes'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/includes'
+Making all in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/tests'
+make[1]: Nothing to be done for `all'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/tests'
+Making all in common
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common/tests'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT alloc.o -MD -MP -MF .deps/alloc.Tpo -c -o alloc.o alloc.c
+mv -f .deps/alloc.Tpo .deps/alloc.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT bpf.o -MD -MP -MF .deps/bpf.Tpo -c -o bpf.o bpf.c
+mv -f .deps/bpf.Tpo .deps/bpf.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT comapi.o -MD -MP -MF .deps/comapi.Tpo -c -o comapi.o comapi.c
+mv -f .deps/comapi.Tpo .deps/comapi.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT conflex.o -MD -MP -MF .deps/conflex.Tpo -c -o conflex.o conflex.c
+mv -f .deps/conflex.Tpo .deps/conflex.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT ctrace.o -MD -MP -MF .deps/ctrace.Tpo -c -o ctrace.o ctrace.c
+mv -f .deps/ctrace.Tpo .deps/ctrace.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT discover.o -MD -MP -MF .deps/discover.Tpo -c -o discover.o discover.c
+mv -f .deps/discover.Tpo .deps/discover.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dispatch.o -MD -MP -MF .deps/dispatch.Tpo -c -o dispatch.o dispatch.c
+mv -f .deps/dispatch.Tpo .deps/dispatch.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dlpi.o -MD -MP -MF .deps/dlpi.Tpo -c -o dlpi.o dlpi.c
+mv -f .deps/dlpi.Tpo .deps/dlpi.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dns.o -MD -MP -MF .deps/dns.Tpo -c -o dns.o dns.c
+mv -f .deps/dns.Tpo .deps/dns.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT ethernet.o -MD -MP -MF .deps/ethernet.Tpo -c -o ethernet.o ethernet.c
+mv -f .deps/ethernet.Tpo .deps/ethernet.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT execute.o -MD -MP -MF .deps/execute.Tpo -c -o execute.o execute.c
+mv -f .deps/execute.Tpo .deps/execute.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT fddi.o -MD -MP -MF .deps/fddi.Tpo -c -o fddi.o fddi.c
+mv -f .deps/fddi.Tpo .deps/fddi.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT icmp.o -MD -MP -MF .deps/icmp.Tpo -c -o icmp.o icmp.c
+mv -f .deps/icmp.Tpo .deps/icmp.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT inet.o -MD -MP -MF .deps/inet.Tpo -c -o inet.o inet.c
+mv -f .deps/inet.Tpo .deps/inet.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT lpf.o -MD -MP -MF .deps/lpf.Tpo -c -o lpf.o lpf.c
+mv -f .deps/lpf.Tpo .deps/lpf.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT memory.o -MD -MP -MF .deps/memory.Tpo -c -o memory.o memory.c
+mv -f .deps/memory.Tpo .deps/memory.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT nit.o -MD -MP -MF .deps/nit.Tpo -c -o nit.o nit.c
+mv -f .deps/nit.Tpo .deps/nit.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT ns_name.o -MD -MP -MF .deps/ns_name.Tpo -c -o ns_name.o ns_name.c
+mv -f .deps/ns_name.Tpo .deps/ns_name.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT options.o -MD -MP -MF .deps/options.Tpo -c -o options.o options.c
+mv -f .deps/options.Tpo .deps/options.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT packet.o -MD -MP -MF .deps/packet.Tpo -c -o packet.o packet.c
+mv -f .deps/packet.Tpo .deps/packet.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT parse.o -MD -MP -MF .deps/parse.Tpo -c -o parse.o parse.c
+mv -f .deps/parse.Tpo .deps/parse.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT print.o -MD -MP -MF .deps/print.Tpo -c -o print.o print.c
+mv -f .deps/print.Tpo .deps/print.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT raw.o -MD -MP -MF .deps/raw.Tpo -c -o raw.o raw.c
+mv -f .deps/raw.Tpo .deps/raw.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT resolv.o -MD -MP -MF .deps/resolv.Tpo -c -o resolv.o resolv.c
+mv -f .deps/resolv.Tpo .deps/resolv.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT socket.o -MD -MP -MF .deps/socket.Tpo -c -o socket.o socket.c
+mv -f .deps/socket.Tpo .deps/socket.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT tables.o -MD -MP -MF .deps/tables.Tpo -c -o tables.o tables.c
+mv -f .deps/tables.Tpo .deps/tables.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT tr.o -MD -MP -MF .deps/tr.Tpo -c -o tr.o tr.c
+mv -f .deps/tr.Tpo .deps/tr.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT tree.o -MD -MP -MF .deps/tree.Tpo -c -o tree.o tree.c
+mv -f .deps/tree.Tpo .deps/tree.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT upf.o -MD -MP -MF .deps/upf.Tpo -c -o upf.o upf.c
+mv -f .deps/upf.Tpo .deps/upf.Po
+rm -f libdhcp.a
+ar cru libdhcp.a alloc.o bpf.o comapi.o conflex.o ctrace.o discover.o dispatch.o dlpi.o dns.o ethernet.o execute.o fddi.o icmp.o inet.o lpf.o memory.o nit.o ns_name.o options.o packet.o parse.o print.o raw.o resolv.o socket.o tables.o tr.o tree.o upf.o 
+ranlib libdhcp.a
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+Making all in dst
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dst'
+gcc -DHAVE_CONFIG_H -I. -I../includes  -DMINIRES_LIB -DHMAC_MD5   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dst_support.o -MD -MP -MF .deps/dst_support.Tpo -c -o dst_support.o dst_support.c
+mv -f .deps/dst_support.Tpo .deps/dst_support.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -DMINIRES_LIB -DHMAC_MD5   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dst_api.o -MD -MP -MF .deps/dst_api.Tpo -c -o dst_api.o dst_api.c
+mv -f .deps/dst_api.Tpo .deps/dst_api.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -DMINIRES_LIB -DHMAC_MD5   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT hmac_link.o -MD -MP -MF .deps/hmac_link.Tpo -c -o hmac_link.o hmac_link.c
+mv -f .deps/hmac_link.Tpo .deps/hmac_link.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -DMINIRES_LIB -DHMAC_MD5   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT md5_dgst.o -MD -MP -MF .deps/md5_dgst.Tpo -c -o md5_dgst.o md5_dgst.c
+mv -f .deps/md5_dgst.Tpo .deps/md5_dgst.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -DMINIRES_LIB -DHMAC_MD5   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT base64.o -MD -MP -MF .deps/base64.Tpo -c -o base64.o base64.c
+mv -f .deps/base64.Tpo .deps/base64.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -DMINIRES_LIB -DHMAC_MD5   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT prandom.o -MD -MP -MF .deps/prandom.Tpo -c -o prandom.o prandom.c
+mv -f .deps/prandom.Tpo .deps/prandom.Po
+rm -f libdst.a
+ar cru libdst.a dst_support.o dst_api.o hmac_link.o md5_dgst.o base64.o prandom.o 
+ranlib libdst.a
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dst'
+Making all in omapip
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/omapip'
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT protocol.o -MD -MP -MF .deps/protocol.Tpo -c -o protocol.o protocol.c
+mv -f .deps/protocol.Tpo .deps/protocol.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT buffer.o -MD -MP -MF .deps/buffer.Tpo -c -o buffer.o buffer.c
+mv -f .deps/buffer.Tpo .deps/buffer.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT alloc.o -MD -MP -MF .deps/alloc.Tpo -c -o alloc.o alloc.c
+mv -f .deps/alloc.Tpo .deps/alloc.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT result.o -MD -MP -MF .deps/result.Tpo -c -o result.o result.c
+mv -f .deps/result.Tpo .deps/result.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT connection.o -MD -MP -MF .deps/connection.Tpo -c -o connection.o connection.c
+mv -f .deps/connection.Tpo .deps/connection.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT errwarn.o -MD -MP -MF .deps/errwarn.Tpo -c -o errwarn.o errwarn.c
+mv -f .deps/errwarn.Tpo .deps/errwarn.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT listener.o -MD -MP -MF .deps/listener.Tpo -c -o listener.o listener.c
+mv -f .deps/listener.Tpo .deps/listener.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dispatch.o -MD -MP -MF .deps/dispatch.Tpo -c -o dispatch.o dispatch.c
+mv -f .deps/dispatch.Tpo .deps/dispatch.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT generic.o -MD -MP -MF .deps/generic.Tpo -c -o generic.o generic.c
+mv -f .deps/generic.Tpo .deps/generic.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT support.o -MD -MP -MF .deps/support.Tpo -c -o support.o support.c
+mv -f .deps/support.Tpo .deps/support.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT handle.o -MD -MP -MF .deps/handle.Tpo -c -o handle.o handle.c
+mv -f .deps/handle.Tpo .deps/handle.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT message.o -MD -MP -MF .deps/message.Tpo -c -o message.o message.c
+mv -f .deps/message.Tpo .deps/message.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT convert.o -MD -MP -MF .deps/convert.Tpo -c -o convert.o convert.c
+mv -f .deps/convert.Tpo .deps/convert.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT hash.o -MD -MP -MF .deps/hash.Tpo -c -o hash.o hash.c
+mv -f .deps/hash.Tpo .deps/hash.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT auth.o -MD -MP -MF .deps/auth.Tpo -c -o auth.o auth.c
+mv -f .deps/auth.Tpo .deps/auth.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT inet_addr.o -MD -MP -MF .deps/inet_addr.Tpo -c -o inet_addr.o inet_addr.c
+mv -f .deps/inet_addr.Tpo .deps/inet_addr.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT array.o -MD -MP -MF .deps/array.Tpo -c -o array.o array.c
+mv -f .deps/array.Tpo .deps/array.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT trace.o -MD -MP -MF .deps/trace.Tpo -c -o trace.o trace.c
+mv -f .deps/trace.Tpo .deps/trace.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT toisc.o -MD -MP -MF .deps/toisc.Tpo -c -o toisc.o toisc.c
+mv -f .deps/toisc.Tpo .deps/toisc.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT iscprint.o -MD -MP -MF .deps/iscprint.Tpo -c -o iscprint.o iscprint.c
+mv -f .deps/iscprint.Tpo .deps/iscprint.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT isclib.o -MD -MP -MF .deps/isclib.Tpo -c -o isclib.o isclib.c
+mv -f .deps/isclib.Tpo .deps/isclib.Po
+rm -f libomapi.a
+ar cru libomapi.a protocol.o buffer.o alloc.o result.o connection.o errwarn.o listener.o dispatch.o generic.o support.o handle.o message.o convert.o hash.o auth.o inet_addr.o array.o trace.o toisc.o iscprint.o isclib.o 
+ranlib libomapi.a
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT test.o -MD -MP -MF .deps/test.Tpo -c -o test.o test.c
+mv -f .deps/test.Tpo .deps/test.Po
+gcc  -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include   -o svtest test.o libomapi.a ../bind/lib/libdns.a ../bind/lib/libisc.a 
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/omapip'
+Making all in client
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/client'
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT clparse.o -MD -MP -MF .deps/clparse.Tpo -c -o clparse.o clparse.c
+mv -f .deps/clparse.Tpo .deps/clparse.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -DCLIENT_PATH='"PATH=/usr/sbin:/sbin:/bin:/usr/sbin:/usr/bin"' \
+	   -DLOCALSTATEDIR='"/var"' -c dhclient.c
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -DCLIENT_PATH='"PATH=/usr/sbin:/sbin:/bin:/usr/sbin:/usr/bin"' \
+	   -DLOCALSTATEDIR='"/var"' -c dhc6.c
+gcc  -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include   -o dhclient clparse.o dhclient.o dhc6.o ../common/libdhcp.a ../omapip/libomapi.a ../bind/lib/libdns.a ../bind/lib/libisc.a 
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/client'
+Making all in dhcpctl
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dhcpctl'
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpctl.o -MD -MP -MF .deps/dhcpctl.Tpo -c -o dhcpctl.o dhcpctl.c
+mv -f .deps/dhcpctl.Tpo .deps/dhcpctl.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT callback.o -MD -MP -MF .deps/callback.Tpo -c -o callback.o callback.c
+mv -f .deps/callback.Tpo .deps/callback.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT remote.o -MD -MP -MF .deps/remote.Tpo -c -o remote.o remote.c
+mv -f .deps/remote.Tpo .deps/remote.Po
+rm -f libdhcpctl.a
+ar cru libdhcpctl.a dhcpctl.o callback.o remote.o 
+ranlib libdhcpctl.a
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT omshell.o -MD -MP -MF .deps/omshell.Tpo -c -o omshell.o omshell.c
+mv -f .deps/omshell.Tpo .deps/omshell.Po
+gcc  -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include   -o omshell omshell.o libdhcpctl.a ../common/libdhcp.a ../omapip/libomapi.a ../bind/lib/libdns.a ../bind/lib/libisc.a 
+gcc -DHAVE_CONFIG_H -I. -I../includes     -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT cltest.o -MD -MP -MF .deps/cltest.Tpo -c -o cltest.o cltest.c
+mv -f .deps/cltest.Tpo .deps/cltest.Po
+gcc  -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include   -o cltest cltest.o libdhcpctl.a ../common/libdhcp.a ../omapip/libomapi.a ../bind/lib/libdns.a ../bind/lib/libisc.a 
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dhcpctl'
+Making all in relay
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/relay'
+gcc -DHAVE_CONFIG_H -I. -I../includes  -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcrelay.o -MD -MP -MF .deps/dhcrelay.Tpo -c -o dhcrelay.o dhcrelay.c
+mv -f .deps/dhcrelay.Tpo .deps/dhcrelay.Po
+gcc  -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include   -o dhcrelay dhcrelay.o ../common/libdhcp.a ../omapip/libomapi.a ../bind/lib/libdns.a ../bind/lib/libisc.a 
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/relay'
+Making all in server
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/server'
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-dhcpd.o -MD -MP -MF .deps/dhcpd-dhcpd.Tpo -c -o dhcpd-dhcpd.o `test -f 'dhcpd.c' || echo './'`dhcpd.c
+mv -f .deps/dhcpd-dhcpd.Tpo .deps/dhcpd-dhcpd.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-dhcp.o -MD -MP -MF .deps/dhcpd-dhcp.Tpo -c -o dhcpd-dhcp.o `test -f 'dhcp.c' || echo './'`dhcp.c
+mv -f .deps/dhcpd-dhcp.Tpo .deps/dhcpd-dhcp.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-bootp.o -MD -MP -MF .deps/dhcpd-bootp.Tpo -c -o dhcpd-bootp.o `test -f 'bootp.c' || echo './'`bootp.c
+mv -f .deps/dhcpd-bootp.Tpo .deps/dhcpd-bootp.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-confpars.o -MD -MP -MF .deps/dhcpd-confpars.Tpo -c -o dhcpd-confpars.o `test -f 'confpars.c' || echo './'`confpars.c
+mv -f .deps/dhcpd-confpars.Tpo .deps/dhcpd-confpars.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-db.o -MD -MP -MF .deps/dhcpd-db.Tpo -c -o dhcpd-db.o `test -f 'db.c' || echo './'`db.c
+mv -f .deps/dhcpd-db.Tpo .deps/dhcpd-db.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-class.o -MD -MP -MF .deps/dhcpd-class.Tpo -c -o dhcpd-class.o `test -f 'class.c' || echo './'`class.c
+mv -f .deps/dhcpd-class.Tpo .deps/dhcpd-class.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-failover.o -MD -MP -MF .deps/dhcpd-failover.Tpo -c -o dhcpd-failover.o `test -f 'failover.c' || echo './'`failover.c
+mv -f .deps/dhcpd-failover.Tpo .deps/dhcpd-failover.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-omapi.o -MD -MP -MF .deps/dhcpd-omapi.Tpo -c -o dhcpd-omapi.o `test -f 'omapi.c' || echo './'`omapi.c
+mv -f .deps/dhcpd-omapi.Tpo .deps/dhcpd-omapi.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-mdb.o -MD -MP -MF .deps/dhcpd-mdb.Tpo -c -o dhcpd-mdb.o `test -f 'mdb.c' || echo './'`mdb.c
+mv -f .deps/dhcpd-mdb.Tpo .deps/dhcpd-mdb.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-stables.o -MD -MP -MF .deps/dhcpd-stables.Tpo -c -o dhcpd-stables.o `test -f 'stables.c' || echo './'`stables.c
+mv -f .deps/dhcpd-stables.Tpo .deps/dhcpd-stables.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-salloc.o -MD -MP -MF .deps/dhcpd-salloc.Tpo -c -o dhcpd-salloc.o `test -f 'salloc.c' || echo './'`salloc.c
+mv -f .deps/dhcpd-salloc.Tpo .deps/dhcpd-salloc.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-ddns.o -MD -MP -MF .deps/dhcpd-ddns.Tpo -c -o dhcpd-ddns.o `test -f 'ddns.c' || echo './'`ddns.c
+mv -f .deps/dhcpd-ddns.Tpo .deps/dhcpd-ddns.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-dhcpleasequery.o -MD -MP -MF .deps/dhcpd-dhcpleasequery.Tpo -c -o dhcpd-dhcpleasequery.o `test -f 'dhcpleasequery.c' || echo './'`dhcpleasequery.c
+mv -f .deps/dhcpd-dhcpleasequery.Tpo .deps/dhcpd-dhcpleasequery.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-dhcpv6.o -MD -MP -MF .deps/dhcpd-dhcpv6.Tpo -c -o dhcpd-dhcpv6.o `test -f 'dhcpv6.c' || echo './'`dhcpv6.c
+mv -f .deps/dhcpd-dhcpv6.Tpo .deps/dhcpd-dhcpv6.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-mdb6.o -MD -MP -MF .deps/dhcpd-mdb6.Tpo -c -o dhcpd-mdb6.o `test -f 'mdb6.c' || echo './'`mdb6.c
+mv -f .deps/dhcpd-mdb6.Tpo .deps/dhcpd-mdb6.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-ldap.o -MD -MP -MF .deps/dhcpd-ldap.Tpo -c -o dhcpd-ldap.o `test -f 'ldap.c' || echo './'`ldap.c
+mv -f .deps/dhcpd-ldap.Tpo .deps/dhcpd-ldap.Po
+gcc -DHAVE_CONFIG_H -I. -I../includes  -I.. -DLOCALSTATEDIR='"/var"'   -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include -MT dhcpd-ldap_casa.o -MD -MP -MF .deps/dhcpd-ldap_casa.Tpo -c -o dhcpd-ldap_casa.o `test -f 'ldap_casa.c' || echo './'`ldap_casa.c
+mv -f .deps/dhcpd-ldap_casa.Tpo .deps/dhcpd-ldap_casa.Po
+gcc  -g -Os -pipe  -Wall -pipe -fno-strict-aliasing  -I../bind/include   -o dhcpd dhcpd-dhcpd.o dhcpd-dhcp.o dhcpd-bootp.o dhcpd-confpars.o dhcpd-db.o dhcpd-class.o dhcpd-failover.o dhcpd-omapi.o dhcpd-mdb.o dhcpd-stables.o dhcpd-salloc.o dhcpd-ddns.o dhcpd-dhcpleasequery.o dhcpd-dhcpv6.o dhcpd-mdb6.o dhcpd-ldap.o dhcpd-ldap_casa.o ../common/libdhcp.a ../omapip/libomapi.a ../dhcpctl/libdhcpctl.a ../bind/lib/libdns.a ../bind/lib/libisc.a 
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/server'
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3'
+make[1]: Nothing to be done for `all-am'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.66475
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/dhcp-root
++ /bin/mkdir -p /var/tmp/dhcp-root
++ cd dhcp-4.2.3
++ make DESTDIR=/var/tmp/dhcp-root install
+Making install in bind
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/bind'
+make[1]: Nothing to be done for `install'.
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/bind'
+Making install in includes
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/includes'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/includes'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/include" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/include"
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/alloc.h' '/var/tmp/dhcp-root/usr/include/omapip/alloc.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/buffer.h' '/var/tmp/dhcp-root/usr/include/omapip/buffer.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/convert.h' '/var/tmp/dhcp-root/usr/include/omapip/convert.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/hash.h' '/var/tmp/dhcp-root/usr/include/omapip/hash.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/isclib.h' '/var/tmp/dhcp-root/usr/include/omapip/isclib.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/omapip.h' '/var/tmp/dhcp-root/usr/include/omapip/omapip.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/omapip_p.h' '/var/tmp/dhcp-root/usr/include/omapip/omapip_p.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/result.h' '/var/tmp/dhcp-root/usr/include/omapip/result.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'omapip/trace.h' '/var/tmp/dhcp-root/usr/include/omapip/trace.h'
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'isc-dhcp/dst.h' '/var/tmp/dhcp-root/usr/include/isc-dhcp/dst.h'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/includes'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/includes'
+Making install in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/tests'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/tests'
+Making install in common
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+Making install in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common/tests'
+make[3]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common/tests'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common/tests'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+make[3]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man5" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man5"
+ /usr/bin/install -c -m 644 './dhcp-eval.5' '/var/tmp/dhcp-root/usr/share/man/man5/dhcp-eval.5'
+ /usr/bin/install -c -m 644 './dhcp-options.5' '/var/tmp/dhcp-root/usr/share/man/man5/dhcp-options.5'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/common'
+Making install in dst
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dst'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dst'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/lib64"
+ /usr/bin/install -c -m 644 'libdst.a' '/var/tmp/dhcp-root/usr/lib64/libdst.a'
+ ranlib '/var/tmp/dhcp-root/usr/lib64/libdst.a'
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dst'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dst'
+Making install in omapip
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/omapip'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/omapip'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/lib64"
+ /usr/bin/install -c -m 644 'libomapi.a' '/var/tmp/dhcp-root/usr/lib64/libomapi.a'
+ ranlib '/var/tmp/dhcp-root/usr/lib64/libomapi.a'
+test -z "/usr/share/man/man3" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man3"
+ /usr/bin/install -c -m 644 './omapi.3' '/var/tmp/dhcp-root/usr/share/man/man3/omapi.3'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/omapip'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/omapip'
+Making install in client
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/client'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/client'
+test -z "/etc" || /bin/mkdir -p "/var/tmp/dhcp-root/etc"
+ /usr/bin/install -c -m 644 'dhclient.conf' '/var/tmp/dhcp-root/etc/dhclient.conf'
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/sbin"
+  /usr/bin/install -c 'dhclient' '/var/tmp/dhcp-root/usr/sbin/dhclient'
+test -z "/usr/share/man/man5" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man5"
+ /usr/bin/install -c -m 644 './dhclient.conf.5' '/var/tmp/dhcp-root/usr/share/man/man5/dhclient.conf.5'
+ /usr/bin/install -c -m 644 './dhclient.leases.5' '/var/tmp/dhcp-root/usr/share/man/man5/dhclient.leases.5'
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 './dhclient.8' '/var/tmp/dhcp-root/usr/share/man/man8/dhclient.8'
+ /usr/bin/install -c -m 644 './dhclient-script.8' '/var/tmp/dhcp-root/usr/share/man/man8/dhclient-script.8'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/client'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/client'
+Making install in dhcpctl
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dhcpctl'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dhcpctl'
+test -z "/usr/bin" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/bin"
+  /usr/bin/install -c 'omshell' '/var/tmp/dhcp-root/usr/bin/omshell'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/lib64"
+ /usr/bin/install -c -m 644 'libdhcpctl.a' '/var/tmp/dhcp-root/usr/lib64/libdhcpctl.a'
+ ranlib '/var/tmp/dhcp-root/usr/lib64/libdhcpctl.a'
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 './omshell.1' '/var/tmp/dhcp-root/usr/share/man/man1/omshell.1'
+test -z "/usr/share/man/man3" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man3"
+ /usr/bin/install -c -m 644 './dhcpctl.3' '/var/tmp/dhcp-root/usr/share/man/man3/dhcpctl.3'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dhcpctl'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/dhcpctl'
+Making install in relay
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/relay'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/relay'
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/sbin"
+  /usr/bin/install -c 'dhcrelay' '/var/tmp/dhcp-root/usr/sbin/dhcrelay'
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 './dhcrelay.8' '/var/tmp/dhcp-root/usr/share/man/man8/dhcrelay.8'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/relay'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/relay'
+Making install in server
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/server'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3/server'
+test -z "/etc" || /bin/mkdir -p "/var/tmp/dhcp-root/etc"
+ /usr/bin/install -c -m 644 'dhcpd.conf' '/var/tmp/dhcp-root/etc/dhcpd.conf'
+test -z "/usr/sbin" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/sbin"
+  /usr/bin/install -c 'dhcpd' '/var/tmp/dhcp-root/usr/sbin/dhcpd'
+test -z "/usr/share/man/man5" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man5"
+ /usr/bin/install -c -m 644 './dhcpd.conf.5' '/var/tmp/dhcp-root/usr/share/man/man5/dhcpd.conf.5'
+ /usr/bin/install -c -m 644 './dhcpd.leases.5' '/var/tmp/dhcp-root/usr/share/man/man5/dhcpd.leases.5'
+test -z "/usr/share/man/man8" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/share/man/man8"
+ /usr/bin/install -c -m 644 './dhcpd.8' '/var/tmp/dhcp-root/usr/share/man/man8/dhcpd.8'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/server'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3/server'
+make[1]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3'
+make[2]: Entering directory `/usr/src/rpm/BUILD/dhcp-4.2.3'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/include" || /bin/mkdir -p "/var/tmp/dhcp-root/usr/include"
+ /bin/sh /usr/src/rpm/BUILD/dhcp-4.2.3/install-sh -c -m 644 'dhcpctl/dhcpctl.h' '/var/tmp/dhcp-root/usr/include/dhcpctl/dhcpctl.h'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/dhcp-4.2.3'
++ install -dv /var/tmp/dhcp-root/sbin /var/tmp/dhcp-root/etc/init.d
+install: creating directory `/var/tmp/dhcp-root/sbin'
+install: creating directory `/var/tmp/dhcp-root/etc/init.d'
++ install -dv /var/tmp/dhcp-root/var/lib/dhcp
+install: creating directory `/var/tmp/dhcp-root/var'
+install: creating directory `/var/tmp/dhcp-root/var/lib'
+install: creating directory `/var/tmp/dhcp-root/var/lib/dhcp'
++ mv -v /var/tmp/dhcp-root/usr/sbin/dhclient /var/tmp/dhcp-root/sbin
+`/var/tmp/dhcp-root/usr/sbin/dhclient' -> `/var/tmp/dhcp-root/sbin/dhclient'
++ cat
++ sed -e '/^[ \t]*route/s@route@\$\{ip\} &@' -e 's@ gw @ via @g' -e 's@ifconfig@/sbin/&@g' client/scripts/linux
++ install /usr/src/rpm/SOURCES/dhcpd.init /var/tmp/dhcp-root/etc/init.d/dhcpd
++ /usr/lib/rpm/compress_man.sh /var/tmp/dhcp-root
++ /usr/lib/rpm/strip.sh /var/tmp/dhcp-root
+copy from `/var/tmp/dhcp-root/sbin/dhclient' [elf64-x86-64] to `/var/tmp/dhcp-root/sbin/sto3O2Au' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/bin/omshell' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/bin/stgbH4Us' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/sbin/dhcpd' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/sbin/stNfzfft' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/sbin/dhcrelay' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/sbin/st8TBgrt' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdhcpctl.a(dhcpctl.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnINdZE/dhcpctl.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdhcpctl.a(callback.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnINdZE/callback.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdhcpctl.a(remote.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnINdZE/remote.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(protocol.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/protocol.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(buffer.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/buffer.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(alloc.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/alloc.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(result.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/result.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(connection.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/connection.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(errwarn.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/errwarn.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(listener.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/listener.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(dispatch.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/dispatch.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(generic.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/generic.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(support.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/support.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(handle.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/handle.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(message.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/message.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(convert.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/convert.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(hash.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/hash.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(auth.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/auth.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(inet_addr.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/inet_addr.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(array.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/array.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(trace.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/trace.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(toisc.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/toisc.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(iscprint.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/iscprint.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libomapi.a(isclib.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stzz7qtF/isclib.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdst.a(dst_support.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnIN5JF/dst_support.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdst.a(dst_api.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnIN5JF/dst_api.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdst.a(hmac_link.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnIN5JF/hmac_link.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdst.a(md5_dgst.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnIN5JF/md5_dgst.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdst.a(base64.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnIN5JF/base64.o' [elf64-x86-64]
+copy from `/var/tmp/dhcp-root/usr/lib64/libdst.a(prandom.o)' [elf64-x86-64] to `/var/tmp/dhcp-root/usr/lib64/stnIN5JF/prandom.o' [elf64-x86-64]
++ exit 0
+Processing files: dhcp-4.2.3-1.x86_64
+Provides: config(dhcp) = 0:4.2.3-1
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit)
+Processing files: dhcp-server-4.2.3-1.x86_64
+Provides: config(dhcp-server) = 0:4.2.3-1
+Requires(interp): /bin/sh
+Requires(preun): /bin/sh /bin/true /usr/sbin/remove_initd
+Requires: /bin/sh /bin/true /usr/sbin/remove_initd libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit)
+Processing files: dhcp-devel-4.2.3-1.x86_64
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/dhcp-root
+Wrote: /usr/src/rpm/SRPMS/dhcp-4.2.3-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/dhcp-4.2.3-1.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/dhcp-server-4.2.3-1.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/dhcp-devel-4.2.3-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.38431
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd dhcp-4.2.3
++ /bin/rm -rf /var/tmp/dhcp-root

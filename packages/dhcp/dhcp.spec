@@ -1,16 +1,16 @@
 Summary: DHCP
 Name: dhcp
-Version: 4.1.1
-Release: 2
+Version: 4.2.3
+Release: 1
 Group: System Environment/Base
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.isc.org/software/dhcp
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-P1.tar.gz
-Source1: http://dev.lightcube.us/sources/%{name}/dhcpd.init
+Source0: ftp://ftp.isc.org/isc/dhcp/dhcp-4.2.3/dhcp-4.2.3.tar.gz
+Source1: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/dhcp/dhcpd.init
 
-BuildRequires: digest(sha1:%{SOURCE0}) = e9e756df09502f6666cd79bdf0ab3af0f92b41b0
+BuildRequires: digest(sha1:%{SOURCE0}) = d50767156a000e4158c16ede7a102cac992cc98d
 BuildRequires: digest(sha1:%{SOURCE1}) = e7dd5ed50ae49f3e9d9e86e705d660804d615383
 
 %description
@@ -20,7 +20,7 @@ It provides both a DHCP server and client tool.
 %package server
 Summary: The DHCP server
 Group: Services
-Requires: %{name} = %{version}
+Requires: %{name} >= %{version}
 
 %description server
 The DHCP server
@@ -28,17 +28,16 @@ The DHCP server
 %package devel
 Summary: Headers and Libraries for developing with DHCP
 Group: Development/Libraries
-Requires: %{name} = %{version}
+Requires: %{name} >= %{version}
 
 %description devel
 Headers and Libraries for developing with DHCP
 
 %prep
-%setup -q -n %{name}-%{version}-P1
+%setup -q
 
 %build
-export CFLAGS="-g -O2  -Wall -pipe -fno-strict-aliasing"
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS="-g -Os -pipe  -Wall -pipe -fno-strict-aliasing"
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
@@ -47,7 +46,8 @@ export LDFLAGS="%{LDFLAGS}"
   --with-srv6-lease-file=/var/lib/dhcp/dhcpd6.leases \
   --with-cli-lease-file=/var/lib/dhcp/dhclient.leases \
   --with-cli6-lease-file=/var/lib/dhcp/dhclient6.leases
-make %{PMFLAGS}
+# Doesn't support PMFLAGS
+make
 
 %install
 make DESTDIR=%{buildroot} install
@@ -66,6 +66,7 @@ sed -e '/^[ \t]*route/s@route@\$\{ip\} &@' \
     client/scripts/linux > %{buildroot}/sbin/dhclient-script
 install %{SOURCE1} %{buildroot}/etc/init.d/dhcpd
 %{compress_man}
+%{strip}
 
 %preun server
 /usr/sbin/remove_initd dhcpd 2>/dev/null || /bin/true
@@ -111,6 +112,10 @@ rm -rf %{buildroot}
 /usr/share/man/man8/dhcrelay.8.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.3-1
+- Upgrade to 4.2.3
+- Optimize for size
+
 * Mon Sep 05 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.1-2
 - Fix call to ifconfig to use full path in /sbin/dhclient-script
 
