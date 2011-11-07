@@ -1,0 +1,666 @@
+Fetching(Source0): http://iweb.dl.sourceforge.net/project/beecrypt/beecrypt/4.2.1/beecrypt-4.2.1.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.42748
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf beecrypt-4.2.1
++ /bin/gzip -dc /usr/src/rpm/SOURCES/beecrypt-4.2.1.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd beecrypt-4.2.1
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.42748
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd beecrypt-4.2.1
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --libdir=/usr/lib64 --disable-openmp
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking target system type... x86_64-unknown-linux-gnu
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for gawk... (cached) gawk
+enabling expert mode
+checking for style of include used by make... GNU
+checking for gcc... gcc
+checking for C compiler default output file name... a.out
+checking whether the C compiler works... yes
+checking whether we are cross compiling... no
+checking for suffix of executables... 
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking dependency style of gcc... gcc3
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking minix/config.h usability... no
+checking minix/config.h presence... no
+checking for minix/config.h... no
+checking whether it is safe to define __EXTENSIONS__... yes
+checking for gcc... (cached) gcc
+checking whether we are using the GNU C compiler... (cached) yes
+checking whether gcc accepts -g... (cached) yes
+checking for gcc option to accept ISO C89... (cached) none needed
+checking dependency style of gcc... (cached) gcc3
+checking how to run the C preprocessor... gcc -E
+checking for g++... g++
+checking whether we are using the GNU C++ compiler... yes
+checking whether g++ accepts -g... yes
+checking dependency style of g++... gcc3
+checking how to run the C++ preprocessor... g++ -E
+checking dependency style of gcc... gcc3
+checking for a sed that does not truncate output... /bin/sed
+checking for fgrep... /bin/grep -F
+checking for ld used by gcc... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking whether ln -s works... yes
+checking for egrep... (cached) /bin/grep -E
+checking for a BSD-compatible install... /usr/bin/install -c
+checking for BSD- or MS-compatible name lister (nm)... /usr/bin/nm -B
+checking the name lister (/usr/bin/nm -B) interface... BSD nm
+checking the maximum length of command line arguments... 1572864
+checking whether the shell understands some XSI constructs... yes
+checking whether the shell understands "+="... yes
+checking for /usr/bin/ld option to reload object files... -r
+checking for objdump... objdump
+checking how to recognize dependent libraries... pass_all
+checking for ar... ar
+checking for strip... strip
+checking for ranlib... ranlib
+checking command to parse /usr/bin/nm -B output from gcc object... ok
+checking for dlfcn.h... yes
+checking whether we are using the GNU C++ compiler... (cached) yes
+checking whether g++ accepts -g... (cached) yes
+checking dependency style of g++... (cached) gcc3
+checking how to run the C++ preprocessor... g++ -E
+checking for objdir... .libs
+checking if gcc supports -fno-rtti -fno-exceptions... no
+checking for gcc option to produce PIC... -fPIC -DPIC
+checking if gcc PIC flag -fPIC -DPIC works... yes
+checking if gcc static flag -static works... yes
+checking if gcc supports -c -o file.o... yes
+checking if gcc supports -c -o file.o... (cached) yes
+checking whether the gcc linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking whether -lc should be explicitly linked in... no
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether stripping libraries is possible... yes
+checking if libtool supports shared libraries... yes
+checking whether to build shared libraries... yes
+checking whether to build static libraries... yes
+checking for ld used by g++... /usr/bin/ld -m elf_x86_64
+checking if the linker (/usr/bin/ld -m elf_x86_64) is GNU ld... yes
+checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking for g++ option to produce PIC... -fPIC -DPIC
+checking if g++ PIC flag -fPIC -DPIC works... yes
+checking if g++ static flag -static works... yes
+checking if g++ supports -c -o file.o... yes
+checking if g++ supports -c -o file.o... (cached) yes
+checking whether the g++ linker (/usr/bin/ld -m elf_x86_64) supports shared libraries... yes
+checking dynamic linker characteristics... GNU/Linux ld.so
+checking how to hardcode library paths into programs... immediate
+checking whether we can use noexecstack flag in C... yes
+checking whether we can use noexecstack flag in C++... yes
+checking for ANSI C header files... (cached) yes
+checking time.h usability... yes
+checking time.h presence... yes
+checking for time.h... yes
+checking sys/time.h usability... yes
+checking sys/time.h presence... yes
+checking for sys/time.h... yes
+checking whether time.h and sys/time.h may both be included... yes
+checking assert.h usability... yes
+checking assert.h presence... yes
+checking for assert.h... yes
+checking ctype.h usability... yes
+checking ctype.h presence... yes
+checking for ctype.h... yes
+checking errno.h usability... yes
+checking errno.h presence... yes
+checking for errno.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking malloc.h usability... yes
+checking malloc.h presence... yes
+checking for malloc.h... yes
+checking stdio.h usability... yes
+checking stdio.h presence... yes
+checking for stdio.h... yes
+checking termio.h usability... yes
+checking termio.h presence... yes
+checking for termio.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/mman.h usability... yes
+checking sys/mman.h presence... yes
+checking for sys/mman.h... yes
+checking sys/audioio.h usability... no
+checking sys/audioio.h presence... no
+checking for sys/audioio.h... no
+checking sys/soundcard.h usability... yes
+checking sys/soundcard.h presence... yes
+checking for sys/soundcard.h... yes
+checking endian.h usability... yes
+checking endian.h presence... yes
+checking for endian.h... yes
+checking sys/endian.h usability... no
+checking sys/endian.h presence... no
+checking for sys/endian.h... no
+checking asm/byteorder.h usability... yes
+checking asm/byteorder.h presence... yes
+checking for asm/byteorder.h... yes
+checking for dlfcn.h... (cached) yes
+checking for library containing dlopen... -ldl
+checking synch.h usability... no
+checking synch.h presence... no
+checking for synch.h... no
+checking thread.h usability... no
+checking thread.h presence... no
+checking for thread.h... no
+checking pthread.h usability... yes
+checking pthread.h presence... yes
+checking for pthread.h... yes
+checking semaphore.h usability... yes
+checking semaphore.h presence... yes
+checking for semaphore.h... yes
+checking sched.h usability... yes
+checking sched.h presence... yes
+checking for sched.h... yes
+checking if your compiler supports thread-local-storage... yes
+checking aio.h usability... yes
+checking aio.h presence... yes
+checking for aio.h... yes
+checking for library containing aio_read... -lrt
+checking whether aio works... yes
+checking whether byte ordering is bigendian... no
+checking for an ANSI C-conforming const... yes
+checking for inline... inline
+checking whether gcc needs -traditional... no
+checking for working memcmp... yes
+checking whether lstat dereferences a symlink specified with a trailing slash... yes
+checking whether stat accepts an empty string... no
+checking for memset... yes
+checking for memcmp... yes
+checking for memmove... yes
+checking for strcspn... yes
+checking for strerror... yes
+checking for strspn... yes
+checking for nanosleep... yes
+checking for gethrtime... no
+checking for gettimeofday... yes
+checking for IBM's ICU library version >= 2.8... no
+configure: WARNING: disabling cplusplus
+checking for gcj... no
+checking for gcjh... no
+checking for java... no
+configure: WARNING: java not found, disabling java
+checking for python... /usr/bin/python
+checking for python headers... -I/usr/include/python2.7
+checking where to install python libraries... /usr/lib/python2.7/site-packages
+checking for platform-specific entropy devices... 
+checking for /dev/dsp... no
+checking for generic entropy devices... 
+checking for /dev/random... yes
+checking for /dev/urandom... yes
+checking for /dev/tty... yes
+checking how to switch to text segment... .text
+checking how to declare a global symbol... .globl
+checking if global symbols need leading underscore... 
+checking how to declare a local symbol... .L
+checking how to align symbols... .align 16
+checking for size_t... yes
+checking size of size_t... 8
+checking for int8_t... yes
+checking for int16_t... yes
+checking for int32_t... yes
+checking for int64_t... yes
+checking for uint8_t... yes
+checking for uint16_t... yes
+checking for uint32_t... yes
+checking for uint64_t... yes
+checking for long long... yes
+checking for unsigned long long... yes
+checking size of unsigned long... 8
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating config.m4
+config.status: creating include/Makefile
+config.status: creating include/beecrypt/Doxyfile
+config.status: creating include/beecrypt/c++/Doxyfile
+config.status: creating c++/Makefile
+config.status: creating c++/beeyond/Makefile
+config.status: creating c++/crypto/Makefile
+config.status: creating c++/crypto/spec/Makefile
+config.status: creating c++/io/Makefile
+config.status: creating c++/lang/Makefile
+config.status: creating c++/math/Makefile
+config.status: creating c++/nio/Makefile
+config.status: creating c++/provider/Makefile
+config.status: creating c++/security/Makefile
+config.status: creating c++/security/auth/Makefile
+config.status: creating c++/security/cert/Makefile
+config.status: creating c++/security/spec/Makefile
+config.status: creating c++/util/Makefile
+config.status: creating c++/util/concurrent/Makefile
+config.status: creating c++/util/concurrent/locks/Makefile
+config.status: creating docs/Makefile
+config.status: creating gas/Makefile
+config.status: creating java/Makefile
+config.status: creating java/build.xml
+config.status: creating masm/Makefile
+config.status: creating python/Makefile
+config.status: creating python/test/Makefile
+config.status: creating tests/Makefile
+config.status: creating gnu.h
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing libtool commands
++ make -j24
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1'
+Making all in .
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1'
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o aes.lo aes.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o base64.lo base64.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o beecrypt.lo beecrypt.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o blockmode.lo blockmode.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o blockpad.lo blockpad.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o blowfish.lo blowfish.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o dhies.lo dhies.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o dldp.lo dldp.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o dlkp.lo dlkp.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o dlpk.lo dlpk.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o dlsvdp-dh.lo dlsvdp-dh.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o dsa.lo dsa.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o elgamal.lo elgamal.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o endianness.lo endianness.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o entropy.lo entropy.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o fips186.lo fips186.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o hmac.lo hmac.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o hmacmd5.lo hmacmd5.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o hmacsha1.lo hmacsha1.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o hmacsha224.lo hmacsha224.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o hmacsha256.lo hmacsha256.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o md4.lo md4.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o md5.lo md5.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o hmacsha384.lo hmacsha384.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c blockmode.c  -fPIC -DPIC -o .libs/blockmode.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c aes.c  -fPIC -DPIC -o .libs/aes.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c beecrypt.c  -fPIC -DPIC -o .libs/beecrypt.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c blowfish.c  -fPIC -DPIC -o .libs/blowfish.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dlkp.c  -fPIC -DPIC -o .libs/dlkp.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dldp.c  -fPIC -DPIC -o .libs/dldp.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c base64.c  -fPIC -DPIC -o .libs/base64.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c blockpad.c  -fPIC -DPIC -o .libs/blockpad.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dsa.c  -fPIC -DPIC -o .libs/dsa.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dlsvdp-dh.c  -fPIC -DPIC -o .libs/dlsvdp-dh.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dhies.c  -fPIC -DPIC -o .libs/dhies.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c entropy.c  -fPIC -DPIC -o .libs/entropy.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmac.c  -fPIC -DPIC -o .libs/hmac.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dlpk.c  -fPIC -DPIC -o .libs/dlpk.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c elgamal.c  -fPIC -DPIC -o .libs/elgamal.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha1.c  -fPIC -DPIC -o .libs/hmacsha1.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha224.c  -fPIC -DPIC -o .libs/hmacsha224.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha256.c  -fPIC -DPIC -o .libs/hmacsha256.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c endianness.c  -fPIC -DPIC -o .libs/endianness.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c md4.c  -fPIC -DPIC -o .libs/md4.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacmd5.c  -fPIC -DPIC -o .libs/hmacmd5.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha384.c  -fPIC -DPIC -o .libs/hmacsha384.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c md5.c  -fPIC -DPIC -o .libs/md5.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c fips186.c  -fPIC -DPIC -o .libs/fips186.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dlsvdp-dh.c -o dlsvdp-dh.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha256.c -o hmacsha256.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dlkp.c -o dlkp.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c endianness.c -o endianness.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacmd5.c -o hmacmd5.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha1.c -o hmacsha1.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha224.c -o hmacsha224.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha384.c -o hmacsha384.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c blockpad.c -o blockpad.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmac.c -o hmac.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dlpk.c -o dlpk.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dsa.c -o dsa.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c blockmode.c -o blockmode.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c fips186.c -o fips186.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c elgamal.c -o elgamal.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c entropy.c -o entropy.o >/dev/null 2>&1
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o hmacsha512.lo hmacsha512.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o memchunk.lo memchunk.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dhies.c -o dhies.o >/dev/null 2>&1
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o mp.lo mp.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o mpbarrett.lo mpbarrett.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o mpnumber.lo mpnumber.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o mpprime.lo mpprime.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o mtprng.lo mtprng.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c memchunk.c  -fPIC -DPIC -o .libs/memchunk.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c md4.c -o md4.o >/dev/null 2>&1
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o pkcs1.lo pkcs1.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha512.c  -fPIC -DPIC -o .libs/hmacsha512.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o pkcs12.lo pkcs12.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o ripemd128.lo ripemd128.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mp.c  -fPIC -DPIC -o .libs/mp.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mpnumber.c  -fPIC -DPIC -o .libs/mpnumber.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o ripemd160.lo ripemd160.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c dldp.c -o dldp.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mpprime.c  -fPIC -DPIC -o .libs/mpprime.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mtprng.c  -fPIC -DPIC -o .libs/mtprng.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mpbarrett.c  -fPIC -DPIC -o .libs/mpbarrett.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c pkcs12.c  -fPIC -DPIC -o .libs/pkcs12.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c pkcs1.c  -fPIC -DPIC -o .libs/pkcs1.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c ripemd128.c  -fPIC -DPIC -o .libs/ripemd128.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o ripemd256.lo ripemd256.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c ripemd160.c  -fPIC -DPIC -o .libs/ripemd160.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o ripemd320.lo ripemd320.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c md5.c -o md5.o >/dev/null 2>&1
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o rsa.lo rsa.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c hmacsha512.c -o hmacsha512.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c base64.c -o base64.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c ripemd256.c  -fPIC -DPIC -o .libs/ripemd256.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c memchunk.c -o memchunk.o >/dev/null 2>&1
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o rsakp.lo rsakp.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c ripemd320.c  -fPIC -DPIC -o .libs/ripemd320.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o rsapk.lo rsapk.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c pkcs1.c -o pkcs1.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c rsa.c  -fPIC -DPIC -o .libs/rsa.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c pkcs12.c -o pkcs12.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c blowfish.c -o blowfish.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c rsakp.c  -fPIC -DPIC -o .libs/rsakp.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o sha1.lo sha1.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mtprng.c -o mtprng.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c rsapk.c  -fPIC -DPIC -o .libs/rsapk.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mpnumber.c -o mpnumber.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha1.c  -fPIC -DPIC -o .libs/sha1.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o sha224.lo sha224.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o sha256.lo sha256.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c beecrypt.c -o beecrypt.o >/dev/null 2>&1
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o sha384.lo sha384.c
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o sha512.lo sha512.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha256.c  -fPIC -DPIC -o .libs/sha256.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o sha2k32.lo sha2k32.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha384.c  -fPIC -DPIC -o .libs/sha384.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha512.c  -fPIC -DPIC -o .libs/sha512.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha224.c  -fPIC -DPIC -o .libs/sha224.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c rsapk.c -o rsapk.o >/dev/null 2>&1
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o sha2k64.lo sha2k64.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c rsa.c -o rsa.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c rsakp.c -o rsakp.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mpprime.c -o mpprime.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha2k32.c  -fPIC -DPIC -o .libs/sha2k32.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o timestamp.lo timestamp.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha2k64.c  -fPIC -DPIC -o .libs/sha2k64.o
+/bin/sh ./libtool --tag=CXX   --mode=compile g++ -DHAVE_CONFIG_H -I. -I./include    -g -O2 -Wa,--noexecstack -c -o cppglue.lo cppglue.cxx
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o blowfishopt.lo `test -f blowfishopt.s || echo './'`blowfishopt.s
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c timestamp.c  -fPIC -DPIC -o .libs/timestamp.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o mpopt.lo `test -f mpopt.s || echo './'`mpopt.s
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha2k32.c -o sha2k32.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c blowfishopt.s  -fPIC -DPIC -o .libs/blowfishopt.o
+/bin/sh ./libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I./include    -Os -pipe -Wa,--noexecstack -c -o sha1opt.lo `test -f sha1opt.s || echo './'`sha1opt.s
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I./include -g -O2 -Wa,--noexecstack -c cppglue.cxx  -fPIC -DPIC -o .libs/cppglue.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c blowfishopt.s -o blowfishopt.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha2k64.c -o sha2k64.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mpopt.s  -fPIC -DPIC -o .libs/mpopt.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mpopt.s -o mpopt.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha1opt.s  -fPIC -DPIC -o .libs/sha1opt.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c ripemd128.c -o ripemd128.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c timestamp.c -o timestamp.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha1opt.s -o sha1opt.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mpbarrett.c -o mpbarrett.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c ripemd256.c -o ripemd256.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha1.c -o sha1.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c ripemd160.c -o ripemd160.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c ripemd320.c -o ripemd320.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c mp.c -o mp.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c aes.c -o aes.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha224.c -o sha224.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha384.c -o sha384.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha256.c -o sha256.o >/dev/null 2>&1
+libtool: compile:  g++ -DHAVE_CONFIG_H -I. -I./include -g -O2 -Wa,--noexecstack -c cppglue.cxx -o cppglue.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I./include -Os -pipe -Wa,--noexecstack -c sha512.c -o sha512.o >/dev/null 2>&1
+/bin/sh ./libtool --tag=CXX   --mode=link g++  -g -O2 -Wa,--noexecstack -no-undefined -version-info 7:0:0  -o libbeecrypt.la -rpath /usr/lib64 aes.lo base64.lo beecrypt.lo blockmode.lo blockpad.lo blowfish.lo dhies.lo dldp.lo dlkp.lo dlpk.lo dlsvdp-dh.lo dsa.lo elgamal.lo endianness.lo entropy.lo fips186.lo hmac.lo hmacmd5.lo hmacsha1.lo hmacsha224.lo hmacsha256.lo md4.lo md5.lo hmacsha384.lo hmacsha512.lo memchunk.lo mp.lo mpbarrett.lo mpnumber.lo mpprime.lo mtprng.lo pkcs1.lo pkcs12.lo ripemd128.lo ripemd160.lo ripemd256.lo ripemd320.lo rsa.lo rsakp.lo rsapk.lo sha1.lo sha224.lo sha256.lo sha384.lo sha512.lo sha2k32.lo sha2k64.lo timestamp.lo cppglue.lo blowfishopt.lo mpopt.lo sha1opt.lo  -lrt -lpthread -ldl 
+libtool: link: g++ -shared -nostdlib /usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/../../../../lib64/crti.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/crtbeginS.o  .libs/aes.o .libs/base64.o .libs/beecrypt.o .libs/blockmode.o .libs/blockpad.o .libs/blowfish.o .libs/dhies.o .libs/dldp.o .libs/dlkp.o .libs/dlpk.o .libs/dlsvdp-dh.o .libs/dsa.o .libs/elgamal.o .libs/endianness.o .libs/entropy.o .libs/fips186.o .libs/hmac.o .libs/hmacmd5.o .libs/hmacsha1.o .libs/hmacsha224.o .libs/hmacsha256.o .libs/md4.o .libs/md5.o .libs/hmacsha384.o .libs/hmacsha512.o .libs/memchunk.o .libs/mp.o .libs/mpbarrett.o .libs/mpnumber.o .libs/mpprime.o .libs/mtprng.o .libs/pkcs1.o .libs/pkcs12.o .libs/ripemd128.o .libs/ripemd160.o .libs/ripemd256.o .libs/ripemd320.o .libs/rsa.o .libs/rsakp.o .libs/rsapk.o .libs/sha1.o .libs/sha224.o .libs/sha256.o .libs/sha384.o .libs/sha512.o .libs/sha2k32.o .libs/sha2k64.o .libs/timestamp.o .libs/cppglue.o .libs/blowfishopt.o .libs/mpopt.o .libs/sha1opt.o   -Wl,-rpath -Wl,/usr/lib64/../lib64 -Wl,-rpath -Wl,/usr/lib64/../lib64 -lrt -lpthread -ldl -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/../../../../lib64 -L/lib/../lib64 -L/usr/lib/../lib64 -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/../../.. /usr/lib64/../lib64/libstdc++.so -lm -lc -lgcc_s /usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/crtendS.o /usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/../../../../lib64/crtn.o    -Wl,-soname -Wl,libbeecrypt.so.7 -o .libs/libbeecrypt.so.7.0.0
+libtool: link: (cd ".libs" && rm -f "libbeecrypt.so.7" && ln -s "libbeecrypt.so.7.0.0" "libbeecrypt.so.7")
+libtool: link: (cd ".libs" && rm -f "libbeecrypt.so" && ln -s "libbeecrypt.so.7.0.0" "libbeecrypt.so")
+libtool: link: ar cru .libs/libbeecrypt.a  aes.o base64.o beecrypt.o blockmode.o blockpad.o blowfish.o dhies.o dldp.o dlkp.o dlpk.o dlsvdp-dh.o dsa.o elgamal.o endianness.o entropy.o fips186.o hmac.o hmacmd5.o hmacsha1.o hmacsha224.o hmacsha256.o md4.o md5.o hmacsha384.o hmacsha512.o memchunk.o mp.o mpbarrett.o mpnumber.o mpprime.o mtprng.o pkcs1.o pkcs12.o ripemd128.o ripemd160.o ripemd256.o ripemd320.o rsa.o rsakp.o rsapk.o sha1.o sha224.o sha256.o sha384.o sha512.o sha2k32.o sha2k64.o timestamp.o cppglue.o blowfishopt.o mpopt.o sha1opt.o
+libtool: link: ranlib .libs/libbeecrypt.a
+libtool: link: ( cd ".libs" && rm -f "libbeecrypt.la" && ln -s "../libbeecrypt.la" "libbeecrypt.la" )
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1'
+Making all in include
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/include'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/include'
+Making all in tests
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/tests'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/tests'
+Making all in docs
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/docs'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/docs'
+Making all in gas
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/gas'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/gas'
+Making all in masm
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/masm'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/masm'
+Making all in python
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+Making all in test
+make[3]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python/test'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python/test'
+make[3]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7    -Os -pipe -Wa,--noexecstack -c -o _bc-py.lo _bc-py.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7    -Os -pipe -Wa,--noexecstack -c -o mpw-py.lo mpw-py.c
+/bin/sh ../libtool --tag=CC   --mode=compile gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7    -Os -pipe -Wa,--noexecstack -c -o rng-py.lo rng-py.c
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7 -Os -pipe -Wa,--noexecstack -c _bc-py.c  -fPIC -DPIC -o .libs/_bc-py.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7 -Os -pipe -Wa,--noexecstack -c mpw-py.c  -fPIC -DPIC -o .libs/mpw-py.o
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7 -Os -pipe -Wa,--noexecstack -c rng-py.c  -fPIC -DPIC -o .libs/rng-py.o
+rng-py.c:322:2: warning: initialization from incompatible pointer type
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7 -Os -pipe -Wa,--noexecstack -c _bc-py.c -o _bc-py.o >/dev/null 2>&1
+mpw-py.c:2341:2: warning: initialization from incompatible pointer type
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7 -Os -pipe -Wa,--noexecstack -c rng-py.c -o rng-py.o >/dev/null 2>&1
+libtool: compile:  gcc -DHAVE_CONFIG_H -I. -I.. -I. -I../include -I/usr/include/python2.7 -Os -pipe -Wa,--noexecstack -c mpw-py.c -o mpw-py.o >/dev/null 2>&1
+/bin/sh ../libtool --tag=CC   --mode=link gcc  -Os -pipe -Wa,--noexecstack -avoid-version -module  -o _bc.la -rpath /usr/lib/python2.7/site-packages _bc-py.lo mpw-py.lo rng-py.lo ../libbeecrypt.la -lrt -lpthread -ldl 
+libtool: link: warning: `/usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/../../../../lib64/libstdc++.la' seems to be moved
+libtool: link: gcc -shared  .libs/_bc-py.o .libs/mpw-py.o .libs/rng-py.o   -Wl,-rpath -Wl,/usr/src/rpm/BUILD/beecrypt-4.2.1/.libs -Wl,-rpath -Wl,/usr/lib64/../lib64 -Wl,-rpath -Wl,/usr/lib64 -Wl,-rpath -Wl,/usr/lib64/../lib64 ../.libs/libbeecrypt.so -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/../../../../lib64 /usr/lib64/../lib64/libstdc++.so -lrt -lpthread -ldl    -Wl,-soname -Wl,_bc.so -o .libs/_bc.so
+libtool: link: ar cru .libs/_bc.a  _bc-py.o mpw-py.o rng-py.o
+libtool: link: ranlib .libs/_bc.a
+libtool: link: ( cd ".libs" && rm -f "_bc.la" && ln -s "../_bc.la" "_bc.la" )
+make[3]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.59738
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/beecrypt-root
++ /bin/mkdir -p /var/tmp/beecrypt-root
++ cd beecrypt-4.2.1
++ make DESTDIR=/var/tmp/beecrypt-root install
+Making install in .
+make[1]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1'
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1'
+test -z "/usr/lib64" || /bin/mkdir -p "/var/tmp/beecrypt-root/usr/lib64"
+ /bin/sh ./libtool   --mode=install /usr/bin/install -c   libbeecrypt.la '/var/tmp/beecrypt-root/usr/lib64'
+libtool: install: /usr/bin/install -c .libs/libbeecrypt.so.7.0.0 /var/tmp/beecrypt-root/usr/lib64/libbeecrypt.so.7.0.0
+libtool: install: (cd /var/tmp/beecrypt-root/usr/lib64 && { ln -s -f libbeecrypt.so.7.0.0 libbeecrypt.so.7 || { rm -f libbeecrypt.so.7 && ln -s libbeecrypt.so.7.0.0 libbeecrypt.so.7; }; })
+libtool: install: (cd /var/tmp/beecrypt-root/usr/lib64 && { ln -s -f libbeecrypt.so.7.0.0 libbeecrypt.so || { rm -f libbeecrypt.so && ln -s libbeecrypt.so.7.0.0 libbeecrypt.so; }; })
+libtool: install: /usr/bin/install -c .libs/libbeecrypt.lai /var/tmp/beecrypt-root/usr/lib64/libbeecrypt.la
+libtool: install: /usr/bin/install -c .libs/libbeecrypt.a /var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a
+libtool: install: chmod 644 /var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a
+libtool: install: ranlib /var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib64'
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1'
+Making install in include
+make[1]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/include'
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/include'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/include" || /bin/mkdir -p "/var/tmp/beecrypt-root/usr/include"
+/bin/mkdir -p '/var/tmp/beecrypt-root/usr/include/beecrypt'
+ /usr/bin/install -c -m 644  beecrypt/aes.h beecrypt/aesopt.h beecrypt/api.h beecrypt/base64.h beecrypt/beecrypt.h beecrypt/blockmode.h beecrypt/blockpad.h beecrypt/blowfish.h beecrypt/blowfishopt.h beecrypt/dhies.h beecrypt/dldp.h beecrypt/dlkp.h beecrypt/dlpk.h beecrypt/dlsvdp-dh.h beecrypt/dsa.h beecrypt/elgamal.h beecrypt/endianness.h beecrypt/entropy.h beecrypt/fips186.h beecrypt/gnu.h beecrypt/hmac.h beecrypt/hmacmd5.h beecrypt/hmacsha1.h beecrypt/hmacsha224.h beecrypt/hmacsha256.h beecrypt/hmacsha384.h beecrypt/hmacsha512.h beecrypt/md4.h beecrypt/md5.h beecrypt/memchunk.h beecrypt/mpbarrett.h beecrypt/mp.h beecrypt/mpnumber.h beecrypt/mpopt.h beecrypt/mpprime.h beecrypt/mtprng.h beecrypt/pkcs12.h beecrypt/pkcs1.h beecrypt/ripemd128.h beecrypt/ripemd160.h '/var/tmp/beecrypt-root/usr/include/beecrypt'
+/bin/mkdir -p '/var/tmp/beecrypt-root/usr/include/beecrypt'
+ /usr/bin/install -c -m 644  beecrypt/ripemd256.h beecrypt/ripemd320.h beecrypt/rsa.h beecrypt/rsakp.h beecrypt/rsapk.h beecrypt/sha1.h beecrypt/sha1opt.h beecrypt/sha224.h beecrypt/sha256.h beecrypt/sha384.h beecrypt/sha512.h beecrypt/sha2k32.h beecrypt/sha2k64.h beecrypt/timestamp.h beecrypt/win.h '/var/tmp/beecrypt-root/usr/include/beecrypt'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/include'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/include'
+Making install in tests
+make[1]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/tests'
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/tests'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/tests'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/tests'
+Making install in docs
+make[1]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/docs'
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/docs'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/docs'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/docs'
+Making install in gas
+make[1]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/gas'
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/gas'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/gas'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/gas'
+Making install in masm
+make[1]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/masm'
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/masm'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/masm'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/masm'
+Making install in python
+make[1]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+Making install in test
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python/test'
+make[3]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python/test'
+make[3]: Nothing to be done for `install-exec-am'.
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python/test'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python/test'
+make[2]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+make[3]: Entering directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+make[3]: Nothing to be done for `install-exec-am'.
+test -z "/usr/lib/python2.7/site-packages" || /bin/mkdir -p "/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages"
+ /bin/sh ../libtool   --mode=install /usr/bin/install -c   _bc.la '/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages'
+libtool: install: warning: relinking `_bc.la'
+libtool: install: (cd /usr/src/rpm/BUILD/beecrypt-4.2.1/python; /bin/sh /usr/src/rpm/BUILD/beecrypt-4.2.1/libtool  --tag CC --mode=relink gcc -Os -pipe -Wa,--noexecstack -avoid-version -module -o _bc.la -rpath /usr/lib/python2.7/site-packages _bc-py.lo mpw-py.lo rng-py.lo ../libbeecrypt.la -lrt -lpthread -ldl -inst-prefix-dir /var/tmp/beecrypt-root)
+libtool: relink: warning: `/usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/../../../../lib64/libstdc++.la' seems to be moved
+libtool: relink: gcc -shared  .libs/_bc-py.o .libs/mpw-py.o .libs/rng-py.o   -Wl,-rpath -Wl,/usr/lib64 -Wl,-rpath -Wl,/usr/lib64/../lib64 -L/var/tmp/beecrypt-root/usr/lib64 -L/usr/lib64 -lbeecrypt -L/usr/lib64/gcc/x86_64-unknown-linux-gnu/4.5.3/../../../../lib64 -L/var/tmp/beecrypt-root/usr/lib64/../lib64 -L/usr/lib64/../lib64 -lstdc++ -lrt -lpthread -ldl    -Wl,-soname -Wl,_bc.so -o .libs/_bc.so
+libtool: install: /usr/bin/install -c .libs/_bc.soT /var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.so
+libtool: install: /usr/bin/install -c .libs/_bc.lai /var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.la
+libtool: install: /usr/bin/install -c .libs/_bc.a /var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.a
+libtool: install: chmod 644 /var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.a
+libtool: install: ranlib /var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.a
+libtool: install: warning: remember to run `libtool --finish /usr/lib/python2.7/site-packages'
+make[3]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/beecrypt-4.2.1/python'
++ /usr/lib/rpm/strip.sh /var/tmp/beecrypt-root
+copy from `/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.a(_bc-py.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/stqcAOXr/_bc-py.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.a(mpw-py.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/stqcAOXr/mpw-py.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.a(rng-py.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/stqcAOXr/rng-py.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/_bc.so' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib/python2.7/site-packages/stuko4RO' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(aes.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/aes.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(base64.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/base64.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(beecrypt.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/beecrypt.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(blockmode.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/blockmode.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(blockpad.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/blockpad.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(blowfish.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/blowfish.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(dhies.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/dhies.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(dldp.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/dldp.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(dlkp.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/dlkp.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(dlpk.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/dlpk.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(dlsvdp-dh.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/dlsvdp-dh.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(dsa.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/dsa.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(elgamal.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/elgamal.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(endianness.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/endianness.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(entropy.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/entropy.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(fips186.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/fips186.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(hmac.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/hmac.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(hmacmd5.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/hmacmd5.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(hmacsha1.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/hmacsha1.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(hmacsha224.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/hmacsha224.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(hmacsha256.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/hmacsha256.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(md4.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/md4.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(md5.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/md5.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(hmacsha384.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/hmacsha384.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(hmacsha512.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/hmacsha512.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(memchunk.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/memchunk.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(mp.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/mp.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(mpbarrett.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/mpbarrett.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(mpnumber.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/mpnumber.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(mpprime.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/mpprime.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(mtprng.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/mtprng.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(pkcs1.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/pkcs1.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(pkcs12.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/pkcs12.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(ripemd128.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/ripemd128.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(ripemd160.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/ripemd160.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(ripemd256.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/ripemd256.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(ripemd320.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/ripemd320.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(rsa.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/rsa.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(rsakp.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/rsakp.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(rsapk.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/rsapk.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(sha1.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/sha1.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(sha224.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/sha224.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(sha256.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/sha256.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(sha384.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/sha384.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(sha512.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/sha512.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(sha2k32.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/sha2k32.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(sha2k64.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/sha2k64.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(timestamp.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/timestamp.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(cppglue.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/cppglue.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(blowfishopt.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/blowfishopt.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(mpopt.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/mpopt.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.a(sha1opt.o)' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/stGk4USt/sha1opt.o' [elf64-x86-64]
+copy from `/var/tmp/beecrypt-root/usr/lib64/libbeecrypt.so.7.0.0' [elf64-x86-64] to `/var/tmp/beecrypt-root/usr/lib64/st0F8K4S' [elf64-x86-64]
++ exit 0
+Processing files: beecrypt-4.2.1-2.x86_64
+Provides: libbeecrypt.so.7()(64bit)
+Requires(interp): /sbin/ldconfig /sbin/ldconfig
+Requires(post): /sbin/ldconfig
+Requires(postun): /sbin/ldconfig
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libdl.so.2()(64bit) libgcc_s.so.1()(64bit) libgcc_s.so.1(GCC_3.0)(64bit) libm.so.6()(64bit) libpthread.so.0()(64bit) libpthread.so.0(GLIBC_2.2.5)(64bit) librt.so.1()(64bit) libstdc++.so.6()(64bit) libstdc++.so.6(CXXABI_1.3)(64bit) libstdc++.so.6(GLIBCXX_3.4)(64bit) libstdc++.so.6(GLIBCXX_3.4.11)(64bit) libstdc++.so.6(GLIBCXX_3.4.9)(64bit)
+Processing files: beecrypt-devel-4.2.1-2.x86_64
+Provides: libtool(/usr/lib64/libbeecrypt.la)
+Processing files: beecrypt-python-4.2.1-2.x86_64
+Provides: _bc.so()(64bit)
+Requires: libbeecrypt.so.7()(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libdl.so.2()(64bit) libpthread.so.0()(64bit) librt.so.1()(64bit) libstdc++.so.6()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/beecrypt-root
+Wrote: /usr/src/rpm/SRPMS/beecrypt-4.2.1-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/beecrypt-4.2.1-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/beecrypt-devel-4.2.1-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/beecrypt-python-4.2.1-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.68842
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd beecrypt-4.2.1
++ /bin/rm -rf /var/tmp/beecrypt-root
