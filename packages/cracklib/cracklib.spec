@@ -1,20 +1,20 @@
 Summary: CrackLib
 Name: cracklib
 Version: 2.8.18
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://cracklib.sourceforge.net
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: http://dev.lightcube.us/sources/%{name}/%{name}-words-20080507.gz
+Source0: http://iweb.dl.sourceforge.net/project/cracklib/cracklib/2.8.18/cracklib-2.8.18.tar.gz
+Source1: http://iweb.dl.sourceforge.net/project/cracklib/cracklib-words/2008-05-07/cracklib-words-20080507.gz
 
 Requires(post): grep
 BuildRequires: digest(sha1:%{SOURCE0}) = 3c4df51b13047fd7a85ae470f568abf8a8d6f92b
 BuildRequires: digest(sha1:%{SOURCE1}) = e0cea03e505e709b15b8b950d56cb493166607da
 BuildRequires: zlib-devel
-BuildRequires: Python-devel
+BuildRequires: python-devel
 
 %description
 A Next generation version of the libCrack password checking library.
@@ -23,6 +23,7 @@ A Next generation version of the libCrack password checking library.
 Summary: %{name} modules for Python
 Group: Development/Modules
 Requires: %{name} = %{version}
+Requires: python(abi) = 2.7
 
 %description python
 %{name} modules for python
@@ -39,6 +40,7 @@ Libraries and Header files for developing with %{name}
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
@@ -54,6 +56,7 @@ install -v -m644 -D %{SOURCE1} %{buildroot}/usr/share/dict/cracklib-words.gz
 gunzip -fv %{buildroot}/usr/share/dict/cracklib-words.gz
 ln -svf cracklib-words %{buildroot}/usr/share/dict/words
 %find_lang %{name}
+%{strip}
 
 %post
 /usr/sbin/create-cracklib-dict /usr/share/dict/cracklib-words &>/dev/null
@@ -96,6 +99,9 @@ rm -rf %{buildroot}
 /usr/include/packer.h
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.18-3
+- Optimize for size
+
 * Mon Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.8.18-2
 - Fix post requirements
 
