@@ -1,16 +1,16 @@
 Summary: Network Time Protocol utilities
 Name: ntp
-Version: 4.2.6p3
+Version: 4.2.6p4
 Release: 1
 Group: Services
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.ntp.org
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-Source1: https://dev.lightcube.us/svn/lightcubeos/!svn/bc/419/lightcube_os/trunk/packages/%{name}/ntpd.init
+Source0: http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2/ntp-4.2.6p4.tar.gz
+Source1: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/ntp/ntpd.init
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 1d560cf689054a14e0d7446cb7bab50a92ead647
+BuildRequires: digest(sha1:%{SOURCE0}) = b53c4565c5d1c37494584d4fb826f82ffea285cf
 BuildRequires: digest(sha1:%{SOURCE1}) = fb8868cd559a97a8e7dc1397617935f3b42f4f70
 
 %description
@@ -21,7 +21,7 @@ network.
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --sysconfdir=/etc \
@@ -31,8 +31,9 @@ make %{PMFLAGS}
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
+%{strip}
 install -dv %{buildroot}/etc/init.d
-install -m 754 %{SOURCE1} %{buildroot}/etc/init.d/ntpd
+install -m 0754 %{SOURCE1} %{buildroot}/etc/init.d/ntpd
 cat > %{buildroot}/etc/ntp.conf << "EOF"
 driftfile /var/cache/ntp.drift
 pidfile   /var/run/ntpd.pid
@@ -49,12 +50,12 @@ rm -rf %{buildroot}
 /usr/sbin/install_initd ntpd
 
 %preun
-/usr/sbin/remove_initd ntpd || /bin/true
+/usr/sbin/remove_initd ntpd 2>&1 || /bin/true
 
 %files
 %defattr(-,root,root)
-/etc/ntp.conf
-/etc/init.d/ntpd
+%config /etc/ntp.conf
+%config /etc/init.d/ntpd
 /usr/sbin/ntp-keygen
 /usr/sbin/ntp-wait
 /usr/sbin/ntpd
@@ -65,9 +66,13 @@ rm -rf %{buildroot}
 /usr/sbin/ntptrace
 /usr/sbin/sntp
 /usr/sbin/tickadj
-/usr/share/man/man1/*
+/usr/share/man/man1/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.6p4-1
+- Upgrade to 4.2.6p4
+- Optimize for size
+
 * Mon Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.6p3-1
 - Upgrade to 4.2.6p3
 - Fixes to init script
