@@ -1,14 +1,14 @@
 Summary: NET-3 Network Tools
 Name: net-tools
 Version: 1.60
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/inetutils
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-debian_fixes-1.patch
+Source0: http://iweb.dl.sourceforge.net/project/net-tools/net-tools-1.60.tar.bz2
+Patch0:  https://raw.github.com/jhuntwork/LightCube-OS/master/packages/net-tools/debian-fixes.patch
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 944fb70641505d5d1139dba3aeb81ba124574b83
 BuildRequires: digest(sha1:%{PATCH0})  = 0342a1ff113fac94a222566c0c093830a851caf1
@@ -22,10 +22,11 @@ route and slattach.
 %prep
 %setup -q
 %patch0 -p1
+sed -i 's@-O2@-Os -pipe@' Makefile
 
 %build
 yes "" | make config
-make
+make %{PMFLAGS}
 
 %install
 make BASEDIR=%{buildroot} install
@@ -33,6 +34,7 @@ make BASEDIR=%{buildroot} install
 rm -f %{buildroot}/bin/hostname
 rm -f %{buildroot}/usr/share/man/man1/hostname.1
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -70,5 +72,8 @@ rm -rf %{buildroot}
 /usr/share/man/man8/slattach.8.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.60-2
+- Optimize for size
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.60-1
 - Initial version
