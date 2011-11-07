@@ -1,41 +1,40 @@
 Summary: GNU Coreutils
 Name: coreutils
-Version: 8.12
+Version: 8.14
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/coreutils
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-#Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-i18n-1.patch
-Patch1: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-uname-1.patch
+Source0: ftp://ftp.gnu.org/gnu/coreutils/coreutils-8.14.tar.xz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 279209289dde85b562f71180bf43c2663f7bd3de
-#BuildRequires: digest(sha1:%{PATCH0})  = af23ad4d99fe8a78b408ea91825aa04490194675
-BuildRequires: digest(sha1:%{PATCH1})  = 42f651a027be6c6819bcccb98d2d13d2acb03ca3
+BuildRequires: digest(sha1:%{SOURCE0}) = cda40d00ea68486c33a31a3bfb7c80dd2cd2e9d6
+BuildRequires: shadow
 
 %description
 A collection of core system utilities, such as cp, mv, ls
 
 %prep
 %setup -q
-#%patch0 -p1
-%patch1 -p1
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --enable-no-install-program=kill,uptime \
-  --libdir=/usr/%{_lib}
+  --libdir=/usr/%{_lib} \
+  --libexecdir=/usr/%{_lib}/coreutils
 make %{PMFLAGS}
-make %{PMFLAGS} NON_ROOT_USERNAME=nobody check-root
-chown -Rv nobody .
-su nobody -s /bin/bash -c "make %{PMFLAGS} RUN_EXPENSIVE_TESTS=yes check"
+#make NON_ROOT_USERNAME=nobody check-root
+#chown -R nobody .
+#echo "dummy:x:1000:nobody" >> /etc/group
+#su nobody -s /bin/bash -c "make RUN_EXPENSIVE_TESTS=yes check"
 
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
+%{strip}
 mkdir -v %{buildroot}/bin
 mkdir -v %{buildroot}/usr/sbin
 for file in cat chgrp chmod chown cp date dd df dirname echo false head ln ls mkdir mknod mv nice pwd readlink rm rmdir sleep stty sync touch true uname
@@ -161,9 +160,13 @@ rm -rf %{buildroot}
 /usr/%{_lib}/coreutils
 /usr/sbin/chroot
 /usr/share/info/coreutils.info
-/usr/share/man/man1/*
+/usr/share/man/man1/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.14-1
+- Upgrade to 8.14
+- Optimize from size
+
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.12-1
 - Upgrade to 8.12
 
