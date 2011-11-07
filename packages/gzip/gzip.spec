@@ -1,13 +1,13 @@
 Summary: Gzip compression utility
 Name: gzip
 Version: 1.4
-Release: 2
+Release: 3
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/gzip
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/gzip/gzip-1.4.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 1d398dac6a7920a7de6e2685fe472a840eb2ce6e
 
@@ -18,8 +18,11 @@ The GNU zip compression utility.
 %setup -q
 
 %build
-./configure --prefix=/usr --bindir=/bin
-make
+export CFLAGS='-Os -pipe'
+./configure \
+  --prefix=/usr \
+  --bindir=/bin
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
@@ -30,6 +33,7 @@ mv -v %{buildroot}/bin/{zfgrep,zforce,zgrep,zless,zmore,znew} %{buildroot}/usr/b
 rm -f %{buildroot}/usr/share/info/dir
 ln -sv /bin/gunzip %{buildroot}/usr/bin/uncompress
 %{compress_man}
+%{strip}
 
 %post
 /usr/bin/install-info /usr/share/info/gzip.info /usr/share/info/dir
@@ -60,6 +64,9 @@ rm -rf %{buildroot}
 /usr/share/man/man1/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4-3
+- Optimize for size
+
 * Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4-2
 - Change a hard-linked binary to a symbolic link
 - Compress man pages
