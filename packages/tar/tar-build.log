@@ -1,5 +1,5 @@
-Fetching(Source0): http://dev.lightcube.us/sources/tar/tar-1.26.tar.bz2
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.7639
+Fetching(Source0): ftp://ftp.gnu.org/gnu/tar/tar-1.26.tar.bz2
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.46702
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -10,10 +10,12 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.7639
 + '[' 0 -ne 0 ']'
 + cd tar-1.26
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.15462
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.26076
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd tar-1.26
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
 + FORCE_UNSAFE_CONFIGURE=1
 + ./configure --prefix=/usr --bindir=/bin --libexecdir=/usr/sbin
 checking for a BSD-compatible install... /usr/bin/install -c
@@ -703,7 +705,8 @@ checking whether getgrgid is declared... yes
 checking whether getpwuid is declared... yes
 checking whether time is declared... yes
 checking for waitpid... yes
-checking for remote shell... /usr/bin/rsh
+checking for remote shell... no
+checking for netdb.h... (cached) yes
 checking for default archive format... GNU
 checking for default archive... -
 checking for default blocking... 20
@@ -769,14 +772,14 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/tar-1.26/gnu'
   GEN    langinfo.h
   GEN    stdio.h
   GEN    stdlib.h
-  GEN    strings.h
   GEN    string.h
+  GEN    strings.h
   GEN    time.h
   GEN    sys/time.h
   GEN    sys/stat.h
   GEN    unistd.h
-  GEN    wctype.h
   GEN    wchar.h
+  GEN    wctype.h
 make  all-recursive
 make[3]: Entering directory `/usr/src/rpm/BUILD/tar-1.26/gnu'
 make[4]: Entering directory `/usr/src/rpm/BUILD/tar-1.26/gnu'
@@ -793,37 +796,37 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/tar-1.26/gnu'
   CC     argp-pvh.o
   CC     argp-xinl.o
   CC     argp-version-etc.o
-  CC     close-hook.o
   CC     c-ctype.o
+  CC     close-hook.o
   CC     exitfail.o
   CC     fdutimensat.o
   CC     full-write.o
   CC     imaxtostr.o
   CC     inttostr.o
   CC     offtostr.o
+  CC     uinttostr.o
   CC     umaxtostr.o
   CC     localcharset.o
-  CC     uinttostr.o
   CC     malloca.o
-  CC     mbscasecmp.o
   CC     mbchar.o
+  CC     mbscasecmp.o
   CC     openat-die.o
   CC     parse-datetime.o
   CC     priv-set.o
   CC     progname.o
   CC     strnlen1.o
   CC     version-etc.o
-  CC     xalloc-die.o
   CC     version-etc-fsf.o
-  CC     xstrtoumax.o
+  CC     xalloc-die.o
   CC     xstrndup.o
   CC     xvasprintf.o
   CC     xasprintf.o
+  CC     xstrtoumax.o
   CC     argmatch.o
   CC     asnprintf.o
   CC     backupfile.o
-  CC     basename-lgpl.o
   CC     basename.o
+  CC     basename-lgpl.o
   CC     chdir-long.o
   CC     cloexec.o
   CC     close-stream.o
@@ -912,8 +915,8 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/tar-1.26/src'
   CC     suffix.o
   CC     system.o
   CC     tar.o
-  CC     transform.o
   CC     unlink.o
+  CC     transform.o
   CC     update.o
   CC     utf8.o
   CC     warning.o
@@ -1099,7 +1102,7 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/tar-1.26/tests'
 112: remove-files with compression                   skipped (remfiles01.at:32)
 113: remove-files with compression: grand-child      ok
 114: remove-files with symbolic links                ok
-115: sigpipe handling                                skipped (sigpipe.at:28)
+115: sigpipe handling                                ok
 116: gtarfail                                        skipped (gtarfail.at:26)
 117: gtarfail2                                       skipped (gtarfail2.at:26)
 118: multi-fail                                      skipped (multi-fail.at:26)
@@ -1111,14 +1114,14 @@ make[2]: Entering directory `/usr/src/rpm/BUILD/tar-1.26/tests'
 ## Test results. ##
 ## ------------- ##
 
-106 tests were successful.
-15 tests were skipped.
+107 tests were successful.
+14 tests were skipped.
 make[2]: Leaving directory `/usr/src/rpm/BUILD/tar-1.26/tests'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/tar-1.26/tests'
 make[1]: Entering directory `/usr/src/rpm/BUILD/tar-1.26'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/tar-1.26'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.47778
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.36218
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/tar-root
@@ -1271,17 +1274,20 @@ make[2]: Nothing to be done for `install-data-am'.
 make[2]: Leaving directory `/usr/src/rpm/BUILD/tar-1.26'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/tar-1.26'
 + rm -f /var/tmp/tar-root/usr/share/info/dir
++ /usr/lib/rpm/strip.sh /var/tmp/tar-root
+copy from `/var/tmp/tar-root/bin/tar' [elf64-x86-64] to `/var/tmp/tar-root/bin/stLg4dIg' [elf64-x86-64]
+copy from `/var/tmp/tar-root/usr/sbin/rmt' [elf64-x86-64] to `/var/tmp/tar-root/usr/sbin/stGnBrzg' [elf64-x86-64]
 + /usr/lib/rpm/find-lang.sh /var/tmp/tar-root tar
 + exit 0
-Processing files: tar-1.26-1.x86_64
+Processing files: tar-1.26-2.x86_64
 Requires(interp): /bin/sh /bin/sh
 Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
-Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.4)(64bit) libc.so.6(GLIBC_2.6)(64bit) librt.so.1()(64bit) librt.so.1(GLIBC_2.2.5)(64bit)
+Requires: /usr/bin/install-info /usr/bin/install-info libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.4)(64bit) libc.so.6(GLIBC_2.6)(64bit) librt.so.1()(64bit) librt.so.1(GLIBC_2.2.5)(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/tar-root
-Wrote: /usr/src/rpm/SRPMS/tar-1.26-1.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/tar-1.26-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.96234
+Wrote: /usr/src/rpm/SRPMS/tar-1.26-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/tar-1.26-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.80085
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd tar-1.26

@@ -1,13 +1,13 @@
 Summary: GNU Tape Archiver
 Name: tar
 Version: 1.26
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/tar
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: ftp://ftp.gnu.org/gnu/tar/tar-1.26.tar.bz2
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 70f298c3cd997b694864c55e6d8655324c87a0cc
 
@@ -19,6 +19,7 @@ as well as various other kinds of manipulation.
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 FORCE_UNSAFE_CONFIGURE=1 \
 ./configure \
   --prefix=/usr \
@@ -30,6 +31,7 @@ make check
 %install
 make DESTDIR=%{buildroot} install
 rm -f %{buildroot}/usr/share/info/dir
+%{strip}
 %find_lang %{name}
 
 %post
@@ -50,6 +52,9 @@ rm -rf %{buildroot}
 /usr/share/info/tar.info-2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.26-2
+- Optimize for size
+
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.26-1
 - Upgrade to 1.26
 
