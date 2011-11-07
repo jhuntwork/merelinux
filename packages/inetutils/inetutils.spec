@@ -33,7 +33,7 @@ export CFLAGS='-Os -pipe'
   --disable-ping \
   --disable-ping6 \
   --disable-servers
-make %{PMFLAGS}
+make %{PMFLAGS} V=1
 
 %install
 make DESTDIR=%{buildroot} install
