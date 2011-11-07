@@ -1,13 +1,13 @@
 Summary: System V style init programs
 Name: sysvinit
 Version: 2.88dsf
-Release: 3
+Release: 4
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://savannah.nongnu.org/projects/sysvinit
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://savannah.spinellicreations.com/sysvinit/sysvinit-2.88dsf.tar.bz2
 
 BuildRequires: digest(sha1:%{SOURCE0}) = f2ca149df1314a91f3007cccd7a0aa47d990de26
 
@@ -16,8 +16,7 @@ System V style init programs that control system booting and shutdown.
 
 %prep
 %setup -q
-
-%build
+sed -i 's@-O2@-Os -pipe@' src/Makefile
 sed -i 's@Sending processes@& configured via /etc/inittab@g' \
     src/init.c
 sed -i -e 's/utmpdump wall/utmpdump/' \
@@ -25,7 +24,9 @@ sed -i -e 's/utmpdump wall/utmpdump/' \
 %if "%{_lib}" != "lib"
 sed -i 's@/lib/@/%{_lib}/@' src/Makefile
 %endif
-make -C src
+
+%build
+make -C src %{PMFLAGS}
 
 %install
 install -dv %{buildroot}/{bin,sbin,usr/bin,usr/include,usr/share/man/man{1,5,8}}
@@ -33,6 +34,8 @@ make ROOT=%{buildroot} -C src install
 # Remove mountpoint, since util-linux provides a newer one
 rm -f %{buildroot}/bin/mountpoint
 rm -rfv %{buildroot}/usr/include
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -55,11 +58,14 @@ rm -rf %{buildroot}
 /usr/bin/lastb
 /usr/bin/mesg
 /usr/bin/utmpdump
-/usr/share/man/man1/*
-/usr/share/man/man5/*
-/usr/share/man/man8/*
+/usr/share/man/man1/*.bz2
+/usr/share/man/man5/*.bz2
+/usr/share/man/man8/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.88dsf-4
+- Optimize for size
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.88dsf-3
 - util-linux now provides /bin/mountpoint
 
