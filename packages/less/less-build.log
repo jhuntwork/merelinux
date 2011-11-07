@@ -1,4 +1,5 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.85749
+Fetching(Source0): ftp://ftp.gnu.org/gnu/less/less-443.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.48951
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -9,12 +10,12 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.85749
 + '[' 0 -ne 0 ']'
 + cd less-443
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.85749
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.48951
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd less-443
-+ export LDFLAGS=-s
-+ LDFLAGS=-s
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
 + ./configure --prefix=/usr --sysconfdir=/etc
 checking for gcc... gcc
 checking whether the C compiler works... yes
@@ -138,46 +139,46 @@ config.status: creating defines.h
 + make -j24
 test ! -f stamp-h || CONFIG_FILES= CONFIG_HEADERS=defines.h ./config.status
 touch stamp-h
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 lesskey.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 lessecho.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 main.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 screen.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 brac.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 ch.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 charset.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 cmdbuf.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 command.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 cvt.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 decode.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 edit.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 filename.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 forwback.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 help.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 ifile.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 input.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 jump.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 line.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 linenum.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 lsystem.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 mark.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 optfunc.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 option.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 opttbl.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 os.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 output.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 pattern.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 position.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 prompt.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 search.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 signal.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 tags.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 ttyin.c
-gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -g -O2 version.c
-gcc -s -o lessecho lessecho.o version.o
-gcc -s -o lesskey lesskey.o version.o
-gcc -s -o less main.o screen.o brac.o ch.o charset.o cmdbuf.o command.o cvt.o decode.o edit.o filename.o forwback.o help.o ifile.o input.o jump.o line.o linenum.o lsystem.o mark.o optfunc.o option.o opttbl.o os.o output.o pattern.o position.o prompt.o search.o signal.o tags.o ttyin.o version.o   -lncursesw
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe lesskey.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe lessecho.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe main.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe screen.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe brac.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe ch.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe charset.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe cmdbuf.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe command.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe cvt.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe decode.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe edit.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe filename.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe forwback.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe help.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe ifile.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe input.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe jump.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe line.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe linenum.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe lsystem.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe mark.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe optfunc.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe option.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe opttbl.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe os.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe output.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe pattern.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe position.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe prompt.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe search.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe signal.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe tags.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe ttyin.c
+gcc -I. -c -DBINDIR=\"/usr/bin\" -DSYSDIR=\"/etc\"  -Os -pipe version.c
+gcc  -o lessecho lessecho.o version.o
+gcc  -o lesskey lesskey.o version.o
+gcc  -o less main.o screen.o brac.o ch.o charset.o cmdbuf.o command.o cvt.o decode.o edit.o filename.o forwback.o help.o ifile.o input.o jump.o line.o linenum.o lsystem.o mark.o optfunc.o option.o opttbl.o os.o output.o pattern.o position.o prompt.o search.o signal.o tags.o ttyin.o version.o   -lncursesw
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.81377
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.47559
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/less-root
@@ -197,13 +198,17 @@ mkdir /var/tmp/less-root/usr/share/man/man1
 /usr/bin/install -c -m 644 ./lesskey.nro /var/tmp/less-root/usr/share/man/man1/lesskey.1
 /usr/bin/install -c -m 644 ./lessecho.nro /var/tmp/less-root/usr/share/man/man1/lessecho.1
 + /usr/lib/rpm/compress_man.sh /var/tmp/less-root
++ /usr/lib/rpm/strip.sh /var/tmp/less-root
+copy from `/var/tmp/less-root/usr/bin/lessecho' [elf64-x86-64] to `/var/tmp/less-root/usr/bin/stkH4QdF' [elf64-x86-64]
+copy from `/var/tmp/less-root/usr/bin/lesskey' [elf64-x86-64] to `/var/tmp/less-root/usr/bin/stVdbTKF' [elf64-x86-64]
+copy from `/var/tmp/less-root/usr/bin/less' [elf64-x86-64] to `/var/tmp/less-root/usr/bin/st09T4CF' [elf64-x86-64]
 + exit 0
-Processing files: less-443-1.x86_64
+Processing files: less-443-2.x86_64
 Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libncursesw.so.5()(64bit)
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/less-root
-Wrote: /usr/src/rpm/SRPMS/less-443-1.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/less-443-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.84321
+Wrote: /usr/src/rpm/SRPMS/less-443-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/less-443-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.47559
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd less-443

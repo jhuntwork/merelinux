@@ -1,13 +1,13 @@
 Summary: less
 Name: less
 Version: 443
-Release: 1
+Release: 2
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/less
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: ftp://ftp.gnu.org/gnu/less/less-443.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 72cf3d3c77990e04ad04ea63b377b893c8a7a2cd
 BuildRequires: ncurses-devel
@@ -19,7 +19,7 @@ Less allows forward and backwards page viewing through the contents of a file
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --sysconfdir=/etc
@@ -28,6 +28,7 @@ make %{PMFLAGS}
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -37,9 +38,12 @@ rm -rf %{buildroot}
 /usr/bin/less
 /usr/bin/lessecho
 /usr/bin/lesskey
-/usr/share/man/man1/*
+/usr/share/man/man1/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 443-2
+- Optimize for size
+
 * Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 443-1
 - Upgrade to 443
 
