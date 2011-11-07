@@ -1,0 +1,165 @@
+diff -Naur iputils-s20101006.orig/arping.c iputils-s20101006/arping.c
+--- iputils-s20101006.orig/arping.c	2010-10-06 11:59:20.000000000 +0000
++++ iputils-s20101006/arping.c	2011-08-30 10:32:58.335669951 +0000
+@@ -182,12 +182,17 @@
+ 	if (start.tv_sec==0)
+ 		start = tv;
+ 
+-	if (count-- == 0 || (timeout && MS_TDIFF(tv,start) > timeout*1000 + 500))
++	if (timeout && MS_TDIFF(tv,start) > timeout*1000 + 500)
+ 		finish();
+ 
+-	if (last.tv_sec==0 || MS_TDIFF(tv,last) > 500) {
++	if ((!timeout) && (count == 0))
++		finish();
++
++	if ( count!=0  && (last.tv_sec==0 || MS_TDIFF(tv,last) > 500 ) ) {
+ 		send_pack(s, src, dst,
+ 			  (struct sockaddr_ll *)&me, (struct sockaddr_ll *)&he);
++		if (count >= 0)
++		    count--;
+ 		if (count == 0 && unsolicited)
+ 			finish();
+ 	}
+diff -Naur iputils-s20101006.orig/doc/docbook2man-spec.pl iputils-s20101006/doc/docbook2man-spec.pl
+--- iputils-s20101006.orig/doc/docbook2man-spec.pl	2010-10-06 11:59:20.000000000 +0000
++++ iputils-s20101006/doc/docbook2man-spec.pl	2011-08-30 10:32:58.331669603 +0000
+@@ -428,7 +428,7 @@
+ 	output ' ';
+ 
+ 	if($_[0]->attribute('CHOICE')->value =~ /opt/i) {
+-		output '[ ';
++		output '[';
+ 	}
+ 	bold_on();
+ }
+@@ -441,7 +441,7 @@
+ 		font_off();
+ 	}
+ 	if($_[0]->attribute('CHOICE')->value =~ /opt/i) {
+-		output '] ';
++		output ']';
+ 	}
+ }
+ 
+diff -Naur iputils-s20101006.orig/doc/Makefile iputils-s20101006/doc/Makefile
+--- iputils-s20101006.orig/doc/Makefile	2010-10-06 11:59:20.000000000 +0000
++++ iputils-s20101006/doc/Makefile	2011-08-30 10:32:58.334669870 +0000
+@@ -6,7 +6,7 @@
+ 
+ html: $(HTMLFILES) iputils.html
+ 
+-man: $(MANFILES)
++man: $(MANFILES) fix_sgml2man
+ 
+ # docbook scripts are incredibly dirty in the sense that they leak
+ # lots of some strange temporary junk directories and files.
+@@ -33,6 +33,9 @@
+ 	@set -e; cd tmp.db2man; nsgmls ../$< | sgmlspl ../docbook2man-spec.pl ;	mv $@ ..
+ 	@-rm -rf tmp.db2man
+ 
++fix_sgml2man:
++	@sed -i -e 's!\\fB\\fIdestination\\fB\\fR \[\\fB/\\fIport\\fB\\fR\]!\\fB\\fIdestination\\fB\\fR[\\fB/\\fIport\\fB\\fR]!g' tracepath.8
++
+ clean:
+ 	@rm -rf $(MANFILES) $(HTMLFILES) iputils.html tmp.db2html tmp.db2man
+ 
+diff -Naur iputils-s20101006.orig/Makefile iputils-s20101006/Makefile
+--- iputils-s20101006.orig/Makefile	2010-10-06 11:59:20.000000000 +0000
++++ iputils-s20101006/Makefile	2011-08-30 10:38:30.650036707 +0000
+@@ -16,7 +16,7 @@
+ CCOPT=-D_GNU_SOURCE -O2 -Wstrict-prototypes -Wall -g
+ CFLAGS=$(CCOPT) $(GLIBCFIX) $(DEFINES) 
+ 
+-IPV4_TARGETS=tracepath ping clockdiff rdisc arping tftpd rarpd
++IPV4_TARGETS=tracepath ping clockdiff rdisc tftpd rarpd
+ IPV6_TARGETS=tracepath6 traceroute6 ping6
+ TARGETS=$(IPV4_TARGETS) $(IPV6_TARGETS)
+ 
+@@ -29,7 +29,8 @@
+ tftpd: tftpd.o tftpsubs.o
+ arping: arping.o -lsysfs
+ ping: ping.o ping_common.o
+-ping6: ping6.o ping_common.o -lresolv -lcrypto
++ping6: ping6.o ping_common.o
++	$(CC) $(CFLAGS) -o $@ ping6.o ping_common.o -lresolv -lcrypto
+ ping.o ping6.o ping_common.o: ping_common.h
+ tftpd.o tftpsubs.o: tftp.h
+ 
+diff -Naur iputils-s20101006.orig/ping.c iputils-s20101006/ping.c
+--- iputils-s20101006.orig/ping.c	2010-10-06 11:59:20.000000000 +0000
++++ iputils-s20101006/ping.c	2011-08-30 10:32:58.330669505 +0000
+@@ -250,7 +250,7 @@
+ 			if (argc == 1)
+ 				options |= F_NUMERIC;
+ 		} else {
+-			hp = gethostbyname(target);
++			hp = gethostbyname2(target, AF_INET);
+ 			if (!hp) {
+ 				fprintf(stderr, "ping: unknown host %s\n", target);
+ 				exit(2);
+@@ -883,9 +883,36 @@
+ 		case ICMP_SR_FAILED:
+ 			printf("Source Route Failed\n");
+ 			break;
++		case ICMP_NET_UNKNOWN:
++			printf("Destination Net Unknown\n");
++			break;
++		case ICMP_HOST_UNKNOWN:
++			printf("Destination Host Unknown\n");
++			break;
++		case ICMP_HOST_ISOLATED:
++			printf("Source Host Isolated\n");
++			break;
++		case ICMP_NET_ANO:
++			printf("Destination Net Prohibited\n");
++			break;
++		case ICMP_HOST_ANO:
++			printf("Destination Host Prohibited\n");
++			break;
++		case ICMP_NET_UNR_TOS:
++			printf("Destination Net Unreachable for Type of Service\n");
++			break;
++		case ICMP_HOST_UNR_TOS:
++			printf("Destination Host Unreachable for Type of Service\n");
++			break;
+ 		case ICMP_PKT_FILTERED:
+ 			printf("Packet filtered\n");
+ 			break;
++		case ICMP_PREC_VIOLATION:
++			printf("Precedence Violation\n");
++			break;
++		case ICMP_PREC_CUTOFF:
++			printf("Precedence Cutoff\n");
++			break;
+ 		default:
+ 			printf("Dest Unreachable, Bad Code: %d\n", code);
+ 			break;
+diff -Naur iputils-s20101006.orig/ping_common.c iputils-s20101006/ping_common.c
+--- iputils-s20101006.orig/ping_common.c	2010-10-06 11:59:20.000000000 +0000
++++ iputils-s20101006/ping_common.c	2011-08-30 10:32:58.326669085 +0000
+@@ -872,7 +872,8 @@
+ 		printf("%spipe %d", comma, pipesize);
+ 		comma = ", ";
+ 	}
+-	if (ntransmitted > 1 && (!interval || (options&(F_FLOOD|F_ADAPTIVE)))) {
++	if (ntransmitted > 1 && nreceived &&
++		(!interval || (options&(F_FLOOD|F_ADAPTIVE)))) {
+ 		int ipg = (1000000*(long long)tv.tv_sec+tv.tv_usec)/(ntransmitted-1);
+ 		printf("%sipg/ewma %d.%03d/%d.%03d ms",
+ 		       comma, ipg/1000, ipg%1000, rtt/8000, (rtt/8)%1000);
+diff -Naur iputils-s20101006.orig/tracepath.c iputils-s20101006/tracepath.c
+--- iputils-s20101006.orig/tracepath.c	2010-10-06 11:59:20.000000000 +0000
++++ iputils-s20101006/tracepath.c	2011-08-30 10:32:58.329669406 +0000
+@@ -338,9 +338,9 @@
+ 		base_port = atoi(p+1);
+ 	} else
+ 		base_port = 44444;
+-	he = gethostbyname(argv[0]);
++	he = gethostbyname2(argv[0], AF_INET);
+ 	if (he == NULL) {
+-		herror("gethostbyname");
++		herror("gethostbyname2");
+ 		exit(1);
+ 	}
+ 	memcpy(&target.sin_addr, he->h_addr, 4);
