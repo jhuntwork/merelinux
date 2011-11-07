@@ -1,0 +1,328 @@
+Fetching(Source0): http://iweb.dl.sourceforge.net/project/psmisc/psmisc/psmisc-22.14.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.67974
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd /usr/src/rpm/BUILD
++ rm -rf psmisc-22.14
++ /bin/gzip -dc /usr/src/rpm/SOURCES/psmisc-22.14.tar.gz
++ /bin/tar -xf -
++ STATUS=0
++ '[' 0 -ne 0 ']'
++ cd psmisc-22.14
++ exit 0
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.67974
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd psmisc-22.14
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --exec-prefix=
+checking for a BSD-compatible install... /usr/bin/install -c
+checking whether build environment is sane... yes
+checking for a thread-safe mkdir -p... /bin/mkdir -p
+checking for gawk... gawk
+checking whether make sets $(MAKE)... yes
+checking for gcc... gcc
+checking whether the C compiler works... yes
+checking for C compiler default output file name... a.out
+checking for suffix of executables... 
+checking whether we are cross compiling... no
+checking for suffix of object files... o
+checking whether we are using the GNU C compiler... yes
+checking whether gcc accepts -g... yes
+checking for gcc option to accept ISO C89... none needed
+checking for style of include used by make... GNU
+checking dependency style of gcc... gcc3
+checking whether make sets $(MAKE)... (cached) yes
+checking whether ln -s works... yes
+checking for tgetent in -ltinfo... no
+checking for tgetent in -lncurses... yes
+checking for dirent.h that defines DIR... yes
+checking for library containing opendir... none required
+checking how to run the C preprocessor... gcc -E
+checking for grep that handles long lines and -e... /bin/grep
+checking for egrep... /bin/grep -E
+checking for ANSI C header files... yes
+checking for sys/wait.h that is POSIX.1 compatible... yes
+checking for sys/types.h... yes
+checking for sys/stat.h... yes
+checking for stdlib.h... yes
+checking for string.h... yes
+checking for memory.h... yes
+checking for strings.h... yes
+checking for inttypes.h... yes
+checking for stdint.h... yes
+checking for unistd.h... yes
+checking arpa/inet.h usability... yes
+checking arpa/inet.h presence... yes
+checking for arpa/inet.h... yes
+checking fcntl.h usability... yes
+checking fcntl.h presence... yes
+checking for fcntl.h... yes
+checking langinfo.h usability... yes
+checking langinfo.h presence... yes
+checking for langinfo.h... yes
+checking libintl.h usability... yes
+checking libintl.h presence... yes
+checking for libintl.h... yes
+checking limits.h usability... yes
+checking limits.h presence... yes
+checking for limits.h... yes
+checking locale.h usability... yes
+checking locale.h presence... yes
+checking for locale.h... yes
+checking mntent.h usability... yes
+checking mntent.h presence... yes
+checking for mntent.h... yes
+checking netdb.h usability... yes
+checking netdb.h presence... yes
+checking for netdb.h... yes
+checking netinet/in.h usability... yes
+checking netinet/in.h presence... yes
+checking for netinet/in.h... yes
+checking for stdlib.h... (cached) yes
+checking for string.h... (cached) yes
+checking sys/ioctl.h usability... yes
+checking sys/ioctl.h presence... yes
+checking for sys/ioctl.h... yes
+checking sys/socket.h usability... yes
+checking sys/socket.h presence... yes
+checking for sys/socket.h... yes
+checking termios.h usability... yes
+checking termios.h presence... yes
+checking for termios.h... yes
+checking for unistd.h... (cached) yes
+checking for an ANSI C-conforming const... yes
+checking for pid_t... yes
+checking for size_t... yes
+checking for struct stat.st_rdev... yes
+checking for uid_t in sys/types.h... yes
+checking whether NLS is requested... yes
+checking for msgfmt... /usr/bin/msgfmt
+checking for gmsgfmt... /usr/bin/msgfmt
+checking for xgettext... /usr/bin/xgettext
+checking for msgmerge... /usr/bin/msgmerge
+checking build system type... x86_64-unknown-linux-gnu
+checking host system type... x86_64-unknown-linux-gnu
+checking for ld used by GCC... /usr/bin/ld
+checking if the linker (/usr/bin/ld) is GNU ld... yes
+checking for shared library run path origin... done
+checking for CFPreferencesCopyAppValue... no
+checking for CFLocaleCopyCurrent... no
+checking for GNU gettext in libc... yes
+checking whether to use NLS... yes
+checking where the gettext function comes from... libc
+checking for struct user_regs_struct.orig_eax... no
+checking for struct user_regs_struct.eax... no
+checking for struct user_regs_struct.ebx... no
+checking for struct user_regs_struct.ecx... no
+checking for struct user_regs_struct.edx... no
+checking for struct user_regs_struct.orig_rax... yes
+checking for struct user_regs_struct.rax... yes
+checking for struct user_regs_struct.rdi... yes
+checking for struct user_regs_struct.rsi... yes
+checking for struct user_regs_struct.rdx... yes
+checking for struct pt_regs.orig_gpr3... no
+checking for struct pt_regs.gpr... no
+checking for struct pt_regs.uregs... no
+checking for struct pt_regs.regs... no
+checking for struct pt_regs.cp0_status... no
+checking whether closedir returns void... no
+checking for library containing getmntent... none required
+checking whether gcc needs -traditional... no
+checking whether lstat correctly handles trailing slash... yes
+checking whether lstat accepts an empty string... no
+checking whether lstat correctly handles trailing slash... (cached) yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible malloc... yes
+checking for working memcmp... yes
+checking for stdlib.h... (cached) yes
+checking for GNU libc compatible realloc... yes
+checking whether stat accepts an empty string... no
+checking for atexit... yes
+checking for getmntent... (cached) yes
+checking for memset... yes
+checking for nl_langinfo... yes
+checking for regcomp... yes
+checking for rpmatch... yes
+checking for setlocale... yes
+checking for socket... yes
+checking for strcasecmp... yes
+checking for strchr... yes
+checking for strdup... yes
+checking for strerror... yes
+checking for strpbrk... yes
+checking for strrchr... yes
+checking for strtoul... yes
+checking for special C compiler options needed for large files... no
+checking for _FILE_OFFSET_BITS value needed for large files... no
+configure: creating ./config.status
+config.status: creating Makefile
+config.status: creating doc/Makefile
+config.status: creating src/Makefile
+config.status: creating icons/Makefile
+config.status: creating po/Makefile.in
+config.status: creating config.h
+config.status: executing depfiles commands
+config.status: executing po-directories commands
+config.status: creating po/POTFILES
+config.status: creating po/Makefile
++ make -j24
+make  all-recursive
+make[1]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14'
+Making all in doc
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/doc'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/doc'
+Making all in src
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+export LC_ALL=C ; \
+	gcc -E -dM signames.c |\
+	tr -s '\t ' ' ' | sort -n -k 3 | sed \
+'s:#define SIG\([A-Z]\+[0-9]*\) \([0-9]\+\) *\(\|/\*.*\)$:{\ \2,"\1" },:p;d' | \
+	  grep -v '[0-9][0-9][0-9]' >signames.h || \
+	  { rm -f signames.h; exit 1; }
+grep '^{ 1,"HUP" },$' signames.h >/dev/null || \
+	  { rm -f signames.h; exit 1; }
+make  all-am
+make[3]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+gcc -DHAVE_CONFIG_H -I. -I..    -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe -MT fuser.o -MD -MP -MF .deps/fuser.Tpo -c -o fuser.o fuser.c
+gcc -DHAVE_CONFIG_H -I. -I..    -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe -MT signals.o -MD -MP -MF .deps/signals.Tpo -c -o signals.o signals.c
+gcc -DHAVE_CONFIG_H -I. -I..    -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe -MT killall.o -MD -MP -MF .deps/killall.Tpo -c -o killall.o killall.c
+gcc -DHAVE_CONFIG_H -I. -I..    -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe -MT pstree.o -MD -MP -MF .deps/pstree.Tpo -c -o pstree.o pstree.c
+gcc -DHAVE_CONFIG_H -I. -I..    -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe -MT prtstat.o -MD -MP -MF .deps/prtstat.Tpo -c -o prtstat.o prtstat.c
+gcc -DHAVE_CONFIG_H -I. -I..    -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe -MT peekfd.o -MD -MP -MF .deps/peekfd.Tpo -c -o peekfd.o peekfd.c
+mv -f .deps/signals.Tpo .deps/signals.Po
+mv -f .deps/peekfd.Tpo .deps/peekfd.Po
+gcc -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe   -o peekfd peekfd.o  
+mv -f .deps/prtstat.Tpo .deps/prtstat.Po
+gcc -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe   -o prtstat prtstat.o  
+mv -f .deps/pstree.Tpo .deps/pstree.Po
+mv -f .deps/killall.Tpo .deps/killall.Po
+gcc -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe   -o pstree pstree.o -lncurses  
+gcc -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe   -o killall killall.o signals.o  
+mv -f .deps/fuser.Tpo .deps/fuser.Po
+gcc -Wall -DLOCALEDIR=\"/usr/share/locale\"  -DX86_64    -Os -pipe   -o fuser fuser.o signals.o  
+make[3]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+Making all in po
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/po'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/po'
+Making all in icons
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/icons'
+make[2]: Nothing to be done for `all'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/icons'
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14'
++ exit 0
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.1230
++ umask 022
++ cd /usr/src/rpm/BUILD
++ /bin/rm -rf /var/tmp/psmisc-root
++ /bin/mkdir -p /var/tmp/psmisc-root
++ cd psmisc-22.14
++ make DESTDIR=/var/tmp/psmisc-root install
+Making install in doc
+make[1]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/doc'
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/doc'
+make[2]: Nothing to be done for `install-exec-am'.
+test -z "/usr/share/man/man1" || /bin/mkdir -p "/var/tmp/psmisc-root/usr/share/man/man1"
+ /usr/bin/install -c -m 644 fuser.1 killall.1 peekfd.1 prtstat.1 pstree.1 '/var/tmp/psmisc-root/usr/share/man/man1'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/doc'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/doc'
+Making install in src
+make[1]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+make  install-am
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+make[3]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+test -z "/bin" || /bin/mkdir -p "/var/tmp/psmisc-root/bin"
+  /usr/bin/install -c fuser killall pstree prtstat peekfd '/var/tmp/psmisc-root/bin'
+make  install-exec-hook
+make[4]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+cd /var/tmp/psmisc-root/bin && \
+		( [ -h pstree.x11 ]  || ln -s pstree pstree.x11)
+make[4]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+make[3]: Nothing to be done for `install-data-am'.
+make[3]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/src'
+Making install in po
+make[1]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/po'
+/bin/mkdir -p /var/tmp/psmisc-root/usr/share
+installing bg.gmo as /var/tmp/psmisc-root/usr/share/locale/bg/LC_MESSAGES/psmisc.mo
+installing ca.gmo as /var/tmp/psmisc-root/usr/share/locale/ca/LC_MESSAGES/psmisc.mo
+installing cs.gmo as /var/tmp/psmisc-root/usr/share/locale/cs/LC_MESSAGES/psmisc.mo
+installing de.gmo as /var/tmp/psmisc-root/usr/share/locale/de/LC_MESSAGES/psmisc.mo
+installing el.gmo as /var/tmp/psmisc-root/usr/share/locale/el/LC_MESSAGES/psmisc.mo
+installing eu.gmo as /var/tmp/psmisc-root/usr/share/locale/eu/LC_MESSAGES/psmisc.mo
+installing fi.gmo as /var/tmp/psmisc-root/usr/share/locale/fi/LC_MESSAGES/psmisc.mo
+installing fr.gmo as /var/tmp/psmisc-root/usr/share/locale/fr/LC_MESSAGES/psmisc.mo
+installing hu.gmo as /var/tmp/psmisc-root/usr/share/locale/hu/LC_MESSAGES/psmisc.mo
+installing id.gmo as /var/tmp/psmisc-root/usr/share/locale/id/LC_MESSAGES/psmisc.mo
+installing it.gmo as /var/tmp/psmisc-root/usr/share/locale/it/LC_MESSAGES/psmisc.mo
+installing ja.gmo as /var/tmp/psmisc-root/usr/share/locale/ja/LC_MESSAGES/psmisc.mo
+installing nb.gmo as /var/tmp/psmisc-root/usr/share/locale/nb/LC_MESSAGES/psmisc.mo
+installing nl.gmo as /var/tmp/psmisc-root/usr/share/locale/nl/LC_MESSAGES/psmisc.mo
+installing pl.gmo as /var/tmp/psmisc-root/usr/share/locale/pl/LC_MESSAGES/psmisc.mo
+installing pt.gmo as /var/tmp/psmisc-root/usr/share/locale/pt/LC_MESSAGES/psmisc.mo
+installing pt_BR.gmo as /var/tmp/psmisc-root/usr/share/locale/pt_BR/LC_MESSAGES/psmisc.mo
+installing ro.gmo as /var/tmp/psmisc-root/usr/share/locale/ro/LC_MESSAGES/psmisc.mo
+installing ru.gmo as /var/tmp/psmisc-root/usr/share/locale/ru/LC_MESSAGES/psmisc.mo
+installing sv.gmo as /var/tmp/psmisc-root/usr/share/locale/sv/LC_MESSAGES/psmisc.mo
+installing vi.gmo as /var/tmp/psmisc-root/usr/share/locale/vi/LC_MESSAGES/psmisc.mo
+installing zh_CN.gmo as /var/tmp/psmisc-root/usr/share/locale/zh_CN/LC_MESSAGES/psmisc.mo
+installing zh_TW.gmo as /var/tmp/psmisc-root/usr/share/locale/zh_TW/LC_MESSAGES/psmisc.mo
+if test "psmisc" = "gettext-tools"; then \
+  /bin/mkdir -p /var/tmp/psmisc-root/usr/share/gettext/po; \
+  for file in Makefile.in.in remove-potcdate.sin quot.sed boldquot.sed en@quot.header en@boldquot.header insert-header.sin Rules-quot   Makevars.template; do \
+    /usr/bin/install -c -m 644 ./$file \
+		    /var/tmp/psmisc-root/usr/share/gettext/po/$file; \
+  done; \
+  for file in Makevars; do \
+    rm -f /var/tmp/psmisc-root/usr/share/gettext/po/$file; \
+  done; \
+else \
+  : ; \
+fi
+make[1]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/po'
+Making install in icons
+make[1]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/icons'
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14/icons'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/icons'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14/icons'
+make[1]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14'
+make[2]: Entering directory `/usr/src/rpm/BUILD/psmisc-22.14'
+make[2]: Nothing to be done for `install-exec-am'.
+make[2]: Nothing to be done for `install-data-am'.
+make[2]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14'
+make[1]: Leaving directory `/usr/src/rpm/BUILD/psmisc-22.14'
++ mkdir -pv /var/tmp/psmisc-root/usr/bin
+mkdir: created directory `/var/tmp/psmisc-root/usr/bin'
++ mv -v /var/tmp/psmisc-root/bin/pstree /var/tmp/psmisc-root/bin/pstree.x11 /var/tmp/psmisc-root/usr/bin
+`/var/tmp/psmisc-root/bin/pstree' -> `/var/tmp/psmisc-root/usr/bin/pstree'
+`/var/tmp/psmisc-root/bin/pstree.x11' -> `/var/tmp/psmisc-root/usr/bin/pstree.x11'
++ rm -vf /var/tmp/psmisc-root/usr/bin/pstree.x11
+removed `/var/tmp/psmisc-root/usr/bin/pstree.x11'
++ /usr/lib/rpm/compress_man.sh /var/tmp/psmisc-root
++ /usr/lib/rpm/strip.sh /var/tmp/psmisc-root
+copy from `/var/tmp/psmisc-root/bin/peekfd' [elf64-x86-64] to `/var/tmp/psmisc-root/bin/stFEPepd' [elf64-x86-64]
+copy from `/var/tmp/psmisc-root/bin/prtstat' [elf64-x86-64] to `/var/tmp/psmisc-root/bin/staQCyWd' [elf64-x86-64]
+copy from `/var/tmp/psmisc-root/bin/killall' [elf64-x86-64] to `/var/tmp/psmisc-root/bin/stTwjRRd' [elf64-x86-64]
+copy from `/var/tmp/psmisc-root/bin/fuser' [elf64-x86-64] to `/var/tmp/psmisc-root/bin/stU68kKd' [elf64-x86-64]
+copy from `/var/tmp/psmisc-root/usr/bin/pstree' [elf64-x86-64] to `/var/tmp/psmisc-root/usr/bin/stnfufhe' [elf64-x86-64]
++ /usr/lib/rpm/find-lang.sh /var/tmp/psmisc-root psmisc
++ exit 0
+Processing files: psmisc-22.14-1.x86_64
+Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libc.so.6(GLIBC_2.7)(64bit) libncursesw.so.5()(64bit)
+Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/psmisc-root
+Wrote: /usr/src/rpm/SRPMS/psmisc-22.14-1.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/psmisc-22.14-1.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.1230
++ umask 022
++ cd /usr/src/rpm/BUILD
++ cd psmisc-22.14
++ /bin/rm -rf /var/tmp/psmisc-root
