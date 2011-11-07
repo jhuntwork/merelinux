@@ -1,13 +1,13 @@
 Summary: Ncurses Library
 Name: ncurses
 Version: 5.9
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/ncurses
-Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://ftp.gnu.org/gnu/ncurses/ncurses-5.9.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 3e042e5f2c7223bffdaac9646a533b8c758b65b5
 
@@ -26,7 +26,7 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
@@ -54,6 +54,7 @@ ln -sfv libncurses++w.a %{buildroot}/usr/%{_lib}/libncurses++.a
 ln -sfv libncursesw.a %{buildroot}/usr/%{_lib}/libcursesw.a
 ln -sfv libncurses.a %{buildroot}/usr/%{_lib}/libcurses.a
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -80,9 +81,9 @@ rm -rf %{buildroot}
 %ifnarch x86_64
 /usr/%{_lib}/terminfo
 %endif
-/usr/share/man/man1/*
-/usr/share/man/man5/*
-/usr/share/man/man7/*
+/usr/share/man/man1/*.bz2
+/usr/share/man/man5/*.bz2
+/usr/share/man/man7/*.bz2
 /usr/share/tabset
 /usr/share/terminfo/*
 
@@ -112,9 +113,12 @@ rm -rf %{buildroot}
 /usr/%{_lib}/libpanelw.a
 /usr/%{_lib}/libpanelw.so
 /usr/include/*.h
-/usr/share/man/man3/*
+/usr/share/man/man3/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.9-2
+- Optimize for size
+
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.9-1
 - Upgrade to 5.9
 
