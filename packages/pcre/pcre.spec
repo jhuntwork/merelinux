@@ -1,17 +1,17 @@
 Summary: PCRE - Perl Compatible Regular Expressions
 Name: pcre
-Version: 8.13
+Version: 8.20
 Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.pcre.org
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
-Patch0: http://dev.lightcube.us/sources/%{name}/pcreposix.patch
+Source0: ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.20.tar.bz2
+Patch0: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/pcre/posix.patch
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 4dedf8f2e1d7fb29bd00e62bcd26ca3ba71ff9bb
-BuildRequires: digest(sha1:%{PATCH0}) = ea2dab6648c0ccb43d4e3783932f5e3d87db73a8
+BuildRequires: digest(sha1:%{SOURCE0}) = 6264472669d8068338cd32128cd4e9742587c676
+BuildRequires: digest(sha1:%{PATCH0})  = ea2dab6648c0ccb43d4e3783932f5e3d87db73a8
 BuildRequires: bzip2-devel
 BuildRequires: readline-devel
 BuildRequires: zlib-devel
@@ -33,6 +33,7 @@ Headers and libraries for developing with %{name}
 %patch0 -p1
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --enable-utf8 \
@@ -46,6 +47,7 @@ make %{PMFLAGS}
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -86,9 +88,13 @@ rm -rf %{buildroot}
 /usr/%{_lib}/pkgconfig/libpcrecpp.pc
 /usr/%{_lib}/pkgconfig/libpcreposix.pc
 /usr/share/man/man1/pcre-config.1.bz2
-/usr/share/man/man3/*
+/usr/share/man/man3/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.20-1
+- Upgrade to 8.20
+- Optimize for size
+
 * Tue Aug 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 8.13-1
 - Upgrade to 8.13
 
