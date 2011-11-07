@@ -1,4 +1,5 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.87175
+Fetching(Source0): http://ftp.gnu.org/gnu/parted/parted-3.0.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.87024
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -9,13 +10,13 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.87175
 + '[' 0 -ne 0 ']'
 + cd parted-3.0
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.87175
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.87024
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd parted-3.0
-+ export LDFLAGS=-s
-+ LDFLAGS=-s
-+ ./configure --prefix=/usr --libdir=/usr/lib64 --disable-device-mapper
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
++ ./configure --prefix=/usr --libdir=/usr/lib64
 checking for a BSD-compatible install... /usr/bin/install -c
 checking whether build environment is sane... yes
 checking for a thread-safe mkdir -p... /bin/mkdir -p
@@ -528,6 +529,7 @@ checking whether to use NLS... yes
 checking where the gettext function comes from... libc
 checking for dlopen in -ldl... yes
 checking for uuid_generate in -luuid... yes
+checking for dm_task_create in -ldevmapper... yes
 checking for library containing tgetent... -lncurses
 checking for readline in -lreadline... yes
 checking for rl_variable_value in -lreadline... yes
@@ -577,6 +579,7 @@ checking for sigaction... yes
 checking for getuid... yes
 checking for rl_completion_matches... yes
 checking for canonicalize_file_name... (cached) yes
+./configure: line 37421: hostname: command not found
 checking for library containing blkid_probe_get_topology... -lblkid
 checking for blkid_probe_get_topology... yes
 checking that generated files are newer than configure... done
@@ -654,31 +657,31 @@ make[4]: Entering directory `/usr/src/rpm/BUILD/parted-3.0/lib'
   CC       version-etc.lo
   CC       version-etc-fsf.lo
   CC       xalloc-die.lo
-  CC       argmatch.lo
   CC       xstrndup.lo
-  CC       basename-lgpl.lo
   CC       basename.lo
+  CC       argmatch.lo
+  CC       basename-lgpl.lo
   CC       close-stream.lo
-  CC       dirname.lo
   CC       closeout.lo
+  CC       dirname.lo
   CC       dirname-lgpl.lo
   CC       fclose.lo
   CC       fflush.lo
   CC       fpurge.lo
-  CC       fseeko.lo
   CC       long-options.lo
+  CC       fseeko.lo
   CC       quotearg.lo
   CC       quote.lo
-  CC       safe-read.lo
   CC       strerror_r.lo
+  CC       safe-read.lo
   CC       stripslash.lo
-  CC       tempname.lo
   CC       xmalloc.lo
+  CC       tempname.lo
   CC       xstrtol.lo
   CC       xstrtol-error.lo
   CC       xstrtoll.lo
-  CC       xstrtoul.lo
   CC       xstrtoull.lo
+  CC       xstrtoul.lo
   GEN      charset.alias
   GEN      ref-add.sed
   GEN      ref-del.sed
@@ -792,8 +795,8 @@ Makefile:1225: warning: ignoring old recipe for target `linux.lo'
   CC       filesys.lo
   CC       libparted.lo
   CC       timer.lo
-  CC       disk.lo
   CC       unit.lo
+  CC       disk.lo
   CC       geom.lo
   CC       constraint.lo
   CC       natmath.lo
@@ -867,7 +870,7 @@ make[2]: Nothing to be done for `all-am'.
 make[2]: Leaving directory `/usr/src/rpm/BUILD/parted-3.0'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/parted-3.0'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.11710
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.61835
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/parted-root
@@ -1177,23 +1180,105 @@ make[2]: Leaving directory `/usr/src/rpm/BUILD/parted-3.0'
 make[1]: Leaving directory `/usr/src/rpm/BUILD/parted-3.0'
 + rm -f /var/tmp/parted-root/usr/share/info/dir
 + /usr/lib/rpm/compress_man.sh /var/tmp/parted-root
++ /usr/lib/rpm/strip.sh /var/tmp/parted-root
+copy from `/var/tmp/parted-root/usr/sbin/partprobe' [elf64-x86-64] to `/var/tmp/parted-root/usr/sbin/stO7ByPM' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/sbin/parted' [elf64-x86-64] to `/var/tmp/parted-root/usr/sbin/stX3RYKM' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(debug.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/debug.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(architecture.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/architecture.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(device.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/device.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(exception.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/exception.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(filesys.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/filesys.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(libparted.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/libparted.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(timer.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/timer.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(unit.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/unit.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(disk.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/disk.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(geom.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/geom.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(constraint.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/constraint.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(natmath.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/natmath.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(linux.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/linux.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(affs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/affs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(amiga.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/amiga.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(apfs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/apfs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(asfs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/asfs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(bootsector.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/bootsector.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(fat.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/fat.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(hfs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/hfs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(interface.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/interface.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(jfs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/jfs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(linux_swap.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/linux_swap.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(lt1-interface.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/lt1-interface.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(nilfs2.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/nilfs2.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(ntfs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/ntfs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(probe.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/probe.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(reiserfs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/reiserfs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(ufs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/ufs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xfs.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xfs.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(aix.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/aix.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(bsd.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/bsd.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(dos.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/dos.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(dvh.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/dvh.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(efi_crc32.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/efi_crc32.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(gpt.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/gpt.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(loop.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/loop.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(mac.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/mac.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(pc98.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/pc98.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(pt-tools.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/pt-tools.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(rdb.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/rdb.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(sun.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/sun.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(argmatch.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/argmatch.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(basename-lgpl.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/basename-lgpl.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(basename.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/basename.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(close-stream.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/close-stream.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(closeout.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/closeout.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(dirname-lgpl.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/dirname-lgpl.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(dirname.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/dirname.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(exitfail.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/exitfail.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(fclose.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/fclose.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(fd-hook.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/fd-hook.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(fflush.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/fflush.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(fpurge.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/fpurge.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(freading.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/freading.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(fseeko.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/fseeko.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(localcharset.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/localcharset.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(lock.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/lock.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(long-options.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/long-options.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(malloca.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/malloca.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(progname.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/progname.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(quote.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/quote.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(quotearg.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/quotearg.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(safe-read.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/safe-read.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(strerror_r.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/strerror_r.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(stripslash.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/stripslash.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(tempname.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/tempname.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(threadlib.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/threadlib.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(version-etc-fsf.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/version-etc-fsf.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(version-etc.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/version-etc.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xalloc-die.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xalloc-die.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xmalloc.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xmalloc.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xstrndup.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xstrndup.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xstrtol-error.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xstrtol-error.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xstrtol.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xstrtol.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xstrtoll.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xstrtoll.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xstrtoul.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xstrtoul.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.a(xstrtoull.o)' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/stzDLfLR/xstrtoull.o' [elf64-x86-64]
+copy from `/var/tmp/parted-root/usr/lib64/libparted.so.1.0.0' [elf64-x86-64] to `/var/tmp/parted-root/usr/lib64/st3an87L' [elf64-x86-64]
 + /usr/lib/rpm/find-lang.sh /var/tmp/parted-root parted
 + exit 0
-Processing files: parted-3.0-1.x86_64
+Processing files: parted-3.0-2.x86_64
 Provides: libparted.so.1()(64bit)
 Requires(interp): /bin/sh /bin/sh
 Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
-Requires: /usr/bin/install-info /usr/bin/install-info libblkid.so.1()(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libdl.so.2()(64bit) libncursesw.so.5()(64bit) libparted.so.1()(64bit) libreadline.so.6()(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUID_1.0)(64bit)
-Processing files: parted-devel-3.0-1.x86_64
+Requires: /usr/bin/install-info /usr/bin/install-info libblkid.so.1()(64bit) libblkid.so.1(BLKID_2.15)(64bit) libblkid.so.1(BLKID_2.17)(64bit) libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libc.so.6(GLIBC_2.3.3)(64bit) libc.so.6(GLIBC_2.3.4)(64bit) libdevmapper.so.1.02()(64bit) libdevmapper.so.1.02(Base)(64bit) libdl.so.2()(64bit) libncursesw.so.5()(64bit) libparted.so.1()(64bit) libreadline.so.6()(64bit) libuuid.so.1()(64bit) libuuid.so.1(UUID_1.0)(64bit)
+Processing files: parted-devel-3.0-2.x86_64
 Provides: pkgconfig(libparted) = 3.0
 Requires(rpmlib): rpmlib(VersionedDependencies) <= 3.0.3-1
 Requires: pkgconfig
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/parted-root
-Wrote: /usr/src/rpm/SRPMS/parted-3.0-1.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/parted-3.0-1.x86_64.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/parted-devel-3.0-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.91570
+Wrote: /usr/src/rpm/SRPMS/parted-3.0-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/parted-3.0-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/parted-devel-3.0-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.62987
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd parted-3.0
