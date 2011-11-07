@@ -1,16 +1,18 @@
 Summary: Sudo
 Name: sudo
-Version: 1.8.1p1
+Version: 1.8.3p1
 Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.sudo.ws/sudo
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://www.sudo.ws/sudo/dist/sudo-1.8.3p1.tar.gz
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 000c156a82216f08db743928a70c0b1990b4b32e
+BuildRequires: digest(sha1:%{SOURCE0}) = 2a7ad912aa8a31706796e5bff8813e4fc7505333
 BuildRequires: Linux-PAM-devel
+BuildRequires: groff
+BuildRequires: vim
 BuildRequires: zlib-devel
 
 %description
@@ -23,11 +25,13 @@ their arguments.
 %setup -q
 
 %build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --libexecdir=/usr/%{_lib} \
   --with-ignore-dot \
+  --with-insults \
   --with-all-insults \
   --enable-shell-sets-home \
   --with-sendmail=/usr/sbin/sendmail \
@@ -55,12 +59,16 @@ session     required        pam_unix.so
 
 # End /etc/pam.d/sudo
 EOF
+%{strip}
 %{compress_man}
+%find_lang sudo
+%find_lang sudoers
+cat sudo.lang sudoers.lang > all.lang
 
 %clean
 rm -rf %{buildroot}
 
-%files
+%files -f all.lang
 %defattr(-,root,root)
 %config /etc/sudoers
 %config /etc/pam.d/sudo
@@ -71,10 +79,14 @@ rm -rf %{buildroot}
 /usr/%{_lib}/sudoers.so
 /usr/sbin/visudo
 /usr/share/doc/sudo
-/usr/share/man/man5/*
-/usr/share/man/man8/*
+/usr/share/man/man5/*.bz2
+/usr/share/man/man8/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8.3p1-1
+- Upgrade to 1.8.3p1
+- Optimize for size
+
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8.1p1-1
 - Upgrade to 1.8.1p1. Fix issues with default sudoers file and add a missing PAM config.
 
