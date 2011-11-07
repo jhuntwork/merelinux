@@ -1,4 +1,6 @@
-Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.45803
+Fetching(Patch0): http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-001
+Fetching(Source0): http://ftp.gnu.org/gnu/readline/readline-6.2.tar.gz
+Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.52562
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd /usr/src/rpm/BUILD
@@ -8,17 +10,19 @@ Executing(%prep): /bin/sh -e /var/tmp/rpm-tmp.45803
 + STATUS=0
 + '[' 0 -ne 0 ']'
 + cd readline-6.2
-+ echo 'Patch #0 (readline-6.2-fixes-1.patch):'
-Patch #0 (readline-6.2-fixes-1.patch):
-+ /bin/cat /usr/src/rpm/SOURCES/readline-6.2-fixes-1.patch
-+ /usr/bin/patch -s -p1
++ echo 'Patch #0 (readline62-001):'
+Patch #0 (readline62-001):
++ /bin/cat /usr/src/rpm/SOURCES/readline62-001
++ /usr/bin/patch -s -p0
++ sed -i '/MV.*old/d' Makefile.in
++ sed -i '/{OLDSUFF}/c:' support/shlib-install
 + exit 0
-Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.45803
+Executing(%build): /bin/sh -e /var/tmp/rpm-tmp.52562
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd readline-6.2
-+ sed -i '/MV.*old/d' Makefile.in
-+ sed -i '/{OLDSUFF}/c:' support/shlib-install
++ export 'CFLAGS=-Os -pipe'
++ CFLAGS='-Os -pipe'
 + ./configure --prefix=/usr --libdir=/lib64
 checking build system type... x86_64-unknown-linux-gnu
 checking host system type... x86_64-unknown-linux-gnu
@@ -197,179 +201,179 @@ config.status: executing default commands
 rm -f readline.o
 rm -f vi_mode.o
 rm -f funmap.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O readline.c
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O vi_mode.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe readline.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe vi_mode.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe funmap.c
 rm -f keymaps.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O funmap.c
 rm -f parens.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O keymaps.c
 rm -f search.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O parens.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe keymaps.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe parens.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe search.c
 rm -f rltty.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O search.c
 rm -f complete.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O rltty.c
 rm -f bind.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O complete.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe rltty.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe complete.c
 rm -f isearch.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O bind.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe bind.c
 rm -f display.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O isearch.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe isearch.c
 rm -f signals.o
 rm -f util.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O display.c
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O signals.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe display.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe signals.c
 rm -f kill.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O util.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe util.c
 rm -f undo.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O kill.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe kill.c
 rm -f macro.o
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe undo.c
 rm -f input.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O undo.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe macro.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe input.c
 rm -f callback.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O macro.c
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O input.c
 rm -f terminal.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O callback.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe callback.c
 rm -f text.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O terminal.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe terminal.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe text.c
 rm -f nls.o
 rm -f misc.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O text.c
 rm -f compat.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O nls.c
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O misc.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe nls.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe misc.c
 rm -f xfree.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O compat.c
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O xfree.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe compat.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe xfree.c
 rm -f xmalloc.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O xmalloc.c
 rm -f history.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O history.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe xmalloc.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe history.c
 rm -f histexpand.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O histexpand.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe histexpand.c
 rm -f histfile.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O histfile.c
 rm -f histsearch.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O histsearch.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe histfile.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe histsearch.c
 rm -f shell.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O shell.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe shell.c
 rm -f mbutil.o
-gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O mbutil.c
+gcc -c -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe mbutil.c
 rm -f tilde.o
-gcc -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -g -O -DREADLINE_LIBRARY -c ./tilde.c
+gcc -DHAVE_CONFIG_H    -I. -I. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -DREADLINE_LIBRARY -c ./tilde.c
 test -d shlib || mkdir shlib
 ( cd shlib ; make - --jobserver-fds=3,4 -j all )
 make[1]: Entering directory `/usr/src/rpm/BUILD/readline-6.2/shlib'
 rm -f readline.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o readline.o ../readline.c 
 rm -f vi_mode.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o readline.o ../readline.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o vi_mode.o ../vi_mode.c 
 rm -f funmap.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o vi_mode.o ../vi_mode.c 
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o funmap.o ../funmap.c 
 rm -f keymaps.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o keymaps.o ../keymaps.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o funmap.o ../funmap.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o keymaps.o ../keymaps.c 
 rm -f parens.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o parens.o ../parens.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o parens.o ../parens.c 
 rm -f search.so
 rm -f rltty.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o search.o ../search.c 
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o rltty.o ../rltty.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o search.o ../search.c 
 rm -f complete.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o complete.o ../complete.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o rltty.o ../rltty.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o complete.o ../complete.c 
 rm -f bind.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o bind.o ../bind.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o bind.o ../bind.c 
 rm -f isearch.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o isearch.o ../isearch.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o isearch.o ../isearch.c 
 rm -f display.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o display.o ../display.c 
-rm -f signals.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o signals.o ../signals.c 
-rm -f util.so
-rm -f kill.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o util.o ../util.c 
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o kill.o ../kill.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o display.o ../display.c 
 mv funmap.o funmap.so
-rm -f undo.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o undo.o ../undo.c 
-rm -f macro.so
-rm -f input.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o macro.o ../macro.c 
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o input.o ../input.c 
-rm -f callback.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o callback.o ../callback.c 
-rm -f terminal.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o terminal.o ../terminal.c 
+rm -f signals.so
+rm -f util.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o signals.o ../signals.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o util.o ../util.c 
+rm -f kill.so
 mv keymaps.o keymaps.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o kill.o ../kill.c 
+rm -f undo.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o undo.o ../undo.c 
+rm -f macro.so
 mv parens.o parens.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o macro.o ../macro.c 
+rm -f input.so
+rm -f callback.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o input.o ../input.c 
+rm -f terminal.so
 rm -f text.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o callback.o ../callback.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o terminal.o ../terminal.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o text.o ../text.c 
 rm -f nls.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o text.o ../text.c 
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o nls.o ../nls.c 
-mv rltty.o rltty.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o nls.o ../nls.c 
 mv nls.o nls.so
-mv signals.o signals.so
 rm -f misc.so
+mv rltty.o rltty.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o misc.o ../misc.c 
 rm -f xmalloc.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o misc.o ../misc.c 
-rm -f xfree.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o xmalloc.o ../xmalloc.c 
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o xfree.o ../xfree.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o xmalloc.o ../xmalloc.c 
 mv search.o search.so
+rm -f xfree.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o xfree.o ../xfree.c 
+mv undo.o undo.so
 rm -f history.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o history.o ../history.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o history.o ../history.c 
 mv macro.o macro.so
 mv callback.o callback.so
 rm -f histexpand.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o histexpand.o ../histexpand.c 
 rm -f histfile.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o histexpand.o ../histexpand.c 
-mv undo.o undo.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o histfile.o ../histfile.c 
-rm -f histsearch.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o histsearch.o ../histsearch.c 
-mv xfree.o xfree.so
-rm -f shell.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o shell.o ../shell.c 
-mv readline.o readline.so
-rm -f mbutil.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o mbutil.o ../mbutil.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o histfile.o ../histfile.c 
 mv xmalloc.o xmalloc.so
-rm -f tilde.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -DREADLINE_LIBRARY -c -o tilde.o ../tilde.c
+mv signals.o signals.so
+mv xfree.o xfree.so
+rm -f histsearch.so
+rm -f shell.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o histsearch.o ../histsearch.c 
+rm -f mbutil.so
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o shell.o ../shell.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o mbutil.o ../mbutil.c 
 mv util.o util.so
+mv readline.o readline.so
+rm -f tilde.so
 rm -f compat.so
-gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -g -O -fPIC -o compat.o ../compat.c 
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -DREADLINE_LIBRARY -c -o tilde.o ../tilde.c
+gcc -c -DHAVE_CONFIG_H    -I. -I.. -I.. -DRL_LIBRARY_VERSION='"6.2"' -Os -pipe -fPIC -o compat.o ../compat.c 
 mv input.o input.so
+mv terminal.o terminal.so
+mv shell.o shell.so
+mv compat.o compat.so
 mv kill.o kill.so
 mv isearch.o isearch.so
-mv terminal.o terminal.so
-mv compat.o compat.so
-mv shell.o shell.so
 mv histsearch.o histsearch.so
-mv tilde.o tilde.so
-mv misc.o misc.so
-mv history.o history.so
 mv mbutil.o mbutil.so
+mv tilde.o tilde.so
 mv histfile.o histfile.so
+mv history.o history.so
+mv misc.o misc.so
 rm -f libhistory.a
 ar cr libhistory.a history.o histexpand.o histfile.o histsearch.o shell.o mbutil.o xmalloc.o xfree.o
 test -n "ranlib" && ranlib libhistory.a
-mv vi_mode.o vi_mode.so
 mv text.o text.so
 rm -f libreadline.a
 ar cr libreadline.a readline.o vi_mode.o funmap.o keymaps.o parens.o search.o rltty.o complete.o bind.o isearch.o display.o signals.o util.o kill.o undo.o macro.o input.o callback.o terminal.o text.o nls.o misc.o compat.o xfree.o xmalloc.o history.o histexpand.o histfile.o histsearch.o shell.o mbutil.o tilde.o
 test -n "ranlib" && ranlib libreadline.a
-mv complete.o complete.so
-mv bind.o bind.so
-mv display.o display.so
+mv vi_mode.o vi_mode.so
 mv histexpand.o histexpand.so
-rm -f libreadline.so.6.2
 rm -f libhistory.so.6.2
-gcc -shared -Wl,-soname,libreadline.so.6.2 -Wl,-rpath,/lib64 -Wl,-soname,`basename libreadline.so.6.2 .2` -o libreadline.so.6.2 readline.so vi_mode.so funmap.so keymaps.so parens.so search.so rltty.so complete.so bind.so isearch.so display.so signals.so util.so kill.so undo.so macro.so input.so callback.so terminal.so text.so nls.so misc.so xmalloc.so xfree.so history.so histexpand.so histfile.so histsearch.so shell.so mbutil.so tilde.so compat.so -lncurses
 gcc -shared -Wl,-soname,libhistory.so.6.2 -Wl,-rpath,/lib64 -Wl,-soname,`basename libhistory.so.6.2 .2` -o libhistory.so.6.2 history.so histexpand.so histfile.so histsearch.so shell.so mbutil.so xmalloc.so xfree.so -lncurses
+mv bind.o bind.so
+mv complete.o complete.so
+mv display.o display.so
+rm -f libreadline.so.6.2
+gcc -shared -Wl,-soname,libreadline.so.6.2 -Wl,-rpath,/lib64 -Wl,-soname,`basename libreadline.so.6.2 .2` -o libreadline.so.6.2 readline.so vi_mode.so funmap.so keymaps.so parens.so search.so rltty.so complete.so bind.so isearch.so display.so signals.so util.so kill.so undo.so macro.so input.so callback.so terminal.so text.so nls.so misc.so xmalloc.so xfree.so history.so histexpand.so histfile.so histsearch.so shell.so mbutil.so tilde.so compat.so -lncurses
 make[1]: Leaving directory `/usr/src/rpm/BUILD/readline-6.2/shlib'
 + exit 0
-Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.65874
+Executing(%install): /bin/sh -e /var/tmp/rpm-tmp.90381
 + umask 022
 + cd /usr/src/rpm/BUILD
 + /bin/rm -rf /var/tmp/readline-root
@@ -472,23 +476,66 @@ removed `/var/tmp/readline-root/lib64/libhistory.so'
 `/var/tmp/readline-root/usr/lib64/libhistory.so' -> `../../lib64/libhistory.so.6'
 + rm -f /var/tmp/readline-root/usr/share/info/dir
 + /usr/lib/rpm/compress_man.sh /var/tmp/readline-root
++ /usr/lib/rpm/strip.sh /var/tmp/readline-root
+copy from `/var/tmp/readline-root/lib64/libreadline.so.6.2' [elf64-x86-64] to `/var/tmp/readline-root/lib64/stxkukWs' [elf64-x86-64]
+copy from `/var/tmp/readline-root/lib64/libhistory.so.6.2' [elf64-x86-64] to `/var/tmp/readline-root/lib64/stiqAlNs' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libhistory.a(history.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/st2B2zoW/history.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libhistory.a(histexpand.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/st2B2zoW/histexpand.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libhistory.a(histfile.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/st2B2zoW/histfile.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libhistory.a(histsearch.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/st2B2zoW/histsearch.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libhistory.a(shell.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/st2B2zoW/shell.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libhistory.a(mbutil.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/st2B2zoW/mbutil.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libhistory.a(xmalloc.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/st2B2zoW/xmalloc.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libhistory.a(xfree.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/st2B2zoW/xfree.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(readline.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/readline.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(vi_mode.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/vi_mode.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(funmap.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/funmap.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(keymaps.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/keymaps.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(parens.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/parens.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(search.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/search.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(rltty.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/rltty.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(complete.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/complete.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(bind.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/bind.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(isearch.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/isearch.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(display.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/display.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(signals.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/signals.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(util.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/util.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(kill.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/kill.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(undo.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/undo.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(macro.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/macro.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(input.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/input.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(callback.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/callback.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(terminal.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/terminal.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(text.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/text.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(nls.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/nls.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(misc.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/misc.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(compat.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/compat.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(xfree.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/xfree.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(xmalloc.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/xmalloc.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(history.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/history.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(histexpand.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/histexpand.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(histfile.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/histfile.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(histsearch.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/histsearch.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(shell.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/shell.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(mbutil.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/mbutil.o' [elf64-x86-64]
+copy from `/var/tmp/readline-root/usr/lib64/libreadline.a(tilde.o)' [elf64-x86-64] to `/var/tmp/readline-root/usr/lib64/stSvZpdW/tilde.o' [elf64-x86-64]
 + exit 0
-Processing files: readline-6.2-1.x86_64
+Processing files: readline-6.2-2.x86_64
 Provides: libhistory.so.6()(64bit) libreadline.so.6()(64bit)
 Requires(interp): /sbin/ldconfig /sbin/ldconfig
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 Requires: libc.so.6()(64bit) libc.so.6(GLIBC_2.2.5)(64bit) libc.so.6(GLIBC_2.3)(64bit) libncursesw.so.5()(64bit)
-Processing files: readline-devel-6.2-1.x86_64
+Processing files: readline-devel-6.2-2.x86_64
 Requires(interp): /bin/sh /bin/sh
 Requires(post): /bin/sh /usr/bin/install-info
 Requires(preun): /bin/sh /usr/bin/install-info
 Requires: /usr/bin/install-info /usr/bin/install-info
 Checking for unpackaged file(s): /usr/lib/rpm/check-files /var/tmp/readline-root
-Wrote: /usr/src/rpm/SRPMS/readline-6.2-1.src.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/readline-6.2-1.x86_64.rpm
-Wrote: /usr/src/rpm/RPMS/x86_64/readline-devel-6.2-1.x86_64.rpm
-Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.28035
+Wrote: /usr/src/rpm/SRPMS/readline-6.2-2.src.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/readline-6.2-2.x86_64.rpm
+Wrote: /usr/src/rpm/RPMS/x86_64/readline-devel-6.2-2.x86_64.rpm
+Executing(%clean): /bin/sh -e /var/tmp/rpm-tmp.5725
 + umask 022
 + cd /usr/src/rpm/BUILD
 + cd readline-6.2

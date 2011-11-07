@@ -1,17 +1,17 @@
 Summary: The GNU Readline Library
 Name: readline
 Version: 6.2
-Release: 1
+Release: 2
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://tiswww.case.edu/php/chet/readline/rltop.html
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
-Patch0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}-fixes-1.patch
+Source0: http://ftp.gnu.org/gnu/readline/readline-6.2.tar.gz
+Patch0: http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-001
 
 BuildRequires: digest(sha1:%{SOURCE0}) = a9761cd9c3da485eb354175fcc2fe35856bc43ac
-BuildRequires: digest(sha1:%{PATCH0})  = b721a06ba9db6b6ce342444fcd8bfef25bd9e189
+BuildRequires: digest(sha1:%{PATCH0})  = 7d264c281f3b43e1c07c020b1785631411ce039e
 BuildRequires: ncurses-devel
 
 %package devel
@@ -28,11 +28,12 @@ Headers and objects for developing with %{name}
 
 %prep
 %setup -q
-%patch0 -p1
-
-%build
+%patch0 -p0
 sed -i '/MV.*old/d' Makefile.in
 sed -i '/{OLDSUFF}/c:' support/shlib-install
+
+%build
+export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
   --libdir=/%{_lib}
@@ -47,6 +48,7 @@ ln -sfv ../../%{_lib}/libreadline.so.6 %{buildroot}/usr/%{_lib}/libreadline.so
 ln -sfv ../../%{_lib}/libhistory.so.6 %{buildroot}/usr/%{_lib}/libhistory.so
 rm -f %{buildroot}/usr/share/info/dir
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -82,9 +84,12 @@ done
 /usr/share/info/history.info
 /usr/share/info/readline.info
 /usr/share/info/rluserman.info
-/usr/share/man/man3/*
+/usr/share/man/man3/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 6.2-2
+- Optimize for size
+
 * Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 6.2-1
 - Upgrade to 6.2
 
