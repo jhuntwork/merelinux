@@ -1,21 +1,30 @@
 Summary: Perl Progamming Language
 Name: perl
-Version: 5.12.1
-Release: 2
+Version: 5.14.2
+Release: 1
 Group: Development/Languages
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.perl.org
-Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: http://www.cpan.org/src/5.0/perl-5.14.2.tar.gz
 
-BuildRequires: digest(%{SOURCE0}) = f7f2d7f5aaac15a75028381b159a560f
+BuildRequires: digest(sha1:%{SOURCE0}) = df1549d65cdef2b20023af83ecaa2a024109a5ad
+BuildRequires: util-linux
 BuildRequires: zlib-devel
-
 Provides: perl, perl(Carp::Heavy), perl(getopts.pl), perl(bigint.pl)
+
 
 %description
 Perl is a stable, cross platform programming language.
+
+%package devel-docs
+Group: Development/Languages
+Summary: Documentation for development with perl
+Requires: %{name} >= %{version}
+
+%description devel-docs
+Documentation for development with perl
 
 %prep
 %setup -q
@@ -43,8 +52,6 @@ chmod +x %{name}-req
 %define __perl_requires %{_builddir}/%{name}-%{version}/%{name}-req
 
 %build
-export CFLAGS="%{CFLAGS}"
-export LDFLAGS="%{LDFLAGS}"
 sed -i -e "s|BUILD_ZLIB\s*= True|BUILD_ZLIB = False|" \
        -e "s|INCLUDE\s*= ./zlib-src|INCLUDE = /usr/include|" \
        -e "s|LIB\s*= ./zlib-src|LIB = /usr/%{_lib}|" \
@@ -57,17 +64,13 @@ sh Configure \
   -Dman3dir=/usr/share/man/man3 \
   -Dpager="/usr/bin/less -isR" \
   -Duseshrplib
-make
-#make test
+make %{PMFLAGS} OPTIMIZE="-Os -pipe"
 
 %install
 make DESTDIR=%{buildroot} install
-install -dv %{buildroot}/usr/lib/perl5/site_perl/5.12.1/$(arch)-linux/{auto,Bundle}
-rm -f %{buildroot}/usr/share/man/man1/{c2ph.1,perlthanks.1,s2p.1}
-find %{buildroot}/usr/share/man -type f -exec bzip2 -9 '{}' \;
-ln -v %{buildroot}/usr/share/man/man1/pstruct.1.bz2 %{buildroot}/usr/share/man/man1/c2ph.1.bz2
-ln -v %{buildroot}/usr/share/man/man1/perlbug.1.bz2 %{buildroot}/usr/share/man/man1/perlthanks.1.bz2
-ln -v %{buildroot}/usr/share/man/man1/psed.1.bz2 %{buildroot}/usr/share/man/man1/s2p.1.bz2
+install -dv %{buildroot}/usr/lib/perl5/site_perl/%{version}/$(arch)-linux/{auto,Bundle}
+%{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -88,6 +91,7 @@ rm -rf %{buildroot}
 /usr/bin/h2ph
 /usr/bin/h2xs
 /usr/bin/instmodsh
+/usr/bin/json_pp
 /usr/bin/libnetcfg
 /usr/bin/perl
 /usr/bin/perl%{version}
@@ -109,15 +113,23 @@ rm -rf %{buildroot}
 /usr/bin/pstruct
 /usr/bin/ptar
 /usr/bin/ptardiff
+/usr/bin/ptargrep
 /usr/bin/s2p
 /usr/bin/shasum
 /usr/bin/splain
 /usr/bin/xsubpp
 /usr/lib/perl5
-/usr/share/man/man1/*
-/usr/share/man/man3/*
+/usr/share/man/man1/*.bz2
+
+%files devel-docs
+/usr/share/man/man3/*.bz2
 
 %changelog
+* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.14.2-1
+- Upgrade to 5.14.2
+- Optimize for size
+- Separate man3 files into devel-docs package
+
 * Sat Sep 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.12.1-2
 - Create a shared perl library
 
