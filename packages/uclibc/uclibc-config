@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Version: 0.9.32
-# Mon Dec 12 21:41:56 2011
+# Fri Dec 16 01:55:39 2011
 #
 # TARGET_alpha is not set
 # TARGET_arm is not set
@@ -122,7 +122,7 @@ UCLIBC_GRP_BUFFER_SIZE=256
 # UCLIBC_LINUX_MODULE_24 is not set
 UCLIBC_LINUX_SPECIFIC=y
 UCLIBC_HAS_GNU_ERROR=y
-# UCLIBC_BSD_SPECIFIC is not set
+UCLIBC_BSD_SPECIFIC=y
 UCLIBC_HAS_BSD_ERR=y
 # UCLIBC_HAS_OBSOLETE_BSD_SIGNAL is not set
 # UCLIBC_HAS_OBSOLETE_SYSV_SIGNAL is not set
