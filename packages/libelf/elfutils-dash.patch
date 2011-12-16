@@ -1,0 +1,21 @@
+diff -Naur elfutils-0.152.orig/configure elfutils-0.152/configure
+--- elfutils-0.152.orig/configure	2011-02-15 14:30:26.000000000 +0000
++++ elfutils-0.152/configure	2011-12-04 23:28:09.484464472 +0000
+@@ -4878,7 +4878,7 @@
+ 
+ # 1.234<whatever> -> 1234<whatever>
+ case "$PACKAGE_VERSION" in
+-[0-9].*) eu_version="${PACKAGE_VERSION/./}" ;;
++[0-9].*) eu_version=`echo "$PACKAGE_VERSION" | sed 's@\.@@'` ;;
+ *)     	   as_fn_error $? "confused by version number '$PACKAGE_VERSION'" "$LINENO" 5 ;;
+ esac
+ case "$eu_version" in
+@@ -4907,7 +4907,7 @@
+ esac
+ 
+ # Round up to the next release API (x.y) version.
+-eu_version=$[($eu_version + 999) / 1000]
++eu_version=$(( (eu_version + 999) / 1000 ))
+ 
+ cat >confcache <<\_ACEOF
+ # This file is a shell script that caches the results of configure
