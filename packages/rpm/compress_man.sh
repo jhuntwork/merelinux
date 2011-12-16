@@ -20,8 +20,8 @@ for file in $files ; do
         let "count++"
      done
      link="${back}${oldfile#$common/}"
-     rm -vf "$file"
-     ln -sv "$link" "$file"
+     rm -f "$file"
+     ln -s "$link" "$file"
   else
      oldfile=$file
      oldinode=$inode
@@ -36,6 +36,6 @@ for i in $(find "$@/usr/share/man" -type l) ; do
     link=$(basename `readlink $i`)
     fn=$(basename $i)
     dn=$(dirname $i)
-    rm -vf $i
-    ln -sv $link.bz2 "$dn/$fn.bz2"
+    rm -f $i
+    ln -s $link.bz2 "$dn/$fn.bz2"
 done
