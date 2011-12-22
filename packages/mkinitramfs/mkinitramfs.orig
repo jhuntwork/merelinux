@@ -29,12 +29,12 @@ if [ $CD -eq 1 ] ; then
   CDBINEXTRA='blockdev dmsetup losetup'
   CDLIBEXTRA='libdevmapper.so.1.02 libm.so.6'
   INITRAMFS_FILE=/tmp/initramfs.gz
-  INITIN=initcd.in
+  INITIN=initcd.in.xz
 else
   CDBINEXTRA=''
   CDLIBEXTRA=''
   INITRAMFS_FILE=/boot/initrd.img-$KERNEL_VERSION
-  INITIN=init.in
+  INITIN=init.in.xz
 fi
 
 function die {
