@@ -42,11 +42,7 @@ function die {
    exit 1
 }
 
-# Determine the main lib directory for this arch
-case $(uname -m) in
-        x86_64) LIBDIR=lib64 ; DL=ld-linux-x86-64.so.2 ;;
-        *) LIBDIR=lib ; ld-linux.so.2 ;;
-esac
+DL=ld64-uClibc.so.0
 
 # Create a temporrary working directory
 WDIR=`mktemp -d`
@@ -54,7 +50,6 @@ WDIR=`mktemp -d`
 # Create base directory structure
 mkdir -p $WDIR/{bin,dev,etc/{modprobe.d,udev/rules.d},lib/firmware,sbin,sys,proc}
 touch $WDIR/etc/modprobe.d/modprobe.conf
-ln -s lib $WDIR/lib64
 
 # Create necessary device nodes
 mknod -m 640 $WDIR/dev/console c 5 1
@@ -80,18 +75,24 @@ else
 fi
 
 # Install basic binaries
-for f in sh cat cp dd killall ls lsmod mdadm mkdir mknod mount umount sed sleep ln rm uname $CDBINEXTRA
+for f in busybox $CDBINEXTRA
 do
   file=$(type -p $f)
   if [ ! -z $file ] ; then
     cp $file $WDIR/bin
+    if [ "$file" = "busybox" ] ; then
+      cmds=`$WDIR/bin/busybox --help|grep "^Currently defined functions:-*$" -A10|grep \,`
+      for cmd in $cmds ; do
+         ln -s busybox $WDIR/bin/$cmd
+      done
+    fi
   else
     echo "Missing required binary: $f"
     die
   fi
 done
 
-for f in udevadm udevd modprobe blkid switch_root
+for f in udevadm udevd modprobe
 do
   file=$(type -p $f)
   if [ ! -z $file ] ; then
@@ -106,17 +107,11 @@ done
 for l in $DL $CDLIBEXTRA \
  librt.so.1 \
  libpthread.so.0 \
- libblkid.so.1 \
- libc.so.6 \
+ libc.so.0 \
  libdl.so.2 \
- libncursesw.so.5 \
- libreadline.so.6 \
- libhistory.so.6 \
- libz.so.1 \
- libuuid.so.1 \
- libblkid.so.1
+ libz.so.1
 do
-  file=$(PATH=/$LIBDIR:/usr/$LIBDIR type -p $l)
+  file=$(PATH=/lib:/usr/lib type -p $l)
   if [ ! -z $file ] ; then
     cp $file $WDIR/lib
   else
