@@ -10,5 +10,5 @@ install:
 	install -d -m0755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(DATADIR)
 	sed 's@DATADIR=.*@DATADIR=$(DATADIR)@' mkinitramfs.orig > mkinitramfs
 	install -m0755 mkinitramfs $(DESTDIR)$(BINDIR)
-	install -m0644 init.in $(DESTDIR)$(DATADIR)
-	install -m0644 initcd.in $(DESTDIR)$(DATADIR)
+	xz -zc init.in >$(DESTDIR)$(DATADIR)
+	xz -zc initcd.in >$(DESTDIR)$(DATADIR)

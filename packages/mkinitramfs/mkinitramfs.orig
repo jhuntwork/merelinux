@@ -68,7 +68,7 @@ fi
 
 # Install the init file
 if [ $CD -eq 1 ] ; then
-    sed "s/__VERSION__/$CDVERSION/" $DATADIR/$INITIN > $WDIR/init
+    xzcat $DATADIR/$INITIN | sed "s/__VERSION__/$CDVERSION/" > $WDIR/init
     chmod 0755 $WDIR/init
 else
     install -m0755 $DATADIR/$INITIN $WDIR/init
@@ -105,10 +105,10 @@ done
 
 # Install libraries
 for l in $DL $CDLIBEXTRA \
- librt.so.1 \
+ librt.so.0 \
  libpthread.so.0 \
  libc.so.0 \
- libdl.so.2 \
+ libdl.so.0 \
  libz.so.1
 do
   file=$(PATH=/lib:/usr/lib type -p $l)
