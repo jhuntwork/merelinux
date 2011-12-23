@@ -87,7 +87,7 @@ export LDFLAGS="%{LDFLAGS}"
   --with-gd \
   --with-mysql=mysqlnd \
   --with-mysqli=mysqlnd \
-  --with-mysql-sock=/var/run/mysql/mysql.sock \
+  --with-mysql-sock=/srv/mysql/mysql.sock \
   --with-apxs2=/usr/sbin/apxs
 make
 cd ../%{name}-%{version}-fpm
@@ -120,7 +120,7 @@ cd ../%{name}-%{version}-fpm
   --with-gd \
   --with-mysql=mysqlnd \
   --with-mysqli=mysqlnd \
-  --with-mysql-sock=/var/run/mysql/mysql.sock \
+  --with-mysql-sock=/srv/mysql/mysql.sock \
   --enable-fpm
 make
 
