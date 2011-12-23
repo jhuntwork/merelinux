@@ -1,0 +1,14 @@
+--- a/gettext-tools/gnulib-lib/spawn.in.h	2010-11-18 19:49:42.424350565 +0300
++++ b/gettext-tools/gnulib-lib/spawn.in.h	2010-11-18 19:49:10.392349526 +0300
+@@ -37,6 +37,10 @@
+ # include <signal.h>
+ #endif
+
++#ifdef __UCLIBC__
++# include <sched.h>
++#endif
++
+ #include <sys/types.h>
+
+ #ifndef __THROW
+
