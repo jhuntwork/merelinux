@@ -1,7 +1,7 @@
 Summary: PHP Hypertext Preprocessor
 Name: php
 Version: 5.3.6
-Release: 2
+Release: 3
 Group: Development/Languages
 License: PHP v3.01
 Distribution: LightCube OS
@@ -87,7 +87,7 @@ export LDFLAGS="%{LDFLAGS}"
   --with-gd \
   --with-mysql=mysqlnd \
   --with-mysqli=mysqlnd \
-  --with-mysql-sock=/var/run/mysql/mysql.sock \
+  --with-mysql-sock=/srv/mysql/mysql.sock \
   --with-apxs2=/usr/sbin/apxs
 make
 cd ../%{name}-%{version}-fpm
@@ -120,7 +120,7 @@ cd ../%{name}-%{version}-fpm
   --with-gd \
   --with-mysql=mysqlnd \
   --with-mysqli=mysqlnd \
-  --with-mysql-sock=/var/run/mysql/mysql.sock \
+  --with-mysql-sock=/srv/mysql/mysql.sock \
   --enable-fpm
 make
 
@@ -187,6 +187,9 @@ You may also what to edit "DirectoryIndex" to include index.php'
 /usr/%{_lib}/apache/libphp5.so
 
 %changelog
+* Fri Dec 24 2011 Fitz Agard <fhagard@lightcubesolutions.com> - 5.3.6-3
+- Changed mysql.sock location.
+
 * Thu Aug 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.3.6-2
 - Enable support for FTP
 
