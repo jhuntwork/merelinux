@@ -1,7 +1,7 @@
 #
 # Automatically generated make config: don't edit
 # Busybox version: 1.19.3
-# Sat Dec 24 11:44:42 2011
+# Sat Dec 24 17:06:08 2011
 #
 CONFIG_HAVE_DOT_CONFIG=y
 
@@ -916,17 +916,17 @@ CONFIG_WATCH=y
 #
 # Runit Utilities
 #
-# CONFIG_RUNSV is not set
-# CONFIG_RUNSVDIR is not set
-# CONFIG_FEATURE_RUNSVDIR_LOG is not set
-# CONFIG_SV is not set
-CONFIG_SV_DEFAULT_SERVICE_DIR=""
-# CONFIG_SVLOGD is not set
-# CONFIG_CHPST is not set
-# CONFIG_SETUIDGID is not set
-# CONFIG_ENVUIDGID is not set
-# CONFIG_ENVDIR is not set
-# CONFIG_SOFTLIMIT is not set
+CONFIG_RUNSV=y
+CONFIG_RUNSVDIR=y
+CONFIG_FEATURE_RUNSVDIR_LOG=y
+CONFIG_SV=y
+CONFIG_SV_DEFAULT_SERVICE_DIR="/var/service"
+CONFIG_SVLOGD=y
+CONFIG_CHPST=y
+CONFIG_SETUIDGID=y
+CONFIG_ENVUIDGID=y
+CONFIG_ENVDIR=y
+CONFIG_SOFTLIMIT=y
 # CONFIG_CHCON is not set
 # CONFIG_FEATURE_CHCON_LONG_OPTIONS is not set
 # CONFIG_GETENFORCE is not set
