@@ -27,7 +27,7 @@ DATADIR=/usr/share/mkinitramfs
 if [ $CD -eq 1 ] ; then
   CDVERSION="lightcubecd-$3"
   CDBINEXTRA='blockdev dmsetup losetup'
-  CDLIBEXTRA='libdevmapper.so.1.02 libm.so.6'
+  CDLIBEXTRA='libdevmapper.so.1.02'
   INITRAMFS_FILE=/tmp/initramfs.gz
   INITIN=initcd.in.xz
 else
@@ -69,28 +69,41 @@ fi
 # Install the init file
 if [ $CD -eq 1 ] ; then
     xzcat $DATADIR/$INITIN | sed "s/__VERSION__/$CDVERSION/" > $WDIR/init
-    chmod 0755 $WDIR/init
 else
-    install -m0755 $DATADIR/$INITIN $WDIR/init
+    xzcat $DATADIR/$INITIN > $WDIR/init
 fi
+chmod 0755 $WDIR/init
 
 # Install basic binaries
-for f in busybox $CDBINEXTRA
+for f in sh lsmod busybox $CDBINEXTRA
 do
   file=$(type -p $f)
   if [ ! -z $file ] ; then
     cp $file $WDIR/bin
-    if [ "$file" = "busybox" ] ; then
-      cmds=`$WDIR/bin/busybox --help|grep "^Currently defined functions:-*$" -A10|grep \,`
-      for cmd in $cmds ; do
-         ln -s busybox $WDIR/bin/$cmd
-      done
-    fi
   else
     echo "Missing required binary: $f"
     die
   fi
 done
+
+for file in /bin/*
+do
+  if [ "`readlink $file`" = "busybox" ]
+  then
+    name=`basename $file`
+    ln -s busybox $WDIR/bin/$name
+  fi
+done
+
+for file in /sbin/*
+do
+  if [ "`readlink $file`" = "../bin/busybox" ]
+  then
+    name=`basename $file`
+    ln -s ../bin/busybox $WDIR/sbin/$name
+  fi
+done
+rm -f $WDIR/sbin/init
 
 for f in udevadm udevd modprobe
 do
@@ -105,11 +118,14 @@ done
 
 # Install libraries
 for l in $DL $CDLIBEXTRA \
- librt.so.0 \
- libpthread.so.0 \
- libc.so.0 \
- libdl.so.0 \
- libz.so.1
+  librt.so.0 \
+  libpthread.so.0 \
+  libpam.so.0 \
+  libpam_misc.so.0 \
+  libc.so.0 \
+  libdl.so.0 \
+  libm.so.0 \
+  libz.so.1
 do
   file=$(PATH=/lib:/usr/lib type -p $l)
   if [ ! -z $file ] ; then
@@ -120,14 +136,15 @@ do
   fi
 done
 cp -a /lib/udev $WDIR/lib
+cp -a /lib/security $WDIR/lib
 
 # Install the kernel modules
 find /lib/modules/$KERNEL_VERSION/kernel/{crypto,fs,lib} \
- /lib/modules/$KERNEL_VERSION/kernel/drivers/{block,ata,md,firewire,scsi,usb/{host,storage},message,pcmcia,virtio} \
- -type f | cpio --make-directories -p $WDIR
+  /lib/modules/$KERNEL_VERSION/kernel/drivers/{block,ata,md,firewire,scsi,usb/{host,storage},message,pcmcia,virtio} \
+  -type f | cpio --quiet --make-directories -p $WDIR
 depmod -b $WDIR $KERNEL_VERSION
 
-( cd $WDIR ; find . | cpio -o -H newc | gzip -9 ) > $INITRAMFS_FILE
+( cd $WDIR ; find . | cpio --quiet -o -H newc | gzip -9 ) > $INITRAMFS_FILE
 
 # Remove the temporary directory
 rm -rf $WDIR

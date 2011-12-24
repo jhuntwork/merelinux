@@ -112,6 +112,6 @@ if [ -n "$rootdelay" ] ; then sleep "$rootdelay" ; fi
 
 do_mount_root
 
-killall -w /sbin/udevd
+killall /sbin/udevd
 
 exec switch_root /.root "$init" "$@"
