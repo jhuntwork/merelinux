@@ -1,0 +1,58 @@
+#!/bin/sh
+# Begin /etc/init.d/mongod
+
+### BEGIN INIT INFO
+# Provides:            mongod
+# Required-Start:      $network
+# Should-Start:        $remote_fs
+# Required-Stop:       $network
+# Should-Stop:         $remote_fs
+# Default-Start:       3 4 5 
+# Default-Stop:        0 1 2 6
+# Short-Description:   Starts/Stops the mongoDB server.
+# Description:         Starts and stops the mongoDB server.
+# X-LFS-Provided-By:   BLFS
+### END INIT INFO
+
+. /lib/lsb/init-functions
+
+MESSAGE="mongoDB Server"
+BIN_FILE="/usr/sbin/mongod"
+CONFIG_FILE="/etc/mongod.conf"
+
+chk_stat
+
+case "$1" in
+    start)
+        start_daemon "${BIN_FILE}" -f "${CONFIG_FILE}"
+        evaluate_retval start
+        ;;
+
+    stop)
+        killproc "${BIN_FILE}"
+        evaluate_retval stop
+        ;;
+
+    reload)
+        killproc "${BIN_FILE}" -HUP
+        evaluate_retval reload
+        ;;
+
+    restart)
+        killproc "${BIN_FILE}"
+        sleep 1
+        start_daemon "${BIN_FILE}" -f "${CONFIG_FILE}"
+        evaluate_retval restart
+        ;;
+
+    status)
+        statusproc "${BIN_FILE}"
+        ;;
+
+    *)
+        echo "Usage: $0 {start|stop|reload|restart|status}"
+        exit 1
+        ;;
+esac
+
+# End /etc/init.d/mongod
