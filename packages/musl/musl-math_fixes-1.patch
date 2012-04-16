@@ -1,0 +1,30 @@
+From 93a18a15e4428d4fe3f239081e0218ac0c69f458 Mon Sep 17 00:00:00 2001
+From: Rich Felker <dalias@aerifal.cx>
+Date: Fri, 30 Mar 2012 23:33:00 -0400
+Subject: [PATCH 1/1] make math.h more c++-friendly
+
+---
+ include/math.h |    7 +++++--
+ 1 files changed, 5 insertions(+), 2 deletions(-)
+
+diff --git a/include/math.h b/include/math.h
+index e7220ae..8791bba 100644
+--- a/include/math.h
++++ b/include/math.h
+@@ -41,8 +41,11 @@ int __fpclassify(double);
+ int __fpclassifyf(float);
+ int __fpclassifyl(long double);
+ 
+-#define __FLOAT_BITS(f) (((union { float __f; __uint32_t __i; }){ (float)(f) }).__i)
+-#define __DOUBLE_BITS(f) (((union { double __f; __uint64_t __i; }){ (double)(f) }).__i)
++union __float_repr { float __f; __uint32_t __i; };
++union __double_repr { double __f; __uint64_t __i; };
++
++#define __FLOAT_BITS(f) (((union __float_repr){ (float)(f) }).__i)
++#define __DOUBLE_BITS(f) (((union __double_repr){ (double)(f) }).__i)
+ 
+ #define fpclassify(x) ( \
+ 	sizeof(x) == sizeof(float) ? __fpclassifyf(x) : \
+-- 
+1.7.3.2
+

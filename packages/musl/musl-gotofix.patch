@@ -1,0 +1,35 @@
+From f42bad9ccb2af7cde8a676d57c4d161455256456 Mon Sep 17 00:00:00 2001
+From: Rich Felker <dalias@aerifal.cx>
+Date: Sat, 11 Feb 2012 00:05:58 -0500
+Subject: [PATCH] fix illegal goto out of cleanup context in dns lookups
+
+---
+ src/network/__dns.c |    6 +++---
+ 1 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/network/__dns.c b/src/network/__dns.c
+index 8cd7d5d..45d9b43 100644
+--- a/src/network/__dns.c
++++ b/src/network/__dns.c
+@@ -88,6 +88,9 @@ int __dns_doqueries(unsigned char *dest, const char *name, int *rr, int rrcnt)
+ 		sl = sizeof sa.sin;
+ 	}
+ 
++	pthread_cleanup_push(cleanup, (void *)(intptr_t)fd);
++	pthread_setcancelstate(cs, 0);
++
+ 	/* Get local address and open/bind a socket */
+ 	sa.sin.sin_family = family;
+ 	fd = socket(family, SOCK_DGRAM, 0);
+@@ -101,9 +104,6 @@ int __dns_doqueries(unsigned char *dest, const char *name, int *rr, int rrcnt)
+ 	pfd.fd = fd;
+ 	pfd.events = POLLIN;
+ 
+-	pthread_cleanup_push(cleanup, (void *)(intptr_t)fd);
+-	pthread_setcancelstate(cs, 0);
+-
+ 	/* Loop until we timeout; break early on success */
+ 	for (; time(0)-t0 < TIMEOUT; ) {
+ 
+-- 
+1.7.3.2
