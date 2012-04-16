@@ -17,45 +17,31 @@ expanding macros as it goes.
 
 %prep
 %setup -q
+%{config_musl}
+sed -i '/abort/d' lib/freadahead.c
 
 %build
-export LDFLAGS="%{LDFLAGS}"
+export CFLAGS="-D_GNU_SOURCE -DSLOW_BUT_NO_HACKS -Os"
 ./configure \
-  --prefix=/usr
+  --prefix=''
 make %{PMFLAGS}
-make check
+#make check
 
 %install
 make DESTDIR=%{buildroot} install
-rm -f %{buildroot}/usr/share/info/dir
+rm -rf %{buildroot}/share/info
+rm -rf %{buildroot}/lib
 %{compress_man}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
 
-%post
-/usr/bin/install-info /usr/share/info/m4.info /usr/share/info/dir
-
-%preun
-/usr/bin/install-info --delete /usr/share/info/m4.info /usr/share/info/dir
-
 %files
 %defattr(-,root,root)
-/usr/bin/m4
-/usr/share/info/m4.info
-/usr/share/info/m4.info-1
-/usr/share/info/m4.info-2
-/usr/share/man/man1/m4.1.bz2
+/bin/m4
+/share/man/man1/m4.1.bz2
 
 %changelog
-* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4.16-1
-- Upgrade to 1.4.16
-
-* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4.15-1
-- Upgrade to 1.4.15
-
-* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4.14-1
-- Upgrade to 1.4.14
-
-* Tue Jul 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.4.16-1
 - Initial version
