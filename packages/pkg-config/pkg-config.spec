@@ -1,7 +1,7 @@
 Summary: pkg-config 
 Name: pkg-config
 Version: 0.25
-Release: 2
+Release: 1
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
@@ -12,48 +12,53 @@ Provides: pkgconfig
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 8922aeb4edeff7ed554cc1969cbb4ad5a4e6b26e
 
-
 %description
 pkg-config is a helper tool used when compiling applications and libraries. It can
 be used to determine library versions and compiler options needed for linking to
 installed libraries.
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
+%{config_musl}
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-D_GNU_SOURCE -Os -pipe'
 ./configure \
-  --prefix=/usr \
-  --with-pc-path=/usr/%{_lib}/pkgconfig
+  --prefix='' \
+  --with-pc-path=/lib/pkgconfig
 make %{PMFLAGS}
-make check
 
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
 %{strip}
-install -dv %{buildroot}/usr/share/pkgconfig
-install -dv %{buildroot}/usr/%{_lib}/pkgconfig
+install -dv %{buildroot}/share/pkgconfig
+install -dv %{buildroot}/lib/pkgconfig
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/usr/bin/pkg-config
-/usr/share/aclocal/pkg.m4
-%dir /usr/share/pkgconfig
-%dir /usr/%{_lib}/pkgconfig
-/usr/share/man/man1/pkg-config.1.bz2
-/usr/share/doc/pkg-config
+/bin/pkg-config
+/share/aclocal/pkg.m4
+%dir /lib/pkgconfig
+%dir /share/pkgconfig
+/share/man/man1/pkg-config.1.bz2
+
+%files extras
+%defattr(-,root,root)
+/share/doc/pkg-config
 
 %changelog
-* Tue Oct 25 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.25-2
-- Optimize for size
-
-* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.25-1
-- Upgrade to 0.25
-
-* Sat Jul 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.23-1
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.25-1
 - Initial version
