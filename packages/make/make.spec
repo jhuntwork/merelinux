@@ -8,8 +8,10 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/make
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
+Patch0: make-ar.h.patch
 
 BuildRequires: digest(sha1:%{SOURCE0}) = b8a8a99e4cb636a213aad3816dda827a92b9bbed
+BuildRequires: digest(sha1:%{PATCH0})  = a157c1727c0cd6b9ce4280453bc31a2314a07e04
 
 %description
 Make is a tool which controls the generation of executables and other
@@ -17,41 +19,32 @@ non-source files of a program from the program's source files.
 
 %prep
 %setup -q
+%patch0 -p1
+%{config_musl}
 
 %build
+export CFLAGS='-D_GNU_SOURCE -Os'
 ./configure \
-  --prefix=/usr \
-  --infodir=/usr/share/info \
-  --mandir=/usr/share/man
-make
+  --prefix='' \
+  --infodir=/share/info \
+  --mandir=/share/man
+make %{PMFLAGS}
 make check
 
 %install
 make DESTDIR=%{buildroot} install
-rm -f %{buildroot}/usr/share/info/dir
+rm -rf %{buildroot}/share/info
 %{compress_man}
-%find_lang %{name}
+%{strip}
 
 %clean
 rm -rf %{buildroot}
 
-%post
-/usr/bin/install-info /usr/share/info/make.info /usr/share/info/dir
-
-%preun
-/usr/bin/install-info --delete /usr/share/info/make.info /usr/share/info/dir
-
-%files -f %{name}.lang
+%files
 %defattr(-,root,root)
-/usr/bin/make
-/usr/share/info/make.info
-/usr/share/info/make.info-1
-/usr/share/info/make.info-2
-/usr/share/man/man1/make.1.bz2
+/bin/make
+/share/man/man1/make.1.bz2
 
 %changelog
-* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.82-1
-- Upgrade to 3.82
-
-* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.81-1
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.82-1
 - Initial version
