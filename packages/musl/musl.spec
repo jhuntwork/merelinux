@@ -54,6 +54,7 @@ make DESTDIR=%{buildroot} install
 install -d %{buildroot}/lib
 # Remove headers provided by the kernel
 rm -rf %{buildroot}/include/linux
+ln -sf libc.so %{buildroot}/lib/ld-musl-%{_arch}.so.1
 %{strip}
 
 %clean
