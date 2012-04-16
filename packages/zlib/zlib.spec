@@ -1,15 +1,15 @@
 Summary: zlib Compression Library
 Name: zlib
-Version: 1.2.5
-Release: 2
+Version: 1.2.6
+Release: 1
 Group: System Environment/Libraries
 License: BSD
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.zlib.net
-Source0: http://zlib.net/zlib-1.2.5.tar.bz2
+Source0: http://zlib.net/zlib-1.2.6.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 543fa9abff0442edca308772d6cef85557677e02
+BuildRequires: digest(sha1:%{SOURCE0}) = 3d445731e4bfea1cd00f36567d77d6e5f5a19be9
 
 %description
 According to its maintainers, zlib is:
@@ -25,56 +25,36 @@ Headers and libraries for developing with %{name}
 
 %prep
 %setup -q
+# Busybox doesn't support mktemp -u
+sed -i 's@mktemp -u@mktemp@' Makefile.in
 
 %build
-export CFLAGS="-Os -pipe"
+export CFLAGS="-Os"
 ./configure \
-  --prefix=/usr \
-  --libdir=/usr/%{_lib}
+  --prefix=''
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
-install -dv %{buildroot}/%{_lib}
-mv -v %{buildroot}/usr/%{_lib}/libz.so.* %{buildroot}/%{_lib}
-ln -sfv ../../%{_lib}/libz.so.%{version} %{buildroot}/usr/%{_lib}/libz.so
 %{compress_man}
 %{strip}
 
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %files
 %defattr(-,root,root)
-/%{_lib}/libz.so.*
+/lib/libz.so.*
 
 %files devel
 %defattr(-,root,root)
-/usr/%{_lib}/libz.a
-/usr/%{_lib}/libz.so
-/usr/%{_lib}/pkgconfig/zlib.pc
-/usr/share/man/man3/zlib.3.bz2
-/usr/include/zconf.h
-/usr/include/zlib.h
+/lib/libz.a
+/lib/libz.so
+/lib/pkgconfig/zlib.pc
+/share/man/man3/zlib.3.bz2
+/include/zconf.h
+/include/zlib.h
 
 %changelog
-* Wed Oct 26 2011 Jeremy Huntwork <jhuntowrk@lightcubesolutions.com> - 1.2.5-2
-- Optimize for size
-
-* Sat Jul 17 2010 Jeremy Huntwork <jhuntowrk@lightcubesolutions.com> - 1.2.5-1
-- Upgrade to 1.2.5
-
-* Fri Apr 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.2.4-3
-- Fixes to build method since 1.2.4 has a new make system
-
-* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.2.4-2
-- Move development libraries to the devel package 
-
-* Tue Mar 30 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.2.4-1
-- Update to 1.2.4
-
-* Sun Jul 19 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntowrk@lightcubesolutions.com> - 1.2.6-1
 - Initial version
