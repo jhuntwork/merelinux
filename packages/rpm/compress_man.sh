@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/bin/sh
 # First convert any hardlinks to softlinks
-files=$(find "$@/usr/share/man" -type f)
+files=$(find "$@/share/man" -type f)
 files=$(ls -i $files | sort)
 IFS='
 '
@@ -29,10 +29,10 @@ for file in $files ; do
 done
 
 # Next compress any real files left
-find "$@/usr/share/man" -type f -exec bzip2 -9 '{}' \;
+find "$@/share/man" -type f -exec bzip2 -9 '{}' \;
 
 # Finally rename any softlinks to their bz2 name
-for i in $(find "$@/usr/share/man" -type l) ; do
+for i in $(find "$@/share/man" -type l) ; do
     link=$(basename `readlink $i`)
     fn=$(basename $i)
     dn=$(dirname $i)

@@ -24,6 +24,7 @@ non-source files of a program from the program's source files.
 
 %build
 export CFLAGS='-D_GNU_SOURCE -Os'
+export LDFLAGS='--static'
 ./configure \
   --prefix='' \
   --infodir=/share/info \

@@ -1,7 +1,7 @@
 Summary: The Expat XML Parser
 Name: expat
 Version: 2.0.1
-Release: 3
+Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -26,13 +26,15 @@ Headers and libraries for developing with %{name}
 
 %prep
 %setup -q
+%{config_musl}
 
 %build
-export CFLAGS="-Os -pipe"
+export CFLAGS="-D_GNU_SOURCE -Os"
+export LDFLAGS="--static"
 ./configure \
-  --prefix=/usr \
-  --libdir=/usr/%{_lib} \
-  --mandir=/usr/share/man
+  --prefix='' \
+  --disable-shared \
+  --mandir=/share/man
 make %{PMFLAGS}
 
 %install
@@ -43,29 +45,18 @@ make DESTDIR=%{buildroot} install
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
 %files
 %defattr(-,root,root)
-/usr/bin/xmlwf
-/usr/%{_lib}/libexpat.so.*
-/usr/share/man/man1/xmlwf.1.bz2
+/bin/xmlwf
+/share/man/man1/xmlwf.1.bz2
 
 %files devel
 %defattr(-,root,root)
-/usr/include/expat.h
-/usr/include/expat_external.h
-/usr/%{_lib}/libexpat.a
-/usr/%{_lib}/libexpat.la
-/usr/%{_lib}/libexpat.so
+/include/expat.h
+/include/expat_external.h
+/lib/libexpat.a
+/lib/libexpat.la
 
 %changelog
-* Thu Oct 27 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.0.1-3
-- Optimize for size
-
-* Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.0.1-2
-- Fixes to mandir location
-
-* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.0.1-1
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.0.1-1
 - Initial version

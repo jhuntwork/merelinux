@@ -1,7 +1,7 @@
 Summary: ext2, ext3 and ext4 File System Programs
 Name: e2fsprogs
 Version: 1.41.14
-Release: 2
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://e2fsprogs.sourceforge.net
 Source: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 24f9364fa3d4c0d7d00cb627b819d0e51055d6c5
-BuildRequires: util-linux-devel
+BuildRequires: util-linux-libs-devel
 
 %package devel
 Summary: %{name} headers and libraries
@@ -23,53 +23,56 @@ ext2, ext3 and ext4 filesystems
 %description devel
 Headers and libraries for developing with %{name}
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
+%{config_musl}
+sed -i 's@open64@open@g' misc/mke2fs.c
+sed -i 's@lseek64@lseek@g' lib/ext2fs/llseek.c lib/blkid/llseek.c misc/e2image.c 
+sed -i '/sys\/signal\.h/d' misc/fsck.c
 
 %build
-export CFLAGS='-Os -pipe'
-mkdir -v build
+export CFLAGS='-D_GNU_SOURCE -Os -pipe -Werror=implicit-function-declaration -DHAVE_LSEEK64 -DHAVE_LSEEK64_PROTOTYPE'
+mkdir build
 cd build
 ../configure \
   --prefix=/usr \
   --with-root-prefix="" \
   --enable-elf-shlibs \
-  --libdir=/usr/%{_lib} \
   --disable-libblkid \
   --disable-libuuid \
   --disable-uuidd \
-  --disable-fsck
-make %{PMFLAGS}
+  --disable-tls
+make V=1 %{PMFLAGS}
 #make check
 
 %install
 cd build
 make DESTDIR=%{buildroot} install
 make DESTDIR=%{buildroot} install-libs
-gunzip %{buildroot}/usr/share/info/libext2fs.info.gz
-makeinfo -o doc/com_err.info ../lib/et/com_err.texinfo
-install -v -m644 doc/com_err.info %{buildroot}/usr/share/info
+rm -rf %{buildroot}/usr/share/locale
+rm -rf %{buildroot}/usr/lib/charset.alias
 %{compress_man}
 %{strip}
-%find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
-%post devel
-/usr/bin/install-info /usr/share/info/libext2fs.info /usr/share/info/dir
-/usr/bin/install-info /usr/share/info/com_err.info /usr/share/info/dir
-
-%preun devel
-/usr/bin/install-info --delete /usr/share/info/libext2fs.info /usr/share/info/dir
-/usr/bin/install-info --delete /usr/share/info/com_err.info /usr/share/info/dir
-
-%files -f build/%{name}.lang
+%files
 %defattr(-,root,root)
 /etc/mke2fs.conf
+/lib/libcom_err.so.*
+/lib/libe2p.so.*
+/lib/libext2fs.so.*
+/lib/libss.so.*
 /sbin/badblocks
 /sbin/debugfs
 /sbin/dumpe2fs
@@ -77,6 +80,7 @@ rm -rf %{buildroot}
 /sbin/e2image
 /sbin/e2label
 /sbin/e2undo
+/sbin/fsck
 /sbin/fsck.ext2
 /sbin/fsck.ext3
 /sbin/fsck.ext4
@@ -92,55 +96,39 @@ rm -rf %{buildroot}
 /usr/bin/chattr
 /usr/bin/lsattr
 /usr/sbin/e2freefrag
-/usr/%{_lib}/e2initrd_helper
-/usr/%{_lib}/libcom_err.so.*
-/usr/%{_lib}/libe2p.so.*
-/usr/%{_lib}/libext2fs.so.*
-/usr/%{_lib}/libss.so.*
+/usr/lib/e2initrd_helper
 /usr/sbin/filefrag
 /usr/sbin/mklost+found
-/usr/share/man/man1/*.bz2
-/usr/share/man/man5/*.bz2
-/usr/share/man/man8/*.bz2
 
 %files devel
 %defattr(-,root,root)
 /usr/bin/mk_cmds
 /usr/bin/compile_et
-/usr/share/et
-/usr/share/ss
-/usr/share/info/libext2fs.info
-/usr/share/info/com_err.info
-/usr/share/man/man3/com_err.3.bz2
 /usr/include/e2p
 /usr/include/et
 /usr/include/ext2fs
 /usr/include/ss
-/usr/%{_lib}/libcom_err.a
-/usr/%{_lib}/libcom_err.so
-/usr/%{_lib}/libe2p.a
-/usr/%{_lib}/libe2p.so
-/usr/%{_lib}/libext2fs.a
-/usr/%{_lib}/libext2fs.so
-/usr/%{_lib}/libss.a
-/usr/%{_lib}/libss.so
-/usr/%{_lib}/pkgconfig/com_err.pc
-/usr/%{_lib}/pkgconfig/e2p.pc
-/usr/%{_lib}/pkgconfig/ext2fs.pc
-/usr/%{_lib}/pkgconfig/ss.pc
+/usr/lib/libcom_err.a
+/usr/lib/libcom_err.so
+/usr/lib/libe2p.a
+/usr/lib/libe2p.so
+/usr/lib/libext2fs.a
+/usr/lib/libext2fs.so
+/usr/lib/libss.a
+/usr/lib/libss.so
+/usr/lib/pkgconfig/com_err.pc
+/usr/lib/pkgconfig/e2p.pc
+/usr/lib/pkgconfig/ext2fs.pc
+/usr/lib/pkgconfig/ss.pc
+
+%files extras
+/usr/share/et
+/usr/share/ss
+/usr/share/man/man1/*.bz2
+/usr/share/man/man3/*.bz2
+/usr/share/man/man5/*.bz2 
+/usr/share/man/man8/*.bz2
 
 %changelog
-* Thu Nov 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.14-2
-- Optimize for size
-
-* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.14-1
-- Upgrade to 1.41.14
-
-* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.12-1
-- Upgrade to 1.41.12
-
-* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.11-1
-- Upgrade to 1.41.11
-
-* Thu Aug 13 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Sat Feb 04 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.41.11-1
 - Initial version

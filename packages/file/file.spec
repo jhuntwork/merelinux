@@ -27,15 +27,18 @@ Libraries and headers for developing with libmagic
 
 %prep
 %setup -q
-# Move the datadir location from /usr/share/misc to /usr/share/file
+%{config_musl}
+# Move the datadir location from /share/misc to /share/file
 sed -i 's/misc/file/' configure
+sed -i '/memory.h/d' src/ascmagic.c src/encoding.c
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-D_GNU_SOURCE -Os'
+export LDFLAGS="--static"
 ./configure \
-  --prefix=/usr \
-  --libdir=/usr/%{_lib}
-make %{PMFLAGS}
+  --prefix='' \
+  --disable-shared 
+make V=1 %{PMFLAGS}
 make check
 
 %install
@@ -48,37 +51,18 @@ rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/usr/bin/file
-/usr/%{_lib}/libmagic.so.1
-/usr/%{_lib}/libmagic.so.1.0.0
-/usr/share/man/man1/file.1.bz2
-/usr/share/man/man4/magic.4.bz2
-/usr/share/file
+/bin/file
+/share/file
+/share/man/man1/file.1.bz2
+/share/man/man4/magic.4.bz2
 
 %files devel
 %defattr(-,root,root)
-/usr/include/magic.h
-/usr/%{_lib}/libmagic.a
-/usr/%{_lib}/libmagic.la
-/usr/%{_lib}/libmagic.so
-/usr/share/man/man3/libmagic.3.bz2
+/include/magic.h
+/lib/libmagic.a
+/lib/libmagic.la
+/share/man/man3/libmagic.3.bz2
 
 %changelog
-* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.09-1
-- Upgrade to 5.09
-- Optimize for size
-
-* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.06-1
-- Upgrade to 5.06
-
-* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.05-1
-- Upgrade to 5.05
-
-* Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.04-2
-- Make datadir /usr/share/file instead of /usr/share/misc
-
-* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.04-1
-- Upgrade to 5.04
-
-* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.09-1
 - Initial version

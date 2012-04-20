@@ -1,7 +1,7 @@
 Summary: BeeCrypt Cryptography Library
 Name: beecrypt
 Version: 4.2.1
-Release: 2
+Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ URL: http://beecrypt.sourceforge.net
 Source0: http://iweb.dl.sourceforge.net/project/beecrypt/beecrypt/4.2.1/beecrypt-4.2.1.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = b1c62c2480c79302a8ca5c09063b3d654275eae0
-BuildRequires: python-devel
+#BuildRequires: python-devel
 
 %description
 BeeCrypt aims to provide a strong and fast cryptography toolkit.
@@ -18,24 +18,24 @@ BeeCrypt aims to provide a strong and fast cryptography toolkit.
 %package devel
 Summary: Headers and libraries for developing with %{name}
 Group: Development/Libraries
-Requires: %{name} >= %{version}
 
 %description devel
 Headers and libraries for developing with %{name}
 
-%package python
-Summary: Libraries for using %{name} with Python
-Group: Development/Librares
-Requires: python(abi) = 2.7
+#%package python
+#Summary: Libraries for using %{name} with Python
+#Group: Development/Librares
+#Requires: python(abi) = 2.7
 
 %prep
 %setup -q
+%{config_musl}
 
 %build
-export CFLAGS="-Os -pipe"
+export CFLAGS="-D_GNU_SOURCE -Os"
 ./configure \
-  --prefix=/usr \
-  --libdir=/usr/%{_lib} \
+  --prefix='' \
+  --disable-shared \
   --disable-openmp
 make %{PMFLAGS}
 
@@ -46,28 +46,17 @@ make DESTDIR=%{buildroot} install
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
-%files
-%defattr(-,root,root)
-/usr/%{_lib}/libbeecrypt.so.*
-
 %files devel
 %defattr(-,root,root)
-/usr/include/beecrypt
-/usr/%{_lib}/libbeecrypt.a
-/usr/%{_lib}/libbeecrypt.la
-/usr/%{_lib}/libbeecrypt.so
+/include/beecrypt
+/lib/libbeecrypt.a
+/lib/libbeecrypt.la
 
-%files python
-/usr/lib/python2.7/site-packages/_bc.a
-/usr/lib/python2.7/site-packages/_bc.la
-/usr/lib/python2.7/site-packages/_bc.so
+#%files python
+#/usr/lib/python2.7/site-packages/_bc.a
+#/usr/lib/python2.7/site-packages/_bc.la
+#/usr/lib/python2.7/site-packages/_bc.so
 
 %changelog
-* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.1-2
-- Optimize for size
-
-* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.1-1
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.1-1
 - Initial version

@@ -10,7 +10,7 @@ URL: http://pypi.python.org/pypi/setuptools
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 8d1ad6384d358c547c50c60f1bfdb3362c6c4a7d
-BuildRequires: Python
+#BuildRequires: python
 
 %description
 Utilities to "Download, build, install, upgrade, and uninstall Python

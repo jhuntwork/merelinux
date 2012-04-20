@@ -20,7 +20,6 @@ neon is an HTTP and WebDAV client library, with a C interface.
 %package devel
 Summary: Headers and libraries for developing with %{name}
 Group: Development/Libraries
-Requires: %{name} >= %{version}
 
 %description devel
 Headers and libraries for developing with %{name}
@@ -29,49 +28,35 @@ Headers and libraries for developing with %{name}
 %setup -q
 
 %build
-export CFLAGS="-Os -pipe"
+export CFLAGS="-D_GNU_SOURCE -Os -pipe"
 ./configure \
-  --prefix=/usr \
-  --libdir=/usr/%{_lib} \
+  --prefix=/ \
   --with-ssl \
-  --enable-shared
+  --disable-shared \
+  --enable-static
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
+# Remove locale messages for now
+rm -rf %{buildroot}/share/locale
 %{compress_man}
 %{strip}
-%find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
-%files -f %{name}.lang
-%defattr(-,root,root)
-/usr/%{_lib}/libneon.so.*
-
 %files devel
 %defattr(-,root,root)
-/usr/bin/neon-config
-/usr/include/neon
-/usr/%{_lib}/libneon.a
-/usr/%{_lib}/libneon.la
-/usr/%{_lib}/libneon.so
-/usr/%{_lib}/pkgconfig/neon.pc
-/usr/share/doc/%{name}-%{version}
-/usr/share/man/man1/*.bz2
-/usr/share/man/man3/*.bz2
+/bin/neon-config
+/include/neon
+/lib/libneon.a
+/lib/libneon.la
+/lib/pkgconfig/neon.pc
+/share/doc/%{name}-%{version}
+/share/man/man1/*.bz2
+/share/man/man3/*.bz2
 
 %changelog
-* Sat Nov 05 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.29.6-1
-- Upgrade to 0.29.6
-- Optimize for size
-
-* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.29.5-1
-- Upgrade to 0.29.5
-
-* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.29.3-1
+* Fri Apr 20 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.29.6-1
 - Initial version

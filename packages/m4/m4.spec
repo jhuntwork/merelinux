@@ -22,6 +22,7 @@ sed -i '/abort/d' lib/freadahead.c
 
 %build
 export CFLAGS="-D_GNU_SOURCE -DSLOW_BUT_NO_HACKS -Os"
+export LDFLAGS="--static"
 ./configure \
   --prefix=''
 make %{PMFLAGS}

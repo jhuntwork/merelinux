@@ -1,0 +1,98 @@
+diff -aur initd-tools-0.1.3-orig/src/install_initd.c initd-tools-0.1.3/src/install_initd.c
+--- initd-tools-0.1.3-orig/src/install_initd.c	2012-02-01 13:53:20.585898970 -0500
++++ initd-tools-0.1.3/src/install_initd.c	2012-02-01 13:58:34.263700826 -0500
+@@ -9,10 +9,6 @@
+ #include "initd.h"
+ #include "util.h"
+ 
+-#ifndef _GNU_SOURCE
+-char *program_invocation_name = NULL;
+-char *program_invocation_short_name = NULL;
+-#endif
+ #define PROGNAME "install_initd"
+ 
+ static struct option long_opts[] = {
+@@ -52,7 +48,7 @@
+ 			err(EXIT_FAILURE,
+ 				"Unrecognized option '%c'\n"
+ 				"See `%s --help' for usage",
+-				optopt, program_invocation_name);
++				optopt, argv[0]);
+ 		}
+ 	}
+ 
+@@ -60,7 +56,7 @@
+ 	if (optind >= argc)
+ 		err(EXIT_FAILURE, "No services supplied\n"
+ 			"See `%s --help' for usage",
+-			program_invocation_name);
++			argv[0]);
+ 
+ 	/* Process the services */
+ 	while (optind < argc) {
+@@ -86,8 +82,6 @@
+ 
+ 	if (!stream)
+ 		out = stdout;
+-	if (!program_invocation_name)
+-		program_invocation_name = PROGNAME;
+ 
+ 	fprintf(stderr,
+ 		"Usage: %s [OPTION] [SERVICE]...\n"
+@@ -99,6 +93,6 @@
+ 		"\n"
+ 		"When an absolute path to SERVICE is not given, it is assumed\n"
+ 		"to be relative to the default service directory, %s.\n",
+-		program_invocation_name,
++		PROGNAME,
+ 		DEF_INITD_DIR);
+ }
+diff -aur initd-tools-0.1.3-orig/src/remove_initd.c initd-tools-0.1.3/src/remove_initd.c
+--- initd-tools-0.1.3-orig/src/remove_initd.c	2012-02-01 13:53:20.585898970 -0500
++++ initd-tools-0.1.3/src/remove_initd.c	2012-02-01 13:59:12.299431762 -0500
+@@ -9,10 +9,6 @@
+ #include "initd.h"
+ #include "util.h"
+ 
+-#ifndef _GNU_SOURCE
+-char *program_invocation_name = NULL;
+-char *program_invocation_short_name = NULL;
+-#endif
+ #define PROGNAME "remove_initd"
+ 
+ static struct option long_opts[] = {
+@@ -52,7 +48,7 @@
+ 			err(EXIT_FAILURE,
+ 				"Unrecognized option '%c'\n"
+ 				"See `%s --help' for usage",
+-				optopt, program_invocation_name);
++				optopt, argv[0]);
+ 		}
+ 	}
+ 
+@@ -60,7 +56,7 @@
+ 	if (optind >= argc)
+ 		err(EXIT_FAILURE, "No services supplied\n"
+ 			"See `%s --help' for usage",
+-			program_invocation_name);
++			argv[0]);
+ 
+ 	/* Process the services */
+ 	while (optind < argc) {
+@@ -86,8 +82,6 @@
+ 
+ 	if (!stream)
+ 		out = stdout;
+-	if (!program_invocation_name)
+-		program_invocation_name = PROGNAME;
+ 
+ 	fprintf(stderr,
+ 		"Usage: %s [OPTION] [SERVICE]...\n"
+@@ -99,6 +93,6 @@
+ 		"\n"
+ 		"When an absolute path to SERVICE is not given, it is assumed\n"
+ 		"to be relative to the default service directory, %s.\n",
+-		program_invocation_name,
++		PROGNAME,
+ 		DEF_INITD_DIR);
+ }

@@ -18,85 +18,77 @@ compression ratio. XZ Utils are the successor to LZMA Utils.
 %package devel
 Summary: Libraries and headers for developing with lzma
 Group: Development/Libraries
-Requires: %{name} >= %{version}
 
 %description devel
 Libraries and headers for developing with lzma
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
+%{config_musl}
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-D_GNU_SOURCE -Os'
+export LDFLAGS="--static"
 ./configure \
-  --prefix=/usr \
-  --libdir=/usr/%{_lib}
+  --prefix='' \
+  --disable-shared
 make %{PMFLAGS}
-make check
+#make check
 
 %install
 make DESTDIR=%{buildroot} install
 %{compress_man}
-%{strip}
-%find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
-%files -f %{name}.lang
+%files
 %defattr(-,root,root)
-/usr/bin/lzcat
-/usr/bin/lzcmp
-/usr/bin/lzdiff
-/usr/bin/lzegrep
-/usr/bin/lzfgrep
-/usr/bin/lzgrep
-/usr/bin/lzless
-/usr/bin/lzma
-/usr/bin/lzmadec
-/usr/bin/lzmainfo
-/usr/bin/lzmore
-/usr/bin/unlzma
-/usr/bin/unxz
-/usr/bin/xz
-/usr/bin/xzcat
-/usr/bin/xzcmp
-/usr/bin/xzdec
-/usr/bin/xzdiff
-/usr/bin/xzegrep
-/usr/bin/xzfgrep
-/usr/bin/xzgrep
-/usr/bin/xzless
-/usr/bin/xzmore
-/usr/%{_lib}/liblzma.so.*
-/usr/share/doc/xz
-/usr/share/man/man1/*.bz2
+/bin/lzcat
+/bin/lzcmp
+/bin/lzdiff
+/bin/lzegrep
+/bin/lzfgrep
+/bin/lzgrep
+/bin/lzless
+/bin/lzma
+/bin/lzmadec
+/bin/lzmainfo
+/bin/lzmore
+/bin/unlzma
+/bin/unxz
+/bin/xz
+/bin/xzcat
+/bin/xzcmp
+/bin/xzdec
+/bin/xzdiff
+/bin/xzegrep
+/bin/xzfgrep
+/bin/xzgrep
+/bin/xzless
+/bin/xzmore
+/share/man/man1/*.bz2
 
 %files devel
 %defattr(-,root,root)
-/usr/%{_lib}/liblzma.a
-/usr/%{_lib}/liblzma.la
-/usr/%{_lib}/liblzma.so
-/usr/%{_lib}/pkgconfig/liblzma.pc
-/usr/include/lzma.h
-/usr/include/lzma
+/lib/liblzma.a
+/lib/liblzma.la
+/lib/pkgconfig/liblzma.pc
+/include/lzma.h
+/include/lzma
+
+%files extras
+/share/doc/xz
 
 %changelog
-* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.3-1
-- Upgrade to 5.0.3
-- Optimize for size
-
-* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.2-1
-- Upgrade to 5.0.2
-
-* Sun Jan 30 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.1-1
-- Upgrade to 5.0.1
-
-* Sun Jul 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.999.9beta-2
-- Upgrade to development snapshot which contains important bug fixes
-
-* Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.999.9beta-1
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.0.3-1
 - Initial version

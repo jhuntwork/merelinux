@@ -19,11 +19,20 @@ automatic rotation compression, removal and mailing of log files. Logrotate can
 be set to handle a log file daily, weekly, monthly or when the log file gets to
 a certain size.
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
 
 %build
-make BASEDIR="/usr" LFS='-Os -pipe'
+make BASEDIR="/usr" LFS='-Os -pipe -D_GNU_SOURCE'
 
 %install
 make PREFIX=%{buildroot} MANDIR="/usr/share/man" install
@@ -45,17 +54,12 @@ rm -rf %{buildroot}
 %dir /etc/logrotate.d
 /usr/lib/logrotate
 /usr/sbin/logrotate
+
+%files extras
+%defattr(-,root,root)
 /usr/share/man/man5/logrotate.conf.5.bz2
 /usr/share/man/man8/logrotate.8.bz2
 
 %changelog
-* Tue Oct 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.8.1-1
-- Upgrade to 3.8.1
-- Add a default logrotate.conf
-- Optimize for size
-
-* Sun Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.7.9-1
-- Fixes to /etc/logrotate.d directory
-
-* Sun Aug 22 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.7.9-1
+* Wed Feb 01 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.8.1-1
 - Initial version

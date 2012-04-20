@@ -9,6 +9,6 @@ all:
 install:
 	install -d -m0755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(DATADIR)
 	sed 's@DATADIR=.*@DATADIR=$(DATADIR)@' mkinitramfs.orig > mkinitramfs
-	install -m0755 mkinitramfs $(DESTDIR)$(BINDIR)
-	/usr/bin/xz -zc init.in >$(DESTDIR)$(DATADIR)/init.in.xz
-	/usr/bin/xz -zc initcd.in >$(DESTDIR)$(DATADIR)/initcd.in.xz
+	install -m 0755 mkinitramfs $(DESTDIR)$(BINDIR)
+	install -m 0644 init.in $(DESTDIR)$(DATADIR)/init.in
+	install -m 0566 initcd.in $(DESTDIR)$(DATADIR)/initcd.in

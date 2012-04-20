@@ -33,14 +33,22 @@ Requires: %{name} >= %{version}
 %description devel
 Headers and Libraries for developing with DHCP
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
 
 %build
-export CFLAGS="-g -Os -pipe  -Wall -pipe -fno-strict-aliasing"
+export CFLAGS="-D_GNU_SOURCE -Os -pipe  -Wall -pipe -fno-strict-aliasing"
 ./configure \
   --prefix=/usr \
-  --libdir=/usr/%{_lib} \
   --sysconfdir=/etc \
   --with-srv-lease-file=/var/lib/dhcp/dhcpd.leases \
   --with-srv6-lease-file=/var/lib/dhcp/dhcpd6.leases \
@@ -51,9 +59,10 @@ make
 
 %install
 make DESTDIR=%{buildroot} install
-install -dv %{buildroot}/{sbin,etc/init.d}
+install -dv %{buildroot}/sbin
+install -dv %{buildroot}/etc/init.d
 install -dv %{buildroot}/var/lib/dhcp
-mv -v %{buildroot}/usr/sbin/dhclient %{buildroot}/sbin
+mv %{buildroot}/usr/sbin/dhclient %{buildroot}/sbin
 cat > %{buildroot}/etc/dhclient.conf << "EOF"
 # See dhclient.conf.5 man page for more configuration options
 request subnet-mask, broadcast-address, time-offset, routers,
@@ -79,23 +88,16 @@ rm -rf %{buildroot}
 %config /etc/dhclient.conf
 /sbin/dhclient
 %attr(0755,root,root) /sbin/dhclient-script
-/usr/share/man/man5/dhclient.leases.5.bz2
-/usr/share/man/man5/dhcp-eval.5.bz2
-/usr/share/man/man5/dhclient.conf.5.bz2
-/usr/share/man/man8/dhclient-script.8.bz2
-/usr/share/man/man8/dhclient.8.bz2
-/var/lib/dhcp
+%dir /var/lib/dhcp
 
 %files devel
 %defattr(-,root,root)
 /usr/include/dhcpctl
 /usr/include/isc-dhcp
 /usr/include/omapip
-/usr/%{_lib}/libdhcpctl.a
-/usr/%{_lib}/libdst.a
-/usr/%{_lib}/libomapi.a
-/usr/share/man/man3/dhcpctl.3.bz2
-/usr/share/man/man3/omapi.3.bz2
+/usr/lib/libdhcpctl.a
+/usr/lib/libdst.a
+/usr/lib/libomapi.a
 
 %files server
 %defattr(-,root,root)
@@ -104,20 +106,23 @@ rm -rf %{buildroot}
 /usr/bin/omshell
 /usr/sbin/dhcpd
 /usr/sbin/dhcrelay
+
+%files extras
+%defattr(-,root,root)
 /usr/share/man/man1/omshell.1.bz2
+/usr/share/man/man3/dhcpctl.3.bz2
+/usr/share/man/man3/omapi.3.bz2
 /usr/share/man/man5/dhcp-options.5.bz2
 /usr/share/man/man5/dhcpd.conf.5.bz2
+/usr/share/man/man5/dhclient.conf.5.bz2
+/usr/share/man/man5/dhclient.leases.5.bz2
+/usr/share/man/man5/dhcp-eval.5.bz2
 /usr/share/man/man5/dhcpd.leases.5.bz2
 /usr/share/man/man8/dhcpd.8.bz2
 /usr/share/man/man8/dhcrelay.8.bz2
+/usr/share/man/man8/dhclient-script.8.bz2
+/usr/share/man/man8/dhclient.8.bz2
 
 %changelog
-* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.3-1
-- Upgrade to 4.2.3
-- Optimize for size
-
-* Mon Sep 05 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.1-2
-- Fix call to ifconfig to use full path in /sbin/dhclient-script
-
-* Fri Sep 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.1-1
+* Tue Jan 31 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.3-1
 - Initial version

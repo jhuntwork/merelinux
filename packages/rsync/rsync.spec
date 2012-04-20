@@ -17,11 +17,21 @@ BuildRequires: popt-devel
 %description
 rsync is an open source utility that provides fast incremental file transfer.
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
+%{config_musl}
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-D_GNU_SOURCE -Os -pipe'
 ./configure \
   --prefix=/usr 
 make %{PMFLAGS}
@@ -50,17 +60,12 @@ rm -rf %{buildroot}
 %config /etc/rsyncd.conf
 %config /etc/init.d/rsyncd
 /usr/bin/rsync
+
+%files extras
+%defattr(-,root,root)
 /usr/share/man/man1/rsync.1.bz2
 /usr/share/man/man5/rsyncd.conf.5.bz2
 
 %changelog
-* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.9-1
-- Upgrade to 3.0.9
-- Optimize for size
-
-* Mon Aug 23 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.8-1
-- Upgrade to 3.0.8
-- Fix issue with restart in init script
-
-* Mon Aug 23 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.7-1
+* Tue Jan 31 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.9-1
 - Initial version

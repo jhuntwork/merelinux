@@ -12,7 +12,6 @@ Patch0: http://www.linuxfromscratch.org/patches/blfs/svn/cvs-1.11.23-zlib-1.patc
 
 BuildRequires: digest(sha1:%{SOURCE0}) = a51c531eebaff2dfdcc0fb6d94c8c6e509e06d7d
 BuildRequires: digest(sha1:%{PATCH0})  = 0d20bab8a6b6e419a8c900d082b487ad6a3aec38
-BuildRequires: vim
 BuildRequires: zlib-devel
 
 %description
@@ -21,49 +20,50 @@ Management (SCM). Using it, you can record the history of sources files, and
 documents. It fills a similar role to the free software RCS, PRCS, and Aegis
 packages.
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
 %patch0 -p1
-sed -i 's/getline /get_line /' lib/getline.{c,h}
+sed -i 's/getline /get_line /' lib/getline.c lib/getline.h
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-D_GNU_SOURCE -Os -pipe'
+export LDFLAGS='--static'
 ./configure \
-  --prefix=/usr \
+  --prefix='' \
   --with-editor=vi
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
-rm -f %{buildroot}/usr/share/info/dir
+rm -rf %{buildroot}/share/info
 %{compress_man}
 %{strip}
-
-%post
-/usr/bin/install-info /usr/share/info/cvs.info /usr/share/info/dir
-/usr/bin/install-info /usr/share/info/cvsclient.info /usr/share/info/dir
-
-%preun
-/usr/bin/install-info --delete /usr/share/info/cvs.info /usr/share/info/dir
-/usr/bin/install-info --delete /usr/share/info/cvsclient.info /usr/share/info/dir
 
 %clean
 rm -rf %{buildroot}
 
 %files
 %defattr(-,root,root)
-/usr/bin/cvs
-/usr/bin/cvsbug
-/usr/bin/rcs2log
-/usr/share/cvs
-/usr/share/info/cvs.info
-/usr/share/info/cvs.info-1
-/usr/share/info/cvs.info-2
-/usr/share/info/cvsclient.info
-/usr/share/man/man1/cvs.1.bz2
-/usr/share/man/man5/cvs.5.bz2
-/usr/share/man/man8/cvsbug.8.bz2
+/bin/cvs
+/share/man/man1/cvs.1.bz2
+/share/man/man5/cvs.5.bz2
+
+%files extras
+%defattr(-,root,root)
+/bin/cvsbug
+/bin/rcs2log
+/share/cvs
+/share/man/man8/cvsbug.8.bz2
 
 %changelog
-* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.11.23-1
+* Thu Apr 19 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.11.23-1
 - Initial version

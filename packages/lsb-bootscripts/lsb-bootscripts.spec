@@ -1,7 +1,7 @@
 Summary: LSB Bootscripts
 Name: lsb-bootscripts
-Version: 4.1.2
-Release: 2
+Version: 4.2.0
+Release: 1
 Group: System Environment/Base
 License: MIT
 Distribution: LightCube OS
@@ -10,7 +10,7 @@ Buildarch: noarch
 URL: http://dev.lightcube.us/projects/lsb-bootscripts
 Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.bz2
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 38a771fc7332bcfb9adfe3b0e59090c78da9d3f3
+BuildRequires: digest(sha1:%{SOURCE0}) = 3cd9e3efaa0d55b7ff0337cf7642be3d570a9fbc
 
 %description
 LSB compatible bootscripts adapted from the LFS project.
@@ -69,35 +69,5 @@ rm -rf %{buildroot}
 /sbin/service
 
 %changelog
-* Mon Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.2-2
-- Install setclock scripts symlinks on post
-
-* Mon Aug 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.2-1
-- Upgrade to version 4.1.2
-- Fixes to setclock script
-
-* Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.1-1
-- Upgrade version to 4.1.1
-- Fixes to install procedure
-- Add /etc/rc.local
-
-* Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1-1
-- Upgrade version to 4.1 (matches LSB version)
-- Fix PATH setting in scripts to use /usr/bin and /usr/sbin
-
-* Sat Aug 20 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.0-1
-- Fork from LFS project.
-- New directory layout.
-- New version: 4.0
-
-* Sat Sep 18 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3-4
-- Add random seed handling
-
-* Fri Sep 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3-3
-- Add dhclient service
-
-* Sun Sep 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3-2
-- Fix quotes in service script
-
-* Mon Aug 23 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3-1
+* Thu Jan 31 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.2.0-1
 - Initial version

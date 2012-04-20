@@ -20,6 +20,7 @@ Patch allows merging of textual changes
 
 %build
 export CFLAGS='-D_GNU_SOURCE -Os'
+export LDFLAGS="--static"
 ./configure \
   --prefix=''
 make %{PMFLAGS}

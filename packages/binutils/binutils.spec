@@ -23,6 +23,7 @@ rm -rf %{name}-build
 
 %build
 export CFLAGS="-Os -D_GNU_SOURCE"
+export LDFLAGS="--static"
 rm -f etc/standards.info
 sed -i '/^INFO/s/standards.info //' etc/Makefile.in
 mkdir ../%{name}-build

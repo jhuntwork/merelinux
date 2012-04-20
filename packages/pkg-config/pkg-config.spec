@@ -32,6 +32,7 @@ man pages, locale messages and extra documentation
 
 %build
 export CFLAGS='-D_GNU_SOURCE -Os -pipe'
+export LDFLAGS='--static'
 ./configure \
   --prefix='' \
   --with-pc-path=/lib/pkgconfig

@@ -1,6 +1,6 @@
 Summary: LightCube OS Build Essential Meta-Package
 Name: build-essential
-Version: 0.2
+Version: 1.0
 Release: 1
 Group: Development/Utilities
 License: GPLv2
@@ -9,9 +9,9 @@ Vendor: LightCube Solutions
 Buildarch: noarch
 
 Requires: binutils
-Requires: glibc-devel
+Requires: musl-devel
 Requires: linux-headers
-Requires: gcc-c++
+Requires: gcc
 Requires: make
 Requires: pkg-config
 Requires: patch
@@ -27,8 +27,5 @@ build essentials are installed.
 %files
 
 %changelog
-* Mon Mar 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.2-1
-- Add rpm-build dependency
-
-* Mon Sep 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 0.1-1
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.0-1
 - Initial version

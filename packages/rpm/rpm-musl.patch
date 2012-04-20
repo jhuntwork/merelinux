@@ -1,0 +1,191 @@
+diff -Naur rpm-5.3.11-orig/lib/poptALL.c rpm-5.3.11/lib/poptALL.c
+--- rpm-5.3.11-orig/lib/poptALL.c	2010-10-13 00:59:33.000000000 +0000
++++ rpm-5.3.11/lib/poptALL.c	2012-01-26 03:27:24.494037927 +0000
+@@ -637,6 +637,7 @@
+ 	if ((__progname = strrchr(argv[0], '/')) != NULL) __progname++;
+ 	else __progname = argv[0];
+     }
++
+ /*@=globs =mods@*/
+ 
+     /* Insure that stdin/stdout/stderr are open, lest stderr end up in rpmdb. */
+diff -Naur rpm-5.3.11-orig/misc/setproctitle.c rpm-5.3.11/misc/setproctitle.c
+--- rpm-5.3.11-orig/misc/setproctitle.c	2012-01-26 02:44:30.486651583 +0000
++++ rpm-5.3.11/misc/setproctitle.c	2012-01-26 02:45:23.331592240 +0000
+@@ -126,7 +126,7 @@
+ {
+ 
+ /* XXX limit the fiddle up to linux for now. */
+-#if defined(__linux__)
++#if defined(__linux__) && !defined(__musl__)
+ 	char   *begin_of_buffer = 0, *end_of_buffer = 0;
+ 	int     i;
+ 
+diff -Naur rpm-5.3.11-orig/rpmio/fts.c rpm-5.3.11/rpmio/fts.c
+--- rpm-5.3.11-orig/rpmio/fts.c	2010-01-04 15:27:48.000000000 +0000
++++ rpm-5.3.11/rpmio/fts.c	2012-01-26 01:36:34.364141802 +0000
+@@ -48,6 +48,11 @@
+ #if defined(__UCLIBC__)
+ #   define __fxstat64(_stat_ver, _fd, _sbp)    fstat((_fd), (_sbp))
+ #endif
++#if defined(__musl__)
++#   define stat64		stat
++#   define _STAT_VER		0
++#   define __fxstat64(_stat_ver, _fd, _sbp)    fstat((_fd), (_sbp))
++#endif
+ #if defined(hpux) || defined(__hpux)
+ # define        _INCLUDE_POSIX_SOURCE
+ #   define __errno_location() 	(&errno)
+diff -Naur rpm-5.3.11-orig/rpmio/rpmdir.h rpm-5.3.11/rpmio/rpmdir.h
+--- rpm-5.3.11-orig/rpmio/rpmdir.h	2009-12-10 18:47:58.000000000 +0000
++++ rpm-5.3.11/rpmio/rpmdir.h	2012-01-26 01:36:55.252723973 +0000
+@@ -21,7 +21,7 @@
+ typedef struct __dirstream *	AVDIR;
+ typedef struct __dirstream *	DAVDIR;
+ #else
+-# if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__OpenBSD__)
++# if defined(__FreeBSD__) || defined(__NetBSD__) || defined(__DragonFly__) || defined(__OpenBSD__) || defined(__musl__)
+ typedef struct __dirstream *	AVDIR;
+ typedef struct __dirstream *	DAVDIR;
+ #else	/* __FreeBSD__ */
+diff -Naur rpm-5.3.11-orig/rpmio/rpmmalloc.c rpm-5.3.11/rpmio/rpmmalloc.c
+--- rpm-5.3.11-orig/rpmio/rpmmalloc.c	2010-10-18 07:07:43.000000000 +0000
++++ rpm-5.3.11/rpmio/rpmmalloc.c	2012-01-26 01:36:01.369799211 +0000
+@@ -275,7 +275,7 @@
+ }
+ /*@=internalglobs@*/
+ 
+-#if !(HAVE_MCHECK_H && defined(__GNUC__)) && !defined(__LCLINT__)
++#if !(defined(__GNUC__)) && !defined(__LCLINT__)
+ 
+ /*@out@*/ /*@only@*/ void * xmalloc (size_t size)
+ {
+@@ -318,4 +318,4 @@
+     return newstr;
+ }
+ 
+-#endif	/* !(HAVE_MCHECK_H && defined(__GNUC__)) */
++#endif	/* !(defined(__GNUC__)) */
+diff -Naur rpm-5.3.11-orig/rpmio/rpmsq.c rpm-5.3.11/rpmio/rpmsq.c
+--- rpm-5.3.11-orig/rpmio/rpmsq.c	2009-03-07 13:38:10.000000000 +0000
++++ rpm-5.3.11/rpmio/rpmsq.c	2012-01-26 01:49:40.552434549 +0000
+@@ -118,7 +118,7 @@
+ #endif
+ 
+ #include <signal.h>
+-#if !defined(__QNX__)
++#if !defined(__QNX__) && !defined(__musl__)
+ #  include <sys/signal.h>
+ #endif
+ #include <sys/wait.h>
+diff -Naur rpm-5.3.11-orig/rpmio/yarn.c rpm-5.3.11/rpmio/yarn.c
+--- rpm-5.3.11-orig/rpmio/yarn.c	2010-09-20 18:17:35.000000000 +0000
++++ rpm-5.3.11/rpmio/yarn.c	2012-01-26 01:36:01.371799171 +0000
+@@ -441,6 +441,8 @@
+     struct capsule * capsule;
+ #if defined(WITH_PTHREADS)
+     pthread_attr_t attr;
++#else
++	int attr;
+ #endif
+ 
+     /* construct the requested call and argument for the yarnIgnition() routine
+diff -Naur rpm-5.3.11-orig/rpmqv.c rpm-5.3.11/rpmqv.c
+--- rpm-5.3.11-orig/rpmqv.c	2011-03-30 14:26:00.000000000 +0000
++++ rpm-5.3.11/rpmqv.c	2012-01-26 03:33:49.429300565 +0000
+@@ -428,6 +428,12 @@
+ #endif
+ #endif  
+ 
++    /* XXX glibc churn sanity */
++    if (__progname == NULL) {
++        if ((__progname = strrchr(argv[0], '/')) != NULL) __progname++;
++        else __progname = argv[0];
++    }
++
+     /* Set the major mode based on argv[0] */
+     /*@-nullpass@*/
+ #ifdef	IAM_RPMBT
+diff -Naur rpm-5.3.11-orig/system.h rpm-5.3.11/system.h
+--- rpm-5.3.11-orig/system.h	2010-09-22 20:27:32.000000000 +0000
++++ rpm-5.3.11/system.h	2012-01-26 03:00:46.468092958 +0000
+@@ -402,13 +402,13 @@
+ #endif /* defined(__LCLINT__) */
+ 
+ /* Memory allocation via macro defs to get meaningful locations from mtrace() */
++#endif	/* HAVE_MCHECK_H */
+ #if defined(__GNUC__)
+ #define	xmalloc(_size) 		(malloc(_size) ? : vmefail(_size))
+ #define	xcalloc(_nmemb, _size)	(calloc((_nmemb), (_size)) ? : vmefail(_size))
+ #define	xrealloc(_ptr, _size)	(realloc((_ptr), (_size)) ? : vmefail(_size))
+ #define	xstrdup(_str)	(strcpy((malloc(strlen(_str)+1) ? : vmefail(strlen(_str)+1)), (_str)))
+ #endif	/* defined(__GNUC__) */
+-#endif	/* HAVE_MCHECK_H */
+ 
+ /* Retrofit glibc __progname */
+ #if defined __GLIBC__ && __GLIBC__ >= 2
+@@ -736,3 +736,4 @@
+ #undef	SUPPORT_AR_PAYLOADS
+ 
+ #endif	/* H_SYSTEM */
++const char *program_name;
+diff -Naur rpm-5.3.11-orig/tools/dbconvert.c rpm-5.3.11/tools/dbconvert.c
+--- rpm-5.3.11-orig/tools/dbconvert.c	2011-04-10 10:17:22.000000000 +0000
++++ rpm-5.3.11/tools/dbconvert.c	2012-01-26 01:36:01.374799111 +0000
+@@ -19,6 +19,9 @@
+ #include <rpmlog.h>
+ 
+ #if BYTE_ORDER == LITTLE_ENDIAN
++#include <byteswap.h>
++#define htobe32(x) __bswap_32 (x)
++#define htole32(x) (x)
+ #define bswap32(x) htobe32(x)
+ #elif __BYTE_ORDER == BIG_ENDIAN
+ #define bswap32(x) htole32(x)
+diff -Naur rpm-5.3.11-orig/tools/rpmfind.c rpm-5.3.11/tools/rpmfind.c
+--- rpm-5.3.11-orig/tools/rpmfind.c	2010-10-25 05:27:30.000000000 +0000
++++ rpm-5.3.11/tools/rpmfind.c	2012-01-26 01:39:55.314123446 +0000
+@@ -1108,7 +1108,7 @@
+ 	(void)fprintf(stderr, "\n");
+ 	(void)fflush(stderr);
+     }
+-#if defined(__APPLE__) || defined(__sun__)
++#if defined(__APPLE__) || defined(__sun__) || defined(__musl__)
+     return ((resp[0] == 'Y' || resp[0] == 'y') ? 1 : 0);
+ #else
+     return (rpmatch(resp) == 1);
+@@ -1170,14 +1170,14 @@
+     }
+ 
+     /*
+-     * Convert the string with strtoq().  Note, if strtoq() returns zero
++     * Convert the string with strtoll().  Note, if strtoll() returns zero
+      * and endchar points to the beginning of the string we know we have
+      * a syntax error.
+      */
+ #if defined(__sun__)
+     value = strtoll(str, &endchar, 10);
+ #else
+-    value = strtoq(str, &endchar, 10);
++    value = strtoll(str, &endchar, 10);
+ #endif
+     if (value == 0 && endchar == str)
+ 	errx(1, "%s: %s: illegal numeric value", option, vp);
+@@ -1217,7 +1217,7 @@
+ #if defined(__sun__)
+     value = strtoll(str, &unit, 10);
+ #else
+-    value = strtoq(str, &unit, 10);
++    value = strtoll(str, &unit, 10);
+ #endif
+     if (value == 0 && unit == str) {
+ 	errx(1, "%s: %s: illegal time value", option, vp);
+@@ -1255,7 +1255,7 @@
+ #if defined(__sun__)
+ 	value = strtoll(str, &unit, 10);
+ #else
+-	value = strtoq(str, &unit, 10);
++	value = strtoll(str, &unit, 10);
+ #endif
+ 	if (value == 0 && unit == str) {
+ 	    errx(1, "%s: %s: illegal time value", option, vp);

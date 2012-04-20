@@ -1,7 +1,7 @@
 Summary: Fcron Periodical Command Scheduler
 Name: fcron
 Version: 3.0.6
-Release: 3
+Release: 1
 Group: Services
 License: GPL
 Distribution: LightCube OS
@@ -13,18 +13,25 @@ Source1: https://raw.github.com/jhuntwork/LightCube-OS/master/packages/fcron/fcr
 BuildRequires: digest(sha1:%{SOURCE0}) = 6b0a886931d9a89c65df33228384b07d672238bf
 BuildRequires: digest(sha1:%{SOURCE1}) = 0ea2b2a3678a9296ae5ec119d426f1eb25ca2f7c
 BuildRequires: Linux-PAM-devel
-BuildRequires: vim
-BuildRequires: postfix
 BuildRequires: lsb-bootscripts
 
 %description
 Fcron is a periodical command scheduler which aims at replacing Vixie Cron
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-D_GNU_SOURCE -Os -pipe'
 ./configure \
   --prefix=/usr \
   --sysconfdir=/etc \
@@ -34,8 +41,9 @@ make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
-install -dv %{buildroot}/etc/{pam.d,init.d}
-install -m754 %{SOURCE1} %{buildroot}/etc/init.d/fcron
+install -d %{buildroot}/etc/pam.d
+install -d %{buildroot}/etc/init.d
+install -m0754 %{SOURCE1} %{buildroot}/etc/init.d/fcron
 rm -f %{buildroot}/etc/pam.conf
 cat > %{buildroot}/etc/pam.d/fcron << "EOF"
 account         required        pam_unix.so
@@ -47,7 +55,7 @@ account         required        pam_permit.so
 auth            required        pam_permit.so
 session         required        pam_permit.so
 EOF
-ln -sv fcrontab %{buildroot}/usr/bin/crontab
+ln -s fcrontab %{buildroot}/usr/bin/crontab
 %{compress_man}
 %{strip}
 
@@ -66,15 +74,6 @@ rm -rf %{buildroot}
 %config /etc/pam.d/fcron
 %config /etc/pam.d/fcrontab
 /usr/sbin/fcron
-/usr/share/doc/fcron-3.0.6
-/usr/share/man/fr/man1/*.bz2
-/usr/share/man/fr/man3/*.bz2
-/usr/share/man/fr/man5/*.bz2
-/usr/share/man/fr/man8/*.bz2
-/usr/share/man/man1/*.bz2
-/usr/share/man/man3/*.bz2
-/usr/share/man/man5/*.bz2
-/usr/share/man/man8/*.bz2
 %defattr(-,root,fcron)
 %config /etc/fcron.allow
 %config /etc/fcron.conf
@@ -84,15 +83,20 @@ rm -rf %{buildroot}
 /usr/bin/crontab
 /usr/bin/fcrontab
 /usr/bin/fcrondyn
-/var/spool/fcron
+%dir /var/spool/fcron
+
+%files extras
+%defattr(-,root,root)
+/usr/share/doc/fcron-3.0.6
+/usr/share/man/fr/man1/*.bz2
+/usr/share/man/fr/man3/*.bz2
+/usr/share/man/fr/man5/*.bz2
+/usr/share/man/fr/man8/*.bz2
+/usr/share/man/man1/*.bz2
+/usr/share/man/man3/*.bz2
+/usr/share/man/man5/*.bz2
+/usr/share/man/man8/*.bz2
 
 %changelog
-* Thu Nov 03 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.6-3
-- Better management of configs
-- Optimize for size
-
-* Sat Jan 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.6-2
-- Fix issues with PAM modules
-
-* Sun Aug 22 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.6-1
+* Wed Feb 01 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.0.6-1
 - Initial version

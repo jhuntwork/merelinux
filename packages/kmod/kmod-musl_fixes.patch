@@ -1,0 +1,138 @@
+diff -Naur kmod-4/libkmod/libkmod-array.c kmod-4-new//libkmod/libkmod-array.c
+--- kmod-4/libkmod/libkmod-array.c	2012-01-11 17:35:18.202581879 -0500
++++ kmod-4-new//libkmod/libkmod-array.c	2012-02-06 10:00:36.153656654 -0500
+@@ -18,13 +18,12 @@
+  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+  */
+ 
+-#include "libkmod.h"
+-#include "libkmod-array.h"
+-
+ #include <assert.h>
+ #include <stdlib.h>
+ #include <string.h>
+ #include <errno.h>
++#include "libkmod.h"
++#include "libkmod-array.h"
+ 
+ /* basic pointer array growing in steps */
+ 
+diff -Naur kmod-4/libkmod/libkmod-index.c kmod-4-new//libkmod/libkmod-index.c
+--- kmod-4/libkmod/libkmod-index.c	2012-01-16 13:05:46.952106308 -0500
++++ kmod-4-new//libkmod/libkmod-index.c	2012-02-06 10:00:36.153656654 -0500
+@@ -630,7 +630,10 @@
+ 	return out;
+ }
+ 
+-#include <sys/mman.h>
++#include <bits/mman.h>
++#ifndef MAX_POPULATE
++# define MAP_POPULATE	0x08000
++#endif
+ #include <sys/stat.h>
+ #include <unistd.h>
+ 
+diff -Naur kmod-4/libkmod/libkmod-module.c kmod-4-new//libkmod/libkmod-module.c
+--- kmod-4/libkmod/libkmod-module.c	2012-01-12 21:23:26.584326786 -0500
++++ kmod-4-new//libkmod/libkmod-module.c	2012-02-06 10:53:14.107641451 -0500
+@@ -39,6 +39,10 @@
+ #include "libkmod.h"
+ #include "libkmod-private.h"
+ 
++# include <sys/syscall.h>
++# define init_module(mod, len, opts) syscall(__NR_init_module, mod, len, opts)
++# define delete_module(mod, flags) syscall(__NR_delete_module, mod, flags)
++
+ /**
+  * SECTION:libkmod-module
+  * @short_description: operate on kernel modules
+@@ -699,7 +703,7 @@
+ }
+ 
+ 
+-extern long delete_module(const char *name, unsigned int flags);
++/* extern long delete_module(const char *name, unsigned int flags); */
+ 
+ /**
+  * kmod_module_remove_module:
+@@ -730,7 +734,7 @@
+ 	return err;
+ }
+ 
+-extern long init_module(const void *mem, unsigned long len, const char *args);
++/* extern long init_module(const void *mem, unsigned long len, const char *args); */
+ 
+ /**
+  * kmod_module_insert_module:
+diff -Naur kmod-4/libkmod/libkmod-util.c kmod-4-new//libkmod/libkmod-util.c
+--- kmod-4/libkmod/libkmod-util.c	2012-01-16 13:05:46.911106821 -0500
++++ kmod-4-new//libkmod/libkmod-util.c	2012-02-06 10:00:36.153656654 -0500
+@@ -31,6 +31,41 @@
+ #include "libkmod.h"
+ #include "libkmod-private.h"
+ 
++#ifdef NO_GET_CURRENT_DIR_NAME
++char *get_current_dir_name()
++{
++        long path_max;
++        size_t size;
++        char *buf = NULL;
++
++        path_max = pathconf(".", _PC_PATH_MAX);
++        if (path_max == -1)
++                size = 1024;
++        else if (path_max > 10240)
++                size = 10240;
++        else
++                size = path_max;
++
++        while (buf == NULL)
++        {
++                if ((buf = realloc(buf, size)) == NULL)
++                {
++                        perror("Cannot allocate memory.\n");
++                        free(buf);
++                        return NULL;
++                }
++                if ((getcwd(buf, size)) == NULL && errno != ERANGE)
++                {
++                        printf("error: %s\n", strerror(errno));
++                        free(buf);
++                        return NULL;
++                }
++                size *= 2;
++        }
++        return buf;
++}
++#endif
++
+ /*
+  * Read one logical line from a configuration file.
+  *
+diff -Naur kmod-4/tools/kmod-depmod.c kmod-4-new//tools/kmod-depmod.c
+--- kmod-4/tools/kmod-depmod.c	2012-01-16 11:24:09.118339722 -0500
++++ kmod-4-new//tools/kmod-depmod.c	2012-02-06 10:00:36.153656654 -0500
+@@ -16,11 +16,6 @@
+  * You should have received a copy of the GNU General Public License
+  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  */
+-#include "libkmod.h"
+-#include "libkmod-array.h"
+-#include "libkmod-hash.h"
+-#include "libkmod-util.h"
+-
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <getopt.h>
+@@ -36,6 +31,11 @@
+ #include <unistd.h>
+ #include <ctype.h>
+ 
++#include "libkmod.h"
++#include "libkmod-array.h"
++#include "libkmod-hash.h"
++#include "libkmod-util.h"
++
+ #define DEFAULT_VERBOSE LOG_WARNING
+ static int verbose = DEFAULT_VERBOSE;
+ 

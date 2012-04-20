@@ -8,26 +8,30 @@ Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.perl.org
 Source0: http://www.cpan.org/src/5.0/perl-5.14.2.tar.gz
+Patch0: Digest_security_fix.patch
 
 BuildRequires: digest(sha1:%{SOURCE0}) = df1549d65cdef2b20023af83ecaa2a024109a5ad
-BuildRequires: util-linux
+BuildRequires: digest(sha1:%{PATCH0})  = c070099859db65415cbd970bda1c99da76ba4620
 BuildRequires: zlib-devel
-Provides: perl, perl(Carp::Heavy), perl(getopts.pl), perl(bigint.pl)
-
+Provides: perl
+Provides: perl(Carp::Heavy)
+Provides: perl(getopts.pl)
+Provides: perl(bigint.pl)
 
 %description
-Perl is a stable, cross platform programming language.
+Perl is a feature-rich platform programming language.
 
-%package devel-docs
+%package extras
 Group: Development/Languages
-Summary: Documentation for development with perl
+Summary: Documentation for perl
 Requires: %{name} >= %{version}
 
-%description devel-docs
-Documentation for development with perl
+%description extras
+Documentation for perl
 
 %prep
 %setup -q
+%patch0 -p1
 # perl doesn't conform to POSIX sh and doesn't offer any easy workaround
 mkdir bin
 ln -s /bin/bash bin/sh
@@ -54,7 +58,7 @@ chmod +x %{name}-req
 %build
 sed -i -e "s|BUILD_ZLIB\s*= True|BUILD_ZLIB = False|" \
        -e "s|INCLUDE\s*= ./zlib-src|INCLUDE = /usr/include|" \
-       -e "s|LIB\s*= ./zlib-src|LIB = /usr/%{_lib}|" \
+       -e "s|LIB\s*= ./zlib-src|LIB = /usr/lib|" \
        cpan/Compress-Raw-Zlib/config.in
 sh Configure \
   -des \
@@ -64,11 +68,13 @@ sh Configure \
   -Dman3dir=/usr/share/man/man3 \
   -Dpager="/usr/bin/less -isR" \
   -Duseshrplib
-make %{PMFLAGS} OPTIMIZE="-Os -pipe"
+make OPTIMIZE="-D_GNU_SOURCE -Os -pipe"
 
 %install
 make DESTDIR=%{buildroot} install
-install -dv %{buildroot}/usr/lib/perl5/site_perl/%{version}/$(arch)-linux/{auto,Bundle}
+cp %{buildroot}/usr/lib/perl5/%{version}/$(uname -m)-linux/CORE/libperl.so %{buildroot}/usr/lib/
+install -d %{buildroot}/usr/lib/perl5/site_perl/%{version}/$(uname -m)-linux/auto
+install -d %{buildroot}/usr/lib/perl5/site_perl/%{version}/$(uname -m)-linux/Bundle
 %{compress_man}
 %{strip}
 
@@ -118,29 +124,21 @@ rm -rf %{buildroot}
 /usr/bin/shasum
 /usr/bin/splain
 /usr/bin/xsubpp
-/usr/lib/perl5
-/usr/share/man/man1/*.bz2
+/usr/lib/libperl.so
+%dir /usr/lib/perl5
+%dir /usr/lib/perl5/%{version}
+%dir /usr/lib/perl5/site_perl
+%dir /usr/lib/perl5/site_perl/%{version}
+%dir /usr/lib/perl5/site_perl/%{version}/%{_arch}-linux
+%dir /usr/lib/perl5/site_perl/%{version}/%{_arch}-linux/auto
+/usr/lib/perl5/%{version}/*
+%exclude /usr/lib/perl5/%{version}/pod/*
 
-%files devel-docs
+%files extras
+/usr/lib/perl5/%{version}/pod/*
+/usr/share/man/man1/*.bz2
 /usr/share/man/man3/*.bz2
 
 %changelog
-* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.14.2-1
-- Upgrade to 5.14.2
-- Optimize for size
-- Separate man3 files into devel-docs package
-
-* Sat Sep 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.12.1-2
-- Create a shared perl library
-
-* Sat Jul 17 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.12.1-1
-- Upgrade to 5.12.1
-
-* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
-- Add in UTF-8 fixes
-
-* Sat Oct 24 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
-- Upgrade to 5.10.1
-
-* Tue Jul 28 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Tue Jan 31 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 5.14.2-1
 - Initial version

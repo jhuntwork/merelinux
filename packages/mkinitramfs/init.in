@@ -70,6 +70,10 @@ EOF
 
 mount -n -t proc proc /proc
 mount -n -t sysfs sysfs /sys
+mount -t tmpfs tmpfs /dev
+mknod -m 640 /dev/console c 5 1
+mknod -m 664 /dev/null c 1 3
+mount -t tmpfs tmpfs /run
 
 read -r cmdline </proc/cmdline
 
@@ -99,9 +103,10 @@ for param in $cmdline ; do
 	esac
 done
 
-udevd --daemon --resolve-names=never
-udevadm trigger
-udevadm settle
+/lib/udev/udevd --daemon
+/sbin/udevadm trigger --action=add --type=subsystems
+/sbin/udevadm trigger --action=add --type=devices
+/sbin/udevadm settle
 
 if [ -f /etc/mdadm.conf ] ; then mdadm -As ; fi
 

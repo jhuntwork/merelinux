@@ -22,6 +22,7 @@ sed -i '/elif 0/s@0@defined SLOW_BUT_NO_HACKS@' lib/fseterr.c
 
 %build
 export CFLAGS='-D_GNU_FLAGS -DSLOW_BUT_NO_HACKS -Os'
+export LDFLAGS="--static"
 ./configure \
   --prefix=''
 make %{PMFLAGS}

@@ -1,0 +1,43 @@
+diff -aur initd-tools-0.1.3-orig/lib/initd.c initd-tools-0.1.3/lib/initd.c
+--- initd-tools-0.1.3-orig/lib/initd.c	2012-02-01 13:53:20.585898970 -0500
++++ initd-tools-0.1.3/lib/initd.c	2012-02-01 17:18:21.568112290 -0500
+@@ -306,3 +306,39 @@
+ 
+ 	return c;
+ }
++
++#ifdef NO_GET_CURRENT_DIR_NAME
++#include <unistd.h>
++char *get_current_dir_name()
++{
++	long path_max;
++	size_t size;
++	char *buf = NULL;
++
++	path_max = pathconf(".", _PC_PATH_MAX);
++	if (path_max == -1)
++		size = 1024;
++	else if (path_max > 10240)
++		size = 10240;
++	else
++		size = path_max;
++
++	while (buf == NULL)
++	{
++		if ((buf = realloc(buf, size)) == NULL)
++		{
++			perror("Cannot allocate memory.\n");
++			free(buf);
++			return NULL;
++		}
++		if ((getcwd(buf, size)) == NULL && errno != ERANGE)
++		{
++			printf("error: %s\n", strerror(errno));
++			free(buf);
++			return NULL;
++		}
++		size *= 2;
++	}
++	return buf;
++}
++#endif

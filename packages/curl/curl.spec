@@ -38,7 +38,7 @@ export CFLAGS='-Os -pipe'
   --prefix=/usr \
   --libdir=/usr/%{_lib} \
   --with-ca-bundle=/etc/ssl/ca-bundle.crt
-make %{PMFLAGS}
+make
 
 %install
 make DESTDIR=%{buildroot} install

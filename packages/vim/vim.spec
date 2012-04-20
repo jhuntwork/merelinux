@@ -1,7 +1,7 @@
 Summary: vim
 Name: vim
 Version: 7.3
-Release: 2
+Release: 1
 Group: Text Editors
 License: GPLv2
 Distribution: LightCube OS
@@ -20,33 +20,46 @@ Unix editor 'Vi', with a more complete feature set.
 %prep
 %setup -q -n %{name}73
 # Apply upstream patches
-mkdir patches
-cd patches
-wget ftp://ftp.vim.org/pub/vim/patches/7.3/MD5SUMS
-wget ftp://ftp.vim.org/pub/vim/patches/7.3/7.3.*
+PDIR=/tmp/vim-patches
+SDIR=`pwd`
+install -d $PDIR
+cd $PDIR
+wget -q -O MD5SUMS ftp://ftp.vim.org/pub/vim/patches/%{version}/MD5SUMS
+IFS='
+'
+for line in `cat MD5SUMS` ; do
+   sum=`echo $line | cut -d' ' -f1`
+   file=`echo $line | cut -d' ' -f3`
+   if ! echo "$sum  $file" | md5sum -c - ; then
+      wget -c ftp://ftp.vim.org/pub/vim/patches/%{version}/$file
+   fi
+done
 md5sum -c MD5SUMS
-cd ..
-for file in patches/7.3.* ; do
+cd $SDIR
+for file in $PDIR/%{version}.* ; do
    patch -p0 < $file
 done
 echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-Os -pipe -D_GNU_SOURCE'
+export LDFLAGS='--static'
 ./configure \
-  --prefix=/usr \
+  --prefix='' \
   --enable-multibyte
+make -C src auto/osdef.h
+sed -i '/define stack_t/d' src/auto/config.h
+sed -i '/setenv/d' src/auto/osdef.h
+sed -i '/putenv/d' src/auto/osdef.h
 make %{PMFLAGS}
 #make test >test.out 2>&1
 
 %install
 make DESTDIR=%{buildroot} install
 # Remove the following sample script due to dependency on /bin/csh
-rm -v %{buildroot}/usr/share/vim/vim73/tools/vim132
-ln -sv vim %{buildroot}/usr/bin/vi
-for L in  %{buildroot}/usr/share/man/{,*/}man1/vim.1; do
-    ln -sv vim.1 $(dirname $L)/vi.1
-done
+rm -v %{buildroot}/share/vim/vim73/tools/vim132
+sed -i 's@/usr/bin/env@/bin/env@g' `grep -lr /usr/bin/env %{buildroot}`
+find %{buildroot}/share/man -mindepth 0 -maxdepth 1 ! -name "man*" -exec rm -rf '{}' +
 %{compress_man}
 %{strip}
 install -dv %{buildroot}/etc
@@ -67,26 +80,17 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %config /etc/vimrc
-/usr/bin/ex
-/usr/bin/rview
-/usr/bin/rvim
-/usr/bin/vi
-/usr/bin/view
-/usr/bin/vim
-/usr/bin/vimdiff
-/usr/bin/vimtutor
-/usr/bin/xxd
-/usr/share/man/man1/*.bz2
-/usr/share/man/*/man1/*.bz2
-/usr/share/vim
+/bin/ex
+/bin/rview
+/bin/rvim
+/bin/view
+/bin/vim
+/bin/vimdiff
+/bin/vimtutor
+/bin/xxd
+/share/man/man1/*.bz2
+/share/vim
 
 %changelog
-* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.3-2
-- Apply all upstream patches
-- Optimize for size
-
-* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.3-1
-- Upgrade to 7.3
-
-* Sat Apr 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.2-1
+* Thu Apr 19 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 7.3-1
 - Initial version

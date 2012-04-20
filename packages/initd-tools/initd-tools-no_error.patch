@@ -1,0 +1,527 @@
+diff -aur initd-tools-0.1.3-orig/lib/active.c initd-tools-0.1.3/lib/active.c
+--- initd-tools-0.1.3-orig/lib/active.c	2008-11-02 12:59:36.000000000 -0500
++++ initd-tools-0.1.3/lib/active.c	2012-02-01 12:52:00.442085144 -0500
+@@ -9,7 +9,7 @@
+ #include <dirent.h>
+ #include <unistd.h>
+ #include <libgen.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include <string.h>
+ #include "initd.h"
+@@ -36,7 +36,7 @@
+ 	/* Change to the init.d directory */
+ 	cwd = get_current_dir_name();
+ 	if (chdir(dir) != 0)
+-		error(EXIT_FAILURE, errno, "chdir %s", dir);
++		err(EXIT_FAILURE, "chdir %s", dir);
+ 
+ 	/* Check the various sysinit directories, stopping after the
+ 	 * first one. */
+@@ -52,7 +52,7 @@
+ 
+ 	/* Return to the original directory */
+ 	if (chdir(cwd) != 0)
+-		error(EXIT_FAILURE, errno, "chdir %s", cwd);
++		err(EXIT_FAILURE, "chdir %s", cwd);
+ 	free(cwd);
+ }
+ 
+@@ -121,13 +121,13 @@
+ 			errno = 0;
+ 			return false;
+ 		} else {
+-			error(EXIT_FAILURE, errno, "chdir %s", dir);
++			err(EXIT_FAILURE, "chdir %s", dir);
+ 		}
+ 	}
+ 
+ 	dfd = opendir(".");
+ 	if (!dfd)
+-		error(EXIT_FAILURE, errno, "opendir %s", dir);
++		err(EXIT_FAILURE, "opendir %s", dir);
+ 
+ 	errno = 0;
+ 	while ((de = readdir(dfd))) {
+@@ -146,10 +146,10 @@
+ 
+ 	/* if errno is set, readdir had issues */
+ 	if (errno)
+-		error(EXIT_FAILURE, errno, "readdir %s", dir);
++		err(EXIT_FAILURE, "readdir %s", dir);
+ 
+ 	if (closedir(dfd) != 0)
+-		error(EXIT_FAILURE, errno, "closedir %s", dir);
++		err(EXIT_FAILURE, "closedir %s", dir);
+ 
+ 	return true;
+ }
+@@ -161,7 +161,7 @@
+ 	ssize_t tlen;
+ 
+ 	if (lstat(path, &ls) != 0)
+-		error(EXIT_FAILURE, errno, "lstat %s", path);
++		err(EXIT_FAILURE, "lstat %s", path);
+ 
+ 	if (!S_ISLNK(ls.st_mode)) {
+ 		if (active_verbose) {
+@@ -176,7 +176,7 @@
+ 
+ 	tlen = readlink(path, target, sizeof(target));
+ 	if (tlen < 0)
+-		error(EXIT_FAILURE, errno, "readlink %s", path);
++		err(EXIT_FAILURE, "readlink %s", path);
+ 
+ 	/* append a null byte if target was truncated */
+ 	if (tlen == PATH_MAX)
+@@ -255,9 +255,9 @@
+ 	pathlen = strlen(rcp->dir) + strlen(link) + 2;
+ 	fullpath = malloc(sizeof(char) * pathlen);
+ 	if (!fullpath)
+-		error(EXIT_FAILURE, errno, "malloc");
++		err(EXIT_FAILURE, "malloc");
+ 	if (snprintf(fullpath, pathlen, "%s/%s", rcp->dir, link) >= pathlen)
+-		error(EXIT_FAILURE, errno, "snprintf");
++		err(EXIT_FAILURE, "snprintf");
+ 
+ 	switch (key) {
+ 	case KEY_ASTART:
+diff -aur initd-tools-0.1.3-orig/lib/initd-list.c initd-tools-0.1.3/lib/initd-list.c
+--- initd-tools-0.1.3-orig/lib/initd-list.c	2008-11-02 12:59:36.000000000 -0500
++++ initd-tools-0.1.3/lib/initd-list.c	2012-02-01 12:54:31.720899617 -0500
+@@ -2,7 +2,7 @@
+ # include <config.h>
+ #endif
+ #include <stdlib.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include <string.h>
+ #include <stdbool.h>
+@@ -19,7 +19,7 @@
+ {
+ 	initd_list_t *ilp = malloc(sizeof(initd_list_t));
+ 	if (!ilp)
+-		error(EXIT_FAILURE, errno, "malloc initd_list_t");
++		err(EXIT_FAILURE, "malloc initd_list_t");
+ 
+ 	ilp->first = NULL;
+ 	ilp->last = NULL;
+@@ -117,7 +117,7 @@
+ 
+ 	dfd = opendir(dir);
+ 	if (!dfd)
+-		error(EXIT_FAILURE, errno, "opendir %s", dir);
++		err(EXIT_FAILURE, "opendir %s", dir);
+ 
+ 	errno = 0;
+ 	while ((de = readdir(dfd))) {
+@@ -128,12 +128,12 @@
+ 
+ 		plen = snprintf(ip_path, PATH_MAX, "%s/%s", dir, de->d_name);
+ 		if (plen < 0)
+-			error(EXIT_FAILURE, errno, "snprintf %s/%s",
++			err(EXIT_FAILURE, "snprintf %s/%s",
+ 				dir, de->d_name);
+ 
+ 		struct stat ip_buf;
+ 		if (stat(ip_path, &ip_buf) < 0)
+-			error(EXIT_FAILURE, errno, "stat %s", ip_path);
++			err(EXIT_FAILURE, "stat %s", ip_path);
+ 		if (!S_ISREG(ip_buf.st_mode))
+ 			continue;
+ 
+@@ -146,10 +146,10 @@
+ 
+ 	/* if errno is set, readdir had issues */
+ 	if (!de && errno != 0)
+-		error(EXIT_FAILURE, errno, "readdir %s", dir);
++		err(EXIT_FAILURE, "readdir %s", dir);
+ 
+ 	if (closedir(dfd) != 0)
+-		error(EXIT_FAILURE, errno, "closedir %s", dir);
++		err(EXIT_FAILURE, "closedir %s", dir);
+ 
+ 	/* Set the active field for all scripts */
+ 	initd_list_set_actives(ilp, dir);
+diff -aur initd-tools-0.1.3-orig/lib/initd.c initd-tools-0.1.3/lib/initd.c
+--- initd-tools-0.1.3-orig/lib/initd.c	2008-11-02 12:59:36.000000000 -0500
++++ initd-tools-0.1.3/lib/initd.c	2012-02-01 12:53:00.037618216 -0500
+@@ -3,7 +3,7 @@
+ #endif
+ #include <stdlib.h>
+ #include <string.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include "initd.h"
+ #include "initd-str.h"
+@@ -14,7 +14,7 @@
+ initd_t *initd_new(const char *name) {
+ 	initd_t *ip = malloc(sizeof(initd_t));
+ 	if (!ip)
+-		error(EXIT_FAILURE, errno, "malloc initd_t");
++		err(EXIT_FAILURE, "malloc initd_t");
+ 
+ 	ip->name = d_string_new(name);
+ 
+@@ -113,7 +113,7 @@
+ {
+ 	initd_node_t *inp = malloc(sizeof(initd_node_t));
+ 	if (!inp)
+-		error(EXIT_FAILURE, errno, "malloc initd_node_t");
++		err(EXIT_FAILURE, "malloc initd_node_t");
+ 
+ 	inp->initd = ip;
+ 	inp->prev = NULL;
+diff -aur initd-tools-0.1.3-orig/lib/installrm.c initd-tools-0.1.3/lib/installrm.c
+--- initd-tools-0.1.3-orig/lib/installrm.c	2008-11-02 12:59:36.000000000 -0500
++++ initd-tools-0.1.3/lib/installrm.c	2012-02-01 13:01:01.786154958 -0500
+@@ -6,7 +6,7 @@
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <unistd.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include <string.h>
+ #include <limits.h>
+@@ -39,13 +39,13 @@
+ 	/* move to the init.d directory */
+ 	cwd = get_current_dir_name();
+         if (chdir(dir) != 0)
+-		error(EXIT_FAILURE, errno, "chdir %s", dir);
++		err(EXIT_FAILURE, "chdir %s", dir);
+ 
+ 	/* See if we can can find an existing sysinit directory */
+ 	for (cur = rcsdirs; cur->dir; cur++) {
+ 		if (stat(cur->dir, &sbuf) != 0) {
+ 			if (errno != ENOENT)
+-				error(EXIT_FAILURE, errno, "stat %s", cur->dir);
++				err(EXIT_FAILURE, "stat %s", cur->dir);
+ 		} else {
+ 			/* found one */
+ 			break;
+@@ -65,7 +65,7 @@
+ 
+ 	/* Return to the original directory */
+ 	if (chdir(cwd) != 0)
+-		error(EXIT_FAILURE, errno, "chdir %s", cwd);
++		err(EXIT_FAILURE, "chdir %s", cwd);
+ 	free(cwd);
+ 
+ 	ret = true;
+@@ -105,12 +105,12 @@
+ 			errno = 0;
+ 			mode_t dirmode = (S_IRWXU|S_IRWXG|S_IRWXO);
+ 			if (mkdir(dir, dirmode) < 0)
+-				error(EXIT_FAILURE, errno, "mkdir %s", dir);
++				err(EXIT_FAILURE, "mkdir %s", dir);
+ 			/* Change to the created directory */
+ 			if (chdir(dir) < 0)
+-				error(EXIT_FAILURE, errno, "chdir %s", dir);
++				err(EXIT_FAILURE, "chdir %s", dir);
+ 		} else {
+-			error(EXIT_FAILURE, errno, "chdir %s", dir);
++			err(EXIT_FAILURE, "chdir %s", dir);
+ 		}
+ 	}
+ 
+@@ -176,8 +176,7 @@
+ 			}
+ 			if (remove(path) != 0) {
+ 				if (errno != ENOENT)
+-					error(EXIT_FAILURE, errno,
+-						"remove %s", path);
++					err(EXIT_FAILURE, "remove %s", path);
+ 			}
+ 
+ 			/* Clear the active bit for this level */
+@@ -236,7 +235,7 @@
+ 			path, target, bdir);
+ 	}
+ 	if (symlink(target, path) < 0)
+-		error(EXIT_FAILURE, errno, "symlink %s -> %s", path, target);
++		err(EXIT_FAILURE, "symlink %s -> %s", path, target);
+ 
+ 	/* Set the active bit for this level */
+ 	initd_set_rc(ip, akey, rc);
+diff -aur initd-tools-0.1.3-orig/lib/parse.c initd-tools-0.1.3/lib/parse.c
+--- initd-tools-0.1.3-orig/lib/parse.c	2008-11-27 12:28:19.000000000 -0500
++++ initd-tools-0.1.3/lib/parse.c	2012-02-01 12:48:48.631596785 -0500
+@@ -4,7 +4,7 @@
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <string.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include <ctype.h>
+ #include "initd.h"
+@@ -60,7 +60,7 @@
+ 	}
+ 
+ 	if (ferror(ifd))
+-		error(EXIT_FAILURE, errno, "fgets %s", path);
++		err(EXIT_FAILURE, "fgets %s", path);
+ 
+ 	initd_close(ifd);
+ 
+@@ -83,7 +83,7 @@
+ 
+ 	fd = fopen(path, "r");
+ 	if (!fd)
+-		error(EXIT_FAILURE, errno, "fopen %s", path);
++		err(EXIT_FAILURE, "fopen %s", path);
+ 
+ out:
+ 	return fd;
+@@ -95,7 +95,7 @@
+ 		return;
+ 
+ 	if (fclose(ifd) != 0)
+-		error(EXIT_FAILURE, errno, "fclose");
++		err(EXIT_FAILURE, "fclose");
+ }
+ 
+ static initd_key_t initd_parse_line(initd_t *ip, const char *line,
+@@ -175,7 +175,7 @@
+ 	/* Store the key string */
+ 	kstring = strndup(tmp, pos - tmp);
+ 	if (!kstring)
+-		error(EXIT_FAILURE, errno, "strndup");
++		err(EXIT_FAILURE, "strndup");
+ 
+ 	/* Strip any trailing spaces from the key string */
+ 	for (n = strlen(kstring) - 1; n >= 0; n--) {
+@@ -357,7 +357,7 @@
+ 		/* reached end of line or space following token */
+ 		tok = strndup(a, b-a);
+ 		if (!tok)
+-			error(EXIT_FAILURE, errno, "strndup");
++			err(EXIT_FAILURE, "strndup");
+ 
+ 		switch(key) {
+ 		case KEY_DSTART:
+diff -aur initd-tools-0.1.3-orig/lib/str.c initd-tools-0.1.3/lib/str.c
+--- initd-tools-0.1.3-orig/lib/str.c	2008-11-02 12:59:36.000000000 -0500
++++ initd-tools-0.1.3/lib/str.c	2012-02-01 10:54:49.488664842 -0500
+@@ -2,7 +2,7 @@
+ # include <config.h>
+ #endif
+ #include <string.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -16,7 +16,7 @@
+ 
+ 	new = strdup(init ? init : "");
+ 	if (!new)
+-		error(EXIT_FAILURE, errno, "strdup %s",
++		err(EXIT_FAILURE, "strdup %s",
+ 			init ? init : "");
+ 
+ 	return new;
+@@ -33,7 +33,7 @@
+ 
+ 	ds = realloc(ds, strlen(ds) + len + 1);
+ 	if (!ds)
+-		error(EXIT_FAILURE, errno, "realloc");
++		err(EXIT_FAILURE, "realloc");
+ 
+ out:
+ 	return ds;
+diff -aur initd-tools-0.1.3-orig/lib/strarg.c initd-tools-0.1.3/lib/strarg.c
+--- initd-tools-0.1.3-orig/lib/strarg.c	2008-11-02 12:59:36.000000000 -0500
++++ initd-tools-0.1.3/lib/strarg.c	2012-02-01 12:45:26.681200092 -0500
+@@ -2,7 +2,7 @@
+ # include <config.h>
+ #endif
+ #include <stdlib.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include <string.h>
+ #include "initd-str.h"
+@@ -11,11 +11,11 @@
+ {
+ 	strarg_t *sp = malloc(sizeof(strarg_t));
+ 	if (!sp)
+-		error(EXIT_FAILURE, errno, "malloc");
++		err(EXIT_FAILURE, "malloc");
+ 
+ 	sp->str = malloc(sizeof(char *));
+ 	if (!sp)
+-		error(EXIT_FAILURE, errno, "malloc");
++		err(EXIT_FAILURE, "malloc");
+ 
+ 	*(sp->str) = NULL;
+ 	sp->nstr = 0;
+@@ -47,7 +47,7 @@
+ 
+ 	sp->str = realloc(sp->str, (sp->nstr + 2) * sizeof(char *));
+ 	if (!sp)
+-		error(EXIT_FAILURE, errno, "realloc");
++		err(EXIT_FAILURE, "realloc");
+ 
+ 	sp->str[(sp->nstr)++] = d_string_new(s);
+ 	sp->str[sp->nstr] = NULL;
+@@ -69,7 +69,7 @@
+ 	/* resize for one less element */
+ 	sp->str = realloc(sp->str, len * sizeof(char *));
+ 	if (!sp->str)
+-		error(EXIT_FAILURE, errno, "realloc");
++		err(EXIT_FAILURE, "realloc");
+ 
+ 	sp->str[--(sp->nstr)] = NULL;
+ }
+diff -aur initd-tools-0.1.3-orig/lib/util.c initd-tools-0.1.3/lib/util.c
+--- initd-tools-0.1.3-orig/lib/util.c	2008-06-16 11:09:08.000000000 -0400
++++ initd-tools-0.1.3/lib/util.c	2012-02-01 12:57:59.679329765 -0500
+@@ -4,7 +4,7 @@
+ #include <string.h>
+ #include <stdlib.h>
+ #include <libgen.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include "initd-util.h"
+ 
+@@ -16,14 +16,14 @@
+ 	if (path) {
+ 		tbase = strdup(path);
+ 		if (!tbase)
+-			error(EXIT_FAILURE, errno, "strdup");
++			err(EXIT_FAILURE, "strdup");
+ 	} else {
+ 		tbase = NULL;
+ 	}
+ 
+ 	base = strdup(basename(tbase));
+ 	if (!base)
+-		error(EXIT_FAILURE, errno, "strdup");
++		err(EXIT_FAILURE, "strdup");
+ 
+ 	free(tbase);
+ 	return base;
+@@ -36,14 +36,14 @@
+ 	if (path) {
+ 		tdir = strdup(path);
+ 		if (!tdir)
+-			error(EXIT_FAILURE, errno, "strdup");
++			err(EXIT_FAILURE, "strdup");
+ 	} else {
+ 		tdir = NULL;
+ 	}
+ 
+ 	dir = strdup(dirname(tdir));
+ 	if (!dir)
+-		error(EXIT_FAILURE, errno, "strdup");
++		err(EXIT_FAILURE, "strdup");
+ 
+ 	free(tdir);
+ 	return dir;
+diff -aur initd-tools-0.1.3-orig/src/install_initd.c initd-tools-0.1.3/src/install_initd.c
+--- initd-tools-0.1.3-orig/src/install_initd.c	2008-06-16 11:09:08.000000000 -0400
++++ initd-tools-0.1.3/src/install_initd.c	2012-02-01 13:02:45.709483899 -0500
+@@ -3,7 +3,7 @@
+ #endif
+ #include <stdlib.h>
+ #include <stdio.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include <getopt.h>
+ #include "initd.h"
+@@ -49,7 +49,7 @@
+ 			set_verbose(true);
+ 			break;
+ 		case '?':
+-			error(EXIT_FAILURE, 0,
++			err(EXIT_FAILURE,
+ 				"Unrecognized option '%c'\n"
+ 				"See `%s --help' for usage",
+ 				optopt, program_invocation_name);
+@@ -58,7 +58,7 @@
+ 
+ 	/* At least one service must be provided */
+ 	if (optind >= argc)
+-		error(EXIT_FAILURE, 0, "No services supplied\n"
++		err(EXIT_FAILURE, "No services supplied\n"
+ 			"See `%s --help' for usage",
+ 			program_invocation_name);
+ 
+diff -aur initd-tools-0.1.3-orig/src/remove_initd.c initd-tools-0.1.3/src/remove_initd.c
+--- initd-tools-0.1.3-orig/src/remove_initd.c	2008-06-16 11:09:08.000000000 -0400
++++ initd-tools-0.1.3/src/remove_initd.c	2012-02-01 13:05:58.164239077 -0500
+@@ -3,7 +3,7 @@
+ #endif
+ #include <stdlib.h>
+ #include <stdio.h>
+-#include <error.h>
++#include <err.h>
+ #include <errno.h>
+ #include <getopt.h>
+ #include "initd.h"
+@@ -49,7 +49,7 @@
+ 			set_verbose(true);
+ 			break;
+ 		case '?':
+-			error(EXIT_FAILURE, 0,
++			err(EXIT_FAILURE,
+ 				"Unrecognized option '%c'\n"
+ 				"See `%s --help' for usage",
+ 				optopt, program_invocation_name);
+@@ -58,7 +58,7 @@
+ 
+ 	/* At least one service must be provided */
+ 	if (optind >= argc)
+-		error(EXIT_FAILURE, 0, "No services supplied\n"
++		err(EXIT_FAILURE, "No services supplied\n"
+ 			"See `%s --help' for usage",
+ 			program_invocation_name);
+ 
+diff -aur initd-tools-0.1.3-orig/src/util.c initd-tools-0.1.3/src/util.c
+--- initd-tools-0.1.3-orig/src/util.c	2008-06-16 11:09:08.000000000 -0400
++++ initd-tools-0.1.3/src/util.c	2012-02-01 13:04:22.340858855 -0500
+@@ -2,7 +2,7 @@
+ # include <config.h>
+ #endif
+ #include <string.h>
+-#include <error.h>
++#include <err.h>
+ #include "initd.h"
+ #include "util.h"
+ 
+@@ -18,7 +18,7 @@
+ 	char *srv, *srvdir;
+ 
+ 	if (!initd_dir) {
+-		error(0, 0, "No string address passed to %s", __FUNCTION__);
++		err(0, "No string address passed to %s", __FUNCTION__);
+ 		return false;
+ 	}
+ 
+@@ -31,7 +31,7 @@
+ 
+ 		/* See if it conflicts with a previous setting */
+ 		if (*initd_dir && (strcmp(srvdir, *initd_dir) != 0)) {
+-			error(0, 0, "Directory %s conflicts with "
++			err(0, "Directory %s conflicts with "
+ 				"previous setting %s",
+ 				srvdir, *initd_dir);
+ 			return false;
+diff -aur initd-tools-0.1.3-orig/test/tstrarg.c initd-tools-0.1.3/test/tstrarg.c
+--- initd-tools-0.1.3-orig/test/tstrarg.c	2008-06-16 11:09:08.000000000 -0400
++++ initd-tools-0.1.3/test/tstrarg.c	2012-02-01 13:06:43.355946243 -0500
+@@ -3,7 +3,6 @@
+ #endif
+ #include <stdlib.h>
+ #include <stdio.h>
+-#include <error.h>
+ #include <errno.h>
+ #include "initd.h"
+ 

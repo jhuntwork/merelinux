@@ -13,10 +13,9 @@ Source0: http://www.python.org/ftp/python/2.7.2/Python-2.7.2.tar.bz2
 Obsoletes: Python <= %{version}
 BuildRequires: digest(sha1:%{SOURCE0}) = 417bdeea77abfaf1b9257fc6b4a04aaa209f4547
 BuildRequires: ncurses-devel
-BuildRequires: zlib-devel
-BuildRequires: readline-devel
 BuildRequires: openssl-devel
-BuildRequires: bzip2-devel
+BuildRequires: readline-devel
+BuildRequires: zlib-devel
 Provides: python(abi) = %{abi}
 Provides: Python
 
@@ -37,32 +36,32 @@ dynamically loaded extensions and can be embedded in other programs.
 This package contains the header files and libraries needed to do
 these types of tasks.
 
-%package test
-Summary: Extra tests shipped with Python
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
 Requires: %{name} >= %{version}
-Group: Development/Libraries
 
-%description test
-Test modules shipped with python, separated to save space.
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
 
 %prep
 %setup -q -n Python-%{version}
+sed -i 's/-O3/-Os -g -D_BSD_SOURCE/' `grep -l -r "\-O3" .`
+%{config_musl}
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-g -D_GNU_SOURCE -Os -pipe -Werror=implicit-function-declaration'
+export LDFLAGS='-g'
 ./configure \
   --prefix=/usr \
-  --enable-shared
+  --enable-shared \
+  --without-pymalloc
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
 sed -i '/#!/s@/local@@' %{buildroot}/usr/lib/python%{abi}/cgi.py
-%if "%{_lib}" != "lib"
-  install -dv %{buildroot}/usr/lib64
-  mv -v %{buildroot}/usr/lib/pkgconfig %{buildroot}/usr/lib64/
-  mv -v %{buildroot}/usr/lib/libpython* %{buildroot}/usr/lib64/
-%endif
 find %{buildroot}/usr/lib/python%{abi} \
   -mindepth 1 -maxdepth 1 -not -name config \
   -not -regex '^.*/test.*' -not -regex '^.*/unittest.*' \
@@ -72,7 +71,7 @@ find %{buildroot}/usr/lib/python%{abi}/config \
 find %{buildroot}/usr/include/python%{abi} \
   -mindepth 1 -maxdepth 1 -not -name pyconfig.h | sed "s|^%{buildroot}||" >>devel-files
 %{compress_man}
-%{strip}
+#%{strip}
 
 %clean
 rm -rf %{buildroot}
@@ -96,39 +95,21 @@ rm -rf %{buildroot}
 %dir /usr/lib/python%{abi}
 %dir /usr/lib/python%{abi}/config
 /usr/lib/python%{abi}/config/Makefile
-/usr/%{_lib}/libpython2.7.so.1.0
-/usr/share/man/man1/python%{abi}.1.bz2
+/usr/lib/libpython2.7.so.1.0
 
 %files -f devel-files devel
 %defattr(-,root,root)
-/usr/%{_lib}/libpython2.7.so
-/usr/%{_lib}/pkgconfig/python-%{abi}.pc
-/usr/%{_lib}/pkgconfig/python.pc
+/usr/lib/libpython2.7.so
+/usr/lib/pkgconfig/python-%{abi}.pc
+/usr/lib/pkgconfig/python.pc
 
-%files test
+%files extras
 %defattr(-,root,root)
 /usr/lib/python%{abi}/test/*
 %exclude /usr/lib/python%{abi}/test/test_support.py*
 %exclude /usr/lib/python%{abi}/test/__init__.py*
+/usr/share/man/man1/python%{abi}.1.bz2
 
 %changelog
-* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.7.2
-- Upgrade to 2.7.2
-- Remove dependency on sqlite and gdbm
-- Optimize for size, separate out test modules
-- Rename package to 'python'
-
-* Fri Jul 16 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.7
-- Upgrade to 2.7
-
-* Thu Apr 01 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.5-1
-- Upgrade to 2.6.5
-
-* Tue Dec 29 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.4-1
-- Upgrade to 2.6.4
-
-* Sun Oct 25 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.6.3-1
-- Upgrade to 2.6.3
-
-* Tue Sep 8 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> -
+* Tue Jan 31 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.7.2-1
 - Initial version

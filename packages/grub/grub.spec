@@ -7,11 +7,9 @@ License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.gnu.org/software/grub
-Source0: http://dev.lightcube.us/~jhuntwork/sources/%{name}/%{name}-%{version}.tar.gz
+Source0: http://dev.lightcube.us/sources/%{name}/%{name}-%{version}.tar.gz
 
-Requires: base-layout, glibc
-BuildRequires: digest(%{SOURCE0}) = c0bcf60e524739bb64e3a2d4e3732a59
-Requires(post): texinfo, bash, ncurses, readline
+BuildRequires: digest(sha1:%{SOURCE0}) = e83a2c438f4773a2e272c225983c0145e1ffd641
 
 %description
 GNU GRUB is a Multiboot boot loader. It is responsible for loading and
@@ -19,32 +17,38 @@ transferring control to the operating system kernel software
 
 %prep
 %setup -q
+%{config_musl}
+mv po/ OLD-po/
+sed -i 's@loff_t@off_t@g' util/hostdisk.c
+sed -i -e '402 s@linux@musl@' util/hostdisk.c
 
 %build
+export CFLAGS="-D_GNU_SOURCE -Os -pipe"
 ./configure \
   --prefix=/usr \
   --sysconfdir=/etc \
-  --libdir=/usr/%{_lib} \
+  --disable-werror \
   --disable-grub-emu-usb \
   --disable-grub-fstest \
   --disable-efiemu
-make
+make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
-rm -f %{buildroot}/usr/share/info/dir
-%find_lang %{name}
+for file in `grep -r -l '\-qx' %{buildroot}`
+do
+    sed -i 's@-qx@-q@' $file
+done
+for file in `grep -r -l '\-vx' %{buildroot}` 
+do
+    sed -i 's@-vx@-q@' $file
+done
 
-%post
-/usr/bin/install-info /usr/share/info/grub.info /usr/share/info/dir
-
-%preun
-/usr/bin/install-info --delete /usr/share/info/grub.info /usr/share/info/dir
 
 %clean
 rm -rf %{buildroot}
 
-%files -f %{name}.lang
+%files
 %defattr(-,root,root)
 /etc/grub.d
 /usr/bin/grub-bin2h
@@ -56,7 +60,7 @@ rm -rf %{buildroot}
 /usr/bin/grub-mkrelpath
 /usr/bin/grub-mkrescue
 /usr/bin/grub-script-check
-/usr/%{_lib}/grub
+/usr/lib/grub
 /usr/sbin/grub-install
 /usr/sbin/grub-mkconfig
 /usr/sbin/grub-mkdevicemap
@@ -64,8 +68,7 @@ rm -rf %{buildroot}
 /usr/sbin/grub-reboot
 /usr/sbin/grub-set-default
 /usr/sbin/grub-setup
-/usr/share/info/grub.info
 
 %changelog
-* Sat Apr 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.98-1
+* Fri Feb 03 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.98-1
 - Initial version

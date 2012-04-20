@@ -11,8 +11,6 @@ Source0: http://www.sudo.ws/sudo/dist/sudo-1.8.3p1.tar.gz
 
 BuildRequires: digest(sha1:%{SOURCE0}) = 2a7ad912aa8a31706796e5bff8813e4fc7505333
 BuildRequires: Linux-PAM-devel
-BuildRequires: groff
-BuildRequires: vim
 BuildRequires: zlib-devel
 
 %description
@@ -21,18 +19,28 @@ certain users (or groups of users) the ability to run some (or all) commands
 as root or another user while providing an audit trail of the commands and
 their arguments.
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
+%{config_musl}
+sed -i "/sys\/select\.h/s@.*@&\n# define NFDBITS		__NFDBITS\n#define __NFDBITS	(8 * sizeof(unsigned long))\n# define howmany(x, y)	(((x) + ((y) - 1)) / (y))@" plugins/sudoers/sudoreplay.c src/exec_pty.c src/exec.c
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-D_GNU_SOURCE -Os -pipe'
 ./configure \
   --prefix=/usr \
-  --libdir=/usr/%{_lib} \
-  --libexecdir=/usr/%{_lib} \
+  --libdir=/usr/lib \
+  --libexecdir=/usr/lib \
   --with-ignore-dot \
-  --with-insults \
-  --with-all-insults \
+  --disable-nls \
   --enable-shell-sets-home \
   --with-sendmail=/usr/sbin/sendmail \
   --with-editor=/usr/bin/vi \
@@ -43,6 +51,7 @@ make %{PMFLAGS}
 make DESTDIR=%{buildroot} install
 # Remove /usr/lib64/sudoers.so for now
 rm -rf %{buildroot}/usr/include
+rm -rf %{buildroot}/usr/share/man
 # Comment out the inclusion of the non-existent /etc/sudoers.d directory
 sed -i 's@^#include@#&@' %{buildroot}/etc/sudoers
 # Add a PAM definition
@@ -61,34 +70,25 @@ session     required        pam_unix.so
 EOF
 %{strip}
 %{compress_man}
-%find_lang sudo
-%find_lang sudoers
-cat sudo.lang sudoers.lang > all.lang
 
 %clean
 rm -rf %{buildroot}
 
-%files -f all.lang
+%files
 %defattr(-,root,root)
 %config /etc/sudoers
 %config /etc/pam.d/sudo
 /usr/bin/sudo
 /usr/bin/sudoedit
 /usr/bin/sudoreplay
-/usr/%{_lib}/sudo_noexec.so
-/usr/%{_lib}/sudoers.so
+/usr/lib/sudo_noexec.so
+/usr/lib/sudoers.so
 /usr/sbin/visudo
+
+%files extras
+%defattr(-,root,root)
 /usr/share/doc/sudo
-/usr/share/man/man5/*.bz2
-/usr/share/man/man8/*.bz2
 
 %changelog
-* Mon Nov 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8.3p1-1
-- Upgrade to 1.8.3p1
-- Optimize for size
-
-* Sat May 07 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8.1p1-1
-- Upgrade to 1.8.1p1. Fix issues with default sudoers file and add a missing PAM config.
-
-* Tue Aug 10 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.7.4p2-1
+* Fri Feb 03 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.8.3p1-1
 - Initial version

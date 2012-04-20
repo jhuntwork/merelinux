@@ -1,7 +1,7 @@
 Summary: The shadow tool suite
 Name: shadow
 Version: 4.1.4.3
-Release: 2
+Release: 1
 Group: System Environment/Base
 License: GPLv2
 Distribution: LightCube OS
@@ -15,23 +15,51 @@ BuildRequires: Linux-PAM-devel
 %description
 Shadow provides a suite of tools for managing system users, groups and passwords 
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
-
-%build
-sed -i 's/groups$(EXEEXT) //' src/Makefile.in
-find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
-sed -i -e 's/ ko//' -e 's/ zh_CN zh_TW//' man/Makefile.in
+%{config_musl}
+# Don't build lastlog
+sed -i 's/lastlog$(EXEEXT) //' src/Makefile.in
+sed -i -e '/lastlog\.h/d' -e '219,224d' lib/prototypes.h
+sed -i -e 's/log\.c//' \
+  -e '/log\.Po/d' \
+  -e 's@ log\.\$(OBJEXT)@@' \
+  libmisc/Makefile.in
+sed -i "/stdio\.h/s@.*@&\n#include <sys/socket.h>@" libmisc/utmp.c
+#sed -i -e 's/log\.c//' \
+  #-e 's/utmp\.c//' \
+  #-e '/utmp\.Po/d' \
+  #-e 's@ utmp\.\$(OBJEXT)@@' \
+  #libmisc/Makefile.in
+mv libmisc/log.c libmisc/log.c.bak
 sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' \
        -e 's@/var/spool/mail@/var/mail@' etc/login.defs
-export CFLAGS='-Os -pipe'
+# Kill usage of get/setusershell for now
+sed -i -e '149 s@.*@/\* &@' -e '158 s@.*@& \*/@' src/su.c
+
+%build
+export CFLAGS='-D_GNU_SOURCE -Os -pipe'
 ./configure \
-  --sysconfdir=/etc
-make %{PMFLAGS}
+  --sysconfdir=/etc \
+  --with-libpam \
+  --disable-nls \
+  --without-nscd ac_cv_func_l64a=yes \
+  ac_cv_member_struct_utmp_ut_addr_v6=no
+sed -i -e 's/#define RUSEROK 0//' config.h
+make
 
 %install
 make DESTDIR=%{buildroot} install
-mv -v %{buildroot}/usr/bin/passwd %{buildroot}/bin
+mv %{buildroot}/usr/bin/passwd %{buildroot}/bin
 for FUNCTION in LASTLOG_ENAB MAIL_CHECK_ENAB \
                 PORTTIME_CHECKS_ENAB CONSOLE \
                 MOTD_FILE NOLOGINS_FILE PASS_MIN_LEN \
@@ -59,7 +87,6 @@ session     required       pam_limits.so
 session     optional       pam_mail.so      dir=/var/mail standard
 session     optional       pam_lastlog.so
 session     required       pam_unix.so
-password    required       pam_cracklib.so  retry=3
 password    required       pam_unix.so      sha512 shadow use_authtok
 
 # End /etc/pam.d/login
@@ -67,11 +94,6 @@ EOF
 cat > %{buildroot}/etc/pam.d/passwd << "EOF"
 # Begin /etc/pam.d/passwd
 
-password    required       pam_cracklib.so  type=Linux retry=1 \
-                                            difok=5 difignore=23 minlen=9 \
-                                            dcredit=1 ucredit=1 lcredit=1 \
-                                            ocredit=1 \
-                                            dictpath=/%{_lib}/cracklib/pw_dict
 password    required       pam_unix.so      sha512 shadow use_authtok
 
 # End /etc/pam.d/passwd
@@ -122,12 +144,11 @@ session     required        pam_warn.so
 EOF
 %{compress_man}
 %{strip}
-%find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
 
-%files -f %{name}.lang
+%files
 %defattr(-,root,root)
 /bin/login
 /bin/passwd
@@ -181,26 +202,14 @@ rm -rf %{buildroot}
 /usr/sbin/usermod
 /usr/sbin/vigr
 /usr/sbin/vipw
-/usr/share/man/*/man1/*
-/usr/share/man/*/man3/*
-/usr/share/man/*/man5/*
-/usr/share/man/*/man8/*
-/usr/share/man/man1/*
-/usr/share/man/man3/*
-/usr/share/man/man5/*
-/usr/share/man/man8/*
+
+%files extras
+%defattr(-,root,root)
+/usr/share/man/man1/*.bz2
+/usr/share/man/man3/*.bz2
+/usr/share/man/man5/*.bz2
+/usr/share/man/man8/*.bz2
 
 %changelog
-* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.3-2
-- Fix typo in /etc/pam.d/passwd
-- Use sha512 for passwords
-- Optimize for size
-
-* Sun May 08 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.3-1
-- Upgrade to 4.1.4.3
-
-* Mon Apr 12 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.2-2
-- Don't link directly to cracklib
-
-* Tue Apr 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.2-1
+* Mon Jan 30 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 4.1.4.3-1
 - Initial version

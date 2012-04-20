@@ -18,7 +18,6 @@ A Massively Spiffy Yet Delicately Unobtrusive Compression Library
 %package devel
 Summary: Headers and libraries for developing with %{name}
 Group: Development/Libraries
-Requires: %{name}
 
 %description devel
 Headers and libraries for developing with %{name}
@@ -29,9 +28,10 @@ Headers and libraries for developing with %{name}
 sed -i 's@mktemp -u@mktemp@' Makefile.in
 
 %build
-export CFLAGS="-Os"
+export CFLAGS="-Os -pipe -fPIC"
 ./configure \
-  --prefix=''
+  --prefix='' \
+  --static
 make %{PMFLAGS}
 
 %install
@@ -42,14 +42,9 @@ make DESTDIR=%{buildroot} install
 %clean
 rm -rf %{buildroot}
 
-%files
-%defattr(-,root,root)
-/lib/libz.so.*
-
 %files devel
 %defattr(-,root,root)
 /lib/libz.a
-/lib/libz.so
 /lib/pkgconfig/zlib.pc
 /share/man/man3/zlib.3.bz2
 /include/zconf.h

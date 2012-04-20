@@ -11,7 +11,6 @@ session     required       pam_limits.so
 session     optional       pam_mail.so      dir=/var/mail standard
 session     optional       pam_lastlog.so
 session     required       pam_unix.so
-password    required       pam_cracklib.so  retry=3
-password    required       pam_unix.so      sha512 shadow use_authtok
+password    required       pam_unix.so      sha1 shadow use_authtok
 
 # End /etc/pam.d/sshd

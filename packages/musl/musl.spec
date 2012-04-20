@@ -1,17 +1,16 @@
 Summary: musl
 Name: musl
-Version: 0.8.7
+Version: 0.8.9
 Release: 1
 Group: System Environment/Libraries
 License: GPLv2
 Distribution: LightCube OS
 Vendor: LightCube Solutions
 URL: http://www.etalabs.net/musl
-#Source0: http://www.etalabs.net/musl/releases/%{name}-%{version}.tar.gz
-Source0: http://dev.lightcube.us/sources/musl/musl-%{version}-20120414.tar.bz2
+Source0: http://www.etalabs.net/musl/releases/%{name}-%{version}.tar.gz
 Source1: musl-config
 
-BuildRequires: digest(sha1:%{SOURCE0}) = 0570a4525897ab8224fccc127c4b1ee175a66848
+BuildRequires: digest(sha1:%{SOURCE0}) = 7fe4e6d3e91968ed7490259ae5a2b9c61e82743b
 BuildRequires: digest(sha1:%{SOURCE1}) = 4e1ba96338fa03ddbb767c27fe7a26763c391a3c
 
 %description
@@ -33,16 +32,10 @@ the standard C libraries, your system needs to have these standard
 object files available in order to create the executables.
 
 %prep
-%setup -q -n musl-%{version}-20120414
-sed -i "/getdate /s@.*@&\nint stime(time_t *t);@" include/time.h
-sed -i "s@^#ifdef _GNU_SOURCE.*@&\nint daemon(int nochdir, int noclose);\nint getdomainname(char *name, size_t len);@" include/unistd.h
-sed -i "/^pid_t/s@.*@&\n\n#ifdef _GNU_SOURCE\nvoid cfmakeraw(struct termios *t);\nint cfsetspeed(struct termios *, speed_t);\n#endif@" include/termios.h
+%setup -q
 echo "
 #undef powerof2
 #define powerof2(x) ((((x) - 1) & (x)) == 0)
-
-#undef __CONCAT
-#define __CONCAT(x,y)   x ## y
 " >> include/sys/param.h
 
 %build
@@ -256,5 +249,5 @@ rm -rf %{buildroot}
 /lib/libxnet.a
 
 %changelog
-* Tue Mar 27 2012 Jeremy Huntwork <jhuntowrk@lightcubesolutions.com> - 0.8.7-1
+* Thu Apr 19 2012 Jeremy Huntwork <jhuntowrk@lightcubesolutions.com> - 0.8.9-1
 - Initial version

@@ -1,7 +1,7 @@
 Summary: The Fast Lexical Analyzer
 Name: flex
 Version: 2.5.35
-Release: 2
+Release: 1
 Group: Development/Tools
 License: GPLv2
 Distribution: LightCube OS
@@ -25,23 +25,32 @@ Requires: %{name}
 %description devel
 Provides headers and libraries for developing with %{name}
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
 %patch0 -p1
+sed -i 's/linux-gnu/linux-musl/g' `find . -name config.guess -o -name config.sub`
 
 %build
 export CFLAGS='-Os -pipe'
 ./configure \
   --prefix=/usr \
-  --libdir=/usr/%{_lib} \
   --infodir=/usr/share/info \
   --mandir=/usr/share/man
 make %{PMFLAGS}
-make check
+#make check
 
 %install
 make DESTDIR=%{buildroot} install
-ln -sv libfl.a %{buildroot}/usr/%{_lib}/libl.a
+ln -s libfl.a %{buildroot}/usr/lib/libl.a
 
 cat > %{buildroot}/usr/bin/lex << "EOF"
 #!/bin/sh
@@ -52,26 +61,28 @@ exec /usr/bin/flex -l "$@"
 # End /usr/bin/lex
 EOF
 
-chmod -v 755 %{buildroot}/usr/bin/lex
+chmod 0755 %{buildroot}/usr/bin/lex
 rm -f %{buildroot}/usr/share/info/dir
 %{compress_man}
-ln -sv flex.1.bz2 %{buildroot}/usr/share/man/man1/lex.1.bz2
+ln -s flex.1.bz2 %{buildroot}/usr/share/man/man1/lex.1.bz2
 %{strip}
-%find_lang %{name}
 
 %clean
 rm -rf %{buildroot}
 
-%post
+%post extras
 /usr/bin/install-info /usr/share/info/flex.info /usr/share/info/dir
 
-%preun
+%preun extras
 /usr/bin/install-info --delete /usr/share/info/flex.info /usr/share/info/dir
 
-%files -f %{name}.lang
+%files
 %defattr(-,root,root)
 /usr/bin/flex
 /usr/bin/lex
+
+%files extras
+%defattr(-,root,root)
 /usr/share/man/man1/flex.1.bz2
 /usr/share/man/man1/lex.1.bz2
 /usr/share/info/flex.info
@@ -81,13 +92,10 @@ rm -rf %{buildroot}
 %files devel
 %defattr(-,root,root)
 /usr/include/FlexLexer.h
-/usr/%{_lib}/libfl.a
-/usr/%{_lib}/libfl_pic.a
-/usr/%{_lib}/libl.a
+/usr/lib/libfl.a
+/usr/lib/libfl_pic.a
+/usr/lib/libl.a
 
 %changelog
-* Sat Oct 29 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.35-2
-- Optimize for size
-
-* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.35-1
+* Thu Jan 26 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 2.5.35-1
 - Initial version

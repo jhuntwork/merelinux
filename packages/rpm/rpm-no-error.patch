@@ -1,0 +1,282 @@
+--- rpm-5.3.11-orig/tools/debugedit.c
++++ rpm-5.3.11/tools/debugedit.c
+@@ -23,7 +23,7 @@
+ #include <byteswap.h>
+ #include <endian.h>
+ #include <errno.h>
+-#include <error.h>
++#include <err.h>
+ #include <limits.h>
+ #include <string.h>
+ #include <stdlib.h>
+@@ -309,7 +309,7 @@
+   if (h == NULL)
+     {
+ no_memory:
+-      error (0, ENOMEM, "%s: Could not read .debug_abbrev", dso->filename);
++      err (0, "%s: Could not read .debug_abbrev", dso->filename);
+       if (h)
+         htab_delete (h);
+       return NULL;
+@@ -331,7 +331,7 @@
+         }
+       if (*slot != NULL)
+ 	{
+-	  error (0, 0, "%s: Duplicate DWARF abbreviation %d", dso->filename,
++	  err (0, "%s: Duplicate DWARF abbreviation %d", dso->filename,
+ 		 t->entry);
+ 	  free (t);
+ 	  htab_delete (h);
+@@ -351,7 +351,7 @@
+ 	  form = read_uleb128 (ptr);
+ 	  if (form == 2 || form > DW_FORM_indirect)
+ 	    {
+-	      error (0, 0, "%s: Unknown DWARF DW_FORM_%d", dso->filename, form);
++	      err (0, "%s: Unknown DWARF DW_FORM_%d", dso->filename, form);
+ 	      htab_delete (h);
+ 	      return NULL;
+ 	    }
+@@ -361,7 +361,7 @@
+         }
+       if (read_uleb128 (ptr) != 0)
+         {
+-	  error (0, 0, "%s: DWARF abbreviation does not end with 2 zeros",
++	  err (0, "%s: DWARF abbreviation does not end with 2 zeros",
+ 		 dso->filename);
+ 	  htab_delete (h);
+ 	  return NULL;
+@@ -501,13 +501,13 @@
+   endcu += read_32 (ptr);
+   if (endcu == ptr + 0xffffffff)
+     {
+-      error (0, 0, "%s: 64-bit DWARF not supported", dso->filename);
++      err (0, "%s: 64-bit DWARF not supported", dso->filename);
+       return 1;
+     }
+ 
+   if (endcu > endsec)
+     {
+-      error (0, 0, "%s: .debug_line CU does not fit into section",
++      err (0, "%s: .debug_line CU does not fit into section",
+ 	     dso->filename);
+       return 1;
+     }
+@@ -515,7 +515,7 @@
+   value = read_16 (ptr);
+   if (value != 2 && value != 3)
+     {
+-      error (0, 0, "%s: DWARF version %d unhandled", dso->filename,
++      err (0, "%s: DWARF version %d unhandled", dso->filename,
+ 	     value);
+       return 1;
+     }
+@@ -524,7 +524,7 @@
+   endprol += read_32 (ptr);
+   if (endprol > endcu)
+     {
+-      error (0, 0, "%s: .debug_line CU prologue does not fit into CU",
++      err (0, "%s: .debug_line CU prologue does not fit into CU",
+ 	     dso->filename);
+       return 1;
+     }
+@@ -563,7 +563,7 @@
+ 
+       if (value >= dirt_cnt)
+ 	{
+-	  error (0, 0, "%s: Wrong directory table index %u",
++	  err (0, "%s: Wrong directory table index %u",
+ 		 dso->filename, value);
+ 	  return 1;
+ 	}
+@@ -572,7 +572,7 @@
+       s = malloc (comp_dir_len + 1 + file_len + 1 + dir_len + 1);
+       if (s == NULL)
+ 	{
+-	  error (0, ENOMEM, "%s: Reading file table", dso->filename);
++	  err (0, "%s: Reading file table", dso->filename);
+ 	  return 1;
+ 	}
+       if (*file == '/')
+@@ -677,7 +677,7 @@
+       if (shrank > 0)
+ 	{
+ 	  if (--shrank == 0)
+-	    error (EXIT_FAILURE, 0,
++	    err (EXIT_FAILURE,
+ 		   "canonicalization unexpectedly shrank by one character");
+ 	  else
+ 	    {	    
+@@ -692,7 +692,7 @@
+ 	  size_t len = (abs_dir_cnt + abs_file_cnt) * (base_len - dest_len);
+ 
+ 	  if (len == 1)
+-	    error (EXIT_FAILURE, 0, "-b arg has to be either the same length as -d arg, or more than 1 char shorter");
++	    err (EXIT_FAILURE, "-b arg has to be either the same length as -d arg, or more than 1 char shorter");
+ 	  memset (ptr, 'X', len - 1);
+ 	  ptr += len - 1;
+ 	  *ptr++ = '\0';
+@@ -915,7 +915,7 @@
+ 	      assert (len < UINT_MAX);
+ 	      break;
+ 	    default:
+-	      error (0, 0, "%s: Unknown DWARF DW_FORM_%d", dso->filename,
++	      err (0, "%s: Unknown DWARF DW_FORM_%d", dso->filename,
+ 		     form);
+ 	      return NULL;
+ 	    }
+@@ -1006,7 +1006,7 @@
+ 	 	{
+ 		  if (debug_sections[j].data)
+ 		    {
+-		      error (0, 0, "%s: Found two copies of %s section",
++		      err (0, "%s: Found two copies of %s section",
+ 			     dso->filename, name);
+ 		      return 1;
+ 		    }
+@@ -1026,7 +1026,7 @@
+ 
+ 	    if (debug_sections[j].name == NULL)
+ 	      {
+-		error (0, 0, "%s: Unknown debugging section %s",
++		err (0, "%s: Unknown debugging section %s",
+ 		       dso->filename, name);
+ 	      }
+ 	  }
+@@ -1063,7 +1063,7 @@
+     }
+   else
+     {
+-      error (0, 0, "%s: Wrong ELF data enconding", dso->filename);
++      err (0, "%s: Wrong ELF data enconding", dso->filename);
+       return 1;
+     }
+ 
+@@ -1097,7 +1097,7 @@
+ 	  relbuf = malloc (maxndx * sizeof (REL));
+ 	  reltype = dso->shdr[i].sh_type;
+ 	  if (relbuf == NULL)
+-	    error (1, errno, "%s: Could not allocate memory", dso->filename);
++	    err (1, "%s: Could not allocate memory", dso->filename);
+ 
+ 	  symdata = elf_getdata (dso->scn[dso->shdr[i].sh_link], NULL);
+ 	  assert (symdata != NULL && symdata->d_buf != NULL);
+@@ -1166,7 +1166,7 @@
+ 		  break;
+ 		default:
+ 		fail:
+-		  error (1, 0, "%s: Unhandled relocation %d in .debug_info section",
++		  err (1, "%s: Unhandled relocation %d in .debug_info section",
+ 			 dso->filename, rtype);
+ 		}
+ 	      relend->ptr = debug_sections[DEBUG_INFO].data
+@@ -1193,7 +1193,7 @@
+ 	    {
+ 	      if (ptr + 11 > endsec)
+ 		{
+-		  error (0, 0, "%s: .debug_info CU header too small",
++		  err (0, "%s: .debug_info CU header too small",
+ 			 dso->filename);
+ 		  return 1;
+ 		}
+@@ -1202,20 +1202,20 @@
+ 	      endcu += read_32 (ptr);
+ 	      if (endcu == ptr + 0xffffffff)
+ 		{
+-		  error (0, 0, "%s: 64-bit DWARF not supported", dso->filename);
++		  err (0, "%s: 64-bit DWARF not supported", dso->filename);
+ 		  return 1;
+ 		}
+ 	      
+ 	      if (endcu > endsec)
+ 		{
+-		  error (0, 0, "%s: .debug_info too small", dso->filename);
++		  err (0, "%s: .debug_info too small", dso->filename);
+ 		  return 1;
+ 		}
+ 	      
+ 	      cu_version = read_16 (ptr);
+ 	      if (cu_version != 2 && cu_version != 3)
+ 		{
+-		  error (0, 0, "%s: DWARF version %d unhandled", dso->filename,
++		  err (0, "%s: DWARF version %d unhandled", dso->filename,
+ 			 cu_version);
+ 		  return 1;
+ 		}
+@@ -1224,9 +1224,9 @@
+ 	      if (value >= debug_sections[DEBUG_ABBREV].size)
+ 		{
+ 		  if (debug_sections[DEBUG_ABBREV].data == NULL)
+-		    error (0, 0, "%s: .debug_abbrev not present", dso->filename);
++		    err (0, "%s: .debug_abbrev not present", dso->filename);
+ 		  else
+-		    error (0, 0, "%s: DWARF CU abbrev offset too large",
++		    err (0, "%s: DWARF CU abbrev offset too large",
+ 			   dso->filename);
+ 		  return 1;
+ 		}
+@@ -1236,14 +1236,14 @@
+ 		  ptr_size = read_1 (ptr);
+ 		  if (ptr_size != 4 && ptr_size != 8)
+ 		    {
+-		      error (0, 0, "%s: Invalid DWARF pointer size %d",
++		      err (0, "%s: Invalid DWARF pointer size %d",
+ 			     dso->filename, ptr_size);
+ 		      return 1;
+ 		    }
+ 		}
+ 	      else if (read_1 (ptr) != ptr_size)
+ 		{
+-		  error (0, 0, "%s: DWARF pointer size differs between CUs",
++		  err (0, "%s: DWARF pointer size differs between CUs",
+ 			 dso->filename);
+ 		  return 1;
+ 		}
+@@ -1261,7 +1261,7 @@
+ 		  t = htab_find_with_hash (abbrev, &tag, tag.entry);
+ 		  if (t == NULL)
+ 		    {
+-		      error (0, 0, "%s: Could not find DWARF abbreviation %d",
++		      err (0, "%s: Could not find DWARF abbreviation %d",
+ 			     dso->filename, tag.entry);
+ 		      htab_delete (abbrev);
+ 		      return 1;
+@@ -1305,26 +1305,26 @@
+   elf = elf_begin (fd, ELF_C_RDWR_MMAP, NULL);
+   if (elf == NULL)
+     {
+-      error (0, 0, "cannot open ELF file: %s", elf_errmsg (-1));
++      err (0, "cannot open ELF file: %s", elf_errmsg (-1));
+       goto error_out;
+     }
+ 
+   if (elf_kind (elf) != ELF_K_ELF)
+     {
+-      error (0, 0, "\"%s\" is not an ELF file", name);
++      err (0, "\"%s\" is not an ELF file", name);
+       goto error_out;
+     }
+ 
+   if (gelf_getehdr (elf, &ehdr) == NULL)
+     {
+-      error (0, 0, "cannot get the ELF header: %s",
++      err (0, "cannot get the ELF header: %s",
+ 	     elf_errmsg (-1));
+       goto error_out;
+     }
+ 
+   if (ehdr.e_type != ET_DYN && ehdr.e_type != ET_EXEC && ehdr.e_type != ET_REL)
+     {
+-      error (0, 0, "\"%s\" is not a shared library", name);
++      err (0, "\"%s\" is not a shared library", name);
+       goto error_out;
+     }
+ 
+@@ -1335,7 +1335,7 @@
+ 	        + (ehdr.e_shnum + 20) * sizeof(Elf_Scn *));
+   if (!dso)
+     {
+-      error (0, ENOMEM, "Could not open DSO");
++      err (0, "Could not open DSO");
+       goto error_out;
+     }
+ 

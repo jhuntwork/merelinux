@@ -15,15 +15,26 @@ BuildRequires: zlib-devel
 %description
 Tools for activating Linux kernel modules
 
+%package extras
+Summary: Extra pieces that are useful but are not necessary at runtime
+Group: Extras
+Requires: %{name} >= %{version}
+
+%description extras
+Extra pieces that are useful but are not necessary at runtime, such as
+man pages, locale messages and extra documentation
+
 %prep
 %setup -q
+%{config_musl}
 
 %build
+export CFLAGS="-Os -pipe"
 DOCBOOKTOMAN=/bin/true ./configure \
   --prefix=/ \
   --enable-zlib-dynamic \
   --mandir=/usr/share/man
-make %{PMFLAGS}
+make
 
 %install
 make DESTDIR=%{buildroot} INSTALL=install install
@@ -37,13 +48,16 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 /bin/lsmod
-/etc/modprobe.d
+%dir /etc/modprobe.d
 /sbin/depmod
 /sbin/insmod
 /sbin/insmod.static
 /sbin/modinfo
 /sbin/modprobe
 /sbin/rmmod
+
+%files extras
+%defattr(-,root,root)
 /usr/share/man/man5/depmod.conf.5.bz2
 /usr/share/man/man5/depmod.d.5.bz2
 /usr/share/man/man5/modprobe.conf.5.bz2
@@ -58,24 +72,5 @@ rm -rf %{buildroot}
 /usr/share/man/man8/rmmod.8.bz2
 
 %changelog
-* Wed Nov 02 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.15-1
-- Upgrade to 3.15
-- Optimize for size
-
-* Tue Sep 14 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.12-3
-- Add an /etc/modprobe.d directory
-
-* Mon Sep 06 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.12-2
-- Fix rogue info file instructions
-
-* Tue Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.12-1
-- Upgrade to 3.12
-
-* Tue Dec 29 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.11.1-1
-- Upgrade to 3.11.1
-
-* Fri Oct 30 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.10-2
-- Use FHS compatible info directories
-
-* Fri Aug 14 2009 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.10-1
+* Wed Feb 01 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 3.15-1
 - Initial version

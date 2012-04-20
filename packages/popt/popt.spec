@@ -1,7 +1,7 @@
 Summary: popt
 Name: popt
 Version: 1.16
-Release: 2
+Release: 1
 Group: System Environment/Libraries
 License: GPL
 Distribution: LightCube OS
@@ -17,56 +17,37 @@ The popt library exists essentially for parsing command line options.
 %package devel
 Summary: Headers and libraries for developing with %{name}
 Group: Development/Libraries
-Requires: %{name}
 
 %description devel
 Headers and libraries for developing with %{name}
 
 %prep
 %setup -q
+%{config_musl}
 
 %build
-export CFLAGS='-Os -pipe'
+export CFLAGS='-D_GNU_SOURCE -Os'
 ./configure \
-  --prefix=/usr \
-  --libdir=/usr/%{_lib}
+  --prefix='' \
+  --disable-shared
 make %{PMFLAGS}
 
 %install
 make DESTDIR=%{buildroot} install
-%if %{_lib} != "lib"
-mv %{buildroot}/usr/lib/pkgconfig %{buildroot}/usr/%{_lib}/
-%endif
-%find_lang %{name}
 %{compress_man}
 %{strip}
 
 %clean
 rm -rf %{buildroot}
 
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
-
-%files -f %{name}.lang
-%defattr(-,root,root)
-/usr/%{_lib}/libpopt.so.*
-
 %files devel
 %defattr(-,root,root)
-/usr/include/popt.h
-/usr/%{_lib}/libpopt.a
-/usr/%{_lib}/libpopt.la
-/usr/%{_lib}/libpopt.so
-/usr/%{_lib}/pkgconfig/popt.pc
-/usr/share/man/man3/popt.3.bz2
-
+/include/popt.h
+/lib/libpopt.a
+/lib/libpopt.la
+/lib/pkgconfig/popt.pc
+/share/man/man3/popt.3.bz2
 
 %changelog
-* Wed Oct 26 2011 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.16-2
-- Optimize for size
-
-* Sun Aug 08 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.16-1
-- Upgrade to 1.16
-
-* Sun Apr 11 2010 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.15-1
+* Mon Apr 16 2012 Jeremy Huntwork <jhuntwork@lightcubesolutions.com> - 1.16-1
 - Initial version

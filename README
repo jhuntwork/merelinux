@@ -1,5 +1,6 @@
-LightCube OS is a lightweight, server-centric GNU/Linux distribution built upon
-RPM5 and Smart.
+LightCube OS is a lightweight, server-centric Linux distribution built upon
+musl libc, RPM5 and Smart.
 
+musl - http://www.etalabs.net/musl
 RPM5 - http://rpm5.org
 Smart - http://labix.org/smart
