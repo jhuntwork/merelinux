@@ -1,0 +1,39 @@
+pkgname=musl
+pkgver=0.8.10
+pkgrel=1
+pkgdesc='An implementation of the C/POSIX standard library.'
+arch=('x86_64')
+url='http://www.etalabs.net/musl'
+license=('LGPL' 'BSD')
+groups=('base')
+depends=()
+makedepends=()
+options=('strip')
+changelog=ChangeLog
+source=(
+	"http://www.etalabs.net/musl/releases/$pkgname-$pkgver.tar.gz"
+	'musl-config'
+)
+sha256sums=(
+	'ac967024f4187fec8f5100489db70d7c904bcf98e7544f8b52e872f380d4c033'
+	'3fc04b1b46133266f8517d025499197f95af27064bd687a7e8e1334eb8253fe5'
+)
+
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	echo "
+#undef powerof2
+#define powerof2(x) ((((x) - 1) & (x)) == 0)
+" >> include/sys/param.h
+	cp "$srcdir/musl-config" config.mak
+	make $MAKEFLAGS
+}
+
+package() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make DESTDIR=${pkgdir} install
+	# Remove headers provided by the kernel
+	rm -rf $pkgdir/include/linux
+	ln -sf libc.so $pkgdir/lib/ld-musl-$arch.so.1
+}
