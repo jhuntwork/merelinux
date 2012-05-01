@@ -1,0 +1,44 @@
+pkgname=ncurses
+pkgver=5.9
+pkgrel=1
+pkgdesc='An API for writing text-based user interfaces.'
+arch=('x86_64')
+url='http://www.gnu.org/software/ncurses'
+license=('GPL2')
+groups=('base')
+depends=()
+makedepends=(musl)
+options=() # Defaults in makepkg.conf
+changelog=ChangeLog
+
+source=(
+	"http://ftp.gnu.org/gnu/ncurses/$pkgname-$pkgver.tar.gz"
+	'ncurses-fallback.c'
+)
+sha256sums=(
+	'9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b'
+	'b7981bb4e087ee4d3cf796541d4467a6db2d5fa494ff3cb12924cbdbd962135c'
+)
+
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	sed -i 's/linux-gnu/linux-musl/g' `find . -name "confi*.sub" -o -name "confi*.guess"`
+	cp "$srcdir/ncurses-fallback.c" ncurses/fallback.c
+	./configure \
+	  --prefix='' \
+	  --with-fallbacks="linux vt100 xterm xterm256-color" \
+	  --with-shared \
+	  --disable-debug \
+  	  --disable-nls \
+  	  --includedir=/include \
+	  --mandir=/share/man
+	make $MAKEFLAGS
+}
+
+package() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make DESTDIR=${pkgdir} install
+	ln -s libncurses.so ${pkgdir}/lib/libcurses.so
+	ln -s libncurses.a ${pkgdir}/lib/libcurses.a
+}
