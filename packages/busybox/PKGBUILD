@@ -1,0 +1,43 @@
+pkgname=busybox
+pkgver=1.19.4
+pkgrel=1
+pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
+arch=('x86_64')
+url='http://busybox.net'
+license=('GPL2')
+groups=('base')
+depends=()
+makedepends=()
+options=('strip')
+changelog=ChangeLog
+source=(
+	"http://busybox.net/downloads/$pkgname-$pkgver.tar.bz2"
+	'busybox-config'
+)
+sha256sums=(
+	'9b853406da61ffb59eb488495fe99cbb7fb3dd29a31307fcfa9cf070543710ee'
+	'42f5968a40e01065738a33c3564733cc7836b1952d49e7f75e9d73f8221b94e6'
+)
+
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" $srcdir/busybox-config >"$srcdir/$pkgname-$pkgver/.config"
+	sed -i '/netinet\/ether/d' networking/arp.c
+	sed -i '/net\/if_slip/d' networking/ifconfig.c
+	sed -i '/net\/if_packet/d' networking/libiproute/iplink.c
+	sed -i '/getpwent/s@!.*@(pwent = getpwent()) != NULL) {@' loginutils/deluser.c
+	sed -i -e '/struct passwd \*pw/d' \
+	  -e 's@struct passwd pwent@struct passwd \*pwent@' \
+	  -e 's@pwent\.pw@pwent->pw@g' loginutils/deluser.c
+	make V=1 HOSTCC="gcc -D_GNU_SOURCE" ${MAKEFLAGS}
+}
+
+package() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
+	chmod u+s ${pkgdir}/bin/busybox
+	rm -f ${pkgdir}/bin/ip
+	ln -s ../bin/busybox ${pkgdir}/sbin/ip
+	rm -f ${pkgdir}/bin/bash
+}
