@@ -1,0 +1,8 @@
+export PATH=/bin:/sbin
+export INPUTRC=/etc/inputrc
+export PKG_CONFIG_PATH="/lib/pkgconfig:/share/pkgconfig"
+export HISTSIZE=1000
+export HISTFILESIZE=2000
+export HISTTIMEFORMAT="%F %T :: "
+export HISTCONTROL=ignoredups:ignorespace
+source /etc/bashrc
