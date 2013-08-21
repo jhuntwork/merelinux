@@ -1,0 +1,41 @@
+pkgname=m4
+pkgver=1.4.16
+pkgrel=1
+pkgdesc='GNU M4 is an implementation of the traditional Unix macro processor.'
+arch=('x86_64')
+url='http://www.gnu.org/software/m4/'
+license=('GPL3')
+groups=('base')
+depends=()
+makedepends=()
+options=('strip')
+changelog=ChangeLog
+source=(
+	"http://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz"
+	'freadahead.h'
+)
+
+sha256sums=(
+	'd5b5d51cf8f5b18f3bac39bc2f6b1e61f34d400136ae1a87d075e26a38028d5d'
+	'9c12c770e2c991e0dd2e5710d5f59ee531210b1142d379fc96a89d6be0958ee1'
+)
+
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	cp "$srcdir/freadahead.h" lib/
+	echo '#include "freadahead.h"' >lib/freadahead.c
+	CC="gcc -DHAVE___FREADAHEAD" \
+	LDFLAGS="-Wl,-static" \
+	./configure --prefix='' --enable-threads
+	make $MAKEFLAGS
+}
+
+package() {
+	pkgfiles=(
+		'bin/m4'
+		'share/man/man1/m4.1.gz'
+	)
+	cd "$srcdir/$pkgname-$pkgver"
+	make DESTDIR="$pkgdir" install
+}
