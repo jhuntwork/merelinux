@@ -1,13 +1,13 @@
-pkgname=readline
+pkgname=('readline' 'readline-devel')
 pkgver=6.2
 pkgrel=1
 pkgdesc='A library for allowing users to edit command lines as they are typed in.'
 arch=('x86_64')
-url='http://cnswww.cns.cwru.edu/php/chet/readline/rltop.html'
+url='http://www.gnu.org/software/readline/'
 license=('BSD')
 groups=('base')
 depends=(ncurses)
-makedepends=(musl ncurses)
+makedepends=(musl-devel ncurses-devel)
 options=() # Defaults in makepkg.conf
 changelog=ChangeLog
 
@@ -16,18 +16,23 @@ PURGE_TARGETS=(share/info/* share/readline/*)
 source=(
 	"http://ftp.gnu.org/gnu/readline/$pkgname-$pkgver.tar.gz"
 	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-001'
+	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-002'
+	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-003'
+	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-004'
 )
 
 sha256sums=(
 	'79a696070a058c233c72dd6ac697021cc64abd5ed51e59db867d66d196a89381'
 	'38a86c417437692db01069c8ab40a9a8f548e67ad9af0390221b024b1c39b4e3'
+	'1e6349128cb573172063ea007c67af79256889c809973002ca66c5dfc503c7d4'
+	'cb2131ff352d6e5f82edc09755191f74220b15f026bdb6c52624931c79622374'
+	'09bd342479ea5bb8b6411bfdf7d302fab2e521d1d241bcb8344d3bad5d9f5476'
 )
 
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
-	patch -Np0 -i "$srcdir/readline62-001"
-	sed -i 's/linux-gnu/linux-musl/g' `find . -name "confi*.sub" -o -name "confi*.guess"`
+	for p in readline62-{001..004} ; do patch -Np0 -i "$srcdir/$p" ; done
 	sed -i '/MV.*old/d' Makefile.in
 	sed -i '/{OLDSUFF}/c:' support/shlib-install
 	./configure \
@@ -35,7 +40,29 @@ build() {
 	make $MAKEFLAGS SHLIB_LIBS=-lncurses
 }
 
-package() {
-	cd "$srcdir/$pkgname-$pkgver"
+package_readline() {
+	pkgfiles=(
+		'lib/libhistory.so.6'
+		'lib/libreadline.so.6'
+		"lib/libreadline.so.$pkgver"
+		"lib/libhistory.so.$pkgver"
+	)
+	cd "$srcdir/$pkgbase-$pkgver"
+	make DESTDIR=${pkgdir} install
+}
+
+package_readline-devel() {
+	pkgfiles=(
+		'lib/libreadline.a'
+		'lib/libreadline.so'
+		'lib/libhistory.a'
+		'lib/libhistory.so'
+		'include'
+		'share/man'
+	)
+	depends=(
+		'readline'
+	)
+	cd "$srcdir/$pkgbase-$pkgver"
 	make DESTDIR=${pkgdir} install
 }
