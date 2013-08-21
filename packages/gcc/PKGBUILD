@@ -1,0 +1,93 @@
+pkgname=('gcc' 'gcc-c++')
+pkgver=4.2.4
+pkgrel=1
+pkgdesc='The GNU Compiler Collection'
+arch=('x86_64')
+url='http://gcc.gnu.org/'
+license=('GPL2')
+groups=('base')
+depends=()
+makedepends=()
+options=('strip')
+changelog=ChangeLog
+source=(
+	"http://ftp.gnu.org/gnu/gcc/$pkgname-$pkgver/$pkgname-$pkgver.tar.bz2"
+)
+
+sha256sums=(
+	'afba845e2d38547a63bd3976e90245c81ea176786f9e6966339c6d3761f1133a'
+)
+
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	sed -i -e 's/linux-gnu/linux-musl/g' \
+		-e 's@LIBC=gnu@LIBC=musl@' \
+		$(find . -name "confi*.guess" -o -name "confi*.sub")
+	for file in $(find gcc/config/i386 -name linux64.h -o -name linux.h) ; do
+		sed -i -e 's@lib/ld-linux.so.2@lib/ld-musl-i386.so.1@' \
+	            -e 's@/usr@/@g' \
+	       	    -e 's@lib64/ld-linux-x86-64.so.2@lib/ld-musl-x86_64.so.1@' $file
+	done
+	sed -i '/MULTILIB_OSDIRNAMES/d' $(find gcc/config -name t-linux64)
+	sed -i '/^NATIVE_SYSTEM_HEADER_DIR/s@= .*@= /include@' gcc/Makefile.in
+	sed -i '/#define STANDARD_INCLUDE_DIR/s@"/usr/include"@"/include"@g' gcc/cppdefault.c
+	sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in
+	sed -i '/include <link.h>/s@^.*@/\*&\*/@' gcc/unwind-dw2-fde-glibc.c
+	sed -i 's,\./fixinc\.sh,-c true,' gcc/Makefile.in
+	rm -rf libstdc++-v3/config/os/gnu-linux && ln -s generic libstdc++-v3/config/os/gnu-linux
+	mkdir ../$pkgname-build
+	cd ../$pkgname-build
+	CFLAGS="$CFLAGS -fPIC" CXXFLAGS="$CXXFLAGS -fPIC" \
+	  ../$pkgname-$pkgver/configure \
+	  --prefix='' \
+	  --libexecdir=/lib \
+	  --mandir=/share/man \
+	  --enable-threads=posix \
+	  --enable-tls \
+	  --disable-shared \
+	  --disable-bootstrap \
+	  --disable-libmudflap \
+	  --disable-multilib \
+	  --enable-languages=c,c++
+	make $MAKEFLAGS BOOT_LDFLAGS="-static" LDFLAGS="-static"
+}
+
+package_gcc() {
+	pkgfiles=(
+		'bin/cpp'
+		'bin/gcc'
+		'bin/gcov'
+		'bin/cc'
+		'bin/gccbug'
+		'lib/cpp'
+		'lib/libssp.a'
+		'lib/gcc'
+		'lib/libgomp.spec'
+		'lib/libgomp.a'
+		'lib/libssp_nonshared.a'
+		'share/man/man1/cpp.1.gz'
+		'share/man/man1/gcc.1.gz'
+		'share/man/man1/gcov.1.gz'
+	)
+	cd "$srcdir/$pkgbase-build"
+	make DESTDIR="$pkgdir" install
+	find "$pkgdir" -type f -name "*.gch" -delete
+	ln -sf ../bin/cpp "$pkgdir/lib"
+	ln -sf gcc "$pkgdir/bin/cc"
+}
+
+package_gcc-c++() {
+	pkgfiles=(
+		'bin/c++'
+		'bin/g++'
+		'include/c++'
+		'lib/libstdc++.a'
+		'lib/libsupc++.a'
+		'share/man/man1/g++.1.gz'
+	)
+	depends=('gcc')
+	cd "$srcdir/$pkgbase-build"
+	make DESTDIR="$pkgdir" install
+	find "$pkgdir" -type f -name "*.gch" -delete
+}
