@@ -4,10 +4,10 @@ pkgrel=1
 pkgdesc='A full-featured sh-compatible shell.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bash'
-license=('GPL2')
+license=('GPL3')
 groups=('base')
-depends=(ncurses readline)
-makedepends=(musl ncurses readline)
+depends=()
+makedepends=(musl-devel ncurses-devel readline-devel bison)
 options=() # Defaults in makepkg.conf
 changelog=ChangeLog
 
@@ -41,6 +41,27 @@ source=(
 	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-022'
 	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-023'
 	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-024'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-025'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-026'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-027'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-028'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-029'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-030'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-031'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-032'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-033'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-034'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-035'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-036'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-037'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-038'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-039'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-040'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-041'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-042'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-043'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-044'
+	'http://ftp.gnu.org/gnu/bash/bash-4.2-patches/bash42-045'
 )
 
 sha256sums=(
@@ -71,14 +92,34 @@ sha256sums=(
 	'9dcdf69df7f8cd2ba88d18c45a0d8f55fbe4f0e273411179db94dd6198b85c6b' 
 	'5dc11394f1a6c887373c081396efd4f4cc04492696722c57a4811c207965f0bf' 
 	'99c826bdd33bee281d0a9191550d62a24d0b256cd41c90afd10abd63a66b99e6'
+	'0db0646fd7a559d5702911192bdd387acbbc61cf3c29a34007c3ec840e275515'
+	'e7e90cfaabbce3b4b9c699994e9d9ea4a2f084fd9f37788a80b0b70b47d323d2'
+	'0c1f6b7256fcc17f42c05f9bbb4138f8e8bb67e79c622c3485711b6f37f7ed42'
+	'204226de39ba81aaf3dd5a29cd59de052ec9f648538bb9e7f1c8150852b1ed7a'
+	'd0b08c0817bc5acdb28b466727622a8422ca4d61188313cf162443b7f338f581'
+	'12594366591a136d8ccdcb8e218010f2ddab6be28a7f96d0ed32ca927e44afae'
+	'55f38c4d34775fbb063510c4222b195d998dd86f88288b64a6103e3812f8d9f9'
+	'e3a8b563dbb1e5cb7ca85a53515da8b2941213973496d48c4cc5a11c604791ed'
+	'f5d12790d69fdfb2f47ac86fa1ea1ecc088880141570273f38dfd3fa4a46434b'
+	'01c1f332101389cedf347c7736102966722a3b213900954e5d625bbc2f1e41b8'
+	'cecde463b038b4849635ff0993d9b264fc92403e7ae0accb52c7877aeaed78df'
+	'fe293a1bc92ac4d272ae9b9a0de3afef7c06145a2b52337a09cacccc5305aafa'
+	'c7578cddd3bb2430689c740f58a03403800726dcd1268b28f91bf37f368e1674'
+	'b8c9a81bdf206be58ba491dfad80373b3348af769e80aaf72f7611ddbbbe6d57'
+	'f4f9300a60321a5088ae9e54052a64c4d3e876f9a3a17ca104d58fa38b9c1791'
+	'b265f9caf3c7321f95bc8e0b9e2c46bd86c226f00f05e823699aafb83c4aaa6c'
+	'05cc1951bd9f6624088dd6067486ff47f1825e333273d7df5f1b06b23baaf5eb'
+	'faaa5c1f456517b258b2a65eaa664dd6a01eeff73c8ca4447c3a6de371bbf304'
+	'dc2683840f3e890a9c5f85338366ff6cd923285e558eb46aa818a03fa67c5c57'
+	'10d32d6c9ccdedb1d826f46468631d475f9dcf983fac087766e16df7b99766e6'
+	'ddb7eff0f59d394a483b09feec3771d9026f81ba90afac32846a19b172b2986d'
 )
 
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
 	for patch in bash42-{001..024} ; do patch -Np0 -i "$srcdir/$patch" ; done
-	sed -i 's/linux-gnu/linux-musl/g' `find . -name "confi*.sub" -o -name "confi*.guess"`
-	export LDFLAGS='--static'
+	LDFLAGS='-Wl,-static' \
 	./configure \
 	  --prefix=/ \
 	  --disable-nls \
@@ -94,4 +135,5 @@ package() {
 	install -d ${pkgdir}/etc
 	install -m 0644 ${srcdir}/profile ${pkgdir}/etc/
 	install -m 0644 ${srcdir}/bashrc ${pkgdir}/etc/
+	rm -rf "$pkgdir/share"
 }
