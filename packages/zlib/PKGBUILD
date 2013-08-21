@@ -1,0 +1,41 @@
+pkgname=('zlib' 'zlib-devel')
+pkgver=1.2.8
+pkgrel=1
+pkgdesc='A Massively Spiffy Yet Delicately Unobtrusive Compression Library'
+arch=('x86_64')
+url='http://www.zlib.net'
+license=('BSD')
+groups=('base')
+depends=('musl')
+makedepends=()
+options=('strip')
+changelog=ChangeLog
+source=(
+	"http://zlib.net/$pkgname-$pkgver.tar.gz"
+)
+sha256sums=(
+	'36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d'
+)
+
+
+build() {
+	cd "$srcdir/$pkgbase-$pkgver"
+	sed -i 's@mktemp -u@mktemp@' Makefile.in
+	CFLAGS="$CFLAGS -fPIC" ./configure --prefix=''
+	make $MAKEFLAGS
+}
+
+package_zlib() {
+	pkgfiles=(
+		"lib/libz.so.$pkgver"
+	)
+	cd "$srcdir/$pkgbase-$pkgver"
+	make DESTDIR="$pkgdir" install
+}
+
+package_zlib-devel() {
+	depends=('zlib')
+	cd "$srcdir/$pkgbase-$pkgver"
+	make DESTDIR="$pkgdir" install
+	rm "$pkgdir/lib/libz.so.$pkgver"
+}
