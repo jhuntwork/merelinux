@@ -1,0 +1,32 @@
+pkgname=make
+pkgver=3.82
+pkgrel=1
+pkgdesc='A tool to control the generation of executables'
+arch=('x86_64')
+url='http://www.gnu.org/software/make/'
+license=('GPL3')
+groups=('base')
+depends=()
+makedepends=()
+options=('strip')
+changelog=ChangeLog
+source=(
+	"http://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.gz"
+)
+
+sha256sums=(
+	'3d991b33e604187c5881a0abc2e102d5b9776da5569640e73778f85d617242e7'
+)
+
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	LDFLAGS="-Wl,-static" ./configure --prefix=''
+	make V=1 $MAKEFLAGS
+}
+
+package() {
+	cd "$srcdir/$pkgname-$pkgver"
+	make DESTDIR="${pkgdir}" install
+	rm -rf "$pkgdir/share/info"
+}
