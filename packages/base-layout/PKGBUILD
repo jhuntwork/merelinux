@@ -62,7 +62,6 @@ package() {
 	install -dv ${pkgdir}/share/aclocal
 	install -dv ${pkgdir}/share/dict
 	install -dv ${pkgdir}/share/doc
-	install -dv ${pkgdir}/share/info
 	install -dv ${pkgdir}/share/locale
 	install -dv ${pkgdir}/share/man
 	install -dv ${pkgdir}/share/misc
