@@ -1,0 +1,48 @@
+pkgname=binutils
+pkgaltver=397a64b3
+pkgver=2.17.50.20070703
+pkgrel=1
+pkgdesc='A collection of binary tools, including a linker and an assembler'
+arch=('x86_64')
+url='http://www.gnu.org/software/binutils/'
+license=('GPL2')
+groups=('base')
+depends=()
+makedepends=()
+options=('strip')
+changelog=ChangeLog
+source=(
+	"http://landley.net/aboriginal/mirror/$pkgname-$pkgaltver.tar.bz2"
+)
+
+sha256sums=(
+	'c7e0f0dfd2f53df76d2196b5bec0a2f0922c68c8719f9127efaf703c4f35939c'
+)
+
+
+build() {
+	cd "$srcdir/$pkgname-$pkgaltver"
+	sed -i -e 's/linux-gnu/linux-musl/g' \
+		-e 's@LIBC=gnu@LIBC=musl@' \
+		$(find . -name "confi*.guess" -o -name "confi*.sub")
+	rm -f etc/standards.info
+	sed -i '/^INFO/s/standards.info //' etc/Makefile.in
+	mkdir ../$pkgname-build
+	cd ../$pkgname-build
+	LDFLAGS="-Wl,-static" \
+	  ../$pkgname-$pkgaltver/configure \
+	  --prefix='' \
+	  --disable-shared \
+	  --disable-werror \
+	  --disable-nls \
+	  --mandir=/share/man \
+	  --disable-install-libbfd
+	echo "MAKEINFO = :" >> Makefile
+	make $MAKEFLAGS tooldir=/
+}
+
+package() {
+	cd "$srcdir/$pkgname-build"
+	make DESTDIR="$pkgdir" tooldir=/ install-gas install-ld install-binutils
+	rm -rf "$pkgdir/info"
+}
