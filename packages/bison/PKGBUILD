@@ -1,0 +1,41 @@
+pkgname=bison
+pkgver=3.0
+pkgrel=1
+pkgdesc='Bison is a general-purpose parser generator.'
+arch=('x86_64')
+url='http://www.gnu.org/software/bison/'
+license=('GPL3')
+groups=('base')
+depends=('m4')
+makedepends=('m4')
+options=('strip')
+changelog=ChangeLog
+source=(
+	"http://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz"
+)
+
+sha256sums=(
+	'e9ac5585002b71208aee8a20bbe1ced96c48766e6c4247bc7ef8f3141f7624c8'
+)
+
+
+build() {
+	cd "$srcdir/$pkgname-$pkgver"
+	LDFLAGS="-Wl,-static" \
+	./configure --prefix=''
+	make $MAKEFLAGS
+}
+
+package() {
+	pkgfiles=(
+		'bin/bison'
+		'bin/yacc'
+		'lib/liby.a'
+		'share/bison'
+		'share/man/man1/bison.1.gz'
+		'share/man/man1/yacc.1.gz'
+		'share/aclocal/bison-i18n.m4'
+	)	
+	cd "$srcdir/$pkgname-$pkgver"
+	make DESTDIR="$pkgdir" install
+}
