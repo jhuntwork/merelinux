@@ -1,4 +1,4 @@
-pkgname=ncurses
+pkgname=('ncurses' 'ncurses-devel')
 pkgver=5.9
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
@@ -23,7 +23,6 @@ sha256sums=(
 
 build() {
 	cd "$srcdir/$pkgname-$pkgver"
-	sed -i 's/linux-gnu/linux-musl/g' `find . -name "confi*.sub" -o -name "confi*.guess"`
 	cp "$srcdir/ncurses-fallback.c" ncurses/fallback.c
 	./configure \
 	  --prefix='' \
@@ -36,8 +35,47 @@ build() {
 	make $MAKEFLAGS
 }
 
-package() {
-	cd "$srcdir/$pkgname-$pkgver"
+package_ncurses() {
+	pkgfiles=(
+		'bin'
+		'lib'
+		'share/terminfo'
+		'share/tabset'
+		'share/man/man1'
+		'share/man/man5'
+		'share/man/man7'
+	)
+	cd "$srcdir/$pkgbase-$pkgver"
+	make DESTDIR=${pkgdir} install
+	find "$pkgdir/lib" -name "*.a" -delete
+	find "$pkgdir/lib" -name "*.so" -delete
+	rm -f "$pkgdir"/bin/{clear,reset,ncurses5-config}
+}
+
+package_ncurses-devel() {
+	pkgfiles=(
+		'bin/ncurses5-config'
+		'include'
+		'lib/libcurses.so'
+		'lib/libncurses.so'
+		'lib/libmenu.so'
+		'lib/libpanel.so'
+		'lib/libcurses.a'
+		'lib/libncurses.a'
+		'lib/libmenu_g.a'
+		'lib/libncurses_g.a'
+		'lib/libpanel_g.a'
+		'lib/libncurses++.a'
+		'lib/libform_g.a'
+		'lib/libpanel.a'
+		'lib/libform.a'
+		'lib/libmenu.a'
+		'share/man/man3'
+	)
+	depends=(
+		'ncurses'
+	)
+	cd "$srcdir/$pkgbase-$pkgver"
 	make DESTDIR=${pkgdir} install
 	ln -s libncurses.so ${pkgdir}/lib/libcurses.so
 	ln -s libncurses.a ${pkgdir}/lib/libcurses.a
