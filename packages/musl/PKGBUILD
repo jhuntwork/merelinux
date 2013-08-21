@@ -1,5 +1,5 @@
-pkgname=musl
-pkgver=0.8.10
+pkgname=('musl' 'musl-devel')
+pkgver=0.9.12
 pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
@@ -12,28 +12,33 @@ options=('strip')
 changelog=ChangeLog
 source=(
 	"http://www.etalabs.net/musl/releases/$pkgname-$pkgver.tar.gz"
-	'musl-config'
 )
 sha256sums=(
-	'ac967024f4187fec8f5100489db70d7c904bcf98e7544f8b52e872f380d4c033'
-	'3fc04b1b46133266f8517d025499197f95af27064bd687a7e8e1334eb8253fe5'
+	'72353f9e1f2fdaf5e88223dcd1cfa5555f5a364eb5e4a9967de1fd44cc4c6d3e'
 )
 
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
-	echo "
-#undef powerof2
-#define powerof2(x) ((((x) - 1) & (x)) == 0)
-" >> include/sys/param.h
-	cp "$srcdir/musl-config" config.mak
+	cd "$srcdir/$pkgbase-$pkgver"
+	CFLAGS='' ./configure --prefix=''
 	make $MAKEFLAGS
 }
 
-package() {
-	cd "$srcdir/$pkgname-$pkgver"
-	make DESTDIR=${pkgdir} install
-	# Remove headers provided by the kernel
-	rm -rf $pkgdir/include/linux
+package_musl() {
+	pkgfiles=(
+		'bin/ldd'
+		'lib/libc.so'
+	)
+	cd "$srcdir/$pkgbase-$pkgver"
+	make DESTDIR="$pkgdir" install
 	ln -sf libc.so $pkgdir/lib/ld-musl-$arch.so.1
+	install -d "$pkgdir/bin"
+	ln -sf ../lib/libc.so "$pkgdir/bin/ldd"
+}
+
+package_musl-devel() {
+	depends=('musl')
+	cd "$srcdir/$pkgbase-$pkgver"
+	make DESTDIR="$pkgdir" install
+	rm "$pkgdir/lib/libc.so"
 }
