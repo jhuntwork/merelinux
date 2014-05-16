@@ -1,0 +1,61 @@
+pkgname=('xz' 'xz-devel')
+pkgver=5.0.5
+pkgrel=1
+pkgdesc='Free general-purpose data compression software with high compression ratio.'
+arch=('x86_64')
+url='http://tukaani.org/xz/'
+license=('GPL2')
+groups=('base')
+#makedepends=('musl', 'binutils', 'gcc', 'linux-headers')
+options=() # Defaults in makepkg.conf
+changelog=ChangeLog
+
+source=(
+	"${url}/${pkgname}-${pkgver}.tar.gz"
+)
+sha256sums=(
+	'5dcffe6a3726d23d1711a65288de2e215b4960da5092248ce63c99d50093b93a'
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	./configure \
+	  --prefix='' \
+	  --enable-shared \
+	  --enable-static \
+  	  --disable-nls \
+  	  --includedir=/include \
+	  --mandir=/share/man
+	make $MAKEFLAGS
+}
+
+package_xz() {
+	pkgfiles=(
+		'bin/*'
+		"lib/liblzma.so.${pkgver}"
+		'share/man/man1/*'
+	)
+	depends=('musl')
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_xz-devel() {
+	pkgfiles=(
+		'include/*'
+		'include/lzma/*'
+		'lib/liblzma.a'
+		'lib/liblzma.la'
+		'lib/liblzma.so'
+		'lib/liblzma.so.5'
+		'lib/pkgconfig/liblzma.pc'
+	)
+	depends=('xz')
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
