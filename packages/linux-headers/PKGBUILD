@@ -27,7 +27,6 @@ build() {
 }
 
 package() {
-	cd "${srcdir}/linux-${pkgver}"
-	install -d "${pkgdir}/include"
-	cp -rv dest/include/* "${pkgdir}/include"
+	cd "${srcdir}/linux-${pkgver}/dest"
+	find include ! -type d -name "*.h" | cpio -dumpv "${pkgdir}"
 }
