@@ -8,10 +8,10 @@ license=('LGPL' 'BSD')
 groups=('base')
 depends=()
 makedepends=()
-options=('strip')
+options=()
 changelog=ChangeLog
 source=(
-	"http://www.etalabs.net/musl/releases/$pkgname-$pkgver.tar.gz"
+	"http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
 	'de1b43019e5361d7577e5e0213e9dde591853e9da5d4a7cd75e2e0d78bf60820'
@@ -19,7 +19,7 @@ sha256sums=(
 
 
 build() {
-	cd "$srcdir/$pkgbase-$pkgver"
+	cd "${srcdir}/${pkgbase}-${pkgver}"
 	sed -i 's@-Os@-O3@g' configure
 	CFLAGS='' ./configure --prefix=/
 	make $MAKEFLAGS
@@ -30,7 +30,8 @@ package_musl() {
 		'bin/ldd'
 		'lib/libc.so'
 	)
-	cd "$srcdir/$pkgbase-$pkgver"
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="${pkgdir}-tmp" install
 	cd "${pkgdir}-tmp"
 	ln -sf libc.so lib/ld-musl-$arch.so.1
@@ -41,7 +42,8 @@ package_musl() {
 
 package_musl-devel() {
 	depends=('musl')
-	cd "$srcdir/$pkgbase-$pkgver"
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="$pkgdir" install
-	rm "$pkgdir/lib/libc.so"
+	rm "${pkgdir}/lib/libc.so"
 }
