@@ -1,5 +1,5 @@
 pkgname=('musl' 'musl-devel')
-pkgver=0.9.12
+pkgver=1.1.0
 pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
@@ -14,13 +14,14 @@ source=(
 	"http://www.etalabs.net/musl/releases/$pkgname-$pkgver.tar.gz"
 )
 sha256sums=(
-	'72353f9e1f2fdaf5e88223dcd1cfa5555f5a364eb5e4a9967de1fd44cc4c6d3e'
+	'de1b43019e5361d7577e5e0213e9dde591853e9da5d4a7cd75e2e0d78bf60820'
 )
 
 
 build() {
 	cd "$srcdir/$pkgbase-$pkgver"
-	CFLAGS='' ./configure --prefix=''
+	sed -i 's@-Os@-O3@g' configure
+	CFLAGS='' ./configure --prefix=/
 	make $MAKEFLAGS
 }
 
@@ -30,10 +31,12 @@ package_musl() {
 		'lib/libc.so'
 	)
 	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR="$pkgdir" install
-	ln -sf libc.so $pkgdir/lib/ld-musl-$arch.so.1
-	install -d "$pkgdir/bin"
-	ln -sf ../lib/libc.so "$pkgdir/bin/ldd"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	ln -sf libc.so lib/ld-musl-$arch.so.1
+	install -d bin
+	ln -sf ../lib/libc.so bin/ldd
+	printf "%s\n" ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }
 
 package_musl-devel() {
