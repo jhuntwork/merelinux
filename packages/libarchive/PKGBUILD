@@ -8,10 +8,10 @@ license=('BSD')
 groups=('base')
 depends=('')
 makedepends=()
-options=('strip')
+options=()
 changelog=ChangeLog
 source=(
-	"http://www.libarchive.org/downloads/$pkgname-$pkgver.tar.gz"
+	"http://www.libarchive.org/downloads/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
 	'eb87eacd8fe49e8d90c8fdc189813023ccc319c5e752b01fb6ad0cc7b2c53d5e'
@@ -19,9 +19,10 @@ sha256sums=(
 
 
 build() {
-	cd "$srcdir/$pkgbase-$pkgver"
-	# libarchive fixes for bsdtar + busybox xz
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	# fix for musl
 	sed -i 's@HAVE_LCHMOD@&_DISABLE@' libarchive/archive_write_disk_posix.c
+	# fix for busybox xz
 	sed -i 's@ -qq@@' libarchive/archive_read_support_filter_xz.c
 	CFLAGS="$CFLAGS -Os -fPIC --static" ./configure --prefix=''
 	make V=1 $MAKEFLAGS
@@ -30,33 +31,42 @@ build() {
 package_libarchive() {
 	pkgfiles=(
 		'lib/libarchive.so.13'
-		"lib/libarchive.so.1$pkgver"
+		"lib/libarchive.so.1${pkgver}"
 	)
-	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR="$pkgdir" install
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_libarchive-devel() {
 	depends=("$pkgbase")
 	pkgfiles=(
-		'include'
+		'include/*'
 		'lib/libarchive.a'
 		'lib/libarchive.so'
-		'lib/pkgconfig'
-		'share/man/man3'
+		'lib/pkgconfig/*'
+		'share/man/man3/*'
 	)
 	depends=("$pkgbase")
-	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR="$pkgdir" install
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_libarchive-utils() {
 	pkgfiles=(
 		'bin/bsdcpio'
 		'bin/bsdtar'
-		'share/man/man1'
+		'share/man/man1/*'
 	)
+	
 	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR="$pkgdir" install
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
