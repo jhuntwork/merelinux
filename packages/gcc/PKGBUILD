@@ -66,15 +66,17 @@ package_gcc() {
 		'lib/libgomp.spec'
 		'lib/libgomp.a'
 		'lib/libssp_nonshared.a'
-		'share/man/man1/cpp.1.gz'
-		'share/man/man1/gcc.1.gz'
-		'share/man/man1/gcov.1.gz'
+		'share/man/man1/cpp.*'
+		'share/man/man1/gcc.*'
+		'share/man/man1/gcov.*'
 	)
 	cd "$srcdir/$pkgbase-build"
-	make DESTDIR="$pkgdir" install
-	find "$pkgdir" -type f -name "*.gch" -delete
-	ln -sf ../bin/cpp "$pkgdir/lib"
-	ln -sf gcc "$pkgdir/bin/cc"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find . -type f -name "*.gch" -delete
+	ln -sf ../bin/cpp lib
+	ln -sf gcc bin/cc
+	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_gcc-c++() {
@@ -84,10 +86,12 @@ package_gcc-c++() {
 		'include/c++'
 		'lib/libstdc++.a'
 		'lib/libsupc++.a'
-		'share/man/man1/g++.1.gz'
+		'share/man/man1/g++*'
 	)
 	depends=('gcc')
 	cd "$srcdir/$pkgbase-build"
-	make DESTDIR="$pkgdir" install
-	find "$pkgdir" -type f -name "*.gch" -delete
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find . -type f -name "*.gch" -delete
+	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
