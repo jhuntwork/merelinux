@@ -1,0 +1,33 @@
+pkgname='linux-headers'
+pkgver=3.14.4
+pkgrel=1
+pkgdesc='Linux kernel headers for user space'
+arch=('x86_64')
+url='https://www.kernel.org'
+license=('GPL2')
+groups=('base')
+depends=()
+makedepends=()
+options=() # Defaults in makepkg.conf
+changelog=ChangeLog
+
+source=(
+	"https://www.kernel.org/pub/linux/kernel/v3.x/linux-${pkgver}.tar.xz"
+)
+sha256sums=(
+	'65850a8c799c695ab43aab1bc7a98f2631092b696ee07db348cfca75450ad717'
+)
+
+
+build() {
+	cd "${srcdir}/linux-${pkgver}"
+	sed -i 's@ ERR@@' scripts/link-vmlinux.sh
+	make mrproper
+	make INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
+}
+
+package() {
+	cd "${srcdir}/linux-${pkgver}"
+	install -d "${pkgdir}/include"
+	cp -rv dest/include/* "${pkgdir}/include"
+}
