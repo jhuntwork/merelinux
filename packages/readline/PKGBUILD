@@ -6,15 +6,21 @@ arch=('x86_64')
 url='http://www.gnu.org/software/readline/'
 license=('BSD')
 groups=('base')
-depends=(ncurses)
-makedepends=(musl-devel ncurses-devel)
+depends=()
+makedepends=(
+	binutils
+	gcc
+	linux-headers
+	musl-devel
+	ncurses-devel
+)
 options=() # Defaults in makepkg.conf
 changelog=ChangeLog
 
-PURGE_TARGETS=(share/info/* share/readline/*)
+PURGE_TARGETS+=(share/info/* share/readline/*)
 
 source=(
-	"http://ftp.gnu.org/gnu/readline/$pkgname-$pkgver.tar.gz"
+	"http://ftp.gnu.org/gnu/readline/${pkgname}-${pkgver}.tar.gz"
 	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-001'
 	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-002'
 	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-003'
@@ -31,8 +37,8 @@ sha256sums=(
 
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
-	for p in readline62-{001..004} ; do patch -Np0 -i "$srcdir/$p" ; done
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	for p in readline62-{001..004} ; do patch -Np0 -i "${srcdir}/${p}" ; done
 	sed -i '/MV.*old/d' Makefile.in
 	sed -i '/{OLDSUFF}/c:' support/shlib-install
 	./configure \
@@ -44,11 +50,18 @@ package_readline() {
 	pkgfiles=(
 		'lib/libhistory.so.6'
 		'lib/libreadline.so.6'
-		"lib/libreadline.so.$pkgver"
-		"lib/libhistory.so.$pkgver"
+		"lib/libreadline.so.${pkgver}"
+		"lib/libhistory.so.${pkgver}"
 	)
-	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR=${pkgdir} install
+	depends=(
+		musl
+		ncurses
+	)
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
 
 package_readline-devel() {
@@ -61,8 +74,11 @@ package_readline-devel() {
 		'share/man'
 	)
 	depends=(
-		'readline'
+		readline
 	)
-	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR=${pkgdir} install
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
