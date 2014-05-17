@@ -1,5 +1,5 @@
 pkgname=('readline' 'readline-devel')
-pkgver=6.2
+pkgver=6.3
 pkgrel=1
 pkgdesc='A library for allowing users to edit command lines as they are typed in.'
 arch=('x86_64')
@@ -21,24 +21,26 @@ PURGE_TARGETS+=(share/info/* share/readline/*)
 
 source=(
 	"http://ftp.gnu.org/gnu/readline/${pkgname}-${pkgver}.tar.gz"
-	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-001'
-	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-002'
-	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-003'
-	'http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-004'
+	'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-001'
+	'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-002'
+	'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-003'
+	'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-004'
+	'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-005'
 )
 
 sha256sums=(
-	'79a696070a058c233c72dd6ac697021cc64abd5ed51e59db867d66d196a89381'
-	'38a86c417437692db01069c8ab40a9a8f548e67ad9af0390221b024b1c39b4e3'
-	'1e6349128cb573172063ea007c67af79256889c809973002ca66c5dfc503c7d4'
-	'cb2131ff352d6e5f82edc09755191f74220b15f026bdb6c52624931c79622374'
-	'09bd342479ea5bb8b6411bfdf7d302fab2e521d1d241bcb8344d3bad5d9f5476'
+	'56ba6071b9462f980c5a72ab0023893b65ba6debb4eeb475d7a563dc65cafd43'
+	'1a79bbb6eaee750e0d6f7f3d059b30a45fc54e8e388a8e05e9c3ae598590146f'
+	'39e304c7a526888f9e112e733848215736fb7b9d540729b9e31f3347b7a1e0a5'
+	'ec41bdd8b00fd884e847708513df41d51b1243cecb680189e31b7173d01ca52f'
+	'4547b906fb2570866c21887807de5dee19838a60a1afb66385b272155e4355cc'
+	'877788f9228d1a9907a4bcfe3d6dd0439c08d728949458b41208d9bf9060274b'
 )
 
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
-	for p in readline62-{001..004} ; do patch -Np0 -i "${srcdir}/${p}" ; done
+	for p in readline63-{001..005} ; do patch -Np2 -i "${srcdir}/${p}" ; done
 	sed -i '/MV.*old/d' Makefile.in
 	sed -i '/{OLDSUFF}/c:' support/shlib-install
 	./configure \
