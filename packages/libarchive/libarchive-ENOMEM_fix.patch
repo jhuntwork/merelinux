@@ -1,0 +1,26 @@
+From fe5c22be5f091d692a387158dbed2754762dcd4a Mon Sep 17 00:00:00 2001
+From: Dave Reisner <dreisner@archlinux.org>
+Date: Sat, 2 Feb 2013 19:35:19 -0500
+Subject: [PATCH] mtree: fix line filename length calculation
+
+Fixes issue 301.
+---
+ libarchive/archive_write_set_format_mtree.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libarchive/archive_write_set_format_mtree.c b/libarchive/archive_write_set_format_mtree.c
+index 9c0613c..cfe22ed 100644
+--- a/libarchive/archive_write_set_format_mtree.c
++++ b/libarchive/archive_write_set_format_mtree.c
+@@ -1857,7 +1857,7 @@ mtree_entry_setup_filenames(struct archive_write *a, struct mtree_entry *file,
+ 
+ 	/* Make a basename from dirname and slash */
+ 	*slash  = '\0';
+-	file->parentdir.length = slash - dirname;
++	file->parentdir.length = slash - file->parentdir.s;
+ 	archive_strcpy(&(file->basename),  slash + 1);
+ 	return (ret);
+ }
+-- 
+1.8.1.2
+

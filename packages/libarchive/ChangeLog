@@ -1,4 +1,9 @@
 2013-08-09 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+	* 3.1.2-2 :
+	Add upstream fix for .MTREE creation errors
+	
+2013-08-09 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 	* 3.1.2-1 :
 	Initial version

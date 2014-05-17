@@ -1,6 +1,6 @@
 pkgname=('libarchive' 'libarchive-utils' 'libarchive-devel')
 pkgver=3.1.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Multi-format archive and compression library'
 arch=('x86_64')
 url='http://www.libarchive.org'
@@ -12,9 +12,11 @@ options=()
 changelog=ChangeLog
 source=(
 	"http://www.libarchive.org/downloads/${pkgname}-${pkgver}.tar.gz"
+	'libarchive-ENOMEM_fix.patch'
 )
 sha256sums=(
 	'eb87eacd8fe49e8d90c8fdc189813023ccc319c5e752b01fb6ad0cc7b2c53d5e'
+	'bbea265ab0191c734dab47c23c543584757c0a3f55619c5afba5a0f9a3550a33'
 )
 
 
@@ -24,6 +26,8 @@ build() {
 	sed -i 's@HAVE_LCHMOD@&_DISABLE@' libarchive/archive_write_disk_posix.c
 	# fix for busybox xz
 	sed -i 's@ -qq@@' libarchive/archive_read_support_filter_xz.c
+	# upstream fix for .MTREE creation
+	patch -Np1 -i ../libarchive-ENOMEM_fix.patch
 	CFLAGS="$CFLAGS -Os -fPIC --static" ./configure --prefix=''
 	make V=1 $MAKEFLAGS
 }
