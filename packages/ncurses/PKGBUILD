@@ -7,12 +7,12 @@ url='http://www.gnu.org/software/ncurses'
 license=('GPL2')
 groups=('base')
 depends=()
-makedepends=(musl)
-options=() # Defaults in makepkg.conf
+makedepends=('musl' 'binutils' 'gcc' 'gcc-c++' 'linux-headers')
+options=()
 changelog=ChangeLog
 
 source=(
-	"http://ftp.gnu.org/gnu/ncurses/$pkgname-$pkgver.tar.gz"
+	"http://ftp.gnu.org/gnu/ncurses/${pkgname}-${pkgver}.tar.gz"
 	'ncurses-fallback.c'
 )
 sha256sums=(
@@ -22,8 +22,8 @@ sha256sums=(
 
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
-	cp "$srcdir/ncurses-fallback.c" ncurses/fallback.c
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	cp "${srcdir}/ncurses-fallback.c" ncurses/fallback.c
 	./configure \
 	  --prefix='' \
 	  --with-fallbacks="linux vt100 xterm xterm256-color" \
@@ -45,11 +45,17 @@ package_ncurses() {
 		'share/man/man5'
 		'share/man/man7'
 	)
-	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR=${pkgdir} install
-	find "$pkgdir/lib" -name "*.a" -delete
-	find "$pkgdir/lib" -name "*.so" -delete
-	rm -f "$pkgdir"/bin/{clear,reset,ncurses5-config}
+	depends=(
+		'musl'
+	)
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find . -name "*.a" -delete
+	find . -name "*.so" -delete
+	rm -f bin/{clear,reset,ncurses5-config}
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
 }
 
 package_ncurses-devel() {
@@ -75,8 +81,11 @@ package_ncurses-devel() {
 	depends=(
 		'ncurses'
 	)
-	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR=${pkgdir} install
-	ln -s libncurses.so ${pkgdir}/lib/libcurses.so
-	ln -s libncurses.a ${pkgdir}/lib/libcurses.a
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	ln -s libncurses.so lib/libcurses.so
+	ln -s libncurses.a lib/libcurses.a
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
 }
