@@ -8,7 +8,7 @@ license=('BSD')
 groups=('base')
 depends=()
 makedepends=()
-options=('strip')
+options=()
 changelog=ChangeLog
 source=(
 	"ftp://ftp.astron.com/pub/file/${pkgname}-${pkgver}.tar.gz"
