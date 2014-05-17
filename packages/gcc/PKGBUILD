@@ -20,7 +20,7 @@ sha256sums=(
 
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	sed -i -e 's/linux-gnu/linux-musl/g' \
 		-e 's@LIBC=gnu@LIBC=musl@' \
 		$(find . -name "confi*.guess" -o -name "confi*.sub")
@@ -36,10 +36,10 @@ build() {
 	sed -i '/include <link.h>/s@^.*@/\*&\*/@' gcc/unwind-dw2-fde-glibc.c
 	sed -i 's,\./fixinc\.sh,-c true,' gcc/Makefile.in
 	rm -rf libstdc++-v3/config/os/gnu-linux && ln -s generic libstdc++-v3/config/os/gnu-linux
-	mkdir ../$pkgname-build
-	cd ../$pkgname-build
+	mkdir "../${pkgname}-build"
+	cd "../${pkgname}-build"
 	CFLAGS="$CFLAGS -fPIC" CXXFLAGS="$CXXFLAGS -fPIC" \
-	  ../$pkgname-$pkgver/configure \
+	  ../${pkgname}-${pkgver}/configure \
 	  --prefix='' \
 	  --libexecdir=/lib \
 	  --mandir=/share/man \
@@ -70,13 +70,13 @@ package_gcc() {
 		'share/man/man1/gcc.*'
 		'share/man/man1/gcov.*'
 	)
-	cd "$srcdir/$pkgbase-build"
+	cd "${srcdir}/${pkgbase}-build"
 	make DESTDIR="${pkgdir}-tmp" install
 	cd "${pkgdir}-tmp"
-	find . -type f -name "*.gch" -delete
+	find . -name "*.gch" -delete
 	ln -sf ../bin/cpp lib
 	ln -sf gcc bin/cc
-	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
 
 package_gcc-c++() {
@@ -89,9 +89,9 @@ package_gcc-c++() {
 		'share/man/man1/g++*'
 	)
 	depends=('gcc')
-	cd "$srcdir/$pkgbase-build"
+	cd "${srcdir}/${pkgbase}-build"
 	make DESTDIR="${pkgdir}-tmp" install
 	cd "${pkgdir}-tmp"
-	find . -type f -name "*.gch" -delete
-	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+	find . -name "*.gch" -delete
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
