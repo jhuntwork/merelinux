@@ -6,7 +6,7 @@ arch=('x86_64')
 url='http://www.perl.org'
 license=('GPL2')
 groups=('base')
-depends=()
+depends=('musl' 'zlib')
 makedepends=('musl-devel' 'binutils' 'gcc' 'zlib-devel' 'linux-headers')
 options=()
 changelog=ChangeLog
@@ -55,9 +55,6 @@ package() {
 		'bin'
 		'lib'
 		'share'
-	)
-	depends=(
-		'musl'
 	)
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
