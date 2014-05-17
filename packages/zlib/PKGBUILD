@@ -8,10 +8,10 @@ license=('BSD')
 groups=('base')
 depends=('musl')
 makedepends=()
-options=('strip')
+options=()
 changelog=ChangeLog
 source=(
-	"http://zlib.net/$pkgname-$pkgver.tar.gz"
+	"http://zlib.net/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
 	'36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d'
@@ -19,7 +19,7 @@ sha256sums=(
 
 
 build() {
-	cd "$srcdir/$pkgbase-$pkgver"
+	cd "${srcdir}/${pkgbase}-${pkgver}"
 	sed -i 's@mktemp -u@mktemp@' Makefile.in
 	CFLAGS="$CFLAGS -fPIC" ./configure --prefix=''
 	make $MAKEFLAGS
@@ -27,15 +27,21 @@ build() {
 
 package_zlib() {
 	pkgfiles=(
-		"lib/libz.so.$pkgver"
+		"lib/libz.so.${pkgver}"
+		'lib/libz.so.1'
 	)
-	cd "$srcdir/$pkgbase-$pkgver"
-	make DESTDIR="$pkgdir" install
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
 
 package_zlib-devel() {
 	depends=('zlib')
-	cd "$srcdir/$pkgbase-$pkgver"
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="$pkgdir" install
-	rm "$pkgdir/lib/libz.so.$pkgver"
+	rm "${pkgdir}/lib/libz.so.1"
+	rm "${pkgdir}/lib/libz.so.${pkgver}"
 }
