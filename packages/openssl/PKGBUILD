@@ -1,0 +1,83 @@
+pkgname=('openssl' 'openssl-devel')
+pkgver=1.0.1g
+pkgrel=1
+pkgdesc='An Open Source toolkit implementing the SSL and TLS protocols and a full-strength general purpose cryptography library.'
+arch=('x86_64')
+url='http://www.openssl.org'
+license=('GPL2')
+groups=('base')
+depends=()
+makedepends=(
+	'binutils'
+	'musl-devel'
+	'gcc'
+	'linux-headers'
+	'perl'
+	'zlib-devel'
+)
+options=()
+changelog=ChangeLog
+
+source=(
+	"${url}/source/${pkgname}-${pkgver}.tar.gz"
+	'openssl-parallel-build.patch'
+)
+sha256sums=(
+	'53cb818c3b90e507a8348f4f5eaedb05d8bfe5358aabb508b7263cc670c3e028'
+	'590fc258c71c47864d91fd2555fe890c19810926129f3ec4a832e1b02310a9b5'
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	patch -Np1 -i "${srcdir}/openssl-parallel-build.patch"
+	sed -i '/^"linux-x86_64/s/-DTERMIO/-DTERMIOS/' Configure
+	sed -i '/^"linux-elf/s/-DTERMIO/-DTERMIOS/' Configure
+	sed -i 's/defined(linux)/0/' crypto/ui/ui_openssl.c
+	./config \
+	  --prefix=/ \
+	  --libdir=/lib \
+	  --openssldir=/etc/ssl \
+	  shared zlib no-dso $CFLAGS -D_HACK_DSO_BEOS
+	make $MAKEFLAGS
+}
+
+package_openssl() {
+	pkgfiles=(
+		'bin'
+		'etc/ssl'
+		'lib/engines'
+		'lib/libssl.so.1.0.0'
+		'lib/libcrypto.so.1.0.0'
+		'share/man/man1'
+		'share/man/man5'
+		'share/man/man7'
+	)
+	depends=(
+		'musl'
+		'zlib'
+	)
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make MANDIR=/share/man INSTALL_PREFIX="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+}
+
+package_openssl-devel() {
+	pkgfiles=(
+		'include'
+		'lib/*.a'
+		'lib/*.so'
+		'lib/pkgconfig'
+		'share/man/man3'
+	)
+	depends=(
+		'openssl'
+	)
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make MANDIR=/share/man INSTALL_PREFIX="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+}
