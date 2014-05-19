@@ -87,8 +87,4 @@ package() {
 	# located at http://sethwklein.net/iana-etc
 	install -m0644 protocols ${pkgdir}/etc/protocols
 	install -m0644 services  ${pkgdir}/etc/services
-
-	for man in man1 man2 man3 man4 man5 man6 man7 man8 man9 ; do
-		mkdir -p ${pkgdir}/share/man/$man
-	done
 }

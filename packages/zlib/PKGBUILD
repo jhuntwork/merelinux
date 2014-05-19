@@ -27,8 +27,7 @@ build() {
 
 package_zlib() {
 	pkgfiles=(
-		"lib/libz.so.${pkgver}"
-		'lib/libz.so.1'
+		"lib/libz.so*"
 	)
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
@@ -42,6 +41,7 @@ package_zlib-devel() {
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="$pkgdir" install
+	rm "${pkgdir}/lib/libz.so"
 	rm "${pkgdir}/lib/libz.so.1"
 	rm "${pkgdir}/lib/libz.so.${pkgver}"
 }
