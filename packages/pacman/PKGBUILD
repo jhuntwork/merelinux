@@ -1,0 +1,86 @@
+pkgname=('pacman' 'pacman-build')
+pkgver=4.1.2
+pkgrel=1
+pkgdesc='The pacman Package Manager'
+arch=('x86_64')
+url='https://www.archlinux.org/pacman/'
+license=('GPL2')
+groups=('base')
+depends=()
+makedepends=(
+	'musl-devel'
+	'binutils'
+	'gcc'
+	'linux-headers'
+	'libarchive-devel'
+	'libcurl-devel'
+	'openssl-devel'
+	'zlib-devel'
+)
+options=()
+changelog=ChangeLog
+
+source=(
+	"ftp://ftp.archlinux.org/other/pacman/${pkgname}-${pkgver}.tar.gz"
+	'makepkg.conf'
+)
+sha256sums=(
+	'7c059b444735ee254cfbd8dc2fac8c5d61453601f8adaf001c7038cdc673334c'
+	'c05022850bb00ea992400e596c480d901e4ac90e4a30d9a3e7756506cfa86fc9'
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	sed -i 's@usr/@@g' etc/makepkg.conf.in etc/pacman.conf.in
+	sed -i 's@ --apparent-size@@' etc/makepkg.conf.in
+	LDFLAGS='-Wl,-static' \
+	./configure \
+	  --prefix='' \
+	  --disable-shared \
+	  --disable-doc
+	  make V=1 $MAKEFLAGS
+}
+
+package_pacman() {
+	pkgfiles=(
+		'bin/pacman'
+		'bin/pacman-key'
+		'bin/pacsort'
+		'bin/pacman-db-upgrade'
+		'bin/vercmp'
+		'bin/pkgdelta'
+		'etc/pacman.conf'
+		'var'
+	)
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+}
+
+package_pacman-build() {
+	pkgfiles=(
+		'bin/makepkg'
+		'bin/cleanupdelta'
+		'bin/repo-add'
+		'bin/repo-remove'
+		'bin/repo-elephant'
+		'bin/testpkg'
+		'bin/testdb'
+		'etc/makepkg.conf'
+		'share'
+	)
+	depends=(
+		'bash'
+		'libarchive-utils'
+		'openssl'
+	)
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	install -vm 0644 "${srcdir}/makepkg.conf" "${pkgdir}-tmp/etc/"
+	cd "${pkgdir}-tmp"
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+}
