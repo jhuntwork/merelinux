@@ -13,24 +13,15 @@ changelog=ChangeLog
 source=(
 	"passwd"
 	"group"
-	"protocols"
-	"services"
-	"inputrc"
 )
 sha256sums=(
 	'060fa3b3198b78d2a8c6596055ee76a594b604ab320c2deaafe2df5c58978d11'
 	'3859671b647704e2f804307c0f47ae5d4a5d5f26e4b1482591b53a1fe106795d'
-	'297b784a25fc59641589c6ef05dc26680e2805e9cab37a4ea3699aa072a25c2e'
-	'b4d36eb75767bebb41c5fa7a35599952e1883b3d3f6332496e1561eeb4067018'
-	'e0d8cc13a477b1e44236a6052fb6169118f92aaed917e10c7a9819e0da1976b2'
 )
 
 backup=(
 	'etc/passwd'
 	'etc/group'
-	'etc/inputrc'
-	'etc/protocols'
-	'etc/services'
 )
 
 package() {
@@ -68,6 +59,9 @@ package() {
 	install -dv ${pkgdir}/share/terminfo
 	install -dv ${pkgdir}/share/zoneinfo
 	install -dv ${pkgdir}/src/kernels
+	install -dv -m 0755 ${pkgdir}/usr
+	ln -s ../bin ${pkgdir}/usr/bin
+	ln -s ../sbin ${pkgdir}/usr/sbin
 	install -dv ${pkgdir}/var/cache
 	install -dv ${pkgdir}/var/lock
 	install -dv ${pkgdir}/var/lib/hwclock
@@ -82,9 +76,4 @@ package() {
 	install -dv ${pkgdir}/var/opt
 	install -m0644 passwd  ${pkgdir}/etc/passwd
 	install -m0644 group   ${pkgdir}/etc/group
-	install -m0644 inputrc ${pkgdir}/etc/inputrc
-	# The following two files were generated from the iana-etc package
-	# located at http://sethwklein.net/iana-etc
-	install -m0644 protocols ${pkgdir}/etc/protocols
-	install -m0644 services  ${pkgdir}/etc/services
 }
