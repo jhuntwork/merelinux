@@ -12,7 +12,7 @@ makedepends=()
 options=('strip')
 changelog=ChangeLog
 source=(
-	"http://landley.net/aboriginal/mirror/$pkgname-$pkgaltver.tar.bz2"
+	"http://landley.net/aboriginal/mirror/${pkgname}-${pkgaltver}.tar.bz2"
 )
 
 sha256sums=(
@@ -21,16 +21,16 @@ sha256sums=(
 
 
 build() {
-	cd "$srcdir/$pkgname-$pkgaltver"
+	cd "$srcdir/${pkgname}-${pkgaltver}"
 	sed -i -e 's/linux-gnu/linux-musl/g' \
 		-e 's@LIBC=gnu@LIBC=musl@' \
 		$(find . -name "confi*.guess" -o -name "confi*.sub")
 	rm -f etc/standards.info
 	sed -i '/^INFO/s/standards.info //' etc/Makefile.in
-	mkdir ../$pkgname-build
-	cd ../$pkgname-build
+	mkdir "../${pkgname}-build"
+	cd "../${pkgname}-build"
 	LDFLAGS="-Wl,-static" \
-	  ../$pkgname-$pkgaltver/configure \
+	  ../${pkgname}-${pkgaltver}/configure \
 	  --prefix='' \
 	  --disable-shared \
 	  --disable-werror \
@@ -42,7 +42,7 @@ build() {
 }
 
 package() {
-	cd "$srcdir/$pkgname-build"
+	cd "${srcdir}/${pkgname}-build"
 	make DESTDIR="$pkgdir" tooldir=/ install-gas install-ld install-binutils
-	rm -rf "$pkgdir/info"
+	rm -rf "${pkgdir}/info"
 }

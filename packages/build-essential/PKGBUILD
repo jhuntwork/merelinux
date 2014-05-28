@@ -1,0 +1,29 @@
+pkgname=build-essential
+pkgver=0.1
+pkgrel=1
+pkgdesc='A meta-package which pulls in essential build tools'
+arch=('x86_64')
+url=''
+license=('BSD')
+groups=('base')
+depends=(
+    'pacman-build'
+    'make'
+    'patch'
+    'busybox'
+    'gcc'
+    'musl-devel'
+    'binutils'
+    'linux-headers'
+)
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+)
+sha256sums=(
+)
+
+package() {
+    /bin/true
+}

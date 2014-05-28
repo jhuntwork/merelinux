@@ -33,6 +33,7 @@ build() {
 package_xz() {
 	pkgfiles=(
 		'bin/*'
+		'lib/liblzma.so.5'
 		"lib/liblzma.so.${pkgver}"
 		'share/man/man1/*'
 	)
@@ -50,7 +51,6 @@ package_xz-devel() {
 		'lib/liblzma.a'
 		'lib/liblzma.la'
 		'lib/liblzma.so'
-		'lib/liblzma.so.5'
 		'lib/pkgconfig/liblzma.pc'
 	)
 	depends=('xz')

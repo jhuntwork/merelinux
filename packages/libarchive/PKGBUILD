@@ -7,7 +7,14 @@ url='http://www.libarchive.org'
 license=('BSD')
 groups=('base')
 depends=('')
-makedepends=()
+makedepends=(
+	'musl-devel'
+	'binutils'
+	'gcc'
+	'linux-headers'
+	'openssl-devel'
+	'zlib-devel'
+)
 options=()
 changelog=ChangeLog
 source=(
@@ -28,7 +35,20 @@ build() {
 	sed -i 's@ -qq@@' libarchive/archive_read_support_filter_xz.c
 	# upstream fix for .MTREE creation
 	patch -Np1 -i ../libarchive-ENOMEM_fix.patch
-	CFLAGS="$CFLAGS -Os -fPIC --static" ./configure --prefix=''
+	LDFLAGS='--static' \
+	./configure \
+	  --prefix=/ \
+	  --enable-static \
+	  --disable-shared
+	make V=1 $MAKEFLAGS
+	install -v bsdtar{,-static}
+	install -v bsdcpio{,-static}
+	unset LDFLAGS
+	make clean
+	./configure \
+	  --prefix=/ \
+	  --enable-static \
+	  --enable-shared
 	make V=1 $MAKEFLAGS
 }
 
@@ -36,6 +56,10 @@ package_libarchive() {
 	pkgfiles=(
 		'lib/libarchive.so.13'
 		"lib/libarchive.so.1${pkgver}"
+	)
+	depends=(
+		'openssl'
+		'zlib'
 	)
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
@@ -70,6 +94,8 @@ package_libarchive-utils() {
 	
 	cd "$srcdir/$pkgbase-$pkgver"
 	make DESTDIR="${pkgdir}-tmp" install
+	install -v -m 0755 bsdtar-static "${pkgdir}-tmp/bin/bsdtar" 
+	install -v -m 0755 bsdcpio-static "${pkgdir}-tmp/bin/bsdcpio" 
 	cd "${pkgdir}-tmp"
 	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }

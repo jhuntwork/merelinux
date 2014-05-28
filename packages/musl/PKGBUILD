@@ -3,11 +3,17 @@ pkgver=1.1.0
 pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
-url='http://www.etalabs.net/musl'
+url='http://www.musl-libc.org'
 license=('LGPL' 'BSD')
 groups=('base')
 depends=()
-makedepends=()
+makedepends=(
+	'busybox'
+	'binutils'
+	'gcc'
+	'linux-headers'
+	'make'
+)
 options=()
 changelog=ChangeLog
 source=(
@@ -29,12 +35,12 @@ package_musl() {
 	pkgfiles=(
 		'bin/ldd'
 		'lib/libc.so'
+		"lib/ld-musl-${arch}.so.1"
 	)
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="${pkgdir}-tmp" install
 	cd "${pkgdir}-tmp"
-	ln -sf libc.so lib/ld-musl-$arch.so.1
 	install -d bin
 	ln -sf ../lib/libc.so bin/ldd
 	printf "%s\n" ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
@@ -46,4 +52,5 @@ package_musl-devel() {
 	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="$pkgdir" install
 	rm "${pkgdir}/lib/libc.so"
+	rm "${pkgdir}/lib/ld-musl-${arch}.so.1"
 }
