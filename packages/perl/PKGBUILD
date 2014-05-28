@@ -45,7 +45,7 @@ build() {
 	  -Dvendorscript=/bin \
 	  -Dman1dir=/share/man/man1 \
 	  -Dman3dir=/share/man/man3 \
-	  -Dpager="/bin/less -isR" \
+	  -Dpager="/bin/less -I" \
 	  -Duseshrplib
 	make $MAKEFLAGS
 }
