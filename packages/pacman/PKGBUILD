@@ -11,10 +11,12 @@ makedepends=(
 	'musl-devel'
 	'binutils'
 	'gcc'
+	'm4'
 	'linux-headers'
 	'libarchive-devel'
 	'libcurl-devel'
 	'openssl-devel'
+	'pkgconf'
 	'zlib-devel'
 )
 options=()
@@ -26,20 +28,21 @@ source=(
 )
 sha256sums=(
 	'7c059b444735ee254cfbd8dc2fac8c5d61453601f8adaf001c7038cdc673334c'
-	'c05022850bb00ea992400e596c480d901e4ac90e4a30d9a3e7756506cfa86fc9'
+	'15b6915da738ba5af092841b0de8b78c57591085caf50bbaa893ff0e4aa7d4ee'
 )
 
 
 build() {
 	cd "${srcdir}/${pkgbase}-${pkgver}"
 	sed -i 's@usr/@@g' etc/makepkg.conf.in etc/pacman.conf.in
-	sed -i 's@ --apparent-size@@' etc/makepkg.conf.in
+	sed -i '/x-cpio/s@)@|*application/x-empty*)@' scripts/makepkg.sh.in
+	sed -i 's@ --apparent-size@@' configure
 	LDFLAGS='-Wl,-static' \
 	./configure \
 	  --prefix='' \
 	  --disable-shared \
 	  --disable-doc
-	  make V=1 $MAKEFLAGS
+	  make V=1 LIBS="-lm -lz -lssl -lcrypto" $MAKEFLAGS
 }
 
 package_pacman() {
@@ -53,6 +56,9 @@ package_pacman() {
 		'etc/pacman.conf'
 		'var'
 	)
+	depends=(
+		'curl'
+	)	
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="${pkgdir}-tmp" install
@@ -74,8 +80,11 @@ package_pacman-build() {
 	)
 	depends=(
 		'bash'
+		'file'
 		'libarchive-utils'
 		'openssl'
+		'pacman'
+		'xz'
 	)
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
