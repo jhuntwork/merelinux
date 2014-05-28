@@ -12,7 +12,7 @@ makedepends=(
 	gcc
 	linux-headers
 	musl-devel
-	ncurses-devel
+	libncurses-devel
 )
 options=() # Defaults in makepkg.conf
 changelog=ChangeLog
@@ -57,7 +57,7 @@ package_readline() {
 	)
 	depends=(
 		musl
-		ncurses
+		libncurses
 	)
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
