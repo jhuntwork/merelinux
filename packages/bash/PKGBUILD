@@ -7,7 +7,7 @@ url='http://www.gnu.org/software/bash'
 license=('GPL3')
 groups=('base')
 depends=()
-makedepends=(musl-devel ncurses-devel readline-devel)
+makedepends=(musl-devel libncurses-devel readline-devel)
 options=()
 changelog=ChangeLog
 
