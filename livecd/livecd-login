@@ -1,9 +1,0 @@
-#!/bin/sh
-stty sane
-echo -en '\033(K'
-clear
-echo -e "\nLightCube OS version __VERSION__\n"
-echo -en 'Press Enter to activate this virtual console...'
-read ENTER
-echo
-exec /bin/login -f root

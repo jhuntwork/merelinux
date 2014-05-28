@@ -1,5 +1,0 @@
-# filesystem		mount-point	fs-type		options		dump	fsck-order
-/dev/mapper/lcos-cd	/		ext2		defaults	0	0
-proc			/proc		proc		defaults	0	0
-sysfs			/sys		sysfs		defaults	0	0
-devpts			/dev/pts	devpts		gid=4,mode=620	0	0
