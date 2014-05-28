@@ -1,4 +1,4 @@
-pkgname=('ncurses' 'ncurses-devel')
+pkgname=('ncurses' 'libncurses' 'libncurses-devel')
 pkgver=5.9
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
@@ -38,7 +38,6 @@ build() {
 package_ncurses() {
 	pkgfiles=(
 		'bin'
-		'lib'
 		'share/terminfo'
 		'share/tabset'
 		'share/man/man1'
@@ -48,17 +47,29 @@ package_ncurses() {
 	depends=(
 		'musl'
 	)
+	depends=(libncurses)
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="${pkgdir}-tmp" install
 	cd "${pkgdir}-tmp"
-	find . -name "*.a" -delete
-	find . -name "*.so" -delete
-	rm -f bin/{clear,reset,ncurses5-config}
+	rm -f bin/ncurses5-config
 	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
 }
 
-package_ncurses-devel() {
+package_libncurses() {
+	pkgfiles=(
+		'lib'
+	)
+	
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find . -name "*.so" -delete
+	find . -name "*.a" -delete
+	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+}
+
+package_libncurses-devel() {
 	pkgfiles=(
 		'bin/ncurses5-config'
 		'include'
@@ -79,7 +90,7 @@ package_ncurses-devel() {
 		'share/man/man3'
 	)
 	depends=(
-		'ncurses'
+		'libncurses'
 	)
 	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
