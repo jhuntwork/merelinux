@@ -7,14 +7,16 @@ url=''
 license=('BSD')
 groups=('base')
 depends=(
-    'pacman-build'
-    'make'
-    'patch'
-    'busybox'
-    'gcc'
-    'musl-devel'
     'binutils'
+    'busybox'
+    'file'
+    'gcc'
     'linux-headers'
+    'm4'
+    'make'
+    'musl-devel'
+    'pacman-build'
+    'patch'
 )
 makedepends=()
 options=()
