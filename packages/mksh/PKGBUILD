@@ -1,0 +1,33 @@
+pkgname=mksh
+pkgver=R49
+pkgrel=1
+pkgdesc='The MirBSD Korn Shell'
+arch=('x86_64')
+url='https://www.mirbsd.org/mksh.htm'
+license=('BSD')
+groups=('base')
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-${pkgver}.tgz"
+)
+
+sha256sums=(
+    '4dd6c37fe2b8603be3d59744d7866d72913fca49d8a68d3254d064b12eb3da49'
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}"
+    sh ./Build.sh -r -j
+}
+
+package() {
+    cd "${srcdir}/${pkgname}"
+    install -d "${pkgdir}/bin"
+    install -m0755 mksh "${pkgdir}/bin/"
+    install -d "${pkgdir}/share/man/man1"
+    install -m0444 mksh.1 "${pkgdir}/share/man/man1/mksh.1"
+}
