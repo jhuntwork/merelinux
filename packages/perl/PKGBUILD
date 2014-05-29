@@ -12,53 +12,54 @@ options=()
 changelog=ChangeLog
 
 source=(
-	"http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.gz"
+    "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-	'7cbed5ef11900e8f68041215eea0de5e443d53393f84c41d5c9c69c150a4982f'
+    '7cbed5ef11900e8f68041215eea0de5e443d53393f84c41d5c9c69c150a4982f'
 )
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	for file in `grep -l -r "/usr" .` ; do
-		sed -i -e 's@/usr/local@@g' -e 's@/usr@@g' $file
-	done
-	sed -i -e "s|BUILD_ZLIB\s*= True|BUILD_ZLIB = False|" \
-	       -e "s|INCLUDE\s*= ./zlib-src|INCLUDE    = /include|" \
-	       -e "s|LIB\s*= ./zlib-src|LIB        = /lib|" \
-	       cpan/Compress-Raw-Zlib/config.in
-	CFLAGS="$CFLAGS" ./configure.gnu \
-	  -des -Dprefix=/ \
-	  -Dcc="gcc -D_GNU_SOURCE" \
-	  -Dbin=/bin \
-	  -Dinstallsitebin=/bin \
-	  -Dvendorprefix=/ \
-	  -Dprivlib=/lib/perl5/${pkgver} \
-	  -Darchlib=/lib/perl5/${pkgver}/${arch}-linux \
-	  -Dsitelib=/lib/perl5/site_perl/${pkgver} \
-	  -Dvendorlib=/lib/perl5/vendor_perl/${pkgver} \
-	  -Dvendorarch=/lib/perl5/vendor_perl/${pkgver}/${arch}-linux \
-	  -Dscriptdir=/bin \
-	  -Dsitescript=/bin \
-	  -Dvendorbin=/bin \
-	  -Dvendorscript=/bin \
-	  -Dman1dir=/share/man/man1 \
-	  -Dman3dir=/share/man/man3 \
-	  -Dpager="/bin/less -I" \
-	  -Duseshrplib
-	make $MAKEFLAGS
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    for file in `grep -l -r "/usr" .` ; do
+        sed -i -e 's@/usr/local@@g' -e 's@/usr@@g' $file
+    done
+    sed -i -e "s|BUILD_ZLIB\s*= True|BUILD_ZLIB = False|" \
+           -e "s|INCLUDE\s*= ./zlib-src|INCLUDE    = /include|" \
+           -e "s|LIB\s*= ./zlib-src|LIB        = /lib|" \
+           cpan/Compress-Raw-Zlib/config.in
+    CFLAGS="$CFLAGS" ./configure.gnu \
+      -des -Dprefix=/ \
+      -Dcc="gcc -D_GNU_SOURCE" \
+      -Dbin=/bin \
+      -Dinstallsitebin=/bin \
+      -Dvendorprefix=/ \
+      -Dprivlib=/lib/perl5/${pkgver} \
+      -Darchlib=/lib/perl5/${pkgver}/${arch}-linux \
+      -Dsitelib=/lib/perl5/site_perl/${pkgver} \
+      -Dvendorlib=/lib/perl5/vendor_perl/${pkgver} \
+      -Dvendorarch=/lib/perl5/vendor_perl/${pkgver}/${arch}-linux \
+      -Dscriptdir=/bin \
+      -Dsitescript=/bin \
+      -Dvendorbin=/bin \
+      -Dvendorscript=/bin \
+      -Dman1dir=/share/man/man1 \
+      -Dman3dir=/share/man/man3 \
+      -Dpager="/bin/less -I" \
+      -Duseshrplib
+    make $MAKEFLAGS
 }
 
 package() {
-	pkgfiles=(
-		'bin'
-		'lib'
-		'share'
-	)
-	
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    pkgfiles=(
+        'bin'
+        'lib'
+        'share'
+    )
+    
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    mv ./share/man/man3/{,perl-}threads.3 
+    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
 }
