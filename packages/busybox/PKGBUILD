@@ -11,43 +11,43 @@ makedepends=()
 options=('strip')
 changelog=ChangeLog
 source=(
-	"http://busybox.net/downloads/$pkgname-$pkgver.tar.bz2"
-	"https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix1.patch"
-	"https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix2.patch"
-	"https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix3.patch"
-	'busybox-config'
+    "http://busybox.net/downloads/$pkgname-$pkgver.tar.bz2"
+    "https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix1.patch"
+    "https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix2.patch"
+    "https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix3.patch"
+    'busybox-config'
 )
 
 sha256sums=(
-	'eb13ff01dae5618ead2ef6f92ba879e9e0390f9583bd545d8789d27cf39b6882'
-	'0c448c25c7506adabc76871149672c6e37cdf0e0f7f75a8535c96f9b43f10314'
-	'd074f0af9bc861283a0cdd66b8f8b9109c588413616725369e8e7783cd16627d'
-	'140debc9a88e866692bdcee8641e8fbe80d1f93b027a2d5a5f1b2b254b475199'
-	'8421688e7886ee562579f0c7c133f04c7f2904017276a863e73fbb35c35783e4'
+    'eb13ff01dae5618ead2ef6f92ba879e9e0390f9583bd545d8789d27cf39b6882'
+    '0c448c25c7506adabc76871149672c6e37cdf0e0f7f75a8535c96f9b43f10314'
+    'd074f0af9bc861283a0cdd66b8f8b9109c588413616725369e8e7783cd16627d'
+    '140debc9a88e866692bdcee8641e8fbe80d1f93b027a2d5a5f1b2b254b475199'
+    '813377182d34c115774faa002bb009888b93b0ae4d51b1189fd1df72c987c141'
 )
 
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
-	patch -Np1 -i "$srcdir/busybox-xz-bugfix1.patch"
-	patch -Np1 -i "$srcdir/busybox-xz-bugfix2.patch"
-	patch -Np1 -i "$srcdir/busybox-xz-bugfix3.patch"
-	sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" $srcdir/busybox-config >"$srcdir/$pkgname-$pkgver/.config"
-	sed -i '/netinet\/ether/d' networking/arp.c
-	sed -i '/net\/if_slip/d' networking/ifconfig.c
-	sed -i '/net\/if_packet/d' networking/libiproute/iplink.c
-	sed -i '/getpwent/s@!.*@(pwent = getpwent()) != NULL) {@' loginutils/deluser.c
-	sed -i -e '/struct passwd \*pw/d' \
-	  -e 's@struct passwd pwent@struct passwd \*pwent@' \
-	  -e 's@pwent\.pw@pwent->pw@g' loginutils/deluser.c
-	make V=1 HOSTCC="gcc -D_GNU_SOURCE" ${MAKEFLAGS}
+    cd "$srcdir/$pkgname-$pkgver"
+    patch -Np1 -i "$srcdir/busybox-xz-bugfix1.patch"
+    patch -Np1 -i "$srcdir/busybox-xz-bugfix2.patch"
+    patch -Np1 -i "$srcdir/busybox-xz-bugfix3.patch"
+    sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" $srcdir/busybox-config >"$srcdir/$pkgname-$pkgver/.config"
+    sed -i '/netinet\/ether/d' networking/arp.c
+    sed -i '/net\/if_slip/d' networking/ifconfig.c
+    sed -i '/net\/if_packet/d' networking/libiproute/iplink.c
+    sed -i '/getpwent/s@!.*@(pwent = getpwent()) != NULL) {@' loginutils/deluser.c
+    sed -i -e '/struct passwd \*pw/d' \
+      -e 's@struct passwd pwent@struct passwd \*pwent@' \
+      -e 's@pwent\.pw@pwent->pw@g' loginutils/deluser.c
+    make V=1 HOSTCC="gcc -D_GNU_SOURCE" ${MAKEFLAGS}
 }
 
 package() {
-	cd "$srcdir/$pkgname-$pkgver"
-	make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
-	chmod u+s ${pkgdir}/bin/busybox
-	rm -f ${pkgdir}/bin/ip
-	ln -s ../bin/busybox ${pkgdir}/sbin/ip
-	rm -f ${pkgdir}/bin/bash
+    cd "$srcdir/$pkgname-$pkgver"
+    make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
+    chmod u+s ${pkgdir}/bin/busybox
+    rm -f ${pkgdir}/bin/ip
+    ln -s ../bin/busybox ${pkgdir}/sbin/ip
+    rm -f ${pkgdir}/bin/bash
 }
