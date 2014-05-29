@@ -11,69 +11,47 @@ makedepends=()
 options=('emptydirs')
 changelog=ChangeLog
 source=(
-	"passwd"
-	"group"
+    'passwd'
+    'group'
+    'profile'
 )
 sha256sums=(
-	'060fa3b3198b78d2a8c6596055ee76a594b604ab320c2deaafe2df5c58978d11'
-	'3859671b647704e2f804307c0f47ae5d4a5d5f26e4b1482591b53a1fe106795d'
+    '060fa3b3198b78d2a8c6596055ee76a594b604ab320c2deaafe2df5c58978d11'
+    '3859671b647704e2f804307c0f47ae5d4a5d5f26e4b1482591b53a1fe106795d'
+    'f5e5f56bc470d3fcb1257505cdc86c37909053d9f626e9f666c52adc85bcbde1'
 )
 
 backup=(
-	'etc/passwd'
-	'etc/group'
+    'etc/passwd'
+    'etc/group'
+    'etc/profile'
 )
 
 package() {
-	install -dv ${pkgdir}/bin
-	install -dv ${pkgdir}/boot
-	install -dv ${pkgdir}/dev
-	install -dv ${pkgdir}/etc/default
-	install -dv ${pkgdir}/lib/lsb
-	install -dv ${pkgdir}/home
-	install -dv ${pkgdir}/include
-	install -dv ${pkgdir}/lib/modules
-	install -dv ${pkgdir}/local
-	install -dv ${pkgdir}/local/bin
-	install -dv ${pkgdir}/local/include
-	install -dv ${pkgdir}/local/lib
-	install -dv ${pkgdir}/local/sbin
-	install -dv ${pkgdir}/local/share
-	install -dv ${pkgdir}/media
-	install -dv ${pkgdir}/media/floppy
-	install -dv ${pkgdir}/media/cdrom
-	install -dv ${pkgdir}/mnt
-	install -dv ${pkgdir}/opt
-	install -dv ${pkgdir}/proc
-	install -dv -m 0750 ${pkgdir}/root
-	install -dv ${pkgdir}/sbin
-	install -dv ${pkgdir}/srv
-	install -dv ${pkgdir}/sys
-	install -dv -m 1777 ${pkgdir}/tmp
-	install -dv ${pkgdir}/share/aclocal
-	install -dv ${pkgdir}/share/dict
-	install -dv ${pkgdir}/share/doc
-	install -dv ${pkgdir}/share/locale
-	install -dv ${pkgdir}/share/man
-	install -dv ${pkgdir}/share/misc
-	install -dv ${pkgdir}/share/terminfo
-	install -dv ${pkgdir}/share/zoneinfo
-	install -dv ${pkgdir}/src/kernels
-	install -dv -m 0755 ${pkgdir}/usr
-	ln -s ../bin ${pkgdir}/usr/bin
-	ln -s ../sbin ${pkgdir}/usr/sbin
-	install -dv ${pkgdir}/var/cache
-	install -dv ${pkgdir}/var/lock
-	install -dv ${pkgdir}/var/lib/hwclock
-	install -dv ${pkgdir}/var/lib/misc
-	install -dv ${pkgdir}/var/lib/locate
-	install -dv ${pkgdir}/var/log
-	install -dv ${pkgdir}/var/mail
-	install -dv ${pkgdir}/var/run
-	install -dv ${pkgdir}/var/spool
-	install -dv -m 1777 ${pkgdir}/var/tmp
-	install -dv ${pkgdir}/var/spool/repackage
-	install -dv ${pkgdir}/var/opt
-	install -m0644 passwd  ${pkgdir}/etc/passwd
-	install -m0644 group   ${pkgdir}/etc/group
+    install -d ${pkgdir}/bin
+    install -d ${pkgdir}/boot
+    install -d ${pkgdir}/dev
+    install -d ${pkgdir}/etc/default
+    install -d ${pkgdir}/home
+    install -d ${pkgdir}/include
+    install -d ${pkgdir}/lib/modules
+    install -d ${pkgdir}/local/{bin,include,lib,sbin,share}
+    install -d ${pkgdir}/media
+    install -d ${pkgdir}/mnt
+    install -d ${pkgdir}/opt
+    install -d -m 0555 ${pkgdir}/proc
+    install -d -m 0750 ${pkgdir}/root
+    install -d ${pkgdir}/sbin
+    install -d ${pkgdir}/srv
+    install -d -m 0555 ${pkgdir}/sys
+    install -d -m 1777 ${pkgdir}/tmp
+    install -d ${pkgdir}/share/{aclocal,dict,doc,locale,man,misc}
+    install -d -m 0555 ${pkgdir}/usr
+    ln -s ../bin ${pkgdir}/usr/bin
+    ln -s ../sbin ${pkgdir}/usr/sbin
+    install -d ${pkgdir}/var/{cache,lock,lib,log,mail,run,spool}
+    install -d -m 1777 ${pkgdir}/var/tmp
+    install -m0644 passwd  ${pkgdir}/etc/passwd
+    install -m0644 group   ${pkgdir}/etc/group
+    install -m0644 profile ${pkgdir}/etc/profile
 }

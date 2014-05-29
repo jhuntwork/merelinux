@@ -1,20 +1,8 @@
 alias ls='ls --color=auto'
-alias ll='ls -l'
-
-# Setup a red prompt for root and a green one for users. 
-NORMAL="\[\e[0m\]"
-RED="\[\e[1;31m\]"
-GREEN="\[\e[1;32m\]"
-if [[ $EUID == 0 ]] ; then
-        PS1="$RED\u$NORMAL@\h \w$RED \\$ $NORMAL"
-else
-        PS1="$GREEN\u$NORMAL@\h \w$GREEN \\$ $NORMAL"
-fi
-PS2=' '
 
 if [ "`locale charmap 2>/dev/null`" = "UTF-8" ]
 then
-        stty iutf8
+    stty iutf8
 fi
 
 shopt -s checkwinsize
