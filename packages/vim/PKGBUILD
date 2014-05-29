@@ -1,0 +1,69 @@
+pkgname=vim
+vermajor=7
+verminor=4
+pkgver="${vermajor}.${verminor}"
+pkgrel=1
+pkgdesc='An IMproved version of the vi editor'
+arch=('x86_64')
+url='http://www.vim.org'
+license=('VIM')
+groups=('base')
+depends=(ncurses libncurses)
+makedepends=(libncurses-devel)
+options=()
+changelog=ChangeLog
+source=(
+    "http://ftp.vim.org/pub/vim/unix/vim-${pkgver}.tar.bz2"
+    'https://projects.archlinux.org/pacman.git/plain/contrib/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39'
+    'vimrc'
+)
+
+sha256sums=(
+    'd0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade'
+    'dda73393c44e448ddeddaff76287dbbe5fcea1bc381c5d065789bd3c1b481f0e'
+    '9b5605b11065963359d403adbd5277dc0c6087235feb510d5fe4494bdd6bd093'
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}${vermajor}${verminor}"
+    
+    # Apply all upstream patches
+    install -d patches
+    cd patches
+    printf "Downloading MD5SUMS of patches\n"
+    curl --progress-bar -LO http://ftp.vim.org/pub/vim/patches/${pkgver}/MD5SUMS
+    IFS=$'\n'
+    for line in `cat MD5SUMS` ; do
+        sum=`echo $line | cut -d' ' -f1`
+        file=`echo $line | cut -d' ' -f3`
+        if ! echo "$sum  $file" | md5sum -c - >/dev/null 2>&1 ; then
+    	    printf "Downloading %s\n" "$file"
+            curl --progress-bar -LO http://ftp.vim.org/pub/vim/patches/${pkgver}/${file}
+        fi
+    done
+    md5sum -c MD5SUMS
+    cd ..
+    for file in patches/${pkgver}.* ; do
+        patch -p0 < $file
+    done
+    
+    echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+    ./configure \
+      --prefix='' \
+      --enable-multibyte
+    make $MAKEFLAGS
+}
+
+package() {
+    cd "${srcdir}/${pkgname}${vermajor}${verminor}"
+    make DESTDIR="$pkgdir" install
+    find "${pkgdir}/share/man" -mindepth 0 -maxdepth 1 ! -name "man*" -exec rm -rf '{}' +
+    rm -rf "${pkgdir}/share/vim/vim${vermajor}${verminor}/{keymap,lang}"
+    install -d "${pkgdir}/etc"
+    install -m0644 "${srcdir}/vimrc" "${pkgdir}/etc/" 
+    install -m0644 "${srcdir}/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39" \
+      "${pkgdir}/share/vim/vim${vermajor}${verminor}/syntax/PKGBUILD.vim" 
+    echo "au BufNewFile,BufRead PKGBUILD set filetype=PKGBUILD" \
+      >> "${pkgdir}/share/vim/vim${vermajor}${verminor}/filetype.vim"
+}

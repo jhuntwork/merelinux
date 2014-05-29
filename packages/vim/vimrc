@@ -1,0 +1,4 @@
+set nocompatible
+set backspace=2
+set ruler
+syntax on
