@@ -1,0 +1,99 @@
+pkgname=(git git-extra)
+pkgver=1.9.3
+pkgrel=1
+pkgdesc='A distributed version control system'
+arch=('x86_64')
+url='http://git-scm.com/'
+license=('GPL2')
+groups=('base')
+depends=(
+    libcurl
+    openssl
+    zlib
+)
+makedepends=(
+    libcurl-devel
+    mksh
+    openssl-devel
+    perl
+    zlib-devel
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://www.kernel.org/pub/software/scm/git/${pkgname}-${pkgver}.tar.xz"
+)
+sha256sums=(
+    'f633865337a378f625bdc72691b7a71013f3b391d2791c5c76e5a0973cc7d05f'
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+
+    sed -i 's@/usr/bin/perl@/bin/perl@g' `grep -lr "/usr/bin/perl" .`
+    sed -i '/absolute directory/d' configure
+    ./configure \
+      --prefix='' \
+      --libexecdir=/lib \
+      --with-curl \
+      --without-tcltk \
+      --with-zlib \
+      --with-editor=/bin/vim \
+      --with-pager=/bin/more \
+      --with-perl=/bin/perl \
+      --with-shell=/bin/mksh
+    make V=1 NO_MSGFMT=1 NO_GETTEXT=1 $MAKEFLAGS
+}
+
+package_git() {
+    pkgfiles=(
+        'bin'
+        'lib/git-core'
+        'share/git-core'
+    )
+    rmfiles=(
+        'bin/git-cvsserver'
+        'lib/git-core/git-add--interactive'
+        'lib/git-core/git-archimport'
+        'lib/git-core/git-cvs*'
+        'lib/git-core/git-difftool'
+	'lib/git-core/git-relink'
+	'lib/git-core/git-send-email'
+	'lib/git-core/git-svn'
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find $(printf "%s\n" ${rmfiles[@]}) -delete
+    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+}
+
+package_git-extra() {
+    depends=(
+        git
+        perl
+    )
+    pkgdesc='Extra features for git'
+    pkgfiles=(
+        'bin/git-cvsserver'
+        'lib/git-core/git-add--interactive'
+        'lib/git-core/git-archimport'
+        'lib/git-core/git-cvs*'
+        'lib/git-core/git-difftool'
+        'lib/git-core/git-relink'
+        'lib/git-core/git-send-email'
+        'lib/git-core/git-svn'
+        'lib/perl5'
+        'share/git-web'
+        'share/man'
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+}
+
