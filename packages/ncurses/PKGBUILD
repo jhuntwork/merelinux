@@ -12,91 +12,92 @@ options=()
 changelog=ChangeLog
 
 source=(
-	"http://ftp.gnu.org/gnu/ncurses/${pkgname}-${pkgver}.tar.gz"
-	'ncurses-fallback.c'
+    "http://ftp.gnu.org/gnu/ncurses/${pkgname}-${pkgver}.tar.gz"
+    'ncurses-fallback.c'
 )
 sha256sums=(
-	'9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b'
-	'b7981bb4e087ee4d3cf796541d4467a6db2d5fa494ff3cb12924cbdbd962135c'
+    '9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b'
+    'b7981bb4e087ee4d3cf796541d4467a6db2d5fa494ff3cb12924cbdbd962135c'
 )
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	cp "${srcdir}/ncurses-fallback.c" ncurses/fallback.c
-	./configure \
-	  --prefix='' \
-	  --with-fallbacks="linux vt100 xterm xterm256-color" \
-	  --with-shared \
-	  --disable-debug \
-  	  --disable-nls \
-  	  --includedir=/include \
-	  --mandir=/share/man
-	make $MAKEFLAGS
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cp "${srcdir}/ncurses-fallback.c" ncurses/fallback.c
+    CFLAGS="$CFLAGS -fPIC" \
+    ./configure \
+      --prefix='' \
+      --with-fallbacks="linux vt100 xterm xterm256-color" \
+      --with-shared \
+      --disable-debug \
+        --disable-nls \
+        --includedir=/include \
+      --mandir=/share/man
+    make $MAKEFLAGS
 }
 
 package_ncurses() {
-	pkgfiles=(
-		'bin'
-		'share/terminfo'
-		'share/tabset'
-		'share/man/man1'
-		'share/man/man5'
-		'share/man/man7'
-	)
-	depends=(
-		'musl'
-	)
-	depends=(libncurses)
-	
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	rm -f bin/ncurses5-config
-	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    pkgfiles=(
+        'bin'
+        'share/terminfo'
+        'share/tabset'
+        'share/man/man1'
+        'share/man/man5'
+        'share/man/man7'
+    )
+    depends=(
+        'musl'
+    )
+    depends=(libncurses)
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    rm -f bin/ncurses5-config
+    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
 }
 
 package_libncurses() {
-	pkgfiles=(
-		'lib'
-	)
-	
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find . -name "*.so" -delete
-	find . -name "*.a" -delete
-	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    pkgfiles=(
+        'lib'
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find . -name "*.so" -delete
+    find . -name "*.a" -delete
+    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
 }
 
 package_libncurses-devel() {
-	pkgfiles=(
-		'bin/ncurses5-config'
-		'include'
-		'lib/libcurses.so'
-		'lib/libncurses.so'
-		'lib/libmenu.so'
-		'lib/libpanel.so'
-		'lib/libcurses.a'
-		'lib/libncurses.a'
-		'lib/libmenu_g.a'
-		'lib/libncurses_g.a'
-		'lib/libpanel_g.a'
-		'lib/libncurses++.a'
-		'lib/libform_g.a'
-		'lib/libpanel.a'
-		'lib/libform.a'
-		'lib/libmenu.a'
-		'share/man/man3'
-	)
-	depends=(
-		'libncurses'
-	)
-	
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	ln -s libncurses.so lib/libcurses.so
-	ln -s libncurses.a lib/libcurses.a
-	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    pkgfiles=(
+        'bin/ncurses5-config'
+        'include'
+        'lib/libcurses.so'
+        'lib/libncurses.so'
+        'lib/libmenu.so'
+        'lib/libpanel.so'
+        'lib/libcurses.a'
+        'lib/libncurses.a'
+        'lib/libmenu_g.a'
+        'lib/libncurses_g.a'
+        'lib/libpanel_g.a'
+        'lib/libncurses++.a'
+        'lib/libform_g.a'
+        'lib/libpanel.a'
+        'lib/libform.a'
+        'lib/libmenu.a'
+        'share/man/man3'
+    )
+    depends=(
+        'libncurses'
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    ln -s libncurses.so lib/libcurses.so
+    ln -s libncurses.a lib/libcurses.a
+    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
 }
