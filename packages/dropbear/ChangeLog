@@ -1,0 +1,10 @@
+2015-03-20 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2015.67-2 :
+	Disable wtmp support
+	Add s6 service files
+
+2015-03-17 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2015.67-1 :
+	Initial version

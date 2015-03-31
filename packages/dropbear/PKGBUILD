@@ -1,0 +1,46 @@
+pkgname=dropbear
+pkgver=2015.67
+pkgrel=2
+pkgdesc='A relatively small SSH server and client.'
+arch=(x86_64)
+url='http://matt.ucc.asn.au/dropbear/dropbear.html'
+license=(MIT)
+groups=(base)
+depends=(s6 execline)
+makedepends=(zlib-devel)
+options=()
+changelog=ChangeLog
+source=(
+    "http://matt.ucc.asn.au/dropbear/releases/dropbear-${pkgver}.tar.bz2"
+    dropbear-service
+    dropbear-log
+)
+
+sha256sums=(
+    7e690594645dfde5787065c78a5d2e4d15e288babfa06e140197ce05f698c8e5
+    39dd2592dc121badf5b50ab71d56045e88c314182f9c7c12812296ab4d9c5362
+    df91dcee399c728a884f89723f29754353710b0e6c9ef8e8d1ae87300928b0f8
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS='-Wl,-static' ./configure \
+      --prefix='' \
+      --disable-wtmp
+    make $MAKEFLAGS
+}
+
+package() {
+    options+=(emptydirs)
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
+    ln -s dbclient "${pkgdir}/bin/ssh"
+    install -d -m 0755 "${pkgdir}/etc/dropbear"
+    install -d "${pkgdir}/etc/services/dropbear/log"
+    install -m 0754 "${srcdir}/dropbear-service" \
+        "${pkgdir}/etc/services/dropbear/run"
+    install -m 0754 "${srcdir}/dropbear-log" \
+        "${pkgdir}/etc/services/dropbear/log/run"
+    rm -rf "$pkgdir"/share
+}
