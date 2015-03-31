@@ -1,0 +1,39 @@
+pkgname=bc
+pkgver=1.06.95
+pkgrel=1
+pkgdesc='An arbitrary precision numeric processing language.'
+arch=('x86_64')
+url='http://www.gnu.org/software/bc/'
+license=('GPL2')
+groups=('base')
+depends=('')
+makedepends=('readline-devel' 'bison')
+options=()
+changelog=ChangeLog
+source=(
+	"http://alpha.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+    "http://www.linuxfromscratch.org/patches/lfs/development/bc-${pkgver}-memory_leak-1.patch"
+)
+
+sha256sums=(
+    '7ee4abbcfac03d8a6e1a8a3440558a3d239d6b858585063e745c760957725ecc'
+    '9e9279f1c2c4b83f3dab9672563bb02087776f04bb43eec135af117e6d4f83fb'
+)
+
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+    patch -Np1 -i "${srcdir}/bc-${pkgver}-memory_leak-1.patch"
+	LDFLAGS="-Wl,-static" \
+	./configure --prefix='' --with-readline \
+       --mandir=/share/man \
+       --infodir=/share/info
+	echo "MAKEINFO = :" >> doc/Makefile
+	make $MAKEFLAGS
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="$pkgdir" install
+    rm -rf "${pkgdir}/share/info"
+}
