@@ -1,0 +1,38 @@
+pkgname=sudo
+pkgver=1.8.13
+pkgrel=1
+pkgdesc='Tool for delegating authority to users and groups.'
+arch=(x86_64)
+url='http://www.sudo.ws/'
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "http://www.sudo.ws/sudo/dist/sudo-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    e374e5edf2c11c00d6916a9f51cb0ad15e51c7b028370fa15169b07e61e05a25
+)
+
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+    CFLAGS="${CFLAGS} -fPIC -static" \
+	  LDFLAGS="-Wl,-static" \
+	  ./configure \
+      --prefix='' \
+      --libexecdir=/lib/sudo \
+      --enable-static \
+      --disable-shared
+	make $MAKEFLAGS
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="$pkgdir" install
+    rm -rf ${pkgdir}/{include,share,usr,var/run}
+}
