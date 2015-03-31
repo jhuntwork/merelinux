@@ -1,19 +1,19 @@
-pkgname=('curl' 'libcurl' 'libcurl-devel')
-pkgver=7.36.0
+pkgname=(
+    curl
+    libcurl
+    libcurl-devel
+)
+pkgver=7.41.0
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
-arch=('x86_64')
+arch=(x86_64)
 url='http://curl.haxx.se'
-license=('GPL2')
-groups=('base')
+license=(GPL2)
+groups=(base)
 depends=()
 makedepends=(
-    'musl-devel'
-    'binutils'
-    'gcc'
-    'linux-headers'
-    'openssl-devel'
-    'zlib-devel'
+    openssl-devel
+    zlib-devel
 )
 options=()
 changelog=ChangeLog
@@ -22,14 +22,15 @@ source=(
     "${url}/download/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    '33015795d5650a2bfdd9a4a28ce4317cef944722a5cfca0d1563db8479840e90'
+    58c9f7cb1be9c26e6a2fd9326c14e054780dc4bb74b590a1d47fb3788a31535d
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     rm src/tool_hugehelp.c
-    LDFLAGS='-fPIC -Wl,-static' \
+    CFLAGS="$CFLAGS -fPIC" \
+    LDFLAGS='-Wl,-static' \
     ./configure \
       --prefix=/ \
       --enable-static \
@@ -40,6 +41,7 @@ build() {
     install -v src/curl{,-static}
     unset LDFLAGS
     make clean
+    CFLAGS="$CFLAGS -fPIC" \
     ./configure \
       --prefix=/ \
       --enable-static \
@@ -51,53 +53,51 @@ build() {
 
 package_curl() {
     pkgfiles=(
-        'bin/curl'
-        'share/man/man1/curl.1.*'
+        bin/curl
     )
     depends=(
-        'ca-certificates'
+        ca-certificates
     )
-    
+
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     install -m0755 -v src/curl-static "${pkgdir}-tmp/bin/curl"
     cd "${pkgdir}-tmp"
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_libcurl() {
     pkgfiles=(
-        'lib/libcurl.so.*'
+        "lib/libcurl.so.*"
     )
     depends=(
-        'musl'
-        'openssl'
-        'zlib'
+        musl
+        openssl
+        zlib
     )
 
-    
+
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_libcurl-devel() {
     pkgfiles=(
-        'bin/curl-config'
-        'include'
-        'lib/*.a'
-        'lib/*.so'
-        'lib/pkgconfig'
-        'share/aclocal'
-        'share/man/man3'
-        'share/man/man1/curl-config.1.*'
+        bin/curl-config
+        include
+        "lib/*.a"
+        "lib/*.so"
+        lib/pkgconfig
+        share/aclocal
     )
     depends=(
-        'libcurl'
+        libcurl
     )
+
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
