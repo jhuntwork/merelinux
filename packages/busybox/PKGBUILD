@@ -1,53 +1,85 @@
-pkgname=busybox
-pkgver=1.20.2
+pkgname=(busybox busybox-static)
+pkgver=1.23.2
 pkgrel=1
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
-arch=('x86_64')
+arch=(x86_64)
 url='http://busybox.net'
-license=('GPL2')
-groups=('base')
+license=(GPL)
+groups=(base)
 depends=()
 makedepends=()
-options=('strip')
+options=(!upx emptydirs)
 changelog=ChangeLog
 source=(
-    "http://busybox.net/downloads/$pkgname-$pkgver.tar.bz2"
-    "https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix1.patch"
-    "https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix2.patch"
-    "https://raw.github.com/jhuntwork/lightcube-bootstrap-musl/master/packages/busybox/busybox-xz-bugfix3.patch"
-    'busybox-config'
+    "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
+    busybox-config
+    udhcpc.script
+    sysctl.conf
 )
 
 sha256sums=(
-    'eb13ff01dae5618ead2ef6f92ba879e9e0390f9583bd545d8789d27cf39b6882'
-    '0c448c25c7506adabc76871149672c6e37cdf0e0f7f75a8535c96f9b43f10314'
-    'd074f0af9bc861283a0cdd66b8f8b9109c588413616725369e8e7783cd16627d'
-    '140debc9a88e866692bdcee8641e8fbe80d1f93b027a2d5a5f1b2b254b475199'
-    '813377182d34c115774faa002bb009888b93b0ae4d51b1189fd1df72c987c141'
+    05a6f9e21aad8c098e388ae77de7b2361941afa7157ef74216703395b14e319a
+    be968691ac78b6d70331c46e86406abacbe3a51d4e754277341512557ac7e632
+    4843ba14d59fb1f76a594d95b29a78c8e0195b038b9343926ece7ec9bb348383
+    0be69e4c03c50b91784dfaf9f51bceb1a01c4c61d24045c6022f2bfa6a31e4e6
 )
 
 
 build() {
-    cd "$srcdir/$pkgname-$pkgver"
-    patch -Np1 -i "$srcdir/busybox-xz-bugfix1.patch"
-    patch -Np1 -i "$srcdir/busybox-xz-bugfix2.patch"
-    patch -Np1 -i "$srcdir/busybox-xz-bugfix3.patch"
-    sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" $srcdir/busybox-config >"$srcdir/$pkgname-$pkgver/.config"
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    # Fixes
     sed -i '/netinet\/ether/d' networking/arp.c
     sed -i '/net\/if_slip/d' networking/ifconfig.c
-    sed -i '/net\/if_packet/d' networking/libiproute/iplink.c
     sed -i '/getpwent/s@!.*@(pwent = getpwent()) != NULL) {@' loginutils/deluser.c
     sed -i -e '/struct passwd \*pw/d' \
       -e 's@struct passwd pwent@struct passwd \*pwent@' \
       -e 's@pwent\.pw@pwent->pw@g' loginutils/deluser.c
-    make V=1 HOSTCC="gcc -D_GNU_SOURCE" ${MAKEFLAGS}
+    cd ..
+    # Static
+    cp -a "${pkgname}-${pkgver}" "${pkgname}-${pkgver}-static"
+    cd "${pkgname}-${pkgver}-static"
+    sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}-static/\"@" \
+      "${srcdir}/busybox-config" >.config
+    make V=1 HOSTCC='gcc -D_GNU_SOURCE' $MAKEFLAGS
+    # Dynamic
+    cd ../${pkgname}-${pkgver}
+    sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" \
+      "${srcdir}/busybox-config" >.config
+    sed -i '/CONFIG_STATIC/s@.*@# CONFIG_STATIC is not set@' .config
+    make V=1 HOSTCC='gcc -D_GNU_SOURCE' $MAKEFLAGS
 }
 
-package() {
-    cd "$srcdir/$pkgname-$pkgver"
+package_busybox() {
+    depends=(
+        musl
+    )
+    cd "${pkgbase}-${pkgver}"
     make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
-    chmod u+s ${pkgdir}/bin/busybox
-    rm -f ${pkgdir}/bin/ip
-    ln -s ../bin/busybox ${pkgdir}/sbin/ip
-    rm -f ${pkgdir}/bin/bash
+    cd "$pkgdir"
+    chmod u+s bin/busybox
+    rm -f bin/bash
+    install -d etc/network/if-pre-up.d
+    install -d etc/network/if-up.d
+    install -d etc/network/if-down.d
+    install -d etc/network/if-post-down.d
+    install -d share/udhcpc
+    install -m 0755 "${srcdir}/udhcpc.script" \
+        share/udhcpc/default.script
+    install -m 0644 "${srcdir}/sysctl.conf" etc/
+}
+
+package_busybox-static() {
+    cd "${pkgbase}-${pkgver}-static"
+    make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
+    cd "$pkgdir"
+    chmod u+s bin/busybox
+    rm -f bin/bash
+    install -d etc/network/if-pre-up.d
+    install -d etc/network/if-up.d
+    install -d etc/network/if-down.d
+    install -d etc/network/if-post-down.d
+    install -d share/udhcpc
+    install -m 0755 "${srcdir}/udhcpc.script" \
+        share/udhcpc/default.script
+    install -m 0644 "${srcdir}/sysctl.conf" etc/
 }
