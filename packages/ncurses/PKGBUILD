@@ -1,23 +1,27 @@
-pkgname=('ncurses' 'libncurses' 'libncurses-devel')
+pkgname=(
+    ncurses
+    libncurses
+    libncurses-devel
+)
 pkgver=5.9
-pkgrel=1
+pkgrel=3
 pkgdesc='An API for writing text-based user interfaces.'
-arch=('x86_64')
+arch=(x86_64)
 url='http://www.gnu.org/software/ncurses'
-license=('GPL2')
-groups=('base')
+license=(GPL2)
+groups=(base)
 depends=()
-makedepends=('musl' 'binutils' 'gcc' 'gcc-c++' 'linux-headers')
+makedepends=(gcc-c++)
 options=()
 changelog=ChangeLog
 
 source=(
     "http://ftp.gnu.org/gnu/ncurses/${pkgname}-${pkgver}.tar.gz"
-    'ncurses-fallback.c'
+    ncurses-fallback.c
 )
 sha256sums=(
-    '9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b'
-    'b7981bb4e087ee4d3cf796541d4467a6db2d5fa494ff3cb12924cbdbd962135c'
+    9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b
+    b7981bb4e087ee4d3cf796541d4467a6db2d5fa494ff3cb12924cbdbd962135c
 )
 
 
@@ -30,36 +34,34 @@ build() {
       --with-fallbacks="linux vt100 xterm xterm256-color" \
       --with-shared \
       --disable-debug \
-        --disable-nls \
-        --includedir=/include \
+      --disable-nls \
+      --enable-widec \
+      --includedir=/include \
       --mandir=/share/man
     make $MAKEFLAGS
 }
 
 package_ncurses() {
     pkgfiles=(
-        'bin'
-        'share/terminfo'
-        'share/tabset'
-        'share/man/man1'
-        'share/man/man5'
-        'share/man/man7'
+        bin
     )
     depends=(
-        'musl'
+        libncurses
     )
-    depends=(libncurses)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    rm -f bin/ncurses5-config
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    rm bin/ncursesw5-config
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_libncurses() {
     pkgfiles=(
-        'lib'
+        lib
+    )
+    depends=(
+        musl
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
@@ -67,37 +69,28 @@ package_libncurses() {
     cd "${pkgdir}-tmp"
     find . -name "*.so" -delete
     find . -name "*.a" -delete
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_libncurses-devel() {
     pkgfiles=(
-        'bin/ncurses5-config'
-        'include'
-        'lib/libcurses.so'
-        'lib/libncurses.so'
-        'lib/libmenu.so'
-        'lib/libpanel.so'
-        'lib/libcurses.a'
-        'lib/libncurses.a'
-        'lib/libmenu_g.a'
-        'lib/libncurses_g.a'
-        'lib/libpanel_g.a'
-        'lib/libncurses++.a'
-        'lib/libform_g.a'
-        'lib/libpanel.a'
-        'lib/libform.a'
-        'lib/libmenu.a'
-        'share/man/man3'
+        bin/ncursesw5-config
+        include
+        "lib/*.so"
+        "lib/*.a"
     )
     depends=(
-        'libncurses'
+        libncurses
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
+    for lib in ncurses form panel menu ; do
+        ln -s lib${lib}w.so lib/lib${lib}.so
+        ln -s lib${lib}w.a lib/lib${lib}.a
+    done
     ln -s libncurses.so lib/libcurses.so
     ln -s libncurses.a lib/libcurses.a
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

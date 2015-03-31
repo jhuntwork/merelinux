@@ -1,3 +1,13 @@
+2015-03-20 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.9-3 :
+	Add wide character support
+
+2015-03-20 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.9-2 :
+	Fix libncurses dependencies
+
 2013-08-01 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.9-1 :
