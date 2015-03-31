@@ -1,0 +1,52 @@
+pkgname=(mpc mpc-devel)
+pkgver=1.0.3
+pkgrel=1
+pkgdesc='A library for the arithmetic of complex numbers with arbitrarily high \
+precision and correct rounding.'
+arch=('x86_64')
+url='http://www.multiprecision.org'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(gmp-devel mpfr-devel)
+options=()
+changelog=ChangeLog
+source=(
+	"http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
+)
+sha256sums=(
+    '617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3'
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	./configure --prefix='' \
+      --enable-thread-safe
+	make $MAKEFLAGS
+    make check
+}
+
+package_mpc() {
+	pkgfiles=(
+		lib/libmpc.so.*
+	)
+    depends=(musl mpfr gmp)
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+}
+
+package_mpc-devel() {
+    pkgfiles=(
+        include
+        lib/libmpc.a
+        lib/libmpc.so
+    )
+	depends=(mpc)
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+}

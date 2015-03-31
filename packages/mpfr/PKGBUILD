@@ -1,0 +1,54 @@
+pkgname=(mpfr mpfr-devel)
+pkgver=3.1.2
+pkgrel=1
+pkgdesc='A library for multiple-precision floating-point computations with correct rounding.'
+arch=('x86_64')
+url='http://www.mpfr.org'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(gmp-devel)
+options=()
+changelog=ChangeLog
+source=(
+	"http://www.mpfr.org/mpfr-current/${pkgname}-${pkgver}.tar.xz"
+    "http://www.linuxfromscratch.org/patches/lfs/development/mpfr-${pkgver}-upstream_fixes-3.patch"
+)
+sha256sums=(
+    '399d0f47ef6608cc01d29ed1b99c7faff36d9994c45f36f41ba250147100453b'
+    '75091edbfb2684f71104ea07a87180638f5845c32ba1d24db8172b446cff361a'
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    patch -Np1 -i "${srcdir}/mpfr-${pkgver}-upstream_fixes-3.patch"
+	./configure --prefix='' \
+      --enable-thread-safe
+	make $MAKEFLAGS
+    make check
+}
+
+package_mpfr() {
+	pkgfiles=(
+		lib/libmpfr.so.*
+	)
+    depends=(musl gmp)
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+}
+
+package_mpfr-devel() {
+    pkgfiles=(
+        include
+        lib/libmpfr.a
+        lib/libmpfr.so
+    )
+	depends=(mpfr)
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+}
