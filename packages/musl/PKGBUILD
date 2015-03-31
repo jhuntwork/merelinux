@@ -1,26 +1,20 @@
-pkgname=('musl' 'musl-devel')
-pkgver=1.1.0
+pkgname=(musl musl-devel)
+pkgver=1.1.8
 pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
 url='http://www.musl-libc.org'
-license=('LGPL' 'BSD')
+license=(LGPL BSD)
 groups=('base')
 depends=()
-makedepends=(
-	'busybox'
-	'binutils'
-	'gcc'
-	'linux-headers'
-	'make'
-)
-options=()
+makedepends=()
+options=(!upx)
 changelog=ChangeLog
 source=(
 	"http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-	'de1b43019e5361d7577e5e0213e9dde591853e9da5d4a7cd75e2e0d78bf60820'
+    fa928506415b9c555977daaf874c190eaf7fbbd16028cc5c5f33a00a83227813
 )
 
 
@@ -33,22 +27,21 @@ build() {
 
 package_musl() {
 	pkgfiles=(
-		'bin/ldd'
-		'lib/libc.so'
+		bin/ldd
+		lib/libc.so
 		"lib/ld-musl-${arch}.so.1"
 	)
-	
+
 	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="${pkgdir}-tmp" install
 	cd "${pkgdir}-tmp"
 	install -d bin
 	ln -sf ../lib/libc.so bin/ldd
-	printf "%s\n" ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }
 
 package_musl-devel() {
 	depends=('musl')
-	
 	cd "${srcdir}/${pkgbase}-${pkgver}"
 	make DESTDIR="$pkgdir" install
 	rm "${pkgdir}/lib/libc.so"
