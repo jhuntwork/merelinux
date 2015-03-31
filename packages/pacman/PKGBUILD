@@ -1,95 +1,97 @@
-pkgname=('pacman' 'pacman-build')
-pkgver=4.1.2
+pkgname=(pacman pacman-build)
+pkgver=4.2.1
 pkgrel=1
 pkgdesc='The pacman Package Manager'
-arch=('x86_64')
+arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
-license=('GPL2')
-groups=('base')
+license=(GPL2)
+groups=(base)
 depends=()
 makedepends=(
-    'musl-devel'
-    'binutils'
-    'gcc'
-    'm4'
-    'linux-headers'
-    'libarchive-devel'
-    'libcurl-devel'
-    'openssl-devel'
-    'pkgconf'
-    'zlib-devel'
+    gettext
+    libtool
+    libarchive-devel
+    libcurl-devel
+    liblzma-devel
+    openssl-devel
+    pkgconf
+    zlib-devel
 )
 options=()
 changelog=ChangeLog
 
 source=(
-    "ftp://ftp.archlinux.org/other/pacman/${pkgname}-${pkgver}.tar.gz"
-    'makepkg.conf'
+    "https://projects.archlinux.org/pacman.git/snapshot/pacman-${pkgver}.tar.gz"
+    makepkg.conf
+    pacman.conf
 )
 sha256sums=(
-    '7c059b444735ee254cfbd8dc2fac8c5d61453601f8adaf001c7038cdc673334c'
-    '919dfd41277c073d5b5b706fb0bdd223a6ca65604dcf8a8252e3f7d50c4e92b1'
+    6d411509310760acbf0c3cf4d7e72c604b3e7919306681507c9107c527709cc5
+    e9b4831842279531313e17039245572d1d1f01ae7eacf7dc2adc9d84c4236ea9
+    0a3ba7c8f9e6ab3ae2e596149c7238bc9ce80055c645c686eb8a810721ff4399
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    sed -i 's@usr/@@g' etc/makepkg.conf.in etc/pacman.conf.in
+    ./autogen.sh
     sed -i '/x-cpio/s@)@|*application/x-empty*)@' scripts/makepkg.sh.in
     sed -i 's@ --apparent-size@@' configure
     LDFLAGS='-Wl,-static' \
     ./configure \
       --prefix='' \
       --disable-shared \
+      --disable-nls \
       --disable-doc
-      make V=1 LIBS="-lm -lz -lssl -lcrypto" $MAKEFLAGS
+      make V=1 LIBS='-lm -lz -lssl -lcrypto -llzma' $MAKEFLAGS
 }
 
 package_pacman() {
     pkgfiles=(
-        'bin/pacman'
-        'bin/pacman-key'
-        'bin/pacsort'
-        'bin/pacman-db-upgrade'
-        'bin/vercmp'
-        'bin/pkgdelta'
-        'etc/pacman.conf'
-        'var'
-    )
-    depends=(
-        'curl'
+        bin/pacman
+        bin/pacman-key
+        bin/pacsort
+        bin/pacman-db-upgrade
+        bin/vercmp
+        bin/pkgdelta
+        "etc/pacman.conf*"
+        var
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
+    mv ${pkgdir}-tmp/etc/pacman.conf{,.example}
+    install -vm 0644 "${srcdir}/pacman.conf" "${pkgdir}-tmp/etc/"
     cd "${pkgdir}-tmp"
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_pacman-build() {
     pkgfiles=(
-        'bin/makepkg'
-        'bin/cleanupdelta'
-        'bin/repo-add'
-        'bin/repo-remove'
-        'bin/repo-elephant'
-        'bin/testpkg'
-        'bin/testdb'
-        'etc/makepkg.conf'
-        'share'
+        bin/makepkg
+        bin/cleanupdelta
+        bin/repo-add
+        bin/repo-remove
+        bin/repo-elephant
+        bin/testpkg
+        bin/testdb
+        "etc/makepkg.conf*"
+        share
     )
     depends=(
-        'bash'
-        'file'
-        'libarchive-utils'
-        'openssl'
-        'pacman'
-        'xz'
+        bash
+        curl
+        file
+        libarchive
+        openssl
+        pacman
+        xz
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
+    mv ${pkgdir}-tmp/etc/makepkg.conf{,.example}
     install -vm 0644 "${srcdir}/makepkg.conf" "${pkgdir}-tmp/etc/"
     cd "${pkgdir}-tmp"
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
