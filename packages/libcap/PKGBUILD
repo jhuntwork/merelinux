@@ -1,0 +1,59 @@
+pkgname=(libcap libcap-devel)
+pkgver=2.24
+pkgrel=1
+pkgdesc='A Linux capability implementation.'
+arch=(x86_64)
+url='https://sites.google.com/site/fullycapable/'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(
+    libattr-devel
+    perl
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-${pkgver}.tar.xz"
+)
+sha256sums=(
+    cee4568f78dc851d726fc93f25f4ed91cc223b1fe8259daa4a77158d174e6c65
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i '/^lib=/s@=.*@=/lib@' Make.Rules
+	make prefix=/
+}
+
+package_libcap() {
+	pkgfiles=(
+		"lib/libcap.so.*"
+        sbin
+	)
+    depends=(
+        libattr
+        musl
+    )
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libcap-devel() {
+    pkgfiles=(
+        include
+        lib/libcap.a
+        lib/libcap.so
+        lib/pkgconfig
+    )
+	depends=(libcap)
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}

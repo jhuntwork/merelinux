@@ -1,0 +1,47 @@
+pkgname=fakeroot
+pkgver=1.20.2
+pkgrel=1
+pkgdesc='A tool for simulating superuser privileges.'
+arch=(x86_64)
+url='http://fakeroot.alioth.debian.org/'
+license=(GPL)
+groups=(base)
+depends=(musl)
+makedepends=(libcap-devel)
+options=(!upx)
+changelog=ChangeLog
+source=(
+    "http://ftp.de.debian.org/debian/pool/main/f/fakeroot/fakeroot_${pkgver}.orig.tar.bz2"
+    fakeroot-no64.patch
+    fakeroot-stdint.patch
+    fakeroot-uclibc.patch
+)
+
+sha256sums=(
+    7c0a164d19db3efa9e802e0fc7cdfeff70ec6d26cdbdc4338c9c2823c5ea230c
+    3420da0789caef582fcfc890c657da4136b3b06d1205443f4409cdf85ab02a46
+    8739c0b79c3f2b0e46cd0dffa8b73d946efbe994f61f69f7d1115c2dcec22df1
+    e325ad9aad310caa71002adea220795f706c621c5794093f16c0f319b3d58977
+)
+
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i 's@getopt --version@& 2>/dev/null@' scripts/fakeroot.in
+    patch -p1 -i "$srcdir"/fakeroot-no64.patch
+    patch -p1 -i "$srcdir"/fakeroot-stdint.patch
+    patch -p1 -i "$srcdir"/fakeroot-uclibc.patch
+    sed -e 's/for WRAPPED in __${PRE}x${FUNC} _${PRE}x${FUNC} __${PRE}${FUNC}13 ${PRE}${FUNC}; do/for WRAPPED in ${PRE}${FUNC}; do/' \
+      -i configure
+    CFLAGS="${CFLAGS} -D_STAT_VER=0" \
+	  ./configure \
+      --prefix='' \
+      --disable-static
+	make $MAKEFLAGS
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="${pkgdir}" install
+    rm -rf ${pkgdir}/share
+}
