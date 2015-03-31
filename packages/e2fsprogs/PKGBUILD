@@ -1,0 +1,109 @@
+pkgname=(
+    e2fsprogs
+    libuuid-devel
+    libblkid-devel
+)
+pkgver=1.42.12
+pkgrel=1
+pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
+arch=(x86_64)
+url=http://e2fsprogs.sourceforge.net/
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.kernel.org/pub/linux/kernel/people/tytso/${pkgname}/v${pkgver}/${pkgname}-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    '6dadcd3b759195150d20154ab9d6516e3b3cbb35d66d461f55ae94a2854e7de8'
+)
+G
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    mkdir build
+    cd build
+    CFLAGS='-fPIC -static' \
+      LDFLAGS='-static' \
+      ../configure --prefix=''
+    make V=1 $MAKEFLAGS
+}
+
+package_e2fsprogs() {
+    pkgfiles=(
+        bin/uuidgen
+        bin/chattr
+        bin/lsattr
+        etc/mke2fs.conf
+        sbin/
+        sbin/e4defrag
+        sbin/logsave
+        sbin/fsck.ext4
+        sbin/mkfs.ext2
+        sbin/findfs
+        sbin/fsck
+        sbin/blkid
+        sbin/debugfs
+        sbin/badblocks
+        sbin/fsck.ext4dev
+        sbin/mklost+found
+        sbin/mke2fs
+        sbin/mkfs.ext4
+        sbin/dumpe2fs
+        sbin/e2label
+        sbin/fsck.ext3
+        sbin/resize2fs
+        sbin/filefrag
+        sbin/mkfs.ext3
+        sbin/e2image
+        sbin/e2fsck
+        sbin/tune2fs
+        sbin/fsck.ext2
+        sbin/e2undo
+        sbin/uuidd
+        sbin/mkfs.ext4dev
+        sbin/e2freefrag
+        share/man/man8/*
+        share/man/man5/*
+        share/man/man1/*
+    )
+    cd "${srcdir}/${pkgbase}-${pkgver}/build"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libuuid-devel() {
+    pkgfiles=(
+        include/uuid
+        lib/pkgconfig/uuid.pc
+        lib/libuuid.a
+        share/man/man3/uuid*
+    )
+    depends=(pkgconf)
+    cd "${srcdir}/${pkgbase}-${pkgver}/build"
+    make DESTDIR="${pkgdir}-tmp" install-libs
+    cd "${pkgdir}-tmp"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libblkid-devel() {
+    pkgfiles=(
+        include/blkid
+        lib/pkgconfig/blkid.pc
+        lib/libblkid.a
+        share/man/man3/libblkid.3
+    )
+    depends=(pkgconf libuuid-devel)
+    cd "${srcdir}/${pkgbase}-${pkgver}/build"
+    make DESTDIR="${pkgdir}-tmp" install-libs
+    cd "${pkgdir}-tmp"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
