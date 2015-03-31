@@ -1,41 +1,53 @@
-pkgname=bison
-pkgver=3.0
+pkgname=(bison bison-devel)
+pkgver=3.0.4
 pkgrel=1
-pkgdesc='Bison is a general-purpose parser generator.'
+pkgdesc='A general-purpose parser generator.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bison/'
 license=('GPL3')
 groups=('base')
 depends=('m4')
-makedepends=('m4')
-options=('strip')
+makedepends=('m4' 'perl')
+options=()
 changelog=ChangeLog
 source=(
 	"http://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz"
 )
 
 sha256sums=(
-	'e9ac5585002b71208aee8a20bbe1ced96c48766e6c4247bc7ef8f3141f7624c8'
+    'a72428c7917bdf9fa93cb8181c971b6e22834125848cf1d03ce10b1bb0716fe1'
 )
 
 
 build() {
-	cd "$srcdir/$pkgname-$pkgver"
+	cd "${srcdir}/${pkgname}-${pkgver}"
 	LDFLAGS="-Wl,-static" \
 	./configure --prefix=''
 	make $MAKEFLAGS
+    make check
 }
 
-package() {
+package_bison() {
 	pkgfiles=(
-		'bin/bison'
-		'bin/yacc'
-		'lib/liby.a'
-		'share/bison'
-		'share/man/man1/bison.1.gz'
-		'share/man/man1/yacc.1.gz'
-		'share/aclocal/bison-i18n.m4'
+		bin/bison
+		bin/yacc
+		share/bison
+		share/man/man1/bison.1
+		share/man/man1/yacc.1
+		share/aclocal/bison-i18n.m4
 	)	
-	cd "$srcdir/$pkgname-$pkgver"
-	make DESTDIR="$pkgdir" install
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_bison-devel() {
+    pkgfiles=(
+		lib/liby.a
+    )
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
