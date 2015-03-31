@@ -1,34 +1,42 @@
-pkgname=('linux-headers')
-pkgver=3.10.4
+pkgname=(linux linux-headers)
+pkgver=3.19.2
 pkgrel=1
 pkgdesc='The Linux kernel'
-arch=('x86_64')
+arch=(x86_64)
 url='http://www.kernel.org'
-license=('GPL2')
-groups=('base')
+license=(GPL2)
+groups=(base)
 depends=()
-makedepends=()
-options=('strip')
+makedepends=(bc perl)
+options=()
 changelog=ChangeLog
 source=(
-	"https://www.kernel.org/pub/linux/kernel/v3.x/linux-$pkgver.tar.xz"
+    "https://www.kernel.org/pub/linux/kernel/v3.x/linux-$pkgver.tar.xz"
+    'linux-config'
 )
 
 sha256sums=(
-	'9e5a423722db8bf48fd5a029b11340763394fd41e57ea844a774c275c6b41eb8'
+    0c0ee420dc8d4f6239fab072351c7a2ce6a881028d5ab2d162ec667fdd750b2d
+    c766df34a14b51c554c6b4119bcec023161a419030491be2036f423cc5b928a1
 )
 
 
 build() {
-	cd "$srcdir/linux-$pkgver"
-	sed -i 's@ ERR@@' scripts/link-vmlinux.sh
-	make mrproper
-	make INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make mrproper
+    cp "${srcdir}/linux-config" .config
+    make $MAKEFLAGS
+}
+
+package_linux() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    install -d "${pkgdir}/boot"
+    install 'arch/x86_64/boot/bzImage' "${pkgdir}/boot/vmlinux"
 }
 
 package_linux-headers() {
-	cd "$srcdir/linux-$pkgver"
-	install -d "$pkgdir/include"
-	cp -r dest/include/* "$pkgdir/include/"
-	find "$pkgdir/include" -type f -name "*.install*" -delete
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
+    cd "${srcdir}/${pkgbase}-${pkgver}/dest"
+    find include ! -type d -name "*.h" | cpio -dumpv "${pkgdir}"
 }
