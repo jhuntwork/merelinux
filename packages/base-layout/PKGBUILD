@@ -1,30 +1,33 @@
 pkgname=base-layout
-pkgver=1.0
+pkgver=1.4
 pkgrel=1
 pkgdesc='The base directory structure and a few core files for the system.'
 arch=('x86_64')
 url=''
-license=('GPL2')
+license=(MIT)
 groups=('base')
 depends=()
 makedepends=()
 options=('emptydirs')
 changelog=ChangeLog
 source=(
-    'passwd'
-    'group'
-    'profile'
+    passwd
+    group
+    profile
+    shells
 )
 sha256sums=(
-    '060fa3b3198b78d2a8c6596055ee76a594b604ab320c2deaafe2df5c58978d11'
-    '3859671b647704e2f804307c0f47ae5d4a5d5f26e4b1482591b53a1fe106795d'
-    'f5e5f56bc470d3fcb1257505cdc86c37909053d9f626e9f666c52adc85bcbde1'
+    d0870c90f2f05910050cb324e96664b2bb995e790eac4feb002352265583ead3
+    3859671b647704e2f804307c0f47ae5d4a5d5f26e4b1482591b53a1fe106795d
+    f5e5f56bc470d3fcb1257505cdc86c37909053d9f626e9f666c52adc85bcbde1
+    6e7af7647d4064e6df502e1fa5f062a7ba753487a906850e9f332c6f0a7be7a3
 )
 
 backup=(
-    'etc/passwd'
-    'etc/group'
-    'etc/profile'
+    etc/passwd
+    etc/group
+    etc/profile
+    etc/shells
 )
 
 package() {
@@ -32,26 +35,29 @@ package() {
     install -d ${pkgdir}/boot
     install -d ${pkgdir}/dev
     install -d ${pkgdir}/etc/default
+    ln -s /proc/mounts ${pkgdir}/etc/mtab
     install -d ${pkgdir}/home
     install -d ${pkgdir}/include
     install -d ${pkgdir}/lib/modules
     install -d ${pkgdir}/local/{bin,include,lib,sbin,share}
-    install -d ${pkgdir}/media
-    install -d ${pkgdir}/mnt
-    install -d ${pkgdir}/opt
     install -d -m 0555 ${pkgdir}/proc
     install -d -m 0750 ${pkgdir}/root
+    install -d -m 1777 ${pkgdir}/run
     install -d ${pkgdir}/sbin
-    install -d ${pkgdir}/srv
     install -d -m 0555 ${pkgdir}/sys
     install -d -m 1777 ${pkgdir}/tmp
-    install -d ${pkgdir}/share/{aclocal,dict,doc,locale,man,misc}
+    install -d ${pkgdir}/share
     install -d -m 0555 ${pkgdir}/usr
-    ln -s ../bin ${pkgdir}/usr/bin
-    ln -s ../sbin ${pkgdir}/usr/sbin
-    install -d ${pkgdir}/var/{cache,lock,lib,log,mail,run,spool}
+    ln -s ../bin     ${pkgdir}/usr/bin
+    ln -s ../include ${pkgdir}/usr/include
+    ln -s ../local   ${pkgdir}/usr/local
+    ln -s ../sbin    ${pkgdir}/usr/sbin
+    ln -s ../share   ${pkgdir}/usr/share
+    install -d ${pkgdir}/var/{cache,lock,lib,log,mail,spool}
+    ln -s /run ${pkgdir}/var/run
     install -d -m 1777 ${pkgdir}/var/tmp
     install -m0644 passwd  ${pkgdir}/etc/passwd
     install -m0644 group   ${pkgdir}/etc/group
     install -m0644 profile ${pkgdir}/etc/profile
+    install -m0644 shells  ${pkgdir}/etc/shells
 }
