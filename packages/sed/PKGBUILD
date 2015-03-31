@@ -1,0 +1,33 @@
+pkgname=sed
+pkgver=4.2.2
+pkgrel=1
+pkgdesc='stream editor'
+arch=(x86_64)
+url='http://www.gnu.org/software/sed'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+	"http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    'f048d1838da284c8bc9753e4506b85a1e0cc1ea8999d36f6995bcb9460cddbd7'
+)
+
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	LDFLAGS="-Wl,-static" \
+	./configure --prefix=''
+	make $MAKEFLAGS
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="$pkgdir" install
+    rm -rf "${pkgdir}"/{lib,share}
+}
