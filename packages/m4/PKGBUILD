@@ -1,11 +1,11 @@
 pkgname=m4
 pkgver=1.4.17
 pkgrel=1
-pkgdesc='GNU M4 is an implementation of the traditional Unix macro processor.'
-arch=('x86_64')
+pkgdesc='An implementation of the traditional Unix macro processor.'
+arch=(x86_64)
 url='http://www.gnu.org/software/m4/'
-license=('GPL3')
-groups=('base')
+license=(GPL3)
+groups=(base)
 depends=()
 makedepends=()
 options=()
@@ -15,15 +15,16 @@ source=(
 )
 
 sha256sums=(
-	'f0543c3beb51fa6b3337d8025331591e0e18d8ec2886ed391f1aade43477d508'
+    f0543c3beb51fa6b3337d8025331591e0e18d8ec2886ed391f1aade43477d508
 )
 
 
 build() {
 	cd "${srcdir}/${pkgname}-${pkgver}"
-	#CC="gcc -DHAVE___FREADAHEAD" \
 	LDFLAGS="-Wl,-static" \
-	./configure --prefix='' --enable-threads
+	  ./configure \
+      --prefix='' \
+      --enable-threads
 	make $MAKEFLAGS
 }
 
