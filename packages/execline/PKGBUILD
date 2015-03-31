@@ -1,0 +1,53 @@
+pkgname=(execline execline-devel)
+pkgver=2.1.1.0
+pkgrel=1
+pkgdesc='a (non-interactive) scripting language.'
+arch=(x86_64)
+url='http://skarnet.org/software/execline/'
+license=(ISC)
+groups=(base)
+depends=()
+makedepends=(skalibs-devel)
+options=()
+changelog=ChangeLog
+source=(
+    "http://skarnet.org/software/execline/execline-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    9e1a9b95772b64bd623c1ddea6200909cca0eb659893ac47857848928eaff7dc
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure \
+      --prefix=/ \
+      --enable-static-libc
+    make
+}
+
+package_execline() {
+    pkgfiles=(
+        bin
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_execline-devel() {
+    pkgfiles=(
+        include
+        lib
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    mv lib/execline/libexecline.a lib
+    rm -rf lib/execline
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}

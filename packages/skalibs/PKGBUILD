@@ -1,0 +1,64 @@
+pkgname=(skalibs skalibs-devel)
+pkgver=2.3.2.0
+pkgrel=1
+pkgdesc='A library suite supporting skarnet.org software.'
+arch=(x86_64)
+url=http://skarnet.org/software/skalibs/
+license=(ISC)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+
+source=(
+    "http://skarnet.org/software/skalibs/${pkgname}-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    a36302b63fe97fa8d616cac0bb7aebbff60e1419dfb4d4f1af66b3c058dbd6ba
+)
+
+
+build() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    ./configure \
+      --prefix=/ \
+      --disable-ipv6 \
+      --enable-force-devr \
+      --enable-tai-clock
+    make $MAKEFLAGS
+}
+
+package_skalibs() {
+    pkgfiles=(
+        lib/libskarnet.so.*
+    )
+    depends=(
+        musl
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_skalibs-devel() {
+    pkgfiles=(
+        etc/leapsecs.dat
+        include/skalibs
+        lib/skalibs/sysdeps
+        lib/libskarnet.a
+        lib/libskarnet.so
+    )
+    depends=(
+        skalibs
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    mv lib/skalibs/libskarnet.a lib
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}

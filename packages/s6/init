@@ -1,0 +1,37 @@
+#!/bin/sh
+PATH=/bin:/sbin
+TZ=UTC
+export PATH TZ
+
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+if ! grep -q ' /dev devtmpfs rw' /proc/mounts ; then
+    mount -t devtmpfs devtmpfs /dev
+fi
+install -d /dev/pts
+mount -t devpts devpts /dev/pts
+
+mount -t tmpfs runstate /run
+
+# Run mdev
+echo '/sbin/mdev' >/proc/sys/kernel/hotplug
+/sbin/mdev -s
+
+# Set the hostname
+[ -e /etc/hostname ] && hostname -F /etc/hostname
+
+# Move this to later in the boot process so file system checks
+# can happen?
+mount -o remount,rw /
+
+# sysctl
+sysctl -w -p /etc/sysctl.conf
+
+# Start network interfaces
+ip addr add 127.0.0.1/8 dev lo
+ip link set lo up
+ip link set eth0 up
+udhcpc -v -R -t 10 -p /var/run/udhcpc.eth0.pid -i eth0
+
+# Launch the supervisor
+exec /sbin/s6-svscan -t0 /service
