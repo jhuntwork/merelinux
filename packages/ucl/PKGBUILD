@@ -1,0 +1,30 @@
+pkgname=libucl-devel
+pkgver=1.03
+pkgrel=1
+pkgdesc='A portable lossless data compression library.'
+arch=(x86_64)
+url='http://www.oberhumer.com/opensource/ucl'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "http://www.oberhumer.com/opensource/ucl/download/ucl-${pkgver}.tar.gz"
+)
+sha256sums=(
+    b865299ffd45d73412293369c9754b07637680e5c826915f097577cd27350348
+)
+
+
+build() {
+	cd "${srcdir}/ucl-${pkgver}"
+    CFLAGS="${CFLAGS} -fPIC" ./configure --prefix=''
+	make
+}
+
+package() {
+	cd "${srcdir}/ucl-${pkgver}"
+	make DESTDIR="$pkgdir" install
+}
