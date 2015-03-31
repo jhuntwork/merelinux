@@ -1,0 +1,32 @@
+pkgname=automake
+pkgver=1.15
+pkgrel=1
+pkgdesc='A tool for automatically generating Makefile.in files.'
+arch=(x86_64)
+url='http://www.gnu.org/software/automake'
+license=(GPL3)
+groups=(base)
+depends=(autoconf)
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+	"http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    9908c75aabd49d13661d6dcb1bc382252d22cc77bf733a2d55e87f2aa2db8636
+)
+
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	./configure --prefix=''
+	make $MAKEFLAGS
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="$pkgdir" install
+    rm -rf ${pkgdir}/share/{man,info,doc}
+}
