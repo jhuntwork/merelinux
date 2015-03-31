@@ -1,3 +1,13 @@
+2015-03-25 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.2.1-2 :
+	Remove unxz and unlzma, busybox provides. Remove man pages.
+
+2015-03-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.2.1-1 :
+	Upgrade to 5.2.1. Create statically linked binaries.
+
 2014-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.0.5-1 :
