@@ -1,22 +1,26 @@
 pkgname=build-essential
-pkgver=0.1
+pkgver=0.3
 pkgrel=1
 pkgdesc='A meta-package which pulls in essential build tools'
-arch=('x86_64')
+arch=(x86_64)
 url=''
-license=('BSD')
-groups=('base')
+license=(BSD)
+groups=(base)
 depends=(
-    'binutils'
-    'busybox'
-    'file'
-    'gcc'
-    'linux-headers'
-    'm4'
-    'make'
-    'musl-devel'
-    'pacman-build'
-    'patch'
+    binutils
+    busybox
+    fakeroot
+    file
+    gcc
+    linux-headers
+    m4
+    make
+    musl-devel
+    pacman-build
+    patch
+    sed
+    sudo
+    upx
 )
 makedepends=()
 options=()
