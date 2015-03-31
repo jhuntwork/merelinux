@@ -1,0 +1,57 @@
+pkgname=(flex flex-devel)
+pkgver=2.5.39
+pkgrel=1
+pkgdesc='A tool for generating scanners, or tokenizers that recognize lexical \
+patterns in text.'
+arch=('x86_64')
+url='http://flex.sourceforge.net/'
+license=('GPL2')
+groups=('base')
+depends=()
+makedepends=(bison gcc-c++)
+options=()
+changelog=ChangeLog
+source=(
+    "http://downloads.sourceforge.net/project/flex/flex-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    'c988bb3ab340aaba16df5a54ab98bb4760599975375c8ac9388a078b7f27e9e8'
+)
+
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	./configure --prefix=''
+	make $MAKEFLAGS
+}
+
+package_flex() {
+    pkgfiles=(
+        bin/flex
+        bin/flex++
+        lib/libfl_pic.so.*
+        lib/libfl.so.*
+        share/man/man1/flex.1
+    )
+    depends=(musl)
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_flex-devel() {
+    pkgfiles=(
+        include/FlexLexer.h
+        lib/libfl_pic.so
+        lib/libfl.so
+        lib/libfl_pic.a
+        lib/libfl.a
+    )
+    depends=(flex)
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
