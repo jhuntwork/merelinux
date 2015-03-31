@@ -1,0 +1,74 @@
+pkgname=(
+    acl
+    libacl
+    libacl-devel
+)
+pkgver=2.2.52
+pkgrel=1
+pkgdesc='A library for manipulating POSIX access control lists.'
+arch=(x86_64)
+url='http://savannah.nongnu.org/projects/acl'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(gettext libattr-devel)
+options=(!upx)
+changelog=ChangeLog
+source=(
+    "http://download.savannah.gnu.org/releases/acl/acl-${pkgver}.src.tar.gz"
+)
+sha256sums=(
+    179074bb0580c06c4b4137be4c5a92a701583277967acdb5546043c7874e0d23
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    ./configure \
+      --prefix=''
+	make
+}
+
+package_acl() {
+    pkgfiles=(
+        bin
+    )
+    depends=(
+        libacl
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libacl() {
+	pkgfiles=(
+        lib
+	)
+    depends=(
+        libattr
+        musl
+    )
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install-lib
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libacl-devel() {
+    pkgfiles=(
+        include
+        lib
+    )
+	depends=(
+        libacl
+    )
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install-dev
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}

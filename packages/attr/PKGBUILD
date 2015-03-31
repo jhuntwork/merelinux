@@ -1,0 +1,75 @@
+pkgname=(
+    attr
+    libattr
+    libattr-devel
+)
+pkgver=2.4.47
+pkgrel=1
+pkgdesc='A library for manipulating filesystem extended attributes.'
+arch=(x86_64)
+url='http://savannah.nongnu.org/projects/attr'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(gettext)
+options=()
+changelog=ChangeLog
+source=(
+    "http://download.savannah.gnu.org/releases/attr/attr-${pkgver}.src.tar.gz"
+)
+sha256sums=(
+    25772f653ac5b2e3ceeb89df50e4688891e21f723c460636548971652af0a859
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i 's@ __THROW;@;@' include/xattr.h
+    sed -i '/DECLS/d' include/xattr.h
+    ./configure \
+      --prefix=''
+	make
+}
+
+package_attr() {
+    pkgfiles=(
+        bin
+    )
+    depends=(
+        libattr
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libattr() {
+	pkgfiles=(
+        lib
+	)
+    depends=(
+        musl
+    )
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install-lib
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libattr-devel() {
+    pkgfiles=(
+        include
+        lib
+    )
+	depends=(
+        libattr
+    )
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+	make DESTDIR="${pkgdir}-tmp" install-dev
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
