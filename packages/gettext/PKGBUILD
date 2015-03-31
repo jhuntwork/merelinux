@@ -1,0 +1,33 @@
+pkgname=gettext
+pkgver=0.19.4
+pkgrel=1
+pkgdesc='A framework for producing multi-lingual messages.'
+arch=(x86_64)
+url='http://www.gnu.org/software/gettext'
+license=(GPL3)
+groups=(base)
+depends=(musl)
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+	"http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    719adadb8bf3e36bac52c243a01c0add18d23506a3a40437e6f5899ceab18d20
+)
+
+PURGE_TARGETS+=(lib/charset.alias include/libintl.h)
+
+build() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	./configure --prefix=''
+	make $MAKEFLAGS
+}
+
+package() {
+	cd "${srcdir}/${pkgname}-${pkgver}"
+	make DESTDIR="$pkgdir" install
+    rm -rf ${pkgdir}/share/{doc,info,man}
+}
