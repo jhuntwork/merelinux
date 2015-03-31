@@ -1,0 +1,34 @@
+pkgname=syslinux
+pkgver=6.03
+pkgrel=1
+pkgdesc='Lightweight Linux bootloaders.'
+arch=(x86_64)
+url=http://syslinux.org/
+license=(BSD)
+groups=(base)
+depends=(musl perl)
+makedepends=(perl libuuid-devel)
+options=(!upx)
+changelog=ChangeLog
+source=(
+    "https://www.kernel.org/pub/linux/utils/boot/${pkgname}/${pkgname}-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    '26d3986d2bea109d5dc0e4f8c4822a459276cf021125e8c9f23c3cca5d8c850e'
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make BINDIR='/bin' LIBDIR='/lib' DATADIR='/share' \
+      MANDIR='/man' INCDIR='/include' bios installer
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make INSTALLROOT="$pkgdir" \
+      BINDIR='/bin' LIBDIR='/lib' DATADIR='/share' \
+      MANDIR='/share/man' INCDIR='/include' -j1 bios install
+    rm -rf "${pkgdir}"/share/man
+}
