@@ -1,0 +1,129 @@
+pkgname=(php php-fpm php-devel)
+pkgver=5.6.7
+mongover=1.6.6
+pkgrel=1
+pkgdesc='The PHP scripting language'
+arch=(x86_64)
+url='http://www.php.net'
+license=(PHP)
+groups=(base)
+depends=()
+makedepends=(
+    libcurl-devel
+    libtool
+    libxml2-devel
+    gettext
+    openssl-devel
+    pkgconf
+    zlib-devel
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "http://php.net/distributions/php-${pkgver}.tar.bz2"
+    "https://github.com/mongodb/mongo-php-driver/archive/${mongover}.tar.gz"
+)
+sha256sums=(
+    02954fb74c61a7879d48ebdcd4ecb78aa0056f4215ca9b096232de28eb8f17bc
+    57d1c807fc47ed0aef1525a4f1ef6008880ce1bf01fbd17c97e698d566647b93
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    # Fix warnings about including sys/poll.h
+    sed -i '/sys\/poll.h/s@sys/@@' main/php_network.h \
+      sapi/cgi/fastcgi.c main/network.c sapi/fpm/fpm/fastcgi.c
+
+    tar -xf "$srcdir"/"$mongover".tar.gz
+    mv "mongo-php-driver-${mongover}" ext/mongo
+    # Fix namespace collision with ext/hash
+    sed -i -e 's@php_hash_copy(@php_hash_copy_m(@' \
+           -e 's@php_hash_copy,@php_hash_copy_m,@' \
+           ext/mongo/contrib/crypto.c
+
+    rm configure
+    ./buildconf --force
+
+    sed -i 's@CURL_CONFIG --libs@CURL_CONFIG --static-libs@' configure
+    CFLAGS="$CFLAGS -fPIC --static" \
+    ./configure \
+      --prefix=/ \
+      --with-config-file-path=/etc/php \
+      --disable-all \
+      --disable-cgi \
+      --disable-shared \
+      --enable-static \
+      --enable-cli \
+      --enable-ctype \
+      --enable-filter \
+      --enable-fpm \
+      --enable-hash \
+      --enable-json \
+      --enable-libxml \
+      --enable-mbstring \
+      --enable-mbregex \
+      --enable-mongo \
+      --enable-phar \
+      --enable-session \
+      --enable-tokenizer \
+      --enable-xml \
+      --with-curl \
+      --with-iconv \
+      --with-gettext \
+      --with-openssl \
+      --with-zlib \
+      ac_cv_crypt_des=no \
+      ac_cv_crypt_ext_des=no
+    make $MAKEFLAGS
+}
+
+package_php() {
+    pkgfiles=(
+        bin
+    )
+    options+=(upx)
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make INSTALL_ROOT="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    rm bin/php{-config,ize}
+    # Fix broken symlink
+    rm bin/phar
+    ln -s phar.phar bin/phar
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_php-fpm() {
+    pkgfiles=(
+        etc
+        sbin
+    )
+    options+=(upx)
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make INSTALL_ROOT="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_php-devel() {
+    depends=(
+        php
+    )
+    pkgfiles=(
+        bin/php-config
+        bin/phpize
+        include
+        lib/php/build
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make INSTALL_ROOT="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
