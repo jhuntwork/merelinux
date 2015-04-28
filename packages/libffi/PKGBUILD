@@ -1,0 +1,60 @@
+pkgname=(libffi libffi-devel)
+pkgver=3.2.1
+pkgrel=1
+pkgdesc='A portable Foregin Function Interface library.'
+arch=(x86_64)
+url='http://sourceware.org/libffi/'
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "ftp://sourceware.org/pub/libffi/libffi-${pkgver}.tar.gz"
+)
+sha256sums=(
+    d06ebb8e1d9a22d19e38d63fdb83954253f39bedc5d46232a05645685722ca37
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    CFLAGS="$CFLAGS -fPIC" \
+      ./configure \
+      --prefix='' \
+      --includedir=/include \
+      --enable-static \
+      --enable-shared
+	make $MAKEFLAGS
+}
+
+package_libffi() {
+	pkgfiles=(
+		"lib/libffi.so.*"
+	)
+    depends=(
+        musl
+    )
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libffi-devel() {
+    pkgfiles=(
+        include
+        "lib/*.a"
+        "lib/*.so"
+        lib/pkgconfig
+    )
+	depends=(libffi)
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+    mv lib/libffi-${pkgver}/include .
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
