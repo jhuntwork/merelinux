@@ -13,8 +13,14 @@ while getopts "mucp:" arg ; do
     case $arg in
         m) do_mount=1 ;;
         u) do_umount=1 ;;
-    	c) do_clean=1 ;;
-    	p) pkgdir="$OPTARG" ;;
+        c) do_clean=1 ;;
+        p)
+            pkgdir="$OPTARG"
+            if [ ! -d "$pkgdir" ] ; then
+                printf "Missing directory: %s\n" $pkgdir
+                exit 1
+            fi
+            ;;
     esac
 done
 
@@ -82,13 +88,14 @@ pacman -Sy --noconfirm -r "$ROOT" base-layout build-essential
 mount_virtual
 
 cp /etc/resolv.conf "${ROOT}/etc/"
+echo '127.0.0.1 localhost.localdomain localhost' >"${ROOT}/etc/hosts"
 
 install -g nobody -d "${ROOT}/BUILD_PKG"
 chmod g+s "${ROOT}/BUILD_PKG"
 setfacl -m u::rwx,g::rwx "${ROOT}/BUILD_PKG"
 setfacl -d --set u::rwx,g::rx,o::rx "${ROOT}/BUILD_PKG"
 find "${pkgdir}" -maxdepth 1 -type f -exec cp '{}' "${ROOT}/BUILD_PKG/" \;
-echo 'nobody ALL=NOPASSWD: ALL' >"${ROOT}/etc/sudoers.d/nobody"
+echo 'nobody ALL=NOPASSWD: /bin/pacman' >"${ROOT}/etc/sudoers.d/nobody"
 
 chroot "${ROOT}" /bin/sudo -u nobody -- /bin/env -i \
     PATH=/bin:/sbin TERM=$TERM HOME=/BUILD_PKG \
