@@ -1,0 +1,147 @@
+--- Python-2.7.3.org/Modules/getpath.c	2012-04-09 23:07:34.000000000 +0000
++++ Python-2.7.3/Modules/getpath.c	2013-08-03 23:17:07.569000003 +0000
+@@ -5,6 +5,8 @@
+ 
+ #include <sys/types.h>
+ #include <string.h>
++#include <stdio.h>
++#include <unistd.h>
+ 
+ #ifdef __APPLE__
+ #include <mach-o/dyld.h>
+@@ -135,8 +137,13 @@
+ reduce(char *dir)
+ {
+     size_t i = strlen(dir);
++    if(i == 1 && dir[0] == '/') {
++	dir[0] = 0;
++	return;
++    }
+     while (i > 0 && dir[i] != SEP)
+         --i;
++    if(i == 0 && dir[0] == '/') i = 1;
+     dir[i] = '\0';
+ }
+ 
+@@ -267,7 +274,7 @@
+     /* If PYTHONHOME is set, we believe it unconditionally */
+     if (home) {
+         char *delim;
+-        strncpy(prefix, home, MAXPATHLEN);
++        snprintf(prefix, MAXPATHLEN, "%s", home);
+         delim = strchr(prefix, DELIM);
+         if (delim)
+             *delim = '\0';
+@@ -276,6 +283,11 @@
+         return 1;
+     }
+ 
++    if(!access(PREFIX "/bin/python", X_OK)) {
++       snprintf(prefix, sizeof prefix, "%s", PREFIX);
++       return 1;
++    }
++
+     /* Check to see if argv[0] is in the build directory */
+     strcpy(prefix, argv0_path);
+     joinpath(prefix, "Modules/Setup");
+@@ -290,7 +302,13 @@
+             return -1;
+     }
+ 
+-    /* Search from argv0_path, until root is found */
++    /* Search from argv0_path, until root is found 
++     * judging from the path of the currently running
++     * program about where the prefix is completely
++     * bogus unless we're running the python interpreter
++     * itself.
++     */
++    if(!strstr(argv0_path, "python")) goto skip_argv0_madness;
+     copy_absolute(prefix, argv0_path);
+     do {
+         n = strlen(prefix);
+@@ -301,9 +319,15 @@
+         prefix[n] = '\0';
+         reduce(prefix);
+     } while (prefix[0]);
++    skip_argv0_madness:
+ 
+     /* Look at configure's PREFIX */
+-    strncpy(prefix, PREFIX, MAXPATHLEN);
++    if(strlen(PREFIX))
++	snprintf(prefix, MAXPATHLEN, "%s", PREFIX);
++    else {
++       prefix[0] = '/';
++       prefix[1] = 0;
++    }
+     joinpath(prefix, lib_python);
+     joinpath(prefix, LANDMARK);
+     if (ismodule(prefix))
+@@ -344,6 +368,7 @@
+     }
+ 
+     /* Search from argv0_path, until root is found */
++    if(!strstr(argv0_path, "python")) goto skip_argv0_madness;
+     copy_absolute(exec_prefix, argv0_path);
+     do {
+         n = strlen(exec_prefix);
+@@ -354,9 +379,16 @@
+         exec_prefix[n] = '\0';
+         reduce(exec_prefix);
+     } while (exec_prefix[0]);
++    skip_argv0_madness:
+ 
+     /* Look at configure's EXEC_PREFIX */
+-    strncpy(exec_prefix, EXEC_PREFIX, MAXPATHLEN);
++    if(strlen(EXEC_PREFIX))
++        snprintf(exec_prefix, MAXPATHLEN, "%s", EXEC_PREFIX);
++    else {
++       exec_prefix[0] = '/';
++       exec_prefix[1] = 0;
++    }
++
+     joinpath(exec_prefix, lib_python);
+     joinpath(exec_prefix, "lib-dynload");
+     if (isdir(exec_prefix))
+@@ -574,6 +606,12 @@
+     bufsz += strlen(zip_path) + 1;
+     bufsz += strlen(exec_prefix) + 1;
+ 
++#define PYTHONSUCKS PREFIX "/lib/python" VERSION ":" \
++                    EXEC_PREFIX "/lib/python" VERSION "/lib-dynload:" \
++                    PREFIX "/lib/python" VERSION "/site-packages"
++
++    bufsz += strlen(PYTHONSUCKS) + 1;
++
+     /* This is the only malloc call in this file */
+     buf = (char *)PyMem_Malloc(bufsz);
+ 
+@@ -592,10 +630,6 @@
+         else
+             buf[0] = '\0';
+ 
+-        /* Next is the default zip path */
+-        strcat(buf, zip_path);
+-        strcat(buf, delimiter);
+-
+         /* Next goes merge of compile-time $PYTHONPATH with
+          * dynamically located prefix.
+          */
+@@ -622,8 +656,17 @@
+         }
+         strcat(buf, delimiter);
+ 
++        /* Next is the default prefix path. if we don't add this,
++           python will stupidly search for modules only in it's *DESTDIR* instead of prefix
++           this is fundamentally incompatible with the way sabotage relocates
++           packages */
++        strcat(buf, PYTHONSUCKS);
++
+         /* Finally, on goes the directory for dynamic-load modules */
+-        strcat(buf, exec_prefix);
++	if(strlen(exec_prefix)) {
++		strcat(buf, delimiter);
++	        strcat(buf, exec_prefix);
++	}
+ 
+         /* And publish the results */
+         module_search_path = buf;

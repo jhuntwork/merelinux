@@ -1,0 +1,26 @@
+--- Python-2.7.7/Lib/ctypes/util.py.orig
++++ Python-2.7.7/Lib/ctypes/util.py
+@@ -134,22 +134,7 @@
+             # assuming GNU binutils / ELF
+             if not f:
+                 return None
+-            cmd = 'if ! type objdump >/dev/null 2>&1; then exit 10; fi;' \
+-                  "objdump -p -j .dynamic 2>/dev/null " + f
+-            f = os.popen(cmd)
+-            dump = f.read()
+-            rv = f.close()
+-            if rv == 10:
+-                raise OSError, 'objdump command not found'
+-            f = os.popen(cmd)
+-            try:
+-                data = f.read()
+-            finally:
+-                f.close()
+-            res = re.search(r'\sSONAME\s+([^\s]+)', data)
+-            if not res:
+-                return None
+-            return res.group(1)
++            return os.path.basename(os.path.realpath(f))
+ 
+     if (sys.platform.startswith("freebsd")
+         or sys.platform.startswith("openbsd")

@@ -1,0 +1,90 @@
+pkgname=(python python-devel)
+vermajor=2
+verminor=7
+pkgver=${vermajor}.${verminor}.9
+pkgrel=1
+pkgdesc='The Python programming language'
+arch=(x86_64)
+url='http://www.python.org'
+license=(Python)
+groups=(base)
+depends=()
+makedepends=(
+    libffi-devel
+    libncurses-devel
+    openssl-devel
+    readline-devel
+    zlib-devel
+)
+options=(upx)
+changelog=ChangeLog
+
+source=(
+    "https://www.python.org/ftp/python/${pkgver}/Python-${pkgver}.tar.xz"
+    python-fix-ctypes_util.patch
+    python-pathsearch.patch
+    fix-root-prefix.patch
+    Setup
+)
+sha256sums=(
+    90d27e14ea7e03570026850e2e50ba71ad20b7eb31035aada1cf3def8f8d4916
+    0de9d04c6618155d17f0e58753961dede9023cf42e8dad1bdff68fa41026ec52
+    44dee4ffa2add32748128f7382651b3d805b4a176a1adbf6ff52dcc8b32e0b0e
+    b363ebe8bd810545ca00b52398fa86c60e232c61191af560b02a85b6e1308e42
+    c058eddb34d45dcdd00fd7a9b25263b14a6469c160fe998fd10851d66730179d
+)
+
+
+build() {
+    cd "${srcdir}/Python-${pkgver}"
+    patch -Np1 -i "${srcdir}/python-fix-ctypes_util.patch"
+    patch -Np1 -i "${srcdir}/python-pathsearch.patch"
+    patch -Np0 -i "${srcdir}/fix-root-prefix.patch"
+    # http://bugs.python.org/issue19348
+    sed -i "/datetime.h/s@.*@#ifdef Py_BUILD_CORE\n#undef Py_BUILD_CORE\n#include \"datetime.h\"\n#define Py_BUILD_CORE\n#else\n#include \"datetime.h\"\n#endif@" \
+        Modules/_testcapimodule.c
+    cp "$srcdir"/Setup Modules/
+    CC='gcc -fPIC' \
+        CPPFLAGS='-static' \
+        LDFLAGS='-static -static-libgcc -Wl,-static' \
+        ./configure \
+        --prefix=/ \
+        --with-system-ffi
+    make $MAKEFLAGS
+    #make test
+}
+
+package_python() {
+    pkgfiles=(
+        bin/python
+        "bin/python${vermajor}"
+        "bin/python${vermajor}.${verminor}"
+        "lib/python${vermajor}.${verminor}"
+    )
+
+    cd "${srcdir}/Python-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
+    find . -name 'test' -type d -exec rm -rf '{}' + || true
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_python-devel() {
+    depends=(
+        python
+    )
+    pkgfiles=(
+        "bin/py*-config"
+        include
+        lib/libpython${vermajor}.${verminor}.a
+        lib/pkgconfig
+    )
+
+    cd "${srcdir}/Python-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
+    find . -name 'test' -type d -exec rm -rf '{}' + || true
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
