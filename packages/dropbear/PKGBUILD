@@ -37,10 +37,10 @@ package() {
     make DESTDIR="$pkgdir" install
     ln -s dbclient "${pkgdir}/bin/ssh"
     install -d -m 0755 "${pkgdir}/etc/dropbear"
-    install -d "${pkgdir}/etc/services/dropbear/log"
+    install -d "${pkgdir}/etc/s6-services/dropbear/log"
     install -m 0754 "${srcdir}/dropbear-service" \
-        "${pkgdir}/etc/services/dropbear/run"
+        "${pkgdir}/etc/s6-services/dropbear/run"
     install -m 0754 "${srcdir}/dropbear-log" \
-        "${pkgdir}/etc/services/dropbear/log/run"
+        "${pkgdir}/etc/s6-services/dropbear/log/run"
     rm -rf "$pkgdir"/share
 }
