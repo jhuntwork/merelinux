@@ -1,6 +1,6 @@
 pkgname=(
     ncurses
-    libncurses
+    ncurses-terminfo
     libncurses-devel
 )
 pkgver=5.9
@@ -11,64 +11,72 @@ url='http://www.gnu.org/software/ncurses'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=(gcc-c++)
+makedepends=(
+    gcc-c++
+    ncurses
+    ncurses-terminfo
+)
 options=()
 changelog=ChangeLog
 
 source=(
     "http://ftp.gnu.org/gnu/ncurses/${pkgname}-${pkgver}.tar.gz"
-    ncurses-fallback.c
+    ftp://invisible-island.net/ncurses/termcap.src.gz
 )
 sha256sums=(
     9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b
-    b7981bb4e087ee4d3cf796541d4467a6db2d5fa494ff3cb12924cbdbd962135c
+    5c3b7c467ac5390ec3d91b7e439cec1a0179a7d7a737c2065e7d6fe4cbd87022
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    cp "${srcdir}/ncurses-fallback.c" ncurses/fallback.c
+    zcat "$srcdir"/termcap.src.gz >termcap
+    ./ncurses/tinfo/MKfallback.sh /share/terminfo/ termcap \
+        tic linux vt100 xterm xterm-256color >ncurses/fallback.c
     CFLAGS="$CFLAGS -fPIC" \
-    ./configure \
-      --prefix='' \
-      --with-fallbacks="linux vt100 xterm xterm256-color" \
-      --with-shared \
-      --disable-debug \
-      --disable-nls \
-      --enable-widec \
-      --includedir=/include \
-      --mandir=/share/man
+        LDFLAGS='-Wl,-static' \
+        ./configure \
+        --prefix='' \
+        --with-fallbacks="linux vt100 xterm xterm256-color" \
+        --disable-debug \
+        --without-tests \
+        --disable-nls \
+        --without-cxx-binding \
+        --without-dlsym \
+        --enable-widec \
+        --enable-sigwinch \
+        --includedir=/include \
+        --mandir=/share/man
     make $MAKEFLAGS
 }
 
 package_ncurses() {
-    pkgfiles=(
-        bin
-    )
-    depends=(
-        libncurses
-    )
+    pkgfiles=(bin)
+    options+=(upx)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    rm bin/ncursesw5-config
+    local destdir="${pkgdir%/*}/${pkgbase}-tmp"
+
+    make DESTDIR="$destdir" install
+
+    cd "$destdir"
+    for lib in ncurses form panel menu ; do
+        ln -s lib${lib}w.a lib/lib${lib}.a
+    done
+    ln -s libncurses.a lib/libcurses.a
+
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    # ncurses5w-config is in -devel and clear/reset are in busybox
+    rm "$pkgdir"/bin/{ncursesw5-config,clear,reset}
 }
 
-package_libncurses() {
-    pkgfiles=(
-        lib
-    )
-    depends=(
-        musl
-    )
-
+package_ncurses-terminfo() {
+    pkgfiles=(share/terminfo)
+    depends=(ncurses)
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find . -name "*.so" -delete
-    find . -name "*.a" -delete
+    local destdir="${pkgdir%/*}/${pkgbase}-tmp"
+    cd "$destdir"
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
@@ -76,21 +84,10 @@ package_libncurses-devel() {
     pkgfiles=(
         bin/ncursesw5-config
         include
-        "lib/*.so"
         "lib/*.a"
     )
-    depends=(
-        libncurses
-    )
-
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    for lib in ncurses form panel menu ; do
-        ln -s lib${lib}w.so lib/lib${lib}.so
-        ln -s lib${lib}w.a lib/lib${lib}.a
-    done
-    ln -s libncurses.so lib/libcurses.so
-    ln -s libncurses.a lib/libcurses.a
+    local destdir="${pkgdir%/*}/${pkgbase}-tmp"
+    cd "$destdir"
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
