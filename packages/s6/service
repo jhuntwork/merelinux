@@ -1,0 +1,36 @@
+#!/bin/sh -e
+. /lib/s6/service_functions.sh
+
+check_args $@
+if is_service "$1" ; then
+    case "$2" in
+        start)
+            message="Starting ${1}... "
+            printf "%s" "$message"
+            if s6-svc -Uu -T 5000 "/service/${1}" ; then
+                display_ok "$message"
+            else
+                display_fail "$message"
+            fi
+            ;;
+        stop)
+            message="Stopping ${1}... "
+            printf "%s" "$message"
+            if s6-svc -Dd -T 5000 "/service/${1}" ; then
+                display_ok "$message"
+            else
+                display_fail "$message"
+            fi
+            ;;
+        status) s6-svstat -n "/service/${1}" ;;
+        restart)
+            if [ -x "/service/${1}/restart" ] ; then
+                "/service/${1}/restart"
+            else
+                $0 $1 stop
+                sleep 1
+                $0 $1 start
+            fi
+            ;;
+    esac
+fi
