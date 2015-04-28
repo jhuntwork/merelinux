@@ -13,13 +13,15 @@ changelog=ChangeLog
 source=(
     "http://skarnet.org/software/s6/s6-${pkgver}.tar.gz"
     init
-    tty0-service
+    service
+    service_functions.sh
 )
 
 sha256sums=(
     73057df188f1ac8db186b96298c0cb6081199aa73d3f2f8d5fabdbbe21c3ea04
     c399575e649a93a83db6fcf5795568bc97db5c37d8ac2fe442764a58a125d538
-    42571aa1b84d56e6cbd2091629b793ccc7e698117243911691b7310373a7e98f
+    611d31bf4351ddc40867ef9507c130f8de5f2042c68b4642b2cb31957cbc8f24
+    6871693d9834adc79aea3ce7989b028279533dc7e7063cf8ef2182f2afe2cfd2
 )
 
 
@@ -35,11 +37,12 @@ build() {
 package_s6() {
     options+=(emptydirs)
     pkgfiles=(
-        etc/services
+        etc/s6-services
         service
         sbin
         lib/s6
     )
+    depends=(skalibs-leapsecs)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
@@ -47,10 +50,11 @@ package_s6() {
     rm lib/s6/libs6.a
     mv bin/* sbin/
     install -m 0750 "${srcdir}/init" sbin/init
-    install -d etc/services/tty0
-    install -m 0754 "${srcdir}/tty0-service" etc/services/tty0/run
     install -d service
-    ln -s ../etc/services/tty0 service/tty0
+    install -d etc/s6-services
+    install -m 0754 "${srcdir}/service_functions.sh" lib/s6/
+    install -m 0754 "${srcdir}/service" sbin/
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
@@ -64,5 +68,6 @@ package_s6-devel() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     mv lib/s6/libs6.a lib/
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
