@@ -17,12 +17,15 @@ source=(
 
 sha256sums=(
     0c0ee420dc8d4f6239fab072351c7a2ce6a881028d5ab2d162ec667fdd750b2d
-    c766df34a14b51c554c6b4119bcec023161a419030491be2036f423cc5b928a1
+    aadb52d5ec9100d3ffe1e322fe472a53bd4912deb700140b9bdbd01039fe7321
 )
-
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
+    # Something in the linux src wants gnu sed, so just be lazy for now and
+    # give it what it wants
+    sudo pacman -S --force --noconfirm sed
+    sed -i 's@ ERR@@' scripts/link-vmlinux.sh
     make mrproper
     cp "${srcdir}/linux-config" .config
     make $MAKEFLAGS
