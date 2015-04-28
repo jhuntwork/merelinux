@@ -1,0 +1,9 @@
+post_install() {
+    adduser -s /sbin/nologin -D -h /share/nginx -S nginx
+    install -d /var/log/nginx /var/tmp/nginx
+    chown nginx:nogroup /var/log/nginx /var/tmp/nginx
+}
+
+post_remove() {
+    deluser nginx
+}
