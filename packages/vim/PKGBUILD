@@ -1,36 +1,35 @@
-pkgname=vim
+pkgname=(vim vim-extra)
 vermajor=7
 verminor=4
 pkgver="${vermajor}.${verminor}"
 pkgrel=1
 pkgdesc='An IMproved version of the vi editor'
-arch=('x86_64')
+arch=(x86_64)
 url='http://www.vim.org'
-license=('VIM')
-groups=('base')
-depends=(ncurses libncurses)
+license=(VIM)
+groups=(base)
+depends=()
 makedepends=(libncurses-devel)
 options=()
 changelog=ChangeLog
 source=(
     "http://ftp.vim.org/pub/vim/unix/vim-${pkgver}.tar.bz2"
-    'https://projects.archlinux.org/pacman.git/plain/contrib/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39'
-    'vimrc'
+    https://projects.archlinux.org/pacman.git/plain/contrib/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39
+    vimrc
 )
 
 sha256sums=(
-    'd0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade'
-    'dda73393c44e448ddeddaff76287dbbe5fcea1bc381c5d065789bd3c1b481f0e'
-    '9b5605b11065963359d403adbd5277dc0c6087235feb510d5fe4494bdd6bd093'
+    d0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade
+    dda73393c44e448ddeddaff76287dbbe5fcea1bc381c5d065789bd3c1b481f0e
+    5e698ff1872bae79b7eae3f35bfca2e426c2698a785687fb9035e0fee16de91a
 )
 
 
 build() {
-    cd "${srcdir}/${pkgname}${vermajor}${verminor}"
-    
-    # Apply all upstream patches
-    install -d patches
-    cd patches
+    # Fetch all upstream patches
+    cd "$SRCDEST"
+    install -d vim-patches
+    cd vim-patches
     printf "Downloading MD5SUMS of patches\n"
     curl --progress-bar -LO http://ftp.vim.org/pub/vim/patches/${pkgver}/MD5SUMS
     IFS=$'\n'
@@ -43,27 +42,52 @@ build() {
         fi
     done
     md5sum -c MD5SUMS
-    cd ..
-    for file in patches/${pkgver}.* ; do
-        patch -p0 < $file
+
+    # Apply all upstream patches
+    cd "${srcdir}/${pkgname}${vermajor}${verminor}"
+    for file in ${SRCDEST}/vim-patches/${pkgver}.* ; do
+        patch -p0 -i "$file"
     done
-    
+
     echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
-    ./configure \
-      --prefix='' \
-      --enable-multibyte
+    CFLAGS="${CFLAGS} -fPIC" \
+        LDFLAGS='-Wl,-static' \
+        ./configure \
+        --prefix='' \
+        --enable-multibyte
     make $MAKEFLAGS
 }
 
-package() {
-    cd "${srcdir}/${pkgname}${vermajor}${verminor}"
-    make DESTDIR="$pkgdir" install
-    find "${pkgdir}/share/man" -mindepth 0 -maxdepth 1 ! -name "man*" -exec rm -rf '{}' +
-    rm -rf "${pkgdir}/share/vim/vim${vermajor}${verminor}/{keymap,lang}"
-    install -d "${pkgdir}/etc"
-    install -m0644 "${srcdir}/vimrc" "${pkgdir}/etc/" 
-    install -m0644 "${srcdir}/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39" \
-      "${pkgdir}/share/vim/vim${vermajor}${verminor}/syntax/PKGBUILD.vim" 
+package_vim() {
+    pkgfiles=(
+        bin
+        etc
+        share/vim
+    )
+    options+=(emptydirs)
+    cd "${srcdir}/${pkgbase}${vermajor}${verminor}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    install -d etc
+    install -m 0644 "${srcdir}/vimrc" etc/vimrc
+    rm bin/vimtutor
+    find share/vim -type f -delete
+    find share/vim -mindepth 3 -type d -exec rmdir '{}' +
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_vim-extra() {
+    pkgfiles=(
+        bin/vimtutor
+        share/vim
+    )
+    depends=(vim)
+    cd "${srcdir}/${pkgbase}${vermajor}${verminor}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    install -m 0644 "${srcdir}/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39" \
+      "share/vim/vim${vermajor}${verminor}/syntax/PKGBUILD.vim"
     echo "au BufNewFile,BufRead PKGBUILD set filetype=PKGBUILD" \
-      >> "${pkgdir}/share/vim/vim${vermajor}${verminor}/filetype.vim"
+      >> "share/vim/vim${vermajor}${verminor}/filetype.vim"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
