@@ -1,0 +1,58 @@
+pkgname=(libxml2 libxml2-devel)
+pkgver=2.9.2
+pkgrel=1
+pkgdesc='An XML C parser and toolkit.'
+arch=(x86_64)
+url='http://xmlsoft.org/'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(zlib-devel)
+options=(!upx)
+changelog=ChangeLog
+source=(
+    "ftp://xmlsoft.org/libxml2/libxml2-${pkgver}.tar.gz"
+)
+sha256sums=(
+    5178c30b151d044aefb1b08bf54c3003a0ac55c59c866763997529d60770d5bc
+)
+
+
+build() {
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    CFLAGS="$CFLAGS -fPIC -D__GNUC__=2" \
+      ./configure \
+      --prefix='' \
+      --enable-static \
+      --enable-shared
+	make V=1
+}
+
+package_libxml2() {
+	pkgfiles=(
+		"lib/libxml2.so.*"
+	)
+    depends=(
+        musl
+    )
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libxml2-devel() {
+    pkgfiles=(
+        bin/xml2-config
+        include
+        "lib/*.a"
+        "lib/*.so"
+    )
+	depends=(libxml2)
+
+	cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+	cd "${pkgdir}-tmp"
+	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
