@@ -10,4 +10,4 @@ mem:x:8:
 kmem:x:9:
 mail:x:12:
 utmp:x:22:
-nobody:x:99:
+nogroup:x:99:

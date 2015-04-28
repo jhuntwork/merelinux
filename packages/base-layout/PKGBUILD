@@ -18,7 +18,7 @@ source=(
 )
 sha256sums=(
     d0870c90f2f05910050cb324e96664b2bb995e790eac4feb002352265583ead3
-    3859671b647704e2f804307c0f47ae5d4a5d5f26e4b1482591b53a1fe106795d
+    79aa3fb64f0b0d18ed4c53680d1fc991f7782dda9dcafc6bb592648056e21057
     f5e5f56bc470d3fcb1257505cdc86c37909053d9f626e9f666c52adc85bcbde1
     6e7af7647d4064e6df502e1fa5f062a7ba753487a906850e9f332c6f0a7be7a3
 )
@@ -47,12 +47,13 @@ package() {
     install -d -m 0555 ${pkgdir}/sys
     install -d -m 1777 ${pkgdir}/tmp
     install -d ${pkgdir}/share
-    install -d -m 0555 ${pkgdir}/usr
+    install -d ${pkgdir}/usr
     ln -s ../bin     ${pkgdir}/usr/bin
     ln -s ../include ${pkgdir}/usr/include
     ln -s ../local   ${pkgdir}/usr/local
     ln -s ../sbin    ${pkgdir}/usr/sbin
     ln -s ../share   ${pkgdir}/usr/share
+    chmod 0555 ${pkgdir}/usr
     install -d ${pkgdir}/var/{cache,lock,lib,log,mail,spool}
     ln -s /run ${pkgdir}/var/run
     install -d -m 1777 ${pkgdir}/var/tmp
