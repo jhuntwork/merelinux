@@ -37,7 +37,7 @@ package_musl() {
 	cd "${pkgdir}-tmp"
 	install -d bin
 	ln -sf ../lib/libc.so bin/ldd
-	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_musl-devel() {
