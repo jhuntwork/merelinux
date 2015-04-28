@@ -1,0 +1,4 @@
+#!/bin/execlineb -P
+foreground {
+    /sbin/getty 38400 tty0
+}
