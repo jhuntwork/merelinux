@@ -1,12 +1,31 @@
 #!/bin/sh
 
-case "$1" in
+process_routes() {
+    while [ $# -ne 0 ] ; do
+        dest=$1
+        gateway=$2
+        DEST=''
+        # Shift twice past the second arg
+        shift; shift
+        ip route add $dest dev $interface
+    done
+}
 
+case "$1" in
     deconfig)
         ifconfig $interface 0.0.0.0
         ;;
     renew|bound)
+        local NETMASK=''
+        local BROADCAST=''
+        [ -n "$subnet" ] && NETMASK="netmask $subnet"
+        [ "$subnet" = "255.255.255.255" ] && [ -z "$broadcast" ] && broadcast=$ip
+        [ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
+
         ifconfig $interface $ip $NETMASK $BROADCAST
+
+        [ -n "$mtu" ] && ifconfig $interface mtu $mtu
+        [ -n "$staticroutes" ] && process_routes $staticroutes
 
         if [ -n "$router" ] ; then
             while route del default gw 0.0.0.0 dev $interface ; do
@@ -14,17 +33,19 @@ case "$1" in
             done
 
             for i in $router ; do
-                route add default gw $i dev $interface
+                ip route add default via $i
             done
         fi
 
         if [ -n "$dns" ] ; then
             tmpfile=$(mktemp)
             if [ -n "$domain" ] ; then
-                printf "domain %s\n" $domain >>$tmpfile
+                printf "# domain and search keywords aren't currently supported in musl\n" >>$tmpfile
+                printf "# See http://wiki.musl-libc.org/wiki/Functional_differences_from_glibc#Name_Resolver_.2F_DNS\n" >>$tmpfile
+                printf "# domain %s\n" "$domain" >>$tmpfile
             fi
             for ns in $dns ; do
-            printf "nameserver %s\n" $ns >>$tmpfile
+                printf "nameserver %s\n" $ns >>$tmpfile
             done
             mv $tmpfile /etc/resolv.conf
         fi
