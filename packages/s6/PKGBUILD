@@ -1,6 +1,6 @@
 pkgname=(s6 s6-dev)
-pkgver=2.1.3.0
-pkgrel=3
+pkgver=2.2.0.0
+pkgrel=1
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
@@ -24,7 +24,7 @@ source=(
 )
 
 sha256sums=(
-    73057df188f1ac8db186b96298c0cb6081199aa73d3f2f8d5fabdbbe21c3ea04
+    1c4bab36d020f4e9ad41ea45ae9858a1241ed2705f08ad7fe5c5f0a470ee3ba3
     4378dec40d6f497c298cbe5b2bc6234f3354b8e91f0ea1c053039a352e431baa
     f60bc382aa42c181f5a893fa9f7c9222b97cca4f34c49fb2ade464798670e22e
     4662c87f8e847bf1acaf2c424229feb02ced456c7b203484e4ce5f31c254fc05
