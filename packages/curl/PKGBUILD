@@ -3,7 +3,7 @@ pkgname=(
     libcurl
     libcurl-dev
 )
-pkgver=7.41.0
+pkgver=7.43.0
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=(x86_64)
@@ -13,6 +13,7 @@ groups=(base)
 depends=()
 makedepends=(
     openssl-dev
+    perl
     zlib-dev
 )
 options=()
@@ -22,7 +23,7 @@ source=(
     "${url}/download/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    58c9f7cb1be9c26e6a2fd9326c14e054780dc4bb74b590a1d47fb3788a31535d
+    1a084da1edbfc3bd632861358b26af45ba91aaadfb15d6482de55748b8dfc693
 )
 
 
@@ -58,6 +59,7 @@ package_curl() {
     depends=(
         ca-certificates
     )
+    options=(upx)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
