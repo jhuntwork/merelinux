@@ -1,0 +1,5 @@
+#!/bin/sh
+#
+# A simple wrapper for tail which pipes the output through
+# s6-tai64nlocal for timestamp conversion
+tail $@ | s6-tai64nlocal

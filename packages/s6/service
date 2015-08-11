@@ -1,36 +1,69 @@
 #!/bin/sh -e
 . /lib/s6/service_functions.sh
 
+# SVCS_DIR is the top-level services directory. i.e., /run/services
+# svcdir is the service-specific service directory. i.e., /run/services/svc
+# AVAIL_DIR is the directory containing configured services
+# ENABL_DIR is a directory containing symlinks to available services which
+# should be considered 'enabled'.
+
 check_args $@
-if is_service "$1" ; then
-    case "$2" in
-        start)
-            message="Starting ${1}... "
+case "$act" in
+    enable)
+        if is_service ; then
+            message="Enabling ${svc}... "
             printf "%s" "$message"
-            if s6-svc -Uu -T 5000 "/service/${1}" ; then
-                display_ok "$message"
-            else
-                display_fail "$message"
+            ln -sf "../available/${svc}" ${ENABL_DIR}
+            if [ ! -d $svcdir ] ; then
+                cp -a "${AVAIL_DIR}/${svc}" "${SVCS_DIR}"
             fi
-            ;;
-        stop)
-            message="Stopping ${1}... "
-            printf "%s" "$message"
-            if s6-svc -Dd -T 5000 "/service/${1}" ; then
-                display_ok "$message"
-            else
-                display_fail "$message"
-            fi
-            ;;
-        status) s6-svstat -n "/service/${1}" ;;
-        restart)
-            if [ -x "/service/${1}/restart" ] ; then
-                "/service/${1}/restart"
-            else
-                $0 $1 stop
-                sleep 1
-                $0 $1 start
-            fi
-            ;;
-    esac
-fi
+            s6-svscanctl -a ${SVCS_DIR}
+            display_ok "$message"
+        else
+            display_fail "$message"
+        fi
+        ;;
+    disable)
+        # This intentionally doesn't care if the service is properly configured
+        $0 ${svc} stop || true
+        message="Disabling ${svc}... "
+        printf "%s" "$message"
+        if (
+            rm -f "${ENABL_DIR}/${svc}"
+            rm -rf ${svcdir}
+            s6-svscanctl -an ${SVCS_DIR}
+        ) ; then
+            display_ok "$message"
+        else
+            display_fail "$message"
+        fi
+        ;;
+    start)
+        is_supervised || exit 1
+        message="Starting ${svc}... "
+        run_cmd "s6-svc -u -T 5000 ${svcdir}"
+        ;;
+    stop)
+        is_supervised || exit 1
+        message="Stopping ${svc}... "
+        run_cmd "s6-svc -Dd -T 5000 ${svcdir}"
+        ;;
+    status)
+        is_supervised || exit 1
+        s6-svstat -n "${svcdir}"
+        ;;
+    reload)
+        is_supervised || exit 1
+        message="Reloading ${svc}... "
+        run_cmd "s6-svc -h ${svcdir}"
+        ;;
+    restart)
+        if [ -x "${svcdir}/restart" ] ; then
+            "${svcdir}/restart"
+        else
+            $0 $svc stop
+            sleep 1
+            $0 $svc start
+        fi
+        ;;
+esac

@@ -1,0 +1,21 @@
+#!/bin/sh
+# Mount /dev/pts
+install -d /dev/pts
+mount -t devpts devpts /dev/pts
+
+# Run mdev
+/sbin/mdev -s
+
+# TODO: add filesystem checks?
+# Remount the root filesystem read-write
+mount -o remount,rw /
+
+# sysctl settings
+sysctl -w -p /etc/sysctl.conf
+
+# FIXME: move this out of here
+# Start network interfaces
+ip addr add 127.0.0.1/8 dev lo
+ip link set lo up
+ip link set eth0 up
+udhcpc -v -R -b

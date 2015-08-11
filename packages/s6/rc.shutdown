@@ -1,0 +1,6 @@
+#!/bin/sh
+# sync to disk
+sync
+# Send the kernel the appropriate signal through
+# busybox's halt, poweroff or reboot cmds
+$@ -f
