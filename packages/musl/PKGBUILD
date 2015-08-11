@@ -1,5 +1,5 @@
 pkgname=(musl musl-dev)
-pkgver=1.1.8
+pkgver=1.1.10
 pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
@@ -14,13 +14,12 @@ source=(
     "http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    fa928506415b9c555977daaf874c190eaf7fbbd16028cc5c5f33a00a83227813
+    45bbe9b1c7f7a0f743477af1e103b6889bfe4dd9815e16f6c89f6c90831c8b7c
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    sed -i 's@-Os@-O3@g' configure
     CFLAGS='' ./configure --prefix=/
     make $MAKEFLAGS
 }
