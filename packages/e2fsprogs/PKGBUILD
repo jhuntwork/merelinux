@@ -3,7 +3,7 @@ pkgname=(
     libuuid-dev
     libblkid-dev
 )
-pkgver=1.42.12
+pkgver=1.42.13
 pkgrel=1
 pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
 arch=(x86_64)
@@ -19,7 +19,7 @@ source=(
 )
 
 sha256sums=(
-    '6dadcd3b759195150d20154ab9d6516e3b3cbb35d66d461f55ae94a2854e7de8'
+    e16474b5a3a30f9197160c4b91bd48d5a463583049c0fcc405b6f0f7075aa0c7
 )
 
 build() {
@@ -33,6 +33,7 @@ build() {
 }
 
 package_e2fsprogs() {
+    options=(upx)
     pkgfiles=(
         bin/uuidgen
         bin/chattr
@@ -66,9 +67,6 @@ package_e2fsprogs() {
         sbin/uuidd
         sbin/mkfs.ext4dev
         sbin/e2freefrag
-        share/man/man8/*
-        share/man/man5/*
-        share/man/man1/*
     )
     cd "${srcdir}/${pkgbase}-${pkgver}/build"
     make DESTDIR="${pkgdir}-tmp" install
@@ -82,7 +80,6 @@ package_libuuid-dev() {
         include/uuid
         lib/pkgconfig/uuid.pc
         lib/libuuid.a
-        share/man/man3/uuid*
     )
     depends=(pkgconf)
     cd "${srcdir}/${pkgbase}-${pkgver}/build"
@@ -97,7 +94,6 @@ package_libblkid-dev() {
         include/blkid
         lib/pkgconfig/blkid.pc
         lib/libblkid.a
-        share/man/man3/libblkid.3
     )
     depends=(pkgconf libuuid-dev)
     cd "${srcdir}/${pkgbase}-${pkgver}/build"
