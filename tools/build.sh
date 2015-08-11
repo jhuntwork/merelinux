@@ -90,7 +90,7 @@ mount_virtual
 cp /etc/resolv.conf "${ROOT}/etc/"
 echo '127.0.0.1 localhost.localdomain localhost' >"${ROOT}/etc/hosts"
 
-install -g nobody -d "${ROOT}/BUILD_PKG"
+install -g nogroup -d "${ROOT}/BUILD_PKG"
 chmod g+s "${ROOT}/BUILD_PKG"
 setfacl -m u::rwx,g::rwx "${ROOT}/BUILD_PKG"
 setfacl -d --set u::rwx,g::rx,o::rx "${ROOT}/BUILD_PKG"

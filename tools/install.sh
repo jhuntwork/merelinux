@@ -10,9 +10,9 @@ pacman -Sy --needed --noconfirm -r "${ROOT}" \
     execline \
     linux \
     mksh \
+    nginx \
     pacman \
-    s6 \
-    sed
+    s6
 
 install -d "${ROOT}/boot/extlinux"
 cat >"${ROOT}/boot/extlinux/extlinux.conf" <<EOF
@@ -21,19 +21,24 @@ DEFAULT linux
 
 LABEL linux
   KERNEL /boot/vmlinux
-  APPEND root=/dev/sda1 console=tty0 console=ttyS0
+  APPEND root=/dev/sda1 quiet
 EOF
 extlinux -i "${ROOT}/boot/extlinux"
 
 chroot "${ROOT}" /bin/passwd
 
+clear >"${ROOT}"/etc/issue
+cat >>"${ROOT}"/etc/issue <<EOF
+
+ mere linux 1.0 | \m \r
+
+
+EOF
+
 printf "test-%s\n" $(date +%Y%m%d%H%M%S) >"${ROOT}/etc/hostname"
 
 touch "${ROOT}/var/log/lastlog"
 rm "${ROOT}/var/log/pacman.log"
-
-# Make sure dropbear is started
-ln -s ../etc/services/dropbear ${ROOT}/service/
 
 cat >"${ROOT}/etc/network/interfaces" <<EOF
 auto lo eth0
