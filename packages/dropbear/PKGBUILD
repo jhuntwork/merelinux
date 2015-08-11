@@ -1,6 +1,6 @@
 pkgname=dropbear
-pkgver=2015.67
-pkgrel=2
+pkgver=2015.68
+pkgrel=1
 pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
 url='http://matt.ucc.asn.au/dropbear/dropbear.html'
@@ -18,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    7e690594645dfde5787065c78a5d2e4d15e288babfa06e140197ce05f698c8e5
+    55ea7c1e904ffe4b1cdbe1addca8291a2533d7d285fd22ac33608e9502a62446
     39dd2592dc121badf5b50ab71d56045e88c314182f9c7c12812296ab4d9c5362
     df91dcee399c728a884f89723f29754353710b0e6c9ef8e8d1ae87300928b0f8
     5103554505f9642e9b5763842db6a18e3826b8bf6cb34edd2d5afcaa280c2999
