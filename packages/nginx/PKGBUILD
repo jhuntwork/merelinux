@@ -13,7 +13,7 @@ makedepends=(
     openssl-dev
     zlib-dev
 )
-options=(emptydirs)
+options=(upx emptydirs)
 changelog=ChangeLog
 source=(
     "http://nginx.org/download/nginx-${pkgver}.tar.gz"
@@ -58,7 +58,6 @@ build() {
 }
 
 package() {
-    options=(upx)
     pkgfiles=
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="$pkgdir" install
