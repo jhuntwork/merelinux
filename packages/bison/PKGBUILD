@@ -24,7 +24,6 @@ build() {
     LDFLAGS="-Wl,-static" \
     ./configure --prefix=''
     make $MAKEFLAGS
-    make check
 }
 
 package_bison() {
