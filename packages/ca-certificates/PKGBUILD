@@ -22,10 +22,6 @@ build() {
 }
 
 package() {
-    pkgfiles=(
-        "lib/libz.so*"
-    )
-
     cd "${srcdir}"
     install -d "${pkgdir}/etc/certs/"    
     install -m0644 ca-bundle.crt "${pkgdir}/etc/certs/"    
