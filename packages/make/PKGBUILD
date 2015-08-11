@@ -1,5 +1,5 @@
 pkgname=make
-pkgver=3.82
+pkgver=4.1
 pkgrel=1
 pkgdesc='A tool to control the generation of executables'
 arch=(x86_64)
@@ -8,14 +8,14 @@ license=(GPL3)
 groups=(base)
 depends=()
 makedepends=()
-options=()
+options=(upx)
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
+    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
-    3d991b33e604187c5881a0abc2e102d5b9776da5569640e73778f85d617242e7
+    0bc7613389650ee6a24554b52572a272f7356164fd2c4132b0bcf13123e4fca5
 )
 
 
