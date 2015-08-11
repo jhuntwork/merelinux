@@ -1,5 +1,5 @@
 pkgname=patch
-pkgver=2.7.1
+pkgver=2.7.5
 pkgrel=1
 pkgdesc='A utility for patching difference listings against one or more original files'
 arch=('x86_64')
@@ -8,14 +8,14 @@ license=('GPL3')
 groups=('base')
 depends=()
 makedepends=()
-options=()
+options=(upx)
 changelog=ChangeLog
 source=(
     "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
 )
 
 sha256sums=(
-    '9124ba46db0abd873d0995c2ca880e81252676bb6c03e0a37dfc5f608a9b0ceb'
+    fd95153655d6b95567e623843a0e77b81612d502ecf78a489a4aed7867caa299
 )
 
 
@@ -28,5 +28,5 @@ build() {
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
-    rm -rf "${pkgdir}/lib"
+    rm -rf "${pkgdir}/lib" "${pkgdir}/share"
 }
