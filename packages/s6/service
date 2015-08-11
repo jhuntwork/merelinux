@@ -41,12 +41,12 @@ case "$act" in
     start)
         is_supervised || exit 1
         message="Starting ${svc}... "
-        run_cmd "s6-svc -u -T 5000 ${svcdir}"
+        run_cmd "s6-svc -u ${svcdir}"
         ;;
     stop)
         is_supervised || exit 1
         message="Stopping ${svc}... "
-        run_cmd "s6-svc -Dd -T 5000 ${svcdir}"
+        run_cmd "s6-svc -d ${svcdir}"
         ;;
     status)
         is_supervised || exit 1
