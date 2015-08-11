@@ -1,5 +1,5 @@
 pkgname=(git git-extra)
-pkgver=1.9.3
+pkgver=2.5.0
 pkgrel=1
 pkgdesc='A distributed version control system'
 arch=('x86_64')
@@ -24,7 +24,7 @@ source=(
     "https://www.kernel.org/pub/software/scm/git/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    'f633865337a378f625bdc72691b7a71013f3b391d2791c5c76e5a0973cc7d05f'
+    cc59b1bac6c1c67a9159872863f6c5bbe0d9404cac2a85c3e9d9fa49923ce45c
 )
 
 
@@ -58,16 +58,16 @@ package_git() {
         'lib/git-core/git-archimport'
         'lib/git-core/git-cvs*'
         'lib/git-core/git-difftool'
-    'lib/git-core/git-relink'
-    'lib/git-core/git-send-email'
-    'lib/git-core/git-svn'
+        'lib/git-core/git-relink'
+        'lib/git-core/git-send-email'
+        'lib/git-core/git-svn'
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find $(printf "%s\n" ${rmfiles[@]}) -delete
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${rmfiles[@]} -delete
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_git-extra() {
@@ -87,12 +87,11 @@ package_git-extra() {
         'lib/git-core/git-svn'
         'lib/perl5'
         'share/git-web'
-        'share/man'
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
