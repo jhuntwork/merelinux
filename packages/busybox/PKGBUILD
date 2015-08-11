@@ -8,7 +8,7 @@ license=(GPL)
 groups=(base)
 depends=()
 makedepends=()
-options=(!upx emptydirs)
+options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
@@ -87,6 +87,7 @@ package_busybox() {
 }
 
 package_busybox-static() {
+    options=(upx emptydirs)
     cd "${pkgbase}-${pkgver}-static"
     make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
     cd "$pkgdir"
