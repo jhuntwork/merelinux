@@ -12,19 +12,25 @@ options=(!upx emptydirs)
 changelog=ChangeLog
 source=(
     "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
+    poweroff.patch
     busybox-config
     udhcpc.script
     sysctl.conf
-    tty0-service
+    telinit
+    tty1-service
 )
 
 sha256sums=(
     05a6f9e21aad8c098e388ae77de7b2361941afa7157ef74216703395b14e319a
+    7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
     368a6b813aa145fb6b4aa3fc7165aa6f542e2dfec7e168f4d143a6b1f6e7a71a
     980d3689463f75ee36ab67cff579fdcbdbeb629c99331c61c9d9397e869dd340
     0be69e4c03c50b91784dfaf9f51bceb1a01c4c61d24045c6022f2bfa6a31e4e6
-    42571aa1b84d56e6cbd2091629b793ccc7e698117243911691b7310373a7e98f
+    f653d8703f3d061bca3c302470363b80623f2d6494acb9c2cde0c6483e21b34d
+    538bc61ea2ef419c1e48e683d7b6a52ea45ea5b06ad765bbfa28b79d3953829f
 )
+
+install=busybox.install
 
 
 build() {
@@ -35,6 +41,7 @@ build() {
     # magic can happen while packaging, specifcally with tar.
     #
     # Fixes
+    patch -Np1 -i "${srcdir}/poweroff.patch"
     sed -i '/netinet\/ether/d' networking/arp.c
     sed -i '/net\/if_slip/d' networking/ifconfig.c
     sed -i '/getpwent/s@!.*@(pwent = getpwent()) != NULL) {@' loginutils/deluser.c
@@ -73,9 +80,10 @@ package_busybox() {
     install -m 0755 "${srcdir}/udhcpc.script" \
         share/udhcpc/default.script
     install -m 0644 "${srcdir}/sysctl.conf" etc/
-    install -d etc/s6-services/tty0
-    install -m 0754 "${srcdir}/tty0-service" \
-        etc/s6-services/tty0/run
+    install -d sbin
+    install -m 0755 "${srcdir}/telinit" sbin/
+    install -d etc/s6-services/available/tty1
+    install -m 0754 "${srcdir}/tty1-service" etc/s6-services/available/tty1/run
 }
 
 package_busybox-static() {
@@ -92,7 +100,8 @@ package_busybox-static() {
     install -m 0755 "${srcdir}/udhcpc.script" \
         share/udhcpc/default.script
     install -m 0644 "${srcdir}/sysctl.conf" etc/
-    install -d etc/s6-services/tty0
-    install -m 0754 "${srcdir}/tty0-service" \
-        etc/s6-services/tty0/run
+    install -d sbin
+    install -m 0755 "${srcdir}/telinit" sbin/
+    install -d etc/s6-services/available/tty1
+    install -m 0754 "${srcdir}/tty1-service" etc/s6-services/available/tty1/run
 }
