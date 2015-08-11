@@ -1,0 +1,76 @@
+pkgname=(
+    pcre
+    libpcre
+    libpcre-dev
+)
+pkgver=8.36
+pkgrel=1
+pkgdesc='Perl Compatible Regular Expressions'
+arch=(x86_64)
+url='http://pcre.org'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(gcc-c++)
+options=(!upx)
+changelog=ChangeLog
+source=(
+    "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${pkgver}.tar.bz2"
+)
+sha256sums=(
+    ef833457de0c40e82f573e34528f43a751ff20257ad0e86d272ed5637eb845bb
+)
+
+
+build() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    ./configure \
+      --prefix=''
+    make $MAKEFLAGS
+}
+
+package_pcre() {
+    pkgfiles=(
+        bin
+    )
+    depends=(
+        libpcre
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    rm bin/pcre-config
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libpcre() {
+    pkgfiles=(
+        "lib/libpcre*.so.*"
+    )
+    depends=(
+        musl
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libpcre-dev() {
+    pkgfiles=(
+        bin/pcre-config
+        include
+        "lib/*.so"
+        "lib/*.a"
+    )
+    depends=(
+        libpcre
+    )
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
