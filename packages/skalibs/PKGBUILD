@@ -3,7 +3,7 @@ pkgname=(
     skalibs-leapsecs
     skalibs-dev
 )
-pkgver=2.3.2.0
+pkgver=2.3.6.0
 pkgrel=1
 pkgdesc='A library suite supporting skarnet.org software.'
 arch=(x86_64)
@@ -20,7 +20,7 @@ source=(
 )
 
 sha256sums=(
-    a36302b63fe97fa8d616cac0bb7aebbff60e1419dfb4d4f1af66b3c058dbd6ba
+    ce38a9a6d206789b9e782d2846946429d1765974fdd77270c5bdefe24ca613a1
 )
 
 
