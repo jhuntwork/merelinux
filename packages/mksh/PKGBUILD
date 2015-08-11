@@ -1,5 +1,5 @@
 pkgname=mksh
-pkgver=R50e
+pkgver=R51
 pkgrel=1
 pkgdesc='The MirBSD Korn Shell'
 arch=(x86_64)
@@ -8,14 +8,14 @@ license=(BSD)
 groups=(base)
 depends=()
 makedepends=()
-options=()
+options=(upx)
 changelog=ChangeLog
 source=(
     "https://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-${pkgver}.tgz"
 )
 
 sha256sums=(
-    ad3c148769d08cf934a96be2837599ba9db355f38a8f49c7bc8876b80d2e08da
+    9feeaa5ff33d8199c0123675dec29785943ffc67152d58d431802bc20765dadf
 )
 
 
