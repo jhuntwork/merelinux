@@ -1,5 +1,5 @@
 pkgname=pkgconf
-pkgver=0.9.5
+pkgver=0.9.9
 pkgrel=1
 pkgdesc='an API-driven pkg-config replacement'
 arch=('x86_64')
@@ -8,14 +8,14 @@ license=('BSD')
 groups=('base')
 depends=()
 makedepends=()
-options=()
+options=(upx)
 changelog=ChangeLog
 source=(
     "http://rabbit.dereferenced.org/~nenolod/distfiles/${pkgname}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
-    '78dd81f5c0d89b65872bf887e9ee66927da1916796731a8d5183b43885e7029d'
+    100abb2e49752100788628634804730eec240213817f7f941d99b4e2c5144887
 )
 
 
