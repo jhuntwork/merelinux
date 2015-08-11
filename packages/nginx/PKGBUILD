@@ -1,6 +1,6 @@
 pkgname=nginx
 pkgver=1.7.11
-pkgrel=1
+pkgrel=2
 pkgdesc='An HTTP and reverse proxy server.'
 arch=(x86_64)
 url='http://nginx.org/'
@@ -13,20 +13,24 @@ makedepends=(
     openssl-devel
     zlib-devel
 )
-options=()
+options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://nginx.org/download/nginx-${pkgver}.tar.gz"
     nginx-service
     nginx-log
     nginx.install
+    nginx.conf
+    99-default
 )
 
 sha256sums=(
     dad9d740210e638bfd480536910083ed13f04c04775eedf877984e1c61a69695
     3a62b6f4cf05a308f66214e09e8b64dde4a1fe04a78ec0e3cdecc927cf882fae
     14da3ca97bcfe51299f007119350b3c318a5158a1e6697cbf23be909f982fd21
-    d13a45a59449015fe4e855baadf438b7223c623f58427092ae23facccbceb6fd
+    c5446f20588107cfbe1a498601e02f9e18e72119078d09b8d11b657dff21948b
+    6446799214aa0856c2442bb8864b14c105991f2b96a98908d47db5710c6f896b
+    4bedee518691aad64caba2581d617e4ca122dbcb29703df755d45ff7ca53b2f1
 )
 
 install=nginx.install
@@ -40,8 +44,8 @@ build() {
         --conf-path=/etc/nginx/nginx.conf \
         --pid-path=/var/run/nginx.pid \
         --lock-path=/var/lock/nginx.lock \
-        --http-log-path=/var/log/nginx/access.log \
-        --error-log-path=/var/log/nginx/error.log \
+        --http-log-path=/proc/self/fd/1 \
+        --error-log-path=/proc/self/fd/2 \
         --http-client-body-temp-path=/var/tmp/nginx/client_body \
         --http-proxy-temp-path=/var/tmp/nginx/proxy \
         --http-fastcgi-temp-path=/var/tmp/nginx/fastcgi \
@@ -54,16 +58,30 @@ build() {
 }
 
 package() {
+    pkgfiles=
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="$pkgdir" install
+
+    # Share files
     install -d "${pkgdir}"/share/nginx
     mv "${pkgdir}"/html "${pkgdir}"/share/nginx/
-    sed -i '/root.*html/s@html@/share/nginx/html@' \
-        "${pkgdir}"/etc/nginx/nginx.conf
-    install -d "${pkgdir}/etc/s6-services/nginx/log"
+
+    # Configuration
+    install -d "${pkgdir}/etc/nginx/conf.d"
+    install -d "${pkgdir}/etc/nginx/sites-available"
+    install -d "${pkgdir}/etc/nginx/sites-enabled"
+    install -m 0644 "${srcdir}/99-default" "${pkgdir}/etc/nginx/sites-available/"
+    install -m 0644 "${srcdir}/nginx.conf" "${pkgdir}/etc/nginx/"
+
+    # Service files
+    install -d "${pkgdir}/etc/s6-services/available/nginx/log"
     install -m 0754 "${srcdir}/nginx-service" \
-        "${pkgdir}/etc/s6-services/nginx/run"
+        "${pkgdir}/etc/s6-services/available/nginx/run"
     install -m 0754 "${srcdir}/nginx-log" \
-        "${pkgdir}/etc/s6-services/nginx/log/run"
+        "${pkgdir}/etc/s6-services/available/nginx/log/run"
+
+    # Cleanup
     find "$pkgdir"/etc -name "*.default" -delete
+    rm -rf "$pkgdir/var"
+    rm -rf "$pkgdir/proc"
 }

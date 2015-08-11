@@ -1,9 +1,12 @@
 post_install() {
     adduser -s /sbin/nologin -D -h /share/nginx -S nginx
-    install -d /var/log/nginx /var/tmp/nginx
+    install -d /var/log/nginx /var/tmp/nginx /etc/s6-services/enabled
     chown nginx:nogroup /var/log/nginx /var/tmp/nginx
+    ln -s ../sites-available/99-default "${pkgdir}/etc/nginx/sites-enabled/" || true
+    ln -s ../available/nginx /etc/s6-services/enabled/
 }
 
 post_remove() {
+    rm -f /etc/s6-services/enabled/nginx
     deluser nginx
 }
