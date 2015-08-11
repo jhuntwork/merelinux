@@ -1,5 +1,5 @@
 pkgname=sudo
-pkgver=1.8.13
+pkgver=1.8.14p3
 pkgrel=1
 pkgdesc='Tool for delegating authority to users and groups.'
 arch=(x86_64)
@@ -8,19 +8,22 @@ license=(BSD)
 groups=(base)
 depends=()
 makedepends=()
-options=()
+options=(upx emptydirs)
 changelog=ChangeLog
 source=(
     "http://www.sudo.ws/sudo/dist/sudo-${pkgver}.tar.gz"
 )
 
 sha256sums=(
-    e374e5edf2c11c00d6916a9f51cb0ad15e51c7b028370fa15169b07e61e05a25
+    a8a697cbb113859058944850d098464618254804cf97961dee926429f00a1237
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    # Upstream fix: http://www.sudo.ws/repos/sudo/rev/fda95d9ca1e9
+    sed -i "/<config.h>/s@.*@&\n\n#include <sys/types.h>@" \
+      src/preserve_fds.c
     CFLAGS="${CFLAGS} -fPIC -static" \
       LDFLAGS="-Wl,-static" \
       ./configure \
@@ -33,6 +36,6 @@ build() {
 
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    make DESTDIR="$pkgdir" install
+    make DESTDIR="${pkgdir}" install_uid=99 install_gid=99 install
     rm -rf ${pkgdir}/{include,share,usr,var/run}
 }
