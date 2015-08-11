@@ -3,7 +3,7 @@ pkgname=(
     libpcre
     libpcre-dev
 )
-pkgver=8.36
+pkgver=8.37
 pkgrel=1
 pkgdesc='Perl Compatible Regular Expressions'
 arch=(x86_64)
@@ -12,13 +12,13 @@ license=(GPL)
 groups=(base)
 depends=()
 makedepends=(gcc-c++)
-options=(!upx)
+options=()
 changelog=ChangeLog
 source=(
     "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    ef833457de0c40e82f573e34528f43a751ff20257ad0e86d272ed5637eb845bb
+    51679ea8006ce31379fb0860e46dd86665d864b5020fc9cd19e71260eef4789d
 )
 
 
