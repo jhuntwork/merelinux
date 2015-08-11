@@ -28,6 +28,7 @@ build() {
 }
 
 package_execline() {
+    options=(upx)
     pkgfiles=(
         bin
     )
