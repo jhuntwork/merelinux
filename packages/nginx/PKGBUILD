@@ -1,6 +1,6 @@
 pkgname=nginx
-pkgver=1.7.11
-pkgrel=2
+pkgver=1.8.0
+pkgrel=1
 pkgdesc='An HTTP and reverse proxy server.'
 arch=(x86_64)
 url='http://nginx.org/'
@@ -25,7 +25,7 @@ source=(
 )
 
 sha256sums=(
-    dad9d740210e638bfd480536910083ed13f04c04775eedf877984e1c61a69695
+    23cca1239990c818d8f6da118320c4979aadf5386deda691b1b7c2c96b9df3d5
     3a62b6f4cf05a308f66214e09e8b64dde4a1fe04a78ec0e3cdecc927cf882fae
     14da3ca97bcfe51299f007119350b3c318a5158a1e6697cbf23be909f982fd21
     c5446f20588107cfbe1a498601e02f9e18e72119078d09b8d11b657dff21948b
@@ -58,6 +58,7 @@ build() {
 }
 
 package() {
+    options=(upx)
     pkgfiles=
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="$pkgdir" install
