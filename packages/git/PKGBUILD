@@ -59,9 +59,9 @@ package_git() {
         'lib/git-core/git-archimport'
         'lib/git-core/git-cvs*'
         'lib/git-core/git-difftool'
-	'lib/git-core/git-relink'
-	'lib/git-core/git-send-email'
-	'lib/git-core/git-svn'
+    'lib/git-core/git-relink'
+    'lib/git-core/git-send-email'
+    'lib/git-core/git-svn'
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"

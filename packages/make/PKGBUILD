@@ -11,7 +11,7 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-	"http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
+    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
 )
 
 sha256sums=(
@@ -20,15 +20,15 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	LDFLAGS="-Wl,-static" \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS="-Wl,-static" \
         ./configure \
         --prefix=''
-	make V=1 $MAKEFLAGS
+    make V=1 $MAKEFLAGS
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	make DESTDIR="${pkgdir}" install
-	rm -rf "$pkgdir/share/info"
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+    rm -rf "$pkgdir/share/info"
 }

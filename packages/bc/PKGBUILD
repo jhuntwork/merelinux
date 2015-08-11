@@ -11,7 +11,7 @@ makedepends=('readline-devel' 'bison')
 options=()
 changelog=ChangeLog
 source=(
-	"http://alpha.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+    "http://alpha.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
     "http://www.linuxfromscratch.org/patches/lfs/development/bc-${pkgver}-memory_leak-1.patch"
 )
 
@@ -22,18 +22,18 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     patch -Np1 -i "${srcdir}/bc-${pkgver}-memory_leak-1.patch"
-	LDFLAGS="-Wl,-static" \
-	./configure --prefix='' --with-readline \
+    LDFLAGS="-Wl,-static" \
+    ./configure --prefix='' --with-readline \
        --mandir=/share/man \
        --infodir=/share/info
-	echo "MAKEINFO = :" >> doc/Makefile
-	make $MAKEFLAGS
+    echo "MAKEINFO = :" >> doc/Makefile
+    make $MAKEFLAGS
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	make DESTDIR="$pkgdir" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
     rm -rf "${pkgdir}/share/info"
 }

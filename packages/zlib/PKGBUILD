@@ -11,37 +11,37 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-	"http://zlib.net/${pkgname}-${pkgver}.tar.gz"
+    "http://zlib.net/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-	'36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d'
+    '36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d'
 )
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	sed -i 's@mktemp -u@mktemp@' Makefile.in
-	CFLAGS="$CFLAGS -fPIC" ./configure --prefix=''
-	make $MAKEFLAGS
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i 's@mktemp -u@mktemp@' Makefile.in
+    CFLAGS="$CFLAGS -fPIC" ./configure --prefix=''
+    make $MAKEFLAGS
 }
 
 package_zlib() {
-	pkgfiles=(
-		"lib/libz.so*"
-	)
-	
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
+    pkgfiles=(
+        "lib/libz.so*"
+    )
+    
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
 
 package_zlib-devel() {
-	depends=('zlib')
-	
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="$pkgdir" install
-	rm "${pkgdir}/lib/libz.so"
-	rm "${pkgdir}/lib/libz.so.1"
-	rm "${pkgdir}/lib/libz.so.${pkgver}"
+    depends=('zlib')
+    
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="$pkgdir" install
+    rm "${pkgdir}/lib/libz.so"
+    rm "${pkgdir}/lib/libz.so.1"
+    rm "${pkgdir}/lib/libz.so.${pkgver}"
 }

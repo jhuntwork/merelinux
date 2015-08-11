@@ -20,19 +20,19 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     CFLAGS="${CFLAGS} -fPIC -static" \
-	  LDFLAGS="-Wl,-static" \
-	  ./configure \
+      LDFLAGS="-Wl,-static" \
+      ./configure \
       --prefix='' \
       --libexecdir=/lib/sudo \
       --enable-static \
       --disable-shared
-	make $MAKEFLAGS
+    make $MAKEFLAGS
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	make DESTDIR="$pkgdir" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
     rm -rf ${pkgdir}/{include,share,usr,var/run}
 }

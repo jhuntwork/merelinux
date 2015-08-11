@@ -19,12 +19,12 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/ucl-${pkgver}"
+    cd "${srcdir}/ucl-${pkgver}"
     CFLAGS="${CFLAGS} -fPIC" ./configure --prefix=''
-	make
+    make
 }
 
 package() {
-	cd "${srcdir}/ucl-${pkgver}"
-	make DESTDIR="$pkgdir" install
+    cd "${srcdir}/ucl-${pkgver}"
+    make DESTDIR="$pkgdir" install
 }

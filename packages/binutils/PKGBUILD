@@ -20,29 +20,29 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	sed -i -e 's/linux-gnu/linux-musl/g' \
-		-e 's@LIBC=gnu@LIBC=musl@' \
-		$(find . -name "confi*.guess" -o -name "confi*.sub")
-	rm -f etc/standards.info
-	sed -i '/^INFO/s/standards.info //' etc/Makefile.in
-	mkdir "../${pkgname}-build"
-	cd "../${pkgname}-build"
-	LDFLAGS="-Wl,-static" \
-	  ../${pkgname}-${pkgver}/configure \
-	  --prefix='' \
-	  --disable-shared \
-	  --disable-werror \
-	  --disable-nls \
-	  --mandir=/share/man \
-	  --disable-install-libbfd
-	echo "MAKEINFO = :" >> Makefile
-	make $MAKEFLAGS tooldir=/
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i -e 's/linux-gnu/linux-musl/g' \
+        -e 's@LIBC=gnu@LIBC=musl@' \
+        $(find . -name "confi*.guess" -o -name "confi*.sub")
+    rm -f etc/standards.info
+    sed -i '/^INFO/s/standards.info //' etc/Makefile.in
+    mkdir "../${pkgname}-build"
+    cd "../${pkgname}-build"
+    LDFLAGS="-Wl,-static" \
+      ../${pkgname}-${pkgver}/configure \
+      --prefix='' \
+      --disable-shared \
+      --disable-werror \
+      --disable-nls \
+      --mandir=/share/man \
+      --disable-install-libbfd
+    echo "MAKEINFO = :" >> Makefile
+    make $MAKEFLAGS tooldir=/
     make -k check
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-build"
-	make DESTDIR="$pkgdir" tooldir=/ install-gas install-ld install-binutils
-	rm -rf "${pkgdir}/info"
+    cd "${srcdir}/${pkgname}-build"
+    make DESTDIR="$pkgdir" tooldir=/ install-gas install-ld install-binutils
+    rm -rf "${pkgdir}/info"
 }

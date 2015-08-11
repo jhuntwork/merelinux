@@ -26,7 +26,7 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     sed -i 's@getopt --version@& 2>/dev/null@' scripts/fakeroot.in
     patch -p1 -i "$srcdir"/fakeroot-no64.patch
     patch -p1 -i "$srcdir"/fakeroot-stdint.patch
@@ -34,14 +34,14 @@ build() {
     sed -e 's/for WRAPPED in __${PRE}x${FUNC} _${PRE}x${FUNC} __${PRE}${FUNC}13 ${PRE}${FUNC}; do/for WRAPPED in ${PRE}${FUNC}; do/' \
       -i configure
     CFLAGS="${CFLAGS} -D_STAT_VER=0" \
-	  ./configure \
+      ./configure \
       --prefix='' \
       --disable-static
-	make $MAKEFLAGS
+    make $MAKEFLAGS
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	make DESTDIR="${pkgdir}" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
     rm -rf ${pkgdir}/share
 }

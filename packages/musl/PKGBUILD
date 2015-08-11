@@ -11,7 +11,7 @@ makedepends=()
 options=(!upx)
 changelog=ChangeLog
 source=(
-	"http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
+    "http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
     fa928506415b9c555977daaf874c190eaf7fbbd16028cc5c5f33a00a83227813
@@ -19,31 +19,31 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	sed -i 's@-Os@-O3@g' configure
-	CFLAGS='' ./configure --prefix=/
-	make $MAKEFLAGS
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i 's@-Os@-O3@g' configure
+    CFLAGS='' ./configure --prefix=/
+    make $MAKEFLAGS
 }
 
 package_musl() {
-	pkgfiles=(
-		bin/ldd
-		lib/libc.so
-		"lib/ld-musl-${arch}.so.1"
-	)
+    pkgfiles=(
+        bin/ldd
+        lib/libc.so
+        "lib/ld-musl-${arch}.so.1"
+    )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	install -d bin
-	ln -sf ../lib/libc.so bin/ldd
-	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    install -d bin
+    ln -sf ../lib/libc.so bin/ldd
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_musl-devel() {
-	depends=('musl')
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="$pkgdir" install
-	rm "${pkgdir}/lib/libc.so"
-	rm "${pkgdir}/lib/ld-musl-${arch}.so.1"
+    depends=('musl')
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="$pkgdir" install
+    rm "${pkgdir}/lib/libc.so"
+    rm "${pkgdir}/lib/ld-musl-${arch}.so.1"
 }

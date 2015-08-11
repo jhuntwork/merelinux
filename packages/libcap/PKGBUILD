@@ -22,25 +22,25 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     sed -i '/^lib=/s@=.*@=/lib@' Make.Rules
-	make prefix=/
+    make prefix=/
 }
 
 package_libcap() {
-	pkgfiles=(
-		"lib/libcap.so.*"
+    pkgfiles=(
+        "lib/libcap.so.*"
         sbin
-	)
+    )
     depends=(
         libattr
         musl
     )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_libcap-devel() {
@@ -50,10 +50,10 @@ package_libcap-devel() {
         lib/libcap.so
         lib/pkgconfig
     )
-	depends=(libcap)
+    depends=(libcap)
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

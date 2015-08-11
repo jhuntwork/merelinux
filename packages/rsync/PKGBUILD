@@ -20,14 +20,14 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	LDFLAGS="-Wl,-static" \
-	  ./configure --prefix=''
-	make $MAKEFLAGS
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS="-Wl,-static" \
+      ./configure --prefix=''
+    make $MAKEFLAGS
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	make DESTDIR="$pkgdir" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
     rm -rf "$pkgdir"/share
 }

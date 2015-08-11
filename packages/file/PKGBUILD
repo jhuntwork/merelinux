@@ -11,45 +11,45 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-	"ftp://ftp.astron.com/pub/file/${pkgname}-${pkgver}.tar.gz"
+    "ftp://ftp.astron.com/pub/file/${pkgname}-${pkgver}.tar.gz"
 )
 
 sha256sums=(
-	'6519fb706d583231c2419592ebecdbb21d33c62eaf7a1a0b24ddfcb80c08bf07'
+    '6519fb706d583231c2419592ebecdbb21d33c62eaf7a1a0b24ddfcb80c08bf07'
 )
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	sed -i 's/misc/file/' configure
-	LDFLAGS="--static" ./configure \
-	  --prefix='' \
-	  --disable-shared \
-	  --enable-static
-	make $MAKEFLAGS V=1
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i 's/misc/file/' configure
+    LDFLAGS="--static" ./configure \
+      --prefix='' \
+      --disable-shared \
+      --enable-static
+    make $MAKEFLAGS V=1
 }
 
 package_file() {
-	pkgfiles=(
-		'bin/file'
-		'share/file/magic.mgc'
-		'share/man/man1/file.*'
-		'share/man/man4/magic.*'
-	)
-	cd "$srcdir/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    pkgfiles=(
+        'bin/file'
+        'share/file/magic.mgc'
+        'share/man/man1/file.*'
+        'share/man/man4/magic.*'
+    )
+    cd "$srcdir/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_file-devel() {
-	pkgfiles=(
-		'include/*'
-		'lib/*'
-		'share/man/man3/*'
-	)
-	cd "$srcdir/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    pkgfiles=(
+        'include/*'
+        'lib/*'
+        'share/man/man3/*'
+    )
+    cd "$srcdir/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

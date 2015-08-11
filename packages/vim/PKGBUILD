@@ -37,7 +37,7 @@ build() {
         sum=`echo $line | cut -d' ' -f1`
         file=`echo $line | cut -d' ' -f3`
         if ! echo "$sum  $file" | md5sum -c - >/dev/null 2>&1 ; then
-    	    printf "Downloading %s\n" "$file"
+            printf "Downloading %s\n" "$file"
             curl --progress-bar -LO http://ftp.vim.org/pub/vim/patches/${pkgver}/${file}
         fi
     done

@@ -11,7 +11,7 @@ makedepends=(gmp-devel)
 options=()
 changelog=ChangeLog
 source=(
-	"http://www.mpfr.org/mpfr-current/${pkgname}-${pkgver}.tar.xz"
+    "http://www.mpfr.org/mpfr-current/${pkgname}-${pkgver}.tar.xz"
     "http://www.linuxfromscratch.org/patches/lfs/development/mpfr-${pkgver}-upstream_fixes-3.patch"
 )
 sha256sums=(
@@ -21,23 +21,23 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     patch -Np1 -i "${srcdir}/mpfr-${pkgver}-upstream_fixes-3.patch"
-	./configure --prefix='' \
+    ./configure --prefix='' \
       --enable-thread-safe
-	make $MAKEFLAGS
+    make $MAKEFLAGS
     make check
 }
 
 package_mpfr() {
-	pkgfiles=(
-		lib/libmpfr.so.*
-	)
+    pkgfiles=(
+        lib/libmpfr.so.*
+    )
     depends=(musl gmp)
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }
 
 package_mpfr-devel() {
@@ -46,9 +46,9 @@ package_mpfr-devel() {
         lib/libmpfr.a
         lib/libmpfr.so
     )
-	depends=(mpfr)
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    depends=(mpfr)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }

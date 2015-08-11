@@ -14,14 +14,14 @@ makedepends=(
     libacl-devel
     libattr-devel
     liblzma-devel
-	openssl-devel
-	zlib-devel
+    openssl-devel
+    zlib-devel
 )
 options=(!upx)
 changelog=ChangeLog
 source=(
-	"http://www.libarchive.org/downloads/${pkgname}-${pkgver}.tar.gz"
-	libarchive-ENOMEM_fix.patch
+    "http://www.libarchive.org/downloads/${pkgname}-${pkgver}.tar.gz"
+    libarchive-ENOMEM_fix.patch
 )
 sha256sums=(
     eb87eacd8fe49e8d90c8fdc189813023ccc319c5e752b01fb6ad0cc7b2c53d5e
@@ -30,54 +30,54 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	# fix for musl
-	sed -i 's@HAVE_LCHMOD@&_DISABLE@' libarchive/archive_write_disk_posix.c
-	# fixes for busybox xz
-	sed -i 's@ -qq@@' libarchive/archive_read_support_filter_xz.c
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    # fix for musl
+    sed -i 's@HAVE_LCHMOD@&_DISABLE@' libarchive/archive_write_disk_posix.c
+    # fixes for busybox xz
+    sed -i 's@ -qq@@' libarchive/archive_read_support_filter_xz.c
     sed -i 's@xz -d@unxz@' libarchive/archive_read_support_filter_xz.c
     sed -i 's@lzma -d@unlzma@' libarchive/archive_read_support_filter_xz.c
-	# upstream fix for .MTREE creation
-	patch -Np1 -i ../libarchive-ENOMEM_fix.patch
-	./configure \
-	  --prefix='' \
-	  --enable-static \
-	  --enable-shared
-	make V=1 $MAKEFLAGS
+    # upstream fix for .MTREE creation
+    patch -Np1 -i ../libarchive-ENOMEM_fix.patch
+    ./configure \
+      --prefix='' \
+      --enable-static \
+      --enable-shared
+    make V=1 $MAKEFLAGS
 }
 
 package_libarchive() {
-	pkgfiles=(
+    pkgfiles=(
         bin
-		lib/libarchive.so.13
-		"lib/libarchive.so.1${pkgver}"
-	)
-	depends=(
+        lib/libarchive.so.13
+        "lib/libarchive.so.1${pkgver}"
+    )
+    depends=(
         libacl
         libattr
         musl
-		openssl
-		zlib
-	)
+        openssl
+        zlib
+    )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_libarchive-devel() {
-	depends=("$pkgbase")
-	pkgfiles=(
-		include
-		lib/libarchive.a
-		lib/libarchive.so
-		lib/pkgconfig
-	)
-	depends=("$pkgbase")
+    depends=("$pkgbase")
+    pkgfiles=(
+        include
+        lib/libarchive.a
+        lib/libarchive.so
+        lib/pkgconfig
+    )
+    depends=("$pkgbase")
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }

@@ -12,7 +12,7 @@ makedepends=(gmp-devel mpfr-devel)
 options=()
 changelog=ChangeLog
 source=(
-	"http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
+    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
     '617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3'
@@ -20,22 +20,22 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	./configure --prefix='' \
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    ./configure --prefix='' \
       --enable-thread-safe
-	make $MAKEFLAGS
+    make $MAKEFLAGS
     make check
 }
 
 package_mpc() {
-	pkgfiles=(
-		lib/libmpc.so.*
-	)
+    pkgfiles=(
+        lib/libmpc.so.*
+    )
     depends=(musl mpfr gmp)
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }
 
 package_mpc-devel() {
@@ -44,9 +44,9 @@ package_mpc-devel() {
         lib/libmpc.a
         lib/libmpc.so
     )
-	depends=(mpc)
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    depends=(mpc)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }

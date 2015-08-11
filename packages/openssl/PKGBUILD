@@ -8,14 +8,14 @@ license=(GPL2)
 groups=(base)
 depends=()
 makedepends=(
-	perl
-	zlib-devel
+    perl
+    zlib-devel
 )
 options=()
 changelog=ChangeLog
 
 source=(
-	"${url}/source/${pkgname}-${pkgver}.tar.gz"
+    "${url}/source/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
     15b6393c20030aab02c8e2fe0243cb1d1d18062f6c095d67bca91871dc7f324a
@@ -23,50 +23,50 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	sed -i '/^"linux-x86_64/s/-DTERMIO/-DTERMIOS/' Configure
-	sed -i '/^"linux-elf/s/-DTERMIO/-DTERMIOS/' Configure
-	sed -i 's/defined(linux)/0/' crypto/ui/ui_openssl.c
-	./config \
-	  --prefix=/ \
-	  --libdir=/lib \
-	  --openssldir=/etc/ssl \
-	  shared zlib no-dso $CFLAGS -D_HACK_DSO_BEOS
-	make -j1
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i '/^"linux-x86_64/s/-DTERMIO/-DTERMIOS/' Configure
+    sed -i '/^"linux-elf/s/-DTERMIO/-DTERMIOS/' Configure
+    sed -i 's/defined(linux)/0/' crypto/ui/ui_openssl.c
+    ./config \
+      --prefix=/ \
+      --libdir=/lib \
+      --openssldir=/etc/ssl \
+      shared zlib no-dso $CFLAGS -D_HACK_DSO_BEOS
+    make -j1
 }
 
 package_openssl() {
-	pkgfiles=(
-		bin
-		etc/ssl
-		lib/engines
-		"lib/libssl.so.*"
-		"lib/libcrypto.so.*"
-	)
-	depends=(
-		musl
-		zlib
-	)
+    pkgfiles=(
+        bin
+        etc/ssl
+        lib/engines
+        "lib/libssl.so.*"
+        "lib/libcrypto.so.*"
+    )
+    depends=(
+        musl
+        zlib
+    )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make MANDIR=/share/man INSTALL_PREFIX="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make MANDIR=/share/man INSTALL_PREFIX="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_openssl-devel() {
-	pkgfiles=(
-		include
-		"lib/*.a"
-		"lib/*.so"
-		lib/pkgconfig
-	)
-	depends=(
-		openssl
-	)
+    pkgfiles=(
+        include
+        "lib/*.a"
+        "lib/*.so"
+        lib/pkgconfig
+    )
+    depends=(
+        openssl
+    )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make MANDIR=/share/man INSTALL_PREFIX="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make MANDIR=/share/man INSTALL_PREFIX="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }

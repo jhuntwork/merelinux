@@ -11,22 +11,22 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-	'ca-bundle.crt'
+    'ca-bundle.crt'
 )
 sha256sums=(
-	'f11ac083f34063861e5ee013f38b434274c74f6ebbe2d722020e09b47f654dae'
+    'f11ac083f34063861e5ee013f38b434274c74f6ebbe2d722020e09b47f654dae'
 )
 
 build() {
-	cd "${srcdir}"
+    cd "${srcdir}"
 }
 
 package() {
-	pkgfiles=(
-		"lib/libz.so*"
-	)
+    pkgfiles=(
+        "lib/libz.so*"
+    )
 
-	cd "${srcdir}"
-	install -d "${pkgdir}/etc/certs/"	
-	install -m0644 ca-bundle.crt "${pkgdir}/etc/certs/"	
+    cd "${srcdir}"
+    install -d "${pkgdir}/etc/certs/"    
+    install -m0644 ca-bundle.crt "${pkgdir}/etc/certs/"    
 }

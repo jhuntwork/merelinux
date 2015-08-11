@@ -11,7 +11,7 @@ makedepends=(gcc-c++ gmp-devel mpfr-devel mpc-devel zlib-devel)
 options=()
 changelog=ChangeLog
 source=(
-	"http://ftp.gnu.org/gnu/gcc/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.bz2"
+    "http://ftp.gnu.org/gnu/gcc/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
@@ -20,84 +20,84 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	sed -i -e 's/linux-gnu/linux-musl/g' \
-		-e 's@LIBC=gnu@LIBC=musl@' \
-		$(find . -name "confi*.guess" -o -name "confi*.sub")
-	for file in $(find gcc/config/i386 -name linux64.h -o -name linux.h) ; do
-		sed -i -e 's@lib/ld-linux.so.2@lib/ld-musl-i386.so.1@' \
-	            -e 's@/usr@/@g' \
-	       	    -e 's@lib64/ld-linux-x86-64.so.2@lib/ld-musl-x86_64.so.1@' $file
-	done
-	sed -i '/MULTILIB_OSDIRNAMES/d' $(find gcc/config -name t-linux64)
-	sed -i '/^NATIVE_SYSTEM_HEADER_DIR/s@= .*@= /include@' gcc/Makefile.in
-	sed -i '/#define STANDARD_INCLUDE_DIR/s@"/usr/include"@"/include"@g' gcc/cppdefault.c
-	sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i -e 's/linux-gnu/linux-musl/g' \
+        -e 's@LIBC=gnu@LIBC=musl@' \
+        $(find . -name "confi*.guess" -o -name "confi*.sub")
+    for file in $(find gcc/config/i386 -name linux64.h -o -name linux.h) ; do
+        sed -i -e 's@lib/ld-linux.so.2@lib/ld-musl-i386.so.1@' \
+                -e 's@/usr@/@g' \
+                   -e 's@lib64/ld-linux-x86-64.so.2@lib/ld-musl-x86_64.so.1@' $file
+    done
+    sed -i '/MULTILIB_OSDIRNAMES/d' $(find gcc/config -name t-linux64)
+    sed -i '/^NATIVE_SYSTEM_HEADER_DIR/s@= .*@= /include@' gcc/Makefile.in
+    sed -i '/#define STANDARD_INCLUDE_DIR/s@"/usr/include"@"/include"@g' gcc/cppdefault.c
+    sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in
     sed -i 's,-lgcc_s,--start-group -lgcc_eh -lgcc -lc --end-group,' gcc/gcc.c
-	sed -i 's,\./fixinc\.sh,-c true,' gcc/Makefile.in
+    sed -i 's,\./fixinc\.sh,-c true,' gcc/Makefile.in
     sed -i '/__GLIBC_PREREQ) && __GLIBC_PREREQ(/s@ && __GLIBC.*@@' \
         libitm/config/linux/x86/tls.h
-	rm -rf libstdc++-v3/config/os/gnu-linux && ln -s generic libstdc++-v3/config/os/gnu-linux
-	mkdir "../${pkgname}-build"
-	cd "../${pkgname}-build"
-	CFLAGS="$CFLAGS -fPIC" CXXFLAGS="$CXXFLAGS -fPIC" \
-	  ../${pkgname}-${pkgver}/configure \
-	  --prefix='' \
-	  --libexecdir=/lib \
-	  --mandir=/share/man \
-	  --enable-threads=posix \
-	  --enable-tls \
+    rm -rf libstdc++-v3/config/os/gnu-linux && ln -s generic libstdc++-v3/config/os/gnu-linux
+    mkdir "../${pkgname}-build"
+    cd "../${pkgname}-build"
+    CFLAGS="$CFLAGS -fPIC" CXXFLAGS="$CXXFLAGS -fPIC" \
+      ../${pkgname}-${pkgver}/configure \
+      --prefix='' \
+      --libexecdir=/lib \
+      --mandir=/share/man \
+      --enable-threads=posix \
+      --enable-tls \
       --enable-libssp \
       --enable-lto \
-	  --disable-shared \
-	  --disable-bootstrap \
-	  --disable-libsanitizer \
-	  --disable-multilib \
+      --disable-shared \
+      --disable-bootstrap \
+      --disable-libsanitizer \
+      --disable-multilib \
       --with-system-zlib \
-	  --enable-languages=c,c++
+      --enable-languages=c,c++
     gcc_cv_libc_provides_ssp=yes \
-	  make $MAKEFLAGS BOOT_LDFLAGS="-static" LDFLAGS="-static"
+      make $MAKEFLAGS BOOT_LDFLAGS="-static" LDFLAGS="-static"
 }
 
 package_gcc() {
-	pkgfiles=(
-		bin/cpp
-		bin/gcc
-		bin/gcov
-		bin/cc
-		lib/cpp
-		lib/libssp.a
-		lib/gcc
-		lib/libgomp.spec
-		lib/libgomp.a
+    pkgfiles=(
+        bin/cpp
+        bin/gcc
+        bin/gcov
+        bin/cc
+        lib/cpp
         lib/libssp.a
-		lib/libssp_nonshared.a
-		"share/man/man1/cpp.*"
-		"share/man/man1/gcc.*"
-		"share/man/man1/gcov.*"
-	)
-	cd "${srcdir}/${pkgbase}-build"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find . -name "*.gch" -delete
-	ln -sf ../bin/cpp lib
-	ln -sf gcc bin/cc
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+        lib/gcc
+        lib/libgomp.spec
+        lib/libgomp.a
+        lib/libssp.a
+        lib/libssp_nonshared.a
+        "share/man/man1/cpp.*"
+        "share/man/man1/gcc.*"
+        "share/man/man1/gcov.*"
+    )
+    cd "${srcdir}/${pkgbase}-build"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find . -name "*.gch" -delete
+    ln -sf ../bin/cpp lib
+    ln -sf gcc bin/cc
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_gcc-c++() {
-	pkgfiles=(
-		bin/c++
-		bin/g++
-		include/c++
-		lib/libstdc++.a
-		lib/libsupc++.a
-		"share/man/man1/g++*"
-	)
-	depends=('gcc')
-	cd "${srcdir}/${pkgbase}-build"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find . -name "*.gch" -delete
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    pkgfiles=(
+        bin/c++
+        bin/g++
+        include/c++
+        lib/libstdc++.a
+        lib/libsupc++.a
+        "share/man/man1/g++*"
+    )
+    depends=('gcc')
+    cd "${srcdir}/${pkgbase}-build"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find . -name "*.gch" -delete
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

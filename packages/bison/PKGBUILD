@@ -11,7 +11,7 @@ makedepends=('m4' 'perl')
 options=()
 changelog=ChangeLog
 source=(
-	"http://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz"
+    "http://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz"
 )
 
 sha256sums=(
@@ -20,23 +20,23 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	LDFLAGS="-Wl,-static" \
-	./configure --prefix=''
-	make $MAKEFLAGS
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS="-Wl,-static" \
+    ./configure --prefix=''
+    make $MAKEFLAGS
     make check
 }
 
 package_bison() {
-	pkgfiles=(
-		bin/bison
-		bin/yacc
-		share/bison
-		share/man/man1/bison.1
-		share/man/man1/yacc.1
-		share/aclocal/bison-i18n.m4
-	)	
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+    pkgfiles=(
+        bin/bison
+        bin/yacc
+        share/bison
+        share/man/man1/bison.1
+        share/man/man1/yacc.1
+        share/aclocal/bison-i18n.m4
+    )
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
@@ -44,9 +44,9 @@ package_bison() {
 
 package_bison-devel() {
     pkgfiles=(
-		lib/liby.a
+        lib/liby.a
     )
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"

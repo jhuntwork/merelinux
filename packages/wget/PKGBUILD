@@ -15,7 +15,7 @@ makedepends=(
 options=()
 changelog=ChangeLog
 source=(
-	"http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
+    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
 )
 
 sha256sums=(
@@ -24,17 +24,17 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	LDFLAGS="-Wl,-static" \
-	  ./configure \
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS="-Wl,-static" \
+      ./configure \
       --prefix='' \
       --with-ssl=openssl
-	make $MAKEFLAGS
+    make $MAKEFLAGS
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	make DESTDIR="$pkgdir" install
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
     rm -rf "${pkgdir}/lib"
     rm -rf "${pkgdir}/share"
     echo "ca-certificate = /etc/certs/ca-bundle.crt" >>"${pkgdir}/etc/wgetrc"

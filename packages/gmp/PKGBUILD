@@ -11,7 +11,7 @@ makedepends=(gcc-c++)
 options=()
 changelog=ChangeLog
 source=(
-	"https://gmplib.org/download/gmp/${pkgname}-${pkgver}a.tar.xz"
+    "https://gmplib.org/download/gmp/${pkgname}-${pkgver}a.tar.xz"
 )
 sha256sums=(
     '9156d32edac6955bc53b0218f5f3763facb890b73a835d5e1b901dcf8eb8b764'
@@ -19,25 +19,25 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	./configure --prefix='' \
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    ./configure --prefix='' \
       --enable-cxx \
       --target=${arch}-unknown-linux-gnu \
       --host=${arch}-unknown-linux-gnu \
       --build=${arch}-unknown-linux-gnu
-	make $MAKEFLAGS
+    make $MAKEFLAGS
 }
 
 package_gmp() {
-	pkgfiles=(
-		lib/libgmp.so.*
+    pkgfiles=(
+        lib/libgmp.so.*
         lib/libgmpxx.so.*
-	)
-    depends=(musl)	
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    )
+    depends=(musl)    
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }
 
 package_gmp-devel() {
@@ -48,9 +48,9 @@ package_gmp-devel() {
         lib/libgmpxx.so
         lib/libgmpxx.a
     )
-	depends=(gmp)
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    depends=(gmp)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }

@@ -25,13 +25,13 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}-src"
+    cd "${srcdir}/${pkgname}-${pkgver}-src"
     sed -i '/addLoaderVA(a/s@NULL@(char *)&@' src/packer.cpp
-	make LDFLAGS='-Wl,-static' all
+    make LDFLAGS='-Wl,-static' all
 }
 
 package() {
-	cd "${srcdir}/${pkgname}-${pkgver}-src"
+    cd "${srcdir}/${pkgname}-${pkgver}-src"
     install -d "${pkgdir}/bin"
     install -m 0755 src/upx.out "${pkgdir}/bin/upx"
 }

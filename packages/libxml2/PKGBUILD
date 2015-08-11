@@ -19,27 +19,27 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     CFLAGS="$CFLAGS -fPIC -D__GNUC__=2" \
       ./configure \
       --prefix='' \
       --enable-static \
       --enable-shared
-	make V=1
+    make V=1
 }
 
 package_libxml2() {
-	pkgfiles=(
-		"lib/libxml2.so.*"
-	)
+    pkgfiles=(
+        "lib/libxml2.so.*"
+    )
     depends=(
         musl
     )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_libxml2-devel() {
@@ -49,10 +49,10 @@ package_libxml2-devel() {
         "lib/*.a"
         "lib/*.so"
     )
-	depends=(libxml2)
+    depends=(libxml2)
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

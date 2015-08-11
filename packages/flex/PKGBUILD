@@ -21,9 +21,9 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgname}-${pkgver}"
-	./configure --prefix=''
-	make $MAKEFLAGS
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    ./configure --prefix=''
+    make $MAKEFLAGS
 }
 
 package_flex() {
@@ -35,10 +35,10 @@ package_flex() {
         share/man/man1/flex.1
     )
     depends=(musl)
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_flex-devel() {
@@ -50,8 +50,8 @@ package_flex-devel() {
         lib/libfl.a
     )
     depends=(flex)
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
