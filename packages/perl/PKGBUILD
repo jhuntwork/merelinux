@@ -1,5 +1,5 @@
 pkgname=perl
-pkgver=5.18.2
+pkgver=5.22.0
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=('x86_64')
@@ -15,7 +15,7 @@ source=(
     "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    '7cbed5ef11900e8f68041215eea0de5e443d53393f84c41d5c9c69c150a4982f'
+    0c690807f5426bbd1db038e833a917ff00b988bf03cbf2447fa9ffdb34a2ab3c
 )
 
 
@@ -60,6 +60,6 @@ package() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    mv ./share/man/man3/{,perl-}threads.3 
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "${pkgdir}"
+    rm -rf "share/man"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
