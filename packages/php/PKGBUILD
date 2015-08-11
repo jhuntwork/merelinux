@@ -1,4 +1,4 @@
-pkgname=(php php-fpm php-devel)
+pkgname=(php php-fpm php-dev)
 pkgver=5.6.7
 mongover=1.6.6
 pkgrel=1
@@ -9,13 +9,13 @@ license=(PHP)
 groups=(base)
 depends=()
 makedepends=(
-    libcurl-devel
+    libcurl-dev
     libtool
-    libxml2-devel
+    libxml2-dev
     gettext
-    openssl-devel
+    openssl-dev
     pkgconf
-    zlib-devel
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
@@ -110,7 +110,7 @@ package_php-fpm() {
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
-package_php-devel() {
+package_php-dev() {
     depends=(
         php
     )

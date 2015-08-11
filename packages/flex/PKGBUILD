@@ -1,4 +1,4 @@
-pkgname=(flex flex-devel)
+pkgname=(flex flex-dev)
 pkgver=2.5.39
 pkgrel=1
 pkgdesc='A tool for generating scanners, or tokenizers that recognize lexical \
@@ -41,7 +41,7 @@ package_flex() {
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
-package_flex-devel() {
+package_flex-dev() {
     pkgfiles=(
         include/FlexLexer.h
         lib/libfl_pic.so

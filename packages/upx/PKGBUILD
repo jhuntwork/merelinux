@@ -9,9 +9,9 @@ groups=(base)
 depends=()
 makedepends=(
     gcc-c++
-    libucl-devel
+    libucl-dev
     perl
-    zlib-devel
+    zlib-dev
 )
 options=()
 changelog=ChangeLog

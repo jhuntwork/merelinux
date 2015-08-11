@@ -1,4 +1,4 @@
-pkgname=(python python-devel)
+pkgname=(python python-dev)
 vermajor=2
 verminor=7
 pkgver=${vermajor}.${verminor}.9
@@ -10,11 +10,11 @@ license=(Python)
 groups=(base)
 depends=()
 makedepends=(
-    libffi-devel
-    libncurses-devel
-    openssl-devel
-    readline-devel
-    zlib-devel
+    libffi-dev
+    libncurses-dev
+    openssl-dev
+    readline-dev
+    zlib-dev
 )
 options=(upx)
 changelog=ChangeLog
@@ -70,7 +70,7 @@ package_python() {
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
-package_python-devel() {
+package_python-dev() {
     depends=(
         python
     )

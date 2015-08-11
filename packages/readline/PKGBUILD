@@ -1,4 +1,4 @@
-pkgname=('readline' 'readline-devel')
+pkgname=(readline readline-dev)
 pkgver=6.3
 pkgrel=1
 pkgdesc='A library for allowing users to edit command lines as they are typed in.'
@@ -7,13 +7,7 @@ url='http://www.gnu.org/software/readline/'
 license=('BSD')
 groups=('base')
 depends=()
-makedepends=(
-    binutils
-    gcc
-    linux-headers
-    musl-devel
-    libncurses-devel
-)
+makedepends=(libncurses-dev)
 options=() # Defaults in makepkg.conf
 changelog=ChangeLog
 
@@ -67,7 +61,7 @@ package_readline() {
     find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
 
-package_readline-devel() {
+package_readline-dev() {
     pkgfiles=(
         'lib/libreadline.a'
         'lib/libreadline.so'

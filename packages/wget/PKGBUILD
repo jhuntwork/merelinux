@@ -8,9 +8,9 @@ license=(GPL3)
 groups=(base)
 depends=()
 makedepends=(
-    openssl-devel
+    openssl-dev
     pkgconf
-    zlib-devel
+    zlib-dev
 )
 options=()
 changelog=ChangeLog

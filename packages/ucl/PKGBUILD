@@ -1,4 +1,4 @@
-pkgname=libucl-devel
+pkgname=libucl-dev
 pkgver=1.03
 pkgrel=1
 pkgdesc='A portable lossless data compression library.'

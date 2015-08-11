@@ -1,4 +1,4 @@
-pkgname=(bison bison-devel)
+pkgname=(bison bison-dev)
 pkgver=3.0.4
 pkgrel=1
 pkgdesc='A general-purpose parser generator.'
@@ -42,7 +42,7 @@ package_bison() {
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_bison-devel() {
+package_bison-dev() {
     pkgfiles=(
         lib/liby.a
     )

@@ -9,9 +9,9 @@ groups=(base)
 depends=(s6 execline)
 makedepends=(
     pkgconf
-    libpcre-devel
-    openssl-devel
-    zlib-devel
+    libpcre-dev
+    openssl-dev
+    zlib-dev
 )
 options=(emptydirs)
 changelog=ChangeLog

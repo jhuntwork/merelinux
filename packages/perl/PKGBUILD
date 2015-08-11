@@ -6,8 +6,8 @@ arch=('x86_64')
 url='http://www.perl.org'
 license=('GPL2')
 groups=('base')
-depends=('musl' 'zlib')
-makedepends=('musl-devel' 'binutils' 'gcc' 'zlib-devel' 'linux-headers')
+depends=(musl zlib)
+makedepends=(zlib-dev)
 options=()
 changelog=ChangeLog
 

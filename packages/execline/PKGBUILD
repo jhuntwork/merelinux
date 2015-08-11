@@ -1,4 +1,4 @@
-pkgname=(execline execline-devel)
+pkgname=(execline execline-dev)
 pkgver=2.1.1.0
 pkgrel=1
 pkgdesc='a (non-interactive) scripting language.'
@@ -7,7 +7,7 @@ url='http://skarnet.org/software/execline/'
 license=(ISC)
 groups=(base)
 depends=()
-makedepends=(skalibs-devel)
+makedepends=(skalibs-dev)
 options=()
 changelog=ChangeLog
 source=(
@@ -38,7 +38,7 @@ package_execline() {
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_execline-devel() {
+package_execline-dev() {
     pkgfiles=(
         include
         lib

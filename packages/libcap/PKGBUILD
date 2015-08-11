@@ -1,4 +1,4 @@
-pkgname=(libcap libcap-devel)
+pkgname=(libcap libcap-dev)
 pkgver=2.24
 pkgrel=1
 pkgdesc='A Linux capability implementation.'
@@ -8,7 +8,7 @@ license=(GPL)
 groups=(base)
 depends=()
 makedepends=(
-    libattr-devel
+    libattr-dev
     perl
 )
 options=()
@@ -43,7 +43,7 @@ package_libcap() {
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_libcap-devel() {
+package_libcap-dev() {
     pkgfiles=(
         include
         lib/libcap.a

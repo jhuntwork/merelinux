@@ -1,4 +1,4 @@
-pkgname=('file' 'file-devel')
+pkgname=(file file-dev)
 pkgver=5.18
 pkgrel=1
 pkgdesc='The Fine Free File Command - a file type guesser'
@@ -42,7 +42,7 @@ package_file() {
     printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_file-devel() {
+package_file-dev() {
     pkgfiles=(
         'include/*'
         'lib/*'

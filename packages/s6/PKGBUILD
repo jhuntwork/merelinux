@@ -1,4 +1,4 @@
-pkgname=(s6 s6-devel)
+pkgname=(s6 s6-dev)
 pkgver=2.1.3.0
 pkgrel=3
 pkgdesc='A small process supervision suite for UNIX.'
@@ -7,7 +7,7 @@ url='http://skarnet.org/software/s6/'
 license=(ISC)
 groups=(base)
 depends=()
-makedepends=(skalibs-devel execline-devel)
+makedepends=(skalibs-dev execline-dev)
 options=()
 changelog=ChangeLog
 source=(
@@ -93,7 +93,7 @@ package_s6() {
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_s6-devel() {
+package_s6-dev() {
     pkgfiles=(
         include
         lib/libs6.a

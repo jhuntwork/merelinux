@@ -15,7 +15,7 @@ depends=(
     linux-headers
     m4
     make
-    musl-devel
+    musl-dev
     pacman-build
     patch
     sudo

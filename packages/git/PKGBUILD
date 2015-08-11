@@ -12,11 +12,10 @@ depends=(
     zlib
 )
 makedepends=(
-    libcurl-devel
-    mksh
-    openssl-devel
+    libcurl-dev
+    openssl-dev
     perl
-    zlib-devel
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
@@ -43,7 +42,7 @@ build() {
       --with-editor=/bin/vim \
       --with-pager=/bin/more \
       --with-perl=/bin/perl \
-      --with-shell=/bin/mksh
+      --with-shell=/bin/sh
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1 $MAKEFLAGS
 }
 

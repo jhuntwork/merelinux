@@ -1,7 +1,7 @@
 pkgname=(
     acl
     libacl
-    libacl-devel
+    libacl-dev
 )
 pkgver=2.2.52
 pkgrel=1
@@ -11,8 +11,8 @@ url='http://savannah.nongnu.org/projects/acl'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=(gettext libattr-devel)
-options=(!upx)
+makedepends=(gettext libattr-dev)
+options=()
 changelog=ChangeLog
 source=(
     "http://download.savannah.gnu.org/releases/acl/acl-${pkgver}.src.tar.gz"
@@ -23,10 +23,10 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     ./configure \
       --prefix=''
-	make
+    make
 }
 
 package_acl() {
@@ -44,31 +44,31 @@ package_acl() {
 }
 
 package_libacl() {
-	pkgfiles=(
+    pkgfiles=(
         lib
-	)
+    )
     depends=(
         libattr
         musl
     )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install-lib
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install-lib
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_libacl-devel() {
+package_libacl-dev() {
     pkgfiles=(
         include
         lib
     )
-	depends=(
+    depends=(
         libacl
     )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install-dev
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install-dev
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

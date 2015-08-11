@@ -1,7 +1,7 @@
 pkgname=(
     curl
     libcurl
-    libcurl-devel
+    libcurl-dev
 )
 pkgver=7.41.0
 pkgrel=1
@@ -12,8 +12,8 @@ license=(GPL2)
 groups=(base)
 depends=()
 makedepends=(
-    openssl-devel
-    zlib-devel
+    openssl-dev
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
@@ -83,7 +83,7 @@ package_libcurl() {
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
-package_libcurl-devel() {
+package_libcurl-dev() {
     pkgfiles=(
         bin/curl-config
         include

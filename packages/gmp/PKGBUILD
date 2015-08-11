@@ -1,4 +1,4 @@
-pkgname=(gmp gmp-devel)
+pkgname=(gmp gmp-dev)
 pkgver=6.0.0
 pkgrel=1
 pkgdesc='A free library for arbitrary precision arithmetic.'
@@ -40,7 +40,7 @@ package_gmp() {
     find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
 }
 
-package_gmp-devel() {
+package_gmp-dev() {
     pkgfiles=(
         include
         lib/libgmp.so

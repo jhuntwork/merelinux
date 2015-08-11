@@ -1,4 +1,4 @@
-pkgname=(xz liblzma-devel)
+pkgname=(xz liblzma-dev)
 pkgver=5.2.1
 pkgrel=2
 pkgdesc='Free general-purpose data compression software with high compression ratio.'
@@ -43,7 +43,7 @@ package_xz() {
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
-package_liblzma-devel() {
+package_liblzma-dev() {
     pkgfiles=(
         include
         lib/liblzma.a

@@ -1,5 +1,5 @@
-pkgname=(openssl openssl-devel)
-pkgver=1.0.2a
+pkgname=(openssl openssl-dev)
+pkgver=1.0.2d
 pkgrel=1
 pkgdesc='The SSL and TLS protocols and a full-strength general purpose cryptography library.'
 arch=(x86_64)
@@ -9,7 +9,7 @@ groups=(base)
 depends=()
 makedepends=(
     perl
-    zlib-devel
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
@@ -18,7 +18,7 @@ source=(
     "${url}/source/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    15b6393c20030aab02c8e2fe0243cb1d1d18062f6c095d67bca91871dc7f324a
+    671c36487785628a703374c652ad2cebea45fa920ae5681515df25d9f2c9a8c8
 )
 
 
@@ -32,7 +32,7 @@ build() {
       --libdir=/lib \
       --openssldir=/etc/ssl \
       shared zlib no-dso $CFLAGS -D_HACK_DSO_BEOS
-    make -j1
+    make
 }
 
 package_openssl() {
@@ -54,7 +54,7 @@ package_openssl() {
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
-package_openssl-devel() {
+package_openssl-dev() {
     pkgfiles=(
         include
         "lib/*.a"

@@ -1,7 +1,7 @@
 pkgname=(
     attr
     libattr
-    libattr-devel
+    libattr-dev
 )
 pkgver=2.4.47
 pkgrel=1
@@ -28,7 +28,7 @@ build() {
     sed -i '/DECLS/d' include/xattr.h
     ./configure \
       --prefix=''
-	make
+    make
 }
 
 package_attr() {
@@ -46,30 +46,30 @@ package_attr() {
 }
 
 package_libattr() {
-	pkgfiles=(
+    pkgfiles=(
         lib
-	)
+    )
     depends=(
         musl
     )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install-lib
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install-lib
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_libattr-devel() {
+package_libattr-dev() {
     pkgfiles=(
         include
         lib
     )
-	depends=(
+    depends=(
         libattr
     )
 
-	cd "${srcdir}/${pkgbase}-${pkgver}"
-	make DESTDIR="${pkgdir}-tmp" install-dev
-	cd "${pkgdir}-tmp"
-	find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install-dev
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

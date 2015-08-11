@@ -1,4 +1,4 @@
-pkgname=(musl musl-devel)
+pkgname=(musl musl-dev)
 pkgver=1.1.8
 pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
@@ -40,7 +40,7 @@ package_musl() {
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
-package_musl-devel() {
+package_musl-dev() {
     depends=('musl')
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="$pkgdir" install

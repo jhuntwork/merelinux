@@ -1,4 +1,4 @@
-pkgname=(libxml2 libxml2-devel)
+pkgname=(libxml2 libxml2-dev)
 pkgver=2.9.2
 pkgrel=1
 pkgdesc='An XML C parser and toolkit.'
@@ -7,7 +7,7 @@ url='http://xmlsoft.org/'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=(zlib-devel)
+makedepends=(zlib-dev)
 options=(!upx)
 changelog=ChangeLog
 source=(
@@ -42,7 +42,7 @@ package_libxml2() {
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_libxml2-devel() {
+package_libxml2-dev() {
     pkgfiles=(
         bin/xml2-config
         include

@@ -1,7 +1,7 @@
 pkgname=(
     skalibs
     skalibs-leapsecs
-    skalibs-devel
+    skalibs-dev
 )
 pkgver=2.3.2.0
 pkgrel=1
@@ -59,7 +59,7 @@ package_skalibs-leapsecs() {
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_skalibs-devel() {
+package_skalibs-dev() {
     pkgfiles=(
         include/skalibs
         lib/skalibs/sysdeps

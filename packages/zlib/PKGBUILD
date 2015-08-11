@@ -1,4 +1,4 @@
-pkgname=('zlib' 'zlib-devel')
+pkgname=(zlib zlib-dev)
 pkgver=1.2.8
 pkgrel=1
 pkgdesc='A Massively Spiffy Yet Delicately Unobtrusive Compression Library'
@@ -36,7 +36,7 @@ package_zlib() {
     find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
 
-package_zlib-devel() {
+package_zlib-dev() {
     depends=('zlib')
     
     cd "${srcdir}/${pkgbase}-${pkgver}"

@@ -1,7 +1,7 @@
 pkgname=(
     ncurses
     ncurses-terminfo
-    libncurses-devel
+    libncurses-dev
 )
 pkgver=5.9
 pkgrel=3
@@ -67,7 +67,7 @@ package_ncurses() {
     ln -s libncurses.a lib/libcurses.a
 
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
-    # ncurses5w-config is in -devel and clear/reset are in busybox
+    # ncurses5w-config is in -dev and clear/reset are in busybox
     rm "$pkgdir"/bin/{ncursesw5-config,clear,reset}
 }
 
@@ -80,7 +80,7 @@ package_ncurses-terminfo() {
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
-package_libncurses-devel() {
+package_libncurses-dev() {
     pkgfiles=(
         bin/ncursesw5-config
         include
