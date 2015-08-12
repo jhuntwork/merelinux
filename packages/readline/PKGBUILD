@@ -52,7 +52,6 @@ package_readline() {
     )
     depends=(
         musl
-        libncurses
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
