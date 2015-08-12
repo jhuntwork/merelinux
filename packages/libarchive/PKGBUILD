@@ -67,14 +67,14 @@ package_libarchive() {
 }
 
 package_libarchive-dev() {
-    depends=("$pkgbase")
+    depends=(libarchive)
     pkgfiles=(
         include
         lib/libarchive.a
         lib/libarchive.so
         lib/pkgconfig
     )
-    depends=("$pkgbase")
+    depends=(libarchive)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
