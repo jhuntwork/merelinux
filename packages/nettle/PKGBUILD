@@ -1,0 +1,56 @@
+pkgname=(nettle nettle-dev)
+pkgver=3.2
+pkgrel=1
+pkgdesc='A cryptographic library that is designed to fit easily in more or less any context'
+arch=(x86_64)
+url='http://www.lysator.liu.se/~nisse/nettle/'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=(gmp-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "https://ftp.gnu.org/gnu/nettle/nettle-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    ea4283def236413edab5a4cf9cf32adf540c8df1b9b67641cfc2302fca849d97
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+      ./configure --prefix='' \
+        --enable-static
+    make $MAKEFLAGS
+}
+
+package_nettle() {
+    pkgfiles=(
+        bin
+        lib/libhogweed.so.*
+        lib/libnettle.so.*
+    )
+    depends=(musl gmp)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_nettle-dev() {
+    pkgfiles=(
+        include
+        lib/libhogweed.a
+        lib/libhogweed.so
+        lib/libnettle.a
+        lib/libnettle.so
+        lib/pkgconfig
+    )
+    depends=(nettle)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
