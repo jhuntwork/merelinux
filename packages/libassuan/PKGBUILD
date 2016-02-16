@@ -1,0 +1,53 @@
+pkgname=(libassuan libassuan-dev)
+pkgver=2.4.2
+pkgrel=1
+pkgdesc='A small library implementing the so-called Assuan protocol.'
+arch=(x86_64)
+url='https://www.gnupg.org/'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=(libgpg-error-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    bb06dc81380b74bf1b64d5849be5c0409a336f3b4c45f20ac688e86d1b5bcb20
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+      ./configure --prefix='' \
+        --enable-static
+    make $MAKEFLAGS
+}
+
+package_libassuan() {
+    pkgfiles=(
+        lib/libassuan.so.*
+    )
+    depends=(libgpg-error)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_libassuan-dev() {
+    pkgfiles=(
+        bin
+        include
+        lib/libassuan.a
+        lib/libassuan.so
+        share/aclocal
+    )
+    depends=(libassuan)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
