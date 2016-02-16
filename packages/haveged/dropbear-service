@@ -1,0 +1,5 @@
+#!/bin/execlineb -P
+fdmove -c 2 1
+foreground {
+    /sbin/dropbear -R -F -E -p 0.0.0.0:22
+}

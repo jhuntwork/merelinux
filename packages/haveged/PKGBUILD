@@ -1,0 +1,34 @@
+pkgname=haveged
+pkgver=1.9.1
+pkgrel=1
+pkgdesc='A simple entropy daemon'
+arch=(x86_64)
+url='http://www.issihosts.com/haveged'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "http://www.issihosts.com/haveged/haveged-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    9c2363ed9542a6784ff08e247182137e71f2ddb79e8e6c1ac4ad50d21ced3715
+)
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS='-Wl,-static' \
+      ./configure \
+      --prefix='' \
+      --disable-shared
+    make $MAKEFLAGS
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
+    rm -rf "$pkgdir"/{lib,include}
+}
