@@ -1,0 +1,37 @@
+pkgname=pinentry
+pkgver=0.9.7
+pkgrel=1
+pkgdesc='A collection of passphrase entry dialogs for GnuPG'
+arch=(x86_64)
+url='https://www.gnupg.org/'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=(
+    libgpg-error-dev
+    libassuan-dev
+    libncurses-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    6398208394972bbf897c3325780195584682a0d0c164ca5a0da35b93b1e4e7b2
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS="-Wl,-static" \
+      ./configure --prefix=''
+    make $MAKEFLAGS
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
+    rm -rf "$pkgdir"/share
+}
