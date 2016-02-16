@@ -1,0 +1,67 @@
+#!/bin/sh -e
+options=$(getopt -o p:n: -l rootfs:,name:,path: -- "$@")
+[ $? -ne 0 ] && exit 1
+eval set -- "$options"
+while true
+do
+    case "$1" in
+        -p|--path)      path=$2; shift 2;;
+        -n|--name)      name=$2; shift 2;;
+        --rootfs)       rootfs=$2; shift 2;;
+        --)             shift 1; break ;;
+        *)              break ;;
+    esac
+done
+
+error() {
+    printf "%s\n" "$1"
+    exit 1
+}
+
+[ "$(id -u)" = "0" ] || error "This script should be run as 'root'"
+[ -n "$path" ] || error "'path' parameter is required"
+
+# detect rootfs
+config="$path/config"
+if [ -z "$rootfs" ]; then
+    if grep -q '^lxc.rootfs' $config 2>/dev/null ; then
+        rootfs=$(awk -F= '/^lxc.rootfs =/{ print $2 }' $config)
+    else
+        rootfs=$path/rootfs
+    fi
+fi
+
+builddir='merebuild'
+
+install -d "${rootfs}/var/lib/pacman"
+yes | pacman -Scc
+pacman -Sy --noconfirm -r "$rootfs" base-layout build-essential
+
+install /etc/pacman.conf "${rootfs}/etc/"
+install /etc/resolv.conf "${rootfs}/etc/"
+
+cat >"${rootfs}/etc/hosts" << EOF
+127.0.0.1 localhost.localdomain localhost
+EOF
+
+cat >"${rootfs}/etc/network/interfaces" <<EOF
+auto lo eth0
+iface lo inet loopback
+EOF
+
+[ -f '/pkgs/buildlocal.db.tar.gz' ] && \
+    find /pkgs ! -type d -maxdepth 1 | cpio -dump "${rootfs}/"
+for dir in sources staging logs ; do
+    install -o nobody -g nogroup -d "${rootfs}/pkgs/${dir}"
+done
+
+install -o nobody -g nogroup -d "${rootfs}/${builddir}"
+chmod g+s "${rootfs}/${builddir}"
+setfacl -m u::rwx,g::rwx "${rootfs}/${builddir}"
+setfacl -d --set u::rwx,g::rx,o::rx "${rootfs}/${builddir}"
+
+cat >"${rootfs}/etc/sudoers.d/nobody" << EOF
+Defaults env_keep += "ftp_proxy http_proxy https_proxy no_proxy"
+nobody ALL=NOPASSWD: /bin/pacman
+EOF
+
