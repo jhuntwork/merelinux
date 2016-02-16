@@ -1,0 +1,42 @@
+pkgname=gnupg
+pkgver=2.1.11
+pkgrel=1
+pkgdesc='GNU Privacy Guard. An implementation of the OpenPGP standard.'
+arch=(x86_64)
+url='https://www.gnupg.org/'
+license=(GPL3)
+groups=(base)
+depends=(pinentry)
+makedepends=(
+    gnutls-dev
+    libassuan-dev
+    libgcrypt-dev
+    libgpg-error-dev
+    libksba-dev
+    npth-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.gnupg.org/ftp/gcrypt/gnupg/gnupg-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    b7b0fb2c8c5d47d7ec916d4a1097c0ddcb94a12bb1c0ac424ad86b1ee316b61a
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS="-Wl,-static" \
+      ./configure --prefix='' \
+        --libexecdir=/lib/gnupg
+    make $MAKEFLAGS
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
+    ln -s gpg2 "${pkgdir}/bin/gpg"
+    rm -rf "$pkgdir"/share/{info,man}
+}
