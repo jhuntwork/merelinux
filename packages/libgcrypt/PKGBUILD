@@ -1,0 +1,53 @@
+pkgname=(libgcrypt libgcrypt-dev)
+pkgver=1.6.5
+pkgrel=1
+pkgdesc='A general purpose cryptographic library based on the code from GnuPG'
+arch=(x86_64)
+url='https://www.gnupg.org/'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=(libgpg-error-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    f49ebc5842d455ae7019def33eb5a014a0f07a2a8353dc3aa50a76fd1dafa924
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+      ./configure --prefix='' \
+        --enable-static
+    make $MAKEFLAGS
+}
+
+package_libgcrypt() {
+    pkgfiles=(
+        lib/libgcrypt.so.*
+    )
+    depends=(libgpg-error)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_libgcrypt-dev() {
+    pkgfiles=(
+        bin
+        include
+        lib/libgcrypt.a
+        lib/libgcrypt.so
+        share/aclocal
+    )
+    depends=(libgcrypt)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
