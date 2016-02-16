@@ -1,5 +1,7 @@
 #!/bin/sh
-for file in $(find /tmp/root/BUILD_PKG -name "*.pkg.*" | xargs) ; do
-    cp /pkgs/staging/${file##*/} /pkgs/
-    repo-add /pkgs/main.db.tar.gz /pkgs/${file##*/}
+template=merebuild
+root=/var/lib/lxc/${template}/rootfs
+for file in $(find $root/pkgs/staging -name "*.pkg.*" | xargs) ; do
+    cp $file /pkgs/
+    repo-add /pkgs/buildlocal.db.tar.gz /pkgs/${file##*/}
 done

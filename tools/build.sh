@@ -1,102 +1,66 @@
-#!/bin/sh
-ROOT=/tmp/root
+#!/bin/sh -e
 do_clean=0
-do_mount=0
-do_umount=0
-# type:src:dest
-# if type is 1, it is the same as source
-# if type is 0, there is no type
-# if type is anything else, use type as defined
-mounts="1:devtmpfs:/dev 1:proc:/proc 1:sysfs:/sys 0:/pkgs:/pkgs"
+lxcdir=/var/lib/lxc
+template=merebuild
+rootfs="${lxcdir}/${template}/rootfs"
+home="${rootfs}/merebuild"
+shome="/${home##*/}"
+clog=/tmp/merebuild.log
+sign=''
 
-while getopts "mucp:" arg ; do
-    case $arg in
-        m) do_mount=1 ;;
-        u) do_umount=1 ;;
-        c) do_clean=1 ;;
-        p)
-            pkgdir="$OPTARG"
-            if [ ! -d "$pkgdir" ] ; then
-                printf "Missing directory: %s\n" $pkgdir
-                exit 1
-            fi
-            ;;
-    esac
-done
+msg() {
+    printf "%s\n" "$1"
+}
 
-is_mounted() {
-    awk {'print $2'} /proc/mounts | grep -q "^$@$"
-    return $?
+info() {
+    msg "INFO: $1"
+}
+
+error() {
+    msg "ERROR: $1"
+    exit 1
 }
 
 cleanup() {
     if [ $1 -eq 1 ] ; then
-        umount_virtual
-        printf "Cleaning %s\n" "$ROOT"
-        rm -rf "$ROOT"
+        info "Removing existing ${template} container"
+        lxc-destroy -n ${template} >/dev/null 2>&1 || true
     fi
 }
 
-mount_virtual() {
-    printf "Mounting virtual file systems\n"
-    for mount in $mounts ; do
-        dest=${ROOT}${mount##*:}
-        src=$(echo $mount | cut -d: -f2)
-        type=$(echo $mount | cut -d: -f1)
-        case $type in
-            0) is_mounted "$dest" || mount "$src" "$dest" ;;
-            1) is_mounted "$dest" || mount -t "$src" "$src" "$dest" ;;
-            *) is_mounted "$dest" || mount -t "$type" "$src" "$dest" ;;
-        esac
-    done
-}
-
-umount_virtual() {
-    printf "Unmounting virtual file systems\n"
-    for mount in $mounts ; do
-        dest=${ROOT}${mount##*:}
-        is_mounted "$dest" && umount "$dest"
-    done
-}
+while getopts "cp:" arg ; do
+    case $arg in
+        c) do_clean=1 ;;
+        p)
+            pkgdir="$OPTARG"
+            [ -d "$pkgdir" ] || error "Missing directory: ${pkgdir}"
+            ;;
+    esac
+done
 
 trap "cleanup ${do_clean}" INT EXIT
 
-if [ $do_mount -eq 1 ] ; then
-    mount_virtual && exit 0
-fi
-
-if [ $do_umount -eq 1 ] ; then
-    umount_virtual && exit 0
-fi
-
 [ $do_clean -eq 1 ] && exit 0
+[ -n $pkgdir ] || error "Package directory required"
 
-if [ -z $pkgdir ] ; then
-    printf "Package directory required\n"
-    exit 1
-fi
-
-# Before doing anything ensure the directory is clean
 cleanup 1
-set -e
 
-install -d "${ROOT}/var/lib/pacman"
-install -d "${ROOT}/pkgs"
-yes | pacman -Scc
-pacman -Sy --noconfirm -r "$ROOT" base-layout build-essential
+info "Creating a fresh ${template} container"
+lxc-create -n ${template} -t ${template} >$clog 2>&1 ||
+    error "Failed to create container. Examine ${clog} for details."
 
-mount_virtual
+info "Copying package definition to container"
+cd "$pkgdir"
+find ! -type d -maxdepth 1 | cpio -dumpv "${home}/" >>$clog 2>&1
 
-cp /etc/resolv.conf "${ROOT}/etc/"
-echo '127.0.0.1 localhost.localdomain localhost' >"${ROOT}/etc/hosts"
-
-install -g nogroup -d "${ROOT}/BUILD_PKG"
-chmod g+s "${ROOT}/BUILD_PKG"
-setfacl -m u::rwx,g::rwx "${ROOT}/BUILD_PKG"
-setfacl -d --set u::rwx,g::rx,o::rx "${ROOT}/BUILD_PKG"
-find "${pkgdir}" -maxdepth 1 -type f -exec cp '{}' "${ROOT}/BUILD_PKG/" \;
-echo 'nobody ALL=NOPASSWD: /bin/pacman' >"${ROOT}/etc/sudoers.d/nobody"
-
-chroot "${ROOT}" /bin/sudo -u nobody -- /bin/env -i \
-    PATH=/bin:/sbin TERM=$TERM HOME=/BUILD_PKG \
-    LC_ALL=POSIX /bin/sh -c 'cd /BUILD_PKG && makepkg -fLs --noconfirm'
+info "Building package"
+lxc-start -n ${template} -F -- /bin/sh -c \
+    "mount -t proc proc /proc &&
+     mount -t sysfs sysfs /sys &&
+     /bin/sudo -u nobody -- \
+     /bin/env -i PATH=/bin:/sbin TERM=$TERM \
+     http_proxy=${http_proxy} \
+     https_proxy=${https_proxy} \
+     HOME=${shome} /bin/sh -c \
+     'cd ${shome} &&
+      makepkg ${sign} -fLs --noconfirm'"
