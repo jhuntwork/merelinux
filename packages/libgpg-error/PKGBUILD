@@ -1,0 +1,53 @@
+pkgname=(libgpg-error libgpg-error-dev)
+pkgver=1.21
+pkgrel=1
+pkgdesc='A small library that defines common error values for all GnuPG components'
+arch=(x86_64)
+url='https://www.gnupg.org/'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    b7dbdb3cad63a740e9f0c632a1da32d4afdb694ec86c8625c98ea0691713b84d
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+      ./configure --prefix='' \
+        --enable-static
+    make $MAKEFLAGS
+}
+
+package_libgpg-error() {
+    pkgfiles=(
+        lib/libgpg-error.so.*
+    )
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_libgpg-error-dev() {
+    pkgfiles=(
+        bin
+        include
+        lib/libgpg-error.a
+        lib/libgpg-error.so
+        share/aclocal
+        share/common-lisp
+    )
+    depends=(libgpg-error)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
