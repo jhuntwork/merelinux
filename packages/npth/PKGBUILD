@@ -1,0 +1,52 @@
+pkgname=(npth npth-dev)
+pkgver=1.2
+pkgrel=1
+pkgdesc='The New Portable Threads Library'
+arch=(x86_64)
+url='https://www.gnupg.org/'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    6ddbdddb2cf49a4723f9d1ad6563c480d6760dcb63cb7726b8fc3bc2e1b6c08a
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+      ./configure --prefix='' \
+        --enable-static
+    make $MAKEFLAGS
+}
+
+package_npth() {
+    pkgfiles=(
+        lib/libnpth.so.*
+    )
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_npth-dev() {
+    pkgfiles=(
+        bin
+        include
+        lib/libnpth.a
+        lib/libnpth.so
+        share/aclocal
+    )
+    depends=(npth)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
