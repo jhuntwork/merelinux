@@ -1,0 +1,60 @@
+pkgname=(gnutls gnutls-dev)
+pkgver=3.4.9
+pkgrel=1
+pkgdesc='A secure communications library implementing the SSL, TLS and DTLS protocols'
+arch=(x86_64)
+url='http://www.gnutls.org/'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=(
+    gmp-dev
+    nettle-dev
+    zlib-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "http://gd.tuwien.ac.at/privacy/gnupg/gnutls/v3.4/gnutls-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    48594fadba33d450f796ec69526cf2bce6ff9bc3dc90fbd7bf38dc3601f57c3f
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+      ./configure --prefix='' \
+        --with-included-libtasn1 \
+        --without-p11-kit \
+        --enable-static
+    make $MAKEFLAGS
+}
+
+package_gnutls() {
+    pkgfiles=(
+        bin
+        lib/libgnutls.so.*
+    )
+    depends=(musl nettle gmp zlib)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_gnutls-dev() {
+    pkgfiles=(
+        include
+        lib/libgnutls.a
+        lib/libgnutls.so
+        lib/pkgconfig
+    )
+    depends=(gnutls gmp-dev nettle-dev pkgconf zlib-dev)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdir}-tmp" install
+    sed -i 's@-lgnutls@& -lhogweed -lgmp -lnettle -lz@' "${pkgdir}-tmp/lib/pkgconfig/gnutls.pc"
+    cd "${pkgdir}-tmp"
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
