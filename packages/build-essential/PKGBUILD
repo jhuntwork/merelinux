@@ -1,5 +1,5 @@
 pkgname=build-essential
-pkgver=0.3
+pkgver=0.4
 pkgrel=1
 pkgdesc='A meta-package which pulls in essential build tools'
 arch=(x86_64)
@@ -12,12 +12,14 @@ depends=(
     fakeroot
     file
     gcc
+    gnupg
     linux-headers
     m4
     make
     musl-dev
     pacman-build
     patch
+    pkgconf
     sudo
     upx
 )
