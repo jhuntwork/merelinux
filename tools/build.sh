@@ -45,6 +45,20 @@ trap "cleanup ${do_clean}" INT EXIT
 
 cleanup 1
 
+if ! mountpoint /sys/fs/cgroup >/dev/null 2>&1 ; then
+    mount -t tmpfs cgroupfs /sys/fs/cgroup
+    cd /sys/fs/cgroup
+    for sys in $(awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups); do
+        mkdir -p $sys
+        if ! mountpoint -q $sys; then
+            if ! mount -n -t cgroup -o $sys cgroup $sys; then
+                rmdir $sys || true
+            fi
+        fi
+    done
+    cd $OLDPWD
+fi
+
 info "Creating a fresh ${template} container"
 lxc-create -n ${template} -t ${template} >$clog 2>&1 ||
     error "Failed to create container. Examine ${clog} for details."
