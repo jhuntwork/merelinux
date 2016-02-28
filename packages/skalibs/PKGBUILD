@@ -3,7 +3,7 @@ pkgname=(
     skalibs-leapsecs
     skalibs-dev
 )
-pkgver=2.3.6.0
+pkgver=2.3.9.0
 pkgrel=1
 pkgdesc='A library suite supporting skarnet.org software.'
 arch=(x86_64)
@@ -20,12 +20,13 @@ source=(
 )
 
 sha256sums=(
-    ce38a9a6d206789b9e782d2846946429d1765974fdd77270c5bdefe24ca613a1
+    6229fb4fb415699bbff3b446ff44aa5b7fb9c512b83bd68ae4005603afab60cb
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i 's@#!/bin/sh@#!/bin/bash@' configure
     ./configure \
       --prefix=/ \
       --disable-ipv6 \
