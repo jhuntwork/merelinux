@@ -1,5 +1,5 @@
 pkgname=(s6 s6-dev)
-pkgver=2.2.0.0
+pkgver=2.2.4.3
 pkgrel=1
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
@@ -24,9 +24,9 @@ source=(
 )
 
 sha256sums=(
-    1c4bab36d020f4e9ad41ea45ae9858a1241ed2705f08ad7fe5c5f0a470ee3ba3
+    f584ec56d5f2a3a2d81698d5f744b9b64d8fb6c22b56649faa71f3b62da7db3f
     4378dec40d6f497c298cbe5b2bc6234f3354b8e91f0ea1c053039a352e431baa
-    f60bc382aa42c181f5a893fa9f7c9222b97cca4f34c49fb2ade464798670e22e
+    3ba6876fced96c6abbda10bcdbd4a4e07f2c47bad51f1ca6f2ccd6edd8009200
     4662c87f8e847bf1acaf2c424229feb02ced456c7b203484e4ce5f31c254fc05
     a90dd71977a0a223265ddda7713e8cd798d14d21a3b010c9ba69b8c76c483133
     a10793f4303640159919e3fae315561417c94fe102f08ab655c505fb279e5950
@@ -39,6 +39,7 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i 's@#!/bin/sh@#!/bin/bash@' configure
     ./configure \
       --prefix=/ \
       --libexecdir=/lib/s6 \

@@ -2,9 +2,7 @@
 # Mount /dev/pts
 install -d /dev/pts
 mount -t devpts devpts /dev/pts
-
-# Run mdev
-/sbin/mdev -s
+ln -s /proc/self/fd /dev/fd
 
 # TODO: add filesystem checks?
 # Remount the root filesystem read-write
