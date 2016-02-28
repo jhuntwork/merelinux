@@ -1,5 +1,5 @@
 pkgname=(linux linux-headers)
-pkgver=3.19.2
+pkgver=4.4.2
 pkgrel=1
 pkgdesc='The Linux kernel'
 arch=(x86_64)
@@ -11,13 +11,13 @@ makedepends=(bc perl)
 options=()
 changelog=ChangeLog
 source=(
-    "https://www.kernel.org/pub/linux/kernel/v3.x/linux-$pkgver.tar.xz"
+    "https://www.kernel.org/pub/linux/kernel/v4.x/linux-$pkgver.tar.xz"
     'linux-config'
 )
 
 sha256sums=(
-    0c0ee420dc8d4f6239fab072351c7a2ce6a881028d5ab2d162ec667fdd750b2d
-    aadb52d5ec9100d3ffe1e322fe472a53bd4912deb700140b9bdbd01039fe7321
+    82fd2a22a9efd81200e08bc2d316ebf3265822f190bbac4ca0677bb42cf08626
+    fe9c3f97b6ea3d53416604348648d5eb57e7838d3ab225337f489698e18a7088
 )
 
 build() {
@@ -25,7 +25,6 @@ build() {
     # Something in the linux src wants gnu sed, so just be lazy for now and
     # give it what it wants
     sudo pacman -S --force --noconfirm sed
-    sed -i 's@ ERR@@' scripts/link-vmlinux.sh
     make mrproper
     cp "${srcdir}/linux-config" .config
     make $MAKEFLAGS
