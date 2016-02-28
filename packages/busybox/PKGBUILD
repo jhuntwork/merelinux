@@ -1,5 +1,5 @@
 pkgname=(busybox busybox-static)
-pkgver=1.23.2
+pkgver=1.24.1
 pkgrel=1
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
 arch=(x86_64)
@@ -21,9 +21,9 @@ source=(
 )
 
 sha256sums=(
-    05a6f9e21aad8c098e388ae77de7b2361941afa7157ef74216703395b14e319a
+    37d03132cc078937360b392170b7a1d0e5b322eee9f57c0b82292a8b1f0afe3d
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
-    368a6b813aa145fb6b4aa3fc7165aa6f542e2dfec7e168f4d143a6b1f6e7a71a
+    dc9ad12b967c6416c1f960880e69d69af12036bd67eab2969bf35dc24fed8321
     980d3689463f75ee36ab67cff579fdcbdbeb629c99331c61c9d9397e869dd340
     0be69e4c03c50b91784dfaf9f51bceb1a01c4c61d24045c6022f2bfa6a31e4e6
     f653d8703f3d061bca3c302470363b80623f2d6494acb9c2cde0c6483e21b34d
@@ -42,12 +42,8 @@ build() {
     #
     # Fixes
     patch -Np1 -i "${srcdir}/poweroff.patch"
-    sed -i '/netinet\/ether/d' networking/arp.c
-    sed -i '/net\/if_slip/d' networking/ifconfig.c
-    sed -i '/getpwent/s@!.*@(pwent = getpwent()) != NULL) {@' loginutils/deluser.c
-    sed -i -e '/struct passwd \*pw/d' \
-      -e 's@struct passwd pwent@struct passwd \*pwent@' \
-      -e 's@pwent\.pw@pwent->pw@g' loginutils/deluser.c
+    sed -i 's@PATH_UTMPX@PATH_UTMP@g' libbb/utmp.c
+    sed -i "/utmpx.h/s@\$@\n#  include <utmp.h>@" include/libbb.h
     cd ..
     # Static
     cp -a "${pkgname}-${pkgver}" "${pkgname}-${pkgver}-static"
