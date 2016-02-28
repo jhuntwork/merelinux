@@ -1,5 +1,5 @@
 pkgname=(musl musl-dev)
-pkgver=1.1.10
+pkgver=1.1.14
 pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
@@ -14,7 +14,7 @@ source=(
     "http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    45bbe9b1c7f7a0f743477af1e103b6889bfe4dd9815e16f6c89f6c90831c8b7c
+    35f6c00c84a6091bd5dab29eedde7508dae755ead92dcc0239f3677d1055b9b5
 )
 
 
