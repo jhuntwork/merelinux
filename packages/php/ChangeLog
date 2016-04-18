@@ -1,3 +1,8 @@
+2016-04-18 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.6.7-2 :
+	Enable mysqlnd, yaml
+
 2015-03-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.6.7-1 :

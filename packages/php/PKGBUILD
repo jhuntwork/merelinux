@@ -1,7 +1,8 @@
 pkgname=(php php-fpm php-dev)
 pkgver=5.6.7
 mongover=1.6.6
-pkgrel=1
+yamlver=1.2.0
+pkgrel=2
 pkgdesc='The PHP scripting language'
 arch=(x86_64)
 url='http://www.php.net'
@@ -12,6 +13,7 @@ makedepends=(
     libcurl-dev
     libtool
     libxml2-dev
+    libyaml-dev
     gettext
     openssl-dev
     pkgconf
@@ -22,11 +24,13 @@ changelog=ChangeLog
 
 source=(
     "http://php.net/distributions/php-${pkgver}.tar.bz2"
-    "https://github.com/mongodb/mongo-php-driver/archive/${mongover}.tar.gz"
+    "https://pecl.php.net/get/mongo-${mongover}.tgz"
+    "https://pecl.php.net/get/yaml-${yamlver}.tgz"
 )
 sha256sums=(
     02954fb74c61a7879d48ebdcd4ecb78aa0056f4215ca9b096232de28eb8f17bc
-    57d1c807fc47ed0aef1525a4f1ef6008880ce1bf01fbd17c97e698d566647b93
+    8552b100231baf16e49c8d66a6ac064c36edc3172f6ab5a0ea924acc289eb0d8
+    fdf0eec6bf16b0c45e58076a2048f96140a778463724fb82ab49ab5fb4c7e19a
 )
 
 
@@ -36,12 +40,15 @@ build() {
     sed -i '/sys\/poll.h/s@sys/@@' main/php_network.h \
       sapi/cgi/fastcgi.c main/network.c sapi/fpm/fpm/fastcgi.c
 
-    tar -xf "$srcdir"/"$mongover".tar.gz
-    mv "mongo-php-driver-${mongover}" ext/mongo
+    tar -xf "${srcdir}/mongo-${mongover}.tgz"
+    mv "mongo-${mongover}" ext/mongo
     # Fix namespace collision with ext/hash
     sed -i -e 's@php_hash_copy(@php_hash_copy_m(@' \
            -e 's@php_hash_copy,@php_hash_copy_m,@' \
            ext/mongo/contrib/crypto.c
+
+    tar -xf "${srcdir}/yaml-${yamlver}.tgz"
+    mv "yaml-${yamlver}" ext/yaml
 
     rm configure
     ./buildconf --force
@@ -65,6 +72,7 @@ build() {
       --enable-mbstring \
       --enable-mbregex \
       --enable-mongo \
+      --enable-pdo \
       --enable-phar \
       --enable-session \
       --enable-tokenizer \
@@ -72,7 +80,11 @@ build() {
       --with-curl \
       --with-iconv \
       --with-gettext \
+      --with-mysql=mysqlnd \
+      --with-mysqli=mysqlnd \
+      --with-pdo-mysql=mysqlnd \
       --with-openssl \
+      --with-yaml \
       --with-zlib \
       ac_cv_crypt_des=no \
       ac_cv_crypt_ext_des=no
