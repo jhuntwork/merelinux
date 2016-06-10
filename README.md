@@ -17,3 +17,5 @@ What if support for the above use cases were stripped away? What if a distributi
 What would a distribution optimized for such a use case look like?
 
 Mere Linux aims to find the answer.
+
+For additional details regarding the goals and design decisions of Mere Linux, see the [Wiki](https://github.com/jhuntwork/merelinux/wiki).
