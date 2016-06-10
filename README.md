@@ -18,4 +18,5 @@ What would a distribution optimized for such a use case look like?
 
 Mere Linux aims to find the answer.
 
-For additional details regarding the goals and design decisions of Mere Linux, see the [Wiki](https://github.com/jhuntwork/merelinux/wiki).
+## Getting Started
+For additional details, such as how to install, how to contribute, or the goals and design decisions of Mere Linux, see the [Wiki](https://github.com/jhuntwork/merelinux/wiki).
