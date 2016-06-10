@@ -1,0 +1,3 @@
+#!/bin/execlineb -P
+
+/sbin/ntpd -n

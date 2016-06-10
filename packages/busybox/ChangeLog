@@ -1,3 +1,9 @@
+2016-03-02 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.24.1-2:
+	Add conflicts between busybox and busybox-static
+	Add a service description for ntpd
+
 2016-02-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.24.1-1:

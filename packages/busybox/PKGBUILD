@@ -1,6 +1,6 @@
 pkgname=(busybox busybox-static)
 pkgver=1.24.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
 arch=(x86_64)
 url='http://busybox.net'
@@ -12,22 +12,28 @@ options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
+    busybox.install
     poweroff.patch
     busybox-config
     udhcpc.script
     sysctl.conf
     telinit
     tty1-service
+    ntpd-service
+    ntp.conf
 )
 
 sha256sums=(
     37d03132cc078937360b392170b7a1d0e5b322eee9f57c0b82292a8b1f0afe3d
+    bc86efc8f8f50f8655833f7a45639156b6b35217e41b36135db1a4fd59bcd105
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
     dc9ad12b967c6416c1f960880e69d69af12036bd67eab2969bf35dc24fed8321
     980d3689463f75ee36ab67cff579fdcbdbeb629c99331c61c9d9397e869dd340
     0be69e4c03c50b91784dfaf9f51bceb1a01c4c61d24045c6022f2bfa6a31e4e6
     f653d8703f3d061bca3c302470363b80623f2d6494acb9c2cde0c6483e21b34d
     538bc61ea2ef419c1e48e683d7b6a52ea45ea5b06ad765bbfa28b79d3953829f
+    327d16c7732cd5dcc3eca07a1c414cd025f66af22339cba1c27cc58e950eb0d9
+    644321e67516c8e6869dd1f09b9dfc06d6758dec91df0bdea3cb614419a1e0d3
 )
 
 install=busybox.install
@@ -35,22 +41,24 @@ install=busybox.install
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    # Build busybox twice, once producing a dynamically linked binary
-    # and once producting a statically linked one. The static one is
-    # preferred for the final system. The dynamic one is so fakeroot
-    # magic can happen while packaging, specifcally with tar.
-    #
     # Fixes
     patch -Np1 -i "${srcdir}/poweroff.patch"
     sed -i 's@PATH_UTMPX@PATH_UTMP@g' libbb/utmp.c
     sed -i "/utmpx.h/s@\$@\n#  include <utmp.h>@" include/libbb.h
     cd ..
+
+    # Build busybox twice, once producing a dynamically linked binary
+    # and once producting a statically linked one. The static one is
+    # preferred for the final system. The dynamic one is so fakeroot
+    # magic can happen while packaging, specifcally with tar.
+    #
     # Static
     cp -a "${pkgname}-${pkgver}" "${pkgname}-${pkgver}-static"
     cd "${pkgname}-${pkgver}-static"
     sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}-static/\"@" \
       "${srcdir}/busybox-config" >.config
     make V=1 HOSTCC='gcc -D_GNU_SOURCE' $MAKEFLAGS
+
     # Dynamic
     cd ../${pkgname}-${pkgver}
     sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" \
@@ -59,46 +67,49 @@ build() {
     make V=1 HOSTCC='gcc -D_GNU_SOURCE' $MAKEFLAGS
 }
 
+common_install() {
+    rm -f bin/bash
+    install -d etc/network/if-pre-up.d
+    install -d etc/network/if-up.d
+    install -d etc/network/if-down.d
+    install -d etc/network/if-post-down.d
+    install -d share/udhcpc
+    install -m 0755 "${srcdir}/udhcpc.script" \
+        share/udhcpc/default.script
+    install -m 0644 "${srcdir}/sysctl.conf" etc/
+    install -d sbin
+    install -m 0755 "${srcdir}/telinit" sbin/
+    install -d etc/s6-services/available/tty1
+    install -m 0754 "${srcdir}/tty1-service" etc/s6-services/available/tty1/run
+    install -d etc/s6-services/available/ntpd
+    install -m 0754 "${srcdir}/ntpd-service" etc/s6-services/available/ntpd/run
+    install -m 0644 "${srcdir}/ntp.conf" etc/ntp.conf
+}
+
 package_busybox() {
     depends=(
         musl
     )
+    conflicts=(
+        busybox-static
+    )
+
     cd "${pkgbase}-${pkgver}"
     make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
     cd "$pkgdir"
-    chmod u+s bin/busybox
-    rm -f bin/bash
-    install -d etc/network/if-pre-up.d
-    install -d etc/network/if-up.d
-    install -d etc/network/if-down.d
-    install -d etc/network/if-post-down.d
-    install -d share/udhcpc
-    install -m 0755 "${srcdir}/udhcpc.script" \
-        share/udhcpc/default.script
-    install -m 0644 "${srcdir}/sysctl.conf" etc/
-    install -d sbin
-    install -m 0755 "${srcdir}/telinit" sbin/
-    install -d etc/s6-services/available/tty1
-    install -m 0754 "${srcdir}/tty1-service" etc/s6-services/available/tty1/run
+    common_install
 }
 
 package_busybox-static() {
-    options=(upx emptydirs)
+    options+=(
+        upx
+    )
+    conflicts=(
+        busybox
+    )
+
     cd "${pkgbase}-${pkgver}-static"
     make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
     cd "$pkgdir"
-    chmod u+s bin/busybox
-    rm -f bin/bash
-    install -d etc/network/if-pre-up.d
-    install -d etc/network/if-up.d
-    install -d etc/network/if-down.d
-    install -d etc/network/if-post-down.d
-    install -d share/udhcpc
-    install -m 0755 "${srcdir}/udhcpc.script" \
-        share/udhcpc/default.script
-    install -m 0644 "${srcdir}/sysctl.conf" etc/
-    install -d sbin
-    install -m 0755 "${srcdir}/telinit" sbin/
-    install -d etc/s6-services/available/tty1
-    install -m 0754 "${srcdir}/tty1-service" etc/s6-services/available/tty1/run
+    common_install
 }
