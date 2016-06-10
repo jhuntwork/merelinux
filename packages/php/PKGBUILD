@@ -1,5 +1,6 @@
 pkgname=(php php-fpm php-dev)
 pkgver=5.6.7
+memcachedver=2.2.0
 mongover=1.6.6
 yamlver=1.2.0
 pkgrel=2
@@ -11,6 +12,7 @@ groups=(base)
 depends=()
 makedepends=(
     libcurl-dev
+    libmemcached-dev
     libtool
     libxml2-dev
     libyaml-dev
@@ -24,11 +26,13 @@ changelog=ChangeLog
 
 source=(
     "http://php.net/distributions/php-${pkgver}.tar.bz2"
+    "https://pecl.php.net/get/memcached-${memcachedver}.tgz"
     "https://pecl.php.net/get/mongo-${mongover}.tgz"
     "https://pecl.php.net/get/yaml-${yamlver}.tgz"
 )
 sha256sums=(
     02954fb74c61a7879d48ebdcd4ecb78aa0056f4215ca9b096232de28eb8f17bc
+    17b9600f6d4c807f23a3f5c45fcd8775ca2e61d6eda70370af2bef4c6e159f58
     8552b100231baf16e49c8d66a6ac064c36edc3172f6ab5a0ea924acc289eb0d8
     fdf0eec6bf16b0c45e58076a2048f96140a778463724fb82ab49ab5fb4c7e19a
 )
@@ -40,6 +44,11 @@ build() {
     sed -i '/sys\/poll.h/s@sys/@@' main/php_network.h \
       sapi/cgi/fastcgi.c main/network.c sapi/fpm/fpm/fastcgi.c
 
+    # memcached ext
+    tar -xf "${srcdir}/memcached-${memcachedver}.tgz"
+    mv "memcached-${memcachedver}" ext/memcached
+
+    # mongo ext
     tar -xf "${srcdir}/mongo-${mongover}.tgz"
     mv "mongo-${mongover}" ext/mongo
     # Fix namespace collision with ext/hash
@@ -47,6 +56,7 @@ build() {
            -e 's@php_hash_copy,@php_hash_copy_m,@' \
            ext/mongo/contrib/crypto.c
 
+    # yaml ext
     tar -xf "${srcdir}/yaml-${yamlver}.tgz"
     mv "yaml-${yamlver}" ext/yaml
 
@@ -71,10 +81,13 @@ build() {
       --enable-libxml \
       --enable-mbstring \
       --enable-mbregex \
+      --enable-memcached \
+      --disable-memcached-sasl \
       --enable-mongo \
       --enable-pdo \
       --enable-phar \
       --enable-session \
+      --enable-simplexml \
       --enable-tokenizer \
       --enable-xml \
       --with-curl \
