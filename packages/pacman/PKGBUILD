@@ -1,6 +1,6 @@
 pkgname=(pacman pacman-build)
 pkgver=4.2.1
-pkgrel=2
+pkgrel=3
 pkgdesc='The pacman Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -29,7 +29,7 @@ source=(
 sha256sums=(
     6d411509310760acbf0c3cf4d7e72c604b3e7919306681507c9107c527709cc5
     e81771f782e27a5e10e076c9e3ba1f93cc796318608c9769bea13e952c53f1de
-    5bab1d8c8b99e28c1d9f5d215c47368c54743b1f64248406ab1adf95b2557fd2
+    a4c69eb1b3be80292ad3dd1a90b4c4e9c24d6b7fb1235622fbfe4510c484494a
 )
 
 
@@ -58,6 +58,9 @@ package_pacman() {
         bin/pkgdelta
         "etc/pacman.conf*"
         var
+    )
+    options+=(
+        upx
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"

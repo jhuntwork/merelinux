@@ -1,3 +1,8 @@
+2016-03-03 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 4.1.2-3 :
+	Use repo.merelinux.org as the stable package repository
+
 2016-02-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 4.1.2-2 :
