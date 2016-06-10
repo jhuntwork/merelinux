@@ -30,7 +30,7 @@ package_libyaml() {
     pkgfiles=(
         lib/libyaml*so.*
     )
-    depends=(libgpg-error)
+    depends=(musl)
     cd "${srcdir}/yaml-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
