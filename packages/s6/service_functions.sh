@@ -4,7 +4,7 @@ AVAIL_DIR="/etc/s6-services/available"
 ENABL_DIR="/etc/s6-services/enabled"
 
 get_columns() {
-    stty -a | grep -o columns\ [0-9]*\; | grep -o [0-9]*
+    stty -a | grep -o columns\ [0-9]*\; | grep -oE '[0-9]*'
 }
 
 display_ok() {
