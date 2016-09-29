@@ -1,5 +1,3 @@
 #!/bin/execlineb -P
 fdmove -c 2 1
-foreground {
-    /sbin/nginx -g "daemon off;"
-}
+/sbin/nginx -g "daemon off;"

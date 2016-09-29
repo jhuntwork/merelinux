@@ -1,4 +1,2 @@
 #!/bin/execlineb -P
-foreground {
-    s6-log -b t /var/log/nginx
-}
+s6-log -b -- t /var/log/nginx
