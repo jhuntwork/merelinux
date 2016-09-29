@@ -1,4 +1,2 @@
 #!/bin/execlineb -P
-foreground {
-    s6-log -b n20 s1000000 t /var/log/dropbear
-}
+s6-log -b -- n20 s1000000 t /var/log/dropbear

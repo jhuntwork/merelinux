@@ -1,8 +1,3 @@
-post_install() {
-    install -d /etc/s6-services/enabled
-    ln -s ../available/dropbear /etc/s6-services/enabled/
-}
-
-post_remove() {
-    rm -f /etc/s6-services/enabled/dropbear
+pre_remove() {
+    service dropbear disable >/dev/null 2>&1
 }

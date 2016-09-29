@@ -1,6 +1,6 @@
 pkgname=dropbear
 pkgver=2015.68
-pkgrel=1
+pkgrel=2
 pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
 url='http://matt.ucc.asn.au/dropbear/dropbear.html'
@@ -14,14 +14,16 @@ source=(
     "http://matt.ucc.asn.au/dropbear/releases/dropbear-${pkgver}.tar.bz2"
     dropbear-service
     dropbear-log
+    dropbear-finish
     dropbear.install
 )
 
 sha256sums=(
     55ea7c1e904ffe4b1cdbe1addca8291a2533d7d285fd22ac33608e9502a62446
-    39dd2592dc121badf5b50ab71d56045e88c314182f9c7c12812296ab4d9c5362
-    df91dcee399c728a884f89723f29754353710b0e6c9ef8e8d1ae87300928b0f8
-    5103554505f9642e9b5763842db6a18e3826b8bf6cb34edd2d5afcaa280c2999
+    743b0d8c6e7a60f07910daa913bfb5717e98b47654ac7cffaafff15a1c3a7566
+    992a38e175c6dd8dea0c0496dbe175749f0f18eee6d861d913cd8f5bfe19a37a
+    678981da5f219b6d335e132073ce5516e51470f80d17f33b282af259d846c5b0
+    8e70536d7bdf7d8cd7ae0b7d0b047e59c424374495490fe02140989345baa886
 )
 
 install=dropbear.install
@@ -40,10 +42,12 @@ package() {
     make DESTDIR="$pkgdir" install
     ln -s dbclient "${pkgdir}/bin/ssh"
     install -d -m 0755 "${pkgdir}/etc/dropbear"
-    install -d "${pkgdir}/etc/s6-services/available/dropbear/log"
+    install -d "${pkgdir}/etc/s6/services/available/dropbear/log"
     install -m 0754 "${srcdir}/dropbear-service" \
-        "${pkgdir}/etc/s6-services/available/dropbear/run"
+        "${pkgdir}/etc/s6/services/available/dropbear/run"
+    install -m 0754 "${srcdir}/dropbear-finish" \
+        "${pkgdir}/etc/s6/services/available/dropbear/finish"
     install -m 0754 "${srcdir}/dropbear-log" \
-        "${pkgdir}/etc/s6-services/available/dropbear/log/run"
+        "${pkgdir}/etc/s6/services/available/dropbear/log/run"
     rm -rf "$pkgdir"/share
 }
