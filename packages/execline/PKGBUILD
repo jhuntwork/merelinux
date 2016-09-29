@@ -1,5 +1,5 @@
 pkgname=(execline execline-dev)
-pkgver=2.1.4.5
+pkgver=2.1.5.0
 pkgrel=1
 pkgdesc='a (non-interactive) scripting language.'
 arch=(x86_64)
@@ -15,7 +15,7 @@ source=(
 )
 
 sha256sums=(
-    ab4451d4992a5d7fb2ae34cffe4d0806e4902bf9aa27ee3b75617aa35379356f
+    8a3605a6db73183baa376bf2130e8b7eb75a5b5347c7f9144e520fe86bcb1142
 )
 
 
