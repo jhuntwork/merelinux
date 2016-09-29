@@ -1,3 +1,15 @@
+2016-09-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.3.0.0-2 :
+	Move all s6 configuration/boot-time scripts to /etc/s6
+	Update /sbin/init and /etc/s6/rc.init to better align with boot stages
+	Move the tty1 service to an early launched service
+
+2016-09-27 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.3.0.0-1 :
+	Upgrade to 2.2.0.0
+
 2016-07-05 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 2.2.0.0-2 :

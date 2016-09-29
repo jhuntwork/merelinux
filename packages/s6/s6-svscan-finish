@@ -6,4 +6,4 @@ fdmove -c 1 2
 foreground { s6-svc -x -- /run/service/s6-svscan-log }
 unexport ?
 wait -r -- { }
-/etc/rc.shutdown ${@}
+/etc/s6/rc.shutdown ${@}

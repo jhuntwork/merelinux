@@ -1,7 +1,7 @@
 N="\033[00m"
 SVCS_DIR="/run/service"
-AVAIL_DIR="/etc/s6-services/available"
-ENABL_DIR="/etc/s6-services/enabled"
+AVAIL_DIR="/etc/s6/services/available"
+ENABL_DIR="/etc/s6/services/enabled"
 
 get_columns() {
     stty -a | grep -o columns\ [0-9]*\; | grep -oE '[0-9]*'
@@ -100,7 +100,7 @@ list_services() {
                 LIST="$LIST unknown "
             fi
         else
-            LIST="$LIST disabled unknown "
+            LIST="$LIST disabled disabled "
         fi
     done
     printf "%-30s%-30s%s\n" $LIST

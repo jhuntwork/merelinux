@@ -1,5 +1,5 @@
 pkgname=(s6 s6-dev)
-pkgver=2.2.4.3
+pkgver=2.3.0.0
 pkgrel=2
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
@@ -21,19 +21,21 @@ source=(
     service
     service_functions.sh
     taillog
+    tty1-service
 )
 
 sha256sums=(
-    f584ec56d5f2a3a2d81698d5f744b9b64d8fb6c22b56649faa71f3b62da7db3f
-    4378dec40d6f497c298cbe5b2bc6234f3354b8e91f0ea1c053039a352e431baa
-    3ba6876fced96c6abbda10bcdbd4a4e07f2c47bad51f1ca6f2ccd6edd8009200
-    4662c87f8e847bf1acaf2c424229feb02ced456c7b203484e4ce5f31c254fc05
+    49c9a0476d93c6279c776ca5ae9c49b3fd39c356eda674828aebf78f8488e8e6
+    c01dc625a11f12dce8600382790dd08e557cd5aeddbc59eba2a621dcaf4e58e5
+    c40ad49b2cb933cbf4d5f2b45a843563e627f859be399d3e164edab53932fcb6
+    c9a2fd4b5a11bc2469ad3d574425c2cf5b4984673203ed110d0c2190216cd82f
     a90dd71977a0a223265ddda7713e8cd798d14d21a3b010c9ba69b8c76c483133
-    a10793f4303640159919e3fae315561417c94fe102f08ab655c505fb279e5950
+    9b3a7743208a3c65ce2fc63b8ad572a0f801be51e95052c46b3c1abeafdde650
     95ecf8c0ae9a55b3f8743a0dfdc6fd6816e6abd9cfe9802eba3752635d0d0c41
     c7954598edb572bd776c55327ac9280ef64e864a68f923b45f02d0a3180df9e7
-    6ebe606dd85a0d9ae5e1f7cb81e3844a3cbaf80cd06c74bb74c0f2f0ac70620e
+    b9dae4e52493f1751e21ff3cdcb0c6f99e56c212af2b31be8ee309593cfd17cb
     6fe869bfaf65ea4528bcb437c8c2d818aae898ea3be9215ae082ce3548e34d08
+    538bc61ea2ef419c1e48e683d7b6a52ea45ea5b06ad765bbfa28b79d3953829f
 )
 
 
@@ -65,25 +67,29 @@ package_s6() {
     mv bin/* sbin/
 
     # Services dir and init
-    install -d etc/s6-services/{available,enabled}
+    install -d etc/s6/services/{available,enabled}
     install -m 0750 "${srcdir}/init" sbin/init
-    install -m 0750 "${srcdir}/rc.init" etc/rc.init
-    install -m 0750 "${srcdir}/rc.shutdown" etc/rc.shutdown
+    install -m 0750 "${srcdir}/rc.init" etc/s6/rc.init
+    install -m 0750 "${srcdir}/rc.shutdown" etc/s6/rc.shutdown
 
     # Early env vars
-    install -d etc/s6-env
-    echo 'UTC' >etc/s6-env/TZ
+    install -d etc/s6/env
+    echo 'UTC' >etc/s6/env/TZ
 
     # crash and finish scripts for s6-svscan
-    install -d etc/s6-init-services/.s6-svscan
-    install -m 0750 "${srcdir}/s6-svscan-crash" etc/s6-init-services/.s6-svscan/crash
-    install -m 0750 "${srcdir}/s6-svscan-finish" etc/s6-init-services/.s6-svscan/finish
+    install -d etc/s6/init-services/.s6-svscan
+    install -m 0750 "${srcdir}/s6-svscan-crash" etc/s6/init-services/.s6-svscan/crash
+    install -m 0750 "${srcdir}/s6-svscan-finish" etc/s6/init-services/.s6-svscan/finish
+
+    # early tty1 service
+    install -d etc/s6/init-services/tty1
+    install -m 0754 "${srcdir}/tty1-service" etc/s6/init-services/tty1/run
 
     # Script and named pipe for catchall logging process
-    install -d etc/s6-init-services/s6-svscan-log
-    install -m 0750 "${srcdir}/s6-svscan-log" etc/s6-init-services/s6-svscan-log/run
-    mkfifo etc/s6-init-services/s6-svscan-log/fifo
-    chmod 0600 etc/s6-init-services/s6-svscan-log/fifo
+    install -d etc/s6/init-services/s6-svscan-log
+    install -m 0750 "${srcdir}/s6-svscan-log" etc/s6/init-services/s6-svscan-log/run
+    mkfifo etc/s6/init-services/s6-svscan-log/fifo
+    chmod 0600 etc/s6/init-services/s6-svscan-log/fifo
 
     # Human readable/usable service compatibility layer
     install -m 0754 "${srcdir}/service_functions.sh" lib/s6/

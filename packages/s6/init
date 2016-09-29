@@ -1,44 +1,27 @@
 #!/bin/execlineb -P
 /bin/export PATH "/bin:/sbin"
-/bin/cd /
+cd /
+s6-setsid -qb --
 umask 022
-foreground { mount -wt tmpfs -o mode=0755 tmpfs /run }
-foreground { mount -t proc proc /proc }
-foreground { mount -t sysfs sysfs /sys }
-foreground { install -d /run/service/ }
-foreground { install -o nobody -g nogroup -d /run/uncaught-logs }
-foreground {
-    forbacktickx svc {
-        pipeline {
-            find /etc/s6-init-services -type d -mindepth 1 -maxdepth 1
-        } xargs
-    }
-    import -u svc
-    foreground { cp -a ${svc} /run/service/ }
-}
-foreground {
-    forbacktickx enabled {
-        pipeline {
-            find /etc/s6-services/enabled -type l -maxdepth 1
-        } xargs
-    }
-    import -u enabled
-    backtick -i realpath { readlink -fn ${enabled} }
-    import -u realpath
-    foreground { cp -a ${realpath} /run/service/ }
-}
+if { mount -wt tmpfs -o mode=0755 tmpfs /run }
+if { mount -t proc proc /proc }
+if { mount -t sysfs sysfs /sys }
+if { cp -a /etc/s6/init-services /run/service }
+if { install -m 2700 -o nobody -g nogroup -d /run/uncaught-logs }
 foreground {
     if { test -e /etc/hostname } foreground { hostname -F /etc/hostname }
 }
-s6-envdir -I -- /etc/s6-env
+emptyenv -p
+s6-envdir -I -- /etc/s6/env
 redirfd -r 0 /dev/null
 redirfd -wnb 1 /run/service/s6-svscan-log/fifo
 background {
     s6-setsid --
     redirfd -w 1 /run/service/s6-svscan-log/fifo
     fdmove -c 2 1
-    /etc/rc.init
+    /etc/s6/rc.init
 }
 unexport !
 fdmove -c 2 1
-s6-svscan -t0 /run/service
+cd /run/service
+s6-svscan -st0

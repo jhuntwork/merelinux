@@ -1,6 +1,10 @@
 #!/bin/sh
+# Try to stop all supervised services within 10 seconds
+s6-svwait -D -t 10000 /run/service
+
 # sync to disk
 sync
+
 # Send the kernel the appropriate signal through
 # busybox's halt, poweroff or reboot cmds
 $@ -f

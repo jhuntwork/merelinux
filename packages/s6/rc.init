@@ -2,7 +2,15 @@
 # Mount /dev/pts
 install -d /dev/pts
 mount -t devpts devpts /dev/pts
+
+# /dev/fd
 ln -s /proc/self/fd /dev/fd
+
+# Copy over enabled services and refresh
+for dir in $(find /etc/s6/services/enabled -maxdepth 1 -type l | xargs) ; do
+   cp -a $(readlink -fn ${dir}) /run/service/
+done
+s6-svscanctl -a /run/service
 
 # TODO: add filesystem checks?
 # Remount the root filesystem read-write
@@ -11,9 +19,5 @@ mount -o remount,rw /
 # sysctl settings
 sysctl -w -p /etc/sysctl.conf
 
-# FIXME: move this out of here
-# Start network interfaces
-ip addr add 127.0.0.1/8 dev lo
-ip link set lo up
-ip link set eth0 up
-udhcpc -v -R -b
+# Bring up network devices
+ifup -a
