@@ -1,10 +1,11 @@
 post_install() {
-    chmod u+s bin/busybox
-    install -d /etc/s6-services/enabled
-    ln -nsf ../available/tty1 /etc/s6-services/enabled/
+    chmod u+s /bin/busybox
+}
+
+pre_remove() {
+    service ntpd disable >/dev/null 2>&1
 }
 
 post_remove() {
-    rm -f /etc/s6-services/enabled/tty1
     pacman -Sy busybox-static
 }

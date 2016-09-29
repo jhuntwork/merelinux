@@ -1,6 +1,6 @@
 pkgname=(busybox busybox-static)
 pkgver=1.24.1
-pkgrel=2
+pkgrel=3
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
 arch=(x86_64)
 url='http://busybox.net'
@@ -18,22 +18,26 @@ source=(
     udhcpc.script
     sysctl.conf
     telinit
-    tty1-service
     ntpd-service
+    ntpd-log
     ntp.conf
+    if-pre-up-bridge
+    if-post-down-bridge
 )
 
 sha256sums=(
     37d03132cc078937360b392170b7a1d0e5b322eee9f57c0b82292a8b1f0afe3d
-    bc86efc8f8f50f8655833f7a45639156b6b35217e41b36135db1a4fd59bcd105
+    11e129606a78278facc24b36096ea0bd9749a37e924ca57d5dc35d833b31a3ca
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
     dc9ad12b967c6416c1f960880e69d69af12036bd67eab2969bf35dc24fed8321
     980d3689463f75ee36ab67cff579fdcbdbeb629c99331c61c9d9397e869dd340
     0be69e4c03c50b91784dfaf9f51bceb1a01c4c61d24045c6022f2bfa6a31e4e6
     f653d8703f3d061bca3c302470363b80623f2d6494acb9c2cde0c6483e21b34d
-    538bc61ea2ef419c1e48e683d7b6a52ea45ea5b06ad765bbfa28b79d3953829f
-    327d16c7732cd5dcc3eca07a1c414cd025f66af22339cba1c27cc58e950eb0d9
+    0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
+    6572c2fdb51f665a236507a59f1aee43c3b3212d6636141775f082b87868333d
     644321e67516c8e6869dd1f09b9dfc06d6758dec91df0bdea3cb614419a1e0d3
+    de0724907f8cbd9e0f95f0d568a1fe7423d90007a7f565684e42516d8911ca9e
+    2d9876f5b675a6f86b38b975fdaa19cd109dd7c91cbf8a5b0b602dbb1fed6f49
 )
 
 install=busybox.install
@@ -69,20 +73,27 @@ build() {
 
 common_install() {
     rm -f bin/bash
+
+    # configuration/scripts
     install -d etc/network/if-pre-up.d
+    install -m 0755 "${srcdir}/if-pre-up-bridge" \
+        etc/network/if-pre-up.d/01-bridge
     install -d etc/network/if-up.d
     install -d etc/network/if-down.d
     install -d etc/network/if-post-down.d
+    install -m 0755 "${srcdir}/if-post-down-bridge" \
+        etc/network/if-post-down.d/01-bridge
     install -d share/udhcpc
     install -m 0755 "${srcdir}/udhcpc.script" \
         share/udhcpc/default.script
     install -m 0644 "${srcdir}/sysctl.conf" etc/
     install -d sbin
     install -m 0755 "${srcdir}/telinit" sbin/
-    install -d etc/s6-services/available/tty1
-    install -m 0754 "${srcdir}/tty1-service" etc/s6-services/available/tty1/run
-    install -d etc/s6-services/available/ntpd
-    install -m 0754 "${srcdir}/ntpd-service" etc/s6-services/available/ntpd/run
+
+    # s6 Services
+    install -d etc/s6/services/available/ntpd/log
+    install -m 0754 "${srcdir}/ntpd-service" etc/s6/services/available/ntpd/run
+    install -m 0754 "${srcdir}/ntpd-log" etc/s6/services/available/ntpd/log/run
     install -m 0644 "${srcdir}/ntp.conf" etc/ntp.conf
 }
 

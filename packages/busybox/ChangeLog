@@ -1,3 +1,9 @@
+2016-09-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.24.1-3:
+	tty1 service moving back to s6 package
+	s6 has new services location
+
 2016-03-02 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.24.1-2:

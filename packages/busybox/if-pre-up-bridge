@@ -1,0 +1,10 @@
+#!/bin/sh -e
+if [ -n "$IF_BRIDGE_PORTS" ] ; then
+    for iface in $IF_BRIDGE_PORTS ; do
+        ip link set $iface up
+    done
+    if ! brctl show | grep -q $IFACE ; then
+        brctl addbr $IFACE
+        brctl addif $IFACE $IF_BRIDGE_PORTS
+    fi
+fi
