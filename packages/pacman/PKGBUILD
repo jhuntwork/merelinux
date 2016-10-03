@@ -1,6 +1,6 @@
 pkgname=(pacman pacman-build)
-pkgver=4.2.1
-pkgrel=3
+pkgver=5.0.1
+pkgrel=1
 pkgdesc='The pacman Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -27,8 +27,8 @@ source=(
     pacman.conf
 )
 sha256sums=(
-    6d411509310760acbf0c3cf4d7e72c604b3e7919306681507c9107c527709cc5
-    e81771f782e27a5e10e076c9e3ba1f93cc796318608c9769bea13e952c53f1de
+    84599e2ee2158134fd704f1cd681ea46e021165bed4df5f002aa1748caef9e7b
+    6cc9e88b91ac55b7facaddfd196446043c488734acf7ca86861c4d42451dab6b
     a4c69eb1b3be80292ad3dd1a90b4c4e9c24d6b7fb1235622fbfe4510c484494a
 )
 
