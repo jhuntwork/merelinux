@@ -1,8 +1,8 @@
 #!/bin/sh -e
 . /lib/s6/service_functions.sh
 
-# SVCS_DIR is the top-level services directory. i.e., /run/service
-# svcdir is the service-specific service directory. i.e., /run/service/svc
+# SVCS_DIR is the top-level services directory. i.e., /run/services
+# svcdir is the service-specific service directory. i.e., /run/services/svc
 # AVAIL_DIR is the directory containing configured services
 # ENABL_DIR is a directory containing symlinks to available services which
 # should be considered 'enabled'.
@@ -42,11 +42,13 @@ case "$act" in
         is_supervised || exit 1
         message="Starting ${svc}... "
         run_cmd "s6-svc -u ${svcdir}"
+        s6-svok "${svcdir}/log" && s6-svc -u "${svcdir}/log"
         ;;
     stop)
         is_supervised || exit 1
         message="Stopping ${svc}... "
         run_cmd "s6-svc -d ${svcdir}"
+        s6-svok "${svcdir}/log" && s6-svc -d "${svcdir}/log"
         ;;
     status)
         is_supervised || exit 1
