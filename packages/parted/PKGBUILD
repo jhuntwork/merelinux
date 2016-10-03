@@ -1,0 +1,46 @@
+pkgname=parted
+pkgver=3.2
+pkgrel=1
+pkgdesc='partition table manipulator'
+arch=(x86_64)
+url='http://www.gnu.org/software/parted'
+license=(GPL3)
+groups=(base)
+depends=()
+makedepends=(
+    libuuid-dev
+    libncurses-dev
+    readline-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
+    parted-3.2-devmapper.patch
+)
+
+sha256sums=(
+    858b589c22297cacdf437f3baff6f04b333087521ab274f7ab677cb8c6bb78e4
+    a72db7a487b891b19e6b859a6deaa4defe0c603842f1a91962de553e68acc96f
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i 's@loff_t@off_t@g' libparted/fs/xfs/platform_defs.h
+    patch -Np1 -i "${srcdir}/parted-3.2-devmapper.patch"
+    CFLAGS="$CFLAGS -fPIC" LDFLAGS="-Wl,-static" \
+    ./configure \
+      --prefix='' \
+      --enable-static \
+      --disable-shared \
+      --disable-device-mapper
+    make $MAKEFLAGS V=1
+}
+
+package() {
+    options=(upx)
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="$pkgdir" install
+    rm -rf "${pkgdir}"/{include,lib,share}
+}
