@@ -1,5 +1,5 @@
 pkgname=(readline readline-dev)
-pkgver=6.3
+pkgver=7.0
 pkgrel=1
 pkgdesc='A library for allowing users to edit command lines as they are typed in.'
 arch=('x86_64')
@@ -15,26 +15,15 @@ PURGE_TARGETS+=(share/info/* share/readline/*)
 
 source=(
     "http://ftp.gnu.org/gnu/readline/${pkgname}-${pkgver}.tar.gz"
-    'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-001'
-    'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-002'
-    'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-003'
-    'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-004'
-    'http://ftp.gnu.org/gnu/readline/readline-6.3-patches/readline63-005'
 )
 
 sha256sums=(
-    '56ba6071b9462f980c5a72ab0023893b65ba6debb4eeb475d7a563dc65cafd43'
-    '1a79bbb6eaee750e0d6f7f3d059b30a45fc54e8e388a8e05e9c3ae598590146f'
-    '39e304c7a526888f9e112e733848215736fb7b9d540729b9e31f3347b7a1e0a5'
-    'ec41bdd8b00fd884e847708513df41d51b1243cecb680189e31b7173d01ca52f'
-    '4547b906fb2570866c21887807de5dee19838a60a1afb66385b272155e4355cc'
-    '877788f9228d1a9907a4bcfe3d6dd0439c08d728949458b41208d9bf9060274b'
+    750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    for p in readline63-{001..005} ; do patch -Np2 -i "${srcdir}/${p}" ; done
     sed -i '/MV.*old/d' Makefile.in
     sed -i '/{OLDSUFF}/c:' support/shlib-install
     CFLAGS="$CFLAGS -fPIC" \
@@ -45,8 +34,8 @@ build() {
 
 package_readline() {
     pkgfiles=(
-        'lib/libhistory.so.6'
-        'lib/libreadline.so.6'
+        'lib/libhistory.so.7'
+        'lib/libreadline.so.7'
         "lib/libreadline.so.${pkgver}"
         "lib/libhistory.so.${pkgver}"
     )
@@ -57,6 +46,7 @@ package_readline() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
+    set -o pipefail
     find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
 
@@ -67,7 +57,6 @@ package_readline-dev() {
         'lib/libhistory.a'
         'lib/libhistory.so'
         'include'
-        'share/man'
     )
     depends=(
         readline
@@ -76,5 +65,6 @@ package_readline-dev() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
+    set -o pipefail
     find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
 }
