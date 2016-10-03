@@ -1,5 +1,5 @@
 pkgname=(linux linux-headers)
-pkgver=4.4.2
+pkgver=4.7.5
 pkgrel=1
 pkgdesc='The Linux kernel'
 arch=(x86_64)
@@ -16,8 +16,8 @@ source=(
 )
 
 sha256sums=(
-    82fd2a22a9efd81200e08bc2d316ebf3265822f190bbac4ca0677bb42cf08626
-    fe9c3f97b6ea3d53416604348648d5eb57e7838d3ab225337f489698e18a7088
+    97b0aff0264a661c256e738cec43b4e2addbb21f8de73fcca16a5a25f619d092
+    04df4ada0c9cba5237718f92a43b4a0f70196d6cd09757499850a51ece98f294
 )
 
 build() {
