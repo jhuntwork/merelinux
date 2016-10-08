@@ -1,3 +1,9 @@
+2016-10-03 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.0.1-2 :
+	Backup configuration files on installation of new package
+	Add new binaries bin/pactree, bin/pacman-optimize
+
 2016-09-29 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.0.1-1 :

@@ -1,6 +1,6 @@
 pkgname=(pacman pacman-build)
 pkgver=5.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc='The pacman Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -46,40 +46,43 @@ build() {
       --disable-nls \
       --disable-doc
       make V=1 LIBS='-lm -lz -lssl -lcrypto -llzma' $MAKEFLAGS
+    make DESTDIR="$(pwd)/.pkgdir/tmp" install
+    cd "./.pkgdir/tmp"
+    mv etc/pacman.conf{,.example}
+    mv etc/makepkg.conf{,.example}
+    install -vm 0644 "${srcdir}/pacman.conf" etc/
+    install -vm 0644 "${srcdir}/makepkg.conf" etc/
 }
 
 package_pacman() {
+    backup=(etc/pacman.conf)
     pkgfiles=(
         bin/pacman
-        bin/pacman-key
-        bin/pacsort
         bin/pacman-db-upgrade
-        bin/vercmp
+        bin/pacman-key
+        bin/pacman-optimize
+        bin/pacsort
+        bin/pactree
         bin/pkgdelta
+        bin/vercmp
         "etc/pacman.conf*"
         var
     )
-    options+=(
-        upx
-    )
+    options+=(upx)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    mv ${pkgdir}-tmp/etc/pacman.conf{,.example}
-    install -vm 0644 "${srcdir}/pacman.conf" "${pkgdir}-tmp/etc/"
-    cd "${pkgdir}-tmp"
+    cd "${srcdir}/${pkgbase}-${pkgver}/.pkgdir/tmp"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_pacman-build() {
+    backup=(etc/makepkg.conf)
     pkgfiles=(
-        bin/makepkg
         bin/cleanupdelta
-        bin/repo-add
-        bin/repo-remove
-        bin/repo-elephant
+        bin/makepkg
+        bin/makepkg-template
+        bin/repo-*
         bin/testpkg
-        bin/testdb
         "etc/makepkg.conf*"
         share
     )
@@ -93,10 +96,7 @@ package_pacman-build() {
         xz
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    mv ${pkgdir}-tmp/etc/makepkg.conf{,.example}
-    install -vm 0644 "${srcdir}/makepkg.conf" "${pkgdir}-tmp/etc/"
-    cd "${pkgdir}-tmp"
+    cd "${srcdir}/${pkgbase}-${pkgver}/.pkgdir/tmp"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
