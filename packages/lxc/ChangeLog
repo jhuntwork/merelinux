@@ -1,3 +1,10 @@
+2016-10-03 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.1.5-2 :
+	Package empty dirs
+	Add a dependency on acl
+	Specify /etc/lxc/default.conf as a config file to backup
+
 2016-02-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.1.5-1 :

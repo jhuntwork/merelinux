@@ -1,6 +1,6 @@
 pkgname=(lxc lxc-dev)
 pkgver=1.1.5
-pkgrel=1
+pkgrel=2
 pkgdesc='A userspace interface for the Linux kernel containment features'
 arch=(x86_64)
 url='https://linuxcontainers.org/'
@@ -39,11 +39,14 @@ package_lxc() {
         share/lxc
         var
     )
-    depends=(libcap)
+    options+=(emptydirs)
+    depends=(acl libcap)
+    backup=(etc/lxc/default.conf)
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    set -o pipefail
     install -m 0755 "${srcdir}/lxc-merebuild" "${pkgdir}/share/lxc/templates/"
 }
 
@@ -57,5 +60,6 @@ package_lxc-dev() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
