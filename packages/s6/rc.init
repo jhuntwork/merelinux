@@ -13,8 +13,10 @@ done
 s6-svscanctl -a /run/service
 
 # TODO: add filesystem checks?
-# Remount the root filesystem read-write
-mount -o remount,rw /
+# mount filesystems in /etc/fstab
+mount -a
+
+[ -e /var/log/lastlog ] || touch /var/log/lastlog
 
 # sysctl settings
 sysctl -w -p /etc/sysctl.conf
