@@ -1,5 +1,5 @@
 pkgname=base-layout
-pkgver=1.5
+pkgver=1.6
 pkgrel=1
 pkgdesc='The base directory structure and a few core files for the system.'
 arch=('x86_64')
@@ -21,7 +21,7 @@ source=(
 sha256sums=(
     d0870c90f2f05910050cb324e96664b2bb995e790eac4feb002352265583ead3
     79aa3fb64f0b0d18ed4c53680d1fc991f7782dda9dcafc6bb592648056e21057
-    f5e5f56bc470d3fcb1257505cdc86c37909053d9f626e9f666c52adc85bcbde1
+    01152b10609e6d8fe9ce37f518b325c33d59ab142eb597591735da692d1bbfc4
     6e7af7647d4064e6df502e1fa5f062a7ba753487a906850e9f332c6f0a7be7a3
     b4d36eb75767bebb41c5fa7a35599952e1883b3d3f6332496e1561eeb4067018
     297b784a25fc59641589c6ef05dc26680e2805e9cab37a4ea3699aa072a25c2e

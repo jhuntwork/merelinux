@@ -3,14 +3,11 @@
 
 # Prompt settings
 hn=$(hostname -s)
-R="\033[00m"
-M="\033[32m"
-P='$'
 
-[ "${USER}" = "root" ] && M="\033[31m" && P='#'
+[ "${USER}" = "root" ] && P='#'
 
 set_ps1() {
-    printf "${hn} ${M}|\033[36m ${PWD}${R}\n${P} "
+    printf "${hn} | ${PWD}\n${P} "
 }
 
 PS1='$(set_ps1)'
