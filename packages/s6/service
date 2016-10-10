@@ -18,9 +18,9 @@ case "$act" in
                 cp -a "${AVAIL_DIR}/${svc}" "${SVCS_DIR}"
             fi
             s6-svscanctl -a ${SVCS_DIR}
-            display_ok "$message"
+            display_ok
         else
-            display_fail "$message"
+            display_fail
         fi
         ;;
     disable)
@@ -33,9 +33,9 @@ case "$act" in
             rm -rf ${svcdir}
             s6-svscanctl -an ${SVCS_DIR}
         ) ; then
-            display_ok "$message"
+            display_ok
         else
-            display_fail "$message"
+            display_fail
         fi
         ;;
     start)

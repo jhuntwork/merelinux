@@ -3,6 +3,9 @@
 install -d /dev/pts
 mount -t devpts devpts /dev/pts
 
+# TODO: add filesystem checks?
+mount -o rw,remount /
+
 # /dev/fd
 ln -s /proc/self/fd /dev/fd
 
@@ -12,8 +15,7 @@ for dir in $(find /etc/s6/services/enabled -maxdepth 1 -type l | xargs) ; do
 done
 s6-svscanctl -a /run/service
 
-# TODO: add filesystem checks?
-# mount filesystems in /etc/fstab
+# mount other filesystems in /etc/fstab
 mount -a
 
 [ -e /var/log/lastlog ] || touch /var/log/lastlog

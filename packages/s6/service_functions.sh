@@ -1,26 +1,13 @@
-N="\033[00m"
 SVCS_DIR="/run/service"
 AVAIL_DIR="/etc/s6/services/available"
 ENABL_DIR="/etc/s6/services/enabled"
 
-get_columns() {
-    stty -a | grep -o columns\ [0-9]*\; | grep -oE '[0-9]*'
-}
-
 display_ok() {
-    C="\033[32m"
-    len=$(printf "$@" | wc -m)
-    col=$(get_columns)
-    space=$(expr $col - $len - 7)
-    printf "% ${space}s[ ${C}OK${N} ]\n"
+    printf " OK\n"
 }
 
 display_fail() {
-    C="\033[31m"
-    len=$(printf "$@" | wc -m)
-    col=$(get_columns)
-    space=$(expr $col - $len - 9)
-    printf "% ${space}s[ ${C}FAIL${N} ]\n"
+    printf " FAIL\n"
 }
 
 usage() {
@@ -78,9 +65,9 @@ is_service() {
 run_cmd() {
     printf "%s" "$message"
     if $1 ; then
-        display_ok "$message"
+        display_ok
     else
-        display_fail "$message"
+        display_fail
     fi
 }
 
