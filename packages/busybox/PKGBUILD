@@ -1,6 +1,6 @@
 pkgname=(busybox busybox-static)
-pkgver=1.24.1
-pkgrel=3
+pkgver=1.24.2
+pkgrel=2
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
 arch=(x86_64)
 url='http://busybox.net'
@@ -12,9 +12,9 @@ options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
+    busybox-config
     busybox.install
     poweroff.patch
-    busybox-config
     udhcpc.script
     sysctl.conf
     telinit
@@ -23,24 +23,34 @@ source=(
     ntp.conf
     if-pre-up-bridge
     if-post-down-bridge
+    syslogd-service
+    syslogd-log
+    klogd-service
 )
 
 sha256sums=(
-    37d03132cc078937360b392170b7a1d0e5b322eee9f57c0b82292a8b1f0afe3d
+    e71ef53ec656f31c42633918d301405d40dea1d97eca12f272217ae4a971c855
+    c15cae47f5623f27379f529c13ad0a87abd0cef30957281416a4363e2ce54771
     11e129606a78278facc24b36096ea0bd9749a37e924ca57d5dc35d833b31a3ca
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
-    dc9ad12b967c6416c1f960880e69d69af12036bd67eab2969bf35dc24fed8321
     980d3689463f75ee36ab67cff579fdcbdbeb629c99331c61c9d9397e869dd340
-    0be69e4c03c50b91784dfaf9f51bceb1a01c4c61d24045c6022f2bfa6a31e4e6
+    49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
     f653d8703f3d061bca3c302470363b80623f2d6494acb9c2cde0c6483e21b34d
     0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
     6572c2fdb51f665a236507a59f1aee43c3b3212d6636141775f082b87868333d
     644321e67516c8e6869dd1f09b9dfc06d6758dec91df0bdea3cb614419a1e0d3
     de0724907f8cbd9e0f95f0d568a1fe7423d90007a7f565684e42516d8911ca9e
     2d9876f5b675a6f86b38b975fdaa19cd109dd7c91cbf8a5b0b602dbb1fed6f49
+    44ab6c3435535856b54269be711de6514e3c97612684c1c23c5f90f14b40b470
+    4882124b9d9e2f9b369acec0f0b3bd289b3f3d3d86d8b3751b931e78d4fe669b
+    30129377e9d49cdccd58882f9c4fd6d45ded5a3762ca1a27ee50414381d3af06
 )
 
 install=busybox.install
+backup=(
+    etc/ntp.conf
+    etc/sysctl.conf
+)
 
 
 build() {
@@ -87,6 +97,7 @@ common_install() {
     install -m 0755 "${srcdir}/udhcpc.script" \
         share/udhcpc/default.script
     install -m 0644 "${srcdir}/sysctl.conf" etc/
+    install -m 0644 "${srcdir}/ntp.conf" etc/ntp.conf
     install -d sbin
     install -m 0755 "${srcdir}/telinit" sbin/
 
@@ -94,7 +105,11 @@ common_install() {
     install -d etc/s6/services/available/ntpd/log
     install -m 0754 "${srcdir}/ntpd-service" etc/s6/services/available/ntpd/run
     install -m 0754 "${srcdir}/ntpd-log" etc/s6/services/available/ntpd/log/run
-    install -m 0644 "${srcdir}/ntp.conf" etc/ntp.conf
+    install -d etc/s6/services/available/syslogd/log
+    install -m 0754 "${srcdir}/syslogd-service" etc/s6/services/available/syslogd/run
+    install -m 0754 "${srcdir}/syslogd-log" etc/s6/services/available/syslogd/log/run
+    install -d etc/s6/services/available/klogd
+    install -m 0754 "${srcdir}/klogd-service" etc/s6/services/available/klogd/run
 }
 
 package_busybox() {

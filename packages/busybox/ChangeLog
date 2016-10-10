@@ -1,3 +1,15 @@
+2016-10-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.24.2-2:
+	Remove crond, crontab, sendmail
+	Add syslogd, klogd
+	Specify ntp.conf and systcl.conf as config files to backup
+
+2016-10-03 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.24.2-1:
+	Upgrade to 1.24.2
+
 2016-09-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.24.1-3:
