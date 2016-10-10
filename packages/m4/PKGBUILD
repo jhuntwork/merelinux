@@ -1,6 +1,6 @@
 pkgname=m4
 pkgver=1.4.17
-pkgrel=1
+pkgrel=2
 pkgdesc='An implementation of the traditional Unix macro processor.'
 arch=(x86_64)
 url='http://www.gnu.org/software/m4/'
@@ -8,7 +8,7 @@ license=(GPL3)
 groups=(base)
 depends=()
 makedepends=()
-options=()
+options=(upx)
 changelog=ChangeLog
 source=(
     "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
@@ -31,4 +31,5 @@ build() {
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="$pkgdir" install
+    rm -rf "${pkgdir}"/{lib,share}
 }
