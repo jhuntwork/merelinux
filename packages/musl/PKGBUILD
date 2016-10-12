@@ -20,6 +20,7 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i 's@-Os@-O3@g' configure
     CFLAGS='' mksh ./configure --prefix=/
     make $MAKEFLAGS
 }
