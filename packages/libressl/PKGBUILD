@@ -1,0 +1,69 @@
+pkgname=(libressl libressl-dev ca-certs)
+pkgver=2.5.0
+pkgrel=1
+pkgdesc='A fork of OpenSSL 1.0.1g with the goal modernizing the codebase and improving security'
+arch=(x86_64)
+url='http://www.libressl.org'
+license=(OpenSSL SSLeay)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+
+source=(
+    "http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${pkgver}.tar.gz"
+)
+sha256sums=(
+    8652bf6b55ab51fb37b686a3f604a2643e0e8fde2c56e6a936027d12afda6eae
+)
+
+
+build() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    CFLAGS='-fPIC' ./configure --prefix=''
+    make $MAKEFLAGS V=1
+}
+
+check() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make check
+    make DESTDIR="$(pwd)/.destdir" install
+}
+
+package_libressl() {
+    pkgfiles=(
+        bin
+        etc/ssl/*.cnf
+        "lib/lib*.so.*"
+    )
+    depends=(musl)
+
+    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_libressl-dev() {
+    pkgfiles=(
+        include
+        "lib/*.a"
+        "lib/*.so"
+        lib/pkgconfig
+    )
+    depends=(libressl)
+
+    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_ca-certs() {
+    pkgfiles=(
+        etc/ssl/ca-certs.pem
+    )
+    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    mv etc/ssl/cert.pem etc/ssl/ca-certs.pem
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
