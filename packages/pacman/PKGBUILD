@@ -1,6 +1,6 @@
 pkgname=(pacman pacman-build)
 pkgver=5.0.1
-pkgrel=3
+pkgrel=4
 pkgdesc='The pacman Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -10,11 +10,12 @@ depends=()
 makedepends=(
     gettext
     gpgme-dev
-    libtool
+    libacl-dev
     libarchive-dev
     libcurl-dev
     liblzma-dev
-    openssl-dev
+    libressl-dev
+    libtool
     pkgconf
     zlib-dev
 )
@@ -38,16 +39,21 @@ build() {
     ./autogen.sh
     sed -i '/x-cpio/s@)@|*application/x-empty*)@' scripts/makepkg.sh.in
     sed -i 's@ --apparent-size@@' configure
-    LDFLAGS='-Wl,-static' \
+    CFLAGS='-fPIC' LDFLAGS='-Wl,-static' \
     ./configure \
       --prefix='' \
       --with-gpgme \
       --disable-shared \
       --disable-nls \
       --disable-doc
-      make V=1 LIBS='-lm -lz -lssl -lcrypto -llzma' $MAKEFLAGS
-    make DESTDIR="$(pwd)/.pkgdir/tmp" install
-    cd "./.pkgdir/tmp"
+    make V=1 LIBS='-lm -lz -lssl -lcrypto -llzma -lacl' -j1
+}
+
+check() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    destdir="$(pwd)/.destdir"
+    make DESTDIR="$destdir" install
+    cd "$destdir"
     mv etc/pacman.conf{,.example}
     mv etc/makepkg.conf{,.example}
     install -vm 0644 "${srcdir}/pacman.conf" etc/
@@ -70,7 +76,7 @@ package_pacman() {
     )
     options+=(upx)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}/.pkgdir/tmp"
+    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
@@ -91,12 +97,11 @@ package_pacman-build() {
         curl
         file
         libarchive
-        openssl
+        libressl
         pacman
         xz
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}/.pkgdir/tmp"
+    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
