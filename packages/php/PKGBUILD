@@ -1,9 +1,9 @@
 pkgname=(php php-fpm php-dev)
-pkgver=5.6.7
+pkgver=5.6.26
 memcachedver=2.2.0
 mongover=1.6.14
 yamlver=1.2.0
-pkgrel=3
+pkgrel=1
 pkgdesc='The PHP scripting language'
 arch=(x86_64)
 url='http://www.php.net'
@@ -17,7 +17,7 @@ makedepends=(
     libxml2-dev
     libyaml-dev
     gettext
-    openssl-dev
+    libressl-dev
     pkgconf
     zlib-dev
 )
@@ -36,7 +36,7 @@ source=(
     php.ini
 )
 sha256sums=(
-    02954fb74c61a7879d48ebdcd4ecb78aa0056f4215ca9b096232de28eb8f17bc
+    d47aab8083a4284b905777e1b45dd7735adc53be827b29f896684750ac8b6236
     17b9600f6d4c807f23a3f5c45fcd8775ca2e61d6eda70370af2bef4c6e159f58
     586a0f55d29198010da5f4c932a183491f114db6e1b0ba8e40e7246b1a4a96d0
     fdf0eec6bf16b0c45e58076a2048f96140a778463724fb82ab49ab5fb4c7e19a

@@ -1,6 +1,12 @@
+2016-10-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.6.26-1 :
+	Upgrade to 5.6.26
+	Link against libressl
+
 2016-09-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-	* 5.6.7-4 :
+	* 5.6.7-3 :
 	Update the mongo driver to 1.6.14
 	Add an s6 service script for php-fpm
 
