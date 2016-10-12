@@ -1,5 +1,5 @@
 pkgname=wget
-pkgver=1.16.3
+pkgver=1.18
 pkgrel=1
 pkgdesc='An HTTP, HTTPS and FTP file retriever'
 arch=(x86_64)
@@ -8,20 +8,21 @@ license=(GPL3)
 groups=(base)
 depends=()
 makedepends=(
-    openssl-dev
+    libressl-dev
     pkgconf
     zlib-dev
 )
-options=()
+options=(upx)
 changelog=ChangeLog
 source=(
     "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
 )
 
 sha256sums=(
-    67f7b7b0f5c14db633e3b18f53172786c001e153d545cfc85d82759c5c2ffb37
+    b5b55b75726c04c06fe253daec9329a6f1a3c0c1878e3ea76ebfebc139ea9cc1
 )
 
+backup=(etc/wgetrc)
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
@@ -37,5 +38,5 @@ package() {
     make DESTDIR="$pkgdir" install
     rm -rf "${pkgdir}/lib"
     rm -rf "${pkgdir}/share"
-    echo "ca-certificate = /etc/certs/ca-bundle.crt" >>"${pkgdir}/etc/wgetrc"
+    echo "ca-certificate = /etc/ssl/ca-certs.pem" >>"${pkgdir}/etc/wgetrc"
 }
