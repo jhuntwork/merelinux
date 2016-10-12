@@ -3,7 +3,7 @@ pkgname=(
     libcurl
     libcurl-dev
 )
-pkgver=7.43.0
+pkgver=7.50.3
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=(x86_64)
@@ -11,11 +11,7 @@ url='http://curl.haxx.se'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=(
-    openssl-dev
-    perl
-    zlib-dev
-)
+makedepends=(libressl-dev perl zlib-dev)
 options=()
 changelog=ChangeLog
 
@@ -23,13 +19,14 @@ source=(
     "${url}/download/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    1a084da1edbfc3bd632861358b26af45ba91aaadfb15d6482de55748b8dfc693
+    3991c2234986178af3b3f693e5afa35d49da2ab4ba61292e3817222446dca7e1
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     rm src/tool_hugehelp.c
+    sed -i 's@sys/poll.h@poll.h@g' $(grep -lr 'sys/poll.h' .)
     CFLAGS="$CFLAGS -fPIC" \
     LDFLAGS='-Wl,-static' \
     ./configure \
@@ -37,8 +34,8 @@ build() {
       --enable-static \
       --disable-shared \
       --with-ssl \
-      --with-ca-bundle=/etc/certs/ca-bundle.crt
-    make $MAKEFLAGS
+      --with-ca-bundle=/etc/ssl/ca-certs.pem
+    make $MAKEFLAGS V=1
     install -v src/curl{,-static}
     unset LDFLAGS
     make clean
@@ -48,8 +45,8 @@ build() {
       --enable-static \
       --enable-shared \
       --with-ssl \
-      --with-ca-bundle=/etc/certs/ca-bundle.crt
-    make $MAKEFLAGS
+      --with-ca-bundle=/etc/ssl/ca-certs.pem
+    make $MAKEFLAGS V=1
 }
 
 package_curl() {
@@ -57,7 +54,7 @@ package_curl() {
         bin/curl
     )
     depends=(
-        ca-certificates
+        ca-certs
     )
     options=(upx)
 
@@ -65,6 +62,7 @@ package_curl() {
     make DESTDIR="${pkgdir}-tmp" install
     install -m0755 -v src/curl-static "${pkgdir}-tmp/bin/curl"
     cd "${pkgdir}-tmp"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
@@ -73,8 +71,9 @@ package_libcurl() {
         "lib/libcurl.so.*"
     )
     depends=(
+        ca-certs
         musl
-        openssl
+        libressl
         zlib
     )
 
@@ -82,6 +81,7 @@ package_libcurl() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
@@ -101,5 +101,6 @@ package_libcurl-dev() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
