@@ -1,5 +1,5 @@
 pkgname=(git git-extra)
-pkgver=2.5.0
+pkgver=2.10.1
 pkgrel=1
 pkgdesc='A distributed version control system'
 arch=('x86_64')
@@ -8,12 +8,12 @@ license=('GPL2')
 groups=('base')
 depends=(
     libcurl
-    openssl
+    libressl
     zlib
 )
 makedepends=(
     libcurl-dev
-    openssl-dev
+    libressl-dev
     perl
     zlib-dev
 )
@@ -24,13 +24,13 @@ source=(
     "https://www.kernel.org/pub/software/scm/git/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    cc59b1bac6c1c67a9159872863f6c5bbe0d9404cac2a85c3e9d9fa49923ce45c
+    a9c32df9061cfc2c194ecaa0357ba273c1f24a0dbf0d856b03dcedafcd0a4dc6
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-
+    sed -i 's@sys/poll.h@poll.h@g' $(grep -lr 'sys/poll.h' .)
     sed -i 's@/usr/bin/perl@/bin/perl@g' `grep -lr "/usr/bin/perl" .`
     sed -i '/absolute directory/d' configure
     ./configure \
@@ -66,6 +66,7 @@ package_git() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
+    set -o pipefail
     find ${rmfiles[@]} -delete
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
@@ -86,12 +87,13 @@ package_git-extra() {
         'lib/git-core/git-send-email'
         'lib/git-core/git-svn'
         'lib/perl5'
-        'share/git-web'
+        'share/gitweb'
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
