@@ -4,7 +4,7 @@ pkgname=(
     libacl-dev
 )
 pkgver=2.2.52
-pkgrel=1
+pkgrel=2
 pkgdesc='A library for manipulating POSIX access control lists.'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/acl'
@@ -24,9 +24,19 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    ./configure \
+    CFLAGS='-fPIC' ./configure \
       --prefix=''
-    make
+    make $MAKEFLAGS
+}
+
+check() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="$(pwd)/.destdir" install
+    make DESTDIR="$(pwd)/.destdir" install-lib
+    make DESTDIR="$(pwd)/.destdir" install-dev
+    mv .destdir/libexec/* .destdir/lib
+    rm .destdir/lib/libacl.so
+    ln -s libacl.so.1 .destdir/lib/libacl.so
 }
 
 package_acl() {
@@ -36,39 +46,34 @@ package_acl() {
     depends=(
         libacl
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_libacl() {
     pkgfiles=(
-        lib
+        lib/lib*.so.*
     )
     depends=(
         libattr
         musl
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install-lib
-    cd "${pkgdir}-tmp"
+    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_libacl-dev() {
     pkgfiles=(
         include
-        lib
+        lib/*.so
+        lib/*.a
     )
     depends=(
         libacl
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install-dev
-    cd "${pkgdir}-tmp"
+    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
