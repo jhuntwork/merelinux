@@ -1,6 +1,6 @@
 pkgname=(git git-extra)
 pkgver=2.10.1
-pkgrel=1
+pkgrel=2
 pkgdesc='A distributed version control system'
 arch=('x86_64')
 url='http://git-scm.com/'
@@ -9,13 +9,13 @@ groups=('base')
 depends=(
     libcurl
     libressl
-    zlib
+    libz
 )
 makedepends=(
     libcurl-dev
     libressl-dev
     perl
-    zlib-dev
+    libz-dev
 )
 options=()
 changelog=ChangeLog
