@@ -1,6 +1,6 @@
 pkgname=bash
-pkgver=4.3.39
-archivever=4.3.30
+pkgver=4.4
+archivever=4.4
 pkgrel=1
 pkgdesc='A full-featured sh-compatible shell.'
 arch=('x86_64')
@@ -8,69 +8,51 @@ url='http://www.gnu.org/software/bash'
 license=('GPL3')
 groups=('base')
 depends=()
-makedepends=(libncurses-dev readline-dev)
+makedepends=(bison netbsd-curses-dev readline-dev)
 options=(upx)
 changelog=ChangeLog
 
 source=(
     "http://ftp.gnu.org/gnu/bash/${pkgname}-${archivever}.tar.gz"
-    'bashrc'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-031'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-032'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-033'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-034'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-035'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-036'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-037'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-038'
-    'http://ftp.gnu.org/gnu/bash/bash-4.3-patches/bash43-039'
+    bashrc
 )
 
 sha256sums=(
-    317881019bbf2262fb814b7dd8e40632d13c3608d2f237800a8828fbb8a640dd
+    d86b3392c1202e8ff5a423b302e6284db7f8f435ea9f39b5b1b20fd3ac36dfcb
     29e174a59b56444b205541cbd3ce9c854d7f47eba0bdb6ea5e823bf3177af557
-    cd529f59dd0f2fdd49d619fe34691da6f0affedf87cc37cd460a9f3fe812a61d
-    889357d29a6005b2c3308ca5b6286cb223b5e9c083219e5db3156282dd554f4a
-    fb2a7787a13fbe027a7335aca6eb3c21cdbd813e9edc221274b6a9d8692eaa16
-    f1694f04f110defe1330a851cc2768e7e57ddd2dfdb0e3e350ca0e3c214ff889
-    370d85e51780036f2386dc18c5efe996eba8e652fc1973f0f4f2ab55a993c1e3
-    ac5f82445b36efdb543dbfae64afed63f586d7574b833e9aa9cd5170bc5fd27c
-    33f170dd7400ab3418d749c55c6391b1d161ef2de7aced1873451b3a3fca5813
-    adbeaa500ca7a82535f0e88d673661963f8a5fcdc7ad63445e68bf5b49786367
-    ab94dced2215541097691f60c3eb323cc28ef2549463e6a5334bbcc1e61e74ec
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${archivever}"
-    for patch in ${source[@]} ; do
-        case ${patch##*/} in
-            bash43-[0-9][0-9][0-9])
-                patch -Np0 -i "${srcdir}/${patch##*/}"
-            ;;
-        esac
-    done
-    LDFLAGS='-Wl,-static' \
+#    for patch in ${source[@]} ; do
+#        case ${patch##*/} in
+#            bash43-[0-9][0-9][0-9])
+#                patch -Np0 -i "${srcdir}/${patch##*/}"
+#            ;;
+#        esac
+#    done
+    CFLAGS="-O3 -pipe -fomit-frame-pointer -fno-asynchronous-unwind-tables" \
     ./configure \
       --prefix=/ \
-      --disable-nls \
+      --enable-static-link \
       --without-bash-malloc \
-      --with-installed-readline \
-      ac_cv_func_mbsnrtowcs=no
+      --with-installed-readline
     make $MAKEFLAGS
 }
 
 package() {
     pkgfiles=(
-        'bin/bash'
-        'etc/bashrc'
-        'share/man/man1/bash.1*'
+        bin/bash
+        etc/bashrc
+        share/man/man1/bash.1*
     )
 
     cd "${srcdir}/${pkgname}-${archivever}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/destdir" install
+    cd "${pkgdirbase}/destdir"
     install -d etc
     install -m 0644 ${srcdir}/bashrc etc/
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
