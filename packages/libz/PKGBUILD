@@ -1,0 +1,55 @@
+pkgname=(libz libz-dev)
+pkgver=1.2.8.2015.12.26
+pkgrel=1
+pkgdesc='Sortix libz. A fork of zlib'
+arch=('x86_64')
+url='https://sortix.org/libz/'
+license=(zlib)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "https://sortix.org/libz/release/libz-${pkgver}.tar.gz"
+)
+sha256sums=(
+    abcc2831b7a0e891d0875fa852e9b9510b420d843d3d20aad010f65493fe4f7b
+)
+
+
+build() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    CFLAGS="-O3 -fPIC $CFLAGS" \
+      ./configure \
+      --prefix=''
+    make
+}
+
+package_libz() {
+    pkgfiles=(
+        lib/*.so.*
+    )
+    depends=(musl)
+    conflicts=(zlib)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdirbase}/destdir" install
+    cd "${pkgdirbase}/destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libz-dev() {
+    pkgfiles=(
+        include
+        lib/*.so
+        lib/*.a
+        lib/pkgconfig
+        share/man/man3
+    )
+    depends=(libz)
+    conflicts=(zlib-dev)
+    cd "${pkgdirbase}/destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
