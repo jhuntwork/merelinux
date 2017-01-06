@@ -1,0 +1,58 @@
+pkgname=(go)
+pkgver=1.7.3
+pkgrel=1
+pkgdesc='The Go Programming Language'
+arch=(x86_64)
+url='https://golang.org'
+license=(BSD)
+groups=(base)
+depends=(ca-certs)
+makedepends=(go)
+options=(!strip)
+changelog=ChangeLog
+
+source=(
+    "https://storage.googleapis.com/golang/go${pkgver}.src.tar.gz"
+)
+sha256sums=(
+    79430a0027a09b0b3ad57e214c4c1acfdd7af290961dd08d322818895af1ef44
+)
+
+
+build() {
+    cd "${srcdir}/go/src"
+    sed -i "s@string{@&\n\t\"/etc/ssl/ca-certs.pem\",@" crypto/x509/root_linux.go
+    GOROOT_FINAL=/lib/go \
+      GOROOT_BOOTSTRAP=/lib/go \
+      CGO_ENABLED=0 \
+      GO_LDFLAGS='-s -w' \
+      ./make.bash
+}
+
+package_go() {
+    pkgfiles=(
+        bin/go
+        bin/gofmt
+        lib/go/bin
+        lib/go/lib
+        lib/go/pkg
+        lib/go/src
+    )
+
+    install -d "${srcdir}/go/.destdir/bin"
+    install -d "${srcdir}/go/.destdir/lib/go"
+    cd "${srcdir}/go/.destdir"
+    cp -a ../bin lib/go/
+    cp -a ../pkg lib/go/
+    cp -a ../lib lib/go/
+    cp -a ../src lib/go/
+    find lib/go/src -type f -name "*_test.go" -delete
+    find lib/go/src -type d -name testdata -exec rm -rf '{}' +
+    find lib/go/src -type f \( -name "*.bash" -o -name "*.rc" -o -name "*.bat" \) -delete
+    rm -rf lib/go/pkg/bootstrap
+    rm -rf lib/go/pkg/tool/*/api
+    ln -s /lib/go/bin/go bin/go
+    ln -s /lib/go/bin/gofmt bin/gofmt
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
