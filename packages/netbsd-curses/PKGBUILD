@@ -1,0 +1,65 @@
+pkgname=(
+    netbsd-curses
+    netbsd-curses-dev
+)
+pkgver=0.1.1
+pkgrel=1
+pkgdesc='libcurses and dependencies from netbsd'
+arch=(x86_64)
+url='https://github.com/sabotage-linux/netbsd-curses'
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=(
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://github.com/sabotage-linux/netbsd-curses/releases/download/v${pkgver}/netbsd-curses-${pkgver}.tar.xz"
+)
+sha256sums=(
+    bab54db4bf0dcde910af639782aed75c15e0f81f2f444b95f6c6d43b48c94959
+)
+
+
+build() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make CFLAGS='-fPIC -Wall -O3 -pipe' PREFIX='' $MAKEFLAGS
+}
+
+package_netbsd-curses() {
+    pkgfiles=(
+        bin
+        lib/*.so
+        share/man/man1
+    )
+    depends=(
+        musl
+    )
+    conflicts=(ncurses)
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    local destdir="${pkgdir%/*}/${pkgbase}-tmp"
+    make PREFIX='' DESTDIR="$destdir" install
+    cd "$destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_netbsd-curses-dev() {
+    pkgfiles=(
+        include
+        lib/*.a
+        lib/pkgconfig
+        share/man/man3
+    )
+    depends=(
+        netbsd-curses-dev
+    )
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    local destdir="${pkgdir%/*}/${pkgbase}-tmp"
+    make PREFIX='' DESTDIR="$destdir" install
+    cd "$destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
