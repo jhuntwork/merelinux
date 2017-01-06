@@ -52,7 +52,7 @@ EOF
 [ -f '/pkgs/buildlocal.db.tar.gz' ] && \
     find /pkgs ! -type d -maxdepth 1 | cpio -dump "${rootfs}/"
 for dir in sources staging logs ; do
-    install -o nobody -g nogroup -d "${rootfs}/pkgs/${dir}"
+    install -o nobody -g nogroup -d "${rootfs}/merebuild/${dir}"
 done
 
 install -o nobody -g nogroup -d "${rootfs}/${builddir}"
