@@ -1,3 +1,9 @@
+2017-01-05 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.6.29-1 :
+	Upgrade to 5.6.29
+	Build with redis extension
+
 2016-10-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.6.26-1 :

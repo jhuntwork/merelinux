@@ -1,8 +1,9 @@
 pkgname=(php php-fpm php-dev)
-pkgver=5.6.26
+pkgver=5.6.29
 memcachedver=2.2.0
 mongover=1.6.14
 yamlver=1.2.0
+redisver=2.2.8
 pkgrel=1
 pkgdesc='The PHP scripting language'
 arch=(x86_64)
@@ -11,6 +12,7 @@ license=(PHP)
 groups=(base)
 depends=()
 makedepends=(
+    bison
     libcurl-dev
     libmemcached-dev
     libtool
@@ -19,7 +21,7 @@ makedepends=(
     gettext
     libressl-dev
     pkgconf
-    zlib-dev
+    libz-dev
 )
 options=()
 changelog=ChangeLog
@@ -29,6 +31,7 @@ source=(
     "https://pecl.php.net/get/memcached-${memcachedver}.tgz"
     "https://pecl.php.net/get/mongo-${mongover}.tgz"
     "https://pecl.php.net/get/yaml-${yamlver}.tgz"
+    "https://pecl.php.net/get/redis-${redisver}.tgz"
     php-fpm-service
     php-fpm-log
     php-fpm.install
@@ -36,10 +39,11 @@ source=(
     php.ini
 )
 sha256sums=(
-    d47aab8083a4284b905777e1b45dd7735adc53be827b29f896684750ac8b6236
+    499b844c8aa7be064c111692e51a093ba94e54d2d9abb01e70ea76183a1825bb
     17b9600f6d4c807f23a3f5c45fcd8775ca2e61d6eda70370af2bef4c6e159f58
     586a0f55d29198010da5f4c932a183491f114db6e1b0ba8e40e7246b1a4a96d0
     fdf0eec6bf16b0c45e58076a2048f96140a778463724fb82ab49ab5fb4c7e19a
+    fc533752de62848f645707b65cba9d015ab4ed9c7a978c7bd710a5934d97b1b5
     d78dbfab9328333f48dd657ffec39637fe12774431565259e126088e5d49fa9a
     e622dba8b94208a0313f5a1951928fc9bdb27dd56b3a56e3d40afe667e4e7506
     f4947a011d1c5f318eb7933c3ab08fa48cc8c28a61faba70447f6e911354544a
@@ -66,6 +70,10 @@ build() {
            -e 's@php_hash_copy,@php_hash_copy_m,@' \
            ext/mongo/contrib/crypto.c
 
+    # redis ext
+    tar -xf "${srcdir}/redis-${redisver}.tgz"
+    mv "redis-${redisver}" ext/redis
+
     # yaml ext
     tar -xf "${srcdir}/yaml-${yamlver}.tgz"
     mv "yaml-${yamlver}" ext/yaml
@@ -74,8 +82,8 @@ build() {
     ./buildconf --force
 
     sed -i 's@CURL_CONFIG --libs@CURL_CONFIG --static-libs@' configure
-    CFLAGS="$CFLAGS -fPIC --static" \
-    ./configure \
+    CFLAGS="-pipe -fomit-frame-pointer -fno-asynchronous-unwind-tables -fPIC --static -static" \
+      ./configure \
       --prefix=/ \
       --with-config-file-path=/etc/php \
       --disable-all \
@@ -96,6 +104,7 @@ build() {
       --enable-mongo \
       --enable-pdo \
       --enable-phar \
+      --enable-redis \
       --enable-session \
       --enable-simplexml \
       --enable-tokenizer \
@@ -109,6 +118,7 @@ build() {
       --with-openssl \
       --with-yaml \
       --with-zlib \
+      --with-pic \
       ac_cv_crypt_des=no \
       ac_cv_crypt_ext_des=no
     make $MAKEFLAGS
@@ -116,14 +126,15 @@ build() {
 
 package_php() {
     pkgfiles=(
-        bin
+        bin/phar
+        bin/phar.phar
+        bin/php
     )
     options+=(upx)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make INSTALL_ROOT="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    rm bin/php{-config,ize}
+    make INSTALL_ROOT="${pkgdirbase}/destdir" install
+    cd "${pkgdirbase}/destdir"
     # Fix broken symlink
     rm bin/phar
     ln -s phar.phar bin/phar
@@ -143,9 +154,6 @@ package_php-fpm() {
     options+=(upx)
     install=php-fpm.install
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make INSTALL_ROOT="${pkgdir}-tmp" install
-
     # Service files
     install -d "${pkgdir}/etc/s6/services/available/php-fpm/log"
     install -m 0754 "${srcdir}/php-fpm-service" \
@@ -159,7 +167,7 @@ package_php-fpm() {
     install -m 0644 "${srcdir}/php.ini" \
         "${pkgdir}/etc/php.ini"
 
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/destdir"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
@@ -175,9 +183,7 @@ package_php-dev() {
         lib/php/build
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make INSTALL_ROOT="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/destdir"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
