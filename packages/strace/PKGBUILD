@@ -1,0 +1,33 @@
+pkgname=strace
+pkgver=4.14
+pkgrel=1
+pkgdesc='A diagnostic, debugging and instructional userspace tracer for Linux'
+arch=(x86_64)
+url='http://strace.sourceforge.net'
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=()
+options=(upx)
+changelog=ChangeLog
+
+source=(
+    "http://downloads.sourceforge.net/project/strace/strace/${pkgver}/strace-${pkgver}.tar.xz"
+)
+sha256sums=(
+    5bed5110b243dce6864bedba269446c18c8c63f553cdd7fd4f808d89a764712f
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS='-Wl,-static' \
+      ./configure \
+      --prefix=''
+    make
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+}
