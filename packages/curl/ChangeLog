@@ -1,3 +1,9 @@
+2016-12-20 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 7.51.0-1 :
+	Upgrade to 7.51.0
+	Link against libz
+
 2016-10-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 7.50.3-1 :

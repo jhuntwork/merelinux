@@ -3,7 +3,7 @@ pkgname=(
     libcurl
     libcurl-dev
 )
-pkgver=7.50.3
+pkgver=7.51.0
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=(x86_64)
@@ -11,7 +11,7 @@ url='http://curl.haxx.se'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=(libressl-dev perl zlib-dev)
+makedepends=(libressl-dev perl libz-dev)
 options=()
 changelog=ChangeLog
 
@@ -19,7 +19,7 @@ source=(
     "${url}/download/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    3991c2234986178af3b3f693e5afa35d49da2ab4ba61292e3817222446dca7e1
+    65b5216a6fbfa72f547eb7706ca5902d7400db9868269017a8888aa91d87977c
 )
 
 
@@ -74,7 +74,7 @@ package_libcurl() {
         ca-certs
         musl
         libressl
-        zlib
+        libz
     )
 
 
