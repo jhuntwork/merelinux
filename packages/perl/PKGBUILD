@@ -1,13 +1,13 @@
 pkgname=perl
-pkgver=5.22.0
+pkgver=5.24.0
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=('x86_64')
 url='http://www.perl.org'
 license=('GPL2')
 groups=('base')
-depends=(musl zlib)
-makedepends=(zlib-dev)
+depends=(musl libz)
+makedepends=(libz-dev)
 options=()
 changelog=ChangeLog
 
@@ -15,7 +15,7 @@ source=(
     "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    0c690807f5426bbd1db038e833a917ff00b988bf03cbf2447fa9ffdb34a2ab3c
+    7e430c6e0e0d9017c3f72898850dea657fa6b51909220a7bcf305a87f2475202
 )
 
 
