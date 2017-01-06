@@ -1,7 +1,7 @@
 pkgname=(python python-dev)
-vermajor=2
-verminor=7
-pkgver=${vermajor}.${verminor}.10
+vermajor=3
+verminor=5
+pkgver=${vermajor}.${verminor}.2
 pkgrel=1
 pkgdesc='The Python programming language'
 arch=(x86_64)
@@ -10,11 +10,12 @@ license=(Python)
 groups=(base)
 depends=()
 makedepends=(
+    gcc-c++
     libffi-dev
-    libncurses-dev
-    openssl-dev
+    netbsd-curses-dev
+    libressl-dev
     readline-dev
-    zlib-dev
+    libz-dev
 )
 options=()
 changelog=ChangeLog
@@ -22,53 +23,56 @@ changelog=ChangeLog
 source=(
     "https://www.python.org/ftp/python/${pkgver}/Python-${pkgver}.tar.xz"
     python-fix-ctypes_util.patch
-    python-pathsearch.patch
     fix-root-prefix.patch
-    Setup
 )
 sha256sums=(
-    1cd3730781b91caf0fa1c4d472dc29274186480161a150294c42ce9b5c5effc0
-    0de9d04c6618155d17f0e58753961dede9023cf42e8dad1bdff68fa41026ec52
-    44dee4ffa2add32748128f7382651b3d805b4a176a1adbf6ff52dcc8b32e0b0e
+    0010f56100b9b74259ebcd5d4b295a32324b58b517403a10d1a2aa7cb22bca40
+    b9b817a4fd8dea3ef28929a9bee6a3572e0a365d815615aa112192f78ae6d401
     b363ebe8bd810545ca00b52398fa86c60e232c61191af560b02a85b6e1308e42
-    c058eddb34d45dcdd00fd7a9b25263b14a6469c160fe998fd10851d66730179d
 )
 
 
 build() {
     cd "${srcdir}/Python-${pkgver}"
     patch -Np1 -i "${srcdir}/python-fix-ctypes_util.patch"
-    patch -Np1 -i "${srcdir}/python-pathsearch.patch"
     patch -Np0 -i "${srcdir}/fix-root-prefix.patch"
-    # http://bugs.python.org/issue19348
-    sed -i "/datetime.h/s@.*@#ifdef Py_BUILD_CORE\n#undef Py_BUILD_CORE\n#include \"datetime.h\"\n#define Py_BUILD_CORE\n#else\n#include \"datetime.h\"\n#endif@" \
-        Modules/_testcapimodule.c
-    cp "$srcdir"/Setup Modules/
     CC='gcc -fPIC' \
-        CPPFLAGS='-static' \
-        LDFLAGS='-static -static-libgcc -Wl,-static' \
-        ./configure \
+      ./configure \
         --prefix=/ \
         --with-system-ffi
     make $MAKEFLAGS
+}
+
+check() {
+    cd "${srcdir}/Python-${pkgver}"
     #make test
+    make DESTDIR="$(pwd)/.destdir" install
+    cd .destdir
+    ln -s "python${vermajor}.${verminor}" bin/python
+    ln -s "pip${vermajor}" bin/pip
+    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
+    find . -name 'test' -type d -exec rm -rf '{}' + || true
 }
 
 package_python() {
-    options=(upx)
+    depends=(
+        musl
+        libffi
+    )
     pkgfiles=(
+        bin/pip
+        "bin/pip${vermajor}"
         bin/python
         "bin/python${vermajor}"
         "bin/python${vermajor}.${verminor}"
         "lib/python${vermajor}.${verminor}"
+        "include/python${vermajor}.${verminor}m/pyconfig.h"
     )
 
-    cd "${srcdir}/Python-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
-    find . -name 'test' -type d -exec rm -rf '{}' + || true
+    cd "${srcdir}/Python-${pkgver}/.destdir"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    rm "include/python${vermajor}.${verminor}m/pyconfig.h"
 }
 
 package_python-dev() {
@@ -78,14 +82,11 @@ package_python-dev() {
     pkgfiles=(
         "bin/py*-config"
         include
-        lib/libpython${vermajor}.${verminor}.a
+        "lib/libpython*.a"
         lib/pkgconfig
     )
 
-    cd "${srcdir}/Python-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
-    find . -name 'test' -type d -exec rm -rf '{}' + || true
+    cd "${srcdir}/Python-${pkgver}/.destdir"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
