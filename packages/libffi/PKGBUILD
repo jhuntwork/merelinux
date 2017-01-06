@@ -1,6 +1,6 @@
 pkgname=(libffi libffi-dev)
 pkgver=3.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc='A portable Foregin Function Interface library.'
 arch=(x86_64)
 url='http://sourceware.org/libffi/'
@@ -56,5 +56,6 @@ package_libffi-dev() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     mv lib/libffi-${pkgver}/include .
+    sed -i 's@^includedir=.*@includedir=/include@' lib/pkgconfig/libffi.pc
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
