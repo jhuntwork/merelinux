@@ -1,14 +1,14 @@
 pkgname=(readline readline-dev)
 pkgver=7.0
-pkgrel=1
+pkgrel=2
 pkgdesc='A library for allowing users to edit command lines as they are typed in.'
 arch=('x86_64')
 url='http://www.gnu.org/software/readline/'
 license=('BSD')
 groups=('base')
 depends=()
-makedepends=(libncurses-dev)
-options=() # Defaults in makepkg.conf
+makedepends=(netbsd-curses-dev)
+options=()
 changelog=ChangeLog
 
 PURGE_TARGETS+=(share/info/* share/readline/*)
@@ -26,45 +26,39 @@ build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     sed -i '/MV.*old/d' Makefile.in
     sed -i '/{OLDSUFF}/c:' support/shlib-install
-    CFLAGS="$CFLAGS -fPIC" \
+    CFLAGS='-fPIC' \
     ./configure \
       --prefix=''
-    make $MAKEFLAGS SHLIB_LIBS=-lncurses
+    make $MAKEFLAGS SHLIB_LIBS=-lcurses
 }
 
 package_readline() {
     pkgfiles=(
-        'lib/libhistory.so.7'
-        'lib/libreadline.so.7'
-        "lib/libreadline.so.${pkgver}"
-        "lib/libhistory.so.${pkgver}"
+        lib/*.so.*
     )
     depends=(
         musl
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/destdir" install
+    cd "${pkgdirbase}/destdir"
     set -o pipefail
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_readline-dev() {
     pkgfiles=(
-        'lib/libreadline.a'
-        'lib/libreadline.so'
-        'lib/libhistory.a'
-        'lib/libhistory.so'
-        'include'
+        include
+        lib/*.a
+        lib/*.so
+        share/man/man3
     )
     depends=(
         readline
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/destdir"
     set -o pipefail
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
