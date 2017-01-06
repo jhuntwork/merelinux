@@ -1,5 +1,5 @@
 pkgname=binutils
-pkgver=2.25
+pkgver=2.27
 pkgrel=1
 pkgdesc='A collection of binary tools, including a linker and an assembler'
 arch=('x86_64')
@@ -7,15 +7,19 @@ url='http://www.gnu.org/software/binutils/'
 license=('GPL3')
 groups=('base')
 depends=()
-makedepends=()
-options=(upx)
+makedepends=(
+    bison
+    gcc-c++
+    libz-dev
+)
+options=()
 changelog=ChangeLog
 source=(
     "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
-    '22defc65cfa3ef2a3395faaea75d6331c6e62ea5dfacfed3e2ec17b08c882923'
+    369737ce51587f92466041a97ab7d2358c6d9e1b6490b3940eb09fb0a9a6ac88
 )
 
 
@@ -35,10 +39,15 @@ build() {
       --disable-werror \
       --disable-nls \
       --mandir=/share/man \
-      --disable-install-libbfd
+      --disable-install-libbfd \
+      --with-system-zlib
     echo "MAKEINFO = :" >> Makefile
     make $MAKEFLAGS tooldir=/
-    make -k check
+}
+
+check() {
+    cd "${srcdir}/${pkgname}-build"
+    MAKEFLAGS='' make LDFLAGS='' check
 }
 
 package() {
