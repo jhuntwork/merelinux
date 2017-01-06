@@ -2,7 +2,7 @@ pkgname=(
     libarchive
     libarchive-dev
 )
-pkgver=3.2.1
+pkgver=3.2.2
 pkgrel=1
 pkgdesc='Multi-format archive and compression library'
 arch=(x86_64)
@@ -15,7 +15,7 @@ makedepends=(
     libattr-dev
     liblzma-dev
     libressl-dev
-    zlib-dev
+    libz-dev
 )
 options=(!upx)
 changelog=ChangeLog
@@ -23,7 +23,7 @@ source=(
     "http://www.libarchive.org/downloads/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    72ee1a4e3fd534525f13a0ba1aa7b05b203d186e0c6072a8a4738649d0b3cfd2
+    691c194ee132d1f0f7a42541f091db811bc2e56f7107e9121be2bc8c04f1060f
 )
 
 
@@ -35,7 +35,7 @@ build() {
     sed -i 's@ -qq@@' libarchive/archive_read_support_filter_xz.c
     sed -i 's@xz -d@unxz@' libarchive/archive_read_support_filter_xz.c
     sed -i 's@lzma -d@unlzma@' libarchive/archive_read_support_filter_xz.c
-    CFLAGS='-fPIC' \
+    CFLAGS="-O3 -fPIC $CFLAGS" \
       ./configure \
       --prefix='' \
       --enable-static \
@@ -43,24 +43,25 @@ build() {
     make V=1 $MAKEFLAGS
 }
 
-check() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="$(pwd)/.destdir" install
-}
-
 package_libarchive() {
     pkgfiles=(
         bin
-        "lib/libarchive.so.*"
+        lib/*.so.*
+        share/man/man1
+        share/man/man5/libarchive-formats*
     )
     depends=(
         libacl
         libattr
-        musl
         libressl
-        zlib
+        libz
+        musl
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdirbase}/destdir" install
+
+    cd "${pkgdirbase}/destdir"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
@@ -69,12 +70,14 @@ package_libarchive-dev() {
     depends=(libarchive)
     pkgfiles=(
         include
-        lib/libarchive.a
-        lib/libarchive.so
+        lib/*.a
+        lib/*.so
         lib/pkgconfig
+        share/man/man3
     )
     depends=(libarchive)
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+
+    cd "${pkgdirbase}/destdir"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
