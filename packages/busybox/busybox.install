@@ -1,11 +1,3 @@
 post_install() {
     chmod u+s /bin/busybox
 }
-
-pre_remove() {
-    service ntpd disable >/dev/null 2>&1
-}
-
-post_remove() {
-    pacman -Sy busybox-static
-}

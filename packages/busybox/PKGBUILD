@@ -1,5 +1,5 @@
-pkgname=(busybox busybox-static)
-pkgver=1.24.2
+pkgname=busybox
+pkgver=1.25.1
 pkgrel=2
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
 arch=(x86_64)
@@ -7,8 +7,8 @@ url='http://busybox.net'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=()
-options=(emptydirs)
+makedepends=(perl)
+options=(emptydirs upx)
 changelog=ChangeLog
 source=(
     "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
@@ -29,9 +29,9 @@ source=(
 )
 
 sha256sums=(
-    e71ef53ec656f31c42633918d301405d40dea1d97eca12f272217ae4a971c855
-    c15cae47f5623f27379f529c13ad0a87abd0cef30957281416a4363e2ce54771
-    11e129606a78278facc24b36096ea0bd9749a37e924ca57d5dc35d833b31a3ca
+    27667e0f2328fdbd79cfd622e4453e5c57e58f781c5da97c9be337d93aa2a02e
+    b48a4d06b88d178d18b4853d8a2c18616f517e6bc1e67dafe3b54b50bd2ae7e8
+    10c7a8af37b60ffeeb0d08e9b5a2e578ca2eaba69f6bf43d4f3a8e093d144ab4
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
     980d3689463f75ee36ab67cff579fdcbdbeb629c99331c61c9d9397e869dd340
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
@@ -55,34 +55,22 @@ backup=(
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    # Fixes
     patch -Np1 -i "${srcdir}/poweroff.patch"
     sed -i 's@PATH_UTMPX@PATH_UTMP@g' libbb/utmp.c
     sed -i "/utmpx.h/s@\$@\n#  include <utmp.h>@" include/libbb.h
-    cd ..
-
-    # Build busybox twice, once producing a dynamically linked binary
-    # and once producting a statically linked one. The static one is
-    # preferred for the final system. The dynamic one is so fakeroot
-    # magic can happen while packaging, specifcally with tar.
-    #
-    # Static
-    cp -a "${pkgname}-${pkgver}" "${pkgname}-${pkgver}-static"
-    cd "${pkgname}-${pkgver}-static"
-    sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}-static/\"@" \
-      "${srcdir}/busybox-config" >.config
-    make V=1 HOSTCC='gcc -D_GNU_SOURCE' $MAKEFLAGS
-
-    # Dynamic
-    cd ../${pkgname}-${pkgver}
     sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" \
       "${srcdir}/busybox-config" >.config
-    sed -i '/CONFIG_STATIC/s@.*@# CONFIG_STATIC is not set@' .config
-    make V=1 HOSTCC='gcc -D_GNU_SOURCE' $MAKEFLAGS
+    CFLAGS='' make V=1 HOSTCC='gcc -D_GNU_SOURCE'
 }
 
-common_install() {
-    rm -f bin/bash
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    CFLAGS='' make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
+
+    cd "$pkgdir"
+
+    install -d share/man/man1
+    install -m0644 "${srcdir}/${pkgname}-${pkgver}/docs/busybox.1" share/man/man1/
 
     # configuration/scripts
     install -d etc/network/if-pre-up.d
@@ -110,32 +98,4 @@ common_install() {
     install -m 0754 "${srcdir}/syslogd-log" etc/s6/services/available/syslogd/log/run
     install -d etc/s6/services/available/klogd
     install -m 0754 "${srcdir}/klogd-service" etc/s6/services/available/klogd/run
-}
-
-package_busybox() {
-    depends=(
-        musl
-    )
-    conflicts=(
-        busybox-static
-    )
-
-    cd "${pkgbase}-${pkgver}"
-    make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
-    cd "$pkgdir"
-    common_install
-}
-
-package_busybox-static() {
-    options+=(
-        upx
-    )
-    conflicts=(
-        busybox
-    )
-
-    cd "${pkgbase}-${pkgver}-static"
-    make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
-    cd "$pkgdir"
-    common_install
 }
