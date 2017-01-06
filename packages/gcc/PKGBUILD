@@ -1,5 +1,5 @@
 pkgname=(gcc gcc-c++)
-pkgver=4.9.2
+pkgver=6.2.0
 pkgrel=1
 pkgdesc='The GNU Compiler Collection'
 arch=('x86_64')
@@ -15,7 +15,7 @@ source=(
 )
 
 sha256sums=(
-    '2020c98295856aa13fda0f2f3a4794490757fc24bcca918d52cc8b4917b972dd'
+    9944589fc722d3e66308c0ce5257788ebd7872982a718aa2516123940671b7c5
 )
 
 
@@ -25,9 +25,10 @@ build() {
         -e 's@LIBC=gnu@LIBC=musl@' \
         $(find . -name "confi*.guess" -o -name "confi*.sub")
     for file in $(find gcc/config/i386 -name linux64.h -o -name linux.h) ; do
-        sed -i -e 's@lib/ld-linux.so.2@lib/ld-musl-i386.so.1@' \
-                -e 's@/usr@/@g' \
-                   -e 's@lib64/ld-linux-x86-64.so.2@lib/ld-musl-x86_64.so.1@' $file
+        sed -i \
+            -e 's@lib/ld-linux.so.2@lib/ld-musl-i386.so.1@' \
+            -e 's@/usr@/@g' \
+            -e 's@lib64/ld-linux-x86-64.so.2@lib/ld-musl-x86_64.so.1@' $file
     done
     sed -i '/MULTILIB_OSDIRNAMES/d' $(find gcc/config -name t-linux64)
     sed -i '/^NATIVE_SYSTEM_HEADER_DIR/s@= .*@= /include@' gcc/Makefile.in
@@ -35,9 +36,6 @@ build() {
     sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in
     sed -i 's,-lgcc_s,--start-group -lgcc_eh -lgcc -lc --end-group,' gcc/gcc.c
     sed -i 's,\./fixinc\.sh,-c true,' gcc/Makefile.in
-    sed -i '/__GLIBC_PREREQ) && __GLIBC_PREREQ(/s@ && __GLIBC.*@@' \
-        libitm/config/linux/x86/tls.h
-    rm -rf libstdc++-v3/config/os/gnu-linux && ln -s generic libstdc++-v3/config/os/gnu-linux
     mkdir "../${pkgname}-build"
     cd "../${pkgname}-build"
     CFLAGS="$CFLAGS -fPIC" CXXFLAGS="$CXXFLAGS -fPIC" \
@@ -82,6 +80,7 @@ package_gcc() {
     find . -name "*.gch" -delete
     ln -sf ../bin/cpp lib
     ln -sf gcc bin/cc
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
@@ -99,5 +98,6 @@ package_gcc-c++() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     find . -name "*.gch" -delete
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
