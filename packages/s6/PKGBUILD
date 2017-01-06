@@ -1,6 +1,6 @@
 pkgname=(s6 s6-dev)
 pkgver=2.3.0.0
-pkgrel=5
+pkgrel=6
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
@@ -50,7 +50,7 @@ build() {
 }
 
 package_s6() {
-    options+=(emptydirs)
+    options+=(emptydirs upx)
     pkgfiles=(
         etc
         bin
