@@ -67,6 +67,11 @@ info "Copying package definition to container"
 cd "$pkgdir"
 find ! -type d -maxdepth 1 | cpio -dumpv "${home}/" >>$clog 2>&1
 
+if [ -n "MERE_PACKAGER" ] ; then
+    info "Adding packager information to makepkg.conf"
+    echo "PACKAGER='${MERE_PACKAGER}'" >>"${rootfs}/etc/makepkg.conf"
+fi
+
 info "Building package"
 lxc-start -n ${template} -F -- /bin/sh -c \
     "mount -t proc proc /proc &&
@@ -77,4 +82,4 @@ lxc-start -n ${template} -F -- /bin/sh -c \
      https_proxy=${https_proxy} \
      HOME=${shome} /bin/sh -c \
      'cd ${shome} &&
-      makepkg ${sign} -fLs --noconfirm'"
+      yes y | makepkg ${sign} -fLs'"
