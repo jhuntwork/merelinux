@@ -1,6 +1,6 @@
-pkgname=(pacman pacman-build)
+pkgname=(pacman pacman-build libalpm-dev)
 pkgver=5.0.1
-pkgrel=5
+pkgrel=6
 pkgdesc='The pacman Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -49,17 +49,6 @@ build() {
     make V=1 LIBS='-lm -lz -lssl -lcrypto -llzma -lacl' -j1
 }
 
-check() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    destdir="$(pwd)/.destdir"
-    make DESTDIR="$destdir" install
-    cd "$destdir"
-    mv etc/pacman.conf{,.example}
-    mv etc/makepkg.conf{,.example}
-    install -vm 0644 "${srcdir}/pacman.conf" etc/
-    install -vm 0644 "${srcdir}/makepkg.conf" etc/
-}
-
 package_pacman() {
     backup=(etc/pacman.conf)
     pkgfiles=(
@@ -76,7 +65,13 @@ package_pacman() {
     )
     options+=(upx)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdirbase}/destdir" install
+    cd "${pkgdirbase}/destdir"
+    mv etc/pacman.conf{,.example}
+    mv etc/makepkg.conf{,.example}
+    install -vm 0644 "${srcdir}/pacman.conf" etc/
+    install -vm 0644 "${srcdir}/makepkg.conf" etc/
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
@@ -101,7 +96,18 @@ package_pacman-build() {
         pacman
         xz
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    cd "${pkgdirbase}/destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
+
+package_libalpm-dev() {
+    pkgfiles=(
+        include
+        lib/libalpm.a
+        lib/pkgconfig
+    )
+    cd "${pkgdirbase}/destdir"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
