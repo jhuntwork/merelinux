@@ -12,8 +12,8 @@ depends=()
 makedepends=(
     gcc-c++
     libffi-dev
-    netbsd-curses-dev
     libressl-dev
+    libncurses-dev
     readline-dev
     libz-dev
 )
@@ -46,18 +46,13 @@ build() {
 check() {
     cd "${srcdir}/Python-${pkgver}"
     #make test
-    make DESTDIR="$(pwd)/.destdir" install
-    cd .destdir
-    ln -s "python${vermajor}.${verminor}" bin/python
-    ln -s "pip${vermajor}" bin/pip
-    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
-    find . -name 'test' -type d -exec rm -rf '{}' + || true
 }
 
 package_python() {
     depends=(
         musl
         libffi
+        libz
     )
     pkgfiles=(
         bin/pip
@@ -69,10 +64,15 @@ package_python() {
         "include/python${vermajor}.${verminor}m/pyconfig.h"
     )
 
-    cd "${srcdir}/Python-${pkgver}/.destdir"
+    cd "${srcdir}/Python-${pkgver}"
+    make DESTDIR="${pkgdirbase}/destdir" install
+    cd "${pkgdirbase}/destdir"
+    ln -s "python${vermajor}.${verminor}" bin/python
+    ln -s "pip${vermajor}" bin/pip
+    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
+    find . -name 'test' -type d -exec rm -rf '{}' + || true
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
-    rm "include/python${vermajor}.${verminor}m/pyconfig.h"
 }
 
 package_python-dev() {
@@ -86,7 +86,8 @@ package_python-dev() {
         lib/pkgconfig
     )
 
-    cd "${srcdir}/Python-${pkgver}/.destdir"
+    cd "${pkgdirbase}/destdir"
+    rm "include/python${vermajor}.${verminor}m/pyconfig.h"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
