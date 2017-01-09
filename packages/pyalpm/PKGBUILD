@@ -1,0 +1,50 @@
+pkgname=pyalpm
+pkgver=0.8
+pkgrel=1
+pkgdesc='A C extension for Python 3 that give access to the libalpm API'
+arch=('x86_64')
+url='https://git.archlinux.org/users/remy/pyalpm.git'
+license=('GPL3')
+groups=('base')
+depends=(
+    gpgme
+    libarchive
+    libcurl
+    python
+)
+makedepends=(
+    gpgme-dev
+    libarchive-dev
+    libalpm-dev
+    libcurl-dev
+    python-dev
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://git.archlinux.org/users/remy/pyalpm.git/snapshot/pyalpm-${pkgver}.tar.xz"
+)
+sha256sums=(
+    a7e106ac4eed40f69da4ad840ee7077cbef4c0ad80999f18ec831e4c337f9ebd
+)
+
+
+build() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    LDFLAGS='-larchive -lgpgme -lcurl' \
+        python setup.py build
+}
+
+package() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    pkgfiles=(
+        bin
+        lib
+    )
+    python setup.py install --prefix="${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir"
+    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
