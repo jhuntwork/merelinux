@@ -1,0 +1,47 @@
+pkgname=namcap
+pkgver=3.2.7
+pkgrel=1
+pkgdesc='A tool for checking binary and source packages for common packaging mistakes'
+arch=('x86_64')
+url='https://wiki.archlinux.org/index.php/namcap'
+license=('GPL2')
+groups=('base')
+depends=(
+    pyalpm
+    pyelftools
+    python
+)
+makedepends=(
+    pyalpm
+    pyelftools
+    python-dev
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://git.archlinux.org/namcap.git/snapshot/namcap-${pkgver}.tar.xz"
+)
+sha256sums=(
+    fa6aeb58238375008c9260fd5a5d37b3f016e67e1de386e4b15c6a6bacf037d8
+)
+
+
+build() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    # Fix usage of mktemp for busybox compatibility
+    sed -i 's@--tmpdir@-t@' namcap
+    python setup.py build
+}
+
+package() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    pkgfiles=(
+        bin
+        lib
+    )
+    python setup.py install --root="${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
