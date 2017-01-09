@@ -8,7 +8,7 @@ url='http://www.gnu.org/software/bash'
 license=('GPL3')
 groups=('base')
 depends=()
-makedepends=(bison netbsd-curses-dev readline-dev)
+makedepends=(bison libncurses-dev readline-dev)
 options=(upx)
 changelog=ChangeLog
 

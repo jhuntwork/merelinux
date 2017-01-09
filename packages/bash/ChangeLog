@@ -2,7 +2,6 @@
 
 	* 4.4-1 :
 	Upgrade to 4.4
-	Link against netbsd-curses
 
 2014-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
