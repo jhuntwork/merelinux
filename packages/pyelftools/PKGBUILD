@@ -1,0 +1,40 @@
+pkgname=pyelftools
+pkgver=0.24
+pkgrel=1
+pkgdesc='A pure-Python library for parsing and analyzing ELF files'
+arch=('x86_64')
+url='https://github.com/eliben/pyelftools'
+license=('Public Domain')
+groups=('base')
+depends=(python)
+makedepends=(
+    python-dev
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://github.com/eliben/pyelftools/archive/v${pkgver}.tar.gz"
+)
+sha256sums=(
+    c419035e52dcd61d46c0045c2076ab0e83e3826d42256d1054e0e505c43a84c7
+)
+
+
+build() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    python setup.py build
+}
+
+package() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    pkgfiles=(
+        bin
+        lib
+    )
+    python setup.py install --prefix="${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir"
+    find . -name "*.pyc" -delete -o -name "*.pyo" -delete
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
