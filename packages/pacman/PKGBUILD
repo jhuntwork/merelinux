@@ -2,8 +2,8 @@
 
 pkgname=(pacman pacman-build libalpm-dev)
 pkgver=5.0.1
-pkgrel=6
-pkgdesc='The pacman Package Manager'
+pkgrel=7
+pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
 license=(GPL2)
