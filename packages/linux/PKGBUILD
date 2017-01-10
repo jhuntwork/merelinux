@@ -2,8 +2,8 @@
 
 pkgname=(linux linux-headers)
 pkgver=4.7.5
-pkgrel=1
-pkgdesc='The Linux kernel'
+pkgrel=2
+pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
 license=(GPL2)
@@ -35,10 +35,11 @@ build() {
 package_linux() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     install -d "${pkgdir}/boot"
-    install 'arch/x86_64/boot/bzImage' "${pkgdir}/boot/vmlinux"
+    install "arch/${CARCH}/boot/bzImage" "${pkgdir}/boot/vmlinux"
 }
 
 package_linux-headers() {
+    pkgdesc='System headers'
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
     cd "${srcdir}/${pkgbase}-${pkgver}/dest"

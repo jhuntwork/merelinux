@@ -2,8 +2,8 @@
 
 pkgname=(go)
 pkgver=1.7.3
-pkgrel=1
-pkgdesc='The Go Programming Language'
+pkgrel=2
+pkgdesc='An expressive, concise, clean and efficient programming language'
 arch=(x86_64)
 url='https://golang.org'
 license=(BSD)
