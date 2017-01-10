@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=fakeroot
 pkgver=1.20.2
 pkgrel=1

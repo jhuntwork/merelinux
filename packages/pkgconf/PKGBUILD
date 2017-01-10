@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=pkgconf
 pkgver=0.9.9
 pkgrel=1

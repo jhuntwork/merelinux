@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(mandoc mandoc-dev)
 pkgver=1.13.4
 pkgrel=1

@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(readline readline-dev)
 pkgver=7.0
 pkgrel=1

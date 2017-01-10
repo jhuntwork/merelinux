@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=sudo
 pkgver=1.8.14p3
 pkgrel=1

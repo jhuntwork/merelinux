@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(file file-dev)
 pkgver=5.24
 pkgrel=1

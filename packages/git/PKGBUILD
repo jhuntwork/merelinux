@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(git git-extra)
 pkgver=2.10.1
 pkgrel=2

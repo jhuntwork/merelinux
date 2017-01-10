@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(libgpg-error libgpg-error-dev)
 pkgver=1.21
 pkgrel=1

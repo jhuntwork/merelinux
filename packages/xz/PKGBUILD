@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(xz liblzma-dev)
 pkgver=5.2.1
 pkgrel=2

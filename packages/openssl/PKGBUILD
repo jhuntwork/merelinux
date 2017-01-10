@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(openssl openssl-dev)
 pkgver=1.0.2d
 pkgrel=1

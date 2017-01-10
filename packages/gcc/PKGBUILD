@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(gcc gcc-c++)
 pkgver=6.2.0
 pkgrel=1

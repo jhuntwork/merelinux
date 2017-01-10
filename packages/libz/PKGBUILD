@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(libz libz-dev)
 pkgver=1.2.8.2015.12.26
 pkgrel=1

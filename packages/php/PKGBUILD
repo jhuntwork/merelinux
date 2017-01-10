@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(php php-fpm php-dev)
 pkgver=5.6.29
 memcachedver=2.2.0

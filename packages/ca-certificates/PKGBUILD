@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=('ca-certificates')
 pkgver=0.1
 pkgrel=1

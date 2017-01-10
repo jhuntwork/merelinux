@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(zlib zlib-dev)
 pkgver=1.2.8
 pkgrel=1

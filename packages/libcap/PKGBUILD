@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(libcap libcap-dev)
 pkgver=2.24
 pkgrel=1

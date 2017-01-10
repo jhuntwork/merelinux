@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(libyaml libyaml-dev)
 pkgver=0.1.5
 pkgrel=1

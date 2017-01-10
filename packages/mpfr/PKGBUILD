@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(mpfr mpfr-dev)
 pkgver=3.1.5
 pkgrel=1

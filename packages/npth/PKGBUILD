@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(npth npth-dev)
 pkgver=1.2
 pkgrel=1

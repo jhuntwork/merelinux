@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(lxc lxc-dev)
 pkgver=2.0.6
 pkgrel=1

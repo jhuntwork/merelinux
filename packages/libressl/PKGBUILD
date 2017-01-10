@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(libressl libressl-dev ca-certs)
 pkgver=2.5.0
 pkgrel=1

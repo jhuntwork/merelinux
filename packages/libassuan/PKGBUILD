@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(libassuan libassuan-dev)
 pkgver=2.4.2
 pkgrel=1

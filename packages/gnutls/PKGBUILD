@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(gnutls gnutls-dev)
 pkgver=3.4.9
 pkgrel=1

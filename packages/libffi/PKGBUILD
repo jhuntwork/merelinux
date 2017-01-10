@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(libffi libffi-dev)
 pkgver=3.2.1
 pkgrel=2

@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(pacman pacman-build libalpm-dev)
 pkgver=5.0.1
 pkgrel=6

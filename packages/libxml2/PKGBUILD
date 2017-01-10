@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(libxml2 libxml2-dev)
 pkgver=2.9.2
 pkgrel=1

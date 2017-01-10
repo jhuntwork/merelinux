@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(flex flex-dev)
 pkgver=2.5.39
 pkgrel=1

@@ -1,3 +1,5 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 pkgname=(nettle nettle-dev)
 pkgver=3.2
 pkgrel=1
