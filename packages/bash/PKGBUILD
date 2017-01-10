@@ -2,7 +2,6 @@
 
 pkgname=bash
 pkgver=4.4
-archivever=4.4
 pkgrel=1
 pkgdesc='A full-featured sh-compatible shell.'
 arch=('x86_64')
@@ -15,7 +14,7 @@ options=(upx)
 changelog=ChangeLog
 
 source=(
-    "http://ftp.gnu.org/gnu/bash/${pkgname}-${archivever}.tar.gz"
+    "http://ftp.gnu.org/gnu/bash/${pkgname}-${pkgver}.tar.gz"
     bashrc
 )
 
@@ -26,14 +25,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${archivever}"
-#    for patch in ${source[@]} ; do
-#        case ${patch##*/} in
-#            bash43-[0-9][0-9][0-9])
-#                patch -Np0 -i "${srcdir}/${patch##*/}"
-#            ;;
-#        esac
-#    done
+    cd "${srcdir}/${pkgname}-${pkgver}"
     CFLAGS="-O3 -pipe -fomit-frame-pointer -fno-asynchronous-unwind-tables" \
     ./configure \
       --prefix=/ \
@@ -50,7 +42,7 @@ package() {
         share/man/man1/bash.1*
     )
 
-    cd "${srcdir}/${pkgname}-${archivever}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdirbase}/destdir" install
     cd "${pkgdirbase}/destdir"
     install -d etc
