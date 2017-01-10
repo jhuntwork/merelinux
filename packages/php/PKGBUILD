@@ -2,12 +2,12 @@
 
 pkgname=(php php-fpm php-dev)
 pkgver=5.6.29
-memcachedver=2.2.0
-mongover=1.6.14
-yamlver=1.2.0
-redisver=2.2.8
-pkgrel=1
-pkgdesc='The PHP scripting language'
+_memcachedver=2.2.0
+_mongover=1.6.14
+_yamlver=1.2.0
+_redisver=2.2.8
+pkgrel=2
+pkgdesc='A scripting language widely used in web development'
 arch=(x86_64)
 url='http://www.php.net'
 license=(PHP)
@@ -30,10 +30,10 @@ changelog=ChangeLog
 
 source=(
     "http://php.net/distributions/php-${pkgver}.tar.bz2"
-    "https://pecl.php.net/get/memcached-${memcachedver}.tgz"
-    "https://pecl.php.net/get/mongo-${mongover}.tgz"
-    "https://pecl.php.net/get/yaml-${yamlver}.tgz"
-    "https://pecl.php.net/get/redis-${redisver}.tgz"
+    "https://pecl.php.net/get/memcached-${_memcachedver}.tgz"
+    "https://pecl.php.net/get/mongo-${_mongover}.tgz"
+    "https://pecl.php.net/get/yaml-${_yamlver}.tgz"
+    "https://pecl.php.net/get/redis-${_redisver}.tgz"
     php-fpm-service
     php-fpm-log
     php-fpm.install
@@ -61,24 +61,20 @@ build() {
       sapi/cgi/fastcgi.c main/network.c sapi/fpm/fpm/fastcgi.c
 
     # memcached ext
-    tar -xf "${srcdir}/memcached-${memcachedver}.tgz"
-    mv "memcached-${memcachedver}" ext/memcached
+    mv "${srcdir}/memcached-${_memcachedver}" ext/memcached
 
     # mongo ext
-    tar -xf "${srcdir}/mongo-${mongover}.tgz"
-    mv "mongo-${mongover}" ext/mongo
+    mv "${srcdir}/mongo-${_mongover}" ext/mongo
     # Fix namespace collision with ext/hash
     sed -i -e 's@php_hash_copy(@php_hash_copy_m(@' \
            -e 's@php_hash_copy,@php_hash_copy_m,@' \
            ext/mongo/contrib/crypto.c
 
     # redis ext
-    tar -xf "${srcdir}/redis-${redisver}.tgz"
-    mv "redis-${redisver}" ext/redis
+    mv "${srcdir}/redis-${_redisver}" ext/redis
 
     # yaml ext
-    tar -xf "${srcdir}/yaml-${yamlver}.tgz"
-    mv "yaml-${yamlver}" ext/yaml
+    mv "${srcdir}/yaml-${_yamlver}" ext/yaml
 
     rm configure
     ./buildconf --force
