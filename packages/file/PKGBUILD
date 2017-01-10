@@ -2,8 +2,8 @@
 
 pkgname=(file file-dev)
 pkgver=5.24
-pkgrel=1
-pkgdesc='The Fine Free File Command - a file type guesser'
+pkgrel=2
+pkgdesc='A file-type guesser'
 arch=('x86_64')
 url='http://darwinsys.com/file/'
 license=('BSD')
