@@ -30,7 +30,7 @@ build() {
         sed -i \
             -e 's@lib/ld-linux.so.2@lib/ld-musl-i386.so.1@' \
             -e 's@/usr@/@g' \
-            -e 's@lib64/ld-linux-x86-64.so.2@lib/ld-musl-x86_64.so.1@' $file
+            -e "s@lib64/ld-linux-x86-64.so.2@lib/ld-musl-${CARCH}.so.1@" $file
     done
     sed -i '/MULTILIB_OSDIRNAMES/d' $(find gcc/config -name t-linux64)
     sed -i '/^NATIVE_SYSTEM_HEADER_DIR/s@= .*@= /include@' gcc/Makefile.in
