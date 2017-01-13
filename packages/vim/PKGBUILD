@@ -1,9 +1,9 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(vim vim-extra)
-vermajor=7
-verminor=4
-pkgver="${vermajor}.${verminor}"
+_vermajor=7
+_verminor=4
+pkgver="${_vermajor}.${_verminor}"
 pkgrel=1
 pkgdesc='An IMproved version of the vi editor'
 arch=(x86_64)
@@ -46,7 +46,7 @@ build() {
     md5sum -c MD5SUMS
 
     # Apply all upstream patches
-    cd "${srcdir}/${pkgname}${vermajor}${verminor}"
+    cd "${srcdir}/${pkgname}${_vermajor}${_verminor}"
     for file in ${SRCDEST}/vim-patches/${pkgver}.* ; do
         patch -p0 -i "$file"
     done
@@ -67,7 +67,7 @@ package_vim() {
         share/vim
     )
     options+=(emptydirs)
-    cd "${srcdir}/${pkgbase}${vermajor}${verminor}"
+    cd "${srcdir}/${pkgbase}${_vermajor}${_verminor}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     install -d etc
@@ -84,12 +84,12 @@ package_vim-extra() {
         share/vim
     )
     depends=(vim)
-    cd "${srcdir}/${pkgbase}${vermajor}${verminor}"
+    cd "${srcdir}/${pkgbase}${_vermajor}${_verminor}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     install -m 0644 "${srcdir}/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39" \
-      "share/vim/vim${vermajor}${verminor}/syntax/PKGBUILD.vim"
+      "share/vim/vim${_vermajor}${_verminor}/syntax/PKGBUILD.vim"
     echo "au BufNewFile,BufRead PKGBUILD set filetype=PKGBUILD" \
-      >> "share/vim/vim${vermajor}${verminor}/filetype.vim"
+      >> "share/vim/vim${_vermajor}${_verminor}/filetype.vim"
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
