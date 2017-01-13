@@ -15,15 +15,16 @@ groups=(base)
 depends=()
 makedepends=(
     bison
+    gcc-c++
+    gettext
     libcurl-dev
     libmemcached-dev
+    libressl-dev
     libtool
     libxml2-dev
     libyaml-dev
-    gettext
-    libressl-dev
-    pkgconf
     libz-dev
+    pkgconf
 )
 options=()
 changelog=ChangeLog
@@ -39,6 +40,7 @@ source=(
     php-fpm.install
     php-fpm.conf
     php.ini
+    fix_expr_syntax.patch
 )
 sha256sums=(
     499b844c8aa7be064c111692e51a093ba94e54d2d9abb01e70ea76183a1825bb
@@ -51,14 +53,26 @@ sha256sums=(
     f4947a011d1c5f318eb7933c3ab08fa48cc8c28a61faba70447f6e911354544a
     693a0376eb4c2dc8bfe8027cec0f2eb2982ea64cfd3b36d4f089d4fe464dbfff
     8897e31325d4ee3c2a1a3fa81a415f59092b5e72ea8887ea501b472c6d0b6cf3
+    291be80b93513f734eb4df8d0a6225890e48f74c3dd32d3f4889ce2aa27b23d0
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    # Fix uses of expr in configure which aren't portable
+    patch -Np1 -i "${srcdir}/fix_expr_syntax.patch"
+
     # Fix warnings about including sys/poll.h
     sed -i '/sys\/poll.h/s@sys/@@' main/php_network.h \
       sapi/cgi/fastcgi.c main/network.c sapi/fpm/fpm/fastcgi.c
+
+    # Fix implicit declaration in mbstring
+    sed -i \
+        "/endif/s@^.*\$@int mbfl_filt_put_invalid_char(int c, mbfl_convert_filter *filter);\n&@" \
+        ext/mbstring/libmbfl/filters/mbfilter_utf8_mobile.h
+
+    # Fix readdir tests on musl-based system
+    sed -i "/dirent.h/s@^.*\$@#include <stdlib.h>\n&@" aclocal.m4
 
     # memcached ext
     mv "${srcdir}/memcached-${_memcachedver}" ext/memcached
@@ -80,8 +94,7 @@ build() {
     ./buildconf --force
 
     sed -i 's@CURL_CONFIG --libs@CURL_CONFIG --static-libs@' configure
-    CFLAGS="-pipe -fomit-frame-pointer -fno-asynchronous-unwind-tables -fPIC --static -static" \
-      ./configure \
+    ./configure \
       --prefix=/ \
       --with-config-file-path=/etc/php \
       --disable-all \
@@ -100,6 +113,7 @@ build() {
       --enable-memcached \
       --disable-memcached-sasl \
       --enable-mongo \
+      --enable-pear \
       --enable-pdo \
       --enable-phar \
       --enable-redis \
@@ -119,7 +133,12 @@ build() {
       --with-pic \
       ac_cv_crypt_des=no \
       ac_cv_crypt_ext_des=no
-    make $MAKEFLAGS
+    make
+}
+
+check() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make test
 }
 
 package_php() {
@@ -128,7 +147,6 @@ package_php() {
         bin/phar.phar
         bin/php
     )
-    options+=(upx)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make INSTALL_ROOT="${pkgdirbase}/destdir" install
@@ -149,7 +167,6 @@ package_php-fpm() {
         etc/php-fpm.conf
         etc/php.ini
     )
-    options+=(upx)
     install=php-fpm.install
 
     # Service files
