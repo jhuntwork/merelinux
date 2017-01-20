@@ -5,7 +5,7 @@ pkgname=(
     libarchive-dev
 )
 pkgver=3.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc='Multi-format archive and compression library'
 arch=(x86_64)
 url='http://www.libarchive.org'
@@ -19,7 +19,7 @@ makedepends=(
     libressl-dev
     libz-dev
 )
-options=(!upx)
+options=()
 changelog=ChangeLog
 source=(
     "http://www.libarchive.org/downloads/${pkgname}-${pkgver}.tar.gz"
@@ -37,8 +37,7 @@ build() {
     sed -i 's@ -qq@@' libarchive/archive_read_support_filter_xz.c
     sed -i 's@xz -d@unxz@' libarchive/archive_read_support_filter_xz.c
     sed -i 's@lzma -d@unlzma@' libarchive/archive_read_support_filter_xz.c
-    CFLAGS="-O3 -fPIC $CFLAGS" \
-      ./configure \
+    ./configure \
       --prefix='' \
       --enable-static \
       --enable-shared
