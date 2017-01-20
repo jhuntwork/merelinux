@@ -1,0 +1,76 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=(sqlite libsqlite libsqlite-dev)
+pkgver=3.15.1
+_pkgaltver=3150100
+pkgrel=1
+pkgdesc='A self-contained embedded SQL database engine.'
+arch=('x86_64')
+url='https://sqlite.org/'
+license=(PublicDomain)
+groups=('base')
+depends=()
+makedepends=(readline-dev)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://sqlite.org/2016/sqlite-autoconf-${_pkgaltver}.tar.gz"
+)
+
+sha256sums=(
+    5dfa89b7697ee3c2ac7b44e8e157e7f204bf999c866afcaa8bb1c7ff656ae2c5
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-autoconf-${_pkgaltver}"
+    CFLAGS+=' --static' \
+    ./configure \
+      --prefix=''
+    make
+}
+
+package_sqlite() {
+    pkgfiles=(
+        bin
+        share/man/man1
+    )
+    options=(upx)
+
+    cd "${srcdir}/${pkgbase}-autoconf-${_pkgaltver}"
+    make DESTDIR="${pkgdirbase}/destdir" install
+
+    cd "${pkgdirbase}/destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libsqlite() {
+    pkgfiles=(
+        lib/*.so.*
+    )
+    depends=(
+        musl
+        readline
+    )
+    cd "${pkgdirbase}/destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libsqlite-dev() {
+    pkgfiles=(
+        include
+        lib/*.a
+        lib/*.so
+        lib/pkgconfig
+    )
+    depends=(
+        libsqlite
+    )
+
+    cd "${pkgdirbase}/destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
