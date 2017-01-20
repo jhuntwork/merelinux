@@ -22,7 +22,7 @@ makedepends=(
 options=()
 changelog=ChangeLog
 source=(
-    "http://www.libarchive.org/downloads/${pkgname}-${pkgver}.tar.gz"
+    "http://www.libarchive.org/downloads/libarchive-${pkgver}.tar.gz"
 )
 sha256sums=(
     691c194ee132d1f0f7a42541f091db811bc2e56f7107e9121be2bc8c04f1060f
@@ -41,7 +41,7 @@ build() {
       --prefix='' \
       --enable-static \
       --enable-shared
-    make V=1 $MAKEFLAGS
+    make V=1
 }
 
 package_libarchive() {

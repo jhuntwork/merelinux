@@ -24,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-autoconf-${_pkgaltver}"
+    cd "${srcdir}/sqlite-autoconf-${_pkgaltver}"
     CFLAGS+=' --static' \
     ./configure \
       --prefix=''

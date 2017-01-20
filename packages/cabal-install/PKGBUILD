@@ -30,7 +30,7 @@ build() {
     install -d "${srcdir}/destdir"
     jobs=$(grep -c processor /proc/cpuinfo)
     TMPDIR=$(mktemp -d) ./bootstrap.sh \
-      --jobs $jobs \
+      --jobs "$jobs" \
       --no-doc \
       --sandbox "${srcdir}/destdir"
 }
