@@ -2,7 +2,7 @@
 
 pkgname=(pacman pacman-build libalpm-dev)
 pkgver=5.0.1
-pkgrel=7
+pkgrel=8
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -31,7 +31,7 @@ source=(
 )
 sha256sums=(
     84599e2ee2158134fd704f1cd681ea46e021165bed4df5f002aa1748caef9e7b
-    86f6944c7b499df4c537c0fe418ac7693f88c4174e2cfc22d1c5494ad868b438
+    69a0d0fd9d8812e10541b32aed02d351094b23afd54ac676de878c156b0af37e
     a4c69eb1b3be80292ad3dd1a90b4c4e9c24d6b7fb1235622fbfe4510c484494a
 )
 
@@ -96,6 +96,7 @@ package_pacman-build() {
         libarchive
         libressl
         pacman
+        pixz
         xz
     )
     cd "${pkgdirbase}/destdir"
