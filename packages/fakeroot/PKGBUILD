@@ -2,7 +2,7 @@
 
 pkgname=fakeroot
 pkgver=1.21
-pkgrel=1
+pkgrel=2
 pkgdesc='A tool for simulating superuser privileges.'
 arch=(x86_64)
 url='http://fakeroot.alioth.debian.org/'
@@ -41,15 +41,14 @@ build() {
     done
     sed -i 's@puts.*);\]@\]@g' configure.ac
     ./bootstrap
-    CFLAGS="${CFLAGS} -D_STAT_VER=0" \
+    CFLAGS+=" -D_STAT_VER=0" \
       ./configure \
       --prefix='' \
       --disable-static
-    make $MAKEFLAGS
+    make
 }
 
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="${pkgdir}" install
-    rm -rf ${pkgdir}/share
 }
