@@ -2,7 +2,7 @@
 
 pkgname=automake
 pkgver=1.15
-pkgrel=1
+pkgrel=2
 pkgdesc='A tool for automatically generating Makefile.in files.'
 arch=(x86_64)
 url='http://www.gnu.org/software/automake'
@@ -23,12 +23,21 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
+    sed -i 's:/\\\${:/\\\$\\{:' bin/automake.in
     ./configure --prefix=''
-    make $MAKEFLAGS
+    make
 }
 
 package() {
+    pkgfiles=(
+        bin
+        share/aclocal-*
+        share/automake-*
+        share/man
+    )
     cd "${srcdir}/${pkgname}-${pkgver}"
-    make DESTDIR="$pkgdir" install
-    rm -rf ${pkgdir}/share/{man,info,doc}
+    make DESTDIR="${pkgdirbase}/destdir" install
+    cd "${pkgdirbase}/destdir"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
