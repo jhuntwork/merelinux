@@ -1,7 +1,7 @@
 2017-01-13 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 3.5.2-2 :
-	Update description
+	Update description and build against libsqlite, liblzma
 
 2016-10-24 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 

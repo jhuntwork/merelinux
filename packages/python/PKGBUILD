@@ -14,10 +14,12 @@ depends=()
 makedepends=(
     gcc-c++
     libffi-dev
-    libressl-dev
     libncurses-dev
-    readline-dev
+    libressl-dev
+    libsqlite-dev
+    liblzma-dev
     libz-dev
+    readline-dev
 )
 options=()
 changelog=ChangeLog
@@ -38,11 +40,11 @@ build() {
     cd "${srcdir}/Python-${pkgver}"
     patch -Np1 -i "${srcdir}/python-fix-ctypes_util.patch"
     patch -Np0 -i "${srcdir}/fix-root-prefix.patch"
-    CC='gcc -fPIC' \
-      ./configure \
+    unset CFLAGS CXXFLAGS
+    CC='gcc -fPIC' CXX='g++ -fPIC' ./configure \
         --prefix=/ \
         --with-system-ffi
-    make $MAKEFLAGS
+    make
 }
 
 check() {
@@ -54,7 +56,10 @@ package_python() {
     depends=(
         musl
         libffi
+        libressl
+        libsqlite
         libz
+        readline
     )
     pkgfiles=(
         bin/pip
@@ -74,7 +79,7 @@ package_python() {
     find . -name "*.pyc" -delete -o -name "*.pyo" -delete
     find . -name 'test' -type d -exec rm -rf '{}' + || true
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_python-dev() {
@@ -91,5 +96,5 @@ package_python-dev() {
     cd "${pkgdirbase}/destdir"
     rm "include/python${_vermajor}.${_verminor}m/pyconfig.h"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
