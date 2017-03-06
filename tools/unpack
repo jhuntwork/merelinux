@@ -1,0 +1,70 @@
+#!/bin/sh -e
+#
+# Unpack a tar archive and print the top-level directory in the archive.
+# Specifically, print the second line of the archive list minus a leading '/'.
+
+usage="
+Usage: $0 [flags] filename 
+
+Unpack a tar archive and print the top-level directory in the archive.
+
+Optional flags:
+  -d  Dry run. Don't unpack the archive, just print the top-level directory.
+  -v  Verbose. Run tar with the verbose flag. Ignored when used wih -d.
+"
+
+error() {
+    printf "%s\n" "$@"
+    exit 1
+}
+
+transform_tar_output() {
+    head -n2 | awk '{if ((FNR % 2) == 0) {print $1}}' | sed 's@/.*@@'
+}
+
+unpack_archive() {
+	case $1 in
+		*zcat)
+			top_dir=$($1 "$archive" | tar -tf - | transform_tar_output)
+            [ $dry_run -eq 1 ] || $1 "$archive" | tar $verbose -xf -
+			;;
+		tar)
+			top_dir=$(tar -tf $archive | transform_tar_output)
+            [ $dry_run -eq 1 ] || tar $verbose -xf "$archive"
+			;;
+	esac
+    printf "%s\n" "$top_dir"
+}
+
+dry_run=0
+verbose=''
+while getopts "dv" arg ; do
+    case $arg in
+        d) dry_run=1; shift;;
+        v) verbose='-v'; shift;;
+    esac
+done
+
+[ -n "$1" ] || error "$usage"
+[ -e "$1" ] || error "No such file: $1"
+
+archive="$1"
+
+# Prefer the file command for guessing file type, if it is available.
+out=$(type -p file)
+if [ $? -eq 0 ] ; then
+    filecmd=${out##* }
+    fileout=$($filecmd "$archive")
+    ext=$(echo ${fileout#*:} | cut -d' ' -f1)
+else
+    ext=${archive##*.}
+fi
+
+case $ext in
+    bzip2|bz2|BZ2)  tool=bzcat;;
+	gzip|tgz|gz|GZ) tool=zcat;;
+    xz|XZ)          tool=xzcat;;
+    *)              tool=tar;;
+esac
+
+unpack_archive $tool
