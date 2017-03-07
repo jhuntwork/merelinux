@@ -22,20 +22,6 @@ transform_tar_output() {
     head -n2 | awk '{if ((FNR % 2) == 0) {print $1}}' | sed 's@/.*@@'
 }
 
-unpack_archive() {
-	case $1 in
-		*zcat)
-			top_dir=$($1 "$archive" | tar -tf - | transform_tar_output)
-            [ $dry_run -eq 1 ] || $1 "$archive" | tar $verbose -xf -
-			;;
-		tar)
-			top_dir=$(tar -tf $archive | transform_tar_output)
-            [ $dry_run -eq 1 ] || tar $verbose -xf "$archive"
-			;;
-	esac
-    printf "%s\n" "$top_dir"
-}
-
 dry_run=0
 verbose=''
 while getopts "dv" arg ; do
@@ -62,9 +48,19 @@ fi
 
 case $ext in
     bzip2|bz2|BZ2)  tool=bzcat;;
-	gzip|tgz|gz|GZ) tool=zcat;;
+    gzip|tgz|gz|GZ) tool=zcat;;
     xz|XZ)          tool=xzcat;;
     *)              tool=tar;;
 esac
 
-unpack_archive $tool
+case $tool in
+    *zcat)
+        top_dir=$($1 "$archive" | tar -tf - | transform_tar_output)
+        [ $dry_run -eq 1 ] || $1 "$archive" | tar $verbose -xf -
+        ;;
+    tar)
+        top_dir=$(tar -tf $archive | transform_tar_output)
+        [ $dry_run -eq 1 ] || tar $verbose -xf "$archive"
+        ;;
+esac
+printf "%s\n" "$top_dir"
