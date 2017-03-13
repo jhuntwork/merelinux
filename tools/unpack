@@ -56,11 +56,11 @@ esac
 case $tool in
     *zcat)
         top_dir=$($tool "$archive" | tar -tf - | transform_tar_output)
-        [ $dry_run -eq 1 ] || $tool "$archive" | tar $verbose -xf -
+        [ $dry_run -eq 1 ] || $tool "$archive" 2>/dev/null | tar $verbose -xf - 2>/dev/null
         ;;
     tar)
         top_dir=$(tar -tf $archive | transform_tar_output)
-        [ $dry_run -eq 1 ] || tar $verbose -xf "$archive"
+        [ $dry_run -eq 1 ] || tar $verbose -xf "$archive" 2>/dev/null
         ;;
 esac
 printf "%s\n" "$top_dir"
