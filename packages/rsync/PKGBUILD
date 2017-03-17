@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=rsync
-pkgver=3.1.1
+pkgver=3.1.2
 pkgrel=1
 pkgdesc='A fast incremental file transfer utility'
 arch=(x86_64)
@@ -9,7 +9,7 @@ url='https://rsync.samba.org/'
 license=(GPL3)
 groups=(base)
 depends=()
-makedepends=(zlib-dev perl)
+makedepends=(libz-dev perl)
 options=()
 changelog=ChangeLog
 source=(
@@ -17,14 +17,15 @@ source=(
 )
 
 sha256sums=(
-    7de4364fcf5fe42f3bdb514417f1c40d10bbca896abe7e7f2c581c6ea08a2621
+    ecfa62a7fa3c4c18b9eccd8c16eaddee4bd308a76ea50b5c02a5840f09c0a1c2
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     LDFLAGS="-Wl,-static" \
-      ./configure --prefix=''
+      ./configure --prefix='' \
+      rsync_cv_HAVE_GETTIMEOFDAY_TZ=yes
     make $MAKEFLAGS
 }
 
