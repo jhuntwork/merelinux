@@ -37,8 +37,11 @@ done
 archive="$1"
 
 # Prefer the file command for guessing file type, if it is available.
+set +e
 out=$(type -p file)
-if [ $? -eq 0 ] ; then
+rc=$?
+set -e
+if [ $rc -eq 0 ] ; then
     filecmd=${out##* }
     fileout=$($filecmd "$archive")
     ext=$(echo ${fileout#*:} | cut -d' ' -f1)
