@@ -1,3 +1,13 @@
+2017-04-17 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 0.6-1 :
+	Simplify dependencies further
+
+2016-03-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 0.5-1 :
+	Remove sudo, fakeroot.
+
 2016-02-13 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 0.4-1 :

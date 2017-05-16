@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=build-essential
-pkgver=0.4
+pkgver=0.6
 pkgrel=1
 pkgdesc='A meta-package which pulls in essential build tools'
 arch=(x86_64)
@@ -9,21 +9,13 @@ url='http://www.merelinux.org'
 license=(BSD)
 groups=(base)
 depends=(
-    binutils
     busybox
-    fakeroot
-    file
     gcc
-    gnupg
-    linux-headers
     m4
     make
-    musl-dev
     pacman-build
     patch
     pkgconf
-    sudo
-    upx
 )
 makedepends=()
 options=()
