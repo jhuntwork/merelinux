@@ -1,18 +1,14 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=libtool
+pkgname=(libtool libltdl libltdl-dev)
 pkgver=2.4.6
-pkgrel=1
+pkgrel=2
 pkgdesc='A generic library support script.'
 arch=(x86_64)
 url='http://www.gnu.org/software/libtool'
 license=(GPL3)
 groups=(base)
-depends=(
-    autoconf
-    automake
-    musl
-    )
+depends=()
 makedepends=()
 options=()
 changelog=ChangeLog
@@ -27,12 +23,49 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    ./configure --prefix=''
-    make $MAKEFLAGS
+    ./configure --prefix='' \
+        --enable-static
+    make
 }
 
-package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
-    make DESTDIR="$pkgdir" install
-    rm -rf ${pkgdir}/share/{man,info,doc}
+package_libtool() {
+    pkgfiles=(
+        bin
+        share/aclocal
+        share/libtool
+        share/man/man1
+    )
+    depends=(
+        autoconf
+        automake
+        bash
+    )
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    rm -rf share/info share/doc
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+}
+
+package_libltdl() {
+    pkgfiles=(
+        lib/lib*.so.*
+    )
+    depends=(musl)
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+}
+
+package_libltdl-dev() {
+    pkgfiles=(
+        include
+        lib/lib*.a
+        lib/lib*.so
+    )
+    depends=(libltdl)
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

@@ -1,3 +1,8 @@
+2017-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.4.6-2 :
+	Separate libltdl into its own packages
+
 2015-03-25 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 2.4.6-1 :
