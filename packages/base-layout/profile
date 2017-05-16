@@ -1,10 +1,17 @@
 # A generic personal profile settings file
 # intended to be usable by mksh and bash
 
-# Prompt settings
+# Defaults
 hn=$(hostname -s)
+id=$(id -u)
+P='$'
+PATH='/local/bin:/bin'
 
-[ "${USER}" = "root" ] && P='#'
+# Special cases for root
+if [ "$id" = '0' ] ; then
+    P='#'
+    PATH='/local/bin:/local/sbin:/bin:/sbin'
+fi
 
 set_ps1() {
     printf "${hn} | ${PWD}\n${P} "
@@ -13,9 +20,5 @@ set_ps1() {
 PS1='$(set_ps1)'
 PS2=" > "
 
-# Aliases
-alias ll='ls -l'
-
-# Misc environment variables
-PATH="/bin:/sbin"
+# export environment variables
 export PATH
