@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(xz liblzma-dev)
-pkgver=5.2.1
-pkgrel=2
+pkgver=5.2.3
+pkgrel=1
 pkgdesc='Free general-purpose data compression software with high compression ratio.'
 arch=('x86_64')
 url='http://tukaani.org/xz/'
@@ -13,10 +13,10 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "${url}/${pkgname}-${pkgver}.tar.gz"
+    "${url}/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    'b918b6648076e74f8d7ae19db5ee663df800049e187259faf5eb997a7b974681'
+    7876096b053ad598c31f6df35f7de5cd9ff2ba3162e5a5554e4fc198447e0347
 )
 
 
@@ -30,18 +30,17 @@ build() {
       --disable-nls \
       --includedir=/include \
       --mandir=/share/man
-    make $MAKEFLAGS
+    make
 }
 
 package_xz() {
-    options=(upx)
     pkgfiles=(
         bin/*
     )
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    # The following two files are provided in busybox
+    # The following files are provided in busybox
     rm bin/{lzcat,unlzma,unxz,xzcat}
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
