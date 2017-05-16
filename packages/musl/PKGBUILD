@@ -2,15 +2,15 @@
 
 pkgname=(musl musl-dev)
 pkgver=1.1.16
-pkgrel=1
+pkgrel=2
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
 url='http://www.musl-libc.org'
 license=(LGPL BSD)
 groups=('base')
 depends=()
-makedepends=(mksh)
-options=(!upx)
+makedepends=()
+options=()
 changelog=ChangeLog
 source=(
     "http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
@@ -22,9 +22,9 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    sed -i 's@-Os@-O3@g' configure
-    CFLAGS='' mksh ./configure --prefix=/
-    make $MAKEFLAGS
+    unset CFLAGS CXXFLAGS
+    ./configure --prefix=/
+    make
 }
 
 package_musl() {
@@ -35,17 +35,22 @@ package_musl() {
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     install -d bin
     ln -sf ../lib/libc.so bin/ldd
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_musl-dev() {
-    depends=('musl')
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="$pkgdir" install
-    rm "${pkgdir}/lib/libc.so"
-    rm "${pkgdir}/lib/ld-musl-${arch}.so.1"
+    pkgfiles=(
+        include
+        lib/*.a
+        lib/*.o
+    )
+    depends=(musl linux-headers)
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }

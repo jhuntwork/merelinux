@@ -1,3 +1,9 @@
+2017-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.1.16-2 :
+	Use default CFLAGS. Improve packaging.
+	musl-dev depends on linux-headers
+
 2017-01-05 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.1.16-1 :
