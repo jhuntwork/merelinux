@@ -2,7 +2,7 @@
 
 pkgname=pixz
 pkgver=1.0.6
-pkgrel=1
+pkgrel=2
 pkgdesc='Parallel, indexed xz compressor'
 arch=('x86_64')
 url='https://github.com/vasi/pixz'
@@ -32,7 +32,6 @@ build() {
 }
 
 package() {
-    options=(upx)
     pkgfiles=(
         bin
         share

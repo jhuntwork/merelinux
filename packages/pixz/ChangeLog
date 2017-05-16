@@ -1,4 +1,9 @@
+2017-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.0.6-2 :
+	Don't compress with upx
+
 2017-01-19 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-	* 1.0.6-1:
+	* 1.0.6-1 :
 	Initial version
