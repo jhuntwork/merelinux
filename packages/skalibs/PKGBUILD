@@ -5,7 +5,7 @@ pkgname=(
     skalibs-leapsecs
     skalibs-dev
 )
-pkgver=2.3.10.0
+pkgver=2.5.0.0
 pkgrel=1
 pkgdesc='A library suite supporting skarnet.org software.'
 arch=(x86_64)
@@ -22,19 +22,18 @@ source=(
 )
 
 sha256sums=(
-    e4d5147941055b2a367794666f773a4b216c3ae83c015a5fcf2cd0498470ea44
+    38408ff6d0aec581010ecf9e49703ec5f4c8887bbe68717ec087634a7ade849c
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    sed -i 's@#!/bin/sh@#!/bin/bash@' configure
     ./configure \
       --prefix=/ \
       --disable-ipv6 \
       --enable-force-devr \
       --enable-tai-clock
-    make $MAKEFLAGS
+    make
 }
 
 package_skalibs() {
