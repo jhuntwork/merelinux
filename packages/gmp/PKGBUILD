@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(gmp gmp-dev)
-pkgver=6.1.1
+pkgver=6.1.2
 pkgrel=1
 pkgdesc='A free library for arbitrary precision arithmetic.'
 arch=('x86_64')
@@ -16,18 +16,18 @@ source=(
     "https://gmplib.org/download/gmp/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    d36e9c05df488ad630fff17edb50051d6432357f9ce04e34a09b3d818825e831
+    87b565e89a9a684fe4ebeeddb8399dce2599f9c9049854ca8c0dfbdea0e21912
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     ./configure --prefix='' \
-      --enable-cxx \
-      --target=${arch}-unknown-linux-gnu \
-      --host=${arch}-unknown-linux-gnu \
-      --build=${arch}-unknown-linux-gnu
-    make $MAKEFLAGS
+      --build=$CHOST \
+      --host=$CHOST \
+      --target=$CHOST \
+      --enable-cxx
+    make
 }
 
 package_gmp() {
