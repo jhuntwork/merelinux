@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(lxc lxc-dev)
-pkgver=2.0.6
+pkgver=2.0.7
 pkgrel=1
 pkgdesc='A userspace interface for the Linux kernel containment features'
 arch=(x86_64)
@@ -18,8 +18,8 @@ source=(
 )
 
 sha256sums=(
-    7c292cd0055dac1a0e6fbb6a7740fd12b6ffb204603c198faf37c11c9d6dcd7a
-    cc0a1d731c9e4172125ca2779ea2b0951df87916616d0352a3318ced2a568dfe
+    1c09c075f06ec029f86fa6370c7d379494ff4c66a129eda17af7b7b41e055f5d
+    ecde193ce4ed90002d373e8715953e2ea1f3b61912bd5473978a67f2c940acab
 )
 
 
@@ -29,7 +29,7 @@ build() {
     ./configure \
       --prefix='' \
       --libexecdir=/lib/lxc
-    make $MAKEFLAGS
+    make
 }
 
 package_lxc() {

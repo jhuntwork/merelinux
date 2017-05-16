@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 options=$(getopt -o p:n: -l rootfs:,name:,path: -- "$@")
 [ $? -ne 0 ] && exit 1
 eval set -- "$options"
@@ -13,14 +13,6 @@ do
     esac
 done
 
-error() {
-    printf "%s\n" "$1"
-    exit 1
-}
-
-[ "$(id -u)" = "0" ] || error "This script should be run as 'root'"
-[ -n "$path" ] || error "'path' parameter is required"
-
 # detect rootfs
 config="$path/config"
 if [ -z "$rootfs" ]; then
@@ -31,37 +23,48 @@ if [ -z "$rootfs" ]; then
     fi
 fi
 
-builddir='merebuild'
-
-install -d "${rootfs}/var/lib/pacman"
-yes | pacman -Scc
-pacman -Sy --noconfirm -r "$rootfs" base-layout build-essential
-
-install /etc/pacman.conf "${rootfs}/etc/"
-install /etc/resolv.conf "${rootfs}/etc/"
-
-cat >"${rootfs}/etc/hosts" << EOF
-127.0.0.1 localhost.localdomain localhost
-EOF
-
-cat >"${rootfs}/etc/network/interfaces" <<EOF
-auto lo eth0
-iface lo inet loopback
-EOF
-
-[ -f '/pkgs/buildlocal.db.tar.gz' ] && \
-    find /pkgs ! -type d -maxdepth 1 | cpio -dump "${rootfs}/"
-for dir in sources staging logs ; do
-    install -o nobody -g nogroup -d "${rootfs}/merebuild/${dir}"
+# Add required core directories/files
+for dir in bin etc dev lib merebuild var/lib/pacman; do
+    install -d -m0755 "${rootfs}/${dir}"
 done
+install -d -m0555 "${rootfs}/proc"
+install -d -m0555 "${rootfs}/sys"
+install -d -m1777 "${rootfs}/tmp"
+install -d -m0755 "${rootfs}/tmp/staging"
+install -m 0644 /etc/resolv.conf "${rootfs}/etc/"
+ln -s /proc/mounts "${rootfs}/etc/mtab"
 
-install -o nobody -g nogroup -d "${rootfs}/${builddir}"
-chmod g+s "${rootfs}/${builddir}"
-setfacl -m u::rwx,g::rwx "${rootfs}/${builddir}"
-setfacl -d --set u::rwx,g::rx,o::rx "${rootfs}/${builddir}"
+# /tools specific settings, for use when bootstrapping
+if [ -n "$mere_use_tools" ] ; then
+    install -d -m0755 "${rootfs}/tools"
+    for file in $(find /tools/bin -maxdepth 1 ! -type d) ; do
+        ln -s $file    "${rootfs}/bin/"
+    done
+    ln -s /tools/lib/libstdc++.a "${rootfs}/lib/"
+fi
 
-cat >"${rootfs}/etc/sudoers.d/nobody" << EOF
-Defaults env_keep += "ftp_proxy http_proxy https_proxy no_proxy"
-nobody ALL=NOPASSWD: /bin/pacman
-EOF
+if [ -n "$mere_pacman_conf" ] && [ -f "$mere_pacman_conf" ] ; then
+    pac_config="--config $mere_pacman_conf"
+fi
 
+if [ -z "$mere_base" ] ; then
+    mere_base="base-layout build-essential"
+fi
+
+if [ "$mere_base" != 'none' ] ; then
+    yes | pacman -Scc
+    pacman -Syy -r "$rootfs" -b "${rootfs}/var/lib/pacman" \
+        $pac_config --force --noconfirm $mere_base
+    if [ -n "$pac_config" ]; then
+        install -m0644 "$mere_pacman_conf" "${rootfs}/etc/"
+    fi
+fi
+
+if [ -n "$mere_package" ] ; then
+    if [ -d "$mere_package" ] ; then
+        cp -a "$mere_package" "${rootfs}/tmp/wd"
+    else
+        printf "No such directory %s\n" "$mere_package"
+        exit 1
+    fi
+fi
