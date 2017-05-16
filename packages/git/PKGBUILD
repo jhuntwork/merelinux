@@ -1,23 +1,19 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(git git-extra)
-pkgver=2.10.1
-pkgrel=2
+pkgver=2.12.2
+pkgrel=1
 pkgdesc='A distributed version control system'
 arch=('x86_64')
 url='http://git-scm.com/'
 license=('GPL2')
 groups=('base')
-depends=(
-    libcurl
-    libressl
-    libz
-)
+depends=()
 makedepends=(
     libcurl-dev
     libressl-dev
+    zlib-dev
     perl
-    libz-dev
 )
 options=()
 changelog=ChangeLog
@@ -26,7 +22,7 @@ source=(
     "https://www.kernel.org/pub/software/scm/git/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    a9c32df9061cfc2c194ecaa0357ba273c1f24a0dbf0d856b03dcedafcd0a4dc6
+    d21a9e23506e618d561fb25a8a7bd6134f927b86147930103487117a7a678c4a
 )
 
 
@@ -35,7 +31,7 @@ build() {
     sed -i 's@sys/poll.h@poll.h@g' $(grep -lr 'sys/poll.h' .)
     sed -i 's@/usr/bin/perl@/bin/perl@g' `grep -lr "/usr/bin/perl" .`
     sed -i '/absolute directory/d' configure
-    ./configure \
+    LIBS='-lssl -lcrypto' ./configure \
       --prefix='' \
       --libexecdir=/lib \
       --with-curl \
@@ -45,7 +41,7 @@ build() {
       --with-pager=/bin/more \
       --with-perl=/bin/perl \
       --with-shell=/bin/sh
-    make V=1 NO_MSGFMT=1 NO_GETTEXT=1 $MAKEFLAGS
+    make V=1 NO_MSGFMT=1 NO_GETTEXT=1
 }
 
 package_git() {
@@ -54,13 +50,17 @@ package_git() {
         'lib/git-core'
         'share/git-core'
     )
+    depends=(
+        libcurl
+        libressl
+        musl
+    )
     rmfiles=(
         'bin/git-cvsserver'
         'lib/git-core/git-add--interactive'
         'lib/git-core/git-archimport'
         'lib/git-core/git-cvs*'
         'lib/git-core/git-difftool'
-        'lib/git-core/git-relink'
         'lib/git-core/git-send-email'
         'lib/git-core/git-svn'
     )
@@ -76,6 +76,8 @@ package_git() {
 package_git-extra() {
     depends=(
         git
+        libressl
+        musl
         perl
     )
     pkgdesc='Extra features for git'
@@ -85,7 +87,6 @@ package_git-extra() {
         'lib/git-core/git-archimport'
         'lib/git-core/git-cvs*'
         'lib/git-core/git-difftool'
-        'lib/git-core/git-relink'
         'lib/git-core/git-send-email'
         'lib/git-core/git-svn'
         'lib/perl5'
