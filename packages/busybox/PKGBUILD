@@ -1,16 +1,16 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=busybox
-pkgver=1.25.1
-pkgrel=2
+pkgver=1.26.2
+pkgrel=1
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
 arch=(x86_64)
 url='http://busybox.net'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=(perl)
-options=(emptydirs upx)
+makedepends=(tcc)
+options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
@@ -31,17 +31,17 @@ source=(
 )
 
 sha256sums=(
-    27667e0f2328fdbd79cfd622e4453e5c57e58f781c5da97c9be337d93aa2a02e
-    b48a4d06b88d178d18b4853d8a2c18616f517e6bc1e67dafe3b54b50bd2ae7e8
-    10c7a8af37b60ffeeb0d08e9b5a2e578ca2eaba69f6bf43d4f3a8e093d144ab4
+    da3e44913fc1a9c9b7c5337ea5292da518683cbff32be630777f565d6036af16
+    ac5684c2fd53c6a4f624a113df8e7c73803984f1e5085b3d1628dca9b03cb633
+    388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
-    980d3689463f75ee36ab67cff579fdcbdbeb629c99331c61c9d9397e869dd340
+    c91ad6bf827da152edf4ddb29fdaae1b07b683bd9bb366787fb1bf0117968c72
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
     f653d8703f3d061bca3c302470363b80623f2d6494acb9c2cde0c6483e21b34d
     0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
     6572c2fdb51f665a236507a59f1aee43c3b3212d6636141775f082b87868333d
     644321e67516c8e6869dd1f09b9dfc06d6758dec91df0bdea3cb614419a1e0d3
-    de0724907f8cbd9e0f95f0d568a1fe7423d90007a7f565684e42516d8911ca9e
+    e3f03cdee9f5945667728a76053bba3641add9820cafe75b1f883d711bcb58d9
     2d9876f5b675a6f86b38b975fdaa19cd109dd7c91cbf8a5b0b602dbb1fed6f49
     44ab6c3435535856b54269be711de6514e3c97612684c1c23c5f90f14b40b470
     4882124b9d9e2f9b369acec0f0b3bd289b3f3d3d86d8b3751b931e78d4fe669b
@@ -67,10 +67,9 @@ build() {
 
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    CFLAGS='' make V=1 HOSTCC="gcc -D_GNU_SOURCE" install
+    CFLAGS='' make V=1 HOSTCC='gcc -D_GNU_SOURCE' install
 
     cd "$pkgdir"
-
     install -d share/man/man1
     install -m0644 "${srcdir}/${pkgname}-${pkgver}/docs/busybox.1" share/man/man1/
 

@@ -16,8 +16,8 @@ case "$1" in
         ifconfig $interface 0.0.0.0
         ;;
     renew|bound)
-        local NETMASK=''
-        local BROADCAST=''
+        NETMASK=''
+        BROADCAST=''
         [ -n "$subnet" ] && NETMASK="netmask $subnet"
         [ "$subnet" = "255.255.255.255" ] && [ -z "$broadcast" ] && broadcast=$ip
         [ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
@@ -47,7 +47,8 @@ case "$1" in
             for ns in $dns ; do
                 printf "nameserver %s\n" $ns >>$tmpfile
             done
-            mv $tmpfile /etc/resolv.conf
+            install -m0644 $tmpfile /etc/resolv.conf
+            rm $tmpfile
         fi
         ;;
 esac

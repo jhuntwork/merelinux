@@ -1,3 +1,10 @@
+2017-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.26.2-1:
+	Upgrade to 1.26.2
+	Improve handling of bridge devices
+	Fix permissions on /etc/resolv.conf when created by udhcpc
+
 2016-11-07 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.25.1-2:
