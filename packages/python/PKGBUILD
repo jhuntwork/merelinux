@@ -2,9 +2,9 @@
 
 pkgname=(python python-dev)
 _vermajor=3
-_verminor=5
-pkgver=${_vermajor}.${_verminor}.2
-pkgrel=2
+_verminor=6
+pkgver=${_vermajor}.${_verminor}.1
+pkgrel=1
 pkgdesc='A clear and powerful object-oriented programming language,'
 arch=(x86_64)
 url='http://www.python.org'
@@ -12,14 +12,13 @@ license=(Python)
 groups=(base)
 depends=()
 makedepends=(
-    gcc-c++
     libffi-dev
     libncurses-dev
     libressl-dev
     libsqlite-dev
     liblzma-dev
-    libz-dev
     readline-dev
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
@@ -30,7 +29,7 @@ source=(
     fix-root-prefix.patch
 )
 sha256sums=(
-    0010f56100b9b74259ebcd5d4b295a32324b58b517403a10d1a2aa7cb22bca40
+    a01810ddfcec216bcdb357a84bfaafdfaa0ca42bbdaa4cb7ff74f5a9961e4041
     b9b817a4fd8dea3ef28929a9bee6a3572e0a365d815615aa112192f78ae6d401
     b363ebe8bd810545ca00b52398fa86c60e232c61191af560b02a85b6e1308e42
 )
@@ -58,7 +57,6 @@ package_python() {
         libffi
         libressl
         libsqlite
-        libz
         readline
     )
     pkgfiles=(
