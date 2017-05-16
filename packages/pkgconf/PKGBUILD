@@ -1,23 +1,23 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=pkgconf
-pkgver=0.9.9
+pkgver=1.3.6
 pkgrel=1
-pkgdesc='an API-driven pkg-config replacement'
+pkgdesc='An API-driven pkg-config replacement'
 arch=('x86_64')
 url='https://github.com/pkgconf/pkgconf'
 license=('BSD')
 groups=('base')
 depends=()
 makedepends=()
-options=(upx)
+options=()
 changelog=ChangeLog
 source=(
-    "http://rabbit.dereferenced.org/~nenolod/distfiles/${pkgname}-${pkgver}.tar.bz2"
+    "https://github.com/pkgconf/pkgconf/releases/download/pkgconf-${pkgver}/pkgconf-${pkgver}.tar.xz"
 )
 
 sha256sums=(
-    100abb2e49752100788628634804730eec240213817f7f941d99b4e2c5144887
+    95331d7e77c43a253cc677f87a319b5f8e36b163b715dc155df2711fcddd5437
 )
 
 
@@ -26,9 +26,10 @@ build() {
     LDFLAGS='-Wl,-static' \
       ./configure \
       --prefix='' \
+      --disable-shared \
       --with-system-libdir=/lib \
       --with-system-includedir=/include
-    make $MAKEFLAGS
+    make
 }
 
 package() {
