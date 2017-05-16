@@ -4,8 +4,8 @@ pkgname=(
     libarchive
     libarchive-dev
 )
-pkgver=3.2.2
-pkgrel=2
+pkgver=3.3.1
+pkgrel=1
 pkgdesc='Multi-format archive and compression library'
 arch=(x86_64)
 url='http://www.libarchive.org'
@@ -16,8 +16,8 @@ makedepends=(
     libacl-dev
     libattr-dev
     liblzma-dev
-    libressl-dev
-    libz-dev
+    nettle-dev
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
@@ -25,7 +25,7 @@ source=(
     "http://www.libarchive.org/downloads/libarchive-${pkgver}.tar.gz"
 )
 sha256sums=(
-    691c194ee132d1f0f7a42541f091db811bc2e56f7107e9121be2bc8c04f1060f
+    29ca5bd1624ca5a007aa57e16080262ab4379dbf8797f5c52f7ea74a3b0424e7
 )
 
 
@@ -54,9 +54,8 @@ package_libarchive() {
     depends=(
         libacl
         libattr
-        libressl
-        libz
         musl
+        nettle
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
