@@ -1,19 +1,15 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=binutils
-pkgver=2.27
+pkgver=2.28
 pkgrel=1
 pkgdesc='A collection of binary tools, including a linker and an assembler'
 arch=('x86_64')
 url='http://www.gnu.org/software/binutils/'
 license=('GPL3')
 groups=('base')
-depends=()
-makedepends=(
-    bison
-    gcc-c++
-    libz-dev
-)
+depends=(musl)
+makedepends=(bison zlib-dev)
 options=()
 changelog=ChangeLog
 source=(
@@ -21,39 +17,36 @@ source=(
 )
 
 sha256sums=(
-    369737ce51587f92466041a97ab7d2358c6d9e1b6490b3940eb09fb0a9a6ac88
+    6297433ee120b11b4b0a1c8f3512d7d73501753142ab9e2daa13c5a3edd32a72
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    sed -i -e 's/linux-gnu/linux-musl/g' \
-        -e 's@LIBC=gnu@LIBC=musl@' \
-        $(find . -name "confi*.guess" -o -name "confi*.sub")
-    rm -f etc/standards.info
-    sed -i '/^INFO/s/standards.info //' etc/Makefile.in
-    mkdir "../${pkgname}-build"
-    cd "../${pkgname}-build"
-    LDFLAGS="-Wl,-static" \
-      ../${pkgname}-${pkgver}/configure \
-      --prefix='' \
-      --disable-shared \
+    mkdir build
+    cd build
+    ../configure --prefix='' \
+      --build=${CHOST} \
+      --host=${CHOST} \
+      --target=${CHOST} \
+      --enable-gold \
+      --enable-ld=default \
+      --enable-plugins \
+      --enable-shared \
       --disable-werror \
       --disable-nls \
-      --mandir=/share/man \
-      --disable-install-libbfd \
-      --with-system-zlib
-    echo "MAKEINFO = :" >> Makefile
-    make $MAKEFLAGS tooldir=/
+      --with-system-zlib \
+      --mandir=/share/man
+    make tooldir=/
 }
 
 check() {
-    cd "${srcdir}/${pkgname}-build"
+    cd "${srcdir}/${pkgname}-${pkgver}/build"
     MAKEFLAGS='' make LDFLAGS='' check
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-build"
-    make DESTDIR="$pkgdir" tooldir=/ install-gas install-ld install-binutils
+    cd "${srcdir}/${pkgname}-${pkgver}/build"
+    make DESTDIR="$pkgdir" tooldir=/ install
     rm -rf "${pkgdir}/info"
 }
