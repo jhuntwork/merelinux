@@ -1,11 +1,16 @@
+2017-03-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.0.1-9 :
+	Add a fakefakeroot script
+
 2017-01-19 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-	* 5.0.1-8:
+	* 5.0.1-8 :
 	Default to pixz for xz compression
 
 2017-01-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 	
-	* 5.0.1-7:
+	* 5.0.1-7 :
 	Update description
 
 2017-01-09 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>

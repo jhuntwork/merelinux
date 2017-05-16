@@ -1,0 +1,15 @@
+#!/bin/sh
+case "$1" in
+   -v) echo '0.1';;
+   --)
+        shift
+        bin=$1
+        shift
+        export FAKEROOTKEY=1
+        exec $bin $@
+        ;;
+    *)
+        echo 'This stub fakeroot takes no options.'
+        exit 1
+        ;;
+esac

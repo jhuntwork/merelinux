@@ -2,7 +2,7 @@
 
 pkgname=(pacman pacman-build libalpm-dev)
 pkgver=5.0.1
-pkgrel=8
+pkgrel=9
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -11,14 +11,14 @@ groups=(base)
 depends=()
 makedepends=(
     gettext
-    gpgme-dev
     libacl-dev
     libarchive-dev
     libcurl-dev
     liblzma-dev
     libressl-dev
     libtool
-    libz-dev
+    nettle-dev
+    zlib-dev
     pkgconf
 )
 options=()
@@ -28,27 +28,34 @@ source=(
     "https://projects.archlinux.org/pacman.git/snapshot/pacman-${pkgver}.tar.gz"
     makepkg.conf
     pacman.conf
+    fakeroot
+    dependencies.sh
 )
 sha256sums=(
     84599e2ee2158134fd704f1cd681ea46e021165bed4df5f002aa1748caef9e7b
-    69a0d0fd9d8812e10541b32aed02d351094b23afd54ac676de878c156b0af37e
+    59d188dd2b4444f8079add3332c15af6dbc3841fef8ac98e08f7a7857ee58f05
     a4c69eb1b3be80292ad3dd1a90b4c4e9c24d6b7fb1235622fbfe4510c484494a
+    689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
+    4d1a3db8ac679e75000fd5d39b9fc2371f5deefe6dffcb3dfcf672eb0b9c3a7c
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
+    sed -i -e 's@/usr/bin/@@g' \
+       -e 's@/usr/bin\$PATH_SEPARATOR@@g' \
+       -e 's@ --apparent-size@@' configure.ac
+    sed -i -e '/x-cpio/s@)@|*application/x-empty*)@' \
+        -e 's/EUID == 0/EUID == -1/' \
+        scripts/makepkg.sh.in
     ./autogen.sh
-    sed -i '/x-cpio/s@)@|*application/x-empty*)@' scripts/makepkg.sh.in
-    sed -i 's@ --apparent-size@@' configure
     CFLAGS='-fPIC' LDFLAGS='-Wl,-static' \
     ./configure \
       --prefix='' \
-      --with-gpgme \
       --disable-shared \
       --disable-nls \
       --disable-doc
-    make V=1 LIBS='-lm -lz -lssl -lcrypto -llzma -lacl' -j1
+    make V=1 LIBS='-lm -lz -lnettle -lssl -lcrypto -llzma -lacl'
 }
 
 package_pacman() {
@@ -62,18 +69,19 @@ package_pacman() {
         bin/pactree
         bin/pkgdelta
         bin/vercmp
-        "etc/pacman.conf*"
+        etc/pacman.conf*
         var
     )
-    options+=(upx)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     mv etc/pacman.conf{,.example}
     mv etc/makepkg.conf{,.example}
     install -vm 0644 "${srcdir}/pacman.conf" etc/
     install -vm 0644 "${srcdir}/makepkg.conf" etc/
+    install -vm 0755 "${srcdir}/fakeroot" bin/
+    install -vm 0755 "${srcdir}/dependencies.sh" share/makepkg/lint_package/
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
@@ -82,11 +90,12 @@ package_pacman-build() {
     backup=(etc/makepkg.conf)
     pkgfiles=(
         bin/cleanupdelta
+        bin/fakeroot
         bin/makepkg
         bin/makepkg-template
         bin/repo-*
         bin/testpkg
-        "etc/makepkg.conf*"
+        etc/makepkg.conf*
         share
     )
     depends=(
@@ -95,11 +104,12 @@ package_pacman-build() {
         file
         libarchive
         libressl
+        nettle
         pacman
         pixz
         xz
     )
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
@@ -110,7 +120,7 @@ package_libalpm-dev() {
         lib/libalpm.a
         lib/pkgconfig
     )
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
