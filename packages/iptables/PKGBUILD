@@ -1,0 +1,48 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=iptables
+pkgver=1.6.1
+pkgrel=1
+pkgdesc='A fast incremental file transfer utility'
+arch=(x86_64)
+url='http://www.netfilter.org/'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(libz-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.netfilter.org/projects/iptables/files/${pkgname}-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    0fc2d7bd5d7be11311726466789d4c65fb4c8e096c9182b56ce97440864f0cf5
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS="-Wl,-static" \
+      ./configure --prefix='' \
+      --disable-shared \
+      --enable-static \
+      --disable-nftables \
+      --enable-libipq \
+      --with-xtlibdir=/lib/xtables
+    make
+}
+
+package() {
+    pkgfiles=(
+        bin
+        sbin
+        share/man/man1
+        share/man/man8
+    )
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+}
