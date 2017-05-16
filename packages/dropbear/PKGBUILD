@@ -35,9 +35,7 @@ build() {
     ./configure \
       --prefix='' \
       --disable-wtmp
-    make $MAKEFLAGS \
-      PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" \
-      STATIC=1
+    make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" STATIC=1
 }
 
 package() {

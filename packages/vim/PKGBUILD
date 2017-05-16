@@ -57,7 +57,7 @@ build() {
         ./configure \
         --prefix='' \
         --enable-multibyte
-    make $MAKEFLAGS
+    make
 }
 
 package_vim() {

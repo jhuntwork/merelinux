@@ -23,9 +23,9 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-      ./configure --prefix='' \
+    CFLAGS+=' -fPIC' ./configure --prefix='' \
         --enable-static
-    make $MAKEFLAGS
+    make
 }
 
 package_gpgme() {

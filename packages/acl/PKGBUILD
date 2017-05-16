@@ -28,7 +28,7 @@ build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     CFLAGS='-fPIC' ./configure \
       --prefix=''
-    make $MAKEFLAGS
+    make
 }
 
 check() {

@@ -28,7 +28,7 @@ build() {
       --includedir=/include \
       --enable-static \
       --enable-shared
-    make $MAKEFLAGS
+    make
 }
 
 package_libffi() {

@@ -24,7 +24,11 @@ build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     ./configure --prefix='' \
       --enable-thread-safe
-    make $MAKEFLAGS
+    make
+}
+
+check() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
     make check
 }
 

@@ -10,7 +10,7 @@ license=(GPL2)
 groups=(base)
 depends=()
 makedepends=()
-options=(upx emptydirs)
+options=(emptydirs)
 changelog=ChangeLog
 source=(
     "https://fedorahosted.org/releases/c/r/${pkgname}/${pkgname}-${pkgver}.tar.gz"
@@ -29,7 +29,7 @@ build() {
     ./configure \
       --prefix=''\
       --enable-syscrontab
-    make $MAKEFLAGS
+    make
 }
 
 package() {

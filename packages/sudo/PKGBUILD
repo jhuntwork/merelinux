@@ -10,7 +10,7 @@ license=(BSD)
 groups=(base)
 depends=()
 makedepends=()
-options=(upx emptydirs)
+options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://www.sudo.ws/sudo/dist/sudo-${pkgver}.tar.gz"
@@ -33,7 +33,7 @@ build() {
       --libexecdir=/lib/sudo \
       --enable-static \
       --disable-shared
-    make $MAKEFLAGS
+    make
 }
 
 package() {
