@@ -26,7 +26,7 @@ build() {
     LDFLAGS="-Wl,-static" \
       ./configure --prefix='' \
       rsync_cv_HAVE_GETTIMEOFDAY_TZ=yes
-    make $MAKEFLAGS
+    make
 }
 
 package() {
