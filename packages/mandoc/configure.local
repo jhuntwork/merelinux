@@ -1,0 +1,5 @@
+LDFLAGS='-Wl,-static'
+PREFIX=''
+MANDIR='/share/man'
+MANPAGER='less'
+CFLAGS="-W -Wall -Wmissing-prototypes -Wstrict-prototypes -Wwrite-strings -Wno-unused-parameter"

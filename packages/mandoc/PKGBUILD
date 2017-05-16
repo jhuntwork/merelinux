@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(mandoc mandoc-dev)
-pkgver=1.13.4
+pkgname=mandoc
+pkgver=1.14.1
 pkgrel=1
 pkgdesc='UNIX manpage tools'
 arch=(x86_64)
@@ -9,51 +9,43 @@ url='http://mdocml.bsd.lv/'
 license=(ISC)
 groups=(base)
 depends=()
-makedepends=(libsqlite-dev libz-dev)
+makedepends=(
+    zlib-dev
+)
 options=()
 changelog=ChangeLog
 source=(
     "http://mdocml.bsd.lv/snapshots/mdocml-${pkgver}.tar.gz"
+    configure.local
 )
 
 sha256sums=(
-    0a55c1addb188071d6f784599303656b8465e98ec6b2f4f264e12fb96d79e0ef
+    356954f141ec6f5635e938c826f2e16e4619bb361c64d84a31f6775d030a615b
+    76f8831038e8102febf42427dc4a0796f63b3e4e026e13c93fd916d07a5fba4d
 )
 
 
 build() {
     cd "${srcdir}/mdocml-${pkgver}"
-    echo "LDFLAGS='-Wl,--static'" >configure.local
-    echo "PREFIX=''" >>configure.local
-    echo "MANDIR='/share/man'" >>configure.local
+    cp "${srcdir}/configure.local" .
+    echo "CFLAGS=\"${CFLAGS} \${CFLAGS}\"" >>configure.local
+
+    # Busybox less doesn't support -T
+    sed -i '/strdup("-T")/,+1d' main.c
+
     ./configure
     make
 }
 
-package_mandoc() {
+package() {
     pkgfiles=(
         bin
         sbin
-        share/man/man1
-        share/man/man5
-        share/man/man7
-        share/man/man8
+        share/man
     )
-    options=(upx)
     cd "${srcdir}/mdocml-${pkgver}"
-    MAKEFLAGS='' make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir"
+    MAKEFLAGS='' make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
-}
-
-package_mandoc-dev() {
-    pkgfiles=(
-        include
-        lib
-        share/man/man3
-    )
-    cd "${pkgdirbase}/destdir"
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
