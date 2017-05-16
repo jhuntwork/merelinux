@@ -1,23 +1,23 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=perl
-pkgver=5.24.0
+pkgver=5.24.1
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=('x86_64')
 url='http://www.perl.org'
 license=('GPL2')
 groups=('base')
-depends=(musl libz)
-makedepends=(libz-dev)
+depends=(musl)
+makedepends=(zlib-dev)
 options=()
 changelog=ChangeLog
 
 source=(
-    "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.gz"
+    "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    7e430c6e0e0d9017c3f72898850dea657fa6b51909220a7bcf305a87f2475202
+    482ac5dca262b57d26c381382a3e057b22ede631fcce32523c004b8bf773f6f0
 )
 
 
@@ -26,10 +26,7 @@ build() {
     for file in `grep -l -r "/usr" .` ; do
         sed -i -e 's@/usr/local@@g' -e 's@/usr@@g' $file
     done
-    sed -i -e "s|BUILD_ZLIB\s*= True|BUILD_ZLIB = False|" \
-           -e "s|INCLUDE\s*= ./zlib-src|INCLUDE    = /include|" \
-           -e "s|LIB\s*= ./zlib-src|LIB        = /lib|" \
-           cpan/Compress-Raw-Zlib/config.in
+    export BUILD_ZLIB=False
     CFLAGS="$CFLAGS" ./configure.gnu \
       -des -Dprefix=/ \
       -Dcc="gcc -D_GNU_SOURCE" \
@@ -48,8 +45,14 @@ build() {
       -Dman1dir=/share/man/man1 \
       -Dman3dir=/share/man/man3 \
       -Dpager="/bin/less -I" \
+      -Dusethreads \
       -Duseshrplib
-    make $MAKEFLAGS
+    make
+}
+
+check() {
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    # make test
 }
 
 package() {
@@ -58,7 +61,7 @@ package() {
         'lib'
         'share'
     )
-    
+
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
