@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libgcrypt libgcrypt-dev)
-pkgver=1.6.5
+pkgver=1.7.6
 pkgrel=1
 pkgdesc='A general purpose cryptographic library based on the code from GnuPG'
 arch=(x86_64)
@@ -17,39 +17,41 @@ source=(
 )
 
 sha256sums=(
-    f49ebc5842d455ae7019def33eb5a014a0f07a2a8353dc3aa50a76fd1dafa924
+    626aafee84af9d2ce253d2c143dc1c0902dda045780cc241f39970fc60be05bc
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-      ./configure --prefix='' \
+    CFLAGS+=' -fPIC' ./configure --prefix='' \
         --enable-static
-    make $MAKEFLAGS
+    make
 }
 
 package_libgcrypt() {
     pkgfiles=(
+        bin
         lib/libgcrypt.so.*
     )
-    depends=(libgpg-error)
+    depends=(libgpg-error musl)
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    rm "${pkgdir}/bin/libgcrypt-config"
 }
 
 package_libgcrypt-dev() {
     pkgfiles=(
-        bin
+        bin/libgcrypt-config
         include
         lib/libgcrypt.a
         lib/libgcrypt.so
         share/aclocal
     )
-    depends=(libgcrypt)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    depends=(libgcrypt libgpg-error-dev)
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
