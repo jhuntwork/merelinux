@@ -5,7 +5,7 @@ pkgname=(
     libcurl
     libcurl-dev
 )
-pkgver=7.51.0
+pkgver=7.54.0
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=(x86_64)
@@ -13,15 +13,15 @@ url='http://curl.haxx.se'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=(libressl-dev perl libz-dev)
+makedepends=(libressl-dev perl zlib-dev)
 options=()
 changelog=ChangeLog
 
 source=(
-    "${url}/download/${pkgname}-${pkgver}.tar.gz"
+    "${url}/download/${pkgname}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    65b5216a6fbfa72f547eb7706ca5902d7400db9868269017a8888aa91d87977c
+    1c7207c06d75e9136a944a2e0528337ce76f15b9ec9ae4bb30d703b59bf530e8
 )
 
 
@@ -37,7 +37,7 @@ build() {
       --disable-shared \
       --with-ssl \
       --with-ca-bundle=/etc/ssl/ca-certs.pem
-    make $MAKEFLAGS V=1
+    make V=1
     install -v src/curl{,-static}
     unset LDFLAGS
     make clean
@@ -48,7 +48,7 @@ build() {
       --enable-shared \
       --with-ssl \
       --with-ca-bundle=/etc/ssl/ca-certs.pem
-    make $MAKEFLAGS V=1
+    make V=1
 }
 
 package_curl() {
@@ -58,14 +58,13 @@ package_curl() {
     depends=(
         ca-certs
     )
-    options=(upx)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     install -m0755 -v src/curl-static "${pkgdir}-tmp/bin/curl"
     cd "${pkgdir}-tmp"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_libcurl() {
@@ -76,7 +75,6 @@ package_libcurl() {
         ca-certs
         musl
         libressl
-        libz
     )
 
 
@@ -84,7 +82,7 @@ package_libcurl() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_libcurl-dev() {
@@ -104,5 +102,5 @@ package_libcurl-dev() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
