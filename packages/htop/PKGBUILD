@@ -1,0 +1,37 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=htop
+pkgver=2.0.2
+pkgrel=1
+pkgdesc='An interactive process viewer for Unix'
+arch=(x86_64)
+url='http://hisham.hm/htop'
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=(
+    libncurses-dev
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "${url}/releases/${pkgver}/${pkgname}-${pkgver}.tar.gz"
+)
+sha256sums=(
+    179be9dccb80cee0c5e1a1f58c8f72ce7b2328ede30fb71dcdf336539be2f487
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    LDFLAGS='-Wl,-static' \
+      ./configure \
+      --prefix=''
+    make
+}
+
+package() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdir}" install
+}
