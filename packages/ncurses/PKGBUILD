@@ -5,8 +5,8 @@ pkgname=(
     ncurses-terminfo
     libncurses-dev
 )
-pkgver=5.9
-pkgrel=3
+pkgver=6.0
+pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=(x86_64)
 url='http://www.gnu.org/software/ncurses'
@@ -14,7 +14,6 @@ license=(GPL2)
 groups=(base)
 depends=()
 makedepends=(
-    gcc-c++
     ncurses
     ncurses-terminfo
 )
@@ -26,8 +25,8 @@ source=(
     ftp://invisible-island.net/ncurses/termcap.src.gz
 )
 sha256sums=(
-    9046298fb440324c9d4135ecea7879ffed8546dd1b58e59430ea07a4633f563b
-    5c3b7c467ac5390ec3d91b7e439cec1a0179a7d7a737c2065e7d6fe4cbd87022
+    f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
+    2ac1f97574e1e07a7fd37e6ba324a5c474bdb9ef537b061127d9f18d467b501c
 )
 
 
@@ -50,46 +49,43 @@ build() {
         --enable-sigwinch \
         --includedir=/include \
         --mandir=/share/man
-    make $MAKEFLAGS
+    make
 }
 
 package_ncurses() {
     pkgfiles=(bin)
-    options+=(upx)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    local destdir="${pkgdir%/*}/${pkgbase}-tmp"
+    make DESTDIR="${pkgdirbase}/dest" install
 
-    make DESTDIR="$destdir" install
-
-    cd "$destdir"
+    cd "${pkgdirbase}/dest"
     for lib in ncurses form panel menu ; do
         ln -s lib${lib}w.a lib/lib${lib}.a
     done
     ln -s libncurses.a lib/libcurses.a
+    ln -s ncursesw include/ncurses
 
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
-    # ncurses5w-config is in -dev and clear/reset are in busybox
-    rm "$pkgdir"/bin/{ncursesw5-config,clear,reset}
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    # ncurses6w-config is in -dev and clear/reset are in busybox
+    rm "$pkgdir"/bin/{ncursesw6-config,clear,reset}
 }
 
 package_ncurses-terminfo() {
     pkgfiles=(share/terminfo)
     depends=(ncurses)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    local destdir="${pkgdir%/*}/${pkgbase}-tmp"
-    cd "$destdir"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libncurses-dev() {
     pkgfiles=(
-        bin/ncursesw5-config
+        bin/ncursesw6-config
         include
-        "lib/*.a"
+        lib/*.a
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    local destdir="${pkgdir%/*}/${pkgbase}-tmp"
-    cd "$destdir"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${pkgdirbase}/dest"
+    ln -s ncursesw6-config bin/ncurses6-config
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
