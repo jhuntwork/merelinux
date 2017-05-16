@@ -1,49 +1,40 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(zlib zlib-dev)
-pkgver=1.2.8
+pkgname=zlib-dev
+pkgver=1.2.11
 pkgrel=1
 pkgdesc='A Massively Spiffy Yet Delicately Unobtrusive Compression Library'
 arch=('x86_64')
 url='http://www.zlib.net'
 license=('BSD')
 groups=('base')
-depends=('musl')
+depends=()
 makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "http://zlib.net/${pkgname}-${pkgver}.tar.gz"
+    "http://zlib.net/zlib-${pkgver}.tar.xz"
 )
 sha256sums=(
-    '36658cb768a54c1d4dec43c3116c27ed893e88b02ecfcb44f2166f9c0b7f2a0d'
+    4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    sed -i 's@mktemp -u@mktemp@' Makefile.in
-    CFLAGS="$CFLAGS -fPIC" ./configure --prefix=''
-    make $MAKEFLAGS
+    cd "${srcdir}/zlib-${pkgver}"
+    CFLAGS+=' -fPIC' ./configure --prefix=''
+    make
 }
 
-package_zlib() {
+package() {
     pkgfiles=(
-        "lib/libz.so*"
+        include
+        lib/lib*.a
+        lib/pkgconfig
     )
-    
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find $(printf "%s\n" ${pkgfiles[@]}) | cpio -dumpv "$pkgdir"
-}
-
-package_zlib-dev() {
-    depends=('zlib')
-    
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="$pkgdir" install
-    rm "${pkgdir}/lib/libz.so"
-    rm "${pkgdir}/lib/libz.so.1"
-    rm "${pkgdir}/lib/libz.so.${pkgver}"
+    cd "${srcdir}/zlib-${pkgver}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
