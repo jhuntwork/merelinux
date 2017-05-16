@@ -1,14 +1,14 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=gnupg
-pkgver=2.1.11
+pkgver=2.1.19
 pkgrel=1
 pkgdesc='GNU Privacy Guard. An implementation of the OpenPGP standard.'
 arch=(x86_64)
 url='https://www.gnupg.org/'
 license=(GPL3)
 groups=(base)
-depends=(pinentry)
+depends=()
 makedepends=(
     gnutls-dev
     libassuan-dev
@@ -24,7 +24,7 @@ source=(
 )
 
 sha256sums=(
-    b7b0fb2c8c5d47d7ec916d4a1097c0ddcb94a12bb1c0ac424ad86b1ee316b61a
+    46cced1f5641ce29cc28250f52fadf6e417e649b3bfdec49a5a0d0b22a639bf0
 )
 
 
@@ -33,7 +33,7 @@ build() {
     LDFLAGS="-Wl,-static" \
       ./configure --prefix='' \
         --libexecdir=/lib/gnupg
-    make $MAKEFLAGS
+    make
 }
 
 package() {
