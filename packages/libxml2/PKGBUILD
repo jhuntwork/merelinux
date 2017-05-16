@@ -2,16 +2,14 @@
 
 pkgname=(libxml2 libxml2-dev)
 pkgver=2.9.4
-pkgrel=1
+pkgrel=2
 pkgdesc='An XML C parser and toolkit.'
 arch=(x86_64)
 url='http://xmlsoft.org/'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=(
-    libz-dev
-)
+makedepends=(zlib-dev)
 options=()
 changelog=ChangeLog
 source=(
@@ -24,9 +22,8 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    CFLAGS="$CFLAGS -fPIC -D__GNUC__=2" \
-      ./configure \
-      --prefix='' \
+    CFLAGS+=' -fPIC -D__GNUC__=2' \
+      ./configure --prefix='' \
       --enable-static \
       --enable-shared
     make V=1
@@ -34,17 +31,18 @@ build() {
 
 package_libxml2() {
     pkgfiles=(
+        bin/xmlcatalog
+        bin/xmllint
         lib/*.so.*
+        share/man/man1
     )
-    depends=(
-        musl
-    )
+    depends=(musl)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libxml2-dev() {
@@ -53,12 +51,14 @@ package_libxml2-dev() {
         include
         lib/*.a
         lib/*.so
+        lib/cmake
+        lib/xml*.sh
+        lib/pkgconfig
+        share/man/man3
     )
     depends=(libxml2)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
