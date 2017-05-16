@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(linux linux-headers)
-pkgver=4.7.5
-pkgrel=2
+pkgver=4.10
+pkgrel=1
 pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
@@ -18,18 +18,18 @@ source=(
 )
 
 sha256sums=(
-    97b0aff0264a661c256e738cec43b4e2addbb21f8de73fcca16a5a25f619d092
-    04df4ada0c9cba5237718f92a43b4a0f70196d6cd09757499850a51ece98f294
+    3c95d9f049bd085e5c346d2c77f063b8425f191460fcd3ae9fe7e94e0477dc4b
+    7ff526225976af5091ebfbb88c677ecf20cf27d7e2b76d85d9d0cbb7fa47ff05
 )
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     # Something in the linux src wants gnu sed, so just be lazy for now and
     # give it what it wants
-    sudo pacman -S --force --noconfirm sed
+    # sudo pacman -S --force --noconfirm sed
     make mrproper
     cp "${srcdir}/linux-config" .config
-    make $MAKEFLAGS
+    make
 }
 
 package_linux() {
