@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(file file-dev)
-pkgver=5.24
-pkgrel=2
+pkgver=5.30
+pkgrel=1
 pkgdesc='A file-type guesser'
 arch=('x86_64')
 url='http://darwinsys.com/file/'
@@ -17,39 +17,38 @@ source=(
 )
 
 sha256sums=(
-    802cb3de2e49e88ef97cdcb52cd507a0f25458112752e398445cea102bc750ce
+    694c2432e5240187524c9e7cf1ec6acc77b47a0e19554d34c14773e43dbbf214
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     sed -i 's/misc/file/' configure
-    LDFLAGS="--static" ./configure \
-      --prefix='' \
+    LDFLAGS='-Wl,-static' ./configure --prefix='' \
       --disable-shared \
       --enable-static
-    make $MAKEFLAGS V=1
+    make V=1
 }
 
 package_file() {
-    options=(upx)
+    options=()
     pkgfiles=(
-        'bin/file'
-        'share/file/magic.mgc'
+        bin/file
+        share/file/magic.mgc
     )
     cd "$srcdir/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_file-dev() {
     pkgfiles=(
-        'include/*'
-        'lib/*'
+        include
+        lib
     )
-    cd "$srcdir/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    printf "%s\n" ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
