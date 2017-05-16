@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(s6 s6-dev)
-pkgver=2.3.0.0
-pkgrel=6
+pkgver=2.5.0.0
+pkgrel=1
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
@@ -27,7 +27,7 @@ source=(
 )
 
 sha256sums=(
-    49c9a0476d93c6279c776ca5ae9c49b3fd39c356eda674828aebf78f8488e8e6
+    11413aea4add3aea2d0f3f7515d274ac58d4adfb03661a1f6ce7fa2abd24dab1
     c01dc625a11f12dce8600382790dd08e557cd5aeddbc59eba2a621dcaf4e58e5
     321a1138500481920cd1f79056424000c85e3d820df41f4a09cf78a56e374140
     c9a2fd4b5a11bc2469ad3d574425c2cf5b4984673203ed110d0c2190216cd82f
@@ -46,16 +46,17 @@ build() {
     sed -i 's@#!/bin/sh@#!/bin/bash@' configure
     ./configure \
       --prefix=/ \
+      --bindir=/sbin \
       --libexecdir=/lib/s6 \
       --enable-static-libc
-    make $MAKEFLAGS
+    make
 }
 
 package_s6() {
-    options+=(emptydirs upx)
+    options+=(emptydirs)
     pkgfiles=(
-        etc
         bin
+        etc
         sbin
         lib/s6
     )
@@ -63,10 +64,11 @@ package_s6() {
 
     # Run make install
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    rm lib/s6/libs6.a
-    mv bin/* sbin/
+    make DESTDIR="${pkgdirbase}/.destdir" install
+
+    # Begin customization
+    cd "${pkgdirbase}/.destdir"
+    mv lib/s6/libs6.a lib/
 
     # Services dir and init
     install -d etc/s6/services/{available,enabled}
@@ -96,6 +98,7 @@ package_s6() {
     # Human readable/usable service compatibility layer
     install -m 0754 "${srcdir}/service_functions.sh" lib/s6/
     install -m 0754 "${srcdir}/service" sbin/
+    install -d bin
     install -m 0755 "${srcdir}/taillog" bin/
 
     set -o pipefail
@@ -108,10 +111,7 @@ package_s6-dev() {
         lib/libs6.a
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    mv lib/s6/libs6.a lib/
+    cd "${pkgdirbase}/.destdir"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
