@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(sqlite libsqlite libsqlite-dev)
-pkgver=3.15.1
-_pkgaltver=3150100
+pkgver=3.18.0
+_pkgaltver=3180000
 pkgrel=1
 pkgdesc='A self-contained embedded SQL database engine.'
 arch=('x86_64')
@@ -15,19 +15,20 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "https://sqlite.org/2016/sqlite-autoconf-${_pkgaltver}.tar.gz"
+    "https://sqlite.org/2017/sqlite-autoconf-${_pkgaltver}.tar.gz"
 )
 
 sha256sums=(
-    5dfa89b7697ee3c2ac7b44e8e157e7f204bf999c866afcaa8bb1c7ff656ae2c5
+    3757612463976e7d08c5e9f0af3021613fc24bbcfe1c51197d6776b9ece9ac5c
 )
 
 
 build() {
     cd "${srcdir}/sqlite-autoconf-${_pkgaltver}"
-    CFLAGS+=' --static' \
-    ./configure \
-      --prefix=''
+    CFLAGS="$CFLAGS -fPIC -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_COLUMN_METADATA=1"
+    CFLAGS="$CFLAGS -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_SECURE_DELETE=1"
+    CFLAGS="$CFLAGS -DSQLITE_ENABLE_DBSTAT_VTAB=1 --static" \
+        ./configure --prefix=''
     make
 }
 
@@ -36,7 +37,6 @@ package_sqlite() {
         bin
         share/man/man1
     )
-    options=(upx)
 
     cd "${srcdir}/${pkgbase}-autoconf-${_pkgaltver}"
     make DESTDIR="${pkgdirbase}/destdir" install
