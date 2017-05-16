@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(flex flex-dev)
-pkgver=2.5.39
+pkgver=2.6.3
 pkgrel=1
 pkgdesc='A tool for generating scanners, or tokenizers that recognize lexical \
 patterns in text.'
@@ -10,50 +10,46 @@ url='http://flex.sourceforge.net/'
 license=('GPL2')
 groups=('base')
 depends=()
-makedepends=(bison gcc-c++)
+makedepends=(bison)
 options=()
 changelog=ChangeLog
 source=(
-    "http://downloads.sourceforge.net/project/flex/flex-${pkgver}.tar.xz"
+    "http://github.com/westes/flex/releases/download/v2.6.3/flex-${pkgver}.tar.gz"
 )
 
 sha256sums=(
-    'c988bb3ab340aaba16df5a54ab98bb4760599975375c8ac9388a078b7f27e9e8'
+    68b2742233e747c462f781462a2a1e299dc6207401dac8f0bbb316f48565c2aa
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     ./configure --prefix=''
-    make $MAKEFLAGS
+    make
 }
 
 package_flex() {
     pkgfiles=(
-        bin/flex
-        bin/flex++
-        lib/libfl_pic.so.*
-        lib/libfl.so.*
-        share/man/man1/flex.1
+        bin
+        lib/lib*.so.*
+        share/man/man1/
     )
     depends=(musl)
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_flex-dev() {
     pkgfiles=(
-        include/FlexLexer.h
-        lib/libfl_pic.so
-        lib/libfl.so
-        lib/libfl_pic.a
-        lib/libfl.a
+        include
+        lib/*.so
+        lib/*.a
     )
     depends=(flex)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
