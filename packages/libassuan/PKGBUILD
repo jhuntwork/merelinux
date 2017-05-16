@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libassuan libassuan-dev)
-pkgver=2.4.2
+pkgver=2.4.3
 pkgrel=1
 pkgdesc='A small library implementing the so-called Assuan protocol.'
 arch=(x86_64)
@@ -17,15 +17,15 @@ source=(
 )
 
 sha256sums=(
-    bb06dc81380b74bf1b64d5849be5c0409a336f3b4c45f20ac688e86d1b5bcb20
+    22843a3bdb256f59be49842abf24da76700354293a066d82ade8134bb5aa2b71
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-      ./configure --prefix='' \
+    CFLAGS+=' -fPIC' ./configure --prefix='' \
         --enable-static
-    make $MAKEFLAGS
+    make
 }
 
 package_libassuan() {
