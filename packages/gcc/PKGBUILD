@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(gcc gcc-c++)
-pkgver=6.2.0
+pkgname=gcc
+pkgver=7.1.0
 pkgrel=1
 pkgdesc='The GNU Compiler Collection'
 arch=('x86_64')
@@ -9,7 +9,7 @@ url='http://gcc.gnu.org/'
 license=('GPL3')
 groups=('base')
 depends=()
-makedepends=(gcc-c++ gmp-dev mpfr-dev mpc-dev zlib-dev)
+makedepends=(gmp-dev mpfr-dev mpc-dev zlib-dev)
 options=()
 changelog=ChangeLog
 source=(
@@ -17,89 +17,68 @@ source=(
 )
 
 sha256sums=(
-    9944589fc722d3e66308c0ce5257788ebd7872982a718aa2516123940671b7c5
+    f06ae7f3f790fbf0f018f6d40e844451e6bc3b7bc96e128e63b09825c1f8b29f
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    sed -i -e 's/linux-gnu/linux-musl/g' \
-        -e 's@LIBC=gnu@LIBC=musl@' \
-        $(find . -name "confi*.guess" -o -name "confi*.sub")
-    for file in $(find gcc/config/i386 -name linux64.h -o -name linux.h) ; do
-        sed -i \
-            -e 's@lib/ld-linux.so.2@lib/ld-musl-i386.so.1@' \
-            -e 's@/usr@/@g' \
-            -e "s@lib64/ld-linux-x86-64.so.2@lib/ld-musl-${CARCH}.so.1@" $file
-    done
-    sed -i '/MULTILIB_OSDIRNAMES/d' $(find gcc/config -name t-linux64)
-    sed -i '/^NATIVE_SYSTEM_HEADER_DIR/s@= .*@= /include@' gcc/Makefile.in
-    sed -i '/#define STANDARD_INCLUDE_DIR/s@"/usr/include"@"/include"@g' gcc/cppdefault.c
+    sed -i '/m64=/s@lib64@lib@' gcc/config/i386/t-linux64
     sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in
     sed -i 's,-lgcc_s,--start-group -lgcc_eh -lgcc -lc --end-group,' gcc/gcc.c
     sed -i 's,\./fixinc\.sh,-c true,' gcc/Makefile.in
-    mkdir "../${pkgname}-build"
-    cd "../${pkgname}-build"
-    CFLAGS="$CFLAGS -fPIC" CXXFLAGS="$CXXFLAGS -fPIC" \
-      ../${pkgname}-${pkgver}/configure \
+    sed -i '/define secure_getenv/s@__secure_getenv@getenv@' \
+           libmpx/mpxrt/mpxrt-utils.c \
+           libvtv/vtv_utils.cc
+    sed -i '/__USE_ISOC11/s@!(@(@' libssp/gets-chk.c
+    # No pthread_yield in musl, just use sched_yield as per other targets
+    sed -i 's@pthread_yield();@sched_yield();@' libcilkrts/runtime/os-unix.c
+    mkdir build
+    cd build
+    CFLAGS+=' -fPIC' CXXFLAGS+=' -fPIC' \
+      ../configure \
       --prefix='' \
+      --build=${CHOST} \
+      --host=${CHOST} \
+      --target=${CHOST} \
       --libexecdir=/lib \
       --mandir=/share/man \
-      --enable-threads=posix \
-      --enable-tls \
       --enable-libssp \
       --enable-lto \
-      --disable-shared \
+      --enable-threads=posix \
+      --enable-tls \
       --disable-bootstrap \
-      --disable-libsanitizer \
       --disable-multilib \
-      --with-system-zlib \
-      --enable-languages=c,c++
-    gcc_cv_libc_provides_ssp=yes \
-      make $MAKEFLAGS BOOT_LDFLAGS="-static" LDFLAGS="-static"
+      --enable-languages=c,c++ \
+      --with-system-zlib
+    make
 }
 
-package_gcc() {
+package() {
     pkgfiles=(
-        bin/cpp
-        bin/gcc
-        bin/gcov
-        bin/cc
-        lib/cpp
-        lib/libssp.a
-        lib/gcc
-        lib/libgomp.spec
-        lib/libgomp.a
-        lib/libssp.a
-        lib/libssp_nonshared.a
-        "share/man/man1/cpp.*"
-        "share/man/man1/gcc.*"
-        "share/man/man1/gcov.*"
+        bin
+        include
+        lib
+        share/man/man1
     )
-    cd "${srcdir}/${pkgbase}-build"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    depends=(
+        binutils
+        gmp
+        mpc
+        mpfr
+        musl-dev
+        musl
+    )
+    cd "${srcdir}/${pkgbase}-${pkgver}/build"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    install -d lib/bfd-plugins
+    [ -f lib/gcc/x86_64-pc-linux-musl/${pkgver}/liblto_plugin.so ]
+    ln -s ../gcc/x86_64-pc-linux-musl/${pkgver}/liblto_plugin.so lib/bfd-plugins/
+    find lib -name "*.so" -maxdepth 1 -delete
     find . -name "*.gch" -delete
     ln -sf ../bin/cpp lib
     ln -sf gcc bin/cc
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
-}
-
-package_gcc-c++() {
-    pkgfiles=(
-        bin/c++
-        bin/g++
-        include/c++
-        lib/libstdc++.a
-        lib/libsupc++.a
-        "share/man/man1/g++*"
-    )
-    depends=('gcc')
-    cd "${srcdir}/${pkgbase}-build"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find . -name "*.gch" -delete
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

@@ -1,3 +1,14 @@
+2017-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 7.1.0-1 :
+	Upgrade to 7.1.0
+	Package gcc and g++ together
+
+2017-03-30 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 6.3.0-1 :
+	Upgrade to 6.3.0
+
 2016-10-22 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 6.2.0-1 :
