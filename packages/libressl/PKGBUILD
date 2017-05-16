@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libressl libressl-dev ca-certs)
-pkgver=2.5.0
+pkgver=2.5.2
 pkgrel=1
 pkgdesc='A fork of OpenSSL 1.0.1g with the goal modernizing the codebase and improving security'
 arch=(x86_64)
@@ -9,7 +9,7 @@ url='http://www.libressl.org'
 license=(OpenSSL SSLeay)
 groups=(base)
 depends=()
-makedepends=()
+makedepends=(libtool)
 options=()
 changelog=ChangeLog
 
@@ -17,14 +17,15 @@ source=(
     "http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${pkgver}.tar.gz"
 )
 sha256sums=(
-    8652bf6b55ab51fb37b686a3f604a2643e0e8fde2c56e6a936027d12afda6eae
+    0ffa7d70809284a4ac96e965918a61c1d7930bca865457a7db0ff0afc8201c82
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
+    autoreconf -i
     CFLAGS='-fPIC' ./configure --prefix=''
-    make $MAKEFLAGS V=1
+    make V=1
 }
 
 check() {
