@@ -1,11 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(
-    pcre
-    libpcre
-    libpcre-dev
-)
-pkgver=8.37
+pkgname=(pcre libpcre libpcre-dev)
+pkgver=8.40
 pkgrel=1
 pkgdesc='Perl Compatible Regular Expressions'
 arch=(x86_64)
@@ -13,50 +9,48 @@ url='http://pcre.org'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=(gcc-c++)
+makedepends=(libtool)
 options=()
 changelog=ChangeLog
 source=(
     "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    51679ea8006ce31379fb0860e46dd86665d864b5020fc9cd19e71260eef4789d
+    00e27a29ead4267e3de8111fcaa59b132d0533cdfdbdddf4b0604279acbcf4f4
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    ./configure \
-      --prefix=''
-    make $MAKEFLAGS
+    autoreconf -i
+    ./configure --prefix='' \
+        --enable-utf8 \
+        --enable-unicode-properties
+    make
 }
 
 package_pcre() {
     pkgfiles=(
         bin
     )
-    depends=(
-        libpcre
-    )
+    depends=(libpcre)
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    rm bin/pcre-config
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    rm "${pkgdir}/bin/pcre-config"
 }
 
 package_libpcre() {
     pkgfiles=(
-        "lib/libpcre*.so.*"
+        lib/libpcre*.so.*
     )
-    depends=(
-        musl
-    )
+    depends=(musl)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
@@ -64,15 +58,13 @@ package_libpcre-dev() {
     pkgfiles=(
         bin/pcre-config
         include
-        "lib/*.so"
-        "lib/*.a"
+        lib/*.so
+        lib/*.a
+        lib/pkgconfig
     )
-    depends=(
-        libpcre
-    )
+    depends=(libpcre)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
