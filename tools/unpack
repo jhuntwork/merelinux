@@ -61,7 +61,7 @@ tmp_dir=''
 
 # Prefer the file command for guessing file type, if it is available.
 set +e
-out=$(type -p file)
+out=$(type file)
 rc=$?
 set -e
 if [ $rc -eq 0 ] ; then
