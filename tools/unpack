@@ -4,14 +4,15 @@
 # Specifically, print the second line of the archive list minus a leading '/'.
 
 usage="
-Usage: $0 [flags] filename
+Usage: $0 [options] filename
 
 Unpack a tar archive and print the top-level directory in the archive.
 
 Optional flags:
-  -d  Dry run. Don't unpack the archive, just print the top-level directory.
-  -t  Unpack archive to a temporary directory.
-  -v  Verbose. Run tar with the verbose flag. Ignored when used wih -d.
+  -d           Dry run. Don't unpack the archive, just print the top-level directory.
+  -t           Unpack archive to a temporary directory.
+  -T TEMPLATE  Like -t, but use the given template for the temporary directory.
+  -v           Verbose. Run tar with the verbose flag. Ignored when used wih -d.
 "
 
 u_realpath() {
@@ -44,10 +45,12 @@ transform_tar_output() {
 dry_run=0
 make_tmp_dir=0
 verbose=''
-while getopts dtv arg ; do
+template=''
+while getopts dtT:v arg ; do
     case $arg in
         d) dry_run=1;;
         t) make_tmp_dir=1;;
+        T) make_tmp_dir=1; template="-t $2";;
         v) verbose='-v';;
     esac
 done
@@ -80,7 +83,7 @@ case $ext in
 esac
 
 if [ $make_tmp_dir = 1 ] ; then
-    tmp_dir="$(mktemp -d)/"
+    tmp_dir="$(mktemp -d $template)/"
     cd "$tmp_dir"
 fi
 
