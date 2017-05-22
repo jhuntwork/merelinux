@@ -1,0 +1,40 @@
+#!/bin/sh -e
+
+usage="
+Usage: $0 URL sha256sum
+
+Download a given URL and verify using a given sha256 checksum
+
+Files will be downloaded to the current directory and saved as the basename
+element of the URL. If the file already exists and the checksum matches,
+downloading is skipped.
+"
+
+error() {
+    printf "%s\n" "$@"
+    exit 1
+}
+
+[ $# -eq 2 ] || error "$usage"
+
+if ! type -p sha256sum ; then
+    if type -p shasum >/dev/null ; then
+        alias sha256sum='shasum -a 256'
+    else
+        error "Cannot determine a sha256sum binary to use."
+    fi
+fi
+
+verify() {
+    echo "$sha  $filename" | sha256sum -c -
+}
+
+url=$1
+sha=$2
+filename=${1##*/}
+if [ -f "$filename" ] ; then
+    verify
+    exit 0
+fi
+curl -LO "$url"
+verify
