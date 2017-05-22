@@ -4,14 +4,33 @@
 # Specifically, print the second line of the archive list minus a leading '/'.
 
 usage="
-Usage: $0 [flags] filename 
+Usage: $0 [flags] filename
 
 Unpack a tar archive and print the top-level directory in the archive.
 
 Optional flags:
   -d  Dry run. Don't unpack the archive, just print the top-level directory.
+  -t  Unpack archive to a temporary directory.
   -v  Verbose. Run tar with the verbose flag. Ignored when used wih -d.
 "
+
+u_realpath() {
+    set +e
+    local curdir=$(pwd)
+    local dir_name="${1%/*}"
+    [ -d "$dir_name" ] && cd "$dir_name"
+    local lastlink=$1
+    local link=$(readlink ${lastlink##*/})
+    while [ "$link" ] ; do
+        dir_name="${link%/*}"
+        [ -d "$dir_name" ] && cd "$dir_name"
+        lastlink=$link
+        link=$(readlink ${link##*/})
+    done
+    echo "$(pwd)/${lastlink##*/}"
+    cd $curdir
+    set -e
+}
 
 error() {
     printf "%s\n" "$@"
@@ -23,18 +42,22 @@ transform_tar_output() {
 }
 
 dry_run=0
+make_tmp_dir=0
 verbose=''
-while getopts "dv" arg ; do
+while getopts dtv arg ; do
     case $arg in
-        d) dry_run=1; shift;;
-        v) verbose='-v'; shift;;
+        d) dry_run=1;;
+        t) make_tmp_dir=1;;
+        v) verbose='-v';;
     esac
 done
+shift $(($OPTIND - 1))
 
 [ -n "$1" ] || error "$usage"
 [ -e "$1" ] || error "No such file: $1"
 
-archive="$1"
+archive="$(u_realpath $1)"
+tmp_dir=''
 
 # Prefer the file command for guessing file type, if it is available.
 set +e
@@ -56,14 +79,24 @@ case $ext in
     *)              tool=tar;;
 esac
 
+if [ $make_tmp_dir = 1 ] ; then
+    tmp_dir="$(mktemp -d)/"
+    cd "$tmp_dir"
+fi
+
 case $tool in
     *zcat)
-        top_dir=$($tool "$archive" | tar -tf - | transform_tar_output)
+        top_dir="${tmp_dir}$($tool "$archive" | tar -tf - | transform_tar_output)"
         [ $dry_run -eq 1 ] || $tool "$archive" 2>/dev/null | tar $verbose -xf - 2>/dev/null
         ;;
     tar)
-        top_dir=$(tar -tf $archive | transform_tar_output)
+        top_dir="${tmp_dir}$(tar -tf $archive | transform_tar_output)"
         [ $dry_run -eq 1 ] || tar $verbose -xf "$archive" 2>/dev/null
         ;;
 esac
+
+if [ $dry_run -eq 1 ] && [ $make_tmp_dir -eq 1 ] && [ -d "$tmp_dir" ] ; then
+    rm -rf "$tmp_dir"
+fi
+
 printf "%s\n" "$top_dir"
