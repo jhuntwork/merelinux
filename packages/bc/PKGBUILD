@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=bc
-pkgver=1.06.95
+pkgver=1.07.1
 pkgrel=1
 pkgdesc='An arbitrary precision numeric processing language.'
 arch=('x86_64')
@@ -13,19 +13,19 @@ makedepends=(readline-dev bison)
 options=()
 changelog=ChangeLog
 source=(
-    "http://alpha.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
-    "http://www.linuxfromscratch.org/patches/lfs/development/bc-${pkgver}-memory_leak-1.patch"
+    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
+    fix-libmath_h
 )
 
 sha256sums=(
-    '7ee4abbcfac03d8a6e1a8a3440558a3d239d6b858585063e745c760957725ecc'
-    '9e9279f1c2c4b83f3dab9672563bb02087776f04bb43eec135af117e6d4f83fb'
+    62adfca89b0a1c0164c2cdca59ca210c1d44c3ffc46daf9931cf4942664cb02a
+    cf7325777749b2dd6b4715d7c308c7c13f88f13c6ba1f3e7f08f669cd9c96833
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    patch -Np1 -i "${srcdir}/bc-${pkgver}-memory_leak-1.patch"
+    install -m0755 "${srcdir}/fix-libmath_h" bc/fix-libmath_h
     LDFLAGS="-Wl,-static" \
     ./configure --prefix='' --with-readline \
        --mandir=/share/man \
