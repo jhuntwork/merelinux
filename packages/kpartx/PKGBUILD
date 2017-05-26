@@ -1,0 +1,33 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=kpartx
+pkgver=0.7.1
+pkgrel=1
+pkgdesc='Tools for the Device Mapper multipathing driver'
+arch=(x86_64)
+url='http://christophe.varoqui.free.fr/'
+license=(GPL2)
+groups=(base)
+depends=()
+makedepends=(
+    libdevmapper-dev
+    git
+)
+options=(upx)
+changelog=ChangeLog
+source=(
+    "multipath-tools::git+http://git.opensvc.com/multipath-tools/.git#tag=${pkgver}"
+)
+sha256sums=('SKIP')
+
+
+build() {
+    cd "${srcdir}/multipath-tools"
+    make -C kpartx VERSION=$pkgver LDFLAGS='-Wl,-static -ldevmapper'
+}
+
+package() {
+    cd "${srcdir}/multipath-tools"
+    install -d "${pkgdir}/bin"
+    install -m 0755 kpartx/kpartx "${pkgdir}/bin/kpartx"
+}
