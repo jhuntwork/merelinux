@@ -1,0 +1,54 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=(libdevmapper libdevmapper-dev)
+pkgver=2.02.171
+pkgrel=1
+pkgdesc='The userspace device-mapper support library'
+arch=(x86_64)
+url='https://www.sourceware.org/lvm2/'
+license=(GPL2)
+groups=(base)
+depends=()
+makedepends=(
+)
+options=()
+changelog=ChangeLog
+source=(
+    "ftp://sources.redhat.com/pub/lvm2/releases/LVM2.${pkgver}.tgz"
+)
+sha256sums=(
+    e120b066b85b224552efda40204488c5123de068725676fd6e5c8bc655051b94
+)
+
+
+build() {
+    cd "${srcdir}/LVM2.${pkgver}"
+    ./configure --prefix='' \
+      --enable-static_link
+    make $MAKEFLAGS device-mapper
+}
+
+package_libdevmapper() {
+    pkgfiles=(
+        lib/libdevmapper.so.*
+        sbin
+    )
+    depends=(musl)
+    cd "${srcdir}/LVM2.${pkgver}"
+    make DESTDIR="${pkdirbase}/dest" install_device-mapper
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+}
+
+package_libdevmapper-dev() {
+    pkgfiles=(
+        include
+        lib/libdevmapper.so
+        lib/libdevmapper.a
+    )
+    depends=(libdevmapper)
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+}
