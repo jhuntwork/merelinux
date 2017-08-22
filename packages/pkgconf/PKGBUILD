@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=pkgconf
-pkgver=1.3.6
+pkgver=1.3.7
 pkgrel=1
 pkgdesc='An API-driven pkg-config replacement'
 arch=('x86_64')
@@ -9,20 +9,21 @@ url='https://github.com/pkgconf/pkgconf'
 license=('BSD')
 groups=('base')
 depends=()
-makedepends=()
+makedepends=(libtool)
 options=()
 changelog=ChangeLog
 source=(
-    "https://github.com/pkgconf/pkgconf/releases/download/pkgconf-${pkgver}/pkgconf-${pkgver}.tar.xz"
+    "${url}/archive/pkgconf-${pkgver}.tar.gz"
 )
 
 sha256sums=(
-    95331d7e77c43a253cc677f87a319b5f8e36b163b715dc155df2711fcddd5437
+    0c624678e8a8b027b532830b01c6d99542c3f967b28ccff9933b52a8a1009677
 )
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/pkgconf-pkgconf-${pkgver}"
+    ./autogen.sh
     LDFLAGS='-Wl,-static' \
       ./configure \
       --prefix='' \
@@ -33,7 +34,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/pkgconf-pkgconf-${pkgver}"
     make DESTDIR="$pkgdir" install
     ln -s pkgconf "${pkgdir}/bin/pkg-config"
 }
