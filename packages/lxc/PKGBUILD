@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(lxc lxc-dev)
-pkgver=2.0.7
+pkgver=2.0.8
 pkgrel=1
 pkgdesc='A userspace interface for the Linux kernel containment features'
 arch=(x86_64)
@@ -18,8 +18,8 @@ source=(
 )
 
 sha256sums=(
-    1c09c075f06ec029f86fa6370c7d379494ff4c66a129eda17af7b7b41e055f5d
-    ecde193ce4ed90002d373e8715953e2ea1f3b61912bd5473978a67f2c940acab
+    0d8e34b302cfe4c40c6c9ae5097096aa5cc2c1dfceea3f0f22e3e16c4a4e8494
+    6709aa2010c69e3f914c2d302cf1329a4e365dd9c56b42c3c1484007e17c5d8c
 )
 
 
@@ -42,12 +42,17 @@ package_lxc() {
         var
     )
     options+=(emptydirs)
-    depends=(acl libcap)
+    depends=(
+        acl
+        libattr
+        libcap
+        musl
+    )
     backup=(etc/lxc/default.conf)
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
     set -o pipefail
     install -m 0755 "${srcdir}/lxc-merebuild" "${pkgdir}/share/lxc/templates/"
 }
@@ -59,9 +64,7 @@ package_lxc-dev() {
         lib/pkgconfig
     )
     depends=(lxc libcap-dev)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
