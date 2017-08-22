@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=mksh
-pkgver=R51
+pkgver=R55
 pkgrel=1
 pkgdesc='The MirBSD Korn Shell'
 arch=(x86_64)
@@ -10,14 +10,14 @@ license=(BSD)
 groups=(base)
 depends=()
 makedepends=()
-options=(upx)
+options=()
 changelog=ChangeLog
 source=(
     "https://www.mirbsd.org/MirOS/dist/mir/mksh/mksh-${pkgver}.tgz"
 )
 
 sha256sums=(
-    9feeaa5ff33d8199c0123675dec29785943ffc67152d58d431802bc20765dadf
+    ced42cb4a181d97d52d98009eed753bd553f7c34e6991d404f9a8dcb45c35a57
 )
 
 
@@ -29,5 +29,7 @@ build() {
 package() {
     cd "${srcdir}/${pkgname}"
     install -d "${pkgdir}/bin"
+    install -d "${pkgdir}/share/man/man1"
     install -m 0755 mksh "${pkgdir}/bin/"
+    install -c -o root -g bin -m 444 lksh.1 mksh.1 "${pkgdir}/share/man/man1/"
 }
