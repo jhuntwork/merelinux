@@ -2,7 +2,7 @@
 
 pkgname=nginx
 pkgver=1.10.1
-pkgrel=1
+pkgrel=2
 pkgdesc='An HTTP and reverse proxy server.'
 arch=(x86_64)
 url='http://nginx.org/'
@@ -15,7 +15,7 @@ makedepends=(
     libressl-dev
     zlib-dev
 )
-options=(upx emptydirs)
+options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://nginx.org/download/nginx-${pkgver}.tar.gz"
@@ -40,8 +40,9 @@ install=nginx.install
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    CC="gcc -fPIC -static" \
-        ./configure \
+    sed -i 's@-Wl,-E@-Wl,-static@g' auto/cc/conf
+    CC='gcc -static -fPIC' \
+    ./configure \
         --prefix='' \
         --conf-path=/etc/nginx/nginx.conf \
         --pid-path=/var/run/nginx.pid \
@@ -56,7 +57,7 @@ build() {
         --user=nginx \
         --group=nogroup \
         --with-threads
-    make $MAKEFLAGS
+    make
 }
 
 package() {
