@@ -1,9 +1,10 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(vim vim-extra)
-_vermajor=7
-_verminor=4
-pkgver="${_vermajor}.${_verminor}"
+pkgname=vim
+_vermajor=8
+_verminor=0
+_verpatch=0891
+pkgver="${_vermajor}.${_verminor}.${_verpatch}"
 pkgrel=1
 pkgdesc='An IMproved version of the vi editor'
 arch=(x86_64)
@@ -15,48 +16,36 @@ makedepends=(libncurses-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.vim.org/pub/vim/unix/vim-${pkgver}.tar.bz2"
+    "https://github.com/vim/vim/archive/v${pkgver}.tar.gz"
     https://projects.archlinux.org/pacman.git/plain/contrib/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39
     vimrc
 )
 
 sha256sums=(
-    d0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade
+    0d1467df73fbfb57a48b728b5a6b1ac1e50d062b9b09471c59c140c2eb9b4384
     dda73393c44e448ddeddaff76287dbbe5fcea1bc381c5d065789bd3c1b481f0e
     5e698ff1872bae79b7eae3f35bfca2e426c2698a785687fb9035e0fee16de91a
 )
 
 
 build() {
-    # Fetch all upstream patches
-    cd "$SRCDEST"
-    install -d vim-patches
-    cd vim-patches
-    printf "Downloading MD5SUMS of patches\n"
-    curl --progress-bar -LO http://ftp.vim.org/pub/vim/patches/${pkgver}/MD5SUMS
-    IFS=$'\n'
-    for line in `cat MD5SUMS` ; do
-        sum=`echo $line | cut -d' ' -f1`
-        file=`echo $line | cut -d' ' -f3`
-        if ! echo "$sum  $file" | md5sum -c - >/dev/null 2>&1 ; then
-            printf "Downloading %s\n" "$file"
-            curl --progress-bar -LO http://ftp.vim.org/pub/vim/patches/${pkgver}/${file}
-        fi
-    done
-    md5sum -c MD5SUMS
+    cd "${srcdir}/${pkgbase}-${pkgver}"
 
-    # Apply all upstream patches
-    cd "${srcdir}/${pkgname}${_vermajor}${_verminor}"
-    for file in ${SRCDEST}/vim-patches/${pkgver}.* ; do
-        patch -p0 -i "$file"
-    done
-
+    # Set the path of the default vimrc file
     echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
-    CFLAGS="${CFLAGS} -fPIC" \
+
+    # Fix some feature tests
+    sed -i -e '/thisterminaldoesnotexist/i #include <term.h>' \
+           -e '/0xffffffffUL;/i #include <stdlib.h>' \
+	   src/auto/configure
+
+    CC='gcc -I/include/ncursesw' \
+        CFLAGS="${CFLAGS} -fPIC" \
         LDFLAGS='-Wl,-static' \
         ./configure \
         --prefix='' \
-        --enable-multibyte
+        --enable-multibyte \
+        --with-tlib=ncursesw
     make
 }
 
@@ -64,32 +53,18 @@ package_vim() {
     pkgfiles=(
         bin
         etc
+        share/man/man1
         share/vim
     )
     options+=(emptydirs)
-    cd "${srcdir}/${pkgbase}${_vermajor}${_verminor}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     install -d etc
     install -m 0644 "${srcdir}/vimrc" etc/vimrc
-    rm bin/vimtutor
-    find share/vim -type f -delete
-    find share/vim -mindepth 3 -type d -exec rmdir '{}' +
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
-}
-
-package_vim-extra() {
-    pkgfiles=(
-        bin/vimtutor
-        share/vim
-    )
-    depends=(vim)
-    cd "${srcdir}/${pkgbase}${_vermajor}${_verminor}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
     install -m 0644 "${srcdir}/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39" \
       "share/vim/vim${_vermajor}${_verminor}/syntax/PKGBUILD.vim"
     echo "au BufNewFile,BufRead PKGBUILD set filetype=PKGBUILD" \
       >> "share/vim/vim${_vermajor}${_verminor}/filetype.vim"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
