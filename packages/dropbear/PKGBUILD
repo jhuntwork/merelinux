@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=dropbear
-pkgver=2016.74
+pkgver=2017.75
 pkgrel=1
 pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
@@ -21,7 +21,7 @@ source=(
 )
 
 sha256sums=(
-    2720ea54ed009af812701bcc290a2a601d5c107d12993e5d92c0f5f81f718891
+    6cbc1dcb1c9709d226dff669e5604172a18cf5dbf9a201474d5618ae4465098c
     743b0d8c6e7a60f07910daa913bfb5717e98b47654ac7cffaafff15a1c3a7566
     992a38e175c6dd8dea0c0496dbe175749f0f18eee6d861d913cd8f5bfe19a37a
     678981da5f219b6d335e132073ce5516e51470f80d17f33b282af259d846c5b0
