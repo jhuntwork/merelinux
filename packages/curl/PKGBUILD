@@ -21,14 +21,14 @@ source=(
     "${url}/download/${pkgname}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    1c7207c06d75e9136a944a2e0528337ce76f15b9ec9ae4bb30d703b59bf530e8
+    f50ebaf43c507fa7cc32be4b8108fa8bbd0f5022e90794388f3c7694a302ff06
 )
 
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     rm src/tool_hugehelp.c
-    sed -i 's@sys/poll.h@poll.h@g' $(grep -lr 'sys/poll.h' .)
+    sed -i 's@poll.h@poll.h@g' $(grep -lr 'poll.h' .)
     CFLAGS="$CFLAGS -fPIC" \
     LDFLAGS='-Wl,-static' \
     ./configure \
