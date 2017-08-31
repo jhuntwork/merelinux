@@ -13,7 +13,7 @@ makedepends=(
     libdevmapper-dev
     git
 )
-options=(upx)
+options=()
 changelog=ChangeLog
 source=(
     "multipath-tools::git+http://git.opensvc.com/multipath-tools/.git#tag=${pkgver}"
