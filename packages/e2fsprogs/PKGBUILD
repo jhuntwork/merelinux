@@ -1,6 +1,6 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(e2fsprogs)
+pkgname=(e2fsprogs libblkid-dev libuuid-dev)
 pkgver=1.43.4
 pkgrel=1
 pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
@@ -30,15 +30,40 @@ build() {
     MAKEFLAGS='' make V=1
 }
 
-package() {
+package_e2fsprogs() {
     pkgfiles=(
         bin
         etc/mke2fs.conf
         sbin
+        share/man/man1
+        share/man/man5
+        share/man/man8
     )
     cd "${srcdir}/${pkgbase}-${pkgver}/build"
-    MAKEFLAGS='' make DESTDIR="${pkgdirbase}/dest" install
+    MAKEFLAGS='' make DESTDIR="${pkgdirbase}/dest" install install-libs
     cd "${pkgdirbase}/dest"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+}
+
+package_libblkid-dev() {
+    pkgfiles=(
+        include/blkid
+        lib/pkgconfig/blkid.pc
+        lib/libblkid.a
+    )
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+}
+
+package_libuuid-dev() {
+    pkgfiles=(
+        include/uuid
+        lib/pkgconfig/uuid.pc
+        lib/libuuid.a
+    )
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
