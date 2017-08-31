@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=busybox
-pkgver=1.26.2
+pkgver=1.27.2
 pkgrel=1
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
 arch=(x86_64)
@@ -9,7 +9,7 @@ url='http://busybox.net'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=(tcc)
+makedepends=()
 options=(emptydirs)
 changelog=ChangeLog
 source=(
@@ -31,8 +31,8 @@ source=(
 )
 
 sha256sums=(
-    da3e44913fc1a9c9b7c5337ea5292da518683cbff32be630777f565d6036af16
-    ac5684c2fd53c6a4f624a113df8e7c73803984f1e5085b3d1628dca9b03cb633
+    9d4be516b61e6480f156b11eb42577a13529f75d3383850bb75c50c285de63df
+    d81209a69ebbde6053f4d78fd1b02c6c5c74b4b70f84bef59e2ec265be8c1a73
     388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
     c91ad6bf827da152edf4ddb29fdaae1b07b683bd9bb366787fb1bf0117968c72
