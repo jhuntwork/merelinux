@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=gcc
-pkgver=7.1.0
+pkgver=6.4.0
 pkgrel=1
 pkgdesc='The GNU Compiler Collection'
 arch=('x86_64')
@@ -13,11 +13,11 @@ makedepends=(gmp-dev mpfr-dev mpc-dev zlib-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/gcc/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.bz2"
+    "http://ftp.gnu.org/gnu/gcc/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.xz"
 )
 
 sha256sums=(
-    f06ae7f3f790fbf0f018f6d40e844451e6bc3b7bc96e128e63b09825c1f8b29f
+    850bf21eafdfe5cd5f6827148184c08c4a0852a37ccf36ce69855334d2c914d4
 )
 
 
