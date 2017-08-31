@@ -28,7 +28,7 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    sed -i 's@sys/poll.h@poll.h@g' $(grep -lr 'sys/poll.h' .)
+    sed -i 's@sys/poll.h@poll.h@g' $(grep -lr 'poll.h' .)
     sed -i 's@/usr/bin/perl@/bin/perl@g' `grep -lr "/usr/bin/perl" .`
     sed -i '/absolute directory/d' configure
     LIBS='-lssl -lcrypto' ./configure \
@@ -66,20 +66,15 @@ package_git() {
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    cd "$pkgdir"
     find ${rmfiles[@]} -delete
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
 package_git-extra() {
-    depends=(
-        git
-        libressl
-        musl
-        perl
-    )
     pkgdesc='Extra features for git'
     pkgfiles=(
         'bin/git-cvsserver'
@@ -92,11 +87,14 @@ package_git-extra() {
         'lib/perl5'
         'share/gitweb'
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    depends=(
+        git
+        libressl
+        musl
+        perl
+    )
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
