@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(go)
-pkgver=1.7.3
-pkgrel=2
+pkgver=1.9
+pkgrel=1
 pkgdesc='An expressive, concise, clean and efficient programming language'
 arch=(x86_64)
 url='https://golang.org'
@@ -17,7 +17,7 @@ source=(
     "https://storage.googleapis.com/golang/go${pkgver}.src.tar.gz"
 )
 sha256sums=(
-    79430a0027a09b0b3ad57e214c4c1acfdd7af290961dd08d322818895af1ef44
+    a4ab229028ed167ba1986825751463605264e44868362ca8e7accc8be057e993
 )
 
 
