@@ -9,15 +9,14 @@ url='https://www.sourceware.org/lvm2/'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=(
-)
+makedepends=()
 options=()
 changelog=ChangeLog
 source=(
     "ftp://sources.redhat.com/pub/lvm2/releases/LVM2.${pkgver}.tgz"
 )
 sha256sums=(
-    e120b066b85b224552efda40204488c5123de068725676fd6e5c8bc655051b94
+    b815a711a2fabaa5c3dc1a4a284df0268bf0f325f0fc0f5c9530c9bbb54b9964
 )
 
 
@@ -35,7 +34,7 @@ package_libdevmapper() {
     )
     depends=(musl)
     cd "${srcdir}/LVM2.${pkgver}"
-    make DESTDIR="${pkdirbase}/dest" install_device-mapper
+    make DESTDIR="${pkgdirbase}/dest" install_device-mapper
     cd "${pkgdirbase}/dest"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
