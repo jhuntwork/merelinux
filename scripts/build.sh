@@ -1,61 +1,96 @@
 #!/bin/sh -e
-do_clean=0
 shome="/tmp/wd"
-clog=/tmp/merebuild.log
+clog=/var/log/merebuild.log
+auto=0
 
 msg() {
     printf "%s\n" "$1"
 }
 
 info() {
-    msg "INFO: $1"
+    msg "INF: $1"
 }
 
 error() {
-    msg "ERROR: $1"
+    msg "ERR: $1"
     exit 1
 }
 
-pkgdir="$1"
-[ -d "$pkgdir" ] || error "Missing directory: ${pkgdir}"
-pkgdir=$(realpath "$pkgdir")
-name="merebuild-${pkgdir##*/}"
+usage() {
+    printf "
+Usage: %s <pkgdir> [options]
 
-cleanup() {
-    if [ $1 -eq 1 ] ; then
-        info "Removing any existing container named $name"
-        lxc-destroy -n $name >/dev/null 2>&1 || true
-    fi
+  <pkgdir>   Identifies a directory containing, at minimum, a PKGBUILD file.
+             The directory may also contain a ChangeLog file and additional
+             source files required for the build.
+
+  -a,--auto  Run a container in the foreground, but non-interactively.
+             Signals are ignored.
+
+" "$0"
 }
 
-trap 'cleanup 0' INT EXIT
-
-cleanup 1
-
-if ! mountpoint /sys/fs/cgroup >/dev/null 2>&1 ; then
-    mount -t tmpfs cgroupfs /sys/fs/cgroup
-    for sys in $(awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups); do
-        sys_path="/sys/fs/cgroup/${sys}"
-        mkdir -p $sys_path
-        if ! mountpoint -q $sys_path; then
-            if ! mount -n -t cgroup -o $sys cgroup $sys_path; then
-                rmdir $sys_path || true
-            fi
-        fi
-    done
+if [ -z "$1" ] || [ ! -d "$1" ] ; then
+    usage
+    error "Missing or invalid directory. pkgdir argument: ${pkgdir}"
+else
+    pkgdir=$(realpath "$1")
+    name="merebuild-${pkgdir##*/}"
+    shift
 fi
 
-[ -z "$mere_pacman_conf" ] && export mere_pacman_conf='/etc/pacman.conf'
+if options=$(getopt -o a -l auto -- "$@" 2>&1); then
+    eval set -- "$options"
+    while true
+    do
+        case "$1" in
+            -a|--auto) auto=1; shift 2;;
+            --)        shift 1; break;;
+            *)         break;;
+        esac
+    done
+else
+    usage
+    error "$(printf "%s" "$options" | head -n1 | sed 's@getopt: @@')"
+fi
 
-info "Creating a fresh $name container"
-mere_package="$pkgdir" lxc-create -n ${name} -t merebuild >$clog 2>&1 ||
+# Make sure required mountpoints are present
+mountpoint -q /sys/fs/cgroup || mount -t tmpfs cgroupfs /sys/fs/cgroup
+awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups | \
+    while IFS= read -r sys
+do
+    sys_path="/sys/fs/cgroup/${sys}"
+    mkdir -p "$sys_path"
+    mountpoint -q "$sys_path" ||
+        mount -n -t cgroup -o "$sys" cgroup "$sys_path" ||
+        rmdir "$sys_path" ||
+        true
+done
+
+# Start fresh
+info "Stopping and destroying any existing container named $name"
+lxc-stop -k -n "$name" >/dev/null 2>&1 || true
+lxc-destroy -n "$name" >/dev/null 2>&1 || true
+
+# Create the container
+info "Creating a fresh merebuild container named $name"
+mere_package="$pkgdir" lxc-create -n "$name" -t merebuild >>"$clog" 2>&1 ||
     error "Failed to create container. Examine ${clog} for details."
 
-info "Building package"
-lxc-start -n ${name} -F -- /bin/env -i TERM=$TERM \
-     http_proxy=${http_proxy} \
-     https_proxy=${https_proxy} \
-     SHELL=/bin/bash \
-     HOME=${shome} /bin/sh -lc \
-     "cd ${shome} &&
-      makepkg -fLs --noconfirm"
+# Execute the container
+if [ $auto -eq 1 ] ; then
+    [ -n "$mere_no_deps" ] && mere_no_deps='-d'
+    info "Running the container"
+    lxc-start -n "$name" -F -- \
+        /bin/env -i TERM="$TERM" HOME="$shome" \
+        /bin/sh -lc "cd ${shome} && makepkg -Ls --noconfirm ${mere_no_deps}"
+else
+    info "Entering the container"
+    lxc-start -n "$name" -F -- \
+    /bin/env -i TERM="$TERM" HOME="$shome" \
+    /bin/sh -c "cd ${shome} && printf \"#!/bin/sh\nmakepkg -Ls\" >/bin/mp &&
+        chmod +x /bin/mp &&
+        printf \"\nReady.\nTo make the package, run %s\n\n\" \
+        \"'makepkg -Ls', or its short equivalent, 'mp'\" && exec /bin/bash -l"
+
+fi
