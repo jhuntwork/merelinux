@@ -41,7 +41,7 @@ build() {
 }
 
 package() {
-    options=(upx)
+    options=()
     cd "${srcdir}/${pkgname}-${pkgver}"
     make DESTDIR="$pkgdir" install
     rm -rf "${pkgdir}"/{include,lib,share}
