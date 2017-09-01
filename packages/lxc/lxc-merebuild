@@ -1,6 +1,5 @@
 #!/bin/sh -xe
 options=$(getopt -o p:n: -l rootfs:,name:,path: -- "$@")
-[ $? -ne 0 ] && exit 1
 eval set -- "$options"
 while true
 do
@@ -13,13 +12,15 @@ do
     esac
 done
 
+printf "Creating %s\n" "$name"
+
 # detect rootfs
 config="$path/config"
 if [ -z "$rootfs" ]; then
-    if grep -q '^lxc.rootfs' $config 2>/dev/null ; then
-        rootfs=$(awk -F= '/^lxc.rootfs =/{ print $2 }' $config)
+    if grep -q '^lxc.rootfs' "$config" 2>/dev/null ; then
+        rootfs=$(awk -F= '/^lxc.rootfs =/{ print $2 }' "$config")
     else
-        rootfs=$path/rootfs
+        rootfs="${path}/rootfs"
     fi
 fi
 
@@ -35,31 +36,30 @@ install -m 0644 /etc/resolv.conf "${rootfs}/etc/"
 ln -s /proc/mounts "${rootfs}/etc/mtab"
 
 # /tools specific settings, for use when bootstrapping
+# shellcheck disable=SC2154
 if [ -n "$mere_use_tools" ] ; then
     install -d -m0755 "${rootfs}/tools"
-    for file in $(find /tools/bin -maxdepth 1 ! -type d) ; do
-        ln -s $file    "${rootfs}/bin/"
-    done
+    find /tools/bin -maxdepth 1 ! -type d -exec ln -s {} "${rootfs}/bin/" +
     ln -s /tools/lib/libstdc++.a "${rootfs}/lib/"
 fi
 
-if [ -n "$mere_pacman_conf" ] && [ -f "$mere_pacman_conf" ] ; then
-    pac_config="--config $mere_pacman_conf"
-fi
-
-if [ -z "$mere_base" ] ; then
-    mere_base="base-layout build-essential"
-fi
+[ -z "$mere_pacman_conf" ] && mere_pacman_conf=/etc/pacman.conf
+[ -z "$mere_base" ] && mere_base='base-layout build-essential distcc'
+[ -f "$mere_pacman_conf" ] && pac_config="--config $mere_pacman_conf"
 
 if [ "$mere_base" != 'none' ] ; then
     yes | pacman -Scc
+    # shellcheck disable=SC2086
     pacman -Syy -r "$rootfs" -b "${rootfs}/var/lib/pacman" \
         $pac_config --force --noconfirm $mere_base
-    if [ -n "$pac_config" ]; then
-        install -m0644 "$mere_pacman_conf" "${rootfs}/etc/"
-    fi
+    [ -n "$pac_config" ] && \
+        install -m0644 "$mere_pacman_conf" "${rootfs}/etc/pacman.conf"
+    # shellcheck disable=SC2154
+    [ -n "$mere_makepkg_conf" ] && [ -f "$mere_makepkg_conf" ] && \
+        install -m 0644 "$mere_makepkg_conf" "${rootfs}/etc/makepkg.conf"
 fi
 
+# shellcheck disable=SC2154
 if [ -n "$mere_package" ] ; then
     if [ -d "$mere_package" ] ; then
         cp -a "$mere_package" "${rootfs}/tmp/wd"

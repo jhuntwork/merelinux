@@ -2,7 +2,7 @@
 
 pkgname=(lxc lxc-dev)
 pkgver=2.0.8
-pkgrel=1
+pkgrel=2
 pkgdesc='A userspace interface for the Linux kernel containment features'
 arch=(x86_64)
 url='https://linuxcontainers.org/'
@@ -19,7 +19,7 @@ source=(
 
 sha256sums=(
     0d8e34b302cfe4c40c6c9ae5097096aa5cc2c1dfceea3f0f22e3e16c4a4e8494
-    6709aa2010c69e3f914c2d302cf1329a4e365dd9c56b42c3c1484007e17c5d8c
+    26d267fa002a36da5d986e04066442bc66824ceb39d5de2e29548229cd3e2168
 )
 
 
