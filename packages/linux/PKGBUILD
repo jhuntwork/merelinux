@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(linux linux-headers)
-pkgver=4.10
-pkgrel=1
+pkgname=linux
+pkgver=4.12.9
+pkgrel=2
 pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
@@ -13,23 +13,25 @@ makedepends=(bc perl)
 options=()
 changelog=ChangeLog
 source=(
-    "https://www.kernel.org/pub/linux/kernel/v4.x/linux-$pkgver.tar.xz"
-    'linux-config'
+    "https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-$pkgver.tar.xz"
+    musl-compatibility.patch
+    linux-config
 )
 
 sha256sums=(
-    3c95d9f049bd085e5c346d2c77f063b8425f191460fcd3ae9fe7e94e0477dc4b
-    7ff526225976af5091ebfbb88c677ecf20cf27d7e2b76d85d9d0cbb7fa47ff05
+    690439175c9dfbb90159bdc4b24cf10011675392264764f2031eb19ce0a1649c
+    a43487eb727cfc14576084a437fab09fd79247f6fecce618a6254d8a4e2d4035
+    e69f00ffe1b34e98dc256b930f1073fb7da7b567687d31dcd785e7ee5c85818f
 )
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    # Something in the linux src wants gnu sed, so just be lazy for now and
-    # give it what it wants
-    # sudo pacman -S --force --noconfirm sed
-    make mrproper
     cp "${srcdir}/linux-config" .config
-    make
+    if [ -n "$DISTCC_HOSTS" ] ; then
+        make CC='distcc gcc'
+    else
+        make
+    fi
 }
 
 package_linux() {
@@ -41,7 +43,9 @@ package_linux() {
 package_linux-headers() {
     pkgdesc='System headers'
     cd "${srcdir}/${pkgbase}-${pkgver}"
+    make mrproper
+    patch -Np1 -i "${srcdir}/musl-compatibility.patch"
     make INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
-    cd "${srcdir}/${pkgbase}-${pkgver}/dest"
+    cd dest
     find include ! -type d -name "*.h" | cpio -dumpv "${pkgdir}"
 }

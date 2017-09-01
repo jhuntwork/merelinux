@@ -1,3 +1,24 @@
+2017-08-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 4.12.9-2 :
+	Add ebtables support
+	Add some compatibility fixes for system headers
+
+2017-08-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 4.12.9-1 :
+	Upgrade to 4.12.9
+
+2017-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 4.10-3 :
+	Add Iptables NAT support
+
+2017-08-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 4.10-2 :
+	Add IPv6 support
+
 2017-04-04 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 4.10-1 :
