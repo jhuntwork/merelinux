@@ -5,7 +5,7 @@ _vermajor=8
 _verminor=0
 _verpatch=0891
 pkgver="${_vermajor}.${_verminor}.${_verpatch}"
-pkgrel=1
+pkgrel=2
 pkgdesc='An IMproved version of the vi editor'
 arch=(x86_64)
 url='http://www.vim.org'
@@ -66,5 +66,6 @@ package_vim() {
       "share/vim/vim${_vermajor}${_verminor}/syntax/PKGBUILD.vim"
     echo "au BufNewFile,BufRead PKGBUILD set filetype=PKGBUILD" \
       >> "share/vim/vim${_vermajor}${_verminor}/filetype.vim"
+    rm -f bin/xxd
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
