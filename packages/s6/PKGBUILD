@@ -2,7 +2,7 @@
 
 pkgname=(s6 s6-dev)
 pkgver=2.5.0.0
-pkgrel=1
+pkgrel=3
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
@@ -16,12 +16,12 @@ source=(
     "http://skarnet.org/software/s6/s6-${pkgver}.tar.gz"
     init
     rc.init
+    rc.finish
     rc.shutdown
     s6-svscan-crash
     s6-svscan-finish
     s6-svscan-log
     service
-    service_functions.sh
     taillog
     tty1-service
 )
@@ -29,13 +29,13 @@ source=(
 sha256sums=(
     11413aea4add3aea2d0f3f7515d274ac58d4adfb03661a1f6ce7fa2abd24dab1
     c01dc625a11f12dce8600382790dd08e557cd5aeddbc59eba2a621dcaf4e58e5
-    321a1138500481920cd1f79056424000c85e3d820df41f4a09cf78a56e374140
-    c9a2fd4b5a11bc2469ad3d574425c2cf5b4984673203ed110d0c2190216cd82f
+    ec3b6a031bcf32c20e82887c3f9d0af3901cd0a2073f2ebce660c0767ab2cf4a
+    d7b24888eb77e48ffc12a4b51559701ba78fa905b0243379557c39261b552770
+    ca0bf0138879c1df2655b2f4cc79acfd03005dfbd1f8d23749b260b642a5be91
     a90dd71977a0a223265ddda7713e8cd798d14d21a3b010c9ba69b8c76c483133
-    9b3a7743208a3c65ce2fc63b8ad572a0f801be51e95052c46b3c1abeafdde650
+    048c82dc9b82b514e89e7d33197709153b3e687d47c2194bbce31eb272ab7ad2
     95ecf8c0ae9a55b3f8743a0dfdc6fd6816e6abd9cfe9802eba3752635d0d0c41
-    a4ff5508a9a33a36f8d8ba0740aa42036f343e768f9b39834aa8e3395d6ea9fe
-    61de2cb077920c14e9aad3c72d1689423acc153a1e045368836ecbb29cc7d122
+    1f9bae59c2df1881e5a7f9924baa895446253e8734522de82a259cde434f8e92
     6fe869bfaf65ea4528bcb437c8c2d818aae898ea3be9215ae082ce3548e34d08
     538bc61ea2ef419c1e48e683d7b6a52ea45ea5b06ad765bbfa28b79d3953829f
 )
@@ -60,7 +60,7 @@ package_s6() {
         sbin
         lib/s6
     )
-    depends=(skalibs-leapsecs)
+    depends=(execline)
 
     # Run make install
     cd "${srcdir}/${pkgbase}-${pkgver}"
@@ -74,6 +74,7 @@ package_s6() {
     install -d etc/s6/services/{available,enabled}
     install -m 0750 "${srcdir}/init" sbin/init
     install -m 0750 "${srcdir}/rc.init" etc/s6/rc.init
+    install -m 0750 "${srcdir}/rc.finish" etc/s6/rc.finish
     install -m 0750 "${srcdir}/rc.shutdown" etc/s6/rc.shutdown
 
     # Early env vars
@@ -96,13 +97,12 @@ package_s6() {
     chmod 0600 etc/s6/init-services/s6-svscan-log/fifo
 
     # Human readable/usable service compatibility layer
-    install -m 0754 "${srcdir}/service_functions.sh" lib/s6/
     install -m 0754 "${srcdir}/service" sbin/
     install -d bin
     install -m 0755 "${srcdir}/taillog" bin/
 
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_s6-dev() {
@@ -113,5 +113,5 @@ package_s6-dev() {
 
     cd "${pkgdirbase}/.destdir"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

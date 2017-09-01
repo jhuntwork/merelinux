@@ -1,0 +1,17 @@
+#!/bin/sh
+
+for dir in $(find /run/service -mindepth 1 -maxdepth 1 -type d) ; do
+    basename="${dir##*/}"
+    [ -d "/etc/s6/init-services/${basename}" ] || SVCS="${SVCS} ${dir}"
+done
+
+# Send SIGTERM and SIGCONT and wait up to 10 seconds
+for svc in $SVCS; do
+    s6-svc -d -wd -T 10000 "$svc" 2>/dev/null &
+done
+wait
+
+# Send SIGKILL to anything still up
+for svc in $SVCS; do
+    [ "$(s6-svstat -u "$svc")" = 'true' ] && s6-svc -k "$svc"
+done

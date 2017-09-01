@@ -1,5 +1,5 @@
 #!/bin/execlineb -S0
-
+foreground { /etc/s6/rc.finish }
 cd /
 redirfd -w 2 /dev/console
 fdmove -c 1 2

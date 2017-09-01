@@ -1,19 +1,17 @@
 #!/bin/sh
-# Mount /dev/pts
-install -d /dev/pts
-mount -t devpts devpts /dev/pts
-
-# TODO: add filesystem checks?
 mount -o rw,remount /
 
 # /dev/fd
 ln -s /proc/self/fd /dev/fd
 
 # Copy over enabled services and refresh
-for dir in $(find /etc/s6/services/enabled -maxdepth 1 -type l | xargs) ; do
-   cp -a $(readlink -fn ${dir}) /run/service/
+find /etc/s6/services/enabled -maxdepth 1 -type l | while read -r dir ; do
+   cp -a "$(readlink -fn "$dir")" /run/service/
 done
 s6-svscanctl -a /run/service
+
+# Mountpoints /dev/pts /dev/shm
+install -d /dev/pts /dev/shm
 
 # mount other filesystems in /etc/fstab
 mount -a
