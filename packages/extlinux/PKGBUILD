@@ -1,0 +1,36 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=extlinux
+pkgver=6.03
+pkgrel=1
+pkgdesc='Lightweight Linux bootloaders.'
+arch=(x86_64)
+url=http://syslinux.org/
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=(libuuid-dev perl)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.kernel.org/pub/linux/utils/boot/syslinux/syslinux-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    26d3986d2bea109d5dc0e4f8c4822a459276cf021125e8c9f23c3cca5d8c850e
+)
+
+
+build() {
+    cd "${srcdir}/syslinux-${pkgver}"
+    MAKEFLAGS='' make LDFLAGS='-Wl,-static' installer
+}
+
+package() {
+    cd "${srcdir}/syslinux-${pkgver}"
+    install -d "${pkgdir}/lib/extlinux"
+    install -d "${pkgdir}/sbin"
+    install -m0755 bios/extlinux/extlinux "${pkgdir}/sbin/"
+    install -m0644 bios/mbr/mbr.bin "${pkgdir}/lib/extlinux/"
+    install -m0644 bios/com32/chain/chain.c32 "${pkgdir}/lib/extlinux/"
+}
