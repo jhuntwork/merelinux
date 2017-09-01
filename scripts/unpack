@@ -17,19 +17,19 @@ Optional flags:
 
 u_realpath() {
     set +e
-    local curdir=$(pwd)
-    local dir_name="${1%/*}"
+    curdir=$(pwd)
+    dir_name="${1%/*}"
     [ -d "$dir_name" ] && cd "$dir_name"
-    local lastlink=$1
-    local link=$(readlink ${lastlink##*/})
+    lastlink=$1
+    link="$(readlink "${lastlink##*/}")"
     while [ "$link" ] ; do
         dir_name="${link%/*}"
         [ -d "$dir_name" ] && cd "$dir_name"
         lastlink=$link
-        link=$(readlink ${link##*/})
+        link="$(readlink "${link##*/}")"
     done
     echo "$(pwd)/${lastlink##*/}"
-    cd $curdir
+    cd "$curdir"
     set -e
 }
 
@@ -54,23 +54,18 @@ while getopts dtT:v arg ; do
         v) verbose='-v';;
     esac
 done
-shift $(($OPTIND - 1))
+shift $((OPTIND - 1))
 
 [ -n "$1" ] || error "$usage"
 [ -e "$1" ] || error "No such file: $1"
 
-archive="$(u_realpath $1)"
+archive="$(u_realpath "$1")"
 tmp_dir=''
 
 # Prefer the file command for guessing file type, if it is available.
-set +e
-out=$(type file)
-rc=$?
-set -e
-if [ $rc -eq 0 ] ; then
-    filecmd=${out##* }
-    fileout=$($filecmd "$archive")
-    ext=$(echo ${fileout#*:} | cut -d' ' -f1)
+if file --version >/dev/null ; then
+    fileout="$(file "$archive")"
+    ext=$(printf "%s" "${fileout#*:}" | awk '{print $1}')
 else
     ext=${archive##*.}
 fi
@@ -83,6 +78,7 @@ case $ext in
 esac
 
 if [ $make_tmp_dir = 1 ] ; then
+    # shellcheck disable=SC2086
     tmp_dir="$(mktemp -d $template)/"
     cd "$tmp_dir"
 fi
@@ -93,7 +89,7 @@ case $tool in
         [ $dry_run -eq 1 ] || $tool "$archive" 2>/dev/null | tar $verbose -xf - 2>/dev/null
         ;;
     tar)
-        top_dir="${tmp_dir}$(tar -tf $archive | transform_tar_output)"
+        top_dir="${tmp_dir}$(tar -tf "$archive" | transform_tar_output)"
         [ $dry_run -eq 1 ] || tar $verbose -xf "$archive" 2>/dev/null
         ;;
 esac
