@@ -46,12 +46,13 @@ fi
 [ -z "$mere_pacman_conf" ] && mere_pacman_conf=/etc/pacman.conf
 [ -z "$mere_base" ] && mere_base='base-layout build-essential distcc'
 [ -f "$mere_pacman_conf" ] && pac_config="--config $mere_pacman_conf"
+[ -n "$mere_no_deps" ] && mere_no_deps='-dd'
 
 if [ "$mere_base" != 'none' ] ; then
-    yes | pacman -Scc
+    yes | pacman -Scc -r "$rootfs" -b "${rootfs}/var/lib/pacman"
     # shellcheck disable=SC2086
     pacman -Syy -r "$rootfs" -b "${rootfs}/var/lib/pacman" \
-        $pac_config --force --noconfirm $mere_base
+        $pac_config --force --noconfirm $mere_no_deps $mere_base
     [ -n "$pac_config" ] && \
         install -m0644 "$mere_pacman_conf" "${rootfs}/etc/pacman.conf"
     # shellcheck disable=SC2154
