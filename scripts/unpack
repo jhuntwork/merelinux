@@ -1,12 +1,10 @@
 #!/bin/sh -e
-#
-# Unpack a tar archive and print the top-level directory in the archive.
-# Specifically, print the second line of the archive list minus a leading '/'.
 
 usage="
 Usage: $0 [options] filename
 
 Unpack a tar archive and print the top-level directory in the archive.
+Specifically, print the second line of the archive list minus a leading '/'.
 
 Optional flags:
   -d           Dry run. Don't unpack the archive, just print the top-level directory.
@@ -28,13 +26,13 @@ u_realpath() {
         lastlink=$link
         link="$(readlink "${link##*/}")"
     done
-    echo "$(pwd)/${lastlink##*/}"
+    printf '%s\n' "$(pwd)/${lastlink##*/}"
     cd "$curdir"
     set -e
 }
 
 error() {
-    printf "%s\n" "$@"
+    printf '%s\n' "$*"
     exit 1
 }
 
@@ -63,9 +61,9 @@ archive="$(u_realpath "$1")"
 tmp_dir=''
 
 # Prefer the file command for guessing file type, if it is available.
-if file --version >/dev/null ; then
+if file --version >/dev/null 2>&1 ; then
     fileout="$(file "$archive")"
-    ext=$(printf "%s" "${fileout#*:}" | awk '{print $1}')
+    ext=$(printf '%s' "${fileout#*:}" | awk '{print $1}')
 else
     ext=${archive##*.}
 fi
@@ -78,6 +76,8 @@ case $ext in
 esac
 
 if [ $make_tmp_dir = 1 ] ; then
+    # $template will contain space separated values that should be read as
+    # arguments to mktemp, so evaluating them as a single string is incorrect
     # shellcheck disable=SC2086
     tmp_dir="$(mktemp -d $template)/"
     cd "$tmp_dir"
@@ -98,4 +98,4 @@ if [ $dry_run -eq 1 ] && [ $make_tmp_dir -eq 1 ] && [ -d "$tmp_dir" ] ; then
     rm -rf "$tmp_dir"
 fi
 
-printf "%s\n" "$top_dir"
+printf '%s\n' "$top_dir"
