@@ -2,7 +2,7 @@
 
 pkgname=(libressl libressl-dev ca-certs)
 pkgver=2.5.2
-pkgrel=1
+pkgrel=2
 pkgdesc='A fork of OpenSSL 1.0.1g with the goal modernizing the codebase and improving security'
 arch=(x86_64)
 url='http://www.libressl.org'
@@ -64,9 +64,12 @@ package_libressl-dev() {
 package_ca-certs() {
     pkgfiles=(
         etc/ssl/ca-certs.pem
+        etc/ssl/certs/ca-certificates.crt
     )
     cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
     mv etc/ssl/cert.pem etc/ssl/ca-certs.pem
+    install -d etc/ssl/certs
+    ln -sf ../ca-certs.pem etc/ssl/certs/ca-certificates.crt
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
