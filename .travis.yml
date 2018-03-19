@@ -8,4 +8,4 @@ before_install:
   - docker pull mere/build-essential
 
 script:
-  - docker run -v "$(pwd):/tmp/wd" mere/build-essential 'cd /tmp/wd; git diff --name-only HEAD~1'
+  - scripts/travis-build.sh
