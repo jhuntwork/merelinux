@@ -1,5 +1,5 @@
 #!/bin/sh -xe
-install -d staging merebuild
+install -d staging merebuild/logs merebuild/sources merebuild/pkgs
 for file in $(git diff --name-only HEAD~1) ; do
     if printf '%s' "$file" | grep -q '^packages/'; then
         base="${file%/*}"
