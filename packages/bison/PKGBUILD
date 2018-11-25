@@ -1,14 +1,14 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(bison bison-dev)
-pkgver=3.0.4
+pkgver=3.2
 pkgrel=1
 pkgdesc='A general-purpose parser generator.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bison/'
 license=('GPL3')
 groups=('base')
-depends=(m4)
+depends=(m4 musl)
 makedepends=(perl)
 options=()
 changelog=ChangeLog
@@ -17,13 +17,13 @@ source=(
 )
 
 sha256sums=(
-    a72428c7917bdf9fa93cb8181c971b6e22834125848cf1d03ce10b1bb0716fe1
+    deec377b95aa72ec4e1a33fe2c938d2480749d740b5291a7cc1d77808d3710bf
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    LDFLAGS="-Wl,-static" ./configure --prefix=''
+    ./configure --prefix=''
     make
 }
 
