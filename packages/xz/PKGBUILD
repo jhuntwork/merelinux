@@ -1,11 +1,12 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='Busybox provides an xz utility, however libarchive and pacman will use the liblzma library that ships with xz'
 pkgname=(xz liblzma-dev)
-pkgver=5.2.3
+pkgver=5.2.4
 pkgrel=1
 pkgdesc='Free general-purpose data compression software with high compression ratio.'
 arch=('x86_64')
-url='http://tukaani.org/xz/'
+url='http://tukaani.org/xz'
 license=('GPL2')
 groups=('base')
 makedepends=()
@@ -16,7 +17,7 @@ source=(
     "${url}/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    7876096b053ad598c31f6df35f7de5cd9ff2ba3162e5a5554e4fc198447e0347
+    9717ae363760dedf573dad241420c5fea86256b65bc21d2cf71b2b12f0544f4b
 )
 
 
@@ -42,7 +43,7 @@ package_xz() {
     cd "${pkgdir}-tmp"
     # The following files are provided in busybox
     rm bin/{lzcat,unlzma,unxz,xzcat}
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_liblzma-dev() {
@@ -54,5 +55,5 @@ package_liblzma-dev() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
