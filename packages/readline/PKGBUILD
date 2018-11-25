@@ -46,7 +46,7 @@ package_readline() {
     make DESTDIR="${pkgdirbase}/destdir" install
     cd "${pkgdirbase}/destdir"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_readline-dev() {
@@ -62,5 +62,5 @@ package_readline-dev() {
 
     cd "${pkgdirbase}/destdir"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
