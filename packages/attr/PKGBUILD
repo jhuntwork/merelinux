@@ -43,7 +43,7 @@ package_attr() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libattr() {
@@ -69,5 +69,5 @@ package_libattr-dev() {
     )
 
     cd "${pkgdirbase}/dest"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
