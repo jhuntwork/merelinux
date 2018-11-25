@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(e2fsprogs libblkid-dev libuuid-dev)
-pkgver=1.43.4
+pkgver=1.44.4
 pkgrel=1
 pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
 arch=(x86_64)
@@ -9,7 +9,7 @@ url=http://e2fsprogs.sourceforge.net/
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=(libattr-dev gettext libtool)
+makedepends=(libattr-dev)
 options=()
 changelog=ChangeLog
 source=(
@@ -17,16 +17,14 @@ source=(
 )
 
 sha256sums=(
-    54b3f21123a531a6a536b9cdcc21344b0122a72790dbe4dacc98e64db25e4a24
+    ee03b2f2180614c5ae5f6dd2666f8808de61c3d8b37d22ba86cc6daea25be55a
 )
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    autoreconf -i
-    mkdir build
-    cd build
-    CFLAGS+=' -fPIC' LDFLAGS='-Wl,-static' \
-      ../configure --prefix=''
+    CFLAGS+=' -fPIC -D__GNUC_PREREQ\(...\)=0' LDFLAGS='-Wl,-static' \
+        ac_cv_path_mkdir=mkdir \
+        ./configure --prefix=''
     MAKEFLAGS='' make V=1
 }
 
@@ -39,11 +37,11 @@ package_e2fsprogs() {
         share/man/man5
         share/man/man8
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}/build"
-    MAKEFLAGS='' make DESTDIR="${pkgdirbase}/dest" install install-libs
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    MAKEFLAGS='' make V=1 DESTDIR="${pkgdirbase}/dest" install install-libs
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libblkid-dev() {
