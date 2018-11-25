@@ -1,13 +1,14 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='LXC and libarchive require libattr'
 pkgname=(
     attr
     libattr
     libattr-dev
 )
-pkgver=2.4.47
+pkgver=2.4.48
 pkgrel=1
-pkgdesc='A library for manipulating filesystem extended attributes.'
+pkgdesc='A library for manipulating filesystem extended attributes'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/attr'
 license=(GPL)
@@ -17,17 +18,15 @@ makedepends=(gettext)
 options=()
 changelog=ChangeLog
 source=(
-    "http://download.savannah.gnu.org/releases/attr/attr-${pkgver}.src.tar.gz"
+    "http://download.savannah.gnu.org/releases/attr/attr-${pkgver}.tar.gz"
 )
 sha256sums=(
-    25772f653ac5b2e3ceeb89df50e4688891e21f723c460636548971652af0a859
+    5ead72b358ec709ed00bbf7a9eaef1654baad937c001c044fe8b74c57f5324e7
 )
 
 
 build() {
 	cd "${srcdir}/${pkgbase}-${pkgver}"
-    sed -i 's@ __THROW;@;@' include/xattr.h
-    sed -i '/DECLS/d' include/xattr.h
     ./configure \
       --prefix=''
     make
@@ -42,36 +41,33 @@ package_attr() {
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_libattr() {
     pkgfiles=(
-        lib
+        lib/*.so.*
     )
     depends=(
         musl
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install-lib
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
 package_libattr-dev() {
     pkgfiles=(
         include
-        lib
+        lib/*.a
+        lib/*.so
     )
     depends=(
         libattr
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install-dev
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
