@@ -1,7 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='curl requires an ssl library for https functionality'
 pkgname=(libressl libressl-dev ca-certs)
-pkgver=2.5.2
+pkgver=2.8.2
 pkgrel=1
 pkgdesc='A fork of OpenSSL 1.0.1g with the goal modernizing the codebase and improving security'
 arch=(x86_64)
@@ -17,7 +18,7 @@ source=(
     "http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${pkgver}.tar.gz"
 )
 sha256sums=(
-    0ffa7d70809284a4ac96e965918a61c1d7930bca865457a7db0ff0afc8201c82
+    b8cb31e59f1294557bfc80f2a662969bc064e83006ceef0574e2553a1c254fd5
 )
 
 
@@ -31,7 +32,7 @@ build() {
 check() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make check
-    make DESTDIR="$(pwd)/.destdir" install
+    make DESTDIR="${pkgdirbase}/dest" install
 }
 
 package_libressl() {
@@ -42,9 +43,9 @@ package_libressl() {
     )
     depends=(musl)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_libressl-dev() {
@@ -56,17 +57,17 @@ package_libressl-dev() {
     )
     depends=(libressl)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_ca-certs() {
     pkgfiles=(
         etc/ssl/ca-certs.pem
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    cd "${pkgdirbase}/dest"
     mv etc/ssl/cert.pem etc/ssl/ca-certs.pem
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
