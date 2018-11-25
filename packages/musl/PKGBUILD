@@ -1,8 +1,9 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='This is part of the core toolchain'
 pkgname=(musl musl-dev)
-pkgver=1.1.16
-pkgrel=2
+pkgver=1.1.20
+pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
 url='http://www.musl-libc.org'
@@ -16,7 +17,7 @@ source=(
     "http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    937185a5e5d721050306cf106507a006c3f1f86d86cd550024ea7be909071011
+    44be8771d0e6c6b5f82dd15662eb2957c9a3173a19a8b49966ac0542bbd40d61
 )
 
 
@@ -40,7 +41,7 @@ package_musl() {
     install -d bin
     ln -sf ../lib/libc.so bin/ldd
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_musl-dev() {
@@ -52,5 +53,5 @@ package_musl-dev() {
     depends=(musl linux-headers)
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
