@@ -1,5 +1,6 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='Many source packages ship with pre-generated build scripts. Pacman does not. Autoconf, automake and libtool are required to generate them before using.'
 pkgname=(libtool libltdl libltdl-dev)
 pkgver=2.4.6
 pkgrel=2
