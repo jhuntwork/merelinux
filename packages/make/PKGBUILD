@@ -1,5 +1,6 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='A near-universal build utility, make drives compilation of many packages'
 pkgname=make
 pkgver=4.2.1
 pkgrel=1
