@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(mpfr mpfr-dev)
-pkgver=3.1.5
+pkgver=4.0.1
 pkgrel=1
 pkgdesc='A library for multiple-precision floating-point computations with correct rounding.'
 arch=('x86_64')
@@ -16,7 +16,7 @@ source=(
     "http://www.mpfr.org/mpfr-current/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    015fde82b3979fbe5f83501986d328331ba8ddf008c1ff3da3c238f49ca062bc
+    67874a60826303ee2fb6affc6dc0ddd3e749e9bfcb4c8655e3953d0458a6e16e
 )
 
 
@@ -41,7 +41,7 @@ package_mpfr() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_mpfr-dev() {
@@ -55,5 +55,5 @@ package_mpfr-dev() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
