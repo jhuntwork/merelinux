@@ -41,7 +41,7 @@ package_file() {
     make DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_file-dev() {
@@ -51,5 +51,5 @@ package_file-dev() {
     )
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
