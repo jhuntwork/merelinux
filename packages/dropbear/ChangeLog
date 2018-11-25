@@ -1,3 +1,8 @@
+2018-11-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2018.76-2 :
+	Rebuild against musl-1.20
+
 2017-05-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 2017.75-1:
