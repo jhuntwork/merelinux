@@ -1,7 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='file is used by many build scripts'
 pkgname=(file file-dev)
-pkgver=5.30
+pkgver=5.35
 pkgrel=1
 pkgdesc='A file-type guesser'
 arch=('x86_64')
@@ -17,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    694c2432e5240187524c9e7cf1ec6acc77b47a0e19554d34c14773e43dbbf214
+    30c45e817440779be7aac523a905b123cba2a6ed0bf4f5439e1e99ba940b5546
 )
 
 
