@@ -1,13 +1,14 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='LXC and libarchive require libacl'
 pkgname=(
     acl
     libacl
     libacl-dev
 )
-pkgver=2.2.52
-pkgrel=2
-pkgdesc='A library for manipulating POSIX access control lists.'
+pkgver=2.2.53
+pkgrel=1
+pkgdesc='A library for manipulating POSIX access control lists'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/acl'
 license=(GPL)
@@ -17,10 +18,10 @@ makedepends=(gettext libattr-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "http://download.savannah.gnu.org/releases/acl/acl-${pkgver}.src.tar.gz"
+    "http://download.savannah.gnu.org/releases/acl/acl-${pkgver}.tar.gz"
 )
 sha256sums=(
-    179074bb0580c06c4b4137be4c5a92a701583277967acdb5546043c7874e0d23
+    06be9865c6f418d851ff4494e12406568353b891ffe1f596b34693c387af26c7
 )
 
 
@@ -31,16 +32,6 @@ build() {
     make
 }
 
-check() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="$(pwd)/.destdir" install
-    make DESTDIR="$(pwd)/.destdir" install-lib
-    make DESTDIR="$(pwd)/.destdir" install-dev
-    mv .destdir/libexec/* .destdir/lib
-    rm .destdir/lib/libacl.so
-    ln -s libacl.so.1 .destdir/lib/libacl.so
-}
-
 package_acl() {
     pkgfiles=(
         bin
@@ -48,9 +39,11 @@ package_acl() {
     depends=(
         libacl
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    cd "${srcdir}/${pkgbase}-${pkgver}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libacl() {
@@ -61,9 +54,9 @@ package_libacl() {
         libattr
         musl
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libacl-dev() {
@@ -75,7 +68,7 @@ package_libacl-dev() {
     depends=(
         libacl
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}/.destdir"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
