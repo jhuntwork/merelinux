@@ -1,10 +1,11 @@
 #!/bin/sh -e
+PATH="/tools/bin:$PATH"
 shome="/tmp/wd"
 clog=/var/log/merebuild.log
 auto=0
 
 msg() {
-    printf "%s\n" "$1"
+    printf '%s\n' "$1"
 }
 
 info() {
@@ -17,7 +18,7 @@ error() {
 }
 
 usage() {
-    printf "
+    printf '
 Usage: %s <pkgdir> [options]
 
   <pkgdir>   Identifies a directory containing, at minimum, a PKGBUILD file.
@@ -27,7 +28,7 @@ Usage: %s <pkgdir> [options]
   -a,--auto  Run a container in the foreground, but non-interactively.
              Signals are ignored.
 
-" "$0"
+' "$0"
 }
 
 if [ -z "$1" ] || [ ! -d "$1" ] ; then
@@ -88,9 +89,9 @@ else
     info "Entering the container"
     lxc-start -n "$name" -F -- \
     /bin/env -i TERM="$TERM" HOME="$shome" \
-    /bin/sh -c "cd ${shome} && printf \"#!/bin/sh\nmakepkg -Ls\" >/bin/mp &&
+    /bin/sh -c "cd ${shome} && printf \"#!/bin/sh\\nmakepkg -Ls\" >/bin/mp &&
         chmod +x /bin/mp &&
-        printf \"\nReady.\nTo make the package, run %s\n\n\" \
+        printf '\\nReady.\\nTo make the package, run %s\\n\\n\\' \
         \"'makepkg -Ls', or its short equivalent, 'mp'\" && exec /bin/bash -l"
 
 fi

@@ -34,7 +34,7 @@ u_realpath() {
 }
 
 error() {
-    printf "%s\n" "$@"
+    printf '%s\n' "$@"
     exit 1
 }
 
@@ -52,6 +52,7 @@ while getopts dtT:v arg ; do
         t) make_tmp_dir=1;;
         T) make_tmp_dir=1; template="-t $2";;
         v) verbose='-v';;
+        *) printf 'Unsupported argument %s\n' "$arg" && exit 1;;
     esac
 done
 shift $((OPTIND - 1))
@@ -71,10 +72,10 @@ else
 fi
 
 case $ext in
-    bzip2|bz2|BZ2)  tool=bzcat;;
-    gzip|tgz|gz|GZ) tool=zcat;;
-    xz|XZ)          tool=xzcat;;
-    *)              tool=tar;;
+    bzip2|bz2|BZ2)  tool='bzcat';;
+    gzip|tgz|gz|GZ) tool='zcat';;
+    xz|XZ)          tool='xzcat';;
+    *)              tool='tar';;
 esac
 
 if [ $make_tmp_dir = 1 ] ; then
@@ -98,4 +99,4 @@ if [ $dry_run -eq 1 ] && [ $make_tmp_dir -eq 1 ] && [ -d "$tmp_dir" ] ; then
     rm -rf "$tmp_dir"
 fi
 
-printf "%s\n" "$top_dir"
+printf '%s\n' "$top_dir"
