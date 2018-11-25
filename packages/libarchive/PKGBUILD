@@ -1,10 +1,11 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='libarchive is a core dependency of pacman'
 pkgname=(
     libarchive
     libarchive-dev
 )
-pkgver=3.3.1
+pkgver=3.3.3
 pkgrel=1
 pkgdesc='Multi-format archive and compression library'
 arch=(x86_64)
@@ -25,7 +26,7 @@ source=(
     "http://www.libarchive.org/downloads/libarchive-${pkgver}.tar.gz"
 )
 sha256sums=(
-    29ca5bd1624ca5a007aa57e16080262ab4379dbf8797f5c52f7ea74a3b0424e7
+    ba7eb1781c9fbbae178c4c6bad1c6eb08edab9a1496c64833d1715d022b30e2e
 )
 
 
@@ -63,7 +64,7 @@ package_libarchive() {
 
     cd "${pkgdirbase}/destdir"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_libarchive-dev() {
@@ -79,5 +80,5 @@ package_libarchive-dev() {
 
     cd "${pkgdirbase}/destdir"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
