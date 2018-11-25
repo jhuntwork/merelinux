@@ -10,7 +10,7 @@ license=(BSD)
 groups=(base)
 depends=(musl perl)
 makedepends=(perl libuuid-dev)
-options=(!upx)
+options=()
 changelog=ChangeLog
 source=(
     "https://www.kernel.org/pub/linux/utils/boot/${pkgname}/${pkgname}-${pkgver}.tar.xz"
@@ -23,14 +23,23 @@ sha256sums=(
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    make BINDIR='/bin' LIBDIR='/lib' DATADIR='/share' \
-      MANDIR='/man' INCDIR='/include' bios installer
+    sed -i -e '/^BINDIR/s@=.*@= /bin@' \
+           -e '/^LIBDIR/s@=.*@= /lib@' \
+           -e '/^DATADIR/s@=.*@= /share@' \
+           -e '/^MANDIR/s@=.*@= /share/man@' \
+           -e '/^INCDIR/s@=.*@= /include@' mk/syslinux.mk com32/lib/Makefile
+    make MAKEFLAGS='' -j1 bios installer
 }
 
 package() {
+    pkgfiles=(
+        bin
+        sbin
+        share
+    )
     cd "${srcdir}/${pkgname}-${pkgver}"
-    make INSTALLROOT="$pkgdir" \
-      BINDIR='/bin' LIBDIR='/lib' DATADIR='/share' \
-      MANDIR='/share/man' INCDIR='/include' -j1 bios install
-    rm -rf "${pkgdir}"/share/man
+    make INSTALLROOT="${pkgdirbase}/dest" MAKEFLAGS='' -j1 bios install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
