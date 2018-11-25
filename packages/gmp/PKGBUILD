@@ -40,7 +40,7 @@ package_gmp() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_gmp-dev() {
@@ -56,5 +56,5 @@ package_gmp-dev() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
