@@ -1,8 +1,9 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='The package manager used for the final system'
 pkgname=(pacman pacman-build libalpm-dev)
-pkgver=5.0.1
-pkgrel=9
+pkgver=5.1.1
+pkgrel=1
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -32,7 +33,7 @@ source=(
     dependencies.sh
 )
 sha256sums=(
-    84599e2ee2158134fd704f1cd681ea46e021165bed4df5f002aa1748caef9e7b
+    340a8d3a60d0c26922fa6054455a1b728925a88852cc44711e07536ff049e49d
     59d188dd2b4444f8079add3332c15af6dbc3841fef8ac98e08f7a7857ee58f05
     a4c69eb1b3be80292ad3dd1a90b4c4e9c24d6b7fb1235622fbfe4510c484494a
     689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
@@ -64,9 +65,6 @@ package_pacman() {
         bin/pacman
         bin/pacman-db-upgrade
         bin/pacman-key
-        bin/pacman-optimize
-        bin/pacsort
-        bin/pactree
         bin/pkgdelta
         bin/vercmp
         etc/pacman.conf*
@@ -83,7 +81,7 @@ package_pacman() {
     install -vm 0755 "${srcdir}/fakeroot" bin/
     install -vm 0755 "${srcdir}/dependencies.sh" share/makepkg/lint_package/
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_pacman-build() {
@@ -111,7 +109,7 @@ package_pacman-build() {
     )
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_libalpm-dev() {
@@ -122,5 +120,5 @@ package_libalpm-dev() {
     )
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
