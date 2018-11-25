@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=kpartx
-pkgver=0.7.1
+pkgver=0.7.9
 pkgrel=1
 pkgdesc='Tools for the Device Mapper multipathing driver'
 arch=(x86_64)
