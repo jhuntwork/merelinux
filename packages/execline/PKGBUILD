@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(execline execline-dev)
-pkgver=2.3.0.0
+pkgver=2.5.0.1
 pkgrel=1
 pkgdesc='a (non-interactive) scripting language.'
 arch=(x86_64)
@@ -17,7 +17,7 @@ source=(
 )
 
 sha256sums=(
-    a0ec43b8feba299cc1e5c65b1978ed76571afa595bc53165373e29a57468f425
+    8d07d14e9e9abb1301e08be271313c4ffa5ddf7248fd262dda19588e78e31049
 )
 
 
@@ -36,9 +36,12 @@ package_execline() {
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    mv lib/execline/libexecline.a lib
+    rm -rf lib/execline
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_execline-dev() {
@@ -46,11 +49,7 @@ package_execline-dev() {
         include
         lib
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    mv lib/execline/libexecline.a lib
-    rm -rf lib/execline
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
