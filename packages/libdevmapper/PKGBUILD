@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libdevmapper libdevmapper-dev)
-pkgver=2.02.171
+pkgver=2.02.177
 pkgrel=1
 pkgdesc='The userspace device-mapper support library'
 arch=(x86_64)
@@ -9,14 +9,14 @@ url='https://www.sourceware.org/lvm2/'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=()
+makedepends=(gettext)
 options=()
 changelog=ChangeLog
 source=(
     "ftp://sources.redhat.com/pub/lvm2/releases/LVM2.${pkgver}.tgz"
 )
 sha256sums=(
-    b815a711a2fabaa5c3dc1a4a284df0268bf0f325f0fc0f5c9530c9bbb54b9964
+    4025a23ec9b15c2cb7486d151c29dc953b75efc4d452cfe9dbbc7c0fac8e80f2
 )
 
 
@@ -24,7 +24,7 @@ build() {
     cd "${srcdir}/LVM2.${pkgver}"
     ./configure --prefix='' \
       --enable-static_link
-    make $MAKEFLAGS device-mapper
+    make SHELL=/bin/bash device-mapper
 }
 
 package_libdevmapper() {
