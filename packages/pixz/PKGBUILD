@@ -1,5 +1,6 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='Using pixz as a stand-in for xz in the pacman configs allows for parallel compression and decompression of packages'
 pkgname=pixz
 pkgver=1.0.6
 pkgrel=2
@@ -39,5 +40,5 @@ package() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdirbase}/destdir" install
     cd "${pkgdirbase}/destdir"
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
