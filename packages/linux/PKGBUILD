@@ -1,8 +1,9 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='This is part of the core toolchain'
 pkgname=(linux linux-headers)
-pkgver=4.12.9
-pkgrel=3
+pkgver=4.14.80
+pkgrel=1
 pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
@@ -19,19 +20,15 @@ source=(
 )
 
 sha256sums=(
-    690439175c9dfbb90159bdc4b24cf10011675392264764f2031eb19ce0a1649c
-    a43487eb727cfc14576084a437fab09fd79247f6fecce618a6254d8a4e2d4035
-    e69f00ffe1b34e98dc256b930f1073fb7da7b567687d31dcd785e7ee5c85818f
+    9ddc7bc11cbea6475ac5abf18e01a143d7d506bece591e0dcb15c9452d3ed7d2
+    6ce3f62ed1553cdadd5f3963d8ac1d123b78e3af89d919a876396f7df2b56fd9
+    103e2dfad634e3e8764edb7e49330449816760d2ae922b5ed14b75088acd6fe9
 )
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     cp "${srcdir}/linux-config" .config
-    if [ -n "$DISTCC_HOSTS" ] ; then
-        make CC='distcc gcc'
-    else
-        make
-    fi
+    make
 }
 
 package_linux() {
@@ -47,5 +44,5 @@ package_linux-headers() {
     patch -Np1 -i "${srcdir}/musl-compatibility.patch"
     make INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
     cd dest
-    find include ! -type d -name "*.h" | cpio -dumpv "${pkgdir}"
+    find include ! -type d -name "*.h" | cpio -dump "${pkgdir}"
 }
