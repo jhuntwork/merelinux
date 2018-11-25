@@ -1,7 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='This is part of the core toolchain'
 pkgname=gcc
-pkgver=6.4.0
+pkgver=8.2.0
 pkgrel=1
 pkgdesc='The GNU Compiler Collection'
 arch=('x86_64')
@@ -17,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    850bf21eafdfe5cd5f6827148184c08c4a0852a37ccf36ce69855334d2c914d4
+    196c3c04ba2613f893283977e6011b2345d1cd1af9abeac58e916b1aab3e0080
 )
 
 
@@ -31,8 +32,6 @@ build() {
            libmpx/mpxrt/mpxrt-utils.c \
            libvtv/vtv_utils.cc
     sed -i '/__USE_ISOC11/s@!(@(@' libssp/gets-chk.c
-    # No pthread_yield in musl, just use sched_yield as per other targets
-    sed -i 's@pthread_yield();@sched_yield();@' libcilkrts/runtime/os-unix.c
     mkdir build
     cd build
     CFLAGS+=' -fPIC' CXXFLAGS+=' -fPIC' \
@@ -80,5 +79,5 @@ package() {
     ln -sf ../bin/cpp lib
     ln -sf gcc bin/cc
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
