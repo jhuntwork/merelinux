@@ -1,5 +1,6 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='Many packages may use zlib, but libarchive in particular depends on its functionality'
 pkgname=zlib-dev
 pkgver=1.2.11
 pkgrel=1
