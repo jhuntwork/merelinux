@@ -1,9 +1,10 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='It serves as a stand-in for bzip2, coreutils, diffutils, findutils, gawk, grep, gzip, sed, tar and util-linux'
 pkgname=busybox
-pkgver=1.27.2
-pkgrel=1
-pkgdesc='Tiny versions of common UNIX utilities built into a single binary.'
+pkgver=1.29.3
+pkgrel=2
+pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
 license=(GPL)
@@ -31,13 +32,13 @@ source=(
 )
 
 sha256sums=(
-    9d4be516b61e6480f156b11eb42577a13529f75d3383850bb75c50c285de63df
-    d81209a69ebbde6053f4d78fd1b02c6c5c74b4b70f84bef59e2ec265be8c1a73
+    97648636e579462296478e0218e65e4bc1e9cd69089a3b1aeb810bff7621efb7
+    1dc4b44c6db4c4cb90685270fd64f8de6425b418a5ebb2a123e8ead95403c13d
     388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
     c91ad6bf827da152edf4ddb29fdaae1b07b683bd9bb366787fb1bf0117968c72
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
-    f653d8703f3d061bca3c302470363b80623f2d6494acb9c2cde0c6483e21b34d
+    743c6d5e36eddd05956c2f2e6bcd34de7033cb39c196e77ae568baa85b24fd8a
     0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
     6572c2fdb51f665a236507a59f1aee43c3b3212d6636141775f082b87868333d
     644321e67516c8e6869dd1f09b9dfc06d6758dec91df0bdea3cb614419a1e0d3
@@ -58,16 +59,14 @@ backup=(
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
     patch -Np1 -i "${srcdir}/poweroff.patch"
-    sed -i 's@PATH_UTMPX@PATH_UTMP@g' libbb/utmp.c
-    sed -i "/utmpx.h/s@\$@\n#  include <utmp.h>@" include/libbb.h
     sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" \
       "${srcdir}/busybox-config" >.config
-    CFLAGS='' make V=1 HOSTCC='gcc -D_GNU_SOURCE'
+    make
 }
 
 package() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    CFLAGS='' make V=1 HOSTCC='gcc -D_GNU_SOURCE' install
+    make install
 
     cd "$pkgdir"
     install -d share/man/man1

@@ -1,2 +1,2 @@
 #!/bin/sh
-/sbin/s6-svscanctl -$1 /run/service
+/sbin/s6-svscanctl -"$1" /s6/run
