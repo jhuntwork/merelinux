@@ -1,0 +1,9 @@
+#!/bin/sh
+post_install() {
+    [ -e /sbin/init ]  || ln -s s6-init /sbin/init
+    command -v service >/dev/null 2>&1 || ln -s s6-service /sbin/service
+}
+post_upgrade() {
+    [ -e /sbin/init ]  || ln -s s6-init /sbin/init
+    command -v service >/dev/null 2>&1 || ln -s s6-service /sbin/service
+}

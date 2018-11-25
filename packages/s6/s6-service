@@ -14,12 +14,12 @@
 # ENABL_DIR  - The directory that is used at boot time for launching services,
 #                typically containing symlinks to services in AVAIL_DIR.
 
-SCAN_DIR=/run/service
+SCAN_DIR=/s6/run
 AVAIL_DIR=/etc/s6/services/available
 ENABL_DIR=/etc/s6/services/enabled
 
 usage() {
-    printf "
+    printf '
   Usage:
     %s list
     %s <service_name> [command]
@@ -33,23 +33,23 @@ usage() {
     reload   Signal the service to reload its configuration
     restart  Terminate and restart a service
 
-" "$0" "$0"
+' "$0" "$0"
     exit 1
 }
 
 check() {
     if [ "$1" -eq 0 ] ; then
-        printf " OK\n"
+        printf ' OK\n'
         return 0
     else
-        printf " FAIL\n"
+        printf ' FAIL\n'
         return 1
     fi
 }
 
 is_supervised() {
     if ! s6-svok "$svcdir"; then
-        printf "%s is not a supervised service\n" "$svc"
+        printf '%s is not a supervised service\n' "$svc"
         return 1
     fi
 }
@@ -61,24 +61,24 @@ short_status() {
 
 if [ "$1" = "list" ] ; then
     LIST="Service Status OnBoot ~~~~~~~~ ~~~~~~~~ ~~~~~~~~ "
-    for dir in $(find ${AVAIL_DIR} -type d -mindepth 1 -maxdepth 1 | sort | xargs) ; do
-        bn=${dir##*/}
-        LIST="$LIST ${bn} "
-        case $(short_status "$bn") in
+    for dir in $(find ${AVAIL_DIR} -mindepth 1 -maxdepth 1 -type d | sort | xargs) ; do
+        name=${dir##*/}
+        LIST="$LIST ${name} "
+        case $(short_status "$name") in
             up)   LIST="$LIST up ";;
             down) LIST="$LIST down ";;
             *)    LIST="$LIST unknown ";;
         esac
-        if [ -e "${ENABL_DIR}/${bn}" ] ; then
+        if [ -e "${ENABL_DIR}/${name}" ] ; then
             LIST="$LIST enabled "
         else
             LIST="$LIST disabled "
         fi
     done
-    printf "\n"
+    printf '\n'
     # shellcheck disable=SC2183,SC2086
-    printf "%-20s%-20s%s\n" $LIST
-    printf "\n"
+    printf '%-20s%-20s%s\n' $LIST
+    printf '\n'
     exit 0
 else
 	[ $# -ne 2 ] && usage
@@ -94,13 +94,13 @@ else
 fi
 
 if [ ! -x "${AVAIL_DIR}/${svc}/run" ] ; then
-    printf "%s is not an available service\n" "$svc"
+    printf '%s is not an available service\n' "$svc"
     exit 1
 fi
 
 case "$act" in
     enable)
-        printf "Enabling %s..." "$svc"
+        printf "Enabling %s to launch at boot..." "$svc"
         (
             set -e
             rm -rf "${ENABL_DIR:?}/${svc:?}"
@@ -110,7 +110,7 @@ case "$act" in
         ;;
 
     disable)
-        printf "Disabling %s..." "$svc"
+        printf "Disabling %s from launching at boot..." "$svc"
         (
             set -e
             rm -f "${ENABL_DIR}/${svc}"

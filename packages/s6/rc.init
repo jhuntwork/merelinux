@@ -6,9 +6,9 @@ ln -s /proc/self/fd /dev/fd
 
 # Copy over enabled services and refresh
 find /etc/s6/services/enabled -maxdepth 1 -type l | while read -r dir ; do
-   cp -a "$(readlink -fn "$dir")" /run/service/
+   cp -a "$(readlink -fn "$dir")" /s6/run/
 done
-s6-svscanctl -a /run/service
+s6-svscanctl -a /s6/run
 
 # Mountpoints /dev/pts /dev/shm
 install -d /dev/pts /dev/shm

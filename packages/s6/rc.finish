@@ -1,8 +1,7 @@
 #!/bin/sh
-
-for dir in $(find /run/service -mindepth 1 -maxdepth 1 -type d) ; do
-    basename="${dir##*/}"
-    [ -d "/etc/s6/init-services/${basename}" ] || SVCS="${SVCS} ${dir}"
+dirs=$(find /s6/run -mindepth 1 -maxdepth 1 -type d -print0 | xargs -0)
+for dir in $dirs; do
+    [ -d "/etc/s6/init-services/${dir##*/}" ] || SVCS="${SVCS} ${dir}"
 done
 
 # Send SIGTERM and SIGCONT and wait up to 10 seconds

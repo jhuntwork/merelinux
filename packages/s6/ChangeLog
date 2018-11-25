@@ -1,3 +1,16 @@
+2018-11-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.7.2.2-2 :
+	Move /run/service to /s6/run
+
+2018-11-17  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.7.2.2-1 :
+	Upgrade to 2.7.2.2
+	Use post_install method to symlink /sbin/service and /sbin/init
+	to s6-service an s6-init respectively, which allows for
+	use on non-mere systems
+
 2017-08-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 2.5.0.0-3 :

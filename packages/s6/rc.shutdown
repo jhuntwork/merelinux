@@ -5,4 +5,4 @@ umount -ar 2>/dev/null
 
 # Send the kernel the appropriate signal through
 # busybox's halt, poweroff or reboot cmds
-$@ -f
+"$@" -f
