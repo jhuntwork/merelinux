@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(git git-extra)
-pkgver=2.12.2
+pkgver=2.19.1
 pkgrel=1
 pkgdesc='A distributed version control system'
 arch=('x86_64')
@@ -22,7 +22,7 @@ source=(
     "https://www.kernel.org/pub/software/scm/git/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    d21a9e23506e618d561fb25a8a7bd6134f927b86147930103487117a7a678c4a
+    345056aa9b8084280b1b9fe1374d232dec05a34e8849028a20bfdb56e920dbb5
 )
 
 
@@ -84,7 +84,6 @@ package_git-extra() {
         'lib/git-core/git-difftool'
         'lib/git-core/git-send-email'
         'lib/git-core/git-svn'
-        'lib/perl5'
         'share/gitweb'
     )
     depends=(
