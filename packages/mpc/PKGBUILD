@@ -1,10 +1,9 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(mpc mpc-dev)
-pkgver=1.0.3
+pkgver=1.1.0
 pkgrel=1
-pkgdesc='A library for the arithmetic of complex numbers with arbitrarily high \
-precision and correct rounding.'
+pkgdesc='A library for the arithmetic of complex numbers'
 arch=('x86_64')
 url='http://www.multiprecision.org'
 license=(GPL)
@@ -17,7 +16,7 @@ source=(
     "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    '617decc6ea09889fb08ede330917a00b16809b8db88c29c31bfbb49cbf88ecc3'
+    6985c538143c1208dcb1ac42cedad6ff52e267b47e5f970183a3e75125b43c2e
 )
 
 
@@ -37,7 +36,7 @@ package_mpc() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
 package_mpc-dev() {
@@ -50,5 +49,5 @@ package_mpc-dev() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -pudmv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
