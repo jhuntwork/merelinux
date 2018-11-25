@@ -1,7 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='Perl is a build and runtime dependency of the autoconf and automake tools'
 pkgname=perl
-pkgver=5.24.1
+pkgver=5.28.0
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=('x86_64')
@@ -14,10 +15,10 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.bz2"
+    "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    482ac5dca262b57d26c381382a3e057b22ede631fcce32523c004b8bf773f6f0
+    059b3cb69970d8c8c5964caced0335b4af34ac990c8e61f7e3f90cd1c2d11e49
 )
 
 
@@ -66,5 +67,5 @@ package() {
     make DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
     rm -rf "share/man"
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
