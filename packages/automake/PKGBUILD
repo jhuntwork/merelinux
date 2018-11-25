@@ -1,8 +1,9 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='Many source packages ship with pre-generated build scripts. Pacman does not. Autoconf, automake and libtool are required to generate them before using.'
 pkgname=automake
-pkgver=1.15
-pkgrel=2
+pkgver=1.16.1
+pkgrel=1
 pkgdesc='A tool for automatically generating Makefile.in files.'
 arch=(x86_64)
 url='http://www.gnu.org/software/automake'
@@ -17,13 +18,12 @@ source=(
 )
 
 sha256sums=(
-    9908c75aabd49d13661d6dcb1bc382252d22cc77bf733a2d55e87f2aa2db8636
+    5d05bb38a23fd3312b10aea93840feec685bdf4a41146e78882848165d3ae921
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    sed -i 's:/\\\${:/\\\$\\{:' bin/automake.in
     ./configure --prefix=''
     make
 }
@@ -39,5 +39,5 @@ package() {
     make DESTDIR="${pkgdirbase}/destdir" install
     cd "${pkgdirbase}/destdir"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
