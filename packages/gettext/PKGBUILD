@@ -1,5 +1,6 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+rationale='The pacman autotools scripts require autopoint, which is a part of gettext'
 pkgname=gettext
 pkgver=0.19.8.1
 pkgrel=1
