@@ -1,0 +1,54 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=(jq jq-dev)
+pkgver=1.5
+pkgrel=1
+pkgdesc='A lightweight and flexible command-line JSON processor'
+arch=(x86_64)
+url='https://github.com/stedolan/jq'
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+
+source=(
+    "${url}/releases/download/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.gz"
+)
+sha256sums=(
+    c4d2bfec6436341113419debf479d833692cc5cdab7eb0326b5a4d4fbe9f493c
+)
+
+
+build() {
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    CFLAGS+=' --static' \
+      ./configure \
+      --prefix='' \
+      --enable-static \
+      --disable-shared
+    make
+}
+
+package_jq() {
+    pkgfiles=(
+        bin
+        share/man/man1
+    )
+    cd "${srcdir}/${pkgname}-${pkgver}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+}
+
+package_jq-dev() {
+    pkgfiles=(
+        include
+        lib
+    )
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+}
