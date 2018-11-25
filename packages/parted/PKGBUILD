@@ -2,7 +2,7 @@
 
 pkgname=parted
 pkgver=3.2
-pkgrel=1
+pkgrel=2
 pkgdesc='partition table manipulator'
 arch=(x86_64)
 url='http://www.gnu.org/software/parted'
@@ -37,12 +37,17 @@ build() {
       --enable-static \
       --disable-shared \
       --disable-device-mapper
-    make $MAKEFLAGS V=1
+    make V=1
 }
 
 package() {
-    options=()
+    pkgfiles=(
+        sbin
+        share
+    )
     cd "${srcdir}/${pkgname}-${pkgver}"
-    make DESTDIR="$pkgdir" install
-    rm -rf "${pkgdir}"/{include,lib,share}
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
