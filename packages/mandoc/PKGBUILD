@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=mandoc
-pkgver=1.14.1
+pkgver=1.14.4
 pkgrel=1
 pkgdesc='UNIX manpage tools'
 arch=(x86_64)
@@ -15,18 +15,18 @@ makedepends=(
 options=()
 changelog=ChangeLog
 source=(
-    "http://mdocml.bsd.lv/snapshots/mdocml-${pkgver}.tar.gz"
+    "http://mdocml.bsd.lv/snapshots/${pkgname}-${pkgver}.tar.gz"
     configure.local
 )
 
 sha256sums=(
-    356954f141ec6f5635e938c826f2e16e4619bb361c64d84a31f6775d030a615b
+    24eb72103768987dcc63b53d27fdc085796330782f44b3b40c4660b1e1ee9b9c
     76f8831038e8102febf42427dc4a0796f63b3e4e026e13c93fd916d07a5fba4d
 )
 
 
 build() {
-    cd "${srcdir}/mdocml-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     cp "${srcdir}/configure.local" .
     echo "CFLAGS=\"${CFLAGS} \${CFLAGS}\"" >>configure.local
 
@@ -43,7 +43,7 @@ package() {
         sbin
         share/man
     )
-    cd "${srcdir}/mdocml-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}"
     MAKEFLAGS='' make DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest"
     set -o pipefail
