@@ -89,9 +89,8 @@ else
     info "Entering the container"
     lxc-start -n "$name" -F -- \
     /bin/env -i TERM="$TERM" HOME="$shome" \
-    /bin/sh -c "cd ${shome} && printf \"#!/bin/sh\\nmakepkg -Ls\" >/bin/mp &&
-        chmod +x /bin/mp &&
-        printf '\\nReady.\\nTo make the package, run %s\\n\\n\\' \
-        \"'makepkg -Ls', or its short equivalent, 'mp'\" && exec /bin/bash -l"
+    /bin/sh -c "cd ${shome} &&
+        printf '\\nReady.\\nTo make the package, run: makepkg -Ls\\n\\n' &&
+        exec /bin/bash -l"
 
 fi
