@@ -2,10 +2,10 @@
 
 pkgname=vim
 _vermajor=8
-_verminor=0
-_verpatch=0891
+_verminor=1
+_verpatch=0547
 pkgver="${_vermajor}.${_verminor}.${_verpatch}"
-pkgrel=2
+pkgrel=1
 pkgdesc='An IMproved version of the vi editor'
 arch=(x86_64)
 url='http://www.vim.org'
@@ -22,7 +22,7 @@ source=(
 )
 
 sha256sums=(
-    0d1467df73fbfb57a48b728b5a6b1ac1e50d062b9b09471c59c140c2eb9b4384
+    55d62600b8003671de08b42c6b3c3c9e2800f11e4ca6816f3f9816afbef46b06
     dda73393c44e448ddeddaff76287dbbe5fcea1bc381c5d065789bd3c1b481f0e
     5e698ff1872bae79b7eae3f35bfca2e426c2698a785687fb9035e0fee16de91a
 )
