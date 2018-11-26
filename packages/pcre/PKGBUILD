@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(pcre libpcre libpcre-dev)
-pkgver=8.40
+pkgver=8.42
 pkgrel=1
 pkgdesc='Perl Compatible Regular Expressions'
 arch=(x86_64)
@@ -16,7 +16,7 @@ source=(
     "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    00e27a29ead4267e3de8111fcaa59b132d0533cdfdbdddf4b0604279acbcf4f4
+    2cd04b7c887808be030254e8d77de11d3fe9d4505c39d4b15d2664ffe8bf9301
 )
 
 
@@ -33,13 +33,16 @@ package_pcre() {
     pkgfiles=(
         bin
     )
-    depends=(libpcre)
+    depends=(
+        libpcre
+        musl
+    )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
     rm "${pkgdir}/bin/pcre-config"
 }
 
@@ -51,7 +54,7 @@ package_libpcre() {
 
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libpcre-dev() {
@@ -66,5 +69,5 @@ package_libpcre-dev() {
 
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
