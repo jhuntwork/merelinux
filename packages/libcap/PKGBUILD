@@ -43,7 +43,7 @@ package_libcap() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libcap-dev() {
@@ -58,5 +58,5 @@ package_libcap-dev() {
     cd "${srcdir}/${pkgbase}-${pkgver}"
     make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdir}-tmp" install
     cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
