@@ -1,3 +1,8 @@
+2018-11-26  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.1.1-2 :
+	Move pkgdelta to pacman-build
+
 2018-11-13  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.1.1-1 :
