@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=nginx
-pkgver=1.10.1
-pkgrel=2
+pkgver=1.14.1
+pkgrel=1
 pkgdesc='An HTTP and reverse proxy server.'
 arch=(x86_64)
 url='http://nginx.org/'
@@ -27,7 +27,7 @@ source=(
 )
 
 sha256sums=(
-    1fd35846566485e03c0e318989561c135c598323ff349c503a6c14826487a801
+    bf09974130c0d41c0a811decc17a96ec2f58cdc8bbacb771de8d38c9ba14a4a4
     562826624f8bc98df75abdabcb6e9ce079668bec651dc67a95c34d6bc129a750
     9b4f42034d0130d041dfc8f0fcc262891a7d12a529379c6ca344b4a898248d25
     3ffa02560aeeabf2b23828737c1e5c3d998be2fd1fbc9d6dde15c3401cdb4d7c
