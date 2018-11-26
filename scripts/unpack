@@ -12,7 +12,7 @@ Optional flags:
   -d           Dry run. Don't unpack the archive, just print the top-level directory.
   -t           Unpack archive to a temporary directory.
   -T TEMPLATE  Like -t, but use the given template for the temporary directory.
-  -v           Verbose. Run tar with the verbose flag. Ignored when used wih -d.
+  -v           Verbose. Run tar with the verbose flag. Ignored when used with -d.
 "
 
 u_realpath() {
