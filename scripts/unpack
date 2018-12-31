@@ -17,18 +17,15 @@ Optional flags:
 
 u_realpath() {
     set +e
-    curdir=$(pwd)
-    dir_name="${1%/*}"
-    [ -d "$dir_name" ] && cd "$dir_name"
-    lastlink=$1
-    link="$(readlink "${lastlink##*/}")"
+    curdir="$(pwd)"
+    link="$1"
     while [ "$link" ] ; do
         dir_name="${link%/*}"
         [ -d "$dir_name" ] && cd "$dir_name"
         lastlink=$link
         link="$(readlink "${link##*/}")"
     done
-    echo "$(pwd)/${lastlink##*/}"
+    printf '%s\n' "$(pwd)/${lastlink##*/}"
     cd "$curdir"
     set -e
 }
@@ -66,7 +63,7 @@ tmp_dir=''
 # Prefer the file command for guessing file type, if it is available.
 if file --version >/dev/null ; then
     fileout="$(file "$archive")"
-    ext=$(printf "%s" "${fileout#*:}" | awk '{print $1}')
+    ext=$(printf '%s' "${fileout#*:}" | awk '{print $1}')
 else
     ext=${archive##*.}
 fi
