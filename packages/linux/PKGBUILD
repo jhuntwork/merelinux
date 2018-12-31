@@ -3,7 +3,7 @@
 rationale='This is part of the core toolchain'
 pkgname=(linux linux-headers)
 pkgver=4.14.80
-pkgrel=1
+pkgrel=2
 pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
@@ -22,7 +22,7 @@ source=(
 sha256sums=(
     9ddc7bc11cbea6475ac5abf18e01a143d7d506bece591e0dcb15c9452d3ed7d2
     6ce3f62ed1553cdadd5f3963d8ac1d123b78e3af89d919a876396f7df2b56fd9
-    103e2dfad634e3e8764edb7e49330449816760d2ae922b5ed14b75088acd6fe9
+    c16b8791774cacc9e44d6ccf762e114fb5f080f36d8ed02074c7db8705fb7898
 )
 
 build() {

@@ -1,3 +1,8 @@
+2018-12-16  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 4.14.80-2 :
+	Add EFI stub support
+
 2018-11-12  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 4.14.80-1 :
