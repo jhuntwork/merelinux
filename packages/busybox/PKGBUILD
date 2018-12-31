@@ -3,7 +3,7 @@
 rationale='It serves as a stand-in for bzip2, coreutils, diffutils, findutils, gawk, grep, gzip, sed, tar and util-linux'
 pkgname=busybox
 pkgver=1.29.3
-pkgrel=2
+pkgrel=3
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
@@ -36,7 +36,7 @@ sha256sums=(
     1dc4b44c6db4c4cb90685270fd64f8de6425b418a5ebb2a123e8ead95403c13d
     388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
-    c91ad6bf827da152edf4ddb29fdaae1b07b683bd9bb366787fb1bf0117968c72
+    9861c80af216eb811214b5adbf7895132330d9c56f8f64a05accf2c88bc15650
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
     743c6d5e36eddd05956c2f2e6bcd34de7033cb39c196e77ae568baa85b24fd8a
     0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
