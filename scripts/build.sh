@@ -1,5 +1,5 @@
 #!/bin/sh -e
-PATH="/tools/bin:$PATH"
+PATH="/mere/bin:$PATH"
 shome="/tmp/wd"
 clog=/var/log/merebuild.log
 auto=0
