@@ -1,0 +1,12 @@
+OLDHOME=$HOME
+OLDTERM=$TERM
+for e in $(env | grep -v ^RUNSTEPS | cut -d'=' -f1); do unset "$e"; done
+HOME=$OLDHOME
+TERM=$OLDTERM
+LC_ALL=POSIX
+SYS_FAKE=x86_64-custom-linux-musl
+SYS_REAL=x86_64-pc-linux-musl
+PATH=/mere/bin:/bin:/usr/bin
+MAKEFLAGS="-j$(grep -c processor /proc/cpuinfo)"
+export HOME TERM LC_ALL SYS_FAKE SYS_REAL PATH MAKEFLAGS
+set +h
