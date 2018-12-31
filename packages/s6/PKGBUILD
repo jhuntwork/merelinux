@@ -2,7 +2,7 @@
 
 pkgname=(s6 s6-dev)
 pkgver=2.7.2.2
-pkgrel=2
+pkgrel=3
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
@@ -25,6 +25,7 @@ source=(
     s6-service
     taillog
     tty1-service
+    ttyS0-service
 )
 
 sha256sums=(
@@ -40,6 +41,7 @@ sha256sums=(
     e923f5cea85c921fd8aac5d923c302efbe245727f1eac0b7e138f46f668eda6f
     6fe869bfaf65ea4528bcb437c8c2d818aae898ea3be9215ae082ce3548e34d08
     538bc61ea2ef419c1e48e683d7b6a52ea45ea5b06ad765bbfa28b79d3953829f
+    80efd99ed9a4c12345c15cd1eafaa32467cea341eac88d9282275c73326831fe
 )
 
 install=s6.install
@@ -91,9 +93,10 @@ package_s6() {
     install -m 0750 "${srcdir}/s6-svscan-crash" etc/s6/init-services/.s6-svscan/crash
     install -m 0750 "${srcdir}/s6-svscan-finish" etc/s6/init-services/.s6-svscan/finish
 
-    # early tty1 service
-    install -d etc/s6/init-services/tty1
+    # early tty1 and ttyS0 service
+    install -d etc/s6/init-services/tty1 etc/s6/init-services/ttyS0
     install -m 0754 "${srcdir}/tty1-service" etc/s6/init-services/tty1/run
+    install -m 0754 "${srcdir}/ttyS0-service" etc/s6/init-services/ttyS0/run
 
     # Script and named pipe for catchall logging process
     install -d etc/s6/init-services/s6-svscan-log
