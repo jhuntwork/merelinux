@@ -30,7 +30,7 @@ lint_package_functions+=('warn_dependencies')
 
 list_file_dependencies() {
     if [ -z "$1" ] || [ ! -f "$1" ] ; then
-        printf "Must specify a file\n"
+        printf 'Must specify a file\n'
         return 1
     fi
     TMP=$(mktemp)
@@ -45,23 +45,23 @@ list_file_dependencies() {
 
     local IFS=$'\n'
     for i in $lddout ; do
-        local dep=$(printf "%s\n" "$i" | awk '{print $3}')
+        local dep=$(printf '%s\n' "$i" | awk '{print $3}')
         [ -z "$dep" ] && continue
         case "$dep" in
             ldd|$(pwd)*)
                 ;;
-            *) deps=$(printf "%s\n%s\n" "$dep" "$deps")
+            *) deps=$(printf '%s\n%s\n' "$dep" "$deps")
                 ;;
         esac
     done
-    printf "%s\n" "$deps"
+    printf '%s\n' "$deps"
     rm "$TMP"
     [ $badlinks -eq 1 ] && return 1
 }
 
 collect_all_lib_dependencies() {
     if [ -z "$1" ] || [ ! -d "$1" ] ; then
-        printf "Must specify a directory\n"
+        printf 'Must specify a directory\n'
         return 1
     fi
 
@@ -74,13 +74,13 @@ collect_all_lib_dependencies() {
             ELF*dynamic*)
                 deps=$(LD_LIBRARY_PATH="${1}/lib" list_file_dependencies "$file")
                 [ $? -ne 0 ] && badlinks=1
-                alldeps=$(printf "%s\n%s\n" "$deps" "$alldeps")
+                alldeps=$(printf '%s\n%s\n' "$deps" "$alldeps")
                 ;;
             *)
                 ;;
         esac
     done
-    printf "%s\n" "$alldeps" | sort -u
+    printf '%s\n' "$alldeps" | sort -u
     [ $badlinks -eq 1 ] && return 1
 }
 
@@ -108,7 +108,7 @@ warn_dependencies() {
     done
     if [ -n "$not_found" ] ; then
         error "$(gettext "Missing dependency: %s")" "${not_found[@]}"
-        printf "%s\n" "${not_found[@]}" >>"/tmp/missingdeps.${pkgname}"
+        printf '%s\n' "${not_found[@]}" >>"/tmp/missingdeps.${pkgname}"
         return 2
     fi
 }
