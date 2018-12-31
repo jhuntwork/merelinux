@@ -1,4 +1,5 @@
 #!/bin/sh -xe
+export PATH="/mere/bin:$PATH"
 options=$(getopt -o p:n: -l rootfs:,name:,path: -- "$@")
 eval set -- "$options"
 while true
@@ -25,7 +26,7 @@ if [ -z "$rootfs" ]; then
 fi
 
 # Add required core directories/files
-for dir in bin etc dev lib merebuild var/lib/pacman; do
+for dir in bin etc dev lib mere var/lib/pacman; do
     install -d -m0755 "${rootfs}/${dir}"
 done
 install -d -m0555 "${rootfs}/proc"
@@ -35,15 +36,16 @@ install -d -m0755 "${rootfs}/tmp/staging"
 install -m 0644 /etc/resolv.conf "${rootfs}/etc/"
 ln -s /proc/mounts "${rootfs}/etc/mtab"
 
-# /tools specific settings, for use when bootstrapping
+# Bootstrap specific settings
 # shellcheck disable=SC2154
-if [ -n "$mere_use_tools" ] ; then
-    install -d -m0755 "${rootfs}/tools"
-    find /tools/bin -maxdepth 1 ! -type d -exec ln -s {} "${rootfs}/bin/" +
-    ln -s /tools/lib/libstdc++.a "${rootfs}/lib/"
+if [ -n "$mere_bootstrap" ] ; then
+    find /mere/bin -maxdepth 1 ! -type d -exec ln -s {} "${rootfs}/bin/" +
+    ln -s /mere/lib/libstdc++.a "${rootfs}/lib/"
 fi
 
-[ -z "$mere_pacman_conf" ] && mere_pacman_conf=/etc/pacman.conf
+[ -z "$mere_pacman_conf" ] &&
+    mere_pacman_conf=$(pacman --debug 2>&1 | grep 'config: attempting' | \
+                       awk '{print $NF}')
 [ -z "$mere_base" ] && mere_base='base-layout build-essential'
 [ -f "$mere_pacman_conf" ] && pac_config="--config $mere_pacman_conf"
 
