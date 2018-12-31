@@ -14,7 +14,7 @@ if [ "$id" = '0' ] ; then
 fi
 
 set_ps1() {
-    printf "${hn} | ${PWD}\n${P} "
+    printf '%s | %s\n%s ' "$hn" "$PWD" "$P"
 }
 
 PS1='$(set_ps1)'
