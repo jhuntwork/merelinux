@@ -15,6 +15,10 @@ error() {
     exit 1
 }
 
+verify() {
+    printf '%s  %s\n' "$sha" "$filename" | sha256sum -c -
+}
+
 [ $# -eq 2 ] || error "$usage"
 
 if ! printf '' | sha256sum - >/dev/null ; then
@@ -24,10 +28,6 @@ if ! printf '' | sha256sum - >/dev/null ; then
         error "Cannot determine a sha256sum binary to use."
     fi
 fi
-
-verify() {
-    echo "$sha  $filename" | sha256sum -c -
-}
 
 url=$1
 sha=$2
