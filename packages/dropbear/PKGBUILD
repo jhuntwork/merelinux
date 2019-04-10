@@ -2,7 +2,7 @@
 
 pkgname=dropbear
 pkgver=2018.76
-pkgrel=2
+pkgrel=3
 pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
 url='http://matt.ucc.asn.au/dropbear/dropbear.html'
@@ -32,7 +32,7 @@ install=dropbear.install
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}"
-    export CFLAGS="$CFLAGS -DDEFAULT_RECV_WINDOW=1048576 -DRECV_MAX_PAYLOAD_LEN=524288"
+    sed -i '/MAX_CMD_LEN/s@9000@20000@' sysoptions.h
     ./configure \
       --prefix='' \
       --enable-static \
