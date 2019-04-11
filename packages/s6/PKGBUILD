@@ -1,8 +1,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(s6 s6-dev)
-pkgver=2.7.2.2
-pkgrel=3
+pkgver=2.8.0.0
+pkgrel=1
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
@@ -29,7 +29,7 @@ source=(
 )
 
 sha256sums=(
-    58dfa7633caff3790e06b5981344ceb03a1cedff4f253e15d79135d9a2ab525f
+    284792d8bebecc2c0c1f8318149dac9e6d52fe7756d5de55b4bb47a84ba7b106
     0fc11fe9190d6f1046ff51958f5d84fa74c3800262260b7797c55aa11658c5d1
     0999b95f979d004ec0dae779daf80cd4032b6700b98957a2cfe3a75fdb63662e
     33accde3c4e2c4c880e243a00bcaf6ce8b018fc68deea376f7a3d14e239d3eb9
