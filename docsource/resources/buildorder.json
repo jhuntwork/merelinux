@@ -1,0 +1,198 @@
+[
+  {
+    "name": "binutils_pass1",
+    "sources": [
+      "binutils"
+    ]
+  },
+  {
+    "name": "gcc_pass1",
+    "sources": [
+      "gcc",
+      "gmp",
+      "mpfr",
+      "mpc"
+    ]
+  },
+  {
+    "name": "linux_headers",
+    "sources": [
+      "linux"
+    ]
+  },
+  {
+    "name": "musl",
+    "sources": [
+      "musl"
+    ]
+  },
+  {
+    "name": "libstdc++",
+    "sources": [
+      "gcc"
+    ]
+  },
+  {
+    "name": "binutils_pass2",
+    "sources": [
+      "binutils"
+    ]
+  },
+  {
+    "name": "gcc_pass2",
+    "sources": [
+      "gcc",
+      "gmp",
+      "mpfr",
+      "mpc"
+    ]
+  },
+  {
+    "name": "busybox",
+    "sources": [
+      "busybox"
+    ]
+  },
+  {
+    "name": "make",
+    "sources": [
+      "make"
+    ]
+  },
+  {
+    "name": "file",
+    "sources": [
+      "file"
+    ]
+  },
+  {
+    "name": "adjustpath"
+  },
+  {
+    "name": "zlib",
+    "sources": [
+      "zlib"
+    ]
+  },
+  {
+    "name": "ncurses",
+    "sources": [
+      "ncurses"
+    ]
+  },
+  {
+    "name": "bash",
+    "sources": [
+      "bash"
+    ]
+  },
+  {
+    "name": "patch",
+    "sources": [
+      "patch"
+    ]
+  },
+  {
+    "name": "perl",
+    "sources": [
+      "perl"
+    ]
+  },
+  {
+    "name": "m4",
+    "sources": [
+      "m4"
+    ]
+  },
+  {
+    "name": "gettext",
+    "sources": [
+      "gettext"
+    ]
+  },
+  {
+    "name": "autoconf",
+    "sources": [
+      "autoconf"
+    ]
+  },
+  {
+    "name": "automake",
+    "sources": [
+      "automake"
+    ]
+  },
+  {
+    "name": "libtool",
+    "sources": [
+      "libtool"
+    ]
+  },
+  {
+    "name": "pkgconf",
+    "sources": [
+      "pkgconf"
+    ]
+  },
+  {
+    "name": "libressl",
+    "sources": [
+      "libressl"
+    ]
+  },
+  {
+    "name": "curl",
+    "sources": [
+      "curl"
+    ]
+  },
+  {
+    "name": "attr",
+    "sources": [
+      "attr"
+    ]
+  },
+  {
+    "name": "acl",
+    "sources": [
+      "acl"
+    ]
+  },
+  {
+    "name": "nettle",
+    "sources": [
+      "nettle"
+    ]
+  },
+  {
+    "name": "xz",
+    "sources": [
+      "xz"
+    ]
+  },
+  {
+    "name": "libarchive",
+    "sources": [
+      "libarchive"
+    ]
+  },
+  {
+    "name": "pacman",
+    "sources": [
+      "pacman"
+    ]
+  },
+  {
+    "name": "libcap",
+    "sources": [
+      "libcap"
+    ]
+  },
+  {
+    "name": "lxc",
+    "sources": [
+      "lxc"
+    ]
+  }
+]
+

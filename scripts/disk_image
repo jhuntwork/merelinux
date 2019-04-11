@@ -1,0 +1,115 @@
+#!/bin/sh -e
+
+cleanup() {
+    set +e
+    umount -f "$ROOT"
+    kpartx -dsv "$lodev"
+    losetup -d "$lodev"
+    exit
+}
+
+trap cleanup INT TERM EXIT
+
+# Default vars
+disk_size="${disk_size:-1G}"
+mypass="${mypass:-merepass}"
+ROOT='/tmp/mere'
+
+# Create an empty system root directory
+rm -rf "$ROOT"
+install -d "$ROOT"
+
+# Create a 10G sparse image
+IMG='/tmp/disk.raw'
+rm -f "$IMG"
+dd if=/dev/zero of="$IMG" bs=1 seek="$disk_size" count=0
+
+# If this is being run inside a container, the /dev/loopX devices may
+# not be present. Create them manually if not.
+for i in 0 1 2 3 4 5 6 7 ; do
+    [ -e "/dev/loop${i}" ] || mknod -m 660 "/dev/loop${i}" b 7 "$i"
+done
+
+# setup the image to a loopback device
+losetup -f "$IMG"
+lodev=$(losetup -a | grep "$IMG" | cut -d: -f1)
+[ -n "$lodev" ]
+
+# Create partitions on the new image
+sgdisk -N=1 -A 1:set:2 "$lodev"
+partuuid=$(sgdisk -i=1 "$lodev" 2>&1 | grep unique | awk '{print $NF}')
+
+# Discover the newly made partition name and assert it is present
+lopart=/dev/mapper/$(kpartx -asv "$lodev" 2>/dev/null | cut -d' ' -f3)
+[ -n "$lopart" ]
+
+# Create an ext4 filesystem without 64bit support since extlinux cannot
+# boot from that currently.
+mkfs.ext4 -O ^64bit "$lopart"
+
+# Mount the partition and install basic packages to it
+mount -o loop "$lopart" "$ROOT"
+install -d "${ROOT}/var/lib/pacman"
+pacman -Sy --noconfirm -r "$ROOT" -b "${ROOT}/var/lib/pacman" \
+    base-layout \
+    busybox \
+    linux \
+    nginx \
+    pacman \
+    s6
+
+# Enable nginx to start on boot
+chroot "$ROOT" /sbin/service nginx enable
+
+# Optionally install some comfort packages
+# shellcheck disable=SC2154
+if [ "$comfortable" = '1' ] ; then
+    pacman -Sy --noconfirm -r "$ROOT" -b "${ROOT}/var/lib/pacman" \
+        dropbear \
+        mandoc \
+        mksh \
+        vim
+
+    chroot "$ROOT" /sbin/service dropbear enable
+    sed -i '/^root:/s@/bin/sh@/bin/mksh@g' "${ROOT}/etc/passwd"
+fi
+
+# Set the root password
+yes "$mypass" | chroot "$ROOT" /bin/passwd
+
+# Set the hostname
+echo 'mere' > "${ROOT}/etc/hostname"
+
+# Clear the initial screen
+clear >"${ROOT}/etc/issue"
+
+# Install a basic networking configuration
+cat > "${ROOT}/etc/network/interfaces" << EOF
+auto lo eth0
+
+iface lo inet loopback
+
+iface eth0 inet dhcp
+EOF
+echo '127.0.0.1 localhost' >"${ROOT}/etc/hosts"
+
+# Add an initial fstab file to describe mountable file systems
+cat > "${ROOT}/etc/fstab" << EOF
+devpts /dev/pts devpts defaults 0 0
+tmpfs  /dev/shm tmpfs  defaults 0 0
+EOF
+
+# Configure the system to boot with extlinux from the syslinux package
+install -d ${ROOT}/boot/extlinux
+cat >"${ROOT}/boot/extlinux/extlinux.conf" <<EOF
+SERIAL 0
+DEFAULT mere
+
+LABEL mere
+  LINUX /boot/vmlinux
+  APPEND root=PARTUUID=${partuuid} console=ttyS0,38400n8d
+EOF
+
+# Install extlinux and syslinux MBR for GPT
+extlinux -i "${ROOT}/boot/extlinux"
+cat /share/syslinux/gptmbr.bin >"$lodev"

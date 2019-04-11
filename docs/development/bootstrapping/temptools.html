@@ -1,0 +1,288 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Temporary Tools &mdash; Mere Linux 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="1. Binutils Pass 1" href="temptools/binutils_pass1.html" />
+    <link rel="prev" title="Setup a Default Environment" href="setup_environment.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mere Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../gettingstarted/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../static_tools.html">Static Tools</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Bootstrapping</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="setup_environment.html">Setup a Default Environment</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Temporary Tools</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="temptools/binutils_pass1.html">1. Binutils Pass 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/gcc_pass1.html">2. GCC Pass 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/linux_headers.html">3. Linux API Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/musl.html">4. Musl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/libstdc++.html">5. Libstdc++</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/binutils_pass2.html">6. Binutils Pass 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/gcc_pass2.html">7. GCC Pass 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/busybox.html">8. Busybox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/make.html">9. Make</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/file.html">10. File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/adjustpath.html">11. Adjust PATH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/zlib.html">12. Zlib</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/ncurses.html">13. Ncurses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/bash.html">14. Bash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/patch.html">15. Patch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/perl.html">16. Perl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/m4.html">17. M4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/gettext.html">18. Gettext</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/autoconf.html">19. Autoconf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/automake.html">20. Automake</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/libtool.html">21. Libtool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/pkgconf.html">22. Pkgconf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/libressl.html">23. Libressl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/curl.html">24. Curl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/attr.html">25. Attr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/acl.html">26. Acl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/nettle.html">27. Nettle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/xz.html">28. Xz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/libarchive.html">29. Libarchive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/pacman.html">30. Pacman</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/libcap.html">31. Libcap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="temptools/lxc.html">32. Lxc</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="packaging.html">Packaging the Final System</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/index.html">Concepts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mere Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Development</a> &raquo;</li>
+        
+          <li><a href="index.html">Bootstrapping</a> &raquo;</li>
+        
+      <li>Temporary Tools</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="temporary-tools">
+<h1>Temporary Tools<a class="headerlink" href="#temporary-tools" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Before we can start building actual pacman packages, we need a toolchain that
+can compile and link against musl libc, as well as pacman itself. We’ll also
+compile LXC for more complete control over how containers are created and used
+when building final system packages.</p>
+<p>LFS provides a lot of details concerning the technical aspects of
+<a class="reference external" href="http://www.linuxfromscratch.org/lfs/view/stable/chapter05/toolchaintechnotes.html">bootstrapping a toolchain</a>,
+so I’ll refrain from diving too deeply into that
+here. However, I will aim to note why certain packages are included and any
+points of particular interest.</p>
+<p>Each subsection will outline steps to complete through an embedded script. The
+goal of presenting the commands in this way was to provide a balance between
+readability and automation. Copying and pasting the commands from a browser
+should work just fine, however exercise care about pasting multiple commands,
+since subsequent commands will execute even if previous ones failed.</p>
+<p>If you want to execute the scripts directly, there is a link to download an
+individual script as a footnote at the bottom of each section. You can also
+download the whole collection of scripts in a single archive. <a class="footnote-reference brackets" href="#f1" id="id1">1</a></p>
+<p>Each script is numbered according to execution order, so if you download all of
+them, or even just a few in order, a simple tool to execute each in order will
+provide you with basic automation for the whole temptools section.</p>
+<p>Here is a full working example using a Python package:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip install runsteps
+tar -xf mere_temptools_scripts.tar.gz
+runsteps -v mere_temptools_scripts
+</pre></div>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference download internal" download="" href="../../_downloads/152ac364cf5d989e53abe7c75bbc3b2d/mere_temptools_scripts.tar.gz"><code class="xref download docutils literal notranslate"><span class="pre">mere_temptools_scripts.tar.gz</span></code></a></p>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="temptools/binutils_pass1.html" class="btn btn-neutral float-right" title="1. Binutils Pass 1" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="setup_environment.html" class="btn btn-neutral float-left" title="Setup a Default Environment" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jeremy Huntwork
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

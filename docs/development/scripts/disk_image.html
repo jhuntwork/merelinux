@@ -1,0 +1,340 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>disk_image &mdash; Mere Linux 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="fetch" href="fetch.html" />
+    <link rel="prev" title="clean_env" href="clean_env.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mere Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../gettingstarted/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../static_tools.html">Static Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootstrapping/index.html">Bootstrapping</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../scripts.html">Scripts</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="clean_env.html">clean_env</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">disk_image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fetch.html">fetch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="resize_disk.html">resize_disk</a></li>
+<li class="toctree-l3"><a class="reference internal" href="unpack.html">unpack</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/index.html">Concepts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mere Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Development</a> &raquo;</li>
+        
+          <li><a href="../scripts.html">Scripts</a> &raquo;</li>
+        
+      <li>disk_image</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="disk-image">
+<h1>disk_image<a class="headerlink" href="#disk-image" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/sh -e</span>
+
+cleanup<span class="o">()</span> <span class="o">{</span>
+    <span class="nb">set</span> +e
+    umount -f <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span>
+    kpartx -dsv <span class="s2">&quot;</span><span class="nv">$lodev</span><span class="s2">&quot;</span>
+    losetup -d <span class="s2">&quot;</span><span class="nv">$lodev</span><span class="s2">&quot;</span>
+    <span class="nb">exit</span>
+<span class="o">}</span>
+
+<span class="nb">trap</span> cleanup INT TERM EXIT
+
+<span class="c1"># Default vars</span>
+<span class="nv">disk_size</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">disk_size</span><span class="k">:-</span><span class="nv">1G</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">mypass</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">mypass</span><span class="k">:-</span><span class="nv">merepass</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="nv">ROOT</span><span class="o">=</span><span class="s1">&#39;/tmp/mere&#39;</span>
+
+<span class="c1"># Create an empty system root directory</span>
+rm -rf <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span>
+install -d <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span>
+
+<span class="c1"># Create a 10G sparse image</span>
+<span class="nv">IMG</span><span class="o">=</span><span class="s1">&#39;/tmp/disk.raw&#39;</span>
+rm -f <span class="s2">&quot;</span><span class="nv">$IMG</span><span class="s2">&quot;</span>
+dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$IMG</span><span class="s2">&quot;</span> <span class="nv">bs</span><span class="o">=</span><span class="m">1</span> <span class="nv">seek</span><span class="o">=</span><span class="s2">&quot;</span><span class="nv">$disk_size</span><span class="s2">&quot;</span> <span class="nv">count</span><span class="o">=</span><span class="m">0</span>
+
+<span class="c1"># If this is being run inside a container, the /dev/loopX devices may</span>
+<span class="c1"># not be present. Create them manually if not.</span>
+<span class="k">for</span> i in <span class="m">0</span> <span class="m">1</span> <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> <span class="m">5</span> <span class="m">6</span> <span class="m">7</span> <span class="p">;</span> <span class="k">do</span>
+    <span class="o">[</span> -e <span class="s2">&quot;/dev/loop</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="o">]</span> <span class="o">||</span> mknod -m <span class="m">660</span> <span class="s2">&quot;/dev/loop</span><span class="si">${</span><span class="nv">i</span><span class="si">}</span><span class="s2">&quot;</span> b <span class="m">7</span> <span class="s2">&quot;</span><span class="nv">$i</span><span class="s2">&quot;</span>
+<span class="k">done</span>
+
+<span class="c1"># setup the image to a loopback device</span>
+losetup -f <span class="s2">&quot;</span><span class="nv">$IMG</span><span class="s2">&quot;</span>
+<span class="nv">lodev</span><span class="o">=</span><span class="k">$(</span>losetup -a <span class="p">|</span> grep <span class="s2">&quot;</span><span class="nv">$IMG</span><span class="s2">&quot;</span> <span class="p">|</span> cut -d: -f1<span class="k">)</span>
+<span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$lodev</span><span class="s2">&quot;</span> <span class="o">]</span>
+
+<span class="c1"># Create partitions on the new image</span>
+sgdisk -N<span class="o">=</span><span class="m">1</span> -A <span class="m">1</span>:set:2 <span class="s2">&quot;</span><span class="nv">$lodev</span><span class="s2">&quot;</span>
+<span class="nv">partuuid</span><span class="o">=</span><span class="k">$(</span>sgdisk -i<span class="o">=</span><span class="m">1</span> <span class="s2">&quot;</span><span class="nv">$lodev</span><span class="s2">&quot;</span> <span class="m">2</span>&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">|</span> grep unique <span class="p">|</span> awk <span class="s1">&#39;{print $NF}&#39;</span><span class="k">)</span>
+
+<span class="c1"># Discover the newly made partition name and assert it is present</span>
+<span class="nv">lopart</span><span class="o">=</span>/dev/mapper/<span class="k">$(</span>kpartx -asv <span class="s2">&quot;</span><span class="nv">$lodev</span><span class="s2">&quot;</span> <span class="m">2</span>&gt;/dev/null <span class="p">|</span> cut -d<span class="s1">&#39; &#39;</span> -f3<span class="k">)</span>
+<span class="o">[</span> -n <span class="s2">&quot;</span><span class="nv">$lopart</span><span class="s2">&quot;</span> <span class="o">]</span>
+
+<span class="c1"># Create an ext4 filesystem without 64bit support since extlinux cannot</span>
+<span class="c1"># boot from that currently.</span>
+mkfs.ext4 -O ^64bit <span class="s2">&quot;</span><span class="nv">$lopart</span><span class="s2">&quot;</span>
+
+<span class="c1"># Mount the partition and install basic packages to it</span>
+mount -o loop <span class="s2">&quot;</span><span class="nv">$lopart</span><span class="s2">&quot;</span> <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span>
+install -d <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/var/lib/pacman&quot;</span>
+pacman -Sy --noconfirm -r <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span> -b <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/var/lib/pacman&quot;</span> <span class="se">\</span>
+    base-layout <span class="se">\</span>
+    busybox <span class="se">\</span>
+    linux <span class="se">\</span>
+    nginx <span class="se">\</span>
+    pacman <span class="se">\</span>
+    s6
+
+<span class="c1"># Enable nginx to start on boot</span>
+chroot <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span> /sbin/service nginx <span class="nb">enable</span>
+
+<span class="c1"># Optionally install some comfort packages</span>
+<span class="c1"># shellcheck disable=SC2154</span>
+<span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;</span><span class="nv">$comfortable</span><span class="s2">&quot;</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span> <span class="o">]</span> <span class="p">;</span> <span class="k">then</span>
+    pacman -Sy --noconfirm -r <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span> -b <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/var/lib/pacman&quot;</span> <span class="se">\</span>
+        dropbear <span class="se">\</span>
+        mandoc <span class="se">\</span>
+        mksh <span class="se">\</span>
+        vim
+
+    chroot <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span> /sbin/service dropbear <span class="nb">enable</span>
+    sed -i <span class="s1">&#39;/^root:/s@/bin/sh@/bin/mksh@g&#39;</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/etc/passwd&quot;</span>
+<span class="k">fi</span>
+
+<span class="c1"># Set the root password</span>
+yes <span class="s2">&quot;</span><span class="nv">$mypass</span><span class="s2">&quot;</span> <span class="p">|</span> chroot <span class="s2">&quot;</span><span class="nv">$ROOT</span><span class="s2">&quot;</span> /bin/passwd
+
+<span class="c1"># Set the hostname</span>
+<span class="nb">echo</span> <span class="s1">&#39;mere&#39;</span> &gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/etc/hostname&quot;</span>
+
+<span class="c1"># Clear the initial screen</span>
+clear &gt;<span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/etc/issue&quot;</span>
+
+<span class="c1"># Install a basic networking configuration</span>
+cat &gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/etc/network/interfaces&quot;</span> <span class="s">&lt;&lt; EOF</span>
+<span class="s">auto lo eth0</span>
+
+<span class="s">iface lo inet loopback</span>
+
+<span class="s">iface eth0 inet dhcp</span>
+<span class="s">EOF</span>
+<span class="nb">echo</span> <span class="s1">&#39;127.0.0.1 localhost&#39;</span> &gt;<span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/etc/hosts&quot;</span>
+
+<span class="c1"># Add an initial fstab file to describe mountable file systems</span>
+cat &gt; <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/etc/fstab&quot;</span> <span class="s">&lt;&lt; EOF</span>
+<span class="s">devpts /dev/pts devpts defaults 0 0</span>
+<span class="s">tmpfs  /dev/shm tmpfs  defaults 0 0</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Configure the system to boot with extlinux from the syslinux package</span>
+install -d <span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span>/boot/extlinux
+cat &gt;<span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/boot/extlinux/extlinux.conf&quot;</span> <span class="s">&lt;&lt;EOF</span>
+<span class="s">SERIAL 0</span>
+<span class="s">DEFAULT mere</span>
+
+<span class="s">LABEL mere</span>
+<span class="s">  LINUX /boot/vmlinux</span>
+<span class="s">  APPEND root=PARTUUID=${partuuid} console=ttyS0,38400n8d</span>
+<span class="s">EOF</span>
+
+<span class="c1"># Install extlinux and syslinux MBR for GPT</span>
+extlinux -i <span class="s2">&quot;</span><span class="si">${</span><span class="nv">ROOT</span><span class="si">}</span><span class="s2">/boot/extlinux&quot;</span>
+cat /share/syslinux/gptmbr.bin &gt;<span class="s2">&quot;</span><span class="nv">$lodev</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="fetch.html" class="btn btn-neutral float-right" title="fetch" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="clean_env.html" class="btn btn-neutral float-left" title="clean_env" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jeremy Huntwork
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

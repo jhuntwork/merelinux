@@ -1,0 +1,260 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Bootstrapping &mdash; Mere Linux 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Setup a Default Environment" href="setup_environment.html" />
+    <link rel="prev" title="Static Tools" href="../static_tools.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Mere Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../gettingstarted/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../static_tools.html">Static Tools</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Bootstrapping</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="setup_environment.html">Setup a Default Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temptools.html">Temporary Tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="packaging.html">Packaging the Final System</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../workflow.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../scripts.html">Scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../concepts/index.html">Concepts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">Mere Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../index.html">Development</a> &raquo;</li>
+        
+      <li>Bootstrapping</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="bootstrapping">
+<span id="id1"></span><h1>Bootstrapping<a class="headerlink" href="#bootstrapping" title="Permalink to this headline">¶</a></h1>
+<p>Realistically, a packaged distribution only needs to be bootstrapped once.
+After that, packages can be easily upgraded individually. However, the process
+of starting essentially from nothing and creating a system which can re-build
+itself is interesting. At least, it is to me. The
+<a class="reference external" href="http://www.linuxfromscratch.org/lfs/">Linux From Scratch</a> (LFS) project is
+an excellent resource for understanding the what, why and how of such an
+endeavor. In fact, this bootstrapping process borrows a number of things
+from LFS.</p>
+<p>So why bother documenting this at all? For a few reasons:</p>
+<ol class="arabic simple">
+<li><p>There are some differences when building a native
+<a class="reference external" href="http://www.musl-libc.org">musl libc</a> toolchain compared to the library
+LFS uses,  Glibc.</p></li>
+<li><p>Although the wider LFS community provides a few documents and some tools
+around package management, LFS itself does not really support it. This
+documentation aims to show more fully what it is like to bootstrap a system
+with package management in mind, and specifically,
+<a class="reference external" href="https://www.archlinux.org/pacman/">pacman</a>.</p></li>
+<li><p>When packaging, Mere has adopted a method that does not rely solely on a
+<strong class="command">chroot</strong> environment like LFS, nor a <strong class="command">fakeroot</strong>-based
+setup that pacman’s included <strong class="command">makepkg</strong> tool expects. Instead, it
+uses containers via <a class="reference external" href="https://linuxcontainers.org">LXC</a>. One advantage is
+that the environment where the packages are built is more fully isolated.
+Unlike a simple chroot, the container has its own process and network
+namespaces. Therefore it is reasonably safe to compile and package within
+the container as a privileged user. In turn, this removes the need to
+depend on the LD_PRELOAD hackery of <strong class="command">fakeroot</strong>.
+Finally, containers can be easily torn down and recreated through a
+repeatable mechanism. This allows for better control over
+dependencies while at the same time making automation easier.</p></li>
+<li><p><a class="reference external" href="https://busybox.net">busybox</a> is very usable as a lightweight
+replacement for the utilities included in the  <cite>bzip2</cite>, <cite>coreutils</cite>,
+<cite>diffutils</cite>, <cite>findutils</cite>, <cite>gawk</cite>, <cite>grep</cite>, <cite>gzip</cite>, <cite>inetutils</cite>,
+<cite>iproute2</cite>, <cite>kbd</cite>, <cite>sed</cite>, <cite>sysklogd</cite>, <cite>tar</cite>, and <cite>util-linux</cite> packages.
+This process demonstrates that. While there are some minor features missing,
+most will likely not be noticed, or are easily worked around.</p></li>
+<li><p>It was fun! I enjoyed documenting everything and perhaps someone else will
+find it useful.</p></li>
+</ol>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="setup_environment.html" class="btn btn-neutral float-right" title="Setup a Default Environment" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../static_tools.html" class="btn btn-neutral float-left" title="Static Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jeremy Huntwork
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

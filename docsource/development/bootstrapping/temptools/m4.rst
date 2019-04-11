@@ -1,0 +1,22 @@
+M4
+==
+
+
+.. glossary::
+
+    Description
+        An implementation of the traditional Unix macro processor
+
+    Rationale
+        m4 is a build and runtime dependency of the autoconf and automake tools
+
+
+
+
+The following script [#f1]_ outlines the commands required to complete this step:
+
+.. literalinclude:: mere_temptools_scripts/017-m4.sh
+    :language: bash
+
+
+.. [#f1] :download:`017-m4.sh <mere_temptools_scripts/017-m4.sh>`

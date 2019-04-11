@@ -1,0 +1,334 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Getting Started &mdash; Mere Linux 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Development" href="../development/index.html" />
+    <link rel="prev" title="Mere Linux" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> Mere Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting Started</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#id1">Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-disk-image">Creating a Disk Image</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#prepare-a-working-environment">Prepare a Working Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-the-image">Create the Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resize-the-image">Resize the Image</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../development/index.html">Development</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/index.html">Concepts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Mere Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+      <li>Getting Started</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="getting-started">
+<h1>Getting Started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h1>
+<p>The easiest way to start using and investigating Mere Linux is to download and
+run the latest Docker image. This of course requires
+<a class="reference external" href="https://docs.docker.com/">docker</a> running on your system. Alternatively, you
+can create your own disk image for use in a virtual machine, either locally or
+in a cloud environment. And if you are able to successfully create your own
+disk image, then you likely have the skills required to run that image on
+actual hardware, too.</p>
+<div class="section" id="id1">
+<h2>Docker<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run -it mere/base
+</pre></div>
+</div>
+<p>Once inside the container, use <strong class="command">pacman</strong> to investigate and install new
+packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Update the local pacman database</span>
+pacman -Sy
+
+<span class="c1"># Query what is installed</span>
+pacman -Q
+
+<span class="c1"># Upgrade existing packages</span>
+pacman -Syu
+
+<span class="c1"># Install a new package, for example, a nicer shell</span>
+pacman -Sy mksh
+<span class="nb">exec</span> /bin/mksh -l
+</pre></div>
+</div>
+</div>
+<div class="section" id="creating-a-disk-image">
+<span id="create-disk-image"></span><h2>Creating a Disk Image<a class="headerlink" href="#creating-a-disk-image" title="Permalink to this headline">¶</a></h2>
+<p>These steps will create a disk image that can be used in a Virtual Machine,
+like VirtualBox, or in a cloud environment like GCE.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These instructions assume you have set up the development tools as
+specified in the <a class="reference internal" href="../development/index.html#development"><span class="std std-ref">Development</span></a> section. If not, please proceed there
+first, and choose one of the two options.</p>
+</div>
+<div class="section" id="prepare-a-working-environment">
+<h3>Prepare a Working Environment<a class="headerlink" href="#prepare-a-working-environment" title="Permalink to this headline">¶</a></h3>
+<p>First, create an empty, basic merebuild container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /mere/bin/lxc-create -t merebuild -n merebuild-dimage
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../development/scripts/disk_image.html"><span class="doc">disk_image</span></a> script will do the heavy lifting
+of creating the disk image, so install that to the new container:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo install -m0755 scripts/disk_image <span class="se">\</span>
+    /mere/var/lib/lxc/merebuild-dimage/rootfs/bin/
+</pre></div>
+</div>
+<p>Next, enter into the container with a login shell:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /mere/bin/lxc-start -n merebuild-dimage -F -- <span class="se">\</span>
+    /bin/env -i <span class="se">\</span>
+    <span class="nv">TERM</span><span class="o">=</span><span class="nv">$TERM</span> <span class="se">\</span>
+    <span class="nv">http_proxy</span><span class="o">=</span><span class="si">${</span><span class="nv">http_proxy</span><span class="si">}</span> <span class="se">\</span>
+    <span class="nv">https_proxy</span><span class="o">=</span><span class="si">${</span><span class="nv">https_proxy</span><span class="si">}</span> <span class="se">\</span>
+    <span class="nv">SHELL</span><span class="o">=</span>/bin/bash <span class="se">\</span>
+    <span class="nv">HOME</span><span class="o">=</span>/root <span class="se">\</span>
+    /bin/bash -l
+</pre></div>
+</div>
+<p>Now, install some required packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pacman -Sy --noconfirm e2fsprogs syslinux gptfdisk kpartx
+</pre></div>
+</div>
+<p>Good! Now you’re ready to create the disk image, which you’ll do inside this
+container.</p>
+</div>
+<div class="section" id="create-the-image">
+<h3>Create the Image<a class="headerlink" href="#create-the-image" title="Permalink to this headline">¶</a></h3>
+<p>First, set a variable to a value of your choice. This will be the root
+password of the image you create:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">mypass</span><span class="o">=</span><span class="s1">&#39;somekindofpassword&#39;</span>
+</pre></div>
+</div>
+<p>Optionally, if you want to login over ssh and inspect the system directly,
+set a variable that controls the installation of the comfort packages:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">comfortable</span><span class="o">=</span><span class="m">1</span>
+</pre></div>
+</div>
+<p>The default disk size used in the following script is 1G. The image can
+easily be resized later, after creation, but if you would like a different
+size from the start, specify it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">disk_size</span><span class="o">=</span>10G
+</pre></div>
+</div>
+<p>Create the image by running the disk_image script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>disk_image
+</pre></div>
+</div>
+<p>And finally compress the image:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>tar -C /tmp -czf /meredisk.tar.gz disk.raw
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The new disk image will be located in the container’s root filesystem,
+so after you exit the container, you’ll probably want to move it
+somewhere, like:
+<cite>sudo mv /mere/var/lib/lxc/merebuild-dimage/rootfs/meredisk.tar.gz .</cite></p>
+</div>
+<p>The resulting file can be uploaded to Google Cloud and used as a source
+for a custom disk image there as per the instructions at
+<a class="reference external" href="https://cloud.google.com/compute/docs/images/import-existing-image#import_image">https://cloud.google.com/compute/docs/images/import-existing-image#import_image</a>.
+Or if you unpack the tar archive, you can use the VirtualBox tool
+<strong class="command">VBoxManage</strong> to convert the <cite>disk.raw</cite> file into a format usable by
+VirtualBox and run the system in a virtual machine there. For example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>VBoxManage convertdd disk.raw newdisk.vdi --format VDI
+</pre></div>
+</div>
+</div>
+<div class="section" id="resize-the-image">
+<h3>Resize the Image<a class="headerlink" href="#resize-the-image" title="Permalink to this headline">¶</a></h3>
+<p>If you want to resize the image at any point, take a look at the
+<a class="reference internal" href="../development/scripts/resize_disk.html"><span class="doc">resize_disk</span></a> script which can also be run inside a
+merebuild container.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../development/index.html" class="btn btn-neutral float-right" title="Development" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="../index.html" class="btn btn-neutral float-left" title="Mere Linux" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jeremy Huntwork
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

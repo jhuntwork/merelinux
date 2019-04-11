@@ -1,0 +1,315 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2. Base Layout &mdash; Mere Linux 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="3. Build Essential and Core Packages" href="core.html" />
+    <link rel="prev" title="1. Prepare for Packaging" href="prepare.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Mere Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../gettingstarted/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../static_tools.html">Static Tools</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bootstrapping</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../setup_environment.html">Setup a Default Environment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../temptools.html">Temporary Tools</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../packaging.html">Packaging the Final System</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="prepare.html">1. Prepare for Packaging</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">2. Base Layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="core.html">3. Build Essential and Core Packages</a></li>
+<li class="toctree-l4"><a class="reference internal" href="extra.html">4. Extra Packages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../concepts/index.html">Concepts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Mere Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Development</a> &raquo;</li>
+        
+          <li><a href="../index.html">Bootstrapping</a> &raquo;</li>
+        
+          <li><a href="../packaging.html">Packaging the Final System</a> &raquo;</li>
+        
+      <li>2. Base Layout</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="base-layout">
+<h1>2. Base Layout<a class="headerlink" href="#base-layout" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+</div>
+<p>Let’s build our first package! The base-layout package is really just basic
+directory structure for a Mere Linux system. It also includes a few core files
+such as a basic <code class="file docutils literal notranslate"><span class="pre">/etc/passwd</span></code> file.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>One notable difference in Mere from typical Linux systems is the lack of a
+<cite>/usr</cite> directory. Well, actually, there is one, but it is only used for
+compatibility. <cite>/usr</cite> itself is read-only and there are symbolic links for
+crucial sub-directories. For example, <cite>/usr/bin</cite> points to <cite>/bin</cite>. If this
+is not what you want, feel free to change the build instructions located in
+<cite>packages/base-layout/PKGBUILD</cite>. Note however, that you will also most
+likely need to change other critical packages, like gcc to use a more
+typical prefix, like <cite>/usr</cite>.</p>
+</div>
+<p>For this first package, we’ll run through some of the steps in a more manual
+fashion. But subsequent instructions will advise using a script in the
+<cite>scripts</cite> directory that makes building packages a little easier.</p>
+<p>First, create the merebuild container where the package will be built. As part
+of the creation, <strong class="command">lxc-create</strong> will run through the template installed
+in the last section, <code class="file docutils literal notranslate"><span class="pre">/mere/share/lxc/templates/lxc-merebuild</span></code>, in case
+you’d like to visually inspect it to see what it does:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">mere_package</span><span class="o">=</span>packages/base-layout <span class="se">\</span>
+    sudo -E /mere/bin/lxc-create -t merebuild -n merebuild-base-layout
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ‘-E’ flag passed to sudo is important to preserve the environment
+variables set in the previous page.</p>
+</div>
+<p>Now, to build the base-layout package, run the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo -E /mere/bin/lxc-start -n merebuild-base-layout -F -- /bin/env -i <span class="nv">TERM</span><span class="o">=</span><span class="nv">$TERM</span> <span class="se">\</span>
+    <span class="nv">http_proxy</span><span class="o">=</span><span class="si">${</span><span class="nv">http_proxy</span><span class="si">}</span> <span class="se">\</span>
+    <span class="nv">https_proxy</span><span class="o">=</span><span class="si">${</span><span class="nv">https_proxy</span><span class="si">}</span> <span class="se">\</span>
+    <span class="nv">HOME</span><span class="o">=</span>/tmp/wd /bin/sh -lc <span class="se">\</span>
+    <span class="s2">&quot;cd /tmp/wd &amp;&amp; makepkg -fLs --noconfirm&quot;</span>
+</pre></div>
+</div>
+<p>At this point, it is probably good to give a little helpful info. The root
+filesystem for the container will always be in
+<cite>/mere/var/lib/lxc/[container-name]/rootfs</cite>.
+Inside the container root, the <cite>/tmp/wd</cite> directory is used as a working
+directory while building the package. When finished, pacman’s <cite>makepkg</cite>
+will place any newly created package files in the container’s <cite>/tmp/staging</cite>
+directory. If all went well, you should see a new file there now:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo find /mere/var/lib/lxc/merebuild-base-layout/rootfs/tmp/staging
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <cite>sudo</cite> above is required because the <cite>rootfs</cite> directory is owned
+by the root user and is read only.</p>
+</div>
+<p>Assuming there is a file there named something like
+<code class="file docutils literal notranslate"><span class="pre">base-layout-*-x86_64.pkg.tar.xz</span></code>, it’s time to create a local package
+repository and add the new file to it:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Copy over the package file</span>
+sudo find /mere/var/lib/lxc/merebuild-base-layout/rootfs/tmp/staging <span class="se">\</span>
+    -name <span class="s2">&quot;*.pkg.tar.xz&quot;</span> -exec cp -v <span class="s1">&#39;{}&#39;</span> /mere/pkgs <span class="se">\;</span>
+
+<span class="c1"># Add it to the repo</span>
+sudo <span class="nv">PATH</span><span class="o">=</span>/mere/bin:<span class="nv">$PATH</span> /mere/bin/repo-add <span class="se">\</span>
+    /mere/pkgs/buildlocal.db.tar.gz <span class="se">\</span>
+    /mere/pkgs/base-layout-*-x86_64.pkg.tar.xz
+</pre></div>
+</div>
+<p>Great! The first package has been built and added to the repository.</p>
+<p>Let’s destroy the container now, which will also remove the container’s root
+file system. Each step will use fresh containers, created using the packages
+that were previously built. Doing this ensures there are no issues with the
+packages, it tightly controls the environment in which the packages are built,
+and it generally keeps things clean and repeatable.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo /mere/bin/lxc-destroy -n merebuild-base-layout
+</pre></div>
+</div>
+<p>Now make sure that the new package is part of the core set of packages which
+will be installed when creating new containers:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span> <span class="nv">mere_base</span><span class="o">=</span>base-layout
+</pre></div>
+</div>
+<p>There were a lot of commands executed here to create just one simple package.
+Doing this over and over for various packages will get tiresome quickly. The
+next section will use scripts to automate much of the above for all of the rest
+of the core packages.</p>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="core.html" class="btn btn-neutral float-right" title="3. Build Essential and Core Packages" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="prepare.html" class="btn btn-neutral float-left" title="1. Prepare for Packaging" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jeremy Huntwork
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

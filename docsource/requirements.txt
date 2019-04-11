@@ -1,0 +1,4 @@
+jinja2
+Sphinx
+sphinx_rtd_theme
+pyyaml

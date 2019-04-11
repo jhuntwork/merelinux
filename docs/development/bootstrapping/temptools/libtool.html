@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>21. Libtool &mdash; Mere Linux 0.1 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../../../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../../../" src="../../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../../../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="22. Pkgconf" href="pkgconf.html" />
+    <link rel="prev" title="20. Automake" href="automake.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../../../index.html" class="icon icon-home"> Mere Linux
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                0.1
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../gettingstarted/index.html">Getting Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Development</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../static_tools.html">Static Tools</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Bootstrapping</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../setup_environment.html">Setup a Default Environment</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../temptools.html">Temporary Tools</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="binutils_pass1.html">1. Binutils Pass 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gcc_pass1.html">2. GCC Pass 1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="linux_headers.html">3. Linux API Headers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="musl.html">4. Musl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libstdc++.html">5. Libstdc++</a></li>
+<li class="toctree-l4"><a class="reference internal" href="binutils_pass2.html">6. Binutils Pass 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gcc_pass2.html">7. GCC Pass 2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="busybox.html">8. Busybox</a></li>
+<li class="toctree-l4"><a class="reference internal" href="make.html">9. Make</a></li>
+<li class="toctree-l4"><a class="reference internal" href="file.html">10. File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="adjustpath.html">11. Adjust PATH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="zlib.html">12. Zlib</a></li>
+<li class="toctree-l4"><a class="reference internal" href="ncurses.html">13. Ncurses</a></li>
+<li class="toctree-l4"><a class="reference internal" href="bash.html">14. Bash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="patch.html">15. Patch</a></li>
+<li class="toctree-l4"><a class="reference internal" href="perl.html">16. Perl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="m4.html">17. M4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="gettext.html">18. Gettext</a></li>
+<li class="toctree-l4"><a class="reference internal" href="autoconf.html">19. Autoconf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="automake.html">20. Automake</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">21. Libtool</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pkgconf.html">22. Pkgconf</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libressl.html">23. Libressl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="curl.html">24. Curl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="attr.html">25. Attr</a></li>
+<li class="toctree-l4"><a class="reference internal" href="acl.html">26. Acl</a></li>
+<li class="toctree-l4"><a class="reference internal" href="nettle.html">27. Nettle</a></li>
+<li class="toctree-l4"><a class="reference internal" href="xz.html">28. Xz</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libarchive.html">29. Libarchive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="pacman.html">30. Pacman</a></li>
+<li class="toctree-l4"><a class="reference internal" href="libcap.html">31. Libcap</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lxc.html">32. Lxc</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../packaging.html">Packaging the Final System</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../workflow.html">Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../scripts.html">Scripts</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../concepts/index.html">Concepts</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">Mere Linux</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../../../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="../../index.html">Development</a> &raquo;</li>
+        
+          <li><a href="../index.html">Bootstrapping</a> &raquo;</li>
+        
+          <li><a href="../temptools.html">Temporary Tools</a> &raquo;</li>
+        
+      <li>21. Libtool</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="libtool">
+<h1>21. Libtool<a class="headerlink" href="#libtool" title="Permalink to this headline">¶</a></h1>
+<dl class="glossary simple">
+<dt id="term-description">Description</dt><dd><p>A generic library support script.</p>
+</dd>
+<dt id="term-rationale">Rationale</dt><dd><p>Many source packages ship with pre-generated build scripts. Pacman does not. Autoconf, automake and libtool are required to generate them before using.</p>
+</dd>
+</dl>
+<p>The following script <a class="footnote-reference brackets" href="#f1" id="id1">1</a> outlines the commands required to complete this step:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/mere/bin/bash -e</span>
+
+<span class="c1"># Clean the environment</span>
+<span class="nb">source</span> /mere/bin/clean_env
+
+<span class="c1"># Ensure the required source files are present</span>
+<span class="nb">cd</span> /mere/sources
+fetch <span class="se">\</span>
+    http://ftp.gnu.org/gnu/libtool/libtool-2.4.6.tar.xz <span class="se">\</span>
+    7c87a8c2c8c0fc9cd5019e402bed4292462d00a718a7cd5f11218153bf28b26f
+
+<span class="c1"># Unpack the main source file into a temporary directory</span>
+<span class="nv">source_dir</span><span class="o">=</span><span class="k">$(</span>unpack -T libtool.XXXXXX /mere/sources/libtool-2.4.6.tar.xz<span class="k">)</span>
+<span class="nb">cd</span> <span class="s2">&quot;</span><span class="si">${</span><span class="nv">source_dir</span><span class="p">:?</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># Configure the build</span>
+./configure --prefix<span class="o">=</span>/mere
+
+<span class="c1"># Compile</span>
+make
+
+<span class="c1"># Install</span>
+make install
+
+<span class="c1"># Optionally, clean up the source_dir</span>
+<span class="nb">cd</span> /mere/sources
+rm -rf <span class="s2">&quot;</span><span class="nv">$source_dir</span><span class="s2">&quot;</span>
+</pre></div>
+</div>
+<dl class="footnote brackets">
+<dt class="label" id="f1"><span class="brackets"><a class="fn-backref" href="#id1">1</a></span></dt>
+<dd><p><a class="reference download internal" download="" href="../../../_downloads/9d2478de1a9bd759ff4919ffdce07b4b/021-libtool.sh"><code class="xref download docutils literal notranslate"><span class="pre">021-libtool.sh</span></code></a></p>
+</dd>
+</dl>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="pkgconf.html" class="btn btn-neutral float-right" title="22. Pkgconf" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="automake.html" class="btn btn-neutral float-left" title="20. Automake" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Jeremy Huntwork
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

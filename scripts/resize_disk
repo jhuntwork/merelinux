@@ -1,0 +1,61 @@
+#!/bin/sh -e
+
+usage() {
+    printf '
+Usage: %s <disk image file> <size>
+
+Resize a <disk image file> in GPT format with a single ext4 partition to <size>.
+' "$0"
+    exit 1
+}
+
+cleanup() {
+    set +e
+    kpartx -dsv "$lodev"
+    losetup -d "$lodev"
+    exit
+}
+
+# Default vars
+
+[ $# -ne 2 ] || usage
+IMG=$1
+disk_size=$2
+
+if [ ! -f "$1" ] ; then
+    printf 'No such file %s\n' "$1"
+    exit 1
+fi
+
+# Extend the image
+# FIXME: ensure the size is greater than the current size
+dd if=/dev/null of="$IMG" bs=1 seek="$disk_size" count=1
+
+# If this is being run inside a container, the /dev/loopX devices may
+# not be present. Create them manually if not.
+for i in 0 1 2 3 4 5 6 7 ; do
+    [ -e "/dev/loop${i}" ] || mknod -m 660 "/dev/loop${i}" b 7 "$i"
+done
+
+# setup the image to a loopback device
+losetup -f "$IMG"
+lodev=$(losetup -a | grep "$IMG" | cut -d: -f1)
+[ -n "$lodev" ]
+
+trap cleanup INT TERM EXIT
+
+# Existing partition GUID
+partuuid=$(sgdisk -i=1 "$lodev" 2>&1 | grep unique | awk '{print $NF}')
+
+# Delete existing partition and re-create with same GUID
+sgdisk -e -d 1 -N 1 -A 1:set:2 -u "1:${partuuid}" "$lodev"
+
+# Discover the newly made partition name and assert it is present
+lopart=/dev/mapper/$(kpartx -asv "$lodev" 2>/dev/null | cut -d' ' -f3)
+[ -n "$lopart" ]
+
+# Check the filesystem and repair any errors
+e2fsck -f "$lopart"
+
+# Resize the filesystem to fill the partition
+resize2fs -f "$lopart"
