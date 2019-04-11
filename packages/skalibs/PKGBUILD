@@ -2,10 +2,9 @@
 
 pkgname=(
     skalibs
-    skalibs-leapsecs
     skalibs-dev
 )
-pkgver=2.7.0.0
+pkgver=2.8.0.1
 pkgrel=1
 pkgdesc='A library suite supporting skarnet.org software.'
 arch=(x86_64)
@@ -22,7 +21,7 @@ source=(
 )
 
 sha256sums=(
-    96494d76669d2f8622511d5d616b6367801a42683c0bb11a8855114e5ccbd756
+    47512e12c08c3b08a27367c63019f7f475c0427cf777aa27fc9ddcd16509b002
 )
 
 
@@ -45,19 +44,10 @@ package_skalibs() {
     )
 
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
-}
-
-package_skalibs-leapsecs() {
-    pkgfiles=(
-        etc/leapsecs.dat
-    )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    mv lib/skalibs/libskarnet.a lib
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
@@ -72,9 +62,7 @@ package_skalibs-dev() {
         skalibs
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
-    mv lib/skalibs/libskarnet.a lib
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
