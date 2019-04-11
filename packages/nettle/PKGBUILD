@@ -2,7 +2,7 @@
 
 rationale='libarchive and pacman require nettle'
 pkgname=(nettle nettle-dev)
-pkgver=3.4
+pkgver=3.4.1
 pkgrel=1
 pkgdesc='A cryptographic library that is designed to fit easily in more or less any context'
 arch=(x86_64)
@@ -18,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    ae7a42df026550b85daca8389b6a60ba6313b0567f374392e54918588a411e94
+    f941cf1535cd5d1819be5ccae5babef01f6db611f9b5a777bae9c7604b8a92ad
 )
 
 
@@ -37,8 +37,9 @@ package_nettle() {
     )
     depends=(musl gmp)
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
@@ -52,8 +53,7 @@ package_nettle-dev() {
         lib/pkgconfig
     )
     depends=(nettle)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
