@@ -2,7 +2,7 @@
 
 rationale='Many packages use the pkg-config functionality to locate libraries'
 pkgname=pkgconf
-pkgver=1.5.4
+pkgver=1.6.0
 pkgrel=1
 pkgdesc='An API-driven pkg-config replacement'
 arch=('x86_64')
@@ -18,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    182bed8249100e42f1f77b6d2bbc73d669281e8739dd9620f5d3b4f0a136d2ca
+    b4428d70a7f38bd920b6dee617e1c0264afad7a747200715a9a46de9230067c8
 )
 
 
