@@ -55,7 +55,7 @@ package_libattr() {
     )
 
     cd "${pkgdirbase}/dest"
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libattr-dev() {
