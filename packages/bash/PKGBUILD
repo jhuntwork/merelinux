@@ -2,8 +2,11 @@
 
 rationale='Bash is the language used to interpret pacman PKGBUILD files and the makepkg utility that ships with pacman'
 pkgname=bash
-pkgver=4.4.19
-_archivever=4.4.18
+_vermajor=5
+_verminor=0
+_verpatch=3
+_archivever="${_vermajor}.${_verminor}"
+pkgver="${_archivever}.${_verpatch}"
 pkgrel=1
 pkgdesc='A full-featured sh-compatible shell.'
 arch=('x86_64')
@@ -17,13 +20,17 @@ changelog=ChangeLog
 
 source=(
     "http://ftp.gnu.org/gnu/bash/${pkgname}-${_archivever}.tar.gz"
-    'https://ftp.gnu.org/gnu/bash/bash-4.4-patches/bash44-019'
+    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-001"
+    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-002"
+    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-003"
     bashrc
 )
 
 sha256sums=(
-    604d9eec5e4ed5fd2180ee44dd756ddca92e0b6aa4217bbab2b6227380317f23
-    27170d6edfe8819835407fdc08b401d2e161b1400fe9d0c5317a51104c89c11e
+    b4a80f2ac66170b2913efbfb9f2594f1f76c7b1afd11f799e22035d63077fb4d
+    f2fe9e1f0faddf14ab9bfa88d450a75e5d028fedafad23b88716bd657c737289
+    87e87d3542e598799adb3e7e01c8165bc743e136a400ed0de015845f7ff68707
+    4eebcdc37b13793a232c5f2f498a5fcbf7da0ecb3da2059391c096db620ec85b
     29e174a59b56444b205541cbd3ce9c854d7f47eba0bdb6ea5e823bf3177af557
 )
 
@@ -32,7 +39,7 @@ build() {
     cd "${srcdir}/${pkgname}-${_archivever}"
     for patch in ${source[@]} ; do
         case ${patch##*/} in
-            bash44-[0-9][0-9][0-9])
+            bash${_vermajor}${_verminor}-[0-9][0-9][0-9])
                 patch -Np0 -i "${srcdir}/${patch##*/}"
                 ;;
         esac
