@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(bison bison-dev)
-pkgver=3.2
+pkgver=3.3.2
 pkgrel=1
 pkgdesc='A general-purpose parser generator.'
 arch=('x86_64')
@@ -17,7 +17,7 @@ source=(
 )
 
 sha256sums=(
-    deec377b95aa72ec4e1a33fe2c938d2480749d740b5291a7cc1d77808d3710bf
+    039ee45b61d95e5003e7e8376f9080001b4066ff357bde271b7faace53b9d804
 )
 
 
@@ -40,7 +40,7 @@ package_bison() {
     make DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_bison-dev() {
@@ -49,5 +49,5 @@ package_bison-dev() {
     )
     cd "${pkgdirbase}/dest"
     set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
