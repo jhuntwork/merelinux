@@ -2,15 +2,15 @@
 
 rationale='This is part of the core toolchain'
 pkgname=(linux linux-headers)
-pkgver=4.14.80
-pkgrel=2
+pkgver=4.19.34
+pkgrel=1
 pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=(bc perl)
+makedepends=(bison flex perl)
 options=()
 changelog=ChangeLog
 source=(
@@ -20,9 +20,9 @@ source=(
 )
 
 sha256sums=(
-    9ddc7bc11cbea6475ac5abf18e01a143d7d506bece591e0dcb15c9452d3ed7d2
-    6ce3f62ed1553cdadd5f3963d8ac1d123b78e3af89d919a876396f7df2b56fd9
-    c16b8791774cacc9e44d6ccf762e114fb5f080f36d8ed02074c7db8705fb7898
+    dd795e2a1fddbee5b03c3bb55a1926829cc08df4fdcabce62dda717ba087b8cc
+    fffcf736758c9eb78b7244ba7cc2860166d34c832e7c6ddc21344557a4c587a4
+    5e0bca67c64c916307cf9aed132ab6e65ea939b3a1ec5c343cd0f6d1abb6563c
 )
 
 build() {
