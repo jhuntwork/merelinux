@@ -2,7 +2,7 @@
 
 rationale='Perl is a build and runtime dependency of the autoconf and automake tools'
 pkgname=perl
-pkgver=5.28.0
+pkgver=5.28.1
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=('x86_64')
@@ -18,7 +18,7 @@ source=(
     "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.xz"
 )
 sha256sums=(
-    059b3cb69970d8c8c5964caced0335b4af34ac990c8e61f7e3f90cd1c2d11e49
+    fea7162d4cca940a387f0587b93f6737d884bf74d8a9d7cfd978bc12cd0b202d
 )
 
 
