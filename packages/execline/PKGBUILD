@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(execline execline-dev)
-pkgver=2.5.0.1
+pkgver=2.5.1.0
 pkgrel=1
 pkgdesc='a (non-interactive) scripting language.'
 arch=(x86_64)
@@ -17,7 +17,7 @@ source=(
 )
 
 sha256sums=(
-    8d07d14e9e9abb1301e08be271313c4ffa5ddf7248fd262dda19588e78e31049
+    b1a756842947488404db8173bbae179d6e78b6ef551ec683acca540ecaf22677
 )
 
 
