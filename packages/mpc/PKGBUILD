@@ -34,8 +34,9 @@ package_mpc() {
     )
     depends=(musl mpfr gmp)
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
@@ -46,8 +47,7 @@ package_mpc-dev() {
         lib/libmpc.so
     )
     depends=(mpc)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
