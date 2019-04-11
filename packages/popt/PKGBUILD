@@ -1,0 +1,44 @@
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=popt-dev
+pkgver=1.16
+pkgrel=1
+pkgdesc='A command line argument parser'
+arch=('x86_64')
+url='http://rpm5.org'
+license=('BSD')
+groups=('base')
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "http://rpm5.org/files/popt/popt-${pkgver}.tar.gz"
+)
+sha256sums=(
+    e728ed296fe9f069a0e005003c3d6b2dde3d9cad453422a10d6558616d304cc8
+)
+
+
+build() {
+    cd "${srcdir}/popt-${pkgver}"
+    CFLAGS+=' -fPIC' \
+        ./configure --prefix='' \
+	    --enable-static \
+        --disable-shared
+    make
+}
+
+package() {
+    pkgfiles=(
+        include
+        lib/lib*.a
+        lib/pkgconfig
+        share/man/man3
+    )
+    cd "${srcdir}/popt-${pkgver}"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+}
