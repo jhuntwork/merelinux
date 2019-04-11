@@ -7,7 +7,7 @@ pkgname=(
     libncurses-dev
 )
 pkgver=6.1
-pkgrel=1
+pkgrel=2
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://www.gnu.org/software/ncurses'
@@ -23,11 +23,11 @@ changelog=ChangeLog
 
 source=(
     "http://ftp.gnu.org/gnu/ncurses/${pkgname}-${pkgver}.tar.gz"
-    ftp://invisible-island.net/ncurses/termcap.src.gz
+    https://invisible-mirror.net/archives/ncurses/current/termcap.src.gz
 )
 sha256sums=(
     aa057eeeb4a14d470101eff4597d5833dcef5965331be3528c08d99cebaa0d17
-    bfd8f4c95fc8dda0f9015c1972786e8e02046eff7d33b04717878ca07bc6c943
+    25d14a595f95d66d515aa773c02393ec3c61a36fd78b7ee607a0a57b944b92cd
 )
 
 
