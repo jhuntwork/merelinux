@@ -2,7 +2,7 @@
 
 rationale='curl requires an ssl library for https functionality'
 pkgname=(libressl libressl-dev ca-certs)
-pkgver=2.8.2
+pkgver=2.8.3
 pkgrel=1
 pkgdesc='A fork of OpenSSL 1.0.1g with the goal modernizing the codebase and improving security'
 arch=(x86_64)
@@ -18,7 +18,7 @@ source=(
     "http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/libressl-${pkgver}.tar.gz"
 )
 sha256sums=(
-    b8cb31e59f1294557bfc80f2a662969bc064e83006ceef0574e2553a1c254fd5
+    9b640b13047182761a99ce3e4f000be9687566e0828b4a72709e9e6a3ef98477
 )
 
 
