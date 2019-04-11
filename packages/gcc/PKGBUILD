@@ -2,7 +2,7 @@
 
 rationale='This is part of the core toolchain'
 pkgname=gcc
-pkgver=8.2.0
+pkgver=8.3.0
 pkgrel=1
 pkgdesc='The GNU Compiler Collection'
 arch=('x86_64')
@@ -18,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    196c3c04ba2613f893283977e6011b2345d1cd1af9abeac58e916b1aab3e0080
+    64baadfe6cc0f4947a84cb12d7f0dfaf45bb58b7e92461639596c21e02d97d2c
 )
 
 
