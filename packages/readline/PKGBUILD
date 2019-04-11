@@ -1,7 +1,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(readline readline-dev)
-pkgver=7.0
+pkgver=8.0
 pkgrel=1
 pkgdesc='A library for allowing users to edit command lines as they are typed in.'
 arch=('x86_64')
@@ -20,7 +20,7 @@ source=(
 )
 
 sha256sums=(
-    750d437185286f40a369e1e4f4764eda932b9459b5ec9a731628393dd3d32334
+    e339f51971478d369f8a053a330a190781acb9864cf4c541060f12078948e461
 )
 
 
