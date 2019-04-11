@@ -1,6 +1,5 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='The linux kernel build system requires bc'
 pkgname=bc
 pkgver=1.07.1
 pkgrel=1
