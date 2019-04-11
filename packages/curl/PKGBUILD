@@ -6,7 +6,7 @@ pkgname=(
     libcurl
     libcurl-dev
 )
-pkgver=7.62.0
+pkgver=7.64.1
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
@@ -22,7 +22,7 @@ source=(
     "${url}/download/${pkgname}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    7802c54076500be500b171fde786258579d60547a3a35b8c5a23d8c88e8f9620
+    4cc7c738b35250d0680f29e93e0820c4cb40035f43514ea3ec8d60322d41a45d
 )
 
 
