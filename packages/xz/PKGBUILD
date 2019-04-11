@@ -39,10 +39,11 @@ package_xz() {
         bin/*
     )
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     # The following files are provided in busybox
     rm bin/{lzcat,unlzma,unxz,xzcat}
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
@@ -52,8 +53,7 @@ package_liblzma-dev() {
         lib/liblzma.a
         lib/pkgconfig/liblzma.pc
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
+    set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
