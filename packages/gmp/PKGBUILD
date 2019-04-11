@@ -37,8 +37,8 @@ package_gmp() {
     )
     depends=(musl)
     cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -52,9 +52,7 @@ package_gmp-dev() {
         lib/libgmpxx.a
     )
     depends=(gmp)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdirbase}/dest"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
