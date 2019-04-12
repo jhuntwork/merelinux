@@ -153,79 +153,39 @@
 <h1>Mere Linux<a class="headerlink" href="#mere-linux" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 </div>
-<p>Mere Linux is a simple Linux distribution built upon <a class="reference external" href="http://www.musl-libc.org/">musl libc</a>
-and aimed at virtualized or containerized server instances. It also
-features <a class="reference external" href="https://www.archlinux.org/pacman/">pacman</a> as the package manager
-and <a class="reference external" href="http://skarnet.org/software/s6/">s6</a> for process supervision and process
-1, or init.</p>
+<p>Mere Linux is a simple Linux distribution built upon
+<a class="reference external" href="http://www.musl-libc.org/">musl libc</a> and aimed at virtualized or
+containerized server instances. It also features
+<a class="reference external" href="https://www.archlinux.org/pacman/">pacman</a> as the package manager and
+<a class="reference external" href="http://skarnet.org/software/s6/">s6</a> for process supervision and process 1,
+or init.</p>
 <div class="section" id="why-another-distribution">
 <h2>Why Another Distribution?<a class="headerlink" href="#why-another-distribution" title="Permalink to this headline">¶</a></h2>
-<p>Mainstream Linux distributions have historically been produced with a goal of
-covering of two main use cases:</p>
-<ol class="arabic simple">
-<li><p>A long-lived Web/Internet server, running on physical hardware, supporting
-many users, often managed directly</p></li>
-<li><p>Full-featured desktop systems</p></li>
-</ol>
-<p>As cloud infrastructure continues to gain popularity, such distributions have
-often been made to work inside virtual machines and containers, although they
-haven’t really been designed for that purpose.</p>
-<p>What happens when support for the above use cases are stripped away? What is
-the shape and feel of a distribution designed to run <em>a service</em>, particularly
-where:</p>
-<ul class="simple">
-<li><p>Scalability and flexibility are more important than traditional conventions</p></li>
-<li><p>It is understood that administration is not best done individually and directly</p></li>
-<li><p>Metrics and logs are intended to be collected and exported externally</p></li>
-<li><p>Deployment and configuration happens through instance creation and deletion</p></li>
-</ul>
-<p>Mere Linux aims to find the answer.</p>
+<p>Really, if we’re being honest, the main reason is because it’s fun to build.</p>
+<p>There are a lot of distributions out there. Many of them have great ideas
+and implementations, and most are well suited for a wide variety of purposes.
+But its quite enjoyable to piece together your own system, choosing the
+elements that fit your specific needs and ideals.</p>
+<p>The goal of Mere Linux isn’t to achieve widespread adoption. It won’t fill a
+niche that has never been touched before. The goal is simply to document and
+provide an alternative approach. Specifically, the combination of <cite>musl</cite>,
+<cite>pacman</cite> and <cite>s6</cite> make for a simple but robust alternative.</p>
+<p>Having said that, there are some fundamental principles that have guided how
+Mere has been shaped.</p>
 </div>
 <div class="section" id="design-considerations-and-goals">
 <span id="id1"></span><h2>Design Considerations and Goals<a class="headerlink" href="#design-considerations-and-goals" title="Permalink to this headline">¶</a></h2>
-<p>Simplicity is often considered a sign of good design and efficiency in purpose.
-Mainstream Linux distributions seem to have a hard time keeping things simple
-these days, presumably as a result of attempting to cover every conceivable use
-case. In contrast, Mere Linux aims to provide a small, simple OS layer for the
-purpose of running a single stable web service or application. Below are some
-of the technical design patterns which feed and drive a small, simple operating
-system.</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Microservices">Microservices</a></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Continuous_delivery">Continuous Delivery</a></p></li>
-<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Separation_of_concerns">Separation of Concerns</a></p></li>
-<li><p><a class="reference external" href="https://blog.engineyard.com/2014/pets-vs-cattle">Pets vs. Cattle</a></p></li>
-<li><p>Virtualization and/or Containerization are the primary means of delivering on
-the above today and so become the presumed environment.</p></li>
+<li><p>Simplicity over features. Avoid complexity and bloat</p></li>
+<li><p>Readability and usability over cleverness</p></li>
+<li><p>The primary use case is <a class="reference external" href="https://en.wikipedia.org/wiki/Microservices">Microservices</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/Separation_of_concerns">Separation of Concerns</a>
+and similarly, the <a class="reference external" href="https://en.wikipedia.org/wiki/Unix_philosophy">Unix Philosophy</a></p></li>
+<li><p>Static binaries where feasible for improved performance and portability</p></li>
+<li><p>Aim for Immutable Infrastructure
+* Treat the OS as if admins will rarely, if ever, login to a shell
+* <a class="reference external" href="https://blog.engineyard.com/2014/pets-vs-cattle">Pets vs. Cattle</a></p></li>
 </ul>
-<p>Of course, it is possible to adhere to the above principles using one of the
-mainstream Linux distributions, but there are often many challenges. What
-happens when the OS layer itself is crafted from the beginning to fit these
-principles?</p>
-<div class="section" id="implementation">
-<h3>Implementation<a class="headerlink" href="#implementation" title="Permalink to this headline">¶</a></h3>
-<p>Here are some of the specific design choices, patterned after the above
-principles that have been made so far. (Some may be subject to change as Mere
-Linux matures.)</p>
-<ul class="simple">
-<li><p>Use musl libc instead of glibc</p></li>
-<li><p>Use pacman for package management</p></li>
-<li><p>Replace many common Linux packages with busybox</p></li>
-<li><p>Use s6 as init and for supervising services</p></li>
-<li><p>Build and ship static binaries, where possible</p></li>
-<li><p>Treat the OS as if admins will rarely, if ever, log in to a shell. This has
-implications:</p>
-<ul>
-<li><p>While a modest collection of man pages are extremely useful, the need for
-extensive documentation packaged within the running system is reduced.</p></li>
-<li><p>A full featured shell like bash or zsh is not required (pacman build utilities
-currently require bash, but most run-time use cases will not). mksh is
-provided as lightweight, feature-rich, comfortable shell.</p></li>
-</ul>
-</li>
-<li><p>X11, or any desktop support is out of scope</p></li>
-</ul>
-</div>
 </div>
 </div>
 

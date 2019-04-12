@@ -24,6 +24,7 @@ help:
 		development/bootstrapping/temptools/mere_temptools_scripts.tar.gz \
 		mere_temptools_scripts
 	@$(SPHINXBUILD) -a -W -b $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
+	@mv "$(FINALDIR)/CNAME" "$(BUILDDIR)"
 	@rm -rf "$(FINALDIR)"
 	@rm -rf "$(BUILDDIR)/.doctrees"
 	@rm -rf "$(BUILDDIR)/.buildinfo"
