@@ -39,12 +39,13 @@ Mere has been shaped.
 Design Considerations and Goals
 -------------------------------
 
-* Simplicity over features. Avoid complexity and bloat
+* Simplicity over features
 * Readability and usability over cleverness
 * The primary use case is `Microservices <https://en.wikipedia.org/wiki/Microservices>`_
 * `Separation of Concerns <https://en.wikipedia.org/wiki/Separation_of_concerns>`_
   and similarly, the `Unix Philosophy <https://en.wikipedia.org/wiki/Unix_philosophy>`_
 * Static binaries where feasible for improved performance and portability
-* Aim for Immutable Infrastructure
-  * Treat the OS as if admins will rarely, if ever, login to a shell
-  * `Pets vs. Cattle <https://blog.engineyard.com/2014/pets-vs-cattle>`_
+* Immutable Infrastructure
+
+   * Treat the OS as if admins will rarely, if ever, login to a shell
+   * `Pets vs. Cattle <https://blog.engineyard.com/2014/pets-vs-cattle>`_
