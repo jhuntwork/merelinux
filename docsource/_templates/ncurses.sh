@@ -16,5 +16,6 @@ make
 
 # Install
 make install
+ln -s libncursesw.so /mere/lib/libncurses.so
 
 {% endblock %}

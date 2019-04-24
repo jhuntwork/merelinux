@@ -29,6 +29,7 @@ make
 
 # Install
 make install
+ln -s libncursesw.so /mere/lib/libncurses.so
 
 # Optionally, clean up the source_dir
 cd /mere/sources
