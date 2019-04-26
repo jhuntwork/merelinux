@@ -1,5 +1,9 @@
 sudo: required
 sudo: false
+language: minimal
+addons:
+  artifacts:
+    debug: true
 
 services:
   - docker
