@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='This is part of the core toolchain'
@@ -14,15 +16,14 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "http://www.etalabs.net/musl/releases/${pkgname}-${pkgver}.tar.gz"
+    "http://www.etalabs.net/musl/releases/${pkgname[0]}-${pkgver}.tar.gz"
 )
 sha256sums=(
     8b0941a48d2f980fd7036cfbd24aa1d414f03d9a0652ecbd5ec5c7ff1bee29e3
 )
 
-
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return
     unset CFLAGS CXXFLAGS
     ./configure --prefix=/
     make
@@ -32,15 +33,16 @@ package_musl() {
     pkgfiles=(
         bin/ldd
         lib/libc.so
-        "lib/ld-musl-${arch}.so.1"
+        "lib/ld-musl-$(arch).so.1"
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return
     install -d bin
     ln -sf ../lib/libc.so bin/ldd
     set -o pipefail
+    # shellcheck disable=SC2068
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
 
@@ -51,7 +53,8 @@ package_musl-dev() {
         lib/*.o
     )
     depends=(musl linux-headers)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return
     set -o pipefail
+    # shellcheck disable=SC2068
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
