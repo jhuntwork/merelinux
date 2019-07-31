@@ -1,9 +1,11 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='The package manager used for the final system'
 pkgname=(pacman pacman-portable pacman-build libalpm-dev)
 pkgver=5.1.2
-pkgrel=1
+pkgrel=2
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -32,6 +34,7 @@ source=(
     pacman-portable.conf
     fakeroot
     dependencies.sh
+    std-build-functions.sh
 )
 sha256sums=(
     bdb4d7461b2358fc94e48e1868fb5c801e4210662ec34a6b97bf3b072030d9a5
@@ -39,17 +42,20 @@ sha256sums=(
     a4c69eb1b3be80292ad3dd1a90b4c4e9c24d6b7fb1235622fbfe4510c484494a
     f2c3b003d37c674eb003a69ce389585f14348894de3c5c3bae3f5dd1f96cc1a6
     689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
-    ae4b5742e22a9c22441485e7e9614e391315629c47221af9a34dde5d6517c999
+    c6ea61331e276f3476282bb2c712f41a00a3de4f786e58aee761c92ee1c10a8a
+    ecee87cdc3492de8a01fc45087ef5212c204249f193506a06c56086a23950a3a
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    # shellcheck disable=SC2016
     sed -i -e 's@/usr/bin/@@g' \
        -e 's@/usr/bin\$PATH_SEPARATOR@@g' \
        -e 's@ --apparent-size@@' configure.ac
     sed -i -e '/x-cpio/s@)@|*application/x-empty*)@' \
         -e 's/EUID == 0/EUID == -1/' \
+        -e '/warning.*sudo/s@warning.*@true@g' \
         scripts/makepkg.sh.in
     ./autogen.sh
     cp -a "$(pwd)" "${srcdir}/${pkgbase}-${pkgver}-portable"
@@ -60,7 +66,7 @@ build() {
       --disable-nls \
       --disable-doc
     make V=1 LIBS='-lm -lz -lnettle -lssl -lcrypto -llzma -lacl'
-    cd "${srcdir}/${pkgbase}-${pkgver}-portable"
+    cd "${srcdir}/${pkgbase}-${pkgver}-portable" || return 1
     CFLAGS='-fPIC' LDFLAGS='-Wl,-static' \
     ./configure \
       --prefix='/mere' \
@@ -81,17 +87,18 @@ package_pacman() {
         var
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${srcdir}/${pkgbase}-${pkgver}-portable"
+    cd "${srcdir}/${pkgbase}-${pkgver}-portable" || return 1
     make DESTDIR="${pkgdirbase}/dest-portable" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     mv etc/pacman.conf{,.example}
     mv etc/makepkg.conf{,.example}
     install -vm 0644 "${srcdir}/pacman.conf" etc/
     install -vm 0644 "${srcdir}/makepkg.conf" etc/
     install -vm 0755 "${srcdir}/fakeroot" bin/
     install -vm 0755 "${srcdir}/dependencies.sh" share/makepkg/lint_package/
+    install -vm 0755 "${srcdir}/std-build-functions.sh" share/makepkg/
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -106,7 +113,7 @@ package_pacman-portable() {
         mere/etc/pacman.conf
         mere/var
     )
-    cd "${pkgdirbase}/dest-portable"
+    cd "${pkgdirbase}/dest-portable" || return 1
     install -vm 0644 "${srcdir}/pacman-portable.conf" mere/etc/pacman.conf
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
@@ -135,7 +142,7 @@ package_pacman-build() {
         pacman
         xz
     )
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -146,7 +153,7 @@ package_libalpm-dev() {
         lib/libalpm.a
         lib/pkgconfig
     )
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

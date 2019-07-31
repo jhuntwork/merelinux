@@ -17,14 +17,15 @@
 #   You should have received a copy of the GNU General Public License
 #   along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
+# shellcheck disable=SC2154
 
-[[ -n "$LIBMAKEPKG_LINT_PACKAGE_DEPENDENCIES_SH" ]] && return
+[ -n "$LIBMAKEPKG_LINT_PACKAGE_DEPENDENCIES_SH" ] && return
 LIBMAKEPKG_LINT_PACKAGE_DEPENDENCIES_SH=1
 
 LIBRARY=${LIBRARY:-'/share/makepkg'}
 
+# shellcheck disable=SC1090
 source "$LIBRARY/util/message.sh"
-
 
 lint_package_functions+=('warn_dependencies')
 
@@ -35,9 +36,11 @@ list_file_dependencies() {
     fi
     TMP=$(mktemp)
     local deps=''
-    local badlink=0
+    local badlinks=0
 
-    local lddout=$(ldd "$1" 2>"$TMP")
+    local lddout
+    lddout=$(ldd "$1" 2>"$TMP")
+    # shellcheck disable=SC2181
     if [ $? -ne 0 ] || grep -q 'No such file' "$TMP" || \
             grep -q 'symbol not found' "$TMP" ; then
         badlinks=1
@@ -45,7 +48,8 @@ list_file_dependencies() {
 
     local IFS=$'\n'
     for i in $lddout ; do
-        local dep=$(printf '%s\n' "$i" | awk '{print $3}')
+        local dep
+        dep=$(printf '%s\n' "$i" | awk '{print $3}')
         [ -z "$dep" ] && continue
         case "$dep" in
             ldd|$(pwd)*)
@@ -68,11 +72,13 @@ collect_all_lib_dependencies() {
     local alldeps=''
     local badlinks=0
 
-    for file in $(find "$1" -type f) ; do
+    files=$(find "$1" -type f)
+    for file in $files ; do
         ft=$(file -b "$file")
         case "$ft" in
             ELF*dynamic*)
                 deps=$(LD_LIBRARY_PATH="${1}/lib" list_file_dependencies "$file")
+                # shellcheck disable=SC2181
                 [ $? -ne 0 ] && badlinks=1
                 alldeps=$(printf '%s\n%s\n' "$deps" "$alldeps")
                 ;;
@@ -86,8 +92,10 @@ collect_all_lib_dependencies() {
 
 warn_dependencies() {
     local badlinks=0
-    local pkg_deps=$(collect_all_lib_dependencies "$pkgdir")
+    local pkg_deps
+    pkg_deps=$(collect_all_lib_dependencies "$pkgdir")
     local not_found=()
+    # shellcheck disable=SC2181
     [ $? -ne 0 ] && badlinks=1
     if [ $badlinks -eq 1 ] ; then
 	    error 'Package contains libraries with unresolvable symbols'
@@ -98,7 +106,7 @@ warn_dependencies() {
     fi
     for lib in $pkg_deps; do
         local found=0
-        dep="$(pacman -Qoq ${lib})"
+        dep="$(pacman -Qoq "$lib")"
         for pkg in "${depends[@]}" ; do
             [ "$dep" = "$pkg" ] && found=1
         done
@@ -106,7 +114,7 @@ warn_dependencies() {
             not_found+=("$dep")
         fi
     done
-    if [ -n "$not_found" ] ; then
+    if [ ${#not_found[@]} -gt 0 ] ; then
         error "$(gettext "Missing dependency: %s")" "${not_found[@]}"
         printf '%s\n' "${not_found[@]}" >>"/tmp/missingdeps.${pkgname}"
         return 2
