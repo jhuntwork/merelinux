@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  lint:
+    docker:
+      - image: koalaman/shellcheck-alpine
+    steps:
+      - checkout
+      - run:
+          name: Shellcheck PKGBUILDs
+          command: find packages -name PKGBUILD -exec shellcheck '{}' +
+      - run:
+          name: Shellcheck scripts
+          command: find scripts -exec shellcheck '{}' +
+workflows:
+  version: 2
+  workflow:
+    jobs:
+      - lint
