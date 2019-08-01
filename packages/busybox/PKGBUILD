@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='It serves as a stand-in for bzip2, coreutils, diffutils, findutils, gawk, grep, gzip, sed, tar and util-linux'
@@ -57,7 +59,7 @@ backup=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     patch -Np1 -i "${srcdir}/poweroff.patch"
     sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" \
       "${srcdir}/busybox-config" >.config
@@ -65,10 +67,10 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     make install
 
-    cd "$pkgdir"
+    cd "$pkgdir" || return 1
     install -d share/man/man1
     install -m0644 "${srcdir}/${pkgname}-${pkgver}/docs/busybox.1" share/man/man1/
 

@@ -1,6 +1,8 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=sudo
+pkgname=(sudo)
 pkgver=1.8.14p3
 pkgrel=1
 pkgdesc='Tool for delegating authority to users and groups.'
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     # Upstream fix: http://www.sudo.ws/repos/sudo/rev/fda95d9ca1e9
     sed -i "/<config.h>/s@.*@&\n\n#include <sys/types.h>@" \
       src/preserve_fds.c
@@ -37,7 +39,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}" install_uid=99 install_gid=99 install
-    rm -rf ${pkgdir}/{include,share,usr,var/run}
+    rm -rf "${pkgdir:?}"/{include,share,usr,var/run}
 }

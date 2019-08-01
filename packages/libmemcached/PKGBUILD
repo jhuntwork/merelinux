@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libmemcached libmemcached-dev)
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     sed -i '/defined(POSIX_SPAWN_USEVFORK)/s@).*@)@' libtest/cmdline.cc
     export CFLAGS="$CFLAGS -D__USE_GNU"
     export CXXFLAGS="$CFLAGS"
@@ -37,9 +39,9 @@ package_libmemcached() {
         lib/lib*.so.*
     )
     depends=(musl)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
@@ -51,9 +53,9 @@ package_libmemcached-dev() {
         lib/pkgconfig
     )
     depends=(libmemcached gcc-c++)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     sed -i '/-lmemcached/s@$@ -lstdc++@' lib/pkgconfig/libmemcached.pc
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }

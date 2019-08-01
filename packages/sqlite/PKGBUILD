@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(sqlite libsqlite libsqlite-dev)
@@ -24,7 +26,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/sqlite-autoconf-${_pkgaltver}"
+    cd "${srcdir}/sqlite-autoconf-${_pkgaltver}" || return 1
     CFLAGS="$CFLAGS -fPIC -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_COLUMN_METADATA=1"
     CFLAGS="$CFLAGS -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_SECURE_DELETE=1"
     CFLAGS="$CFLAGS -DSQLITE_ENABLE_DBSTAT_VTAB=1 --static" \
@@ -38,10 +40,10 @@ package_sqlite() {
         share/man/man1
     )
 
-    cd "${srcdir}/${pkgbase}-autoconf-${_pkgaltver}"
+    cd "${srcdir}/${pkgbase}-autoconf-${_pkgaltver}" || return 1
     make DESTDIR="${pkgdirbase}/destdir" install
 
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
@@ -54,7 +56,7 @@ package_libsqlite() {
         musl
         readline
     )
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
@@ -70,7 +72,7 @@ package_libsqlite-dev() {
         libsqlite
     )
 
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

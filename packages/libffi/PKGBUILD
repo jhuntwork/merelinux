@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libffi libffi-dev)
@@ -21,7 +23,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     CFLAGS="$CFLAGS -fPIC" \
       ./configure \
       --prefix='' \
@@ -39,9 +41,9 @@ package_libffi() {
         musl
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }
 
@@ -54,9 +56,9 @@ package_libffi-dev() {
     )
     depends=(libffi)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     mv lib/libffi-${pkgver}/include .
     sed -i 's@^includedir=.*@includedir=/include@' lib/pkgconfig/libffi.pc
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"

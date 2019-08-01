@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='This is part of the core toolchain'
@@ -23,8 +25,9 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     sed -i '/m64=/s@lib64@lib@' gcc/config/i386/t-linux64
+    # shellcheck disable=SC2016
     sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in
     sed -i 's,-lgcc_s,--start-group -lgcc_eh -lgcc -lc --end-group,' gcc/gcc.c
     sed -i 's,\./fixinc\.sh,-c true,' gcc/Makefile.in
@@ -33,13 +36,13 @@ build() {
            libvtv/vtv_utils.cc
     sed -i '/__USE_ISOC11/s@!(@(@' libssp/gets-chk.c
     mkdir build
-    cd build
+    cd build || return 1
     CFLAGS+=' -fPIC' CXXFLAGS+=' -fPIC' \
       ../configure \
       --prefix='' \
-      --build=${CHOST} \
-      --host=${CHOST} \
-      --target=${CHOST} \
+      --build="$CHOST" \
+      --host="$CHOST" \
+      --target="$CHOST" \
       --libexecdir=/lib \
       --mandir=/share/man \
       --enable-libssp \
@@ -68,9 +71,9 @@ package() {
         musl-dev
         musl
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}/build"
+    cd "${srcdir}/${pkgbase}-${pkgver}/build" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     install -d lib/bfd-plugins
     [ -f lib/gcc/x86_64-pc-linux-musl/${pkgver}/liblto_plugin.so ]
     ln -s ../gcc/x86_64-pc-linux-musl/${pkgver}/liblto_plugin.so lib/bfd-plugins/

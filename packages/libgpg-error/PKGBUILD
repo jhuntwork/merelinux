@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libgpg-error libgpg-error-dev)
@@ -13,7 +15,7 @@ makedepends=(gettext libtool)
 options=()
 changelog=ChangeLog
 source=(
-    "https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+    "https://www.gnupg.org/ftp/gcrypt/${pkgbase}/${pkgbase}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     ./autogen.sh
     CFLAGS+=' -fPIC' ./configure --prefix='' \
         --enable-static
@@ -33,9 +35,9 @@ package_libgpg-error() {
     pkgfiles=(
         lib/libgpg-error.so.*
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
 
@@ -49,8 +51,8 @@ package_libgpg-error-dev() {
         share/common-lisp
     )
     depends=(libgpg-error)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }

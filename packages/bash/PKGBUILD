@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='Bash is the language used to interpret pacman PKGBUILD files and the makepkg utility that ships with pacman'
@@ -36,7 +38,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${_archivever}"
+    cd "${srcdir}/${pkgname}-${_archivever}" || return 1
     for patch in ${source[@]} ; do
         case ${patch##*/} in
             bash${_vermajor}${_verminor}-[0-9][0-9][0-9])
@@ -58,11 +60,11 @@ package() {
         etc/bashrc
         share/man/man1/bash.1*
     )
-    cd "${srcdir}/${pkgname}-${_archivever}"
+    cd "${srcdir}/${pkgname}-${_archivever}" || return 1
     make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     install -d etc
-    install -m 0644 ${srcdir}/bashrc etc/
+    install -m 0644 "${srcdir}/bashrc" etc/
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

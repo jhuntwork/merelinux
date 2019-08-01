@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=shadow
@@ -23,8 +25,9 @@ sha256sums=(
 )
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     patch -Np1 -i "${srcdir}/useradd.patch"
+    # shellcheck disable=SC2016
     sed -i 's/groups$(EXEEXT) //' src/Makefile.in
     sed -i -e 's@#ENCRYPT_METHOD DES@ENCRYPT_METHOD SHA512@' etc/login.defs
     sed -i 's/1000/999/' etc/useradd
@@ -46,9 +49,9 @@ package() {
         share/man
     )
     depends=()
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     MAKEFLAGS='' make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     rm bin/su
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"

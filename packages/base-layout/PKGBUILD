@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=base-layout
@@ -39,36 +41,36 @@ backup=(
 )
 
 package() {
-    install -d ${pkgdir}/bin
-    install -d ${pkgdir}/boot
-    install -d ${pkgdir}/dev
-    install -d ${pkgdir}/etc/default
-    ln -s /proc/mounts ${pkgdir}/etc/mtab
-    install -d ${pkgdir}/home
-    install -d ${pkgdir}/include
-    install -d ${pkgdir}/lib/modules
-    install -d ${pkgdir}/local/{bin,include,lib,sbin,share}
-    install -d -m 0555 ${pkgdir}/proc
-    install -d -m 0750 ${pkgdir}/root
-    install -d -m 1777 ${pkgdir}/run
-    install -d ${pkgdir}/sbin
-    install -d -m 0555 ${pkgdir}/sys
-    install -d -m 1777 ${pkgdir}/tmp
-    install -d ${pkgdir}/share
-    install -d ${pkgdir}/usr
-    ln -s ../bin     ${pkgdir}/usr/bin
-    ln -s ../include ${pkgdir}/usr/include
-    ln -s ../local   ${pkgdir}/usr/local
-    ln -s ../sbin    ${pkgdir}/usr/sbin
-    ln -s ../share   ${pkgdir}/usr/share
-    chmod 0555 ${pkgdir}/usr
-    install -d ${pkgdir}/var/{cache,lock,lib,log,mail,spool}
-    ln -s /run ${pkgdir}/var/run
-    install -d -m 1777 ${pkgdir}/var/tmp
-    install -m0644 passwd  ${pkgdir}/etc/passwd
-    install -m0644 group   ${pkgdir}/etc/group
-    install -m0644 profile ${pkgdir}/etc/profile
-    install -m0644 shells  ${pkgdir}/etc/shells
-    install -m0644 services  ${pkgdir}/etc/services
-    install -m0644 protocols  ${pkgdir}/etc/protocols
+    install -d "${pkgdir}/bin"
+    install -d "${pkgdir}/boot"
+    install -d "${pkgdir}/dev"
+    install -d "${pkgdir}/etc/default"
+    ln -s /proc/mounts "${pkgdir}/etc/mtab"
+    install -d "${pkgdir}/home"
+    install -d "${pkgdir}/include"
+    install -d "${pkgdir}/lib/modules"
+    install -d "${pkgdir}/local/"{bin,include,lib,sbin,share}
+    install -d -m 0555 "${pkgdir}/proc"
+    install -d -m 0750 "${pkgdir}/root"
+    install -d -m 1777 "${pkgdir}/run"
+    install -d "${pkgdir}/sbin"
+    install -d -m 0555 "${pkgdir}/sys"
+    install -d -m 1777 "${pkgdir}/tmp"
+    install -d "${pkgdir}/share"
+    install -d "${pkgdir}/usr"
+    ln -s ../bin     "${pkgdir}/usr/bin"
+    ln -s ../include "${pkgdir}/usr/include"
+    ln -s ../local   "${pkgdir}/usr/local"
+    ln -s ../sbin    "${pkgdir}/usr/sbin"
+    ln -s ../share   "${pkgdir}/usr/share"
+    chmod 0555 "${pkgdir}/usr"
+    install -d "${pkgdir}/var/"{cache,lock,lib,log,mail,spool}
+    ln -s /run "${pkgdir}/var/run"
+    install -d -m 1777 "${pkgdir}/var/tmp"
+    install -m0644 passwd    "${pkgdir}/etc/passwd"
+    install -m0644 group     "${pkgdir}/etc/group"
+    install -m0644 profile   "${pkgdir}/etc/profile"
+    install -m0644 shells    "${pkgdir}/etc/shells"
+    install -m0644 services  "${pkgdir}/etc/services"
+    install -m0644 protocols "${pkgdir}/etc/protocols"
 }

@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='Pacman primarily uses libcurl for downloading files'
@@ -19,7 +21,7 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "${url}/download/${pkgname}-${pkgver}.tar.bz2"
+    "${url}/download/${pkgname[0]}-${pkgver}.tar.bz2"
 )
 sha256sums=(
     4cc7c738b35250d0680f29e93e0820c4cb40035f43514ea3ec8d60322d41a45d
@@ -27,9 +29,9 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     rm src/tool_hugehelp.c
-    sed -i 's@poll.h@poll.h@g' $(grep -lr 'poll.h' .)
+    grep -lr 'poll.h' . | xargs sed -i 's@poll.h@poll.h@g'
     CFLAGS="$CFLAGS -fPIC" \
     LDFLAGS='-Wl,-static' \
     ./configure \
@@ -60,10 +62,10 @@ package_curl() {
         ca-certs
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
     install -m0755 -v src/curl-static "${pkgdir}-tmp/bin/curl"
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -79,9 +81,9 @@ package_libcurl() {
     )
 
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -99,9 +101,9 @@ package_libcurl-dev() {
         libcurl
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

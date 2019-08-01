@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='The packaging of ncurses for the final system requires utilities that ship with ncurses, so it has a self-dependency'
@@ -22,7 +24,7 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "http://ftp.gnu.org/gnu/ncurses/${pkgname}-${pkgver}.tar.gz"
+    "http://ftp.gnu.org/gnu/ncurses/${pkgbase}-${pkgver}.tar.gz"
     https://invisible-mirror.net/archives/ncurses/current/termcap.src.gz
 )
 sha256sums=(
@@ -32,7 +34,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     zcat "$srcdir"/termcap.src.gz >termcap
     ./ncurses/tinfo/MKfallback.sh /share/terminfo/ termcap \
         tic linux vt100 xterm xterm-256color >ncurses/fallback.c
@@ -56,10 +58,10 @@ build() {
 package_ncurses() {
     pkgfiles=(bin)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
 
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     for lib in ncurses form panel menu ; do
         ln -s lib${lib}w.a lib/lib${lib}.a
     done
@@ -74,7 +76,7 @@ package_ncurses() {
 package_ncurses-terminfo() {
     pkgfiles=(share/terminfo)
     depends=(ncurses)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -85,7 +87,7 @@ package_libncurses-dev() {
         include
         lib/*.a
     )
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     ln -s ncursesw6-config bin/ncurses6-config
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"

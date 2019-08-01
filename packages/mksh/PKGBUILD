@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=mksh
@@ -22,12 +24,12 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}" || return 1
     LDSTATIC='-static' sh ./Build.sh -r -j
 }
 
 package() {
-    cd "${srcdir}/${pkgname}"
+    cd "${srcdir}/${pkgname}" || return 1
     install -d "${pkgdir}/bin"
     install -d "${pkgdir}/share/man/man1"
     install -m 0755 mksh "${pkgdir}/bin/"

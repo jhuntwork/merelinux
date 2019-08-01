@@ -1,4 +1,6 @@
 #!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+#!/bin/bash
 # shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
@@ -23,7 +25,7 @@ sha256sums=(
 )
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return || return 1
     unset CFLAGS CXXFLAGS
     ./configure --prefix=/
     make
@@ -36,9 +38,9 @@ package_musl() {
         "lib/ld-musl-$(arch).so.1"
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return
+    cd "${pkgdirbase}/dest" || return || return 1
     install -d bin
     ln -sf ../lib/libc.so bin/ldd
     set -o pipefail
@@ -53,7 +55,7 @@ package_musl-dev() {
         lib/*.o
     )
     depends=(musl linux-headers)
-    cd "${pkgdirbase}/dest" || return
+    cd "${pkgdirbase}/dest" || return || return 1
     set -o pipefail
     # shellcheck disable=SC2068
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"

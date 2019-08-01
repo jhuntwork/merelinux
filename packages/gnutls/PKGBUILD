@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(gnutls gnutls-dev)
@@ -26,7 +28,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     CFLAGS+=' -fPIC' ./configure --prefix='' \
         --with-included-libtasn1 \
         --with-included-unistring \
@@ -41,9 +43,9 @@ package_gnutls() {
         lib/libgnutls.so.*
     )
     depends=(musl nettle gmp)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     sed -i 's@-lgnutls@& -lhogweed -lgmp -lnettle -lz@' lib/pkgconfig/gnutls.pc
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
@@ -57,7 +59,7 @@ package_gnutls-dev() {
         lib/pkgconfig
     )
     depends=(gnutls gmp-dev nettle-dev zlib-dev)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

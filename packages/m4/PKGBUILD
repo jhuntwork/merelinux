@@ -1,7 +1,9 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='m4 is a build and runtime dependency of the autoconf and automake tools'
-pkgname=m4
+pkgname=(m4)
 pkgver=1.4.18
 pkgrel=1
 pkgdesc='An implementation of the traditional Unix macro processor'
@@ -14,7 +16,7 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
+    "http://ftp.gnu.org/gnu/${pkgbase}/${pkgbase}-${pkgver}.tar.xz"
 )
 
 sha256sums=(
@@ -23,14 +25,14 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     LDFLAGS="-Wl,-static" ./configure --prefix='' \
       --enable-threads
     make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
-    rm -rf "${pkgdir}"/{lib,share}
+    rm -rf "${pkgdir:?}"/{lib,share}
 }

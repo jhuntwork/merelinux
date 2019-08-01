@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(mpc mpc-dev)
@@ -13,7 +15,7 @@ makedepends=(gmp-dev mpfr-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.gz"
+    "http://ftp.gnu.org/gnu/${pkgbase}/${pkgbase}-${pkgver}.tar.gz"
 )
 sha256sums=(
     6985c538143c1208dcb1ac42cedad6ff52e267b47e5f970183a3e75125b43c2e
@@ -21,7 +23,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     ./configure --prefix='' \
       --enable-thread-safe
     make
@@ -33,9 +35,9 @@ package_mpc() {
         lib/libmpc.so.*
     )
     depends=(musl mpfr gmp)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -47,7 +49,7 @@ package_mpc-dev() {
         lib/libmpc.so
     )
     depends=(mpc)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

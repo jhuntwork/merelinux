@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='The scripted build mechanism for final packages uses LXC'
@@ -27,10 +29,10 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     # The install phase seems to expect a shared library will be built
     sed -i '/mv .*liblxc.so/d' src/lxc/Makefile.in
-    cp -a "$(pwd)" "${srcdir}/${pkgname}-${pkgver}-portable"
+    cp -a "$(pwd)" "${srcdir}/${pkgbase}-${pkgver}-portable"
     CFLAGS+=' -static' \
     LDFLAGS='-Wl,-static' \
     ./configure \
@@ -40,7 +42,7 @@ build() {
       --libexecdir=/lib/lxc \
       --with-init-script=none
     make
-    cd "${srcdir}/${pkgname}-${pkgver}-portable"
+    cd "${srcdir}/${pkgbase}-${pkgver}-portable" || return 1
     CFLAGS+=' -static' \
     LDFLAGS='-Wl,-static' \
     ./configure \
@@ -63,9 +65,9 @@ package_lxc() {
     options+=(emptydirs)
     depends=()
     backup=(etc/lxc/default.conf)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
     set -o pipefail
     install -m 0755 "${srcdir}/lxc-merebuild" "${pkgdir}/share/lxc/templates/"
@@ -83,9 +85,9 @@ package_lxc-portable() {
     options+=(emptydirs)
     depends=()
     backup=(mere/etc/lxc/default.conf)
-    cd "${srcdir}/${pkgbase}-${pkgver}-portable"
+    cd "${srcdir}/${pkgbase}-${pkgver}-portable" || return 1
     make DESTDIR="${pkgdirbase}/dest-portable" install
-    cd "${pkgdirbase}/dest-portable"
+    cd "${pkgdirbase}/dest-portable" || return 1
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
     set -o pipefail
     install -m 0755 "${srcdir}/lxc-merebuild" "${pkgdir}/mere/share/lxc/templates/"
@@ -99,7 +101,7 @@ package_lxc-dev() {
         lib/pkgconfig
     )
     depends=(lxc libcap-dev)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

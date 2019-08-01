@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='LXC and libarchive require libattr'
@@ -26,7 +28,7 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}"
+	cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     ./configure \
       --prefix=''
     make
@@ -40,9 +42,9 @@ package_attr() {
         libattr
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
@@ -54,7 +56,7 @@ package_libattr() {
         musl
     )
 
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
@@ -68,6 +70,6 @@ package_libattr-dev() {
         libattr
     )
 
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

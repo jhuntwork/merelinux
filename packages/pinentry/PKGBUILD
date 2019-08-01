@@ -1,6 +1,8 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=pinentry
+pkgname=(pinentry)
 pkgver=1.0.0
 pkgrel=1
 pkgdesc='A collection of passphrase entry dialogs for GnuPG'
@@ -17,7 +19,7 @@ makedepends=(
 options=()
 changelog=ChangeLog
 source=(
-    "https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+    "https://www.gnupg.org/ftp/gcrypt/${pkgbase}/${pkgbase}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
@@ -26,7 +28,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     LDFLAGS="-Wl,-static" \
       CFLAGS+=' -fPIC -I/include/ncursesw' \
       ./configure --prefix=''
@@ -34,7 +36,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
     rm -rf "$pkgdir"/share
 }

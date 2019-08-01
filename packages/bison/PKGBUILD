@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(bison bison-dev)
@@ -13,7 +15,7 @@ makedepends=(perl)
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/$pkgname/$pkgname-$pkgver.tar.xz"
+    "http://ftp.gnu.org/gnu/bison/bison-$pkgver.tar.xz"
 )
 
 sha256sums=(
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname[0]}-${pkgver}" || return 1
     ./configure --prefix=''
     make
 }
@@ -36,9 +38,9 @@ package_bison() {
         share/man/man1/yacc.1
         share/aclocal/bison-i18n.m4
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -47,7 +49,7 @@ package_bison-dev() {
     pkgfiles=(
         lib/liby.a
     )
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

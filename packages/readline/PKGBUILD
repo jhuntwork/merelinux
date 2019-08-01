@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(readline readline-dev)
@@ -16,7 +18,7 @@ changelog=ChangeLog
 PURGE_TARGETS+=(share/info/* share/readline/*)
 
 source=(
-    "http://ftp.gnu.org/gnu/readline/${pkgname}-${pkgver}.tar.gz"
+    "http://ftp.gnu.org/gnu/readline/${pkgbase}-${pkgver}.tar.gz"
 )
 
 sha256sums=(
@@ -25,7 +27,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     sed -i '/MV.*old/d' Makefile.in
     sed -i '/{OLDSUFF}/c:' support/shlib-install
     CFLAGS='-fPIC' \
@@ -42,9 +44,9 @@ package_readline() {
         musl
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -60,7 +62,7 @@ package_readline-dev() {
         readline
     )
 
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

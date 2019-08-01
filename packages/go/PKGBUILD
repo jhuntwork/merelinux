@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(go)
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/go/src"
+    cd "${srcdir}/go/src" || return 1
     sed -i "s@string{@&\n\t\"/etc/ssl/ca-certs.pem\",@" crypto/x509/root_linux.go
     GOROOT_FINAL=/lib/go \
       GOROOT_BOOTSTRAP=/lib/go \
@@ -43,7 +45,7 @@ package_go() {
 
     install -d "${srcdir}/go/.destdir/bin"
     install -d "${srcdir}/go/.destdir/lib/go"
-    cd "${srcdir}/go/.destdir"
+    cd "${srcdir}/go/.destdir" || return 1
     cp -a ../bin lib/go/
     cp -a ../pkg lib/go/
     cp -a ../lib lib/go/

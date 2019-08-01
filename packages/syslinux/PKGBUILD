@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=syslinux
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     unset MAKEFLAGS
     sed -i -e '/^BINDIR/s@=.*@= /bin@' \
            -e '/^LIBDIR/s@=.*@= /lib@' \
@@ -38,10 +40,10 @@ package() {
         sbin
         share
     )
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     unset MAKEFLAGS
     make LD='ld.bfd' INSTALLROOT="${pkgdirbase}/dest" efi64 bios install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(
@@ -17,7 +19,7 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "http://skarnet.org/software/skalibs/${pkgname}-${pkgver}.tar.gz"
+    "http://skarnet.org/software/skalibs/${pkgbase}-${pkgver}.tar.gz"
 )
 
 sha256sums=(
@@ -26,7 +28,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     ./configure \
       --prefix=/ \
       --disable-ipv6 \
@@ -43,9 +45,9 @@ package_skalibs() {
         musl
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     mv lib/skalibs/libskarnet.a lib
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
@@ -62,7 +64,7 @@ package_skalibs-dev() {
         skalibs
     )
 
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

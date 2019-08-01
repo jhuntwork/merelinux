@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=kpartx
@@ -22,12 +24,12 @@ sha256sums=('SKIP')
 
 
 build() {
-    cd "${srcdir}/multipath-tools"
+    cd "${srcdir}/multipath-tools" || return 1
     make -C kpartx VERSION=$pkgver LDFLAGS='-Wl,-static -ldevmapper'
 }
 
 package() {
-    cd "${srcdir}/multipath-tools"
+    cd "${srcdir}/multipath-tools" || return 1
     install -d "${pkgdir}/bin"
     install -m 0755 kpartx/kpartx "${pkgdir}/bin/kpartx"
 }

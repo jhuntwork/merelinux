@@ -1,6 +1,8 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=bc
+pkgname='bc'
 pkgver=1.07.1
 pkgrel=1
 pkgdesc='An arbitrary precision numeric processing language.'
@@ -24,7 +26,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     install -m0755 "${srcdir}/fix-libmath_h" bc/fix-libmath_h
     LDFLAGS="-Wl,-static" \
     ./configure --prefix='' --with-readline \
@@ -35,7 +37,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
     rm -rf "${pkgdir}/share/info"
 }

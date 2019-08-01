@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=popt-dev
@@ -21,7 +23,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/popt-${pkgver}"
+    cd "${srcdir}/popt-${pkgver}" || return 1
     CFLAGS+=' -fPIC' \
         ./configure --prefix='' \
 	    --enable-static \
@@ -36,9 +38,9 @@ package() {
         lib/pkgconfig
         share/man/man3
     )
-    cd "${srcdir}/popt-${pkgver}"
+    cd "${srcdir}/popt-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

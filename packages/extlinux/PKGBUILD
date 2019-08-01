@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=extlinux
@@ -22,12 +24,12 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/syslinux-${pkgver}"
+    cd "${srcdir}/syslinux-${pkgver}" || return 1
     MAKEFLAGS='' make LDFLAGS='-Wl,-static' installer
 }
 
 package() {
-    cd "${srcdir}/syslinux-${pkgver}"
+    cd "${srcdir}/syslinux-${pkgver}" || return 1
     install -d "${pkgdir}/lib/extlinux"
     install -d "${pkgdir}/sbin"
     install -m0755 bios/extlinux/extlinux "${pkgdir}/sbin/"
