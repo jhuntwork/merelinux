@@ -1,0 +1,24 @@
+#!/bin/bash -e
+pacman -U --noconfirm /tmp/staging/*.pkg.tar.xz
+
+cat >test.c <<"EOF"
+#include <stdio.h>
+int main(){
+    printf("Test worked\n");
+    return 0;
+}
+EOF
+
+set -o pipefail
+
+# Test static
+gcc test.c -o test -v -static -Wl,--verbose -Wl,-static
+strip --strip-all -R .comment -R .note test
+file test | grep static | grep stripped
+./test | grep 'Test worked'
+
+# Test dynamic
+gcc test.c -o test -v -Wl,--verbose
+strip --strip-unneeded -R .comment -R .note test
+file test | grep dynamically | grep stripped
+./test | grep 'Test worked'
