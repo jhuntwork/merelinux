@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(jq jq-dev)
@@ -14,7 +16,7 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "${url}/releases/download/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.gz"
+    "${url}/releases/download/${pkgbase}-${pkgver}/${pkgbase}-${pkgver}.tar.gz"
 )
 sha256sums=(
     c4d2bfec6436341113419debf479d833692cc5cdab7eb0326b5a4d4fbe9f493c
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     CFLAGS+=' --static' \
       ./configure \
       --prefix='' \
@@ -36,9 +38,9 @@ package_jq() {
         bin
         share/man/man1
     )
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -48,7 +50,7 @@ package_jq-dev() {
         include
         lib
     )
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='Busybox provides an xz utility, however libarchive and pacman will use the liblzma library that ships with xz'
@@ -14,7 +16,7 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "${url}/${pkgname}-${pkgver}.tar.xz"
+    "${url}/${pkgbase}-${pkgver}.tar.xz"
 )
 sha256sums=(
     9717ae363760dedf573dad241420c5fea86256b65bc21d2cf71b2b12f0544f4b
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     CFLAGS='-fPIC' LDFLAGS='-Wl,-static' \
       ./configure \
       --prefix='' \
@@ -38,9 +40,9 @@ package_xz() {
     pkgfiles=(
         bin/*
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     # The following files are provided in busybox
     rm bin/{lzcat,unlzma,unxz,xzcat}
     set -o pipefail
@@ -53,7 +55,7 @@ package_liblzma-dev() {
         lib/liblzma.a
         lib/pkgconfig/liblzma.pc
     )
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

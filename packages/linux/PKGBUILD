@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='This is part of the core toolchain'
@@ -26,23 +28,23 @@ sha256sums=(
 )
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     cp "${srcdir}/linux-config" .config
     make
 }
 
 package_linux() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     install -d "${pkgdir}/boot"
     install "arch/${CARCH}/boot/bzImage" "${pkgdir}/boot/vmlinux"
 }
 
 package_linux-headers() {
     pkgdesc='System headers'
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make mrproper
     patch -Np1 -i "${srcdir}/musl-compatibility.patch"
     make INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
-    cd dest
+    cd dest || return 1
     find include ! -type d -name "*.h" | cpio -dump "${pkgdir}"
 }

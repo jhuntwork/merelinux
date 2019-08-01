@@ -1,3 +1,4 @@
+#!/bin/sh
 OLDHOME=$HOME
 OLDTERM=$TERM
 for e in $(env | grep -v ^RUNSTEPS | cut -d'=' -f1); do unset "$e"; done

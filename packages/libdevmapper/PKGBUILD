@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libdevmapper libdevmapper-dev)
@@ -21,7 +23,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/LVM2.${pkgver}"
+    cd "${srcdir}/LVM2.${pkgver}" || return 1
     ./configure --prefix='' \
       --enable-static_link
     make SHELL=/bin/bash device-mapper
@@ -33,9 +35,9 @@ package_libdevmapper() {
         sbin
     )
     depends=(musl)
-    cd "${srcdir}/LVM2.${pkgver}"
+    cd "${srcdir}/LVM2.${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install_device-mapper
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -47,7 +49,7 @@ package_libdevmapper-dev() {
         lib/libdevmapper.a
     )
     depends=(libdevmapper)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

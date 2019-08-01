@@ -1,7 +1,9 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='The patch utility is expected to be present for full pacman functionality. Busybox ships with a version of patch, but its features are not sufficient for our needs.'
-pkgname=patch
+pkgname=(patch)
 pkgver=2.7.6
 pkgrel=1
 pkgdesc='A utility for patching difference listings against one or more original files'
@@ -14,7 +16,7 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
+    "http://ftp.gnu.org/gnu/${pkgbase}/${pkgbase}-${pkgver}.tar.xz"
 )
 
 sha256sums=(
@@ -23,13 +25,13 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     LDFLAGS="-Wl,-static" ./configure --prefix=''
     make V=1
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}" install
-    rm -rf "${pkgdir}/lib" "${pkgdir}/share"
+    rm -rf "${pkgdir:?}/lib" "${pkgdir:?}/share"
 }

@@ -1,7 +1,9 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='Perl is a build and runtime dependency of the autoconf and automake tools'
-pkgname=perl
+pkgname=(perl)
 pkgver=5.28.1
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
@@ -15,7 +17,7 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "http://www.cpan.org/src/5.0/${pkgname}-${pkgver}.tar.xz"
+    "http://www.cpan.org/src/5.0/${pkgbase}-${pkgver}.tar.xz"
 )
 sha256sums=(
     fea7162d4cca940a387f0587b93f6737d884bf74d8a9d7cfd978bc12cd0b202d
@@ -23,10 +25,8 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
-    for file in `grep -l -r "/usr" .` ; do
-        sed -i -e 's@/usr/local@@g' -e 's@/usr@@g' $file
-    done
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    grep -lr "/usr" . | xargs sed -i -e 's@/usr/local@@g' -e 's@/usr@@g'
     export BUILD_ZLIB=False
     CFLAGS="$CFLAGS" ./configure.gnu \
       -des -Dprefix=/ \
@@ -35,10 +35,10 @@ build() {
       -Dinstallsitebin=/bin \
       -Dvendorprefix=/ \
       -Dprivlib=/lib/perl5/${pkgver} \
-      -Darchlib=/lib/perl5/${pkgver}/${arch}-linux \
+      -Darchlib="/lib/perl5/${pkgver}/$(arch)-linux" \
       -Dsitelib=/lib/perl5/site_perl/${pkgver} \
       -Dvendorlib=/lib/perl5/vendor_perl/${pkgver} \
-      -Dvendorarch=/lib/perl5/vendor_perl/${pkgver}/${arch}-linux \
+      -Dvendorarch="/lib/perl5/vendor_perl/${pkgver}/$(arch)-linux" \
       -Dscriptdir=/bin \
       -Dsitescript=/bin \
       -Dvendorbin=/bin \
@@ -52,7 +52,7 @@ build() {
 }
 
 check() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     # make test
 }
 
@@ -63,9 +63,9 @@ package() {
         'share'
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp"
+    cd "${pkgdir}-tmp" || return 1
     rm -rf "share/man"
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

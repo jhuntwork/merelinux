@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(gmp gmp-dev)
@@ -13,7 +15,7 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "https://gmplib.org/download/gmp/${pkgname}-${pkgver}.tar.xz"
+    "https://gmplib.org/download/gmp/${pkgbase}-${pkgver}.tar.xz"
 )
 sha256sums=(
     87b565e89a9a684fe4ebeeddb8399dce2599f9c9049854ca8c0dfbdea0e21912
@@ -21,11 +23,11 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     ./configure --prefix='' \
-      --build=$CHOST \
-      --host=$CHOST \
-      --target=$CHOST \
+      --build="$CHOST" \
+      --host="$CHOST" \
+      --target="$CHOST" \
       --enable-cxx
     make
 }
@@ -36,9 +38,9 @@ package_gmp() {
         lib/libgmpxx.so.*
     )
     depends=(musl)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -52,7 +54,7 @@ package_gmp-dev() {
         lib/libgmpxx.a
     )
     depends=(gmp)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

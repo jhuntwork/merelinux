@@ -1,7 +1,9 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='A near-universal build utility, make drives compilation of many packages'
-pkgname=make
+pkgname=(make)
 pkgver=4.2.1
 pkgrel=1
 pkgdesc='A tool to control the generation of executables'
@@ -14,7 +16,7 @@ makedepends=(gettext libtool)
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+    "http://ftp.gnu.org/gnu/${pkgbase}/${pkgbase}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
@@ -23,7 +25,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     autoreconf -i
     LDFLAGS='-Wl,-static' ./configure --prefix='' \
         --disable-load
@@ -31,7 +33,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdir}" install
     rm -rf "$pkgdir/share/info"
 }

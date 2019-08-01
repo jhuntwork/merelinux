@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=wget
@@ -27,18 +29,17 @@ sha256sums=(
 backup=(etc/wgetrc)
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     LDFLAGS="-Wl,-static" \
       ./configure \
       --prefix='' \
       --with-ssl=openssl
-    make $MAKEFLAGS
+    make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
-    rm -rf "${pkgdir}/lib"
-    rm -rf "${pkgdir}/share"
+    rm -rf "${pkgdir:?}"/{lib,share}
     echo "ca-certificate = /etc/ssl/ca-certs.pem" >>"${pkgdir}/etc/wgetrc"
 }

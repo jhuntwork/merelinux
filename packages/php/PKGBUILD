@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(php php-fpm php-dev)
@@ -58,7 +60,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     # Fix uses of expr in configure which aren't portable
     patch -Np1 -i "${srcdir}/fix_expr_syntax.patch"
 
@@ -137,7 +139,7 @@ build() {
 }
 
 check() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make test
 }
 
@@ -148,9 +150,9 @@ package_php() {
         bin/php
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make INSTALL_ROOT="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     # Fix broken symlink
     rm bin/phar
     ln -s phar.phar bin/phar
@@ -182,7 +184,7 @@ package_php-fpm() {
     install -m 0644 "${srcdir}/php.ini" \
         "${pkgdir}/etc/php.ini"
 
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }
@@ -198,7 +200,7 @@ package_php-dev() {
         lib/php/build
     )
 
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
 }

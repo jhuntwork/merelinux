@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=haveged
@@ -21,7 +23,7 @@ sha256sums=(
 )
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     LDFLAGS='-Wl,-static' \
       ./configure \
       --prefix='' \
@@ -30,7 +32,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
-    rm -rf "$pkgdir"/{lib,include}
+    rm -rf "${pkgdir:?}/"{lib,include}
 }

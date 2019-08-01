@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='Many source packages ship with pre-generated build scripts. Pacman does not. Autoconf, automake and libtool are required to generate them before using.'
@@ -23,13 +25,13 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     ./configure --prefix=''
     make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
-    rm -rf ${pkgdir}/share/{man,info,doc}
+    rm -rf "${pkgdir}/share/"{man,info,doc}
 }

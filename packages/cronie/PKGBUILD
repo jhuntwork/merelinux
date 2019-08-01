@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=cronie
@@ -24,7 +26,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     LDFLAGS="-Wl,-static" \
     ./configure \
       --prefix=''\
@@ -33,10 +35,10 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
     install -d "${pkgdir}/etc/cron.d"
-    cd "$pkgdir"
+    cd "$pkgdir" || return 1
     rm -rf share
     install -d etc/s6/services/available/crond
     install -m 0754 "${srcdir}/crond-service" etc/s6/services/available/crond/run

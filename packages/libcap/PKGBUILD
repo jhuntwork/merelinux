@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='LXC requires libcap'
@@ -25,7 +27,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     sed -i '/^lib=/s@=.*@=/lib@' Make.Rules
     make prefix=/
 }
@@ -40,9 +42,9 @@ package_libcap() {
         musl
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make RAISE_SETFCAP=no prefix=/ DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -56,7 +58,7 @@ package_libcap-dev() {
     )
     depends=(libcap)
 
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

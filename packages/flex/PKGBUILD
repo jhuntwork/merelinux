@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(flex flex-dev)
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     ./configure --prefix=''
     make
 }
@@ -34,9 +36,9 @@ package_flex() {
         share/man/man1/
     )
     depends=(musl)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -48,7 +50,7 @@ package_flex-dev() {
         lib/*.a
     )
     depends=(flex)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

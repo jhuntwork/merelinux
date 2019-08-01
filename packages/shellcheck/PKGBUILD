@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=shellcheck
@@ -26,7 +28,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     sed -i "/^executable/s@.*@&\n    ld-options:\n      -static@" ShellCheck.cabal
     cabal sandbox init --sandbox="${srcdir}/destdir"
     cabal update
@@ -37,7 +39,7 @@ package() {
     pkgfiles=(
         bin
     )
-    cd "${srcdir}/destdir"
+    cd "${srcdir}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
 }

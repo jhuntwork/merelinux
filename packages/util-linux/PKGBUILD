@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libblkid libblkid-dev libmount libmount-dev libuuid libuuid-dev)
@@ -21,7 +23,7 @@ sha256sums=(
 )
 
 build() {
-    cd "${srcdir}/util-linux-${pkgver}"
+    cd "${srcdir}/util-linux-${pkgver}" || return 1
     CFLAGS+=' -fPIC' ./configure --prefix=''
     make
 }
@@ -31,9 +33,9 @@ package_libblkid() {
         lib/libblkid*.so.*
     )
     depends=(musl libuuid)
-    cd "${srcdir}/util-linux-${pkgver}"
+    cd "${srcdir}/util-linux-${pkgver}" || return 1
     MAKEFLAGS='' make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -46,7 +48,7 @@ package_libblkid-dev() {
         lib/libblkid.so
     )
     depends=(libblkid)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -56,7 +58,7 @@ package_libmount() {
         lib/libmount*.so.*
     )
     depends=(musl libblkid)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -69,7 +71,7 @@ package_libmount-dev() {
         lib/libmount.so
     )
     depends=(libmount)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -79,7 +81,7 @@ package_libuuid() {
         lib/libuuid*.so.*
     )
     depends=(musl)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -92,7 +94,7 @@ package_libuuid-dev() {
         lib/libuuid.so
     )
     depends=(libuuid)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

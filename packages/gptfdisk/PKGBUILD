@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=gptfdisk
@@ -26,13 +28,13 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     CXXFLAGS+=' -I/include/ncursesw' LDFLAGS='-Wl,-static' MAKEFLAGS='' make
 }
 
 package() {
     options=()
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     install -d "${pkgdir}/bin"
     for bin in cgdisk gdisk sgdisk fixparts ; do
         install -m0755 $bin "${pkgdir}/bin/"

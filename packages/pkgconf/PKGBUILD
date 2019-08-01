@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='Many packages use the pkg-config functionality to locate libraries'
@@ -23,7 +25,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/pkgconf-pkgconf-${pkgver}"
+    cd "${srcdir}/pkgconf-pkgconf-${pkgver}" || return 1
     ./autogen.sh
     LDFLAGS='-Wl,-static' \
       ./configure \
@@ -35,7 +37,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/pkgconf-pkgconf-${pkgver}"
+    cd "${srcdir}/pkgconf-pkgconf-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
     ln -s pkgconf "${pkgdir}/bin/pkg-config"
 }

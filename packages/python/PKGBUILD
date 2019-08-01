@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(python python-dev)
@@ -36,7 +38,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/Python-${pkgver}"
+    cd "${srcdir}/Python-${pkgver}" || return 1
     patch -Np1 -i "${srcdir}/python-fix-ctypes_util.patch"
     patch -Np0 -i "${srcdir}/fix-root-prefix.patch"
     unset CFLAGS CXXFLAGS
@@ -47,7 +49,7 @@ build() {
 }
 
 check() {
-    cd "${srcdir}/Python-${pkgver}"
+    cd "${srcdir}/Python-${pkgver}" || return 1
     #make test
 }
 
@@ -69,9 +71,9 @@ package_python() {
         "include/python${_vermajor}.${_verminor}m/pyconfig.h"
     )
 
-    cd "${srcdir}/Python-${pkgver}"
+    cd "${srcdir}/Python-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     ln -s "python${_vermajor}.${_verminor}" bin/python
     ln -s "pip${_vermajor}" bin/pip
     find . -name "*.pyc" -delete -o -name "*.pyo" -delete
@@ -91,7 +93,7 @@ package_python-dev() {
         lib/pkgconfig
     )
 
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     rm "include/python${_vermajor}.${_verminor}m/pyconfig.h"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"

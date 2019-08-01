@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(mpfr mpfr-dev)
@@ -13,7 +15,7 @@ makedepends=(gmp-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "http://www.mpfr.org/mpfr-${pkgver}/${pkgname}-${pkgver}.tar.xz"
+    "http://www.mpfr.org/mpfr-${pkgver}/${pkgbase}-${pkgver}.tar.xz"
 )
 sha256sums=(
     1d3be708604eae0e42d578ba93b390c2a145f17743a744d8f3f8c2ad5855a38a
@@ -21,14 +23,14 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     ./configure --prefix='' \
       --enable-thread-safe
     make
 }
 
 check() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make check
 }
 
@@ -37,9 +39,9 @@ package_mpfr() {
         lib/libmpfr.so.*
     )
     depends=(musl gmp)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -51,7 +53,7 @@ package_mpfr-dev() {
         lib/libmpfr.so
     )
     depends=(mpfr)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

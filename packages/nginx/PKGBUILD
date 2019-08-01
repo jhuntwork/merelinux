@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=nginx
@@ -39,7 +41,7 @@ install=nginx.install
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     sed -i 's@-Wl,-E@-Wl,-static@g' auto/cc/conf
     CC='gcc -static -fPIC' \
     ./configure \
@@ -62,7 +64,7 @@ build() {
 
 package() {
     pkgfiles=
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
 
     # Share files
@@ -85,6 +87,5 @@ package() {
 
     # Cleanup
     find "$pkgdir"/etc -name "*.default" -delete
-    rm -rf "$pkgdir/var"
-    rm -rf "$pkgdir/proc"
+    rm -rf "${pkgdir:?}/"{var,proc}
 }

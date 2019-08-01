@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libgcrypt libgcrypt-dev)
@@ -13,7 +15,7 @@ makedepends=(libgpg-error-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "https://www.gnupg.org/ftp/gcrypt/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+    "https://www.gnupg.org/ftp/gcrypt/${pkgbase}/${pkgbase}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
@@ -22,7 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     CFLAGS+=' -fPIC' ./configure --prefix='' \
         --enable-static
     make
@@ -34,9 +36,9 @@ package_libgcrypt() {
         lib/libgcrypt.so.*
     )
     depends=(libgpg-error musl)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
     rm "${pkgdir}/bin/libgcrypt-config"
@@ -51,7 +53,7 @@ package_libgcrypt-dev() {
         share/aclocal
     )
     depends=(libgcrypt libgpg-error-dev)
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

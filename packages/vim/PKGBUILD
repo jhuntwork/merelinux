@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=vim
@@ -17,7 +19,7 @@ options=()
 changelog=ChangeLog
 source=(
     "https://github.com/vim/vim/archive/v${pkgver}.tar.gz"
-    https://projects.archlinux.org/pacman.git/plain/contrib/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39
+    'https://projects.archlinux.org/pacman.git/plain/contrib/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39'
     vimrc
 )
 
@@ -29,7 +31,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
 
     # Set the path of the default vimrc file
     echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
@@ -57,9 +59,9 @@ package_vim() {
         share/vim
     )
     options+=(emptydirs)
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     install -d etc
     install -m 0644 "${srcdir}/vimrc" etc/vimrc
     install -m 0644 "${srcdir}/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39" \

@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='curl requires an ssl library for https functionality'
@@ -23,14 +25,14 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     autoreconf -i
     CFLAGS='-fPIC' ./configure --prefix=''
     make V=1
 }
 
 check() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make check
     make DESTDIR="${pkgdirbase}/dest" install
 }
@@ -43,7 +45,7 @@ package_libressl() {
     )
     depends=(musl)
 
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -57,7 +59,7 @@ package_libressl-dev() {
     )
     depends=(libressl)
 
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -66,7 +68,7 @@ package_ca-certs() {
     pkgfiles=(
         etc/ssl/ca-certs.pem
     )
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     mv etc/ssl/cert.pem etc/ssl/ca-certs.pem
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"

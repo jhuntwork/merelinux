@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libxml2 libxml2-dev)
@@ -21,7 +23,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     CFLAGS+=' -fPIC -D__GNUC__=2' \
       ./configure --prefix='' \
       --enable-static \
@@ -38,9 +40,9 @@ package_libxml2() {
     )
     depends=(musl)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -58,7 +60,7 @@ package_libxml2-dev() {
     )
     depends=(libxml2)
 
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }

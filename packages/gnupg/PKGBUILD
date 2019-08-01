@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=gnupg
@@ -29,7 +31,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     LDFLAGS="-Wl,-static" \
       ./configure --prefix='' \
         --libexecdir=/lib/gnupg
@@ -37,7 +39,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
     ln -s gpg2 "${pkgdir}/bin/gpg"
     rm -rf "$pkgdir"/share/{info,man}

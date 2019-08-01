@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='libarchive is a core dependency of pacman'
@@ -31,7 +33,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     # fix for musl
     sed -i 's@HAVE_LCHMOD@&_DISABLE@' libarchive/archive_write_disk_posix.c
     # fixes for busybox xz
@@ -59,10 +61,10 @@ package_libarchive() {
         nettle
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/destdir" install
 
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -78,7 +80,7 @@ package_libarchive-dev() {
     )
     depends=(libarchive)
 
-    cd "${pkgdirbase}/destdir"
+    cd "${pkgdirbase}/destdir" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

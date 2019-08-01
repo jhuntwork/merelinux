@@ -1,3 +1,5 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(git git-extra)
@@ -19,7 +21,7 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "https://www.kernel.org/pub/software/scm/git/${pkgname}-${pkgver}.tar.xz"
+    "https://www.kernel.org/pub/software/scm/git/${pkgbase}-${pkgver}.tar.xz"
 )
 sha256sums=(
     345056aa9b8084280b1b9fe1374d232dec05a34e8849028a20bfdb56e920dbb5
@@ -27,9 +29,9 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
-    sed -i 's@sys/poll.h@poll.h@g' $(grep -lr 'poll.h' .)
-    sed -i 's@/usr/bin/perl@/bin/perl@g' `grep -lr "/usr/bin/perl" .`
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    grep -lr 'poll.h' . | xargs sed -i 's@sys/poll.h@poll.h@g'
+    grep -lr "/usr/bin/perl" . | xargs sed -i 's@/usr/bin/perl@/bin/perl@g'
     sed -i '/absolute directory/d' configure
     LIBS='-lssl -lcrypto' ./configure \
       --prefix='' \
@@ -65,12 +67,12 @@ package_git() {
         'lib/git-core/git-svn'
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
-    cd "$pkgdir"
+    cd "$pkgdir" || return 1
     find ${rmfiles[@]} -delete
 }
 
@@ -92,7 +94,7 @@ package_git-extra() {
         musl
         perl
     )
-    cd "${pkgdirbase}/dest"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }

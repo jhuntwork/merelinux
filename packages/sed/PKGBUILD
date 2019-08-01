@@ -1,6 +1,8 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=sed
+pkgname=(sed)
 pkgver=4.2.2
 pkgrel=1
 pkgdesc='stream editor'
@@ -13,7 +15,7 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.bz2"
+    "http://ftp.gnu.org/gnu/${pkgbase}/${pkgbase}-${pkgver}.tar.bz2"
 )
 
 sha256sums=(
@@ -22,14 +24,14 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     LDFLAGS="-Wl,-static" \
     ./configure --prefix=''
     make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}"
+    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="$pkgdir" install
-    rm -rf "${pkgdir}"/{lib,share}
+    rm -rf "${pkgdir:?}"/{lib,share}
 }
