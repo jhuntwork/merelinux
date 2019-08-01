@@ -10,7 +10,7 @@ jobs:
           command: find packages -name PKGBUILD -exec shellcheck '{}' +
       - run:
           name: Shellcheck scripts
-          command: find scripts -exec shellcheck '{}' +
+          command: find scripts -type f -exec shellcheck '{}' +
 workflows:
   version: 2
   workflow:
