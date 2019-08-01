@@ -11,8 +11,17 @@ jobs:
       - run:
           name: Shellcheck scripts
           command: find scripts -type f -exec shellcheck '{}' +
+  build:
+    docker:
+      - image: mere/build-essential
+    steps:
+      - checkout
+      - run:
+          name: Build package
+          command: ./scripts/ci-build.sh
 workflows:
   version: 2
   workflow:
     jobs:
       - lint
+      - build
