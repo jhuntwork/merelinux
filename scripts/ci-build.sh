@@ -18,6 +18,7 @@ than the current version '%s'\n" "$proposed" "$current"
     makepkg -Ls --noconfirm
     if [ "$(git rev-parse --abbrev-ref HEAD)" = 'master' ]; then
         makepkg --allsource
+        mv ./*.src.tar.xz /tmp/staging
     fi
 else
     printf 'No packages are required to build in this commit.\n'
