@@ -5,7 +5,7 @@
 pkgname='binutils'
 rationale='This is part of the core toolchain'
 pkgver=2.32
-pkgrel=3
+pkgrel=4
 pkgdesc='A collection of binary tools, including a linker and an assembler'
 arch=('x86_64')
 url='http://www.gnu.org/software/binutils/'
