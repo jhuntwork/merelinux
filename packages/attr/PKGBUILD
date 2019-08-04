@@ -9,7 +9,7 @@ pkgname=(
     libattr-dev
 )
 pkgver=2.4.48
-pkgrel=3
+pkgrel=4
 pkgdesc='A library for manipulating filesystem extended attributes'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/attr'
