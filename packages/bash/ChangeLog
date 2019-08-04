@@ -1,3 +1,18 @@
+2019-08-04  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.0.7-1 :
+	Upgrade to 5.0.7
+
+2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.0.3-3 :
+	Use std build functions
+
+2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.0.3-2 :
+	Refactor PKGBUILD file
+
 2019-04-11  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.0.3-1 :

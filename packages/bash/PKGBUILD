@@ -1,12 +1,13 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='Bash is the language used to interpret pacman PKGBUILD files and the makepkg utility that ships with pacman'
+rationale="Bash is the language used to interpret pacman PKGBUILD files and \
+the makepkg utility that ships with pacman"
 pkgname=bash
 _vermajor=5
 _verminor=0
-_verpatch=3
+_verpatch=7
 _archivever="${_vermajor}.${_verminor}"
 pkgver="${_archivever}.${_verpatch}"
 pkgrel=1
@@ -25,6 +26,10 @@ source=(
     "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-001"
     "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-002"
     "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-003"
+    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-004"
+    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-005"
+    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-006"
+    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-007"
     bashrc
 )
 
@@ -33,12 +38,17 @@ sha256sums=(
     f2fe9e1f0faddf14ab9bfa88d450a75e5d028fedafad23b88716bd657c737289
     87e87d3542e598799adb3e7e01c8165bc743e136a400ed0de015845f7ff68707
     4eebcdc37b13793a232c5f2f498a5fcbf7da0ecb3da2059391c096db620ec85b
+    14447ad832add8ecfafdce5384badd933697b559c4688d6b9e3d36ff36c62f08
+    5bf54dd9bd2c211d2bfb34a49e2c741f2ed5e338767e9ce9f4d41254bf9f8276
+    d68529a6ff201b6ff5915318ab12fc16b8a0ebb77fda3308303fcc1e13398420
+    17b41e7ee3673d8887dd25992417a398677533ab8827938aa41fad70df19af9b
     29e174a59b56444b205541cbd3ce9c854d7f47eba0bdb6ea5e823bf3177af557
 )
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${_archivever}" || return 1
+    cd_unpacked_src
+    # shellcheck disable=SC2068
     for patch in ${source[@]} ; do
         case ${patch##*/} in
             bash${_vermajor}${_verminor}-[0-9][0-9][0-9])
@@ -60,11 +70,9 @@ package() {
         etc/bashrc
         share/man/man1/bash.1*
     )
-    cd "${srcdir}/${pkgname}-${_archivever}" || return 1
-    make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir" || return 1
-    install -d etc
-    install -m 0644 "${srcdir}/bashrc" etc/
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    cd_unpacked_src
+    make DESTDIR="${pkgdirbase}/dest" install
+    install -d "${pkgdirbase}/dest/etc"
+    install -m 0644 "${srcdir}/bashrc" "${pkgdirbase}/dest/etc/"
+    package_defined_files
 }
