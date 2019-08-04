@@ -1,3 +1,8 @@
+2019-08-03  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.1.2-3 :
+	Use pkgs.merelinux.org as the main server
+
 2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.1.2-2 :
