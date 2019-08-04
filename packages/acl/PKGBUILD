@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='LXC and libarchive require libacl'
@@ -9,7 +9,7 @@ pkgname=(
     libacl-dev
 )
 pkgver=2.2.53
-pkgrel=1
+pkgrel=3
 pkgdesc='A library for manipulating POSIX access control lists'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/acl'
@@ -26,9 +26,8 @@ sha256sums=(
     06be9865c6f418d851ff4494e12406568353b891ffe1f596b34693c387af26c7
 )
 
-
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     CFLAGS='-fPIC' ./configure \
       --prefix=''
     make
@@ -40,12 +39,10 @@ package_acl() {
     )
     depends=(
         libacl
+        libattr
+        musl
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_package
 }
 
 package_libacl() {
@@ -56,9 +53,7 @@ package_libacl() {
         libattr
         musl
     )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }
 
 package_libacl-dev() {
@@ -70,7 +65,5 @@ package_libacl-dev() {
     depends=(
         libacl
     )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }
