@@ -16,6 +16,9 @@ than the current version '%s'\n" "$proposed" "$current"
     cd "$pkg"
     sed -i '/MAKEFLAGS=/s@=.*@=@' /etc/makepkg.conf
     makepkg -Ls --noconfirm
+    if [ "$(git rev-parse --abbrev-ref HEAD)" = 'master' ]; then
+        makepkg --allsource
+    fi
 else
     printf 'No packages are required to build in this commit.\n'
 fi
