@@ -1,15 +1,16 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='Bash is the language used to interpret pacman PKGBUILD files and the makepkg utility that ships with pacman'
+rationale="Bash is the language used to interpret pacman PKGBUILD files and \
+the makepkg utility that ships with pacman"
 pkgname=bash
 _vermajor=5
 _verminor=0
 _verpatch=3
 _archivever="${_vermajor}.${_verminor}"
 pkgver="${_archivever}.${_verpatch}"
-pkgrel=1
+pkgrel=3
 pkgdesc='A full-featured sh-compatible shell.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bash'
@@ -38,7 +39,8 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${_archivever}" || return 1
+    cd_unpacked_src
+    # shellcheck disable=SC2068
     for patch in ${source[@]} ; do
         case ${patch##*/} in
             bash${_vermajor}${_verminor}-[0-9][0-9][0-9])
@@ -60,11 +62,9 @@ package() {
         etc/bashrc
         share/man/man1/bash.1*
     )
-    cd "${srcdir}/${pkgname}-${_archivever}" || return 1
-    make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir" || return 1
-    install -d etc
-    install -m 0644 "${srcdir}/bashrc" etc/
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    cd_unpacked_src
+    make DESTDIR="${pkgdirbase}/dest" install
+    install -d "${pkgdirbase}/dest/etc"
+    install -m 0644 "${srcdir}/bashrc" "${pkgdirbase}/dest/etc/"
+    package_defined_files
 }
