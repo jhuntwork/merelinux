@@ -1,10 +1,10 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=base-layout
 pkgver=1.8
-pkgrel=1
+pkgrel=2
 pkgdesc='The base directory structure and a few core files for the system.'
 arch=('x86_64')
 url='http://www.merelinux.org'
