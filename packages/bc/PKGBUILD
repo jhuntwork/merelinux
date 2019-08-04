@@ -1,10 +1,10 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname='bc'
 pkgver=1.07.1
-pkgrel=1
+pkgrel=3
 pkgdesc='An arbitrary precision numeric processing language.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bc/'
@@ -26,7 +26,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     install -m0755 "${srcdir}/fix-libmath_h" bc/fix-libmath_h
     LDFLAGS="-Wl,-static" \
     ./configure --prefix='' --with-readline \
@@ -37,7 +37,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="$pkgdir" install
-    rm -rf "${pkgdir}/share/info"
+    rm -rf "${pkgdir:?}/share/info"
 }
