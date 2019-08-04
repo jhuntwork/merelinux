@@ -1,13 +1,11 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-#!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='The package manager used for the final system'
 pkgname=(pacman pacman-portable pacman-build libalpm-dev)
 pkgver=5.1.2
-pkgrel=2
+pkgrel=3
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -41,13 +39,12 @@ source=(
 sha256sums=(
     bdb4d7461b2358fc94e48e1868fb5c801e4210662ec34a6b97bf3b072030d9a5
     b1a356a9600d4d43ac46021a8c6592aef154ba7ea598182ff430e03638c4bfb5
-    a4c69eb1b3be80292ad3dd1a90b4c4e9c24d6b7fb1235622fbfe4510c484494a
+    52e0ee2b729f48a7cebbd4d348758b74892932d2956a5e92ab155468eb612f5a
     f2c3b003d37c674eb003a69ce389585f14348894de3c5c3bae3f5dd1f96cc1a6
     689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
     c6ea61331e276f3476282bb2c712f41a00a3de4f786e58aee761c92ee1c10a8a
     ecee87cdc3492de8a01fc45087ef5212c204249f193506a06c56086a23950a3a
 )
-
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
@@ -59,6 +56,7 @@ build() {
         -e 's/EUID == 0/EUID == -1/' \
         -e '/warning.*sudo/s@warning.*@true@g' \
         scripts/makepkg.sh.in
+    sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' scripts/repo-add.sh.in
     ./autogen.sh
     cp -a "$(pwd)" "${srcdir}/${pkgbase}-${pkgver}-portable"
     CFLAGS='-fPIC' LDFLAGS='-Wl,-static' \
@@ -144,9 +142,7 @@ package_pacman-build() {
         pacman
         xz
     )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
 
 package_libalpm-dev() {
@@ -155,7 +151,5 @@ package_libalpm-dev() {
         lib/libalpm.a
         lib/pkgconfig
     )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
