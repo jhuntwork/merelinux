@@ -1,5 +1,5 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='LXC and libarchive require libattr'
@@ -9,7 +9,7 @@ pkgname=(
     libattr-dev
 )
 pkgver=2.4.48
-pkgrel=1
+pkgrel=3
 pkgdesc='A library for manipulating filesystem extended attributes'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/attr'
@@ -28,10 +28,7 @@ sha256sums=(
 
 
 build() {
-	cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    ./configure \
-      --prefix=''
-    make
+    std_build
 }
 
 package_attr() {
@@ -40,12 +37,9 @@ package_attr() {
     )
     depends=(
         libattr
+        musl
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_package
 }
 
 package_libattr() {
@@ -55,9 +49,7 @@ package_libattr() {
     depends=(
         musl
     )
-
-    cd "${pkgdirbase}/dest" || return 1
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }
 
 package_libattr-dev() {
@@ -69,7 +61,5 @@ package_libattr-dev() {
     depends=(
         libattr
     )
-
-    cd "${pkgdirbase}/dest" || return 1
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }
