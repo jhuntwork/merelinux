@@ -13,8 +13,8 @@ curl -fsL http://pkgs.merelinux.org/stable/main.db.tar.gz \
 curl -fsL http://pkgs.merelinux.org/stable/main.files.tar.gz \
     -o pkgs/stable/main.files.tar.gz
 
-# FIXME: remove the below
 sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' /bin/repo-add
+find /tmp/staging -name "*.src.tar.xz" -exec mv '{}' pkgs/stable/ \;
 find /tmp/staging -name "*.pkg*" | while read -r file ; do
     mv "$file" pkgs/stable
     repo-add pkgs/stable/main.db.tar.gz "pkgs/stable/${file##*/}"
