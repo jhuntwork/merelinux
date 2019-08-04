@@ -4,7 +4,7 @@
 
 pkgname=base-layout
 pkgver=1.8
-pkgrel=2
+pkgrel=3
 pkgdesc='The base directory structure and a few core files for the system.'
 arch=('x86_64')
 url='http://www.merelinux.org'
