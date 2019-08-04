@@ -1,27 +1,47 @@
-version: 2
-jobs:
-  lint:
-    docker:
-      - image: koalaman/shellcheck-alpine
-    steps:
-      - checkout
-      - run:
-          name: Shellcheck PKGBUILDs
-          command: find packages -name PKGBUILD -exec shellcheck '{}' +
-      - run:
-          name: Shellcheck scripts
-          command: find scripts -type f -exec shellcheck '{}' +
-  build:
+version: 2.1
+executors:
+  build-essential:
     docker:
       - image: mere/build-essential
+jobs:
+  lint:
+    executor: build-essential
     steps:
+      - run:
+          name: Install tools and upgrade
+          command: pacman -Syu --noconfirm git openssh-client shellcheck
       - checkout
+      - run:
+          name: Shellcheck
+          command: |
+            find packages -name PKGBUILD -exec shellcheck '{}' +
+            find packages -name PKGTEST -exec shellcheck '{}' +
+            find scripts -type f -exec shellcheck '{}' +
+  build:
+    executor: build-essential
+    steps:
+      - run:
+          name: Install tools
+          command: pacman -Syu --noconfirm git openssh-client
+      - checkout
+      - run:
+          name: Setup Build
+          command: ./scripts/ci-setup.sh
       - run:
           name: Build package
           command: ./scripts/ci-build.sh
+      - run:
+          name: Test package
+          command: ./scripts/ci-test.sh
+      - run:
+          name: Upload package
+          command: ./scripts/ci-upload.sh
 workflows:
   version: 2
   workflow:
     jobs:
       - lint
-      - build
+      - build:
+          requires:
+            - lint
+          context: upload

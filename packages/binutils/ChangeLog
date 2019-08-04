@@ -1,3 +1,13 @@
+2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.32-3 :
+	Use std build functions
+
+2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.32-2 :
+	Refactor PKGBUILD file
+
 2019-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 2.32-1 :

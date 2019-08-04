@@ -1,11 +1,11 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+pkgname='binutils'
 rationale='This is part of the core toolchain'
-pkgname=binutils
 pkgver=2.32
-pkgrel=1
+pkgrel=3
 pkgdesc='A collection of binary tools, including a linker and an assembler'
 arch=('x86_64')
 url='http://www.gnu.org/software/binutils/'
@@ -15,25 +15,27 @@ depends=(musl)
 makedepends=(zlib-dev)
 options=()
 changelog=ChangeLog
+
 source=(
-    "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
+    "http://ftp.gnu.org/gnu/binutils/binutils-${pkgver}.tar.xz"
 )
 
 sha256sums=(
     0ab6c55dd86a92ed561972ba15b9b70a8b9f75557f896446c82e8b36e473ee04
 )
 
-
-
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    # Brute force binutils to link with the bfd linker since the gold
+    # linker produces 'failed to find' errors here and since the LD and
+    # LD_FOR_TARGET vars don't seem to be respected
+    ln -f /bin/ld.bfd /bin/ld
+    cd_unpacked_src
     mkdir build
     cd build || return 1
     ../configure --prefix='' \
       --build="$CHOST" \
       --host="$CHOST" \
       --target="$CHOST" \
-      --enable-gold \
       --enable-gold=default \
       --enable-plugins \
       --enable-shared \
@@ -44,13 +46,9 @@ build() {
     make tooldir=/
 }
 
-check() {
-    cd "${srcdir}/${pkgname}-${pkgver}/build" || return 1
-    #MAKEFLAGS='' make LDFLAGS='' check
-}
-
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}/build" || return 1
+    cd_unpacked_src
+    cd build || return 1
     make DESTDIR="$pkgdir" tooldir=/ install
-    rm -rf "${pkgdir}/info"
+    rm -rf "${pkgdir:?}/info"
 }
