@@ -1,11 +1,13 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='Many source packages ship with pre-generated build scripts. Pacman does not. Autoconf, automake and libtool are required to generate them before using.'
 pkgname=automake
+rationale="Many source packages ship with pre-generated build scripts. \
+Pacman does not. Autoconf, automake and libtool are required to generate them \
+before using."
 pkgver=1.16.1
-pkgrel=1
+pkgrel=3
 pkgdesc='A tool for automatically generating Makefile.in files.'
 arch=(x86_64)
 url='http://www.gnu.org/software/automake'
@@ -25,9 +27,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    ./configure --prefix=''
-    make
+    std_build
 }
 
 package() {
@@ -37,9 +37,5 @@ package() {
         share/automake-*
         share/man
     )
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_package
 }
