@@ -5,7 +5,7 @@
 pkgname='binutils'
 rationale='This is part of the core toolchain'
 pkgver=2.32
-pkgrel=4
+pkgrel=5
 pkgdesc='A collection of binary tools, including a linker and an assembler'
 arch=('x86_64')
 url='http://www.gnu.org/software/binutils/'
@@ -36,7 +36,7 @@ build() {
       --build="$CHOST" \
       --host="$CHOST" \
       --target="$CHOST" \
-      --enable-gold=default \
+      --enable-64-bit-bfd \
       --enable-plugins \
       --enable-shared \
       --disable-werror \
