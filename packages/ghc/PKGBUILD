@@ -1,9 +1,9 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=ghc
-pkgver=8.0.2
+pkgver=8.2.1
 pkgrel=1
 pkgdesc='The Glasgow Haskell Compiler'
 arch=('x86_64')
@@ -25,14 +25,11 @@ source=(
 )
 
 sha256sums=(
-    11625453e1d0686b3fa6739988f70ecac836cadc30b9f0c8b49ef9091d6118b1
+    cfc2d496708dacea3ea7dde4c6a4b921b97a7f550ee2acea44cfa535840593f0
 )
 
-
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    ./configure --prefix=''
-    make
+    std_build
 }
 
 package() {
@@ -40,10 +37,5 @@ package() {
         bin
         lib
     )
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/destdir" install
-    rm -rf "${pkgdir}/share"
-    cd "${pkgdirbase}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    std_package
 }

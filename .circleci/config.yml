@@ -30,6 +30,7 @@ jobs:
       - run:
           name: Build package
           command: ./scripts/ci-build.sh
+          no_output_timeout: 20m
       - run:
           name: Test package
           command: ./scripts/ci-test.sh
