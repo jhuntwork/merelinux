@@ -1,5 +1,10 @@
 2019-08-04  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+	* 2.32-5 :
+	Use bfd as default linker
+
+2019-08-04  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 	* 2.32-4 :
 	Upload source package
 
