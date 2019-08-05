@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=ghc
-pkgver=8.2.1
+pkgver=8.2.2
 pkgrel=1
 pkgdesc='The Glasgow Haskell Compiler'
 arch=('x86_64')
@@ -25,7 +25,7 @@ source=(
 )
 
 sha256sums=(
-    cfc2d496708dacea3ea7dde4c6a4b921b97a7f550ee2acea44cfa535840593f0
+    bb8ec3634aa132d09faa270bbd604b82dfa61f04855655af6f9d14a9eedc05fc
 )
 
 build() {
