@@ -3,18 +3,18 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=cabal-install
-pkgver=1.24.0.2
+pkgver=2.4.1.0
 pkgrel=1
 pkgdesc='The command line interface to Cabal and hackage'
 arch=('x86_64')
 url='https://www.haskell.org/cabal'
 license=('BSD')
 groups=('base')
-depends=(gmp libz)
+depends=(musl gmp)
 makedepends=(
     ghc
     gmp-dev
-    libz-dev
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
@@ -23,25 +23,22 @@ source=(
 )
 
 sha256sums=(
-    2ac8819238a0e57fff9c3c857e97b8705b1b5fef2e46cd2829e85d96e2a00fe0
+    69bcb2b54a064982412e1587c3c5c1b4fada3344b41b568aab25730034cb21ad
 )
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     install -d "${srcdir}/destdir"
-    jobs=$(grep -c processor /proc/cpuinfo)
     TMPDIR=$(mktemp -d) ./bootstrap.sh \
-      --jobs "$jobs" \
+      --jobs 1 \
       --no-doc \
-      --sandbox "${srcdir}/destdir"
+      --sandbox "${pkgdirbase}/destdir"
 }
 
 package() {
     pkgfiles=(
         bin
     )
-    cd "${srcdir}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    package_defined_files
 }
