@@ -8,7 +8,7 @@ pkgname=(
     libcurl
     libcurl-dev
 )
-pkgver=7.64.1
+pkgver=7.65.3
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
@@ -24,9 +24,8 @@ source=(
     "${url}/download/${pkgname[0]}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    4cc7c738b35250d0680f29e93e0820c4cb40035f43514ea3ec8d60322d41a45d
+    0a855e83be482d7bc9ea00e05bdb1551a44966076762f9650959179c89fce509
 )
-
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
@@ -61,11 +60,10 @@ package_curl() {
     depends=(
         ca-certs
     )
-
     cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdir}-tmp" install
-    install -m0755 -v src/curl-static "${pkgdir}-tmp/bin/curl"
-    cd "${pkgdir}-tmp" || return 1
+    make DESTDIR="${pkgdirbase}/dest" install
+    install -m0755 -v src/curl-static "${pkgdirbase}/dest/bin/curl"
+    cd "${pkgdirbase}/dest" || return 1
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
@@ -79,13 +77,7 @@ package_libcurl() {
         musl
         libressl
     )
-
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
 
 package_libcurl-dev() {
@@ -100,10 +92,5 @@ package_libcurl-dev() {
     depends=(
         libcurl
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
