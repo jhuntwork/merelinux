@@ -1,10 +1,10 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=dropbear
-pkgver=2018.76
-pkgrel=3
+pkgver=2019.78
+pkgrel=1
 pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
 url='http://matt.ucc.asn.au/dropbear/dropbear.html'
@@ -23,7 +23,7 @@ source=(
 )
 
 sha256sums=(
-    f2fb9167eca8cf93456a5fc1d4faf709902a3ab70dd44e352f3acbc3ffdaea65
+    525965971272270995364a0eb01f35180d793182e63dd0b0c3eb0292291644a4
     743b0d8c6e7a60f07910daa913bfb5717e98b47654ac7cffaafff15a1c3a7566
     992a38e175c6dd8dea0c0496dbe175749f0f18eee6d861d913cd8f5bfe19a37a
     678981da5f219b6d335e132073ce5516e51470f80d17f33b282af259d846c5b0
@@ -33,7 +33,7 @@ sha256sums=(
 install=dropbear.install
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     sed -i '/MAX_CMD_LEN/s@9000@20000@' sysoptions.h
     ./configure \
       --prefix='' \
@@ -44,7 +44,7 @@ build() {
 
 package() {
     options+=(emptydirs)
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="$pkgdir" \
       PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" \
       install
