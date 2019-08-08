@@ -9,7 +9,7 @@ pkgname=(
     libcurl-dev
 )
 pkgver=7.65.3
-pkgrel=1
+pkgrel=2
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://curl.haxx.se'
@@ -60,12 +60,10 @@ package_curl() {
     depends=(
         ca-certs
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
     install -m0755 -v src/curl-static "${pkgdirbase}/dest/bin/curl"
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    package_defined_files
 }
 
 package_libcurl() {
