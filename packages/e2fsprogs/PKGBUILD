@@ -1,9 +1,9 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(e2fsprogs libblkid-dev libuuid-dev)
-pkgver=1.44.4
+pkgver=1.45.3
 pkgrel=1
 pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
 arch=(x86_64)
@@ -15,15 +15,15 @@ makedepends=(libattr-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "https://www.kernel.org/pub/linux/kernel/people/tytso/${pkgbase}/v${pkgver}/${pkgbase}-${pkgver}.tar.xz"
+    "https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v${pkgver}/e2fsprogs-${pkgver}.tar.xz"
 )
 
 sha256sums=(
-    ee03b2f2180614c5ae5f6dd2666f8808de61c3d8b37d22ba86cc6daea25be55a
+    90d10066b815e27b0b4875f0d5e396c663e0bf55aa3ca10868978d10c6ffe595
 )
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     CFLAGS+=' -fPIC -D__GNUC_PREREQ\(...\)=0' LDFLAGS='-Wl,-static' \
         ac_cv_path_mkdir=mkdir \
         ./configure --prefix=''
@@ -39,11 +39,9 @@ package_e2fsprogs() {
         share/man/man5
         share/man/man8
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     MAKEFLAGS='' make V=1 DESTDIR="${pkgdirbase}/dest" install install-libs
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    package_defined_files
 }
 
 package_libblkid-dev() {
@@ -52,9 +50,7 @@ package_libblkid-dev() {
         lib/pkgconfig/blkid.pc
         lib/libblkid.a
     )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }
 
 package_libuuid-dev() {
@@ -63,7 +59,5 @@ package_libuuid-dev() {
         lib/pkgconfig/uuid.pc
         lib/libuuid.a
     )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }
