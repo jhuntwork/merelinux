@@ -7,7 +7,8 @@ if [ -n "$pkg" ] ; then
     proposed="${pkgver}-${pkgrel}"
     current="$(pacman -Sl | grep "${pkgname} " | cut -d' ' -f3)"
     if [ "$(printf '%s\n' "$proposed" "$current" | \
-            sort | tail -n1)" != "$proposed" ]; then
+            sort -t. -n -k1,1 -k2,2 -k3,3 -k4,4 | \
+            tail -n1)" != "$proposed" ]; then
         printf "The proposed version '%s' appears to be less \
 than the current version '%s'\n" "$proposed" "$current"
         exit 1
