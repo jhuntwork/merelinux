@@ -1,9 +1,9 @@
 #!/bin/bash
-# shellcheck disable=SC2034,SC2154,SC2068
+# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(go)
-pkgver=1.9
+pkgver=1.12.9
 pkgrel=1
 pkgdesc='An expressive, concise, clean and efficient programming language'
 arch=(x86_64)
@@ -19,7 +19,7 @@ source=(
     "https://storage.googleapis.com/golang/go${pkgver}.src.tar.gz"
 )
 sha256sums=(
-    a4ab229028ed167ba1986825751463605264e44868362ca8e7accc8be057e993
+    ab0e56ed9c4732a653ed22e232652709afbf573e710f56a07f7fdeca578d62fc
 )
 
 
@@ -36,6 +36,7 @@ build() {
 package_go() {
     pkgfiles=(
         bin/go
+        bin/godoc
         bin/gofmt
         lib/go/bin
         lib/go/lib
@@ -43,20 +44,18 @@ package_go() {
         lib/go/src
     )
 
-    install -d "${srcdir}/go/.destdir/bin"
-    install -d "${srcdir}/go/.destdir/lib/go"
-    cd "${srcdir}/go/.destdir" || return 1
-    cp -a ../bin lib/go/
-    cp -a ../pkg lib/go/
-    cp -a ../lib lib/go/
-    cp -a ../src lib/go/
+    install -d "${pkgdirbase}"/dest/{bin,lib}
+    cd "${srcdir}" || return 1
+    cp -a go "${pkgdirbase}/dest/lib/"
+    cd "${pkgdirbase}/dest" || return 1
     find lib/go/src -type f -name "*_test.go" -delete
     find lib/go/src -type d -name testdata -exec rm -rf '{}' +
     find lib/go/src -type f \( -name "*.bash" -o -name "*.rc" -o -name "*.bat" \) -delete
     rm -rf lib/go/pkg/bootstrap
     rm -rf lib/go/pkg/tool/*/api
+    rm -rf lib/go/pkg/obj
     ln -s /lib/go/bin/go bin/go
+    ln -s /lib/go/bin/godoc bin/godoc
     ln -s /lib/go/bin/gofmt bin/gofmt
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    package_defined_files
 }
