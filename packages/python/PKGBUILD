@@ -4,8 +4,8 @@
 
 pkgname=(python python-dev)
 _vermajor=3
-_verminor=7
-pkgver=${_vermajor}.${_verminor}.3
+_verminor=9
+pkgver=${_vermajor}.${_verminor}.2
 pkgrel=1
 pkgdesc='A clear and powerful object-oriented programming language,'
 arch=(x86_64)
@@ -31,7 +31,7 @@ source=(
     fix-root-prefix.patch
 )
 sha256sums=(
-    da60b54064d4cfcd9c26576f6df2690e62085123826cff2e667e72a91952d318
+    3c2034c54f811448f516668dce09d24008a0716c3a794dd8639b5388cbde247d
     db33506472cb9819acf03e8206323ed0aea3cb0ed537b047976dc613e9a34e4e
     b363ebe8bd810545ca00b52398fa86c60e232c61191af560b02a85b6e1308e42
 )
@@ -42,7 +42,7 @@ build() {
     patch -Np1 -i "${srcdir}/python-fix-ctypes_util.patch"
     patch -Np0 -i "${srcdir}/fix-root-prefix.patch"
     unset CFLAGS CXXFLAGS
-    CC='gcc -fPIC' CXX='g++ -fPIC' ./configure \
+    CC='cc -fPIC' CXX='c++ -fPIC' ./configure \
         --prefix=/ \
         --with-system-ffi
     make
@@ -68,7 +68,7 @@ package_python() {
         "bin/python${_vermajor}"
         "bin/python${_vermajor}.${_verminor}"
         "lib/python${_vermajor}.${_verminor}"
-        "include/python${_vermajor}.${_verminor}m/pyconfig.h"
+        "include/python${_vermajor}.${_verminor}/pyconfig.h"
     )
 
     cd "${srcdir}/Python-${pkgver}" || return 1
@@ -94,7 +94,7 @@ package_python-dev() {
     )
 
     cd "${pkgdirbase}/destdir" || return 1
-    rm "include/python${_vermajor}.${_verminor}m/pyconfig.h"
+    rm "include/python${_vermajor}.${_verminor}/pyconfig.h"
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
 }
