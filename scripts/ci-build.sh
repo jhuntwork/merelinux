@@ -2,7 +2,7 @@
 # shellcheck disable=SC2154,SC1090
 . "$CIRCLE_WORKING_DIRECTORY"/.env
 if [ -n "$pkg" ] ; then
-    pacman -Sy
+    pacman -Syu --noconfirm
     . "$pkg"/PKGBUILD
     proposed="${pkgver}-${pkgrel}"
     current="$(pacman -Sl | grep "${pkgname} " | cut -d' ' -f3)"

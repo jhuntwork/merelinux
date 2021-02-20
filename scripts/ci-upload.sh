@@ -17,7 +17,7 @@ sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' /bin/repo-add
 find /tmp/staging -name "*.src.tar.xz" -exec mv '{}' pkgs/testing/ \;
 find /tmp/staging -name "*.pkg*" | while read -r file ; do
     mv "$file" pkgs/testing
-    repo-add pkgs/testing/main.db.tar.gz "pkgs/testing/${file##*/}"
+    repo-add -R pkgs/testing/main.db.tar.gz "pkgs/testing/${file##*/}"
 done
 
 aws s3 sync pkgs s3://pkgs.merelinux.org
