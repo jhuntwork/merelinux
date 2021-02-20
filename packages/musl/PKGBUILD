@@ -6,11 +6,11 @@
 
 rationale='This is part of the core toolchain'
 pkgname=(musl musl-dev)
-pkgver=1.1.22
+pkgver=1.2.2
 pkgrel=1
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
-url='http://www.musl-libc.org'
+url='https://musl.libc.org'
 license=(LGPL BSD)
 groups=('base')
 depends=()
@@ -21,7 +21,7 @@ source=(
     "http://www.etalabs.net/musl/releases/${pkgname[0]}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    8b0941a48d2f980fd7036cfbd24aa1d414f03d9a0652ecbd5ec5c7ff1bee29e3
+    9b969322012d796dc23dda27a35866034fa67d8fb67e0e2c45c913c3d43219dd
 )
 
 build() {
