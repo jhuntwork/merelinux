@@ -5,7 +5,7 @@
 rationale='curl requires an ssl library for https functionality'
 pkgname=(libressl libressl-dev ca-certs)
 pkgver=3.2.4
-pkgrel=1
+pkgrel=2
 pkgdesc='A fork of OpenSSL 1.0.1g with the goal modernizing the codebase and improving security'
 arch=(x86_64)
 url='http://www.libressl.org'
@@ -67,6 +67,7 @@ package_libressl-dev() {
 package_ca-certs() {
     pkgfiles=(
         etc/ssl/ca-certs.pem
+        etc/ssl/certs
     )
     cd "${pkgdirbase}/dest" || return 1
     install -d etc/ssl/certs

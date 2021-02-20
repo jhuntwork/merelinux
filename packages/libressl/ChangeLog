@@ -1,5 +1,10 @@
 2021-02-20  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+	* 3.2.4-2 :
+	Fix missing ca-certificates path
+
+2021-02-20  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 	* 3.2.4-1 :
 	Upgrade to 3.2.4
 
