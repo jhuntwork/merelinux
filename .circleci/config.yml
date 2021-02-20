@@ -1,11 +1,11 @@
 version: 2.1
 executors:
-  build-essential:
+  build-env:
     docker:
-      - image: mere/build-essential
+      - image: mere/dev
 jobs:
   lint:
-    executor: build-essential
+    executor: build-env
     steps:
       - run:
           name: Install tools and upgrade
@@ -18,7 +18,7 @@ jobs:
             find packages -name PKGTEST -exec shellcheck '{}' +
             find scripts -type f -exec shellcheck '{}' +
   build:
-    executor: build-essential
+    executor: build-env
     steps:
       - run:
           name: Install tools
