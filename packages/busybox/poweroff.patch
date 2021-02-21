@@ -1,18 +1,12 @@
---- busybox-1.23.2/init/halt.c
-+++ busybox-1.23.2.patched/init/halt.c
-@@ -107,6 +107,7 @@
- 
- 	int delay = 0;
- 	int which, flags, rc;
-+	char *signal;
- 
- 	/* Figure out which applet we're running */
- 	for (which = 0; "hpr"[which] != applet_name[0]; which++)
-@@ -154,9 +155,20 @@
+--- busybox-1.32.1.orig/init/halt.c
++++ busybox-1.32.1/init/halt.c
+@@ -230,9 +230,22 @@
  				/* runlevels:
  				 * 0 == shutdown
  				 * 6 == reboot */
-+				switch(which) {
++				char *signal;
++				switch(which)
++				{
 +					case 2:
 +						signal = "6";
 +						break;
