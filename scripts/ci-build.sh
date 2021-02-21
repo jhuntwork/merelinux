@@ -3,6 +3,7 @@
 . "$CIRCLE_WORKING_DIRECTORY"/.env
 if [ -n "$pkg" ] ; then
     pacman -Syu --noconfirm
+    pacman -Q
     . "$pkg"/PKGBUILD
     proposed="${pkgver}-${pkgrel}"
     current="$(pacman -Sl | grep "${pkgname} " | cut -d' ' -f3)"
