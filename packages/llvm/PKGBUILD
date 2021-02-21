@@ -1,0 +1,80 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=llvm
+pkgver=11.1.0
+pkgrel=1
+pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
+arch=('x86_64')
+url='htps://llvm.org'
+license=(Apache)
+groups=('base')
+depends=(musl musl-dev)
+makedepends=(cmake git ninja zlib-dev)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://github.com/llvm/llvm-project/releases/download/llvmorg-${pkgver}/llvm-project-${pkgver}.src.tar.xz"
+)
+
+sha256sums=(
+    74d2529159fd118c3eac6f90107b5611bccc6f647fdea104024183e8d5e25831
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i \
+        -e 's@strtoull_l@strtoull@g' \
+        -e '/strtoull/s@, _LIBCPP_GET_C_LOCALE@@' \
+        -e 's@strtoll_l@strtoll@g' \
+        -e '/strtoll/s@, _LIBCPP_GET_C_LOCALE@@' \
+        libcxx/include/locale
+    sed -i \
+        -e 's@/usr/local/include@/local/include@' \
+        clang/lib/Driver/ToolChains/Linux.cpp
+    sed -i 's@/usr/local/include@/local/include@' llvm/CMakeLists.txt
+    install -d build
+    cd build || return 1
+    cmake -G Ninja -Wno-dev \
+        -DCMAKE_INSTALL_PREFIX='' \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DCLANG_BUILD_EXAMPLES=OFF \
+        -DCLANG_DEFAULT_CXX_STDLIB='libc++' \
+        -DCLANG_DEFAULT_RTLIB='compiler-rt' \
+        -DCLANG_VENDOR='Mere' \
+        -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+        -DCOMPILER_RT_BUILD_XRAY=OFF \
+        -DCOMPILER_RT_USE_LIBCXX=ON \
+        -DLIBCLANG_BUILD_STATIC=ON \
+        -DLIBCXX_HAS_MUSL_LIBC=ON \
+        -DLIBCXX_USE_COMPILER_RT=ON \
+        -DLIBCXXABI_USE_COMPILER_RT=ON \
+        -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+        -DLLVM_DEFAULT_TARGET_TRIPLE='x86_64-unknown-linux-musl' \
+        -DLLVM_ENABLE_EH=ON \
+        -DLLVM_ENABLE_LIBCXX=ON \
+        -DLLVM_ENABLE_PROJECTS='lld;clang;compiler-rt;libunwind;libcxx;libcxxabi' \
+        -DLLVM_ENABLE_RTTI=ON \
+        -DLLVM_ENABLE_TERMINFO=OFF \
+        -DLLVM_HOST_TRIPLE='x86_64-unknown-linux-musl' \
+        -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
+        -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON \
+        -DLLVM_PARALLEL_COMPILE_JOBS="$(nproc)" \
+        ../llvm
+    cmake --build .
+}
+
+package() {
+    cd_unpacked_src
+    cd build || return 1
+    export DESTDIR="${pkgdir}"
+    cmake --build . --target install
+    ln -s libunwind.a "${pkgdir}/lib/libgcc_s.a"
+    ln -s lld "${pkgdir}/bin/ld"
+    ln -s clang "${pkgdir}/bin/cc"
+    ln -s clang++ "${pkgdir}/bin/c++"
+    rm -rf "${pkgdir:?}/usr"
+}
