@@ -1,13 +1,11 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-#!/bin/bash
-# shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='This is part of the core toolchain'
 pkgname=(musl musl-dev)
 pkgver=1.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=('x86_64')
 url='https://musl.libc.org'
