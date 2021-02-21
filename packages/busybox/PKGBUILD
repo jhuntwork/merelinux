@@ -5,8 +5,8 @@
 pkgname=busybox
 rationale="It serves as a stand-in for bzip2, coreutils, diffutils, \
 findutils, gawk, grep, gzip, sed, tar and util-linux"
-pkgver=1.30.1
-pkgrel=2
+pkgver=1.32.1
+pkgrel=1
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
@@ -18,9 +18,10 @@ options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
+    0001-Turn-ptr_to_globals-and-bb_errno-to-be-non-const.patch
+    poweroff.patch
     busybox-config
     busybox.install
-    poweroff.patch
     udhcpc.script
     sysctl.conf
     telinit
@@ -35,10 +36,11 @@ source=(
 )
 
 sha256sums=(
-    3d1d04a4dbd34048f4794815a5c48ebb9eb53c5277e09ffffc060323b95dfbdc
-    24f8186e4f5c4b3651e07a715d2b76046c6ef0e22bc7600c0efa71f5d4acb5a9
+    9d57c4bd33974140fd4111260468af22856f12f5b5ef7c70c8d9b75c712a0dee
+    31b58b4de281ffd65c39a9e83103c57b6dfd2dcf9c19a41f3a9cfa35ef3d263b
+    08b850b788636f6c829e865414fc6305bdc1ffc6e1ec74083ab1256b6a38d0a7
+    026675c372271cbf76719e7f096d85132caa5ed306108c0bd3ba6ec9c885e176
     388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
-    7d0b034f5e2170e617caef9e59f99bc03e86b768c650976f3ffe4f0f33da2130
     9861c80af216eb811214b5adbf7895132330d9c56f8f64a05accf2c88bc15650
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
     743c6d5e36eddd05956c2f2e6bcd34de7033cb39c196e77ae568baa85b24fd8a
@@ -61,15 +63,18 @@ backup=(
 
 build() {
     cd_unpacked_src
+    patch -Np1 -i "${srcdir}/0001-Turn-ptr_to_globals-and-bb_errno-to-be-non-const.patch"
     patch -Np1 -i "${srcdir}/poweroff.patch"
     sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" \
       "${srcdir}/busybox-config" >.config
-    make
+    make CFLAGS="$CFLAGS -static" CXXFLAGS="$CXXFLAGS -static" \
+        HOSTCC=clang HOSTCXX=clang++ CC=clang CXX=clang++
 }
 
 package() {
     cd_unpacked_src
-    make install
+    make CFLAGS="$CFLAGS -static" CXXFLAGS="$CXXFLAGS -static" \
+        HOSTCC=clang HOSTCXX=clang++ CC=clang CXX=clang++ install
 
     cd "$pkgdir" || return 1
     install -d share/man/man1
