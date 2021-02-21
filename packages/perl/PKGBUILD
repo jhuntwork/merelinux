@@ -4,7 +4,7 @@
 
 rationale='Perl is a build and runtime dependency of the autoconf and automake tools'
 pkgname=(perl)
-pkgver=5.28.1
+pkgver=5.32.1
 pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=('x86_64')
@@ -17,20 +17,20 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "http://www.cpan.org/src/5.0/${pkgbase}-${pkgver}.tar.xz"
+    "http://www.cpan.org/src/5.0/perl-${pkgver}.tar.xz"
 )
 sha256sums=(
-    fea7162d4cca940a387f0587b93f6737d884bf74d8a9d7cfd978bc12cd0b202d
+    57cc47c735c8300a8ce2fa0643507b44c4ae59012bfdad0121313db639e02309
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     grep -lr "/usr" . | xargs sed -i -e 's@/usr/local@@g' -e 's@/usr@@g'
     export BUILD_ZLIB=False
     CFLAGS="$CFLAGS" ./configure.gnu \
       -des -Dprefix=/ \
-      -Dcc="gcc -D_GNU_SOURCE" \
+      -Dcc="cc -D_GNU_SOURCE" \
       -Dbin=/bin \
       -Dinstallsitebin=/bin \
       -Dvendorprefix=/ \
@@ -52,20 +52,15 @@ build() {
 }
 
 check() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     # make test
 }
 
 package() {
     pkgfiles=(
-        'bin'
-        'lib'
-        'share'
+        bin
+        lib
+        share
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp" || return 1
-    rm -rf "share/man"
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_package
 }
