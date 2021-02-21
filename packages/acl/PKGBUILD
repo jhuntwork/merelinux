@@ -9,7 +9,7 @@ pkgname=(
     libacl-dev
 )
 pkgver=2.2.53
-pkgrel=6
+pkgrel=7
 pkgdesc='A library for manipulating POSIX access control lists'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/acl'
