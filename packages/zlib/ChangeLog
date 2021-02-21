@@ -1,3 +1,8 @@
+2021-02-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.2.11-2 :
+	Build against latest musl/llvm
+
 2017-04-17 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.2.11-1 :
