@@ -1,3 +1,8 @@
+2021-02-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.2.2-2 :
+	Rebuild using llvm and 5.10.x kernel headers
+
 2021-02-20  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.2.2-1 :
