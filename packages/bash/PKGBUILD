@@ -6,11 +6,11 @@ rationale="Bash is the language used to interpret pacman PKGBUILD files and \
 the makepkg utility that ships with pacman"
 pkgname=bash
 _vermajor=5
-_verminor=0
-_verpatch=7
+_verminor=1
+_verpatch=4
 _archivever="${_vermajor}.${_verminor}"
 pkgver="${_archivever}.${_verpatch}"
-pkgrel=2
+pkgrel=1
 pkgdesc='A full-featured sh-compatible shell.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bash'
@@ -27,21 +27,15 @@ source=(
     "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-002"
     "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-003"
     "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-004"
-    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-005"
-    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-006"
-    "https://ftp.gnu.org/gnu/bash/bash-${_archivever}-patches/bash${_vermajor}${_verminor}-007"
     bashrc
 )
 
 sha256sums=(
-    b4a80f2ac66170b2913efbfb9f2594f1f76c7b1afd11f799e22035d63077fb4d
-    f2fe9e1f0faddf14ab9bfa88d450a75e5d028fedafad23b88716bd657c737289
-    87e87d3542e598799adb3e7e01c8165bc743e136a400ed0de015845f7ff68707
-    4eebcdc37b13793a232c5f2f498a5fcbf7da0ecb3da2059391c096db620ec85b
-    14447ad832add8ecfafdce5384badd933697b559c4688d6b9e3d36ff36c62f08
-    5bf54dd9bd2c211d2bfb34a49e2c741f2ed5e338767e9ce9f4d41254bf9f8276
-    d68529a6ff201b6ff5915318ab12fc16b8a0ebb77fda3308303fcc1e13398420
-    17b41e7ee3673d8887dd25992417a398677533ab8827938aa41fad70df19af9b
+    cc012bc860406dcf42f64431bcd3d2fa7560c02915a601aba9cd597a39329baa
+    ebb07b3dbadd98598f078125d0ae0d699295978a5cdaef6282fe19adef45b5fa
+    15ea6121a801e48e658ceee712ea9b88d4ded022046a6147550790caf04f5dbe
+    22f2cc262f056b22966281babf4b0a2f84cb7dd2223422e5dcd013c3dcbab6b1
+    9aaeb65664ef0d28c0067e47ba5652b518298b3b92d33327d84b98b28d873c86
     29e174a59b56444b205541cbd3ce9c854d7f47eba0bdb6ea5e823bf3177af557
 )
 
