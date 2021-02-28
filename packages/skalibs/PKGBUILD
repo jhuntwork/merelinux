@@ -6,7 +6,7 @@ pkgname=(
     skalibs
     skalibs-dev
 )
-pkgver=2.8.0.1
+pkgver=2.10.0.2
 pkgrel=1
 pkgdesc='A library suite supporting skarnet.org software.'
 arch=(x86_64)
@@ -19,16 +19,16 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "http://skarnet.org/software/skalibs/${pkgbase}-${pkgver}.tar.gz"
+    "http://skarnet.org/software/skalibs/skalibs-${pkgver}.tar.gz"
 )
 
 sha256sums=(
-    47512e12c08c3b08a27367c63019f7f475c0427cf777aa27fc9ddcd16509b002
+    8bba3d7650bab83d4ea2ad21d6bfb5479a8652e362a478fcb783b3c7cf891e0f
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     ./configure \
       --prefix=/ \
       --disable-ipv6 \
@@ -44,13 +44,11 @@ package_skalibs() {
     depends=(
         musl
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest" || return 1
     mv lib/skalibs/libskarnet.a lib
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    package_defined_files
 }
 
 package_skalibs-dev() {
@@ -63,8 +61,5 @@ package_skalibs-dev() {
     depends=(
         skalibs
     )
-
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }
