@@ -10,7 +10,7 @@ _verminor=1
 _verpatch=4
 _archivever="${_vermajor}.${_verminor}"
 pkgver="${_archivever}.${_verpatch}"
-pkgrel=1
+pkgrel=2
 pkgdesc='A full-featured sh-compatible shell.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bash'
@@ -50,8 +50,8 @@ build() {
                 ;;
         esac
     done
-    CFLAGS="-O2 -pipe -fno-asynchronous-unwind-tables" \
-        ./configure --prefix=/ \
+    sed -i 's@-rdynamic@@g' configure
+    ./configure --prefix=/ \
         --enable-static-link \
         --without-bash-malloc \
         --with-installed-readline
