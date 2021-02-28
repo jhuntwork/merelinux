@@ -8,8 +8,8 @@ pkgname=(
     libcurl
     libcurl-dev
 )
-pkgver=7.65.3
-pkgrel=2
+pkgver=7.75.0
+pkgrel=1
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://curl.haxx.se'
@@ -24,32 +24,31 @@ source=(
     "${url}/download/${pkgname[0]}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    0a855e83be482d7bc9ea00e05bdb1551a44966076762f9650959179c89fce509
+    50552d4501c178e4cc68baaecc487f466a3d6d19bbf4e50a01869effb316d026
 )
 
 build() {
     cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     rm src/tool_hugehelp.c
     grep -lr 'poll.h' . | xargs sed -i 's@poll.h@poll.h@g'
-    CFLAGS="$CFLAGS -fPIC" \
-    LDFLAGS='-Wl,-static' \
+    CFLAGS+=' -fPIC -static' LDFLAGS='-Wl,-static' \
     ./configure \
       --prefix=/ \
       --enable-static \
       --disable-shared \
       --with-ssl \
-      --with-ca-bundle=/etc/ssl/ca-certs.pem
+      --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt
     make V=1
     install -v src/curl{,-static}
     unset LDFLAGS
     make clean
-    CFLAGS="$CFLAGS -fPIC" \
+    CFLAGS+=' -fPIC' \
     ./configure \
       --prefix=/ \
       --enable-static \
       --enable-shared \
       --with-ssl \
-      --with-ca-bundle=/etc/ssl/ca-certs.pem
+      --with-ca-bundle=/etc/ssl/certs/ca-certificates.crt
     make V=1
 }
 
