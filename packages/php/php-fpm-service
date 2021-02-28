@@ -1,3 +1,0 @@
-#!/bin/execlineb -P
-fdmove -c 2 1
-/sbin/php-fpm -F -O -y /etc/php-fpm.conf -c /etc/php.ini
