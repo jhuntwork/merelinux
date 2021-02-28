@@ -4,7 +4,7 @@
 
 pkgname='bc'
 pkgver=1.07.1
-pkgrel=3
+pkgrel=4
 pkgdesc='An arbitrary precision numeric processing language.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bc/'
@@ -28,7 +28,7 @@ sha256sums=(
 build() {
     cd_unpacked_src
     install -m0755 "${srcdir}/fix-libmath_h" bc/fix-libmath_h
-    LDFLAGS="-Wl,-static" \
+    CFLAGS+=' -static' \
     ./configure --prefix='' --with-readline \
        --mandir=/share/man \
        --infodir=/share/info
