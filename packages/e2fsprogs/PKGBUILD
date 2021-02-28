@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(e2fsprogs libblkid-dev libuuid-dev)
-pkgver=1.45.3
+pkgver=1.45.6
 pkgrel=1
 pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
 arch=(x86_64)
@@ -19,15 +19,15 @@ source=(
 )
 
 sha256sums=(
-    90d10066b815e27b0b4875f0d5e396c663e0bf55aa3ca10868978d10c6ffe595
+    ffa7ae6954395abdc50d0f8605d8be84736465afc53b8938ef473fcf7ff44256
 )
 
 build() {
     cd_unpacked_src
-    CFLAGS+=' -fPIC -D__GNUC_PREREQ\(...\)=0' LDFLAGS='-Wl,-static' \
-        ac_cv_path_mkdir=mkdir \
+    CFLAGS+=' -fPIC' LDFLAGS='-static' \
+        ac_cv_path_mkdir=/bin/mkdir \
         ./configure --prefix=''
-    MAKEFLAGS='' make V=1
+    make V=1
 }
 
 package_e2fsprogs() {
@@ -40,7 +40,7 @@ package_e2fsprogs() {
         share/man/man8
     )
     cd_unpacked_src
-    MAKEFLAGS='' make V=1 DESTDIR="${pkgdirbase}/dest" install install-libs
+    make V=1 DESTDIR="${pkgdirbase}/dest" install install-libs
     package_defined_files
 }
 
