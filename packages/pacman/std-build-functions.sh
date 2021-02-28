@@ -7,7 +7,7 @@ cd_unpacked_src() {
 }
 
 package_defined_files() {
-    cd "${pkgdirbase}/dest" || return 1
+    if [ -n "$1" ]; then cd "$1" || return 1; fi
     set -o pipefail
     find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
@@ -21,9 +21,9 @@ std_build() {
 std_package() {
     cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
-    package_defined_files
+    std_split_package
 }
 
 std_split_package() {
-    package_defined_files
+    package_defined_files "${pkgdirbase}/dest"
 }
