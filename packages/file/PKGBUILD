@@ -4,7 +4,7 @@
 
 rationale='file is used by many build scripts'
 pkgname=(file file-dev)
-pkgver=5.35
+pkgver=5.39
 pkgrel=1
 pkgdesc='A file-type guesser'
 arch=('x86_64')
@@ -16,16 +16,16 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "ftp://ftp.astron.com/pub/file/${pkgbase}-${pkgver}.tar.gz"
+    "ftp://ftp.astron.com/pub/file/file-${pkgver}.tar.gz"
 )
 
 sha256sums=(
-    30c45e817440779be7aac523a905b123cba2a6ed0bf4f5439e1e99ba940b5546
+    f05d286a76d9556243d0cb05814929c2ecf3a5ba07963f8f70bfaaa70517fad1
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     sed -i 's/misc/file/' configure
     LDFLAGS='-Wl,-static' ./configure --prefix='' \
       --disable-shared \
@@ -39,11 +39,7 @@ package_file() {
         bin/file
         share/file/magic.mgc
     )
-    cd "$srcdir/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_package
 }
 
 package_file-dev() {
@@ -51,7 +47,5 @@ package_file-dev() {
         include
         lib
     )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }
