@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libdevmapper libdevmapper-dev)
-pkgver=2.02.177
+pkgver=2.03.11
 pkgrel=1
 pkgdesc='The userspace device-mapper support library'
 arch=(x86_64)
@@ -11,19 +11,22 @@ url='https://www.sourceware.org/lvm2/'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=(gettext)
+makedepends=(libtool libaio-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "ftp://sources.redhat.com/pub/lvm2/releases/LVM2.${pkgver}.tgz"
+    "ftp://sourceware.org/pub/lvm2/LVM2.${pkgver}.tgz"
 )
 sha256sums=(
-    4025a23ec9b15c2cb7486d151c29dc953b75efc4d452cfe9dbbc7c0fac8e80f2
+    842c4510d4653990927d4518a5bf2743126a37531671a05842cdaf8d54bb9dd4
 )
 
 
 build() {
-    cd "${srcdir}/LVM2.${pkgver}" || return 1
+    cd_unpacked_src
+    # musl does not support mallinfo
+    sed -i '/#ifndef VALGRIND_POOL/s@.*@#if !defined\(VALGRIND_POOL\) \&\& defined\(__GLIBC__\)@g' \
+        lib/mm/memlock.c
     ./configure --prefix='' \
       --enable-static_link
     make SHELL=/bin/bash device-mapper
@@ -35,11 +38,9 @@ package_libdevmapper() {
         sbin
     )
     depends=(musl)
-    cd "${srcdir}/LVM2.${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install_device-mapper
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
 
 package_libdevmapper-dev() {
@@ -49,7 +50,5 @@ package_libdevmapper-dev() {
         lib/libdevmapper.a
     )
     depends=(libdevmapper)
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
