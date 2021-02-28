@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=popt-dev
-pkgver=1.16
+pkgver=1.18
 pkgrel=1
 pkgdesc='A command line argument parser'
 arch=('x86_64')
@@ -15,10 +15,10 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "http://rpm5.org/files/popt/popt-${pkgver}.tar.gz"
+    "http://ftp.rpm.org/popt/releases/popt-1.x/popt-${pkgver}.tar.gz"
 )
 sha256sums=(
-    e728ed296fe9f069a0e005003c3d6b2dde3d9cad453422a10d6558616d304cc8
+    5159bc03a20b28ce363aa96765f37df99ea4d8850b1ece17d1e6ad5c24fdc5d1
 )
 
 
@@ -38,9 +38,5 @@ package() {
         lib/pkgconfig
         share/man/man3
     )
-    cd "${srcdir}/popt-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_package
 }
