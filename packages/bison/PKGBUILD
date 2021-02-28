@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(bison bison-dev)
-pkgver=3.4.1
+pkgver=3.7.5
 pkgrel=1
 pkgdesc='A general-purpose parser generator.'
 arch=('x86_64')
@@ -19,7 +19,7 @@ source=(
 )
 
 sha256sums=(
-    27159ac5ebf736dffd5636fd2cd625767c9e437de65baa63cb0de83570bd820d
+    e8c53bc5bc396d636622d0f25e31ca92fd53f00b09629f13ef540d564a6b31ab
 )
 
 build() {
