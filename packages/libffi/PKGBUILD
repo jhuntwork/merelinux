@@ -3,8 +3,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libffi libffi-dev)
-pkgver=3.2.1
-pkgrel=2
+pkgver=3.3
+pkgrel=1
 pkgdesc='A portable Foregin Function Interface library.'
 arch=(x86_64)
 url='http://sourceware.org/libffi/'
@@ -18,13 +18,13 @@ source=(
     "ftp://sourceware.org/pub/libffi/libffi-${pkgver}.tar.gz"
 )
 sha256sums=(
-    d06ebb8e1d9a22d19e38d63fdb83954253f39bedc5d46232a05645685722ca37
+    72fba7922703ddfa7a028d513ac15a85c8d54c8d67f55fa5a4802885dc652056
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    CFLAGS="$CFLAGS -fPIC" \
+    cd_unpacked_src
+    CFLAGS+=" -fPIC" \
       ./configure \
       --prefix='' \
       --includedir=/include \
@@ -40,11 +40,7 @@ package_libffi() {
     depends=(
         musl
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp" || return 1
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    std_package
 }
 
 package_libffi-dev() {
@@ -55,11 +51,5 @@ package_libffi-dev() {
         lib/pkgconfig
     )
     depends=(libffi)
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdir}-tmp" install
-    cd "${pkgdir}-tmp" || return 1
-    mv lib/libffi-${pkgver}/include .
-    sed -i 's@^includedir=.*@includedir=/include@' lib/pkgconfig/libffi.pc
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    std_split_package
 }
