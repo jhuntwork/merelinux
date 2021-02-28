@@ -3,8 +3,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=gptfdisk
-pkgver=1.0.4
-pkgrel=1
+pkgver=1.0.6
+pkgrel=2
 pkgdesc='A set of text-mode partitioning tools'
 arch=(x86_64)
 url='http://www.rodsbooks.com/gdisk'
@@ -23,13 +23,14 @@ source=(
 )
 
 sha256sums=(
-    b663391a6876f19a3cd901d862423a16e2b5ceaa2f4a3b9bb681e64b9c7ba78d
+    ddc551d643a53f0bd4440345d3ae32c49b04a797e9c01036ea460b6bb4168ca8
 )
 
 
 build() {
     cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    CXXFLAGS+=' -I/include/ncursesw' LDFLAGS='-Wl,-static' MAKEFLAGS='' make
+    CXX=c++ CXXFLAGS+=' -static -I/include/ncursesw' \
+        LDFLAGS='-static -Wl,-static -lunwind -lc++abi' MAKEFLAGS='' make
 }
 
 package() {
