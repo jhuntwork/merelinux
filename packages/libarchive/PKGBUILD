@@ -7,7 +7,7 @@ pkgname=(
     libarchive
     libarchive-dev
 )
-pkgver=3.3.3
+pkgver=3.5.1
 pkgrel=1
 pkgdesc='Multi-format archive and compression library'
 arch=(x86_64)
@@ -28,45 +28,33 @@ source=(
     "http://www.libarchive.org/downloads/libarchive-${pkgver}.tar.gz"
 )
 sha256sums=(
-    ba7eb1781c9fbbae178c4c6bad1c6eb08edab9a1496c64833d1715d022b30e2e
+    9015d109ec00bb9ae1a384b172bf2fc1dff41e2c66e5a9eeddf933af9db37f5a
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     # fix for musl
     sed -i 's@HAVE_LCHMOD@&_DISABLE@' libarchive/archive_write_disk_posix.c
     # fixes for busybox xz
     sed -i 's@ -qq@@' libarchive/archive_read_support_filter_xz.c
     sed -i 's@xz -d@unxz@' libarchive/archive_read_support_filter_xz.c
     sed -i 's@lzma -d@unlzma@' libarchive/archive_read_support_filter_xz.c
-    ./configure \
-      --prefix='' \
-      --enable-static \
-      --enable-shared
+    CFLAGS+=' -fPIC --static' LDFLAGS='-static -Wl,-static' \
+        ./configure \
+        --prefix='' \
+        --disable-shared \
+        --enable-static
     make V=1
 }
 
 package_libarchive() {
     pkgfiles=(
         bin
-        lib/*.so.*
         share/man/man1
         share/man/man5/libarchive-formats*
     )
-    depends=(
-        libacl
-        libattr
-        musl
-        nettle
-    )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/destdir" install
-
-    cd "${pkgdirbase}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_package
 }
 
 package_libarchive-dev() {
@@ -74,13 +62,9 @@ package_libarchive-dev() {
     pkgfiles=(
         include
         lib/*.a
-        lib/*.so
         lib/pkgconfig
         share/man/man3
     )
     depends=(libarchive)
-
-    cd "${pkgdirbase}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
