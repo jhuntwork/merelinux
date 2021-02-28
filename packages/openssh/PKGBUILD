@@ -1,0 +1,60 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=(openssh-client)
+_vermajor=8
+_verminor=4
+pkgver=${_vermajor}.${_verminor}p1
+pkgrel=1
+pkgdesc='the premier connectivity tool for remote login with the SSH protocol'
+arch=(x86_64)
+url='https://openssh.com'
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=(
+    libressl-dev
+    zlib-dev
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://ftp4.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${pkgver}.tar.gz"
+)
+sha256sums=(
+    5a01d22e407eb1c05ba8a8f7c654d388a13e9f226e4ed33bd38748dafa1d2b24
+)
+
+
+build() {
+    cd_unpacked_src
+    export LDFLAGS='-static -Wl,-static'
+    export ac_cv_func_arc4random=no
+    export ac_cv_func_arc4random_buf=no
+    export ac_cv_func_arc4random_stir=no
+    export ac_cv_func_arc4random_uniform=no
+    ./configure \
+        --prefix=/ \
+        --with-mantype=man
+    make
+}
+
+package_openssh-client() {
+    depends=(
+    )
+    pkgfiles=(
+        bin/ssh
+        bin/ssh-keyscan
+        bin/ssh-keygen
+        bin/scp
+        bin/sftp
+        bin/ssh
+        bin/ssh-agent
+        bin/ssh-add
+        etc/ssh_config
+        share/man/man1
+    )
+    std_package
+}
