@@ -3,40 +3,54 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(go)
-pkgver=1.12.9
+pkgver=1.16
 pkgrel=1
 pkgdesc='An expressive, concise, clean and efficient programming language'
 arch=(x86_64)
 url='https://golang.org'
 license=(BSD)
 groups=(base)
-depends=(ca-certs)
+depends=(musl ca-certs)
 makedepends=(go)
 options=(!strip)
 changelog=ChangeLog
 
 source=(
-    "https://storage.googleapis.com/golang/go${pkgver}.src.tar.gz"
+    "https://golang.org/dl/go${pkgver}.src.tar.gz"
 )
 sha256sums=(
-    ab0e56ed9c4732a653ed22e232652709afbf573e710f56a07f7fdeca578d62fc
+    7688063d55656105898f323d90a79a39c378d86fe89ae192eb3b7fc46347c95a
 )
 
 
 build() {
     cd "${srcdir}/go/src" || return 1
-    sed -i "s@string{@&\n\t\"/etc/ssl/ca-certs.pem\",@" crypto/x509/root_linux.go
     GOROOT_FINAL=/lib/go \
       GOROOT_BOOTSTRAP=/lib/go \
-      CGO_ENABLED=0 \
-      GO_LDFLAGS='-s -w' \
+      GO_LDFLAGS='-s -w -buildmode=pie'
+      CC=clang \
       ./make.bash
+}
+
+check() {
+    # Disable for now
+    return 0
+    cd "${srcdir}/go/src" || return 1
+    # Go tests want /usr/bin to be a real directory
+    rm /usr/bin && install -d /usr/bin && ln -s /bin/env /usr/bin/
+    # cgo detects musl by detecting alpine :(
+    touch /etc/alpine-release
+    PATH="${srcdir}/go/bin:$PATH" \
+    GOROOT_FINAL=/lib/go \
+      GOROOT_BOOTSTRAP=/lib/go \
+      GO_LDFLAGS='-s -w -buildmode=pie'
+      CC=clang \
+      ./run.bash -no-rebuild
 }
 
 package_go() {
     pkgfiles=(
         bin/go
-        bin/godoc
         bin/gofmt
         lib/go/bin
         lib/go/lib
@@ -55,7 +69,6 @@ package_go() {
     rm -rf lib/go/pkg/tool/*/api
     rm -rf lib/go/pkg/obj
     ln -s /lib/go/bin/go bin/go
-    ln -s /lib/go/bin/godoc bin/godoc
     ln -s /lib/go/bin/gofmt bin/gofmt
     package_defined_files
 }
