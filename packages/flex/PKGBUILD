@@ -4,7 +4,7 @@
 
 pkgname=(flex flex-dev)
 pkgver=2.6.4
-pkgrel=1
+pkgrel=2
 pkgdesc='A tool for generating scanners, or tokenizers that recognize lexical patterns in text.'
 arch=('x86_64')
 url='http://flex.sourceforge.net/'
@@ -24,9 +24,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    ./configure --prefix=''
-    make
+    std_build
 }
 
 package_flex() {
@@ -36,11 +34,7 @@ package_flex() {
         share/man/man1/
     )
     depends=(musl)
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_package
 }
 
 package_flex-dev() {
@@ -50,7 +44,5 @@ package_flex-dev() {
         lib/*.a
     )
     depends=(flex)
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
