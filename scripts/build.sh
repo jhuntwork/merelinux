@@ -18,9 +18,12 @@ else
     shift
 fi
 
+cmd=/local/bin/build-in-docker.sh
+[ -n "$1" ] && cmd="$1"
+
 docker run -it --rm \
     -v "${pkgdir}":/src \
     -v /mere/logs:/mere/logs \
     -v /mere/pkgs:/mere/pkgs \
     -v /mere/sources:/mere/sources \
-    mere/dev:latest /local/bin/build-in-docker.sh
+    mere/dev:latest "$cmd"
