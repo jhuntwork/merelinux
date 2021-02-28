@@ -1,3 +1,12 @@
+2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.10.0.2-1 :
+	Upgrade to 2.10.0.2
+	Update the service command. Change order of operations and add two new
+	commands to provide easier management of the state of supervision.
+	Move telinit from busybox and adjust to the most recent logic of the
+    s6-svscanctl command.
+
 2019-04-11  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 2.8.0.0-1 :

@@ -1,9 +1,8 @@
 #!/bin/execlineb -S0
-foreground { /etc/s6/rc.finish }
 cd /
 redirfd -w 2 /dev/console
 fdmove -c 1 2
 foreground { s6-svc -x -- /s6/run/s6-svscan-log }
 unexport ?
 wait -r -- { }
-/etc/s6/rc.shutdown ${@}
+/etc/s6/rc.shutdown

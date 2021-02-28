@@ -1,8 +1,13 @@
 #!/bin/sh
+# Clean out /tmp
+find /tmp -mindepth 1 -maxdepth 1 -exec rm -rf '{}' + 2>/dev/null
+
 # sync to disk and unmount
 sync
 umount -ar 2>/dev/null
 
 # Send the kernel the appropriate signal through
 # busybox's halt, poweroff or reboot cmds
-"$@" -f
+action="$(cat /s6/run/.shutdown 2>/dev/null)"
+[ -z "$action" ] && action=poweroff
+"$action" -f
