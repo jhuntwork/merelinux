@@ -4,14 +4,14 @@
 
 rationale='The pacman autotools scripts require autopoint, which is a part of gettext'
 pkgname=gettext
-pkgver=0.19.8.1
+pkgver=0.21
 pkgrel=1
 pkgdesc='A framework for producing multi-lingual messages.'
 arch=(x86_64)
 url='http://www.gnu.org/software/gettext'
 license=(GPL3)
 groups=(base)
-depends=(musl)
+depends=()
 makedepends=()
 options=()
 changelog=ChangeLog
@@ -20,19 +20,22 @@ source=(
 )
 
 sha256sums=(
-    105556dbc5c3fbbc2aa0edb46d22d055748b6f5c7cd7a8d99f8e7eb84e938be4
+    d20fcbb537e02dcf1383197ba05bd0734ef7bf5db06bdb241eb69b7d16b73192
 )
 
 PURGE_TARGETS+=(lib/charset.alias include/libintl.h)
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    ./configure --prefix=''
+    cd_unpacked_src
+    LDFLAGS='-static -Wl,-static' \
+        ./configure --prefix='' \
+        --enable-static \
+        --disable-shared
     make
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="$pkgdir" install
-    rm -rf "${pkgdir}/share/"{doc,info,man}
+    rm -rf "${pkgdir}/share/"{doc,info}
 }
