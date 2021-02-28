@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=iptables
-pkgver=1.6.1
+pkgver=1.8.7
 pkgrel=1
 pkgdesc='A fast incremental file transfer utility'
 arch=(x86_64)
@@ -19,13 +19,13 @@ source=(
 )
 
 sha256sums=(
-    0fc2d7bd5d7be11311726466789d4c65fb4c8e096c9182b56ce97440864f0cf5
+    c109c96bb04998cd44156622d36f8e04b140701ec60531a10668cfdff5e8d8f0
 )
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    LDFLAGS="-Wl,-static" \
+    cd_unpacked_src
+    LDFLAGS='-static -Wl,-static' \
       ./configure --prefix='' \
       --disable-shared \
       --enable-static \
@@ -42,9 +42,5 @@ package() {
         share/man/man1
         share/man/man8
     )
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "${pkgdir}"
+    std_package
 }
