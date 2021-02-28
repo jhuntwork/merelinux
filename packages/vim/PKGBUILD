@@ -4,8 +4,8 @@
 
 pkgname=vim
 _vermajor=8
-_verminor=1
-_verpatch=0547
+_verminor=2
+_verpatch=2557
 pkgver="${_vermajor}.${_verminor}.${_verpatch}"
 pkgrel=1
 pkgdesc='An IMproved version of the vi editor'
@@ -24,14 +24,14 @@ source=(
 )
 
 sha256sums=(
-    55d62600b8003671de08b42c6b3c3c9e2800f11e4ca6816f3f9816afbef46b06
+    44da75af85cf1c00260532808e7aac91713e15eca5020ff9c46019a9d1ea9c2e
     dda73393c44e448ddeddaff76287dbbe5fcea1bc381c5d065789bd3c1b481f0e
     5e698ff1872bae79b7eae3f35bfca2e426c2698a785687fb9035e0fee16de91a
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
 
     # Set the path of the default vimrc file
     echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
@@ -41,9 +41,8 @@ build() {
            -e '/0xffffffffUL;/i #include <stdlib.h>' \
 	   src/auto/configure
 
-    CC='gcc -I/include/ncursesw' \
-        CFLAGS="${CFLAGS} -fPIC" \
-        LDFLAGS='-Wl,-static' \
+    CC='cc -I/include/ncursesw' \
+        CFLAGS+=' -static -fPIC' LDFLAGS='-static -Wl,-static' \
         ./configure \
         --prefix='' \
         --enable-multibyte \
@@ -59,7 +58,7 @@ package_vim() {
         share/vim
     )
     options+=(emptydirs)
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest" || return 1
     install -d etc
@@ -69,5 +68,5 @@ package_vim() {
     echo "au BufNewFile,BufRead PKGBUILD set filetype=PKGBUILD" \
       >> "share/vim/vim${_vermajor}${_verminor}/filetype.vim"
     rm -f bin/xxd
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    package_defined_files
 }
