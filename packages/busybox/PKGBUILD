@@ -6,7 +6,7 @@ pkgname=busybox
 rationale="It serves as a stand-in for bzip2, coreutils, diffutils, \
 findutils, gawk, grep, gzip, sed, tar and util-linux"
 pkgver=1.32.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
@@ -24,7 +24,6 @@ source=(
     busybox.install
     udhcpc.script
     sysctl.conf
-    telinit
     ntpd-service
     ntpd-log
     ntp.conf
@@ -43,7 +42,6 @@ sha256sums=(
     388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     9861c80af216eb811214b5adbf7895132330d9c56f8f64a05accf2c88bc15650
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
-    743c6d5e36eddd05956c2f2e6bcd34de7033cb39c196e77ae568baa85b24fd8a
     0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
     6572c2fdb51f665a236507a59f1aee43c3b3212d6636141775f082b87868333d
     644321e67516c8e6869dd1f09b9dfc06d6758dec91df0bdea3cb614419a1e0d3
@@ -95,7 +93,6 @@ package() {
     install -m 0644 "${srcdir}/sysctl.conf" etc/
     install -m 0644 "${srcdir}/ntp.conf" etc/ntp.conf
     install -d sbin
-    install -m 0755 "${srcdir}/telinit" sbin/
 
     # s6 Services
     install -d etc/s6/services/available/ntpd/log
