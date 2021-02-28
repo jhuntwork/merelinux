@@ -3,8 +3,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(sqlite libsqlite libsqlite-dev)
-pkgver=3.18.0
-_pkgaltver=3180000
+pkgver=3.34.1
+_pkgaltver=3340100
 pkgrel=1
 pkgdesc='A self-contained embedded SQL database engine.'
 arch=('x86_64')
@@ -17,20 +17,20 @@ options=()
 changelog=ChangeLog
 
 source=(
-    "https://sqlite.org/2017/sqlite-autoconf-${_pkgaltver}.tar.gz"
+    "https://sqlite.org/2021/sqlite-autoconf-${_pkgaltver}.tar.gz"
 )
 
 sha256sums=(
-    3757612463976e7d08c5e9f0af3021613fc24bbcfe1c51197d6776b9ece9ac5c
+    2a3bca581117b3b88e5361d0ef3803ba6d8da604b1c1a47d902ef785c1b53e89
 )
 
 
 build() {
-    cd "${srcdir}/sqlite-autoconf-${_pkgaltver}" || return 1
-    CFLAGS="$CFLAGS -fPIC -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_COLUMN_METADATA=1"
-    CFLAGS="$CFLAGS -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_SECURE_DELETE=1"
-    CFLAGS="$CFLAGS -DSQLITE_ENABLE_DBSTAT_VTAB=1 --static" \
-        ./configure --prefix=''
+    cd_unpacked_src
+    CFLAGS+=' -fPIC -DSQLITE_ENABLE_FTS3=1 -DSQLITE_ENABLE_COLUMN_METADATA=1'
+    CFLAGS+=' -DSQLITE_ENABLE_UNLOCK_NOTIFY=1 -DSQLITE_SECURE_DELETE=1'
+    export CFLAGS+=' -DSQLITE_ENABLE_DBSTAT_VTAB=1 --static'
+    ./configure --prefix=''
     make
 }
 
@@ -39,13 +39,7 @@ package_sqlite() {
         bin
         share/man/man1
     )
-
-    cd "${srcdir}/${pkgbase}-autoconf-${_pkgaltver}" || return 1
-    make DESTDIR="${pkgdirbase}/destdir" install
-
-    cd "${pkgdirbase}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    std_package
 }
 
 package_libsqlite() {
@@ -56,9 +50,7 @@ package_libsqlite() {
         musl
         readline
     )
-    cd "${pkgdirbase}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    std_split_package
 }
 
 package_libsqlite-dev() {
@@ -71,8 +63,5 @@ package_libsqlite-dev() {
     depends=(
         libsqlite
     )
-
-    cd "${pkgdirbase}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    std_split_package
 }
