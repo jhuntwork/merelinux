@@ -2,100 +2,71 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(git git-extra)
-pkgver=2.19.1
+pkgname=git
+pkgver=2.30.1
 pkgrel=1
 pkgdesc='A distributed version control system'
 arch=('x86_64')
 url='http://git-scm.com/'
 license=('GPL2')
 groups=('base')
-depends=()
+depends=(
+    perl
+    python
+)
 makedepends=(
     libcurl-dev
     libressl-dev
-    zlib-dev
     perl
+    python
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
 
 source=(
-    "https://www.kernel.org/pub/software/scm/git/${pkgbase}-${pkgver}.tar.xz"
+    "https://www.kernel.org/pub/software/scm/git/git-${pkgver}.tar.xz"
 )
 sha256sums=(
-    345056aa9b8084280b1b9fe1374d232dec05a34e8849028a20bfdb56e920dbb5
+    f988a8a095089978dab2932af4edb22b4d7d67d67b81aaa1986fa29ef45d9467
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    grep -lr 'poll.h' . | xargs sed -i 's@sys/poll.h@poll.h@g'
-    grep -lr "/usr/bin/perl" . | xargs sed -i 's@/usr/bin/perl@/bin/perl@g'
-    sed -i '/absolute directory/d' configure
-    LIBS='-lssl -lcrypto' ./configure \
+    cd_unpacked_src
+    LIBS='-lz -lssl -lcrypto' \
+    LDFLAGS='-static -Wl,-static -lssl -lcrypto -lz' \
+    ./configure \
       --prefix='' \
       --libexecdir=/lib \
       --with-curl \
+      --with-openssl \
       --without-tcltk \
-      --with-zlib \
+      --with-zlib=/lib \
       --with-editor=/bin/vim \
       --with-pager=/bin/more \
       --with-perl=/bin/perl \
+      --with-python=/bin/python \
       --with-shell=/bin/sh
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1
 }
 
-package_git() {
+package() {
     pkgfiles=(
-        'bin'
-        'lib/git-core'
-        'share/git-core'
-    )
-    depends=(
-        libcurl
-        libressl
-        musl
+        bin
+        lib/git-core
+        share/git-core
     )
     rmfiles=(
-        'bin/git-cvsserver'
-        'lib/git-core/git-add--interactive'
-        'lib/git-core/git-archimport'
-        'lib/git-core/git-cvs*'
-        'lib/git-core/git-difftool'
-        'lib/git-core/git-send-email'
-        'lib/git-core/git-svn'
+        bin/git-cvsserver
+        lib/git-core/git-cvs*
+        lib/git-core/git-svn
     )
 
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    package_defined_files
     cd "$pkgdir" || return 1
     find ${rmfiles[@]} -delete
 }
-
-package_git-extra() {
-    pkgdesc='Extra features for git'
-    pkgfiles=(
-        'bin/git-cvsserver'
-        'lib/git-core/git-add--interactive'
-        'lib/git-core/git-archimport'
-        'lib/git-core/git-cvs*'
-        'lib/git-core/git-difftool'
-        'lib/git-core/git-send-email'
-        'lib/git-core/git-svn'
-        'share/gitweb'
-    )
-    depends=(
-        git
-        libressl
-        musl
-        perl
-    )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
-}
-
