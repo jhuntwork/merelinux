@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(s6 s6-dev)
-pkgver=2.8.0.0
+pkgver=2.10.0.2
 pkgrel=1
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
@@ -17,7 +17,6 @@ changelog=ChangeLog
 source=(
     "http://skarnet.org/software/s6/s6-${pkgver}.tar.gz"
     rc.init
-    rc.finish
     rc.shutdown
     s6.install
     s6-init
@@ -25,22 +24,23 @@ source=(
     s6-svscan-finish
     s6-svscan-log
     s6-service
+    s6-telinit
     taillog
     tty1-service
     ttyS0-service
 )
 
 sha256sums=(
-    284792d8bebecc2c0c1f8318149dac9e6d52fe7756d5de55b4bb47a84ba7b106
-    0fc11fe9190d6f1046ff51958f5d84fa74c3800262260b7797c55aa11658c5d1
-    0999b95f979d004ec0dae779daf80cd4032b6700b98957a2cfe3a75fdb63662e
-    33accde3c4e2c4c880e243a00bcaf6ce8b018fc68deea376f7a3d14e239d3eb9
-    49677fb3fa4b880a6999be7741c15d21cd9fdd4a35c0bd9b002407e8525aea50
+    b23afce87080b848b89499e85ebd93c20269e6db23f6ef65e58386c9cecd6c21
+    b7152736b6a2de7c7a198cb96fc0d563c7f34622874196518bcf36c867c6fda0
+    db0e8c503e72eb05356a4ec9a65903a6d6447b5786453d0d8dbf097534c89ad5
+    6ba76e90d72d7e59763a0ec42304d46abfd17548b1d52485dcf2e5306998887e
     603258d6e66ed3d62c6d9e19129bcf0bb34b2871fb5826d7f02571bf16de6fd4
     a90dd71977a0a223265ddda7713e8cd798d14d21a3b010c9ba69b8c76c483133
-    f3a51757da18c71a936b188f1693bf10179edf5fe54c8964b74435d82b98d1cb
+    aa07d12477029cabc69f6024dc2ca1f3ea2137df869b1e72a1a47491abc980df
     551527219c85ec06df46c8f54e7c13afc181276ace95135491795457a7eec501
-    e923f5cea85c921fd8aac5d923c302efbe245727f1eac0b7e138f46f668eda6f
+    1f6282b4bb277bf6f6924c8b82c46f0012e665c401732720983c2e43ba504f36
+    9cb05e7d9637f5175ab270c45acf15ff25e68b93dd6d300a1fb226182a12fc3f
     6fe869bfaf65ea4528bcb437c8c2d818aae898ea3be9215ae082ce3548e34d08
     538bc61ea2ef419c1e48e683d7b6a52ea45ea5b06ad765bbfa28b79d3953829f
     80efd99ed9a4c12345c15cd1eafaa32467cea341eac88d9282275c73326831fe
@@ -50,8 +50,8 @@ install=s6.install
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    sed -i 's@#!/bin/sh@#!/bin/bash@' configure
+    cd_unpacked_src
+#sed -i 's@#!/bin/sh@#!/bin/bash@' configure
     ./configure \
       --prefix=/ \
       --bindir=/sbin \
@@ -72,7 +72,7 @@ package_s6() {
     depends=(execline)
 
     # Run make install
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
 
     # Begin customization
@@ -83,8 +83,8 @@ package_s6() {
     install -d s6 etc/s6/services/{available,enabled}
     install -m 0750 "${srcdir}/s6-init" sbin/
     install -m 0750 "${srcdir}/rc.init" etc/s6/
-    install -m 0750 "${srcdir}/rc.finish" etc/s6/
     install -m 0750 "${srcdir}/rc.shutdown" etc/s6/
+    install -m 0750 "${srcdir}/s6-telinit" sbin/
 
     # Early env vars
     install -d etc/s6/env
@@ -111,8 +111,7 @@ package_s6() {
     install -d bin
     install -m 0755 "${srcdir}/taillog" bin/
 
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    package_defined_files
 }
 
 package_s6-dev() {
@@ -120,8 +119,5 @@ package_s6-dev() {
         include
         lib/libs6.a
     )
-
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_split_package
 }

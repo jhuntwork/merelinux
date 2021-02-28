@@ -19,22 +19,35 @@ AVAIL_DIR=/etc/s6/services/available
 ENABL_DIR=/etc/s6/services/enabled
 
 usage() {
+    name="${0##*/}"
     printf '
+  %s - Manage services defined in %s.
+
   Usage:
     %s list
-    %s <service_name> [command]
+    %s [command] <service_name>
 
   Commands:
-    enable   Enables a service to start at boot
-    disable  Disables a service from starting at boot
-    start    Attempt to start a service
-    stop     Attempt to stop a service
-    status   Show status of a service
-    reload   Signal the service to reload its configuration
-    restart  Terminate and restart a service
+    enable   Enables a service to start at system boot. Does not alter the
+             current running state of any service.
+    disable  Disables a service from starting at system boot. Does not alter
+             the current running state of any service.
+    list     Show all defined services and their current status.
+    reload   Signal a supervised service to reload its configuration.
+    restart  Terminate and restart a supervised service. Does not reload the
+             service definition.
+    resup    Terminate and unsupervise a service, then start it and begin
+             supervision again. This will reload the service definition.
+    start    Attempt to start a service. If the service is currently
+             unsupervised, begin supervision.
+    status   Show the current status of a service.
+    stop     Attempt to stop a supervised service. The service will remain
+             supervised.
+    unsup    Attempt to stop a supervised service and remove it from
+             supervision.
 
-' "$0" "$0"
-    exit 1
+' "$name" "$AVAIL_DIR" "$name" "$name"
+    exit 2
 }
 
 check() {
@@ -58,16 +71,32 @@ short_status() {
     s6-svstat -n "${SCAN_DIR}/${1}" 2>/dev/null | cut -d' ' -f1
 }
 
+start_supervision() {
+    [ -d "$svcdir" ] || cp -a "${AVAIL_DIR}/${svc}" "$SCAN_DIR"
+    s6-svscanctl -a "$SCAN_DIR"
+}
+
+stop_service() {
+    s6-svc -wd -d -T 30000 "$svcdir" 2>/dev/null
+    if s6-svok "${svcdir}/log"; then
+        s6-svc -wd -d -T 10000 "${svcdir}/log"
+    fi
+}
+
+stop_supervision() {
+    rm -rf "${svcdir:?}"
+    s6-svscanctl -h "$SCAN_DIR"
+}
 
 if [ "$1" = "list" ] ; then
-    LIST="Service Status OnBoot ~~~~~~~~ ~~~~~~~~ ~~~~~~~~ "
+    LIST="Service Status OnBoot ~~~~~~~~~~~ ~~~~~~~~~~~~ ~~~~~~~~ "
     for dir in $(find ${AVAIL_DIR} -mindepth 1 -maxdepth 1 -type d | sort | xargs) ; do
         name=${dir##*/}
         LIST="$LIST ${name} "
         case $(short_status "$name") in
             up)   LIST="$LIST up ";;
             down) LIST="$LIST down ";;
-            *)    LIST="$LIST unknown ";;
+            *)    LIST="$LIST unsupervised ";;
         esac
         if [ -e "${ENABL_DIR}/${name}" ] ; then
             LIST="$LIST enabled "
@@ -82,10 +111,10 @@ if [ "$1" = "list" ] ; then
     exit 0
 else
 	[ $# -ne 2 ] && usage
-    case "$2" in
-        enable|disable|start|stop|status|reload|restart)
-            svc=$1
-            act=$2
+    case "$1" in
+        enable|disable|reload|restart|resup|status|start|stop|unsup)
+            act=$1
+            svc=$2
             svcdir="${SCAN_DIR}/${svc}"
             export svc act svcdir
             ;;
@@ -100,7 +129,7 @@ fi
 
 case "$act" in
     enable)
-        printf "Enabling %s to launch at boot..." "$svc"
+        printf 'Enabling %s to launch at boot...' "$svc"
         (
             set -e
             rm -rf "${ENABL_DIR:?}/${svc:?}"
@@ -110,63 +139,24 @@ case "$act" in
         ;;
 
     disable)
-        printf "Disabling %s from launching at boot..." "$svc"
+        printf 'Disabling %s from launching at boot...' "$svc"
         (
             set -e
             rm -f "${ENABL_DIR}/${svc}"
-            if s6-svok "$svcdir" && [ "$(short_status "$svc")" != 'up' ] ; then
-                $0 "$svc" stop >/dev/null || true
-                rm -rf "$svcdir"
-                s6-svscanctl -an "$SCAN_DIR"
-            fi
         )
         check $?
-        ;;
-
-    start)
-        printf "Starting %s..." "$svc"
-        if s6-svok "$svcdir" ; then
-            (
-                set -e
-                s6-svc -u "$svcdir"
-                s6-svok "${svcdir}/log" && s6-svc -u "${svcdir}/log"
-            )
-        else
-            (
-                set -e
-                [ -d "$svcdir" ] || cp -a "${AVAIL_DIR}/${svc}" "$SCAN_DIR"
-                s6-svscanctl -a "$SCAN_DIR"
-            )
-        fi
-        check $?
-        ;;
-
-    stop)
-        is_supervised || exit 1
-        printf "Stopping %s..." "$svc"
-        (
-            set -e
-            s6-svc -wd -d -T 10000 "$svcdir" 2>/dev/null
-            s6-svok "${svcdir}/log" && s6-svc -d "${svcdir}/log"
-        )
-        check $?
-        ;;
-
-    status)
-        is_supervised || exit 1
-        s6-svstat -n "$svcdir"
         ;;
 
     reload)
         is_supervised || exit 1
-        printf "Reloading %s..." "$svc"
+        printf 'Reloading %s...' "$svc"
         s6-svc -h "$svcdir"
         check $?
         ;;
 
     restart)
         is_supervised || exit 1
-        printf "Restarting %s..." "$svc"
+        printf 'Restarting %s...' "$svc"
         if [ -x "${svcdir}/restart" ] ; then
             "${svcdir}/restart"
         else
@@ -176,6 +166,65 @@ case "$act" in
                 s6-svc -u "$svcdir"
             )
         fi
+        check $?
+        ;;
+
+    resup)
+        printf 'Restarting supervision of %s...' "$svc"
+        (
+            set -e
+            if s6-svok "$svcdir"; then
+                stop_service
+                stop_supervision
+            fi
+            start_supervision
+        )
+        check $?
+        ;;
+
+    status)
+        is_supervised || exit 1
+        s6-svstat -n "$svcdir"
+        ;;
+
+    start)
+        printf 'Starting %s...' "$svc"
+        if s6-svok "$svcdir" ; then
+            (
+                set -e
+                s6-svc -u "$svcdir"
+                if s6-svok "${svcdir}/log"; then
+                    s6-svc -u "${svcdir}/log"
+                fi
+            )
+        else
+            (
+                set -e
+                start_supervision
+            )
+        fi
+        check $?
+        ;;
+
+    stop)
+        is_supervised || exit 1
+        printf 'Stopping %s...' "$svc"
+        (
+            set -e
+            stop_service
+        )
+        check $?
+        ;;
+
+    unsup)
+        printf 'Stopping %s and unsupervising...' "$svc"
+        (
+            set -e
+            if s6-svok "$svcdir"; then
+                stop_service
+                stop_supervision
+            fi
+        )
         check $?
         ;;
 esac

@@ -1,0 +1,23 @@
+#!/bin/sh
+case "$@" in
+    0) action=halt;;
+    6) action=reboot;;
+    7) action=poweroff;;
+    *)
+        printf 'Unsupported signal: %s\n' "$@"
+        exit 1
+        ;;
+esac
+
+# Save the command that was requested.
+# Used by /etc/s6/rc.shutdown later.
+printf '%s\n' "$action" >/s6/run/.shutdown
+
+# Kill any unsupervised processes hanging around
+s6-svscanctl -an /s6/run
+
+# Graceful shutdown, allowing logs to finish.
+# After tearing down all supervised processes, s6-svscan will execute its
+# finish script as defined under /etc/s6/init-services/.s6-svscan/finish
+# which will in turn call /etc/s6/rc.shutdown when done.
+s6-svscanctl -tb /s6/run

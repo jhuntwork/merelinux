@@ -13,6 +13,16 @@ s6-svscanctl -a /s6/run
 # Mountpoints /dev/pts /dev/shm
 install -d /dev/pts /dev/shm
 
+mount -t tmpfs cgroupfs /sys/fs/cgroup
+awk '!/^#/ { if ($4 == 1) print $1 }' /proc/cgroups | while IFS= read -r sys; do
+    sys_path="/sys/fs/cgroup/${sys}"
+    mkdir -p "$sys_path"
+    mountpoint -q "$sys_path" ||
+        mount -n -t cgroup -o "$sys" cgroup "$sys_path" ||
+        rmdir "$sys_path" ||
+        true
+done
+
 # mount other filesystems in /etc/fstab
 mount -a
 
