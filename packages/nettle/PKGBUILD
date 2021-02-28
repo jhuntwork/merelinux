@@ -4,7 +4,7 @@
 
 rationale='libarchive and pacman require nettle'
 pkgname=(nettle nettle-dev)
-pkgver=3.4.1
+pkgver=3.7
 pkgrel=1
 pkgdesc='A cryptographic library that is designed to fit easily in more or less any context'
 arch=(x86_64)
@@ -12,7 +12,7 @@ url='http://www.lysator.liu.se/~nisse/nettle/'
 license=(GPL3)
 groups=(base)
 depends=()
-makedepends=(gmp-dev)
+makedepends=()
 options=()
 changelog=ChangeLog
 source=(
@@ -20,42 +20,33 @@ source=(
 )
 
 sha256sums=(
-    f941cf1535cd5d1819be5ccae5babef01f6db611f9b5a777bae9c7604b8a92ad
+    f001f64eb444bf13dd91bceccbc20acbc60c4311d6e2b20878452eb9a9cec75a
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    CFLAGS+=' -fPIC' ./configure --prefix='' \
-        --enable-static
+    cd_unpacked_src
+    CFLAGS+=' -fPIC' LDFLAGS='-static -Wl,-static' \
+        ./configure --prefix='' \
+        --enable-static \
+        --disable-shared
     make
 }
 
 package_nettle() {
     pkgfiles=(
         bin
-        lib/libhogweed.so.*
-        lib/libnettle.so.*
     )
-    depends=(musl gmp)
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    depends=(musl)
+    std_package
 }
 
 package_nettle-dev() {
     pkgfiles=(
         include
-        lib/libhogweed.a
-        lib/libhogweed.so
         lib/libnettle.a
-        lib/libnettle.so
         lib/pkgconfig
     )
     depends=(nettle)
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
