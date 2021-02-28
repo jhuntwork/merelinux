@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(jq jq-dev)
-pkgver=1.5
+pkgver=1.6
 pkgrel=1
 pkgdesc='A lightweight and flexible command-line JSON processor'
 arch=(x86_64)
@@ -11,46 +11,42 @@ url='https://github.com/stedolan/jq'
 license=(BSD)
 groups=(base)
 depends=()
-makedepends=()
+makedepends=(libtool)
 options=()
 changelog=ChangeLog
 
 source=(
-    "${url}/releases/download/${pkgbase}-${pkgver}/${pkgbase}-${pkgver}.tar.gz"
+    "${url}/releases/download/jq-${pkgver}/jq-${pkgver}.tar.gz"
 )
 sha256sums=(
-    c4d2bfec6436341113419debf479d833692cc5cdab7eb0326b5a4d4fbe9f493c
+    5de8c8e29aaa3fb9cc6b47bb27299f271354ebb72514e3accadc7d38b5bbaa72
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    CFLAGS+=' --static' \
-      ./configure \
+    cd_unpacked_src
+    autoreconf -i
+    ./configure \
       --prefix='' \
       --enable-static \
-      --disable-shared
+      --disable-shared \
+      --enable-all-static
     make
 }
 
 package_jq() {
     pkgfiles=(
-        bin
+        bin/jq
         share/man/man1
     )
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_package
 }
 
 package_jq-dev() {
     pkgfiles=(
+        bin/onig-config
         include
         lib
     )
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
