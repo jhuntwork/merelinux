@@ -4,7 +4,7 @@
 
 rationale='A near-universal build utility, make drives compilation of many packages'
 pkgname=(make)
-pkgver=4.2.1
+pkgver=4.3
 pkgrel=1
 pkgdesc='A tool to control the generation of executables'
 arch=(x86_64)
@@ -12,22 +12,21 @@ url='http://www.gnu.org/software/make/'
 license=(GPL3)
 groups=(base)
 depends=()
-makedepends=(gettext libtool)
+makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "http://ftp.gnu.org/gnu/${pkgbase}/${pkgbase}-${pkgver}.tar.bz2"
+    "http://ftp.gnu.org/gnu/make/make-${pkgver}.tar.gz"
 )
 
 sha256sums=(
-    d6e262bf3601b42d2b1e4ef8310029e1dcf20083c5446b4b7aa67081fdffc589
+    e05fdde47c5f7ca45cb697e973894ff4f5d79e13b750ed57d7b66d8defc78e19
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    autoreconf -i
-    LDFLAGS='-Wl,-static' ./configure --prefix='' \
+    cd_unpacked_src
+    LDFLAGS='-static -Wl,-static' ./configure --prefix='' \
         --disable-load
     make V=1
 }
