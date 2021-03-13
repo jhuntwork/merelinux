@@ -9,6 +9,8 @@ minify:
   disableXML: true
   minifyOutput: true
 
+googleAnalytics: G-0F75MQ8DJJ
+
 params:
   env: production
   description: A lightweight Linux distribution using musl libc, pacman and s6.
