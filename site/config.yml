@@ -1,6 +1,6 @@
 baseURL: http://merelinux.org/
 languageCode: en-us
-title:
+title: "\U0001F331 Mere Linux"
 theme: PaperMod
 copyright: © 2021 Jeremy Huntwork
 enableRobotsTXT: true
@@ -22,14 +22,19 @@ params:
   hidemeta: false
 
   homeInfoParams:
-    Title: "\U0001F331 Mere Linux"
+    Title: "Welcome!"
     Content: >
-      A lightweight Linux distribution built around musl libc and s6.\
+      Mere Linux is a lightweight Linux distribution built around
+      [musl libc](https://musl.libc.org/) and
+      [s6](https://skarnet.org/software/s6/) for system initialization and
+      process supervision.\
 
       \
 
-      It currently uses pacman as the package manager, and llvm/clang as the
-      toolchain and C compiler.\
+      It also uses [pacman](https://www.archlinux.org/pacman/)
+      for package management, [busybox](https://busybox.net) for a suite of
+      core utilities, and [llvm+clang](https://llvm.org) as the main C
+      compiler and toolchain.\
 
       \
 
@@ -41,4 +46,3 @@ params:
   socialIcons:
     - name: github
       url: "https://github.com/jhuntwork/merelinux"
-
