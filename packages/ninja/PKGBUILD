@@ -25,7 +25,7 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    LDFLAGS='-Wl,-static' ./configure.py --bootstrap
+    LDFLAGS='-static -Wl,-static -lc++abi -lunwind' ./configure.py --bootstrap
 }
 
 package() {

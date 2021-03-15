@@ -4,7 +4,7 @@
 
 pkgname=(openssh-client)
 _vermajor=8
-_verminor=4
+_verminor=5
 pkgver=${_vermajor}.${_verminor}p1
 pkgrel=1
 pkgdesc='the premier connectivity tool for remote login with the SSH protocol'
@@ -14,7 +14,7 @@ license=(BSD)
 groups=(base)
 depends=()
 makedepends=(
-    libressl-dev
+    openssl-dev
     zlib-dev
 )
 options=()
@@ -24,17 +24,13 @@ source=(
     "https://ftp4.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${pkgver}.tar.gz"
 )
 sha256sums=(
-    5a01d22e407eb1c05ba8a8f7c654d388a13e9f226e4ed33bd38748dafa1d2b24
+    f52f3f41d429aa9918e38cf200af225ccdd8e66f052da572870c89737646ec25
 )
 
 
 build() {
     cd_unpacked_src
     export LDFLAGS='-static -Wl,-static'
-    export ac_cv_func_arc4random=no
-    export ac_cv_func_arc4random_buf=no
-    export ac_cv_func_arc4random_stir=no
-    export ac_cv_func_arc4random_uniform=no
     ./configure \
         --prefix=/ \
         --with-mantype=man

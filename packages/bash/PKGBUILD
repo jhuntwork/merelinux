@@ -68,5 +68,5 @@ package() {
     make DESTDIR="${pkgdirbase}/dest" install
     install -d "${pkgdirbase}/dest/etc"
     install -m 0644 "${srcdir}/bashrc" "${pkgdirbase}/dest/etc/"
-    package_defined_files
+    std_split_package
 }

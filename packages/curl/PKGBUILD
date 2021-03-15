@@ -62,7 +62,7 @@ package_curl() {
     cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
     install -m0755 -v src/curl-static "${pkgdirbase}/dest/bin/curl"
-    package_defined_files
+    std_split_package
 }
 
 package_libcurl() {
