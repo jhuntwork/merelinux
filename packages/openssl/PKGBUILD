@@ -1,0 +1,63 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+pkgname=(openssl openssl-dev)
+pkgver=1.1.1j
+pkgrel=1
+pkgdesc='a toolkit for the TLS and SSL protocols'
+arch=(x86_64)
+url='https://www.openssl.org'
+license=(BSD)
+groups=(base)
+depends=()
+makedepends=(perl zlib-dev)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://www.openssl.org/source/openssl-1.1.1j.tar.gz"
+)
+sha256sums=(
+    aaf2fcb575cdf6491b98ab4829abf78a3dec8402b8b81efc8f23c00d443981bf
+)
+
+
+build() {
+    cd_unpacked_src
+    ./Configure \
+        --prefix=/ \
+        --openssldir=/etc/ssl \
+        linux-x86_64-clang
+    make
+}
+
+package_openssl() {
+    depends=(
+        musl
+    )
+    pkgfiles=(
+        etc/ssl/*.cnf
+        bin/openssl
+        lib/engines-1.1
+        lib/lib*.so.*
+        share/man/man1
+        share/man/man5
+        share/man/man7
+    )
+    std_package
+}
+
+package_openssl-dev() {
+    depends=(
+        openssl
+    )
+    pkgfiles=(
+        include
+        lib/lib*.a
+        lib/lib*.so
+        lib/pkgconfig
+        share/man/man3
+    )
+    std_split_package
+}
