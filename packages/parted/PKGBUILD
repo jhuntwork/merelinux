@@ -3,8 +3,8 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=parted
-pkgver=3.2
-pkgrel=2
+pkgver=3.4
+pkgrel=1
 pkgdesc='partition table manipulator'
 arch=(x86_64)
 url='http://www.gnu.org/software/parted'
@@ -20,20 +20,17 @@ options=()
 changelog=ChangeLog
 source=(
     "http://ftp.gnu.org/gnu/${pkgname}/${pkgname}-${pkgver}.tar.xz"
-    parted-3.2-devmapper.patch
 )
 
 sha256sums=(
-    858b589c22297cacdf437f3baff6f04b333087521ab274f7ab677cb8c6bb78e4
-    a72db7a487b891b19e6b859a6deaa4defe0c603842f1a91962de553e68acc96f
+    e1298022472da5589b7f2be1d5ee3c1b66ec3d96dfbad03dc642afd009da5342
 )
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     sed -i 's@loff_t@off_t@g' libparted/fs/xfs/platform_defs.h
-    patch -Np1 -i "${srcdir}/parted-3.2-devmapper.patch"
-    CFLAGS="$CFLAGS -fPIC" LDFLAGS="-Wl,-static" \
+    CFLAGS+=' -fPIC --static' \
     ./configure \
       --prefix='' \
       --enable-static \
@@ -47,9 +44,5 @@ package() {
         sbin
         share
     )
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_package
 }
