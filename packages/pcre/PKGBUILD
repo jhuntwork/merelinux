@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=(pcre libpcre libpcre-dev)
-pkgver=8.42
+pkgname=(pcre libpcre-dev)
+pkgver=8.44
 pkgrel=1
 pkgdesc='Perl Compatible Regular Expressions'
 arch=(x86_64)
@@ -11,21 +11,22 @@ url='http://pcre.org'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=(libtool)
+makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-${pkgver}.tar.bz2"
+    "https://ftp.pcre.org/pub/pcre/pcre-${pkgver}.tar.gz"
 )
 sha256sums=(
-    2cd04b7c887808be030254e8d77de11d3fe9d4505c39d4b15d2664ffe8bf9301
+    aecafd4af3bd0f3935721af77b889d9024b2e01d96b58471bd91a3063fb47728
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    autoreconf -i
+    cd_unpacked_src
     ./configure --prefix='' \
+        --disable-shared \
+        --enable-static \
         --enable-utf8 \
         --enable-unicode-properties
     make
@@ -36,40 +37,19 @@ package_pcre() {
         bin
     )
     depends=(
-        libpcre
         musl
     )
-
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    std_package
     rm "${pkgdir}/bin/pcre-config"
-}
-
-package_libpcre() {
-    pkgfiles=(
-        lib/libpcre*.so.*
-    )
-    depends=(musl)
-
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
 }
 
 package_libpcre-dev() {
     pkgfiles=(
         bin/pcre-config
         include
-        lib/*.so
         lib/*.a
         lib/pkgconfig
     )
-    depends=(libpcre)
-
-    cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+    depends=()
+    std_split_package
 }
