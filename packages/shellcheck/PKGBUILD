@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=shellcheck
-pkgver=0.6.0
+pkgver=0.7.1
 pkgrel=1
 pkgdesc='A static analysis tool for shell scripts'
 arch=('x86_64')
@@ -11,35 +11,24 @@ url='https://github.com/koalaman/shellcheck'
 license=('GPL3')
 groups=('base')
 depends=()
-makedepends=(
-    cabal-install
-    ghc
-    gmp-dev
-)
+makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "https://github.com/koalaman/shellcheck/archive/v${pkgver}.tar.gz"
+    "https://github.com/koalaman/shellcheck/releases/download/v${pkgver}/shellcheck-v${pkgver}.linux.x86_64.tar.xz"
 )
 
 sha256sums=(
-    78f90aa8e618dc468bc1c36b6929216dc7a0c2679cd157e50919f7d8cc1899bc
+    64f17152d96d7ec261ad3086ed42d18232fcb65148b44571b564d688269d36c8
 )
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    sed -i "/^executable/s@.*@&\n    ld-options:\n      -static@" ShellCheck.cabal
-    cabal sandbox init --sandbox="${srcdir}/destdir"
-    cabal update
-    cabal install
+    cd_unpacked_src
 }
 
 package() {
-    pkgfiles=(
-        bin
-    )
-    cd "${srcdir}/destdir" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dumpv "$pkgdir"
+    cd_unpacked_src
+    install -d "${pkgdir}"/bin
+    install -m0755 shellcheck "${pkgdir}"/bin/
 }
