@@ -41,7 +41,7 @@ package_e2fsprogs() {
     )
     cd_unpacked_src
     make V=1 DESTDIR="${pkgdirbase}/dest" install install-libs
-    package_defined_files
+    std_split_package
 }
 
 package_libblkid-dev() {
