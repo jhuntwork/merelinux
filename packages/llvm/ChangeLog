@@ -1,3 +1,13 @@
+2021-03-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 11.1.0-4 :
+	Build only the native target
+
+2021-03-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 11.1.0-3 :
+	Add llvm-strip
+
 2021-03-13  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 11.1.0-2 :
