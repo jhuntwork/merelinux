@@ -3,13 +3,13 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=base-layout
-pkgver=1.8
-pkgrel=3
+pkgver=1.9
+pkgrel=1
 pkgdesc='The base directory structure and a few core files for the system.'
 arch=('x86_64')
 url='http://www.merelinux.org'
 license=(MIT)
-groups=('base')
+groups=(core)
 depends=()
 makedepends=()
 options=('emptydirs')
@@ -26,7 +26,7 @@ sha256sums=(
     e1d32f445c3a6da06f9787ec7b8d59bb789dde4ad95e12b62ece5b68f307777e
     79aa3fb64f0b0d18ed4c53680d1fc991f7782dda9dcafc6bb592648056e21057
     182754543753adbc9bcd5c03e55ca49603be6ed181770676920d7bb9277f7e77
-    6e7af7647d4064e6df502e1fa5f062a7ba753487a906850e9f332c6f0a7be7a3
+    1dcc1e00d7189fa105c726b253aab416b3c0d47e432ac9958db54c7faacb9ac7
     b4d36eb75767bebb41c5fa7a35599952e1883b3d3f6332496e1561eeb4067018
     297b784a25fc59641589c6ef05dc26680e2805e9cab37a4ea3699aa072a25c2e
 )

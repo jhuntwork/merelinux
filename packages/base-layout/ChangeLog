@@ -1,3 +1,9 @@
+2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.9-1 :
+	Add to new core group
+	Add /bin/sh to /etc/shells
+
 2019-08-04  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.8-3 :
