@@ -4,12 +4,12 @@
 
 pkgname=build-essential
 pkgver=0.7
-pkgrel=1
+pkgrel=2
 pkgdesc='A meta-package which pulls in essential build tools'
 arch=(x86_64)
 url='http://www.merelinux.org'
 license=(BSD)
-groups=(base)
+groups=(core-dev)
 depends=(
     busybox
     llvm
