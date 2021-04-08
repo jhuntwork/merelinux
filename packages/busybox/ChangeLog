@@ -1,3 +1,11 @@
+2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.32.1-3 :
+	Use pretty lsmod output
+	Add support for module blacklists
+	Improve udhcpc script: use CIDR mask and add metrics to default routes
+	Add to new core group
+
 2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.32.1-2 :

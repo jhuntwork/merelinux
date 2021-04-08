@@ -1,10 +1,16 @@
 #!/bin/sh
+
 # shellcheck disable=SC2154
+# This script depends on multiple variables declared in the environment by
+# udhcpc at runtime
+#
+# shellcheck disable=SC2086
+# There are several variables such as BROADCAST, staticroutes and default
+# which may contiain multiple terms and should be left unquoted
 
 process_routes() {
     while [ $# -ne 0 ] ; do
         dest=$1
-        # Shift twice past the second arg
         shift; shift
         ip route add "$dest" dev "$interface"
     done
@@ -12,29 +18,27 @@ process_routes() {
 
 case "$1" in
     deconfig)
-        ifconfig "$interface" 0.0.0.0
+        ip -4 addr flush dev "$interface"
+        ip link set dev "$interface" up
         ;;
     renew|bound)
-        NETMASK=''
-        BROADCAST=''
-        [ -n "$subnet" ] && NETMASK="netmask $subnet"
-        [ "$subnet" = "255.255.255.255" ] && [ -z "$broadcast" ] &&
-            broadcast=$ip
+        BROADCAST='broadcast +'
         [ -n "$broadcast" ] && BROADCAST="broadcast $broadcast"
 
-        ifconfig "$interface" "$ip" "$NETMASK" "$BROADCAST"
+        ip addr add "${ip}/${mask}" $BROADCAST dev "$interface"
 
-        [ -n "$mtu" ] && ifconfig "$interface" mtu "$mtu"
-        # shellcheck disable=SC2086
+        [ -n "$mtu" ] && ip link set dev "$interface" mtu "$mtu"
         [ -n "$staticroutes" ] && process_routes $staticroutes
 
         if [ -n "$router" ] ; then
-            while route del default gw 0.0.0.0 dev "$interface" ; do
+            while ip route delete default dev "$interface" 2>/dev/null ; do
                 :
             done
-
+            metric=0
             for i in $router ; do
-                ip route add default via "$i"
+                [ "$mask" = '32' ] && ip route add "$i" dev "$interface"
+                metric=$((metric+1))
+                ip route add default via "$i" metric "$metric"
             done
         fi
 
