@@ -25,4 +25,4 @@ background {
 unexport !
 fdmove -c 2 1
 cd /s6/run
-s6-svscan -st0
+s6-svscan
