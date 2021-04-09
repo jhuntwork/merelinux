@@ -2,15 +2,14 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='Perl is a build and runtime dependency of the autoconf and automake tools'
 pkgname=(perl)
 pkgver=5.32.1
-pkgrel=1
+pkgrel=2
 pkgdesc='An API for writing text-based user interfaces.'
 arch=('x86_64')
 url='http://www.perl.org'
 license=('GPL2')
-groups=('base')
+groups=()
 depends=(musl)
 makedepends=(zlib-dev)
 options=()
@@ -26,25 +25,18 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    grep -lr "/usr" . | xargs sed -i -e 's@/usr/local@@g' -e 's@/usr@@g'
     export BUILD_ZLIB=False
     CFLAGS="$CFLAGS" ./configure.gnu \
-      -des -Dprefix=/ \
+      -des -Dprefix=/usr \
       -Dcc="cc -D_GNU_SOURCE" \
-      -Dbin=/bin \
-      -Dinstallsitebin=/bin \
-      -Dvendorprefix=/ \
-      -Dprivlib=/lib/perl5/${pkgver} \
-      -Darchlib="/lib/perl5/${pkgver}/$(arch)-linux" \
-      -Dsitelib=/lib/perl5/site_perl/${pkgver} \
-      -Dvendorlib=/lib/perl5/vendor_perl/${pkgver} \
-      -Dvendorarch="/lib/perl5/vendor_perl/${pkgver}/$(arch)-linux" \
-      -Dscriptdir=/bin \
-      -Dsitescript=/bin \
-      -Dvendorbin=/bin \
-      -Dvendorscript=/bin \
-      -Dman1dir=/share/man/man1 \
-      -Dman3dir=/share/man/man3 \
+      -Dvendorprefix=/usr \
+      -Dprivlib="/usr/lib/perl5/${pkgver}" \
+      -Darchlib="/usr/lib/perl5/${pkgver}/$(arch)-linux" \
+      -Dsitelib="/usr/lib/perl5/site_perl/${pkgver}" \
+      -Dvendorlib="/usr/lib/perl5/vendor_perl/${pkgver}" \
+      -Dvendorarch="/usr/lib/perl5/vendor_perl/${pkgver}/$(arch)-linux" \
+      -Dman1dir=/usr/share/man/man1 \
+      -Dman3dir=/usr/share/man/man3 \
       -Dpager="/bin/less -I" \
       -Dusethreads \
       -Duseshrplib
@@ -58,9 +50,9 @@ check() {
 
 package() {
     pkgfiles=(
-        bin
-        lib
-        share
+        usr/bin
+        usr/lib
+        usr/share
     )
     std_package
 }
