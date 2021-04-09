@@ -1,3 +1,9 @@
+2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.2.2-3 :
+	Add to groups core and core-dev for musl and musl-dev respectively
+	Switch to /usr as main prefix
+
 2021-02-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.2.2-2 :
@@ -6,7 +12,7 @@
 2021-02-20  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.2.2-1 :
-    Upgrade to 1.2.2
+	Upgrade to 1.2.2
 
 2019-04-10  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 

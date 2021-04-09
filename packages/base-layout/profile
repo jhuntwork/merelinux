@@ -5,12 +5,12 @@
 hn=$(hostname -s)
 id=$(id -u)
 P='$'
-PATH='/local/bin:/bin'
+PATH='/usr/local/bin:/bin:/usr/bin'
 
 # Special cases for root
 if [ "$id" = '0' ] ; then
     P='#'
-    PATH='/local/bin:/local/sbin:/bin:/sbin'
+    PATH='/usr/local/bin:/usr/local/sbin:/bin:/sbin'
 fi
 
 set_ps1() {

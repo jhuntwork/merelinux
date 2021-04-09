@@ -5,12 +5,12 @@
 rationale='This is part of the core toolchain'
 pkgname=(musl musl-dev)
 pkgver=1.2.2
-pkgrel=2
+pkgrel=3
 pkgdesc='An implementation of the C/POSIX standard library.'
-arch=('x86_64')
+arch=(x86_64)
 url='https://musl.libc.org'
 license=(LGPL BSD)
-groups=('base')
+groups=(core)
 depends=()
 makedepends=()
 options=()
@@ -23,38 +23,32 @@ sha256sums=(
 )
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return || return 1
+    cd_unpacked_src
     unset CFLAGS CXXFLAGS
-    ./configure --prefix=/
+    ./configure --prefix=/usr \
+        --syslibdir=/lib
     make
 }
 
 package_musl() {
     pkgfiles=(
-        bin/ldd
-        lib/libc.so
+        usr/lib/libc.so
         "lib/ld-musl-$(arch).so.1"
     )
+    provides=("ld-musl-$(arch).so.1")
 
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${pkgdirbase}/dest" || return || return 1
-    install -d bin
-    ln -sf ../lib/libc.so bin/ldd
-    set -o pipefail
-    # shellcheck disable=SC2068
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_package
+    install -d "${pkgdir}"/usr/bin
+    ln -sf /usr/lib/libc.so "${pkgdir}"/usr/bin/ldd
 }
 
 package_musl-dev() {
     pkgfiles=(
-        include
-        lib/*.a
-        lib/*.o
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.o
     )
-    depends=(musl linux-headers)
-    cd "${pkgdirbase}/dest" || return || return 1
-    set -o pipefail
-    # shellcheck disable=SC2068
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    depends=("musl=${pkgver}" linux-headers)
+    groups=(core-dev)
+    std_split_package
 }
