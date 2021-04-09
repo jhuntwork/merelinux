@@ -4,18 +4,18 @@
 
 pkgname=(readline readline-dev)
 pkgver=8.1
-pkgrel=1
+pkgrel=2
 pkgdesc='A library for allowing users to edit command lines as they are typed in.'
 arch=('x86_64')
 url='http://www.gnu.org/software/readline/'
 license=('BSD')
-groups=('base')
+groups=()
 depends=()
 makedepends=(libncurses-dev)
 options=()
 changelog=ChangeLog
 
-PURGE_TARGETS+=(share/info/* share/readline/*)
+PURGE_TARGETS+=(usr/share/info/* usr/share/readline/*)
 
 source=(
     "http://ftp.gnu.org/gnu/readline/readline-${pkgver}.tar.gz"
@@ -32,29 +32,32 @@ build() {
     sed -i '/{OLDSUFF}/c:' support/shlib-install
     CFLAGS='-fPIC' \
     ./configure \
-      --prefix=''
+      --prefix=/usr
     make SHLIB_LIBS=-lncursesw
 }
 
 package_readline() {
     pkgfiles=(
-        lib/*.so.*
+        usr/lib/*.so.*
     )
     depends=(
-        musl
+        libc.so
+    )
+    provides=(
+        libreadline.so.8
     )
     std_package
 }
 
 package_readline-dev() {
     pkgfiles=(
-        include
-        lib/*.a
-        lib/*.so
-        share/man/man3
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
+        usr/share/man/man3
     )
     depends=(
-        readline
+        "readline=${pkgver}"
     )
     std_split_package
 }
