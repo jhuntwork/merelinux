@@ -2,15 +2,14 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='Many packages use the pkg-config functionality to locate libraries'
 pkgname=pkgconf
 pkgver=1.7.3
-pkgrel=1
+pkgrel=2
 pkgdesc='An API-driven pkg-config replacement'
 arch=('x86_64')
 url='https://github.com/pkgconf/pkgconf'
 license=('BSD')
-groups=('base')
+groups=(core-dev)
 depends=()
 makedepends=()
 options=()
@@ -28,15 +27,15 @@ build() {
     cd_unpacked_src
     LDFLAGS='-static -Wl,-static' \
       ./configure \
-      --prefix='' \
+      --prefix=/usr \
       --disable-shared \
-      --with-system-libdir=/lib \
-      --with-system-includedir=/include
+      --with-system-libdir=/usr/lib \
+      --with-system-includedir=/usr/include
     make
 }
 
 package() {
     cd_unpacked_src
     make DESTDIR="$pkgdir" install
-    ln -s pkgconf "${pkgdir}/bin/pkg-config"
+    ln -s pkgconf "${pkgdir}/usr/bin/pkg-config"
 }
