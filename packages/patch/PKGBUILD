@@ -2,15 +2,14 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='The patch utility is expected to be present for full pacman functionality. Busybox ships with a version of patch, but its features are not sufficient for our needs.'
 pkgname=(patch)
 pkgver=2.7.6
-pkgrel=2
+pkgrel=3
 pkgdesc='A utility for patching difference listings against one or more original files'
 arch=('x86_64')
 url='http://savannah.gnu.org/projects/patch/'
 license=('GPL3')
-groups=('base')
+groups=(core-dev)
 depends=()
 makedepends=()
 options=()
@@ -26,12 +25,12 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    LDFLAGS='-static -Wl,-static' ./configure --prefix=''
+    LDFLAGS='-static -Wl,-static' ./configure --prefix=/usr
     make V=1
 }
 
 package() {
     cd_unpacked_src
     make DESTDIR="${pkgdir}" install
-    rm -rf "${pkgdir:?}/lib"
+    rm -rf "${pkgdir:?}/usr/lib"
 }
