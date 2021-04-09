@@ -4,12 +4,12 @@
 
 pkgname=(libffi libffi-dev)
 pkgver=3.3
-pkgrel=1
+pkgrel=2
 pkgdesc='A portable Foregin Function Interface library.'
 arch=(x86_64)
 url='http://sourceware.org/libffi/'
 license=(BSD)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -26,8 +26,7 @@ build() {
     cd_unpacked_src
     CFLAGS+=" -fPIC" \
       ./configure \
-      --prefix='' \
-      --includedir=/include \
+      --prefix=/usr \
       --enable-static \
       --enable-shared
     make
@@ -35,21 +34,24 @@ build() {
 
 package_libffi() {
     pkgfiles=(
-        "lib/libffi.so.*"
+        usr/lib/libffi.so.*
     )
     depends=(
-        musl
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libffi.so.7
     )
     std_package
 }
 
 package_libffi-dev() {
     pkgfiles=(
-        include
-        "lib/*.a"
-        "lib/*.so"
-        lib/pkgconfig
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
+        usr/lib/pkgconfig
     )
-    depends=(libffi)
+    depends=("libffi=${pkgver}")
     std_split_package
 }
