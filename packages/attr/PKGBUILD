@@ -37,7 +37,7 @@ package_attr() {
         usr/bin
     )
     depends=(
-        libattr.so
+        libattr.so.1
         "ld-musl-$(arch).so.1"
     )
     std_package
@@ -51,7 +51,7 @@ package_libattr() {
         "ld-musl-$(arch).so.1"
     )
     provides=(
-        libattr.so
+        libattr.so.1
     )
     std_split_package
 }
