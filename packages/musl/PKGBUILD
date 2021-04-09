@@ -5,7 +5,7 @@
 rationale='This is part of the core toolchain'
 pkgname=(musl musl-dev)
 pkgver=1.2.2
-pkgrel=3
+pkgrel=4
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=(x86_64)
 url='https://musl.libc.org'
@@ -26,27 +26,31 @@ build() {
     cd_unpacked_src
     unset CFLAGS CXXFLAGS
     ./configure --prefix=/usr \
+        --libdir=/lib \
         --syslibdir=/lib
     make
 }
 
 package_musl() {
     pkgfiles=(
-        usr/lib/libc.so
+        lib/libc.so
         "lib/ld-musl-$(arch).so.1"
     )
-    provides=("ld-musl-$(arch).so.1")
+    provides=(
+        "ld-musl-$(arch).so.1"
+        libc.so
+    )
 
     std_package
     install -d "${pkgdir}"/usr/bin
-    ln -sf /usr/lib/libc.so "${pkgdir}"/usr/bin/ldd
+    ln -sf /lib/libc.so "${pkgdir}"/usr/bin/ldd
 }
 
 package_musl-dev() {
     pkgfiles=(
         usr/include
-        usr/lib/*.a
-        usr/lib/*.o
+        lib/*.a
+        lib/*.o
     )
     depends=("musl=${pkgver}" linux-headers)
     groups=(core-dev)
