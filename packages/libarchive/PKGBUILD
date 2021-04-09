@@ -8,12 +8,12 @@ pkgname=(
     libarchive-dev
 )
 pkgver=3.5.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Multi-format archive and compression library'
 arch=(x86_64)
 url='http://www.libarchive.org'
 license=(BSD)
-groups=(base)
+groups=()
 depends=()
 makedepends=(
     libacl-dev
@@ -42,7 +42,7 @@ build() {
     sed -i 's@lzma -d@unlzma@' libarchive/archive_read_support_filter_xz.c
     CFLAGS+=' -fPIC --static' LDFLAGS='-static -Wl,-static' \
         ./configure \
-        --prefix='' \
+        --prefix=/usr \
         --disable-shared \
         --enable-static
     make V=1
@@ -50,9 +50,9 @@ build() {
 
 package_libarchive() {
     pkgfiles=(
-        bin
-        share/man/man1
-        share/man/man5/libarchive-formats*
+        usr/bin
+        usr/share/man/man1
+        usr/share/man/man5/libarchive-formats*
     )
     std_package
 }
@@ -60,10 +60,10 @@ package_libarchive() {
 package_libarchive-dev() {
     depends=(libarchive)
     pkgfiles=(
-        include
-        lib/*.a
-        lib/pkgconfig
-        share/man/man3
+        usr/include
+        usr/lib/*.a
+        usr/lib/pkgconfig
+        usr/share/man/man3
     )
     depends=(libarchive)
     std_split_package

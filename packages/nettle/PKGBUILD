@@ -5,12 +5,12 @@
 rationale='libarchive and pacman require nettle'
 pkgname=(nettle nettle-dev)
 pkgver=3.7
-pkgrel=1
+pkgrel=2
 pkgdesc='A cryptographic library that is designed to fit easily in more or less any context'
 arch=(x86_64)
 url='http://www.lysator.liu.se/~nisse/nettle/'
 license=(GPL3)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -27,7 +27,7 @@ sha256sums=(
 build() {
     cd_unpacked_src
     CFLAGS+=' -fPIC' LDFLAGS='-static -Wl,-static' \
-        ./configure --prefix='' \
+        ./configure --prefix=/usr \
         --enable-static \
         --disable-shared
     make
@@ -35,7 +35,7 @@ build() {
 
 package_nettle() {
     pkgfiles=(
-        bin
+        usr/bin
     )
     depends=(musl)
     std_package
@@ -43,9 +43,9 @@ package_nettle() {
 
 package_nettle-dev() {
     pkgfiles=(
-        include
-        lib/libnettle.a
-        lib/pkgconfig
+        usr/include
+        usr/lib/libnettle.a
+        usr/lib/pkgconfig
     )
     depends=(nettle)
     std_split_package
