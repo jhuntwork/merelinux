@@ -113,6 +113,14 @@ warn_dependencies() {
             fi
         done
         if [ $found -eq 0 ] ; then
+            for p in "${provides[@]}"; do
+                if [ "$p" = "$lib" ]; then
+                    found=1
+                    break
+                fi
+            done
+        fi
+        if [ $found -eq 0 ] ; then
             not_found+=("$lib")
         fi
     done
