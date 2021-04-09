@@ -49,7 +49,7 @@ list_file_dependencies() {
     local IFS=$'\n'
     for i in $lddout ; do
         local dep
-        dep=$(printf '%s\n' "$i" | awk '{print $3}')
+        dep=$(printf '%s\n' "$i" | awk '{print $3}' | awk -F/ '{print $NF}')
         [ -z "$dep" ] && continue
         case "$dep" in
             ldd|$(pwd)*)
@@ -106,12 +106,14 @@ warn_dependencies() {
     fi
     for lib in $pkg_deps; do
         local found=0
-        dep="$(pacman -Qoq "$lib")"
-        for pkg in "${depends[@]}" ; do
-            [ "$dep" = "$pkg" ] && found=1
+        for dep in "${depends[@]}" ; do
+            if [ "$dep" = "$lib" ]; then
+                found=1
+                break
+            fi
         done
         if [ $found -eq 0 ] ; then
-            not_found+=("$dep")
+            not_found+=("$lib")
         fi
     done
     if [ ${#not_found[@]} -gt 0 ] ; then
