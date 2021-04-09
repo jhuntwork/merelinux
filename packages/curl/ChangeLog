@@ -1,3 +1,11 @@
+2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 7.75.0-2 :
+	Use openssl instead of libressl
+	Add to new core group
+	Use /usr for prefix
+	Add provides for libcurl
+
 2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 7.75.0-1 :

@@ -9,14 +9,14 @@ pkgname=(
     libcurl-dev
 )
 pkgver=7.75.0
-pkgrel=1
+pkgrel=2
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://curl.haxx.se'
 license=(GPL2)
-groups=(base)
+groups=(core)
 depends=()
-makedepends=(libressl-dev perl zlib-dev)
+makedepends=(openssl-dev perl zlib-dev)
 options=()
 changelog=ChangeLog
 
@@ -28,12 +28,12 @@ sha256sums=(
 )
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
     rm src/tool_hugehelp.c
     grep -lr 'poll.h' . | xargs sed -i 's@poll.h@poll.h@g'
     CFLAGS+=' -fPIC -static' LDFLAGS='-Wl,-static' \
     ./configure \
-      --prefix=/ \
+      --prefix=/usr \
       --enable-static \
       --disable-shared \
       --with-ssl \
@@ -44,7 +44,7 @@ build() {
     make clean
     CFLAGS+=' -fPIC' \
     ./configure \
-      --prefix=/ \
+      --prefix=/usr \
       --enable-static \
       --enable-shared \
       --with-ssl \
@@ -54,40 +54,44 @@ build() {
 
 package_curl() {
     pkgfiles=(
-        bin/curl
+        usr/bin/curl
     )
     depends=(
         ca-certs
     )
     cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
-    install -m0755 -v src/curl-static "${pkgdirbase}/dest/bin/curl"
+    install -m0755 -v src/curl-static "${pkgdirbase}/dest/usr/bin/curl"
     std_split_package
 }
 
 package_libcurl() {
     pkgfiles=(
-        "lib/libcurl.so.*"
+        usr/lib/libcurl.so.*
     )
     depends=(
         ca-certs
-        musl
-        libressl
+        "ld-musl-$(arch).so.1"
+        libssl.so.1.1
+        libcrypto.so.1.1
+    )
+    provides=(
+        libcurl.so.4
     )
     std_split_package
 }
 
 package_libcurl-dev() {
     pkgfiles=(
-        bin/curl-config
-        include
-        "lib/*.a"
-        "lib/*.so"
-        lib/pkgconfig
-        share/aclocal
+        usr/bin/curl-config
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
+        usr/lib/pkgconfig
+        usr/share/aclocal
     )
     depends=(
-        libcurl
+        "libcurl=${pkgver}"
     )
     std_split_package
 }
