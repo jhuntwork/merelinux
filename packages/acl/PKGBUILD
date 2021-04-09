@@ -2,14 +2,13 @@
 # shellcheck disable=SC2034,SC2154
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='LXC and libarchive require libacl'
 pkgname=(
     acl
     libacl
     libacl-dev
 )
 pkgver=2.2.53
-pkgrel=8
+pkgrel=9
 pkgdesc='A library for manipulating POSIX access control lists'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/acl'
@@ -28,42 +27,45 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    CFLAGS='-fPIC' ./configure \
-      --prefix=''
+    CFLAGS+=' -fPIC' ./configure \
+      --prefix=/usr
     make
 }
 
 package_acl() {
     pkgfiles=(
-        bin
+        usr/bin
     )
     depends=(
-        libacl
-        libattr
-        musl
+        libacl.so.1
+        libattr.so.1
+        "ld-musl-$(arch).so.1"
     )
     std_package
 }
 
 package_libacl() {
     pkgfiles=(
-        lib/lib*.so.*
+        usr/lib/lib*.so.*
     )
     depends=(
-        libattr
-        musl
+        libattr.so.1
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libacl.so.1
     )
     std_split_package
 }
 
 package_libacl-dev() {
     pkgfiles=(
-        include
-        lib/*.so
-        lib/*.a
+        usr/include
+        usr/lib/*.so
+        usr/lib/*.a
     )
     depends=(
-        libacl
+        "libacl=${pkgver}"
     )
     std_split_package
 }

@@ -1,3 +1,8 @@
+2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 2.2.53-9 :
+	Use /usr for prefix and update provides and depends
+
 2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 2.2.53-8 :
