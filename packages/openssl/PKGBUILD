@@ -3,30 +3,30 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(openssl openssl-dev)
-pkgver=1.1.1j
+pkgver=1.1.1k
 pkgrel=1
 pkgdesc='a toolkit for the TLS and SSL protocols'
 arch=(x86_64)
 url='https://www.openssl.org'
 license=(BSD)
-groups=(base)
+groups=()
 depends=()
 makedepends=(perl zlib-dev)
 options=()
 changelog=ChangeLog
 
 source=(
-    "https://www.openssl.org/source/openssl-1.1.1j.tar.gz"
+    "https://www.openssl.org/source/openssl-${pkgver}.tar.gz"
 )
 sha256sums=(
-    aaf2fcb575cdf6491b98ab4829abf78a3dec8402b8b81efc8f23c00d443981bf
+    892a0875b9872acd04a9fde79b1f943075d5ea162415de3047c327df33fbaee5
 )
 
 
 build() {
     cd_unpacked_src
     ./Configure \
-        --prefix=/ \
+        --prefix=/usr \
         --openssldir=/etc/ssl \
         linux-x86_64-clang
     make
@@ -34,30 +34,34 @@ build() {
 
 package_openssl() {
     depends=(
-        musl
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libcrypto.so.1.1
+        libssl.so.1.1
     )
     pkgfiles=(
         etc/ssl/*.cnf
-        bin/openssl
-        lib/engines-1.1
-        lib/lib*.so.*
-        share/man/man1
-        share/man/man5
-        share/man/man7
+        usr/bin/openssl
+        usr/lib/engines-1.1
+        usr/lib/lib*.so.*
+        usr/share/man/man1
+        usr/share/man/man5
+        usr/share/man/man7
     )
     std_package
 }
 
 package_openssl-dev() {
     depends=(
-        openssl
+        "openssl=${pkgver}"
     )
     pkgfiles=(
-        include
-        lib/lib*.a
-        lib/lib*.so
-        lib/pkgconfig
-        share/man/man3
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/share/man/man3
     )
     std_split_package
 }
