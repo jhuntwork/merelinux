@@ -5,12 +5,12 @@
 rationale='m4 is a build and runtime dependency of the autoconf and automake tools'
 pkgname=(m4)
 pkgver=1.4.18
-pkgrel=2
+pkgrel=3
 pkgdesc='An implementation of the traditional Unix macro processor'
 arch=(x86_64)
 url='http://www.gnu.org/software/m4/'
 license=(GPL3)
-groups=(base)
+groups=(core-dev)
 depends=()
 makedepends=()
 options=()
@@ -26,7 +26,7 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    CFLAGS+=' -static' ./configure --prefix='' \
+    CFLAGS+=' -static' ./configure --prefix=/usr \
       --enable-threads
     make
 }
@@ -34,5 +34,5 @@ build() {
 package() {
     cd_unpacked_src
     make DESTDIR="$pkgdir" install
-    rm -rf "${pkgdir:?}"/{lib,share}
+    rm -rf "${pkgdir:?}"/usr/{lib,share}
 }
