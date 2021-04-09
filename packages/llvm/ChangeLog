@@ -1,3 +1,8 @@
+2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 11.1.0-6 :
+	Re-add explicit dependency on musl-dev
+
 2021-03-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 11.1.0-5 :
