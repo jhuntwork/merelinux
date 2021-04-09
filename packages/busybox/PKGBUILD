@@ -6,7 +6,7 @@ pkgname=busybox
 rationale="It serves as a stand-in for bzip2, coreutils, diffutils, \
 findutils, gawk, grep, gzip, sed, tar and util-linux"
 pkgver=1.32.1
-pkgrel=3
+pkgrel=4
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
@@ -38,7 +38,7 @@ sha256sums=(
     9d57c4bd33974140fd4111260468af22856f12f5b5ef7c70c8d9b75c712a0dee
     31b58b4de281ffd65c39a9e83103c57b6dfd2dcf9c19a41f3a9cfa35ef3d263b
     08b850b788636f6c829e865414fc6305bdc1ffc6e1ec74083ab1256b6a38d0a7
-    c5618ccc99675968f199c8fb2a552458b6998245786ae6595ec3e7333461e573
+    7d9769f58391196096cf89b1d01793db8cb9019454c2d5349f443966040a3eda
     388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     3e0c3b046209525a6ac08b56406d7753a196ace08c127ff7423a8af5b91e0cbe
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
@@ -75,8 +75,8 @@ package() {
         HOSTCC=clang HOSTCXX=clang++ CC=clang CXX=clang++ install
 
     cd "$pkgdir" || return 1
-    install -d share/man/man1
-    install -m0644 "${srcdir}/${pkgname}-${pkgver}/docs/busybox.1" share/man/man1/
+    install -d usr/share/man/man1
+    install -m0644 "${srcdir}/${pkgname}-${pkgver}/docs/busybox.1" usr/share/man/man1/
 
     # configuration/scripts
     install -d etc/network/if-pre-up.d
@@ -87,12 +87,15 @@ package() {
     install -d etc/network/if-post-down.d
     install -m 0755 "${srcdir}/if-post-down-bridge" \
         etc/network/if-post-down.d/01-bridge
-    install -d share/udhcpc
+    install -d usr/share/udhcpc
     install -m 0755 "${srcdir}/udhcpc.script" \
-        share/udhcpc/default.script
+        usr/share/udhcpc/default.script
     install -m 0644 "${srcdir}/sysctl.conf" etc/
     install -m 0644 "${srcdir}/ntp.conf" etc/ntp.conf
     install -d sbin
+    install -d usr/bin
+    ln -s /bin/busybox usr/bin/env
+    rm -f bin/env
 
     # s6 Services
     install -d etc/s6/services/available/ntpd/log
