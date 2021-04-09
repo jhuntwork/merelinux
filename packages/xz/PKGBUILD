@@ -5,12 +5,12 @@
 rationale='Busybox provides an xz utility, however libarchive and pacman will use the liblzma library that ships with xz'
 pkgname=(xz liblzma-dev)
 pkgver=5.2.5
-pkgrel=1
+pkgrel=2
 pkgdesc='Free general-purpose data compression software with high compression ratio.'
 arch=('x86_64')
 url='http://tukaani.org/xz'
 license=('GPL2')
-groups=('base')
+groups=()
 makedepends=()
 options=()
 changelog=ChangeLog
@@ -27,29 +27,27 @@ build() {
     cd_unpacked_src
     CFLAGS+=' -fPIC' LDFLAGS='-static -Wl,-static' \
       ./configure \
-      --prefix='' \
+      --prefix=/usr \
       --disable-shared \
       --enable-static \
-      --disable-nls \
-      --includedir=/include \
-      --mandir=/share/man
+      --disable-nls
     make
 }
 
 package_xz() {
     pkgfiles=(
-        bin/*
+        usr/bin/*
     )
     std_package
     # The following files are provided in busybox
-    rm "${pkgdir}/bin/"{lzcat,unlzma,unxz,xzcat}
+    rm "${pkgdir}/usr/bin/"{lzcat,unlzma,unxz,xzcat}
 }
 
 package_liblzma-dev() {
     pkgfiles=(
-        include
-        lib/liblzma.a
-        lib/pkgconfig/liblzma.pc
+        usr/include
+        usr/lib/liblzma.a
+        usr/lib/pkgconfig/liblzma.pc
     )
     std_split_package
 }
