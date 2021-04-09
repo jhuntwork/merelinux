@@ -1,3 +1,8 @@
+2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.32.1-4 :
+	Support existence of a real /usr directory
+
 2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.32.1-3 :
