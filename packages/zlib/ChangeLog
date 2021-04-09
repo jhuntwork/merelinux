@@ -1,3 +1,9 @@
+2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.2.11-3 :
+	Use /usr as prefix
+	Add to new core-dev group
+
 2021-02-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.2.11-2 :
