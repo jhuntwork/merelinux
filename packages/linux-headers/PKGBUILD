@@ -5,12 +5,12 @@
 rationale='This is part of the core toolchain'
 pkgname=linux-headers
 pkgver=5.10.17
-pkgrel=1
+pkgrel=2
 pkgdesc='System headers'
 arch=(x86_64)
 url='http://www.kernel.org'
 license=(GPL2)
-groups=(base)
+groups=(core-dev)
 depends=()
 makedepends=()
 options=()
@@ -34,7 +34,7 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/linux-${pkgver}/dest/usr" || return 1
+    cd "${srcdir}/linux-${pkgver}/dest" || return 1
     set -o pipefail
-    find include -not -type d -name "*.h" | cpio -dump "${pkgdir}"
+    find usr -not -type d -name "*.h" | cpio -dump "${pkgdir}"
 }

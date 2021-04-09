@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=base-layout
-pkgver=1.9
+pkgver=2.0
 pkgrel=1
 pkgdesc='The base directory structure and a few core files for the system.'
 arch=('x86_64')
@@ -25,7 +25,7 @@ source=(
 sha256sums=(
     e1d32f445c3a6da06f9787ec7b8d59bb789dde4ad95e12b62ece5b68f307777e
     79aa3fb64f0b0d18ed4c53680d1fc991f7782dda9dcafc6bb592648056e21057
-    182754543753adbc9bcd5c03e55ca49603be6ed181770676920d7bb9277f7e77
+    da5cf257af94cdae7efdbf67aba27f937bcc785ad01e5bde5d116bf2904079c9
     1dcc1e00d7189fa105c726b253aab416b3c0d47e432ac9958db54c7faacb9ac7
     b4d36eb75767bebb41c5fa7a35599952e1883b3d3f6332496e1561eeb4067018
     297b784a25fc59641589c6ef05dc26680e2805e9cab37a4ea3699aa072a25c2e
@@ -47,23 +47,16 @@ package() {
     install -d "${pkgdir}/etc/default"
     ln -s /proc/mounts "${pkgdir}/etc/mtab"
     install -d "${pkgdir}/home"
-    install -d "${pkgdir}/include"
     install -d "${pkgdir}/lib/modules"
-    install -d "${pkgdir}/local/"{bin,include,lib,sbin,share}
+    install -d "${pkgdir}/mnt"
     install -d -m 0555 "${pkgdir}/proc"
     install -d -m 0750 "${pkgdir}/root"
     install -d -m 1777 "${pkgdir}/run"
     install -d "${pkgdir}/sbin"
     install -d -m 0555 "${pkgdir}/sys"
     install -d -m 1777 "${pkgdir}/tmp"
-    install -d "${pkgdir}/share"
-    install -d "${pkgdir}/usr"
-    ln -s ../bin     "${pkgdir}/usr/bin"
-    ln -s ../include "${pkgdir}/usr/include"
-    ln -s ../local   "${pkgdir}/usr/local"
-    ln -s ../sbin    "${pkgdir}/usr/sbin"
-    ln -s ../share   "${pkgdir}/usr/share"
-    chmod 0555 "${pkgdir}/usr"
+    install -d "${pkgdir}/srv"
+    install -d "${pkgdir}/usr/"{bin,include,local/bin,local/sbin,sbin,share/man}
     install -d "${pkgdir}/var/"{cache,lock,lib,log,mail,spool}
     ln -s /run "${pkgdir}/var/run"
     install -d -m 1777 "${pkgdir}/var/tmp"

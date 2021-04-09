@@ -1,3 +1,10 @@
+2021-03-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 11.1.0-5 :
+	Add additional modules and split out runtime libs
+	Add to new group core-dev
+	Install to prefix /usr
+
 2021-03-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 11.1.0-4 :

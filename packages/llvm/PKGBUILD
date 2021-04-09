@@ -2,14 +2,14 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-pkgname=llvm
+pkgname=(llvm llvm-runtime-libs)
 pkgver=11.1.0
-pkgrel=4
+pkgrel=5
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
 url='htps://llvm.org'
 license=(Apache)
-groups=('base')
+groups=()
 depends=(musl musl-dev)
 makedepends=(cmake git ninja zlib-dev)
 options=()
@@ -32,14 +32,10 @@ build() {
         -e 's@strtoll_l@strtoll@g' \
         -e '/strtoll/s@, _LIBCPP_GET_C_LOCALE@@' \
         libcxx/include/locale
-    sed -i \
-        -e 's@/usr/local/include@/local/include@' \
-        clang/lib/Driver/ToolChains/Linux.cpp
-    sed -i 's@/usr/local/include@/local/include@' llvm/CMakeLists.txt
     install -d build
     cd build || return 1
     cmake -G Ninja -Wno-dev \
-        -DCMAKE_INSTALL_PREFIX='' \
+        -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
         -DCLANG_BUILD_EXAMPLES=OFF \
         -DCLANG_DEFAULT_CXX_STDLIB='libc++' \
@@ -56,6 +52,7 @@ build() {
         -DLLVM_DEFAULT_TARGET_TRIPLE='x86_64-unknown-linux-musl' \
         -DLLVM_DISTRIBUTION_COMPONENTS='clang;clang-resource-headers;lld;LTO;compiler-rt;addr2line;llvm-strip;ar;objcopy;objdump;nm;ranlib;size;strings;strip;unwind;cxx;cxxabi' \
         -DLLVM_ENABLE_LIBCXX=ON \
+        -DLLVM_ENABLE_RTTI=ON \
         -DLLVM_ENABLE_PROJECTS='lld;clang;compiler-rt;libunwind;libcxx;libcxxabi' \
         -DLLVM_ENABLE_TERMINFO=OFF \
         -DLLVM_HOST_TRIPLE='x86_64-unknown-linux-musl' \
@@ -67,14 +64,43 @@ build() {
     cmake --build .
 }
 
-package() {
+package_llvm() {
+    pkgfiles=(
+        usr/bin
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
+        usr/lib/clang
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libLTO.so.11
+        libc++.so.1
+        libc++abi.so.1
+        libunwind.so.1
+    )
+    groups=(core-dev)
     cd_unpacked_src
     cd build || return 1
-    export DESTDIR="${pkgdir}"
+    export DESTDIR="${pkgdirbase}/dest"
     cmake --build . --target install-distribution
-    ln -s libunwind.a "${pkgdir}/lib/libgcc_s.a"
-    ln -s lld "${pkgdir}/bin/ld"
-    ln -s clang "${pkgdir}/bin/cc"
-    ln -s clang++ "${pkgdir}/bin/c++"
-    rm -rf "${pkgdir:?}/usr"
+    std_split_package
+    ln -s libunwind.a "${pkgdir}/usr/lib/libgcc_s.a"
+    ln -s lld "${pkgdir}/usr/bin/ld"
+    ln -s clang "${pkgdir}/usr/bin/cc"
+    ln -s clang++ "${pkgdir}/usr/bin/c++"
+}
+
+package_llvm-runtime-libs() {
+    pkgfiles=(
+        usr/lib/*.so.*
+    )
+    depends=("ld-musl-$(arch).so.1")
+    provides=(
+        libLTO.so.11
+        libc++.so.1
+        libc++abi.so.1
+        libunwind.so.1
+    )
+    std_split_package
 }
