@@ -5,12 +5,12 @@
 rationale='Many packages may use zlib, but libarchive in particular depends on its functionality'
 pkgname=zlib-dev
 pkgver=1.2.11
-pkgrel=2
+pkgrel=3
 pkgdesc='A Massively Spiffy Yet Delicately Unobtrusive Compression Library'
 arch=('x86_64')
 url='http://www.zlib.net'
 license=('BSD')
-groups=('base')
+groups=(core-dev)
 depends=()
 makedepends=()
 options=()
@@ -25,15 +25,15 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    CFLAGS+=' -fPIC' ./configure --prefix=''
+    CFLAGS+=' -fPIC' ./configure --prefix=/usr
     make
 }
 
 package() {
     pkgfiles=(
-        include
-        lib/lib*.a
-        lib/pkgconfig
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/pkgconfig
     )
     std_package
 }
