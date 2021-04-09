@@ -1,3 +1,10 @@
+2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 8.1-2 :
+	Remove from any groups
+	Set prefix to /usr
+	Define provides
+
 2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 8.1-1 :
