@@ -9,12 +9,12 @@ pkgname=(
     libncurses-dev
 )
 pkgver=6.2
-pkgrel=1
+pkgrel=2
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://www.gnu.org/software/ncurses'
 license=(GPL2)
-groups=(base)
+groups=()
 depends=()
 makedepends=(
     ncurses
@@ -36,11 +36,11 @@ sha256sums=(
 build() {
     cd_unpacked_src
     zcat "$srcdir"/termcap.src.gz >termcap
-    ./ncurses/tinfo/MKfallback.sh /share/terminfo/ termcap tic infocmp \
+    ./ncurses/tinfo/MKfallback.sh /usr/share/terminfo/ termcap tic infocmp \
         linux vt100 xterm xterm-256color >ncurses/fallback.c
-    CFLAGS="$CFLAGS -fPIC -static" \
+    CFLAGS+=' -fPIC -static' \
         ./configure \
-        --prefix='' \
+        --prefix=/usr \
         --with-fallbacks="linux vt100 xterm xterm256-color" \
         --disable-debug \
         --without-tests \
@@ -48,43 +48,41 @@ build() {
         --without-cxx-binding \
         --without-dlsym \
         --enable-widec \
-        --enable-sigwinch \
-        --includedir=/include \
-        --mandir=/share/man
+        --enable-sigwinch
     make
 }
 
 package_ncurses() {
-    pkgfiles=(bin)
+    pkgfiles=(usr/bin)
 
     cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
 
     cd "${pkgdirbase}/dest" || return 1
     for lib in ncurses form panel menu ; do
-        ln -s lib${lib}w.a lib/lib${lib}.a
+        ln -s lib${lib}w.a usr/lib/lib${lib}.a
     done
-    ln -s libncurses.a lib/libcurses.a
-    ln -s ncursesw include/ncurses
+    ln -s libncurses.a usr/lib/libcurses.a
+    ln -s ncursesw usr/include/ncurses
 
     find ${pkgfiles[@]} | cpio -dump --quiet "$pkgdir"
     # ncurses6w-config is in -dev and clear/reset are in busybox
-    rm "$pkgdir"/bin/{ncursesw6-config,clear,reset}
+    rm "$pkgdir"/usr/bin/{ncursesw6-config,clear,reset}
 }
 
 package_ncurses-terminfo() {
-    pkgfiles=(share/terminfo)
+    pkgfiles=(usr/share/terminfo)
     depends=(ncurses)
     std_split_package
 }
 
 package_libncurses-dev() {
     pkgfiles=(
-        bin/ncursesw6-config
-        include
-        lib/*.a
+        usr/bin/ncursesw6-config
+        usr/include
+        usr/lib/*.a
     )
     cd "${pkgdirbase}/dest" || return 1
-    ln -s ncursesw6-config bin/ncurses6-config
+    ln -s ncursesw6-config usr/bin/ncurses6-config
     std_split_package
 }
