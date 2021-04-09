@@ -1,3 +1,10 @@
+2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 3.9.2-3 :
+	Use openssl instead of libressl
+	Remove from any groups for now
+	Set prefix to /usr
+
 2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 3.9.2-2 :

@@ -6,17 +6,17 @@ pkgname=(python python-dev)
 _vermajor=3
 _verminor=9
 pkgver=${_vermajor}.${_verminor}.2
-pkgrel=2
+pkgrel=3
 pkgdesc='A clear and powerful object-oriented programming language,'
 arch=(x86_64)
 url='http://www.python.org'
 license=(Python)
-groups=(base)
+groups=()
 depends=()
 makedepends=(
     libffi-dev
     libncurses-dev
-    libressl-dev
+    openssl-dev
     libsqlite-dev
     liblzma-dev
     readline-dev
@@ -28,73 +28,67 @@ changelog=ChangeLog
 source=(
     "https://www.python.org/ftp/python/${pkgver}/Python-${pkgver}.tar.xz"
     python-fix-ctypes_util.patch
-    fix-root-prefix.patch
 )
 sha256sums=(
     3c2034c54f811448f516668dce09d24008a0716c3a794dd8639b5388cbde247d
     db33506472cb9819acf03e8206323ed0aea3cb0ed537b047976dc613e9a34e4e
-    b363ebe8bd810545ca00b52398fa86c60e232c61191af560b02a85b6e1308e42
 )
 
 
 build() {
-    cd "${srcdir}/Python-${pkgver}" || return 1
+    cd_unpacked_src
     patch -Np1 -i "${srcdir}/python-fix-ctypes_util.patch"
-    patch -Np0 -i "${srcdir}/fix-root-prefix.patch"
     unset CFLAGS CXXFLAGS
     CC='cc -fPIC' CXX='c++ -fPIC' ./configure \
-        --prefix=/ \
+        --prefix=/usr \
+        --sysconfdir=/etc \
         --with-system-ffi
     make
 }
 
 check() {
-    cd "${srcdir}/Python-${pkgver}" || return 1
+    cd_unpacked_src
     #make test
 }
 
 package_python() {
     depends=(
-        musl
-        libffi
-        libressl
-        libsqlite
-        readline
+        "ld-musl-$(arch).so.1"
+        libc.so
+        libcrypto.so.1.1
+        libffi.so.7
+        libreadline.so.8
+        libsqlite3.so.0
+        libssl.so.1.1
     )
     pkgfiles=(
-        bin/pip
-        "bin/pip${_vermajor}"
-        bin/python
-        "bin/python${_vermajor}"
-        "bin/python${_vermajor}.${_verminor}"
-        "lib/python${_vermajor}.${_verminor}"
-        "include/python${_vermajor}.${_verminor}/pyconfig.h"
+        usr/bin/pip
+        "usr/bin/pip${_vermajor}"
+        usr/bin/python
+        "usr/bin/python${_vermajor}"
+        "usr/bin/python${_vermajor}.${_verminor}"
+        "usr/lib/python${_vermajor}.${_verminor}"
+        "usr/include/python${_vermajor}.${_verminor}/pyconfig.h"
     )
-
-    cd "${srcdir}/Python-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/destdir" install
-    cd "${pkgdirbase}/destdir" || return 1
-    ln -s "python${_vermajor}.${_verminor}" bin/python
-    ln -s "pip${_vermajor}" bin/pip
+    cd_unpacked_src
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest" || return 1
+    ln -s "python${_vermajor}.${_verminor}" usr/bin/python
+    ln -s "pip${_vermajor}" usr/bin/pip
     find . -name "*.pyc" -delete -o -name "*.pyo" -delete
     find . -name 'test' -type d -exec rm -rf '{}' + || true
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    package_defined_files
 }
 
 package_python-dev() {
     depends=(
-        python
+        "python=${pkgver}"
     )
     pkgfiles=(
-        "bin/py*-config"
-        include
-        "lib/libpython*.a"
-        lib/pkgconfig
+        "usr/bin/py*-config"
+        usr/include
+        "usr/lib/libpython*.a"
+        usr/lib/pkgconfig
     )
-
-    cd "${pkgdirbase}/destdir" || return 1
-    rm "include/python${_vermajor}.${_verminor}/pyconfig.h"
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    std_split_package
 }
