@@ -1,3 +1,10 @@
+2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.2.2-2 :
+	Use openssl instead of libressl
+	Add to new core group
+	Update dependencies.sh linter to detect library names
+
 2021-02-23  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.2.2-1 :

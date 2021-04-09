@@ -2,22 +2,21 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='The package manager used for the final system'
 pkgname=(pacman pacman-portable pacman-build libalpm-dev)
 pkgver=5.2.2
-pkgrel=1
+pkgrel=2
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
 license=(GPL2)
-groups=(base)
+groups=()
 depends=()
 makedepends=(
     libacl-dev
     libarchive-dev
     libcurl-dev
     liblzma-dev
-    libressl-dev
+    openssl-dev
     nettle-dev
     zlib-dev
     perl
@@ -39,11 +38,11 @@ source=(
 )
 sha256sums=(
     bb201a9f2fb53c28d011f661d50028efce6eef2c1d2a36728bdd0130189349a0
-    faa0577aee2baaf9a24ed202b3ae9dda0d6ce727a06a0735092138e4c8dba176
+    d81339c076c604657242092e1c94d99a79c4567290e537cb23b4505ac5cd299d
     52e0ee2b729f48a7cebbd4d348758b74892932d2956a5e92ab155468eb612f5a
     f2c3b003d37c674eb003a69ce389585f14348894de3c5c3bae3f5dd1f96cc1a6
     689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
-    c6ea61331e276f3476282bb2c712f41a00a3de4f786e58aee761c92ee1c10a8a
+    8f09f1162030597b291661049569f0853c41e304298898ac13e2ac26519ddef2
     f8d20ad8a50f284542e25519657d746e6d0864ef1506c45c56d691bbd0ed14d6
     25a6f2f45854c77d958cea13e1fa4953e599615e72ca0010772b4f9ffe5b2a9e
     16a6b153abaff83f3c1bd8cd60b2ffe8df71e42c2c36f34903914ba9ea92e191
@@ -61,7 +60,10 @@ build() {
     cp -a "$(pwd)" "${srcdir}/${pkgbase}-${pkgver}-portable"
     CFLAGS+=' --static' LDFLAGS='-static -Wl,-static' \
     ./configure \
-      --prefix='' \
+      --prefix=/usr \
+      --bindir=/bin \
+      --sysconfdir=/etc \
+      --localstatedir=/var \
       --disable-shared \
       --disable-nls \
       --disable-doc
@@ -87,6 +89,7 @@ package_pacman() {
         etc/pacman.conf*
         var
     )
+    groups=(core)
 
     cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
     make DESTDIR="${pkgdirbase}/dest" install
@@ -99,9 +102,9 @@ package_pacman() {
     install -m 0644 "${srcdir}/makepkg.conf" etc/
     install -m 0755 "${srcdir}/fakeroot" bin/
     install -m 0755 "${srcdir}/mere-dedup" bin/
-    install -m 0755 "${srcdir}/dependencies.sh" share/makepkg/lint_package/
-    install -m 0755 "${srcdir}/dedup.sh" share/makepkg/tidy/
-    install -m 0755 "${srcdir}/std-build-functions.sh" share/makepkg/
+    install -m 0755 "${srcdir}/dependencies.sh" usr/share/makepkg/lint_package/
+    install -m 0755 "${srcdir}/dedup.sh" usr/share/makepkg/tidy/
+    install -m 0755 "${srcdir}/std-build-functions.sh" usr/share/makepkg/
     package_defined_files
 }
 
@@ -131,14 +134,14 @@ package_pacman-build() {
         bin/repo-*
         bin/testpkg
         etc/makepkg.conf*
-        share
+        usr/share
     )
     depends=(
         bash
         curl
         file
         libarchive
-        pacman
+        "pacman=${pkgver}"
         xz
     )
     std_split_package
@@ -146,9 +149,9 @@ package_pacman-build() {
 
 package_libalpm-dev() {
     pkgfiles=(
-        include
-        lib/libalpm.a
-        lib/pkgconfig
+        usr/include
+        usr/lib/libalpm.a
+        usr/lib/pkgconfig
     )
     std_split_package
 }
