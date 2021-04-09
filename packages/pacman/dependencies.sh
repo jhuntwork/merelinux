@@ -52,10 +52,9 @@ list_file_dependencies() {
         dep=$(printf '%s\n' "$i" | awk '{print $3}' | awk -F/ '{print $NF}')
         [ -z "$dep" ] && continue
         case "$dep" in
-            ldd|$(pwd)*)
-                ;;
-            *) deps=$(printf '%s\n%s\n' "$dep" "$deps")
-                ;;
+            $(pwd)*) ;;
+            ldd) deps=$(printf '%s\n%s\n' 'libc.so' "$deps") ;;
+            *)   deps=$(printf '%s\n%s\n' "$dep" "$deps") ;;
         esac
     done
     printf '%s\n' "$deps"

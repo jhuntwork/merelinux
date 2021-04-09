@@ -1,5 +1,10 @@
 2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
+	* 5.2.2-4 :
+	Add a dependency condition for libc.so
+
+2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
 	* 5.2.2-3 :
 	Don't error on lib deps if the same package provides them
 
