@@ -2,19 +2,18 @@
 # shellcheck disable=SC2034
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='LXC and libarchive require libattr'
 pkgname=(
     attr
     libattr
     libattr-dev
 )
 pkgver=2.4.48
-pkgrel=6
+pkgrel=7
 pkgdesc='A library for manipulating filesystem extended attributes'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/attr'
 license=(GPL)
-groups=(base)
+groups=()
 depends=()
 makedepends=(gettext)
 options=()
@@ -28,38 +27,43 @@ sha256sums=(
 
 
 build() {
-    std_build
+    cd_unpacked_src
+    ./configure --prefix=/usr
+    make
 }
 
 package_attr() {
     pkgfiles=(
-        bin
+        usr/bin
     )
     depends=(
-        libattr
-        musl
+        libattr.so
+        "ld-musl-$(arch).so.1"
     )
     std_package
 }
 
 package_libattr() {
     pkgfiles=(
-        lib/*.so.*
+        usr/lib/*.so.*
     )
     depends=(
-        musl
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libattr.so
     )
     std_split_package
 }
 
 package_libattr-dev() {
     pkgfiles=(
-        include
-        lib/*.a
-        lib/*.so
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
     )
     depends=(
-        libattr
+        "libattr=${pkgver}"
     )
     std_split_package
 }
