@@ -4,13 +4,13 @@
 
 pkgname=(llvm llvm-runtime-libs)
 pkgver=11.1.0
-pkgrel=5
+pkgrel=6
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
 url='htps://llvm.org'
 license=(Apache)
 groups=()
-depends=(musl musl-dev)
+depends=()
 makedepends=(cmake git ninja zlib-dev)
 options=()
 changelog=ChangeLog
@@ -78,6 +78,7 @@ package_llvm() {
         libc++.so.1
         libc++abi.so.1
         libunwind.so.1
+        musl-dev
     )
     groups=(core-dev)
     cd_unpacked_src
