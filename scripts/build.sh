@@ -54,7 +54,7 @@ cp packages/base-layout/group "$MEREDIR"
 printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh' \
     "$uid" "$gid" >>"${MEREDIR}/passwd"
 printf 'merebuild:x:%s:merebuild' \
-    "$uid" "$gid" >>"${MEREDIR}/group"
+    "$gid" >>"${MEREDIR}/group"
 
 docker run -it --rm \
     -e PACKAGER="$MERE_PACKAGER" \
