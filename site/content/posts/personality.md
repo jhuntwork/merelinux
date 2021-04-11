@@ -6,8 +6,8 @@ draft: false
 
 Like many things, Mere Linux has a sort of personality. Various
 decisions have molded its shape, its structure, its feel. Simplicity was
-already mentioned in the {{< ref "direction.md" >}} post. Here are a couple
-more.
+already mentioned in the [Direction]({{< ref "direction.md" >}}) post. Here are
+a couple more.
 
 ## No Systemd
 
