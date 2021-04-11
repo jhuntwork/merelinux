@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <copyright>© 2021 Jeremy Huntwork</copyright>
-    <lastBuildDate>Sat, 13 Mar 2021 09:40:06 -0500</lastBuildDate><atom:link href="http://merelinux.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Apr 2021 13:03:51 -0400</lastBuildDate><atom:link href="http://merelinux.org/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Personality</title>
+      <link>http://merelinux.org/posts/personality/</link>
+      <pubDate>Sun, 11 Apr 2021 13:03:51 -0400</pubDate>
+      
+      <guid>http://merelinux.org/posts/personality/</guid>
+      <description>Like many things, Mere Linux has a sort of personality. Various decisions have molded its shape, its structure, its feel. Simplicity was already mentioned in the http://merelinux.org/posts/direction/ post. Here are a couple more.
+No Systemd Mere Linux does not and will not use systemd. There&amp;rsquo;s many reasons why, but the most fundamental one is that it breaks the principle of Simplicity. The author of the excellent s6 suite of packages says it well:</description>
+    </item>
+    
     <item>
       <title>Direction</title>
       <link>http://merelinux.org/posts/direction/</link>
