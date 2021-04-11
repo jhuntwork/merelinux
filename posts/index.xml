@@ -14,7 +14,7 @@
       <pubDate>Sun, 11 Apr 2021 13:03:51 -0400</pubDate>
       
       <guid>http://merelinux.org/posts/personality/</guid>
-      <description>Like many things, Mere Linux has a sort of personality. Various decisions have molded its shape, its structure, its feel. Simplicity was already mentioned in the http://merelinux.org/posts/direction/ post. Here are a couple more.
+      <description>Like many things, Mere Linux has a sort of personality. Various decisions have molded its shape, its structure, its feel. Simplicity was already mentioned in the Direction post. Here are a couple more.
 No Systemd Mere Linux does not and will not use systemd. There&amp;rsquo;s many reasons why, but the most fundamental one is that it breaks the principle of Simplicity. The author of the excellent s6 suite of packages says it well:</description>
     </item>
     
