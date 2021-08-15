@@ -45,3 +45,7 @@ workflows:
         filters:
           branches:
             ignore: gh-pages
+      - build:
+          requires:
+            - lint
+          context: upload
