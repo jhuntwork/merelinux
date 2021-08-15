@@ -4,14 +4,14 @@
 
 pkgname=cmake
 pkgver=3.19.5
-pkgrel=1
+pkgrel=2
 pkgdesc='The CMake toolsuite for building, testing and packaging software.'
 arch=('x86_64')
 url='https://cmake.org'
 license=('GPL2')
-groups=('base')
-depends=(musl libressl)
-makedepends=(libressl-dev)
+groups=(core-dev)
+depends=()
+makedepends=(openssl-dev)
 options=()
 changelog=ChangeLog
 
@@ -25,14 +25,22 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    ./bootstrap --prefix=''
+    ./bootstrap --prefix=/usr
     make
 }
 
 package() {
     pkgfiles=(
-        bin
-        share
+        /usr/bin
+        /usr/share
+    )
+    depends=(
+        ld-musl-x86_64.so.1
+        libc++.so.1
+        libc++abi.so.1
+        libcrypto.so.1.1
+        libssl.so.1.1
+        libunwind.so.1
     )
     std_package
 }
