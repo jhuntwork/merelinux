@@ -1,11 +1,14 @@
 version: 2.1
 executors:
-  build-env:
+  lint-env:
     docker:
       - image: mere/dev
+  build-env:
+    machine:
+      image: ubuntu-2004:202107-02
 jobs:
   lint:
-    executor: build-env
+    executor: lint-env
     steps:
       - run:
           name: Install tools and upgrade
@@ -20,9 +23,6 @@ jobs:
   build:
     executor: build-env
     steps:
-      - run:
-          name: Install tools
-          command: pacman -Syu --noconfirm git openssh-client
       - checkout
       - run:
           name: Setup Build
