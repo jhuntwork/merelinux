@@ -29,9 +29,10 @@ case "$bn" in
             mv -v "$file" pkgs/testing
             ./bin/repo-add -R pkgs/testing/main.db.tar.gz "pkgs/testing/${file##*/}"
         done
-        find pkgs/staging -name "*.src.tar.xz" -exec mv -v '{}' pkgs/staging/ \;
+        find pkgs/staging -name "*.src.tar.xz" -exec mv -v '{}' pkgs/testing/ \;
 
         aws s3 sync pkgs s3://pkgs.merelinux.org
+        rm -f pkgs/staging/*
         aws s3 sync --delete pkgs/staging/ s3://pkgs.merelinux.org/pkgs/staging/
         ;;
     *)
