@@ -5,10 +5,14 @@ bn="$(git rev-parse --abbrev-ref HEAD)"
 case "$bn" in
     master)
         # install pacman-build
+        install -d /tmp/pacman
         curl -LO http://pkgs.merelinux.org/stable/pacman-latest-x86_64.pkg.tar.xz
-        tar -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
+        tar -C /tmp/pacman -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
+
         install -d ./var/lib/pacman
-        sudo ./bin/pacman -S --config etc/pacman.conf -y -r . --noconfirm --overwrite pacman-build
+        sudo /tmp/pacman/bin/pacman -Sy
+        sudo /tmp/pacman/bin/pacman -Sy --config /tmp/pacman/etc/pacman.conf \
+            -r . --noconfirm pacman-build
         sudo sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' bin/repo-add
 
         # Sync down existing files in the staging repo
@@ -39,4 +43,3 @@ case "$bn" in
         fi
         ;;
 esac
-
