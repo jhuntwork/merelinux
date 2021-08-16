@@ -10,7 +10,6 @@ case "$bn" in
         tar -C /tmp/pacman -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
 
         install -d ./var/lib/pacman
-        sudo /tmp/pacman/bin/pacman -Sy
         sudo /tmp/pacman/bin/pacman -Sy --config /tmp/pacman/etc/pacman.conf \
             -r . --noconfirm pacman-build
         sudo sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' bin/repo-add
