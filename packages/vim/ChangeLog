@@ -1,3 +1,10 @@
+2021-08-16  Jeremy Huntwork <jeremy@merelinux.org>
+
+	* 8.2.3354-1 :
+	Upgrade to 8.2.3354
+	Remove syntax file for PGKBUILD files. Plugins for this and more exist
+	and users should be free to customize.
+
 2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 8.2.2557-1 :

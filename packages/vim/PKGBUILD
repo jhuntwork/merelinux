@@ -1,11 +1,11 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=vim
 _vermajor=8
 _verminor=2
-_verpatch=2557
+_verpatch=3354
 pkgver="${_vermajor}.${_verminor}.${_verpatch}"
 pkgrel=1
 pkgdesc='An IMproved version of the vi editor'
@@ -19,13 +19,11 @@ options=()
 changelog=ChangeLog
 source=(
     "https://github.com/vim/vim/archive/v${pkgver}.tar.gz"
-    'https://projects.archlinux.org/pacman.git/plain/contrib/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39'
     vimrc
 )
 
 sha256sums=(
-    44da75af85cf1c00260532808e7aac91713e15eca5020ff9c46019a9d1ea9c2e
-    dda73393c44e448ddeddaff76287dbbe5fcea1bc381c5d065789bd3c1b481f0e
+    e54c8dcbe02f0e9122ff4258964ae604839cf730f4f488f422231ebd59c60160
     5e698ff1872bae79b7eae3f35bfca2e426c2698a785687fb9035e0fee16de91a
 )
 
@@ -44,7 +42,7 @@ build() {
     CC='cc -I/include/ncursesw' \
         CFLAGS+=' -static -fPIC' LDFLAGS='-static -Wl,-static' \
         ./configure \
-        --prefix='' \
+        --prefix=/usr \
         --enable-multibyte \
         --with-tlib=ncursesw
     make
@@ -52,10 +50,10 @@ build() {
 
 package_vim() {
     pkgfiles=(
-        bin
+        usr/bin
         etc
-        share/man/man1
-        share/vim
+        usr/share/man/man1
+        usr/share/vim
     )
     options+=(emptydirs)
     cd_unpacked_src
@@ -63,10 +61,6 @@ package_vim() {
     cd "${pkgdirbase}/dest" || return 1
     install -d etc
     install -m 0644 "${srcdir}/vimrc" etc/vimrc
-    install -m 0644 "${srcdir}/PKGBUILD.vim?id=ec01a22f7d13147a52ac8c0c1ee1b5fc2426de39" \
-      "share/vim/vim${_vermajor}${_verminor}/syntax/PKGBUILD.vim"
-    echo "au BufNewFile,BufRead PKGBUILD set filetype=PKGBUILD" \
-      >> "share/vim/vim${_vermajor}${_verminor}/filetype.vim"
-    rm -f bin/xxd
+    rm -f usr/bin/xxd
     package_defined_files
 }
