@@ -7,7 +7,7 @@ rationale="Many source packages ship with pre-generated build scripts. \
 Pacman does not. Autoconf, automake and libtool are required to generate \
 them before using."
 pkgver=2.71
-pkgrel=2
+pkgrel=3
 pkgdesc='A tool that produces shell scripts to automatically configure source code.'
 arch=(x86_64)
 url='http://www.gnu.org/software/autoconf'
