@@ -8,8 +8,8 @@ case "$bn" in
         curl -LO http://pkgs.merelinux.org/stable/pacman-latest-x86_64.pkg.tar.xz
         tar -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
         install -d ./var/lib/pacman
-        ./bin/pacman -S --config etc/pacman.conf -y -r . --noconfirm --overwrite pacman-build
-        sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' bin/repo-add
+        sudo ./bin/pacman -S --config etc/pacman.conf -y -r . --noconfirm --overwrite pacman-build
+        sudo sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' bin/repo-add
 
         # Sync down existing files in the staging repo
         install -d pkgs/testing pkgs/staging
@@ -33,8 +33,10 @@ case "$bn" in
         ;;
     *)
         install -d pkgs/staging
-        find "$(pwd)/.mere/pkgs" -type f -exec mv -v '{}' pkgs/staging/ \;
-        aws s3 sync pkgs s3://pkgs.merelinux.org
+        if [ -d "$(pwd)/.mere/pkgs" ] ; then
+            find "$(pwd)/.mere/pkgs" -type f -exec mv -v '{}' pkgs/staging/ \;
+            aws s3 sync pkgs s3://pkgs.merelinux.org
+        fi
         ;;
 esac
 
