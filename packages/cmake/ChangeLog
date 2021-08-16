@@ -1,3 +1,8 @@
+2021-08-15  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 3.19.5-3 :
+	Bump version to trigger a new build and release with new scripts
+
 2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 3.19.5-2 :
