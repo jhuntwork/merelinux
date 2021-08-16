@@ -32,8 +32,7 @@ case "$bn" in
         find pkgs/staging -name "*.src.tar.xz" -exec mv -v '{}' pkgs/testing/ \;
 
         aws s3 sync pkgs s3://pkgs.merelinux.org
-        rm -f pkgs/staging/*
-        aws s3 sync --delete pkgs/staging/ s3://pkgs.merelinux.org/pkgs/staging/
+        aws s3 rm --recursive s3://pkgs.merelinux.org/pkgs/staging/
         ;;
     *)
         install -d pkgs/staging
