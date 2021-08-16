@@ -38,7 +38,8 @@ cmd=/usr/local/bin/build-in-docker.sh
 [ -n "$1" ] && cmd="$1"
 [ -d "${pkgdir}/pkg" ] && chmod 755 "${pkgdir}/pkg"
 
-MEREDIR="${HOME}/.mere"
+MEREDIR="${MEREDIR:-${HOME}/.mere}"
+printf 'MEREDIR is: %s\n' "$MEREDIR"
 uid=$(id -u)
 gid=$(id -g)
 
