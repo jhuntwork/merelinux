@@ -33,6 +33,7 @@ case "$bn" in
 
         aws s3 sync pkgs s3://pkgs.merelinux.org
         aws s3 rm --recursive s3://pkgs.merelinux.org/pkgs/staging/
+        sleep 5
         ;;
     *)
         install -d pkgs/staging
