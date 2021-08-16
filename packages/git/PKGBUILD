@@ -3,20 +3,20 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=git
-pkgver=2.30.1
+pkgver=2.32.0
 pkgrel=1
 pkgdesc='A distributed version control system'
 arch=('x86_64')
 url='http://git-scm.com/'
 license=('GPL2')
-groups=('base')
+groups=()
 depends=(
     perl
     python
 )
 makedepends=(
     libcurl-dev
-    libressl-dev
+    openssl-dev
     perl
     python
     zlib-dev
@@ -28,7 +28,7 @@ source=(
     "https://www.kernel.org/pub/software/scm/git/git-${pkgver}.tar.xz"
 )
 sha256sums=(
-    f988a8a095089978dab2932af4edb22b4d7d67d67b81aaa1986fa29ef45d9467
+    68a841da3c4389847ecd3301c25eb7e4a51d07edf5f0168615ad6179e3a83623
 )
 
 
@@ -37,30 +37,30 @@ build() {
     LIBS='-lz -lssl -lcrypto' \
     LDFLAGS='-static -Wl,-static -lssl -lcrypto -lz' \
     ./configure \
-      --prefix='' \
-      --libexecdir=/lib \
+      --prefix=/usr \
+      --libexecdir=/usr/lib \
       --with-curl \
       --with-openssl \
       --without-tcltk \
-      --with-zlib=/lib \
-      --with-editor=/bin/vim \
+      --with-zlib=/usr/lib \
+      --with-editor=/usr/bin/vim \
       --with-pager=/bin/more \
-      --with-perl=/bin/perl \
-      --with-python=/bin/python \
+      --with-perl=/usr/bin/perl \
+      --with-python=/usr/bin/python \
       --with-shell=/bin/sh
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1
 }
 
 package() {
     pkgfiles=(
-        bin
-        lib/git-core
-        share/git-core
+        usr/bin
+        usr/lib/git-core
+        usr/share/git-core
     )
     rmfiles=(
-        bin/git-cvsserver
-        lib/git-core/git-cvs*
-        lib/git-core/git-svn
+        usr/bin/git-cvsserver
+        usr/lib/git-core/git-cvs*
+        usr/lib/git-core/git-svn
     )
 
     cd_unpacked_src
