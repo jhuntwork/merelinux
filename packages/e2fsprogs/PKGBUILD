@@ -1,15 +1,15 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(e2fsprogs libblkid-dev libuuid-dev)
-pkgver=1.45.6
+pkgver=1.46.3
 pkgrel=1
 pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
 arch=(x86_64)
 url=http://e2fsprogs.sourceforge.net/
 license=(GPL)
-groups=(base)
+groups=()
 depends=()
 makedepends=(libattr-dev)
 options=()
@@ -19,25 +19,26 @@ source=(
 )
 
 sha256sums=(
-    ffa7ae6954395abdc50d0f8605d8be84736465afc53b8938ef473fcf7ff44256
+    86d1580facdd49f2e0e6b027e26b1e6c48af538762dc40aeed2a87153c1f11b7
 )
 
 build() {
     cd_unpacked_src
     CFLAGS+=' -fPIC' LDFLAGS='-static' \
         ac_cv_path_mkdir=/bin/mkdir \
-        ./configure --prefix=''
+        ./configure --prefix=/usr \
+            --sysconfdir=/etc
     make V=1
 }
 
 package_e2fsprogs() {
     pkgfiles=(
-        bin
+        usr/bin
         etc/mke2fs.conf
-        sbin
-        share/man/man1
-        share/man/man5
-        share/man/man8
+        usr/sbin
+        usr/share/man/man1
+        usr/share/man/man5
+        usr/share/man/man8
     )
     cd_unpacked_src
     make V=1 DESTDIR="${pkgdirbase}/dest" install install-libs
@@ -46,18 +47,18 @@ package_e2fsprogs() {
 
 package_libblkid-dev() {
     pkgfiles=(
-        include/blkid
-        lib/pkgconfig/blkid.pc
-        lib/libblkid.a
+        usr/include/blkid
+        usr/lib/pkgconfig/blkid.pc
+        usr/lib/libblkid.a
     )
     std_split_package
 }
 
 package_libuuid-dev() {
     pkgfiles=(
-        include/uuid
-        lib/pkgconfig/uuid.pc
-        lib/libuuid.a
+        usr/include/uuid
+        usr/lib/pkgconfig/uuid.pc
+        usr/lib/libuuid.a
     )
     std_split_package
 }
