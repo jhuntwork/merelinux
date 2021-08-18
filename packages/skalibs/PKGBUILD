@@ -1,18 +1,18 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(
     skalibs
     skalibs-dev
 )
-pkgver=2.10.0.2
+pkgver=2.10.0.3
 pkgrel=1
 pkgdesc='A library suite supporting skarnet.org software.'
 arch=(x86_64)
 url=http://skarnet.org/software/skalibs/
 license=(ISC)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -23,7 +23,7 @@ source=(
 )
 
 sha256sums=(
-    8bba3d7650bab83d4ea2ad21d6bfb5479a8652e362a478fcb783b3c7cf891e0f
+    b780b0ae650dda0c3ec5f8975174998af2d24c2a2e2be669b1bab46e73b1464d
 )
 
 
@@ -42,7 +42,7 @@ package_skalibs() {
         lib/libskarnet.so.*
     )
     depends=(
-        musl
+        libc.so
     )
     cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
