@@ -1,15 +1,15 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(s6 s6-dev)
-pkgver=2.10.0.2
-pkgrel=2
+pkgver=2.10.0.3
+pkgrel=1
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
 license=(ISC)
-groups=(base)
+groups=(core)
 depends=()
 makedepends=(skalibs-dev execline-dev)
 options=(emptydirs)
@@ -31,7 +31,7 @@ source=(
 )
 
 sha256sums=(
-    b23afce87080b848b89499e85ebd93c20269e6db23f6ef65e58386c9cecd6c21
+    1d21373151704150df0e8ed199f097f6ee5d2befb9a68aca4f20f3862e5d8757
     b7152736b6a2de7c7a198cb96fc0d563c7f34622874196518bcf36c867c6fda0
     db0e8c503e72eb05356a4ec9a65903a6d6447b5786453d0d8dbf097534c89ad5
     6ba76e90d72d7e59763a0ec42304d46abfd17548b1d52485dcf2e5306998887e
@@ -51,7 +51,6 @@ install=s6.install
 
 build() {
     cd_unpacked_src
-#sed -i 's@#!/bin/sh@#!/bin/bash@' configure
     ./configure \
       --prefix=/ \
       --bindir=/sbin \
