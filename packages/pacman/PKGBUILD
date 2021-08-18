@@ -1,10 +1,10 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(pacman pacman-portable pacman-build libalpm-dev)
 pkgver=5.2.2
-pkgrel=5
+pkgrel=6
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -45,7 +45,7 @@ sha256sums=(
     bf8bf662c85a8020023a0eb4f4d652398ef3ddc0ced3b9409ed0750bf88a8df9
     f8d20ad8a50f284542e25519657d746e6d0864ef1506c45c56d691bbd0ed14d6
     25a6f2f45854c77d958cea13e1fa4953e599615e72ca0010772b4f9ffe5b2a9e
-    16a6b153abaff83f3c1bd8cd60b2ffe8df71e42c2c36f34903914ba9ea92e191
+    992b324505daa83bc872547817275029ed680b333148f354573dedf0a9986503
 )
 
 build() {

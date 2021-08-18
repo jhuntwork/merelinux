@@ -14,7 +14,7 @@ package_defined_files() {
 
 std_build() {
     cd_unpacked_src
-    ./configure --prefix=''
+    ./configure --prefix=/usr
     make
 }
 
