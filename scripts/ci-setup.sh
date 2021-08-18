@@ -12,7 +12,15 @@ if [ "${#unique_pkgs[@]}" -gt 1 ] ; then
     exit 1
 fi
 printf 'unique_pkgs is: %s\n' "${unique_pkgs[@]}"
+
+is_deleted='false'
+if git log --oneline --full-history -1 -p -- "${unique_pkgs[0]}/PKGBUILD" \
+    | head | grep -q '^+++ /dev/null'; then
+    is_deleted='true'
+fi
+
 install -d "$CIRCLE_WORKING_DIRECTORY"
 cat >"$CIRCLE_WORKING_DIRECTORY"/.env <<EOF
 pkg='${unique_pkgs[0]}'
+is_deleted=$is_deleted
 EOF
