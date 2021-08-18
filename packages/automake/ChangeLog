@@ -1,3 +1,8 @@
+2021-08-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 1.16.3-4 :
+	Build with latest pacman to install to /usr
+
 2021-08-16  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.16.3-3 :
