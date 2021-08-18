@@ -1,3 +1,8 @@
+2021-08-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+
+	* 5.2.2-6 :
+	Set std prefix to /usr in std build functions
+
 2021-04-11  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.2.2-5 :
