@@ -1,3 +1,10 @@
+2021-08-18  Jeremy Huntwork <jeremy@merelinux.org>
+
+	* 7.78.0-1 :
+	Upgrade to 7.78.0
+	Generate ca-certificates from the tool curl ships, mk-ca-bundle
+	Move the ca-certs package from libressl to curl
+
 2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 7.75.0-2 :
