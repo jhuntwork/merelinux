@@ -1,15 +1,15 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(execline execline-dev)
-pkgver=2.8.0.0
+pkgver=2.8.0.1
 pkgrel=1
 pkgdesc='a (non-interactive) scripting language.'
 arch=(x86_64)
 url='http://skarnet.org/software/execline/'
 license=(ISC)
-groups=(base)
+groups=(core)
 depends=()
 makedepends=(skalibs-dev)
 options=()
@@ -19,7 +19,7 @@ source=(
 )
 
 sha256sums=(
-    e7744b4a400eda68b83dcfb1bce65e454606279882d83d8230ddf8afda25766d
+    a373f497d2335905d750e2f3be2ba47a028c11c4a7d5595dca9965c161e53aed
 )
 
 
