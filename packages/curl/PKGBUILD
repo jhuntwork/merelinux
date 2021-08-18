@@ -1,15 +1,16 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 rationale='Pacman primarily uses libcurl for downloading files'
 pkgname=(
     curl
     libcurl
     libcurl-dev
+    ca-certs
 )
-pkgver=7.75.0
-pkgrel=2
+pkgver=7.78.0
+pkgrel=1
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://curl.haxx.se'
@@ -24,7 +25,7 @@ source=(
     "${url}/download/${pkgname[0]}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    50552d4501c178e4cc68baaecc487f466a3d6d19bbf4e50a01869effb316d026
+    98530b317dc95ccb324bbe4f834f07bb642fbc393b794ddf3434f246a71ea44a
 )
 
 build() {
@@ -71,6 +72,7 @@ package_libcurl() {
     )
     depends=(
         ca-certs
+        libc.so
         "ld-musl-$(arch).so.1"
         libssl.so.1.1
         libcrypto.so.1.1
@@ -94,4 +96,13 @@ package_libcurl-dev() {
         "libcurl=${pkgver}"
     )
     std_split_package
+}
+
+package_ca-certs() {
+    cd_unpacked_src
+    ./lib/mk-ca-bundle.pl
+    install -d "${pkgdir}/etc/ssl/certs"
+    install -m0644 ca-bundle.crt "${pkgdir}/etc/ssl/certs/ca-certificates.crt"
+    ln -s certs/ca-certificates.crt "${pkgdir}/etc/ssl/cert.pem"
+    ln -s certs/ca-certificates.crt "${pkgdir}/etc/ssl/ca-certs.pem"
 }
