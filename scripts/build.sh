@@ -1,4 +1,4 @@
-#!/bin/sh -e
+#!/bin/sh -xe
 
 usage() {
     printf '
@@ -17,7 +17,7 @@ Usage: %s <pkgdir> [cmd]
 realpath_cd () {
     cd "$1" || return 1
     pwd -P
-    cd -
+    cd - >/dev/null 2>&1 || return 1
 }
 
 bad_pkgdir() {
