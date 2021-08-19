@@ -50,7 +50,7 @@ case "$bn" in
 
         install -d "pkgs/${prnum}"
         if [ -d "/tmp/.mere/pkgs" ] ; then
-            find "/tmp/.mere/pkgs" -type f -exec mv -v '{}' "pkgs/${prnum}/" \;
+            sudo find "/tmp/.mere/pkgs" -type f -exec mv -v '{}' "pkgs/${prnum}/" \;
             aws s3 sync pkgs s3://pkgs.merelinux.org
         fi
         ;;
