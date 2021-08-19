@@ -4,12 +4,12 @@
 
 pkgname=(execline execline-dev)
 pkgver=2.8.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc='a (non-interactive) scripting language.'
 arch=(x86_64)
 url='http://skarnet.org/software/execline/'
 license=(ISC)
-groups=(core)
+groups=()
 depends=()
 makedepends=(skalibs-dev)
 options=()
