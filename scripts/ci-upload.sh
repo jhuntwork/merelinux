@@ -23,6 +23,7 @@ case "$bn" in
 
         # Sync down existing files in the staging repo
         install -d pkgs/testing staging
+        aws s3 sync s3://pkgs.merelinux.org/testing/ pkgs/testing/
         aws s3 sync "s3://pkgs.merelinux.org/${prnum}/" staging/
 
         # Grab the testing dbs
@@ -38,7 +39,7 @@ case "$bn" in
         done
         find staging -name "*.src.tar.xz" -exec mv -v '{}' pkgs/testing/ \;
 
-        aws s3 sync pkgs s3://pkgs.merelinux.org
+        aws s3 sync --delete pkgs/testing/ s3://pkgs.merelinux.org/testing/
         aws s3 rm --recursive "s3://pkgs.merelinux.org/${prnum}/"
         ;;
     *)
