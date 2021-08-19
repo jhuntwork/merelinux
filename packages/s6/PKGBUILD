@@ -4,12 +4,12 @@
 
 pkgname=(s6 s6-dev)
 pkgver=2.10.0.3
-pkgrel=1
+pkgrel=2
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
 license=(ISC)
-groups=(core)
+groups=()
 depends=()
 makedepends=(skalibs-dev execline-dev)
 options=(emptydirs)
@@ -69,6 +69,7 @@ package_s6() {
         lib/s6
     )
     depends=(execline)
+    groups=(core)
 
     # Run make install
     cd_unpacked_src
