@@ -1,3 +1,8 @@
+2021-08-19  Jeremy Huntwork <jeremy@merelinux.org>
+
+	* 1.2.2-5 :
+	Remove musl from core. musl-dev remains in core-dev
+
 2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 1.2.2-4 :
