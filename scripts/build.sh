@@ -39,7 +39,6 @@ cmd=/usr/local/bin/build-in-docker.sh
 [ -d "${pkgdir}/pkg" ] && chmod 755 "${pkgdir}/pkg"
 
 MEREDIR="${MEREDIR:-${HOME}/.mere}"
-printf 'MEREDIR is: %s\n' "$MEREDIR"
 uid=$(id -u)
 gid=$(id -g)
 
@@ -52,16 +51,25 @@ install -d "${MEREDIR}/sources"
 cp packages/base-layout/passwd "$MEREDIR"
 cp packages/base-layout/group "$MEREDIR"
 
-printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh' \
-    "$uid" "$gid" >>"${MEREDIR}/passwd"
-printf 'merebuild:x:%s:merebuild' \
-    "$gid" >>"${MEREDIR}/group"
+if [ "$uid" = '0' ]; then
+    docker run -it --rm \
+        -v "$pkgdir":/src \
+        -v "$MEREDIR":/mere \
+        mere/dev:latest sh -c \
+            "sed -i '/^ .*PATH=/s@=.*@=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin@\' \
+                /etc/profile && $cmd"
+else
+    printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh' \
+        "$uid" "$gid" >>"${MEREDIR}/passwd"
+    printf 'merebuild:x:%s:merebuild' \
+        "$gid" >>"${MEREDIR}/group"
 
-docker run -it --rm \
-    -e PACKAGER="$MERE_PACKAGER" \
-    -v "$pkgdir":/src \
-    -v "$MEREDIR":/mere \
-    -v "${MEREDIR}/passwd":/etc/passwd \
-    -v "${MEREDIR}/group":/etc/group \
-    -u "${uid}:${gid}" \
-    mere/dev:latest "$cmd"
+    docker run -it --rm \
+        -e PACKAGER="$MERE_PACKAGER" \
+        -v "$pkgdir":/src \
+        -v "$MEREDIR":/mere \
+        -v "${MEREDIR}/passwd":/etc/passwd \
+        -v "${MEREDIR}/group":/etc/group \
+        -u "${uid}:${gid}" \
+        mere/dev:latest "$cmd"
+fi

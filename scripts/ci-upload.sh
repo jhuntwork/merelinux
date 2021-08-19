@@ -49,8 +49,8 @@ case "$bn" in
         fi
 
         install -d "pkgs/${prnum}"
-        if [ -d "$(pwd)/.mere/pkgs" ] ; then
-            find "$(pwd)/.mere/pkgs" -type f -exec mv -v '{}' "pkgs/${prnum}/" \;
+        if [ -d "/tmp/.mere/pkgs" ] ; then
+            find "/tmp/.mere/pkgs" -type f -exec mv -v '{}' "pkgs/${prnum}/" \;
             aws s3 sync pkgs s3://pkgs.merelinux.org
         fi
         ;;
