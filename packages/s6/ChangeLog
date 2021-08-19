@@ -1,3 +1,8 @@
+2021-08-19  Jeremy Huntwork <jeremy@merelinux.org>
+
+	* 2.10.0.3-2 :
+	Remove s6-dev from core
+
 2021-08-18  Jeremy Huntwork <jeremy@merelinux.org>
 
 	* 2.10.0.3-1 :
