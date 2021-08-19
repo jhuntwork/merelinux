@@ -1,5 +1,10 @@
 2021-08-19  Jeremy Huntwork <jeremy@merelinux.org>
 
+	* 2.0.1-2 :
+	Building again from fixed CI scripts
+
+2021-08-19  Jeremy Huntwork <jeremy@merelinux.org>
+
 	* 2.0.1-1 :
 	Fix PATH for root by adding /usr/bin and /usr/sbin
 
