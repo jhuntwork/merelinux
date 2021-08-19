@@ -10,7 +10,7 @@ PATH='/usr/local/bin:/bin:/usr/bin'
 # Special cases for root
 if [ "$id" = '0' ] ; then
     P='#'
-    PATH='/usr/local/bin:/usr/local/sbin:/bin:/sbin'
+    PATH='/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin'
 fi
 
 set_ps1() {
