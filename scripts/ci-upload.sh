@@ -1,11 +1,16 @@
 #!/bin/bash -xe
 sudo pip install awscli
 
-printf '%s\n' "$CIRCLE_PULL_REQUEST"
-
 bn="$(git rev-parse --abbrev-ref HEAD)"
 case "$bn" in
     master)
+        prnum=$(git log --oneline -1 | grep -o 'Merge pull request.*from' | \
+                cut -d' ' -f4 | sed 's@#@@')
+        if ! printf '%d' "$prnum" >/dev/null 2>&1 ; then
+            printf 'Cannot determine an upload path for the merged PR\n'
+            exit 1
+        fi
+
         # install pacman-build
         install -d /tmp/pacman
         curl -LO http://pkgs.merelinux.org/stable/pacman-latest-x86_64.pkg.tar.xz
@@ -17,8 +22,8 @@ case "$bn" in
         sudo sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' bin/repo-add
 
         # Sync down existing files in the staging repo
-        install -d pkgs/testing pkgs/staging
-        aws s3 sync s3://pkgs.merelinux.org/staging/ pkgs/staging/
+        install -d pkgs/testing staging
+        aws s3 sync "s3://pkgs.merelinux.org/${prnum}/" staging/
 
         # Grab the testing dbs
         curl -fsL http://pkgs.merelinux.org/testing/main.db.tar.gz \
@@ -27,19 +32,25 @@ case "$bn" in
             -o pkgs/testing/main.files.tar.gz
 
         # Copy over the staging files to testing
-        find "pkgs/staging" -name "*.pkg*" | while read -r file ; do
+        find staging -name "*.pkg*" | while read -r file ; do
             mv -v "$file" pkgs/testing
             ./bin/repo-add -R pkgs/testing/main.db.tar.gz "pkgs/testing/${file##*/}"
         done
-        find pkgs/staging -name "*.src.tar.xz" -exec mv -v '{}' pkgs/testing/ \;
+        find staging -name "*.src.tar.xz" -exec mv -v '{}' pkgs/testing/ \;
 
         aws s3 sync pkgs s3://pkgs.merelinux.org
-        aws s3 rm --recursive s3://pkgs.merelinux.org/staging/
+        aws s3 rm --recursive "s3://pkgs.merelinux.org/${prnum}/"
         ;;
     *)
-        install -d pkgs/staging
+        prnum=$(printf '%s' "$CIRCLE_PULL_REQUEST" | awk -F/ '{print $NF}')
+        if ! printf '%d' "$prnum" >/dev/null 2>&1 ; then
+            printf 'Cannot determine an upload path for the merged PR\n'
+            exit 1
+        fi
+
+        install -d "pkgs/${prnum}"
         if [ -d "$(pwd)/.mere/pkgs" ] ; then
-            find "$(pwd)/.mere/pkgs" -type f -exec mv -v '{}' pkgs/staging/ \;
+            find "$(pwd)/.mere/pkgs" -type f -exec mv -v '{}' "pkgs/${prnum}/" \;
             aws s3 sync pkgs s3://pkgs.merelinux.org
         fi
         ;;
