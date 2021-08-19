@@ -1,16 +1,16 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(bison bison-dev)
-pkgver=3.7.5
-pkgrel=2
+pkgver=3.7.6
+pkgrel=1
 pkgdesc='A general-purpose parser generator.'
 arch=('x86_64')
 url='http://www.gnu.org/software/bison/'
 license=('GPL3')
-groups=(core-dev)
-depends=(m4 musl)
+groups=()
+depends=()
 makedepends=(flex perl)
 options=()
 changelog=ChangeLog
@@ -19,7 +19,7 @@ source=(
 )
 
 sha256sums=(
-    e8c53bc5bc396d636622d0f25e31ca92fd53f00b09629f13ef540d564a6b31ab
+    67d68ce1e22192050525643fc0a7a22297576682bef6a5c51446903f5aeef3cf
 )
 
 build() {
@@ -33,19 +33,23 @@ check() {
 
 package_bison() {
     pkgfiles=(
-        bin/bison
-        bin/yacc
-        share/bison
-        share/man/man1/bison.1
-        share/man/man1/yacc.1
-        share/aclocal/bison-i18n.m4
+        usr/bin/bison
+        usr/bin/yacc
+        usr/share/bison
+        usr/share/man/man1/bison.1
+        usr/share/man/man1/yacc.1
+        usr/share/aclocal/bison-i18n.m4
+    )
+    depends=(
+        m4
+        "ld-musl-$(arch).so.1"
     )
     std_package
 }
 
 package_bison-dev() {
     pkgfiles=(
-        lib/liby.a
+        usr/lib/liby.a
     )
     std_split_package
 }
