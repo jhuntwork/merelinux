@@ -1,15 +1,15 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=mksh
 pkgver=R59c
-pkgrel=1
+pkgrel=2
 pkgdesc='The MirBSD Korn Shell'
 arch=(x86_64)
 url='https://www.mirbsd.org/mksh.htm'
 license=(BSD)
-groups=(base)
+groups=(core)
 depends=()
 makedepends=()
 options=()
