@@ -10,12 +10,12 @@ pkgname=(
     ca-certs
 )
 pkgver=7.78.0
-pkgrel=1
+pkgrel=2
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
-url='http://curl.haxx.se'
+url='http://curl.se'
 license=(GPL2)
-groups=(core)
+groups=()
 depends=()
 makedepends=(openssl-dev perl zlib-dev)
 options=()
