@@ -1,6 +1,8 @@
 #!/bin/bash -xe
 sudo pip install awscli
 
+printf '%s\n' "$CIRCLE_PULL_REQUEST"
+
 bn="$(git rev-parse --abbrev-ref HEAD)"
 case "$bn" in
     master)
