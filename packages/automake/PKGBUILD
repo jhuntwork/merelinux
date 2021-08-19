@@ -6,13 +6,13 @@ pkgname=automake
 rationale="Many source packages ship with pre-generated build scripts. \
 Pacman does not. Autoconf, automake and libtool are required to generate them \
 before using."
-pkgver=1.16.3
-pkgrel=4
+pkgver=1.16.4
+pkgrel=1
 pkgdesc='A tool for automatically generating Makefile.in files.'
 arch=(x86_64)
 url='http://www.gnu.org/software/automake'
 license=(GPL3)
-groups=(core-dev)
+groups=()
 depends=(autoconf)
 makedepends=()
 options=()
@@ -22,7 +22,7 @@ source=(
 )
 
 sha256sums=(
-    ff2bf7656c4d1c6fdda3b8bebb21f09153a736bcba169aaf65eab25fa113bf3a
+    80facc09885a57e6d49d06972c0ae1089c5fa8f4d4c7cfe5baea58e5085f136d
 )
 
 
