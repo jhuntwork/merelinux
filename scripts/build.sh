@@ -1,4 +1,4 @@
-#!/bin/sh -xe
+#!/bin/sh -e
 
 usage() {
     printf '
@@ -55,9 +55,7 @@ if [ "$uid" = '0' ]; then
     docker run -it --rm \
         -v "$pkgdir":/src \
         -v "$MEREDIR":/mere \
-        mere/dev:latest sh -c \
-            "sed -i '/^ .*PATH=/s@=.*@=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin@\' \
-                /etc/profile && $cmd"
+        mere/dev:latest "$cmd"
 else
     printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh' \
         "$uid" "$gid" >>"${MEREDIR}/passwd"
