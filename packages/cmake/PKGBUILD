@@ -1,25 +1,26 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=cmake
-pkgver=3.19.5
-pkgrel=3
+_major_minor=3.21
+pkgver="${_major_minor}.1"
+pkgrel=1
 pkgdesc='The CMake toolsuite for building, testing and packaging software.'
 arch=('x86_64')
 url='https://cmake.org'
 license=('GPL2')
-groups=(core-dev)
+groups=()
 depends=()
 makedepends=(openssl-dev)
 options=()
 changelog=ChangeLog
 
 source=(
-    "${url}/files/v3.19/${pkgname}-${pkgver}.tar.gz"
+    "${url}/files/v${_major_minor}/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    c432296eb5dec6d71eae15d140f6297d63df44e9ffe3e453628d1dc8fc4201ce
+    fac3915171d4dff25913975d712f76e69aef44bf738ba7b976793a458b4cfed4
 )
 
 
@@ -35,7 +36,7 @@ package() {
         /usr/share
     )
     depends=(
-        ld-musl-x86_64.so.1
+        "ld-musl-$(arch).so.1"
         libc++.so.1
         libc++abi.so.1
         libcrypto.so.1.1
