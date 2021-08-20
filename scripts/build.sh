@@ -29,8 +29,9 @@ bad_pkgdir() {
 if [ -z "$1" ] || [ ! -d "$1" ] ; then
     bad_pkgdir "$1"
 else
-    command -v realpath >/dev/null || alias realpath='realpath_cd'
-    pkgdir=$(realpath "$1")
+    rp=realpath
+    command -v $rp >/dev/null || rp='realpath_cd'
+    pkgdir=$($rp "$1")
     shift
 fi
 
@@ -57,9 +58,9 @@ if [ "$uid" = '0' ]; then
         -v "$MEREDIR":/mere \
         mere/dev:latest "$cmd"
 else
-    printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh' \
+    printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh\n' \
         "$uid" "$gid" >>"${MEREDIR}/passwd"
-    printf 'merebuild:x:%s:merebuild' \
+    printf 'merebuild:x:%s:merebuild\n' \
         "$gid" >>"${MEREDIR}/group"
 
     docker run -it --rm \
