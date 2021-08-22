@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=git
-pkgver=2.32.0
+pkgver=2.33.0
 pkgrel=1
 pkgdesc='A distributed version control system'
 arch=('x86_64')
@@ -28,7 +28,7 @@ source=(
     "https://www.kernel.org/pub/software/scm/git/git-${pkgver}.tar.xz"
 )
 sha256sums=(
-    68a841da3c4389847ecd3301c25eb7e4a51d07edf5f0168615ad6179e3a83623
+    bf3c6ab5f82e072aad4768f647cfb1ef60aece39855f83f080f9c0222dd20c4f
 )
 
 
