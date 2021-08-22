@@ -33,8 +33,9 @@ tidy_modify+=('tidy_dedup')
 
 tidy_dedup() {
 	msg2 "$(gettext "De-duplicating files...")"
-    if command -v mere-dedup >/dev/null; then
-        mere-dedup "$pkgdir"
+    if command -v fedup >/dev/null; then
+        # shellcheck disable=SC2154
+        fedup -q "$pkgdir"
         return $?
     fi
     IFS='

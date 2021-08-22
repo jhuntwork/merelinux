@@ -4,7 +4,7 @@
 
 pkgname=(pacman pacman-portable pacman-build libalpm-dev)
 pkgver=5.2.2
-pkgrel=6
+pkgrel=7
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -32,8 +32,7 @@ source=(
     pacman-portable.conf
     fakeroot
     dependencies.sh
-    dedup.sh
-    mere-dedup
+    zz-dedup.sh
     std-build-functions.sh
 )
 sha256sums=(
@@ -43,8 +42,7 @@ sha256sums=(
     f2c3b003d37c674eb003a69ce389585f14348894de3c5c3bae3f5dd1f96cc1a6
     689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
     bf8bf662c85a8020023a0eb4f4d652398ef3ddc0ced3b9409ed0750bf88a8df9
-    f8d20ad8a50f284542e25519657d746e6d0864ef1506c45c56d691bbd0ed14d6
-    25a6f2f45854c77d958cea13e1fa4953e599615e72ca0010772b4f9ffe5b2a9e
+    4bd067e3bdfe37ff8f028d8d71685206f8791b0a6f9737a0875e6ddab3394be6
     992b324505daa83bc872547817275029ed680b333148f354573dedf0a9986503
 )
 
@@ -101,9 +99,9 @@ package_pacman() {
     install -m 0644 "${srcdir}/pacman.conf" etc/
     install -m 0644 "${srcdir}/makepkg.conf" etc/
     install -m 0755 "${srcdir}/fakeroot" bin/
-    install -m 0755 "${srcdir}/mere-dedup" bin/
     install -m 0755 "${srcdir}/dependencies.sh" usr/share/makepkg/lint_package/
-    install -m 0755 "${srcdir}/dedup.sh" usr/share/makepkg/tidy/
+    # Named zz-dedup.sh because it needs to be executed last in the tidy stage
+    install -m 0755 "${srcdir}/zz-dedup.sh" usr/share/makepkg/tidy/
     install -m 0755 "${srcdir}/std-build-functions.sh" usr/share/makepkg/
     package_defined_files
 }
@@ -130,7 +128,6 @@ package_pacman-build() {
         bin/fakeroot
         bin/makepkg
         bin/makepkg-template
-        bin/mere-dedup
         bin/repo-*
         bin/testpkg
         etc/makepkg.conf*
@@ -139,6 +136,7 @@ package_pacman-build() {
     depends=(
         bash
         curl
+        fedup
         file
         libarchive
         "pacman=${pkgver}"
