@@ -1,10 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
-rationale='This is part of the core toolchain'
-pkgname=(linux linux-headers)
-pkgver=4.19.34
+pkgname=linux
+pkgver=5.11.7
 pkgrel=1
 pkgdesc='System kernel'
 arch=(x86_64)
@@ -12,39 +11,38 @@ url='http://www.kernel.org'
 license=(GPL2)
 groups=(base)
 depends=()
-makedepends=(bison flex perl)
+makedepends=(bison flex perl python)
 options=()
 changelog=ChangeLog
 source=(
-    "https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-$pkgver.tar.xz"
-    musl-compatibility.patch
+    "https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-$pkgver.tar.xz"
     linux-config
+    busybox-find-compat.patch
 )
 
 sha256sums=(
-    dd795e2a1fddbee5b03c3bb55a1926829cc08df4fdcabce62dda717ba087b8cc
-    fffcf736758c9eb78b7244ba7cc2860166d34c832e7c6ddc21344557a4c587a4
-    5e0bca67c64c916307cf9aed132ab6e65ea939b3a1ec5c343cd0f6d1abb6563c
+    49b5f12c47e151c98e8dc11a22436940d2d4bf8f5b698ce54d685a24cd3ea8b1
+    26e43c82162d5eb0a6095d5762803360101734e4e717b5449359c345fdff77f1
+    c8f3271471fd3c9b576fca983511da87f2f9c14dbc1e6eb1573fe98a771b0481
 )
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+    cd_unpacked_src
+    sed -i 's@/usr/bin/awk@/bin/awk@' scripts/ld-version.sh
+    # Some internal build scripts expect the GNU find command.
+    # Specifically, they expect find will have the -printf flag.
+    patch -Np1 -i "${srcdir}/busybox-find-compat.patch"
     cp "${srcdir}/linux-config" .config
-    make
+    make LLVM=1 LLVM_IAS=1
 }
 
-package_linux() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
+package() {
+    cd_unpacked_src
+    make LLVM=1 LLVM_IAS=1 INSTALL_MOD_PATH="$pkgdir" modules_install
     install -d "${pkgdir}/boot"
     install "arch/${CARCH}/boot/bzImage" "${pkgdir}/boot/vmlinux"
-}
-
-package_linux-headers() {
-    pkgdesc='System headers'
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make mrproper
-    patch -Np1 -i "${srcdir}/musl-compatibility.patch"
-    make INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
-    cd dest || return 1
-    find include ! -type d -name "*.h" | cpio -dump "${pkgdir}"
+    install .config "${pkgdir}/boot/config"
+    # remove build/source links for now
+    rm -f "${pkgdir}/lib/modules/${pkgver}/build" \
+          "${pkgdir}/lib/modules/${pkgver}/source"
 }
