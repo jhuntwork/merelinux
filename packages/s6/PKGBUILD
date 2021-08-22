@@ -4,7 +4,7 @@
 
 pkgname=(s6 s6-dev)
 pkgver=2.10.0.3
-pkgrel=2
+pkgrel=3
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
@@ -16,6 +16,7 @@ options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://skarnet.org/software/s6/s6-${pkgver}.tar.gz"
+    mdevd-service
     rc.init
     rc.shutdown
     s6.install
@@ -32,7 +33,8 @@ source=(
 
 sha256sums=(
     1d21373151704150df0e8ed199f097f6ee5d2befb9a68aca4f20f3862e5d8757
-    b7152736b6a2de7c7a198cb96fc0d563c7f34622874196518bcf36c867c6fda0
+    9ca3f44a433f800d88a49be522c1ca6943b2035715b7368b42767cc49850c997
+    33ade9b012439977931e2b7999cddda26f9dc64dc0768b6d4b94cad01d63be37
     db0e8c503e72eb05356a4ec9a65903a6d6447b5786453d0d8dbf097534c89ad5
     6ba76e90d72d7e59763a0ec42304d46abfd17548b1d52485dcf2e5306998887e
     23565910c6f2bbbc1d196fd4538d19ac9096a190bfc5f3a0ced8a15d0f13e029
@@ -68,7 +70,7 @@ package_s6() {
         sbin
         lib/s6
     )
-    depends=(execline)
+    depends=(execline mdevd)
     groups=(core)
 
     # Run make install
@@ -94,6 +96,10 @@ package_s6() {
     install -d etc/s6/init-services/.s6-svscan
     install -m 0750 "${srcdir}/s6-svscan-crash" etc/s6/init-services/.s6-svscan/crash
     install -m 0750 "${srcdir}/s6-svscan-finish" etc/s6/init-services/.s6-svscan/finish
+
+    # mdevd service
+    install -d etc/s6/init-services/mdevd
+    install -m 0754 "${srcdir}/mdevd-service" etc/s6/init-services/mdevd/run
 
     # early tty1 and ttyS0 service
     install -d etc/s6/init-services/tty1 etc/s6/init-services/ttyS0
