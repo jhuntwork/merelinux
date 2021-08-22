@@ -8,7 +8,7 @@ COPY scripts/build-in-docker.sh /usr/local/bin/build-in-docker.sh
 RUN install -d /mere/pkgs && \
     touch /mere/pkgs/buildlocal.db && \
     pacman -Syu --noconfirm && \
-    pacman -Sy --noconfirm build-essential sudo && \
+    pacman -Sy --noconfirm base-layout busybox core-dev pacman-build sudo && \
     chmod +x /usr/local/bin/build-in-docker.sh && \
     rm -rf /var/lib/pacman/sync && \
     printf 'merebuild ALL=(ALL) NOPASSWD: ALL\n' >>/etc/sudoers && \
