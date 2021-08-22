@@ -1,0 +1,48 @@
+--- linux-5.11.7/kernel/gen_kheaders.sh
++++ linux-5.11.7.new/kernel/gen_kheaders.sh
+@@ -85,7 +85,7 @@
+ # Create archive and try to normalize metadata for reproducibility.
+ # For compatibility with older versions of tar, files are fed to tar
+ # pre-sorted, as --sort=name might not be available.
+-find $cpio_dir -printf "./%P\n" | LC_ALL=C sort | \
++find $cpio_dir | LC_ALL=C sort | \
+     tar "${KBUILD_BUILD_TIMESTAMP:+--mtime=$KBUILD_BUILD_TIMESTAMP}" \
+     --owner=0 --group=0 --numeric-owner --no-recursion \
+     -I $XZ -cf $tarfile -C $cpio_dir/ -T - > /dev/null
+--- linux-5.11.7/scripts/tags.sh
++++ linux-5.11.7.new/scripts/tags.sh
+@@ -36,7 +36,7 @@
+ if [ "${ALLSOURCE_ARCHS}" = "" ]; then
+ 	ALLSOURCE_ARCHS=${SRCARCH}
+ elif [ "${ALLSOURCE_ARCHS}" = "all" ]; then
+-	ALLSOURCE_ARCHS=$(find ${tree}arch/ -mindepth 1 -maxdepth 1 -type d -printf '%f ')
++	ALLSOURCE_ARCHS=$(find ${tree}arch/ -mindepth 1 -maxdepth 1 -type d -exec sh -c 'printf "%s " {} | sed s@.*/@@' \;)
+ fi
+
+ # find sources in arch/$1
+--- linux-5.11.7/usr/gen_initramfs.sh
++++ linux-5.11.7.new/usr/gen_initramfs.sh
+@@ -62,11 +62,22 @@
+ 	return 0
+ }
+
++print_ntime() {
++    # This exists to support using busybox find over GNU find.
++    # It is quite a bit slower, but will produce compatible results.
++    # busybox find does not support -printf
++    find "$1" | while read -r file ; do
++        nanotime=$(stat -c '%y' "$file" | cut -d. -f2 | cut -d' ' -f1)
++        seconds=$(stat -c '%Y' "$file")
++        printf '%s.%s0\n' "$seconds" "$nanotime"
++    done
++}
++
+ print_mtime() {
+ 	local my_mtime="0"
+
+ 	if [ -e "$1" ]; then
+-		my_mtime=$(find "$1" -printf "%T@\n" | sort -r | head -n 1)
++		my_mtime=$(print_ntime "$1" | sort -r | head -n 1)
+ 	fi
+
+ 	echo "# Last modified: ${my_mtime}" >> $cpio_list
