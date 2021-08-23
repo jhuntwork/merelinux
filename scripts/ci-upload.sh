@@ -44,7 +44,7 @@ case "$bn" in
         ;;
     *)
         prnum=$(printf '%s' "$CIRCLE_PULL_REQUEST" | awk -F/ '{print $NF}')
-        if ! printf '%d' "$prnum" >/dev/null 2>&1 ; then
+        if [ -z "$prnum" ] || ! printf '%d' "$prnum" >/dev/null 2>&1 ; then
             printf 'Cannot determine an upload path for the merged PR\n'
             exit 1
         fi
