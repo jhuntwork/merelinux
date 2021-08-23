@@ -1,3 +1,8 @@
+2021-08-23  Jeremy Huntwork <jeremy@merelinux.org>
+
+	* 0.1.4.0-2 :
+	Add some helper scripts for cold-plug events
+
 2021-08-22  Jeremy Huntwork <jeremy@merelinux.org>
 
 	* 0.1.4.0-1 :

@@ -1,0 +1,14 @@
+#!/bin/sh
+# Adapted from https://github.com/slashbeast/mdev-like-a-boss
+
+# A catch-all script which will be executed for all not-configured devices in /etc/mdev.conf
+
+umask 022
+
+# Log unknown event so we can debug it later.
+# We hit this part of script if nothing above matched.
+exit
+exec >>/run/mdev.log
+exec 2>&1
+env
+echo '---'
