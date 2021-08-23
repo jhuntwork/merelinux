@@ -4,7 +4,7 @@
 
 pkgname=(s6 s6-dev)
 pkgver=2.10.0.3
-pkgrel=3
+pkgrel=4
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
