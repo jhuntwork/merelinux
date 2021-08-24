@@ -1,3 +1,8 @@
+2021-08-24  Jeremy Huntwork <jeremy@merelinux.org>
+
+	* 2.0.3-1 :
+	Add some missing groups required by mdev
+
 2021-08-21  Jeremy Huntwork <jeremy@merelinux.org>
 
 	* 2.0.2-1 :

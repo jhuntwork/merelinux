@@ -10,4 +10,11 @@ mem:x:8:
 kmem:x:9:
 mail:x:12:
 utmp:x:22:
+kvm:x:23:
+uucp:x:24:
+cdrom:x:25:
+floppy:x:26:
+audio:x:27:
+video:x:28:
+input:x:29:
 nogroup:x:99:
