@@ -1,3 +1,9 @@
+2021-08-24  Jeremy Huntwork <jeremy@merelinux.org>
+
+	* 5.10.60-1 :
+	Downgrade to 5.10.60 to track the 5.10 longterm branch
+	Add sound and nvme support
+
 2021-03-17  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 	* 5.11.7-1 :
