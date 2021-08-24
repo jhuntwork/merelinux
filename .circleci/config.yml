@@ -19,24 +19,24 @@ jobs:
           command: |
             find packages -name PKGBUILD -exec shellcheck '{}' +
             find packages -name PKGTEST -exec shellcheck '{}' +
-            find scripts -type f -exec shellcheck '{}' +
+            find buildpkg.sh ci-scripts dev-scripts misc-util -type f -exec shellcheck '{}' +
   build:
     executor: build-env
     steps:
       - checkout
       - run:
           name: Setup Build
-          command: ./scripts/ci-setup.sh
+          command: ./ci-scripts/ci-setup.sh
       - run:
           name: Build package
-          command: ./scripts/ci-build.sh
+          command: ./ci-scripts/ci-build.sh
           no_output_timeout: 20m
       - run:
           name: Test package
-          command: ./scripts/ci-test.sh
+          command: ./ci-scripts/ci-test.sh
       - run:
           name: Upload package
-          command: ./scripts/ci-upload.sh
+          command: ./ci-scripts/ci-upload.sh
 workflows:
   version: 2
   workflow:
