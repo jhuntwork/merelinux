@@ -3,7 +3,7 @@
 # Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=linux
-pkgver=5.11.7
+pkgver=5.10.60
 pkgrel=1
 pkgdesc='System kernel'
 arch=(x86_64)
@@ -21,8 +21,8 @@ source=(
 )
 
 sha256sums=(
-    49b5f12c47e151c98e8dc11a22436940d2d4bf8f5b698ce54d685a24cd3ea8b1
-    26e43c82162d5eb0a6095d5762803360101734e4e717b5449359c345fdff77f1
+    696ff7753f6c7c5123dbcb0a22d693cb358c760c61a76649531b6a207155f78d
+    18491acd910d739816876630cd7ef187389e5d81718cac0c15099b521d437e65
     c8f3271471fd3c9b576fca983511da87f2f9c14dbc1e6eb1573fe98a771b0481
 )
 
