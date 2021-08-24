@@ -1,0 +1,59 @@
+Updated version of patch originally provided by Khem Raj <raj.khem@gmail.com>
+
+--- busybox-1.33.1.orig/coreutils/test.c
++++ busybox-1.33.1/coreutils/test.c
+@@ -435,7 +435,7 @@
+ };
+ 
+ /* See test_ptr_hack.c */
+-extern struct test_statics *const test_ptr_to_statics;
++extern struct test_statics *test_ptr_to_statics;
+ 
+ #define S (*test_ptr_to_statics)
+ #define args            (S.args         )
+--- busybox-1.33.1.orig/include/libbb.h
++++ busybox-1.33.1/include/libbb.h
+@@ -342,7 +342,7 @@
+ #if defined(errno)
+ /* If errno is a define, assume it's "define errno (*__errno_location())"
+  * and we will cache it's result in this variable */
+-extern int *const bb_errno;
++extern int *bb_errno;
+ #undef errno
+ #define errno (*bb_errno)
+ #define bb_cached_errno_ptr 1
+@@ -2228,7 +2228,7 @@
+ /* '*const' ptr makes gcc optimize code much better.
+  * Magic prevents ptr_to_globals from going into rodata.
+  * If you want to assign a value, use SET_PTR_TO_GLOBALS(x) */
+-extern struct globals *const ptr_to_globals;
++extern struct globals *ptr_to_globals;
+ 
+ #if defined(__clang_major__) && __clang_major__ >= 9
+ /* Clang/llvm drops assignment to "constant" storage. Silently.
+--- busybox-1.33.1.orig/libbb/lineedit.c
++++ busybox-1.33.1/libbb/lineedit.c
+@@ -192,7 +192,7 @@
+ };
+ 
+ /* See lineedit_ptr_hack.c */
+-extern struct lineedit_statics *const lineedit_ptr_to_statics;
++extern struct lineedit_statics * lineedit_ptr_to_statics;
+ 
+ #define S (*lineedit_ptr_to_statics)
+ #define state            (S.state           )
+--- busybox-1.33.1.orig/shell/ash.c
++++ busybox-1.33.1/shell/ash.c
+@@ -300,10 +300,9 @@
+  * set "-DBB_GLOBAL_CONST=''" in CONFIG_EXTRA_CFLAGS to disable
+  * this optimization.
+  */
+-#ifndef BB_GLOBAL_CONST
+-# define BB_GLOBAL_CONST const
+-#endif
+ 
++#undef BB_GLOBAL_CONST
++#define BB_GLOBAL_CONST
+ 
+ /* ============ Hash table sizes. Configurable. */
+ 

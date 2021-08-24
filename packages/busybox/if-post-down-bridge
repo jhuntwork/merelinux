@@ -1,9 +1,9 @@
 #!/bin/sh -e
 if [ -n "$IF_BRIDGE_PORTS" ] ; then
-    for iface in $IF_BRIDGE_PORTS ; do
-        ip link set $iface down
+    for dev in $IF_BRIDGE_PORTS ; do
+        ip link set "$dev" down
     done
-    if brctl show | grep -q $IFACE ; then
-        brctl delbr $IFACE
+    if brctl show | grep -q "$IFACE" ; then
+        brctl delbr "$IFACE"
     fi
 fi

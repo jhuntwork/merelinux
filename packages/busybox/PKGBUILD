@@ -1,12 +1,12 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=busybox
 rationale="It serves as a stand-in for bzip2, coreutils, diffutils, \
 findutils, gawk, grep, gzip, sed, tar and util-linux"
-pkgver=1.32.1
-pkgrel=4
+pkgver=1.33.1
+pkgrel=1
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
@@ -18,7 +18,7 @@ options=(emptydirs)
 changelog=ChangeLog
 source=(
     "http://busybox.net/downloads/${pkgname}-${pkgver}.tar.bz2"
-    0001-Turn-ptr_to_globals-and-bb_errno-to-be-non-const.patch
+    non-const.patch
     poweroff.patch
     busybox-config
     busybox.install
@@ -35,18 +35,18 @@ source=(
 )
 
 sha256sums=(
-    9d57c4bd33974140fd4111260468af22856f12f5b5ef7c70c8d9b75c712a0dee
-    31b58b4de281ffd65c39a9e83103c57b6dfd2dcf9c19a41f3a9cfa35ef3d263b
+    12cec6bd2b16d8a9446dd16130f2b92982f1819f6e1c5f5887b6db03f5660d28
+    df74957dc1b48adf791d236996b64cd439d440e9cef9fc582721dda5cf7aca90
     08b850b788636f6c829e865414fc6305bdc1ffc6e1ec74083ab1256b6a38d0a7
-    7d9769f58391196096cf89b1d01793db8cb9019454c2d5349f443966040a3eda
+    48153964473d97f632bab76aa3b0fc586496cefb7eb6879114ef2055160c6c11
     388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     3e0c3b046209525a6ac08b56406d7753a196ace08c127ff7423a8af5b91e0cbe
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
     0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
     6572c2fdb51f665a236507a59f1aee43c3b3212d6636141775f082b87868333d
     644321e67516c8e6869dd1f09b9dfc06d6758dec91df0bdea3cb614419a1e0d3
-    e3f03cdee9f5945667728a76053bba3641add9820cafe75b1f883d711bcb58d9
-    2d9876f5b675a6f86b38b975fdaa19cd109dd7c91cbf8a5b0b602dbb1fed6f49
+    b7faa90c6bd1608c802c39e559fd1dffd30f0f2d1471f58d0324709b9c5fab2d
+    afb6ade6f60f9aef614263b0debf2a42d9ef84377bb5e40c5a5b196786cb1288
     44ab6c3435535856b54269be711de6514e3c97612684c1c23c5f90f14b40b470
     4882124b9d9e2f9b369acec0f0b3bd289b3f3d3d86d8b3751b931e78d4fe669b
     30129377e9d49cdccd58882f9c4fd6d45ded5a3762ca1a27ee50414381d3af06
@@ -61,7 +61,7 @@ backup=(
 
 build() {
     cd_unpacked_src
-    patch -Np1 -i "${srcdir}/0001-Turn-ptr_to_globals-and-bb_errno-to-be-non-const.patch"
+    patch -Np1 -i "${srcdir}/non-const.patch"
     patch -Np1 -i "${srcdir}/poweroff.patch"
     sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" \
       "${srcdir}/busybox-config" >.config
@@ -95,7 +95,7 @@ package() {
     install -d sbin
     install -d usr/bin
     ln -s /bin/busybox usr/bin/env
-    rm -f bin/env
+    ln -s /bin/busybox usr/bin/awk
 
     # s6 Services
     install -d etc/s6/services/available/ntpd/log
