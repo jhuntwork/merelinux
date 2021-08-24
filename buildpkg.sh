@@ -57,6 +57,7 @@ if [ "$uid" = '0' ]; then
         -v "$pkgdir":/src \
         -v "$MEREDIR":/mere \
         -v "$(pwd)"/dev-scripts:/usr/local/bin \
+        -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
         mere/dev:latest "$cmd"
 else
     printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh\n' \
@@ -70,6 +71,7 @@ else
         -v "$MEREDIR":/mere \
         -v "${MEREDIR}/passwd":/etc/passwd \
         -v "${MEREDIR}/group":/etc/group \
+        -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
         -v "$(pwd)"/dev-scripts:/usr/local/bin \
         -u "${uid}:${gid}" \
         mere/dev:latest "$cmd"
