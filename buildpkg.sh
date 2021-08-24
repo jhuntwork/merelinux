@@ -9,7 +9,7 @@ Usage: %s <pkgdir> [cmd]
              source files required for the build.
 
   [cmd]      Optional command to run inside the container. E.g., /bin/sh.
-             The default is /usr/local/bin/build-in-docker.sh
+             The default is /usr/local/bin/build-in-docker
 ' "$0"
 }
 
@@ -35,7 +35,7 @@ else
     shift
 fi
 
-cmd=/usr/local/bin/build-in-docker.sh
+cmd=/usr/local/bin/build-in-docker
 [ -n "$1" ] && cmd="$1"
 [ -d "${pkgdir}/pkg" ] && chmod 755 "${pkgdir}/pkg"
 
@@ -56,6 +56,7 @@ if [ "$uid" = '0' ]; then
     docker run -it --rm \
         -v "$pkgdir":/src \
         -v "$MEREDIR":/mere \
+        -v "$(pwd)"/dev-scripts:/usr/local/bin \
         mere/dev:latest "$cmd"
 else
     printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh\n' \
@@ -69,6 +70,7 @@ else
         -v "$MEREDIR":/mere \
         -v "${MEREDIR}/passwd":/etc/passwd \
         -v "${MEREDIR}/group":/etc/group \
+        -v "$(pwd)"/dev-scripts:/usr/local/bin \
         -u "${uid}:${gid}" \
         mere/dev:latest "$cmd"
 fi

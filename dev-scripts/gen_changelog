@@ -20,7 +20,6 @@ comment=$*
                     sed 's/.*://')
 
 file=$(mktemp)
-printf 'Added the following to the top of %s:\n\n' "$changelog"
 
 # shellcheck disable=SC2154
 printf '%s %s\n\n\t* %s-%s :\n\t%s\n\n' "$(date +%Y-%m-%d)" "$MERE_PACKAGER" \
@@ -28,3 +27,5 @@ printf '%s %s\n\n\t* %s-%s :\n\t%s\n\n' "$(date +%Y-%m-%d)" "$MERE_PACKAGER" \
 
 [ -f "${pkgdir}/${changelog}" ] && cat "${pkgdir}/${changelog}" >>"$file"
 mv "$file" "${pkgdir}/${changelog}"
+
+printf 'Added the following to the top of %s:\n\n' "$changelog"
