@@ -27,15 +27,15 @@ case "$bn" in
         aws s3 sync "s3://pkgs.merelinux.org/${prnum}/" staging/
 
         # Grab the testing dbs
-        curl -fsL http://pkgs.merelinux.org/testing/main.db.tar.gz \
-            -o pkgs/testing/main.db.tar.gz
-        curl -fsL http://pkgs.merelinux.org/testing/main.files.tar.gz \
-            -o pkgs/testing/main.files.tar.gz
+        curl -fsL http://pkgs.merelinux.org/testing/testing.db.tar.gz \
+            -o pkgs/testing/testing.db.tar.gz
+        curl -fsL http://pkgs.merelinux.org/testing/testing.files.tar.gz \
+            -o pkgs/testing/testing.files.tar.gz
 
         # Copy over the staging files to testing
         find staging -name "*.pkg*" | while read -r file ; do
             mv -v "$file" pkgs/testing
-            ./bin/repo-add -R pkgs/testing/main.db.tar.gz "pkgs/testing/${file##*/}"
+            ./bin/repo-add -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
         done
         find staging -name "*.src.tar.xz" -exec mv -v '{}' pkgs/testing/ \;
 
