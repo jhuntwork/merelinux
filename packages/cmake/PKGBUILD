@@ -5,7 +5,7 @@
 pkgname=cmake
 _major_minor=3.21
 pkgver="${_major_minor}.1"
-pkgrel=1
+pkgrel=2
 pkgdesc='The CMake toolsuite for building, testing and packaging software.'
 arch=('x86_64')
 url='https://cmake.org'
@@ -32,8 +32,8 @@ build() {
 
 package() {
     pkgfiles=(
-        /usr/bin
-        /usr/share
+        usr/bin
+        usr/share
     )
     depends=(
         "ld-musl-$(arch).so.1"
