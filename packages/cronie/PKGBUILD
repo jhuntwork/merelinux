@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=cronie
-pkgver=1.5.5
+pkgver=1.5.7
 pkgrel=1
 pkgdesc='A standard UNIX daemon crond'
 arch=(x86_64)
@@ -20,7 +20,7 @@ source=(
 )
 
 sha256sums=(
-    be34c79505e5544323281854744b9955ff16b160ee569f9df7c0dddae5720eac
+    538bcfaf2e986e5ae1edf6d1472a77ea8271d6a9005aee2497a9ed6e13320eb3
     fd6e2ff2f82087e64103050315cd3d291adedc34322e23f3209e6e9bb4cc1fb4
 )
 
