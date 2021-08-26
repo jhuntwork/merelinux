@@ -3,7 +3,7 @@ sudo pip install awscli
 
 bn="$(git rev-parse --abbrev-ref HEAD)"
 case "$bn" in
-    master)
+    main)
         prnum=$(git log --oneline -1 | grep -o 'Merge pull request.*from' | \
                 cut -d' ' -f4 | sed 's@#@@')
         if ! printf '%d' "$prnum" >/dev/null 2>&1 ; then
