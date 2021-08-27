@@ -37,11 +37,8 @@ fi
 
 cmd=/usr/local/bin/build-in-docker
 [ -n "$1" ] && cmd="$1"
-[ -d "${pkgdir}/pkg" ] && chmod 755 "${pkgdir}/pkg"
 
 MEREDIR="${MEREDIR:-${HOME}/.mere}"
-uid=$(id -u)
-gid=$(id -g)
 
 install -d "${MEREDIR}/logs"
 install -d "${MEREDIR}/pkgs"
@@ -52,27 +49,10 @@ install -d "${MEREDIR}/sources"
 cp packages/base-layout/passwd "$MEREDIR"
 cp packages/base-layout/group "$MEREDIR"
 
-if [ "$uid" = '0' ]; then
-    docker run -it --rm \
-        -v "$pkgdir":/src \
-        -v "$MEREDIR":/mere \
-        -v "$(pwd)"/dev-scripts:/usr/local/bin \
-        -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
-        mere/dev:latest "$cmd"
-else
-    printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh\n' \
-        "$uid" "$gid" >>"${MEREDIR}/passwd"
-    printf 'merebuild:x:%s:merebuild\n' \
-        "$gid" >>"${MEREDIR}/group"
-
-    docker run -it --rm \
-        -e PACKAGER="$MERE_PACKAGER" \
-        -v "$pkgdir":/src \
-        -v "$MEREDIR":/mere \
-        -v "${MEREDIR}/passwd":/etc/passwd \
-        -v "${MEREDIR}/group":/etc/group \
-        -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
-        -v "$(pwd)"/dev-scripts:/usr/local/bin \
-        -u "${uid}:${gid}" \
-        mere/dev:latest "$cmd"
-fi
+docker run -it --rm \
+    -e PACKAGER="$MERE_PACKAGER" \
+    -v "$pkgdir":/src \
+    -v "$MEREDIR":/mere \
+    -v "$(pwd)"/dev-scripts:/usr/local/bin \
+    -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
+    mere/dev:latest "$cmd"
