@@ -1,31 +1,78 @@
 #!/bin/bash -e
-error() {
-    printf 'ERROR: %s\n' "$1"
-    exit 1
+
+parse_newstyle() {
+    while IFS= read -r line; do
+        if printf '%s' "$line" | \
+            grep -qE '^\d+.*-\d+ \(\d{4}-\d{2}-\d{2}\)'; then
+            version=$(printf '%s' "$line" | cut -d' ' -f1)
+            logline=''
+        elif printf '%s' "$line" | grep -qE '^\t[A-z]+'; then
+            logline=$(printf '%s\n%s\n' "$logline" "$line")
+            releases["$version"]="$logline"
+        fi
+    done < "${pkgdir}/${changelog}"
 }
 
+parse_oldstyle() {
+    while IFS= read -r line; do
+        if printf '%s' "$line" | \
+                grep -qE '^\d{4}-\d{2}-\d{2}'; then
+            date=$(printf '%s' "$line" | grep -oE '^\d{4}-\d{2}-\d{2}')
+            if [ -n "$entry" ]; then
+                # Print the previous entry and clear state
+                printf '%s\n\n' "$entry"
+                entry=''
+                logline=''
+            fi
+        elif printf '%s' "$line" | \
+                grep -qE '^\t\* .*-\d+ :$'; then
+            version=$(printf '%s' "$line" | grep -oE '\t\* .*-\d+' | cut -d' ' -f2)
+        elif printf '%s' "$line" | grep -qE '^\t[A-z]+'; then
+            logline=$(printf '%s\n%s\n' "$logline" "$line")
+            entry=$(printf '%s (%s)\n%s\n' "$version" "$date" "$logline")
+        fi
+    done < "${pkgdir}/${changelog}"
+}
+
+set -o pipefail
+
 pkgdir="$1"
-[ -d "$pkgdir" ] || error "Missing directory: ${pkgdir}"
-shift
-comment=$*
-[ -z "$comment" ] && comment='Initial version'
+if [ ! -d "$pkgdir" ]; then
+    printf 'Missing directory: %s\n' "$pkgdir"
+    exit 1
+fi
 
 # shellcheck disable=SC1090
 . "${pkgdir}/PKGBUILD"
 
 [ -n "$changelog" ] || changelog='ChangeLog'
 
-[ -n "$MERE_PACKAGER" ] ||
-    MERE_PACKAGER=$(grep '^#.*Maintainer:' "${pkgdir}/PKGBUILD" | \
-                    sed 's/.*://')
+if head -n1 "${pkgdir}/${changelog}" | \
+   grep -qE '^\d{4}-\d{2}-\d{2}.*<[A-z\d._%+-]+@[A-z\d.-]+\.[A-z]{2,}>$'; then
+   content=$(parse_oldstyle)
+   printf '%s\s' "$content" >"${pkgdir}/${changelog}"
+fi
 
-file=$(mktemp)
+declare -A releases
+parse_newstyle
 
 # shellcheck disable=SC2154
-printf '%s %s\n\n\t* %s-%s :\n\t%s\n\n' "$(date +%Y-%m-%d)" "$MERE_PACKAGER" \
-    "$pkgver" "$pkgrel" "$comment" | tee "$file"
+this_version="${pkgver}-${pkgrel}"
+if [ ${releases[$this_version]+x} ]; then
+    printf 'An entry for version %s already exists in the ChangeLog\n' "$this_version"
+    exit 1
+fi
 
-[ -f "${pkgdir}/${changelog}" ] && cat "${pkgdir}/${changelog}" >>"$file"
-mv "$file" "${pkgdir}/${changelog}"
+printf 'Enter a change description for %s (press ctrl-d when done):\n' "$this_version"
+input=$(cat)
+wrapped_input=$(printf '%s' "$input" | fold -s -w 72 | sed -e 's/^[ \t]*//' -e 's@^@\t@')
 
-printf 'Added the following to the top of %s:\n\n' "$changelog"
+tmpfile=$(mktemp)
+entry=$(printf '%s (%s)\n\n%s\n\n' "$this_version" "$(date +%Y-%m-%d)" "$wrapped_input")
+
+printf '%s\n\n' "$entry" >"$tmpfile"
+cat "${pkgdir}/${changelog}" >>"$tmpfile"
+mv "$tmpfile" "${pkgdir}/${changelog}"
+
+# shellcheck disable=SC2154
+printf '\nAdded the following entry to the ChangeLog for %s:\n\n%s\n\n' "$pkgname" "$entry"
