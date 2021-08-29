@@ -19,6 +19,11 @@ installed to disk manually from any x86_64 Linux system using a statically
 compiled version of `pacman`. Detailed instructions are forthcoming in a
 separate installation document.
 
+## Support
+
+Feel free to ask questions in the `#merelinux` channel on the
+[LiberaChat IRC Network](https://libera.chat).
+
 ## Contributing
 
 In the current state of development, the most helpful contributions are:
