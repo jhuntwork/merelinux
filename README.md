@@ -1,4 +1,5 @@
 # Mere Linux
+
 Mere Linux is a simple Linux distribution built upon
 [musl](http://www.musl-libc.org/) libc, using
 [pacman](https://www.archlinux.org/pacman/) for package management and
@@ -9,4 +10,21 @@ shape its direction, please visit the
 [Github Discussions](https://github.com/jhuntwork/merelinux/discussions/58)
 page and leave a comment.
 
-For additional details, visit https://merelinux.org.
+For additional details, visit [https://merelinux.org](https://merelinux.org).
+
+## Installing
+
+Currently there is no Mere-specific installation media. However, Mere can be
+installed to disk manually from any x86_64 Linux system using a statically
+compiled version of `pacman`. Detailed instructions are forthcoming in a
+separate installation document.
+
+## Contributing
+
+In the current state of development, the most helpful contributions are:
+
+- Test Mere on your local machine and
+  [report any issues](https://github.com/jhuntwork/merelinux/issues).
+- Create pull requests of any missing packages you would like to see included.
+  There is currently a lot of room for potential packages.
+  See [CONTRIBUTING](CONTRIBUTING.md) for more details.
