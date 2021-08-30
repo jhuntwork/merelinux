@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(pcre libpcre-dev)
-pkgver=8.44
+pkgver=8.45
 pkgrel=1
 pkgdesc='Perl Compatible Regular Expressions'
 arch=(x86_64)
 url='http://pcre.org'
 license=(GPL)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -18,13 +17,13 @@ source=(
     "https://ftp.pcre.org/pub/pcre/pcre-${pkgver}.tar.gz"
 )
 sha256sums=(
-    aecafd4af3bd0f3935721af77b889d9024b2e01d96b58471bd91a3063fb47728
+    4e6ce03e0336e8b4a3d6c2b70b1c5e18590a5673a98186da90d4f33c23defc09
 )
 
 
 build() {
     cd_unpacked_src
-    ./configure --prefix='' \
+    ./configure --prefix=/usr \
         --disable-shared \
         --enable-static \
         --enable-utf8 \
@@ -34,21 +33,21 @@ build() {
 
 package_pcre() {
     pkgfiles=(
-        bin
+        usr/bin
     )
     depends=(
-        musl
+        "ld-musl-$(arch).so.1"
     )
     std_package
-    rm "${pkgdir}/bin/pcre-config"
+    rm "${pkgdir}/usr/bin/pcre-config"
 }
 
 package_libpcre-dev() {
     pkgfiles=(
-        bin/pcre-config
-        include
-        lib/*.a
-        lib/pkgconfig
+        usr/bin/pcre-config
+        usr/include
+        usr/lib/*.a
+        usr/lib/pkgconfig
     )
     depends=()
     std_split_package
