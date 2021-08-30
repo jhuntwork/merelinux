@@ -1,14 +1,15 @@
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.6-5 (2021-08-30)
 
-	* 2.4.6-4 :
+	Move to prefix /usr
+
+2.4.6-4 (2021-02-27)
+
 	Build against musl-1.2.2
 
-2017-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.6-2 (2017-05-16)
 
-	* 2.4.6-2 :
 	Separate libltdl into its own packages
 
-2015-03-25 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.6-1 (2015-03-25)
 
-	* 2.4.6-1 :
 	Initial version

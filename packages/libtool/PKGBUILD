@@ -1,16 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='Many source packages ship with pre-generated build scripts. Pacman does not. Autoconf, automake and libtool are required to generate them before using.'
 pkgname=(libtool libltdl libltdl-dev)
 pkgver=2.4.6
-pkgrel=4
+pkgrel=5
 pkgdesc='A generic library support script.'
 arch=(x86_64)
 url='http://www.gnu.org/software/libtool'
 license=(GPL3)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -26,17 +24,17 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    ./configure --prefix='' \
+    ./configure --prefix=/usr \
         --enable-static
     make
 }
 
 package_libtool() {
     pkgfiles=(
-        bin
-        share/aclocal
-        share/libtool
-        share/man/man1
+        usr/bin
+        usr/share/aclocal
+        usr/share/libtool
+        usr/share/man/man1
     )
     depends=(
         autoconf
@@ -48,18 +46,25 @@ package_libtool() {
 
 package_libltdl() {
     pkgfiles=(
-        lib/lib*.so.*
+        usr/lib/lib*.so.*
     )
-    depends=(musl)
+    depends=(
+        libc.so
+    )
+    provides=(
+        libltdl.so.7.3.1
+    )
     std_split_package
 }
 
 package_libltdl-dev() {
     pkgfiles=(
-        include
-        lib/lib*.a
-        lib/lib*.so
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
     )
-    depends=(libltdl)
+    depends=(
+        libltdl.so.7.3.1
+    )
     std_split_package
 }
