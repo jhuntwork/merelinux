@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(jq jq-dev)
 pkgver=1.6
-pkgrel=1
+pkgrel=2
 pkgdesc='A lightweight and flexible command-line JSON processor'
 arch=(x86_64)
 url='https://github.com/stedolan/jq'
 license=(BSD)
-groups=(base)
+groups=()
 depends=()
 makedepends=(libtool)
 options=()
@@ -27,7 +26,7 @@ build() {
     cd_unpacked_src
     autoreconf -i
     ./configure \
-      --prefix='' \
+      --prefix=/usr \
       --enable-static \
       --disable-shared \
       --enable-all-static
@@ -36,17 +35,17 @@ build() {
 
 package_jq() {
     pkgfiles=(
-        bin/jq
-        share/man/man1
+        usr/bin/jq
+        usr/share/man/man1
     )
     std_package
 }
 
 package_jq-dev() {
     pkgfiles=(
-        bin/onig-config
-        include
-        lib
+        usr/bin/onig-config
+        usr/include
+        usr/lib
     )
     std_split_package
 }
