@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(libaio libaio-dev)
 pkgver=0.3.112
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux-native asynchronous I/O access library'
 arch=(x86_64)
 url=https://pagure.io/libaio
 license=(GPL2)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -24,25 +23,30 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    make prefix=''
+    make prefix=/usr
 }
 
 package_libaio() {
     pkgfiles=(
-        lib/libaio.so.*
+        usr/lib/libaio.so.*
     )
-    depends=(musl)
+    depends=(
+        libc.so
+    )
+    provides=(
+        libaio.so.1.0.1
+    )
     cd_unpacked_src
-    make prefix='' DESTDIR="${pkgdirbase}/dest" install
+    make prefix=/usr DESTDIR="${pkgdirbase}/dest" install
     std_split_package
 }
 
 package_libaio-dev() {
     pkgfiles=(
-        include
-        lib/libaio.so
-        lib/libaio.a
+        usr/include
+        usr/lib/libaio.so
+        usr/lib/libaio.a
     )
-    depends=(libaio)
+    depends=(libaio.so.1.0.1)
     std_split_package
 }

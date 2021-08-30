@@ -1,5 +1,7 @@
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+0.3.112-2 (2021-08-30)
 
-	* 0.3.112-1 :
+	Move prefix to /usr
+
+0.3.112-1 (2021-02-27)
+
 	Initial version
-
