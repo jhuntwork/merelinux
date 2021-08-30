@@ -1,11 +1,12 @@
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.1l-1 (2021-08-30)
 
-	* 1.1.1k-1 :
+	Upgrade to 1.1.1l
+
+1.1.1k-1 (2021-04-09)
+
 	Upgrade to 1.1.1k
 	Also use /usr for prefix and add provides
 
-2021-03-15  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.1j-1 (2021-03-15)
 
-	* 1.1.1j-1 :
 	Initial version
-

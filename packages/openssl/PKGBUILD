@@ -1,9 +1,8 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(openssl openssl-dev)
-pkgver=1.1.1k
+pkgver=1.1.1l
 pkgrel=1
 pkgdesc='a toolkit for the TLS and SSL protocols'
 arch=(x86_64)
@@ -19,7 +18,7 @@ source=(
     "https://www.openssl.org/source/openssl-${pkgver}.tar.gz"
 )
 sha256sums=(
-    892a0875b9872acd04a9fde79b1f943075d5ea162415de3047c327df33fbaee5
+    0b7a3e5e59c34827fe0c3a74b7ec8baef302b98fa80088d7f9153aa16fa76bd1
 )
 
 
@@ -35,6 +34,7 @@ build() {
 package_openssl() {
     depends=(
         "ld-musl-$(arch).so.1"
+        libc.so
     )
     provides=(
         libcrypto.so.1.1
