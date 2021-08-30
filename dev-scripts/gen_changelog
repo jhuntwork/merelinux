@@ -32,11 +32,14 @@ parse_oldstyle() {
             entry=$(printf '%s (%s)\n%s\n' "$version" "$date" "$logline")
         fi
     done < "${pkgdir}/${changelog}"
+    # Print the last entry
+    [ -n "$entry" ] && printf '%s\n' "$entry"
 }
 
 set -o pipefail
 
-pkgdir="$1"
+pkgdir='.'
+[ -n "$1" ] && pkgdir="$1"
 if [ ! -d "$pkgdir" ]; then
     printf 'Missing directory: %s\n' "$pkgdir"
     exit 1
@@ -46,11 +49,12 @@ fi
 . "${pkgdir}/PKGBUILD"
 
 [ -n "$changelog" ] || changelog='ChangeLog'
+[ -e "${pkgdir}/${changelog}" ] || touch "${pkgdir}/${changelog}"
 
 if head -n1 "${pkgdir}/${changelog}" | \
    grep -qE '^\d{4}-\d{2}-\d{2}.*<[A-z\d._%+-]+@[A-z\d.-]+\.[A-z]{2,}>$'; then
    content=$(parse_oldstyle)
-   printf '%s\s' "$content" >"${pkgdir}/${changelog}"
+   printf '%s\n' "$content" >"${pkgdir}/${changelog}"
 fi
 
 declare -A releases

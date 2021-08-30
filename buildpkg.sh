@@ -35,24 +35,50 @@ else
     shift
 fi
 
-cmd=/usr/local/bin/build-in-docker
-[ -n "$1" ] && cmd="$1"
-
 MEREDIR="${MEREDIR:-${HOME}/.mere}"
-
 install -d "${MEREDIR}/logs"
 install -d "${MEREDIR}/pkgs"
 install -d "${MEREDIR}/sources"
 
-# These two lines assume the script will be run from the top of the merelinux
-# source directory. May revisit this in the future.
-cp packages/base-layout/passwd "$MEREDIR"
-cp packages/base-layout/group "$MEREDIR"
+cmd=/usr/local/bin/build-in-docker
+[ -n "$1" ] && cmd="$1"
 
-docker run -it --rm \
-    -e PACKAGER="$MERE_PACKAGER" \
-    -v "$pkgdir":/src \
-    -v "$MEREDIR":/mere \
-    -v "$(pwd)"/dev-scripts:/usr/local/bin \
-    -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
-    mere/dev:latest "$cmd"
+case "$cmd" in
+    gen|gen_changelog|gen_sums)
+        uid=$(id -u)
+        gid=$(id -g)
+        toplevel=$(git rev-parse --show-toplevel)
+        cp "${toplevel}/packages/base-layout/passwd" "$MEREDIR"
+        cp "${toplevel}/packages/base-layout/group" "$MEREDIR"
+
+        printf 'merebuild:x:%s:%s:Mere Build User,,,:/src:/bin/sh\n' \
+            "$uid" "$gid" >>"${MEREDIR}/passwd"
+        printf 'merebuild:x:%s:merebuild\n' \
+            "$gid" >>"${MEREDIR}/group"
+
+        docker run -it --rm \
+            -v "$pkgdir":/src \
+            -v "$MEREDIR":/mere \
+            -v "$(pwd)"/dev-scripts:/usr/local/bin \
+            -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
+            -v "${MEREDIR}/passwd":/etc/passwd \
+            -v "${MEREDIR}/group":/etc/group \
+            -u "${uid}:${gid}" \
+            mere/dev:latest "$cmd"
+        ;;
+    *)
+        tmpdir=$(mktemp -d -t "${pkgdir##*/}-XXXXXX")
+        cd "$pkgdir"
+        find . | cpio -dump "$tmpdir" 2>/dev/null
+        cd - >/dev/null
+        trap 'printf "\nBuild directory was: %s\n" $tmpdir' EXIT
+        docker run -it --rm \
+            -v "$tmpdir":/src \
+            -v "$MEREDIR":/mere \
+            -v "$(pwd)"/dev-scripts:/usr/local/bin \
+            -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
+            mere/dev:latest "$cmd"
+        printf '\nNew package(s) added to %s\n' "${MEREDIR}/pkgs"
+        printf 'Build logs are located at %s\n' "${MEREDIR}/logs"
+        ;;
+esac
