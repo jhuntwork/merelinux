@@ -1,10 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=parted
 pkgver=3.4
-pkgrel=1
+pkgrel=2
 pkgdesc='partition table manipulator'
 arch=(x86_64)
 url='http://www.gnu.org/software/parted'
@@ -32,7 +31,7 @@ build() {
     sed -i 's@loff_t@off_t@g' libparted/fs/xfs/platform_defs.h
     CFLAGS+=' -fPIC --static' \
     ./configure \
-      --prefix='' \
+      --prefix=/usr \
       --enable-static \
       --disable-shared \
       --disable-device-mapper
@@ -41,8 +40,8 @@ build() {
 
 package() {
     pkgfiles=(
-        sbin
-        share
+        usr/sbin
+        usr/share
     )
     std_package
 }
