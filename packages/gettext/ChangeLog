@@ -1,14 +1,16 @@
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+0.21-2 (2021-08-30)
 
-	* 0.21-1 :
+	Move to /usr prefix
+	Remove static build flags
+
+0.21-1 (2021-02-22)
+
 	Upgrade to 0.21
 
-2017-03-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+0.19.8.1-1 (2017-03-31)
 
-	* 0.19.8.1-1 :
 	Upgrade to 0.19.8.1
 
-2015-03-25 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+0.19.4-1 (2015-03-25)
 
-	* 0.19.4-1 :
 	Initial version
