@@ -4,6 +4,8 @@ cd /src
 
 touch /mere/pkgs/buildlocal.db
 sudo pacman -Syu --noconfirm
+# Clear the shell's cached paths of binaries, in case something moved
+hash -r
 makepkg -Ls --noconfirm
 makepkg --allsource
 mv ./*.src.tar.xz /mere/pkgs/
