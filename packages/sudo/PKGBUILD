@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(sudo)
-pkgver=1.9.5p2
+pkgver=1.9.7p2
 pkgrel=1
 pkgdesc='Tool for delegating authority to users and groups.'
 arch=(x86_64)
 url='http://www.sudo.ws/'
 license=(BSD)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=(emptydirs)
@@ -19,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    539e2ef43c8a55026697fb0474ab6a925a11206b5aa58710cb42a0e1c81f0978
+    28b5ee725dbf89a7852f42f309ca877d2810a9531b4eecfe59f3a84b6b4afca8
 )
 
 
@@ -28,8 +27,8 @@ build() {
     CFLAGS+=' -fPIC -static' \
       LDFLAGS='-static -Wl,-static' \
       ./configure \
-      --prefix='' \
-      --libexecdir=/lib/sudo \
+      --prefix=/usr \
+      --libexecdir=/usr/lib/sudo \
       --enable-static \
       --disable-shared
     make
@@ -39,12 +38,12 @@ package() {
     options=(emptydirs)
     backup=(etc/sudoers etc/sudo.conf)
     pkgfiles=(
-        bin
+        usr/bin
         etc/sudo.conf
         etc/sudoers
         etc/sudoers.d
-        sbin
-        share/man
+        usr/sbin
+        usr/share/man
     )
     std_package
 }
