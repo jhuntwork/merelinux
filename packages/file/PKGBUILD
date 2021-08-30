@@ -1,16 +1,15 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='file is used by many build scripts'
 pkgname=(file file-dev)
-pkgver=5.39
+pkgver=5.40
 pkgrel=1
 pkgdesc='A file-type guesser'
-arch=('x86_64')
+arch=(x86_64)
 url='http://darwinsys.com/file/'
-license=('BSD')
-groups=('base')
+license=(BSD)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -20,14 +19,14 @@ source=(
 )
 
 sha256sums=(
-    f05d286a76d9556243d0cb05814929c2ecf3a5ba07963f8f70bfaaa70517fad1
+    167321f43c148a553f68a0ea7f579821ef3b11c27b8cbe158e4df897e4a5dd57
 )
 
 
 build() {
     cd_unpacked_src
     sed -i 's/misc/file/' configure
-    LDFLAGS='-Wl,-static' ./configure --prefix='' \
+    LDFLAGS='-Wl,-static' ./configure --prefix=/usr \
       --disable-shared \
       --enable-static
     make V=1
@@ -36,16 +35,16 @@ build() {
 package_file() {
     options=()
     pkgfiles=(
-        bin/file
-        share/file/magic.mgc
+        usr/bin/file
+        usr/share/file/magic.mgc
     )
     std_package
 }
 
 package_file-dev() {
     pkgfiles=(
-        include
-        lib
+        usr/include
+        usr/lib
     )
     std_split_package
 }
