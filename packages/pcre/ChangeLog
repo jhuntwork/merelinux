@@ -1,24 +1,24 @@
-2021-03-15  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.45-1 (2021-08-30)
 
-	* 8.44-1 :
+	Upgrade to 8.45
+	Move prefix to /usr
+
+8.44-1 (2021-03-15)
+
 	Upgrade to 8.44
 
-2018-11-25  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.42-1 (2018-11-25)
 
-	* 8.42-1 :
 	Upgrade to 8.42
 
-2017-04-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.40-1 (2017-04-16)
 
-	* 8.40-1 :
 	Upgrade to 8.40
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.37-1 (2015-08-11)
 
-	* 8.37-1 :
 	Upgrade to 8.37
 
-2015-03-27 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.36-1 (2015-03-27)
 
-	* 8.36-1 :
 	Initial version
