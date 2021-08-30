@@ -1,14 +1,16 @@
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.03.13-1 (2021-08-30)
 
-	* 2.03.11-1 :
+	Upgrade to 2.03.13
+	Move prefix to /usr
+
+2.03.11-1 (2021-02-27)
+
 	Upgrade to 2.03.11
 
-2018-11-17  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.02.177-1 (2018-11-17)
 
-	* 2.02.177-1 :
 	Upgrade to 2.02.177
 
-2017-05-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.02.171-1 (2017-05-26)
 
-	* 2.02.171-1 :
 	Initial version
