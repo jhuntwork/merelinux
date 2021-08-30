@@ -1,29 +1,27 @@
-2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.07.1-6 (2021-08-30)
 
-	* 1.07.1-5 :
+	Move to /usr prefix
+
+1.07.1-5 (2021-04-08)
+
 	Remove from any groups for now
 
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.07.1-4 (2021-02-22)
 
-	* 1.07.1-4 :
 	Build with llvm and latest musl
 
-2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.07.1-3 (2019-07-30)
 
-	* 1.07.1-3 :
 	Use std build functions
 
-2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.07.1-2 (2019-07-30)
 
-	* 1.07.1-2 :
 	Refactor PKGBUILD file
 
-2017-05-22 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.07.1-1 (2017-05-22)
 
-	* 1.07.1-1 :
 	Upgrade to 1.07.1
 
-2015-03-15 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.06.95-1 (2015-03-15)
 
-	* 1.06.95-1 :
 	Initial version
