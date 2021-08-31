@@ -1,5 +1,5 @@
 #!/bin/execlineb -P
-/bin/export PATH "/bin:/sbin"
+/bin/export PATH "/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin"
 cd /
 s6-setsid -qb --
 umask 022

@@ -1,10 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(s6 s6-dev)
 pkgver=2.10.0.3
-pkgrel=4
+pkgrel=5
 pkgdesc='A small process supervision suite for UNIX.'
 arch=(x86_64)
 url='http://skarnet.org/software/s6/'
@@ -37,7 +36,7 @@ sha256sums=(
     33ade9b012439977931e2b7999cddda26f9dc64dc0768b6d4b94cad01d63be37
     db0e8c503e72eb05356a4ec9a65903a6d6447b5786453d0d8dbf097534c89ad5
     6ba76e90d72d7e59763a0ec42304d46abfd17548b1d52485dcf2e5306998887e
-    23565910c6f2bbbc1d196fd4538d19ac9096a190bfc5f3a0ced8a15d0f13e029
+    ad6fc42721170dbceefaa55a3e3010d023420de5a1882735a1eab32ac9ec92d4
     a90dd71977a0a223265ddda7713e8cd798d14d21a3b010c9ba69b8c76c483133
     aa07d12477029cabc69f6024dc2ca1f3ea2137df869b1e72a1a47491abc980df
     551527219c85ec06df46c8f54e7c13afc181276ace95135491795457a7eec501
