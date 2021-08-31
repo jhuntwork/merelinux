@@ -1,34 +1,31 @@
-2021-08-19  Jeremy Huntwork <jeremy@merelinux.org>
+R59c-3 (2021-08-31)
 
-	* R59c-2 :
+	Move man page to /usr/share/man
+
+R59c-2 (2021-08-19)
+
 	Add to core group
 
-2021-02-28  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+R59c-1 (2021-02-28)
 
-	* R59c-1 :
 	Upgrade to R59c
 
-2018-11-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+R56c-1 (2018-11-18)
 
-	* R56c-1 :
 	Upgrade to R56c
 
-2017-05-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+R55-1 (2017-05-26)
 
-	* R55-1 :
 	Upgrade to R55
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+R51-1 (2015-08-11)
 
-	* R51-1 :
 	Upgrade to R51
 
-2015-03-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+R50e-1 (2015-03-16)
 
-	* R50e-1 :
 	Upgrade to R50e
 
-2014-05-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+R49-1 (2014-05-28)
 
-	* R49-1 :
 	Initial version
