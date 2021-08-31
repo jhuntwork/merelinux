@@ -3,12 +3,12 @@
 
 pkgname=gptfdisk
 pkgver=1.0.8
-pkgrel=1
+pkgrel=2
 pkgdesc='A set of text-mode partitioning tools'
 arch=(x86_64)
 url='http://www.rodsbooks.com/gdisk'
 license=(GPL2)
-groups=(base)
+groups=()
 depends=()
 makedepends=(
     libncurses-dev
