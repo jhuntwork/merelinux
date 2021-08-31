@@ -1,9 +1,11 @@
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.8.7-2 (2021-08-31)
 
-	* 1.8.7-1 :
+	Move man pages to /usr/share/man
+
+1.8.7-1 (2021-02-27)
+
 	Upgrade to 1.8.7
 
-2017-04-15 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.6.1-1 (2017-04-15)
 
-	* 1.6.1-1 :
 	Initial version

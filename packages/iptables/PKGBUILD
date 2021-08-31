@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=iptables
 pkgver=1.8.7
-pkgrel=1
+pkgrel=2
 pkgdesc='A fast incremental file transfer utility'
 arch=(x86_64)
 url='http://www.netfilter.org/'
 license=(GPL)
-groups=(base)
+groups=()
 depends=()
 makedepends=(zlib-dev)
 options=()
@@ -31,6 +30,7 @@ build() {
       --enable-static \
       --disable-nftables \
       --enable-libipq \
+      --mandir=/usr/share/man \
       --with-xtlibdir=/lib/xtables
     make
 }
@@ -39,8 +39,8 @@ package() {
     pkgfiles=(
         bin
         sbin
-        share/man/man1
-        share/man/man8
+        usr/share/man/man1
+        usr/share/man/man8
     )
     std_package
 }
