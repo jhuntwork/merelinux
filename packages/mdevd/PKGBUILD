@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(mdevd)
 pkgver=0.1.4.0
-pkgrel=2
+pkgrel=3
 pkgdesc='A small daemon managing kernel hotplug events, similarly to udevd.'
 arch=(x86_64)
 url='http://skarnet.org/software/mdevd/'
 license=(ISC)
-groups=(base)
+groups=()
 depends=()
 makedepends=(skalibs-dev)
 options=()
