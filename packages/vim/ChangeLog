@@ -1,37 +1,35 @@
-2021-08-16  Jeremy Huntwork <jeremy@merelinux.org>
+8.2.3388-1 (2021-08-31)
 
-	* 8.2.3354-1 :
+	Upgrade to 8.2.3388
+	Remove from base group
+
+8.2.3354-1 (2021-08-16)
+
 	Upgrade to 8.2.3354
 	Remove syntax file for PGKBUILD files. Plugins for this and more exist
 	and users should be free to customize.
 
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.2.2557-1 (2021-02-27)
 
-	* 8.2.2557-1 :
 	Upgrade to 8.2.2557
 
-2018-11-25  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.1.0547-1 (2018-11-25)
 
-	* 8.1.0547-1 :
 	Upgrade to 8.1.0547
 
-2017-08-20 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.1.0547-1 (2017-08-20)
 
-	* 8.0.0891 :
 	Remove /bin/xxd
 
-2017-08-08 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.1.0547-1 (2017-08-08)
 
-	* 8.0.0891 :
 	Upgrade to 8.0.0891
 	Combine vim-extra with vim
 
-2017-05-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.0.0604-1 (2017-05-26)
 
-	* 8.0.0604-1 :
 	Upgrade to 8.0.0604
 
-2014-05-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+7.4-1 (2014-05-28)
 
-	* 7.4-1 :
 	Initial version

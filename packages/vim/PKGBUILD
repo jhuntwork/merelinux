@@ -1,18 +1,17 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=vim
 _vermajor=8
 _verminor=2
-_verpatch=3354
+_verpatch=3388
 pkgver="${_vermajor}.${_verminor}.${_verpatch}"
 pkgrel=1
 pkgdesc='An IMproved version of the vi editor'
 arch=(x86_64)
 url='http://www.vim.org'
 license=(VIM)
-groups=(base)
+groups=()
 depends=()
 makedepends=(libncurses-dev)
 options=()
@@ -23,7 +22,7 @@ source=(
 )
 
 sha256sums=(
-    e54c8dcbe02f0e9122ff4258964ae604839cf730f4f488f422231ebd59c60160
+    0e1c04d25cb36f4cf3fdcd85d6b2a7df6923ea09551ed823e7adfba7bf19c6c1
     5e698ff1872bae79b7eae3f35bfca2e426c2698a785687fb9035e0fee16de91a
 )
 
