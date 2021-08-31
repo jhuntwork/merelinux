@@ -3,7 +3,7 @@
 
 pkgname=(pciutils)
 pkgver=3.7.0
-pkgrel=1
+pkgrel=2
 pkgdesc='A tool for working with PCI devices'
 arch=(x86_64)
 url=''
@@ -30,4 +30,5 @@ build() {
 package() {
     cd_unpacked_src
     make DESTDIR="${pkgdir}" PREFIX=/usr SHAREDIR=/usr/share/pciutils/hwdata install
+    sed -i '/PCI_COMPRESSED_IDS=/s@=.*@=0' "${pkgdir}/usr/sbin/update-pciids"
 }
