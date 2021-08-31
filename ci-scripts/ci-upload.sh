@@ -37,7 +37,14 @@ case "$bn" in
             mv -v "$file" pkgs/testing
             ./bin/repo-add -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
         done
-        find staging -name "*.src.tar.xz" -exec mv -v '{}' pkgs/testing/ \;
+        find staging -name "*.src.tar.xz" | while read -r file; do
+            bn=${file##*/}
+            noext=${bn%.src.tar.xz*}
+            norel=${noext%-*}
+            nover=${norel%-*}
+            find pkgs/testing -not -type d -name "${nover}*.src.tar.xz" -delete
+            mv -v "$file" pkgs/testing
+        done
 
         aws s3 sync --delete pkgs/testing/ s3://pkgs.merelinux.org/testing/
         aws s3 rm --recursive "s3://pkgs.merelinux.org/${prnum}/"
