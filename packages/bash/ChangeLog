@@ -1,64 +1,56 @@
-2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.8-1 (2021-08-31)
 
-	* 5.1.4-3 :
+	Upgrade to 5.1.8
+	Move man page to /usr/share/man
+
+5.1.4-3 (2021-04-08)
+
 	Remove from any groups for now
 
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.4-2 (2021-02-22)
 
-	* 5.1.4-2 :
 	Remove use of -rdynamic so a true static binary is built
 
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.4-1 (2021-02-22)
 
-	* 5.1.4-1 :
 	Upgrade to 5.1.4
 
-2019-08-04  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.7-2 (2019-08-04)
 
-	* 5.0.7-2 :
 	Upload source package
 
-2019-08-04  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.7-1 (2019-08-04)
 
-	* 5.0.7-1 :
 	Upgrade to 5.0.7
 
-2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.3-3 (2019-07-30)
 
-	* 5.0.3-3 :
 	Use std build functions
 
-2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.3-2 (2019-07-30)
 
-	* 5.0.3-2 :
 	Refactor PKGBUILD file
 
-2019-04-11  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.3-1 (2019-04-11)
 
-	* 5.0.3-1 :
 	Upgrade to 5.0.3
 
-2017-04-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.4.12-1 (2017-04-11)
 
-	* 4.4.12-1 :
 	Upgrade patch version to 4.4.12
 
-2016-11-04 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.4-1 (2016-11-04)
 
-	* 4.4-1 :
 	Upgrade to 4.4
 
-2014-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.3.39-1 (2014-08-11)
 
-	* 4.3.39-1 :
 	Upgrade to 4.3.39
 
-2014-05-17 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.3-1 (2014-05-17)
 
-	* 4.3-1 :
 	Upgrade to 4.3
 
-2013-08-21 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.2-1 (2013-08-21)
 
-	* 4.2-1 :
 	Initial version
