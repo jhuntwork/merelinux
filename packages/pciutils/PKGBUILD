@@ -1,34 +1,33 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(pciutils)
-pkgver=3.5.4
+pkgver=3.7.0
 pkgrel=1
 pkgdesc='A tool for working with PCI devices'
 arch=(x86_64)
 url=''
 license=(GPL)
-groups=(base)
+groups=()
 depends=()
-makedepends=(libz-dev)
+makedepends=(zlib-dev)
 options=()
 changelog=ChangeLog
 source=(
-    "https://www.kernel.org/pub/software/utils/${pkgbase}/${pkgbase}-${pkgver}.tar.xz"
+    "https://www.kernel.org/pub/software/utils/pciutils/pciutils-${pkgver}.tar.xz"
 )
 
 sha256sums=(
-    64293c6ab9318c40ef262b76d87bd9097531759752bac556e50979b1e63cfe66
+    9d40b97be8b6a2cdf96aead5a61881d1f7e4e0da9544a9bac4fba1ae9dcd40eb
 )
 
 
 build() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    LDFLAGS='-Wl,-static' make PREFIX=/ SHAREDIR=/share/pciutils/hwdata
+    cd_unpacked_src
+    LDFLAGS='-Wl,-static' make PREFIX=/usr CC=cc SHAREDIR=/usr/share/pciutils/hwdata
 }
 
 package() {
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdir}" PREFIX=/ SHAREDIR=/share/pciutils/hwdata install
+    cd_unpacked_src
+    make DESTDIR="${pkgdir}" PREFIX=/usr SHAREDIR=/usr/share/pciutils/hwdata install
 }
