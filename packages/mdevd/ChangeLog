@@ -1,3 +1,7 @@
+0.1.4.0-4 (2021-08-31)
+
+	Re-release latest version after relasing issue
+
 0.1.4.0-3 (2021-08-31)
 
 	Remove from base group - is a dependency of s6, so core will pull it in
