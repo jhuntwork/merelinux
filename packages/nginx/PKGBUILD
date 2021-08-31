@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=nginx
-pkgver=1.19.8
+pkgver=1.21.1
 pkgrel=1
 pkgdesc='An HTTP and reverse proxy server.'
 arch=(x86_64)
 url='http://nginx.org/'
 license=(BSD)
-groups=(base)
+groups=()
 depends=(s6 execline)
 makedepends=(
     pkgconf
@@ -29,23 +28,23 @@ source=(
 )
 
 sha256sums=(
-    308919b1a1359315a8066578472f998f14cb32af8de605a3743acca834348b05
-    562826624f8bc98df75abdabcb6e9ce079668bec651dc67a95c34d6bc129a750
+    68ba0311342115163a0354cad34f90c05a7e8bf689dc498abf07899eda155560
+    46d22dd25d7628a3696396f7d35352f7e6e0eb03369bb3c2dad000d23b3dee8b
     9b4f42034d0130d041dfc8f0fcc262891a7d12a529379c6ca344b4a898248d25
-    3ffa02560aeeabf2b23828737c1e5c3d998be2fd1fbc9d6dde15c3401cdb4d7c
+    9df79cf0c61958cc9d4d74ef7831d5d70c1c58bc859b36a2299c5853d66bb30a
     6446799214aa0856c2442bb8864b14c105991f2b96a98908d47db5710c6f896b
-    4bedee518691aad64caba2581d617e4ca122dbcb29703df755d45ff7ca53b2f1
+    4d3411f16e5c7bef5c0c2f9865ffbbbe2c226fa073ab7fd8a4e54547fff875f2
 )
 
 install=nginx.install
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     sed -i 's@-Wl,-E@-Wl,-static@g' auto/cc/conf
     CC='cc -static -fPIC' \
     ./configure \
-        --prefix='' \
+        --prefix=/usr \
         --conf-path=/etc/nginx/nginx.conf \
         --pid-path=/var/run/nginx.pid \
         --lock-path=/var/lock/nginx.lock \
@@ -64,12 +63,12 @@ build() {
 
 package() {
     pkgfiles=
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="$pkgdir" install
 
     # Share files
-    install -d "${pkgdir}"/share/nginx
-    mv "${pkgdir}"/html "${pkgdir}"/share/nginx/
+    install -d "${pkgdir}"/usr/share/nginx
+    mv "${pkgdir}"/usr/html "${pkgdir}"/usr/share/nginx/
 
     # Configuration
     install -d "${pkgdir}/etc/nginx/conf.d"
