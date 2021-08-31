@@ -1,10 +1,12 @@
-2021-03-15  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.7p1-1 (2021-08-31)
 
-	* 8.5p1-1 :
+	Upgrade to 8.7p1
+	Move prefix to /usr
+
+8.5p1-1 (2021-03-15)
+
 	Upgrade to 8.5p1
 
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+8.4p1-1 (2021-02-27)
 
-	* 8.4p1-1 :
 	Initial version
-
