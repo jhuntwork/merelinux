@@ -1,14 +1,18 @@
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+0.8.6-1 (2021-08-31)
 
-	* 0.7.9-2 :
+	Upgrade to 0.8.6
+	Remove from base group
+	Install binaries to /usr/sbin
+	Add man page for kpartx
+
+0.7.9-2 (2021-02-27)
+
 	Build with latest musl/llvm
 
-2018-11-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+0.7.9-1 (2018-11-18)
 
-	* 0.7.9-1 :
 	Upgrade to 0.7.9
 
-2017-05-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+0.7.1-1 (2017-05-26)
 
-	* 0.7.1-1 :
 	Initial version
