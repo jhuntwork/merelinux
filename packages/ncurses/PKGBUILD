@@ -8,7 +8,7 @@ pkgname=(
     libncurses-dev
 )
 pkgver=6.2
-pkgrel=3
+pkgrel=4
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://www.gnu.org/software/ncurses'
@@ -63,7 +63,7 @@ package_ncurses() {
     done
     ln -s libncurses.a usr/lib/libcurses.a
     install -d usr/include/ncursesw
-    find usr/include -type f | while read -r file; do
+    find usr/include -not -type d | while read -r file; do
         bn=${file##*/}
         ln -sv "../${bn}" usr/include/ncursesw/
     done
