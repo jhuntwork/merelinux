@@ -1,35 +1,36 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=kpartx
-pkgver=0.7.9
-pkgrel=2
+pkgver=0.8.6
+pkgrel=1
 pkgdesc='Tools for the Device Mapper multipathing driver'
 arch=(x86_64)
 url='http://christophe.varoqui.free.fr/'
 license=(GPL2)
-groups=(base)
+groups=()
 depends=()
 makedepends=(
     libdevmapper-dev
-    git
 )
 options=()
 changelog=ChangeLog
 source=(
-    "multipath-tools::git+https://git.opensvc.com/multipath-tools/.git#tag=${pkgver}"
+    "kpartx-${pkgver}.tar.gz::https://github.com/opensvc/multipath-tools/archive/refs/tags/${pkgver}.tar.gz"
 )
-sha256sums=('SKIP')
+sha256sums=(
+    ba781d981bd6e8efa5f9f3af6727f85520af6395958e852c1907f59f6124f08e
+)
 
 
 build() {
-    cd "${srcdir}/multipath-tools" || return 1
+    cd_unpacked_src
     make -C kpartx VERSION=$pkgver LDFLAGS='-static -Wl,-static -ldevmapper'
 }
 
 package() {
-    cd "${srcdir}/multipath-tools" || return 1
-    install -d "${pkgdir}/bin"
-    install -m 0755 kpartx/kpartx "${pkgdir}/bin/kpartx"
+    cd_unpacked_src
+    install -d "${pkgdir}/usr/sbin" "${pkgdir}/usr/share/man/man8"
+    install -m 0755 kpartx/kpartx "${pkgdir}/usr/sbin/kpartx"
+    install -m 0644 kpartx/kpartx.8 "${pkgdir}/usr/share/man/man8/"
 }
