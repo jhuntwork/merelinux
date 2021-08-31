@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=linux
-pkgver=5.10.60
-pkgrel=2
+pkgver=5.10.61
+pkgrel=1
 pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
 license=(GPL2)
-groups=(base)
+groups=(core)
 depends=()
 makedepends=(bison flex perl python)
 options=()
@@ -21,7 +20,7 @@ source=(
 )
 
 sha256sums=(
-    696ff7753f6c7c5123dbcb0a22d693cb358c760c61a76649531b6a207155f78d
+    82eae38cc5cd11dd6aaac91c02ff0d006c7bafd6d4cf5c6a791930820a3a91d1
     5496860c89d9d682a9a9a1c3b2fb0816ef1bebad86ff2e25a95f1f7740115433
     c8f3271471fd3c9b576fca983511da87f2f9c14dbc1e6eb1573fe98a771b0481
 )

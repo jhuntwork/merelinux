@@ -1,91 +1,77 @@
-2021-08-24  Jeremy Huntwork <jeremy@merelinux.org>
+5.10.61-1 (2021-08-31)
 
-	* 5.10.60-2 :
+	Upgrade to 5.10.61
+
+5.10.60-2 (2021-08-24)
+
 	Improve virtio driver support
 
-2021-08-24  Jeremy Huntwork <jeremy@merelinux.org>
+5.10.60-1 (2021-08-24)
 
-	* 5.10.60-1 :
 	Downgrade to 5.10.60 to track the 5.10 longterm branch
 	Add sound and nvme support
 
-2021-03-17  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.11.7-1 (2021-03-17)
 
-	* 5.11.7-1 :
 	Upgrade to 5.11.7
 
-2019-04-10  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.19.34-1 (2019-04-10)
 
-	* 4.19.34-1 :
 	Upgrade to 4.19.34
 
-2018-12-16  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.14.80-2 (2018-12-16)
 
-	* 4.14.80-2 :
 	Add EFI stub support
 
-2018-11-12  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.14.80-1 (2018-11-12)
 
-	* 4.14.80-1 :
 	Upgrade to 4.14.80
 
-2017-09-01 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.12.9-3 (2017-09-01)
 
-	* 4.12.9-3 :
 	Add back in linux-headers
 
-2017-08-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.12.9-2 (2017-08-31)
 
-	* 4.12.9-2 :
 	Add ebtables support
 	Add some compatibility fixes for system headers
 
-2017-08-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.12.9-1 (2017-08-31)
 
-	* 4.12.9-1 :
 	Upgrade to 4.12.9
 
-2017-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.10-3 (2017-08-11)
 
-	* 4.10-3 :
 	Add Iptables NAT support
 
-2017-08-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.10-2 (2017-08-10)
 
-	* 4.10-2 :
 	Add IPv6 support
 
-2017-04-04 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.10-1 (2017-04-04)
 
-	* 4.10-1 :
 	Upgrade to 4.10
 
-2017-01-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.7.5-2 (2017-01-10)
 
-	* 4.7.5-2 :
 	Update descriptions
 
-2017-01-06 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.7.5-1 (2017-01-06)
 
-	* 4.7.5-1 :
 	Upgrade to 4.7.5
 
-2016-02-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.4.2-1 (2016-02-26)
 
-	* 4.4.2-1 :
 	Upgrade to 4.4.2
 
-2015-03-23 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.19.2-1 (2015-03-23)
 
-	* 3.19.2-1 :
 	Upgrade to 3.19.2
 
-2015-03-17 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.19.1-2 (2015-03-17)
 
-	* 3.19.1-2 :
 	Add SATA support for testing in VirtualBox
 
-2015-03-15 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.19.1-1 (2015-03-15)
 
-	* 3.19.1-1 :
 	Initial version
