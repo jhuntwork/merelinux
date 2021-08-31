@@ -3,12 +3,12 @@
 
 pkgname=strace
 pkgver=5.13
-pkgrel=1
+pkgrel=2
 pkgdesc='A diagnostic, debugging and instructional userspace tracer for Linux'
 arch=(x86_64)
 url='https://strace.io'
 license=(BSD)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -23,7 +23,7 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     CFLAGS+=' -static' \
       ./configure \
       --prefix=/usr \
@@ -32,6 +32,6 @@ build() {
 }
 
 package() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
+    cd_unpacked_src
     make DESTDIR="${pkgdir}" install
 }
