@@ -1,14 +1,15 @@
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.2.3-2 (2021-08-31)
 
-	* 3.2.3-1 :
+	Move prefix to /usr
+
+3.2.3-1 (2021-02-27)
+
 	Upgrade to 3.2.3
 
-2017-04-16 Fitz Agard <fhagard@lightcubesolutions.com>
+3.1.2-1 (2017-04-16)
 
-	* 3.1.2-1 :
 	Upgrade to 3.1.2
 
-2015-03-25 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.1.1-1 (2015-03-25)
 
-	* 3.1.1-1 :
 	Initial version
