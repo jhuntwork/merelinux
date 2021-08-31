@@ -1,14 +1,18 @@
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.0.8-1 (2021-08-31)
 
-	* 1.0.6-2 :
+	Upgrade to 1.0.8
+	Remove from base group
+	Install binaries to /usr/sbin instead of /bin
+	Add man pages
+
+1.0.6-2 (2021-02-27)
+
 	Build with latest musl, popt and libuuid
 
-2018-11-17  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.0.4-1 (2018-11-17)
 
-	* 1.0.4-1 :
 	Initial version
 
-2017-05-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.0.1-1 (2017-05-26)
 
-	* 1.0.1-1 :
 	Initial version
