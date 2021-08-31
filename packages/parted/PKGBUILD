@@ -3,12 +3,12 @@
 
 pkgname=parted
 pkgver=3.4
-pkgrel=2
+pkgrel=3
 pkgdesc='partition table manipulator'
 arch=(x86_64)
 url='http://www.gnu.org/software/parted'
 license=(GPL3)
-groups=(base)
+groups=()
 depends=()
 makedepends=(
     libuuid-dev
