@@ -1,3 +1,5 @@
+#!/bin/sh -e
 pre_remove() {
-    service dropbear disable >/dev/null 2>&1
+    service unsup dropbear >/dev/null 2>&1 || true
+    service disable dropbear >/dev/null 2>&1 || true
 }

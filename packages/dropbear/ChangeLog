@@ -1,51 +1,41 @@
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2020.81-1 (2021-02-22)
 
-	* 2020.81-1 :
 	Upgrade to 2020.81
 
-2019-08-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2019.78-1 (2019-08-08)
 
-	* 2019.78-1 :
 	Upgrade to 2019.78
 
-2019-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2018.76-3 (2019-04-09)
 
-	* 2018.76-3 :
 	Increase max command length
 
-2018-11-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2018.76-2 (2018-11-18)
 
-	* 2018.76-2 :
 	Rebuild against musl-1.20
 
-2017-05-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2018.76-2 (2017-05-26)
 
-	* 2017.75-1:
 	Upgrade to 2017.75
 
-2016-09-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2018.76-2 (2016-09-28)
 
-	* 2016.74-1:
 	Upgrade to 2016.74
 	Add scp
 
-2016-09-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2018.76-2 (2016-09-28)
 
-	* 2015.68-2:
 	Use new service location for s6
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2018.76-2 (2015-08-11)
 
-	* 2015.68-1:
 	Upgrade to 2015.68
 
-2015-03-20 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2015.67-2 (2015-03-20)
 
-	* 2015.67-2 :
 	Disable wtmp support
 	Add s6 service files
 
-2015-03-17 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2015.67-1 (2015-03-17)
 
-	* 2015.67-1 :
 	Initial version

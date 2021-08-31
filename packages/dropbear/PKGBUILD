@@ -1,6 +1,5 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=dropbear
 pkgver=2020.81
@@ -9,7 +8,7 @@ pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
 url='http://matt.ucc.asn.au/dropbear/dropbear.html'
 license=(MIT)
-groups=(base)
+groups=()
 depends=(s6 execline)
 makedepends=(zlib-dev)
 options=()
@@ -24,10 +23,10 @@ source=(
 
 sha256sums=(
     48235d10b37775dbda59341ac0c4b239b82ad6318c31568b985730c788aac53b
-    743b0d8c6e7a60f07910daa913bfb5717e98b47654ac7cffaafff15a1c3a7566
+    cd91a5635e4cf9564691b34c082e1371a2001b783ded3ea5c1fdf5629fb44eae
     992a38e175c6dd8dea0c0496dbe175749f0f18eee6d861d913cd8f5bfe19a37a
     678981da5f219b6d335e132073ce5516e51470f80d17f33b282af259d846c5b0
-    8e70536d7bdf7d8cd7ae0b7d0b047e59c424374495490fe02140989345baa886
+    0d6cbdcf92e9c0d3793970f5a068673e8d53ab42c958aaa7920a683699e909cd
 )
 
 install=dropbear.install
@@ -36,7 +35,7 @@ build() {
     cd_unpacked_src
     sed -i '/MAX_CMD_LEN/s@9000@20000@' sysoptions.h
     ./configure \
-      --prefix='' \
+      --prefix=/usr \
       --enable-static \
       --disable-wtmp
     make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp"
@@ -48,7 +47,7 @@ package() {
     make DESTDIR="$pkgdir" \
       PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" \
       install
-    mv "${pkgdir}/bin/scp" "${pkgdir}/bin/dropbear-scp"
+    mv "${pkgdir}/usr/bin/scp" "${pkgdir}/usr/bin/dropbear-scp"
     install -d -m 0755 "${pkgdir}/etc/dropbear"
     install -d "${pkgdir}/etc/s6/services/available/dropbear/log"
     install -m 0754 "${srcdir}/dropbear-service" \
