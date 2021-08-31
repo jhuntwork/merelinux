@@ -3,7 +3,7 @@
 
 pkgname=(mdevd)
 pkgver=0.1.4.0
-pkgrel=3
+pkgrel=4
 pkgdesc='A small daemon managing kernel hotplug events, similarly to udevd.'
 arch=(x86_64)
 url='http://skarnet.org/software/mdevd/'
