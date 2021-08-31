@@ -1,39 +1,36 @@
-2021-03-15  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.21.1-1 (2021-08-31)
 
-	* 1.19.8-1 :
+	Upgrade to 1.21.1
+	Move prefix to /usr
+
+1.19.8-1 (2021-03-15)
+
 	Upgrade to 1.19.8
 
-2018-11-25  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.14.1-1 (2018-11-25)
 
-	* 1.14.1-1 :
 	Upgrade to 1.14.1
 
-2017-08-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.10.1-2 (2017-08-10)
 
-	* 1.10.1-2 :
 	Fix static build
 
-2016-10-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.10.1-1 (2016-10-10)
 
-	* 1.10.1-1 :
 	Upgrade to 1.10.1
 
-2016-09-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.8.0-2 (2016-09-28)
 
-	* 1.8.0-2 :
 	Use new service location for s6
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.8.0-1 (2015-08-11)
 
-	* 1.8.0-1 :
 	Upgrade to 1.8.0
 
-2015-08-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.7.11-2 (2015-08-10)
 
-	* 1.7.11-2 :
 	Improve configuration
 
-2015-03-27 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.7.11-1 (2015-03-27)
 
-	* 1.7.11-1 :
 	Initial version
