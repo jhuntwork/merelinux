@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=cronie
 pkgver=1.5.7
-pkgrel=1
+pkgrel=2
 pkgdesc='A standard UNIX daemon crond'
 arch=(x86_64)
 url=https://github.com/cronie-crond/cronie
 license=(GPL2)
-groups=(base)
+groups=()
 depends=()
 makedepends=()
 options=(emptydirs)
@@ -29,7 +28,7 @@ build() {
     cd_unpacked_src
     CFLAGS+=' -static' \
         ./configure \
-        --prefix=''\
+        --prefix=/usr \
         --enable-syscrontab \
         --disable-anacron
     make V=1
@@ -40,7 +39,6 @@ package() {
     make DESTDIR="$pkgdir" install
     install -d "${pkgdir}/etc/cron.d"
     cd "$pkgdir" || return 1
-    rm -rf share
     install -d etc/s6/services/available/crond
     install -m 0754 "${srcdir}/crond-service" etc/s6/services/available/crond/run
 }
