@@ -3,7 +3,7 @@
 parse_newstyle() {
     while IFS= read -r line; do
         if printf '%s' "$line" | \
-            grep -qE '^[A-z\d]+.*-\d+ \(\d{4}-\d{2}-\d{2}\)'; then
+            grep -qE '^[A-z0-9\.]+-\d+ \(\d{4}-\d{2}-\d{2}\)'; then
             version=$(printf '%s' "$line" | cut -d' ' -f1)
             logline=''
         elif printf '%s' "$line" | grep -qE '^\t[A-z]+'; then

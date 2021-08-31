@@ -1,18 +1,8 @@
+#!/bin/bash
 alias ls='ls --color=auto'
 
-if [ "`locale charmap 2>/dev/null`" = "UTF-8" ]
-then
+if [ "$(locale charmap 2>/dev/null)" = "UTF-8" ]; then
     stty iutf8
 fi
 
 shopt -s checkwinsize
-
-# Set the titlebar text for X terminals.
-if [    "$TERM" = "xterm" -o \
-        "$TERM" = "xterm-color" -o \
-        "$TERM" = "xterm-256color" -o \
-        "$TERM" = "xterm-xfree86" -o \
-        "$TERM" = "rxvt" -o \
-        "$TERM" = "rxvt-unicode" ]; then
-        export PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"'
-fi
