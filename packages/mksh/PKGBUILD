@@ -1,10 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=mksh
 pkgver=R59c
-pkgrel=2
+pkgrel=3
 pkgdesc='The MirBSD Korn Shell'
 arch=(x86_64)
 url='https://www.mirbsd.org/mksh.htm'
@@ -31,7 +30,7 @@ build() {
 package() {
     cd_unpacked_src
     install -d "${pkgdir}/bin"
-    install -d "${pkgdir}/share/man/man1"
+    install -d "${pkgdir}/usr/share/man/man1"
     install -m 0755 mksh "${pkgdir}/bin/"
-    install -c -o root -g bin -m 444 lksh.1 mksh.1 "${pkgdir}/share/man/man1/"
+    install -c -o root -g bin -m 444 lksh.1 mksh.1 "${pkgdir}/usr/share/man/man1/"
 }
