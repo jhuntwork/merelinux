@@ -1,133 +1,112 @@
-2021-08-22  Jeremy Huntwork <jeremy@merelinux.org>
+5.2.2-8 (2021-09-05)
 
-	* 5.2.2-7 :
+	Move from core group to base group
+	Update pacman.conf to use the core repo
+
+5.2.2-7 (2021-08-22)
+
 	Use fedup for dedup.sh
 
-2021-08-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.2-6 (2021-08-18)
 
-	* 5.2.2-6 :
 	Set std prefix to /usr in std build functions
 
-2021-04-11  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.2-5 (2021-04-11)
 
-	* 5.2.2-5 :
 	Adjust makepkg.conf: Use -Os in CFLAGS instead of -O2
 	Adjust makepkg.conf: Use $(arch) instead of hard-coding it
 
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.2-4 (2021-04-09)
 
-	* 5.2.2-4 :
 	Add a dependency condition for libc.so
 
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.2-3 (2021-04-09)
 
-	* 5.2.2-3 :
 	Don't error on lib deps if the same package provides them
 
-2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.2-2 (2021-04-08)
 
-	* 5.2.2-2 :
 	Use openssl instead of libressl
 	Add to new core group
 	Update dependencies.sh linter to detect library names
 
-2021-02-23  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.2-1 (2021-02-23)
 
-	* 5.2.2-1 :
 	Upgrade to 5.2.2
 
-2019-08-03  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.2-3 (2019-08-03)
 
-	* 5.1.2-3 :
 	Use pkgs.merelinux.org as the main server
 
-2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.2-2 (2019-07-30)
 
-	* 5.1.2-2 :
 	Add std-build-functions.sh for PKGBUILD helper functions
 
-2019-04-11  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.2-1 (2019-04-11)
 
-	* 5.1.2-1 :
 	Upgrade to 5.1.2
 
-2019-04-10  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.1-4 (2019-04-10)
 
-	* 5.1.1-4 :
 	Use xz for default package compression
 
-2018-12-02  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.1-3 (2018-12-02)
 
-	* 5.1.1-3 :
 	Add a portable version prefixed to /mere
 
-2018-11-26  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.1-2 (2018-11-26)
 
-	* 5.1.1-2 :
 	Move pkgdelta to pacman-build
 
-2018-11-13  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.1.1-1 (2018-11-13)
 
-	* 5.1.1-1 :
 	Upgrade to 5.1.1
 
-2017-03-31 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-9 (2017-03-31)
 
-	* 5.0.1-9 :
 	Add a fakefakeroot script
 
-2017-01-19 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-8 (2017-01-19)
 
-	* 5.0.1-8 :
 	Default to pixz for xz compression
 
-2017-01-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-7 (2017-01-10)
 
-	* 5.0.1-7 :
 	Update description
 
-2017-01-09 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-6 (2017-01-09)
 
-	* 5.0.1-6 :
 	Add a libalpm-dev package
 
-2016-11-06 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-5 (2016-11-06)
 
-	* 5.0.1-5 :
 	Cleanup some features in makepkg.conf
 
-2016-10-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-4 (2016-10-10)
 
-	* 5.0.1-4 :
 	Link against libressl
 
-2016-10-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-3 (2016-10-10)
 
-	* 5.0.1-3 :
 	Unset default CFLAGS and CXXFLAGS
 
-2016-10-03 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-2 (2016-10-03)
 
-	* 5.0.1-2 :
 	Backup configuration files on installation of new package
 	Add new binaries bin/pactree, bin/pacman-optimize
 
-2016-09-29 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.1-1 (2016-09-29)
 
-	* 5.0.1-1 :
 	Upgrade to 5.0.1-1
 
-2016-03-03 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.1.2-3 (2016-03-03)
 
-	* 4.1.2-3 :
 	Use repo.merelinux.org as the stable package repository
 
-2016-02-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.1.2-2 (2016-02-16)
 
-	* 4.1.2-2 :
 	Build with support for package signing
 
-2014-05-19 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.1.2-1 (2014-05-19)
 
-	* 4.1.2-1 :
 	Initial version
