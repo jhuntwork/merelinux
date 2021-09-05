@@ -1,24 +1,23 @@
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.7.6-4 (2021-09-05)
 
-	* 2.7.6-3 :
+	Move from core-dev group to build-base group
+
+2.7.6-3 (2021-04-09)
+
 	Add to core-dev group and use /usr for prefix
 
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.7.6-2 (2021-02-27)
 
-	* 2.7.6-2 :
 	Build with musl-1.2.2
 
-2018-11-25  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.7.6-1 (2018-11-25)
 
-	* 2.7.6-1 :
 	Upgrade to 2.7.6
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.7.5-1 (2015-08-11)
 
-	* 2.7.5-1 :
 	Upgrade to 2.7.5
 
-2013-07-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.7.1-1 (2013-07-28)
 
-	* 2.7.1-1 :
 	Initial version
