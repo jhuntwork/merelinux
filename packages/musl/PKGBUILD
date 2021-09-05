@@ -1,11 +1,10 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 rationale='This is part of the core toolchain'
 pkgname=(musl musl-dev)
 pkgver=1.2.2
-pkgrel=5
+pkgrel=6
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=(x86_64)
 url='https://musl.libc.org'
@@ -53,6 +52,6 @@ package_musl-dev() {
         lib/*.o
     )
     depends=("musl=${pkgver}" linux-headers)
-    groups=(core-dev)
+    groups=(build-base)
     std_split_package
 }
