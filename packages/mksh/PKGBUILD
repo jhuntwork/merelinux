@@ -3,12 +3,12 @@
 
 pkgname=mksh
 pkgver=R59c
-pkgrel=3
+pkgrel=4
 pkgdesc='The MirBSD Korn Shell'
 arch=(x86_64)
 url='https://www.mirbsd.org/mksh.htm'
 license=(BSD)
-groups=(core)
+groups=(base)
 depends=()
 makedepends=()
 options=()
