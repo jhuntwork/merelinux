@@ -1,24 +1,24 @@
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.4.19-1 (2021-09-05)
 
-	* 1.4.18-3 :
+	Upgrade to 1.4.19
+	Move from core-dev group to build-base group
+
+1.4.18-3 (2021-04-09)
+
 	Add to core-dev group and use /usr prefix
 
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.4.18-2 (2021-02-22)
 
-	* 1.4.18-2 :
 	Build with latest musl and llvm
 
-2017-03-30 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.4.18-1 (2017-03-30)
 
-	* 1.4.18-1 :
 	Upgrade to 1.4.18
 
-2016-10-10 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.4.17-2 (2016-10-10)
 
-	* 1.4.17-2 :
 	Remove unneeded files
 
-2014-05-27 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.4.17-1 (2014-05-27)
 
-	* 1.4.17-1 :
 	Initial version

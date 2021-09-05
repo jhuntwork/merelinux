@@ -1,16 +1,15 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='m4 is a build and runtime dependency of the autoconf and automake tools'
 pkgname=(m4)
-pkgver=1.4.18
-pkgrel=3
+pkgver=1.4.19
+pkgrel=1
 pkgdesc='An implementation of the traditional Unix macro processor'
 arch=(x86_64)
 url='http://www.gnu.org/software/m4/'
 license=(GPL3)
-groups=(core-dev)
+groups=(build-base)
 depends=()
 makedepends=()
 options=()
@@ -20,7 +19,7 @@ source=(
 )
 
 sha256sums=(
-    f2c1e86ca0a404ff281631bdc8377638992744b175afb806e25871a24a934e07
+    63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96
 )
 
 
