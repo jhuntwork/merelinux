@@ -1,81 +1,69 @@
-2021-08-19  Jeremy Huntwork <jeremy@merelinux.org>
+1.2.2-6 (2021-09-05)
 
-	* 1.2.2-5 :
+	Move from core-dev group to build-base group
+
+1.2.2-5 (2021-08-19)
+
 	Remove musl from core. musl-dev remains in core-dev
 
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.2.2-4 (2021-04-09)
 
-	* 1.2.2-4 :
 	Add libc.so to provides
 
-2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.2.2-3 (2021-04-08)
 
-	* 1.2.2-3 :
 	Add to groups core and core-dev for musl and musl-dev respectively
 	Switch to /usr as main prefix
 
-2021-02-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.2.2-2 (2021-02-21)
 
-	* 1.2.2-2 :
 	Rebuild using llvm and 5.10.x kernel headers
 
-2021-02-20  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.2.2-1 (2021-02-20)
 
-	* 1.2.2-1 :
 	Upgrade to 1.2.2
 
-2019-04-10  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.22-1 (2019-04-10)
 
-	* 1.1.22-1 :
 	Upgrade to 1.1.22
 
-2018-11-12  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.20-1 (2018-11-12)
 
-	* 1.1.20-1 :
 	Upgrade to 1.1.20
 
-2017-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.16-2 (2017-05-16)
 
-	* 1.1.16-2 :
 	Use default CFLAGS. Improve packaging.
 	musl-dev depends on linux-headers
 
-2017-01-05 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.16-1 (2017-01-05)
 
-	* 1.1.16-1 :
 	Upgrade to 1.1.16
 
-2016-10-03 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.15-1 (2016-10-03)
 
-	* 1.1.15-1 :
 	Upgrade to 1.1.15
 
-2016-02-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.14-1 (2016-02-26)
 
-	* 1.1.14-1 :
 	Upgrade to 1.1.14
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.10-1 (2015-08-11)
 
-	* 1.1.10-1 :
 	Upgrade to 1.1.10
 
-2015-03-30 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.8-1 (2015-03-30)
 
-	* 1.1.8-1 :
 	Upgrade to 1.1.8
 
-2015-03-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.6-1 (2015-03-16)
 
-	* 1.1.6-1 :
 	Upgrade to 1.1.6
 
-2013-07-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.1.0-1 (2013-07-28)
 
-	* 1.1.0-1 :
 	Upgrade to 1.1.0
 
-2013-07-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+0.9.12-1 (2013-07-28)
 
-	* 0.9.12-1 :
 	Initial version
