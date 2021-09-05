@@ -1,17 +1,16 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=busybox
 rationale="It serves as a stand-in for bzip2, coreutils, diffutils, \
 findutils, gawk, grep, gzip, sed, tar and util-linux"
 pkgver=1.33.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
 license=(GPL)
-groups=(core)
+groups=(base)
 depends=()
 makedepends=()
 options=(emptydirs)
