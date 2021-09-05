@@ -1,3 +1,14 @@
+5.10.62-1 (2021-09-05)
+
+	Upgrade to 5.10.62
+	Merge linux-headers into the linux package
+	Move linux from core group to base group
+	Move linux-headers from core-dev group to build-base group
+
+5.10.61-2 (2021-08-31)
+
+	Use gzip for initrd/initramfs decompression
+
 5.10.61-1 (2021-08-31)
 
 	Upgrade to 5.10.61

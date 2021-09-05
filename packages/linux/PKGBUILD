@@ -1,14 +1,13 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
 
-pkgname=linux
-pkgver=5.10.61
+pkgname=(linux linux-headers)
+pkgver=5.10.62
 pkgrel=1
 pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
 license=(GPL2)
-groups=(core)
 depends=()
 makedepends=(bison flex perl python)
 options=()
@@ -20,22 +19,28 @@ source=(
 )
 
 sha256sums=(
-    82eae38cc5cd11dd6aaac91c02ff0d006c7bafd6d4cf5c6a791930820a3a91d1
-    5496860c89d9d682a9a9a1c3b2fb0816ef1bebad86ff2e25a95f1f7740115433
+    098dd5024d14b01a5ce85a6fec3dd829f4ac62488e4c59004a4687f8bbf886b1
+    2ffab9d900d51293596fcd0c0952f91a1fb03fbe2d49aa11d57ff145e30a00c4
     c8f3271471fd3c9b576fca983511da87f2f9c14dbc1e6eb1573fe98a771b0481
 )
 
 build() {
     cd_unpacked_src
     sed -i 's@/usr/bin/awk@/bin/awk@' scripts/ld-version.sh
+    sed -i \
+        -e "/rsync/s@rsync@find usr/include -not -type d -name '*.h' | cpio -dump --quiet \$\(INSTALL_HDR_PATH\); true@" \
+        -e '/^CC/s@gcc@cc@g' \
+        -e '/^HOSTCC/s@gcc@cc@g' Makefile
     # Some internal build scripts expect the GNU find command.
     # Specifically, they expect find will have the -printf flag.
     patch -Np1 -i "${srcdir}/busybox-find-compat.patch"
+    make LLVM=1 LLVM_IAS=1 mrproper
     cp "${srcdir}/linux-config" .config
     make LLVM=1 LLVM_IAS=1
 }
 
-package() {
+package_linux() {
+    groups=(base)
     cd_unpacked_src
     make LLVM=1 LLVM_IAS=1 INSTALL_MOD_PATH="$pkgdir" modules_install
     install -d "${pkgdir}/boot"
@@ -44,4 +49,12 @@ package() {
     # remove build/source links for now
     rm -f "${pkgdir}/lib/modules/${pkgver}/build" \
           "${pkgdir}/lib/modules/${pkgver}/source"
+}
+
+package_linux-headers() {
+    groups=(build-base)
+    cd_unpacked_src
+    make LLVM=1 LLVM_IAS=1 INSTALL_HDR_PATH=dest HOSTCFLAGS="-D_GNU_SOURCE" headers_install
+    set -o pipefail
+    find usr -not -type d -name "*.h" | cpio -dump "${pkgdir}"
 }
