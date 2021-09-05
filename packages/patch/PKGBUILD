@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(patch)
 pkgver=2.7.6
-pkgrel=3
+pkgrel=4
 pkgdesc='A utility for patching difference listings against one or more original files'
-arch=('x86_64')
+arch=(x86_64)
 url='http://savannah.gnu.org/projects/patch/'
-license=('GPL3')
-groups=(core-dev)
+license=(GPL3)
+groups=(build-base)
 depends=()
 makedepends=()
 options=()
