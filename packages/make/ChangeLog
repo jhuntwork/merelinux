@@ -1,24 +1,23 @@
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.3-3 (2021-09-05)
 
-	* 4.3-2 :
+	Move from core-dev group to build-base group
+
+4.3-2 (2021-04-09)
+
 	Add to core-dev group and use /usr for prefix
 
-2021-02-28  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.3-1 (2021-02-28)
 
-	* 4.3-1 :
 	Upgrade to 4.3
 
-2017-03-30 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.2.1-1 (2017-03-30)
 
-	* 4.2.1-1 :
 	Upgrade to 4.2.1
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+4.1-1 (2015-08-11)
 
-	* 4.1-1 :
 	Upgrade to 4.1
 
-2013-07-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.82-1 (2013-07-28)
 
-	* 3.82-1 :
 	Initial version
