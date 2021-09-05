@@ -1,32 +1,29 @@
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+11.1.0-7 (2021-09-05)
 
-	* 11.1.0-6 :
+	Move from core-dev group to build-base group
+
+11.1.0-6 (2021-04-09)
+
 	Re-add explicit dependency on musl-dev
 
-2021-03-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+11.1.0-5 (2021-03-21)
 
-	* 11.1.0-5 :
 	Add additional modules and split out runtime libs
 	Add to new group core-dev
 	Install to prefix /usr
 
-2021-03-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+11.1.0-4 (2021-03-18)
 
-	* 11.1.0-4 :
 	Build only the native target
 
-2021-03-18  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+11.1.0-3 (2021-03-18)
 
-	* 11.1.0-3 :
 	Add llvm-strip
 
-2021-03-13  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+11.1.0-2 (2021-03-13)
 
-	* 11.1.0-2 :
 	Use the install-distribution target to ship only required tools
 
-2021-02-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+11.1.0-1 (2021-02-21)
 
-	* 11.1.0-1 :
 	Initial version
-

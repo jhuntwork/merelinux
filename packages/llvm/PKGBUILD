@@ -1,10 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(llvm llvm-runtime-libs)
 pkgver=11.1.0
-pkgrel=6
+pkgrel=7
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
 url='htps://llvm.org'
@@ -80,7 +79,7 @@ package_llvm() {
         libunwind.so.1
         musl-dev
     )
-    groups=(core-dev)
+    groups=(build-base)
     cd_unpacked_src
     cd build || return 1
     export DESTDIR="${pkgdirbase}/dest"
@@ -96,7 +95,10 @@ package_llvm-runtime-libs() {
     pkgfiles=(
         usr/lib/*.so.*
     )
-    depends=("ld-musl-$(arch).so.1")
+    depends=(
+        libc.so
+        "ld-musl-$(arch).so.1"
+    )
     provides=(
         libLTO.so.11
         libc++.so.1
