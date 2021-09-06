@@ -3,7 +3,7 @@
 
 pkgname=(linux linux-headers)
 pkgver=5.10.62
-pkgrel=1
+pkgrel=2
 pkgdesc='System kernel'
 arch=(x86_64)
 url='http://www.kernel.org'
@@ -20,7 +20,7 @@ source=(
 
 sha256sums=(
     098dd5024d14b01a5ce85a6fec3dd829f4ac62488e4c59004a4687f8bbf886b1
-    2ffab9d900d51293596fcd0c0952f91a1fb03fbe2d49aa11d57ff145e30a00c4
+    947d30df42f527019939f3851aa8b5901323508072282298f604742b0d8fb44a
     c8f3271471fd3c9b576fca983511da87f2f9c14dbc1e6eb1573fe98a771b0481
 )
 
