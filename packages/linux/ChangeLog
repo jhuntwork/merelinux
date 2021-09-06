@@ -1,3 +1,7 @@
+5.10.62-2 (2021-09-06)
+
+	Build VIRTIO_BLK and VIRTIO_PCI into kernel
+
 5.10.62-1 (2021-09-05)
 
 	Upgrade to 5.10.62
