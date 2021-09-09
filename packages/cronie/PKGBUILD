@@ -3,7 +3,7 @@
 
 pkgname=cronie
 pkgver=1.5.7
-pkgrel=2
+pkgrel=3
 pkgdesc='A standard UNIX daemon crond'
 arch=(x86_64)
 url=https://github.com/cronie-crond/cronie
@@ -30,6 +30,8 @@ build() {
         ./configure \
         --prefix=/usr \
         --enable-syscrontab \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
         --disable-anacron
     make V=1
 }
