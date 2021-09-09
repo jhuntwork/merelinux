@@ -1,14 +1,13 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 rationale='libarchive is a core dependency of pacman'
 pkgname=(
     libarchive
     libarchive-dev
 )
-pkgver=3.5.1
-pkgrel=2
+pkgver=3.5.2
+pkgrel=1
 pkgdesc='Multi-format archive and compression library'
 arch=(x86_64)
 url='http://www.libarchive.org'
@@ -19,7 +18,6 @@ makedepends=(
     libacl-dev
     libattr-dev
     liblzma-dev
-    nettle-dev
     zlib-dev
 )
 options=()
@@ -28,7 +26,7 @@ source=(
     "http://www.libarchive.org/downloads/libarchive-${pkgver}.tar.gz"
 )
 sha256sums=(
-    9015d109ec00bb9ae1a384b172bf2fc1dff41e2c66e5a9eeddf933af9db37f5a
+    5f245bd5176bc5f67428eb0aa497e09979264a153a074d35416521a5b8e86189
 )
 
 
