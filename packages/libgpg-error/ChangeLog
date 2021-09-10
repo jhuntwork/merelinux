@@ -1,3 +1,7 @@
+1.42-2 (2021-09-10)
+
+	Fix provides on dynamic lib
+
 1.42-1 (2021-09-07)
 
 	Initial version

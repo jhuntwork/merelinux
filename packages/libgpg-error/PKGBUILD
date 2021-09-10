@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
 
-pkgname=(libgpg-error-dev)
+pkgname=(libgpg-error libgpg-error-dev)
 pkgver=1.42
-pkgrel=1
+pkgrel=2
 pkgdesc='A small library that defines common error values for all GnuPG components.'
 arch=(x86_64)
 url='https://gnupg.org/software/libgpg-error/'
@@ -26,20 +26,35 @@ sha256sums=(
 build() {
     cd_unpacked_src
     ./configure --prefix=/usr \
-        --disable-shared \
+        --enable-shared \
         --enable-static
 }
 
-package() {
+package_libgpg-error() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libgpg-error.so.0
+    )
+    std_package
+}
+
+package_libgpg-error-dev() {
     pkgfiles=(
         usr/bin
         usr/lib/lib*.a
+        usr/lib/lib*.so
         usr/lib/pkgconfig
         usr/include
         usr/share
     )
     depends=(
         "ld-musl-$(arch).so.1"
+        "libgpg-error=${pkgver}"
     )
-    std_package
+    std_split_package
 }
