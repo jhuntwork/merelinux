@@ -1,3 +1,8 @@
+6.0.1-2 (2021-09-10)
+
+	Remove gpg/key-signing support again for now. Too many external 
+	dependencies. Will look at other options.
+
 6.0.1-1 (2021-09-07)
 
 	Upgrade to 6.0.1
