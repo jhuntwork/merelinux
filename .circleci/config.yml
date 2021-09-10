@@ -12,7 +12,7 @@ jobs:
     steps:
       - run:
           name: Install tools and upgrade
-          command: pacman -Syu --noconfirm git openssh-client shellcheck
+          command: pacman -Sy --noconfirm git openssh-client shellcheck
       - checkout
       - run:
           name: Shellcheck
