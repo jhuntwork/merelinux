@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=shellcheck
-pkgver=0.7.1
+pkgver=0.7.2
 pkgrel=1
 pkgdesc='A static analysis tool for shell scripts'
-arch=('x86_64')
+arch=(x86_64)
 url='https://github.com/koalaman/shellcheck'
-license=('GPL3')
-groups=('base')
+license=(GPL3)
+groups=()
 depends=()
 makedepends=()
 options=()
@@ -19,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    64f17152d96d7ec261ad3086ed42d18232fcb65148b44571b564d688269d36c8
+    70423609f27b504d6c0c47e340f33652aea975e45f312324f2dbf91c95a3b188
 )
 
 
