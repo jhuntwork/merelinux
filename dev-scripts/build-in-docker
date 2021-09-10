@@ -12,7 +12,7 @@ if [ -n "$SIGNING_KEY" ]; then
     reposign='-s'
 
     # Import the private and public key to the user keyring
-    printf '%s\n' "$SIGNING_KEY" | gpg --import -- -
+    printf '%b' "$SIGNING_KEY" | gpg --import -- -
 
     # Setup pacman keyring
     sudo pacman-key --init
