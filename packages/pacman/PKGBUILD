@@ -3,7 +3,7 @@
 
 pkgname=(pacman pacman-build)
 pkgver=6.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -11,12 +11,9 @@ license=(GPL2)
 groups=()
 depends=()
 makedepends=(
-    gpgme-dev
     libacl-dev
     libarchive-dev
-    libassuan-dev
     libcurl-dev
-    libgpg-error-dev
     liblzma-dev
     ninja
     openssl-dev
@@ -71,7 +68,6 @@ package_pacman() {
         usr/bin/pacman
         usr/bin/pacman-conf
         usr/bin/pacman-db-upgrade
-        usr/bin/pacman-key
         usr/bin/vercmp
         etc/pacman.conf*
         var
@@ -110,7 +106,6 @@ package_pacman-build() {
         curl
         fedup
         file
-        gnupg
         libarchive
         "pacman=${pkgver}"
         xz

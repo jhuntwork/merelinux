@@ -2,28 +2,11 @@
 cd /src
 
 touch /mere/pkgs/buildlocal.db
-sudo pacman -Syu --noconfirm
+#sudo pacman -Syu --noconfirm
+sudo pacman -Sy
 
 # Clear the shell's cached paths of binaries, in case something moved
 hash -r
-
-if [ -n "$SIGNING_KEY" ]; then
-    sign='--sign'
-    reposign='-s'
-
-    # Import the private and public key to the user keyring
-    printf '%b' "$SIGNING_KEY" | gpg --import -- -
-
-    # Setup pacman keyring
-    sudo pacman-key --init
-
-    # Add the user's public key
-    gpg --armor --export | pacman-key -a -- -
-
-    # Trust public key
-    pubkey=$(gpg --list-keys --with-colons | grep pub | cut -d: -f5)
-    pacman-key --lsign-key "$pubkey"
-fi
 
 makepkg -Ls --noconfirm $sign
 makepkg --allsource
