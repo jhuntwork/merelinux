@@ -1,0 +1,60 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(libassuan libassuan-dev)
+pkgver=2.5.5
+pkgrel=1
+pkgdesc='A small library a small library implementing the so-called Assuan protocol'
+arch=(x86_64)
+url='https://gnupg.org/software/libassuan/'
+license=(GPL2 LGPL MIT)
+groups=()
+depends=()
+makedepends=(libgpg-error-dev)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://gnupg.org/ftp/gcrypt/libassuan/libassuan-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    8e8c2fcc982f9ca67dcbb1d95e2dc746b1739a4668bc20b3a3c5be632edb34e4
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-shared \
+        --enable-static
+}
+
+package_libassuan() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libgpg-error.so.0
+    )
+    provides=(
+        libassuan.so.0
+    )
+    std_package
+}
+
+package_libassuan-dev() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/include
+        usr/share
+    )
+    depends=(
+        "libassuan=${pkgver}"
+    )
+    std_split_package
+}
