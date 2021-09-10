@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(flex flex-dev)
 pkgver=2.6.4
-pkgrel=2
+pkgrel=3
 pkgdesc='A tool for generating scanners, or tokenizers that recognize lexical patterns in text.'
-arch=('x86_64')
-url='http://flex.sourceforge.net/'
-license=('GPL2')
-groups=('base')
+arch=(x86_64)
+url='https://github.com/westes/flex/'
+license=(GPL2)
+groups=()
 depends=()
 makedepends=(bison)
 options=()
@@ -29,20 +28,24 @@ build() {
 
 package_flex() {
     pkgfiles=(
-        bin
-        lib/lib*.so.*
-        share/man/man1/
+        usr/bin
+        usr/lib/lib*.so.*
+        usr/share/man/man1/
     )
-    depends=(musl)
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
     std_package
 }
 
 package_flex-dev() {
     pkgfiles=(
-        include
-        lib/*.so
-        lib/*.a
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
     )
-    depends=(flex)
+    depends=(
+        "flex=${pkgver}"
+    )
     std_split_package
 }

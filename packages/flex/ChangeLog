@@ -1,19 +1,22 @@
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.6.4-3 (2021-09-10)
 
-	* 2.6.4-2 :
+	Remove from base group
+	Improve dependencies
+	Update home url
+	Move to /usr prefix
+
+2.6.4-2 (2021-02-22)
+
 	Build using llvm and latest musl
 
-2019-04-10  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.6.4-1 (2019-04-10)
 
-	* 2.6.4-1 :
 	Upgrade to 2.6.4
 
-2017-04-24 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.6.3-1 (2017-04-24)
 
-	* 2.6.3-1 :
 	Upgrade to 2.6.3
 
-2015-03-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.5.39-1 (2015-03-16)
 
-	* 2.5.39-1 :
 	Initial version
