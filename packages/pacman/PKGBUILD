@@ -3,7 +3,7 @@
 
 pkgname=(pacman pacman-portable pacman-build libalpm-dev)
 pkgver=5.2.2
-pkgrel=8
+pkgrel=9
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -40,7 +40,7 @@ sha256sums=(
     9b51c011fade056ff7d2a653e03c4ed23cb19d4600d6ae7232bfaff7ba98fac4
     f2c3b003d37c674eb003a69ce389585f14348894de3c5c3bae3f5dd1f96cc1a6
     689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
-    bf8bf662c85a8020023a0eb4f4d652398ef3ddc0ced3b9409ed0750bf88a8df9
+    9045a4c7822bbe3df3490d335e61cafa4e0504c9893250a184faa8aea6c02af1
     4bd067e3bdfe37ff8f028d8d71685206f8791b0a6f9737a0875e6ddab3394be6
     992b324505daa83bc872547817275029ed680b333148f354573dedf0a9986503
 )
