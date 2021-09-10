@@ -1,0 +1,58 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(libksba libksba-dev)
+pkgver=1.6.0
+pkgrel=1
+pkgdesc='A library for working with X.509 certificates, CMS data and related objects'
+arch=(x86_64)
+url='https://gnupg.org/software/libksba/'
+license=(GPL3 LGPL3)
+groups=()
+depends=()
+makedepends=(libgpg-error-dev)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://gnupg.org/ftp/gcrypt/libksba/libksba-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    dad683e6f2d915d880aa4bed5cea9a115690b8935b78a1bbe01669189307a48b
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-shared \
+        --enable-static
+    make
+}
+
+package_libksba() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libgpg-error.so.0
+    )
+    std_package
+}
+
+package_libksba-dev() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/include
+        usr/share
+    )
+    depends=(
+        "libksba=${pkgver}"
+    )
+    std_split_package
+}
