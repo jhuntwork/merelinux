@@ -1,0 +1,53 @@
+--- pacman-6.0.1.orig/meson.build
++++ pacman-6.0.1/meson.build
+@@ -316,31 +316,15 @@
+   gnu_symbol_visibility : 'hidden',
+   dependencies : alpm_deps)
+ 
+-libalpm = library(
+-  'alpm',
+-  version : libalpm_version,
+-  objects: libalpm_a.extract_all_objects(recursive: true),
+-  include_directories : includes,
+-  dependencies : alpm_deps,
+-  install : true)
+-
+ install_headers(
+   'lib/libalpm/alpm.h',
+   'lib/libalpm/alpm_list.h')
+ 
+-pkgconfig = import('pkgconfig')
+-pkgconfig.generate(
+-  libalpm,
+-  name : 'libalpm',
+-  description : 'Arch Linux package management library',
+-  version : libalpm_version,
+-  url : 'http://archlinux.org/pacman/')
+-
+ pacman_bin = executable(
+   'pacman',
+   pacman_sources,
+   include_directories : includes,
+-  link_with : [libalpm, libcommon],
++  link_with : [libalpm_a, libcommon],
+   dependencies : [libarchive],
+   install : true,
+ )
+@@ -349,7 +333,7 @@
+   'pacman-conf',
+   pacman_conf_sources,
+   include_directories : includes,
+-  link_with : [libalpm, libcommon],
++  link_with : [libalpm_a, libcommon],
+   dependencies : [libarchive],
+   install : true,
+ )
+@@ -358,7 +342,7 @@
+   'testpkg',
+   testpkg_sources,
+   include_directories : includes,
+-  link_with : [libalpm],
++  link_with : [libalpm_a],
+   dependencies : [libarchive],
+   install : true,
+ )

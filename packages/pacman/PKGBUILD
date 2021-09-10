@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
 
-pkgname=(pacman pacman-portable pacman-build libalpm-dev)
-pkgver=5.2.2
-pkgrel=9
+pkgname=(pacman pacman-build)
+pkgver=6.0.1
+pkgrel=1
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -11,34 +11,38 @@ license=(GPL2)
 groups=()
 depends=()
 makedepends=(
+    gpgme-dev
     libacl-dev
     libarchive-dev
+    libassuan-dev
     libcurl-dev
+    libgpg-error-dev
     liblzma-dev
+    ninja
     openssl-dev
-    nettle-dev
-    zlib-dev
     perl
     pkgconf
+    python
+    zlib-dev
 )
 options=()
 changelog=ChangeLog
 
 source=(
-    "https://sources.archlinux.org/other/pacman/pacman-${pkgver}.tar.gz"
+    "https://sources.archlinux.org/other/pacman/pacman-${pkgver}.tar.xz"
+    static-build.patch
     makepkg.conf
     pacman.conf
-    pacman-portable.conf
     fakeroot
     dependencies.sh
     zz-dedup.sh
     std-build-functions.sh
 )
 sha256sums=(
-    bb201a9f2fb53c28d011f661d50028efce6eef2c1d2a36728bdd0130189349a0
+    0db61456e56aa49e260e891c0b025be210319e62b15521f29d3e93b00d3bf731
+    4d28d1d3559fb38b677359954f5a3fc7d1e01c84b5074adc2019ec3f1c2f077b
     c58ece17155f655c320509979e0116e93ac9b515dd8b1c9cd7966bbf33accfe5
-    9b51c011fade056ff7d2a653e03c4ed23cb19d4600d6ae7232bfaff7ba98fac4
-    f2c3b003d37c674eb003a69ce389585f14348894de3c5c3bae3f5dd1f96cc1a6
+    2cc0b229f9ceb0a7df51237e99fb52410332694a6b0194ef018dbce3258a242f
     689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
     9045a4c7822bbe3df3490d335e61cafa4e0504c9893250a184faa8aea6c02af1
     4bd067e3bdfe37ff8f028d8d71685206f8791b0a6f9737a0875e6ddab3394be6
@@ -46,58 +50,43 @@ sha256sums=(
 )
 
 build() {
+    pip install meson
+
     cd_unpacked_src
     # shellcheck disable=SC2016
-    sed -i -e '/x-cpio/s@)@|*application/x-empty*)@' \
-        -e 's/EUID == 0/EUID == -1/' \
-        -e '/warning.*sudo/s@warning.*@true@g' \
-        scripts/makepkg.sh.in
+    sed -i -e 's/EUID == 0/EUID == -1/' scripts/makepkg.sh.in
     sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' scripts/repo-add.sh.in
-    sed -i '/strip \$@/s@$@ 2>/dev/null@' scripts/libmakepkg/tidy/strip.sh.in
-    cp -a "$(pwd)" "${srcdir}/${pkgbase}-${pkgver}-portable"
-    CFLAGS+=' --static' LDFLAGS='-static -Wl,-static' \
-    ./configure \
-      --prefix=/usr \
-      --bindir=/bin \
-      --sysconfdir=/etc \
-      --localstatedir=/var \
-      --disable-shared \
-      --disable-nls \
-      --disable-doc
-    make V=1 LIBS='-lm -lz -lnettle -lssl -lcrypto -llzma -lacl'
-    cd "${srcdir}/${pkgbase}-${pkgver}-portable" || return 1
-    CFLAGS+=' --static' LDFLAGS='-static -Wl,-static' \
-    ./configure \
-      --prefix='/mere' \
-      --disable-shared \
-      --disable-nls \
-      --disable-doc
-    make V=1 LIBS='-lm -lz -lnettle -lssl -lcrypto -llzma -lacl'
+    patch -Np1 -i "${srcdir}/static-build.patch"
+    export CFLAGS+=' -static'
+
+    mkdir build
+    cd build || return
+    meson --prefix=/usr -Dbuildstatic=true ..
+    ninja --verbose
 }
 
 package_pacman() {
     backup=(etc/pacman.conf)
     pkgfiles=(
-        bin/pacman
-        bin/pacman-conf
-        bin/pacman-db-upgrade
-        bin/pacman-key
-        bin/vercmp
+        usr/bin/pacman
+        usr/bin/pacman-conf
+        usr/bin/pacman-db-upgrade
+        usr/bin/pacman-key
+        usr/bin/vercmp
         etc/pacman.conf*
         var
     )
     groups=(base)
 
-    cd "${srcdir}/${pkgbase}-${pkgver}" || return 1
-    make DESTDIR="${pkgdirbase}/dest" install
-    cd "${srcdir}/${pkgbase}-${pkgver}-portable" || return 1
-    make DESTDIR="${pkgdirbase}/dest-portable" install
+    cd_unpacked_src
+    cd build || return
+    DESTDIR="${pkgdirbase}/dest" meson install
     cd "${pkgdirbase}/dest" || return 1
     mv etc/pacman.conf{,.example}
     mv etc/makepkg.conf{,.example}
     install -m 0644 "${srcdir}/pacman.conf" etc/
     install -m 0644 "${srcdir}/makepkg.conf" etc/
-    install -m 0755 "${srcdir}/fakeroot" bin/
+    install -m 0755 "${srcdir}/fakeroot" usr/bin/
     install -m 0755 "${srcdir}/dependencies.sh" usr/share/makepkg/lint_package/
     # Named zz-dedup.sh because it needs to be executed last in the tidy stage
     install -m 0755 "${srcdir}/zz-dedup.sh" usr/share/makepkg/tidy/
@@ -105,30 +94,14 @@ package_pacman() {
     package_defined_files
 }
 
-package_pacman-portable() {
-    backup=(mere/etc/pacman.conf)
-    pkgfiles=(
-        mere/bin/pacman
-        mere/bin/pacman-conf
-        mere/bin/pacman-db-upgrade
-        mere/bin/pacman-key
-        mere/bin/vercmp
-        mere/etc/pacman.conf
-        mere/var
-    )
-    cd "${pkgdirbase}/dest-portable" || return 1
-    install -m 0644 "${srcdir}/pacman-portable.conf" mere/etc/pacman.conf
-    package_defined_files
-}
-
 package_pacman-build() {
     backup=(etc/makepkg.conf)
     pkgfiles=(
-        bin/fakeroot
-        bin/makepkg
-        bin/makepkg-template
-        bin/repo-*
-        bin/testpkg
+        usr/bin/fakeroot
+        usr/bin/makepkg
+        usr/bin/makepkg-template
+        usr/bin/repo-*
+        usr/bin/testpkg
         etc/makepkg.conf*
         usr/share
     )
@@ -137,18 +110,10 @@ package_pacman-build() {
         curl
         fedup
         file
+        gnupg
         libarchive
         "pacman=${pkgver}"
         xz
-    )
-    std_split_package
-}
-
-package_libalpm-dev() {
-    pkgfiles=(
-        usr/include
-        usr/lib/libalpm.a
-        usr/lib/pkgconfig
     )
     std_split_package
 }
