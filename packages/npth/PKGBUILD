@@ -3,7 +3,7 @@
 
 pkgname=(npth npth-dev)
 pkgver=1.6
-pkgrel=1
+pkgrel=2
 pkgdesc='A library to provide a non-preemptive threads implementation'
 arch=(x86_64)
 url='https://gnupg.org/software/npth/'
@@ -53,7 +53,7 @@ package_npth-dev() {
         usr/share
     )
     depends=(
-        "ntph=${pkgver}"
+        "npth=${pkgver}"
     )
-    std_package
+    std_split_package
 }
