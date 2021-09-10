@@ -1,3 +1,7 @@
+5.2.2-9 (2021-09-10)
+
+	Fix dependency checking, normalizing the libc.so depdenency
+
 5.2.2-8 (2021-09-05)
 
 	Move from core group to base group

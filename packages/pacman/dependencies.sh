@@ -49,11 +49,15 @@ list_file_dependencies() {
     local IFS=$'\n'
     for i in $lddout ; do
         local dep
-        dep=$(printf '%s\n' "$i" | awk '{print $3}' | awk -F/ '{print $NF}')
+        if printf '%s\n' "$i" | grep -q =\> ; then
+            dep=$(printf '%s\n' "$i" | awk '{print $3}' | awk -F/ '{print $NF}')
+        else
+            dep=$(printf '%s\n' "$i" | awk '{print $1}' | awk -F/ '{print $NF}')
+        fi
         [ -z "$dep" ] && continue
         case "$dep" in
             $(pwd)*) ;;
-            ldd) deps=$(printf '%s\n%s\n' 'libc.so' "$deps") ;;
+            ldd|libc.so) deps=$(printf '%s\n%s\n' "ld-musl-$(arch).so.1" "$deps") ;;
             *)   deps=$(printf '%s\n%s\n' "$dep" "$deps") ;;
         esac
     done
@@ -71,7 +75,7 @@ collect_all_lib_dependencies() {
     local alldeps=''
     local badlinks=0
 
-    files=$(find "$1" -type f)
+    files=$(find "$1" -not -type d)
     for file in $files ; do
         ft=$(file -b "$file")
         case "$ft" in
