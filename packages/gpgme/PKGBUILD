@@ -1,0 +1,70 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(gpgme gpgme-dev)
+pkgver=1.16.0
+pkgrel=1
+pkgdesc='A library designed to make access to GnuPG easier for applications'
+arch=(x86_64)
+url='https://gnupg.org/software/gpgme/'
+license=(GPL2 LGPL MIT)
+groups=()
+depends=()
+makedepends=(
+    gnupg
+    libassuan-dev
+    libgpg-error-dev
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://gnupg.org/ftp/gcrypt/gpgme/gpgme-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    6c8cc4aedb10d5d4c905894ba1d850544619ee765606ac43df7405865de29ed0
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-shared \
+        --enable-static
+    make
+}
+
+package_gpgme() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libassuan.so.0
+        libc++.so.1
+        libc++abi.so.1
+        libgpg-error.so.0
+        libunwind.so.1
+    )
+    std_package
+}
+
+package_gpgme-dev() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/cmake
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/include
+        usr/share/aclocal
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        "gpgme=${pkgver}"
+        libassuan.so.0
+        libgpg-error.so.0
+    )
+    std_split_package
+}
