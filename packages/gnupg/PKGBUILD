@@ -1,0 +1,47 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=gnupg
+pkgver=2.3.2
+pkgrel=1
+pkgdesc='A universal crypto engine for the CLI'
+arch=(x86_64)
+url='https://gnupg.org/software/'
+license=(GPL3)
+groups=()
+depends=(pinentry)
+makedepends=(
+    libassuan-dev
+    libgcrypt-dev
+    libgpg-error-dev
+    libksba-dev
+    libsqlite-dev
+    npth-dev
+    ntbtls-dev
+    readline-dev
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://gnupg.org/ftp/gcrypt/gnupg/gnupg-${pkgver}.tar.bz2"
+)
+sha256sums=(
+    e1d953e0e296072fca284215103ef168885eaac596c4660c5039a36a83e3041b
+)
+
+
+build() {
+    cd_unpacked_src
+    CFLAGS+=' --static' \
+      ./configure \
+      --prefix=/usr \
+      --libexecdir=/usr/lib/gnupg
+    make
+}
+
+package() {
+    cd_unpacked_src
+    make DESTDIR="${pkgdir}" install
+    rm -rf "${pkgdir}/usr/share/info" "${pkgdir}/usr/share/locale"
+}
