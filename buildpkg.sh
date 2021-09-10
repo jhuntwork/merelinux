@@ -73,6 +73,7 @@ case "$cmd" in
         cd - >/dev/null
         trap 'printf "\nBuild directory was: %s\n" $tmpdir' EXIT
         docker run -it --rm \
+            -e SIGNING_KEY \
             -v "$tmpdir":/src \
             -v "$MEREDIR":/mere \
             -v "$(pwd)"/dev-scripts:/usr/local/bin \
