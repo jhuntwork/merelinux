@@ -1,15 +1,14 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=ninja
 pkgver=1.10.2
-pkgrel=1
+pkgrel=2
 pkgdesc='a small build system with a focus on speed'
-arch=('x86_64')
+arch=(x86_64)
 url='https://github.com/ninja-build/ninja'
-license=('GPL2')
-groups=('base')
+license=(GPL2)
+groups=()
 depends=(python)
 makedepends=()
 options=()
