@@ -1,3 +1,8 @@
+1.42-3 (2021-09-10)
+
+	Re-build to sign
+	Run make in build stage
+
 1.42-2 (2021-09-10)
 
 	Fix provides on dynamic lib

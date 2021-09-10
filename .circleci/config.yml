@@ -48,4 +48,3 @@ workflows:
       - build:
           requires:
             - lint
-          context: upload

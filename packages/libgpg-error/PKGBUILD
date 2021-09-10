@@ -3,7 +3,7 @@
 
 pkgname=(libgpg-error libgpg-error-dev)
 pkgver=1.42
-pkgrel=2
+pkgrel=3
 pkgdesc='A small library that defines common error values for all GnuPG components.'
 arch=(x86_64)
 url='https://gnupg.org/software/libgpg-error/'
@@ -28,6 +28,7 @@ build() {
     ./configure --prefix=/usr \
         --enable-shared \
         --enable-static
+    make
 }
 
 package_libgpg-error() {
