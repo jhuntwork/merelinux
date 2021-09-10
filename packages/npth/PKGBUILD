@@ -1,0 +1,59 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(npth npth-dev)
+pkgver=1.6
+pkgrel=1
+pkgdesc='A library to provide a non-preemptive threads implementation'
+arch=(x86_64)
+url='https://gnupg.org/software/npth/'
+license=(LGPL)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://gnupg.org/ftp/gcrypt/npth/npth-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    1393abd9adcf0762d34798dc34fdcf4d0d22a8410721e76f1e3afcd1daa4e2d1
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-shared \
+        --enable-static
+    make
+}
+
+package_npth() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libnpth.so.0
+    )
+    std_package
+}
+
+package_npth-dev() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/include
+        usr/share
+    )
+    depends=(
+        "ntph=${pkgver}"
+    )
+    std_package
+}
