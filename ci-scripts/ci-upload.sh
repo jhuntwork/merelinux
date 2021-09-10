@@ -33,8 +33,9 @@ case "$bn" in
             -o pkgs/testing/testing.files.tar.gz
 
         # Copy over the staging files to testing
-        find staging -name "*.pkg*" | while read -r file ; do
+        find staging -name "*.pkg*" -not -name "*.sig" | while read -r file ; do
             mv -v "$file" pkgs/testing
+            [ -f "${file}.sig" ] && mv -v "${file}.sig" pkgs/testing
             ./bin/repo-add -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
         done
         find staging -name "*.src.tar.xz" | while read -r file; do
