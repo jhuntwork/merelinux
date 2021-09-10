@@ -3,7 +3,7 @@
 
 pkgname=(libksba libksba-dev)
 pkgver=1.6.0
-pkgrel=1
+pkgrel=2
 pkgdesc='A library for working with X.509 certificates, CMS data and related objects'
 arch=(x86_64)
 url='https://gnupg.org/software/libksba/'
@@ -38,6 +38,9 @@ package_libksba() {
     depends=(
         "ld-musl-$(arch).so.1"
         libgpg-error.so.0
+    )
+    provides=(
+        libksba.so.8
     )
     std_package
 }
