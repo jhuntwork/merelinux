@@ -1,0 +1,60 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(mpfr mpfr-dev)
+pkgver=4.1.0
+pkgrel=1
+pkgdesc='A library for multiple-precision floating-point computations with correct rounding.'
+arch=(x86_64)
+url='http://www.mpfr.org'
+license=(GPL)
+groups=()
+depends=()
+makedepends=(gmp-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "http://www.mpfr.org/mpfr-${pkgver}/mpfr-${pkgver}.tar.xz"
+)
+sha256sums=(
+    0c98a3f1732ff6ca4ea690552079da9c597872d30e96ec28414ee23c95558a7f
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+      --enable-thread-safe
+    make
+}
+
+check() {
+    cd_unpacked_src
+    make check
+}
+
+package_mpfr() {
+    pkgfiles=(
+        usr/lib/libmpfr.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libgmp.so.10
+    )
+    provides=(
+        libmpfr.so.6
+    )
+    std_package
+}
+
+package_mpfr-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/libmpfr.a
+        usr/lib/libmpfr.so
+    )
+    depends=(
+        "mpfr=${pkgver}"
+    )
+    std_split_package
+}
