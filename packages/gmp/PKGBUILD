@@ -1,0 +1,63 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(gmp gmp-dev)
+pkgver=6.2.1
+pkgrel=1
+pkgdesc='A free library for arbitrary precision arithmetic.'
+arch=(x86_64)
+url='http://gmplib.org'
+license=(LGPL BSD)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "https://gmplib.org/download/gmp/gmp-${pkgver}.tar.xz"
+)
+sha256sums=(
+    fd4829912cddd12f84181c3451cc752be224643e87fac497b69edddadc49b4f2
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+      --build="$CHOST" \
+      --host="$CHOST" \
+      --target="$CHOST" \
+      --enable-cxx
+    make
+}
+
+package_gmp() {
+    pkgfiles=(
+        usr/lib/libgmp.so.*
+        usr/lib/libgmpxx.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libunwind.so.1
+    )
+    provides=(
+        libgmp.so.10
+    )
+    std_package
+}
+
+package_gmp-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/libgmp.so
+        usr/lib/libgmp.a
+        usr/lib/libgmpxx.so
+        usr/lib/libgmpxx.a
+    )
+    depends=(
+        "gmp=${pkgver}"
+    )
+    std_split_package
+}
