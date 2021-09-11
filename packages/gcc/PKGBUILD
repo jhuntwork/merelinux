@@ -1,0 +1,87 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=gcc
+pkgver=9.4.0
+pkgrel=1
+pkgdesc='The GNU Compiler Collection'
+arch=(x86_64)
+url='http://gcc.gnu.org/'
+license=(GPL3)
+groups=()
+depends=()
+makedepends=(
+    binutils
+    gmp-dev
+    mpfr-dev
+    mpc-dev
+    zlib-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "http://ftp.gnu.org/gnu/gcc/${pkgname}-${pkgver}/${pkgname}-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    c95da32f440378d7751dd95533186f7fc05ceb4fb65eb5b85234e6299eb9838e
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i '/m64=/s@lib64@lib@' gcc/config/i386/t-linux64
+    # shellcheck disable=SC2016
+    sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in
+    sed -i 's,-lgcc_s,--start-group -lgcc_eh -lgcc -lc --end-group,' gcc/gcc.c
+    sed -i 's,\./fixinc\.sh,-c true,' gcc/Makefile.in
+    sed -i '/__USE_ISOC11/s@!(@(@' libssp/gets-chk.c
+    mkdir build
+    cd build || return 1
+    export PATH="/opt/binutils/bin:$PATH"
+    CC=clang CXX=clang++ \
+    CFLAGS+=' -fPIC' CXXFLAGS+=' -fPIC' \
+      ../configure \
+      --prefix=/usr \
+      --build="$CHOST" \
+      --host="$CHOST" \
+      --target="$CHOST" \
+      --libexecdir=/usr/lib \
+      --mandir=/usr/share/man \
+      --disable-bootstrap \
+      --enable-libssp \
+      --enable-threads=posix \
+      --enable-tls \
+      --disable-multilib \
+      --enable-languages=c \
+      --with-system-zlib
+    make
+}
+
+package() {
+    pkgfiles=(
+        usr/bin
+        usr/include
+        usr/lib
+        usr/share/man/man1
+    )
+    depends=(
+        musl-dev
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libgmp.so.10
+        libmpc.so.3
+        libmpfr.so.6
+        libunwind.so.1
+    )
+    cd_unpacked_src
+    cd build || return 1
+    make DESTDIR="${pkgdirbase}/dest" install
+    cd "${pkgdirbase}/dest" || return 1
+    find usr/lib -name "*.so" -maxdepth 1 -delete
+    find . -name "*.gch" -delete
+    ln -sf /usr/bin/cpp /usr/lib/cpp
+    set -o pipefail
+    find ${pkgfiles[@]} | cpio -dump "$pkgdir"
+}
