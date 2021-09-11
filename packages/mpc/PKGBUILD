@@ -1,0 +1,61 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(mpc mpc-dev)
+pkgver=1.2.1
+pkgrel=1
+pkgdesc='A library for the arithmetic of complex numbers'
+arch=(x86_64)
+url='http://www.multiprecision.org'
+license=(GPL)
+groups=()
+depends=()
+makedepends=(gmp-dev mpfr-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "http://ftp.gnu.org/gnu/mpc/mpc-${pkgver}.tar.gz"
+)
+sha256sums=(
+    17503d2c395dfcf106b622dc142683c1199431d095367c6aacba6eec30340459
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+      --enable-thread-safe
+    make
+}
+
+check() {
+    cd_unpacked_src
+    make check
+}
+
+package_mpc() {
+    pkgfiles=(
+        usr/lib/libmpc.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libgmp.so.10
+        libmpfr.so.6
+    )
+    provides=(
+        libmpc.so.3
+    )
+    std_package
+}
+
+package_mpc-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/libmpc.a
+        usr/lib/libmpc.so
+    )
+    depends=(
+        "mpc=${pkgver}"
+    )
+    std_split_package
+}
