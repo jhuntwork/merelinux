@@ -1,9 +1,13 @@
-2018-12-15  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+6.03-6 (2021-09-11)
 
-	* 6.03-5 :
+	Re-package, building with gcc-9.4 and removing some unused headers/libs
+	Remove from base group
+	Remove dependency on perl, for now, though some packaged tools` are perl
+
+6.03-5 (2018-12-15)
+
 	Add efi64 support
 
-2015-03-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+6.03-1 (2015-03-16)
 
-	* 6.03-1 :
 	Initial version
