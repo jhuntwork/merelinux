@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# shellcheck disable=SC2154,SC1090
+# shellcheck disable=SC2154,SC1091
 bn="$(git rev-parse --abbrev-ref HEAD)"
 if [ "$bn" != 'main' ] ; then
     . "$CIRCLE_WORKING_DIRECTORY"/.env
