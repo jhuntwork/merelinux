@@ -1,17 +1,21 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=syslinux
 pkgver=6.03
-pkgrel=5
+pkgrel=6
 pkgdesc='Lightweight Linux bootloaders.'
 arch=(x86_64)
 url=http://syslinux.org/
 license=(BSD)
-groups=(base)
-depends=(musl perl)
-makedepends=(perl libuuid-dev)
+groups=()
+depends=()
+makedepends=(
+    binutils
+    libuuid-dev
+    gcc
+    perl
+)
 options=()
 changelog=ChangeLog
 source=(
@@ -24,26 +28,27 @@ sha256sums=(
 
 
 build() {
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    unset MAKEFLAGS
-    sed -i -e '/^BINDIR/s@=.*@= /bin@' \
-           -e '/^LIBDIR/s@=.*@= /lib@' \
-           -e '/^DATADIR/s@=.*@= /share@' \
-           -e '/^MANDIR/s@=.*@= /share/man@' \
-           -e '/^INCDIR/s@=.*@= /include@' mk/syslinux.mk com32/lib/Makefile
-    make LD='ld.bfd' efi64 bios installer
+    cd_unpacked_src
+    export PATH="/opt/binutils/bin:${PATH}"
+    sed -i -e 's@malign@falign@g' mk/*
+    sed -i "/types.h/s@.*@#include <sys/sysmacros.h>\n&@" extlinux/main.c
+    MAKEFLAGS='' make efi64 bios installer
 }
 
 package() {
     pkgfiles=(
-        bin
-        sbin
-        share
+        usr/sbin/
+        usr/bin
+        usr/share
     )
-    cd "${srcdir}/${pkgname}-${pkgver}" || return 1
-    unset MAKEFLAGS
-    make LD='ld.bfd' INSTALLROOT="${pkgdirbase}/dest" efi64 bios install
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    cd_unpacked_src
+    MAKEFLAGS='' make INSTALLROOT="${pkgdirbase}/dest" efi64 bios install
     cd "${pkgdirbase}/dest" || return 1
-    set -o pipefail
-    find ${pkgfiles[@]} | cpio -dump "${pkgdir}"
+    install -d usr/sbin
+    mv sbin/extlinux usr/sbin/
+    find . -not -type d \( -name "*.a" -o -name "*.h" \) -delete
+    package_defined_files
 }
