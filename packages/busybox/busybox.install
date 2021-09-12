@@ -1,3 +1,0 @@
-post_install() {
-    /bin/chmod u+s /bin/busybox
-}

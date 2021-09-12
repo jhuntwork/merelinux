@@ -5,7 +5,7 @@ pkgname=busybox
 rationale="It serves as a stand-in for bzip2, coreutils, diffutils, \
 findutils, gawk, grep, gzip, sed, tar and util-linux"
 pkgver=1.33.1
-pkgrel=3
+pkgrel=4
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
@@ -23,7 +23,6 @@ source=(
     non-const.patch
     poweroff.patch
     busybox-config
-    busybox.install
     udhcpc.script
     sysctl.conf
     ntpd-service
@@ -41,7 +40,6 @@ sha256sums=(
     df74957dc1b48adf791d236996b64cd439d440e9cef9fc582721dda5cf7aca90
     08b850b788636f6c829e865414fc6305bdc1ffc6e1ec74083ab1256b6a38d0a7
     8004f6e76672f81295c1760e178932876dcc8bf7baead1855eb05ecbd727e15c
-    388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     3e0c3b046209525a6ac08b56406d7753a196ace08c127ff7423a8af5b91e0cbe
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
     0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
@@ -54,7 +52,6 @@ sha256sums=(
     30129377e9d49cdccd58882f9c4fd6d45ded5a3762ca1a27ee50414381d3af06
 )
 
-install=busybox.install
 backup=(
     etc/ntp.conf
     etc/sysctl.conf
@@ -82,6 +79,10 @@ package() {
         LDLIBS='-lutmps -lskarnet' \
         HOSTCC=clang CC=clang install
     cd "$pkgdir" || return 1
+
+    # Setuid
+    chmod u+s bin/busybox
+
     install -d usr/share/man/man1
     install -m0644 "${srcdir}/${pkgname}-${pkgver}/docs/busybox.1" usr/share/man/man1/
 
