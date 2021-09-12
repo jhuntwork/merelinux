@@ -22,16 +22,15 @@
 [ -n "$LIBMAKEPKG_LINT_PACKAGE_DEPENDENCIES_SH" ] && return
 LIBMAKEPKG_LINT_PACKAGE_DEPENDENCIES_SH=1
 
-LIBRARY=${LIBRARY:-'/share/makepkg'}
+LIBRARY=${LIBRARY:-'/usr/share/makepkg'}
 
-# shellcheck disable=SC1090
-source "$LIBRARY/util/message.sh"
+# shellcheck disable=SC1091
+source "${LIBRARY}/util/message.sh"
 
 lint_package_functions+=('warn_dependencies')
 
 list_file_dependencies() {
     if [ -z "$1" ] || [ ! -f "$1" ] ; then
-        printf 'Must specify a file\n'
         return 1
     fi
     TMP=$(mktemp)
@@ -57,13 +56,13 @@ list_file_dependencies() {
         [ -z "$dep" ] && continue
         case "$dep" in
             $(pwd)*) ;;
-            ldd|libc.so) deps=$(printf '%s\n%s\n' "ld-musl-$(arch).so.1" "$deps") ;;
-            *)   deps=$(printf '%s\n%s\n' "$dep" "$deps") ;;
+            ldd|libc.so) deps=$(printf '%s\n' "ld-musl-$(arch).so.1" "$deps") ;;
+            *)   deps=$(printf '%s\n' "$dep" "$deps") ;;
         esac
     done
     printf '%s\n' "$deps"
     rm "$TMP"
-    [ $badlinks -eq 1 ] && return 1
+    [ $badlinks -eq 0 ] || return 1
 }
 
 collect_all_lib_dependencies() {
@@ -72,25 +71,23 @@ collect_all_lib_dependencies() {
         return 1
     fi
 
-    local alldeps=''
+    alldeps=$(mktemp)
     local badlinks=0
 
-    files=$(find "$1" -not -type d)
-    for file in $files ; do
+    find "$1" -not -type d | while read -r file; do
+        local deps=''
         ft=$(file -b "$file")
         case "$ft" in
-            ELF*dynamic*)
+            *ELF*dynamic*)
                 deps=$(LD_LIBRARY_PATH="${1}/lib" list_file_dependencies "$file")
-                # shellcheck disable=SC2181
-                [ $? -ne 0 ] && badlinks=1
-                alldeps=$(printf '%s\n%s\n' "$deps" "$alldeps")
+                printf '%s\n' "$deps" >>"$alldeps"
                 ;;
             *)
                 ;;
         esac
     done
-    printf '%s\n' "$alldeps" | sort -u
-    [ $badlinks -eq 1 ] && return 1
+    sort -u < "$alldeps"
+    rm "$alldeps"
 }
 
 warn_dependencies() {
@@ -128,8 +125,8 @@ warn_dependencies() {
         fi
     done
     if [ ${#not_found[@]} -gt 0 ] ; then
-        error "$(gettext "Missing dependency: %s")" "${not_found[@]}"
-        printf '%s\n' "${not_found[@]}" >>"/tmp/missingdeps.${pkgname}"
+        error "$(gettext "Missing dependencies:")"
+        printf '        %s\n' "${not_found[@]}" | tee "/tmp/missingdeps.${pkgname}"
         return 2
     fi
 }
