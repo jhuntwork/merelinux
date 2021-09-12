@@ -1,0 +1,17 @@
+#!/bin/sh -e
+
+post_install() {
+    if [ -d /s6/run ] ; then
+        cp -a /etc/s6/init-services/mdevd /s6/run/
+        s6-svscanctl -a /s6/run
+    fi
+}
+
+pre_remove() {
+    if [ -d /s6/run ] ; then
+        s6-svc -wd -d -T 30000 /s6/run/mdevd 2>/dev/null
+        rm -rf /s6/run/mdevd
+        s6-svscanctl -h /s6/run
+    fi
+}
+
