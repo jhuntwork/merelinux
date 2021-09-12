@@ -1,3 +1,7 @@
+1.9.7p2-5 (2021-09-12)
+
+	Add missing sudo libs
+
 1.9.7p2-4 (2021-09-12)
 
 	Build as dynamic again. Recent versions appear to require it.

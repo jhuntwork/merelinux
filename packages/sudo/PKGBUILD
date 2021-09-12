@@ -3,7 +3,7 @@
 
 pkgname=(sudo)
 pkgver=1.9.7p2
-pkgrel=4
+pkgrel=5
 pkgdesc='Tool for delegating authority to users and groups.'
 arch=(x86_64)
 url='http://www.sudo.ws/'
@@ -38,10 +38,11 @@ package() {
     options=(emptydirs)
     backup=(etc/sudoers etc/sudo.conf)
     pkgfiles=(
-        usr/bin
         etc/sudo.conf
         etc/sudoers
         etc/sudoers.d
+        usr/bin
+        usr/lib
         usr/sbin
         usr/share/man
     )
