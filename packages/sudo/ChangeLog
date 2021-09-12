@@ -1,3 +1,7 @@
+1.9.7p2-4 (2021-09-12)
+
+	Build as dynamic again. Recent versions appear to require it.
+
 1.9.7p2-3 (2021-09-12)
 
 	Build static binaries
