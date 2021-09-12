@@ -1,0 +1,11 @@
+#!/bin/execlineb -P
+
+fdmove -c 2 1
+foreground { mkdir -p -m 0755 /run/utmps }
+foreground { chown utmp:utmp /run/utmps }
+unexport ?
+s6-setuidgid utmp
+cd /run/utmps
+fdmove 1 3
+s6-ipcserver -1 -- /run/utmps/.utmpd-socket
+utmps-utmpd

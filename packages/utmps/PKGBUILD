@@ -1,0 +1,64 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(utmps utmps-dev)
+pkgver=0.1.0.2
+pkgrel=1
+pkgdesc='An implementation of the utmpx.h family of functions performing user accounting'
+arch=(x86_64)
+url='http://skarnet.org/software/utmps/'
+license=(ISC)
+groups=(base)
+depends=()
+makedepends=(skalibs-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "http://skarnet.org/software/utmps/utmps-${pkgver}.tar.gz"
+    utmpd-service
+    wtmpd-service
+    utmps.install
+)
+
+sha256sums=(
+    8b6e0a0504bd8082e280c9823d67af2c694dc79a866c0d302938fe62ea515fee
+    9b0f7494428bd28616ba5cbb98ac7c7b33ebbba89a8f0faa646aec15a155946f
+    883916402e92f92c9f239f753c13fc362d0047fb797b3a2d82e4f6b2610a1368
+    df3104ea10397470d7a47280f0b0006863f6d3e69e1809150d85f2a96f505ab8
+)
+
+install=utmps.install
+
+
+build() {
+    cd_unpacked_src
+    ./configure \
+        --prefix=/usr \
+        --bindir=/sbin \
+        --libdir=/usr/lib \
+        --with-sysdeps=/lib/skalibs/sysdeps \
+        --enable-libc-includes \
+        --enable-static-libc
+    make
+}
+
+package_utmps() {
+    pkgfiles=(
+        sbin
+    )
+    std_package
+    install -d "${pkgdir}/etc/s6/init-services/utmpd"
+    install -m 0750 "${srcdir}/utmpd-service" "${pkgdir}/etc/s6/init-services/utmpd/run"
+    echo 3 >"${pkgdir}/etc/s6/init-services/utmpd/notification-fd"
+    install -d "${pkgdir}/etc/s6/init-services/wtmpd"
+    install -m 0750 "${srcdir}/wtmpd-service" "${pkgdir}/etc/s6/init-services/wtmpd/run"
+    echo 3 >"${pkgdir}/etc/s6/init-services/wtmpd/notification-fd"
+}
+
+package_utmps-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib
+    )
+    std_split_package
+}
