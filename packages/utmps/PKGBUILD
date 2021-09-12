@@ -3,12 +3,12 @@
 
 pkgname=(utmps utmps-dev)
 pkgver=0.1.0.2
-pkgrel=1
+pkgrel=2
 pkgdesc='An implementation of the utmpx.h family of functions performing user accounting'
 arch=(x86_64)
 url='http://skarnet.org/software/utmps/'
 license=(ISC)
-groups=(base)
+groups=()
 depends=()
 makedepends=(skalibs-dev)
 options=()
@@ -43,15 +43,16 @@ build() {
 }
 
 package_utmps() {
+    groups=(base)
     pkgfiles=(
         sbin
     )
     std_package
     install -d "${pkgdir}/etc/s6/init-services/utmpd"
-    install -m 0750 "${srcdir}/utmpd-service" "${pkgdir}/etc/s6/init-services/utmpd/run"
+    install -m 0754 "${srcdir}/utmpd-service" "${pkgdir}/etc/s6/init-services/utmpd/run"
     echo 3 >"${pkgdir}/etc/s6/init-services/utmpd/notification-fd"
     install -d "${pkgdir}/etc/s6/init-services/wtmpd"
-    install -m 0750 "${srcdir}/wtmpd-service" "${pkgdir}/etc/s6/init-services/wtmpd/run"
+    install -m 0754 "${srcdir}/wtmpd-service" "${pkgdir}/etc/s6/init-services/wtmpd/run"
     echo 3 >"${pkgdir}/etc/s6/init-services/wtmpd/notification-fd"
 }
 

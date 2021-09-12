@@ -1,3 +1,8 @@
+0.1.0.2-2 (2021-09-12)
+
+	Remove utmps-dev from the base group
+	Allow the utmpd and wtmpd service dirs to be world readable
+
 0.1.0.2-1 (2021-09-11)
 
 	Initial version
