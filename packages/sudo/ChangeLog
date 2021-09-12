@@ -1,3 +1,7 @@
+1.9.7p2-3 (2021-09-12)
+
+	Build static binaries
+
 1.9.7p2-2 (2021-09-12)
 
 	Link against utmps for full utmpx support

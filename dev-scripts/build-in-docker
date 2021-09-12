@@ -2,7 +2,8 @@
 cd /src
 
 touch /mere/pkgs/buildlocal.db
-sudo pacman -Syu --noconfirm
+#sudo pacman -Syu --noconfirm
+sudo pacman -Sy musl musl-dev --noconfirm
 
 # Clear the shell's cached paths of binaries, in case something moved
 hash -r
