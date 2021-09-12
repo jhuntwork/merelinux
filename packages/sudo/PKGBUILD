@@ -3,14 +3,17 @@
 
 pkgname=(sudo)
 pkgver=1.9.7p2
-pkgrel=1
+pkgrel=2
 pkgdesc='Tool for delegating authority to users and groups.'
 arch=(x86_64)
 url='http://www.sudo.ws/'
 license=(BSD)
 groups=()
 depends=()
-makedepends=()
+makedepends=(
+    skalibs-dev
+    utmps-dev
+)
 options=(emptydirs)
 changelog=ChangeLog
 source=(
@@ -24,8 +27,7 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    CFLAGS+=' -fPIC -static' \
-      LDFLAGS='-static -Wl,-static' \
+    LIBS='-lutmps -lskarnet' \
       ./configure \
       --prefix=/usr \
       --libexecdir=/usr/lib/sudo \
@@ -44,6 +46,9 @@ package() {
         etc/sudoers.d
         usr/sbin
         usr/share/man
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
     )
     std_package
 }
