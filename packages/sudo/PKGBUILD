@@ -3,7 +3,7 @@
 
 pkgname=(sudo)
 pkgver=1.9.7p2
-pkgrel=3
+pkgrel=4
 pkgdesc='Tool for delegating authority to users and groups.'
 arch=(x86_64)
 url='http://www.sudo.ws/'
@@ -27,16 +27,10 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    sed -i 's@--tag=disable-static@@' configure configure.ac Makefile.in src/Makefile.in
-    CC='cc --static' \
-    LDFLAGS='-Wl,-static' \
     LIBS='-lutmps -lskarnet' \
       ./configure \
       --prefix=/usr \
-      --libexecdir=/usr/lib/sudo \
-      --enable-static \
-      --enable-static-sudoers \
-      --disable-shared
+      --libexecdir=/usr/lib/sudo
     make
 }
 
@@ -50,6 +44,10 @@ package() {
         etc/sudoers.d
         usr/sbin
         usr/share/man
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libskarnet.so.2.10
     )
     std_package
 }
