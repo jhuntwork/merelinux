@@ -1,3 +1,9 @@
+2.10.0.3-7 (2021-09-12)
+
+	Move mdevd service configuration and files to mdevd package, similar 
+	pattern as utmps
+	Remove dependency on mdevd. Allows to run without modules if desired.
+
 2.10.0.3-6 (2021-09-05)
 
 	Move from core group to base group
