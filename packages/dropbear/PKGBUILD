@@ -3,14 +3,18 @@
 
 pkgname=dropbear
 pkgver=2020.81
-pkgrel=1
+pkgrel=2
 pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
 url='http://matt.ucc.asn.au/dropbear/dropbear.html'
 license=(MIT)
 groups=()
 depends=(s6 execline)
-makedepends=(zlib-dev)
+makedepends=(
+    skalibs-dev
+    utmps-dev
+    zlib-dev
+)
 options=()
 changelog=ChangeLog
 source=(
@@ -34,10 +38,14 @@ install=dropbear.install
 build() {
     cd_unpacked_src
     sed -i '/MAX_CMD_LEN/s@9000@20000@' sysoptions.h
-    ./configure \
-      --prefix=/usr \
-      --enable-static \
-      --disable-wtmp
+    LIBS='-lutmps -lskarnet' \
+        ./configure \
+            --prefix=/usr \
+            --disable-utmp \
+            --disable-wtmp \
+            --enable-utmpx \
+            --enable-wtmpx \
+            --enable-static
     make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp"
 }
 
