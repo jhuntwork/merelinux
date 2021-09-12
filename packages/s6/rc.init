@@ -5,7 +5,12 @@ mount -o rw,remount /
 ln -s /proc/self/fd /dev/fd
 
 # Load modules
-mdevd-coldplug
+if command -v mdevd-coldplug >/dev/null 2>&1 && \
+        [ -d /etc/s6/init-services/mdevd ]; then
+    s6-svwait -U /s6/run/mdevd
+    install -d /run/.libudev-zero
+    mdevd-coldplug
+fi
 
 # Copy over enabled services and refresh
 find /etc/s6/services/enabled -maxdepth 1 -type l | while read -r dir ; do
