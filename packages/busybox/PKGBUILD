@@ -5,14 +5,17 @@ pkgname=busybox
 rationale="It serves as a stand-in for bzip2, coreutils, diffutils, \
 findutils, gawk, grep, gzip, sed, tar and util-linux"
 pkgver=1.33.1
-pkgrel=2
+pkgrel=3
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
 license=(GPL)
 groups=(base)
 depends=()
-makedepends=()
+makedepends=(
+    skalibs-dev
+    utmps-dev
+)
 options=(emptydirs)
 changelog=ChangeLog
 source=(
@@ -37,7 +40,7 @@ sha256sums=(
     12cec6bd2b16d8a9446dd16130f2b92982f1819f6e1c5f5887b6db03f5660d28
     df74957dc1b48adf791d236996b64cd439d440e9cef9fc582721dda5cf7aca90
     08b850b788636f6c829e865414fc6305bdc1ffc6e1ec74083ab1256b6a38d0a7
-    48153964473d97f632bab76aa3b0fc586496cefb7eb6879114ef2055160c6c11
+    8004f6e76672f81295c1760e178932876dcc8bf7baead1855eb05ecbd727e15c
     388d154bde6c4de5e49b60e6ad2eb16b0cc9d4fdf186ba550b2ac10f84803c7e
     3e0c3b046209525a6ac08b56406d7753a196ace08c127ff7423a8af5b91e0cbe
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
@@ -64,15 +67,20 @@ build() {
     patch -Np1 -i "${srcdir}/poweroff.patch"
     sed "/CONFIG_PREFIX/s@=.*@=\"${pkgdir}/\"@" \
       "${srcdir}/busybox-config" >.config
-    make CFLAGS="$CFLAGS -static" CXXFLAGS="$CXXFLAGS -static" \
-        HOSTCC=clang HOSTCXX=clang++ CC=clang CXX=clang++
+    # shellcheck disable=SC2016
+    sed -i -e 's@<none>@-lutmps -lskarnet@' \
+        -e '/^l_list=/s@$LDLIBS@-lutmps -lskarnet@' \
+        scripts/trylink
+    make CFLAGS="$CFLAGS -static" \
+        LDLIBS='-lutmps -lskarnet' \
+        HOSTCC=clang CC=clang
 }
 
 package() {
     cd_unpacked_src
-    make CFLAGS="$CFLAGS -static" CXXFLAGS="$CXXFLAGS -static" \
-        HOSTCC=clang HOSTCXX=clang++ CC=clang CXX=clang++ install
-
+    make CFLAGS="$CFLAGS -static" \
+        LDLIBS='-lutmps -lskarnet' \
+        HOSTCC=clang CC=clang install
     cd "$pkgdir" || return 1
     install -d usr/share/man/man1
     install -m0644 "${srcdir}/${pkgname}-${pkgver}/docs/busybox.1" usr/share/man/man1/
