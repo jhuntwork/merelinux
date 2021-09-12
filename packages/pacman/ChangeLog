@@ -1,6 +1,11 @@
+6.0.1-3 (2021-09-12)
+
+	Fix some subtle bugs in dependencies.sh, used in makepkg
+	Adjust output of dependency check for easy listing of deps
+
 6.0.1-2 (2021-09-10)
 
-	Remove gpg/key-signing support again for now. Too many external 
+	Remove gpg/key-signing support again for now. Too many external
 	dependencies. Will look at other options.
 
 6.0.1-1 (2021-09-07)
