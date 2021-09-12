@@ -1,44 +1,39 @@
-2021-08-18  Jeremy Huntwork <jeremy@merelinux.org>
+2.10.0.3-2 (2021-09-12)
 
-	* 2.10.0.3-1 :
+	List provides on skalibs for libskarnet
+
+2.10.0.3-1 (2021-08-18)
+
 	Upgrade to 2.10.0.3
 
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.10.0.2-1 (2021-02-22)
 
-	* 2.10.0.2-1 :
 	Upgrade to 2.10.0.2
 
-2019-04-11  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.8.0.1-1 (2019-04-11)
 
-	* 2.8.0.1-1 :
 	Upgrade to 2.8.0.1
 
-2018-11-17  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.7.0.0-1 (2018-11-17)
 
-	* 2.7.0.0-1 :
 	Upgrade to 2.7.0.0
 
-2016-04-04 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.5.0.0-1 (2016-04-04)
 
-	* 2.5.0.0-1 :
 	Upgrade to 2.5.0.0
 
-2016-09-27 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.3.10.0-1 (2016-09-27)
 
-	* 2.3.10.0-1 :
 	Upgrade to 2.3.10.0
 
-2016-02-26 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.3.9.0-1 (2016-02-26)
 
-	* 2.3.9.0-1 :
 	Upgrade to 2.3.9.0
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.3.6.0-1 (2015-08-11)
 
-	* 2.3.6.0-1 :
 	Upgrade to 2.3.6.0
 
-2015-03-17 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.3.2.0-1 (2015-03-17)
 
-	* 2.3.2.0-1 :
 	Initial version
