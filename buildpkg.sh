@@ -58,6 +58,7 @@ case "$cmd" in
             "$gid" >>"${MEREDIR}/group"
 
         docker run -it --rm \
+            -w /src \
             -v "$pkgdir":/src \
             -v "$MEREDIR":/mere \
             -v "$(pwd)"/dev-scripts:/usr/local/bin \
