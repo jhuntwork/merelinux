@@ -3,7 +3,7 @@
 
 pkgname=(musl musl-dev)
 pkgver=1.2.2
-pkgrel=7
+pkgrel=8
 pkgdesc='An implementation of the C/POSIX standard library.'
 arch=(x86_64)
 url='https://musl.libc.org'
@@ -25,10 +25,7 @@ build() {
     unset CFLAGS CXXFLAGS
     # Disable utmpx since utmps will provide it, avoid duplicate symbols in libs
     # Also set default utmp paths to ones utmps will handle
-    sed -i \
-        -e 's@/dev/null/utmp@/run/utmps/utmp@' \
-        -e 's@/dev/null/wtmp@/var/log/wtmp@' \
-        -e "/utmpx.h/s@.*@#define __NEED_time_t\n#include <bits/alltypes.h>@" \
+    sed -i "/utmpx.h/s@.*@#define __NEED_time_t\n#include <bits/alltypes.h>@" \
         include/utmp.h
     rm src/legacy/utmpx.c include/utmpx.h
     ./configure --prefix=/usr \

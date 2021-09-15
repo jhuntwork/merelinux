@@ -1,3 +1,7 @@
+1.2.2-8 (2021-09-15)
+
+	Leave the default utmp paths in musl alone
+
 1.2.2-7 (2021-09-12)
 
 	Configure utmp.h to use utmps paths
