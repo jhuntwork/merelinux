@@ -1,34 +1,32 @@
-2021-08-18  Jeremy Huntwork <jeremy@merelinux.org>
+1.46.3-2 (2021-09-15)
 
-	* 1.46.3-1 :
+	Remove libblkid and libuuid and blkid from e2fsprogs, providing via 
+	util-linux
+
+1.46.3-1 (2021-08-18)
+
 	Upgrade to 1.46.3
 
-2021-02-22  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.45.6-1 (2021-02-22)
 
-	* 1.45.6-1 :
 	Upgrade to 1.45.6
 
-2019-08-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.45.3-1 (2019-08-08)
 
-	* 1.45.3-1 :
 	Upgrade to 1.45.3
 
-2018-11-17  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.44.4-1 (2018-11-17)
 
-	* 1.44.4-1 :
 	Upgrade to 1.44.4
 
-2017-04-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.43.4-1 (2017-04-16)
 
-	* 1.43.4-1 :
 	Upgrade to 1.43.4
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.42.13-1 (2015-08-11)
 
-	* 1.42.13-1 :
 	Upgrade to 1.42.13
 
-2015-03-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+1.42.12-1 (2015-03-16)
 
-	* 1.42.12-1 :
 	Initial version
