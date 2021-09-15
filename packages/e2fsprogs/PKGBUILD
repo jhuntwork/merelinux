@@ -1,17 +1,16 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
-pkgname=(e2fsprogs libblkid-dev libuuid-dev)
+pkgname=(e2fsprogs)
 pkgver=1.46.3
-pkgrel=1
+pkgrel=2
 pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
 arch=(x86_64)
 url=http://e2fsprogs.sourceforge.net/
 license=(GPL)
 groups=()
 depends=()
-makedepends=(libattr-dev)
+makedepends=()
 options=()
 changelog=ChangeLog
 source=(
@@ -24,14 +23,17 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    CFLAGS+=' -fPIC' LDFLAGS='-static' \
+    LDFLAGS='--static' \
+        ac_cv_c_compiler_gnu=no \
+        ac_cv_lib_dl_dlopen=no \
         ac_cv_path_mkdir=/bin/mkdir \
         ./configure --prefix=/usr \
-            --sysconfdir=/etc
+            --sysconfdir=/etc \
+            --disable-shared
     make V=1
 }
 
-package_e2fsprogs() {
+package() {
     pkgfiles=(
         usr/bin
         etc/mke2fs.conf
@@ -40,25 +42,6 @@ package_e2fsprogs() {
         usr/share/man/man5
         usr/share/man/man8
     )
-    cd_unpacked_src
-    make V=1 DESTDIR="${pkgdirbase}/dest" install install-libs
-    std_split_package
-}
-
-package_libblkid-dev() {
-    pkgfiles=(
-        usr/include/blkid
-        usr/lib/pkgconfig/blkid.pc
-        usr/lib/libblkid.a
-    )
-    std_split_package
-}
-
-package_libuuid-dev() {
-    pkgfiles=(
-        usr/include/uuid
-        usr/lib/pkgconfig/uuid.pc
-        usr/lib/libuuid.a
-    )
-    std_split_package
+    std_package
+    rm "${pkgdir}/usr/sbin/blkid" "${pkgdir}/usr/share/man/man8/blkid.8"
 }
