@@ -35,7 +35,7 @@ case "$bn" in
         find staging -name "*.pkg*" -not -name "*.sig" | while read -r file ; do
             mv -v "$file" pkgs/testing
             [ -f "${file}.sig" ] && mv -v "${file}.sig" pkgs/testing
-            ./usr/bin/repo-add -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
+            LIBRARY=./usr/share/makepkg ./usr/bin/repo-add -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
         done
         find staging -name "*.src.tar.xz" | while read -r file; do
             bn=${file##*/}
