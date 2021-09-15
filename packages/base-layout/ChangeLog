@@ -1,3 +1,8 @@
+2.0.5-1 (2021-09-13)
+
+	Add an initial /etc/shadow file to match /etc/passwd
+	Add the utmp user to the inital /etc/passwd and /etc/shadow files
+
 2.0.4-1 (2021-09-05)
 
 	Update /etc/profile with improved prompt and to set TERM

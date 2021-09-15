@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=base-layout
-pkgver=2.0.4
+pkgver=2.0.5
 pkgrel=1
 pkgdesc='The base directory structure and a few core files for the system.'
 arch=(x86_64)
@@ -20,20 +20,23 @@ source=(
     shells
     services
     protocols
+    shadow
 )
 sha256sums=(
-    e1d32f445c3a6da06f9787ec7b8d59bb789dde4ad95e12b62ece5b68f307777e
+    8d9729ffe6ad542e45bd9c2b43228f1e31c20a75721e8d34ec053cfef62bd985
     ab1e9388edd7947b307b9812f5648f738d797117d99a91deb7e4fb2096c1926f
     fc51d9783a4b429606e2621605ad9836d585fea60d051a7a0e8e62dd03d4bb45
     1dcc1e00d7189fa105c726b253aab416b3c0d47e432ac9958db54c7faacb9ac7
     b4d36eb75767bebb41c5fa7a35599952e1883b3d3f6332496e1561eeb4067018
     297b784a25fc59641589c6ef05dc26680e2805e9cab37a4ea3699aa072a25c2e
+    6979dc53ed05ebdacc18700025ccf0232e0985f52aa56d31a5515935e03b04eb
 )
 
 backup=(
     etc/passwd
     etc/group
     etc/profile
+    etc/shadow
     etc/shells
     etc/services
     etc/protocols
@@ -60,6 +63,7 @@ package() {
     ln -s /run "${pkgdir}/var/run"
     install -d -m 1777 "${pkgdir}/var/tmp"
     install -m0644 passwd    "${pkgdir}/etc/passwd"
+    install -m0400 shadow    "${pkgdir}/etc/shadow"
     install -m0644 group     "${pkgdir}/etc/group"
     install -m0644 profile   "${pkgdir}/etc/profile"
     install -m0644 shells    "${pkgdir}/etc/shells"
