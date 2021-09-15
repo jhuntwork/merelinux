@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=nginx
-pkgver=1.21.1
+pkgver=1.21.3
 pkgrel=1
 pkgdesc='An HTTP and reverse proxy server.'
 arch=(x86_64)
@@ -28,7 +28,7 @@ source=(
 )
 
 sha256sums=(
-    68ba0311342115163a0354cad34f90c05a7e8bf689dc498abf07899eda155560
+    14774aae0d151da350417efc4afda5cce5035056e71894836797e1f6e2d1175a
     46d22dd25d7628a3696396f7d35352f7e6e0eb03369bb3c2dad000d23b3dee8b
     9b4f42034d0130d041dfc8f0fcc262891a7d12a529379c6ca344b4a898248d25
     9df79cf0c61958cc9d4d74ef7831d5d70c1c58bc859b36a2299c5853d66bb30a
@@ -41,8 +41,8 @@ install=nginx.install
 
 build() {
     cd_unpacked_src
-    sed -i 's@-Wl,-E@-Wl,-static@g' auto/cc/conf
-    CC='cc -static -fPIC' \
+    sed -i 's@-Wl,-E@--static@g' auto/cc/conf
+    CC='cc -fPIC' \
     ./configure \
         --prefix=/usr \
         --conf-path=/etc/nginx/nginx.conf \
@@ -55,6 +55,7 @@ build() {
         --http-fastcgi-temp-path=/var/tmp/nginx/fastcgi \
         --http-uwsgi-temp-path=/var/tmp/nginx/uwsgi \
         --http-scgi-temp-path=/var/tmp/nginx/scgi \
+        --with-http_ssl_module \
         --user=nginx \
         --group=nogroup \
         --with-threads
