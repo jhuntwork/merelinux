@@ -3,7 +3,7 @@
 
 pkgname=dropbear
 pkgver=2020.81
-pkgrel=2
+pkgrel=3
 pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
 url='http://matt.ucc.asn.au/dropbear/dropbear.html'
