@@ -1,3 +1,8 @@
+0.1.0.2-3 (2021-09-15)
+
+	Don't add utmp user and group via pre_install, exists in default 
+	passwd/group files
+
 0.1.0.2-2 (2021-09-12)
 
 	Remove utmps-dev from the base group
