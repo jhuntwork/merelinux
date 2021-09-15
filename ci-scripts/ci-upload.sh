@@ -19,7 +19,6 @@ case "$bn" in
         install -d ./var/lib/pacman
         sudo /tmp/pacman/usr/bin/pacman -Sy --config /tmp/pacman/etc/pacman.conf \
             -r . --noconfirm pacman-build
-        sudo sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' bin/repo-add
 
         # Sync down existing files in the staging repo
         install -d pkgs/testing staging
