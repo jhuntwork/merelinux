@@ -1,0 +1,55 @@
+#!/bin/sh -e
+
+drop_to_shell() {
+    printf 'Encountered an unexpected error, starting a shell\n'
+    exec /bin/sh -l
+}
+
+# If anything happens before the final exec, drop to a shell
+trap drop_to_shell EXIT
+
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+mount -t proc proc /proc
+mount -t devtmpfs dev /dev
+mount -t sysfs sys /sys
+
+# shellcheck disable=SC2046
+set -- $(cat /proc/cmdline)
+for word in "$@"; do
+    case "$word" in
+        root=PARTUUID=*)
+            partuuid="${word##*=}"
+            rootpart=$(blkid | grep -i "$partuuid" | cut -d: -f1)
+            if [ -n "$rootpart" ] ; then
+                rootdev=$(readlink "/sys/class/block/${rootpart#/dev/}")
+                rootdev=${rootdev%/*}
+                rootdev="/dev/${rootdev##*/}"
+            fi
+            ;;
+        rootresize) resize=1 ;;
+        livecd|rescue) rootdev=tmpfs ;;
+    esac
+done
+
+install -d /mnt
+if [ -z "$rootdev" ] || [ "$rootdev" = 'tmpfs' ]; then
+    mount -t tmpfs tmpfs-root /mnt
+    find / -not -path "/proc/*" -not -path "/sys/*" -not -path "/dev/*" | \
+        cpio -dump /mnt >/dev/null 2>&1
+    install -d /mnt/proc /mnt/dev /mnt/sys
+    mknod -m 600 /mnt/dev/console c 5 1
+    mknod -m 666 /mnt/dev/null c 1 3
+else
+    # Check the root partition
+    fsck -fy "$rootpart"
+
+    # Resize (grow) the partition if requested
+    if [ -n "$partuuid" ] && [ -n "$resize" ] ; then
+        sgdisk -e -d 1 -N 1 -A 1:set:2 -u "1:${partuuid}" "$rootdev"
+        resize2fs -f "$rootpart"
+    fi
+    mount "$rootpart" /mnt
+fi
+
+# Switch root
+exec switch_root /mnt /sbin/init

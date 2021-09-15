@@ -2,10 +2,8 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=busybox
-rationale="It serves as a stand-in for bzip2, coreutils, diffutils, \
-findutils, gawk, grep, gzip, sed, tar and util-linux"
 pkgver=1.33.1
-pkgrel=4
+pkgrel=5
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
@@ -33,6 +31,8 @@ source=(
     syslogd-service
     syslogd-log
     klogd-service
+    mkinitramfs
+    initramfs-init
 )
 
 sha256sums=(
@@ -50,6 +50,8 @@ sha256sums=(
     44ab6c3435535856b54269be711de6514e3c97612684c1c23c5f90f14b40b470
     4882124b9d9e2f9b369acec0f0b3bd289b3f3d3d86d8b3751b931e78d4fe669b
     30129377e9d49cdccd58882f9c4fd6d45ded5a3762ca1a27ee50414381d3af06
+    45aa770dac8ee4b46e395c013f97ccecb174d4605cf59d09a45e8cea80e43995
+    5c363cb25b3414f2f1d7dfa289ec49e4395015f55a5983d57e0ca51a1cad0b6d
 )
 
 backup=(
@@ -100,10 +102,11 @@ package() {
         usr/share/udhcpc/default.script
     install -m 0644 "${srcdir}/sysctl.conf" etc/
     install -m 0644 "${srcdir}/ntp.conf" etc/ntp.conf
-    install -d sbin
-    install -d usr/bin
+    install -d sbin usr/bin usr/share/mkinitramfs
     ln -s /bin/busybox usr/bin/env
     ln -s /bin/busybox usr/bin/awk
+    install -m 0755 "${srcdir}/mkinitramfs" usr/bin/
+    install -m 0644 "${srcdir}/initramfs-init" usr/share/mkinitramfs/init.in
 
     # s6 Services
     install -d etc/s6/services/available/ntpd/log
