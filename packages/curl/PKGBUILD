@@ -9,8 +9,8 @@ pkgname=(
     libcurl-dev
     ca-certs
 )
-pkgver=7.78.0
-pkgrel=2
+pkgver=7.79.0
+pkgrel=1
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://curl.se'
@@ -25,14 +25,13 @@ source=(
     "${url}/download/${pkgname[0]}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    98530b317dc95ccb324bbe4f834f07bb642fbc393b794ddf3434f246a71ea44a
+    d607a677f473f79f96c964100327125a6204a39d835dc00dab7fc0129b959f42
 )
 
 build() {
     cd_unpacked_src
     rm src/tool_hugehelp.c
-    grep -lr 'poll.h' . | xargs sed -i 's@poll.h@poll.h@g'
-    CFLAGS+=' -fPIC -static' LDFLAGS='-Wl,-static' \
+    CFLAGS+=' -fPIC' LDFLAGS='--static' \
     ./configure \
       --prefix=/usr \
       --enable-static \
