@@ -1,0 +1,39 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(xorriso)
+pkgver=1.5.4.pl02
+pkgrel=1
+pkgdesc='Utilities to copy file objects from POSIX compliant filesystems into Rock Ridge enhanced ISO 9660 filesystems'
+arch=(x86_64)
+url='https://www.gnu.org/software/xorriso/'
+license=(BSD)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+
+source=(
+    "${url}/${pkgname[0]}-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    3ec7393d4a9dcbf5f74309c28a415f55227ec62770b95ae993ac8d7a3b152972
+)
+
+
+build() {
+    std_build
+}
+
+package() {
+    pkgfiles=(
+        usr/bin
+        usr/share/man
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    MAKEFLAGS='' std_package
+}
