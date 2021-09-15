@@ -39,6 +39,7 @@ MEREDIR="${MEREDIR:-${HOME}/.mere}"
 install -d "${MEREDIR}/logs"
 install -d "${MEREDIR}/pkgs"
 install -d "${MEREDIR}/sources"
+touch "${MEREDIR}/pkgs/buildlocal.db" 2>/dev/null || true
 
 cmd=/usr/local/bin/build-in-docker
 [ -n "$1" ] && cmd="$1"
@@ -73,7 +74,8 @@ case "$cmd" in
         cd - >/dev/null
         trap 'printf "\nBuild directory was: %s\n" $tmpdir' EXIT
         docker run -it --rm \
-            -v "$tmpdir":/src \
+            -w "$tmpdir" \
+            -v "$tmpdir":"$tmpdir" \
             -v "$MEREDIR":/mere \
             -v "$(pwd)"/dev-scripts:/usr/local/bin \
             -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
