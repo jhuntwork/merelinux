@@ -1,3 +1,7 @@
+2020.81-3 (2021-09-15)
+
+	Rebuild with latest musl, utmps and skalibs to get proper utmpx support
+
 2020.81-2 (2021-09-12)
 
 	Link against utmps for proper utmp support
