@@ -1,6 +1,5 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 rationale='Pacman primarily uses libcurl for downloading files'
 pkgname=(
@@ -10,7 +9,7 @@ pkgname=(
     ca-certs
 )
 pkgver=7.79.0
-pkgrel=1
+pkgrel=2
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://curl.se'
@@ -71,7 +70,6 @@ package_libcurl() {
     )
     depends=(
         ca-certs
-        libc.so
         "ld-musl-$(arch).so.1"
         libssl.so.1.1
         libcrypto.so.1.1
