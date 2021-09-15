@@ -1,3 +1,7 @@
+1.33.1-5 (2021-09-15)
+
+	Add scripts to create an initramfs
+
 1.33.1-4 (2021-09-12)
 
 	Setuid on /bin/busybox

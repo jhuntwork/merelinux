@@ -1,0 +1,100 @@
+#!/bin/sh -e
+
+usage="
+Usage: $0 [flags] [package ...]
+
+Create an initramfs image for Mere Linux.
+
+Optional flags:
+  -m         Include kernel modules.
+  -o OUTDIR  Create the initrd.gz file in the given directory.
+
+Any packages specified as arguments are added alongside the defaults.
+"
+
+outdir=/tmp
+with_modules=0
+while getopts mo: arg; do
+    case $arg in
+        m) with_modules=1;;
+        o) outdir="$2";;
+        *) printf 'Unsupported flag %s\n' "$arg"; printf '\n%s\n' "$usage"; exit 1;;
+    esac
+done
+shift $((OPTIND - 1))
+
+ROOT=$(mktemp -d)
+install -d "${ROOT}/var/lib/pacman" "${ROOT}/dev"
+
+mknod -m 600 "${ROOT}/dev/console" c 5 1
+mknod -m 666 "${ROOT}/dev/null" c 1 3
+
+pacman -Sy --noconfirm -r "$ROOT" \
+    base-layout \
+    busybox \
+    pacman
+
+pacman -Sy --noconfirm -r "$ROOT" --needed \
+    base \
+    blkid \
+    e2fsprogs \
+    gptfdisk
+
+# shellcheck disable=SC2068
+[ -n "$*" ] && pacman -Sy --noconfirm -r "$ROOT" --needed $@
+
+[ "$with_modules" -eq 1 ] || rm -rf "${ROOT}/lib/modules"
+
+sed -i '/\/root/s@/bin/sh@/bin/mksh@' "${ROOT}/etc/passwd"
+
+echo 'mere-tmpfs' > "${ROOT}/etc/hostname"
+clear >"${ROOT}/etc/issue"
+
+# Install a basic networking configuration
+cat > "${ROOT}/etc/network/interfaces" << EOF
+auto lo eth0
+
+iface lo inet loopback
+
+iface eth0 inet dhcp
+EOF
+echo '127.0.0.1 localhost' >"${ROOT}/etc/hosts"
+
+# Add an initial fstab file to describe mountable file systems
+cat > "${ROOT}/etc/fstab" << EOF
+devpts /dev/pts devpts defaults 0 0
+tmpfs  /dev/shm tmpfs  defaults 0 0
+EOF
+
+cat >"${ROOT}/bin/tmpfs-login" <<EOF
+#!/bin/sh
+stty iutf8
+clear
+printf '
+Mere Linux is running in a tmpfs, no disks have been mounted.
+
+Press Enter to activate this virtual console... '
+read
+login -f root
+EOF
+chmod +x "${ROOT}/bin/tmpfs-login"
+
+cat >"${ROOT}/etc/s6/init-services/tty1/run" << EOF
+#!/bin/execlineb -P
+/sbin/getty -n -l /bin/tmpfs-login 38400 tty1
+EOF
+
+for tty in tty2 tty3 tty4 tty5 tty6 ; do
+    install -d "${ROOT}/etc/s6/init-services/${tty}"
+    sed "s@tty1@${tty}@" "${ROOT}/etc/s6/init-services/tty1/run" \
+        >"${ROOT}/etc/s6/init-services/${tty}/run"
+    chmod +x "${ROOT}/etc/s6/init-services/${tty}/run"
+done
+
+install -m0755 /usr/share/mkinitramfs/init.in "${ROOT}/init"
+mv "${ROOT}/boot/vmlinux" "${outdir}/vmlinux"
+
+cd "$ROOT"
+find . | cpio -o -H newc | gzip -9 >"${outdir}/initrd.gz"
+printf 'initramfs image ready at %s\n' "${outdir}/initrd.gz"
+printf 'Associated kernel is %s\n' "${outdir}/vmlinux"
