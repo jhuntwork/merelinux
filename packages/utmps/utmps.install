@@ -1,7 +1,5 @@
 #!/bin/sh -e
 pre_install() {
-    addgroup -S utmp
-    adduser -s /sbin/nologin -D -H -h /run/utmps -G utmp -S utmp
     touch /var/log/wtmp
     chown utmp:utmp /var/log/wtmp
     chmod 0640 /var/log/wtmp
@@ -27,6 +25,5 @@ pre_remove() {
 }
 
 post_remove() {
-    deluser utmp >/dev/null 2>&1 || true
     rm -rf /run/utmps
 }
