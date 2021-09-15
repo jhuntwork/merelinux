@@ -1,12 +1,11 @@
-FROM scratch as build
+FROM mere/base as build
 
-ADD busybox-1.32.1-4-x86_64.pkg.tar.xz \
-    pacman-5.2.2-2-x86_64.pkg.tar.xz \
-    /
-
-RUN install -d /tmp/system/var/lib/pacman && \
-    pacman -r /tmp/system -Sy base-layout busybox pacman --noconfirm && \
-    rm -rf /tmp/system/var/cache/pacman/pkg/*
+RUN install -d /tmp/system/var/lib/pacman
+RUN pacman -r /tmp/system -Sy base-layout busybox pacman --noconfirm
+RUN rm /tmp/system/etc/services \
+       /tmp/system/etc/protocols \
+       /tmp/system/etc/pacman.conf.example \
+       /tmp/system/usr/bin/pacman-conf
 
 FROM scratch
 
