@@ -44,6 +44,7 @@ while [ "$i" -lt "$len" ]; do
 done
 
 # Sync down existing files in the testing repo
+printf 'Syncing down testing repo\n'
 install -d pkgs/testing
 rsync -rlptv \
     -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
@@ -66,6 +67,7 @@ find staging -name "*.src.tar.xz" | while read -r file; do
 done
 
 # Upload
+printf 'Syncing up testing repo\n'
 rsync -rlptv --delete-after \
     -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
     pkgs/testing/ pkgsync@pkgs.merelinux.org::pkgs/testing/
