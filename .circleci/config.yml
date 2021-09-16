@@ -42,12 +42,12 @@ jobs:
       - add_ssh_keys
       - checkout
       - restore_cache:
-          key: testing-repo
+          key: testing-repo-
       - run:
           name: Upload package
           command: ./ci-scripts/ci-upload.sh
       - save_cache:
-          key: testing-repo
+          key: testing-repo-{{ checksum "pkgs/testing/testing.db.tar.gz" }}
           paths: pkgs/testing
 
 workflows:
