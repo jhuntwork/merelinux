@@ -1,65 +1,69 @@
-#!/bin/bash -xe
-sudo pip install awscli
+#!/bin/bash -e
 
-bn="$(git rev-parse --abbrev-ref HEAD)"
-case "$bn" in
-    main)
-        prnum=$(git log --oneline -1 | grep -o 'Merge pull request.*from' | \
-                cut -d' ' -f4 | sed 's@#@@')
-        if ! printf '%d' "$prnum" >/dev/null 2>&1 ; then
-            printf 'Cannot determine an upload path for the merged PR\n'
-            exit 1
-        fi
+# Get metadata about what was just merged
+prnum=$(git log --oneline -1 | grep -o 'Merge pull request.*from' | \
+        cut -d' ' -f4 | sed 's@#@@')
+if ! printf '%d' "$prnum" >/dev/null 2>&1 ; then
+    printf 'Cannot determine the PR num\n'
+    exit 1
+fi
+originbranch=$(git log --oneline -1 | grep -o 'Merge pull request.*from.*' | \
+    awk '{print $NF}')
+originuser="${originbranch%/*}"
+if [ "$originuser" = "$CIRCLE_PROJECT_USERNAME" ]; then
+    branch="${originbranch##*/}"
+else
+    branch="pull/${prnum}"
+fi
+[ -n "$branch" ] || { printf 'Cannot determine the origin branch name\n'; exit 1; }
 
-        # install pacman-build
-        install -d /tmp/pacman
-        curl -LO http://pkgs.merelinux.org/stable/pacman-latest-x86_64.pkg.tar.xz
-        tar -C /tmp/pacman -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
+# Download artifacts
+artifacts="$(curl \
+    "https://circleci.com/api/v1.1/project/github/jhuntwork/merelinux/latest/artifacts?branch=${branch}&filter=successful" \
+    -H "Circle-Token: ${CIRCLE_API_TOKEN}")"
+[ -n "$artifacts" ] || { printf 'Unable to find artifacts to upload\n'; exit 1; }
 
-        install -d ./var/lib/pacman
-        sudo /tmp/pacman/usr/bin/pacman -Sy --config /tmp/pacman/etc/pacman.conf \
-            -r . --noconfirm pacman-build
+install -d staging
+len=$(printf '%s\n' "$artifacts" | jq '. | length')
+i=0
+while [ "$i" -lt "$len" ]; do
+    url=$(printf '%s\n' "$artifacts" | jq -r .[$i].url)
+    printf 'Downloading %s\n' "$url"
+    curl -LO --output-dir staging "$url"
+    i=$((i+1))
+done
 
-        # Sync down existing files in the staging repo
-        install -d pkgs/testing staging
-        aws s3 sync s3://pkgs.merelinux.org/testing/ pkgs/testing/
-        aws s3 sync "s3://pkgs.merelinux.org/${prnum}/" staging/
+# install pacman-build
+install -d /tmp/pacman
+curl -LO http://pkgs.merelinux.org/stable/pacman-latest-x86_64.pkg.tar.xz
+tar -C /tmp/pacman -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
 
-        # Grab the testing dbs
-        curl -fsL http://pkgs.merelinux.org/testing/testing.db.tar.gz \
-            -o pkgs/testing/testing.db.tar.gz
-        curl -fsL http://pkgs.merelinux.org/testing/testing.files.tar.gz \
-            -o pkgs/testing/testing.files.tar.gz
+install -d ./var/lib/pacman
+sudo /tmp/pacman/usr/bin/pacman -Sy --config /tmp/pacman/etc/pacman.conf \
+    -r . --noconfirm pacman-build
 
-        # Copy over the staging files to testing
-        find staging -name "*.pkg*" -not -name "*.sig" | while read -r file ; do
-            mv -v "$file" pkgs/testing
-            [ -f "${file}.sig" ] && mv -v "${file}.sig" pkgs/testing
-            LIBRARY=./usr/share/makepkg ./usr/bin/repo-add -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
-        done
-        find staging -name "*.src.tar.xz" | while read -r file; do
-            bn=${file##*/}
-            noext=${bn%.src.tar.xz*}
-            norel=${noext%-*}
-            nover=${norel%-*}
-            find pkgs/testing -not -type d -name "${nover}*.src.tar.xz" -delete
-            mv -v "$file" pkgs/testing
-        done
+# Sync down existing files in the testing repo
+install -d pkgs/testing
+rsync -rlptv \
+    -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
+    pkgsync@pkgs.merelinux.org::pkgs/testing/ pkgs/testing/
 
-        aws s3 sync --delete pkgs/testing/ s3://pkgs.merelinux.org/testing/
-        aws s3 rm --recursive "s3://pkgs.merelinux.org/${prnum}/"
-        ;;
-    *)
-        prnum=$(printf '%s' "$CIRCLE_PULL_REQUEST" | awk -F/ '{print $NF}')
-        if [ -z "$prnum" ] || ! printf '%d' "$prnum" >/dev/null 2>&1 ; then
-            printf 'Cannot determine an upload path for the merged PR\n'
-            exit 1
-        fi
+# Copy over the staging files to testing
+find staging -name "*.pkg*" -not -name "*.sig" | while read -r file ; do
+    mv -v "$file" pkgs/testing
+    [ -f "${file}.sig" ] && mv -v "${file}.sig" pkgs/testing
+    LIBRARY=./usr/share/makepkg ./usr/bin/repo-add -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
+done
+find staging -name "*.src.tar.xz" | while read -r file; do
+    bn=${file##*/}
+    noext=${bn%.src.tar.xz*}
+    norel=${noext%-*}
+    nover=${norel%-*}
+    find pkgs/testing -not -type d -name "${nover}*.src.tar.xz" -delete
+    mv -v "$file" pkgs/testing
+done
 
-        install -d "pkgs/${prnum}"
-        if [ -d "/tmp/.mere/pkgs" ] ; then
-            sudo find "/tmp/.mere/pkgs" -type f -exec mv -v '{}' "pkgs/${prnum}/" \;
-            aws s3 sync pkgs s3://pkgs.merelinux.org
-        fi
-        ;;
-esac
+# Upload
+rsync -rlptv --delete-after \
+    -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
+    pkgs/testing/ pkgsync@pkgs.merelinux.org::pkgs/testing/

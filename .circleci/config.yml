@@ -34,6 +34,13 @@ jobs:
       - run:
           name: Test package
           command: ./ci-scripts/ci-test.sh
+      - store_artifacts:
+          path: /tmp/mere
+  upload:
+    executor: build-env
+    steps:
+      - add_ssh_keys
+      - checkout
       - run:
           name: Upload package
           command: ./ci-scripts/ci-upload.sh
@@ -42,9 +49,17 @@ workflows:
   workflow:
     jobs:
       - lint:
-        filters:
-          branches:
-            ignore: gh-pages
+          filters:
+            branches:
+              ignore: main
       - build:
+          filters:
+            branches:
+              ignore: main
           requires:
             - lint
+      - upload:
+          filters:
+            branches:
+              only:
+                - main
