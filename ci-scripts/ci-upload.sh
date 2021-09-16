@@ -1,6 +1,4 @@
 #!/bin/bash -xe
-sudo pip install awscli
-
 bn="$(git rev-parse --abbrev-ref HEAD)"
 case "$bn" in
     main)
@@ -56,10 +54,12 @@ case "$bn" in
             exit 1
         fi
 
-        install -d "pkgs/${prnum}"
+        install -d "ci/${prnum}"
         if [ -d "/tmp/.mere/pkgs" ] ; then
-            sudo find "/tmp/.mere/pkgs" -type f -exec mv -v '{}' "pkgs/${prnum}/" \;
-            aws s3 sync pkgs s3://pkgs.merelinux.org
+            sudo find "/tmp/.mere/pkgs" -type f -exec mv -v '{}' "ci/${prnum}/" \;
+            rsync -rlptv \
+                -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
+                ci pkgsync@pkgs.merelinux.org::all
         fi
         ;;
 esac

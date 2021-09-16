@@ -21,6 +21,7 @@ jobs:
             find packages -name PKGTEST -exec shellcheck '{}' +
             find buildpkg.sh ci-scripts dev-scripts misc-util -type f -exec shellcheck '{}' +
   build:
+    circleci_ip_ranges: true
     executor: build-env
     steps:
       - checkout
@@ -34,6 +35,9 @@ jobs:
       - run:
           name: Test package
           command: ./ci-scripts/ci-test.sh
+      - add_ssh_keys:
+          fingerprints:
+            - "52:6d:68:4c:32:a7:7f:5f:36:55:6c:05:d2:35:21:7b"
       - run:
           name: Upload package
           command: ./ci-scripts/ci-upload.sh
