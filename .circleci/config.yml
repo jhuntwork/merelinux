@@ -41,9 +41,15 @@ jobs:
     steps:
       - add_ssh_keys
       - checkout
+      - restore_cache:
+          key: testing-repo
       - run:
           name: Upload package
           command: ./ci-scripts/ci-upload.sh
+      - save_cache:
+          key: testing-repo
+          paths: pkgs/testing
+
 workflows:
   version: 2
   workflow:

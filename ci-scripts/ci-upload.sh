@@ -62,8 +62,13 @@ find staging -name "*.src.tar.xz" | while read -r file; do
     noext=${bn%.src.tar.xz*}
     norel=${noext%-*}
     nover=${norel%-*}
-    find pkgs/testing -not -type d -name "${nover}*.src.tar.xz" -delete
-    mv -v "$file" pkgs/testing
+    install -d "src/${nover}"
+    mv -v "$file" "src/${nover}/"
+
+    printf 'Syncing up source packages\n'
+    rsync -rlptv --delete-after \
+        -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
+        "src/${nover}/" "pkgsync@pkgs.merelinux.org::pkgs/src/${nover}/"
 done
 
 # Upload
