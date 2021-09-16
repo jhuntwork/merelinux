@@ -17,6 +17,16 @@ else
 fi
 [ -n "$branch" ] || { printf 'Cannot determine the origin branch name\n'; exit 1; }
 
+# install pacman-build
+install -d /tmp/pacman
+curl -LO http://pkgs.merelinux.org/stable/pacman-latest-x86_64.pkg.tar.xz
+tar -C /tmp/pacman -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
+
+install -d /tmp/tools/var/lib/pacman
+sudo /tmp/pacman/usr/bin/pacman -Sy --config /tmp/pacman/etc/pacman.conf \
+    -r /tmp/tools --noconfirm pacman-build curl jq
+export PATH="/tmp/tools/bin:/tmp/tools/usr/bin:$PATH"
+
 # Download artifacts
 artifacts="$(curl \
     "https://circleci.com/api/v1.1/project/github/jhuntwork/merelinux/latest/artifacts?branch=${branch}&filter=successful" \
@@ -33,15 +43,6 @@ while [ "$i" -lt "$len" ]; do
     i=$((i+1))
 done
 
-# install pacman-build
-install -d /tmp/pacman
-curl -LO http://pkgs.merelinux.org/stable/pacman-latest-x86_64.pkg.tar.xz
-tar -C /tmp/pacman -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
-
-install -d ./var/lib/pacman
-sudo /tmp/pacman/usr/bin/pacman -Sy --config /tmp/pacman/etc/pacman.conf \
-    -r . --noconfirm pacman-build
-
 # Sync down existing files in the testing repo
 install -d pkgs/testing
 rsync -rlptv \
@@ -52,7 +53,8 @@ rsync -rlptv \
 find staging -name "*.pkg*" -not -name "*.sig" | while read -r file ; do
     mv -v "$file" pkgs/testing
     [ -f "${file}.sig" ] && mv -v "${file}.sig" pkgs/testing
-    LIBRARY=./usr/share/makepkg ./usr/bin/repo-add -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
+    LIBRARY=/tmp/tools/usr/share/makepkg repo-add \
+        -R pkgs/testing/testing.db.tar.gz "pkgs/testing/${file##*/}"
 done
 find staging -name "*.src.tar.xz" | while read -r file; do
     bn=${file##*/}
