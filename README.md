@@ -14,12 +14,22 @@ For additional details, visit [https://merelinux.org](https://merelinux.org).
 
 ## Installing
 
-Currently there is no Mere-specific installation media. However, Mere can be
-installed to disk manually from any x86_64 Linux system using a statically
-compiled version of `pacman`. Detailed instructions are forthcoming in a
-separate installation document.
+See [INSTALLING](INSTALLING.md) for more details.
+
+## Docker Containers
+
+There are two main docker containers that may make a good introduction to
+Mere Linux.
+
+- `mere/base`: Essentially just `busybox` and `pacman`. Use it to get going and install
+any other available packages. Just 4.35 MB!
+- `mere/dev`: Quite a bit larger, but that's because it includes the `llvm` toolchain and other dependencies required to begin building packages for Mere. In fact, it's the container used in the official Mere build automation.
 
 ## Support
+
+For bugs or feature requests, including packages that do not currently exist in
+the repositories, please create a
+[new Github issue](https://github.com/jhuntwork/merelinux/issues).
 
 Feel free to ask questions in the `#merelinux` channel on the
 [LiberaChat IRC Network](https://libera.chat).
