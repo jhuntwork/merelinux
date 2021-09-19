@@ -1,18 +1,17 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(sqlite libsqlite libsqlite-dev)
 pkgver=3.34.1
 _pkgaltver=3340100
-pkgrel=2
+pkgrel=3
 pkgdesc='A self-contained embedded SQL database engine.'
 arch=('x86_64')
 url='https://sqlite.org/'
 license=(PublicDomain)
 groups=()
 depends=()
-makedepends=(readline-dev 'ld-musl-x86_64.so.1')
+makedepends=(readline-dev "ld-musl-$(arch).so.1")
 options=()
 changelog=ChangeLog
 
@@ -42,7 +41,7 @@ package_sqlite() {
         usr/share/man/man1
     )
     depends=(
-	'ld-musl-x86_64.so.1'
+        "ld-musl-$(arch).so.1"
         libreadline.so.8
     )
     std_package
@@ -53,7 +52,7 @@ package_libsqlite() {
         usr/lib/*.so.*
     )
     depends=(
-	'ld-musl-x86_64.so.1'
+        "ld-musl-$(arch).so.1"
     )
     provides=(
         libsqlite3.so.0
@@ -69,7 +68,7 @@ package_libsqlite-dev() {
         usr/lib/pkgconfig
     )
     depends=(
-	'ld-musl-x86_64.so.1'
+        "ld-musl-$(arch).so.1"
         "libsqlite=${pkgver}"
     )
     std_split_package
