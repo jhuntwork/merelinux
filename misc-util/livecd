@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+# Increment for new CD releases
+CDVERSION=1
+
+# Shouldn't need to modify these
+ISODIR="$(mktemp -d)"
+ISO="$(pwd)/merelinux-${CDVERSION}.iso"
+
+# Working directories
+install -d "$ISODIR"
+
+cat > "${ISODIR}/syslinux.cfg" << EOF
+UI menu.c32
+TIMEOUT 30
+
+LABEL Mere Linux
+  LINUX vmlinux
+  APPEND initrd=initrd.gz quiet livecd
+EOF
+
+for file in isolinux.bin menu.c32 ldlinux.c32 libutil.c32 ; do
+    install -v -m0755 "/usr/share/syslinux/${file}" "${ISODIR}/"
+done
+
+mkinitramfs -m -- base dropbear parted pciutils syslinux vim
+cd "$ISODIR"
+mv /tmp/initrd.gz "${ISODIR}/initrd.gz"
+mv /tmp/vmlinux .
+
+rm -f "$ISO"
+xorriso -as mkisofs -z -R -l -D -o "$ISO" \
+    -b isolinux.bin -c boot.cat -no-emul-boot \
+    -boot-load-size 4 -boot-info-table -V "MERELINUX_${CDVERSION}" ./

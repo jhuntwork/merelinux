@@ -11,16 +11,16 @@ cleanup() {
 trap cleanup INT TERM EXIT
 
 # Default vars
-disk_size="${disk_size:-1G}"
+disk_size="${disk_size:-75M}"
 mypass="${mypass:-merepass}"
-ROOT='/tmp/mere'
+ROOT=$(mktemp -d)
 
 # Create an empty system root directory
 rm -rf "$ROOT"
 install -d "$ROOT"
 
-# Create a 10G sparse image
-IMG='/tmp/disk.raw'
+# Create a sparse image
+IMG='/tmp/meredisk.raw'
 rm -f "$IMG"
 dd if=/dev/zero of="$IMG" bs=1 seek="$disk_size" count=0
 
@@ -49,30 +49,18 @@ mkfs.ext4 -O ^64bit "$lopart"
 
 # Mount the partition and install basic packages to it
 mount -o loop "$lopart" "$ROOT"
-install -d "${ROOT}/var/lib/pacman"
+
+install -d "${ROOT}/var/lib/pacman" "${ROOT}/dev"
+mknod -m 600 "${ROOT}/dev/console" c 5 1
+mknod -m 666 "${ROOT}/dev/null" c 1 3
+
 pacman -Sy --noconfirm -r "$ROOT" -b "${ROOT}/var/lib/pacman" \
-    base-layout \
-    busybox \
-    linux \
-    nginx \
-    pacman \
-    s6
+    base-layout busybox pacman
+pacman -Sy --noconfirm -r "$ROOT" -b "${ROOT}/var/lib/pacman" --needed \
+    base dropbear
 
-# Enable nginx to start on boot
-chroot "$ROOT" /sbin/service nginx enable
-
-# Optionally install some comfort packages
-# shellcheck disable=SC2154
-if [ "$comfortable" = '1' ] ; then
-    pacman -Sy --noconfirm -r "$ROOT" -b "${ROOT}/var/lib/pacman" \
-        dropbear \
-        mandoc \
-        mksh \
-        vim
-
-    chroot "$ROOT" /sbin/service dropbear enable
-    sed -i '/^root:/s@/bin/sh@/bin/mksh@g' "${ROOT}/etc/passwd"
-fi
+# Enable dropbear to start on boot
+chroot "$ROOT" /sbin/service enable dropbear
 
 # Set the root password
 yes "$mypass" | chroot "$ROOT" /bin/passwd
@@ -99,17 +87,21 @@ devpts /dev/pts devpts defaults 0 0
 tmpfs  /dev/shm tmpfs  defaults 0 0
 EOF
 
+mkinitramfs
+mv /tmp/initrd.gz "${ROOT}/boot/"
+
 # Configure the system to boot with extlinux from the syslinux package
-install -d ${ROOT}/boot/extlinux
+install -d "${ROOT}/boot/extlinux"
 cat >"${ROOT}/boot/extlinux/extlinux.conf" <<EOF
 SERIAL 0
 DEFAULT mere
 
 LABEL mere
   LINUX /boot/vmlinux
-  APPEND root=PARTUUID=${partuuid} console=ttyS0,38400n8d
+  APPEND initrd=/boot/initrd.gz root=PARTUUID=${partuuid} console=ttyS0,38400n8d rootresize
 EOF
 
 # Install extlinux and syslinux MBR for GPT
 extlinux -i "${ROOT}/boot/extlinux"
-cat /share/syslinux/gptmbr.bin >"$lodev"
+cat /usr/share/syslinux/gptmbr.bin >"$lodev"
+printf 'Disk image created at %s\n' "$IMG"
