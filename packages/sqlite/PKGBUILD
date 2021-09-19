@@ -12,7 +12,7 @@ url='https://sqlite.org/'
 license=(PublicDomain)
 groups=()
 depends=()
-makedepends=(readline-dev)
+makedepends=(readline-dev 'ld-musl-x86_64.so.1')
 options=()
 changelog=ChangeLog
 
@@ -42,7 +42,7 @@ package_sqlite() {
         usr/share/man/man1
     )
     depends=(
-        "ld-musl-$(arch).so.1"
+	'ld-musl-x86_64.so.1'
         libreadline.so.8
     )
     std_package
@@ -53,7 +53,7 @@ package_libsqlite() {
         usr/lib/*.so.*
     )
     depends=(
-        libc.so
+	'ld-musl-x86_64.so.1'
     )
     provides=(
         libsqlite3.so.0
@@ -69,6 +69,7 @@ package_libsqlite-dev() {
         usr/lib/pkgconfig
     )
     depends=(
+	'ld-musl-x86_64.so.1'
         "libsqlite=${pkgver}"
     )
     std_split_package
