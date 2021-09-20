@@ -1,0 +1,70 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(db libdb libdb-dev)
+pkgver=5.3.28
+pkgrel=1
+pkgdesc='A self-contained embedded SQL database engine.'
+arch=(x86_64)
+url='https://www.oracle.com/database/technologies/related/berkeleydb.html'
+license=(SPL BSD)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://github.com/berkeleydb/libdb/releases/download/v${pkgver}/db-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    e0a992d740709892e81f9d93f06daf305cf73fb81b545afe72478043172c3628
+)
+
+
+build() {
+    cd_unpacked_src
+    cd build_unix || return
+    ../dist/configure --prefix=/usr
+    make
+}
+
+package_db() {
+    pkgfiles=(
+        usr/bin
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    cd_unpacked_src
+    cd build_unix || return
+    make DESTDIR="${pkgdirbase}/dest" install
+    std_split_package
+}
+
+package_libdb() {
+    pkgfiles=(
+        usr/lib/libdb-5.3.so
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libdb-5.3.so
+    )
+    std_split_package
+}
+
+package_libdb-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.a
+        usr/lib/libdb.so
+        usr/lib/libdb-5.so
+    )
+    depends=(
+        "libdb=${pkgver}"
+    )
+    std_split_package
+}
