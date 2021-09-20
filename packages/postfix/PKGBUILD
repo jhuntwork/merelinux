@@ -1,0 +1,74 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(postfix)
+pkgver=3.6.2
+pkgrel=1
+pkgdesc='The Postfix mail server'
+arch=(x86_64)
+url="http://www.postfix.org/"
+license=(BSD)
+groups=()
+depends=(
+    "ld-musl-$(arch).so.1"
+    libcrypto.so.1.1
+    libdb-5.3.so
+    libssl.so.1.1
+)
+makedepends=(openssl-dev libdb-dev)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://mirror.reverse.net/pub/postfix-release/official/postfix-${pkgver}.tar.gz"
+    postfix-service
+    postfix-log
+)
+
+install=postfix.install
+backup=(
+    etc/postfix/main.cf
+    etc/postfix/master.cf
+)
+
+sha256sums=(
+    507323d20d7b3f705f49cf8c07d437c6d8090bed07e15a3c0ec405edad54a7d4
+    4ab377d56da41210035c637806a27df99a7c9acf3af88ab70c3f4721b84054a3
+    c4936a0d13c1054a87b5b1042789b1d196bebedd514f0e0d2f2104f7dea20fd8
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i -e 's|#define HAS_NIS|//#define HAS_NIS|g' src/util/sys_defs.h
+    make \
+        CC=clang \
+        CCARGS='-DUSE_TLS -I/usr/include/openssl/' \
+        AUXLIBS='-lssl -lcrypto' \
+        makefiles
+    MAKEFLAGS='' make
+}
+
+package() {
+    pkgfiles=(
+        etc/postfix
+        usr/bin
+        usr/libexec/postfix
+        usr/sbin
+        usr/share/man
+    )
+    cd_unpacked_src
+    make non-interactive-package \
+		install_root="${pkgdirbase}/dest" \
+		manpage_directory=/usr/share/man
+    std_split_package
+
+    # Service files
+    install -d "${pkgdir}/etc/s6/services/available/postfix/log"
+    install -m 0754 "${srcdir}/postfix-service" \
+        "${pkgdir}/etc/s6/services/available/postfix/run"
+    install -m 0754 "${srcdir}/postfix-log" \
+        "${pkgdir}/etc/s6/services/available/postfix/log/run"
+
+    echo 'maillog_file = /dev/stdout' >>"${pkgdir}/etc/postfix/main.cf"
+}

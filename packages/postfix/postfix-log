@@ -1,0 +1,2 @@
+#!/bin/execlineb -P
+s6-log -b -- n20 s1000000 t /var/log/postfix

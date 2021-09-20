@@ -1,0 +1,21 @@
+#!/bin/sh -e
+post_install() {
+    addgroup -S postdrop
+    addgroup -S postfix
+    adduser -s /sbin/nologin -D -H -h /var/spool/mail -S -G postfix postfix
+    chgrp postdrop /usr/sbin/postqueue /usr/sbin/postdrop
+    chmod g+s /usr/sbin/postqueue /usr/sbin/postdrop
+    install -d /var/spool/postfix/public /var/spool/postfix/maildrop
+    chown postfix:postdrop /var/spool/postfix/public /var/spool/postfix/maildrop
+}
+
+pre_remove() {
+    service unsup postfix >/dev/null 2>&1 || true
+    service disable postfix >/dev/null 2>&1 || true
+}
+
+post_remove() {
+    deluser postfix >/dev/null 2>&1 || true
+    delgroup postfix >/dev/null 2>&1 || true
+    delgroup postdrop >/dev/null 2>&1 || true
+}
