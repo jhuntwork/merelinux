@@ -1,15 +1,13 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
-rationale='Many packages may use zlib, but libarchive in particular depends on its functionality'
-pkgname=zlib-dev
+pkgname=(zlib zlib-dev)
 pkgver=1.2.11
-pkgrel=4
+pkgrel=5
 pkgdesc='A Massively Spiffy Yet Delicately Unobtrusive Compression Library'
-arch=('x86_64')
+arch=(x86_64)
 url='http://www.zlib.net'
-license=('BSD')
+license=(BSD)
 groups=()
 depends=()
 makedepends=()
@@ -25,15 +23,33 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    CFLAGS+=' -fPIC' ./configure --prefix=/usr
+    LDSHARED="cc -shared -Wl,-soname,libz.so.1,--version-script,zlib.map" \
+        ./configure --prefix=/usr
     make
 }
 
-package() {
+package_zlib() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libz.so.1
+    )
+    std_package
+}
+
+package_zlib-dev() {
     pkgfiles=(
         usr/include
         usr/lib/lib*.a
+        usr/lib/lib*.so
         usr/lib/pkgconfig
     )
-    std_package
+    depends=(
+        "zlib=${pkgver}"
+    )
+    std_split_package
 }
