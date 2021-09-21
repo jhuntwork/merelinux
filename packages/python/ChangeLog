@@ -1,51 +1,46 @@
-2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.9.7-1 (2021-09-21)
 
-	* 3.9.2-3 :
+	Upgrade to 3.9.7
+	Fix conflicting file between main package and dev package
+
+3.9.2-3 (2021-04-08)
+
 	Use openssl instead of libressl
 	Remove from any groups for now
 	Set prefix to /usr
 
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.9.2-2 (2021-02-27)
 
-	* 3.9.2-2 :
 	Build with libffi 3.3
 
-2021-02-20  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.9.2-1 (2021-02-20)
 
-	* 3.9.2-1 :
 	Upgrade to 3.9.2
 
-2019-04-10  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.7.3-1 (2019-04-10)
 
-	* 3.7.3-1 :
 	Upgrade to 3.7.3
 
-2018-11-24  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.7.1-1 (2018-11-24)
 
-	* 3.7.1-1 :
 	Upgrade to 3.7.1
 
-2017-04-17 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.6.1-1 (2017-04-17)
 
-	* 3.6.1-1 :
 	Upgrade to 3.6.1
 
-2017-01-13 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.5.2-2 (2017-01-13)
 
-	* 3.5.2-2 :
 	Update description and build against libsqlite, liblzma
 
-2016-10-24 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.5.2-1 (2016-10-24)
 
-	* 3.5.2-1 :
 	Upgrade to 3.5.2
 
-2015-08-11 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.7.10-1 (2015-08-11)
 
-	* 2.7.10-1 :
 	Upgrade to 2.7.10
 
-2015-04-28 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.7.9-1 (2015-04-28)
 
-	* 2.7.9-1 :
 	Initial version
