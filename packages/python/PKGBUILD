@@ -1,12 +1,11 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(python python-dev)
 _vermajor=3
 _verminor=9
-pkgver=${_vermajor}.${_verminor}.2
-pkgrel=3
+pkgver=${_vermajor}.${_verminor}.7
+pkgrel=1
 pkgdesc='A clear and powerful object-oriented programming language,'
 arch=(x86_64)
 url='http://www.python.org'
@@ -30,7 +29,7 @@ source=(
     python-fix-ctypes_util.patch
 )
 sha256sums=(
-    3c2034c54f811448f516668dce09d24008a0716c3a794dd8639b5388cbde247d
+    f8145616e68c00041d1a6399b76387390388f8359581abc24432bb969b5e3c57
     db33506472cb9819acf03e8206323ed0aea3cb0ed537b047976dc613e9a34e4e
 )
 
@@ -54,7 +53,6 @@ check() {
 package_python() {
     depends=(
         "ld-musl-$(arch).so.1"
-        libc.so
         libcrypto.so.1.1
         libffi.so.7
         libreadline.so.8
@@ -73,11 +71,13 @@ package_python() {
     cd_unpacked_src
     make DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest" || return 1
+    rm -rf "usr/lib/${_vermajor}.${_verminor}/site-packages"
     ln -s "python${_vermajor}.${_verminor}" usr/bin/python
     ln -s "pip${_vermajor}" usr/bin/pip
     find . -name "*.pyc" -delete -o -name "*.pyo" -delete
     find . -name 'test' -type d -exec rm -rf '{}' + || true
     package_defined_files
+    rm "${pkgdirbase}/dest/usr/include/python${_vermajor}.${_verminor}/pyconfig.h"
 }
 
 package_python-dev() {
@@ -85,9 +85,9 @@ package_python-dev() {
         "python=${pkgver}"
     )
     pkgfiles=(
-        "usr/bin/py*-config"
+        usr/bin/py*-config
         usr/include
-        "usr/lib/libpython*.a"
+        usr/lib/libpython*.a
         usr/lib/pkgconfig
     )
     std_split_package
