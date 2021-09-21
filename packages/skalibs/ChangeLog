@@ -1,3 +1,7 @@
+2.10.0.3-3 (2021-09-21)
+
+	Fix skalibs paths to be consistent with system includes
+
 2.10.0.3-2 (2021-09-12)
 
 	List provides on skalibs for libskarnet
