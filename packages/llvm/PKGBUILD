@@ -1,33 +1,38 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
 
-pkgname=(llvm llvm-runtime-libs)
+pkgname=(llvm libcxx)
 pkgver=11.1.0
-pkgrel=8
+pkgrel=9
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
 url='htps://llvm.org'
 license=(Apache)
 groups=()
 depends=()
-makedepends=(cmake git ninja zlib-dev)
+makedepends=(
+    cmake
+    git
+    ninja
+    zlib-dev
+)
 options=()
 changelog=ChangeLog
 
 source=(
     "https://github.com/llvm/llvm-project/releases/download/llvmorg-${pkgver}/llvm-project-${pkgver}.src.tar.xz"
-    "https://reviews.llvm.org/file/data/gzxc6jzljy6hogcbsis4/PHID-FILE-wgfo5g772gdk6n7e2ulf/D82170.diff"
+    0001-add-readelf.patch
 )
 
 sha256sums=(
     74d2529159fd118c3eac6f90107b5611bccc6f647fdea104024183e8d5e25831
-    2d4f17538cf98be9c85a60917f76d93bc653fbc395dae0389e22ebb7f42e79e3
+    db60427eb3f844355eabd079a61fac2f32c8291efb4c24f0be5983a6d14128fe
 )
 
 
 build() {
     cd_unpacked_src
-    patch -Np1 -i "${srcdir}/D82170.diff"
+    patch -Np1 -i "${srcdir}/0001-add-readelf.patch"
     sed -i \
         -e 's@strtoull_l@strtoull@g' \
         -e '/strtoull/s@, _LIBCPP_GET_C_LOCALE@@' \
@@ -36,6 +41,7 @@ build() {
         libcxx/include/locale
     install -d build
     cd build || return 1
+    unset CFLAGS CXXFLAGS LDFLAGS
     cmake -G Ninja -Wno-dev \
         -DCMAKE_INSTALL_PREFIX=/usr \
         -DCMAKE_BUILD_TYPE=Release \
@@ -76,11 +82,14 @@ package_llvm() {
     )
     depends=(
         "ld-musl-$(arch).so.1"
-        libLTO.so.11
         libc++.so.1
         libc++abi.so.1
         libunwind.so.1
+        libz.so.1
         musl-dev
+    )
+    provides=(
+        libLTO.so.11
     )
     groups=(build-base)
     cd_unpacked_src
@@ -94,16 +103,19 @@ package_llvm() {
     ln -s clang++ "${pkgdir}/usr/bin/c++"
 }
 
-package_llvm-runtime-libs() {
+package_libcxx() {
     pkgfiles=(
-        usr/lib/*.so.*
+        usr/lib/libc++.so.*
+        usr/lib/libc++abi.so.*
+        usr/lib/libunwind.so.*
     )
     depends=(
-        libc.so
         "ld-musl-$(arch).so.1"
     )
+    replaces=(
+        llvm-runtime-libs
+    )
     provides=(
-        libLTO.so.11
         libc++.so.1
         libc++abi.so.1
         libunwind.so.1
