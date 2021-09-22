@@ -1,0 +1,19 @@
+--- llvm-project-11.1.0.src.orig/llvm/cmake/modules/AddLLVM.cmake
++++ llvm-project-11.1.0.src/llvm/cmake/modules/AddLLVM.cmake
+@@ -1182,6 +1182,8 @@
+     llvm-objcopy
+     llvm-objdump
+     llvm-rc
++    llvm-readelf
++    llvm-readobj
+     llvm-size
+     llvm-strings
+     llvm-strip
+@@ -1196,6 +1198,7 @@
+     nm
+     objcopy
+     objdump
++    readelf
+     size
+     strings
+     strip

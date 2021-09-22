@@ -1,3 +1,7 @@
+11.1.0-9 (2021-09-21)
+
+	Rename llvm-runtime-libs to just libcxx, move libLTO to the llvm package
+
 11.1.0-8 (2021-09-08)
 
 	Build and install readelf
