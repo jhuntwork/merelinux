@@ -1,0 +1,41 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(libmilter-dev)
+pkgver=8.17.1
+pkgrel=1
+pkgdesc="Sendmail's milter library"
+arch=(x86_64)
+url='http://sendmail.org'
+license=(Sendmail)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+
+source=(
+    "ftp://ftp.sendmail.org/pub/sendmail/sendmail.${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    04bc76b6c886e6d111be7fd8daa32b8ce00128a288b6b52e067bc29f3854a6e6
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i '/SM_CONF_SYS_CDEFS_H/s@1@0@' include/sm/os/sm_os_linux.h
+    make -C libmilter
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+    )
+    cd_unpacked_src
+    install -d "${pkgdirbase}/dest/usr/lib"
+    make -C libmilter DESTDIR="${pkgdirbase}/dest" install
+    std_split_package
+}
