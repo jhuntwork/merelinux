@@ -1,0 +1,3 @@
+#!/bin/execlineb -P
+fdmove -c 2 1
+opendkim -x /etc/opendkim.conf -f
