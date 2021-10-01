@@ -9,7 +9,8 @@ The main system toolchain and compiler is [llvm/clang](https://llvm.org/).
 Mere is still in its Alpha phase. If you are interested in helping to
 shape its direction, please visit the
 [Github Discussions](https://github.com/jhuntwork/merelinux/discussions/58)
-page and leave a comment.
+page and leave a comment, or subscribe to the
+[core mailing list](https://lists.merelinux.org).
 
 For additional details, visit [https://merelinux.org](https://merelinux.org).
 
@@ -23,8 +24,9 @@ There are two main docker containers that may make a good introduction to
 Mere Linux.
 
 - `mere/base`: Essentially just `busybox` and `pacman`. Use it to get going and install
-any other available packages. Just 4.35 MB!
-- `mere/dev`: Quite a bit larger, but that's because it includes the `llvm` toolchain and other dependencies required to begin building packages for Mere. In fact, it's the container used in the official Mere build automation.
+any other available packages.
+- `mere/dev`: Quite a bit larger, but that's because it includes the `llvm`
+toolchain and other dependencies required to begin building packages for Mere.
 
 ## Support
 
@@ -44,3 +46,9 @@ In the current state of development, the most helpful contributions are:
 - Create pull requests of any missing packages you would like to see included.
   There is currently a lot of room for potential packages.
   See [CONTRIBUTING](CONTRIBUTING.md) for more details.
+
+## Mailing Lists
+
+Ongoing discussions around Mere Linux development should take place in the
+[core](https://lists.merelinux.org/core) mailing list. The list of active
+mailing lists are found on [lists.merelinux.org](https://lists.merelinux.org).
