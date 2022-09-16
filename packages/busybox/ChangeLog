@@ -1,3 +1,7 @@
+1.33.1-6 (2022-01-09)
+
+	Enable cat -n
+
 1.33.1-5 (2021-09-15)
 
 	Add scripts to create an initramfs
