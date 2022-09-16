@@ -46,8 +46,7 @@ done
 # Sync down existing files in the testing repo
 printf 'Syncing down testing repo\n'
 install -d pkgs/testing
-rsync -rlptv \
-    -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
+rsync -rlptv -e 'ssh -p 50220' \
     pkgsync@pkgs.merelinux.org::pkgs/testing/ pkgs/testing/
 
 # Copy over the staging files to testing
@@ -66,13 +65,11 @@ find staging -name "*.src.tar.xz" | while read -r file; do
     mv -v "$file" "src/${nover}/"
 
     printf 'Syncing up source packages\n'
-    rsync -rlptv --delete-after \
-        -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
+    rsync -rlptv --delete-after -e 'ssh -p 50220' \
         "src/${nover}/" "pkgsync@pkgs.merelinux.org::pkgs/src/${nover}/"
 done
 
 # Upload
 printf 'Syncing up testing repo\n'
-rsync -rlptv --delete-after \
-    -e 'ssh pkgsync@pkgs.merelinux.org -p 50220 nc localhost 873' \
+rsync -rlptv --delete-after -e 'ssh -p 50220' \
     pkgs/testing/ pkgsync@pkgs.merelinux.org::pkgs/testing/
