@@ -3,7 +3,7 @@
 
 pkgname=busybox
 pkgver=1.33.1
-pkgrel=5
+pkgrel=6
 pkgdesc='Tiny versions of common UNIX utilities built into a single binary'
 arch=(x86_64)
 url='http://busybox.net'
@@ -39,7 +39,7 @@ sha256sums=(
     12cec6bd2b16d8a9446dd16130f2b92982f1819f6e1c5f5887b6db03f5660d28
     df74957dc1b48adf791d236996b64cd439d440e9cef9fc582721dda5cf7aca90
     08b850b788636f6c829e865414fc6305bdc1ffc6e1ec74083ab1256b6a38d0a7
-    8004f6e76672f81295c1760e178932876dcc8bf7baead1855eb05ecbd727e15c
+    50352d4c526cc1bd3616842dc5e7cb91991658d06824776939b77f8110b741c8
     3e0c3b046209525a6ac08b56406d7753a196ace08c127ff7423a8af5b91e0cbe
     49ec45959978d05addabb6ae261274012d4cddd40c8ebbbfb3ae99239fa69287
     0b647c26c0aae108a2eac34d8706f759797819b2ebbd37eb59e3f4f4c4de591f
