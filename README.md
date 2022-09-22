@@ -6,11 +6,9 @@ Mere Linux is a simple Linux distribution built upon
 [s6](http://skarnet.org/software/s6/) for PID 1 and process supervision.
 The main system toolchain and compiler is [llvm/clang](https://llvm.org/).
 
-Mere is still in its Alpha phase. If you are interested in helping to
-shape its direction, please visit the
+Mere is still in its Alpha phase. If you are interested in helping please visit the
 [Github Discussions](https://github.com/jhuntwork/merelinux/discussions/58)
-page and leave a comment, or subscribe to the
-[core mailing list](https://lists.merelinux.org).
+page and leave a comment.
 
 For additional details, visit [https://merelinux.org](https://merelinux.org).
 
@@ -34,9 +32,6 @@ For bugs or feature requests, including packages that do not currently exist in
 the repositories, please create a
 [new Github issue](https://github.com/jhuntwork/merelinux/issues).
 
-Feel free to ask questions in the `#merelinux` channel on the
-[LiberaChat IRC Network](https://libera.chat).
-
 ## Contributing
 
 In the current state of development, the most helpful contributions are:
@@ -46,9 +41,3 @@ In the current state of development, the most helpful contributions are:
 - Create pull requests of any missing packages you would like to see included.
   There is currently a lot of room for potential packages.
   See [CONTRIBUTING](CONTRIBUTING.md) for more details.
-
-## Mailing Lists
-
-Ongoing discussions around Mere Linux development should take place in the
-[core](https://lists.merelinux.org/core) mailing list. The list of active
-mailing lists are found on [lists.merelinux.org](https://lists.merelinux.org).
