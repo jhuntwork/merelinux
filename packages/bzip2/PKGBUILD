@@ -1,0 +1,46 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(bzip2 libbzip2-dev)
+pkgver=1.0.8
+pkgrel=1
+pkgdesc='A freely available, patent free, high-quality data compressor lib'
+arch=(x86_64)
+url=https://www.sourceware.org/bzip2
+license=(BSD)
+groups=()
+makedepends=()
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://sourceware.org/pub/bzip2/bzip2-${pkgver}.tar.gz"
+)
+sha256sums=(
+    ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i 's@(PREFIX)/man@(PREFIX)/share/man@g' Makefile
+    make CC="cc $CFLAGS -static"
+}
+
+package_bzip2() {
+    pkgfiles=(
+        usr/bin
+        usr/share/man
+    )
+    cd_unpacked_src
+    make PREFIX="${pkgdirbase}/dest/usr" install
+    std_split_package
+}
+
+package_libbzip2-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+    )
+    std_split_package
+}
