@@ -1,0 +1,111 @@
+From 1b2ca15e0c69973696df645e7b0165d10f053974 Mon Sep 17 00:00:00 2001
+From: Jeremy Huntwork <jeremy@merelinux.org>
+Date: Sat, 1 Jan 2022 14:04:36 -0500
+Subject: [PATCH 4/4] Update meson for asignify
+
+Change the meson configuration so that only one signature method, either
+gpgme or asignify, is supported at build time.
+
+Signed-off-by: Jeremy Huntwork <jeremy@merelinux.org>
+---
+ meson.build             | 33 ++++++++++++++++++++++++---------
+ meson_options.txt       |  4 ++--
+ test/pacman/meson.build |  2 +-
+ 3 files changed, 27 insertions(+), 12 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 76b9d2aa..112a2cc5 100644
+--- a/meson.build
++++ b/meson.build
+@@ -70,6 +70,7 @@ conf.set_quoted('SYSHOOKDIR', join_paths(DATAROOTDIR, 'libalpm/hooks/'))
+ conf.set_quoted('CONFFILE', join_paths(SYSCONFDIR, 'pacman.conf'))
+ conf.set_quoted('DBPATH', join_paths(LOCALSTATEDIR, 'lib/pacman/'))
+ conf.set_quoted('GPGDIR', join_paths(SYSCONFDIR, 'pacman.d/gnupg/'))
++conf.set_quoted('ASIGNIFYDIR', join_paths(SYSCONFDIR, 'pacman.d/asignify/'))
+ conf.set_quoted('LOGFILE', join_paths(LOCALSTATEDIR, 'log/pacman.log'))
+ conf.set_quoted('CACHEDIR', join_paths(LOCALSTATEDIR, 'cache/pacman/pkg/'))
+ conf.set_quoted('HOOKDIR', join_paths(SYSCONFDIR, 'pacman.d/hooks/'))
+@@ -97,13 +98,24 @@ libcurl = dependency('libcurl',
+                      static : get_option('buildstatic'))
+ conf.set('HAVE_LIBCURL', libcurl.found())
+ 
+-needed_gpgme_version = '>=1.3.0'
+-gpgme = dependency('gpgme',
+-                   version : needed_gpgme_version,
+-                   required : get_option('gpgme'),
+-                   static : get_option('buildstatic'),
+-                   not_found_message : 'gpgme @0@ is needed for GPG signature support'.format(needed_gpgme_version))
+-conf.set('HAVE_LIBGPGME', gpgme.found())
++want_signature = get_option('signature')
++if want_signature == 'gpgme'
++  needed_gpgme_version = '>=1.3.0'
++  gpgme = dependency('gpgme',
++                     version : needed_gpgme_version,
++                     static : get_option('buildstatic'),
++                     not_found_message : 'gpgme @0@ is needed for GPG signature support'.format(needed_gpgme_version))
++  signature_provider = gpgme
++  conf.set10('HAVE_LIBGPGME', gpgme.found())
++elif want_signature == 'asignify'
++  libasignify = dependency('libasignify',
++                           static : get_option('buildstatic'),
++                           not_found_message : 'libasignify is needed for asignify signature support')
++  signature_provider = libasignify
++  conf.set10('HAVE_LIBASIGNIFY', libasignify.found())
++else
++  error('unhandled signature value @0@'.format(want_signature))
++endif
+ 
+ want_crypto = get_option('crypto')
+ if want_crypto == 'openssl'
+@@ -305,7 +317,7 @@ libcommon = static_library(
+   gnu_symbol_visibility : 'hidden',
+   install : false)
+ 
+-alpm_deps = [crypto_provider, libarchive, libcurl, libintl, gpgme]
++alpm_deps = [crypto_provider, signature_provider, libarchive, libcurl, libintl]
+ 
+ libalpm_a = static_library(
+   'alpm_objlib',
+@@ -454,7 +466,10 @@ message('\n    '.join([
+   '  Build docs               : @0@'.format(build_doc),
+   '  debug build              : @0@'.format(get_option('buildtype') == 'debug'),
+   '  Use libcurl              : @0@'.format(conf.get('HAVE_LIBCURL')),
+-  '  Use GPGME                : @0@'.format(conf.get('HAVE_LIBGPGME')),
++  '  Use libasignify          : @0@'.format(conf.has('HAVE_LIBASIGNIFY') and
++                                            conf.get('HAVE_LIBASIGNIFY') == 1),
++  '  Use GPGME                : @0@'.format(conf.has('HAVE_LIBGPGME') and
++                                            conf.get('HAVE_LIBGPGME') == 1),
+   '  Use OpenSSL              : @0@'.format(conf.has('HAVE_LIBSSL') and
+                                             conf.get('HAVE_LIBSSL') == 1),
+   '  Use nettle               : @0@'.format(conf.has('HAVE_LIBNETTLE') and
+diff --git a/meson_options.txt b/meson_options.txt
+index 4d8cc300..01d3d2c5 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -45,8 +45,8 @@ option('curl', type : 'feature', value : 'auto',
+ option('crypto', type : 'combo', choices : ['openssl', 'nettle'],
+        description : 'select crypto implementation')
+ 
+-option('gpgme', type : 'feature', value : 'auto',
+-       description : 'use GPGME for PGP signature verification')
++option('signature', type : 'combo', choices : ['asignify', 'gpgme'],
++       description : 'select signature verification implementation')
+ 
+ option('i18n', type : 'boolean', value : true,
+        description : 'enable localization of pacman, libalpm and scripts')
+diff --git a/test/pacman/meson.build b/test/pacman/meson.build
+index ecab75b2..af3d7774 100644
+--- a/test/pacman/meson.build
++++ b/test/pacman/meson.build
+@@ -362,7 +362,7 @@ foreach input : pacman_tests
+   if not conf.get('HAVE_LIBCURL')
+     args += '--without-curl'
+   endif
+-  if not conf.get('HAVE_LIBGPGME')
++  if not conf.has('HAVE_LIBGPGME') or conf.get('HAVE_LIBGPGME') == 0
+     args += '--without-gpg'
+   endif
+ 
+-- 
+2.34.1
+

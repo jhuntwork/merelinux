@@ -3,7 +3,7 @@
 
 pkgname=(pacman pacman-build)
 pkgver=6.0.1
-pkgrel=3
+pkgrel=4
 pkgdesc='A lightweight Package Manager'
 arch=(x86_64)
 url='https://www.archlinux.org/pacman/'
@@ -13,6 +13,7 @@ depends=()
 makedepends=(
     libacl-dev
     libarchive-dev
+    libasignify-dev
     libcurl-dev
     liblzma-dev
     ninja
@@ -28,6 +29,11 @@ changelog=ChangeLog
 source=(
     "https://sources.archlinux.org/other/pacman/pacman-${pkgver}.tar.xz"
     static-build.patch
+    0001-libalpm-Add-support-for-asignify-signatures.patch
+    0002-Add-a-configuration-option-for-asignify-s-key-dir.patch
+    0003-Add-documentation-for-the-AsignifyDir-option.patch
+    0004-Update-meson-for-asignify.patch
+    0005-Modify-makepkg-to-use-asignify.patch
     makepkg.conf
     pacman.conf
     fakeroot
@@ -38,6 +44,11 @@ source=(
 sha256sums=(
     0db61456e56aa49e260e891c0b025be210319e62b15521f29d3e93b00d3bf731
     4d28d1d3559fb38b677359954f5a3fc7d1e01c84b5074adc2019ec3f1c2f077b
+    49f81b873c169b5a7cb8177fccf2731d8ec48ae31b3f8051645ab673f9e4c6c3
+    ef82ed77213facf0dddd4722cfca8bcae9049a9ff5e693264f665881f3a8e7b8
+    a60fa831cf70cb6ead014bd1c220cafce9335dff340ed72039e24b8c9fac2617
+    b2aa11175af7962e99618f61c9071f6bce2dda752811252cad35d92bd74cedbd
+    4bf69ed432ecc1a6517cce9ccf79a54133ca2a6bc4c74f53807ae18248a5c14c
     c58ece17155f655c320509979e0116e93ac9b515dd8b1c9cd7966bbf33accfe5
     2cc0b229f9ceb0a7df51237e99fb52410332694a6b0194ef018dbce3258a242f
     689b6064bea140990b6655cba26bc8cb16d1590c090688d169e5c3929d12a1e3
@@ -54,6 +65,11 @@ build() {
     sed -i -e 's/EUID == 0/EUID == -1/' scripts/makepkg.sh.in
     sed -i '/bsdtar -xf .*dbfile/s@-C@--no-fflags -C@' scripts/repo-add.sh.in
     patch -Np1 -i "${srcdir}/static-build.patch"
+    patch -Np1 -i "${srcdir}/0001-libalpm-Add-support-for-asignify-signatures.patch"
+    patch -Np1 -i "${srcdir}/0002-Add-a-configuration-option-for-asignify-s-key-dir.patch"
+    patch -Np1 -i "${srcdir}/0003-Add-documentation-for-the-AsignifyDir-option.patch"
+    patch -Np1 -i "${srcdir}/0004-Update-meson-for-asignify.patch"
+    patch -Np1 -i "${srcdir}/0005-Modify-makepkg-to-use-asignify.patch"
     export CFLAGS+=' -static'
 
     mkdir build
@@ -102,6 +118,7 @@ package_pacman-build() {
         usr/share
     )
     depends=(
+        asignify
         bash
         curl
         fedup

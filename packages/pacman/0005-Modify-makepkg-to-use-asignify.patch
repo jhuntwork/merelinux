@@ -1,0 +1,374 @@
+--- /dev/null
++++ b/scripts/libmakepkg/executable/asignify.sh.in
+@@ -0,0 +1,42 @@
++#!/usr/bin/bash
++#
++#   asignify.sh - Confirm presence of asignify binary
++#
++#   Copyright (c) 2011-2021 Pacman Development Team <pacman-dev@archlinux.org>
++#
++#   This program is free software; you can redistribute it and/or modify
++#   it under the terms of the GNU General Public License as published by
++#   the Free Software Foundation; either version 2 of the License, or
++#   (at your option) any later version.
++#
++#   This program is distributed in the hope that it will be useful,
++#   but WITHOUT ANY WARRANTY; without even the implied warranty of
++#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++#   GNU General Public License for more details.
++#
++#   You should have received a copy of the GNU General Public License
++#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
++#
++
++[[ -n "$LIBMAKEPKG_EXECUTABLE_ASIGNFY_SH" ]] && return
++LIBMAKEPKG_EXECUTABLE_ASIGNIFY_SH=1
++
++LIBRARY=${LIBRARY:-'@libmakepkgdir@'}
++
++source "$LIBRARY/util/message.sh"
++source "$LIBRARY/util/option.sh"
++
++executable_functions+=('executable_asignify')
++
++executable_asignify() {
++	local ret=0
++
++	if [[ $SIGNPKG == 'y' ]] || { [[ -z $SIGNPKG ]] && check_buildenv "sign" "y"; }; then
++		if ! command -v asignify >/dev/null; then
++			error "$(gettext "Cannot find the %s binary required for signing packages.")" "asignify"
++			ret=1
++		fi
++	fi
++
++	return $ret
++}
+--- a/scripts/libmakepkg/executable/gpg.sh.in
++++ /dev/null
+@@ -1,49 +0,0 @@
+-#!/usr/bin/bash
+-#
+-#   gpg.sh - Confirm presence of gpg binary
+-#
+-#   Copyright (c) 2011-2021 Pacman Development Team <pacman-dev@archlinux.org>
+-#
+-#   This program is free software; you can redistribute it and/or modify
+-#   it under the terms of the GNU General Public License as published by
+-#   the Free Software Foundation; either version 2 of the License, or
+-#   (at your option) any later version.
+-#
+-#   This program is distributed in the hope that it will be useful,
+-#   but WITHOUT ANY WARRANTY; without even the implied warranty of
+-#   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-#   GNU General Public License for more details.
+-#
+-#   You should have received a copy of the GNU General Public License
+-#   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+-#
+-
+-[[ -n "$LIBMAKEPKG_EXECUTABLE_GPG_SH" ]] && return
+-LIBMAKEPKG_EXECUTABLE_GPG_SH=1
+-
+-LIBRARY=${LIBRARY:-'@libmakepkgdir@'}
+-
+-source "$LIBRARY/util/message.sh"
+-source "$LIBRARY/util/option.sh"
+-
+-executable_functions+=('executable_gpg')
+-
+-executable_gpg() {
+-	local ret=0
+-
+-	if [[ $SIGNPKG == 'y' ]] || { [[ -z $SIGNPKG ]] && check_buildenv "sign" "y"; }; then
+-		if ! type -p gpg >/dev/null; then
+-			error "$(gettext "Cannot find the %s binary required for signing packages.")" "gpg"
+-			ret=1
+-		fi
+-	fi
+-
+-	if (( ! SKIPPGPCHECK )) && source_has_signatures; then
+-		if ! type -p gpg >/dev/null; then
+-			error "$(gettext "Cannot find the %s binary required for verifying source files.")" "gpg"
+-			ret=1
+-		fi
+-	fi
+-
+-	return $ret
+-}
+--- a/scripts/libmakepkg/executable/meson.build
++++ b/scripts/libmakepkg/executable/meson.build
+@@ -5,7 +5,7 @@
+   'checksum.sh.in',
+   'distcc.sh.in',
+   'fakeroot.sh.in',
+-  'gpg.sh.in',
++  'asignify.sh.in',
+   'gzip.sh.in',
+   'pacman.sh.in',
+   'strip.sh.in',
+--- a/scripts/libmakepkg/integrity.sh.in
++++ b/scripts/libmakepkg/integrity.sh.in
+@@ -30,16 +30,9 @@
+ done
+ 
+ check_source_integrity() {
+-	if (( SKIPCHECKSUMS && SKIPPGPCHECK )); then
++	if (( SKIPCHECKSUMS )); then
+ 		warning "$(gettext "Skipping all source file integrity checks.")"
+-	elif (( SKIPCHECKSUMS )); then
+-		warning "$(gettext "Skipping verification of source file checksums.")"
+-		check_pgpsigs "$@"
+-	elif (( SKIPPGPCHECK )); then
+-		warning "$(gettext "Skipping verification of source file PGP signatures.")"
+-		check_checksums "$@"
+ 	else
+ 		check_checksums "$@"
+-		check_pgpsigs "$@"
+ 	fi
+ }
+--- a/scripts/libmakepkg/integrity/generate_signature.sh.in
++++ b/scripts/libmakepkg/integrity/generate_signature.sh.in
+@@ -29,13 +29,10 @@
+ 	local ret=0
+ 	local filename="$1"
+ 
+-	local SIGNWITHKEY=()
+-	if [[ -n $GPGKEY ]]; then
+-		SIGNWITHKEY=(-u "${GPGKEY}")
+-	fi
+-
+-	gpg --detach-sign --use-agent "${SIGNWITHKEY[@]}" --no-armor "$filename" &>/dev/null || ret=$?
+-
++    dir="${filename%/*}"
++    [ "$dir" != "${filename}" ] && cd "$dir"
++    asignify sign "$ASIGNIFYKEY" "${filename##*/}.sig" "${filename##*/}" &>/dev/null || ret=$?
++    [ "$dir" != "${filename}" ] && cd - &>/dev/null
+ 
+ 	if (( ! ret )); then
+ 		msg2 "$(gettext "Created signature file %s.")" "${filename##*/}.sig"
+--- a/scripts/libmakepkg/integrity/verify_signature.sh.in
++++ b/scripts/libmakepkg/integrity/verify_signature.sh.in
+@@ -27,7 +27,6 @@
+ source "$LIBRARY/util/pkgbuild.sh"
+ 
+ check_pgpsigs() {
+-	(( SKIPPGPCHECK )) && return 0
+ 	! source_has_signatures && return 0
+ 
+ 	msg "$(gettext "Verifying source file signatures with %s...")" "gpg"
+--- a/scripts/makepkg.sh.in
++++ b/scripts/makepkg.sh.in
+@@ -27,7 +27,7 @@
+ # makepkg uses quite a few external programs during its execution. You
+ # need to have at least the following installed for makepkg to function:
+ #   awk, bsdtar (libarchive), bzip2, coreutils, fakeroot, file, find (findutils),
+-#   gettext, gpg, grep, gzip, sed, tput (ncurses), xz
++#   gettext, asignify, grep, gzip, sed, tput (ncurses), xz
+ 
+ # gettext initialization
+ export TEXTDOMAIN='pacman-scripts'
+@@ -74,7 +74,6 @@
+ REPRODUCIBLE=0
+ RMDEPS=0
+ SKIPCHECKSUMS=0
+-SKIPPGPCHECK=0
+ SIGNPKG=''
+ SPLITPKG=0
+ SOURCEONLY=0
+@@ -988,17 +987,16 @@
+ 	printf -- "$(gettext "  --check          Run the %s function in the %s")\n" "check()" "$BUILDSCRIPT"
+ 	printf -- "$(gettext "  --config <file>  Use an alternate config file (instead of '%s')")\n" "$confdir/makepkg.conf"
+ 	printf -- "$(gettext "  --holdver        Do not update VCS sources")\n"
+-	printf -- "$(gettext "  --key <key>      Specify a key to use for %s signing instead of the default")\n" "gpg"
++	printf -- "$(gettext "  --key <key>      Specify a key to use for %s signing")\n" "asignify"
+ 	printf -- "$(gettext "  --noarchive      Do not create package archive")\n"
+ 	printf -- "$(gettext "  --nocheck        Do not run the %s function in the %s")\n" "check()" "$BUILDSCRIPT"
+ 	printf -- "$(gettext "  --noprepare      Do not run the %s function in the %s")\n" "prepare()" "$BUILDSCRIPT"
+ 	printf -- "$(gettext "  --nosign         Do not create a signature for the package")\n"
+ 	printf -- "$(gettext "  --packagelist    Only list package filepaths that would be produced")\n"
+ 	printf -- "$(gettext "  --printsrcinfo   Print the generated SRCINFO and exit")\n"
+-	printf -- "$(gettext "  --sign           Sign the resulting package with %s")\n" "gpg"
++	printf -- "$(gettext "  --sign           Sign the resulting package with %s")\n" "asignify"
+ 	printf -- "$(gettext "  --skipchecksums  Do not verify checksums of the source files")\n"
+ 	printf -- "$(gettext "  --skipinteg      Do not perform any verification checks on source files")\n"
+-	printf -- "$(gettext "  --skippgpcheck   Do not verify source files with PGP signatures")\n"
+ 	printf -- "$(gettext "  --verifysource   Download source files (if needed) and perform integrity checks")\n"
+ 	echo
+ 	printf -- "$(gettext "These options can be passed to %s:")\n" "pacman"
+@@ -1076,7 +1074,7 @@
+ 		-g|--geninteg)    BUILDPKG=0 GENINTEG=1 IGNOREARCH=1;;
+ 		--holdver)        HOLDVER=1 ;;
+ 		-i|--install)     INSTALL=1 ;;
+-		--key)            shift; GPGKEY=$1 ;;
++		--key)            shift; ASIGNIFYKEY=$1 ;;
+ 		-L|--log)         LOGGING=1 ;;
+ 		-m|--nocolor)     USE_COLOR='n'; PACMAN_OPTS+=("--color" "never") ;;
+ 		--noarchive)      NOARCHIVE=1 ;;
+@@ -1091,8 +1089,7 @@
+ 		-R|--repackage)   REPKG=1 ;;
+ 		--sign)           SIGNPKG='y' ;;
+ 		--skipchecksums)  SKIPCHECKSUMS=1 ;;
+-		--skipinteg)      SKIPCHECKSUMS=1; SKIPPGPCHECK=1 ;;
+-		--skippgpcheck)   SKIPPGPCHECK=1;;
++		--skipinteg)      SKIPCHECKSUMS=1 ;;
+ 		-s|--syncdeps)    DEP_BIN=1 ;;
+ 		-S|--source)      BUILDPKG=0 SOURCEONLY=1 ;;
+ 		--verifysource)   BUILDPKG=0 VERIFYSOURCE=1 ;;
+@@ -1292,16 +1289,16 @@
+ 	PKGFUNC=1
+ fi
+ 
+-# check if gpg signature is to be created and if signing key is valid
++# check if asignify signature is to be created and if signing key is valid
+ if { [[ -z $SIGNPKG ]] && check_buildenv "sign" "y"; } || [[ $SIGNPKG == 'y' ]]; then
+ 	SIGNPKG='y'
+-	if ! gpg --list-secret-key ${GPGKEY:+"$GPGKEY"} &>/dev/null; then
+-		if [[ ! -z $GPGKEY ]]; then
+-			error "$(gettext "The key %s does not exist in your keyring.")" "${GPGKEY}"
+-		else
+-			error "$(gettext "There is no key in your keyring.")"
+-		fi
++    if [ -z "$ASIGNIFYKEY" ]; then
++		error "$(gettext "You must specify a key with --key.")" "$ASIGNIFYKEY"
+ 		exit $E_PRETTY_BAD_PRIVACY
++    fi
++    if [ ! -f "$ASIGNIFYKEY" ]; then
++		error "$(gettext "The key %s does not exist.")" "$ASIGNIFYKEY"
++		exit $E_PRETTY_BAD_PRIVACY
+ 	fi
+ fi
+ 
+@@ -1358,8 +1355,7 @@
+ 	cd_safe "$srcdir"
+ 	if (( SOURCEONLY == 2 )); then
+ 		download_sources allarch
+-	elif ( (( ! SKIPCHECKSUMS )) || \
+-			( (( ! SKIPPGPCHECK )) && source_has_signatures ) ); then
++    elif ( (( ! SKIPCHECKSUMS )) ); then
+ 		download_sources allarch novcs
+ 	fi
+ 	check_source_integrity all
+--- a/scripts/repo-add.sh.in
++++ b/scripts/repo-add.sh.in
+@@ -80,7 +80,7 @@
+ 	fi
+ 	printf -- "$(gettext "  --nocolor         turn off color in output\n")"
+ 	printf -- "$(gettext "  -q, --quiet       minimize output\n")"
+-	printf -- "$(gettext "  -s, --sign        sign database with GnuPG after update\n")"
++	printf -- "$(gettext "  -s, --sign        sign database with asignify after update\n")"
+ 	printf -- "$(gettext "  -k, --key <key>   use the specified key to sign the database\n")"
+ 	printf -- "$(gettext "  -v, --verify      verify database's signature before update\n")"
+ 	printf -- "$(gettext "\n\
+@@ -131,41 +131,32 @@
+ 	return 1
+ }
+ 
+-check_gpg() {
+-	if ! type -p gpg >/dev/null; then
+-		error "$(gettext "Cannot find the gpg binary! Is GnuPG installed?")"
++check_asignify() {
++	if ! command -v asignify >/dev/null; then
++		error "$(gettext "Cannot find the asignify binary!")"
+ 		exit 1 # $E_MISSING_PROGRAM
+ 	fi
+ 
+-	if (( ! VERIFY )); then
+-		if ! gpg --list-secret-key ${GPGKEY:+"$GPGKEY"} &>/dev/null; then
+-			if [[ ! -z $GPGKEY ]]; then
+-				error "$(gettext "The key ${GPGKEY} does not exist in your keyring.")"
+-			elif (( ! KEY )); then
+-				error "$(gettext "There is no key in your keyring.")"
+-			fi
+-			exit 1
+-		fi
+-	fi
++    if [ -z "$ASIGNIFYKEY" ] || [ ! -f "$ASIGNIFYKEY" ]; then
++        error "$(gettext "Must specify a key to use for signing")"
++        exit 1
++    fi
+ }
+ 
+ # sign the package database once repackaged
+ create_signature() {
+ 	(( ! SIGN )) && return
+-	local dbfile=$1
++	local dbfile="${1##*/.tmp.}"
+ 	local ret=0
+-	msg "$(gettext "Signing database '%s'...")" "${dbfile##*/.tmp.}"
++    [ "$1" != "$dbfile" ] && cp "$1" "$dbfile"
++	msg "$(gettext "Signing database '%s'...")" "$dbfile"
+ 
+-	local SIGNWITHKEY=()
+-	if [[ -n $GPGKEY ]]; then
+-		SIGNWITHKEY=(-u "${GPGKEY}")
+-	fi
+-	gpg --detach-sign --use-agent --no-armor "${SIGNWITHKEY[@]}" "$dbfile" &>/dev/null || ret=$?
++    asignify sign "$ASIGNIFYKEY" "${dbfile}.sig" "$dbfile" &>/dev/null || ret=$?
+ 
+ 	if (( ! ret )); then
+-		msg2 "$(gettext "Created signature file '%s'")" "${dbfile##*/.tmp.}.sig"
++		msg2 "$(gettext "Created signature file '%s'")" "${dbfile}.sig"
+ 	else
+-		warning "$(gettext "Failed to sign package database file '%s'")" "${dbfile##*/.tmp.}"
++		warning "$(gettext "Failed to sign package database file '%s'")" "$dbfile"
+ 	fi
+ }
+ 
+@@ -180,13 +171,15 @@
+ 		warning "$(gettext "No existing signature found, skipping verification.")"
+ 		return
+ 	fi
+-	gpg --verify "$dbfile.sig" || ret=$?
+-	if (( ! ret )); then
+-		msg2 "$(gettext "Database signature file verified.")"
+-	else
+-		error "$(gettext "Database signature was NOT valid!")"
+-		exit 1
+-	fi
++    asignifydir=$(pacman-conf AsignifyDir)
++    find "$asignifydir" -iname "*.pub" | while read -r pubfile; do
++        if asignify verify "$pubfile" "$dbfile.sig"; then
++		    msg2 "$(gettext "Database signature file verified.")"
++            return
++        fi
++    done
++	error "$(gettext "Database signature was NOT valid!")"
++	exit 1
+ }
+ 
+ verify_repo_extension() {
+@@ -501,14 +494,8 @@
+ 
+ 		dblink=${filename%.tar*}
+ 		rm -f "$dblink" "$dblink.sig"
+-		ln -s "$filename" "$dblink" 2>/dev/null || \
+-			ln "$filename" "$dblink" 2>/dev/null || \
+-			cp "$filename" "$dblink"
+-		if [[ -f "$filename.sig" ]]; then
+-			ln -s "$filename.sig" "$dblink.sig" 2>/dev/null || \
+-				ln "$filename.sig" "$dblink.sig" 2>/dev/null || \
+-				cp "$filename.sig" "$dblink.sig"
+-		fi
++        cp "$filename" "$dblink"
++        create_signature "$dblink"
+ 	done
+ 
+ 	popd >/dev/null
+@@ -614,7 +601,7 @@
+ 		-k|--key)
+ 			KEY=1
+ 			shift
+-			GPGKEY=$1
++			ASIGNIFYKEY=$1
+ 			;;
+ 		-v|--verify)
+ 			VERIFY=1
+@@ -655,7 +642,7 @@
+ REPO_DB_SUFFIX=${REPO_DB_FILE##*.db.}
+ 
+ if (( SIGN || VERIFY )); then
+-	check_gpg
++	check_asignify
+ fi
+ 
+ if (( VERIFY && ${#args[@]} == 1 )); then
