@@ -1,8 +1,8 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068,SC2086
 
-pkgname=(llvm libcxx)
-pkgver=13.0.0
+pkgname=(llvm llvm-dev llvm-utils libcxx libLLVM)
+pkgver=14.0.6
 pkgrel=1
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
@@ -25,11 +25,47 @@ source=(
 )
 
 sha256sums=(
-    6075ad30f1ac0e15f07c1bf062c1e1268c241d674f11bd32cdf0e040c71f2bf3
+    8b3cfd7bc695bd6cea0f37f53f0981f34f87496e79e2529874fd03a2f9dd3a8a
+)
+
+_binfiles=(
+        usr/bin/addr2line
+        usr/bin/ar
+        usr/bin/c++
+        usr/bin/cc
+        usr/bin/clang
+        usr/bin/clang++
+        usr/bin/clang-14
+        usr/bin/clang-cl
+        usr/bin/clang-cpp
+        usr/bin/ld.lld
+        usr/bin/ld64.lld
+        usr/bin/lld
+        usr/bin/lld-link
+        usr/bin/llvm-ar
+        usr/bin/llvm-nm
+        usr/bin/llvm-objcopy
+        usr/bin/llvm-objdump
+        usr/bin/llvm-readobj
+        usr/bin/llvm-size
+        usr/bin/llvm-strings
+        usr/bin/llvm-symbolizer
+        usr/bin/nm
+        usr/bin/objcopy
+        usr/bin/objdump
+        usr/bin/ranlib
+        usr/bin/readelf
+        usr/bin/size
+        usr/bin/strings
+        usr/bin/strip
+        usr/bin/wasm-ld
 )
 
 
 build() {
+    export CFLAGS+=' -flto'
+    export CXXFLAGS+=' -flto'
+    export LDFLAGS+=' -flto'
     cd_unpacked_src
     sed -i \
         -e 's@strtoull_l@strtoull@g' \
@@ -58,8 +94,8 @@ build() {
         -DLIBCXXABI_USE_COMPILER_RT=ON \
         -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
         -DLLVM_BUILD_EXAMPLES=OFF \
+        -DLLVM_BUILD_LLVM_DYLIB=ON \
         -DLLVM_DEFAULT_TARGET_TRIPLE="$CHOST" \
-        -DLLVM_DISTRIBUTION_COMPONENTS='clang;clang-resource-headers;lld;LTO;compiler-rt;cxx;cxxabi;addr2line;ar;nm;objcopy;objdump;ranlib;readelf;size;strings;strip;unwind' \
         -DLLVM_ENABLE_LIBCXX=ON \
         -DLLVM_ENABLE_PIC=ON \
         -DLLVM_ENABLE_PROJECTS='lld;clang;compiler-rt;libcxx;libcxxabi;libunwind' \
@@ -67,18 +103,25 @@ build() {
         -DLLVM_ENABLE_TERMINFO=OFF \
         -DLLVM_HOST_TRIPLE="$CHOST" \
         -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
-        -DLLVM_INSTALL_TOOLCHAIN_ONLY=ON \
-        -DLLVM_TARGETS_TO_BUILD=Native \
+        -DLLVM_INSTALL_UTILS=ON \
         ../llvm
     cmake --build .
 }
 
 package_llvm() {
     pkgfiles=(
-        usr/bin
-        usr/include
-        usr/lib/*.a
-        usr/lib/*.so
+        "${_binfiles[@]}"
+        usr/include/c++
+        usr/include/llvm-c/lto.h
+        usr/lib/libLTO.so
+        usr/lib/libc++.a
+        usr/lib/libc++.so
+        usr/lib/libc++abi.a
+        usr/lib/libc++abi.so
+        usr/lib/libc++experimental.a
+        usr/lib/libgcc_s.a
+        usr/lib/libunwind.a
+        usr/lib/libunwind.so
         usr/lib/clang
     )
     depends=(
@@ -90,18 +133,50 @@ package_llvm() {
         musl-dev
     )
     provides=(
-        libLTO.so.13
+        libLTO.so.14
     )
     groups=(build-base)
     cd_unpacked_src
     cd build || return 1
     export DESTDIR="${pkgdirbase}/dest"
-    cmake --build . --target install-distribution
+    cmake --build . --target install
+    cd "$DESTDIR" || return 1
+    ln -s libunwind.a usr/lib/libgcc_s.a
+    ln -s clang usr/bin/cc
+    ln -s clang++ usr/bin/c++
+    package_defined_files
+}
+
+package_llvm-dev() {
+    pkgfiles=(
+        usr/bin/llvm-config
+        usr/libexec
+        usr/lib/libclang*.a
+        usr/lib/liblld*.a
+        usr/lib/libLLVM*
+        usr/lib/cmake
+        usr/lib/libear
+        usr/lib/libscanbuild
+        usr/include/lld
+        usr/include/llvm
+        usr/include/llvm-c
+        usr/include/clang*
+        usr/share/clang
+        usr/share/scan*
+        usr/share/opt-viewer
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libunwind.so.1
+        libz.so.1
+        "llvm=${pkgver}"
+        "libLLVM=${pkgver}"
+    )
     std_split_package
-    ln -s libunwind.a "${pkgdir}/usr/lib/libgcc_s.a"
-    ln -s lld "${pkgdir}/usr/bin/ld"
-    ln -s clang "${pkgdir}/usr/bin/cc"
-    ln -s clang++ "${pkgdir}/usr/bin/c++"
+    rm "${pkgdir}/usr/include/llvm-c/lto.h"
+    find "${pkgdir}/usr/lib/" -name "libLLVM-14*so" -delete
 }
 
 package_libcxx() {
@@ -120,6 +195,42 @@ package_libcxx() {
         libc++.so.1
         libc++abi.so.1
         libunwind.so.1
+    )
+    std_split_package
+    ln -s libunwind.so.1 "${pkgdir}/usr/lib/libgcc_s.so.1"
+}
+
+package_llvm-utils() {
+    pkgfiles=(
+        usr/bin
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libunwind.so.1
+        libz.so.1
+    )
+    std_split_package
+    for i in ${_binfiles[@]}; do
+        rm "${pkgdir}/${i}"
+    done
+    rm "${pkgdir}/usr/bin/llvm-config"
+}
+
+package_libLLVM() {
+    pkgfiles=(
+        usr/lib/libLLVM-14*so
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libunwind.so.1
+        libz.so.1
+    )
+    provides=(
+        libLLVM-14.so
     )
     std_split_package
 }
