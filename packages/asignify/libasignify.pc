@@ -1,0 +1,12 @@
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: libasignify
+Description: asignify cryptographic signature lib
+Version: 1.0
+
+Requires:
+Libs: -L${libdir} -lasignify
+Cflags: -I${includedir}
