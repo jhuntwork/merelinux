@@ -1,0 +1,356 @@
+--- a/lib/libalpm/alpm.c
++++ b/lib/libalpm/alpm.c
+@@ -137,7 +137,7 @@
+ #ifdef HAVE_LIBCURL
+ 		| ALPM_CAPABILITY_DOWNLOADER
+ #endif
+-#ifdef HAVE_LIBGPGME
++#if defined(HAVE_LIBGPGME) || defined(HAVE_LIBASIGNIFY)
+ 		| ALPM_CAPABILITY_SIGNATURES
+ #endif
+ 		| 0;
+--- a/lib/libalpm/alpm.h
++++ b/lib/libalpm/alpm.h
+@@ -1837,6 +1837,25 @@
+ /* End of gpdir accessors */
+ /** @} */
+ 
++/** @name Accessors to asignify's trusted public keys directory
++ *
++ * This controls where libalpm will store asignify's public keys.
++ * @{
++ */
++
++/** Returns the path to libalpm's asignify trusted public keys directory.
++ * @param handle the context handle
++ * @return the path to libalpms's trusted public keys directory
++ */
++const char *alpm_option_get_asignifydir(alpm_handle_t *handle);
++
++/** Sets the path to libalpm's asignify trusted public keys directory.
++ * @param handle the context handle
++ * @param asignifydir the asignifydir to set
++ */
++int alpm_option_set_asignifydir(alpm_handle_t *handle, const char *asignifydir);
++/* End of asignifydir accessors */
++/** @} */
+ 
+ /** @name Accessors for use syslog
+  *
+--- a/lib/libalpm/be_package.c
++++ b/lib/libalpm/be_package.c
+@@ -342,12 +342,23 @@
+ 			handle->pm_errno = ALPM_ERR_PKG_MISSING_SIG;
+ 			return -1;
+ 		}
++#ifdef HAVE_LIBGPGME
+ 		if(_alpm_check_pgp_helper(handle, pkgfile, sig,
+ 					level & ALPM_SIG_PACKAGE_OPTIONAL, level & ALPM_SIG_PACKAGE_MARGINAL_OK,
+ 					level & ALPM_SIG_PACKAGE_UNKNOWN_OK, sigdata)) {
+ 			handle->pm_errno = ALPM_ERR_PKG_INVALID_SIG;
+ 			return -1;
+ 		}
++#endif
++#ifdef HAVE_LIBASIGNIFY
++		if (sigdata) {
++			_alpm_log(handle, ALPM_LOG_DEBUG, "sigdata is unused with libasignify\n");
++		}
++		if(_alpm_check_asignify_helper(handle, pkgfile)) {
++			handle->pm_errno = ALPM_ERR_PKG_INVALID_SIG;
++			return -1;
++		}
++#endif
+ 		if(validation && has_sig) {
+ 			*validation |= ALPM_PKG_VALIDATION_SIGNATURE;
+ 		}
+@@ -722,8 +733,6 @@
+ {
+ 	int validation = 0;
+ 	char *sigpath;
+-	alpm_pkg_t *pkg_temp;
+-	char *packager;
+ 
+ 	CHECK_HANDLE(handle, return -1);
+ 	ASSERT(pkg != NULL, RET_ERR(handle, ALPM_ERR_WRONG_ARGS, -1));
+@@ -731,8 +740,6 @@
+ 	sigpath = _alpm_sigpath(handle, filename);
+ 	if(sigpath && !_alpm_access(handle, NULL, sigpath, R_OK)) {
+ 		if(level & ALPM_SIG_PACKAGE) {
+-			alpm_list_t *keys = NULL;
+-			int fail = 0;
+ 			unsigned char *sig = NULL;
+ 			int len = read_sigfile(sigpath, &sig);
+ 
+@@ -743,6 +750,12 @@
+ 				return -1;
+ 			}
+ 
++#ifdef HAVE_LIBGPGME
++			alpm_list_t *keys = NULL;
++			int fail = 0;
++			alpm_pkg_t *pkg_temp;
++			char *packager;
++
+ 			if(alpm_extract_keyid(handle, filename, sig, len, &keys) == 0) {
+ 				alpm_list_t *k;
+ 				for(k = keys; k; k = k->next) {
+@@ -771,6 +784,7 @@
+ 				free(sigpath);
+ 				return -1;
+ 			}
++#endif
+ 		}
+ 	}
+ 	free(sigpath);
+--- a/lib/libalpm/be_sync.c
++++ b/lib/libalpm/be_sync.c
+@@ -106,6 +106,10 @@
+ 	siglevel = alpm_db_get_siglevel(db);
+ 
+ 	if(siglevel & ALPM_SIG_DATABASE) {
++#ifdef HAVE_LIBASIGNIFY
++    int ret;
++    ret = _alpm_check_asignify_helper(db->handle, dbpath);
++#else
+ 		int retry, ret;
+ 		do {
+ 			retry = 0;
+@@ -121,6 +125,7 @@
+ 			alpm_siglist_cleanup(siglist);
+ 			free(siglist);
+ 		} while(retry);
++#endif
+ 
+ 		if(ret) {
+ 			db->status &= ~DB_STATUS_VALID;
+@@ -697,7 +702,7 @@
+ 
+ 	_alpm_log(handle, ALPM_LOG_DEBUG, "registering sync database '%s'\n", treename);
+ 
+-#ifndef HAVE_LIBGPGME
++#if !defined(HAVE_LIBGPGME) || !defined(HAVE_LIBASIGNIFY)
+ 	if(level != 0 && level != ALPM_SIG_USE_DEFAULT) {
+ 		RET_ERR(handle, ALPM_ERR_MISSING_CAPABILITY_SIGNATURES, NULL);
+ 	}
+--- a/lib/libalpm/error.c
++++ b/lib/libalpm/error.c
+@@ -71,7 +71,7 @@
+ 		case ALPM_ERR_DB_INVALID:
+ 			return _("invalid or corrupted database");
+ 		case ALPM_ERR_DB_INVALID_SIG:
+-			return _("invalid or corrupted database (PGP signature)");
++			return _("invalid or corrupted database (signature)");
+ 		case ALPM_ERR_DB_VERSION:
+ 			return _("database is incorrect version");
+ 		case ALPM_ERR_DB_WRITE:
+@@ -114,7 +114,7 @@
+ 		case ALPM_ERR_PKG_INVALID_CHECKSUM:
+ 			return _("invalid or corrupted package (checksum)");
+ 		case ALPM_ERR_PKG_INVALID_SIG:
+-			return _("invalid or corrupted package (PGP signature)");
++			return _("invalid or corrupted package (signature)");
+ 		case ALPM_ERR_PKG_MISSING_SIG:
+ 			return _("package missing required signature");
+ 		case ALPM_ERR_PKG_OPEN:
+@@ -127,9 +127,9 @@
+ 			return _("package architecture is not valid");
+ 		/* Signatures */
+ 		case ALPM_ERR_SIG_MISSING:
+-			return _("missing PGP signature");
++			return _("missing signature");
+ 		case ALPM_ERR_SIG_INVALID:
+-			return _("invalid PGP signature");
++			return _("invalid signature");
+ 		/* Dependencies */
+ 		case ALPM_ERR_UNSATISFIED_DEPS:
+ 			return _("could not satisfy dependencies");
+--- a/lib/libalpm/handle.c
++++ b/lib/libalpm/handle.c
+@@ -270,6 +270,12 @@
+ 	return handle->gpgdir;
+ }
+ 
++const char SYMEXPORT *alpm_option_get_asignifydir(alpm_handle_t *handle)
++{
++	CHECK_HANDLE(handle, return NULL);
++	return handle->asignifydir;
++}
++
+ int SYMEXPORT alpm_option_get_usesyslog(alpm_handle_t *handle)
+ {
+ 	CHECK_HANDLE(handle, return -1);
+@@ -573,6 +579,17 @@
+ 	return 0;
+ }
+ 
++int SYMEXPORT alpm_option_set_asignifydir(alpm_handle_t *handle, const char *asignifydir)
++{
++	int err;
++	CHECK_HANDLE(handle, return -1);
++	if((err = _alpm_set_directory_option(asignifydir, &(handle->asignifydir), 0))) {
++		RET_ERR(handle, err, -1);
++	}
++	_alpm_log(handle, ALPM_LOG_DEBUG, "option 'asignifydir' = %s\n", handle->asignifydir);
++	return 0;
++}
++
+ int SYMEXPORT alpm_option_set_usesyslog(alpm_handle_t *handle, int usesyslog)
+ {
+ 	CHECK_HANDLE(handle, return -1);
+@@ -829,7 +846,7 @@
+ 	if(level == ALPM_SIG_USE_DEFAULT) {
+ 		RET_ERR(handle, ALPM_ERR_WRONG_ARGS, -1);
+ 	}
+-#ifdef HAVE_LIBGPGME
++#if defined(HAVE_LIBGPGME) || defined(HAVE_LIBASIGNIFY)
+ 	handle->siglevel = level;
+ #else
+ 	if(level != 0) {
+@@ -849,7 +866,7 @@
+ 		int level)
+ {
+ 	CHECK_HANDLE(handle, return -1);
+-#ifdef HAVE_LIBGPGME
++#if defined(HAVE_LIBGPGME) || defined(HAVE_LIBASIGNIFY)
+ 	handle->localfilesiglevel = level;
+ #else
+ 	if(level != 0 && level != ALPM_SIG_USE_DEFAULT) {
+@@ -873,7 +890,7 @@
+ 		int level)
+ {
+ 	CHECK_HANDLE(handle, return -1);
+-#ifdef HAVE_LIBGPGME
++#if defined(HAVE_LIBGPGME) || defined(HAVE_LIBASIGNIFY)
+ 	handle->remotefilesiglevel = level;
+ #else
+ 	if(level != 0 && level != ALPM_SIG_USE_DEFAULT) {
+--- a/lib/libalpm/handle.h
++++ b/lib/libalpm/handle.h
+@@ -90,6 +90,7 @@
+ 	char *logfile;           /* Name of the log file */
+ 	char *lockfile;          /* Name of the lock file */
+ 	char *gpgdir;            /* Directory where GnuPG files are stored */
++	char *asignifydir;       /* Directory where asignify trusted public keys are stored */
+ 	alpm_list_t *cachedirs;  /* Paths to pacman cache directories */
+ 	alpm_list_t *hookdirs;   /* Paths to hook directories */
+ 	alpm_list_t *overwrite_files; /* Paths that may be overwritten */
+--- a/lib/libalpm/signing.c
++++ b/lib/libalpm/signing.c
+@@ -26,6 +26,13 @@
+ #include <gpgme.h>
+ #endif
+ 
++#ifdef HAVE_LIBASIGNIFY
++#include <asignify.h>
++#include <dirent.h>
++#include <libgen.h>
++#include <unistd.h>
++#endif
++
+ /* libalpm */
+ #include "signing.h"
+ #include "package.h"
+@@ -813,6 +820,74 @@
+ 	sprintf(sigpath, "%s.sig", path);
+ 	return sigpath;
+ }
++
++#ifdef HAVE_LIBASIGNIFY
++/**
++ * Helper for checking the asignify signature for the given file path.
++ * @param handle the context handle
++ * @param path the full path to a file
++ * @return 0 on success, -1 on error (consult pm_errno or sigdata)
++ */
++int _alpm_check_asignify_helper(alpm_handle_t *handle, const char *path)
++{
++		struct dirent *entry;
++		struct stat statbuf;
++
++    char *dirc = strdup(path);
++    char *basec = strdup(path);
++    char *dname = dirname(dirc);
++    char *bname = basename(basec);
++
++    _alpm_log(handle, ALPM_LOG_DEBUG, "path passed: %s\n", path);
++		char *sigpath = _alpm_sigpath(handle, path);
++		asignify_verify_t *vrf = asignify_verify_init();
++
++		DIR *ad = opendir(handle->asignifydir);
++		if(ad == NULL) {
++			_alpm_log(handle, ALPM_LOG_DEBUG, "cannot open directory: %s\n", handle->asignifydir);
++			return -1;
++		}
++
++		while((entry = readdir(ad)) != NULL) {
++			char *fullpath = malloc(strlen(handle->asignifydir) + strlen(entry->d_name) + 2);
++			if (fullpath == NULL) {
++				_alpm_log(handle, ALPM_LOG_DEBUG, "malloc error\n");
++        closedir(ad);
++				return -1;
++			}
++			sprintf(fullpath, "%s%s", handle->asignifydir, entry->d_name);
++			stat(fullpath, &statbuf);
++			if (S_ISREG(statbuf.st_mode)) {
++				_alpm_log(handle, ALPM_LOG_DEBUG, "attempting to load public key file: %s\n", fullpath);
++				if (!asignify_verify_load_pubkey(vrf, fullpath)) {
++					/* Don't return here because there may be multiple public keys to load. */
++					_alpm_log(handle, ALPM_LOG_DEBUG, "cannot load public key file: %s\n", fullpath);
++				}
++			}
++			free(fullpath);
++		}
++    closedir(ad);
++
++    _alpm_log(handle, ALPM_LOG_DEBUG, "attempting to load signature: %s\n", sigpath);
++		if (!asignify_verify_load_signature(vrf, sigpath)) {
++			_alpm_log(handle, ALPM_LOG_DEBUG, "cannot load signature\n");
++		  asignify_verify_free(vrf);
++		  return -1;
++		}
++
++    _alpm_log(handle, ALPM_LOG_DEBUG, "attempting to verify file %s in dir %s\n", bname, dname);
++    chdir(dname);
++		if (!asignify_verify_file(vrf, bname)) {
++			_alpm_log(handle, ALPM_LOG_DEBUG, "file verification failed\n");
++		  asignify_verify_free(vrf);
++		  return -1;
++		}
++
++		_alpm_log(handle, ALPM_LOG_DEBUG, "file verified\n");
++		asignify_verify_free(vrf);
++    return 0;
++}
++#endif
+ 
+ /**
+  * Helper for checking the PGP signature for the given file path.
+--- a/lib/libalpm/signing.h
++++ b/lib/libalpm/signing.h
+@@ -25,6 +25,7 @@
+ int _alpm_gpgme_checksig(alpm_handle_t *handle, const char *path,
+ 		const char *base64_sig, alpm_siglist_t *result);
+ 
++int _alpm_check_asignify_helper(alpm_handle_t *handle, const char *path);
+ int _alpm_check_pgp_helper(alpm_handle_t *handle, const char *path,
+ 		const char *base64_sig, int optional, int marginal, int unknown,
+ 		alpm_siglist_t **sigdata);
+--- a/lib/libalpm/sync.c
++++ b/lib/libalpm/sync.c
+@@ -1022,11 +1022,16 @@
+ 							_("%s: missing required signature\n"), v->pkg->name);
+ 					break;
+ 				case ALPM_ERR_PKG_INVALID_SIG:
++#ifdef HAVE_LIBGPGME
+ 					_alpm_process_siglist(handle, v->pkg->name, v->siglist,
+ 							v->siglevel & ALPM_SIG_PACKAGE_OPTIONAL,
+ 							v->siglevel & ALPM_SIG_PACKAGE_MARGINAL_OK,
+ 							v->siglevel & ALPM_SIG_PACKAGE_UNKNOWN_OK);
+ 					__attribute__((fallthrough));
++#else
++					_alpm_log(handle, ALPM_LOG_ERROR,
++							_("%s: unable to verify integrity using the signature file\n"), v->pkg->name);
++#endif
+ 				case ALPM_ERR_PKG_INVALID_CHECKSUM:
+ 					prompt_to_delete(handle, v->path, v->error);
+ 					break;

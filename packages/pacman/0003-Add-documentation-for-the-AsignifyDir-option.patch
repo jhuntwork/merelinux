@@ -1,0 +1,45 @@
+From b450294ec024fb677e7b652cb421e31f6459899e Mon Sep 17 00:00:00 2001
+From: Jeremy Huntwork <jeremy@merelinux.org>
+Date: Sat, 1 Jan 2022 14:03:15 -0500
+Subject: [PATCH 3/4] Add documentation for the AsignifyDir option
+
+Signed-off-by: Jeremy Huntwork <jeremy@merelinux.org>
+---
+ doc/pacman.conf.5.asciidoc | 8 ++++++++
+ etc/pacman.conf.in         | 1 +
+ 2 files changed, 9 insertions(+)
+
+diff --git a/doc/pacman.conf.5.asciidoc b/doc/pacman.conf.5.asciidoc
+index 77a3907f..36517b9f 100644
+--- a/doc/pacman.conf.5.asciidoc
++++ b/doc/pacman.conf.5.asciidoc
+@@ -89,6 +89,14 @@ Options
+ 	*NOTE*: this is an absolute path, the root path is not automatically
+ 	prepended.
+ 
++*AsignifyDir =* /path/to/asignify/dir::
++	Overrides the default location of the directory containing trusted asignify
++	public keys. The default is +{sysconfdir}/pacman.d/asignify/+.
++    For packages and repositories signed with asignify, install the appropriate
++    public key counterparts here.
++	*NOTE*: this is an absolute path, the root path is not automatically
++	prepended.
++
+ *LogFile =* /path/to/log/file::
+ 	Overrides the default location of the pacman log file. The default
+ 	is +{localstatedir}/log/pacman.log+. This is an absolute path and the root directory
+diff --git a/etc/pacman.conf.in b/etc/pacman.conf.in
+index 1799efc7..cc93060a 100644
+--- a/etc/pacman.conf.in
++++ b/etc/pacman.conf.in
+@@ -14,6 +14,7 @@
+ #CacheDir    = @localstatedir@/cache/pacman/pkg/
+ #LogFile     = @localstatedir@/log/pacman.log
+ #GPGDir      = @sysconfdir@/pacman.d/gnupg/
++#AsignifyDir = @sysconfdir@/pacman.d/asignify/
+ #HookDir     = @sysconfdir@/pacman.d/hooks/
+ HoldPkg     = pacman glibc
+ #XferCommand = /usr/bin/curl -L -C - -f -o %o %u
+-- 
+2.34.1
+

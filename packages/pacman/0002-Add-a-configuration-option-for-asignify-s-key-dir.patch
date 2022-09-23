@@ -1,0 +1,197 @@
+From c67e07993536ae36f6d243315eec319bef89295c Mon Sep 17 00:00:00 2001
+From: Jeremy Huntwork <jeremy@merelinux.org>
+Date: Sat, 1 Jan 2022 13:58:00 -0500
+Subject: [PATCH 2/4] Add a configuration option for asignify's key dir
+
+Following the pattern used by gpgdir, set asignifydir to the location
+where libasignify will look for and load public keys.
+
+Since the intent is to only support one signature method at a time, wrap
+the `--gpgdir` and `--asignifydir` flags in ifdef blocks.
+
+Signed-off-by: Jeremy Huntwork <jeremy@merelinux.org>
+---
+ src/pacman/conf.c   | 16 ++++++++++++++++
+ src/pacman/conf.h   |  2 ++
+ src/pacman/pacman.c | 40 ++++++++++++++++++++++++++++++++--------
+ 3 files changed, 50 insertions(+), 8 deletions(-)
+
+diff --git a/src/pacman/conf.c b/src/pacman/conf.c
+index 7d0bc2f8..7fe9107b 100644
+--- a/src/pacman/conf.c
++++ b/src/pacman/conf.c
+@@ -155,6 +155,7 @@ int config_free(config_t *oldconfig)
+ 	free(oldconfig->dbpath);
+ 	free(oldconfig->logfile);
+ 	free(oldconfig->gpgdir);
++	free(oldconfig->asignifydir);
+ 	FREELIST(oldconfig->hookdirs);
+ 	FREELIST(oldconfig->cachedirs);
+ 	free(oldconfig->xfercommand);
+@@ -663,6 +664,11 @@ static int _parse_options(const char *key, char *value,
+ 				config->gpgdir = strdup(value);
+ 				pm_printf(ALPM_LOG_DEBUG, "config: gpgdir: %s\n", value);
+ 			}
++		} else if(strcmp(key, "AsignifyDir") == 0) {
++			if(!config->asignifydir) {
++				config->asignifydir = strdup(value);
++				pm_printf(ALPM_LOG_DEBUG, "config: asignifydir: %s\n", value);
++			}
+ 		} else if(strcmp(key, "LogFile") == 0) {
+ 			if(!config->logfile) {
+ 				config->logfile = strdup(value);
+@@ -871,6 +877,15 @@ static int setup_libalpm(void)
+ 		return ret;
+ 	}
+ 
++	/* Set asignify's trusted keys directory. This is not relative to rootdir, even if
++	 * rootdir is defined. Reasoning: asignifydir contains configuration data. */
++	ret = alpm_option_set_asignifydir(handle, config->asignifydir);
++	if(ret != 0) {
++		pm_printf(ALPM_LOG_ERROR, _("problem setting asignifydir '%s' (%s)\n"),
++				config->asignifydir, alpm_strerror(alpm_errno(handle)));
++		return ret;
++	}
++
+ 	/* Set user hook directory. This is not relative to rootdir, even if
+ 	 * rootdir is defined. Reasoning: hookdir contains configuration data. */
+ 	/* add hook directories 1-by-1 to avoid overwriting the system directory */
+@@ -1152,6 +1167,7 @@ int setdefaults(config_t *c)
+ 
+ 	SETDEFAULT(c->logfile, strdup(LOGFILE));
+ 	SETDEFAULT(c->gpgdir, strdup(GPGDIR));
++	SETDEFAULT(c->asignifydir, strdup(ASIGNIFYDIR));
+ 	SETDEFAULT(c->cachedirs, alpm_list_add(NULL, strdup(CACHEDIR)));
+ 	SETDEFAULT(c->hookdirs, alpm_list_add(NULL, strdup(HOOKDIR)));
+ 	SETDEFAULT(c->cleanmethod, PM_CLEAN_KEEPINST);
+diff --git a/src/pacman/conf.h b/src/pacman/conf.h
+index a7162983..fb919b76 100644
+--- a/src/pacman/conf.h
++++ b/src/pacman/conf.h
+@@ -66,6 +66,7 @@ typedef struct __config_t {
+ 	char *dbpath;
+ 	char *logfile;
+ 	char *gpgdir;
++	char *asignifydir;
+ 	char *sysroot;
+ 	alpm_list_t *hookdirs;
+ 	alpm_list_t *cachedirs;
+@@ -173,6 +174,7 @@ enum {
+ 	OP_ARCH,
+ 	OP_PRINTFORMAT,
+ 	OP_GPGDIR,
++	OP_ASIGNIFYDIR,
+ 	OP_DBONLY,
+ 	OP_FORCE,
+ 	OP_OVERWRITE_FILES,
+diff --git a/src/pacman/pacman.c b/src/pacman/pacman.c
+index e7f4a10d..a3a2e2f6 100644
+--- a/src/pacman/pacman.c
++++ b/src/pacman/pacman.c
+@@ -220,7 +220,13 @@ static void usage(int op, const char * const myname)
+ 		addlist(_("      --color <when>   colorize the output\n"));
+ 		addlist(_("      --config <path>  set an alternate configuration file\n"));
+ 		addlist(_("      --debug          display debug messages\n"));
++#ifdef HAVE_LIBGPGME
+ 		addlist(_("      --gpgdir <path>  set an alternate home directory for GnuPG\n"));
++#endif
++#ifdef HAVE_LIBASIGNIFY
++		addlist(_("      --asignifydir <path>\n"
++		          "                       set an alternate directory for asignify's trusted public keys\n"));
++#endif
+ 		addlist(_("      --logfile <path> set an alternate log file\n"));
+ 		addlist(_("      --noconfirm      do not ask for any confirmation\n"));
+ 		addlist(_("      --confirm        always ask for confirmation\n"));
+@@ -428,10 +434,18 @@ static int parsearg_global(int opt)
+ 			/* progress bars get wonky with debug on, shut them off */
+ 			config->noprogressbar = 1;
+ 			break;
++#ifdef HAVE_LIBGPGME
+ 		case OP_GPGDIR:
+ 			free(config->gpgdir);
+ 			config->gpgdir = strdup(optarg);
+ 			break;
++#endif
++#ifdef HAVE_LIBASIGNIFY
++		case OP_ASIGNIFYDIR:
++			free(config->asignifydir);
++			config->asignifydir = strdup(optarg);
++			break;
++#endif
+ 		case OP_HOOKDIR:
+ 			config->hookdirs = alpm_list_add(config->hookdirs, strdup(optarg));
+ 			break;
+@@ -944,7 +958,12 @@ static int parseargs(int argc, char *argv[])
+ 		{"asexplicit",     no_argument,   0, OP_ASEXPLICIT},
+ 		{"arch",       required_argument, 0, OP_ARCH},
+ 		{"print-format", required_argument, 0, OP_PRINTFORMAT},
++#ifdef HAVE_LIBGPGME
+ 		{"gpgdir",     required_argument, 0, OP_GPGDIR},
++#endif
++#ifdef HAVE_LIBASIGNIFY
++        {"asignifydir", required_argument, 0, OP_ASIGNIFYDIR},
++#endif
+ 		{"dbonly",     no_argument,       0, OP_DBONLY},
+ 		{"color",      required_argument, 0, OP_COLOR},
+ 		{"disable-download-timeout", no_argument, 0, OP_DISABLEDLTIMEOUT},
+@@ -1217,22 +1236,27 @@ int main(int argc, char *argv[])
+ 
+ 	if(config->verbose > 0) {
+ 		alpm_list_t *j;
+-		printf("Root      : %s\n", alpm_option_get_root(config->handle));
+-		printf("Conf File : %s\n", config->configfile);
+-		printf("DB Path   : %s\n", alpm_option_get_dbpath(config->handle));
+-		printf("Cache Dirs: ");
++		printf("Root        : %s\n", alpm_option_get_root(config->handle));
++		printf("Conf File   : %s\n", config->configfile);
++		printf("DB Path     : %s\n", alpm_option_get_dbpath(config->handle));
++		printf("Cache Dirs  : ");
+ 		for(j = alpm_option_get_cachedirs(config->handle); j; j = alpm_list_next(j)) {
+ 			printf("%s  ", (const char *)j->data);
+ 		}
+ 		printf("\n");
+-		printf("Hook Dirs : ");
++		printf("Hook Dirs   : ");
+ 		for(j = alpm_option_get_hookdirs(config->handle); j; j = alpm_list_next(j)) {
+ 			printf("%s  ", (const char *)j->data);
+ 		}
+ 		printf("\n");
+-		printf("Lock File : %s\n", alpm_option_get_lockfile(config->handle));
+-		printf("Log File  : %s\n", alpm_option_get_logfile(config->handle));
+-		printf("GPG Dir   : %s\n", alpm_option_get_gpgdir(config->handle));
++		printf("Lock File   : %s\n", alpm_option_get_lockfile(config->handle));
++		printf("Log File    : %s\n", alpm_option_get_logfile(config->handle));
++#ifdef HAVE_LIBGPGME
++		printf("GPG Dir     : %s\n", alpm_option_get_gpgdir(config->handle));
++#endif
++#ifdef HAVE_LIBASIGNIFY
++		printf("Asignify Dir: %s\n", alpm_option_get_asignifydir(config->handle));
++#endif
+ 		list_display("Targets   :", pm_targets, 0);
+ 	}
+ 
+-- 
+2.34.1
+
+--- a/src/pacman/pacman-conf.c
++++ b/src/pacman/pacman-conf.c
+@@ -249,7 +249,7 @@
+ 	show_str("DBPath", config->dbpath);
+ 	show_list_str("CacheDir", config->cachedirs);
+ 	show_list_str("HookDir", config->hookdirs);
+-	show_str("GPGDir", config->gpgdir);
++	show_str("AsignifyDir", config->asignifydir);
+ 	show_str("LogFile", config->logfile);
+ 
+ 	show_list_str("HoldPkg", config->holdpkg);
+@@ -345,8 +345,8 @@
+ 			show_list_str("CacheDir", config->cachedirs);
+ 		} else if(strcasecmp(i->data, "HookDir") == 0) {
+ 			show_list_str("HookDir", config->hookdirs);
+-		} else if(strcasecmp(i->data, "GPGDir") == 0) {
+-			show_str("GPGDir", config->gpgdir);
++		} else if(strcasecmp(i->data, "AsignifyDir") == 0) {
++			show_str("AsignifyDir", config->asignifydir);
+ 		} else if(strcasecmp(i->data, "LogFile") == 0) {
+ 			show_str("LogFile", config->logfile);
+ 
