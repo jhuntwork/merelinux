@@ -3,7 +3,7 @@
 
 pkgname=(python python-dev)
 _vermajor=3
-_verminor=9
+_verminor=10
 pkgver=${_vermajor}.${_verminor}.7
 pkgrel=1
 pkgdesc='A clear and powerful object-oriented programming language,'
@@ -13,6 +13,7 @@ license=(Python)
 groups=()
 depends=()
 makedepends=(
+    libbzip2-dev
     libffi-dev
     libncurses-dev
     openssl-dev
@@ -29,7 +30,7 @@ source=(
     python-fix-ctypes_util.patch
 )
 sha256sums=(
-    f8145616e68c00041d1a6399b76387390388f8359581abc24432bb969b5e3c57
+    6eed8415b7516fb2f260906db5d48dd4c06acc0cb24a7d6cc15296a604dcdc48
     db33506472cb9819acf03e8206323ed0aea3cb0ed537b047976dc613e9a34e4e
 )
 
@@ -58,6 +59,7 @@ package_python() {
         libreadline.so.8
         libsqlite3.so.0
         libssl.so.1.1
+        libz.so.1
     )
     pkgfiles=(
         usr/bin/pip
