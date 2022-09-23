@@ -1,0 +1,52 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(asignify libasignify-dev)
+pkgver=1.0
+pkgrel=1
+pkgdesc='Yet another signify tool'
+arch=(x86_64)
+url='https://github.com/vstakhov/asignify'
+license=(BSD)
+groups=()
+depends=()
+makedepends=(cmake git)
+options=()
+changelog=ChangeLog
+source=(
+    "asignify::git+${url}.git#commit=d6b3651"
+    libasignify.pc
+)
+sha256sums=(
+    SKIP
+    "11720204c4275e4f044dcec16ccd1914f27e72e1361c34703cb4c78f16698135"
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i '/_DECLS/d' libasignify/sha2.h
+    install -d build
+    cd build || return 1
+    CFLAGS="$CFLAGS -static" cmake \
+        -DHAVE_LINUX_RANDOM_H=OFF \
+        -DENABLE_OPENSSL=OFF ..
+    cmake --build .
+}
+
+package_asignify() {
+    cd_unpacked_src
+    install -d "${pkgdir}/usr/bin"
+    install -d "${pkgdir}/usr/share/man/man1"
+    install -m0755 build/asignify "${pkgdir}/usr/bin/"
+    install -m0644 docs/asignify.1 "${pkgdir}/usr/share/man/man1/"
+}
+
+package_libasignify-dev() {
+    cd_unpacked_src
+    install -d "${pkgdir}/usr/include"
+    install -d "${pkgdir}/usr/lib/pkgconfig"
+    install -m 0644 include/asignify.h "${pkgdir}/usr/include/"
+    install -m 0644 build/libasignify.a "${pkgdir}/usr/lib/"
+    install -m 0644 "${srcdir}/libasignify.pc" "${pkgdir}/usr/lib/pkgconfig/"
+}
