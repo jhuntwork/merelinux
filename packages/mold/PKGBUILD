@@ -1,0 +1,42 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(mold)
+pkgver=1.4.2
+pkgrel=1
+pkgdesc='A Modern Linker'
+arch=(x86_64)
+url='https://github.com/rui314/mold'
+license=(GAGPL)
+groups=(build-base)
+depends=(
+    "ld-musl-$(arch).so.1"
+    libc++.so.1
+    libc++abi.so.1
+    libcrypto.so.1.1
+    libunwind.so.1
+    libz.so.1
+)
+makedepends=(cmake openssl-dev zlib-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "https://github.com/rui314/mold/archive/refs/tags/v${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    47e6c48d20f49e5b47dfb8197dd9ffcb11a8833d614f7a03bd29741c658a69cd
+)
+
+
+build() {
+    cd_unpacked_src
+    make PREFIX=/usr
+}
+
+package() {
+    cd_unpacked_src
+    make PREFIX=/usr DESTDIR="${pkgdirbase}/dest" install
+    ln -sf mold "${pkgdirbase}/dest/usr/bin/ld"
+    std_split_package
+}
