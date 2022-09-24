@@ -1,6 +1,6 @@
 #!/bin/bash -e
 pkgs=()
-for file in $(git diff --name-only HEAD~1) ; do
+for file in $(git diff --name-only main) ; do
     if printf '%s' "$file" | grep -q '^packages/.*/PKGBUILD'; then
         pkgs+=("${file%/*}")
     fi
