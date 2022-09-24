@@ -24,3 +24,7 @@ cat >"$CIRCLE_WORKING_DIRECTORY"/.env <<EOF
 pkg='${unique_pkgs[0]}'
 is_deleted=$is_deleted
 EOF
+
+cat >"$CIRCLE_WORKING_DIRECTORY"/mere.key <<EOF
+$MERE_SIGNING_KEY
+EOF
