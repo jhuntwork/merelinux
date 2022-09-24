@@ -78,6 +78,7 @@ case "$cmd" in
             -w "$tmpdir" \
             -v "$tmpdir":"$tmpdir" \
             -v "$MEREDIR":/mere \
+            -v "$(pwd)"/mere.key:/tmp/mere.key \
             -v "$(pwd)"/dev-scripts:/usr/local/bin \
             -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
             mere/dev:latest "$cmd"
