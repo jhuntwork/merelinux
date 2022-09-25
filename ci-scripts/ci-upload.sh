@@ -19,7 +19,7 @@ fi
 
 # install pacman-build
 install -d /tmp/pacman
-curl -LO http://pkgs.merelinux.org/stable/pacman-latest-x86_64.pkg.tar.xz
+curl -LO http://pkgs.merelinux.org/testing/pacman-latest-x86_64.pkg.tar.xz
 tar -C /tmp/pacman -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
 
 install -d /tmp/tools/var/lib/pacman
