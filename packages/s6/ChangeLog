@@ -1,3 +1,7 @@
+2.11.1.2-1 (2022-09-25)
+
+	Upgrade to 2.11.1.2
+
 2.10.0.3-7 (2021-09-12)
 
 	Move mdevd service configuration and files to mdevd package, similar 
