@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=(blkid libblkid-dev libuuid-dev)
-pkgver=2.37.2
+pkgver=2.38.1
 pkgrel=1
 pkgdesc='A command-line utility to locate/print block device attributes'
 arch=(x86_64)
@@ -22,7 +22,7 @@ source=(
 )
 
 sha256sums=(
-    74e725802a6355bba7288caeca171e0e25d9da2aa570162efbc1397ed924dfa2
+    75add98ee04e8ca742e860dd06936379737465149904152175a64708de399125
 )
 
 build() {
