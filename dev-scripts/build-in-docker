@@ -1,6 +1,6 @@
 #!/bin/sh -e
 
-sudo pacman -Syu --noconfirm
+pacman -Syu --noconfirm
 
 # Clear the shell's cached paths of binaries, in case something moved
 hash -r
@@ -12,6 +12,6 @@ mv ./*.src.tar.xz /mere/pkgs/
 find /tmp/staging -name "*.pkg*" -not -name "*.sig" | while read -r file ; do
     cp -a "$file" /mere/pkgs/
     [ -f "${file}.sig" ] && cp -a "${file}.sig" /mere/pkgs/
-    sudo pacman -Dk >/dev/null
+    pacman -Dk >/dev/null
     repo-add -R --sign --key /tmp/mere.key /mere/pkgs/buildlocal.db.tar.gz "/mere/pkgs/${file##*/}"
 done
