@@ -3,7 +3,7 @@
 
 pkgname=(asignify libasignify-dev)
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Yet another signify tool'
 arch=(x86_64)
 url='https://github.com/vstakhov/asignify'
