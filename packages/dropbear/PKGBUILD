@@ -2,11 +2,11 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=dropbear
-pkgver=2020.81
-pkgrel=3
+pkgver=2022.82
+pkgrel=1
 pkgdesc='A relatively small SSH server and client.'
 arch=(x86_64)
-url='http://matt.ucc.asn.au/dropbear/dropbear.html'
+url='https://matt.ucc.asn.au/dropbear/dropbear.html'
 license=(MIT)
 groups=()
 depends=(s6 execline)
@@ -26,7 +26,7 @@ source=(
 )
 
 sha256sums=(
-    48235d10b37775dbda59341ac0c4b239b82ad6318c31568b985730c788aac53b
+    3a038d2bbc02bf28bbdd20c012091f741a3ec5cbe460691811d714876aad75d1
     cd91a5635e4cf9564691b34c082e1371a2001b783ded3ea5c1fdf5629fb44eae
     992a38e175c6dd8dea0c0496dbe175749f0f18eee6d861d913cd8f5bfe19a37a
     678981da5f219b6d335e132073ce5516e51470f80d17f33b282af259d846c5b0
