@@ -8,8 +8,8 @@ pkgname=(
     libcurl-dev
     ca-certs
 )
-pkgver=7.79.0
-pkgrel=2
+pkgver=7.85.0
+pkgrel=1
 pkgdesc='An API for writing text-based user interfaces'
 arch=(x86_64)
 url='http://curl.se'
@@ -24,7 +24,7 @@ source=(
     "${url}/download/${pkgname[0]}-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    d607a677f473f79f96c964100327125a6204a39d835dc00dab7fc0129b959f42
+    21a7e83628ee96164ac2b36ff6bf99d467c7b0b621c1f7e317d8f0d96011539c
 )
 
 build() {
@@ -71,8 +71,9 @@ package_libcurl() {
     depends=(
         ca-certs
         "ld-musl-$(arch).so.1"
-        libssl.so.1.1
         libcrypto.so.1.1
+        libssl.so.1.1
+        libz.so.1
     )
     provides=(
         libcurl.so.4
@@ -97,7 +98,7 @@ package_libcurl-dev() {
 
 package_ca-certs() {
     cd_unpacked_src
-    ./lib/mk-ca-bundle.pl
+    ./scripts/mk-ca-bundle.pl
     install -d "${pkgdir}/etc/ssl/certs"
     install -m0644 ca-bundle.crt "${pkgdir}/etc/ssl/certs/ca-certificates.crt"
     ln -s certs/ca-certificates.crt "${pkgdir}/etc/ssl/cert.pem"
