@@ -19,8 +19,19 @@ fi
 
 # install pacman-build
 install -d /tmp/pacman
-curl -LO http://pkgs.merelinux.org/testing/pacman-latest-x86_64.pkg.tar.xz
+curl -LO http://pkgs.merelinux.org/core/pacman-latest-x86_64.pkg.tar.xz
 tar -C /tmp/pacman -xf pacman-latest-x86_64.pkg.tar.xz 2>/dev/null
+
+cat >/tmp/pacman/etc/pacman.conf <<EOF
+[options]
+HoldPkg      = pacman busybox
+Architecture = auto
+ParallelDownloads = 3
+SigLevel = Never
+
+[testing]
+Server = https://pkgs.merelinux.org/testing
+EOF
 
 install -d /tmp/tools/var/lib/pacman
 sudo /tmp/pacman/usr/bin/pacman -Sy --config /tmp/pacman/etc/pacman.conf \
