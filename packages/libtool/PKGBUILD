@@ -3,7 +3,7 @@
 
 pkgname=(libtool libltdl libltdl-dev)
 pkgver=2.4.6
-pkgrel=6
+pkgrel=7
 pkgdesc='A generic library support script.'
 arch=(x86_64)
 url='http://www.gnu.org/software/libtool'
