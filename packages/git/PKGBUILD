@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=git
-pkgver=2.33.0
+pkgver=2.37.3
+_gitpmver=0.42
 pkgrel=1
 pkgdesc='A distributed version control system'
 arch=('x86_64')
@@ -26,14 +26,19 @@ changelog=ChangeLog
 
 source=(
     "https://www.kernel.org/pub/software/scm/git/git-${pkgver}.tar.xz"
+    "https://cpan.metacpan.org/authors/id/M/MS/MSOUTH/Git-${_gitpmver}.tar.gz"
 )
 sha256sums=(
-    bf3c6ab5f82e072aad4768f647cfb1ef60aece39855f83f080f9c0222dd20c4f
+    814641d7f61659cfbc17825d0462499ca1403e39ff53d76a8512050e6483e87a
+    9469a9f398f3a2bf2b0500566ee41d3ff6fae460412a137185767a1cc4783a6d
 )
 
 
 build() {
-    cd_unpacked_src
+    cd "${srcdir}/Git-${_gitpmver}" || return
+    perl Makefile.PL
+    make
+    cd "${srcdir}/git-${pkgver}" || return
     LIBS='-lz -lssl -lcrypto' \
     LDFLAGS='-static -Wl,-static -lssl -lcrypto -lz' \
     ./configure \
@@ -56,6 +61,7 @@ package() {
         usr/bin
         usr/lib/git-core
         usr/share/git-core
+        usr/share/perl5
     )
     rmfiles=(
         usr/bin/git-cvsserver
@@ -63,7 +69,9 @@ package() {
         usr/lib/git-core/git-svn
     )
 
-    cd_unpacked_src
+    cd "${srcdir}/Git-${_gitpmver}" || return
+    make DESTDIR=/tmp/perl INSTALLSITELIB=/usr/share/perl5 install
+    cd "${srcdir}/git-${pkgver}" || return
     make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${pkgdirbase}/dest" install
     cd "${pkgdirbase}/dest" || return 1
     package_defined_files
