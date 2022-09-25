@@ -2,10 +2,10 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=base-layout
-pkgver=2.0.5
+pkgver=2.0.6
 pkgrel=1
 pkgdesc='The base directory structure and a few core files for the system.'
-arch=(x86_64)
+arch=(any)
 url='http://www.merelinux.org'
 license=(MIT)
 groups=(base)
