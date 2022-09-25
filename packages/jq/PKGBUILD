@@ -3,7 +3,7 @@
 
 pkgname=(jq jq-dev)
 pkgver=1.6
-pkgrel=2
+pkgrel=3
 pkgdesc='A lightweight and flexible command-line JSON processor'
 arch=(x86_64)
 url='https://github.com/stedolan/jq'
