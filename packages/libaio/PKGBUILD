@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=(libaio libaio-dev)
-pkgver=0.3.112
-pkgrel=2
+pkgver=0.3.113
+pkgrel=1
 pkgdesc='Linux-native asynchronous I/O access library'
 arch=(x86_64)
 url=https://pagure.io/libaio
@@ -17,7 +17,7 @@ source=(
     "https://pagure.io/libaio/archive/libaio-${pkgver}/libaio-libaio-${pkgver}.tar.gz"
 )
 sha256sums=(
-    b7cf93b29bbfb354213a0e8c0e82dfcf4e776157940d894750528714a0af2272
+    716c7059703247344eb066b54ecbc3ca2134f0103307192e6c2b7dab5f9528ab
 )
 
 
@@ -31,7 +31,7 @@ package_libaio() {
         usr/lib/libaio.so.*
     )
     depends=(
-        libc.so
+        "ld-musl-$(arch).so.1"
     )
     provides=(
         libaio.so.1.0.1
