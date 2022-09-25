@@ -1,34 +1,31 @@
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.6-1 (2022-09-25)
 
-	* 5.2.5-2 :
+	Upgrade to 5.2.6
+
+5.2.5-2 (2021-04-09)
+
 	Remove from groups and set prefix to /usr
 
-2021-02-23  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.5-1 (2021-02-23)
 
-	* 5.2.5-1 :
 	Upgrade to 5.2.5
 
-2018-11-13  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.4-1 (2018-11-13)
 
-	* 5.2.4-1 :
 	Upgrade to 5.2.4
 
-2017-03-30 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.3-1 (2017-03-30)
 
-	* 5.2.3-1 :
 	Upgrade to 5.2.3
 
-2015-03-25 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.1-2 (2015-03-25)
 
-	* 5.2.1-2 :
 	Remove unxz and unlzma, busybox provides. Remove man pages.
 
-2015-03-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.2.1-1 (2015-03-16)
 
-	* 5.2.1-1 :
 	Upgrade to 5.2.1. Create statically linked binaries.
 
-2014-05-16 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+5.0.5-1 (2014-05-16)
 
-	* 5.0.5-1 :
 	Initial version
