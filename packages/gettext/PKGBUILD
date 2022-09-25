@@ -3,7 +3,7 @@
 
 pkgname=gettext
 pkgver=0.21
-pkgrel=2
+pkgrel=3
 pkgdesc='A framework for producing multi-lingual messages.'
 arch=(x86_64)
 url='http://www.gnu.org/software/gettext'
