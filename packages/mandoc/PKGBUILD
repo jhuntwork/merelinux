@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=mandoc
-pkgver=1.14.5
-pkgrel=2
+pkgver=1.14.6
+pkgrel=1
 pkgdesc='UNIX manpage tools'
 arch=(x86_64)
 url='http://mdocml.bsd.lv/'
@@ -11,7 +11,7 @@ license=(ISC)
 groups=()
 depends=()
 makedepends=(
-    zlib-dev
+    zlib-ng-dev
 )
 options=()
 changelog=ChangeLog
@@ -21,15 +21,13 @@ source=(
 )
 
 sha256sums=(
-    8219b42cb56fc07b2aa660574e6211ac38eefdbf21f41b698d3348793ba5d8f7
-    6d697b3c0321fd1f08730e41b06c3d43bd39254be3cf41604e9e722370c28bf0
+    8bf0d570f01e70a6e124884088870cbed7537f36328d512909eb10cd53179d9c
+    a82dd390a5acdd9b0f7d525af3ce3a698cbbe7e5503e0a7bfc6d6f19e7c152e4
 )
 
 
 build() {
     cd_unpacked_src
-    export CFLAGS+=' -static'
-    export LDFLAGS='-static -Wl,-static'
     sed "/CFLAGS/s@\"\$@ $CFLAGS\"@g" "${srcdir}/configure.local" \
         >configure.local
     sed -i '/^CC=/s@.*@CC=cc@' configure
