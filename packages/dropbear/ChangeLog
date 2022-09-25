@@ -1,3 +1,7 @@
+2022.82-1 (2022-09-25)
+
+	Upgrade to 2022.82
+
 2020.81-3 (2021-09-15)
 
 	Rebuild with latest musl, utmps and skalibs to get proper utmpx support
