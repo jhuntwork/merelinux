@@ -1,3 +1,7 @@
+0.1.2.0-1 (2022-09-25)
+
+	Upgrade to 0.1.2.0
+
 0.1.0.2-3 (2021-09-15)
 
 	Don't add utmp user and group via pre_install, exists in default 
