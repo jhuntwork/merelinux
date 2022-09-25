@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=cronie
-pkgver=1.5.7
-pkgrel=3
+pkgver=1.6.1
+pkgrel=1
 pkgdesc='A standard UNIX daemon crond'
 arch=(x86_64)
 url=https://github.com/cronie-crond/cronie
@@ -19,7 +19,7 @@ source=(
 )
 
 sha256sums=(
-    538bcfaf2e986e5ae1edf6d1472a77ea8271d6a9005aee2497a9ed6e13320eb3
+    2cd0f0dd1680e6b9c39bf1e3a5e7ad6df76aa940de1ee90a453633aa59984e62
     fd6e2ff2f82087e64103050315cd3d291adedc34322e23f3209e6e9bb4cc1fb4
 )
 
