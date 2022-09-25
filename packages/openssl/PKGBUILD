@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=(openssl openssl-dev)
-pkgver=1.1.1l
+pkgver=1.1.1q
 pkgrel=1
 pkgdesc='a toolkit for the TLS and SSL protocols'
 arch=(x86_64)
@@ -18,12 +18,13 @@ source=(
     "https://www.openssl.org/source/openssl-${pkgver}.tar.gz"
 )
 sha256sums=(
-    0b7a3e5e59c34827fe0c3a74b7ec8baef302b98fa80088d7f9153aa16fa76bd1
+    d7939ce614029cdff0b6c20f0e2e5703158a489a72b2507b8bd51bf8c8fd10ca
 )
 
 
 build() {
     cd_unpacked_src
+    sed -i -e "/stdio.h/s@\$@\n#include <string.h>@" test/v3ext.c
     ./Configure \
         --prefix=/usr \
         --openssldir=/etc/ssl \
