@@ -1,39 +1,35 @@
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.48-8 (2022-09-25)
 
-	* 2.4.48-7 :
+	Sign packages
+
+2.4.48-7 (2021-04-09)
+
 	Update provides and specific lib dependencies
 
-2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.48-6 (2021-04-08)
 
-	* 2.4.48-6 :
 	Remove from any groups for now
 
-2021-02-21  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.48-5 (2021-02-21)
 
-	* 2.4.48-5 :
 	Build with latest version of musl/llvm
 
-2019-08-04  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.48-4 (2019-08-04)
 
-	* 2.4.48-4 :
 	Upload source package
 
-2019-07-30  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.48-3 (2019-07-30)
 
-	* 2.4.48-3 :
 	Use std build functions
 
-2019-07-29  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.48-2 (2019-07-29)
 
-	* 2.4.48-2 :
 	Updated dependencies to include musl
 
-2018-11-13  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.48-1 (2018-11-13)
 
-	* 2.4.48-1 :
 	Upgrade to 2.4.48
 
-2015-03-25 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+2.4.47-1 (2015-03-25)
 
-	* 2.4.47-1 :
 	Initial version
