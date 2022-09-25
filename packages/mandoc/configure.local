@@ -1,4 +1,4 @@
-LDFLAGS='-Wl,-static'
+LDFLAGS='--static'
 PREFIX='/usr'
 MANDIR='/usr/share/man'
 MANPAGER='less'
