@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=gptfdisk
-pkgver=1.0.8
-pkgrel=2
+pkgver=1.0.9
+pkgrel=1
 pkgdesc='A set of text-mode partitioning tools'
 arch=(x86_64)
 url='http://www.rodsbooks.com/gdisk'
@@ -22,7 +22,7 @@ source=(
 )
 
 sha256sums=(
-    95d19856f004dabc4b8c342b2612e8d0a9eebdd52004297188369f152e9dc6df
+    dafead2693faeb8e8b97832b23407f6ed5b3219bc1784f482dd855774e2d50c2
 )
 
 
