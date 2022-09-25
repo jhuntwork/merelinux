@@ -1,11 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
-rationale='Busybox provides an xz utility, however libarchive and pacman will use the liblzma library that ships with xz'
 pkgname=(xz liblzma-dev)
-pkgver=5.2.5
-pkgrel=2
+pkgver=5.2.6
+pkgrel=1
 pkgdesc='Free general-purpose data compression software with high compression ratio.'
 arch=('x86_64')
 url='http://tukaani.org/xz'
@@ -19,13 +17,13 @@ source=(
     "${url}/xz-${pkgver}.tar.xz"
 )
 sha256sums=(
-    3e1e518ffc912f86608a8cb35e4bd41ad1aec210df2a47aaa1f95e7f5576ef56
+    e076ba3439cb7cfc45b908c869f51a8c89f3c9ee9ee982fde28849c015e723a7
 )
 
 
 build() {
     cd_unpacked_src
-    CFLAGS+=' -fPIC' LDFLAGS='-static -Wl,-static' \
+    CFLAGS+=' -fPIC' LDFLAGS='--static' \
       ./configure \
       --prefix=/usr \
       --disable-shared \
