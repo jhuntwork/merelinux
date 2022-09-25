@@ -3,7 +3,7 @@
 
 pkgname=(libdevmapper libdevmapper-dev)
 pkgver=2.03.16
-pkgrel=1
+pkgrel=2
 pkgdesc='The userspace device-mapper support library'
 arch=(x86_64)
 url='https://www.sourceware.org/lvm2/'
@@ -37,7 +37,6 @@ package_libdevmapper() {
         usr/sbin
     )
     depends=(
-        libc.so
         "ld-musl-$(arch).so.1"
     )
     provides=(
