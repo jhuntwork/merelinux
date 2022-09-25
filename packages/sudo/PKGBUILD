@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=(sudo)
-pkgver=1.9.7p2
-pkgrel=5
+pkgver=1.9.11p3
+pkgrel=1
 pkgdesc='Tool for delegating authority to users and groups.'
 arch=(x86_64)
 url='http://www.sudo.ws/'
@@ -21,7 +21,7 @@ source=(
 )
 
 sha256sums=(
-    28b5ee725dbf89a7852f42f309ca877d2810a9531b4eecfe59f3a84b6b4afca8
+    4687e7d2f56721708f59cca2e1352c056cb23de526c22725615a42bb094f1f70
 )
 
 
@@ -48,7 +48,10 @@ package() {
     )
     depends=(
         "ld-musl-$(arch).so.1"
-        libskarnet.so.2.10
+        libskarnet.so.2.12
+    )
+    provides=(
+        libsudo_util.so.0
     )
     std_package
 }
