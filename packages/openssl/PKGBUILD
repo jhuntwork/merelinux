@@ -3,7 +3,7 @@
 
 pkgname=(openssl openssl-dev)
 pkgver=1.1.1q
-pkgrel=1
+pkgrel=2
 pkgdesc='a toolkit for the TLS and SSL protocols'
 arch=(x86_64)
 url='https://www.openssl.org'
@@ -35,7 +35,6 @@ build() {
 package_openssl() {
     depends=(
         "ld-musl-$(arch).so.1"
-        libc.so
     )
     provides=(
         libcrypto.so.1.1

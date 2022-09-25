@@ -1,3 +1,7 @@
+1.1.1q-2 (2022-09-25)
+
+	Remove bad dependency on libc.so
+
 1.1.1q-1 (2022-09-25)
 
 	Upgrade to 1.1.1q
