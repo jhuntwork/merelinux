@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=htop
-pkgver=3.0.5
-pkgrel=2
+pkgver=3.2.1
+pkgrel=1
 pkgdesc='An interactive process viewer for Unix'
 arch=(x86_64)
 url='http://htop.dev'
@@ -21,7 +21,7 @@ source=(
     "htop-${pkgver}.tar.gz::https://github.com/htop-dev/htop/archive/refs/tags/${pkgver}.tar.gz"
 )
 sha256sums=(
-    4c2629bd50895bd24082ba2f81f8c972348aa2298cc6edc6a21a7fa18b73990c
+    b5ffac1949a8daaabcffa659c0964360b5008782aae4dfa7702d2323cfb4f438
 )
 
 
