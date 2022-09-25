@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=bash
-pkgver=5.1.8
+pkgver=5.1.16
 pkgrel=1
 pkgdesc='A full-featured sh-compatible shell.'
 arch=(x86_64)
@@ -20,7 +20,7 @@ source=(
 )
 
 sha256sums=(
-    0cfb5c9bb1a29f800a97bd242d19511c997a1013815b805e0fdd32214113d6be
+    5bac17218d3911834520dad13cd1f85ab944e1c09ae1aba55906be1f8192f558
     69ba8775a43461ef74f814e9d32a52fb481f27b2c0666ab145dcf1ea748acc13
 )
 
