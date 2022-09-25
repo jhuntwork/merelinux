@@ -1,26 +1,24 @@
-2021-08-24  Jeremy Huntwork <jeremy@merelinux.org>
+3.24.2-2 (2022-09-25)
 
-	* 3.21.1-2 :
+	Upgrade to 3.24.2
+
+3.21.1-2 (2021-08-24)
+
 	Fix packaging issue
 
-2021-08-19  Jeremy Huntwork <jeremy@merelinux.org>
+3.21.1-1 (2021-08-19)
 
-	* 3.21.1-1 :
 	Upgrade to 3.21.1
 
-2021-08-15  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.19.5-3 (2021-08-15)
 
-	* 3.19.5-3 :
 	Bump version to trigger a new build and release with new scripts
 
-2021-04-08  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.19.5-2 (2021-04-08)
 
-	* 3.19.5-2 :
 	Use openssl instead of libressl
 	Add to new core-dev group
 
-2021-02-20  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.19.5-1 (2021-02-20)
 
-	* 3.19.5-1 :
 	Initial version
-
