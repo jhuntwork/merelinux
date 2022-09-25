@@ -60,8 +60,8 @@ package_libacl() {
 package_libacl-dev() {
     pkgfiles=(
         usr/include
-        usr/lib/*.so
         usr/lib/*.a
+        usr/lib/*.so
     )
     depends=(
         "libacl=${pkgver}"

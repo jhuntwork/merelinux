@@ -61,6 +61,7 @@ rsync -rlptv -e 'ssh -p 50220' \
     pkgsync@pkgs.merelinux.org::pkgs/testing/ pkgs/testing/
 
 # Copy over the staging files to testing
+printf '%s\n' "$MERE_SIGNING_KEY" | base64 -d >"$CIRCLE_WORKING_DIRECTORY"/mere.key
 find staging -name "*.pkg*" -not -name "*.sig" | while read -r file ; do
     mv -v "$file" pkgs/testing
     [ -f "${file}.sig" ] && mv -v "${file}.sig" pkgs/testing
