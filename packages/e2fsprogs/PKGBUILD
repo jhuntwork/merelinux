@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=(e2fsprogs)
-pkgver=1.46.3
-pkgrel=2
+pkgver=1.46.5
+pkgrel=1
 pkgdesc='Filesystem utilities for ext2, ext3 and ext4.'
 arch=(x86_64)
 url=http://e2fsprogs.sourceforge.net/
@@ -18,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    86d1580facdd49f2e0e6b027e26b1e6c48af538762dc40aeed2a87153c1f11b7
+    2f16c9176704cf645dc69d5b15ff704ae722d665df38b2ed3cfc249757d8d81e
 )
 
 build() {
