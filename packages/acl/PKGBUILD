@@ -36,9 +36,9 @@ package_acl() {
         usr/bin
     )
     depends=(
+        "ld-musl-$(arch).so.1"
         libacl.so.1
         libattr.so.1
-        "ld-musl-$(arch).so.1"
     )
     std_package
 }
@@ -48,8 +48,8 @@ package_libacl() {
         usr/lib/lib*.so.*
     )
     depends=(
-        libattr.so.1
         "ld-musl-$(arch).so.1"
+        libattr.so.1
     )
     provides=(
         libacl.so.1
