@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=(libdevmapper libdevmapper-dev)
-pkgver=2.03.13
+pkgver=2.03.16
 pkgrel=1
 pkgdesc='The userspace device-mapper support library'
 arch=(x86_64)
@@ -17,7 +17,7 @@ source=(
     "ftp://sourceware.org/pub/lvm2/LVM2.${pkgver}.tgz"
 )
 sha256sums=(
-    296b9c8769e6b5b8e81128a1c0aeb58e6da1f0fcf97dba90ad3f005ece53a568
+    e661ece15b5d88d8abe39a4c1e1db2f43e1896f019948bb98b0e15d777680786
 )
 
 
