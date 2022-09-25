@@ -3,7 +3,7 @@
 
 pkgname=(libevent libevent-dev)
 pkgver=2.1.12
-pkgrel=1
+pkgrel=2
 pkgdesc='An event based library'
 arch=(x86_64)
 url='https://libevent.org/'
