@@ -1,0 +1,65 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(zlib-ng zlib-ng-dev)
+pkgver=2.0.6
+pkgrel=1
+pkgdesc='zlib replacement with optimizations for "next generation" systems.'
+arch=(x86_64)
+url='https://github.com/zlib-ng/zlib-ng'
+license=(zlib)
+groups=()
+depends=()
+makedepends=(cmake)
+options=()
+changelog=ChangeLog
+source=(
+    "https://github.com/zlib-ng/zlib-ng/archive/refs/tags/${pkgver}.tar.gz"
+)
+sha256sums=(
+    8258b75a72303b661a238047cb348203d88d9dddf85d480ed885f375916fcab6
+)
+
+
+build() {
+    cd_unpacked_src
+    mkdir build
+    cd build || return 1
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DZLIB_COMPAT=ON \
+        ..
+    make
+}
+
+package_zlib-ng() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libz.so.1
+    )
+    replaces=(zlib)
+    cd_unpacked_src
+    cd build || return 1
+    make DESTDIR="${pkgdirbase}/dest" install
+    std_split_package
+}
+
+package_zlib-ng-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "zlib-ng=${pkgver}"
+    )
+    replaces=(zlib-dev)
+    std_split_package
+}
