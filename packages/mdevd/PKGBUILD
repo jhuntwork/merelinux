@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=(mdevd)
-pkgver=0.1.4.0
-pkgrel=5
+pkgver=0.1.6.0
+pkgrel=0
 pkgdesc='A small daemon managing kernel hotplug events, similarly to udevd.'
 arch=(x86_64)
 url='http://skarnet.org/software/mdevd/'
@@ -28,7 +28,7 @@ source=(
 install=mdevd.install
 
 sha256sums=(
-    ffd3b223b4cf0e51253b4a8f09cb88d70bf22693228ab0818af174a3f099dcd2
+    33cf2b118634538fd24f302b30f52cc8aa28ea68b414916ce482b54a4ee57283
     f44446d1dbae8308685e8ee016edde75016a4fd134398c468ad154fcb07a6e99
     c5ec938fe81c88d7e8dafc16a531d943f5f090659374e44cbba422f503fbcd30
     2578b47b0f48bab221f138d8280ca1ce7e5384b26d353ab4f5fd7e922581e0ac
