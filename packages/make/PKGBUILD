@@ -3,7 +3,7 @@
 
 pkgname=(make)
 pkgver=4.3
-pkgrel=3
+pkgrel=4
 pkgdesc='A tool to control the generation of executables'
 arch=(x86_64)
 url='http://www.gnu.org/software/make/'
