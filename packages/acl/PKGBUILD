@@ -1,6 +1,5 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(
     acl
@@ -8,7 +7,7 @@ pkgname=(
     libacl-dev
 )
 pkgver=2.2.53
-pkgrel=9
+pkgrel=10
 pkgdesc='A library for manipulating POSIX access control lists'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/acl'
