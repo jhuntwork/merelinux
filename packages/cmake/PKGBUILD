@@ -1,10 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=cmake
-_major_minor=3.21
-pkgver="${_major_minor}.1"
+_major_minor=3.24
+pkgver="${_major_minor}.2"
 pkgrel=2
 pkgdesc='The CMake toolsuite for building, testing and packaging software.'
 arch=('x86_64')
@@ -20,7 +19,7 @@ source=(
     "${url}/files/v${_major_minor}/${pkgname}-${pkgver}.tar.gz"
 )
 sha256sums=(
-    fac3915171d4dff25913975d712f76e69aef44bf738ba7b976793a458b4cfed4
+    0d9020f06f3ddf17fb537dc228e1a56c927ee506b486f55fe2dc19f69bf0c8db
 )
 
 
