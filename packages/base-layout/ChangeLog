@@ -1,3 +1,7 @@
+2.0.6-1 (2022-09-25)
+
+	Change architecture to 'any'
+
 2.0.5-1 (2021-09-13)
 
 	Add an initial /etc/shadow file to match /etc/passwd
