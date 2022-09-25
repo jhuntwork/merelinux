@@ -6,7 +6,7 @@ pkgname=(
     libarchive
     libarchive-dev
 )
-pkgver=3.5.2
+pkgver=3.6.1
 pkgrel=1
 pkgdesc='Multi-format archive and compression library'
 arch=(x86_64)
@@ -18,7 +18,7 @@ makedepends=(
     libacl-dev
     libattr-dev
     liblzma-dev
-    zlib-dev
+    zlib-ng-dev
 )
 options=()
 changelog=ChangeLog
@@ -26,7 +26,7 @@ source=(
     "http://www.libarchive.org/downloads/libarchive-${pkgver}.tar.gz"
 )
 sha256sums=(
-    5f245bd5176bc5f67428eb0aa497e09979264a153a074d35416521a5b8e86189
+    c676146577d989189940f1959d9e3980d28513d74eedfbc6b7f15ea45fe54ee2
 )
 
 
