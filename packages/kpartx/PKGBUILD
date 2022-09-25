@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=kpartx
-pkgver=0.8.6
+pkgver=0.9.1
 pkgrel=1
 pkgdesc='Tools for the Device Mapper multipathing driver'
 arch=(x86_64)
@@ -19,7 +19,7 @@ source=(
     "kpartx-${pkgver}.tar.gz::https://github.com/opensvc/multipath-tools/archive/refs/tags/${pkgver}.tar.gz"
 )
 sha256sums=(
-    ba781d981bd6e8efa5f9f3af6727f85520af6395958e852c1907f59f6124f08e
+    0e856814aa4b2a24eddd918f4be812af40c28956f48b198f51b73e47d0da0d73
 )
 
 
