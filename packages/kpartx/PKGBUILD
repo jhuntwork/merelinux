@@ -3,7 +3,7 @@
 
 pkgname=kpartx
 pkgver=0.9.1
-pkgrel=1
+pkgrel=2
 pkgdesc='Tools for the Device Mapper multipathing driver'
 arch=(x86_64)
 url='http://christophe.varoqui.free.fr/'
