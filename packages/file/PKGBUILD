@@ -3,7 +3,7 @@
 
 rationale='file is used by many build scripts'
 pkgname=(file file-dev)
-pkgver=5.40
+pkgver=5.43
 pkgrel=1
 pkgdesc='A file-type guesser'
 arch=(x86_64)
@@ -19,14 +19,14 @@ source=(
 )
 
 sha256sums=(
-    167321f43c148a553f68a0ea7f579821ef3b11c27b8cbe158e4df897e4a5dd57
+    8c8015e91ae0e8d0321d94c78239892ef9dbc70c4ade0008c0e95894abfb1991
 )
 
 
 build() {
     cd_unpacked_src
     sed -i 's/misc/file/' configure
-    LDFLAGS='-Wl,-static' ./configure --prefix=/usr \
+    LDFLAGS='--static' ./configure --prefix=/usr \
       --disable-shared \
       --enable-static
     make V=1
