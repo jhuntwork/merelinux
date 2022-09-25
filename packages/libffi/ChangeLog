@@ -1,20 +1,20 @@
-2021-04-09  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.4.3-1 (2022-09-25)
 
-	* 3.3-2 :
+	Upgrade to 3.4.3
+
+3.3-2 (2021-04-09)
+
 	Use /usr for prefix
 	Use specific dependencies and provides
 
-2021-02-27  Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.3-1 (2021-02-27)
 
-	* 3.3-1 :
 	Upgrade to 3.3
 
-2016-10-12 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.2.1-2 (2016-10-12)
 
-	* 3.2.1-2 :
 	Fix pkgconfig file to point to the right include directory
 
-2015-04-02 Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
+3.2.1-1 (2015-04-02)
 
-	* 3.2.1-1 :
 	Initial version
