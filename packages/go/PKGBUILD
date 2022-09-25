@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=(go)
-pkgver=1.17
+pkgver=1.19.1
 pkgrel=1
 pkgdesc='An expressive, concise, clean and efficient programming language'
 arch=(x86_64)
@@ -18,7 +18,7 @@ source=(
     "https://golang.org/dl/go${pkgver}.src.tar.gz"
 )
 sha256sums=(
-    3a70e5055509f347c0fb831ca07a2bf3b531068f349b14a3c652e9b5b67beb5d
+    27871baa490f3401414ad793fba49086f6c855b1c584385ed7771e1204c7e179
 )
 
 
