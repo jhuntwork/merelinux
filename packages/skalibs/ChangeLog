@@ -1,3 +1,7 @@
+2.12.0.1-1 (2022-09-25)
+
+	Upgrade to 2.12.0.1
+
 2.10.0.3-3 (2021-09-21)
 
 	Fix skalibs paths to be consistent with system includes
