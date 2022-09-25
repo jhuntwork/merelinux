@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=iptables
-pkgver=1.8.7
-pkgrel=2
+pkgver=1.8.8
+pkgrel=1
 pkgdesc='A fast incremental file transfer utility'
 arch=(x86_64)
 url='http://www.netfilter.org/'
@@ -18,13 +18,17 @@ source=(
 )
 
 sha256sums=(
-    c109c96bb04998cd44156622d36f8e04b140701ec60531a10668cfdff5e8d8f0
+    71c75889dc710676631553eb1511da0177bbaaf1b551265b912d236c3f51859f
 )
 
 
 build() {
     cd_unpacked_src
-    LDFLAGS='-static -Wl,-static' \
+    # Remove incompatible header
+    sed -i '/if_ether.h/d' libxtables/xtables.c
+    # Add missing header
+    sed -i "/stdint.h/s@\$@\n#include <sys/types.h>@" iptables/xshared.h
+    LDFLAGS='--static' \
       ./configure --prefix='' \
       --disable-shared \
       --enable-static \
