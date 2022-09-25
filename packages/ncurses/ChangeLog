@@ -1,3 +1,7 @@
+6.3-1 (2022-09-25)
+
+	Upgrade to 6.3
+
 6.2-4 (2021-08-31)
 
 	Fix find command for headers, needs to include existing symlinks
