@@ -1,9 +1,8 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154
-# Maintainer: Jeremy Huntwork <jeremy@merelinux.org>
 
 pkgname=(bison bison-dev)
-pkgver=3.7.6
+pkgver=3.8.2
 pkgrel=1
 pkgdesc='A general-purpose parser generator.'
 arch=('x86_64')
@@ -19,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    67d68ce1e22192050525643fc0a7a22297576682bef6a5c51446903f5aeef3cf
+    9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2
 )
 
 build() {
