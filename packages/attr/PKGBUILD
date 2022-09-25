@@ -1,6 +1,5 @@
 #!/bin/bash
 # shellcheck disable=SC2034
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(
     attr
@@ -8,7 +7,7 @@ pkgname=(
     libattr-dev
 )
 pkgver=2.4.48
-pkgrel=7
+pkgrel=8
 pkgdesc='A library for manipulating filesystem extended attributes'
 arch=(x86_64)
 url='http://savannah.nongnu.org/projects/attr'
