@@ -3,7 +3,7 @@
 
 pkgname=(mold)
 pkgver=1.4.2
-pkgrel=1
+pkgrel=2
 pkgdesc='A Modern Linker'
 arch=(x86_64)
 url='https://github.com/rui314/mold'
@@ -17,7 +17,7 @@ depends=(
     libunwind.so.1
     libz.so.1
 )
-makedepends=(cmake openssl-dev zlib-dev)
+makedepends=(cmake openssl-dev zlib-ng-dev)
 options=()
 changelog=ChangeLog
 source=(
