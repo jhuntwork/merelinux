@@ -3,7 +3,7 @@
 
 pkgname=(libffi libffi-dev)
 pkgver=3.4.3
-pkgrel=1
+pkgrel=2
 pkgdesc='A portable Foregin Function Interface library.'
 arch=(x86_64)
 url='http://sourceware.org/libffi/'
@@ -40,7 +40,7 @@ package_libffi() {
         "ld-musl-$(arch).so.1"
     )
     provides=(
-        libffi.so.7
+        libffi.so.8
     )
     std_package
 }
