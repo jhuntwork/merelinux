@@ -5,7 +5,7 @@ pkgname=(python python-dev)
 _vermajor=3
 _verminor=10
 pkgver=${_vermajor}.${_verminor}.7
-pkgrel=1
+pkgrel=2
 pkgdesc='A clear and powerful object-oriented programming language,'
 arch=(x86_64)
 url='http://www.python.org'
@@ -20,7 +20,7 @@ makedepends=(
     libsqlite-dev
     liblzma-dev
     readline-dev
-    zlib-dev
+    zlib-ng-dev
 )
 options=()
 changelog=ChangeLog
@@ -55,7 +55,7 @@ package_python() {
     depends=(
         "ld-musl-$(arch).so.1"
         libcrypto.so.1.1
-        libffi.so.7
+        libffi.so.8
         libreadline.so.8
         libsqlite3.so.0
         libssl.so.1.1
