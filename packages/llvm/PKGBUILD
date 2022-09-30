@@ -1,8 +1,8 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068,SC2086
 
-pkgname=(llvm llvm-dev llvm-utils libcxx libLLVM)
-pkgver=14.0.6
+pkgname=(llvm llvm-dev libcxx libLLVM)
+pkgver=15.0.1
 pkgrel=1
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
@@ -15,7 +15,7 @@ makedepends=(
     git
     ninja
     utmps-dev
-    zlib-dev
+    zlib-ng-dev
 )
 options=()
 changelog=ChangeLog
@@ -25,7 +25,7 @@ source=(
 )
 
 sha256sums=(
-    8b3cfd7bc695bd6cea0f37f53f0981f34f87496e79e2529874fd03a2f9dd3a8a
+    f25ce2d4243bebf527284eb7be7f6f56ef454fca8b3de9523f7eb4efb8d26218
 )
 
 _binfiles=(
@@ -35,7 +35,7 @@ _binfiles=(
         usr/bin/cc
         usr/bin/clang
         usr/bin/clang++
-        usr/bin/clang-14
+        usr/bin/clang-15
         usr/bin/clang-cl
         usr/bin/clang-cpp
         usr/bin/ld.lld
@@ -98,12 +98,12 @@ build() {
         -DLLVM_DEFAULT_TARGET_TRIPLE="$CHOST" \
         -DLLVM_ENABLE_LIBCXX=ON \
         -DLLVM_ENABLE_PIC=ON \
-        -DLLVM_ENABLE_PROJECTS='lld;clang;compiler-rt;libcxx;libcxxabi;libunwind' \
+        -DLLVM_ENABLE_PROJECTS='lld;clang;compiler-rt' \
+        -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi;libunwind' \
         -DLLVM_ENABLE_RTTI=ON \
         -DLLVM_ENABLE_TERMINFO=OFF \
         -DLLVM_HOST_TRIPLE="$CHOST" \
         -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
-        -DLLVM_INSTALL_UTILS=ON \
         ../llvm
     cmake --build .
 }
@@ -112,6 +112,7 @@ package_llvm() {
     pkgfiles=(
         "${_binfiles[@]}"
         usr/include/c++
+        usr/include/"$CHOST"
         usr/include/llvm-c/lto.h
         usr/lib/libLTO.so
         usr/lib/libc++.a
@@ -122,6 +123,13 @@ package_llvm() {
         usr/lib/libgcc_s.a
         usr/lib/libunwind.a
         usr/lib/libunwind.so
+        usr/lib/"$CHOST"/libc++.a
+        usr/lib/"$CHOST"/libc++.so
+        usr/lib/"$CHOST"/libc++abi.a
+        usr/lib/"$CHOST"/libc++abi.so
+        usr/lib/"$CHOST"/libc++experimental.a
+        usr/lib/"$CHOST"/libunwind.a
+        usr/lib/"$CHOST"/libunwind.so
         usr/lib/clang
     )
     depends=(
@@ -130,10 +138,11 @@ package_llvm() {
         libc++abi.so.1
         libunwind.so.1
         libz.so.1
+        mold
         musl-dev
     )
     provides=(
-        libLTO.so.14
+        libLTO.so.15
     )
     groups=(build-base)
     cd_unpacked_src
@@ -142,6 +151,10 @@ package_llvm() {
     cmake --build . --target install
     cd "$DESTDIR" || return 1
     ln -s libunwind.a usr/lib/libgcc_s.a
+    find "usr/lib/${CHOST}/" ! -type d | while read -r file; do
+        bn="${file##*/}"
+        ln -s "${CHOST}/${bn}" "usr/lib/${bn}"
+    done
     ln -s clang usr/bin/cc
     ln -s clang++ usr/bin/c++
     package_defined_files
@@ -176,7 +189,7 @@ package_llvm-dev() {
     )
     std_split_package
     rm "${pkgdir}/usr/include/llvm-c/lto.h"
-    find "${pkgdir}/usr/lib/" -name "libLLVM-14*so" -delete
+    find "${pkgdir}/usr/lib/" -name "libLLVM-15*so" -delete
 }
 
 package_libcxx() {
@@ -184,6 +197,9 @@ package_libcxx() {
         usr/lib/libc++.so.*
         usr/lib/libc++abi.so.*
         usr/lib/libunwind.so.*
+        usr/lib/"$CHOST"/libc++.so.*
+        usr/lib/"$CHOST"/libc++abi.so.*
+        usr/lib/"$CHOST"/libunwind.so.*
     )
     depends=(
         "ld-musl-$(arch).so.1"
@@ -200,27 +216,9 @@ package_libcxx() {
     ln -s libunwind.so.1 "${pkgdir}/usr/lib/libgcc_s.so.1"
 }
 
-package_llvm-utils() {
-    pkgfiles=(
-        usr/bin
-    )
-    depends=(
-        "ld-musl-$(arch).so.1"
-        libc++.so.1
-        libc++abi.so.1
-        libunwind.so.1
-        libz.so.1
-    )
-    std_split_package
-    for i in ${_binfiles[@]}; do
-        rm "${pkgdir}/${i}"
-    done
-    rm "${pkgdir}/usr/bin/llvm-config"
-}
-
 package_libLLVM() {
     pkgfiles=(
-        usr/lib/libLLVM-14*so
+        usr/lib/libLLVM-15*so
     )
     depends=(
         "ld-musl-$(arch).so.1"
@@ -230,7 +228,7 @@ package_libLLVM() {
         libz.so.1
     )
     provides=(
-        libLLVM-14.so
+        libLLVM-15.so
     )
     std_split_package
 }
