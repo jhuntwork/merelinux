@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=nginx
-pkgver=1.21.3
+pkgver=1.23.1
 pkgrel=1
 pkgdesc='An HTTP and reverse proxy server.'
 arch=(x86_64)
@@ -14,7 +14,7 @@ makedepends=(
     pkgconf
     libpcre-dev
     openssl-dev
-    zlib-dev
+    zlib-ng-dev
 )
 options=(emptydirs)
 changelog=ChangeLog
@@ -28,7 +28,7 @@ source=(
 )
 
 sha256sums=(
-    14774aae0d151da350417efc4afda5cce5035056e71894836797e1f6e2d1175a
+    5eee1bd1c23e3b9477a45532f1f36ae6178b43d571a9607e6953cef26d5df1e2
     46d22dd25d7628a3696396f7d35352f7e6e0eb03369bb3c2dad000d23b3dee8b
     9b4f42034d0130d041dfc8f0fcc262891a7d12a529379c6ca344b4a898248d25
     9df79cf0c61958cc9d4d74ef7831d5d70c1c58bc859b36a2299c5853d66bb30a
