@@ -1,0 +1,59 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libpng libpng-dev)
+pkgver=1.6.38
+pkgrel=1
+pkgdesc='The official PNG reference library'
+arch=(x86_64)
+url=http://www.libpng.org/pub/png/libpng.html
+license=(PNG)
+groups=()
+depends=()
+makedepends=(zlib-ng-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "https://download.sourceforge.net/libpng/libpng-${pkgver}.tar.xz"
+    "https://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-${pkgver}-apng.patch.gz"
+)
+
+sha256sums=(
+    b3683e8b8111ebf6f1ac004ebb6b0c975cd310ec469d98364388e9cedbfa68be
+    8c0363977c44ee1c7d5d42cc02d82b83eeb2d49ec4f7c2f4d475a80c8311989f
+)
+
+
+build() {
+    cd_unpacked_src
+    gzip -cd "${srcdir}/libpng-${pkgver}-apng.patch.gz" | patch -p1
+    std_build
+}
+
+package_libpng() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libz.so.1
+    )
+    provides=(
+        libpng16.so.16
+    )
+    std_package
+}
+
+package_libpng-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "libpng=${pkgver}"
+    )
+    std_split_package
+}
