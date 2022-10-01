@@ -3,7 +3,7 @@
 
 pkgname=(llvm llvm-dev libcxx libLLVM)
 pkgver=15.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
 url='htps://llvm.org'
@@ -120,7 +120,6 @@ package_llvm() {
         usr/lib/libc++abi.a
         usr/lib/libc++abi.so
         usr/lib/libc++experimental.a
-        usr/lib/libgcc_s.a
         usr/lib/libunwind.a
         usr/lib/libunwind.so
         usr/lib/"$CHOST"/libc++.a
@@ -150,7 +149,6 @@ package_llvm() {
     export DESTDIR="${pkgdirbase}/dest"
     cmake --build . --target install
     cd "$DESTDIR" || return 1
-    ln -s libunwind.a usr/lib/libgcc_s.a
     find "usr/lib/${CHOST}/" ! -type d | while read -r file; do
         bn="${file##*/}"
         ln -s "${CHOST}/${bn}" "usr/lib/${bn}"
@@ -213,7 +211,6 @@ package_libcxx() {
         libunwind.so.1
     )
     std_split_package
-    ln -s libunwind.so.1 "${pkgdir}/usr/lib/libgcc_s.so.1"
 }
 
 package_libLLVM() {
