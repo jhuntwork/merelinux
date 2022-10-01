@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=shellcheck
-pkgver=0.7.2
+pkgver=0.8.0
 pkgrel=1
 pkgdesc='A static analysis tool for shell scripts'
 arch=(x86_64)
@@ -18,7 +18,7 @@ source=(
 )
 
 sha256sums=(
-    70423609f27b504d6c0c47e340f33652aea975e45f312324f2dbf91c95a3b188
+    ab6ee1b178f014d1b86d1e24da20d1139656c8b0ed34d2867fbb834dad02bf0a
 )
 
 
