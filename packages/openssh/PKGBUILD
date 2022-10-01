@@ -2,10 +2,10 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=(openssh-client)
-_vermajor=9
-_verminor=0
+_vermajor=8
+_verminor=7
 pkgver=${_vermajor}.${_verminor}p1
-pkgrel=1
+pkgrel=2
 pkgdesc='the premier connectivity tool for remote login with the SSH protocol'
 arch=(x86_64)
 url='https://openssh.com'
@@ -24,7 +24,7 @@ source=(
     "https://ftp4.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${pkgver}.tar.gz"
 )
 sha256sums=(
-    03974302161e9ecce32153cfa10012f1e65c8f3750f573a73ab1befd5972a28a
+    7ca34b8bb24ae9e50f33792b7091b3841d7e1b440ff57bc9fabddf01e2ed1e24
 )
 
 
