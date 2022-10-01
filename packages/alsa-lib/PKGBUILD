@@ -1,0 +1,56 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(alsa-lib alsa-lib-dev)
+pkgver=1.2.7.2
+pkgrel=1
+pkgdesc='The Advanced Linux Sound Architecture library and server'
+arch=(x86_64)
+url='http://alsa-project.org'
+license=(GPL)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "ftp://ftp.alsa-project.org/pub/lib/alsa-lib-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    8a35b7218e50f2a2c79342d0de98ded81439ce19e12809385ec9be9596de7c2f
+)
+
+
+build() {
+    std_build
+}
+
+package_alsa-lib() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.so.*
+        usr/share/alsa
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libasound.so.2
+        libatopology.so.2
+    )
+    std_package
+}
+
+package_alsa-lib-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.so
+        usr/lib/pkgconfig
+        usr/share/aclocal
+    )
+    depends=(
+        "alsa-lib=${pkgver}"
+    )
+    std_package
+}
