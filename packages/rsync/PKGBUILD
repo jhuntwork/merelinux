@@ -2,15 +2,18 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=rsync
-pkgver=3.2.3
-pkgrel=2
+pkgver=3.2.6
+pkgrel=1
 pkgdesc='A fast incremental file transfer utility'
 arch=(x86_64)
 url='https://rsync.samba.org/'
 license=(GPL3)
 groups=()
 depends=()
-makedepends=(zlib-dev perl)
+makedepends=(
+    perl
+    zlib-ng-dev
+)
 options=()
 changelog=ChangeLog
 source=(
@@ -18,7 +21,7 @@ source=(
 )
 
 sha256sums=(
-    becc3c504ceea499f4167a260040ccf4d9f2ef9499ad5683c179a697146ce50e
+    fb3365bab27837d41feaf42e967c57bd3a47bc8f10765a3671efd6a3835454d3
 )
 
 
