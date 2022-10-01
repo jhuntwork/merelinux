@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=(openssh-client)
-_vermajor=8
-_verminor=7
+_vermajor=9
+_verminor=0
 pkgver=${_vermajor}.${_verminor}p1
 pkgrel=1
 pkgdesc='the premier connectivity tool for remote login with the SSH protocol'
@@ -14,7 +14,8 @@ groups=()
 depends=()
 makedepends=(
     openssl-dev
-    zlib-dev
+    utmps-dev
+    zlib-ng-dev
 )
 options=()
 changelog=ChangeLog
@@ -23,16 +24,21 @@ source=(
     "https://ftp4.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${pkgver}.tar.gz"
 )
 sha256sums=(
-    7ca34b8bb24ae9e50f33792b7091b3841d7e1b440ff57bc9fabddf01e2ed1e24
+    03974302161e9ecce32153cfa10012f1e65c8f3750f573a73ab1befd5972a28a
 )
 
 
 build() {
     cd_unpacked_src
-    export LDFLAGS='-static -Wl,-static'
+    export LDFLAGS='--static'
     ./configure \
         --prefix=/usr \
         --sysconfdir=/etc \
+        --disable-utmp \
+        --disable-utmpx \
+        --disable-wtmp \
+        --disable-wtmpx \
+        --disable-lastlog \
         --with-mantype=man
     make
 }
