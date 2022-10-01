@@ -1,17 +1,16 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
 
 pkgname=(perl)
-pkgver=5.32.1
-pkgrel=2
+pkgver=5.36.0
+pkgrel=1
 pkgdesc='An API for writing text-based user interfaces.'
 arch=('x86_64')
 url='http://www.perl.org'
 license=('GPL2')
 groups=()
-depends=(musl)
-makedepends=(zlib-dev)
+depends=()
+makedepends=()
 options=()
 changelog=ChangeLog
 
@@ -19,14 +18,13 @@ source=(
     "http://www.cpan.org/src/5.0/perl-${pkgver}.tar.xz"
 )
 sha256sums=(
-    57cc47c735c8300a8ce2fa0643507b44c4ae59012bfdad0121313db639e02309
+    0f386dccbee8e26286404b2cca144e1005be65477979beb9b1ba272d4819bcf0
 )
 
 
 build() {
     cd_unpacked_src
-    export BUILD_ZLIB=False
-    CFLAGS="$CFLAGS" ./configure.gnu \
+    ./configure.gnu \
       -des -Dprefix=/usr \
       -Dcc="cc -D_GNU_SOURCE" \
       -Dvendorprefix=/usr \
@@ -53,6 +51,9 @@ package() {
         usr/bin
         usr/lib
         usr/share
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
     )
     std_package
 }
