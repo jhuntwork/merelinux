@@ -3,7 +3,7 @@
 
 pkgname=(xorriso)
 pkgver=1.5.4.pl02
-pkgrel=1
+pkgrel=2
 pkgdesc='Utilities to copy file objects from POSIX compliant filesystems into Rock Ridge enhanced ISO 9660 filesystems'
 arch=(x86_64)
 url='https://www.gnu.org/software/xorriso/'
