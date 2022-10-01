@@ -1,0 +1,54 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(atk-dev)
+_vermain=2.38
+pkgver="${_vermain}.0"
+pkgrel=1
+pkgdesc='A widget development toolkit'
+arch=(x86_64)
+url=https://www.gnome.org
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    cmake
+    glib-dev
+    gobject-introspection-dev
+    libffi-dev
+    libpcre2-dev
+    meson
+    ninja
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://download.gnome.org/sources/atk/${_vermain}/atk-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    ac4de2a4ef4bd5665052952fe169657e65e895c5057dffb3c2a810f6191a0c36
+)
+
+
+build() {
+    cd_unpacked_src
+    meson build/ -Dprefix=/usr \
+        -Ddefault_library=static \
+        -Dintrospection=true
+    ninja -C build/
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/girepository-1.0
+        usr/lib/lib*.a
+        usr/lib/pkgconfig
+        usr/share/gir-1.0
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
