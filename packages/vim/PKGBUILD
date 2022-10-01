@@ -2,9 +2,9 @@
 # shellcheck disable=SC2034,SC2154,SC2068
 
 pkgname=vim
-_vermajor=8
-_verminor=2
-_verpatch=3388
+_vermajor=9
+_verminor=0
+_verpatch=0631
 pkgver="${_vermajor}.${_verminor}.${_verpatch}"
 pkgrel=1
 pkgdesc='An IMproved version of the vi editor'
@@ -22,7 +22,7 @@ source=(
 )
 
 sha256sums=(
-    0e1c04d25cb36f4cf3fdcd85d6b2a7df6923ea09551ed823e7adfba7bf19c6c1
+    50058bbad4e47d8410831178337d0b0ef184908da61523f17f84993e7a0317bc
     5e698ff1872bae79b7eae3f35bfca2e426c2698a785687fb9035e0fee16de91a
 )
 
@@ -39,7 +39,7 @@ build() {
 	   src/auto/configure
 
     CC='cc -I/include/ncursesw' \
-        CFLAGS+=' -static -fPIC' LDFLAGS='-static -Wl,-static' \
+        CFLAGS+=' -fPIC' LDFLAGS='--static' \
         ./configure \
         --prefix=/usr \
         --enable-multibyte \
