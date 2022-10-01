@@ -3,7 +3,7 @@
 
 pkgname=nginx
 pkgver=1.23.1
-pkgrel=1
+pkgrel=2
 pkgdesc='An HTTP and reverse proxy server.'
 arch=(x86_64)
 url='http://nginx.org/'
@@ -11,8 +11,7 @@ license=(BSD)
 groups=()
 depends=(s6 execline)
 makedepends=(
-    pkgconf
-    libpcre-dev
+    libpcre2-dev
     openssl-dev
     zlib-ng-dev
 )
