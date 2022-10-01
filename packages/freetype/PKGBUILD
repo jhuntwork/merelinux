@@ -1,0 +1,57 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(freetype freetype-dev)
+pkgver=2.12.1
+pkgrel=1
+pkgdesc='A freely available software library to render fonts'
+arch=(x86_64)
+url=https://freetype.org/
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    libpng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://download.savannah.gnu.org/releases/freetype/freetype-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    4766f20157cc4cf0cd292f80bf917f92d1c439b243ac3018debf6b9140c41a7f
+)
+
+
+build() {
+    cd_unpacked_src
+    std_build
+}
+
+package_freetype() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libfreetype.so.6
+    )
+    std_package
+}
+
+package_freetype-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/share/aclocal
+    )
+    depends=(
+        "freetype=${pkgver}"
+    )
+    std_split_package
+}
