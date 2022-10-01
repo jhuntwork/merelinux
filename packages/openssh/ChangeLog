@@ -1,3 +1,8 @@
+8.7p1-2 (2022-10-01)
+
+	Revert from 9.0
+	CircleCI seems incompatible with 9.0 for the moment
+
 9.0p1-1 (2022-09-30)
 
 	Upgrade to 9.0
