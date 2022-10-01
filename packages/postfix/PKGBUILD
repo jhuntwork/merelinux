@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=(postfix)
-pkgver=3.6.2
+pkgver=3.7.2
 pkgrel=1
 pkgdesc='The Postfix mail server'
 arch=(x86_64)
@@ -32,7 +32,7 @@ backup=(
 )
 
 sha256sums=(
-    507323d20d7b3f705f49cf8c07d437c6d8090bed07e15a3c0ec405edad54a7d4
+    3785f76c2924a02873c0be0f0cd124a9166fc1aaf77ea2a06bd4ad795a6ed416
     4ab377d56da41210035c637806a27df99a7c9acf3af88ab70c3f4721b84054a3
     c4936a0d13c1054a87b5b1042789b1d196bebedd514f0e0d2f2104f7dea20fd8
 )
