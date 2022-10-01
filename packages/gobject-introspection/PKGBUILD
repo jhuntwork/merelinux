@@ -1,0 +1,81 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(gobject-introspection gobject-introspection-dev)
+_vermain=1.74
+pkgver="${_vermain}.0"
+pkgrel=1
+pkgdesc='A 2D graphics library with support for multiple output devices'
+arch=(x86_64)
+url=https://gi.readthedocs.io
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    bison
+    flex
+    glib-dev
+    libffi-dev
+    libpcre2-dev
+    libsqlite-dev
+    meson
+    ninja
+    python-dev
+    openssl-dev
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://download.gnome.org/sources/gobject-introspection/${_vermain}/gobject-introspection-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    347b3a719e68ba4c69ff2d57ee2689233ea8c07fc492205e573386779e42d653
+)
+
+
+build() {
+    cd_unpacked_src
+    meson build/ -Dprefix=/usr -Dbuildtype=release
+    ninja -C build/
+}
+
+package_gobject-introspection() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/gobject-introspection
+        usr/lib/girepository-1.0
+        usr/lib/*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libffi.so.8
+        libgio-2.0.so.0
+        libglib-2.0.so.0
+        libgmodule-2.0.so.0
+        libgobject-2.0.so.0
+        libpcre2-8.so.0
+        libz.so.1
+    )
+    provides=(
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
+
+package_gobject-introspection-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/share/aclocal
+        usr/share/gobject-introspection-1.0
+        usr/share/gir-1.0
+    )
+    depends=(
+        "gobject-introspection=${pkgver}"
+    )
+    std_split_package
+}
