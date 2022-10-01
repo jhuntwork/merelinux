@@ -3,7 +3,7 @@
 
 pkgname=(db libdb libdb-dev)
 pkgver=5.3.28
-pkgrel=1
+pkgrel=2
 pkgdesc='A self-contained embedded SQL database engine.'
 arch=(x86_64)
 url='https://www.oracle.com/database/technologies/related/berkeleydb.html'
