@@ -3,7 +3,7 @@
 
 pkgname=strace
 pkgver=5.13
-pkgrel=2
+pkgrel=3
 pkgdesc='A diagnostic, debugging and instructional userspace tracer for Linux'
 arch=(x86_64)
 url='https://strace.io'
@@ -24,8 +24,8 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    CFLAGS+=' -static' \
-      ./configure \
+    CFLAGS+=' -Wno-deprecated-non-prototype -static' \
+    ./configure \
       --prefix=/usr \
       --enable-mpers=no
     make
