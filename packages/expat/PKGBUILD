@@ -1,0 +1,41 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+_pkgname=expat
+pkgname="${_pkgname}-dev"
+pkgver=2.4.9
+pkgrel=1
+pkgdesc='A stream oriented C library for parsing XML'
+arch=(x86_64)
+url='https://libexpat.github.io/'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "http://downloads.sourceforge.net/${_pkgname}/${_pkgname}-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    7f44d1469b110773a94b0d5abeeeffaef79f8bd6406b07e52394bcf48126437a
+)
+
+
+build() {
+    cd_unpacked_src
+    CFLAGS+=' -fPIC' ./configure --prefix=/usr \
+        --disable-shared \
+        --enable-static
+    make
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/pkgconfig
+    )
+    std_package
+}
