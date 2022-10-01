@@ -2,7 +2,7 @@
 # shellcheck disable=SC2034,SC2154
 
 pkgname=(tmux)
-pkgver=3.2a
+pkgver=3.3a
 pkgrel=1
 pkgdesc='A terminal multiplexer'
 arch=(x86_64)
@@ -22,7 +22,7 @@ source=(
 )
 
 sha256sums=(
-    551553a4f82beaa8dadc9256800bcc284d7c000081e47aa6ecbb6ff36eacd05f
+    e4fd347843bd0772c4f48d6dde625b0b109b7a380ff15db21e97c11a4dcdf93f
 )
 
 
