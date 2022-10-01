@@ -3,7 +3,7 @@
 
 pkgname=(pcre libpcre-dev)
 pkgver=8.45
-pkgrel=1
+pkgrel=2
 pkgdesc='Perl Compatible Regular Expressions'
 arch=(x86_64)
 url='http://pcre.org'
@@ -14,10 +14,10 @@ makedepends=()
 options=()
 changelog=ChangeLog
 source=(
-    "https://ftp.pcre.org/pub/pcre/pcre-${pkgver}.tar.gz"
+    "https://sourceforge.net/projects/pcre/files/pcre/${pkgver}/pcre-${pkgver}.tar.bz2"
 )
 sha256sums=(
-    4e6ce03e0336e8b4a3d6c2b70b1c5e18590a5673a98186da90d4f33c23defc09
+    4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8
 )
 
 
