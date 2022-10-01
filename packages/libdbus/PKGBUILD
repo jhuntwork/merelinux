@@ -1,0 +1,46 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=libdbus-dev
+pkgver=1.15.0
+pkgrel=1
+pkgdesc='A message bus library'
+arch=(x86_64)
+url='http://dbus.freedesktop.org'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(
+    expat-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "http://dbus.freedesktop.org/releases/dbus/dbus-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    5073c8cb9ad20226647bb38f4965182b762a6e1f595ccdc8e59411014bfd640a
+)
+
+
+build() {
+    cd_unpacked_src
+    export CFLAGS+=' -fPIC'
+    ./configure --prefix=/usr \
+        --enable-static \
+        --disable-shared \
+        --disable-doxygen-docs \
+        --disable-xml-docs
+    make
+}
+
+package_libdbus-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.a
+        usr/lib/dbus-1.0
+        usr/lib/pkgconfig
+    )
+    std_package
+}
