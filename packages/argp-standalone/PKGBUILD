@@ -1,0 +1,43 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(argp-standalone-dev)
+pkgver=1.4.1
+pkgrel=1
+pkgdesc="An argp library for systems which don't provide one themselves (most non-GNU ones)"
+arch=(x86_64)
+url='https://github.com/ericonr/argp-standalone'
+license=(LGPL-2.1-or-later)
+groups=(base)
+depends=()
+makedepends=(libtool)
+options=()
+changelog=ChangeLog
+source=(
+    "https://github.com/ericonr/argp-standalone/archive/refs/tags/${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    879d76374424dce051b812f16f43c6d16de8dbaddd76002f83fd1b6e57d39e0b
+)
+
+
+build() {
+    cd_unpacked_src
+    autoreconf -i
+    CFLAGS+=' -fPIC --static' \
+        ./configure --prefix=/usr
+    make
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+    )
+    cd_unpacked_src
+    install -d "${pkgdir}/usr/include"
+    install -d "${pkgdir}/usr/lib"
+    install -m0644 argp.h "${pkgdir}/usr/include/"
+    install -m0644 libargp.a "${pkgdir}/usr/lib/"
+}
