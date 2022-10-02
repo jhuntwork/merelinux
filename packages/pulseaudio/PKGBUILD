@@ -1,0 +1,96 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(pulseaudio libpulse-dev)
+pkgver=16.1
+pkgrel=1
+pkgdesc='A sound server system for POSIX OSes'
+arch=(x86_64)
+url='https://www.freedesktop.org/wiki/Software/PulseAudio/'
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    alsa-lib-dev
+    flac-dev
+    gdbm-dev
+    glib-dev
+    libdbus-dev
+    libffi-dev
+    libltdl-dev
+    libogg-dev
+    libopus-dev
+    libpcre2-dev
+    libsndfile-dev
+    libvorbis-dev
+    meson
+    ninja
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    8eef32ce91d47979f95fd9a935e738cd7eb7463430dabc72863251751e504ae4
+)
+
+
+build() {
+    cd_unpacked_src
+    # man requires perl xml libs, tests require check
+    meson build/ \
+        -D prefix=/usr \
+        -D buildtype=release \
+        -D tests=false \
+        -D doxygen=false \
+        -D man=false \
+        -D database=gdbm
+    ninja -C build/
+}
+
+package_pulseaudio() {
+    pkgfiles=(
+        etc/pulse
+        usr/bin
+        usr/lib/pulse*
+        usr/lib/*.so.*
+        usr/share
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libFLAC.so.8
+        libasound.so.2
+        libgdbm.so.6
+        libglib-2.0.so.0
+        libltdl.so.7
+        libogg.so.0
+        libopus.so.0
+        libpcre2-8.so.0
+        libsndfile.so.1
+        libvorbis.so.0
+        libvorbisenc.so.2
+    )
+    provides=(
+        libpulse.so.0
+        libpulse-simple.so.0
+        libpulse-mainloop-glib.so.0
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
+
+package_libpulse-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "pulseaudio=${pkgver}"
+    )
+    std_split_package
+}
