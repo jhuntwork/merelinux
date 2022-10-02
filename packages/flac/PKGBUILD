@@ -1,0 +1,64 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(flac flac-dev)
+pkgver=1.3.3
+pkgrel=1
+pkgdesc='Free Lossless Audio Codec library'
+arch=(x86_64)
+url='http://xiph.org'
+license=(GPL)
+groups=()
+depends=()
+makedepends=(libogg-dev)
+options=()
+changelog=ChangeLog
+source=(
+    "http://downloads.xiph.org/releases/flac/flac-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    213e82bd716c9de6db2f98bcadbc4c24c7e2efe8c75939a1a84e28539c4e1748
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-static \
+        --enable-shared
+    make
+}
+
+package_flac() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libogg.so.0
+        libunwind.so.1
+    )
+    provides=(
+        libFLAC.so.8
+        libFLAC++.so.6
+    )
+    std_package
+}
+
+package_flac-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
+        usr/lib/pkgconfig
+        usr/share/aclocal
+    )
+    depends=(
+        "flac=${pkgver}"
+    )
+    std_split_package
+}
