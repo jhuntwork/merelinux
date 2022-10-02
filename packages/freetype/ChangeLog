@@ -1,3 +1,7 @@
+2.12.1-2 (2022-10-02)
+
+	Fix dependency on libpng
+
 2.12.1-1 (2022-10-01)
 
 	Upgrade to 2.12.1
