@@ -1,0 +1,47 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(wayland-protocols-dev)
+pkgver=1.25
+pkgrel=1
+pkgdesc='Extended Wayland protocols'
+arch=(x86_64)
+url=http://wayland.freedesktop.org
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    meson
+    ninja
+    wayland-dev
+    xorg-macros
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://wayland.freedesktop.org/releases/wayland-protocols-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    f1ff0f7199d0a0da337217dd8c99979967808dc37731a1e759e822b75b571460
+)
+
+
+build() {
+    cd_unpacked_src
+    meson build/ -D prefix=/usr --buildtype=release
+    ninja -C build/
+}
+
+package() {
+    pkgfiles=(
+        usr/lib/pkgconfig
+        usr/share
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    cd "${pkgdirbase}/dest" || return
+    install -d usr/lib
+    mv usr/share/pkgconfig usr/lib/
+    std_split_package
+}
