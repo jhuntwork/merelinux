@@ -1,0 +1,79 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libsndfile libsndfile-dev)
+pkgver=1.1.0
+pkgrel=1
+pkgdesc='a C library for reading and writing files containing sampled sound'
+arch=(x86_64)
+url='https://github.com/libsndfile/libsndfile'
+license=(LGPL-2.1)
+groups=()
+depends=()
+makedepends=(
+    alsa-lib-dev
+    flac-dev
+    libogg-dev
+    libopus-dev
+    libsqlite-dev
+    libtool
+    libvorbis-dev
+    python
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://github.com/libsndfile/libsndfile/releases/download/${pkgver}/libsndfile-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    0f98e101c0f7c850a71225fb5feaf33b106227b3d331333ddc9bacee190bcf41
+)
+
+prepare() {
+    cd_unpacked_src
+    autoreconf -fiv
+}
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-shared \
+        --enable-static
+    make
+}
+
+package_libsndfile() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/*.so.*
+        usr/share/man/man1
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libFLAC.so.8
+        libasound.so.2
+        libogg.so.0
+        libopus.so.0
+        libvorbis.so.0
+        libvorbisenc.so.2
+    )
+    provides=(
+        libsndfile.so.1
+    )
+    std_package
+}
+
+package_libsndfile-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "libsndfile=${pkgver}"
+    )
+    std_split_package
+}
+
