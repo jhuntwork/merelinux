@@ -1,0 +1,58 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libopus libopus-dev)
+pkgver=1.3.1
+pkgrel=1
+pkgdesc='A totally open, royalty-free, highly versatile audio codec'
+arch=(x86_64)
+url='https://www.opus-codec.org/'
+license=(BSD)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "https://archive.mozilla.org/pub/opus/opus-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    65b58e1e25b2a114157014736a3d9dfeaad8d41be1c8179866f144a2fb44ff9d
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-static \
+        --enable-shared
+    make
+}
+
+package_libopus() {
+    pkgfiles=(
+        usr/lib/*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libopus.so.0
+    )
+    std_package
+}
+
+package_libopus-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
+        usr/lib/pkgconfig
+        usr/share/aclocal
+    )
+    depends=(
+        "libopus=${pkgver}"
+    )
+    std_split_package
+}
