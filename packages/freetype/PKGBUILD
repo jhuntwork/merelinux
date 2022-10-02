@@ -3,7 +3,7 @@
 
 pkgname=(freetype freetype-dev)
 pkgver=2.12.1
-pkgrel=2
+pkgrel=3
 pkgdesc='A freely available software library to render fonts'
 arch=(x86_64)
 url=https://freetype.org/
@@ -11,6 +11,10 @@ license=(GPL)
 groups=()
 depends=()
 makedepends=(
+    glib-dev
+    freetype-dev
+    harfbuzz-dev
+    libpcre2-dev
     libpng-dev
     zlib-ng-dev
 )
@@ -36,6 +40,9 @@ package_freetype() {
     )
     depends=(
         "ld-musl-$(arch).so.1"
+        libglib-2.0.so.0
+        libharfbuzz.so.0
+        libpcre2-8.so.0
         libpng16.so.16
         libz.so.1
     )
