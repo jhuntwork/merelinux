@@ -1,0 +1,48 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libepoxy-dev)
+pkgver=1.5.10
+pkgrel=1
+pkgdesc='A library for handling OpenGL function pointer management'
+arch=(x86_64)
+url=https://github.com/anholt/libepoxy
+license=(MIT)
+groups=()
+depends=()
+makedepends=(
+    mesa-dev
+    meson
+    ninja
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://github.com/anholt/libepoxy/archive/refs/tags/${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    a7ced37f4102b745ac86d6a70a9da399cc139ff168ba6b8002b4d8d43c900c15
+)
+
+
+build() {
+    cd_unpacked_src
+    meson build/ \
+        -D prefix=/usr \
+        -D buildtype=release \
+        -D default_library=static \
+        -D x11=false
+    ninja -C build/
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/pkgconfig
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
