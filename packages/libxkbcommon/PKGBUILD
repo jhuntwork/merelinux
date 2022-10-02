@@ -1,0 +1,57 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=libxkbcommon-dev
+pkgver=1.4.1
+pkgrel=1
+pkgdesc='A library for handling of keyboard descriptions'
+arch=(x86_64)
+url=http://xkbcommon.org
+license=(MIT)
+groups=(base)
+depends=()
+makedepends=(
+    bison
+    libffi-dev
+    libxml2-dev
+    meson
+    ninja
+    python
+    wayland-dev
+    wayland-protocols-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://xkbcommon.org/download/libxkbcommon-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    943c07a1e2198026d8102b17270a1f406e4d3d6bbc4ae105b9e1b82d7d136b39
+)
+
+
+build() {
+    cd_unpacked_src
+    find . -name meson.build -exec sed -i \
+        -e 's@shared_library@static_library@g' \
+        -e 's@= library(@= static_library(@g' '{}' \;
+    sed -i -e "/version: '0.0.0'/d" meson.build
+    meson build/ \
+        -D prefix=/usr \
+        -D enable-docs=false \
+        -D enable-x11=false
+    ninja -C build/
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.a
+        usr/lib/pkgconfig
+        usr/share
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
