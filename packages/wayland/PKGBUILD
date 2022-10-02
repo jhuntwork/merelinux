@@ -1,0 +1,74 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(wayland wayland-dev)
+pkgver=1.21.0
+pkgrel=1
+pkgdesc='A simpler replacement for X'
+arch=(x86_64)
+url=http://wayland.freedesktop.org
+license=()
+groups=(base)
+depends=()
+makedepends=(
+    expat-dev
+    libffi-dev
+    libxml2-dev
+    meson
+    ninja
+    python
+    xorg-macros
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://gitlab.freedesktop.org/wayland/wayland/-/releases/${pkgver}/downloads/wayland-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    6dc64d7fc16837a693a51cfdb2e568db538bfdc9f457d4656285bb9594ef11ac
+)
+
+
+build() {
+    cd_unpacked_src
+    export CFLAGS+=' -fPIC'
+    meson build/ -D prefix=/usr -D documentation=false --buildtype=release
+    ninja -C build/
+}
+
+package_wayland() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/*.so.*
+        usr/share/wayland
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libffi.so.8
+        libxml2.so.2
+    )
+    provides=(
+        libwayland-client.so.0
+        libwayland-cursor.so.0
+        libwayland-egl.so.1
+        libwayland-server.so.0
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
+
+package_wayland-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.so
+        usr/lib/pkgconfig
+        usr/share/aclocal
+    )
+    depends=(
+        "wayland=${pkgver}"
+        libffi-dev
+    )
+    std_split_package
+}
