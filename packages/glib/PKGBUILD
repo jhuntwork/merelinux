@@ -4,7 +4,7 @@
 pkgname=(glib glib-dev)
 _vermain=2.74
 pkgver="${_vermain}.0"
-pkgrel=1
+pkgrel=2
 pkgdesc='A low-level core library that forms the basis for GTK and GNOME'
 arch=(x86_64)
 url=https://www.gtk.org/
@@ -51,6 +51,7 @@ package_glib() {
     depends=(
         "ld-musl-$(arch).so.1"
         libffi.so.8
+        libpcre2-8.so.0
         libz.so.1
     )
     provides=(
@@ -59,7 +60,6 @@ package_glib() {
         libgmodule-2.0.so.0
         libgobject-2.0.so.0
         libgthread-2.0.so.0
-        libpcre2-8.so.0
     )
     cd_unpacked_src
     DESTDIR="${pkgdirbase}/dest" ninja -C build/ install

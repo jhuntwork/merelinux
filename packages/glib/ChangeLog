@@ -1,3 +1,7 @@
+2.74.0-2 (2022-10-02)
+
+	Fix dependency declaration for libpcre2
+
 2.74.0-1 (2022-10-01)
 
 	Upgrade to 2.74
