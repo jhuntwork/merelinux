@@ -1,0 +1,57 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(shared-mime-info)
+pkgver=2.2
+pkgrel=1
+pkgdesc='A core database of common MIME types, their file extensions and icon names'
+arch=(x86_64)
+url=https://gitlab.freedesktop.org/xdg/shared-mime-info
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    gettext
+    glib-dev
+    itstool
+    libffi-dev
+    libpcre2-dev
+    libxml2-dev
+    meson
+    ninja
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/${pkgver}/shared-mime-info-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    bcf5d552318136cf7b3ae259975f414fbcdc9ebce000c87cf1f0901ff14e619f
+)
+
+
+build() {
+    cd_unpacked_src
+    meson build/ -D prefix=/usr
+    ninja -C build/
+}
+
+package() {
+    pkgfiles=(
+        usr
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libglib-2.0.so.0
+        libpcre2-8.so.0
+        libxml2.so.2
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    cd "${pkgdirbase}/dest" || return
+    install -d usr/lib
+    mv usr/share/pkgconfig usr/lib/
+    std_split_package
+}
