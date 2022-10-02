@@ -1,0 +1,38 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=xorg-macros
+pkgver=1.19.3
+pkgrel=1
+pkgdesc='m4 macros for the X.org build system'
+arch=(x86_64)
+url='http://x.org'
+license=()
+groups=(base)
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "http://ftp.x.org/pub/individual/util/util-macros-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    0f812e6e9d2786ba8f54b960ee563c0663ddbe2434bf24ff193f5feab1f31971
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var
+    make
+}
+
+package() {
+    cd_unpacked_src
+    make DESTDIR="$pkgdir" install
+    install -d "${pkgdir}/usr/lib"
+    mv "${pkgdir}/usr/share/pkgconfig" "${pkgdir}/usr/lib"
+}
