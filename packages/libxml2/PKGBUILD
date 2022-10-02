@@ -1,0 +1,77 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libxml2 libxml2-dev libxml2-python)
+pkgver=2.10.2
+pkgrel=1
+pkgdesc='An XML C parser and toolkit.'
+arch=(x86_64)
+url='http://xmlsoft.org/'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(
+    libtool
+    python-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://gitlab.gnome.org/GNOME/libxml2/-/archive/v${pkgver}/libxml2-v${pkgver}.tar.bz2"
+)
+sha256sums=(
+    d50e8a55b2797501929d3411b81d5d37ec44e9a4aa58eae9052572977c632d7a
+)
+
+
+build() {
+    cd_unpacked_src
+    ./autogen.sh --prefix=/usr \
+      --enable-static \
+      --with-python=/usr/bin/python
+    make
+}
+
+package_libxml2() {
+    pkgfiles=(
+        usr/bin/xmlcatalog
+        usr/bin/xmllint
+        usr/lib/lib*.so.*
+        usr/share/man/man1
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libxml2.so.2
+    )
+    std_package
+}
+
+package_libxml2-dev() {
+    pkgfiles=(
+        usr/bin/xml2-config
+        usr/include
+        usr/lib/*.a
+        usr/lib/*.so
+        usr/lib/cmake
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "libxml2=${pkgver}"
+    )
+    std_split_package
+}
+
+package_libxml2-python() {
+    pkgfiles=(
+        usr/lib/python3.10
+    )
+    depends=(
+        "python>=3.10.0"
+        "python<3.11.0"
+        "libxml2=${pkgver}"
+        "ld-musl-$(arch).so.1"
+    )
+    std_split_package
+}
