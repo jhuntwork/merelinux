@@ -1,0 +1,68 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libdrm libdrm-dev)
+pkgver=2.4.113
+pkgrel=1
+pkgdesc='A user space library for accessing DRM'
+arch=(x86_64)
+url='http://dri.freedesktop.org'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(
+    libpciaccess-dev
+    meson
+    ninja
+    python
+    xorg-macros
+)
+options=()
+changelog=ChangeLog
+source=(
+    "http://dri.freedesktop.org/libdrm/libdrm-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    7fd7eb2967f63beb4606f22d50e277d993480d05ef75dd88a9bd8e677323e5e1
+)
+
+
+build() {
+    cd_unpacked_src
+    meson build/ -Dprefix=/usr --buildtype=release
+    ninja -C build/
+}
+
+package_libdrm() {
+    pkgfiles=(
+        usr/lib/*.so.*
+        usr/share
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libdrm.so.2
+        libdrm_amdgpu.so.1
+        libdrm_intel.so.1
+        libdrm_nouveau.so.2
+        libdrm_radeon.so.1
+        libkms.so.1
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
+
+package_libdrm-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "libdrm=${pkgver}"
+    )
+    std_split_package
+}
