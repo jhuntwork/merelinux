@@ -3,7 +3,7 @@
 
 pkgname=(libtool libltdl libltdl-dev)
 pkgver=2.4.6
-pkgrel=7
+pkgrel=8
 pkgdesc='A generic library support script.'
 arch=(x86_64)
 url='http://www.gnu.org/software/libtool'
@@ -64,7 +64,7 @@ package_libltdl-dev() {
         usr/lib/lib*.so
     )
     depends=(
-        libltdl.so.7.3.1
+        "libltdl=${pkgver}"
     )
     std_split_package
 }
