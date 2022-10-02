@@ -1,0 +1,85 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(harfbuzz harfbuzz-dev)
+pkgver=5.2.0
+pkgrel=1
+pkgdesc='A text shaping library'
+arch=(x86_64)
+url=https://github.com/harfbuzz/harfbuzz
+license=(MIT)
+groups=()
+depends=()
+makedepends=(
+    freetype-dev
+    glib-dev
+    libffi-dev
+    libpcre2-dev
+    libpng-dev
+    meson
+    ninja
+    gobject-introspection-dev
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://github.com/harfbuzz/harfbuzz/releases/download/${pkgver}/harfbuzz-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    735a94917b47936575acb4d4fa7e7986522f8a89527e4635721474dee2bc942c
+)
+
+
+build() {
+    cd_unpacked_src
+    meson build/ \
+        -Dprefix=/usr \
+        -Dbuildtype=release \
+        -Ddefault_library=both \
+        -Dintrospection=enabled
+    ninja -C build/
+}
+
+package_harfbuzz() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libffi.so.8
+        libfreetype.so.6
+        libglib-2.0.so.0
+        libgobject-2.0.so.0
+        libpcre2-8.so.0
+        libpng16.so.16
+        libunwind.so.1
+        libz.so.1
+    )
+    provides=(
+        libharfbuzz.so.0
+        libharfbuzz-gobject.so.0
+        libharfbuzz-subset.so.0
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
+
+package_harfbuzz-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/girepository-1.0
+        usr/lib/cmake
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/share/gir-1.0
+    )
+    depends=(
+        "harfbuzz=${pkgver}"
+    )
+    std_split_package
+}
