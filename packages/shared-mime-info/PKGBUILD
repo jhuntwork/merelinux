@@ -3,7 +3,7 @@
 
 pkgname=(shared-mime-info)
 pkgver=2.2
-pkgrel=1
+pkgrel=2
 pkgdesc='A core database of common MIME types, their file extensions and icon names'
 arch=(x86_64)
 url=https://gitlab.freedesktop.org/xdg/shared-mime-info
@@ -34,7 +34,9 @@ sha256sums=(
 
 build() {
     cd_unpacked_src
-    meson build/ -D prefix=/usr
+    meson build/ -Dprefix=/usr \
+        --buildtype=release \
+        -Dupdate-mimedb=true
     ninja -C build/
 }
 
