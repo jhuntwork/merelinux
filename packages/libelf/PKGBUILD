@@ -1,0 +1,69 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libelf libelf-dev)
+pkgver=0.187
+pkgrel=1
+pkgdesc='A collection of utilities and libraries to read, create and modify ELF binary files'
+arch=(x86_64)
+url='https://sourceware.org/elfutils/'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(
+    argp-standalone-dev
+    musl-fts-dev
+    musl-obstack-dev
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://sourceware.org/elfutils/ftp/${pkgver}/elfutils-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    e70b0dfbe610f90c4d1fe0d71af142a4e25c3c4ef9ebab8d2d72b65159d454c8
+)
+
+
+build() {
+    cd_unpacked_src
+    CFLAGS+=' -fPIC -Wno-error -DFNM_EXTMATCH=0' \
+        ./configure --prefix=/usr \
+        --disable-debuginfod \
+        --disable-libdebuginfod
+    make
+}
+
+package_libelf() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libz.so.1
+    )
+    provides=(
+        libasm.so.1
+        libelf.so.1
+        libdw.so.1
+    )
+
+    std_package
+}
+
+package_libelf-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/libasm.so
+        usr/lib/libdw.so
+        usr/lib/libelf.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "libelf=${pkgver}"
+    )
+    std_package
+}
