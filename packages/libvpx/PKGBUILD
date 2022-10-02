@@ -1,0 +1,51 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libvpx-dev)
+pkgver=1.12.0
+pkgrel=1
+pkgdesc='the WebM VP8/VP9 Codec SDK'
+arch=(x86_64)
+url=https://www.webmproject.org/code/
+license=(BSD)
+groups=()
+depends=()
+makedepends=(
+    nasm
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://github.com/webmproject/libvpx/archive/v${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    f1acc15d0fd0cb431f4bf6eac32d5e932e40ea1186fe78e074254d6d003957bb
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i 's/diff --version/command -v diff/' configure
+    CC=clang CXX=clang++ ./configure \
+        --prefix=/usr \
+        --enable-vp8 \
+        --enable-vp9 \
+        --enable-experimental \
+        --enable-pic \
+        --enable-postproc \
+        --enable-runtime-cpu-detect \
+        --disable-tools \
+        --disable-examples \
+        --disable-docs \
+        --disable-unit-tests \
+        --disable-install-srcs \
+        --disable-install-bins \
+        --as=nasm
+    make
+}
+
+package() {
+    cd_unpacked_src
+    make DIST_DIR="${pkgdir}/usr" install
+}
