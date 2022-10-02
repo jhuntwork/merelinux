@@ -1,0 +1,32 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(gperf)
+pkgver=3.1
+pkgrel=1
+pkgdesc='A perfect hash function generator'
+arch=(x86_64)
+url='http://www.gnu.org/software/gperf/'
+license=(GPL3)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "http://ftp.gnu.org/gnu/gperf/gperf-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    588546b945bba4b70b6a3a616e80b4ab466e3f33024a352fc2198112cdbb3ae2
+)
+
+
+build() {
+    export LDFLAGS='-static -Wl,-static -lc++abi -lunwind'
+    std_build
+}
+
+package() {
+    std_package
+}
