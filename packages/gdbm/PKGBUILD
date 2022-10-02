@@ -1,0 +1,65 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(gdbm gdbm-dev)
+pkgver=1.23
+pkgrel=1
+pkgdesc='GNU database library'
+url="https://www.gnu.org/software/gdbm/gdbm.html"
+license=('GPL3')
+arch=('x86_64')
+depends=()
+makedepends=(libtool gettext)
+provides=('libgdbm_compat.so' 'libgdbm.so')
+source=(
+    "https://ftp.gnu.org/gnu/gdbm/${pkgname[0]}-${pkgver}.tar.gz"
+)
+sha256sums=(
+    74b1081d21fff13ae4bd7c16e5d6e504a4c26f7cde1dca0d963a484174bbcacd
+)
+
+prepare() {
+    cd_unpacked_src
+    autoreconf -fiv
+}
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-libgdbm-compat
+    make
+}
+
+check() {
+    cd_unpacked_src
+    make check
+}
+
+package_gdbm() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.so.*
+        usr/share/man/man1
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libgdbm.so.6
+        libgdbm_compat.so.4
+    )
+    std_package
+}
+
+package_gdbm-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/share/man/man3
+    )
+    depends=(
+        "gdbm=${pkgver}"
+    )
+    std_split_package
+}
