@@ -1,0 +1,55 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154
+
+pkgname=(glslang)
+pkgver=11.11.0
+pkgrel=1
+pkgdesc='Khronos-reference front end for GLSL/ESSL'
+arch=(x86_64)
+url='https://github.com/KhronosGroup/glslang'
+license=(BSD Apache GPL3)
+groups=()
+depends=()
+makedepends=(
+    cmake
+    python
+)
+options=()
+changelog=ChangeLog
+
+source=(
+    "https://github.com/KhronosGroup/glslang/archive/refs/tags/${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    26c216c3062512c018cbdd752224b8dad703b7e5bb90bf338ba2dbb5d4f11438
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i '/undefined,error/d' CMakeLists.txt
+    mkdir build
+    cd build || return 1
+    cmake \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_BUILD_TYPE=Release \
+        ..
+    make
+}
+
+package() {
+    pkgfiles=(
+        usr/bin
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libunwind.so.1
+    )
+    cd_unpacked_src
+    cd build || return 1
+    make DESTDIR="${pkgdirbase}/dest" install
+    std_split_package
+}
