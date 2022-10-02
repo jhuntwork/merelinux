@@ -1,0 +1,72 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(libjpeg-turbo libjpeg-turbo-dev)
+pkgver=2.1.4
+pkgrel=1
+pkgdesc='JPEG libs'
+arch=(x86_64)
+url=https://libjpeg-turbo.org/
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(
+    cmake
+    nasm
+    ninja
+)
+options=()
+changelog=ChangeLog
+source=(
+    "http://downloads.sourceforge.net/libjpeg-turbo/libjpeg-turbo-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    d3ed26a1131a13686dfca4935e520eb7c90ae76fbc45d98bb50a8dc86230342b
+)
+
+
+build() {
+    cd_unpacked_src
+    export CFLAGS+=' -fPIC'
+    install -d build
+    cd build || return 1
+    cmake -G Ninja -Wno-dev \
+        -DCMAKE_INSTALL_PREFIX=/usr \
+        -DCMAKE_INSTALL_DEFAULT_LIBDIR=/usr/lib \
+        -DWITH_JPEG8=ON \
+        ..
+    cmake --build .
+}
+
+package_libjpeg-turbo() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.so.*
+        usr/share/man/man1
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libjpeg.so.8
+    )
+    cd_unpacked_src
+    cd build || return 1
+    export DESTDIR="${pkgdirbase}/dest"
+    cmake --build . --target install
+    std_split_package
+}
+
+package_libjpeg-turbo-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "libjpeg-turbo=${pkgver}"
+    )
+    std_split_package
+}
