@@ -1,0 +1,45 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=libpciaccess-dev
+pkgver=0.16
+pkgrel=1
+pkgdesc=$pkgname
+arch=(x86_64)
+url=http://x.org
+license=()
+groups=(base)
+depends=()
+makedepends=(
+    xorg-macros
+)
+makedepends=(
+)
+options=()
+changelog=ChangeLog
+source=(
+    "http://ftp.x.org/pub/individual/lib/libpciaccess-${pkgver}.tar.bz2"
+)
+
+sha256sums=(
+    214c9d0d884fdd7375ec8da8dcb91a8d3169f263294c9a90c575bf1938b9f489
+)
+
+
+build() {
+    cd_unpacked_src
+    CFLAGS+=' -fPIC' ./configure --prefix=/usr \
+        --sysconfdir=/etc \
+        --localstatedir=/var \
+        --enable-static
+    make
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/*.a
+        usr/lib/pkgconfig
+    )
+    std_package
+}
