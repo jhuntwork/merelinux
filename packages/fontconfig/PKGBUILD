@@ -1,0 +1,78 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(fontconfig fontconfig-dev)
+pkgver=2.14.0
+pkgrel=1
+pkgdesc='A library for configuring and customizing font access'
+arch=(x86_64)
+url=https://www.freedesktop.org/wiki/Software/fontconfig/
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    expat-dev
+    freetype-dev
+    glib-dev
+    gperf
+    harfbuzz-dev
+    libpcre2-dev
+    libpng-dev
+    python
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://www.freedesktop.org/software/fontconfig/release/fontconfig-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    dcbeb84c9c74bbfdb133d535fe1c7bedc9f2221a8daf3914b984c44c520e9bac
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-shared \
+        --enable-static \
+        --sysconfdir=/etc
+    make
+}
+
+package_fontconfig() {
+    pkgfiles=(
+        etc/fonts
+        usr/bin
+        usr/lib/lib*.so.*
+        usr/share/fontconfig
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libfreetype.so.6
+        libglib-2.0.so.0
+        libharfbuzz.so.0
+        libpcre2-8.so.0
+        libpng16.so.16
+        libz.so.1
+    )
+    provides=(
+        libfontconfig.so.1
+    )
+    std_package
+}
+
+package_fontconfig-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/share/man/man3
+    )
+    depends=(
+        "fontconfig=${pkgver}"
+    )
+    std_split_package
+}
