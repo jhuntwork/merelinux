@@ -1,0 +1,77 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(cairo cairo-dev)
+pkgver=1.17.4
+pkgrel=1
+pkgdesc='A 2D graphics library with support for multiple output devices'
+arch=(x86_64)
+url=https://cairographics.org/
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    expat-dev
+    fontconfig-dev
+    freetype-dev
+    glib-dev
+    harfbuzz-dev
+    libffi-dev
+    libpcre2-dev
+    libpng-dev
+    pixman-dev
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://cairographics.org/snapshots/cairo-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    74b24c1ed436bbe87499179a3b27c43f4143b8676d8ad237a6fa787401959705
+)
+
+
+build() {
+    std_build
+}
+
+package_cairo() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/cairo
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libffi.so.8
+        libfreetype.so.6
+        libfontconfig.so.1
+        libglib-2.0.so.0
+        libgobject-2.0.so.0
+        libharfbuzz.so.0
+        libpcre2-8.so.0
+        libpixman-1.so.0
+        libpng16.so.16
+        libz.so.1
+    )
+    provides=(
+        libcairo.so.2
+        libcairo-gobject.so.2
+    )
+    std_package
+}
+
+package_cairo-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "cairo=${pkgver}"
+    )
+    std_split_package
+}
