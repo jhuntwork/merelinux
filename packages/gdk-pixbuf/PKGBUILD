@@ -1,0 +1,87 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(gdk-pixbuf gdk-pixbuf-dev)
+pkgver=2.42.9
+pkgrel=1
+pkgdesc='A library that loads image data in various formats and stores it as linear buffers in memory'
+arch=(x86_64)
+url=https://gitlab.gnome.org/GNOME/gdk-pixbuf
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    cmake
+    glib-dev
+    gobject-introspection-dev
+    libffi-dev
+    libjpeg-turbo-dev
+    libpcre2-dev
+    libpng-dev
+    meson
+    ninja
+    shared-mime-info
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://gitlab.gnome.org/GNOME/gdk-pixbuf/-/archive/${pkgver}/gdk-pixbuf-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    226d950375907857b23c5946ae6d30128f08cd75f65f14b14334c7a9fb686e36
+)
+
+
+build() {
+    cd_unpacked_src
+    unset CFLAGS CXXFLAGS LDFLAGS
+    meson build/ \
+        --prefix=/usr \
+        --buildtype=release \
+        --wrap-mode=nofallback \
+        -Dman=false
+    ninja -C build
+}
+
+package_gdk-pixbuf() {
+    pkgfiles=(
+        usr/bin
+        usr/lib/lib*.so.*
+        usr/lib/gdk-pixbuf-2.0
+        usr/share/thumbnailers
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libffi.so.8
+        libgio-2.0.so.0
+        libglib-2.0.so.0
+        libgmodule-2.0.so.0
+        libgobject-2.0.so.0
+        libjpeg.so.8
+        libpcre2-8.so.0
+        libpng16.so.16
+        libz.so.1
+    )
+    provides=(
+        libgdk_pixbuf-2.0.so.0
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
+
+package_gdk-pixbuf-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/girepository-1.0
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/share/gir-1.0
+    )
+    depends=(
+        "gdk-pixbuf=${pkgver}"
+    )
+    std_split_package
+}
