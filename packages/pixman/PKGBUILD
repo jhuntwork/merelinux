@@ -1,0 +1,57 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(pixman pixman-dev)
+pkgver=0.40.0
+pkgrel=1
+pkgdesc='A library providing low-level pixel manipulation features'
+arch=(x86_64)
+url='http://pixman.org'
+license=()
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "http://cairographics.org/releases/pixman-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    6d200dec3740d9ec4ec8d1180e25779c00bc749f94278c8b9021f5534db223fc
+)
+
+
+build() {
+    cd_unpacked_src
+    ./configure --prefix=/usr \
+        --enable-static \
+        --enable-shared
+    make
+}
+
+package_pixman() {
+    pkgfiles=(
+        usr/lib/lib*.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libpixman-1.so.0
+    )
+    std_package
+}
+
+package_pixman-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "pixman=${pkgver}"
+    )
+    std_split_package
+}
