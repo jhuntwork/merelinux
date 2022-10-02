@@ -1,0 +1,106 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(mesa mesa-dev)
+pkgver=22.2.0
+pkgrel=0
+pkgdesc='An OpenGL compatible 3D graphics library'
+arch=(x86_64)
+url='http://mesa.freedesktop.org'
+license=()
+groups=(base)
+depends=()
+makedepends=(
+    bison
+    expat-dev
+    flex
+    glslang
+    libdrm-dev
+    libelf-dev
+    libffi-dev
+    libpciaccess-dev
+    llvm-dev
+    meson
+    ninja
+    python
+    wayland-dev
+    wayland-protocols-dev
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "http://mesa.freedesktop.org/archive/mesa-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    b1f9c8fd08f2cae3adf83355bef4d2398e8025f44947332880f2d0066bdafa8c
+)
+
+
+build() {
+    pip install mako
+    cd_unpacked_src
+    meson build/ \
+        --buildtype=release \
+        -D prefix=/usr \
+        -D egl=enabled \
+        -D gallium-drivers='r300,nouveau,virgl,radeonsi,svga,swrast,iris' \
+        -D glx=disabled \
+        -D platforms='wayland' \
+        -D vulkan-drivers='amd,intel'
+    ninja -C build/
+}
+
+package_mesa() {
+    pkgfiles=(
+        usr/lib/dri
+        usr/lib/*.so.*
+        usr/lib/libvulkan_intel.so
+        usr/lib/libvulkan_radeon.so
+        usr/share
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libLLVM-15.so
+        libc++.so.1
+        libc++abi.so.1
+        libdrm.so.2
+        libdrm_amdgpu.so.1
+        libdrm_nouveau.so.2
+        libdrm_radeon.so.1
+        libffi.so.8
+        libunwind.so.1
+        libwayland-client.so.0
+        libwayland-server.so.0
+        libz.so.1
+    )
+    provides=(
+        libEGL.so.1
+        libGLESv1_CM.so.1
+        libGLESv2.so.2
+        libgbm.so.1
+        libglapi.so.0
+        libxatracker.so.2
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
+
+package_mesa-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/libEGL.so
+        usr/lib/libGLESv1_CM.so
+        usr/lib/libGLESv2.so
+        usr/lib/libgbm.so
+        usr/lib/libglapi.so
+        usr/lib/libxatracker.so
+        usr/lib/pkgconfig
+    )
+    depends=(
+        "mesa=${pkgver}"
+    )
+    std_split_package
+}
