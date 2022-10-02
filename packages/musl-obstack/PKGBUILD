@@ -1,0 +1,39 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(musl-obstack-dev)
+pkgver=1.2.3
+pkgrel=1
+pkgdesc='Implements the obstack functions from GNU gcc libiberty for musl'
+arch=(x86_64)
+url='https://github.com/void-linux/musl-obstack'
+license=(GPL)
+groups=(base)
+depends=()
+makedepends=(libtool)
+options=()
+changelog=ChangeLog
+source=(
+    "https://github.com/void-linux/musl-obstack/archive/refs/tags/v${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    9ffb3479b15df0170eba4480e51723c3961dbe0b461ec289744622db03a69395
+)
+
+
+build() {
+    cd_unpacked_src
+    autoreconf -i
+    CFLAGS+=' -fPIC --static' \
+        ./configure --prefix=/usr
+    make
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+    )
+    std_package
+}
