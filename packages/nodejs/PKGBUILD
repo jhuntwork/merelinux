@@ -1,0 +1,59 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(nodejs)
+pkgver=16.17.1
+pkgrel=1
+pkgdesc='A JavaScript runtime'
+arch=(x86_64)
+url='https://nodejs.org'
+license=()
+groups=()
+depends=()
+makedepends=(
+    ninja
+    openssl-dev
+    python
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://nodejs.org/dist/v${pkgver}/node-v${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    6721feb4152d56d2c6b358ce397abd5a7f1daf09ee2e25c5021b9b4d3f86a330
+)
+
+
+build() {
+    export CC=cc CXX=c++
+    cd_unpacked_src
+    sed -i 's/-latomic//' node.gyp
+    ./configure --prefix=/usr \
+        --shared-zlib \
+        --shared-openssl \
+        --with-intl=none \
+        --without-etw \
+        --without-dtrace \
+        --without-report \
+        --without-node-snapshot \
+        --without-node-code-cache \
+        --ninja
+    ninja -C out/Release
+}
+
+package() {
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libcrypto.so.1.1
+        libssl.so.1.1
+        libunwind.so.1
+        libz.so.1
+    )
+    cd_unpacked_src
+    tools/install.py install "$pkgdir" /usr
+}
