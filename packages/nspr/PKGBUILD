@@ -1,0 +1,47 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(nspr-dev)
+pkgver=4.35
+pkgrel=1
+pkgdesc='A 2D graphics library with support for multiple output devices'
+arch=(x86_64)
+url='https://firefox-source-docs.mozilla.org/nspr/index.html'
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://archive.mozilla.org/pub/nspr/releases/v${pkgver}/src/nspr-${pkgver}.tar.gz"
+)
+
+sha256sums=(
+    7ea3297ea5969b5d25a5dd8d47f2443cda88e9ee746301f6e1e1426f8a6abc8f
+)
+
+
+build() {
+    cd_unpacked_src
+    cd nspr || return 1
+    ./configure --prefix=/usr \
+        --with-mozilla \
+        --with-pthreads \
+        --enable-64bit
+    make
+}
+
+package() {
+    pkgfiles=(
+        usr/include
+        usr/lib/lib*.a
+        usr/lib/pkgconfig
+        usr/share/aclocal
+    )
+    cd_unpacked_src
+    cd nspr || return 1
+    make DESTDIR="${pkgdirbase}/dest" install
+    std_split_package
+}
