@@ -1,29 +1,346 @@
---- Python-3.7.1.orig/Lib/ctypes/util.py
-+++ Python-3.7.1/Lib/ctypes/util.py
-@@ -157,25 +157,7 @@
-     else:
-         def _get_soname(f):
-             # assuming GNU binutils / ELF
--            if not f:
--                return None
--            objdump = shutil.which('objdump')
--            if not objdump:
--                # objdump is not available, give up
--                return None
--
--            try:
--                proc = subprocess.Popen((objdump, '-p', '-j', '.dynamic', f),
--                                        stdout=subprocess.PIPE,
--                                        stderr=subprocess.DEVNULL)
--            except OSError:  # E.g. bad executable
--                return None
--            with proc:
--                dump = proc.stdout.read()
--            res = re.search(br'\sSONAME\s+([^\s]+)', dump)
--            if not res:
--                return None
--            return os.fsdecode(res.group(1))
-+            return os.path.basename(os.path.realpath(f))
- 
-     if sys.platform.startswith(("freebsd", "openbsd", "dragonfly")):
- 
+From 01fcc848a8e93b249d799ddf0d692e282ab24a7c Mon Sep 17 00:00:00 2001
+From: Natanael Copa <ncopa@alpinelinux.org>
+Date: Thu, 6 Feb 2020 17:44:35 +0100
+Subject: [PATCH 1/3] bpo-21622: Fix ctypes.util.find_library with musl
+
+Musl libc does not use any ld.cache and `ldconfig -r` does not work with
+musl. It is also common that musl based container runtimes excludes
+objdump, gcc and ld, which means that find_library() does not work at
+all.
+
+So as a last resort, if none of the previously mentioned methods works,
+scan LD_LIBRARY_PATH and some standard locations for elf files that
+matches the specified name, in a similar way that ld does.
+
+We also update the tests so they work as expected with musl libc, which
+does not have a separate libm or libcrypt.
+
+Signed-off-by: Natanael Copa <ncopa@alpinelinux.org>
+---
+ Lib/ctypes/util.py                | 58 +++++++++++++++++++++++++++----
+ Lib/ctypes/test/test_find.py      |  9 +++++
+ Modules/_ctypes/callproc.c        | 52 +++++++++++++++++++++++++++
+ configure                         |  6 ++--
+ configure.ac                      |  6 ++--
+ pyconfig.h.in                     |  9 +++++
+ 6 files changed, 128 insertions(+), 12 deletions(-)
+
+diff --git a/Lib/ctypes/util.py b/Lib/ctypes/util.py
+index 0c2510e1619c..a52369e09556 100644
+--- a/Lib/ctypes/util.py
++++ b/Lib/ctypes/util.py
+@@ -94,10 +94,13 @@ def find_library(name):
+     import re, tempfile
+
+     def _is_elf(filename):
+-        "Return True if the given file is an ELF file"
++        "Return True if the given file is readable and is an ELF file"
+         elf_header = b'\x7fELF'
+-        with open(filename, 'br') as thefile:
+-            return thefile.read(4) == elf_header
++        try:
++            with open(filename, 'br') as thefile:
++                return thefile.read(4) == elf_header
++        except OSError:
++            return False
+
+     def _findLib_gcc(name):
+         # Run GCC's linker with the -t (aka --trace) option and examine the
+@@ -324,10 +327,52 @@ def _findLib_ld(name):
+                 pass  # result will be None
+             return result
+
++        def _findLib_musl(name):
++            # fallback for musl libc, which does not have ldconfig -p
++            # See issue #21622
++
++            from _ctypes import get_interp
++            interp = get_interp()
++            if interp == None:
++                return None
++
++            ldarch = re.sub(r'.*ld-musl-([^.]+)\..*', r'\1', interp)
++            if ldarch == interp:
++                # not musl
++                return None
++
++            from glob import glob
++            if os.path.isabs(name):
++                return name
++            if name.startswith("lib") and name.endswith(".so"):
++                suffixes = [ '.[0-9]*' ]
++                libname = name
++            else:
++                suffixes = ['.so', '.so.[0-9]*', '.musl-%s.so.[0-9]*' % ldarch]
++                libname = 'lib'+name
++            # search LD_LIBRARY_PATH list and default musl libc locations
++            paths = os.environ.get('LD_LIBRARY_PATH', '').split(':')
++            try:
++                with open('/etc/ld-musl-%s.path' % ldarch) as f:
++                    paths.extend(re.split(':|\n', f.read()))
++            except OSError:
++                paths.extend(['/lib', '/usr/local/lib', '/usr/lib'])
++
++            for d in paths:
++                f = os.path.join(d, name)
++                if _is_elf(f):
++                    return os.path.basename(f)
++                prefix = os.path.join(d, libname)
++                for suffix in suffixes:
++                    for f in sorted(glob('{0}{1}'.format(prefix, suffix))):
++                        if _is_elf(f):
++                            return os.path.basename(f)
++
+         def find_library(name):
+             # See issue #9998
+             return _findSoname_ldconfig(name) or \
+-                   _get_soname(_findLib_gcc(name)) or _get_soname(_findLib_ld(name))
++                   _get_soname(_findLib_gcc(name)) or _get_soname(_findLib_ld(name)) or \
++                   _findLib_musl(name)
+
+ ################################################################
+ # test code
+@@ -344,6 +389,7 @@ def test():
+         print(find_library("m"))
+         print(find_library("c"))
+         print(find_library("bz2"))
++        print(find_library("libbz2.so"))
+
+         # load
+         if sys.platform == "darwin":
+@@ -368,8 +414,8 @@ def test():
+             print(f"crypto\t:: {find_library('crypto')}")
+             print(f"crypto\t:: {cdll.LoadLibrary(find_library('crypto'))}")
+         else:
+-            print(cdll.LoadLibrary("libm.so"))
+-            print(cdll.LoadLibrary("libcrypt.so"))
++            print(cdll.LoadLibrary(find_library("c")))
++            print(cdll.LoadLibrary("libc.so"))
+             print(find_library("crypt"))
+
+ if __name__ == "__main__":
+diff --git a/Lib/ctypes/test/test_find.py b/Lib/ctypes/test/test_find.py
+index 1ff9d019b138..1c02769e9cf3 100644
+--- a/Lib/ctypes/test/test_find.py
++++ b/Lib/ctypes/test/test_find.py
+@@ -122,6 +122,15 @@ def test_find_library_with_ld(self):
+              unittest.mock.patch("ctypes.util._findLib_gcc", lambda *args: None):
+             self.assertNotEqual(find_library('c'), None)
+
++    def test_find_library_musl(self):
++        from _ctypes import get_interp
++        interp = get_interp()
++        if interp == None or interp.find("ld-musl-") == -1:
++            self.skipTest('ld-musl not detected')
++
++        with unittest.mock.patch("ctypes.util._findSoname_ldconfig", lambda *args: None), \
++             unittest.mock.patch("ctypes.util._get_soname", lambda *args: None):
++            self.assertNotEqual(find_library('c'), None)
+
+ if __name__ == "__main__":
+     unittest.main()
+diff --git a/Modules/_ctypes/callproc.c b/Modules/_ctypes/callproc.c
+index fa1dfac6c7d9..ac8bf5f21e3a 100644
+--- a/Modules/_ctypes/callproc.c
++++ b/Modules/_ctypes/callproc.c
+@@ -86,6 +86,13 @@
+ #include <alloca.h>
+ #endif
+
++#ifdef HAVE_ELF_H
++#include <elf.h>
++#endif
++#ifdef HAVE_LINK_H
++#include <link.h>
++#endif
++
+ #ifdef _Py_MEMORY_SANITIZER
+ #include <sanitizer/msan_interface.h>
+ #endif
+@@ -1989,7 +1996,51 @@ buffer_info(PyObject *self, PyObject *arg)
+     return Py_BuildValue("siN", dict->format, dict->ndim, shape);
+ }
+
++#ifndef MS_WIN32
++
++#ifdef HAVE_DL_ITERATE_PHDR
++static int interp_cb(struct dl_phdr_info *info, size_t size, void *data)
++{
++    const char **ps = data;
++    const char *base = (const char *)info->dlpi_addr;
++    const ElfW(Phdr) *ph = info->dlpi_phdr;
++    int phn = info->dlpi_phnum;
++
++    for(int i=0; i < phn; i++) {
++        if (ph[i].p_type == PT_INTERP) {
++            *ps = base + ph[i].p_vaddr;
++            return 1;
++        }
++    }
++    return 0;
++}
++
++static PyObject *
++get_interp(PyObject *self, PyObject *arg)
++{
++    const char *s = NULL;
++    if (PySys_Audit("ctypes.get_interp", NULL) < 0) {
++        return NULL;
++    }
++
++    if (dl_iterate_phdr(interp_cb, &s) == 1) {
++        return PyUnicode_FromString(s);
++    }
++
++    return NULL;
++}
++
++#else
++
++static PyObject *
++get_interp(PyObject *self, PyObject *arg)
++{
++    return Py_None;
++}
++
++#endif
+
++#endif
+
+ PyMethodDef _ctypes_module_methods[] = {
+     {"get_errno", get_errno, METH_NOARGS},
+@@ -2012,6 +2063,7 @@ PyMethodDef _ctypes_module_methods[] = {
+      "dlopen(name, flag={RTLD_GLOBAL|RTLD_LOCAL}) open a shared library"},
+     {"dlclose", py_dl_close, METH_VARARGS, "dlclose a library"},
+     {"dlsym", py_dl_sym, METH_VARARGS, "find symbol in shared library"},
++    {"get_interp", get_interp, METH_NOARGS},
+ #endif
+ #ifdef __APPLE__
+      {"_dyld_shared_cache_contains_path", py_dyld_shared_cache_contains_path, METH_VARARGS, "check if path is in the shared cache"},
+diff --git a/configure b/configure
+index 08ec2161cba0..689464a3aeff 100755
+--- a/configure
++++ b/configure
+@@ -9150,8 +9150,8 @@ $as_echo "#define STDC_HEADERS 1" >>confdefs.h
+
+ # checks for header files
+ for ac_header in  \
+-  alloca.h asm/types.h bluetooth.h conio.h crypt.h direct.h dlfcn.h endian.h errno.h fcntl.h grp.h \
+-  ieeefp.h io.h langinfo.h libintl.h libutil.h linux/auxvec.h sys/auxv.h linux/memfd.h \
++  alloca.h asm/types.h bluetooth.h conio.h crypt.h direct.h dlfcn.h elf.h endian.h errno.h fcntl.h grp.h \
++  ieeefp.h io.h langinfo.h libintl.h libutil.h link.h linux/auxvec.h sys/auxv.h linux/memfd.h \
+   linux/random.h linux/soundcard.h \
+   linux/tipc.h linux/wait.h netdb.h netinet/in.h netpacket/packet.h poll.h process.h pthread.h pty.h \
+   sched.h setjmp.h shadow.h signal.h spawn.h stropts.h sys/audioio.h sys/bsdtty.h sys/devpoll.h \
+@@ -15158,7 +15158,7 @@ fi
+ # checks for library functions
+ for ac_func in  \
+   accept4 alarm bind_textdomain_codeset chmod chown clock close_range confstr \
+-  copy_file_range ctermid dup dup3 execv explicit_bzero explicit_memset \
++  copy_file_range ctermid dl_iterate_phdr dup dup3 execv explicit_bzero explicit_memset \
+   faccessat fchmod fchmodat fchown fchownat fdopendir fdwalk fexecve \
+   fork fork1 fpathconf fstatat ftime ftruncate futimens futimes futimesat \
+   gai_strerror getegid getentropy geteuid getgid getgrgid getgrgid_r \
+diff --git a/configure.ac b/configure.ac
+index 7d2e83cac819..fe69f00d0fb5 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -2663,8 +2663,8 @@ AC_DEFINE(STDC_HEADERS, 1, [Define to 1 if you have the ANSI C header files.])
+
+ # checks for header files
+ AC_CHECK_HEADERS([ \
+-  alloca.h asm/types.h bluetooth.h conio.h crypt.h direct.h dlfcn.h endian.h errno.h fcntl.h grp.h \
+-  ieeefp.h io.h langinfo.h libintl.h libutil.h linux/auxvec.h sys/auxv.h linux/memfd.h \
++  alloca.h asm/types.h bluetooth.h conio.h crypt.h direct.h dlfcn.h elf.h endian.h errno.h fcntl.h grp.h \
++  ieeefp.h io.h langinfo.h libintl.h libutil.h link.h linux/auxvec.h sys/auxv.h linux/memfd.h \
+   linux/random.h linux/soundcard.h \
+   linux/tipc.h linux/wait.h netdb.h netinet/in.h netpacket/packet.h poll.h process.h pthread.h pty.h \
+   sched.h setjmp.h shadow.h signal.h spawn.h stropts.h sys/audioio.h sys/bsdtty.h sys/devpoll.h \
+@@ -4582,7 +4582,7 @@ fi
+ # checks for library functions
+ AC_CHECK_FUNCS([ \
+   accept4 alarm bind_textdomain_codeset chmod chown clock close_range confstr \
+-  copy_file_range ctermid dup dup3 execv explicit_bzero explicit_memset \
++  copy_file_range ctermid dl_iterate_phdr dup dup3 execv explicit_bzero explicit_memset \
+   faccessat fchmod fchmodat fchown fchownat fdopendir fdwalk fexecve \
+   fork fork1 fpathconf fstatat ftime ftruncate futimens futimes futimesat \
+   gai_strerror getegid getentropy geteuid getgid getgrgid getgrgid_r \
+diff --git a/pyconfig.h.in b/pyconfig.h.in
+index 1ce09855f555..110684d586d8 100644
+--- a/pyconfig.h.in
++++ b/pyconfig.h.in
+@@ -287,6 +287,9 @@
+ /* Define to 1 if you have the `dlopen' function. */
+ #undef HAVE_DLOPEN
+
++/* Define to 1 if you have the `dl_iterate_phdr' function. */
++#undef HAVE_DL_ITERATE_PHDR
++
+ /* Define to 1 if you have the `dup' function. */
+ #undef HAVE_DUP
+
+@@ -305,6 +308,9 @@
+ /* Define to 1 if you have the <editline/readline.h> header file. */
+ #undef HAVE_EDITLINE_READLINE_H
+
++/* Define to 1 if you have the <elf.h> header file. */
++#undef HAVE_ELF_H
++
+ /* Define to 1 if you have the <endian.h> header file. */
+ #undef HAVE_ENDIAN_H
+
+@@ -700,6 +706,9 @@
+ /* Define to 1 if you have the `linkat' function. */
+ #undef HAVE_LINKAT
+
++/* Define to 1 if you have the <link.h> header file. */
++#undef HAVE_LINK_H
++
+ /* Define to 1 if you have the <linux/auxvec.h> header file. */
+ #undef HAVE_LINUX_AUXVEC_H
+
+
+From 7d73c59ff21cc6493232d1c7af45b7af7d61a200 Mon Sep 17 00:00:00 2001
+From: "blurb-it[bot]" <43283697+blurb-it[bot]@users.noreply.github.com>
+Date: Wed, 10 Feb 2021 16:05:05 +0000
+Subject: [PATCH 2/3] =?UTF-8?q?=F0=9F=93=9C=F0=9F=A4=96=20Added=20by=20blu?=
+ =?UTF-8?q?rb=5Fit.?=
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+---
+ .../NEWS.d/next/Library/2021-02-10-16-05-03.bpo-21622.sNtCfz.rst | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 Misc/NEWS.d/next/Library/2021-02-10-16-05-03.bpo-21622.sNtCfz.rst
+
+diff --git a/Misc/NEWS.d/next/Library/2021-02-10-16-05-03.bpo-21622.sNtCfz.rst b/Misc/NEWS.d/next/Library/2021-02-10-16-05-03.bpo-21622.sNtCfz.rst
+new file mode 100644
+index 000000000000..b5f671cab610
+--- /dev/null
++++ b/Misc/NEWS.d/next/Library/2021-02-10-16-05-03.bpo-21622.sNtCfz.rst
+@@ -0,0 +1 @@
++Fix :func:`ctypes.util.find_library` with musl libc.
+
+From d8fefa9863082fe974ca3ad61b8f6988c5451e82 Mon Sep 17 00:00:00 2001
+From: Natanael Copa <ncopa@alpinelinux.org>
+Date: Tue, 6 Dec 2022 11:04:53 +0100
+Subject: [PATCH 3/3] Update comment as readable is implied
+
+---
+ Lib/ctypes/util.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Lib/ctypes/util.py b/Lib/ctypes/util.py
+index a52369e09556..aa4a5d733cc5 100644
+--- a/Lib/ctypes/util.py
++++ b/Lib/ctypes/util.py
+@@ -94,7 +94,7 @@ def find_library(name):
+     import re, tempfile
+
+     def _is_elf(filename):
+-        "Return True if the given file is readable and is an ELF file"
++        "Return True if the given file is an ELF file"
+         elf_header = b'\x7fELF'
+         try:
+             with open(filename, 'br') as thefile:
