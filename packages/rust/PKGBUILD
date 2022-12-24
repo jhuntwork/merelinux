@@ -1,0 +1,80 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(rust)
+pkgver=1.66.0
+pkgrel=1
+pkgdesc='The Rust programming language'
+arch=(x86_64)
+url='https://www.rust-lang.org'
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    cmake
+    llvm-dev
+    ninja
+    openssl-dev
+    python
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://static.rust-lang.org/dist/rustc-${pkgver}-src.tar.xz"
+)
+
+sha256sums=(
+    0dc176e34fae9871f855a6ba4cb30fa19d69c5b4428d29281a07419c4950715c
+)
+
+
+build() {
+    # FIXME - Add to llvm? or just bootstrap this and have it depend on itself later?
+    ln -s libunwind.so.1.0 /usr/lib/libgcc_s.so.1.0
+    ln -s libgcc_s.so.1.0 /usr/lib/libgcc_s.so.1
+    ln -s libgcc_s.so.1.0 /usr/lib/libgcc_s.so
+    export CHOST=x86_64-unknown-linux-musl
+    cd_unpacked_src
+    sed -i 's/\(crt_static_default = \)true/\1false/' \
+        compiler/rustc_target/src/spec/linux_musl_base.rs
+    ./configure \
+        --prefix=/usr \
+        --build="${CHOST}" \
+        --host="${CHOST}" \
+        --release-channel=stable \
+        --disable-docs \
+        --disable-codegen-tests \
+        --enable-extended \
+        --enable-option-checking \
+        --enable-locked-deps \
+        --enable-vendor \
+        --disable-llvm-static-stdcpp \
+        --llvm-root=/usr \
+        --tools='cargo,src' \
+        --set="target.${CHOST}.musl-root=/" \
+        --set="target.${CHOST}.crt-static=false"
+    ./x.py build -v
+}
+
+package() {
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libcrypto.so.1.1
+        libssl.so.1.1
+        libunwind.so.1
+        libz.so.1
+    )
+    provides=(
+        librustc_driver-6df729ebc511072b.so
+        libstd-1d88b09d0391d938.so
+        libtest-807256c4868665ab.so
+    )
+    cd_unpacked_src
+    DESTDIR="$pkgdir" ./x.py install -v
+    rm -rf "${pkgdir}/usr/lib/rustlib/src" \
+        "${pkgdir}/usr/share/doc" \
+        "${pkgdir}/usr/share/zsh"
+}
