@@ -1,0 +1,40 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(zip)
+_vermajor=3
+_verminor=0
+pkgver=${_vermajor}.${_verminor}
+pkgrel=1
+pkgdesc='A free, portable version of the zip compressor-archiver utility'
+arch=(x86_64)
+url=http://infozip.sourceforge.net
+license=(BSD)
+groups=()
+depends=()
+makedepends=()
+options=()
+changelog=ChangeLog
+source=(
+    "https://downloads.sourceforge.net/infozip/zip${_vermajor}${_verminor}.tar.gz"
+)
+
+sha256sums=(
+    f0e8bb1f9b7eb0b01285495a2699df3a4b766784c1765a8f1aeedf63c0806369
+)
+
+
+build() {
+    cd_unpacked_src
+    sed -i "/^LFLAGS2/s@=.*@='-static'@" unix/configure
+    sh unix/configure cc "${CFLAGS} -static -I. -DUNIX"
+    make LFLAGS2='-static' -f unix/Makefile generic
+}
+
+package() {
+    cd_unpacked_src
+    make \
+        prefix="${pkgdir}/usr" \
+        MANDIR="${pkgdir}/usr/share/man/man1" \
+        -f unix/Makefile install
+}
