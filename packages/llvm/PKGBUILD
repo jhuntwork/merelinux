@@ -2,8 +2,8 @@
 # shellcheck disable=SC2034,SC2154,SC2068,SC2086
 
 pkgname=(llvm llvm-dev libcxx libLLVM)
-pkgver=15.0.1
-pkgrel=2
+pkgver=15.0.6
+pkgrel=1
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
 url='htps://llvm.org'
@@ -25,7 +25,7 @@ source=(
 )
 
 sha256sums=(
-    f25ce2d4243bebf527284eb7be7f6f56ef454fca8b3de9523f7eb4efb8d26218
+    9d53ad04dc60cb7b30e810faf64c5ab8157dadef46c8766f67f286238256ff92
 )
 
 _binfiles=(
@@ -63,9 +63,6 @@ _binfiles=(
 
 
 build() {
-    export CFLAGS+=' -flto'
-    export CXXFLAGS+=' -flto'
-    export LDFLAGS+=' -flto'
     cd_unpacked_src
     sed -i \
         -e 's@strtoull_l@strtoull@g' \
@@ -97,6 +94,7 @@ build() {
         -DLLVM_BUILD_LLVM_DYLIB=ON \
         -DLLVM_DEFAULT_TARGET_TRIPLE="$CHOST" \
         -DLLVM_ENABLE_LIBCXX=ON \
+        -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON \
         -DLLVM_ENABLE_PIC=ON \
         -DLLVM_ENABLE_PROJECTS='lld;clang;compiler-rt' \
         -DLLVM_ENABLE_RUNTIMES='libcxx;libcxxabi;libunwind' \
@@ -120,6 +118,8 @@ package_llvm() {
         usr/lib/libc++abi.a
         usr/lib/libc++abi.so
         usr/lib/libc++experimental.a
+        usr/lib/libgcc_s.a
+        usr/lib/libgcc_s.so
         usr/lib/libunwind.a
         usr/lib/libunwind.so
         usr/lib/"$CHOST"/libc++.a
@@ -155,6 +155,10 @@ package_llvm() {
     done
     ln -s clang usr/bin/cc
     ln -s clang++ usr/bin/c++
+    ln -s libunwind.a usr/lib/libgcc_s.a
+    ln -s libunwind.so.1.0 usr/lib/libgcc_s.so.1.0
+    ln -s libgcc_s.so.1.0 usr/lib/libgcc_s.so.1
+    ln -s libgcc_s.so.1.0 usr/lib/libgcc_s.so
     package_defined_files
 }
 

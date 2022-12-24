@@ -1,3 +1,8 @@
+15.0.6-1 (2022-12-24)
+
+	Upgrade to 15.0.6
+	Re-add libgcc_s symlinks to libunwind. Rust requires this.
+
 15.0.1-2 (2022-10-01)
 
 	Remove libgcc links
