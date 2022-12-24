@@ -1,0 +1,124 @@
+#!/bin/bash
+# shellcheck disable=SC2034,SC2154,SC2068
+
+pkgname=(gtk+ gtk+-dev)
+pkgver=3.24.36
+pkgrel=1
+pkgdesc='A widget development toolkit'
+arch=(x86_64)
+url=https://www.gtk.org
+license=(GPL)
+groups=()
+depends=()
+makedepends=(
+    atk-dev
+    cairo-dev
+    expat-dev
+    fontconfig-dev
+    freetype-dev
+    fribidi-dev
+    gdk-pixbuf-dev
+    glib-dev
+    gobject-introspection-dev
+    harfbuzz-dev
+    libepoxy-dev
+    libffi-dev
+    libjpeg-turbo-dev
+    libpcre2-dev
+    libpng-dev
+    libxkbcommon-dev
+    meson
+    mesa-dev
+    ninja
+    pango-dev
+    pixman-dev
+    python-dev
+    shared-mime-info
+    wayland-dev
+    wayland-protocols-dev
+    zlib-ng-dev
+)
+options=()
+changelog=ChangeLog
+source=(
+    "https://download.gnome.org/sources/gtk+/3.24/gtk+-${pkgver}.tar.xz"
+)
+
+sha256sums=(
+    27a6ef157743350c807ffea59baa1d70226dbede82a5e953ffd58ea6059fe691
+)
+
+
+build() {
+    cd_unpacked_src
+    CC='clang -DEGL_NO_X11=1' \
+        meson build/ -Dprefix=/usr \
+        -Dsysconfdir=/etc \
+        -Dbroadway_backend=true \
+        -Dwayland_backend=true \
+        -Dx11_backend=false
+    ninja -C build/
+}
+
+package_gtk+() {
+    pkgfiles=(
+        etc/gtk-3.0
+        usr/bin
+        usr/lib/gtk-3.0
+        usr/lib/lib*.so.*
+        usr/share/applications
+        usr/share/glib-2.0
+        usr/share/gtk-3.0
+        usr/share/icons
+        usr/share/themes
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libcairo-gobject.so.2
+        libcairo.so.2
+        libffi.so.8
+        libfontconfig.so.1
+        libfreetype.so.6
+        libfribidi.so.0
+        libgdk_pixbuf-2.0.so.0
+        libgio-2.0.so.0
+        libglib-2.0.so.0
+        libgmodule-2.0.so.0
+        libgobject-2.0.so.0
+        libharfbuzz.so.0
+        libjpeg.so.8
+        libpango-1.0.so.0
+        libpangocairo-1.0.so.0
+        libpangoft2-1.0.so.0
+        libpcre2-8.so.0
+        libpixman-1.so.0
+        libpng16.so.16
+        libwayland-client.so.0
+        libwayland-cursor.so.0
+        libwayland-egl.so.1
+        libz.so.1
+    )
+    provides=(
+        libgailutil-3.so.0
+        libgdk-3.so.0
+        libgtk-3.so.0
+    )
+    cd_unpacked_src
+    DESTDIR="${pkgdirbase}/dest" ninja -C build/ install
+    std_split_package
+}
+
+package_gtk+-dev() {
+    pkgfiles=(
+        usr/include
+        usr/lib/girepository-1.0
+        usr/lib/lib*.so
+        usr/lib/pkgconfig
+        usr/share/gir-1.0
+        usr/share/aclocal
+    )
+    depends=(
+        "gtk+=${pkgver}"
+    )
+    std_split_package
+}
