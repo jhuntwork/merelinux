@@ -1,9 +1,9 @@
 #!/bin/bash
 # shellcheck disable=SC2034,SC2154,SC2068,SC2086
 
-pkgname=(llvm llvm-dev libcxx libLLVM)
+pkgname=(llvm llvm-dev libLLVM libclang libcxx libunwind)
 pkgver=15.0.6
-pkgrel=1
+pkgrel=2
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
 url='htps://llvm.org'
@@ -118,6 +118,7 @@ package_llvm() {
         usr/lib/libc++abi.a
         usr/lib/libc++abi.so
         usr/lib/libc++experimental.a
+        usr/lib/libclang.so
         usr/lib/libgcc_s.a
         usr/lib/libgcc_s.so
         usr/lib/libunwind.a
@@ -188,33 +189,13 @@ package_llvm-dev() {
         libz.so.1
         "llvm=${pkgver}"
         "libLLVM=${pkgver}"
+        "libclang=${pkgver}"
+        "libcxx=${pkgver}"
+        "libunwind=${pkgver}"
     )
     std_split_package
     rm "${pkgdir}/usr/include/llvm-c/lto.h"
     find "${pkgdir}/usr/lib/" -name "libLLVM-15*so" -delete
-}
-
-package_libcxx() {
-    pkgfiles=(
-        usr/lib/libc++.so.*
-        usr/lib/libc++abi.so.*
-        usr/lib/libunwind.so.*
-        usr/lib/"$CHOST"/libc++.so.*
-        usr/lib/"$CHOST"/libc++abi.so.*
-        usr/lib/"$CHOST"/libunwind.so.*
-    )
-    depends=(
-        "ld-musl-$(arch).so.1"
-    )
-    replaces=(
-        llvm-runtime-libs
-    )
-    provides=(
-        libc++.so.1
-        libc++abi.so.1
-        libunwind.so.1
-    )
-    std_split_package
 }
 
 package_libLLVM() {
@@ -230,6 +211,61 @@ package_libLLVM() {
     )
     provides=(
         libLLVM-15.so
+    )
+    std_split_package
+}
+
+package_libclang() {
+    pkgfiles=(
+        usr/lib/libclang.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libc++.so.1
+        libc++abi.so.1
+        libunwind.so.1
+        libz.so.1
+    )
+    provides=(
+        libclang.so.15
+    )
+    std_split_package
+}
+
+
+package_libcxx() {
+    pkgfiles=(
+        usr/lib/libc++.so.*
+        usr/lib/libc++abi.so.*
+        usr/lib/"$CHOST"/libc++.so.*
+        usr/lib/"$CHOST"/libc++abi.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+        libunwind.so.1
+    )
+    replaces=(
+        llvm-runtime-libs
+    )
+    provides=(
+        libc++.so.1
+        libc++abi.so.1
+    )
+    std_split_package
+}
+
+package_libunwind() {
+    pkgfiles=(
+        usr/lib/libgcc_s.so.*
+        usr/lib/libunwind.so.*
+        usr/lib/"$CHOST"/libunwind.so.*
+    )
+    depends=(
+        "ld-musl-$(arch).so.1"
+    )
+    provides=(
+        libgcc_s.so.1
+        libunwind.so.1
     )
     std_split_package
 }
