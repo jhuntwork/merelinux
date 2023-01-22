@@ -1,14 +1,15 @@
 version: 2.1
 executors:
-  lint-env:
+  dev-image:
     docker:
       - image: mere/dev
-  build-env:
+  build-machine:
+    resource_class: large
     machine:
-      image: ubuntu-2004:202107-02
+      image: ubuntu-2204:2022.10.2
 jobs:
   lint:
-    executor: lint-env
+    executor: dev-image
     steps:
       - run:
           name: Install tools and upgrade
@@ -20,8 +21,29 @@ jobs:
             find packages -name PKGBUILD -exec shellcheck '{}' +
             find packages -name PKGTEST -exec shellcheck '{}' +
             find buildpkg.sh ci-scripts dev-scripts misc-util -type f -exec shellcheck '{}' +
+  build-parallel:
+    executor: build-machine
+    steps:
+      - checkout
+      - run:
+          name: Setup Build
+          command: ./ci-scripts/ci-setup.sh
+      - run:
+          name: Build package
+          command: ./ci-scripts/ci-build.sh
+          no_output_timeout: 20m
+      - run:
+          name: Test package
+          command: ./ci-scripts/ci-test.sh
+      - run:
+          name: Cleanup
+          command: sudo tailscale logout
+          when: always
+      - store_artifacts:
+          path: /tmp/mere
+    parallelism: 6
   build:
-    executor: build-env
+    executor: build-machine
     steps:
       - checkout
       - run:
@@ -37,7 +59,7 @@ jobs:
       - store_artifacts:
           path: /tmp/mere
   upload:
-    executor: build-env
+    executor: build-machine
     steps:
       - add_ssh_keys
       - checkout
@@ -52,20 +74,28 @@ jobs:
 
 workflows:
   version: 2
-  workflow:
+  parallel:
+    when:
+      matches:
+        pattern: "^.*-parallel$"
+        value: << pipeline.git.branch >>
     jobs:
-      - lint:
-          filters:
-            branches:
-              ignore: main
-      - build:
-          filters:
-            branches:
-              ignore: main
-          requires:
-            - lint
-      - upload:
-          filters:
-            branches:
-              only:
-                - main
+      - lint
+      - build-parallel
+  single:
+    when:
+      and:
+        - not:
+            matches:
+              pattern: "^.*-parallel$"
+              value: << pipeline.git.branch >>
+        - not:
+            equal: [ main, << pipeline.git.branch >> ]
+    jobs:
+      - lint
+      - build
+  upload:
+    when:
+      equal: [ main, << pipeline.git.branch >> ]
+    jobs:
+      - upload
