@@ -74,7 +74,12 @@ case "$cmd" in
         find . | cpio -dump "$tmpdir" 2>/dev/null
         cd - >/dev/null
         trap 'printf "\nBuild directory was: %s\n" $tmpdir' EXIT
+        nproc=$(nproc)
+        nodes=${CIRCLE_NODE_TOTAL:-1}
+        [ -f ./.build-env ] || touch ./.build-env
         docker run -it --rm \
+            -e nproc="$nproc" \
+            -e nodes="$nodes" \
             -w "$tmpdir" \
             -v "$tmpdir":"$tmpdir" \
             -v "$MEREDIR":/mere \
@@ -82,7 +87,7 @@ case "$cmd" in
             -v "$(pwd)"/dev-scripts/build-in-docker:/usr/local/bin/build-in-docker \
             -v "$(pwd)"/dev-scripts/aa-distcc.sh:/usr/share/makepkg/tidy/aa-distcc.sh \
             -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
-            --env-file ./.env \
+            --env-file ./.build-env \
             mere/dev:latest "$cmd"
         printf '\nNew package(s) added to %s\n' "${MEREDIR}/pkgs"
         printf 'Build logs are located at %s\n' "${MEREDIR}/logs"

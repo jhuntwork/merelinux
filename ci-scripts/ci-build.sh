@@ -27,7 +27,7 @@ if [ "$bn" != 'main' ] ; then
                         DISTCC_HOSTS="${DISTCC_HOSTS} ${peerip}:${DISTCC_PORT}"
                         step=$((step + 1))
                     done
-                    cat >.env <<-EOF
+                    cat >.build-env <<-EOF
 					DISTCC_HOSTS=$DISTCC_HOSTS
 					CC=/usr/lib/distcc/cc
 					CXX=/usr/lib/distcc/c++

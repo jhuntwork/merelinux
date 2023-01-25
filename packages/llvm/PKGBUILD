@@ -3,7 +3,7 @@
 
 pkgname=(llvm llvm-dev libLLVM libclang libcxx libunwind)
 pkgver=15.0.6
-pkgrel=2
+pkgrel=3
 pkgdesc='A collection of modular and reusable compiler and toolchain technologies.'
 arch=('x86_64')
 url='htps://llvm.org'
@@ -49,6 +49,7 @@ _binfiles=(
         usr/bin/llvm-readobj
         usr/bin/llvm-size
         usr/bin/llvm-strings
+        usr/bin/llvm-strip
         usr/bin/llvm-symbolizer
         usr/bin/nm
         usr/bin/objcopy
@@ -75,6 +76,8 @@ build() {
     install -d build
     cd build || return 1
     unset CFLAGS CXXFLAGS LDFLAGS
+    CFLAGS='-Wno-gnu-line-marker' \
+    CXXFLAGS='-Wno-gnu-line-marker' \
     cmake -G Ninja -Wno-dev \
         -DCMAKE_BUILD_TYPE=Release \
         -DCLANG_BUILD_EXAMPLES=OFF \
@@ -103,7 +106,7 @@ build() {
         -DLLVM_HOST_TRIPLE="$CHOST" \
         -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
         ../llvm
-    cmake --build .
+    ninja -j "$((nproc * nodes * 2))"
 }
 
 package_llvm() {
