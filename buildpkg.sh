@@ -79,8 +79,10 @@ case "$cmd" in
             -v "$tmpdir":"$tmpdir" \
             -v "$MEREDIR":/mere \
             -v "$(pwd)"/mere.key:/tmp/mere.key \
-            -v "$(pwd)"/dev-scripts:/usr/local/bin \
+            -v "$(pwd)"/dev-scripts/build-in-docker:/usr/local/bin/build-in-docker \
+            -v "$(pwd)"/dev-scripts/aa-distcc.sh:/usr/share/makepkg/tidy/aa-distcc.sh \
             -v "$(pwd)"/packages/pacman/pacman-dev.conf:/etc/pacman.conf \
+            --env-file ./.env \
             mere/dev:latest "$cmd"
         printf '\nNew package(s) added to %s\n' "${MEREDIR}/pkgs"
         printf 'Build logs are located at %s\n' "${MEREDIR}/logs"
