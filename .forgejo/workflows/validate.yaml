@@ -1,0 +1,47 @@
+on:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: docker
+    container:
+      image: mere/ci:0.6.2
+    steps:
+      - name: Git checkout
+        run: |
+          set -eu
+          git init "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git -c http.extraHeader="Authorization: Bearer $GITHUB_TOKEN" \
+            fetch --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Validate changed recipes
+        run: |
+          set -eu
+          cd "$GITHUB_WORKSPACE"
+
+          if [ -z "${GITHUB_BASE_REF:-}" ]; then
+            printf '%s\n' "GITHUB_BASE_REF is not set for this pull request." >&2
+            exit 1
+          fi
+
+          git -c http.extraHeader="Authorization: Bearer $GITHUB_TOKEN" \
+            fetch --depth=50 origin "$GITHUB_BASE_REF"
+
+          changed_recipes=$(
+            git diff --name-only "origin/$GITHUB_BASE_REF...$GITHUB_SHA" \
+              | grep '^repos/[^/][^/]*/[^/][^/]*/recipe\.kdl$' || true
+          )
+
+          if [ -z "$changed_recipes" ]; then
+            printf '%s\n' "No recipe.kdl changes to validate."
+            exit 0
+          fi
+
+          printf '%s\n' "$changed_recipes" | while IFS= read -r recipe; do
+            [ -n "$recipe" ] || continue
+            printf 'Validating %s\n' "$recipe"
+            mere dev validate "$recipe"
+          done
