@@ -2,10 +2,10 @@
 
 This repository contains the package recipes that define Mere Linux.
 
-Mere Linux is a musl-based Linux distribution built around the `mere`
-package manager and build system. Its goal is to produce a complete system,
-with a package set that spans core userspace, development tooling,
-server software, and a modern desktop stack.
+Mere Linux is a musl-based Linux distribution built around the
+[mere](https://codeberg.org/merelinux/mere) package manager and build system.
+Its goal is to produce a complete system, with a package set that spans core
+userspace, development tooling, server software, and a modern desktop stack.
 
 Mere has a distinct personality. Its center of gravity is
 [musl](http://www.musl-libc.org/) rather than glibc,
