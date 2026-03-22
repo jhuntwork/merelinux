@@ -1,0 +1,63 @@
+recipe {
+    name "zig"
+    version "0.16.0-dev"
+    release 4
+    description "The Zig Programming Language Compiler"
+    url "https://ziglang.org"
+    licenses "MIT"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "cmake" \
+            "git" \
+            "linux-headers" \
+            "llvm" \
+            "llvm-dev" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "patch" \
+            "zlib-ng-dev" \
+            "zstd-dev"
+}
+
+source "https://ziglang.org/builds/zig-${recipe.version}.2915+065c6e794.tar.xz" {
+    blake3 "d09aac3a4a87b7cf23b0dd7f53e9a7a16e1a9303de9b3715311083849deae40a"
+}
+
+source "zigc-no-builtin.patch" {
+    blake3 "43b4724bf5a528b633517ef853c94d8ecd3c939b190ef7cec1e96f84b66fbb3a"
+}
+
+prepare {
+    script r#"
+        sed -i 's@/usr/bin/env@/usr/bin/clang@g' lib/std/zig/system.zig
+        sed -i 's@ or target.isMuslLibC()@@' src/Compilation/Config.zig
+        patch -Np1 -i "${MERE_SOURCES_DIR}/zigc-no-builtin.patch"
+    "#
+}
+
+build {
+    script r#"
+        install -d build
+        cd build || return 1
+        cmake -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DZIG_STATIC=On \
+            -DZIG_TARGET_MCPU=baseline \
+            ..
+        ninja
+    "#
+}
+
+install {
+    script r#"
+        cd build || return 1
+        cmake --build . --target install
+    "#
+}
+
+package "zig" {
+    files "usr/bin/" \
+          "usr/lib/"
+}

@@ -1,0 +1,13 @@
+--- a/src/Compilation.zig
++++ b/src/Compilation.zig
+@@ -2050,7 +2050,9 @@ pub fn create(gpa: Allocator, arena: Allocator, io: Io, diag: *CreateDiagnostic,
+                 },
+                 .fully_qualified_name = "zigc",
+                 .cc_argv = &.{},
+-                .inherited = .{},
++                .inherited = .{
++                    .no_builtin = true,
++                },
+                 .global = options.config,
+                 .parent = options.root_mod,
+             }) catch |err| switch (err) {
