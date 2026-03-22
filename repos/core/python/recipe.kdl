@@ -1,0 +1,83 @@
+recipe {
+    name "python"
+    version "3.14.3"
+    release 7
+    description "A clear and powerful object-oriented programming language,"
+    url "http://www.python.org"
+    licenses "Python"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "libbz2-dev" \
+            "libffi-dev" \
+            "liblzma-dev" \
+            "libncurses-dev" \
+            "libsqlite-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "openssl-dev" \
+            "patch" \
+            "readline-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://www.python.org/ftp/python/${recipe.version}/Python-${recipe.version}.tar.xz" {
+    blake3 "782598f0ec0052f0b24b33b98495d126d4eca3bd4ceba513719e2876c1dca034"
+}
+
+source "musl-find_library.patch" {
+    blake3 "db44d203bcb3a2e4e9b64789ec1642e45d4bf145d48082b930ea342247b864ac"
+}
+
+prepare {
+    script r#"
+        # Fix for multiarch detection on musl
+        sed -i '/--print-multiarch/s@MULTIARCH=.*@MULTIARCH=""@' configure
+        patch -Np1 -i "${MERE_SOURCES_DIR}/musl-find_library.patch"
+    "#
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --with-lto \
+            --with-system-ffi
+        make -j "$(nproc)"
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+        cd "${DESTDIR}" || return 1
+        ln -s "python3.14" usr/bin/python
+        ln -s "pip3" usr/bin/pip
+        find . -name "*.pyc" -delete -o -name "*.pyo" -delete
+        find . -name 'test' -type d -exec rm -rf '{}' + || true
+        cat > usr/lib/python3.14/site-packages/sitecustomize.py << EOF
+import site, os
+_profile_site = "/usr/lib/python3.14/site-packages"
+if os.path.isdir(_profile_site):
+    site.addsitedir(_profile_site)
+EOF
+    "#
+}
+
+package "python" {
+    files "usr/bin/" \
+          "!usr/bin/py*-config" \
+          "usr/lib/python3.14/" \
+          "usr/include/python3.14/pyconfig.h" \
+          "usr/share/man/man1/"
+}
+
+package "python-dev" {
+    files "usr/bin/py*-config" \
+          "usr/include/" \
+          "!usr/include/python3.14/pyconfig.h" \
+          "usr/lib/libpython*.a" \
+          "usr/lib/pkgconfig/"
+}
