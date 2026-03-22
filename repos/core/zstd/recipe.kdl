@@ -1,0 +1,46 @@
+recipe {
+    name "zstd"
+    version "1.5.7"
+    release 2
+    description "A fast real-time compression algorithm"
+    url "https://github.com/facebook/zstd"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "${recipe.url}/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "7526c567bb1301b17d637c3ff6a0c1dfedcaac4e37e4f0d63d273fa0fa5edf22"
+}
+
+build {
+    script r#"
+        export CFLAGS="$CFLAGS -fPIC"
+        make prefix=/usr zstd-release lib-release lib-mt
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "zstd" {
+    strip false
+    files "usr/bin/" \
+          "usr/lib/lib*.so.*" \
+          "usr/lib/lib*.so" \
+          "usr/share/man/man1/"
+}
+
+package "zstd-dev" {
+    strip false
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
