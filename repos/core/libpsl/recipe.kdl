@@ -1,0 +1,53 @@
+recipe {
+    name "libpsl"
+    version "0.21.5"
+    release 3
+    description "C library for the Public Suffix List"
+    url "https://github.com/rockdaboot/libpsl"
+    licenses "MIT"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja"
+}
+
+source "https://github.com/rockdaboot/libpsl/releases/download/${recipe.version}/libpsl-${recipe.version}.tar.gz" {
+    blake3 "75520a5e4ef205ad5fcb236075182c9e7aeb4f3122ebdb32854a14f49dc52676"
+}
+
+build {
+    script r#"
+        export CFLAGS="$CFLAGS -fPIC"
+        meson build/ \
+            -Dprefix=/usr \
+            -Dlibdir=/usr/lib \
+            -Dbuildtype=release \
+            -Ddefault_library=both
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "libpsl" {
+    files "usr/lib/libpsl.so.*" \
+          "usr/lib/*.so"
+}
+
+package "libpsl-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
+
+package "libpsl-tools" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
