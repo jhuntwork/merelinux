@@ -1,0 +1,62 @@
+recipe {
+    name "openssl"
+    version "3.6.1"
+    release 4
+    description "a toolkit for the TLS and SSL protocols"
+    url "https://www.openssl.org"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "linux-headers" \
+            "llvm" \
+            "perl" \
+            "pkgconf" \
+            "zlib-ng-dev"
+}
+
+source "https://www.openssl.org/source/openssl-${recipe.version}.tar.gz" {
+    blake3 "90c0c093c5f09397f840cce374e4e6f56134727ac0867aaeccb5314aa3196544"
+}
+
+build {
+    script r#"
+        ./Configure \
+            --prefix=/usr \
+            --libdir=/usr/lib \
+            --openssldir=/etc/ssl \
+            linux-${recipe.arch}-clang
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "openssl" {
+    files "etc/ssl/" \
+          "usr/bin/" \
+          "usr/share/man/man1/" \
+          "usr/share/man/man5/" \
+          "usr/share/man/man7/"
+}
+
+package "libssl-3" {
+    files "usr/lib/engines-3/" \
+          "usr/lib/lib*.so.*" \
+          "usr/lib/lib*.so"
+}
+
+package "openssl-dev" {
+    files "usr/include/" \
+          "usr/lib/cmake/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/doc/" \
+          "usr/share/man/man3/"
+}
