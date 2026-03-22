@@ -1,0 +1,89 @@
+recipe {
+    name "ncurses"
+    version "6.6"
+    release 6
+    description "An API for writing text-based user interfaces"
+    url "https://invisible-island.net/ncurses"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ncurses"
+}
+
+source "https://invisible-island.net/archives/ncurses/ncurses-${recipe.version}.tar.gz" {
+    blake3 "fbec55697a01f99b9cc3f25be55e73ae7091f4c53e5d81a1ea15734c4e5b7238"
+}
+source "https://invisible-mirror.net/archives/ncurses/current/termcap.src.gz" {
+    blake3 "4e6b0900fe923500a902793416220a011b7669bdce8ba74a039fdad2bcb6d785"
+}
+
+build {
+    script r#"
+        zcat "${MERE_SOURCES_DIR}"/termcap.src.gz >termcap
+        sh ./ncurses/tinfo/MKfallback.sh /usr/share/terminfo/ termcap tic infocmp \
+            linux vt100 xterm xterm-256color >ncurses/fallback.c
+        CFLAGS="${CFLAGS} -fPIC" \
+            ./configure \
+            --prefix=/usr \
+            --with-fallbacks="linux vt100 xterm xterm256-color" \
+            --disable-debug \
+            --with-shared \
+            --without-tests \
+            --disable-nls \
+            --without-cxx-binding \
+            --enable-widec \
+            --enable-sigwinch
+        make
+    "#
+}
+
+install {
+    script r#"
+            make DESTDIR="${DESTDIR}" install
+
+            cd "${DESTDIR}" || return 1
+            for lib in ncurses form panel menu ; do
+                ln -s lib${lib}w.a usr/lib/lib${lib}.a
+            done
+            ln -s libncurses.a usr/lib/libcurses.a
+            install -d usr/include/ncursesw
+            find usr/include -not -type d | while read -r file; do
+                bn=${file##*/}
+                ln -sv "../${bn}" usr/include/ncursesw/
+            done
+            ln -s ncursesw6-config usr/bin/ncurses6-config
+
+            # clear/reset are in busybox
+            rm -v usr/bin/clear
+            rm -v usr/bin/reset
+    "#
+}
+
+package "ncurses" {
+    files "usr/bin/" \
+          "!usr/bin/ncursesw6-config" \
+          "!usr/bin/ncurses6-config" \
+          "usr/lib/terminfo/" \
+          "usr/share/man/man1/" \
+          "usr/share/man/man5/" \
+          "usr/share/man/man7/" \
+          "usr/share/tabset/" \
+          "usr/share/terminfo/"
+}
+
+package "libncurses" {
+    files "usr/lib/lib*.so.*" \
+          "usr/lib/*.so"
+}
+
+package "libncurses-dev" {
+    files "usr/bin/ncursesw6-config" \
+          "usr/bin/ncurses6-config" \
+          "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/share/man/man3/"
+}
