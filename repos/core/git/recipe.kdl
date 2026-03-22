@@ -1,0 +1,58 @@
+recipe {
+    name "git"
+    version "2.53.0"
+    release 3
+    description "A distributed version control system"
+    url "http://git-scm.com/"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "libcurl-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "openssl-dev" \
+            "perl" \
+            "pkgconf" \
+            "python" \
+            "zlib-ng-dev"
+}
+
+source "https://www.kernel.org/pub/software/scm/git/git-${recipe.version}.tar.xz" {
+    blake3 "1dc4d1b87ede4887fad78b6e6fc9f49656a5e487d64541a163d7565c41d647d9"
+}
+
+build {
+    script r#"
+        ./configure \
+          --prefix=/usr \
+          --libexecdir=/usr/lib \
+          --with-curl \
+          --with-openssl \
+          --without-tcltk \
+          --with-zlib=/usr/lib \
+          --with-editor=/usr/bin/vim \
+          --with-pager=/bin/more \
+          --with-perl=/usr/bin/perl \
+          --with-python=/usr/bin/python \
+          --with-shell=/bin/sh
+        make V=1 NO_MSGFMT=1 NO_GETTEXT=1
+    "#
+}
+
+install {
+    script r#"
+        make V=1 NO_MSGFMT=1 NO_GETTEXT=1 DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "git" {
+    files "usr/bin/" \
+          "!usr/bin/git-cvsserver" \
+          "!usr/lib/git-core/git-cvs*" \
+          "usr/lib/git-core/" \
+          "usr/share/bash-completion/completions/git" \
+          "usr/share/git-core/" \
+          "usr/share/perl5/"
+}
