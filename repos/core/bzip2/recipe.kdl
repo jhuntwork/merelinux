@@ -1,0 +1,53 @@
+recipe {
+    name "bzip2"
+    version "1.0.8"
+    release 4
+    description "A freely available, patent free, high-quality data compressor lib"
+    url "https://www.sourceware.org/bzip2"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://sourceware.org/pub/bzip2/bzip2-${recipe.version}.tar.gz" {
+    blake3 "97af3f520629c65fe41292f77e6ca798fe594d7987bfb2aebe7c6fcdc7ab5ed2"
+}
+
+build {
+    script r#"
+        sed -i 's@(PREFIX)/man@(PREFIX)/share/man@g' Makefile
+        make CC='cc' -f Makefile-libbz2_so
+        make CC='cc'
+    "#
+}
+
+install {
+    script r#"
+        make PREFIX="${DESTDIR}/usr" install
+        cp -av libbz2.so.* "${DESTDIR}/usr/lib/"
+        ln -sv libbz2.so.${recipe.version} "${DESTDIR}/usr/lib/libbz2.so"
+        ln -sf bzdiff "${DESTDIR}/usr/bin/bzcmp"
+        ln -sf bzgrep "${DESTDIR}/usr/bin/bzegrep"
+        ln -sf bzgrep "${DESTDIR}/usr/bin/bzfgrep"
+        ln -sf bzmore "${DESTDIR}/usr/bin/bzless"
+    "#
+}
+
+package "bzip2" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
+
+package "libbz2" {
+    files "usr/lib/lib*.so.*" \
+          "usr/lib/lib*.so"
+}
+
+package "libbz2-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+}
