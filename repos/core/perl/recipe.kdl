@@ -1,0 +1,52 @@
+recipe {
+    name "perl"
+    version "5.42.1"
+    release 1
+    description "An API for writing text-based user interfaces."
+    url "http://www.perl.org"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "musl-dev"
+    // Perl fails to build with mimalloc by default, requires investigating
+    env MERE_MALLOC="musl"
+}
+
+source "http://www.cpan.org/src/5.0/perl-${recipe.version}.tar.xz" {
+    blake3 "6ac2742721370f9c6f2c5d21567a35730a3ffd969d868161467275bfbbdb5e66"
+}
+
+build {
+    script r#"
+        ./configure.gnu \
+          -des -Dprefix=/usr \
+          -Dcc="cc -D_GNU_SOURCE" \
+          -Dvendorprefix=/usr \
+          -Dprivlib="/usr/lib/perl5/${recipe.version}" \
+          -Darchlib="/usr/lib/perl5/${recipe.version}/$(arch)-linux" \
+          -Dsitelib="/usr/lib/perl5/site_perl/${recipe.version}" \
+          -Dvendorlib="/usr/lib/perl5/vendor_perl/${recipe.version}" \
+          -Dvendorarch="/usr/lib/perl5/vendor_perl/${recipe.version}/$(arch)-linux" \
+          -Dman1dir=/usr/share/man/man1 \
+          -Dman3dir=/usr/share/man/man3 \
+          -Dpager="/bin/less -I" \
+          -Dusethreads \
+          -Duseshrplib
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "perl" {
+    files "usr/bin/" \
+          "usr/lib/" \
+          "usr/share/"
+}
