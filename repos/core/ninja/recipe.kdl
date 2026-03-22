@@ -1,0 +1,37 @@
+recipe {
+    name "ninja"
+    version "1.13.2"
+    release 2
+    description "a small build system with a focus on speed"
+    url "https://github.com/ninja-build/ninja"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "python"
+}
+
+source "https://github.com/ninja-build/ninja/archive/v${recipe.version}.tar.gz" {
+    blake3 "b32100cf57fde2a19d3c242f363c308c3d7a7ed3167774eefcbd107baada26e4"
+}
+
+build {
+    script r#"
+        LDFLAGS='-static -Wl,-static' ./configure.py --bootstrap
+    "#
+}
+
+install {
+    script r#"
+        install -d "${DESTDIR}/bin"
+        install -m 0755 ninja "${DESTDIR}/bin/"
+    "#
+}
+
+package "ninja" {
+    files "bin/ninja"
+}
