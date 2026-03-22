@@ -1,0 +1,78 @@
+recipe {
+    name "bash"
+    version "5.3"
+    release 2
+    description "A full-featured sh-compatible shell."
+    url "http://www.gnu.org/software/bash"
+    licenses "GPL3"
+    archs "aarch64" "x86_64"
+    depends "busybox" "musl-dev" "llvm" "linux-headers" "make" \
+            "mimalloc-dev" "libncurses-dev" "readline-dev" "patch"
+}
+
+source "http://mirror.rit.edu/gnu/bash/${recipe.name}-${recipe.version}.tar.gz" {
+    blake3 "5bf3ac6c18f3dc3fe3e049a1e10ea5ae5c5b39dac2356cd796730f49b273fd0f"
+}
+source "http://mirror.rit.edu/gnu/bash/bash-${recipe.version}-patches/bash53-001" {
+    blake3 "24d01a68165013b581cc2997fa339bdaba4f36b1b69bae0982536bcc87108e50"
+}
+source "http://mirror.rit.edu/gnu/bash/bash-${recipe.version}-patches/bash53-002" {
+    blake3 "57b6f3625f837a85cb99cac5a2e9a0df013823b35b73fe9e9e04acd0aad98611"
+}
+source "http://mirror.rit.edu/gnu/bash/bash-${recipe.version}-patches/bash53-003" {
+    blake3 "7ca5acdfca5f3856244bd34062b51ae06cf87232dae4ffa4d23b28bb59c06317"
+}
+source "http://mirror.rit.edu/gnu/bash/bash-${recipe.version}-patches/bash53-004" {
+    blake3 "2b18a49ce23a148f3917614c8d5a2f0cd6d5fb51021c19906d3f9d345e27fc86"
+}
+source "http://mirror.rit.edu/gnu/bash/bash-${recipe.version}-patches/bash53-005" {
+    blake3 "120460c02d5cfa90628bd774bbd3491a1f85084d0aadaa4398df265ca9ff6caf"
+}
+source "http://mirror.rit.edu/gnu/bash/bash-${recipe.version}-patches/bash53-006" {
+    blake3 "6893b1444c1d1401616184ac8062b4c4b143e0cc30dd0dbc96e4c4f538aa8ac7"
+}
+source "http://mirror.rit.edu/gnu/bash/bash-${recipe.version}-patches/bash53-007" {
+    blake3 "1e1aad166eace5db867c4d3970f9eff9fbf9a5fb1c9aa4027f7e07ce7bd664e6"
+}
+source "http://mirror.rit.edu/gnu/bash/bash-${recipe.version}-patches/bash53-008" {
+    blake3 "9a84604890d85e63a9840ee7c60ea907b92974841404a666c51bf99f0efc20a7"
+}
+
+build {
+    script r#"
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/bash53-001
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/bash53-002
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/bash53-003
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/bash53-004
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/bash53-005
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/bash53-006
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/bash53-007
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/bash53-008
+        ./configure --prefix=/ \
+            --enable-static-link \
+            --mandir=/usr/share/man \
+            --without-bash-malloc \
+            --with-installed-readline \
+            bash_cv_func_strtoimax=no # See note below
+        # When static linking, if the above resolves to yes, the built version will
+        # contain duplicate symbols as libc. Setting to no is a quick way to get
+        # around the issue.
+        make LDFLAGS="$LDFLAGS --static"
+    "#
+}
+
+install {
+    script r#"
+        install -d "${MERE_DESTDIR}/etc" "${MERE_DESTDIR}/usr/share/man/man1"
+        install -m 0644 "${MERE_SOURCES_DIR}/bashrc" "${MERE_DESTDIR}/etc/"
+        install -m 0644 doc/bash.1 "${MERE_DESTDIR}/usr/share/man/man1/"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "bash" {
+    files "bin/bash" \
+          "bin/bashbug" \
+          "etc/bashrc" \
+          "usr/share/man/man1/"
+}
