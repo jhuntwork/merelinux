@@ -1,0 +1,37 @@
+recipe {
+    name "patch"
+    version "2.8"
+    release 3
+    description "A utility for patching difference listings against one or more original files"
+    url "http://savannah.gnu.org/projects/patch/"
+    licenses "GPL3"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "http://mirror.rit.edu/gnu/patch/patch-${recipe.version}.tar.xz" {
+    blake3 "d7dadf0ac720de7560f140a9021928bc0f8089182121c0e65c8bec115cf31124"
+}
+
+build {
+    script r#"
+        LDFLAGS="$LDFLAGS --static" ./configure --prefix=/usr
+        make V=1
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "patch" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
