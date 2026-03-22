@@ -1,0 +1,42 @@
+recipe {
+    name "pkgconf"
+    version "2.5.1"
+    release 1
+    description "An API-driven pkg-config replacement"
+    url "https://github.com/pkgconf/pkgconf"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://distfiles.dereferenced.org/pkgconf/pkgconf-${recipe.version}.tar.xz" {
+    blake3 "c524d73c938e7382d3c12c9cfba16ed32ee092ab21b3e9659a095b5628ea2e88"
+}
+
+build {
+    script r#"
+        ./configure \
+          --prefix=/usr \
+          --disable-shared \
+          --with-system-libdir=/usr/lib \
+          --with-system-includedir=/usr/include
+        make LDFLAGS="$LDFLAGS --static"
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+        ln -s pkgconf "${DESTDIR}/usr/bin/pkg-config"
+    "#
+}
+
+package "pkgconf" {
+    files "usr/bin/pkgconf" \
+          "usr/bin/pkg-config" \
+          "usr/share/man/man1/pkgconf.1"
+}
