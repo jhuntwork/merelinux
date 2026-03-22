@@ -1,0 +1,258 @@
+recipe {
+    name "llvm"
+    version "21.1.8"
+    release 9
+    description "A collection of modular and reusable compiler and toolchain technologies."
+    url "htps://llvm.org"
+    licenses "Apache"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "cmake" \
+            "git" \
+            "linux-headers" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "patch" \
+            "python" \
+            "utmps-dev" \
+            "xz" \
+            "zlib-ng-dev"
+}
+
+source "https://github.com/llvm/llvm-project/releases/download/llvmorg-${recipe.version}/llvm-project-${recipe.version}.src.tar.xz" {
+    blake3 "1426828672b9c7fd24df8a9b57bbf5c8242b10f41c5a58612a6d84effe018b78"
+}
+
+source "mere-malloc-wrapper" {
+    blake3 "1666e3cd1a6a48ee5b9fed435796d7267b5ae1c05f7302ab9c69cae22c654ceb"
+}
+
+prepare {
+    script r#"
+        sed -i "/dlfcn.h/s@\$@\n#include <sys/types.h>@" \
+            compiler-rt/lib/fuzzer/FuzzerInterceptors.cpp
+    "#
+}
+
+build {
+    script r#"
+        install -d build
+        cd build || return 1
+        unset CFLAGS CXXFLAGS LDFLAGS
+        export CHOST="${recipe.arch}-unknown-linux-musl"
+        CFLAGS='-Wno-gnu-line-marker' \
+        CXXFLAGS='-Wno-gnu-line-marker' \
+        cmake -G Ninja -Wno-dev \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCLANG_BUILD_EXAMPLES=OFF \
+            -DCLANG_INCLUDE_DOCS=OFF \
+            -DCLANG_INCLUDE_TESTS=OFF \
+            -DCLANG_LINK_CLANG_DYLIB=ON \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCLANG_DEFAULT_CXX_STDLIB='libc++' \
+            -DCLANG_DEFAULT_RTLIB='compiler-rt' \
+            -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
+            -DCOMPILER_RT_BUILD_XRAY=OFF \
+            -DCOMPILER_RT_USE_LIBCXX=ON \
+            -DLIBCLANG_BUILD_STATIC=ON \
+            -DLIBCXX_CXX_ABI=libcxxabi \
+            -DLIBCXX_ENABLE_SHARED=ON \
+            -DLIBCXX_ENABLE_STATIC=ON \
+            -DLIBCXX_HAS_MUSL_LIBC=ON \
+            -DLIBCXX_HAS_RT_LIB=OFF \
+            -DLIBCXX_USE_COMPILER_RT=ON \
+            -DLIBCXX_HAS_GCC_S_LIB=OFF \
+            -DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
+            -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
+            -DLIBCXXABI_ENABLE_SHARED=ON \
+            -DLIBCXXABI_ENABLE_STATIC=ON \
+            -DLIBCXXABI_USE_COMPILER_RT=ON \
+            -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
+            -DLIBUNWIND_ENABLE_SHARED=OFF \
+            -DLIBUNWIND_USE_COMPILER_RT=ON \
+            -DLLVM_BUILD_LLVM_DYLIB=ON \
+            -DLLVM_BUILD_EXAMPLES=OFF \
+            -DLLVM_DEFAULT_TARGET_TRIPLE="$CHOST" \
+            -DLLVM_ENABLE_BINDINGS=OFF \
+            -DLLVM_ENABLE_LIBCXX=ON \
+            -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON \
+            -DLLVM_ENABLE_PIC=ON \
+            -DLLVM_ENABLE_PROJECTS='lld;clang' \
+            -DLLVM_ENABLE_RUNTIMES='compiler-rt;libcxx;libcxxabi;libunwind' \
+            -DLLVM_ENABLE_RTTI=ON \
+            -DLLVM_HOST_TRIPLE="$CHOST" \
+            -DLLVM_INCLUDE_BENCHMARKS=OFF \
+            -DLLVM_INCLUDE_DOCS=OFF \
+            -DLLVM_INCLUDE_TESTS=OFF \
+            -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
+            -DLLVM_LINK_LLVM_DYLIB=ON \
+            ../llvm
+        ninja -j"$(nproc)"
+    "#
+}
+
+install {
+    script r#"
+        cd build || return 1
+        cmake --build . --target install
+        cd "$DESTDIR" || return 1
+        export CHOST="${recipe.arch}-unknown-linux-musl"
+        find "usr/lib/${CHOST}/" ! -type d | while read -r file; do
+            bn="${file##*/}"
+            ln -s "${CHOST}/${bn}" "usr/lib/${bn}"
+        done
+        install -m0755 "${MERE_SOURCES_DIR}/mere-malloc-wrapper" "${DESTDIR}/usr/bin/cc"
+        ln -s libunwind.a usr/lib/libgcc_s.a
+        ln -s cc usr/bin/c++
+        ln -s cc usr/bin/ld
+    "#
+}
+
+package "llvm" {
+    files "usr/bin/ar" \
+          "usr/bin/cc" \
+          "usr/bin/c++" \
+          "usr/bin/ld" \
+          "usr/bin/clang" \
+          "usr/bin/clang++" \
+          "usr/bin/clang-[0-9]*" \
+          "usr/bin/lld" \
+          "usr/bin/ld.lld" \
+          "usr/bin/ld64.lld" \
+          "usr/bin/lld-link" \
+          "usr/bin/llvm-addr2line" \
+          "usr/bin/llvm-ar" \
+          "usr/bin/llvm-cxxfilt" \
+          "usr/bin/llvm-dwarfdump" \
+          "usr/bin/llvm-dlltool" \
+          "usr/bin/llvm-lib" \
+          "usr/bin/llvm-nm" \
+          "usr/bin/llvm-objcopy" \
+          "usr/bin/llvm-objdump" \
+          "usr/bin/llvm-ranlib" \
+          "usr/bin/llvm-rc" \
+          "usr/bin/llvm-readelf" \
+          "usr/bin/llvm-readobj" \
+          "usr/bin/llvm-strip" \
+          "usr/bin/llvm-strings" \
+          "usr/bin/llvm-size" \
+          "usr/bin/llvm-symbolizer" \
+          "usr/bin/nm" \
+          "usr/bin/objcopy" \
+          "usr/bin/objdump" \
+          "usr/bin/ranlib" \
+          "usr/bin/readelf" \
+          "usr/bin/strip" \
+          "usr/bin/strings" \
+          "usr/bin/size" \
+          "usr/bin/wasm-ld" \
+          "usr/bin/windres" \
+          "usr/libexec/" \
+          "usr/include/c++/" \
+          "usr/include/${recipe.arch}-unknown-linux-musl/" \
+          "usr/include/llvm-c/lto.h" \
+          "usr/include/*unwind*" \
+          "usr/include/*/*unwind*" \
+          "usr/lib/clang/" \
+          "usr/lib/libc++.a" \
+          "usr/lib/libc++abi.a" \
+          "usr/lib/libc++experimental.a" \
+          "usr/lib/libgcc_s.a" \
+          "usr/lib/libunwind.a" \
+          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++.a" \
+          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++abi.a" \
+          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++experimental.a" \
+          "usr/lib/${recipe.arch}-unknown-linux-musl/libunwind.a"
+}
+
+package "libllvm" {
+    files "usr/lib/libLLVM.so.*" \
+          "usr/lib/libLLVM.so" \
+          "usr/lib/libLTO.so" \
+          "usr/lib/libLTO.so.*" \
+          "usr/lib/libRemarks.so.*" \
+          "usr/lib/libRemarks.so"
+}
+
+package "llvm-tools" {
+    files "usr/bin/" \
+          "!usr/bin/ar" \
+          "!usr/bin/cc" \
+          "!usr/bin/c++" \
+          "!usr/bin/ld" \
+          "!usr/bin/clang" \
+          "!usr/bin/clang++" \
+          "!usr/bin/clang-[0-9]*" \
+          "!usr/bin/lld" \
+          "!usr/bin/ld.lld" \
+          "!usr/bin/ld64.lld" \
+          "!usr/bin/lld-link" \
+          "!usr/bin/llvm-addr2line" \
+          "!usr/bin/llvm-ar" \
+          "!usr/bin/llvm-cxxfilt" \
+          "!usr/bin/llvm-dlltool" \
+          "!usr/bin/llvm-dwarfdump" \
+          "!usr/bin/llvm-lib" \
+          "!usr/bin/llvm-nm" \
+          "!usr/bin/llvm-objcopy" \
+          "!usr/bin/llvm-objdump" \
+          "!usr/bin/llvm-ranlib" \
+          "!usr/bin/llvm-rc" \
+          "!usr/bin/llvm-readelf" \
+          "!usr/bin/llvm-readobj" \
+          "!usr/bin/llvm-strip" \
+          "!usr/bin/llvm-strings" \
+          "!usr/bin/llvm-size" \
+          "!usr/bin/llvm-symbolizer" \
+          "!usr/bin/nm" \
+          "!usr/bin/objcopy" \
+          "!usr/bin/objdump" \
+          "!usr/bin/ranlib" \
+          "!usr/bin/readelf" \
+          "!usr/bin/strip" \
+          "!usr/bin/strings" \
+          "!usr/bin/size" \
+          "!usr/bin/wasm-ld" \
+          "!usr/bin/windres"
+}
+
+package "llvm-dev" {
+    files "usr/bin/llvm-config" \
+          "usr/include/clang/" \
+          "usr/include/clang-c/" \
+          "usr/include/lld/" \
+          "usr/include/llvm/" \
+          "usr/include/llvm-c/" \
+          "!usr/include/llvm-c/lto.h" \
+          "usr/lib/cmake/" \
+          "usr/lib/lib*.a" \
+          "!usr/lib/libc++.a" \
+          "!usr/lib/libc++abi.a" \
+          "!usr/lib/libc++experimental.a" \
+          "!usr/lib/libgcc_s.a" \
+          "!usr/lib/libunwind.a" \
+          "usr/lib/libear/" \
+          "usr/lib/libscanbuild/" \
+          "usr/lib/*.json" \
+          "usr/lib/*/*.json" \
+          "usr/share/"
+}
+
+package "libclang" {
+    files "usr/lib/libclang.so.*" \
+          "usr/lib/libclang.so" \
+          "usr/lib/libclang-cpp.so.*" \
+          "usr/lib/libclang-cpp.so"
+}
+
+package "libcxx" {
+    files "usr/lib/libc++.so.*" \
+          "usr/lib/libc++.so" \
+          "usr/lib/libc++abi.so.*" \
+          "usr/lib/libc++abi.so" \
+          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++.so" \
+          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++abi.so" \
+          "usr/lib/${recipe.arch}-unknown-linux-musl/*.so.*"
+}

@@ -1,0 +1,70 @@
+#!/bin/sh
+
+# Wrapper for cc/c++/ld to inject mimalloc at link time unless musl is forced.
+
+prog=${0##*/}
+
+case "$prog" in
+  cc)
+    real_bin=clang
+    mode=cc
+    ;;
+  c++)
+    real_bin=clang++
+    mode=cxx
+    ;;
+  ld)
+    real_bin=ld.lld
+    mode=ld
+    ;;
+  *)
+    printf 'mere-malloc-wrapper: unsupported invocation name: %s\n' "$prog" >&2
+    exit 2
+    ;;
+esac
+
+# Explicit musl selection: no injection.
+if [ "${MERE_MALLOC:-}" = "musl" ]; then
+  exec "$real_bin" "$@"
+fi
+
+already_has_mimalloc=0
+compile_only=0
+non_link_action=0
+
+for arg in "$@"; do
+  case "$arg" in
+    -lmimalloc)
+      already_has_mimalloc=1
+      ;;
+    -c|-S|-E|-M|-MM|-fsyntax-only|-emit-ast|-emit-llvm|-analyze)
+      compile_only=1
+      ;;
+    -v|-V|-version|-qversion|--help|-help|--version|-dumpversion|-dumpmachine|-print-*|--print-*|-###)
+      non_link_action=1
+      ;;
+  esac
+done
+
+inject=0
+case "$mode" in
+  ld)
+    # ld is always a linker invocation unless doing help/version style actions.
+    [ "$non_link_action" -eq 0 ] && [ "$already_has_mimalloc" -eq 0 ] && inject=1
+    ;;
+  cc|cxx)
+    # clang/clang++ link unless a compile-only or non-link mode is selected.
+    if [ "$compile_only" -eq 0 ] && [ "$non_link_action" -eq 0 ] && [ "$already_has_mimalloc" -eq 0 ]; then
+      inject=1
+    fi
+    ;;
+esac
+
+if [ "$inject" -eq 1 ]; then
+  # Keep injection shell-portable for BusyBox /bin/sh.
+  printf 'mere-malloc-wrapper: injecting -lmimalloc via %s\n' "$prog" >&2
+  set -- "$@" -lmimalloc
+  exec "$real_bin" "$@"
+else
+  exec "$real_bin" "$@"
+fi
