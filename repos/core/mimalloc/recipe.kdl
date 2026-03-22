@@ -1,0 +1,55 @@
+recipe {
+    name "mimalloc"
+    version "3.2.8"
+    release 3
+    description "A compact general purpose allocator with excellent performance"
+    url "https://microsoft.github.io/mimalloc"
+    licenses "MIT"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "cmake" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "musl-dev"
+    env MERE_MALLOC="musl"
+}
+
+source "https://github.com/microsoft/mimalloc/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "53bf0a0ad7dab0660ce95232bddc2448bfe3a8fd97de822649a4fb819059bfe7"
+}
+
+build {
+    script r#"
+        mkdir build
+        cd build || return 1
+        cmake \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+            -DCMAKE_BUILD_TYPE=Release \
+            ..
+        make -j"$(nproc)"
+    "#
+}
+
+install {
+    script r#"
+        cd build || return 1
+        make DESTDIR="${DESTDIR}" install
+        find "${DESTDIR}" -name 'libmimalloc.a' -exec mv -v '{}' "${DESTDIR}/usr/lib/" \;
+        rm -rf "${DESTDIR}/usr/lib/mimalloc-3.2"
+    "#
+}
+
+package "mimalloc" {
+    files "usr/lib/lib*.so.*" \
+          "usr/lib/lib*.so"
+}
+
+package "mimalloc-dev" {
+    files "usr/include/" \
+          "usr/lib/cmake/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
+
