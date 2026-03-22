@@ -1,0 +1,54 @@
+recipe {
+    name "sqlite"
+    version "3.51.3"
+    release 1
+    description "A self-contained embedded SQL database engine."
+    url "https://sqlite.org/"
+    licenses "PublicDomain"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "readline-dev"
+}
+
+source "https://sqlite.org/2026/sqlite-autoconf-3510200.tar.gz" {
+    blake3 "7ba8d2c972fb11430e8ce3ca2b2b0c3d583be6da5c8faf7cba50a12eb699601e"
+}
+
+build {
+    script r#"
+        export CFLAGS="$CFLAGS -fPIC -DSQLITE_ENABLE_FTS5=1 -DSQLITE_ENABLE_COLUMN_METADATA=1"
+        export CFLAGS="$CFLAGS -DSQLITE_ENABLE_UNLOCK_NOTIFY=1"
+        export CFLAGS="$CFLAGS -DSQLITE_ENABLE_DBSTAT_VTAB=1"
+        ./configure --prefix=/usr \
+            --enable-shared \
+            --enable-static
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "sqlite" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
+
+package "libsqlite" {
+    files "usr/lib/*.so.*" \
+          "usr/lib/*.so"
+}
+
+package "libsqlite-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
