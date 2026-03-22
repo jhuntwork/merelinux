@@ -1,0 +1,36 @@
+# Source: https://lists.uclibc.org/pipermail/busybox/2024-November/091022.html
+# Follow-up: https://lists.busybox.net/pipermail/busybox/2025-April/091438.html
+
+diff --git a/editors/awk.c b/editors/awk.c
+index 64e752f4b..40f5ba7f7 100644
+--- a/editors/awk.c
++++ b/editors/awk.c
+@@ -2636,8 +2636,13 @@ static int awk_sub(node *rn, const char *repl, int nm, var *src, var *dest /*,in
+ 					resbuf = qrealloc(resbuf, residx + replen + n, &resbufsize);
+ 					memcpy(resbuf + residx, sp + pmatch[j].rm_so - start_ofs, n);
+ 					residx += n;
+-				} else
++				} else {
++/* '\\' and '&' following a backslash keep its original meaning, any other
++ * occurrence of a '\\' should be treated as literal */
++					if (bslash && c != '\\' && c != '&')
++						resbuf[residx++] = '\\';
+ 					resbuf[residx++] = c;
++				}
+ 				bslash = 0;
+ 			}
+ 		}
+diff --git a/testsuite/awk.tests b/testsuite/awk.tests
+index be25f6696..61b3bc7d6 100755
+--- a/testsuite/awk.tests
++++ b/testsuite/awk.tests
+@@ -617,4 +617,9 @@ testing 'awk gsub erroneous word start match' \
+ 	'abc\n' \
+ 	'' ''
+
++testing 'awk sub literal backslash in replacement' \
++	'awk '$sq'sub(/abc/, "\\\d")'$sq \
++	'\d\n' \
++	'' 'abc\n'
++
+ exit $FAILCOUNT

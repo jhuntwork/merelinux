@@ -1,0 +1,144 @@
+recipe {
+    name "busybox"
+    version "1.37.0"
+    release 5
+    description "Tiny versions of common UNIX utilities built into a single binary"
+    url "http://busybox.net"
+    licenses "GPL"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "patch" \
+            "skalibs-dev" \
+            "utmps-dev"
+}
+
+source "http://busybox.net/downloads/${recipe.name}-${recipe.version}.tar.bz2" {
+    blake3 "179c4567a112635be6cb442fd8e3ff95dd0e718facd0666f2426d94322110a8f"
+}
+
+source "poweroff.patch" {
+    blake3 "0356be472dc11883a49c47a6f5c5263ab11a910151e92d60321d7f14db5940d3"
+}
+
+source "awk-sub-literal-backslash.patch" {
+    blake3 "46c8ce13e4a032ce2cb7f59b22ac85fe2f5da632866df11b53dc216499719c51"
+}
+
+source "busybox-config" {
+    blake3 "7d79a841eea928665affe33ef991006f020d3785342fb1e9ea28e83485f5eacf"
+}
+
+source "udhcpc.script" {
+    blake3 "a195efb027fa41a65428bd89067ad04cd2f74246df64a1a703c4a355e47782e9"
+}
+
+source "sysctl.conf" {
+    blake3 "d4251bc26526a1a945baa08edf688b7b03ca2eb87d425b6b6a4ec889bdb07faf"
+}
+
+source "ntpd-service" {
+    blake3 "22a8123e008606777b7a19303168833ecdde8b168b883bda02caa1599a55dbe5"
+}
+
+source "ntpd-log" {
+    blake3 "243e27ef1dddc4e18318f0d867e78fad30b26822354bf012fba91faa516d3c5d"
+}
+
+source "ntp.conf" {
+    blake3 "524c0cf519c0f60df41020065029765e6520cc191d530c8f534004cc0ba72eba"
+}
+
+source "if-pre-up-bridge" {
+    blake3 "d45a68548e60c635e903d4ce4374a06d9ae451165d89033725b9ca2d949b56ad"
+}
+
+source "if-post-down-bridge" {
+    blake3 "bd373cf54e62490dcbd48499f7034ea145a3e2696c9a8e96deef0f88c3a1f94c"
+}
+
+source "syslogd-service" {
+    blake3 "af5a1c4f30c8a96740cf6dfbac89a735e5649381f1b75e6e59c6c41ce1ea1629"
+}
+
+source "syslogd-log" {
+    blake3 "87fea4b7091f340e77b381328cbbb5bf6bfb49e54e4ea78263496e3df8bdf9f4"
+}
+
+source "klogd-service" {
+    blake3 "82b6ba0c61ca1bebdb594087ab8bb17a057892620e10ff86aeb0fcb64f3b8c31"
+}
+
+source "mkinitramfs" {
+    blake3 "8cadedb721b513429b1c3f323fdefaf88a03116373f3139a74a5c2e1b2e922c5"
+}
+
+source "initramfs-init" {
+    blake3 "a40bace03b8b1502ab96000c39c0c3adb7a84ec475db2c458ffa5b046abedaf4"
+}
+
+build {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/poweroff.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/awk-sub-literal-backslash.patch"
+        sed "/CONFIG_PREFIX/s@=.*@=\"${DESTDIR}/\"@" \
+          "${MERE_SOURCES_DIR}/busybox-config" >.config
+        sed -i -e 's@<none>@-lutmps -lskarnet@' \
+            -e '/^l_list=/s@$LDLIBS@-lutmps -lskarnet@' \
+            scripts/trylink
+        make CFLAGS="$CFLAGS -static" \
+            LDLIBS='-lutmps -lskarnet' \
+            HOSTCC=cc CC=cc
+    "#
+}
+
+install {
+    script r#"
+        make CFLAGS="$CFLAGS -static" \
+            LDLIBS='-lutmps -lskarnet' \
+            HOSTCC=cc CC=cc install
+        install -d "${DESTDIR}/usr/share/man/man1"
+        install -m0644 "docs/busybox.1" "${DESTDIR}/usr/share/man/man1/"
+        cd "$DESTDIR" || return 1
+
+        # Setuid
+        chmod u+s bin/busybox
+
+        # configuration/scripts
+        install -d etc/network/if-pre-up.d
+        install -m 0755 "${MERE_SOURCES_DIR}/if-pre-up-bridge" \
+            etc/network/if-pre-up.d/01-bridge
+        install -d etc/network/if-up.d
+        install -d etc/network/if-down.d
+        install -d etc/network/if-post-down.d
+        install -m 0755 "${MERE_SOURCES_DIR}/if-post-down-bridge" \
+            etc/network/if-post-down.d/01-bridge
+        install -d usr/share/udhcpc
+        install -m 0755 "${MERE_SOURCES_DIR}/udhcpc.script" \
+            usr/share/udhcpc/default.script
+        install -m 0644 "${MERE_SOURCES_DIR}/sysctl.conf" etc/
+        install -m 0644 "${MERE_SOURCES_DIR}/ntp.conf" etc/ntp.conf
+        install -d sbin usr/bin usr/share/mkinitramfs
+        ln -s ../../bin/busybox usr/bin/env
+        ln -s ../../bin/busybox usr/bin/awk
+        install -m 0755 "${MERE_SOURCES_DIR}/mkinitramfs" usr/bin/
+        install -m 0644 "${MERE_SOURCES_DIR}/initramfs-init" usr/share/mkinitramfs/init.in
+
+        # s6 Services
+        install -d etc/s6/services/available/ntpd/log
+        install -m 0754 "${MERE_SOURCES_DIR}/ntpd-service" etc/s6/services/available/ntpd/run
+        install -m 0754 "${MERE_SOURCES_DIR}/ntpd-log" etc/s6/services/available/ntpd/log/run
+        install -d etc/s6/services/available/syslogd/log
+        install -m 0754 "${MERE_SOURCES_DIR}/syslogd-service" etc/s6/services/available/syslogd/run
+        install -m 0754 "${MERE_SOURCES_DIR}/syslogd-log" etc/s6/services/available/syslogd/log/run
+        install -d etc/s6/services/available/klogd
+        install -m 0754 "${MERE_SOURCES_DIR}/klogd-service" etc/s6/services/available/klogd/run
+    "#
+}
+
+package "busybox" {
+    files "bin/" "etc/" "usr/" "sbin/"
+}
