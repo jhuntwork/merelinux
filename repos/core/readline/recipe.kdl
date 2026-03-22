@@ -1,0 +1,61 @@
+recipe {
+    name "readline"
+    version "8.3"
+    release 4
+    description "A library for allowing users to edit command lines as they are typed in."
+    url "http://www.gnu.org/software/readline/"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "libncurses-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "patch"
+}
+
+source "http://mirror.rit.edu/gnu/readline/readline-${recipe.version}.tar.gz" {
+    blake3 "7109f094062bda387a0c16b4875375b96e36437bebbbd8d8f91bb27ba01d687f"
+}
+source "http://mirror.rit.edu/gnu/readline/readline-8.3-patches/readline83-001" {
+    blake3 "87c85e44081abbf9d5cdca786b0c0bca5de3165163ee941475c951158331733a"
+}
+source "http://mirror.rit.edu/gnu/readline/readline-8.3-patches/readline83-002" {
+    blake3 "3b28dac250e1f078ad412920dccdeafe64502107df8a233a84c60a7c4fb7559a"
+}
+source "http://mirror.rit.edu/gnu/readline/readline-8.3-patches/readline83-003" {
+    blake3 "c618e7352e4f72a17bdc4dc69c5c9af94443be72bce5bfa475104b659926cbe2"
+}
+
+build {
+    script r#"
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/readline83-001
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/readline83-002
+        patch -Np2 -i "${MERE_SOURCES_DIR}"/readline83-003
+        sed -i '/MV.*old/d' Makefile.in
+        sed -i '/{OLDSUFF}/c:' support/shlib-install
+        CFLAGS='-fPIC' \
+        ./configure \
+          --prefix=/usr
+        make SHLIB_LIBS=-lncursesw
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "readline" {
+    files "usr/lib/*.so.*" \
+          "usr/lib/*.so"
+}
+
+package "readline-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/man3/"
+}
