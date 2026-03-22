@@ -1,0 +1,48 @@
+recipe {
+    name "libffi"
+    version "3.5.2"
+    release 4
+    description "A portable Foregin Function Interface library."
+    url "https://github.com/libffi/libffi/"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/libffi/libffi/releases/download/v${recipe.version}/libffi-${recipe.version}.tar.gz" {
+    blake3 "56207367ae2c1157093ca0c6914e9a15d590042b08c79b5bd8a4d979d3ef4be0"
+}
+
+build {
+    script r#"
+        export CFLAGS="$CFLAGS -fPIC"
+        ./configure \
+          --prefix=/usr \
+          --enable-static \
+          --enable-shared \
+          --disable-exec-static-tramp
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "libffi" {
+    files "usr/lib/libffi.so.*" \
+          "usr/lib/*.so"
+}
+
+package "libffi-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/man3/"
+}
