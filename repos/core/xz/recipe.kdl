@@ -1,0 +1,52 @@
+recipe {
+    name "xz"
+    version "5.8.2"
+    release 4
+    description "Free general-purpose data compression software with high compression ratio."
+    url "https://tukaani.org/xz"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/tukaani-project/xz/releases/download/v${recipe.version}/xz-${recipe.version}.tar.xz" {
+    blake3 "68d67cc938fb8eaa87107a7680fac64895cdc2b1841b6d030bf2713ed730dbaf"
+}
+
+build {
+    script r#"
+        export CFLAGS="$CFLAGS -fPIC"
+        ./configure \
+          --prefix=/usr \
+          --enable-shared \
+          --enable-static \
+          --disable-nls
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+        rm -rf "${DESTDIR}/usr/share/doc"
+    "#
+}
+
+package "xz" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
+
+package "liblzma" {
+    files "usr/lib/liblzma*.so.*" \
+          "usr/lib/liblzma*.so"
+}
+
+package "liblzma-dev" {
+    files "usr/include/" \
+          "usr/lib/liblzma.a" \
+          "usr/lib/pkgconfig/liblzma.pc"
+}
