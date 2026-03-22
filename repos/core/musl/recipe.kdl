@@ -1,0 +1,70 @@
+recipe {
+    name "musl"
+    version "1.2.6"
+    release 1
+    description "An implementation of the C/POSIX standard library"
+    url "https://musl.libc.org"
+    licenses "LGPL" "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "musl-dev" \
+            "patch" \
+            "skalibs-dev" \
+            "utmps-dev"
+    env MERE_MALLOC="musl"
+}
+
+source "http://www.etalabs.net/musl/releases/${recipe.name}-${recipe.version}.tar.gz" {
+    blake3 "260127b07a6cb72b70264fceafbc509e7da0cfde8e701a1fb44247859bc489a5"
+}
+
+source "https://git.musl-libc.org/cgit/musl/patch/?id=6be76895f6863100a311d474a42abdbb6466189d" {
+    save-as "add-elf_relr-typedefs.patch"
+    blake3 "7700795261a74cba7486eb39898c56b0853b9a06e175669de6a0fa52648bb56c"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/add-elf_relr-typedefs.patch"
+        # Disable utmpx since utmps will provide it, avoid duplicate symbols in libs
+        # Also set default utmp paths to ones utmps will handle
+        sed -i "/utmpx.h/s@.*@#define __NEED_time_t\n#include <bits/alltypes.h>@" \
+            include/utmp.h
+        rm src/legacy/utmpx.c include/utmpx.h
+    "#
+}
+
+build {
+    script r#"
+        unset CFLAGS CXXFLAGS
+        ./configure --prefix=/usr \
+            --libdir=/lib \
+            --syslibdir=/lib
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+        ln -sv libc.so "${DESTDIR}/lib/libc.musl-${recipe.arch}.so.1"
+        install -d "${DESTDIR}/usr/bin"
+        ln -sf ../../lib/libc.so "${DESTDIR}/usr/bin/ldd"
+    "#
+}
+
+package "musl" {
+    files "lib/libc.so" \
+          "lib/libc.musl*" \
+          "lib/ld-musl-*.so.1" \
+          "usr/bin/ldd"
+}
+
+package "musl-dev" {
+    files "usr/include/" \
+          "lib/*.a" \
+          "lib/*.o"
+}
