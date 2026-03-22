@@ -1,0 +1,39 @@
+recipe {
+    name "cmake"
+    version "4.3.0"
+    release 1
+    description "The CMake toolsuite for building, testing and packaging software."
+    url "https://cmake.org"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "llvm" \
+            "linux-headers" \
+            "openssl-dev"
+}
+
+source "https://github.com/Kitware/CMake/releases/download/v${recipe.version}/cmake-${recipe.version}.tar.gz" {
+    blake3 "8a6c14ac08397996a8d7063ee646177e27fd4201b4c5659e5c87bb41c5d024b3"
+}
+
+build {
+    script r#"
+        ./bootstrap --prefix=/usr
+        make -j "$(nproc)"
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "cmake" {
+    files "usr/bin/" \
+          "usr/doc/" \
+          "usr/share/"
+}
