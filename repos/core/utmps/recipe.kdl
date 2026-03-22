@@ -1,0 +1,61 @@
+recipe {
+    name "utmps"
+    version "0.1.3.2"
+    release 3
+    description "An implementation of the utmpx.h family of functions performing user accounting"
+    url "http://skarnet.org/software/utmps/"
+    licenses "ISC"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "skalibs-dev"
+}
+
+source "http://skarnet.org/software/utmps/utmps-${recipe.version}.tar.gz" {
+    blake3 "66b5699b2862ed094b3f9b47447f6ac297abba2e59ee1060f45d67e032619e24"
+}
+source "utmpd-service" {
+    blake3 "22f227d99b89ea86b3082eea7b8d37ea23575f88a185049bc782c425fb9f68ea"
+}
+source "wtmpd-service" {
+    blake3 "624958389b9e0566fa925859f4b8797e9ea4d798edadd007348e956f05088e1e"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --bindir=/sbin \
+            --libdir=/usr/lib \
+            --with-sysdeps=/lib/skalibs/sysdeps \
+            --enable-libc-includes \
+            --enable-static-libc
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+        install -d "${DESTDIR}/etc/s6/init-services/utmpd"
+        install -m 0754 "${MERE_SOURCES_DIR}/utmpd-service" "${DESTDIR}/etc/s6/init-services/utmpd/run"
+        echo 3 >"${DESTDIR}/etc/s6/init-services/utmpd/notification-fd"
+        install -d "${DESTDIR}/etc/s6/init-services/wtmpd"
+        install -m 0754 "${MERE_SOURCES_DIR}/wtmpd-service" "${DESTDIR}/etc/s6/init-services/wtmpd/run"
+        echo 3 >"${DESTDIR}/etc/s6/init-services/wtmpd/notification-fd"
+    "#
+}
+
+package "utmps" {
+    files "etc/" \
+          "sbin/"
+}
+
+package "utmps-dev" {
+    files "usr/include/" \
+          "usr/lib/"
+}
