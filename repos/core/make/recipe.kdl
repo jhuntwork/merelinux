@@ -1,0 +1,39 @@
+recipe {
+    name "make"
+    version "4.4.1"
+    release 3
+    description "A tool to control the generation of executables"
+    url "http://www.gnu.org/software/make/"
+    licenses "GPL3"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "http://mirror.rit.edu/gnu/make/make-${recipe.version}.tar.gz" {
+    blake3 "a7d8aee97b7e9a525ef561afa84eea0d929f246e3aafa420231c0602151cf9eb"
+}
+
+build {
+    script r#"
+        LDFLAGS="$LDFLAGS -static -Wl,-static" \
+            ./configure --prefix=/usr \
+            --disable-load
+        make V=1
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "make" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
