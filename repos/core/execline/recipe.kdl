@@ -1,0 +1,45 @@
+recipe {
+    name "execline"
+    version "2.9.8.1"
+    release 1
+    description "A (non-interactive) scripting language"
+    url "http://skarnet.org/software/execline"
+    licenses "ISC"
+    archs "aarch64" "x86_64"
+    depends "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "skalibs-dev"
+}
+
+source "http://skarnet.org/software/execline/execline-${recipe.version}.tar.gz" {
+    blake3 "6060d3bd7f65935e6652af1b2a3123526d60cbbc222617671e3d8b19fce5aaa5"
+}
+
+build {
+    script r#"
+        ./configure \
+          --prefix=/ \
+          --enable-static-libc \
+          --enable-multicall
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+        install -d "${DESTDIR}/usr"
+        mv -v "${DESTDIR}/include" "${DESTDIR}/usr/"
+    "#
+}
+
+package "execline" {
+    files "bin/"
+}
+
+package "execline-dev" {
+    files "usr/include/" \
+          "lib/"
+}
