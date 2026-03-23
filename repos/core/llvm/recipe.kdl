@@ -1,7 +1,7 @@
 recipe {
     name "llvm"
     version "21.1.8"
-    release 9
+    release 10
     description "A collection of modular and reusable compiler and toolchain technologies."
     url "htps://llvm.org"
     licenses "Apache"
@@ -46,32 +46,14 @@ build {
         CXXFLAGS='-Wno-gnu-line-marker' \
         cmake -G Ninja -Wno-dev \
             -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/usr \
             -DCLANG_BUILD_EXAMPLES=OFF \
             -DCLANG_INCLUDE_DOCS=OFF \
             -DCLANG_INCLUDE_TESTS=OFF \
             -DCLANG_LINK_CLANG_DYLIB=ON \
-            -DCMAKE_INSTALL_PREFIX=/usr \
             -DCLANG_DEFAULT_CXX_STDLIB='libc++' \
             -DCLANG_DEFAULT_RTLIB='compiler-rt' \
-            -DCOMPILER_RT_BUILD_SANITIZERS=OFF \
-            -DCOMPILER_RT_BUILD_XRAY=OFF \
-            -DCOMPILER_RT_USE_LIBCXX=ON \
             -DLIBCLANG_BUILD_STATIC=ON \
-            -DLIBCXX_CXX_ABI=libcxxabi \
-            -DLIBCXX_ENABLE_SHARED=ON \
-            -DLIBCXX_ENABLE_STATIC=ON \
-            -DLIBCXX_HAS_MUSL_LIBC=ON \
-            -DLIBCXX_HAS_RT_LIB=OFF \
-            -DLIBCXX_USE_COMPILER_RT=ON \
-            -DLIBCXX_HAS_GCC_S_LIB=OFF \
-            -DLIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
-            -DLIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
-            -DLIBCXXABI_ENABLE_SHARED=ON \
-            -DLIBCXXABI_ENABLE_STATIC=ON \
-            -DLIBCXXABI_USE_COMPILER_RT=ON \
-            -DLIBCXXABI_USE_LLVM_UNWINDER=ON \
-            -DLIBUNWIND_ENABLE_SHARED=OFF \
-            -DLIBUNWIND_USE_COMPILER_RT=ON \
             -DLLVM_BUILD_LLVM_DYLIB=ON \
             -DLLVM_BUILD_EXAMPLES=OFF \
             -DLLVM_DEFAULT_TARGET_TRIPLE="$CHOST" \
@@ -88,6 +70,24 @@ build {
             -DLLVM_INCLUDE_TESTS=OFF \
             -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
             -DLLVM_LINK_LLVM_DYLIB=ON \
+            -DRUNTIMES_COMPILER_RT_BUILD_SANITIZERS=OFF \
+            -DRUNTIMES_COMPILER_RT_BUILD_XRAY=OFF \
+            -DRUNTIMES_COMPILER_RT_USE_LIBCXX=ON \
+            -DRUNTIMES_LIBCXX_CXX_ABI=libcxxabi \
+            -DRUNTIMES_LIBCXX_ENABLE_SHARED=ON \
+            -DRUNTIMES_LIBCXX_ENABLE_STATIC=ON \
+            -DRUNTIMES_LIBCXX_HAS_MUSL_LIBC=ON \
+            -DRUNTIMES_LIBCXX_HAS_RT_LIB=OFF \
+            -DRUNTIMES_LIBCXX_USE_COMPILER_RT=ON \
+            -DRUNTIMES_LIBCXX_HAS_GCC_S_LIB=OFF \
+            -DRUNTIMES_LIBCXX_STATICALLY_LINK_ABI_IN_STATIC_LIBRARY=ON \
+            -DRUNTIMES_LIBCXXABI_ENABLE_STATIC_UNWINDER=ON \
+            -DRUNTIMES_LIBCXXABI_ENABLE_SHARED=ON \
+            -DRUNTIMES_LIBCXXABI_ENABLE_STATIC=ON \
+            -DRUNTIMES_LIBCXXABI_USE_COMPILER_RT=ON \
+            -DRUNTIMES_LIBCXXABI_USE_LLVM_UNWINDER=ON \
+            -DRUNTIMES_LIBUNWIND_ENABLE_SHARED=OFF \
+            -DRUNTIMES_LIBUNWIND_USE_COMPILER_RT=ON \
             ../llvm
         ninja -j"$(nproc)"
     "#
