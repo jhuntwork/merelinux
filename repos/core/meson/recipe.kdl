@@ -1,0 +1,31 @@
+recipe {
+    name "meson"
+    version "1.10.2"
+    release 1
+    description "An build system tool meant to be both extremely fast and user friendly"
+    url "https://mesonbuild.com/"
+    licenses "Apache"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "python"
+}
+
+source "https://github.com/mesonbuild/meson/releases/download/${recipe.version}/meson-${recipe.version}.tar.gz" {
+    blake3 "ba668c914ff12f165bddfd13d1f38fd80700f5bf1be3e5192055ae4fb07027d4"
+}
+
+build {
+    script r#"
+        ./packaging/create_zipapp.py --outfile meson.pyz --interpreter '/usr/bin/python3' .
+    "#
+}
+
+install {
+    script r#"
+        install -Dm755 meson.pyz "${DESTDIR}/usr/bin/meson"
+    "#
+}
+
+package "meson" {
+    files "usr/bin/meson"
+}
