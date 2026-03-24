@@ -26,3 +26,17 @@
  #elif defined(__loongarch__)
    unsigned struct_user_regs_struct_sz = sizeof(struct user_pt_regs);
    unsigned struct_user_fpregs_struct_sz = sizeof(struct user_fp_state);
+--- llvm-project-21.1.8.src.orig/compiler-rt/lib/sanitizer_common/sanitizer_stoptheworld_linux_libcdep.cpp
++++ llvm-project-21.1.8.src/compiler-rt/lib/sanitizer_common/sanitizer_stoptheworld_linux_libcdep.cpp
+@@ -517,7 +517,11 @@
+ #    define REG_SP regs[EF_R29]
+ 
+ #elif defined(__aarch64__)
++#if SANITIZER_MUSL
++typedef struct user_regs_struct regs_struct;
++#else
+ typedef struct user_pt_regs regs_struct;
++#endif
+ #define REG_SP sp
+ static constexpr uptr kExtraRegs[] = {0};
+ #define ARCH_IOVEC_FOR_GETREGSET
