@@ -86,6 +86,9 @@ build {
         patch -Np1 -i "${MERE_SOURCES_DIR}/awk-sub-literal-backslash.patch"
         sed "/CONFIG_PREFIX/s@=.*@=\"${DESTDIR}/\"@" \
           "${MERE_SOURCES_DIR}/busybox-config" >.config
+        case "${recipe.arch}" in
+            aarch64) sed -i 's/CONFIG_\(SHA[0-9]*_HWACCEL\)=y/# CONFIG_\1 is not set/' .config ;;
+        esac
         sed -i -e 's@<none>@-lutmps -lskarnet@' \
             -e '/^l_list=/s@$LDLIBS@-lutmps -lskarnet@' \
             scripts/trylink
