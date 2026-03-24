@@ -1,0 +1,27 @@
+diff --git i/include/libbb.h w/include/libbb.h
+index 01cdb1b..5652b32 100644
+--- i/include/libbb.h
++++ w/include/libbb.h
+@@ -2324,20 +2324,10 @@ extern struct globals *BB_GLOBAL_CONST ptr_to_globals;
+ 
+ #if defined(__clang_major__) && __clang_major__ >= 9
+ /* Clang/llvm drops assignment to "constant" storage. Silently.
+- * Needs serious convincing to not eliminate the store.
++ * Use volatile pointer cast to force the store on all architectures.
+  */
+-static ALWAYS_INLINE void* not_const_pp(const void *p)
+-{
+-	void *pp;
+-	asm volatile (
+-		"# forget that p points to const"
+-		: /*outputs*/ "=r" (pp)
+-		: /*inputs*/ "0" (p)
+-	);
+-	return pp;
+-}
+ # define ASSIGN_CONST_PTR(pptr, v) do { \
+-	*(void**)not_const_pp(pptr) = (void*)(v); \
++	*(void * volatile *)(pptr) = (void*)(v); \
+ 	barrier(); \
+ } while (0)
+ /* XZALLOC_CONST_PTR() is an out-of-line function to prevent

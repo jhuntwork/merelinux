@@ -1,7 +1,7 @@
 recipe {
     name "busybox"
     version "1.37.0"
-    release 5
+    release 6
     description "Tiny versions of common UNIX utilities built into a single binary"
     url "http://busybox.net"
     licenses "GPL"
@@ -26,6 +26,34 @@ source "poweroff.patch" {
 
 source "awk-sub-literal-backslash.patch" {
     blake3 "46c8ce13e4a032ce2cb7f59b22ac85fe2f5da632866df11b53dc216499719c51"
+}
+
+source "clang-aarch64-const-ptr.patch" {
+    blake3 "012d5208343c9a26f292ab56101ecb6d16ba8e94ab58716034daa3ffe0172e47"
+}
+
+source "CVE-2023-42366-awk-regex.patch" {
+    blake3 "a25b0ce9d36091e9368ccd527dec9594582cce097c5de17ad33c7c85b4543a90"
+}
+
+source "tar-malicious-content-masking.patch" {
+    blake3 "0282fb1dc9313540934dd6b117bcfbf1ec082e49c9bc730d51b9d146368baf9e"
+}
+
+source "tar-toctou-symlink-race.patch" {
+    blake3 "a23d2a0a53dbf6e7399a5f377d9b93801fe657cc1bdbb4cb80a5672da0332252"
+}
+
+source "CVE-2024-58251-netstat-sanitize.patch" {
+    blake3 "ea838a7e5876f69ceac7123b3bc1c9b1aa2f0513e98bef74df87c72c043fdc91"
+}
+
+source "sockaddr2str-sanitize.patch" {
+    blake3 "28edce49566488a623d3c31bc2a797ac0fe8aaf5ed90249483fbfc4951338556"
+}
+
+source "nslookup-sanitize.patch" {
+    blake3 "e326e3e219c56a42f826e74fbaf669da138cab4bb1c7708a270f5fc062586b59"
 }
 
 source "busybox-config" {
@@ -84,6 +112,13 @@ build {
     script r#"
         patch -Np1 -i "${MERE_SOURCES_DIR}/poweroff.patch"
         patch -Np1 -i "${MERE_SOURCES_DIR}/awk-sub-literal-backslash.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/clang-aarch64-const-ptr.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/CVE-2023-42366-awk-regex.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/tar-malicious-content-masking.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/tar-toctou-symlink-race.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/CVE-2024-58251-netstat-sanitize.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/sockaddr2str-sanitize.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/nslookup-sanitize.patch"
         sed "/CONFIG_PREFIX/s@=.*@=\"${DESTDIR}/\"@" \
           "${MERE_SOURCES_DIR}/busybox-config" >.config
         case "${recipe.arch}" in
