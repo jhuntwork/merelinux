@@ -12,6 +12,7 @@ recipe {
             "musl-dev" \
             "linux-headers" \
             "llvm" \
+            "patch" \
             "perl" \
             "pkgconf" \
             "zlib-ng-dev"
