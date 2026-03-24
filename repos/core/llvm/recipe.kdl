@@ -30,7 +30,7 @@ source "mere-malloc-wrapper" {
 }
 
 source "musl-aarch64-sanitizer.patch" {
-    blake3 "4a63fc94fea2a9816b762413d50e03fb44ab591313744446120900a7e0994d61"
+    blake3 "6a20e1ec348bb512fe9dce1294c83f8d18cb571edadf6419d93cfec291a9e27a"
 }
 
 prepare {
