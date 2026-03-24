@@ -1,7 +1,7 @@
 recipe {
     name "openssl"
     version "3.6.1"
-    release 4
+    release 5
     description "a toolkit for the TLS and SSL protocols"
     url "https://www.openssl.org"
     licenses "BSD"
@@ -19,6 +19,16 @@ recipe {
 
 source "https://www.openssl.org/source/openssl-${recipe.version}.tar.gz" {
     blake3 "90c0c093c5f09397f840cce374e4e6f56134727ac0867aaeccb5314aa3196544"
+}
+
+source "linux-aarch64-clang.patch" {
+    blake3 "df15e9b87f6835ae9eb3961d60d7d5fb4331acf3fca481442656c5f19261fecc"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/linux-aarch64-clang.patch"
+    "#
 }
 
 build {
