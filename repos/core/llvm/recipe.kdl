@@ -29,10 +29,16 @@ source "mere-malloc-wrapper" {
     blake3 "1666e3cd1a6a48ee5b9fed435796d7267b5ae1c05f7302ab9c69cae22c654ceb"
 }
 
+source "musl-aarch64-sanitizer.patch" {
+    blake3 "4a63fc94fea2a9816b762413d50e03fb44ab591313744446120900a7e0994d61"
+}
+
 prepare {
     script r#"
         sed -i "/dlfcn.h/s@\$@\n#include <sys/types.h>@" \
             compiler-rt/lib/fuzzer/FuzzerInterceptors.cpp
+
+        patch -Np1 -i "${MERE_SOURCES_DIR}/musl-aarch64-sanitizer.patch"
     "#
 }
 
