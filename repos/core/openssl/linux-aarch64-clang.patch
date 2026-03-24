@@ -1,0 +1,14 @@
+--- openssl-1.1.1w.orig/Configurations/10-main.conf
++++ openssl-1.1.1w/Configurations/10-main.conf
+@@ -720,6 +720,11 @@
+         inherit_from     => [ "linux-generic64", asm("aarch64_asm") ],
+         perlasm_scheme   => "linux64",
+     },
++    "linux-aarch64-clang" => {
++        inherit_from     => [ "linux-aarch64" ],
++        CC               => "clang",
++        CXX              => "clang++",
++    },
+     "linux-arm64ilp32" => {  # https://wiki.linaro.org/Platform/arm64-ilp32
+         inherit_from     => [ "linux-generic32", asm("aarch64_asm") ],
+         cflags           => add("-mabi=ilp32"),
