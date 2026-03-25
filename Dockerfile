@@ -1,20 +1,23 @@
-FROM mere/base as build
+FROM alpine AS init
 
-ENV BL_VRS=2.0.5-1
-ENV BB_VRS=1.33.1-5
-ENV PM_VRS=6.0.1-3
-ENV CA_VRS=7.79.0-2
+ARG VERSION
+ARG TARGETARCH
 
-RUN install -d /tmp/system/var/lib/pacman
-RUN pacman -r /tmp/system -Sy \
-        base-layout=${BL_VRS} busybox=${BB_VRS} pacman=${PM_VRS} ca-certs=${CA_VRS} --noconfirm
-RUN rm /tmp/system/etc/services \
-       /tmp/system/etc/protocols \
-       /tmp/system/etc/pacman.conf.example \
-       /tmp/system/usr/bin/pacman-conf
+RUN ARCH=$(case "${TARGETARCH}" in amd64) echo x86_64;; arm64) echo aarch64;; *) echo "${TARGETARCH}";; esac) && \
+    wget https://codeberg.org/merelinux/mere/releases/download/v${VERSION}/mere-${VERSION}-linux-${ARCH} -O /usr/local/bin/mere && \
+    chmod +x /usr/local/bin/mere
+RUN mere init
+RUN wget http://pkgs.merelinux.org/mere.pub -O /mere/keys/mere.pub
+RUN printf 'repo "core" {\n    url "http://pkgs.merelinux.org/core/new"\n    priority 100\n    trusted-fingerprints "eb3877e48560eaa832db2901e6b6ed36798d49831c76ffb66a2eb20010611265"\n}\n' > /mere/config.kdl
+RUN mere install busybox ca-certs
 
 FROM scratch
 
-COPY --from=build /tmp/system /
+COPY --from=init /mere /mere
+COPY --from=init /usr/local/bin/mere /usr/local/bin/mere
+COPY --from=init /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+
+RUN ["/usr/local/bin/mere", "init", "--system"]
+RUN ["/mere/profiles/system/current/bin/rm", "-rf", "/mere/cache/packages", "/mere/cache/repos"]
 
 CMD ["/bin/sh"]
