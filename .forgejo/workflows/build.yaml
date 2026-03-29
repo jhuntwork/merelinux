@@ -1,0 +1,162 @@
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'recipes/**/recipe.kdl'
+
+jobs:
+  detect:
+    runs-on: docker
+    container:
+      image: mere/ci:v0.9.7
+    outputs:
+      recipe: ${{ steps.detect.outputs.recipe }}
+    steps:
+      - name: Git checkout
+        run: |
+          set -eu
+          git init "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git -c http.extraHeader="Authorization: Bearer $GITHUB_TOKEN" \
+            fetch --depth=2 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Detect changed recipe
+        id: detect
+        run: |
+          set -eu
+          cd "$GITHUB_WORKSPACE"
+
+          changed=$(
+            git diff --name-only HEAD~1 HEAD \
+              | grep '^recipes/[^/]*/[^/]*/recipe\.kdl$' || true
+          )
+
+          count=$(printf '%s\n' "$changed" | grep -c . || true)
+          if [ "$count" -gt 1 ]; then
+            printf '::error::Multiple recipes changed in one commit. Build one package per commit.\n'
+            exit 1
+          fi
+
+          if [ -z "$changed" ]; then
+            printf 'No recipe changes detected.\n'
+            printf 'recipe=\n' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          printf 'Building: %s\n' "$changed"
+          printf 'recipe=%s\n' "$changed" >> "$GITHUB_OUTPUT"
+
+  build-x86_64:
+    needs: detect
+    if: needs.detect.outputs.recipe != ''
+    runs-on: docker
+    container:
+      image: mere/ci:v0.9.7
+      options: --privileged
+    env:
+      MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
+      SYNC_SSH_KEY: ${{ secrets.SYNC_SSH_KEY }}
+    steps:
+      - name: Git checkout
+        run: |
+          set -eu
+          git init "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git -c http.extraHeader="Authorization: Bearer $GITHUB_TOKEN" \
+            fetch --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Setup keys
+        run: |
+          set -eu
+          install -d -m 700 ~/.mere/keys
+          printf '%s\n' "$MERE_SIGNING_KEY" > ~/.mere/keys/mere.key
+          chmod 600 ~/.mere/keys/mere.key
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SYNC_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > ~/.ssh/config
+
+      - name: Sync repo down
+        run: |
+          set -eu
+          install -d /tmp/repo-sync
+          rsync -az pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
+
+      - name: Build
+        run: |
+          set -eu
+          cd "$GITHUB_WORKSPACE"
+          mere dev build "${{ needs.detect.outputs.recipe }}"
+
+      - name: Import and publish
+        run: |
+          set -eu
+          mere dev import mere
+          mere dev publish mere /tmp/repo-sync/
+
+      - name: Sync repo up
+        run: |
+          set -eu
+          rsync -az --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+
+  build-aarch64:
+    needs:
+      - detect
+      - build-x86_64
+    if: needs.detect.outputs.recipe != ''
+    runs-on: docker-aarch64
+    container:
+      image: mere/ci:v0.9.7
+      options: --privileged
+    env:
+      MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
+      SYNC_SSH_KEY: ${{ secrets.SYNC_SSH_KEY }}
+    steps:
+      - name: Git checkout
+        run: |
+          set -eu
+          git init "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
+          git -c http.extraHeader="Authorization: Bearer $GITHUB_TOKEN" \
+            fetch --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Setup keys
+        run: |
+          set -eu
+          install -d -m 700 ~/.mere/keys
+          printf '%s\n' "$MERE_SIGNING_KEY" > ~/.mere/keys/mere.key
+          chmod 600 ~/.mere/keys/mere.key
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SYNC_SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > ~/.ssh/config
+
+      - name: Sync repo down
+        run: |
+          set -eu
+          install -d /tmp/repo-sync
+          rsync -az pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
+
+      - name: Build
+        run: |
+          set -eu
+          cd "$GITHUB_WORKSPACE"
+          mere dev build "${{ needs.detect.outputs.recipe }}"
+
+      - name: Import and publish
+        run: |
+          set -eu
+          mere dev import mere
+          mere dev publish mere /tmp/repo-sync/
+
+      - name: Sync repo up
+        run: |
+          set -eu
+          rsync -az --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/

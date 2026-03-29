@@ -1,0 +1,51 @@
+recipe {
+    name "nodejs"
+    version "24.14.1"
+    release 1
+    description "A JavaScript runtime"
+    url "https://nodejs.org"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "openssl-dev" \
+            "python" \
+            "zlib-ng-dev"
+}
+
+source "https://nodejs.org/dist/v${recipe.version}/node-v${recipe.version}.tar.xz" {
+    blake3 "d5bb3cdbb559c29adaea792faf1e4650f200056ea957b1245aca2208b0a39e2e"
+}
+
+prepare {
+    script r#"
+        sed -i 's/-latomic//' node.gyp
+    "#
+}
+
+build {
+    script r#"
+        export CXX=c++ CC=cc
+        ./configure --prefix=/usr \
+            --shared-zlib \
+            --shared-openssl \
+            --with-intl=none \
+            --without-report \
+            --without-node-snapshot \
+            --without-node-code-cache \
+            --ninja
+        ninja -C out/Release
+    "#
+}
+
+install {
+    script r#"
+        tools/install.py install "$DESTDIR" /usr
+    "#
+}
+
+package "nodejs" {
+    files "usr/bin/"
+}

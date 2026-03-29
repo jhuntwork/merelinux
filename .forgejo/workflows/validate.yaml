@@ -5,7 +5,7 @@ jobs:
   validate:
     runs-on: docker
     container:
-      image: mere/ci:0.6.2
+      image: mere/ci:v0.9.7
     steps:
       - name: Git checkout
         run: |
@@ -32,7 +32,7 @@ jobs:
 
           changed_recipes=$(
             git diff --name-only "origin/$GITHUB_BASE_REF...$GITHUB_SHA" \
-              | grep '^repos/[^/][^/]*/[^/][^/]*/recipe\.kdl$' || true
+              | grep '^recipes/[^/][^/]*/[^/][^/]*/recipe\.kdl$' || true
           )
 
           if [ -z "$changed_recipes" ]; then

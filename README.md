@@ -25,34 +25,28 @@ Mere Linux is currently in transition between two recipe formats:
 
 ## Repository Layout
 
-Package recipes live under `repos/<repo-name>/<package-name>/recipe.kdl`
+Package recipes live under `recipes/<category>/<package-name>/recipe.kdl`
 
 Each package directory is the complete home for that package recipe. Local
 patches, config files, and other bundled sources should live beside
 `recipe.kdl` in the same package directory.
 
-Each package should belong to one repo based on its role in the system. While
-an overview is provided below, each individual repo directory will define its
-own more specific inclusion rules.
+The directory categories (`core`, `extra`, `desktop`) are for in-tree
+organization only — all packages are published to a single `mere` repository.
 
-### Current Repos
+### Categories
 
 #### core
 
-`core` is for the small set of packages that are fundamental to installing,
-building, managing, and repairing a Mere Linux system. More details can be
-found in [`repos/core/README.md`](repos/core/README.md).
-
-#### desktop
-
-`desktop` is for packages that primarily exist to provide a graphical
-desktop environment, graphical desktop applications, or the supporting stack
-they depend on in Mere. More details can be found in
-[`repos/desktop/README.md`](repos/desktop/README.md).
+Packages that are fundamental to installing, building, managing, and
+repairing a Mere Linux system.
 
 #### extra
 
-`extra` is for packages that do not belong in `core` or `desktop`. It is the
-broad general-purpose repo for the rest of the system, including common
-development tooling, libraries, runtimes, and utilities. More details can be
-found in [`repos/extra/README.md`](repos/extra/README.md).
+Common development tooling, libraries, runtimes, and utilities that do not
+belong in `core` or `desktop`.
+
+#### desktop
+
+Packages that primarily exist to provide a graphical desktop environment,
+graphical desktop applications, or the supporting stack they depend on.

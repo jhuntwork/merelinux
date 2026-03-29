@@ -3,12 +3,12 @@ FROM alpine AS init
 ARG VERSION
 ARG TARGETARCH
 
-RUN ARCH=$(case "${TARGETARCH}" in amd64) echo x86_64;; arm64) echo aarch64;; *) echo "${TARGETARCH}";; esac) && \
+RUN ARCH="$(case "${TARGETARCH}" in amd64) echo x86_64;; arm64) echo aarch64;; *) echo "${TARGETARCH}";; esac)" && \
     wget https://codeberg.org/merelinux/mere/releases/download/v${VERSION}/mere-${VERSION}-linux-${ARCH} -O /usr/local/bin/mere && \
     chmod +x /usr/local/bin/mere
 RUN mere init
-RUN wget http://pkgs.merelinux.org/mere.pub -O /mere/keys/mere.pub
-RUN printf 'repo "core" {\n    url "http://pkgs.merelinux.org/core/new"\n    priority 100\n    trusted-fingerprints "eb3877e48560eaa832db2901e6b6ed36798d49831c76ffb66a2eb20010611265"\n}\n' > /mere/config.kdl
+RUN wget https://pkgs.merelinux.org/mere.pub -O /mere/keys/mere.pub
+RUN wget https://pkgs.merelinux.org/config.kdl -O /mere/config.kdl
 RUN mere install busybox ca-certs
 
 FROM scratch
