@@ -1,0 +1,45 @@
+recipe {
+    name "jq"
+    version "1.8.1"
+    release 1
+    description "A lightweight and flexible command-line JSON processor"
+    url "https://github.com/stedolan/jq"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "${recipe.url}/releases/download/jq-${recipe.version}/jq-${recipe.version}.tar.gz" {
+    blake3 "9cd38d1bbee1edf69145fb22032b12eccc49cda2741d3bc8b6c1eb9d7d10ff1e"
+}
+
+build {
+    script r#"
+        ./configure \
+          --prefix=/usr \
+          --enable-static \
+          --disable-shared \
+          --enable-all-static
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "jq" {
+    files "usr/bin/jq" \
+          "usr/share/man/man1/"
+}
+
+package "jq-dev" {
+    files "usr/bin/onig-config" \
+          "usr/include/" \
+          "usr/lib/"
+}
