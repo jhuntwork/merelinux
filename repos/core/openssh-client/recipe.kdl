@@ -1,0 +1,54 @@
+recipe {
+    name "openssh-client"
+    version "10.2p1"
+    release 1
+    description "the premier connectivity tool for remote login with the SSH protocol"
+    url "https://openssh.com"
+    archs "aarch64" "x86_64"
+    licenses "BSD"
+    depends "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "openssl-dev" \
+            "utmps-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://ftp4.usa.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-${recipe.version}.tar.gz" {
+    blake3 "33f19bcecf5641fd65b9d76050e70a57eeee644ea8ca60b0a84508c6aa994550"
+}
+
+build {
+    script r#"
+        export LDFLAGS="$LDFLAGS --static"
+        ./configure \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --disable-utmp \
+            --disable-utmpx \
+            --disable-wtmp \
+            --disable-wtmpx \
+            --disable-lastlog \
+            --with-mantype=man
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "openssh-client" {
+    files "etc/ssh_config" \
+          "usr/bin/scp" \
+          "usr/bin/sftp" \
+          "usr/bin/ssh" \
+          "usr/bin/ssh-add" \
+          "usr/bin/ssh-agent" \
+          "usr/bin/ssh-keyscan" \
+          "usr/bin/ssh-keygen" \
+          "usr/share/man/man1/"
+}
