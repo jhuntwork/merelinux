@@ -73,6 +73,7 @@ jobs:
       - name: Setup keys
         run: |
           set -eu
+          grep -q '^root:' /etc/passwd 2>/dev/null || printf 'root:x:0:0:root:/root:/bin/sh\n' >> /etc/passwd
           install -d -m 700 ~/.mere/keys
           printf '%s' "$MERE_SIGNING_KEY" | base64 -d > ~/.mere/keys/mere.key
           chmod 600 ~/.mere/keys/mere.key
@@ -130,6 +131,7 @@ jobs:
       - name: Setup keys
         run: |
           set -eu
+          grep -q '^root:' /etc/passwd 2>/dev/null || printf 'root:x:0:0:root:/root:/bin/sh\n' >> /etc/passwd
           install -d -m 700 ~/.mere/keys
           printf '%s' "$MERE_SIGNING_KEY" | base64 -d > ~/.mere/keys/mere.key
           chmod 600 ~/.mere/keys/mere.key
