@@ -1,7 +1,7 @@
 recipe {
     name "jq"
     version "1.8.1"
-    release 3
+    release 4
     description "A lightweight and flexible command-line JSON processor"
     url "https://github.com/stedolan/jq"
     licenses "BSD"
