@@ -9,7 +9,7 @@ jobs:
   detect:
     runs-on: docker
     container:
-      image: mere/ci:v0.9.7
+      image: mere/ci:v0.10.0
     outputs:
       recipe: ${{ steps.detect.outputs.recipe }}
     steps:
@@ -54,7 +54,7 @@ jobs:
     if: needs.detect.outputs.recipe != ''
     runs-on: docker
     container:
-      image: mere/ci:v0.9.7
+      image: mere/ci:v0.10.0
       options: --privileged
     env:
       MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
@@ -81,18 +81,15 @@ jobs:
           install -d -m 700 /root/.ssh
           printf '%s' "$SYNC_SSH_KEY" | base64 -d > /root/.ssh/id_ed25519
           chmod 600 /root/.ssh/id_ed25519
-          printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > /root/.ssh/config
 
-      - name: Sync repo down
+      - name: Sync repo metadata down
         run: |
           set -eu
-          install -d /tmp/repo-sync
-          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
-          install -d /mere/dev/repo/mere/current
-          cp /tmp/repo-sync/repo.db /mere/dev/repo/mere/current/ 2>/dev/null || true
-          cp /tmp/repo-sync/repo.db.sig /mere/dev/repo/mere/current/ 2>/dev/null || true
-          install -d /mere/cache/packages
-          cp /tmp/repo-sync/packages/*.pkg.tar.zst /mere/cache/packages/ 2>/dev/null || true
+          install -d /tmp/repo/packages
+          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
+            pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/repo.db \
+            pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/repo.db.sig \
+            /tmp/repo/
 
       - name: Build
         run: |
@@ -100,16 +97,16 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           mere dev build "${{ needs.detect.outputs.recipe }}"
 
-      - name: Import and publish
+      - name: Import
         run: |
           set -eu
-          mere dev import mere
-          mere dev publish mere /tmp/repo-sync
+          mere dev import /tmp/repo
 
       - name: Sync repo up
         run: |
           set -eu
-          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
+            /tmp/repo/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
 
   build-aarch64:
     needs:
@@ -118,7 +115,7 @@ jobs:
     if: needs.detect.outputs.recipe != ''
     runs-on: docker-aarch64
     container:
-      image: mere/ci:v0.9.7
+      image: mere/ci:v0.10.0
       options: --privileged
     env:
       MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
@@ -145,18 +142,15 @@ jobs:
           install -d -m 700 /root/.ssh
           printf '%s' "$SYNC_SSH_KEY" | base64 -d > /root/.ssh/id_ed25519
           chmod 600 /root/.ssh/id_ed25519
-          printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > /root/.ssh/config
 
-      - name: Sync repo down
+      - name: Sync repo metadata down
         run: |
           set -eu
-          install -d /tmp/repo-sync
-          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
-          install -d /mere/dev/repo/mere/current
-          cp /tmp/repo-sync/repo.db /mere/dev/repo/mere/current/ 2>/dev/null || true
-          cp /tmp/repo-sync/repo.db.sig /mere/dev/repo/mere/current/ 2>/dev/null || true
-          install -d /mere/cache/packages
-          cp /tmp/repo-sync/packages/*.pkg.tar.zst /mere/cache/packages/ 2>/dev/null || true
+          install -d /tmp/repo/packages
+          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
+            pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/repo.db \
+            pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/repo.db.sig \
+            /tmp/repo/
 
       - name: Build
         run: |
@@ -164,13 +158,13 @@ jobs:
           cd "$GITHUB_WORKSPACE"
           mere dev build "${{ needs.detect.outputs.recipe }}"
 
-      - name: Import and publish
+      - name: Import
         run: |
           set -eu
-          mere dev import mere
-          mere dev publish mere /tmp/repo-sync
+          mere dev import /tmp/repo
 
       - name: Sync repo up
         run: |
           set -eu
-          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
+            /tmp/repo/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
