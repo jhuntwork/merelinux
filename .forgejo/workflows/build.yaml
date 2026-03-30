@@ -88,6 +88,11 @@ jobs:
           set -eu
           install -d /tmp/repo-sync
           rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
+          install -d /mere/dev/repo/mere/current
+          cp /tmp/repo-sync/repo.db /mere/dev/repo/mere/current/ 2>/dev/null || true
+          cp /tmp/repo-sync/repo.db.sig /mere/dev/repo/mere/current/ 2>/dev/null || true
+          install -d /mere/cache/packages
+          cp /tmp/repo-sync/packages/*.pkg.tar.zst /mere/cache/packages/ 2>/dev/null || true
 
       - name: Build
         run: |
@@ -147,6 +152,11 @@ jobs:
           set -eu
           install -d /tmp/repo-sync
           rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
+          install -d /mere/dev/repo/mere/current
+          cp /tmp/repo-sync/repo.db /mere/dev/repo/mere/current/ 2>/dev/null || true
+          cp /tmp/repo-sync/repo.db.sig /mere/dev/repo/mere/current/ 2>/dev/null || true
+          install -d /mere/cache/packages
+          cp /tmp/repo-sync/packages/*.pkg.tar.zst /mere/cache/packages/ 2>/dev/null || true
 
       - name: Build
         run: |
