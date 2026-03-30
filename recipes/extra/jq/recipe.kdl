@@ -41,5 +41,6 @@ package "jq" {
 package "jq-dev" {
     files "usr/bin/onig-config" \
           "usr/include/" \
-          "usr/lib/"
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
 }

@@ -74,10 +74,10 @@ jobs:
         run: |
           set -eu
           install -d -m 700 ~/.mere/keys
-          printf '%s\n' "$MERE_SIGNING_KEY" > ~/.mere/keys/mere.key
+          printf '%s' "$MERE_SIGNING_KEY" | base64 -d > ~/.mere/keys/mere.key
           chmod 600 ~/.mere/keys/mere.key
           install -d -m 700 ~/.ssh
-          printf '%s\n' "$SYNC_SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s' "$SYNC_SSH_KEY" | base64 -d > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > ~/.ssh/config
 
@@ -131,10 +131,10 @@ jobs:
         run: |
           set -eu
           install -d -m 700 ~/.mere/keys
-          printf '%s\n' "$MERE_SIGNING_KEY" > ~/.mere/keys/mere.key
+          printf '%s' "$MERE_SIGNING_KEY" | base64 -d > ~/.mere/keys/mere.key
           chmod 600 ~/.mere/keys/mere.key
           install -d -m 700 ~/.ssh
-          printf '%s\n' "$SYNC_SSH_KEY" > ~/.ssh/id_ed25519
+          printf '%s' "$SYNC_SSH_KEY" | base64 -d > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > ~/.ssh/config
 
