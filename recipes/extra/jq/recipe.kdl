@@ -6,10 +6,7 @@ recipe {
     url "https://github.com/stedolan/jq"
     licenses "BSD"
     archs "aarch64" "x86_64"
-    depends "llvm" \
-            "make" \
-            "mimalloc-dev" \
-            "musl-dev"
+    depends "llvm" "make" "mimalloc-dev" "musl-dev"
 }
 
 source "${recipe.url}/releases/download/jq-${recipe.version}/jq-${recipe.version}.tar.gz" {
