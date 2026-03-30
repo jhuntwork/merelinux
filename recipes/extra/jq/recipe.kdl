@@ -19,10 +19,10 @@ source "${recipe.url}/releases/download/jq-${recipe.version}/jq-${recipe.version
 build {
     script r#"
         ./configure \
-          --prefix=/usr \
-          --enable-static \
-          --disable-shared \
-          --enable-all-static
+            --prefix=/usr \
+            --enable-static \
+            --disable-shared \
+            --enable-all-static
         make
     "#
 }
