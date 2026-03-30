@@ -74,19 +74,20 @@ jobs:
         run: |
           set -eu
           grep -q '^root:' /etc/passwd 2>/dev/null || printf 'root:x:0:0:root:/root:/bin/sh\n' >> /etc/passwd
-          install -d -m 700 ~/.mere/keys
-          printf '%s' "$MERE_SIGNING_KEY" | base64 -d > ~/.mere/keys/mere.key
-          chmod 600 ~/.mere/keys/mere.key
-          install -d -m 700 ~/.ssh
-          printf '%s' "$SYNC_SSH_KEY" | base64 -d > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > ~/.ssh/config
+          install -d -m 700 /root
+          install -d -m 700 /root/.mere/keys
+          printf '%s' "$MERE_SIGNING_KEY" | base64 -d > /root/.mere/keys/mere.key
+          chmod 600 /root/.mere/keys/mere.key
+          install -d -m 700 /root/.ssh
+          printf '%s' "$SYNC_SSH_KEY" | base64 -d > /root/.ssh/id_ed25519
+          chmod 600 /root/.ssh/id_ed25519
+          printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > /root/.ssh/config
 
       - name: Sync repo down
         run: |
           set -eu
           install -d /tmp/repo-sync
-          rsync -az -e "ssh -p 50220 -l pkgsync -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
 
       - name: Build
         run: |
@@ -103,7 +104,7 @@ jobs:
       - name: Sync repo up
         run: |
           set -eu
-          rsync -az -e "ssh -p 50220 -l pkgsync -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
 
   build-aarch64:
     needs:
@@ -132,19 +133,20 @@ jobs:
         run: |
           set -eu
           grep -q '^root:' /etc/passwd 2>/dev/null || printf 'root:x:0:0:root:/root:/bin/sh\n' >> /etc/passwd
-          install -d -m 700 ~/.mere/keys
-          printf '%s' "$MERE_SIGNING_KEY" | base64 -d > ~/.mere/keys/mere.key
-          chmod 600 ~/.mere/keys/mere.key
-          install -d -m 700 ~/.ssh
-          printf '%s' "$SYNC_SSH_KEY" | base64 -d > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
-          printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > ~/.ssh/config
+          install -d -m 700 /root
+          install -d -m 700 /root/.mere/keys
+          printf '%s' "$MERE_SIGNING_KEY" | base64 -d > /root/.mere/keys/mere.key
+          chmod 600 /root/.mere/keys/mere.key
+          install -d -m 700 /root/.ssh
+          printf '%s' "$SYNC_SSH_KEY" | base64 -d > /root/.ssh/id_ed25519
+          chmod 600 /root/.ssh/id_ed25519
+          printf 'Host pkgs.merelinux.org\n  Port 50220\n  User pkgsync\n  StrictHostKeyChecking no\n' > /root/.ssh/config
 
       - name: Sync repo down
         run: |
           set -eu
           install -d /tmp/repo-sync
-          rsync -az -e "ssh -p 50220 -l pkgsync -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
 
       - name: Build
         run: |
@@ -161,4 +163,4 @@ jobs:
       - name: Sync repo up
         run: |
           set -eu
-          rsync -az -e "ssh -p 50220 -l pkgsync -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
