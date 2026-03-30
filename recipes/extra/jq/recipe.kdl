@@ -21,8 +21,7 @@ build {
         ./configure \
             --prefix=/usr \
             --enable-static \
-            --disable-shared \
-            --enable-all-static
+            --disable-shared
         make
     "#
 }
