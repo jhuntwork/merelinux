@@ -59,12 +59,14 @@ install {
             "${DESTDIR}/usr/share/vim/vimfiles/syntax/"
         printf 'autocmd BufRead,BufNewFile recipe.kdl setfiletype mere-recipe\n' \
             > "${DESTDIR}/usr/share/vim/vimfiles/ftdetect/mere-recipe.vim"
+        find "${DESTDIR}/usr/share/man" -maxdepth 1 -type d -name '*.ISO*' -exec rm -rf {} +
+        find "${DESTDIR}/usr/share/man" -maxdepth 1 -type d -name '*.KOI*' -exec rm -rf {} +
     "#
 }
 
 package "vim" {
     files "usr/bin/" \
           "etc/" \
-          "usr/share/man/man1/" \
+          "usr/share/man/" \
           "usr/share/vim/"
 }
