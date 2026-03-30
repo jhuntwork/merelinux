@@ -86,7 +86,7 @@ jobs:
         run: |
           set -eu
           install -d /tmp/repo-sync
-          rsync -az pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
 
       - name: Build
         run: |
@@ -103,7 +103,7 @@ jobs:
       - name: Sync repo up
         run: |
           set -eu
-          rsync -az --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
 
   build-aarch64:
     needs:
@@ -144,7 +144,7 @@ jobs:
         run: |
           set -eu
           install -d /tmp/repo-sync
-          rsync -az pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/ /tmp/repo-sync/
 
       - name: Build
         run: |
@@ -161,4 +161,4 @@ jobs:
       - name: Sync repo up
         run: |
           set -eu
-          rsync -az --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+          rsync -az -e "ssh -p 50220 -l pkgsync -i ~/.ssh/id_ed25519 -o StrictHostKeyChecking=no" --delete-after /tmp/repo-sync/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
