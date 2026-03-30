@@ -1,0 +1,70 @@
+recipe {
+    name "vim"
+    version "9.2.0272"
+    release 1
+    description "An IMproved version of the vi editor"
+    url "https://www.vim.org"
+    licenses "VIM"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "libncurses-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/vim/vim/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "0037c5c4e41c34a8550b0c624b45b7946107a1351c2350513512e5d515641e32"
+}
+
+source "vimrc" {
+    blake3 "9fcb03ecae57d000b22506df235f75ddf22965e5a07a51a625fc01bb55fedbbe"
+}
+
+source "mere-recipe.vim" {
+    blake3 "0da85a8cdb16361c9ca2cd7ab6333e637085ac317ba09ad506edcfb8fc8ce931"
+}
+
+prepare {
+    script r#"
+        echo '#define SYS_VIMRC_FILE "/etc/vimrc"' >> src/feature.h
+        sed -i -e '/thisterminaldoesnotexist/i #include <term.h>' \
+               -e '/0xffffffffUL;/i #include <stdlib.h>' \
+               src/auto/configure
+    "#
+}
+
+build {
+    script r#"
+        CC='cc -I/include/ncursesw' \
+            CFLAGS="$CFLAGS -fPIC" \
+            LDFLAGS="$LDFLAGS --static" \
+            ./configure \
+            --prefix=/usr \
+            --enable-multibyte \
+            --with-tlib=ncursesw
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+        install -d "${DESTDIR}/etc"
+        install -m 0644 "${MERE_SOURCES_DIR}/vimrc" "${DESTDIR}/etc/vimrc"
+        install -d "${DESTDIR}/usr/share/vim/vimfiles/syntax"
+        install -d "${DESTDIR}/usr/share/vim/vimfiles/ftdetect"
+        install -m 0644 "${MERE_SOURCES_DIR}/mere-recipe.vim" \
+            "${DESTDIR}/usr/share/vim/vimfiles/syntax/"
+        printf 'autocmd BufRead,BufNewFile recipe.kdl setfiletype mere-recipe\n' \
+            > "${DESTDIR}/usr/share/vim/vimfiles/ftdetect/mere-recipe.vim"
+    "#
+}
+
+package "vim" {
+    files "usr/bin/" \
+          "etc/" \
+          "usr/share/man/man1/" \
+          "usr/share/vim/"
+}
