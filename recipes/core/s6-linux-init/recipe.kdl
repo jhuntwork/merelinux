@@ -1,0 +1,53 @@
+recipe {
+    name "s6-linux-init"
+    version "1.2.0.0"
+    release 1
+    description "Tools to create an s6-based init system on Linux"
+    url "http://skarnet.org/software/s6-linux-init/"
+    licenses "ISC"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "s6-dev" \
+            "skalibs-dev" \
+            "execline-dev" \
+            "utmps-dev"
+}
+
+source "http://skarnet.org/software/s6-linux-init/s6-linux-init-${recipe.version}.tar.gz" {
+    blake3 "da097149fe067afc4d687e82f1e4c1618f22769809f0a70181ba11b570c927b5"
+}
+
+build {
+    script r#"
+        ./configure \
+          --prefix=/ \
+          --bindir=/bin \
+          --libexecdir=/lib/s6-linux-init \
+          --enable-static-libc \
+          --enable-utmps \
+          --with-lib=/usr/lib
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+        install -d "${DESTDIR}/usr"
+        mv -v "${DESTDIR}/include" "${DESTDIR}/usr/"
+    "#
+}
+
+package "s6-linux-init" {
+    files "bin/" \
+          "etc/s6-linux-init/"
+}
+
+package "s6-linux-init-dev" {
+    files "usr/include/" \
+          "lib/lib*.a"
+}
