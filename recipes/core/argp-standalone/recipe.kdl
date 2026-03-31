@@ -1,0 +1,45 @@
+recipe {
+    name "argp-standalone"
+    version "1.4.1"
+    release 1
+    description "An argp library for systems which don't provide one themselves"
+    url "https://github.com/ericonr/argp-standalone"
+    licenses "LGPL-2.1-or-later"
+    archs "aarch64" "x86_64"
+    depends "autoconf" \
+            "automake" \
+            "busybox" \
+            "libtool" \
+            "linux-headers" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/ericonr/argp-standalone/archive/refs/tags/${recipe.version}.tar.gz" {
+    save-as "argp-standalone-${recipe.version}.tar.gz"
+    blake3 "3e9d894545c1392e0ccce37cb01f5f3a9dee7339a2d4c37e6ffcb3a68bf127a9"
+}
+
+build {
+    script r#"
+        autoreconf -i
+        CFLAGS="$CFLAGS -fPIC" ./configure --prefix=/usr
+        make
+    "#
+}
+
+install {
+    script r#"
+        install -d "${DESTDIR}/usr/include" "${DESTDIR}/usr/lib"
+        install -m0644 argp.h "${DESTDIR}/usr/include/"
+        install -m0644 libargp.a "${DESTDIR}/usr/lib/"
+    "#
+}
+
+package "argp-standalone-dev" {
+    files "usr/include/" \
+          "usr/lib/"
+}
