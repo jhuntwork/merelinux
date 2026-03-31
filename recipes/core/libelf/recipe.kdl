@@ -1,0 +1,57 @@
+recipe {
+    name "libelf"
+    version "0.194"
+    release 1
+    description "ELF object file access library from elfutils"
+    url "https://sourceware.org/elfutils/"
+    licenses "GPL"
+    archs "aarch64" "x86_64"
+    depends "argp-standalone-dev" \
+            "linux-headers" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "musl-fts-dev" \
+            "musl-obstack-dev" \
+            "pkgconf" \
+            "zlib-ng-dev"
+}
+
+source "https://sourceware.org/elfutils/ftp/${recipe.version}/elfutils-${recipe.version}.tar.bz2" {
+    blake3 "1a01558cb4a36adef77594463bd96e2c1149d9434d280c10eabe6dd5a1cb767b"
+}
+
+build {
+    script r#"
+        CFLAGS="$CFLAGS -fPIC -Wno-error -DFNM_EXTMATCH=0" \
+            ./configure --prefix=/usr \
+            --disable-debuginfod \
+            --disable-libdebuginfod
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "elfutils" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
+
+package "libelf" {
+    files "usr/lib/lib*.so*"
+}
+
+package "libelf-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/man3/" \
+          "!usr/share/man/man3/debuginfo*"
+}
