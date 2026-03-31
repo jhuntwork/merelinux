@@ -1,0 +1,50 @@
+recipe {
+    name "s6-rc"
+    version "0.6.0.0"
+    release 1
+    description "A dependency-based service manager for s6"
+    url "http://skarnet.org/software/s6-rc/"
+    licenses "ISC"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "skalibs-dev" \
+            "execline-dev" \
+            "s6-dev"
+}
+
+source "http://skarnet.org/software/s6-rc/s6-rc-${recipe.version}.tar.gz" {
+    blake3 "22f6eaaa27970d0e4e2d021aa45a6eee5d24efdec2e999c7646b0a95e8934a32"
+}
+
+build {
+    script r#"
+        ./configure \
+          --prefix=/ \
+          --bindir=/bin \
+          --libexecdir=/lib/s6-rc \
+          --enable-static-libc
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+        install -d "${DESTDIR}/usr"
+        mv -v "${DESTDIR}/include" "${DESTDIR}/usr/"
+    "#
+}
+
+package "s6-rc" {
+    files "bin/" \
+          "lib/s6-rc/"
+}
+
+package "s6-rc-dev" {
+    files "usr/include/" \
+          "lib/lib*.a"
+}
