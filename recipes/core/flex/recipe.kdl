@@ -1,0 +1,43 @@
+recipe {
+    name "flex"
+    version "2.6.4"
+    release 1
+    description "A tool for generating scanners that recognize lexical patterns in text"
+    url "https://github.com/westes/flex/"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "bison" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/westes/flex/releases/download/v${recipe.version}/flex-${recipe.version}.tar.gz" {
+    blake3 "d78b714ac38bd9de7f9b44a078efed82e96ed43e7cf9cd33944a7f379a2d09a4"
+}
+
+build {
+    script r#"
+        LDFLAGS="$LDFLAGS --static" ./configure --prefix=/usr
+        make V=1
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "flex" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/share/man/man1/"
+}
+
+package "flex-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+}
