@@ -1,0 +1,34 @@
+recipe {
+    name "automake"
+    version "1.18.1"
+    release 1
+    description "A tool for automatically generating Makefile.in files"
+    url "http://www.gnu.org/software/automake"
+    licenses "GPL3"
+    depends "autoconf" "busybox" "m4" "make" "perl"
+}
+
+source "http://ftp.gnu.org/gnu/automake/automake-${recipe.version}.tar.xz" {
+    blake3 "5f0bd223f42060fad07ad387f6b2b37866c350dc7414edec00dbc216f9c4b0be"
+}
+
+build {
+    script r#"
+        ./configure --prefix=/usr
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "automake" {
+    files "usr/bin/" \
+          "usr/share/aclocal/" \
+          "usr/share/aclocal-1.18/" \
+          "usr/share/automake-1.18/" \
+          "usr/share/man/"
+}
