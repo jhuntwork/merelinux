@@ -1,13 +1,14 @@
 recipe {
     name "libelf"
     version "0.194"
-    release 2
+    release 3
     description "ELF object file access library from elfutils"
     url "https://sourceware.org/elfutils/"
     licenses "GPL"
     archs "aarch64" "x86_64"
     depends "argp-standalone-dev" \
             "libbz2-dev" \
+            "liblzma-dev" \
             "linux-headers" \
             "llvm" \
             "m4" \
