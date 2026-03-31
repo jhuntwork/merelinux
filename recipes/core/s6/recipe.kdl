@@ -1,0 +1,47 @@
+recipe {
+    name "s6"
+    version "2.14.0.1"
+    release 1
+    description "A small process supervision suite for UNIX"
+    url "http://skarnet.org/software/s6/"
+    licenses "ISC"
+    archs "aarch64" "x86_64"
+    depends "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "skalibs-dev" \
+            "execline-dev"
+}
+
+source "http://skarnet.org/software/s6/s6-${recipe.version}.tar.gz" {
+    blake3 "2de233f0e53cebdc0fbb60d4a0f11dc2e34a21cbd57504706bda7128089e6fad"
+}
+
+build {
+    script r#"
+        ./configure \
+          --prefix=/ \
+          --bindir=/bin \
+          --libexecdir=/lib/s6 \
+          --enable-static-libc
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+        install -d "${DESTDIR}/usr"
+        mv -v "${DESTDIR}/include" "${DESTDIR}/usr/"
+    "#
+}
+
+package "s6" {
+    files "bin/"
+}
+
+package "s6-dev" {
+    files "usr/include/" \
+          "lib/lib*.a"
+}
