@@ -1,0 +1,41 @@
+recipe {
+    name "bison"
+    version "3.8.2"
+    release 1
+    description "A general-purpose parser generator"
+    url "http://www.gnu.org/software/bison/"
+    licenses "GPL3"
+    archs "aarch64" "x86_64"
+    depends "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "http://ftp.gnu.org/gnu/bison/bison-${recipe.version}.tar.xz" {
+    blake3 "9dd90be8df4d0474b941e2ca14ac76d11b7ccb46edb26344b60d866178bbcc98"
+}
+
+build {
+    script r#"
+        LDFLAGS="$LDFLAGS --static" ./configure --prefix=/usr
+        make V=1
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "bison" {
+    files "usr/bin/" \
+          "usr/share/bison/"
+}
+
+package "bison-dev" {
+    files "usr/lib/liby.a" \
+          "usr/share/aclocal/"
+}
