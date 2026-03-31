@@ -1,0 +1,49 @@
+recipe {
+    name "musl-obstack"
+    version "1.2.3"
+    release 1
+    description "Implements the obstack functions from GNU gcc libiberty for musl"
+    url "https://github.com/void-linux/musl-obstack"
+    licenses "GPL"
+    archs "aarch64" "x86_64"
+    depends "autoconf" \
+            "automake" \
+            "busybox" \
+            "libtool" \
+            "linux-headers" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf"
+}
+
+source "https://github.com/void-linux/musl-obstack/archive/refs/tags/v${recipe.version}.tar.gz" {
+    save-as "musl-obstack-${recipe.version}.tar.gz"
+    blake3 "d4c5b67c7f10ea20a11fb966e32a70d2bede0e0decf2648a4f49449573a75534"
+}
+
+build {
+    script r#"
+        autoreconf -i
+        CFLAGS="$CFLAGS -fPIC" ./configure --prefix=/usr
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "musl-obstack" {
+    files "usr/lib/lib*.so*"
+}
+
+package "musl-obstack-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
