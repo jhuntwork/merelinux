@@ -1,0 +1,39 @@
+recipe {
+    name "m4"
+    version "1.4.21"
+    release 1
+    description "An implementation of the traditional Unix macro processor"
+    url "http://www.gnu.org/software/m4/"
+    licenses "GPL3"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "http://ftp.gnu.org/gnu/m4/m4-${recipe.version}.tar.xz" {
+    blake3 "a23e9503084fa4087f45bb7bb9c39f0cf8e0f046e0f94e55c40a8da124c1fd68"
+}
+
+build {
+    script r#"
+        LDFLAGS="$LDFLAGS --static" ./configure \
+            --prefix=/usr \
+            --enable-threads
+        make V=1
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "m4" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
