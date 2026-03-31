@@ -1,0 +1,32 @@
+recipe {
+    name "autoconf"
+    version "2.73"
+    release 1
+    description "A tool that produces shell scripts to automatically configure source code"
+    url "http://www.gnu.org/software/autoconf"
+    licenses "GPL3"
+    depends "busybox" "m4" "make" "perl"
+}
+
+source "http://ftp.gnu.org/gnu/autoconf/autoconf-${recipe.version}.tar.xz" {
+    blake3 "3c437eb254f691da93f225a3ed1e29fb4450c723246dc5774d3b7ebe4b316b91"
+}
+
+build {
+    script r#"
+        ./configure --prefix=/usr
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "autoconf" {
+    files "usr/bin/" \
+          "usr/share/autoconf/" \
+          "usr/share/man/"
+}
