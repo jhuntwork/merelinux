@@ -1,7 +1,7 @@
 recipe {
     name "pkgconf"
     version "2.5.1"
-    release 1
+    release 2
     description "An API-driven pkg-config replacement"
     url "https://github.com/pkgconf/pkgconf"
     licenses "BSD"
@@ -36,7 +36,15 @@ install {
 }
 
 package "pkgconf" {
-    files "usr/bin/pkgconf" \
-          "usr/bin/pkg-config" \
-          "usr/share/man/man1/pkgconf.1"
+    files "usr/bin/" \
+          "usr/share/aclocal/" \
+          "usr/share/man/man1/"
+}
+
+package "pkgconf-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/man5/" \
+          "usr/share/man/man7/"
 }
