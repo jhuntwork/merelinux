@@ -1,0 +1,51 @@
+recipe {
+    name "libtool"
+    version "2.5.4"
+    release 1
+    description "A generic library support script"
+    url "http://www.gnu.org/software/libtool"
+    licenses "GPL3"
+    archs "aarch64" "x86_64"
+    depends "autoconf" \
+            "automake" \
+            "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "http://ftp.gnu.org/gnu/libtool/libtool-${recipe.version}.tar.xz" {
+    blake3 "07f5880eca816e6ab76da3a69b32df728e0277e96f8da761f69c06157da36a5a"
+}
+
+build {
+    script r#"
+        ./configure --prefix=/usr --enable-static
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "libtool" {
+    files "usr/bin/" \
+          "usr/share/aclocal/" \
+          "usr/share/libtool/" \
+          "usr/share/man/"
+}
+
+package "libltdl" {
+    files "usr/lib/lib*.so*"
+}
+
+package "libltdl-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a"
+}
