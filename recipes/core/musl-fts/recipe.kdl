@@ -1,0 +1,49 @@
+recipe {
+    name "musl-fts"
+    version "1.2.7"
+    release 1
+    description "Implements the fts(3) functions for musl"
+    url "https://github.com/void-linux/musl-fts"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "autoconf" \
+            "automake" \
+            "busybox" \
+            "libtool" \
+            "linux-headers" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf"
+}
+
+source "https://github.com/void-linux/musl-fts/archive/refs/tags/v${recipe.version}.tar.gz" {
+    save-as "musl-fts-${recipe.version}.tar.gz"
+    blake3 "9396a514540b9f8e982a4b894c4153dec5eea82ee5de32b8a24d71642e95eb5c"
+}
+
+build {
+    script r#"
+        autoreconf -i
+        CFLAGS="$CFLAGS -fPIC" ./configure --prefix=/usr
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "musl-fts" {
+    files "usr/lib/lib*.so*"
+}
+
+package "musl-fts-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
