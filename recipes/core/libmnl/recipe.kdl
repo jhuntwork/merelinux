@@ -1,0 +1,44 @@
+recipe {
+    name "libmnl"
+    version "1.0.5"
+    release 1
+    description "A minimalistic user-space library oriented to Netlink developers"
+    url "https://www.netfilter.org/projects/libmnl/index.html"
+    licenses "LGPLv2.1+"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://www.netfilter.org/pub/libmnl/libmnl-${recipe.version}.tar.bz2" {
+    blake3 "bc4ab2439dba1a03954e554af39dd21ac96803870eec152f5d089659e3e5c142"
+}
+
+build {
+    script r#"
+        ./configure --prefix=/usr \
+            --enable-static \
+            --enable-shared
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "libmnl" {
+    files "usr/lib/libmnl.so.*" \
+          "usr/lib/*.so"
+}
+
+package "libmnl-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
