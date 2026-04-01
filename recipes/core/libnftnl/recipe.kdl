@@ -1,0 +1,46 @@
+recipe {
+    name "libnftnl"
+    version "1.3.1"
+    release 1
+    description "A userspace library providing a low-level netlink programming interface (API) to the in-kernel nf_tables subsystem."
+    url "https://www.netfilter.org/projects/libnftnl/index.html"
+    licenses "GPLv2+"
+    archs "aarch64" "x86_64"
+    depends "libmnl-dev" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf"
+}
+
+source "https://www.netfilter.org/pub/libnftnl/libnftnl-${recipe.version}.tar.xz" {
+    blake3 "ad4196d1382a8c05b14543864aa222a6921a027c61cc8c45f0ddc2e699d152e5"
+}
+
+build {
+    script r#"
+        ./configure --prefix=/usr \
+            --enable-static \
+            --enable-shared
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "libnftnl" {
+    files "usr/lib/libnftnl.so.*" \
+          "usr/lib/*.so"
+}
+
+package "libnftnl-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
