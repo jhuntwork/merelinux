@@ -1,16 +1,20 @@
 recipe {
     name "iptables"
     version "1.8.13"
-    release 1
+    release 2
     description "Packet filtering for Linux"
     url "http://www.netfilter.org/"
     archs "aarch64" "x86_64"
     licenses "GPL"
-    depends "linux-headers" \
+    depends "libmnl-dev" \
+            "libnfnetlink-dev" \
+            "libnftnl-dev" \
+            "linux-headers" \
             "llvm" \
             "make" \
             "mimalloc-dev" \
             "musl-dev" \
+            "pkgconf" \
             "zlib-ng-dev"
 }
 
@@ -33,7 +37,7 @@ build {
         ./configure --prefix='' \
             --disable-shared \
             --enable-static \
-            --disable-nftables \
+            --enable-nftables \
             --enable-libipq \
             --mandir=/usr/share/man \
             --with-xtlibdir=/lib/xtables
@@ -49,6 +53,7 @@ install {
 
 package "iptables" {
     files "bin/" \
+          "etc/" \
           "sbin/" \
           "usr/share/man/man1/" \
           "usr/share/man/man8/"
