@@ -1,0 +1,44 @@
+recipe {
+    name "libnfnetlink"
+    version "1.0.2"
+    release 1
+    description "The low-level library for netfilter related kernel/userspace communication"
+    url "https://www.netfilter.org/projects/libnfnetlink/index.html"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://www.netfilter.org/pub/libnfnetlink/libnfnetlink-${recipe.version}.tar.bz2" {
+    blake3 "20b1f96e63b1ecd8bce3ae7600b565c2289e2f0745d5c1a0449f1ca94851f42d"
+}
+
+build {
+    script r#"
+        ./configure --prefix=/usr \
+            --enable-static \
+            --enable-shared
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "libnfnetlink" {
+    files "usr/lib/libnfnetlink.so.*" \
+          "usr/lib/*.so"
+}
+
+package "libnfnetlink-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
