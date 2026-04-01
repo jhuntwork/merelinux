@@ -1,7 +1,7 @@
 recipe {
     name "iptables"
     version "1.8.13"
-    release 2
+    release 3
     description "Packet filtering for Linux"
     url "http://www.netfilter.org/"
     archs "aarch64" "x86_64"
@@ -48,6 +48,12 @@ build {
 install {
     script r#"
         make DESTDIR="$DESTDIR" install
+        # Default iptables/ip6tables to nft backend
+        cd "$DESTDIR/sbin"
+        for cmd in iptables iptables-restore iptables-save \
+                   ip6tables ip6tables-restore ip6tables-save; do
+            ln -sf xtables-nft-multi "$cmd"
+        done
     "#
 }
 
