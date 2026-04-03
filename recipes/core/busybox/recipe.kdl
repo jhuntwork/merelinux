@@ -150,17 +150,17 @@ package "busybox" {
 
     service "ntpd" {
         type "daemon"
-        command "/bin/busybox" "ntpd" "-d" "-n"
+        command "ntpd" "-d" "-n"
     }
 
     service "syslogd" {
         type "daemon"
-        command "/bin/busybox" "syslogd" "-n" "-O" "/proc/self/fd/1"
+        command "syslogd" "-n" "-O" "/proc/self/fd/1"
     }
 
     service "klogd" {
         type "daemon"
-        command "/bin/busybox" "klogd" "-n"
+        command "klogd" "-n"
         depends-on "syslogd"
         log false
     }
