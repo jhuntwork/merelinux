@@ -1,7 +1,7 @@
 recipe {
     name "busybox"
     version "1.37.0"
-    release 6
+    release 7
     description "Tiny versions of common UNIX utilities built into a single binary"
     url "http://busybox.net"
     licenses "GPL"
@@ -18,10 +18,6 @@ recipe {
 
 source "http://busybox.net/downloads/${recipe.name}-${recipe.version}.tar.bz2" {
     blake3 "179c4567a112635be6cb442fd8e3ff95dd0e718facd0666f2426d94322110a8f"
-}
-
-source "poweroff.patch" {
-    blake3 "0356be472dc11883a49c47a6f5c5263ab11a910151e92d60321d7f14db5940d3"
 }
 
 source "awk-sub-literal-backslash.patch" {
@@ -57,7 +53,7 @@ source "nslookup-sanitize.patch" {
 }
 
 source "busybox-config" {
-    blake3 "7d79a841eea928665affe33ef991006f020d3785342fb1e9ea28e83485f5eacf"
+    blake3 "d87fdf4920d820a4f8a34c07115022db22606e79941948ca5f965bc3affd93cb"
 }
 
 source "udhcpc.script" {
@@ -66,14 +62,6 @@ source "udhcpc.script" {
 
 source "sysctl.conf" {
     blake3 "d4251bc26526a1a945baa08edf688b7b03ca2eb87d425b6b6a4ec889bdb07faf"
-}
-
-source "ntpd-service" {
-    blake3 "22a8123e008606777b7a19303168833ecdde8b168b883bda02caa1599a55dbe5"
-}
-
-source "ntpd-log" {
-    blake3 "243e27ef1dddc4e18318f0d867e78fad30b26822354bf012fba91faa516d3c5d"
 }
 
 source "ntp.conf" {
@@ -88,18 +76,6 @@ source "if-post-down-bridge" {
     blake3 "bd373cf54e62490dcbd48499f7034ea145a3e2696c9a8e96deef0f88c3a1f94c"
 }
 
-source "syslogd-service" {
-    blake3 "af5a1c4f30c8a96740cf6dfbac89a735e5649381f1b75e6e59c6c41ce1ea1629"
-}
-
-source "syslogd-log" {
-    blake3 "87fea4b7091f340e77b381328cbbb5bf6bfb49e54e4ea78263496e3df8bdf9f4"
-}
-
-source "klogd-service" {
-    blake3 "82b6ba0c61ca1bebdb594087ab8bb17a057892620e10ff86aeb0fcb64f3b8c31"
-}
-
 source "mkinitramfs" {
     blake3 "8cadedb721b513429b1c3f323fdefaf88a03116373f3139a74a5c2e1b2e922c5"
 }
@@ -110,7 +86,6 @@ source "initramfs-init" {
 
 build {
     script r#"
-        patch -Np1 -i "${MERE_SOURCES_DIR}/poweroff.patch"
         patch -Np1 -i "${MERE_SOURCES_DIR}/awk-sub-literal-backslash.patch"
         patch -Np1 -i "${MERE_SOURCES_DIR}/clang-aarch64-const-ptr.patch"
         patch -Np1 -i "${MERE_SOURCES_DIR}/CVE-2023-42366-awk-regex.patch"
@@ -164,19 +139,26 @@ install {
         ln -s ../../bin/busybox usr/bin/awk
         install -m 0755 "${MERE_SOURCES_DIR}/mkinitramfs" usr/bin/
         install -m 0644 "${MERE_SOURCES_DIR}/initramfs-init" usr/share/mkinitramfs/init.in
-
-        # s6 Services
-        install -d etc/s6/services/available/ntpd/log
-        install -m 0754 "${MERE_SOURCES_DIR}/ntpd-service" etc/s6/services/available/ntpd/run
-        install -m 0754 "${MERE_SOURCES_DIR}/ntpd-log" etc/s6/services/available/ntpd/log/run
-        install -d etc/s6/services/available/syslogd/log
-        install -m 0754 "${MERE_SOURCES_DIR}/syslogd-service" etc/s6/services/available/syslogd/run
-        install -m 0754 "${MERE_SOURCES_DIR}/syslogd-log" etc/s6/services/available/syslogd/log/run
-        install -d etc/s6/services/available/klogd
-        install -m 0754 "${MERE_SOURCES_DIR}/klogd-service" etc/s6/services/available/klogd/run
     "#
 }
 
 package "busybox" {
     files "bin/" "etc/" "usr/" "sbin/"
+
+    service "ntpd" {
+        type "daemon"
+        command "/bin/busybox" "ntpd" "-d" "-n"
+    }
+
+    service "syslogd" {
+        type "daemon"
+        command "/bin/busybox" "syslogd" "-n" "-O" "/proc/self/fd/1"
+    }
+
+    service "klogd" {
+        type "daemon"
+        command "/bin/busybox" "klogd" "-n"
+        depends-on "syslogd"
+        log false
+    }
 }
