@@ -143,7 +143,10 @@ install {
 }
 
 package "busybox" {
-    files "bin/" "etc/" "usr/" "sbin/"
+    files "bin/" \
+          "etc/" \
+          "sbin/" \
+          "usr/"
 
     service "ntpd" {
         type "daemon"
