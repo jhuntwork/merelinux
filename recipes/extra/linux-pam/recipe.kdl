@@ -1,0 +1,93 @@
+recipe {
+    name "linux-pam"
+    version "1.7.2"
+    release 1
+    description "Pluggable Authentication Modules for Linux"
+    url "https://github.com/linux-pam/linux-pam"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "patch" \
+            "pkgconf" \
+            "skalibs-dev" \
+            "utmps-dev"
+
+}
+
+source "https://github.com/linux-pam/linux-pam/releases/download/v${recipe.version}/Linux-PAM-${recipe.version}.tar.xz" {
+    blake3 "05b8e0d0831baa13ff3b3b40666440b56af98dcdb475818faee106f0593a6770"
+}
+source "use-utmpx.patch" {
+    blake3 "44514e4c535318cb3d944ddcb6d76a68a46028defced01610f26a974a2d82338"
+}
+source "add-missing-headers.patch" {
+    blake3 "9b57c9b5f7d2c6bfca79af4c200911d38664c7da632d30be5df45b3c6c63c053"
+}
+source "https://git.adelielinux.org/adelie/packages/-/raw/e455e0062fe267cb758faf98926887b8d3a70eb2/system/linux-pam/fix-compat.patch" {
+    blake3 "4243a2956a6d60e87692f41bb4be0fd020ed28cd057260967fae4b225d478031"
+}
+source "other" {
+    blake3 "503250bdf82d64cd71f2b9c7a59bdbb50a4c84a680567802ad3175214643350b"
+}
+source "system-account" {
+    blake3 "a07fb0776a0e6054e7bfb0d7179636c99d26f1128573f826adda415b9260e376"
+}
+source "system-auth" {
+    blake3 "cec8bd6800a17b8cadb2e530160045c6391952157fa6e063a133554a1dc03c06"
+}
+source "system-password" {
+    blake3 "a8438147e0920efdc79d43074a0ed0004c96b56ec9361afc238e9b8b9af0f500"
+}
+source "system-session" {
+    blake3 "3bcf4f5ac2d6367b2f37ee3605210ddd8950578f3bd48fed0c80d939d16e281e"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/use-utmpx.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/add-missing-headers.patch"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/fix-compat.patch"
+    "#
+}
+
+build {
+    script r#"
+        export LDFLAGS="$LDFLAGS -lutmps -lskarnet"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dlibdir=/lib \
+            -Dbuildtype=release
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+        install -d "${DESTDIR}/etc/pam.d"
+        for file in other system-account system-auth system-password system-session; do
+            install -m 0644 "${MERE_SOURCES_DIR}/${file}" "${DESTDIR}/etc/pam.d/${file}"
+        done
+        install -d "${DESTDIR}/usr/lib"
+        mv -v "${DESTDIR}/lib/pkgconfig" "${DESTDIR}/usr/lib/"
+    "#
+}
+
+package "linux-pam" {
+    files "etc/" \
+          "lib/security/" \
+          "lib/*.so*" \
+          "usr/sbin/" \
+          "usr/share/pam/"
+}
+
+package "linux-pam-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}

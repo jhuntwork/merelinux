@@ -1,0 +1,135 @@
+--- Linux-PAM-1.7.2.orig/modules/pam_issue/pam_issue.c
++++ Linux-PAM-1.7.2/modules/pam_issue/pam_issue.c
+@@ -33,7 +33,7 @@
+ #elif defined(USE_LIBELOGIND)
+ #include <elogind/sd-login.h>
+ #else
+-#include <utmp.h>
++#include <utmpx.h>
+ #endif
+ 
+ #include <security/_pam_macros.h>
+@@ -196,13 +196,13 @@
+ 		      users = sessions;
+ 		    }
+ #else
+-		    struct utmp *ut;
+-		    setutent();
+-		    while ((ut = getutent())) {
+-			if (ut->ut_type == USER_PROCESS)
++		    struct utmpx *utx;
++		    setutxent();
++		    while ((utx = getutxent())) {
++			if (utx->ut_type == USER_PROCESS)
+ 			    ++users;
+ 		    }
+-		    endutent();
++		    endutxent();
+ #endif
+ 		    if (c == 'U')
+ 			pam_sprintf(buf, "%u %s",
+--- Linux-PAM-1.7.2.orig/modules/pam_lastlog/pam_lastlog.c
++++ Linux-PAM-1.7.2/modules/pam_lastlog/pam_lastlog.c
+@@ -13,7 +13,7 @@
+ #include <fcntl.h>
+ #include <time.h>
+ #include <errno.h>
+-#include <utmp.h>
++#include <utmpx.h>
+ #include <pwd.h>
+ #include <stdlib.h>
+ #include <ctype.h>
+@@ -543,8 +543,8 @@
+ {
+     int retval;
+     int fd;
+-    struct utmp ut;
+-    struct utmp utuser;
++    struct utmpx ut;
++    struct utmpx utuser;
+     int failed = 0;
+     char the_time[256];
+     char *date = NULL;
+--- Linux-PAM-1.7.2.orig/modules/pam_limits/pam_limits.c
++++ Linux-PAM-1.7.2/modules/pam_limits/pam_limits.c
+@@ -41,7 +41,7 @@
+ #elif defined(USE_LIBELOGIND)
+ #include <elogind/sd-login.h>
+ #else
+-#include <utmp.h>
++#include <utmpx.h>
+ #endif
+ 
+ #ifndef UT_USER  /* some systems have ut_name instead of ut_user */
+@@ -350,11 +350,11 @@
+       count = sessions;
+     }
+ #else
+-    struct utmp *ut;
++    struct utmpx *ut;
+ 
+-    setutent();
++    setutxent();
+ 
+-    while((ut = getutent())) {
++    while((ut = getutxent())) {
+ #ifdef USER_PROCESS
+         if (ut->ut_type != USER_PROCESS) {
+             continue;
+@@ -391,7 +391,7 @@
+ 	    break;
+ 	}
+     }
+-    endutent();
++    endutxent();
+ #endif
+     if (count > limit) {
+ 	if (name) {
+--- Linux-PAM-1.7.2.orig/modules/pam_timestamp/pam_timestamp.c
++++ Linux-PAM-1.7.2/modules/pam_timestamp/pam_timestamp.c
+@@ -66,7 +66,7 @@
+ #elif defined(USE_LIBELOGIND)
+ #include <elogind/sd-login.h>
+ #else
+-#include <utmp.h>
++#include <utmpx.h>
+ #endif
+ 
+ #include <security/pam_modules.h>
+@@ -228,14 +228,14 @@
+ 
+ 	oldest_login = usec/USEC_PER_SEC;
+ #else
+-	struct utmp utbuf, *ut;
++	struct utmpx utbuf, *ut;
+ 
+-	setutent();
++	setutxent();
+ 	while(
+ #ifdef HAVE_GETUTENT_R
+ 	      !getutent_r(&utbuf, &ut)
+ #else
+-	      (ut = getutent()) != NULL
++	      (ut = getutxent()) != NULL
+ #endif
+ 	      ) {
+ 		if (ut->ut_type != USER_PROCESS) {
+@@ -250,7 +250,7 @@
+ 			oldest_login = ut->ut_tv.tv_sec;
+ 		}
+ 	}
+-	endutent();
++	endutxent();
+ #endif
+ 	if(oldest_login == 0 || timestamp < oldest_login) {
+ 		return PAM_AUTH_ERR;
+--- Linux-PAM-1.7.2.orig/modules/pam_unix/support.c
++++ Linux-PAM-1.7.2/modules/pam_unix/support.c
+@@ -13,7 +13,6 @@
+ #include <pwd.h>
+ #include <shadow.h>
+ #include <limits.h>
+-#include <utmp.h>
+ #include <errno.h>
+ #include <signal.h>
+ #include <ctype.h>

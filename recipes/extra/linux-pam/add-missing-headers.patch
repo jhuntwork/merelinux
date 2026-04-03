@@ -1,0 +1,20 @@
+--- Linux-PAM-1.6.0.orig/libpam/pam_start.c
++++ Linux-PAM-1.6.0/libpam/pam_start.c
+@@ -14,6 +14,7 @@
+ #include <unistd.h>
+ #include <string.h>
+ #include <syslog.h>
++#include <libintl.h> 
+ 
+ static int _pam_start_internal (
+     const char *service_name,
+--- Linux-PAM-1.6.0.orig/modules/pam_namespace/pam_namespace.h
++++ Linux-PAM-1.6.0/modules/pam_namespace/pam_namespace.h
+@@ -49,6 +49,7 @@
+ #include <pwd.h>
+ #include <grp.h>
+ #include <limits.h>
++#include <stdint.h>
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <sys/resource.h>
