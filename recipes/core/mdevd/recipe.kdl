@@ -1,0 +1,95 @@
+recipe {
+    name "mdevd"
+    version "0.1.8.1"
+    release 1
+    description "A small daemon managing kernel hotplug events, similarly to udevd"
+    url "http://skarnet.org/software/mdevd/"
+    archs "aarch64" "x86_64"
+    licenses "ISC"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "skalibs-dev"
+}
+
+source "http://skarnet.org/software/mdevd/mdevd-${recipe.version}.tar.gz" {
+    blake3 "b09f0091821152707d0115200e97d264f60ab92ef751b7c6854ff881dea2b283"
+}
+
+source "mdev.conf" {
+    blake3 "f6d6e928887639fabbbfa434e5fd72202822d14211d90ae70d333a55d491e8f8"
+}
+
+source "catch-all" {
+    blake3 "81f7a912283f5dcefceccfdd6800cdb6ffe2c40bcee1633c9997dcfc936302bf"
+}
+
+source "dev-bus-usb" {
+    blake3 "457b7489ff69f930adcf13970f35994e7587694a644eeeefe6fe95fea2195168"
+}
+
+source "settle-nics" {
+    blake3 "0d4cae0697f444eb88ad47a54f761a400036f1e0bea29c700c0c0189a133f35f"
+}
+
+source "sound-control" {
+    blake3 "b87332282b8122c0d46af686fa5bd12a2d60c0be286e21e66e211f22bbdc3d28"
+}
+
+source "storage-device" {
+    blake3 "594161b922aad43b22d1b1e6962b863e9aa838d7fa6cca8752887a1812478e05"
+}
+
+source "https://raw.githubusercontent.com/illiliti/libudev-zero/refs/heads/master/contrib/helper.c" {
+    blake3 "a5a0e4875dd26f438ce73177881b13530a99b6916b0b3466bf875dff9b45bea7"
+}
+
+build {
+    script r#"
+        ./configure \
+          --prefix=/ \
+          --bindir=/sbin \
+          --enable-static-libc
+        make
+        cc "${MERE_SOURCES_DIR}/helper.c" $CFLAGS -static -o uevents
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+        install -d "${DESTDIR}/etc" "${DESTDIR}/lib/mdev/helpers"
+
+        install -m0644 "${MERE_SOURCES_DIR}/mdev.conf"      "${DESTDIR}/etc/mdev.conf"
+        install -m0754 "${MERE_SOURCES_DIR}/catch-all"      "${DESTDIR}/lib/mdev/helpers/"
+        install -m0754 "${MERE_SOURCES_DIR}/dev-bus-usb"    "${DESTDIR}/lib/mdev/helpers/"
+        install -m0754 "${MERE_SOURCES_DIR}/settle-nics"    "${DESTDIR}/lib/mdev/helpers/"
+        install -m0754 "${MERE_SOURCES_DIR}/sound-control"  "${DESTDIR}/lib/mdev/helpers/"
+        install -m0754 "${MERE_SOURCES_DIR}/storage-device" "${DESTDIR}/lib/mdev/helpers/"
+        install -m0754 uevents                              "${DESTDIR}/lib/mdev/helpers/"
+
+    "#
+}
+
+package "mdevd" {
+    files "etc/" \
+          "lib/" \
+          "sbin/"
+
+    service "mdevd" {
+        type "daemon"
+        command "/sbin/mdevd" "-D" "3"
+        ready-notification 3
+        essential true
+        depends-on "mount-proc" "mount-rw"
+    }
+
+    service "mdevd-coldplug" {
+        type "oneshot"
+        up "if { install -d /run/.libudev-zero } mdevd-coldplug"
+        essential true
+        depends-on "mdevd"
+    }
+}
