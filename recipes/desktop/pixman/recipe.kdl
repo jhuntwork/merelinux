@@ -1,0 +1,43 @@
+recipe {
+    name "pixman"
+    version "0.46.4"
+    release 1
+    description "Image processing and manipulation library"
+    url "http://pixman.org"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja"
+}
+
+source "http://cairographics.org/releases/pixman-${recipe.version}.tar.gz" {
+    blake3 "bf7e48bf0e523ded06089cb99af7be29c2e2581970a63e72ea6f49a469e511a6"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Ddefault_library=both
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "pixman" {
+    files "usr/lib/lib*.so*"
+}
+
+package "pixman-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
