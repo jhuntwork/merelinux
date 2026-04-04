@@ -1,0 +1,40 @@
+recipe {
+    name "libudev-zero"
+    version "1.0.3"
+    release 1
+    description "Drop-in replacement for libudev"
+    url "https://github.com/illiliti/libudev-zero"
+    licenses "ISC"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/illiliti/libudev-zero/archive/refs/tags/${recipe.version}.tar.gz" {
+    blake3 "541472ce66e99b1dc6021eb7aca64a2fde9d0b871ac3c817dd1c4e53e2318830"
+}
+
+build {
+    script r#"
+        CC=clang make
+    "#
+}
+
+install {
+    script r#"
+        make PREFIX=/usr DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "libudev-zero" {
+    files "usr/lib/lib*.so*"
+}
+
+package "libudev-zero-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
