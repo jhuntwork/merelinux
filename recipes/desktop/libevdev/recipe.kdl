@@ -1,0 +1,51 @@
+recipe {
+    name "libevdev"
+    version "1.13.6"
+    release 1
+    description "Wrapper library for evdev devices"
+    url "https://gitlab.freedesktop.org/libevdev/libevdev"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "linux-headers" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "python"
+}
+
+source "http://www.freedesktop.org/software/libevdev/libevdev-${recipe.version}.tar.xz" {
+    blake3 "7cc8322f062a0bdacaf73f7fcb6353024764620633c0c434d725ca3a95119fef"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddefault_library=both \
+            -Dtests=disabled \
+            -Ddocumentation=disabled
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "libevdev" {
+    files "usr/lib/lib*.so*" \
+          "usr/bin/" \
+          "usr/share/man/man1/"
+}
+
+package "libevdev-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/man3/"
+}
