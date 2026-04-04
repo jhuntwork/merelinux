@@ -1,0 +1,40 @@
+recipe {
+    name "libpciaccess"
+    version "0.19"
+    release 1
+    description "Generic PCI access library"
+    url "https://gitlab.freedesktop.org/xorg/lib/libpciaccess"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja"
+}
+
+source "http://www.x.org/pub/individual/lib/libpciaccess-${recipe.version}.tar.xz" {
+    blake3 "2bd8a8cc35aa4bb34dbb043547496367ba66d27b1e3b84a9cae47f0ee29c9c66"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddefault_library=static
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "libpciaccess-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
