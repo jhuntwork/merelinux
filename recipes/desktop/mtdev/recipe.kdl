@@ -1,0 +1,40 @@
+recipe {
+    name "mtdev"
+    version "1.1.7"
+    release 1
+    description "Multitouch Protocol Translation Library"
+    url "https://bitmath.org/code/mtdev/"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "http://bitmath.org/code/mtdev/mtdev-${recipe.version}.tar.bz2" {
+    blake3 "3aa834cd9faddbb30efb1429171038582872743180c0c2db9fa95ca3a63f6139"
+}
+
+build {
+    script r#"
+        CFLAGS="$CFLAGS -fPIC" ./configure \
+            --prefix=/usr \
+            --enable-static \
+            --disable-shared
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "mtdev-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
