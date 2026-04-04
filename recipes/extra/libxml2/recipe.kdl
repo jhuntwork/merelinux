@@ -1,0 +1,52 @@
+recipe {
+    name "libxml2"
+    version "2.15.2"
+    release 1
+    description "XML C parser and toolkit"
+    url "https://gitlab.gnome.org/GNOME/libxml2"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "git" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "python" \
+            "zlib-ng-dev"
+}
+
+source "https://gitlab.gnome.org/GNOME/libxml2/-/archive/v${recipe.version}/libxml2-v${recipe.version}.tar.bz2" {
+    blake3 "174328ac55a38334b260399ffcae5cda8d2713e99ca202cf12576c1e0a372018"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddefault_library=both \
+            -Dhttp=disabled \
+            -Dicu=disabled \
+            -Dpython=disabled
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "libxml2" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*"
+}
+
+package "libxml2-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/cmake/" \
+          "usr/lib/pkgconfig/"
+}
