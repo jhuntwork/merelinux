@@ -1,0 +1,46 @@
+recipe {
+    name "glslang"
+    version "16.2.0"
+    release 1
+    description "Khronos reference front end for GLSL/ESSL and SPIR-V generator"
+    url "https://github.com/KhronosGroup/glslang"
+    archs "aarch64" "x86_64"
+    licenses "BSD"
+    depends "cmake" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "python"
+}
+
+source "https://github.com/KhronosGroup/glslang/archive/refs/tags/${recipe.version}.tar.gz" {
+    blake3 "9b50fda3ad0c58cbb3f4aeb6faed79994244cc870b74c173b63a7f6164a62173"
+}
+
+build {
+    script r#"
+        cmake -B build -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DENABLE_OPT=OFF
+        ninja -C build
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build install
+    "#
+}
+
+package "glslang" {
+    files "usr/bin/"
+}
+
+package "glslang-dev" {
+    files "usr/include/" \
+          "usr/lib/cmake/" \
+          "usr/lib/*.a"
+}
