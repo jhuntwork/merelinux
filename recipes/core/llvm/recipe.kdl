@@ -197,7 +197,7 @@ package "llvm-tools" {
           "!usr/bin/lld-link" \
           "!usr/bin/llvm-addr2line" \
           "!usr/bin/llvm-ar" \
-          "!usr/bin/llvm-config"
+          "!usr/bin/llvm-config" \
           "!usr/bin/llvm-cxxfilt" \
           "!usr/bin/llvm-dlltool" \
           "!usr/bin/llvm-dwarfdump" \
