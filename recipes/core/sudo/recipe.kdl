@@ -1,0 +1,46 @@
+recipe {
+    name "sudo"
+    version "1.9.17p2"
+    release 1
+    description "Tool for delegating authority to users and groups"
+    url "http://www.sudo.ws/"
+    archs "aarch64" "x86_64"
+    licenses "BSD"
+    needs-root true
+    depends "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "skalibs-dev" \
+            "utmps-dev"
+}
+
+source "http://www.sudo.ws/sudo/dist/sudo-${recipe.version}.tar.gz" {
+    blake3 "f9c0de7ccd015d8ac93f8de1e0151877962a6bcac94857fac9708b61bb962b64"
+}
+
+build {
+    script r#"
+        LIBS='-lutmps -lskarnet' \
+          ./configure \
+          --prefix=/usr \
+          --libexecdir=/usr/lib/sudo
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "sudo" {
+    files "etc/sudo.conf" \
+          "etc/sudoers" \
+          "etc/sudoers.d/" \
+          "usr/bin/" \
+          "usr/lib/" \
+          "usr/sbin/" \
+          "usr/share/man/"
+}
