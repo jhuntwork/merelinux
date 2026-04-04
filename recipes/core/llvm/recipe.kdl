@@ -1,7 +1,7 @@
 recipe {
     name "llvm"
     version "21.1.8"
-    release 9
+    release 10
     description "A collection of modular and reusable compiler and toolchain technologies."
     url "htps://llvm.org"
     licenses "Apache"
@@ -197,6 +197,7 @@ package "llvm-tools" {
           "!usr/bin/lld-link" \
           "!usr/bin/llvm-addr2line" \
           "!usr/bin/llvm-ar" \
+          "!usr/bin/llvm-config"
           "!usr/bin/llvm-cxxfilt" \
           "!usr/bin/llvm-dlltool" \
           "!usr/bin/llvm-dwarfdump" \
