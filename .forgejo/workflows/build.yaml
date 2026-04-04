@@ -163,7 +163,7 @@ jobs:
       - name: Import
         run: |
           set -eu
-          mere dev import /tmp/repo
+          mere dev import /tmp/repo --force
 
       - name: Sync repo up
         run: |

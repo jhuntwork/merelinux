@@ -1,7 +1,7 @@
 recipe {
     name "linux-pam"
     version "1.7.2"
-    release 1
+    release 2
     description "Pluggable Authentication Modules for Linux"
     url "https://github.com/linux-pam/linux-pam"
     licenses "BSD"
@@ -17,7 +17,6 @@ recipe {
             "pkgconf" \
             "skalibs-dev" \
             "utmps-dev"
-
 }
 
 source "https://github.com/linux-pam/linux-pam/releases/download/v${recipe.version}/Linux-PAM-${recipe.version}.tar.xz" {
