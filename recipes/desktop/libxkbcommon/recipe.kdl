@@ -1,0 +1,59 @@
+recipe {
+    name "libxkbcommon"
+    version "1.13.1"
+    release 1
+    description "Keyboard keymap compiler and support library"
+    url "https://xkbcommon.org"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "bison" \
+            "libffi-dev" \
+            "libxml2-dev" \
+            "linux-headers" \
+            "llvm" \
+            "m4" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf" \
+            "python" \
+            "wayland" \
+            "wayland-dev" \
+            "wayland-protocols-dev" \
+            "xkeyboard-config"
+}
+
+source "https://github.com/xkbcommon/libxkbcommon/archive/refs/tags/xkbcommon-${recipe.version}.tar.gz" {
+    blake3 "f0606c6f43aa7f9bae291dafd33a7d0059dc27f1851f22f663e1570a73b62473"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Denable-docs=false \
+            -Denable-x11=false
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "libxkbcommon" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/libexec/" \
+          "usr/share/bash-completion/" \
+          "usr/share/man/man1/"
+}
+
+package "libxkbcommon-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}
