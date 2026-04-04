@@ -1,7 +1,7 @@
 recipe {
     name "wayland"
     version "1.25.0"
-    release 1
+    release 2
     description "Wayland compositor protocol"
     url "https://wayland.freedesktop.org"
     archs "aarch64" "x86_64"
@@ -40,13 +40,13 @@ install {
 }
 
 package "wayland" {
-    files "usr/bin/" \
-          "usr/lib/lib*.so*" \
+    files "usr/lib/lib*.so*" \
           "usr/share/wayland/"
 }
 
 package "wayland-dev" {
-    files "usr/include/" \
+    files "usr/bin/" \
+          "usr/include/" \
           "usr/lib/pkgconfig/" \
           "usr/share/aclocal/"
 }
