@@ -1,0 +1,50 @@
+recipe {
+    name "libdrm"
+    version "2.4.131"
+    release 1
+    description "Direct Rendering Manager library and headers"
+    url "https://gitlab.freedesktop.org/mesa/drm"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "libpciaccess-dev" \
+            "linux-headers" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "python"
+}
+
+source "http://dri.freedesktop.org/libdrm/libdrm-${recipe.version}.tar.xz" {
+    blake3 "e8184e37aa0eaa869ef90ad80142ef3688d05d68e365f369991afef078bb20c4"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Dtests=false \
+            -Dcairo-tests=disabled \
+            -Dman-pages=disabled \
+            -Dvalgrind=disabled
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "libdrm" {
+    files "usr/lib/lib*.so" \
+          "usr/share/"
+}
+
+package "libdrm-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}
