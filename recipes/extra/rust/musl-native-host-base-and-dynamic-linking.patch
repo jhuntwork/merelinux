@@ -1,0 +1,70 @@
+--- rustc-1.94.1-src.orig/compiler/rustc_target/src/spec/base/linux_musl.rs
++++ rustc-1.94.1-src/compiler/rustc_target/src/spec/base/linux_musl.rs
+@@ -1,11 +1,8 @@
+-use crate::spec::{Env, LinkSelfContainedDefault, TargetOptions, base, crt_objects};
++use crate::spec::{Env, TargetOptions, base};
+ 
+ pub(crate) fn opts() -> TargetOptions {
+     TargetOptions {
+         env: Env::Musl,
+-        pre_link_objects_self_contained: crt_objects::pre_musl_self_contained(),
+-        post_link_objects_self_contained: crt_objects::post_musl_self_contained(),
+-        link_self_contained: LinkSelfContainedDefault::InferredForMusl,
+         ..base::linux::opts()
+     }
+ }
+--- rustc-1.94.1-src.orig/compiler/rustc_target/src/spec/crt_objects.rs
++++ rustc-1.94.1-src/compiler/rustc_target/src/spec/crt_objects.rs
+@@ -62,28 +62,6 @@
+     ])
+ }
+ 
+-pub(super) fn pre_musl_self_contained() -> CrtObjects {
+-    new(&[
+-        (LinkOutputKind::DynamicNoPicExe, &["crt1.o", "crti.o", "crtbegin.o"]),
+-        (LinkOutputKind::DynamicPicExe, &["Scrt1.o", "crti.o", "crtbeginS.o"]),
+-        (LinkOutputKind::StaticNoPicExe, &["crt1.o", "crti.o", "crtbegin.o"]),
+-        (LinkOutputKind::StaticPicExe, &["rcrt1.o", "crti.o", "crtbeginS.o"]),
+-        (LinkOutputKind::DynamicDylib, &["crti.o", "crtbeginS.o"]),
+-        (LinkOutputKind::StaticDylib, &["crti.o", "crtbeginS.o"]),
+-    ])
+-}
+-
+-pub(super) fn post_musl_self_contained() -> CrtObjects {
+-    new(&[
+-        (LinkOutputKind::DynamicNoPicExe, &["crtend.o", "crtn.o"]),
+-        (LinkOutputKind::DynamicPicExe, &["crtendS.o", "crtn.o"]),
+-        (LinkOutputKind::StaticNoPicExe, &["crtend.o", "crtn.o"]),
+-        (LinkOutputKind::StaticPicExe, &["crtendS.o", "crtn.o"]),
+-        (LinkOutputKind::DynamicDylib, &["crtendS.o", "crtn.o"]),
+-        (LinkOutputKind::StaticDylib, &["crtendS.o", "crtn.o"]),
+-    ])
+-}
+-
+ pub(super) fn pre_mingw_self_contained() -> CrtObjects {
+     new(&[
+         (LinkOutputKind::DynamicNoPicExe, &["crt2.o"]),
+--- rustc-1.94.1-src.orig/vendor/libc-0.2.168/src/unix/mod.rs
++++ rustc-1.94.1-src/vendor/libc-0.2.168/src/unix/mod.rs
+@@ -445,18 +445,16 @@
+         #[link(name = "c", cfg(not(target_feature = "crt-static")))]
+         extern "C" {}
+     } else if #[cfg(any(target_env = "musl", target_env = "ohos"))] {
++        #[link(name = "c")]
++        extern "C" {}
+         #[cfg_attr(
+             feature = "rustc-dep-of-std",
+             link(
+-                name = "c",
++                name = "clang",
+                 kind = "static",
+                 modifiers = "-bundle",
+                 cfg(target_feature = "crt-static")
+             )
+-        )]
+-        #[cfg_attr(
+-            feature = "rustc-dep-of-std",
+-            link(name = "c", cfg(not(target_feature = "crt-static")))
+         )]
+         extern "C" {}
+     } else if #[cfg(target_os = "emscripten")] {

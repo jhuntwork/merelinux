@@ -1,0 +1,99 @@
+recipe {
+    name "rust"
+    version "1.94.1"
+    release 1
+    description "The Rust programming language"
+    url "https://www.rust-lang.org"
+    archs "aarch64" "x86_64"
+    licenses "MIT" "Apache"
+    needs-root true
+    depends "cmake" \
+            "curl" \
+            "llvm" \
+            "llvm-dev" \
+            "llvm-tools" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "openssl-dev" \
+            "patch" \
+            "pkgconf" \
+            "python" \
+            "zlib-ng-dev"
+}
+
+source "https://static.rust-lang.org/dist/rustc-${recipe.version}-src.tar.xz" {
+    blake3 "ee1748543766e3c63d64c1ce505f6dcac4fc99c73027e12a3474da0cbd95e342"
+}
+
+source "musl-native-host-base-and-dynamic-linking.patch" {
+    blake3 "8d346d42c7112e8134e6cd533c762923cc60c1162d7ab35e3b2286242565e239"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/musl-native-host-base-and-dynamic-linking.patch"
+        sed -i 's/\("files":{\)[^}]*/\1/' vendor/libc-*/.cargo-checksum.json
+        # Don't bundle musl CRT objects - use system ones
+        sed -i 's/self.contains("musl") && !self.contains("unikraft")/false/' \
+            src/bootstrap/src/core/config/target_selection.rs
+    "#
+}
+
+build {
+    script r#"
+        install -d /dev/shm
+        mount -t tmpfs tmpfs /dev/shm
+        # We don't ship a shared libunwind or libgcc_s - just fake it
+        install -d custom
+        cc -shared -o custom/libgcc_s.so.1 -Wl,--whole-archive -lunwind -Wl,--no-whole-archive
+        export LD_LIBRARY_PATH="$(pwd)/custom"
+        # Wrap llvm-config so --bindir returns /usr/bin (store paths are immutable)
+        cat > custom/llvm-config <<'WRAPPER'
+#!/bin/sh
+for arg in "$@"; do
+    case "$arg" in --bindir) echo /usr/bin; exit 0 ;; esac
+done
+exec /usr/bin/llvm-config "$@"
+WRAPPER
+        chmod +x custom/llvm-config
+        export PATH="$(pwd)/custom:$PATH"
+        export CHOST="${recipe.arch}-unknown-linux-musl"
+        ./configure \
+            --prefix=/usr \
+            --build="${CHOST}" \
+            --host="${CHOST}" \
+            --release-channel=stable \
+            --disable-docs \
+            --disable-codegen-tests \
+            --enable-extended \
+            --enable-option-checking \
+            --enable-locked-deps \
+            --enable-vendor \
+            --disable-llvm-static-stdcpp \
+            --set="target.${CHOST}.llvm-config=$(pwd)/custom/llvm-config" \
+            --set="target.${CHOST}.musl-root=/" \
+            --set="target.${CHOST}.crt-static=false" \
+            --tools='cargo,src'
+        ./x.py build -v
+    "#
+}
+
+install {
+    script r#"
+        export LD_LIBRARY_PATH="$(pwd)/custom"
+        export PATH="$(pwd)/custom:$PATH"
+        ./x.py install -v
+        rm -rf "${DESTDIR}/usr/lib/rustlib/src" \
+            "${DESTDIR}/usr/share/doc" \
+            "${DESTDIR}/usr/share/zsh"
+    "#
+}
+
+package "rust" {
+    files "etc/bash_completion.d/" \
+          "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/lib/rustlib/" \
+          "usr/share/man/man1/"
+}
