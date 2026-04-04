@@ -1,0 +1,40 @@
+recipe {
+    name "expat"
+    version "2.7.5"
+    release 1
+    description "Fast streaming XML parser written in C"
+    url "https://libexpat.github.io/"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/libexpat/libexpat/releases/download/R_2_7_5/expat-${recipe.version}.tar.bz2" {
+    blake3 "0a5bbdd6c23b7f61e216b0e0f2814ace56ff37cd5182ae5ae8414cb1bc4aa244"
+}
+
+build {
+    script r#"
+        CFLAGS="$CFLAGS -fPIC" ./configure \
+            --prefix=/usr \
+            --disable-shared \
+            --enable-static
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "expat-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/cmake/" \
+          "usr/lib/pkgconfig/"
+}
