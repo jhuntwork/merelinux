@@ -1,7 +1,7 @@
 recipe {
     name "llvm"
     version "21.1.8"
-    release 10
+    release 11
     description "A collection of modular and reusable compiler and toolchain technologies."
     url "htps://llvm.org"
     licenses "Apache"
@@ -176,6 +176,7 @@ package "llvm" {
 package "libllvm" {
     files "usr/lib/libLLVM.so.*" \
           "usr/lib/libLLVM.so" \
+          "usr/lib/libLLVM-*.so" \
           "usr/lib/libLTO.so" \
           "usr/lib/libLTO.so.*" \
           "usr/lib/libRemarks.so.*" \
