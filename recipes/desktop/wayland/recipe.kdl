@@ -1,0 +1,52 @@
+recipe {
+    name "wayland"
+    version "1.25.0"
+    release 1
+    description "Wayland compositor protocol"
+    url "https://wayland.freedesktop.org"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "expat-dev" \
+            "libffi-dev" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf" \
+            "python"
+}
+
+source "https://gitlab.freedesktop.org/wayland/wayland/-/releases/${recipe.version}/downloads/wayland-${recipe.version}.tar.xz" {
+    blake3 "e901b1eea94562827cda0a68351db7625340239eacf696d852cc0c6b2a9edcc6"
+}
+
+build {
+    script r#"
+        CFLAGS="$CFLAGS -fPIC" meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddocumentation=false \
+            -Ddtd_validation=false \
+            -Dtests=false
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "wayland" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/share/wayland/"
+}
+
+package "wayland-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/aclocal/"
+}
