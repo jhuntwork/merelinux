@@ -1,0 +1,58 @@
+recipe {
+    name "libinput"
+    version "1.31.1"
+    release 1
+    description "Input device management and event handling library"
+    url "https://gitlab.freedesktop.org/libinput/libinput"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "libevdev-dev" \
+            "libudev-zero-dev" \
+            "linux-headers" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "mtdev-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf" \
+            "python"
+}
+
+source "https://gitlab.freedesktop.org/libinput/libinput/-/archive/${recipe.version}/libinput-${recipe.version}.tar.bz2" {
+    blake3 "eaace779a93795bd7426a8e57d44b98cad6a59bca888d7955baaae2cfb0796f4"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddocumentation=false \
+            -Ddebug-gui=false \
+            -Dlibwacom=false \
+            -Dtests=false
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "libinput" {
+    files "etc/" \
+          "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/lib/udev/" \
+          "usr/libexec/" \
+          "usr/share/libinput/" \
+          "usr/share/man/"
+}
+
+package "libinput-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}
