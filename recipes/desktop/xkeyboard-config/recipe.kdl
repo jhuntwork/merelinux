@@ -1,0 +1,36 @@
+recipe {
+    name "xkeyboard-config"
+    version "2.47"
+    release 1
+    description "XKB keyboard configuration database"
+    url "https://gitlab.freedesktop.org/xkeyboard-config/xkeyboard-config"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "meson" \
+            "ninja" \
+            "perl" \
+            "python"
+}
+
+source "http://www.x.org/releases/individual/data/xkeyboard-config/xkeyboard-config-${recipe.version}.tar.xz" {
+    blake3 "d7fd87d845828dfc9251d84b6c7690a4dc969ea72e0e8d5bf868706c959d322e"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "xkeyboard-config" {
+    files "usr/share/"
+}
