@@ -1,7 +1,7 @@
 recipe {
     name "llvm"
     version "21.1.8"
-    release 11
+    release 12
     description "A collection of modular and reusable compiler and toolchain technologies."
     url "htps://llvm.org"
     licenses "Apache"
@@ -85,7 +85,7 @@ build {
             -DLLVM_ENABLE_LIBCXX=ON \
             -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON \
             -DLLVM_ENABLE_PIC=ON \
-            -DLLVM_ENABLE_PROJECTS='lld;clang' \
+            -DLLVM_ENABLE_PROJECTS='lld;clang;libclc' \
             -DLLVM_ENABLE_RUNTIMES='compiler-rt;libcxx;libcxxabi;libunwind' \
             -DLLVM_ENABLE_RTTI=ON \
             -DLLVM_HOST_TRIPLE="$CHOST" \
@@ -183,7 +183,7 @@ package "libllvm" {
           "usr/lib/libRemarks.so"
 }
 
-package "llvm-tools" {
+package "llvm-dev" {
     files "usr/bin/" \
           "!usr/bin/ar" \
           "!usr/bin/cc" \
@@ -198,7 +198,6 @@ package "llvm-tools" {
           "!usr/bin/lld-link" \
           "!usr/bin/llvm-addr2line" \
           "!usr/bin/llvm-ar" \
-          "!usr/bin/llvm-config" \
           "!usr/bin/llvm-cxxfilt" \
           "!usr/bin/llvm-dlltool" \
           "!usr/bin/llvm-dwarfdump" \
@@ -223,11 +222,7 @@ package "llvm-tools" {
           "!usr/bin/strings" \
           "!usr/bin/size" \
           "!usr/bin/wasm-ld" \
-          "!usr/bin/windres"
-}
-
-package "llvm-dev" {
-    files "usr/bin/llvm-config" \
+          "!usr/bin/windres" \
           "usr/include/clang/" \
           "usr/include/clang-c/" \
           "usr/include/lld/" \
