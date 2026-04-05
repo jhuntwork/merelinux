@@ -1,7 +1,7 @@
 recipe {
     name "python"
     version "3.14.3"
-    release 8
+    release 9
     description "A clear and powerful object-oriented programming language,"
     url "http://www.python.org"
     licenses "Python"
@@ -40,11 +40,6 @@ prepare {
 
 build {
     script r#"
-        ac_cv_posix_semaphores_enabled=yes \
-        ac_cv_func_sem_open=yes \
-        ac_cv_func_sem_timedwait=yes \
-        ac_cv_func_sem_getvalue=yes \
-        ac_cv_func_sem_unlink=yes \
         ./configure \
             --prefix=/usr \
             --sysconfdir=/etc \
