@@ -9,7 +9,7 @@ jobs:
   detect:
     runs-on: docker
     container:
-      image: mere/ci:v0.12.1
+      image: mere/ci:v0.12.2
     outputs:
       recipe: ${{ steps.detect.outputs.recipe }}
     steps:
@@ -54,7 +54,7 @@ jobs:
     if: needs.detect.outputs.recipe != ''
     runs-on: docker
     container:
-      image: mere/ci:v0.12.1
+      image: mere/ci:v0.12.2
       options: --privileged
     env:
       MERE_NO_HARDEN: "1"
@@ -116,7 +116,7 @@ jobs:
     if: needs.detect.outputs.recipe != ''
     runs-on: docker-aarch64
     container:
-      image: mere/ci:v0.12.1
+      image: mere/ci:v0.12.2
       options: --privileged
     env:
       MERE_NO_HARDEN: "1"
