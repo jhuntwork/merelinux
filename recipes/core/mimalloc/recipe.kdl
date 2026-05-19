@@ -1,7 +1,7 @@
 recipe {
     name "mimalloc"
     version "3.2.8"
-    release 3
+    release 4
     description "A compact general purpose allocator with excellent performance"
     url "https://microsoft.github.io/mimalloc"
     licenses "MIT"
@@ -27,6 +27,7 @@ build {
             -DCMAKE_INSTALL_PREFIX=/usr \
             -DCMAKE_INSTALL_LIBDIR=lib \
             -DCMAKE_BUILD_TYPE=Release \
+            -DMI_LOCAL_DYNAMIC_TLS=ON \
             ..
         make -j"$(nproc)"
     "#
