@@ -79,7 +79,7 @@ build {
             -DLIBUNWIND_USE_COMPILER_RT=ON \
             -DLLVM_BUILD_LLVM_DYLIB=ON \
             -DLLVM_BUILD_EXAMPLES=OFF \
-            -DLLVM_DEFAULT_TARGET_TRIPLE="$CHOST" \
+            -DLLVM_DEFAULT_TARGET_TRIPLE="${recipe.arch}-unknown-linux-musl" \
             -DLLVM_ENABLE_BINDINGS=OFF \
             -DLLVM_ENABLE_LIBCXX=ON \
             -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF \
@@ -87,7 +87,7 @@ build {
             -DLLVM_ENABLE_PROJECTS='lld;clang;libclc' \
             -DLLVM_ENABLE_RUNTIMES='compiler-rt;libcxx;libcxxabi;libunwind' \
             -DLLVM_ENABLE_RTTI=ON \
-            -DLLVM_HOST_TRIPLE="$CHOST" \
+            -DLLVM_HOST_TRIPLE="${recipe.arch}-unknown-linux-musl" \
             -DLLVM_INCLUDE_BENCHMARKS=OFF \
             -DLLVM_INCLUDE_DOCS=OFF \
             -DLLVM_INCLUDE_TESTS=OFF \
