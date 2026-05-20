@@ -1,7 +1,7 @@
 recipe {
     name "sudo"
     version "1.9.17p2"
-    release 6
+    release 7
     description "Tool for delegating authority to users and groups"
     url "http://www.sudo.ws/"
     archs "aarch64" "x86_64"
