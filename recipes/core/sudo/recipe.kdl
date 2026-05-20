@@ -1,13 +1,15 @@
 recipe {
     name "sudo"
     version "1.9.17p2"
-    release 1
+    release 6
     description "Tool for delegating authority to users and groups"
     url "http://www.sudo.ws/"
     archs "aarch64" "x86_64"
     licenses "BSD"
     needs-root true
-    depends "llvm" \
+    depends "linux-pam" \
+            "linux-pam-dev" \
+            "llvm" \
             "make" \
             "mimalloc-dev" \
             "musl-dev" \
@@ -18,13 +20,18 @@ recipe {
 source "http://www.sudo.ws/sudo/dist/sudo-${recipe.version}.tar.gz" {
     blake3 "f9c0de7ccd015d8ac93f8de1e0151877962a6bcac94857fac9708b61bb962b64"
 }
+source "pam-sudo" {
+    blake3 "008f8a9a4a20226c9107d9179570f91ca7754b72cdb7d47fda9f2655f59cca50"
+}
 
 build {
     script r#"
         LIBS='-lutmps -lskarnet' \
           ./configure \
           --prefix=/usr \
-          --libexecdir=/usr/lib/sudo
+          --libexecdir=/usr/lib \
+          --with-pam \
+          --with-vardir=/var/lib/sudo
         make
     "#
 }
@@ -32,11 +39,16 @@ build {
 install {
     script r#"
         make DESTDIR="$DESTDIR" install
+        find "${DESTDIR}/usr/lib/sudo" -iname 'libsudo*.so*' -exec mv -v '{}' "${DESTDIR}/usr/lib/" \;
+        find "${DESTDIR}" -name '*.la' -delete
+        install -d "${DESTDIR}/etc/pam.d"
+        install -m 0644 "${MERE_SOURCES_DIR}/pam-sudo" "${DESTDIR}/etc/pam.d/sudo"
     "#
 }
 
 package "sudo" {
-    files "etc/sudo.conf" \
+    files "etc/pam.d/" \
+          "etc/sudo.conf" \
           "etc/sudoers" \
           "etc/sudoers.d/" \
           "usr/bin/" \
