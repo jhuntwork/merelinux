@@ -1,0 +1,64 @@
+recipe {
+    name "aws-cli"
+    version "2.34.5"
+    release 1
+    description "Universal Command Line Interface for Amazon Web Services"
+    url "https://github.com/aws/aws-cli"
+    licenses "Apache"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "patch" \
+            "python" \
+            "python-dev"
+}
+
+source "https://github.com/aws/aws-cli/archive/refs/tags/${recipe.version}.tar.gz" {
+    blake3 "78d18d0a877292a57f96f86c17d8de5178d37c2e98d8417f3ce59f19d2de256a"
+}
+
+source "https://patch-diff.githubusercontent.com/raw/aws/aws-cli/pull/10102.diff" {
+    blake3 "05f812ecb530ca07ca030090ae16fe7dfead514e2b4a07382f595cef5d626420"
+}
+
+source "autocomplete-index.patch" {
+    blake3 "76c9b06387002b670275dae6f0a93a39cbb31fb946854953b2ec1160b0342f8f"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/10102.diff"
+        patch -Np0 -i "${MERE_SOURCES_DIR}/autocomplete-index.patch"
+        python -m ensurepip --upgrade
+        pip install --upgrade pip setuptools
+    "#
+}
+
+build {
+    script r#"
+        export HOME="$MERE_BUILD_DIR"
+        python -m ensurepip --upgrade
+        pip install --upgrade pip setuptools
+        pip wheel . -w dist/
+    "#
+}
+
+install {
+    script r#"
+        python -m ensurepip --upgrade
+        pip install --upgrade pip setuptools
+        pip install --no-index --find-links dist/ awscli==${recipe.version} \
+            --root "$DESTDIR" --prefix /usr
+        find "$DESTDIR" -iname "*.pyc" -delete
+        find "$DESTDIR" -type d -iname __pycache__ -exec rm -rf '{}' +
+    "#
+}
+
+package "aws-cli" {
+    strip false
+    files "usr/bin/aws*" \
+          "usr/lib/"
+}
