@@ -1,7 +1,7 @@
 recipe {
     name "llvm"
     version "21.1.8"
-    release 12
+    release 13
     description "A collection of modular and reusable compiler and toolchain technologies."
     url "htps://llvm.org"
     licenses "Apache"
@@ -47,7 +47,6 @@ build {
         install -d build
         cd build || return 1
         unset CFLAGS CXXFLAGS LDFLAGS
-        export CHOST="${recipe.arch}-unknown-linux-musl"
         CFLAGS='-Wno-gnu-line-marker' \
         CXXFLAGS='-Wno-gnu-line-marker' \
         cmake -G Ninja -Wno-dev \
@@ -83,7 +82,7 @@ build {
             -DLLVM_DEFAULT_TARGET_TRIPLE="$CHOST" \
             -DLLVM_ENABLE_BINDINGS=OFF \
             -DLLVM_ENABLE_LIBCXX=ON \
-            -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=ON \
+            -DLLVM_ENABLE_PER_TARGET_RUNTIME_DIR=OFF \
             -DLLVM_ENABLE_PIC=ON \
             -DLLVM_ENABLE_PROJECTS='lld;clang;libclc' \
             -DLLVM_ENABLE_RUNTIMES='compiler-rt;libcxx;libcxxabi;libunwind' \
@@ -104,11 +103,6 @@ install {
         cd build || return 1
         cmake --build . --target install
         cd "$DESTDIR" || return 1
-        export CHOST="${recipe.arch}-unknown-linux-musl"
-        find "usr/lib/${CHOST}/" ! -type d | while read -r file; do
-            bn="${file##*/}"
-            ln -s "${CHOST}/${bn}" "usr/lib/${bn}"
-        done
         install -m0755 "${MERE_SOURCES_DIR}/mere-malloc-wrapper" "${DESTDIR}/usr/bin/cc"
         ln -s libunwind.a usr/lib/libgcc_s.a
         ln -s cc usr/bin/c++
@@ -157,7 +151,6 @@ package "llvm" {
           "usr/bin/windres" \
           "usr/libexec/" \
           "usr/include/c++/" \
-          "usr/include/${recipe.arch}-unknown-linux-musl/" \
           "usr/include/llvm-c/lto.h" \
           "usr/include/*unwind*" \
           "usr/include/*/*unwind*" \
@@ -166,11 +159,7 @@ package "llvm" {
           "usr/lib/libc++abi.a" \
           "usr/lib/libc++experimental.a" \
           "usr/lib/libgcc_s.a" \
-          "usr/lib/libunwind.a" \
-          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++.a" \
-          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++abi.a" \
-          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++experimental.a" \
-          "usr/lib/${recipe.arch}-unknown-linux-musl/libunwind.a"
+          "usr/lib/libunwind.a"
 }
 
 package "libllvm" {
@@ -239,7 +228,6 @@ package "llvm-dev" {
           "usr/lib/libear/" \
           "usr/lib/libscanbuild/" \
           "usr/lib/*.json" \
-          "usr/lib/*/*.json" \
           "usr/share/"
 }
 
@@ -254,8 +242,5 @@ package "libcxx" {
     files "usr/lib/libc++.so.*" \
           "usr/lib/libc++.so" \
           "usr/lib/libc++abi.so.*" \
-          "usr/lib/libc++abi.so" \
-          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++.so" \
-          "usr/lib/${recipe.arch}-unknown-linux-musl/libc++abi.so" \
-          "usr/lib/${recipe.arch}-unknown-linux-musl/*.so.*"
+          "usr/lib/libc++abi.so"
 }
