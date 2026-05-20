@@ -1,0 +1,17 @@
+# Taken from https://github.com/aws/aws-cli/issues/8889
+--- awscli/autocomplete/generator.py
++++ awscli/autocomplete/generator.py
+@@ -44,6 +44,7 @@ def _do_generate_index(filename):
+
+ def _do_generate_index(filename):
+     db_connection = db.DatabaseConnection(filename)
++    db_connection.execute('BEGIN')
+     indexers = [
+         indexer.ModelIndexer(db_connection),
+         APICallIndexer(db_connection),
+@@ -53,6 +54,7 @@ def _do_generate_index(filename):
+     try:
+         index_gen.generate_index(driver)
+     finally:
++        db_connection.execute('COMMIT')
+         db_connection.close()
