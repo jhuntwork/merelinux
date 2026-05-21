@@ -1,7 +1,7 @@
 recipe {
     name "rust"
     version "1.94.1"
-    release 1
+    release 2
     description "The Rust programming language"
     url "https://www.rust-lang.org"
     archs "aarch64" "x86_64"
@@ -11,7 +11,6 @@ recipe {
             "curl" \
             "llvm" \
             "llvm-dev" \
-            "llvm-tools" \
             "mimalloc-dev" \
             "musl-dev" \
             "ninja" \
@@ -37,6 +36,9 @@ prepare {
         # Don't bundle musl CRT objects - use system ones
         sed -i 's/self.contains("musl") && !self.contains("unikraft")/false/' \
             src/bootstrap/src/core/config/target_selection.rs
+        # musl targets should default to dynamic linking
+        sed -i '/crt_static_default = true/d' \
+            compiler/rustc_target/src/spec/targets/*_unknown_linux_musl*.rs
     "#
 }
 
