@@ -1,7 +1,7 @@
 recipe {
     name "vim"
     version "9.2.0272"
-    release 1
+    release 2
     description "An IMproved version of the vi editor"
     url "https://www.vim.org"
     licenses "VIM"
@@ -68,5 +68,6 @@ package "vim" {
     files "usr/bin/" \
           "etc/" \
           "usr/share/man/" \
-          "usr/share/vim/"
+          "usr/share/vim/" \
+          "!usr/share/vim/vim92/tools/vim132"
 }
