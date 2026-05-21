@@ -93,6 +93,7 @@ build {
             -DLLVM_INCLUDE_TESTS=OFF \
             -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
             -DLLVM_LINK_LLVM_DYLIB=ON \
+            -DLLVM_TARGETS_TO_BUILD='AArch64;PowerPC;X86'
             ../llvm
         ninja -j"$(nproc)"
     "#
