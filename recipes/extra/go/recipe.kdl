@@ -1,0 +1,73 @@
+recipe {
+    name "go"
+    version "1.26.3"
+    release 1
+    description "The Go programming language"
+    url "https://go.dev"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "bash" \
+            "llvm" \
+            "musl-dev"
+}
+
+source "https://go.dev/dl/go${recipe.version}.src.tar.gz" {
+    blake3 "59e35cf8d41713a7891a94f7beaab2ba9a1e108b71678cd2c829d22b24ef76f1"
+}
+
+source "https://go.dev/dl/go${recipe.version}.linux-amd64.tar.gz" {
+    blake3 "17a2d10cb58b58096652cae9090d61d2cb15e2657ef0e9ac6b0a913e0b3de42a"
+}
+
+source "https://go.dev/dl/go${recipe.version}.linux-arm64.tar.gz" {
+    blake3 "6dde27fcc28b1503d196c0e3e4b5832e1fb94d594cb4639470a5738d4a008f8b"
+}
+
+build {
+    script r#"
+        case "${recipe.arch}" in
+            x86_64)  bootstrap="go${recipe.version}.linux-amd64.tar.gz" ;;
+            aarch64) bootstrap="go${recipe.version}.linux-arm64.tar.gz" ;;
+        esac
+
+        mkdir -p /tmp/go-bootstrap
+        tar xzf "${MERE_SOURCES_DIR}/${bootstrap}" -C /tmp/go-bootstrap --strip-components=1
+
+        cd src
+        GOROOT_FINAL=/usr/lib/go \
+        GOROOT_BOOTSTRAP=/tmp/go-bootstrap \
+        CC=clang \
+        ./make.bash
+    "#
+}
+
+install {
+    script r#"
+        install -d "${DESTDIR}/usr/lib/go" "${DESTDIR}/usr/bin"
+
+        # Only install what's needed: bin, src, pkg, lib, and VERSION
+        cp -a bin "${DESTDIR}/usr/lib/go/"
+        cp -a src "${DESTDIR}/usr/lib/go/"
+        cp -a pkg "${DESTDIR}/usr/lib/go/"
+        cp -a lib "${DESTDIR}/usr/lib/go/"
+        cp -a go.env "${DESTDIR}/usr/lib/go/"
+        cp VERSION "${DESTDIR}/usr/lib/go/"
+
+        # Clean up test files and unnecessary scripts from src
+        find "${DESTDIR}/usr/lib/go/src" -type f -name "*_test.go" -delete
+        find "${DESTDIR}/usr/lib/go/src" -type d -name testdata -exec rm -rf '{}' +
+        find "${DESTDIR}/usr/lib/go/src" -type f \
+            \( -name "*.bash" -o -name "*.rc" -o -name "*.bat" -o -name "*.ps1" \) -delete
+        rm -rf "${DESTDIR}/usr/lib/go/pkg/bootstrap"
+        rm -rf "${DESTDIR}/usr/lib/go/pkg/obj"
+
+        ln -s /usr/lib/go/bin/go "${DESTDIR}/usr/bin/go"
+        ln -s /usr/lib/go/bin/gofmt "${DESTDIR}/usr/bin/gofmt"
+    "#
+}
+
+package "go" {
+    strip false
+    files "usr/bin/" \
+          "usr/lib/go/"
+}
