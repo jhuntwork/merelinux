@@ -1,7 +1,7 @@
 recipe {
     name "zig"
-    version "0.16.0-dev"
-    release 4
+    version "0.16.0"
+    release 1
     description "The Zig Programming Language Compiler"
     url "https://ziglang.org"
     licenses "MIT"
@@ -20,8 +20,8 @@ recipe {
             "zstd-dev"
 }
 
-source "https://ziglang.org/builds/zig-${recipe.version}.2915+065c6e794.tar.xz" {
-    blake3 "d09aac3a4a87b7cf23b0dd7f53e9a7a16e1a9303de9b3715311083849deae40a"
+source "https://ziglang.org/download/0.16.0/zig-0.16.0.tar.xz" {
+    blake3 "c216f4206ded117946e334b129300ba6716aa2a56e200943f27d66f6c6fad755"
 }
 
 source "zigc-no-builtin.patch" {
