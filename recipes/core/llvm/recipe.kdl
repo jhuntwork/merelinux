@@ -1,7 +1,7 @@
 recipe {
     name "llvm"
     version "21.1.8"
-    release 13
+    release 14
     description "A collection of modular and reusable compiler and toolchain technologies."
     url "htps://llvm.org"
     licenses "Apache"
@@ -93,7 +93,7 @@ build {
             -DLLVM_INCLUDE_TESTS=OFF \
             -DLLVM_INSTALL_BINUTILS_SYMLINKS=ON \
             -DLLVM_LINK_LLVM_DYLIB=ON \
-            -DLLVM_TARGETS_TO_BUILD='AArch64;PowerPC;X86' \
+            -DLLVM_TARGETS_TO_BUILD=all \
             ../llvm
         ninja -j"$(nproc)"
     "#
