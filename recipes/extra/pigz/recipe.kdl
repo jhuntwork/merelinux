@@ -1,0 +1,50 @@
+// contributor: oryktos (https://codeberg.org/oryktos)
+// main reference is the Alpine aports apkbuild
+
+recipe {
+    name "pigz"
+    description "Parallel implementation of gzip"
+    url "https://zlib.net/pigz/"
+
+    version "2.8"
+    release 1
+    licenses "zlib"
+
+    archs "x86_64"  // NOTE not yet tested in aarch64
+    depends "busybox" "llvm" "make" "musl-dev" "zlib-ng-dev"
+    env CFLAGS="-O3 -flto=auto"
+}
+
+source "https://zlib.net/pigz/pigz-${recipe.version}.tar.gz" {
+    blake3 "fa165f414a12851806d9d54920879dd989917b9aa410aec671c602b18773b236"
+}
+
+build {
+    script r#"
+        make pigz CC=clang
+    "#
+}
+
+check {
+    script r#"
+        make test
+    "#
+}
+
+install {
+    script r#"
+        install \
+            -Dm0755 pigz \
+            -t "${DESTDIR}"/usr/bin
+
+        ln -s pigz "${DESTDIR}"/usr/bin/unpigz
+
+        install \
+            -Dm0644 pigz.1 \
+            -t "${DESTDIR}"/usr/share/man/man1
+    "#
+}
+
+package "pigz" {
+    files "usr/bin/" "usr/share/"
+}
