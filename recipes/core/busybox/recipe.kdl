@@ -1,11 +1,12 @@
 recipe {
     name "busybox"
     version "1.37.0"
-    release 7
+    release 10
     description "Tiny versions of common UNIX utilities built into a single binary"
     url "http://busybox.net"
     licenses "GPL"
     archs "aarch64" "x86_64"
+    needs-root true
     depends "linux-headers" \
             "llvm" \
             "make" \
@@ -53,7 +54,7 @@ source "nslookup-sanitize.patch" {
 }
 
 source "busybox-config" {
-    blake3 "d87fdf4920d820a4f8a34c07115022db22606e79941948ca5f965bc3affd93cb"
+    blake3 "1683619d1ff1eeb55381e4087dd0798e89038479eaf9a060d2d6cd9d3e60da92"
 }
 
 source "udhcpc.script" {
