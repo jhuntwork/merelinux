@@ -1,0 +1,80 @@
+recipe {
+    name "linux"
+    version "6.18.36"
+    release 1
+    description "Linux kernel and modules"
+    url "http://www.kernel.org"
+    licenses "GPL2"
+    archs "aarch64" "x86_64"
+    depends "bison" \
+            "flex" \
+            "libelf-dev" \
+            "linux-headers" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "openssl-dev" \
+            "perl" \
+            "python" \
+            "rsync" \
+            "xz" \
+            "zlib-ng-dev"
+}
+
+source "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${recipe.version}.tar.xz" {
+    blake3 "0711a7440999feb5bbab3bfce916e04e4737e27d5693bc87209e14e052bd91e8"
+}
+
+source "mere-common.config.fragment" {
+    blake3 "2e6faea7ec2dbe2b62253390a8c9ce6ddc419150b935ff0591e0b0f59de007d1"
+}
+
+source "mere-x86_64.config.fragment" {
+    blake3 "9311385580dea3574f68b4a9eaca362fdb7770bfa332a0321b5cfb2b0711189f"
+}
+
+source "mere-aarch64.config.fragment" {
+    blake3 "4db5d9160156a434d516a5c386c3dd14e5316d095370b4c48224bc5ce0aa2ede"
+}
+
+prepare {
+    script r#"
+        sed -i 's@/usr/bin/awk@/bin/awk@' scripts/ld-version.sh
+        sed -i \
+            -e "/^CC/s@gcc@${CC:-cc}@g" \
+            -e "/^HOSTCC/s@gcc@${CC:-cc}@g" Makefile
+        make LLVM=1 LLVM_IAS=1 mrproper
+        make LLVM=1 LLVM_IAS=1 defconfig
+        scripts/kconfig/merge_config.sh -m .config \
+            "${MERE_SOURCES_DIR}/mere-common.config.fragment" \
+            "${MERE_SOURCES_DIR}/mere-${recipe.arch}.config.fragment"
+        make LLVM=1 LLVM_IAS=1 olddefconfig
+    "#
+}
+
+build {
+    script r#"
+        make LLVM=1 LLVM_IAS=1 -j "$(nproc)"
+    "#
+}
+
+install {
+    script r#"
+        case "${recipe.arch}" in
+            x86_64)  _image=arch/x86_64/boot/bzImage ;;
+            aarch64) _image=arch/arm64/boot/Image ;;
+        esac
+        make LLVM=1 LLVM_IAS=1 INSTALL_MOD_PATH="${DESTDIR}" modules_install
+        install -d "${DESTDIR}/boot"
+        install "$_image" "${DESTDIR}/boot/vmlinux"
+        install .config "${DESTDIR}/boot/config"
+        rm -f "${DESTDIR}/lib/modules/"*/build \
+              "${DESTDIR}/lib/modules/"*/source
+    "#
+}
+
+package "linux" {
+    files "boot/" "lib/modules/"
+}
