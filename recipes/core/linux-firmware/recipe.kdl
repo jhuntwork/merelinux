@@ -1,0 +1,126 @@
+recipe {
+    name "linux-firmware"
+    version "20260309"
+    release 2
+    description "Firmware files for Linux kernel drivers"
+    url "https://gitlab.com/kernel-firmware/linux-firmware"
+    licenses "mixed-redistributable"
+    archs "any"
+    depends "busybox" "make"
+}
+
+source "https://gitlab.com/kernel-firmware/linux-firmware/-/archive/${recipe.version}/linux-firmware-${recipe.version}.tar.gz" {
+    blake3 "21a82e50fbb6fc023cec8bdee9f3b2a4c82d39e18c0f5f18e3f99ffc2e910865"
+}
+
+install {
+    script r#"
+        install -d "${DESTDIR}/lib/firmware"
+        find . \
+            ! -name '*.md' \
+            ! -name '*.py' \
+            ! -name '*.sh' \
+            ! -name '*.yaml' \
+            ! -name 'Makefile' \
+            ! -name 'WHENCE' \
+            ! -name 'LICENSE*' \
+            ! -name 'LICENCE*' \
+            ! -name 'GPL*' \
+            ! -name 'check_whence*' \
+            ! -name 'contrib' \
+            ! -name 'carl9170fw' \
+            ! -name '.git*' \
+            | cpio -dump "${DESTDIR}/lib/firmware/"
+    "#
+}
+
+// Intel: wifi (iwlwifi), GPU (i915, xe), bluetooth (ibt), sound (intel/)
+package "linux-firmware-intel" {
+    files "lib/firmware/intel/" \
+          "lib/firmware/i915/" \
+          "lib/firmware/xe/"
+}
+
+// AMD: GPU (amdgpu), CPU microcode (amd-ucode), NPU, TEE
+package "linux-firmware-amd" {
+    files "lib/firmware/amdgpu/" \
+          "lib/firmware/amd-ucode/" \
+          "lib/firmware/amd/" \
+          "lib/firmware/amdnpu/" \
+          "lib/firmware/amdtee/" \
+          "lib/firmware/radeon/"
+}
+
+// Realtek: wifi (rtw88, rtw89, rtlwifi), bluetooth (rtl_bt), NIC (rtl_nic)
+package "linux-firmware-realtek" {
+    files "lib/firmware/rtw88/" \
+          "lib/firmware/rtw89/" \
+          "lib/firmware/rtlwifi/" \
+          "lib/firmware/rtl_bt/" \
+          "lib/firmware/rtl_nic/" \
+          "lib/firmware/realtek/"
+}
+
+// Qualcomm/Atheros: wifi (ath10k, ath11k, ath12k, ath6k, ath9k_htc), bluetooth (qca)
+package "linux-firmware-ath" {
+    files "lib/firmware/ath10k/" \
+          "lib/firmware/ath11k/" \
+          "lib/firmware/ath12k/" \
+          "lib/firmware/ath6k/" \
+          "lib/firmware/ath9k_htc/" \
+          "lib/firmware/ar3k/" \
+          "lib/firmware/qca/"
+}
+
+// Qualcomm SoC firmware (DSP, modem, GPU zap shaders — aarch64 ELF blobs)
+package "linux-firmware-qcom" {
+    files "lib/firmware/qcom/"
+}
+
+// MediaTek: wifi + bluetooth
+package "linux-firmware-mediatek" {
+    files "lib/firmware/mediatek/"
+}
+
+// Nvidia: nouveau GPU + Tegra
+package "linux-firmware-nvidia" {
+    files "lib/firmware/nvidia/"
+}
+
+// Broadcom: wifi + bluetooth (brcm, cypress)
+package "linux-firmware-broadcom" {
+    files "lib/firmware/brcm/" \
+          "lib/firmware/cypress/"
+}
+
+// Everything not claimed above
+package "linux-firmware-misc" {
+    files "lib/firmware/" \
+          "!lib/firmware/intel/" \
+          "!lib/firmware/i915/" \
+          "!lib/firmware/xe/" \
+          "!lib/firmware/amdgpu/" \
+          "!lib/firmware/amd-ucode/" \
+          "!lib/firmware/amd/" \
+          "!lib/firmware/amdnpu/" \
+          "!lib/firmware/amdtee/" \
+          "!lib/firmware/radeon/" \
+          "!lib/firmware/rtw88/" \
+          "!lib/firmware/rtw89/" \
+          "!lib/firmware/rtlwifi/" \
+          "!lib/firmware/rtl_bt/" \
+          "!lib/firmware/rtl_nic/" \
+          "!lib/firmware/realtek/" \
+          "!lib/firmware/ath10k/" \
+          "!lib/firmware/ath11k/" \
+          "!lib/firmware/ath12k/" \
+          "!lib/firmware/ath6k/" \
+          "!lib/firmware/ath9k_htc/" \
+          "!lib/firmware/ar3k/" \
+          "!lib/firmware/qca/" \
+          "!lib/firmware/qcom/" \
+          "!lib/firmware/mediatek/" \
+          "!lib/firmware/nvidia/" \
+          "!lib/firmware/brcm/" \
+          "!lib/firmware/cypress/"
+}
