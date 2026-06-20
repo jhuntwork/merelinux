@@ -1,0 +1,56 @@
+recipe {
+    name "harfbuzz"
+    version "14.1.0"
+    release 1
+    description "A text shaping library"
+    url "https://github.com/harfbuzz/harfbuzz"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "freetype" \
+            "freetype-dev" \
+            "glib-dev" \
+            "libpng" \
+            "libpng-dev" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf" \
+            "zlib-ng-dev"
+}
+
+source "https://github.com/harfbuzz/harfbuzz/releases/download/${recipe.version}/harfbuzz-${recipe.version}.tar.xz" {
+    blake3 "4f2a0c4a7c9175218eda362a5494f848332a8eac4cd83cad3d05a0cd272f2fe2"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddefault_library=both \
+            -Dfreetype=enabled \
+            -Dintrospection=disabled \
+            -Dtests=disabled \
+            -Ddocs=disabled
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "harfbuzz" {
+    files "usr/lib/lib*.so*"
+}
+
+package "harfbuzz-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/cmake/" \
+          "usr/lib/pkgconfig/"
+}
