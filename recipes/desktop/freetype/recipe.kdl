@@ -1,0 +1,51 @@
+recipe {
+    name "freetype"
+    version "2.14.3"
+    release 1
+    description "A freely available software library to render fonts"
+    url "https://freetype.org/"
+    archs "aarch64" "x86_64"
+    licenses "FTL"
+    depends "libpng" \
+            "libpng-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf" \
+            "zlib-ng-dev"
+}
+
+source "https://download.savannah.gnu.org/releases/freetype/freetype-${recipe.version}.tar.xz" {
+    blake3 "0c791e2ea02be6e3cddd6e69ee84d66d869190e5275d8a34e282517769f1192e"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-shared \
+            --enable-static \
+            --with-zlib=yes \
+            --with-png=yes \
+            --with-harfbuzz=yes
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "freetype" {
+    files "usr/lib/lib*.so*"
+}
+
+package "freetype-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/aclocal/"
+}
