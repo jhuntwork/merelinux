@@ -1,12 +1,16 @@
 recipe {
     name "freetype"
     version "2.14.3"
-    release 1
+    release 2
     description "A freely available software library to render fonts"
     url "https://freetype.org/"
     archs "aarch64" "x86_64"
     licenses "FTL"
-    depends "libpng" \
+    depends "freetype" \
+            "freetype-dev" \
+            "harfbuzz" \
+            "harfbuzz-dev" \
+            "libpng" \
             "libpng-dev" \
             "llvm" \
             "make" \
@@ -27,7 +31,8 @@ build {
             --enable-shared \
             --enable-static \
             --with-zlib=yes \
-            --with-png=yes
+            --with-png=yes \
+            --with-harfbuzz=yes
         make
     "#
 }
