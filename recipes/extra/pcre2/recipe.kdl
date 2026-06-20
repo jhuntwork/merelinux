@@ -1,7 +1,7 @@
 recipe {
     name "pcre2"
     version "10.47"
-    release 1
+    release 2
     description "Perl Compatible Regular Expressions"
     url "https://github.com/PCRE2Project/pcre2"
     archs "aarch64" "x86_64"
