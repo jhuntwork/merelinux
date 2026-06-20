@@ -1,0 +1,61 @@
+recipe {
+    name "fontconfig"
+    version "2.16.0"
+    release 1
+    description "Library for configuring and customizing font access"
+    url "https://www.freedesktop.org/wiki/Software/fontconfig/"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "expat-dev" \
+            "freetype" \
+            "freetype-dev" \
+            "gperf" \
+            "libpng" \
+            "libpng-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf" \
+            "python" \
+            "zlib-ng-dev"
+}
+
+source "https://www.freedesktop.org/software/fontconfig/release/fontconfig-${recipe.version}.tar.xz" {
+    blake3 "5c95d48f5b9150f4a06d8acac12c25edaac956007df95a3bf527df02a5908f0e"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-shared \
+            --enable-static \
+            --sysconfdir=/etc \
+            --localstatedir=/var
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "fontconfig" {
+    files "etc/fonts/" \
+          "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/share/fontconfig/" \
+          "usr/share/man/man1/" \
+          "usr/share/man/man5/" \
+          "usr/share/xml/"
+}
+
+package "fontconfig-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/man3/"
+}
