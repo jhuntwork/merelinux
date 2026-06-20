@@ -1,0 +1,63 @@
+recipe {
+    name "libxcrypt"
+    version "4.4.38"
+    release 1
+    description "Modern library for one-way hashing of passwords"
+    url "https://github.com/besser82/libxcrypt"
+    licenses "LGPL-2.1-or-later"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/besser82/libxcrypt/releases/download/v${recipe.version}/libxcrypt-${recipe.version}.tar.xz" {
+    blake3 "71aae5f40ba64d671dcd914c7e3183d0376972262ed7f603e70259eb7804e227"
+}
+
+prepare {
+    script r#"
+        # On musl, compute-symver-floor returns XCRYPT_2.0 which causes
+        # configure to force enable_obsolete_api=0 even when explicitly
+        # requested. This leaves the version map out of sync with the
+        # built symbols. Prevent the override so the build is consistent.
+        sed -i '/XCRYPT_2\.0)/,/;;/{
+            s/enable_obsolete_api=0/:/
+            s/enable_obsolete_api_enosys=0/:/
+            s/enable_compat_suse=0/:/
+            s/COMPAT_API=no/:/
+        }' configure
+    "#
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-static \
+            --enable-hashes=strong,descrypt \
+            --enable-obsolete-api=glibc \
+            --disable-xcrypt-compat-files
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+        find "${DESTDIR}" -name '*.la' -delete
+    "#
+}
+
+package "libxcrypt" {
+    files "usr/lib/lib*.so*"
+}
+
+package "libxcrypt-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/"
+}
