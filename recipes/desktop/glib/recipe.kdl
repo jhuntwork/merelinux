@@ -1,7 +1,7 @@
 recipe {
     name "glib"
     version "2.84.4"
-    release 1
+    release 2
     description "Low-level core library that forms the basis for GTK and GNOME"
     url "https://www.gtk.org/"
     archs "aarch64" "x86_64"
