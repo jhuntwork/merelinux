@@ -7,10 +7,10 @@ recipe {
     url "https://zlib.net/pigz/"
 
     version "2.8"
-    release 1
+    release 2
     licenses "zlib"
 
-    archs "x86_64"  // NOTE not yet tested in aarch64
+    archs "aarch64" "x86_64"
     depends "busybox" "llvm" "make" "musl-dev" "zlib-ng-dev"
     env CFLAGS="-O3 -flto=auto"
 }
