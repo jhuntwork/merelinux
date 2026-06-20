@@ -1,0 +1,50 @@
+recipe {
+    name "gperf"
+    version "3.2"
+    release 1
+    description "A perfect hash function generator"
+    url "https://www.gnu.org/software/gperf/"
+    archs "aarch64" "x86_64"
+    licenses "GPL-3.0"
+    depends "autoconf" \
+            "automake" \
+            "libtool" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "patch"
+}
+
+source "https://github.com/rurban/gperf/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "d7badb4a1b7d590be78989fb7ab14506e48c08a591b25da661102c305c44e3d2"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/gperf-build-tweaks.patch"
+        ./autogen.sh
+    "#
+}
+
+build {
+    script r#"
+        export LDFLAGS="-static -Wl,-static"
+        ./configure --prefix=/usr
+        make
+    "#
+}
+
+install {
+    script r#"
+        mkdir -p build-aux
+        printf '#!/bin/sh\nmkdir -p "$@"\n' > build-aux/mkinstalldirs
+        chmod +x build-aux/mkinstalldirs
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "gperf" {
+    files "usr/bin/"
+}
