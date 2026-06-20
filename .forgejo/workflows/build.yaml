@@ -55,7 +55,7 @@ jobs:
     runs-on: docker
     container:
       image: mere/ci:v0.13.2
-      options: --privileged
+      options: --privileged --cpus=8 --memory=12g
     env:
       MERE_NO_HARDEN: "1"
       MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
@@ -117,7 +117,7 @@ jobs:
     runs-on: docker-aarch64
     container:
       image: mere/ci:v0.13.2
-      options: --privileged
+      options: --privileged --cpus=8 --memory=12g
     env:
       MERE_NO_HARDEN: "1"
       MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
