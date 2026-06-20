@@ -10,6 +10,8 @@ recipe {
             "freetype" \
             "freetype-dev" \
             "gperf" \
+            "harfbuzz" \
+            "harfbuzz-dev" \
             "libpng" \
             "libpng-dev" \
             "llvm" \
