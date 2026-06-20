@@ -1,7 +1,7 @@
 recipe {
     name "musl"
     version "1.2.6"
-    release 1
+    release 2
     description "An implementation of the C/POSIX standard library"
     url "https://musl.libc.org"
     licenses "LGPL" "BSD"
@@ -66,5 +66,7 @@ package "musl" {
 package "musl-dev" {
     files "usr/include/" \
           "lib/*.a" \
-          "lib/*.o"
+          "lib/*.o" \
+          "!usr/include/crypt.h" \
+          "!lib/libcrypt.a"
 }
