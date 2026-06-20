@@ -1,0 +1,61 @@
+--- gperf-3.2.orig/Makefile.devel
++++ gperf-3.2/Makefile.devel
+@@ -6,7 +6,7 @@
+ 
+ all : configures src/config.h.in
+ 
+-CONFIGURES = configure lib/configure src/configure tests/configure doc/configure
++CONFIGURES = configure lib/configure src/configure tests/configure 
+ 
+ configures : $(CONFIGURES)
+ 
+@@ -21,9 +21,6 @@
+ 
+ tests/configure : tests/configure.ac aclocal.m4
+ 	cd tests && autoconf -I .. && rm -rf autom4te.cache
+-
+-doc/configure : doc/configure.ac aclocal.m4
+-	cd doc && autoconf -I .. && rm -rf autom4te.cache
+ 
+ check-configures : $(CONFIGURES)
+ 	set -e; for f in $(CONFIGURES); do bash -x -n $$f; done
+--- gperf-3.2.orig/autogen.sh
++++ gperf-3.2/autogen.sh
+@@ -34,7 +34,7 @@
+   if test -n "$GNULIB_TOOL"; then
+     $GNULIB_TOOL --copy-file $file $file
+   else
+-    wget -q --timeout=5 -O $file.tmp "${GNULIB_REPO_URL}$file" \
++    curl -L -o $file.tmp "${GNULIB_REPO_URL}$file" \
+       && mv $file.tmp $file
+   fi
+ done
+--- gperf-3.2.orig/configure.ac
++++ gperf-3.2/configure.ac
+@@ -21,7 +21,6 @@
+ 
+ AC_PREREQ([2.64])
+ AC_INIT
+-AC_CONFIG_SRCDIR([doc/gperf.texi])
+ AC_CONFIG_AUX_DIR([build-aux])
+ 
+ AC_PROG_MAKE_SET
+@@ -30,7 +29,7 @@
+ 
+ AC_CONFIG_FILES([Makefile])
+ 
+-AC_CONFIG_SUBDIRS([lib src tests doc])
++AC_CONFIG_SUBDIRS([lib src tests])
+ 
+ dnl This piece of sed script replaces every line containing '@subdir@'
+ dnl by several consecutive lines, each referencing one subdir.
+@@ -45,9 +44,6 @@
+ p
+ g
+ s/@subdir@/tests/
+-p
+-g
+-s/@subdir@/doc/
+ p
+ d
+ }
