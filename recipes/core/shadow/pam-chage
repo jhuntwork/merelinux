@@ -1,0 +1,7 @@
+# Begin /etc/pam.d/chage
+
+auth      sufficient  pam_rootok.so
+auth      include     system-auth
+account   include     system-account
+
+# End /etc/pam.d/chage

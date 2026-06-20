@@ -1,0 +1,120 @@
+recipe {
+    name "shadow"
+    version "4.19.4"
+    release 1
+    description "Password and user account management tool suite"
+    url "https://github.com/shadow-maint/shadow"
+    licenses "BSD-3-Clause"
+    archs "aarch64" "x86_64"
+    needs-root true
+    depends "libxcrypt" \
+            "libxcrypt-dev" \
+            "linux-pam" \
+            "linux-pam-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf" \
+            "skalibs-dev" \
+            "utmps-dev"
+}
+
+source "https://github.com/shadow-maint/shadow/releases/download/${recipe.version}/shadow-${recipe.version}.tar.xz" {
+    blake3 "9855e4cd94967773b5ec9b12487a2a22c06760e512375c8763749b6b0ba6d488"
+}
+source "pam-chage" {
+    blake3 "dfe189a966004f81360168b1657f2af6ed17ce4c36d35b8cd3561c19bd90e1ee"
+}
+source "pam-chpasswd" {
+    blake3 "30ac7d6d958f047c0a2bcfeca592ddb337fc731e34db79b8f015064528b9bd35"
+}
+source "pam-login" {
+    blake3 "4d70deeb4a93566b050817c30625cfe7d38ebcfbd9ba8455c81ad3dc4fe17b45"
+}
+source "pam-passwd" {
+    blake3 "990be5a2844561fd74f70f925f8f4c513b966fcd3d3f86def3b9aa73e8859d8d"
+}
+source "pam-su" {
+    blake3 "cf4cc1c0c42dffda082a401095ff7b2dad8e191206bf191ca779eaacfd29ec0c"
+}
+
+prepare {
+    script r#"
+        # Disable unportable ruserok() on musl
+        sed '/RUSEROK/d' -i configure
+
+        # Remove groups — busybox provides it
+        sed -i 's/groups$(EXEEXT) //' src/Makefile.in
+        find man -name Makefile.in -exec sed -i 's/groups\.1 / /' {} \;
+        find man -name Makefile.in -exec sed -i 's/getspnam\.3 / /' {} \;
+        find man -name Makefile.in -exec sed -i 's/passwd\.5 / /'   {} \;
+
+        # Use YESCRYPT, fix mail dir, clean PATH
+        sed -e 's:#ENCRYPT_METHOD DES:ENCRYPT_METHOD YESCRYPT:' \
+            -e 's:/var/spool/mail:/var/mail:'                   \
+            -e '/PATH=/{s@/sbin:@@;s@/bin:@@}'                  \
+            -i etc/login.defs
+    "#
+}
+
+build {
+    script r#"
+        LIBS='-lutmps -lskarnet' \
+        ./configure \
+            --sysconfdir=/etc \
+            --disable-static \
+            --with-libpam \
+            --with-bcrypt \
+            --with-yescrypt \
+            --without-libbsd \
+            --without-selinux \
+            --disable-logind \
+            --enable-subordinate-ids \
+            --with-group-name-max-length=32
+        make
+    "#
+}
+
+install {
+    script r#"
+        make exec_prefix=/usr pamddir= DESTDIR="$DESTDIR" install
+        make -C man DESTDIR="$DESTDIR" install-man
+        find "${DESTDIR}" -name '*.la' -delete
+
+        # Install PAM config files
+        install -d "${DESTDIR}/etc/pam.d"
+        install -m 0644 "${MERE_SOURCES_DIR}/pam-login"    "${DESTDIR}/etc/pam.d/login"
+        install -m 0644 "${MERE_SOURCES_DIR}/pam-passwd"   "${DESTDIR}/etc/pam.d/passwd"
+        install -m 0644 "${MERE_SOURCES_DIR}/pam-su"       "${DESTDIR}/etc/pam.d/su"
+        install -m 0644 "${MERE_SOURCES_DIR}/pam-chpasswd" "${DESTDIR}/etc/pam.d/chpasswd"
+        install -m 0644 "${MERE_SOURCES_DIR}/pam-chage"    "${DESTDIR}/etc/pam.d/chage"
+
+        # Reuse chage PAM config for other admin tools
+        for prog in chfn chgpasswd chsh groupadd groupdel \
+                    groupmems groupmod newusers useradd userdel usermod; do
+            install -m 0644 "${DESTDIR}/etc/pam.d/chage" "${DESTDIR}/etc/pam.d/${prog}"
+        done
+
+        # newusers gets same config as chpasswd
+        install -m 0644 "${DESTDIR}/etc/pam.d/chpasswd" "${DESTDIR}/etc/pam.d/newusers"
+
+        # Remove logoutd (deprecated upstream, removed next release)
+        rm -f "${DESTDIR}/usr/sbin/logoutd"
+        rm -f "${DESTDIR}/usr/share/man/man8/logoutd.8"
+    "#
+}
+
+package "shadow" {
+    files "etc/login.defs" \
+          "etc/pam.d/" \
+          "usr/bin/" \
+          "usr/sbin/" \
+          "usr/share/man/man1/" \
+          "usr/share/man/man5/" \
+          "usr/share/man/man8/"
+}
+
+package "libsubid" {
+    files "usr/lib/lib*.so*"
+}

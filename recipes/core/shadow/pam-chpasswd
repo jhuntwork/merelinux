@@ -1,0 +1,8 @@
+# Begin /etc/pam.d/chpasswd
+
+auth      sufficient  pam_rootok.so
+auth      include     system-auth
+account   include     system-account
+password  include     system-password
+
+# End /etc/pam.d/chpasswd
