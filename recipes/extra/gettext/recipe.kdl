@@ -1,0 +1,42 @@
+recipe {
+    name "gettext"
+    version "1.0"
+    release 1
+    description "A framework for producing multi-lingual messages"
+    url "http://www.gnu.org/software/gettext"
+    licenses "GPL3"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "http://ftp.gnu.org/gnu/gettext/gettext-${recipe.version}.tar.xz" {
+    blake3 "3e078bfd2ff16d66f1b87d3f0e60b84c117da7e95a57a211eaa7a240b0ff1515"
+}
+
+build {
+    script r#"
+        ./configure --prefix=/usr \
+            --enable-static \
+            --disable-shared
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "gettext" {
+    files "usr/bin/" \
+          "usr/libexec/" \
+          "usr/share/aclocal/" \
+          "usr/share/gettext/" \
+          "usr/share/gettext-1.0/" \
+          "usr/share/man/man1/"
+}
