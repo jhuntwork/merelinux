@@ -1,7 +1,7 @@
 recipe {
     name "shadow"
     version "4.19.4"
-    release 1
+    release 2
     description "Password and user account management tool suite"
     url "https://github.com/shadow-maint/shadow"
     licenses "BSD-3-Clause"
