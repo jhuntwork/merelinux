@@ -27,8 +27,7 @@ build {
             --enable-shared \
             --enable-static \
             --with-zlib=yes \
-            --with-png=yes \
-            --with-harfbuzz=yes
+            --with-png=yes
         make
     "#
 }
