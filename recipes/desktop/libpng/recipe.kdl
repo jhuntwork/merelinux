@@ -1,0 +1,58 @@
+recipe {
+    name "libpng"
+    version "1.6.56"
+    release 2
+    description "The official PNG reference library"
+    url "http://www.libpng.org/pub/png/libpng.html"
+    archs "aarch64" "x86_64"
+    licenses "PNG"
+    depends "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "patch" \
+            "zlib-ng-dev"
+}
+
+source "https://download.sourceforge.net/libpng/libpng-${recipe.version}.tar.xz" {
+    blake3 "21bd8e4a8ce10065a341a2165269055482dc392dd70a8a5013bbd987d84dc394"
+}
+
+source "https://downloads.sourceforge.net/sourceforge/libpng-apng/libpng-${recipe.version}-apng.patch.gz" {
+    blake3 "8cf844d2b15cd5257bc72344521ec3b6468075e539c5ecbf3751b272181526ee"
+}
+
+prepare {
+    script r#"
+        gzip -d "${MERE_SOURCES_DIR}/libpng-${recipe.version}-apng.patch.gz"
+        patch -p1 -i "${MERE_SOURCES_DIR}/libpng-${recipe.version}-apng.patch"
+    "#
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-shared \
+            --enable-static
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "libpng" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*"
+}
+
+package "libpng-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/man3/"
+}
