@@ -1,4 +1,0 @@
-# Maintainer: Jeremy Huntwork <jhuntwork@lightcubesolutions.com>
-source PKGBUILD
-pkgname=(linux-headers)
-pkgbase=linux
