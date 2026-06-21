@@ -1,0 +1,103 @@
+recipe {
+    name "mesa"
+    version "26.0.3"
+    release 1
+    description "OpenGL compatible 3D graphics library"
+    url "https://mesa3d.org"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "bison" \
+            "ca-certs" \
+            "expat-dev" \
+            "flex" \
+            "glslang" \
+            "glslang-dev" \
+            "libdrm-dev" \
+            "libelf-dev" \
+            "libffi-dev" \
+            "libpciaccess-dev" \
+            "libudev-zero-dev" \
+            "linux-headers" \
+            "llvm" \
+            "llvm-dev" \
+            "libllvm" \
+            "m4" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf" \
+            "python" \
+            "rust" \
+            "spirv-llvm-translator-dev" \
+            "spirv-tools" \
+            "spirv-tools-dev" \
+            "wayland" \
+            "wayland-dev" \
+            "wayland-protocols-dev" \
+            "zlib-ng-dev"
+    env LIBCLANG_PATH="/usr/lib"
+}
+
+source "http://mesa.freedesktop.org/archive/mesa-${recipe.version}.tar.xz" {
+    blake3 "8c285c37412c987a9da58c9fe617887e36ca2b819eeb1d8e143f95c916b32590"
+}
+
+prepare {
+    script r#"
+        pip install mako packaging pyyaml
+        cargo install bindgen-cli cbindgen
+        mkdir custom
+        cat > custom/llvm-config <<'EOF'
+#!/bin/sh
+for arg in "$@"; do
+    case "$arg" in
+        --prefix) echo /usr; exit 0 ;;
+        --bindir) echo /usr/bin; exit 0 ;;
+        --libdir) echo /usr/lib; exit 0 ;;
+        --includedir) echo /usr/include; exit 0 ;;
+    esac
+done
+exec /usr/bin/llvm-config "$@"
+EOF
+        chmod +x custom/llvm-config
+    "#
+}
+
+build {
+    script r#"
+        export PATH="$(pwd)/.cargo/bin:$(pwd)/custom:${PATH}"
+        ln -s certs/ca-certificates.crt /etc/ssl/cert.pem
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Dplatforms=wayland \
+            -Degl-native-platform=wayland \
+            -Degl=enabled \
+            -Dopengl=true \
+            -Dgles1=enabled \
+            -Dgles2=enabled \
+            -Dglx=disabled \
+            -Dglvnd=disabled \
+            -Dgallium-drivers=auto \
+            -Dvulkan-drivers=auto
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "mesa" {
+    files "usr/lib/gbm/" \
+          "usr/lib/lib*.so*" \
+          "usr/share/"
+}
+
+package "mesa-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}
