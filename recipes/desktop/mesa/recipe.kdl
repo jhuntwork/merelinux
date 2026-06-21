@@ -1,7 +1,7 @@
 recipe {
     name "mesa"
     version "26.0.3"
-    release 2
+    release 3
     description "OpenGL compatible 3D graphics library"
     url "https://mesa3d.org"
     archs "aarch64" "x86_64"
@@ -62,6 +62,7 @@ done
 exec /usr/bin/llvm-config "$@"
 EOF
         chmod +x custom/llvm-config
+        ln -s /usr/bin/clang-cpp custom/cpp
     "#
 }
 
