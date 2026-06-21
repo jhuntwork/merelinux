@@ -1,0 +1,53 @@
+recipe {
+    name "seatd"
+    version "0.9.3"
+    release 2
+    description "A minimal seat management daemon"
+    url "https://git.sr.ht/~kennylevinsen/seatd"
+    licenses "MIT"
+    archs "aarch64" "x86_64"
+    depends "linux-headers" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja"
+}
+
+source "https://git.sr.ht/~kennylevinsen/seatd/archive/${recipe.version}.tar.gz" {
+    blake3 "c1653dc2766e90c1fa606869f527085d939e13a84369bfad0f6762deeada152c"
+}
+
+build {
+    script r#"
+        export CFLAGS="$CFLAGS -fPIC -static"
+        sed -i -e '/lib = library/s@library@static_library@' \
+               -e '/libseat_soversion/d' meson.build
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dlibdir=/usr/lib \
+            -Dwerror=false
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "seatd" {
+    files "usr/bin/"
+
+    service "seatd" {
+        type "daemon"
+        command "/usr/bin/seatd" "-g" "video"
+    }
+}
+
+package "libseat-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
