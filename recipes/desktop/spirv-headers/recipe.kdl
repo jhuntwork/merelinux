@@ -1,0 +1,38 @@
+recipe {
+    name "spirv-headers"
+    version "1.4.341.0"
+    release 1
+    description "SPIR-V Headers from the Khronos Group"
+    url "https://github.com/KhronosGroup/SPIRV-Headers"
+    archs "aarch64" "x86_64"
+    licenses "MIT" "CC-BY-4.0"
+    depends "cmake" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja"
+}
+
+source "https://github.com/KhronosGroup/SPIRV-Headers/archive/refs/tags/vulkan-sdk-${recipe.version}.tar.gz" {
+    blake3 "9fcacf7be83a830cf97d52949afff125a36db15b486755e88f21b5f840bc3abc"
+}
+
+build {
+    script r#"
+        cmake -B build -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_BUILD_TYPE=Release
+        ninja -C build
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build install
+    "#
+}
+
+package "spirv-headers" {
+    files "usr/include/" \
+          "usr/share/"
+}
