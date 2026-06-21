@@ -1,0 +1,69 @@
+recipe {
+    name "wlroots"
+    version "0.20.0"
+    release 1
+    description "A modular Wayland compositor library"
+    url "https://gitlab.freedesktop.org/wlroots/wlroots"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "glslang" \
+            "glslang-dev" \
+            "hwdata" \
+            "libdrm-dev" \
+            "libffi-dev" \
+            "libdisplay-info" \
+            "libdisplay-info-dev" \
+            "libinput-dev" \
+            "libseat-dev" \
+            "libudev-zero-dev" \
+            "libxkbcommon" \
+            "libxkbcommon-dev" \
+            "linux-headers" \
+            "llvm" \
+            "mesa" \
+            "mesa-dev" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pixman-dev" \
+            "pkgconf" \
+            "wayland" \
+            "wayland-dev" \
+            "wayland-protocols-dev" \
+            "vulkan-headers" \
+            "vulkan-loader" \
+            "vulkan-loader-dev"
+}
+
+source "https://gitlab.freedesktop.org/wlroots/wlroots/-/releases/${recipe.version}/downloads/wlroots-${recipe.version}.tar.gz" {
+    blake3 "3d565ea483b5a9785fa0766be51bd8e3576850abda14d4790b166d55a0932efa"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Dbackends=drm,libinput \
+            -Drenderers=gles2,vulkan \
+            -Dxwayland=disabled \
+            -Dexamples=false
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build/ install
+    "#
+}
+
+package "wlroots" {
+    files "usr/lib/lib*.so*"
+}
+
+package "wlroots-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}
