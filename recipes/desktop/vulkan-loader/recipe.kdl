@@ -1,0 +1,51 @@
+recipe {
+    name "vulkan-loader"
+    version "1.4.348"
+    release 1
+    description "Vulkan ICD loader library"
+    url "https://github.com/KhronosGroup/Vulkan-Loader"
+    archs "aarch64" "x86_64"
+    licenses "Apache"
+    depends "cmake" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf" \
+            "python" \
+            "vulkan-headers" \
+            "wayland-dev"
+}
+
+source "https://github.com/KhronosGroup/Vulkan-Loader/archive/refs/tags/v${recipe.version}.tar.gz" {
+    save-as "vulkan-loader-v${recipe.version}.tar.gz"
+    blake3 "26033b320ba37cb17ab715dd1e77473cd7c59855ad5748954cd5bb413b36e24a"
+}
+
+build {
+    script r#"
+        cmake -B build -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_WSI_XCB_SUPPORT=OFF \
+            -DBUILD_WSI_XLIB_SUPPORT=OFF \
+            -DVULKAN_HEADERS_INSTALL_DIR=/usr
+        ninja -C build
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build install
+    "#
+}
+
+package "vulkan-loader" {
+    files "usr/lib/lib*.so*"
+}
+
+package "vulkan-loader-dev" {
+    files "usr/lib/cmake/" \
+          "usr/lib/pkgconfig/"
+}
