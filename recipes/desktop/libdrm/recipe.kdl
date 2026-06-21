@@ -1,7 +1,7 @@
 recipe {
     name "libdrm"
     version "2.4.131"
-    release 3
+    release 4
     description "Direct Rendering Manager library and headers"
     url "https://gitlab.freedesktop.org/mesa/drm"
     archs "aarch64" "x86_64"
