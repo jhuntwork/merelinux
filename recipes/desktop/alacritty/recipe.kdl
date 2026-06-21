@@ -1,0 +1,48 @@
+recipe {
+    name "alacritty"
+    version "0.17.0"
+    release 1
+    description "A fast, cross-platform, OpenGL terminal emulator"
+    url "https://alacritty.org"
+    archs "aarch64" "x86_64"
+    licenses "Apache-2.0" "MIT"
+    depends "cmake" \
+            "expat-dev" \
+            "fontconfig" \
+            "fontconfig-dev" \
+            "freetype-dev" \
+            "harfbuzz-dev" \
+            "libpng-dev" \
+            "libxkbcommon-dev" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf" \
+            "python" \
+            "rust" \
+            "wayland-dev" \
+            "wayland-protocols-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://github.com/alacritty/alacritty/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "0926898a562f6e21234b6b05dc52ea6060e62d94aab01ae878bc2cdae7e24e97"
+}
+
+build {
+    script r#"
+        cargo build --release --locked --no-default-features --features=wayland
+    "#
+}
+
+install {
+    script r#"
+        install -Dm755 target/release/alacritty "${DESTDIR}/usr/bin/alacritty"
+        install -Dm644 extra/linux/Alacritty.desktop "${DESTDIR}/usr/share/applications/Alacritty.desktop"
+    "#
+}
+
+package "alacritty" {
+    files "usr/bin/" \
+          "usr/share/applications/"
+}
