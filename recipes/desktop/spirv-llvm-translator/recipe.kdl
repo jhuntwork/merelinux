@@ -1,0 +1,61 @@
+recipe {
+    name "spirv-llvm-translator"
+    version "21.1.6"
+    release 1
+    description "LLVM/SPIR-V Bi-Directional Translator"
+    url "https://github.com/KhronosGroup/SPIRV-LLVM-Translator"
+    archs "aarch64" "x86_64"
+    licenses "Apache"
+    depends "cmake" \
+            "llvm" \
+            "llvm-dev" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "spirv-headers" \
+            "spirv-tools" \
+            "spirv-tools-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://github.com/KhronosGroup/SPIRV-LLVM-Translator/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "b73cf5df1881cfb2935858cca82d48e12064979193ed59cd385be68baeac1c3b"
+}
+
+prepare {
+    script r#"
+        mkdir -p custom/llvm
+        cp /usr/lib/cmake/llvm/* custom/llvm/
+        sed -i '/^get_filename_component(_IMPORT_PREFIX.*CMAKE_CURRENT_LIST_FILE/,/^if(_IMPORT_PREFIX STREQUAL/c\set(_IMPORT_PREFIX "/usr")' custom/llvm/LLVMExports.cmake
+        sed -i '/^get_filename_component(LLVM_INSTALL_PREFIX/d' custom/llvm/LLVMConfig.cmake
+        sed -i '3a\set(LLVM_INSTALL_PREFIX "/usr")' custom/llvm/LLVMConfig.cmake
+    "#
+}
+
+build {
+    script r#"
+        cmake -B build -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_SHARED_LIBS=OFF \
+            -DLLVM_DIR="$(pwd)/custom/llvm" \
+            -DLLVM_EXTERNAL_SPIRV_HEADERS_SOURCE_DIR=/usr
+        ninja -C build
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" ninja -C build install
+    "#
+}
+
+package "spirv-llvm-translator" {
+    files "usr/bin/"
+}
+
+package "spirv-llvm-translator-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
