@@ -1,0 +1,45 @@
+recipe {
+    name "libdisplay-info"
+    version "0.3.0"
+    release 1
+    description "EDID and DisplayID library"
+    url "https://gitlab.freedesktop.org/emersion/libdisplay-info"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "hwdata" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf"
+}
+
+source "https://gitlab.freedesktop.org/emersion/libdisplay-info/-/releases/${recipe.version}/downloads/libdisplay-info-${recipe.version}.tar.xz" {
+    blake3 "37a2cdab9c39c1ddb4db7b6cd77660c7dc2ba5a36b70bdce9c0f069a96d82e4d"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "libdisplay-info" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*"
+}
+
+package "libdisplay-info-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}
