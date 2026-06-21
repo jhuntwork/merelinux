@@ -1,0 +1,37 @@
+recipe {
+    name "pycparser"
+    version "3.0"
+    release 1
+    description "A complete parser for the C language, written in pure Python"
+    url "https://github.com/eliben/pycparser"
+    licenses "BSD-3-Clause"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "python"
+}
+
+source "https://files.pythonhosted.org/packages/source/p/pycparser/pycparser-${recipe.version}.tar.gz" {
+    blake3 "b48726028171947cededdd5d7606ad249ad5a499f30a11411fb8eb10bdba629c"
+}
+
+check {
+    script r#"
+        python -c 'from pycparser import c_parser; c_parser.CParser().parse("int main(void) { return 0; }")'
+    "#
+}
+
+install {
+    script r#"
+        site_packages="$(python -c 'import sysconfig; print(sysconfig.get_path("purelib", vars={"base": "/usr", "platbase": "/usr"}))')"
+        install -d "${DESTDIR}${site_packages}"
+        cp -a pycparser "${DESTDIR}${site_packages}/"
+        cp -a pycparser.egg-info "${DESTDIR}${site_packages}/"
+        find "${DESTDIR}" -name "*.pyc" -delete
+        find "${DESTDIR}" -type d -name __pycache__ -exec rm -rf '{}' +
+    "#
+}
+
+package "pycparser" {
+    strip false
+    files "usr/lib/"
+}
