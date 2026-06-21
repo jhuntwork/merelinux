@@ -1,7 +1,7 @@
 recipe {
     name "libdrm"
     version "2.4.131"
-    release 2
+    release 3
     description "Direct Rendering Manager library and headers"
     url "https://gitlab.freedesktop.org/mesa/drm"
     archs "aarch64" "x86_64"
@@ -13,6 +13,7 @@ recipe {
             "mimalloc-dev" \
             "musl-dev" \
             "ninja" \
+            "pkgconf" \
             "python"
 }
 
@@ -25,6 +26,7 @@ build {
         meson setup build/ \
             -Dprefix=/usr \
             -Dbuildtype=release \
+            -Dintel=enabled \
             -Dtests=false \
             -Dcairo-tests=disabled \
             -Dman-pages=disabled \
