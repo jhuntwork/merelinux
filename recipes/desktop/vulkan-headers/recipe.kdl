@@ -1,0 +1,39 @@
+recipe {
+    name "vulkan-headers"
+    version "1.4.348"
+    release 1
+    description "Vulkan header files and API registry"
+    url "https://github.com/KhronosGroup/Vulkan-Headers"
+    archs "aarch64" "x86_64"
+    licenses "Apache" "MIT"
+    depends "cmake" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja"
+}
+
+source "https://github.com/KhronosGroup/Vulkan-Headers/archive/refs/tags/v${recipe.version}.tar.gz" {
+    save-as "vulkan-headers-v${recipe.version}.tar.gz"
+    blake3 "dd316799020d0d52bd7152240e9feb4cfc0d680cb7b2ffc157b87af1dc03b49f"
+}
+
+build {
+    script r#"
+        cmake -B build -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_BUILD_TYPE=Release
+        ninja -C build
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build install
+    "#
+}
+
+package "vulkan-headers" {
+    files "usr/include/" \
+          "usr/share/"
+}
