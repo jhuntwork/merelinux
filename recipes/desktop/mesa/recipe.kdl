@@ -1,7 +1,7 @@
 recipe {
     name "mesa"
     version "26.0.3"
-    release 1
+    release 2
     description "OpenGL compatible 3D graphics library"
     url "https://mesa3d.org"
     archs "aarch64" "x86_64"
@@ -27,6 +27,7 @@ recipe {
             "musl-dev" \
             "ninja" \
             "pkgconf" \
+            "pycparser" \
             "python" \
             "rust" \
             "spirv-llvm-translator-dev" \
