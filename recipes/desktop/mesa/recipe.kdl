@@ -1,7 +1,7 @@
 recipe {
     name "mesa"
     version "26.0.3"
-    release 4
+    release 5
     description "OpenGL compatible 3D graphics library"
     url "https://mesa3d.org"
     archs "aarch64" "x86_64"
@@ -17,6 +17,8 @@ recipe {
             "libffi-dev" \
             "libpciaccess-dev" \
             "libudev-zero-dev" \
+            "libxml2" \
+            "libxml2-dev" \
             "linux-headers" \
             "llvm" \
             "llvm-dev" \
