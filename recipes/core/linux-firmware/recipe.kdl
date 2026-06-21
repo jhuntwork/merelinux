@@ -1,7 +1,7 @@
 recipe {
     name "linux-firmware"
-    version "20260309"
-    release 2
+    version "20260519"
+    release 1
     description "Firmware files for Linux kernel drivers"
     url "https://gitlab.com/kernel-firmware/linux-firmware"
     licenses "mixed-redistributable"
@@ -10,7 +10,7 @@ recipe {
 }
 
 source "https://gitlab.com/kernel-firmware/linux-firmware/-/archive/${recipe.version}/linux-firmware-${recipe.version}.tar.gz" {
-    blake3 "21a82e50fbb6fc023cec8bdee9f3b2a4c82d39e18c0f5f18e3f99ffc2e910865"
+    blake3 "925f63754e11f4f0179de2121a71fee706f985feb87aa487b047979c8898c2cb"
 }
 
 install {
