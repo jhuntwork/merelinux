@@ -1,0 +1,49 @@
+recipe {
+    name "spirv-tools"
+    version "2026.1"
+    release 1
+    description "SPIR-V Tools - assembler, disassembler, validator, and optimizer"
+    url "https://github.com/KhronosGroup/SPIRV-Tools"
+    archs "aarch64" "x86_64"
+    licenses "Apache"
+    depends "cmake" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "python" \
+            "spirv-headers"
+}
+
+source "https://github.com/KhronosGroup/SPIRV-Tools/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "07f13b418b6ed70a3a2962fad60741c9329c12d30ad425f8517500d71e9a809a"
+}
+
+build {
+    script r#"
+        cmake -B build -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DSPIRV-Headers_SOURCE_DIR=/usr
+        ninja -C build
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build install
+    "#
+}
+
+package "spirv-tools" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*"
+}
+
+package "spirv-tools-dev" {
+    files "usr/include/" \
+          "usr/lib/cmake/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
