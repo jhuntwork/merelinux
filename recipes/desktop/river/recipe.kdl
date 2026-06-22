@@ -1,0 +1,50 @@
+recipe {
+    name "river"
+    version "0.5.0~dev"
+    release 1
+    description "A non-monolithic Wayland compositor"
+    url "https://codeberg.org/river/river"
+    archs "aarch64" "x86_64"
+    licenses "GPL3"
+    depends "libdrm-dev" \
+            "libevdev-dev" \
+            "libffi-dev" \
+            "libinput-dev" \
+            "libxkbcommon-dev" \
+            "libudev-zero-dev" \
+            "libdisplay-info-dev" \
+            "libseat-dev" \
+            "libxkbcommon" \
+            "libxkbcommon-dev" \
+            "mesa-dev" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pixman-dev" \
+            "pkgconf" \
+            "vulkan-loader-dev" \
+            "wayland" \
+            "wayland-dev" \
+            "wayland-protocols-dev" \
+            "wlroots" \
+            "wlroots-dev" \
+            "zig=0.16.0"
+}
+
+source "https://codeberg.org/river/river/archive/main.tar.gz" {
+    blake3 "98b906a6acfe4a164eda2fe5c719ff2265e528962c2a8a43f6af8ec04a060e8e"
+}
+
+install {
+    script r#"
+        zig build \
+            -Doptimize=ReleaseSafe \
+            -Dcpu=baseline \
+            --prefix /usr \
+            install
+    "#
+}
+
+package "river" {
+    files "usr/bin/" \
+          "usr/share/"
+}
