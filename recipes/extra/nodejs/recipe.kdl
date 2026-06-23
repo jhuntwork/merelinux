@@ -1,6 +1,6 @@
 recipe {
     name "nodejs"
-    version "24.14.1"
+    version "24.17.0"
     release 1
     description "A JavaScript runtime"
     url "https://nodejs.org"
@@ -16,12 +16,12 @@ recipe {
 }
 
 source "https://nodejs.org/dist/v${recipe.version}/node-v${recipe.version}.tar.xz" {
-    blake3 "d5bb3cdbb559c29adaea792faf1e4650f200056ea957b1245aca2208b0a39e2e"
+    blake3 "7945eb44a96a664dcf8abe133789cbb1685c29f892107cd12cb0dab82bc9b138"
 }
 
 prepare {
     script r#"
-        sed -i 's/-latomic//' node.gyp
+        sed -i "/'[^']*-latomic[^']*'/d" node.gyp tools/v8_gypfiles/v8.gyp
     "#
 }
 
@@ -31,7 +31,7 @@ build {
         ./configure --prefix=/usr \
             --shared-zlib \
             --shared-openssl \
-            --with-intl=none \
+            --with-intl=full-icu \
             --without-report \
             --without-node-snapshot \
             --without-node-code-cache \
@@ -42,10 +42,18 @@ build {
 
 install {
     script r#"
-        tools/install.py install "$DESTDIR" /usr
+        tools/install.py install --dest-dir "$DESTDIR" --prefix /usr
+        find "$DESTDIR" -iname "*.ps1" -delete
     "#
 }
 
 package "nodejs" {
-    files "usr/bin/"
+    files "usr/bin/" \
+          "usr/lib/node_modules/" \
+          "usr/share/doc/node/" \
+          "usr/share/man/"
+}
+
+package "nodejs-dev" {
+    files "usr/include/"
 }
