@@ -1,0 +1,43 @@
+recipe {
+    name "tmux"
+    version "3.7"
+    release 1
+    description "A terminal multiplexer"
+    url "https://github.com/tmux/tmux"
+    archs "aarch64" "x86_64"
+    licenses "BSD"
+    depends "bison" \
+            "busybox" \
+            "libevent-dev" \
+            "libncurses-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/tmux/tmux/releases/download/${recipe.version}/tmux-${recipe.version}.tar.gz" {
+    blake3 "3bcd254d42cd0d40a0e6556c655e89c56656d393356978eb9f4bba54ba5ac243"
+}
+
+build {
+    script r#"
+        CFLAGS="$CFLAGS -fPIC" \
+            LDFLAGS="$LDFLAGS --static" \
+            ./configure \
+            --prefix=/usr \
+            --enable-static
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "tmux" {
+    files "usr/bin/tmux" \
+          "usr/share/man/man1/tmux.1"
+}
