@@ -1,0 +1,54 @@
+// aports author:
+//   Contributor: Sean McAvoy <seanmcavoy@gmail.com>
+//   Maintainer: Sean McAvoy <seanmcavoy@gmail.com>
+//
+// converted from the apkbuild by oryktos <https://codeberg.org/oryktos>
+
+recipe {
+    name "py3-installer"
+    version "1.0.0"
+    release 0
+    description "Low-level library for installing from a Python wheel distribution"
+    url "https://github.com/pypa/installer"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "python"
+}
+
+source "https://files.pythonhosted.org/packages/py3/i/installer/installer-${recipe.version}-py3-none-any.whl" {
+    blake3 "124742855dc74d32e0aa59075d4604692e21f84b5a085a44c927a90aa85f1a5f"
+}
+
+// NOTE is this used?  how?
+// source "default-bytecode-levels.patch" {
+//     blake3 "8d93b38e8b441cfac476787bd834230c9dfb59f23ab6a4927ea127e07ad0a254"
+// }
+
+prepare {
+    script r#"
+        ## aports comment:
+        # we have to use the wheel because py3-installer is the base to
+        # be able to install generated wheels, so we don't have it when
+        # building it itself
+        mkdir -p "${MERE_BUILD_DIR}"
+        unzip -d "${MERE_BUILD_DIR}" "${MERE_SOURCES_DIR}"/installer-${recipe.version}-py3-none-any.whl
+    "#
+}
+
+install {
+    script r#"
+        sitedir="$(python3 -c 'import site;print(site.getsitepackages()[0])')"
+
+        ## NOTE hack to get the final usr/lib/python3.14/site-packages
+        ## part; trying to avoid hard-coding the Python minor version
+        sd="$(echo "${sitedir}" | cut -d/ -f5-)"
+
+        mkdir -p "${DESTDIR}/${sd}"
+        cp -a installer* "${DESTDIR}/${sd}"
+        python3 -m compileall "${DESTDIR}/${sd}"
+    "#
+}
+
+package "py3-installer" {
+    files "usr/lib/"
+}
