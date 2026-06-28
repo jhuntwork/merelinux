@@ -19,11 +19,6 @@ source "https://files.pythonhosted.org/packages/py3/i/installer/installer-${reci
     blake3 "124742855dc74d32e0aa59075d4604692e21f84b5a085a44c927a90aa85f1a5f"
 }
 
-// NOTE is this used?  how?
-// source "default-bytecode-levels.patch" {
-//     blake3 "8d93b38e8b441cfac476787bd834230c9dfb59f23ab6a4927ea127e07ad0a254"
-// }
-
 prepare {
     script r#"
         ## aports comment:
