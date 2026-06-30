@@ -5,7 +5,7 @@
 // converted from the apkbuild by oryktos <https://codeberg.org/oryktos>
 
 recipe {
-    name "py3-installer"
+    name "python-installer"
     version "1.0.0"
     release 1
     description "Low-level library for installing from a Python wheel distribution"
@@ -44,6 +44,6 @@ install {
     "#
 }
 
-package "py3-installer" {
+package "python-installer" {
     files "usr/lib/"
 }
