@@ -1,0 +1,45 @@
+// aports maintainer: Peter Shkenev <santurysim@gmail.com>
+//
+// converted from the aports APKBUILD by oryktos
+// <https://codeberg.org/oryktos>
+
+recipe {
+    name "python-gpep517"
+    version "19"
+    release 1
+    description "Minimal backend script to aid installing Python packages through PEP 517-compliant build systems"
+    url "https://github.com/gentoo/gpep517"
+    archs "any"
+    licenses "GPL-2.0-or-later"
+    depends "python"
+}
+
+source "${recipe.url}/archive/v${recipe.version}/gpep517-v${recipe.version}.tar.gz" {
+    blake3 "1de27ab294038dd90f14bfeaa7432150555d3e4e7360611c73c61fdaf1eaf902"
+}
+
+install {
+    script r#"
+	sitedir="$(python3 -c 'import site; print(site.getsitepackages()[0])')"
+
+        ## NOTE hack to get the final usr/lib/python3.14/site-packages
+        ## part; trying to avoid hard-coding the Python minor version
+        sd="$(echo "${sitedir}" | cut -d/ -f5-)"
+
+	mkdir -p "${DESTDIR}/${sd}"
+	find gpep517 -name "*.orig" -delete
+
+	cp -a gpep517 "${DESTDIR}/${sd}"
+	python3 -m compileall "${DESTDIR}/${sd}"
+    "#
+}
+
+check {
+    script r#"
+	python3 -m gpep517 --help
+    "#
+}
+
+package "python-gpep517" {
+    files "usr/lib/"
+}
