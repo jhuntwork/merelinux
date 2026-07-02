@@ -20,26 +20,31 @@ source "${recipe.url}/archive/v${recipe.version}/gpep517-v${recipe.version}.tar.
 
 install {
     script r#"
-	sitedir="$(python3 -c 'import site; print(site.getsitepackages()[0])')"
+        sitedir="$(python3 -c 'import site; print(site.getsitepackages()[0])')"
 
         ## NOTE hack to get the final usr/lib/python3.14/site-packages
         ## part; trying to avoid hard-coding the Python minor version
         sd="$(echo "${sitedir}" | cut -d/ -f5-)"
 
-	mkdir -p "${DESTDIR}/${sd}"
-	find gpep517 -name "*.orig" -delete
+        mkdir -p "${DESTDIR}/${sd}"
+        find gpep517 -name "*.orig" -delete
 
-	cp -a gpep517 "${DESTDIR}/${sd}"
-	python3 -m compileall "${DESTDIR}/${sd}"
+        cp -a gpep517 "${DESTDIR}/${sd}"
+        python3 -m compileall "${DESTDIR}/${sd}"
+
+        ## install gpep517 executable
+        install -Dm755 \
+            "${MERE_SOURCES_DIR}/gpep517" \
+            -t "${DESTDIR}/usr/bin"
     "#
 }
 
 check {
     script r#"
-	python3 -m gpep517 --help
+        python3 -m gpep517 --help
     "#
 }
 
 package "python-gpep517" {
-    files "usr/lib/"
+    files "usr/bin/gpep517" "usr/lib/"
 }
