@@ -31,6 +31,11 @@ install {
 
 	cp -a gpep517 "${DESTDIR}/${sd}"
 	python3 -m compileall "${DESTDIR}/${sd}"
+
+        ## install gpep517 executable
+	install -Dm755 \
+            "${MERE_SOURCES_DIR}/gpep517" \
+            -t "${DESTDIR}/usr/bin"
     "#
 }
 
@@ -41,5 +46,5 @@ check {
 }
 
 package "python-gpep517" {
-    files "usr/lib/"
+    files "usr/bin/gpep517" "usr/lib/"
 }
