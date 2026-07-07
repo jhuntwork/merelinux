@@ -5,7 +5,7 @@
 // Converted from the aports apkbuild by oryktos
 // <https://codeberg.org/oryktos>, via aport2mere.
 //
-// Apkbuild comment:
+// Apkbuild install function comment:
 //
 //     this causes a lot of circular dependencies, namely this depends
 //     on poetry-core, which needs jsonschema, which needs this
