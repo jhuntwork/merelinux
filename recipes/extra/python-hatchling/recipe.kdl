@@ -1,0 +1,46 @@
+// Alpine Linux ports authors:
+// - contributor: Duncan Bellamy <dunk@denkimushi.com>
+// - maintainer:  Duncan Bellamy <dunk@denkimushi.com>
+//
+// Converted from the aports apkbuild by oryktos
+// <https://codeberg.org/oryktos>, via aport2mere.
+//
+// Apkbuild install function comment:
+//
+//     this causes a lot of circular dependencies, namely this depends
+//     on poetry-core, which needs jsonschema, which needs this
+//
+// I didn't have any problem with this, but needed to change the
+// `destdir` option to `prefix` and append `/usr`.  That will probably
+// be a common pattern for other Mere recipes.  No other dependencies
+// were listed in the apkbuild.
+//
+// cf. the Alpine Linux ports apkbuild for `py3-hatchling`
+
+recipe {
+    name "python-hatchling"
+    version "1.29.0"
+    release 1
+    description "Modern, extensible Python build backend"
+    url "https://hatch.pypa.io/latest/"
+    archs "any"
+    depends "python" \
+            "python-installer"
+}
+
+source "https://files.pythonhosted.org/packages/py3/h/hatchling/hatchling-${recipe.version}-py3-none-any.whl" {
+    blake3 "e2a2af4965677b817ff464f90c0be0ac39bbb1bfac2eacd7435a845f52bfb292"
+}
+
+install {
+    script r#"
+        python3 -m installer \
+            --prefix "${DESTDIR}"/usr \
+            hatchling-${recipe.version}-py3-none-any.whl
+    "#
+}
+
+package "python-hatchling" {
+    files "usr/bin/hatchling" \
+          "usr/lib/"
+}
