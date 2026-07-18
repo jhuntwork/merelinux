@@ -1,7 +1,7 @@
 recipe {
     name "skalibs"
     version "2.14.5.1"
-    release 6
+    release 7
     description "A library suite supporting skarnet.org software."
     url "http://skarnet.org/software/skalibs/"
     licenses "ISC"
