@@ -9,7 +9,7 @@ jobs:
   detect:
     runs-on: docker-aarch64
     container:
-      image: mere/ci:v0.15.2
+      image: mere/ci:v0.15.2-1
     outputs:
       matrix: ${{ steps.detect.outputs.matrix }}
       has_recipes: ${{ steps.detect.outputs.has_recipes }}
@@ -54,7 +54,7 @@ jobs:
     if: needs.detect.outputs.has_recipes == 'true'
     runs-on: ${{ matrix.arch == 'aarch64' && 'docker-aarch64' || 'docker' }}
     container:
-      image: mere/ci:v0.15.2
+      image: mere/ci:v0.15.2-1
       options: --privileged --cpus=8 --memory=12g
     strategy:
       matrix: ${{ fromJson(needs.detect.outputs.matrix) }}
