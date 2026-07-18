@@ -11,7 +11,7 @@ jobs:
     container:
       image: mere/ci:v0.15.2-1
     outputs:
-      matrix: ${{ steps.detect.outputs.matrix }}
+      recipes: ${{ steps.detect.outputs.recipes }}
       has_recipes: ${{ steps.detect.outputs.has_recipes }}
     steps:
       - name: Git checkout
@@ -31,7 +31,6 @@ jobs:
           cd "$GITHUB_WORKSPACE"
 
           # For merge commits, diff against first parent.
-          # For regular commits, HEAD~1 works the same way.
           if git cat-file -t HEAD^2 >/dev/null 2>&1; then
             changed=$(
               git diff --name-only HEAD^1 HEAD \
@@ -47,15 +46,14 @@ jobs:
           if [ -z "$changed" ]; then
             printf 'No recipe changes detected.\n'
             printf 'has_recipes=false\n' >> "$GITHUB_OUTPUT"
-            printf 'matrix={"recipe":[],"arch":[]}\n' >> "$GITHUB_OUTPUT"
+            printf 'recipes=[]\n' >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
-          # Build a JSON matrix of {recipe, arch} pairs
-          recipes=$(printf '%s\n' "$changed" | jq -R . | jq -s .)
-          matrix=$(printf '{"recipe":%s,"arch":["x86_64","aarch64"]}' "$recipes")
+          # Build a JSON array of changed recipe paths
+          recipes=$(printf '%s\n' "$changed" | jq -R . | jq -s -c .)
           printf 'has_recipes=true\n' >> "$GITHUB_OUTPUT"
-          printf 'matrix=%s\n' "$matrix" >> "$GITHUB_OUTPUT"
+          printf 'recipes=%s\n' "$recipes" >> "$GITHUB_OUTPUT"
           printf 'Building: %s\n' "$changed"
 
   build:
@@ -66,7 +64,9 @@ jobs:
       image: mere/ci:v0.15.2-1
       options: --privileged --cpus=8 --memory=12g
     strategy:
-      matrix: ${{ fromJson(needs.detect.outputs.matrix || '{"recipe":[],"arch":[]}') }}
+      matrix:
+        recipe: ${{ fromJSON(needs.detect.outputs.recipes) }}
+        arch: ["x86_64", "aarch64"]
       fail-fast: false
     env:
       MERE_NO_HARDEN: "1"
