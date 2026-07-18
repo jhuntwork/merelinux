@@ -7,11 +7,12 @@ on:
 
 jobs:
   detect:
-    runs-on: docker
+    runs-on: docker-aarch64
     container:
-      image: mere/ci:v0.13.2
+      image: mere/ci:v0.15.2
     outputs:
-      recipe: ${{ steps.detect.outputs.recipe }}
+      matrix: ${{ steps.detect.outputs.matrix }}
+      has_recipes: ${{ steps.detect.outputs.has_recipes }}
     steps:
       - name: Git checkout
         run: |
@@ -23,7 +24,7 @@ jobs:
             fetch --depth=2 origin "$GITHUB_SHA"
           git checkout --detach FETCH_HEAD
 
-      - name: Detect changed recipe
+      - name: Detect changed recipes
         id: detect
         run: |
           set -eu
@@ -34,32 +35,34 @@ jobs:
               | grep '^recipes/[^/]*/[^/]*/recipe\.kdl$' || true
           )
 
-          count=$(printf '%s\n' "$changed" | grep -c . || true)
-          if [ "$count" -gt 1 ]; then
-            printf '::error::Multiple recipes changed in one commit. Build one package per commit.\n'
-            exit 1
-          fi
-
           if [ -z "$changed" ]; then
             printf 'No recipe changes detected.\n'
-            printf 'recipe=\n' >> "$GITHUB_OUTPUT"
+            printf 'has_recipes=false\n' >> "$GITHUB_OUTPUT"
+            printf 'matrix={}\n' >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
+          # Build a JSON matrix of {recipe, arch} pairs
+          recipes=$(printf '%s\n' "$changed" | jq -R . | jq -s .)
+          matrix=$(printf '{"recipe":%s,"arch":["x86_64","aarch64"]}' "$recipes")
+          printf 'has_recipes=true\n' >> "$GITHUB_OUTPUT"
+          printf 'matrix=%s\n' "$matrix" >> "$GITHUB_OUTPUT"
           printf 'Building: %s\n' "$changed"
-          printf 'recipe=%s\n' "$changed" >> "$GITHUB_OUTPUT"
 
-  build-x86_64:
+  build:
     needs: detect
-    if: needs.detect.outputs.recipe != ''
-    runs-on: docker
+    if: needs.detect.outputs.has_recipes == 'true'
+    runs-on: ${{ matrix.arch == 'aarch64' && 'docker-aarch64' || 'docker' }}
     container:
-      image: mere/ci:v0.13.2
+      image: mere/ci:v0.15.2
       options: --privileged --cpus=8 --memory=12g
+    strategy:
+      matrix: ${{ fromJson(needs.detect.outputs.matrix) }}
+      fail-fast: false
     env:
       MERE_NO_HARDEN: "1"
       MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
-      SYNC_SSH_KEY: ${{ secrets.SYNC_SSH_KEY }}
+      PKGD_PUBLISH_TOKEN: ${{ secrets.PKGD_PUBLISH_TOKEN }}
     steps:
       - name: Git checkout
         run: |
@@ -71,7 +74,7 @@ jobs:
             fetch --depth=1 origin "$GITHUB_SHA"
           git checkout --detach FETCH_HEAD
 
-      - name: Setup keys
+      - name: Setup signing key
         run: |
           set -eu
           grep -q '^root:' /etc/passwd 2>/dev/null || printf 'root:x:0:0:root:/root:/bin/sh\n' >> /etc/passwd
@@ -79,94 +82,27 @@ jobs:
           install -d -m 700 /root/.mere/keys
           printf '%s' "$MERE_SIGNING_KEY" | base64 -d > /root/.mere/keys/mere.key
           chmod 600 /root/.mere/keys/mere.key
-          install -d -m 700 /root/.ssh
-          printf '%s' "$SYNC_SSH_KEY" | base64 -d > /root/.ssh/id_ed25519
-          chmod 600 /root/.ssh/id_ed25519
-
-      - name: Sync repo metadata down
-        run: |
-          set -eu
-          install -d /tmp/repo/packages
-          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
-            pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/repo.db \
-            pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/repo.db.sig \
-            /tmp/repo/
 
       - name: Build
         run: |
           set -eu
           cd "$GITHUB_WORKSPACE"
-          mere dev build "${{ needs.detect.outputs.recipe }}"
+          mere dev build "${{ matrix.recipe }}"
 
-      - name: Import
+      - name: Publish to pkgd
         run: |
           set -eu
-          mere dev import /tmp/repo
+          archives=$(find /mere/dev/outputs -name '*.pkg.tar.zst' -type f)
+          if [ -z "$archives" ]; then
+            printf '::error::Build produced no archives\n'
+            exit 1
+          fi
 
-      - name: Sync repo up
-        run: |
-          set -eu
-          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
-            /tmp/repo/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+          curl_args="-sS --fail-with-body"
+          curl_args="$curl_args -H 'Authorization: Bearer $PKGD_PUBLISH_TOKEN'"
+          for archive in $archives; do
+            curl_args="$curl_args -F package=@$archive"
+          done
 
-  build-aarch64:
-    needs:
-      - detect
-      - build-x86_64
-    if: needs.detect.outputs.recipe != ''
-    runs-on: docker-aarch64
-    container:
-      image: mere/ci:v0.13.2
-      options: --privileged --cpus=8 --memory=12g
-    env:
-      MERE_NO_HARDEN: "1"
-      MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
-      SYNC_SSH_KEY: ${{ secrets.SYNC_SSH_KEY }}
-    steps:
-      - name: Git checkout
-        run: |
-          set -eu
-          git init "$GITHUB_WORKSPACE"
-          cd "$GITHUB_WORKSPACE"
-          git remote add origin "$GITHUB_SERVER_URL/$GITHUB_REPOSITORY.git"
-          git -c http.extraHeader="Authorization: Bearer $GITHUB_TOKEN" \
-            fetch --depth=1 origin "$GITHUB_SHA"
-          git checkout --detach FETCH_HEAD
-
-      - name: Setup keys
-        run: |
-          set -eu
-          grep -q '^root:' /etc/passwd 2>/dev/null || printf 'root:x:0:0:root:/root:/bin/sh\n' >> /etc/passwd
-          install -d -m 700 /root
-          install -d -m 700 /root/.mere/keys
-          printf '%s' "$MERE_SIGNING_KEY" | base64 -d > /root/.mere/keys/mere.key
-          chmod 600 /root/.mere/keys/mere.key
-          install -d -m 700 /root/.ssh
-          printf '%s' "$SYNC_SSH_KEY" | base64 -d > /root/.ssh/id_ed25519
-          chmod 600 /root/.ssh/id_ed25519
-
-      - name: Sync repo metadata down
-        run: |
-          set -eu
-          install -d /tmp/repo/packages
-          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
-            pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/repo.db \
-            pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/repo.db.sig \
-            /tmp/repo/
-
-      - name: Build
-        run: |
-          set -eu
-          cd "$GITHUB_WORKSPACE"
-          mere dev build "${{ needs.detect.outputs.recipe }}"
-
-      - name: Import
-        run: |
-          set -eu
-          mere dev import /tmp/repo --force
-
-      - name: Sync repo up
-        run: |
-          set -eu
-          rsync -az -e "ssh -p 50220 -l pkgsync -i /root/.ssh/id_ed25519 -o StrictHostKeyChecking=no" \
-            /tmp/repo/ pkgs.merelinux.org:/srv/pkgs.merelinux.org/mere/
+          printf 'Publishing %d archive(s) to pkgd\n' $(printf '%s\n' "$archives" | wc -l)
+          eval curl $curl_args https://pkgs.merelinux.org/publish
