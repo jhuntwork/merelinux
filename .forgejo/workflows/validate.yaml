@@ -5,7 +5,7 @@ jobs:
   validate:
     runs-on: docker-aarch64
     container:
-      image: mere/ci:v0.15.2
+      image: mere/ci:v0.15.2-1
     steps:
       - name: Git checkout
         run: |
