@@ -1,0 +1,50 @@
+recipe {
+    name "dinit"
+    version "0.22.1"
+    release 1
+    description "A service manager and init system with dependency support"
+    url "https://github.com/davmac314/dinit"
+    licenses "Apache-2.0"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "m4" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "skalibs-dev" \
+            "utmps-dev"
+}
+
+source "https://github.com/davmac314/dinit/releases/download/v${recipe.version}/dinit-${recipe.version}.tar.xz" {
+    blake3 "865ba8b776554e9dd63b33d40a782ab4119cd76eebaec14156bad1bee0ff75d3"
+}
+
+build {
+    script r#"
+        ./configure \
+          --sbindir=/sbin \
+          --bindir=/bin \
+          --mandir=/usr/share/man \
+          --syscontrolsocket=/run/dinitctl \
+          --enable-shutdown \
+          --shutdown-prefix="" \
+          --disable-capabilities \
+          CXX=c++ \
+          CXXFLAGS="-std=c++11 -Os -fno-rtti" \
+          LDFLAGS="-static -lutmps -lskarnet"
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "dinit" {
+    files "sbin/" \
+          "bin/" \
+          "usr/share/man/"
+}
