@@ -1,0 +1,92 @@
+recipe {
+    name "lua"
+    version "5.4.7"
+    release 1
+    description "A powerful, efficient, lightweight, embeddable scripting language"
+    url "https://www.lua.org"
+    licenses "MIT"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "libncurses-dev" \
+            "readline-dev"
+}
+
+source "https://www.lua.org/ftp/lua-${recipe.version}.tar.gz" {
+    blake3 "e51c2f347e3185479d5ff95cae8ac77511db486853269443c56bedaa0a6ae629"
+}
+
+build {
+    script r#"
+        # Build shared library
+        make \
+            CC="${CC:-cc}" \
+            AR="${AR:-ar} rcu" \
+            RANLIB="${RANLIB:-ranlib}" \
+            MYCFLAGS="$CFLAGS -fPIC -DLUA_USE_LINUX" \
+            MYLDFLAGS="$LDFLAGS" \
+            MYLIBS="-lreadline -lncurses" \
+            linux-readline
+
+        # Build the shared object manually
+        ${CC:-cc} -shared -o src/liblua.so.5.4 \
+            -Wl,-soname,liblua.so.5.4 \
+            src/lapi.o src/lcode.o src/lctype.o src/ldebug.o src/ldo.o \
+            src/ldump.o src/lfunc.o src/lgc.o src/llex.o src/lmem.o \
+            src/lobject.o src/lopcodes.o src/lparser.o src/lstate.o \
+            src/lstring.o src/ltable.o src/ltm.o src/lundump.o \
+            src/lvm.o src/lzio.o src/lauxlib.o src/lbaselib.o \
+            src/lcorolib.o src/ldblib.o src/liolib.o src/lmathlib.o \
+            src/loadlib.o src/loslib.o src/lstrlib.o src/ltablib.o \
+            src/lutf8lib.o src/linit.o
+    "#
+}
+
+install {
+    script r#"
+        make INSTALL_TOP="${DESTDIR}/usr" install
+        # Move man pages to standard location
+        install -d "${DESTDIR}/usr/share/man/man1"
+        mv "${DESTDIR}/usr/man/man1/"* "${DESTDIR}/usr/share/man/man1/"
+        rm -rf "${DESTDIR}/usr/man"
+        # Install the shared library
+        install -m755 src/liblua.so.5.4 "${DESTDIR}/usr/lib/liblua.so.5.4"
+        ln -s liblua.so.5.4 "${DESTDIR}/usr/lib/liblua.so"
+        # Install pkgconfig file
+        install -d "${DESTDIR}/usr/lib/pkgconfig"
+        cat > "${DESTDIR}/usr/lib/pkgconfig/lua54.pc" <<'EOF'
+prefix=/usr
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: Lua
+Description: An Extensible Extension Language
+Version: 5.4.7
+Requires:
+Libs: -L${libdir} -llua -lm
+Cflags: -I${includedir}
+EOF
+        ln -s lua54.pc "${DESTDIR}/usr/lib/pkgconfig/lua.pc"
+        ln -s lua54.pc "${DESTDIR}/usr/lib/pkgconfig/lua-5.4.pc"
+    "#
+}
+
+package "lua" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
+
+package "liblua" {
+    files "usr/lib/liblua.so.*"
+}
+
+package "lua-dev" {
+    files "usr/include/" \
+          "usr/lib/liblua.a" \
+          "usr/lib/liblua.so" \
+          "usr/lib/pkgconfig/"
+}
