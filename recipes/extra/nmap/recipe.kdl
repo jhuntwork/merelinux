@@ -1,0 +1,62 @@
+recipe {
+    name "nmap"
+    version "7.95"
+    release 1
+    description "Network exploration tool and security/port scanner"
+    url "https://nmap.org"
+    licenses "NPSL"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "libpcap-dev" \
+            "libssh2-dev" \
+            "linux-headers" \
+            "llvm" \
+            "lua-dev" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "openssl-dev" \
+            "pcre2-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://nmap.org/dist/nmap-${recipe.version}.tar.bz2" {
+    blake3 "b12c13fccc4e5e906a859913496174d7dec64924ba422ae7187430275d660bf1"
+}
+
+build {
+    script r#"
+        # Use system libraries, not bundled copies
+        ./configure \
+            --prefix=/usr \
+            --with-libpcap=/usr \
+            --with-libssh2=/usr \
+            --with-liblua=/usr \
+            --with-libpcre2=/usr \
+            --with-openssl=/usr \
+            --with-libz=/usr \
+            --without-ndiff \
+            --without-zenmap \
+            --without-nping \
+            --with-ncat \
+            --without-nmap-update
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "nmap" {
+    files "usr/bin/nmap" \
+          "usr/share/man/man1/nmap.1" \
+          "usr/share/nmap/"
+}
+
+package "ncat" {
+    files "usr/bin/ncat" \
+          "usr/share/man/man1/ncat.1"
+}
