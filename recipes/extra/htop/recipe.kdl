@@ -1,0 +1,42 @@
+recipe {
+    name "htop"
+    version "3.4.1"
+    release 1
+    description "An interactive process viewer"
+    url "https://github.com/htop-dev/htop"
+    archs "aarch64" "x86_64"
+    licenses "GPL-2.0-or-later"
+    depends "libncurses-dev" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://github.com/htop-dev/htop/releases/download/${recipe.version}/htop-${recipe.version}.tar.xz" {
+    blake3 "e2a02540bd75d1055d77957524a3a3ed89ae61ca10de501becb4f1c87d4fb4fa"
+}
+
+build {
+    script r#"
+        CFLAGS="$CFLAGS -fPIC" \
+            LDFLAGS="$LDFLAGS --static" \
+            ./configure \
+            --prefix=/usr \
+            --enable-static \
+            --enable-unicode
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "htop" {
+    files "usr/bin/htop" \
+          "usr/share/man/man1/htop.1"
+}
