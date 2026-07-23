@@ -1,0 +1,52 @@
+recipe {
+    name "libpcap"
+    version "1.10.5"
+    release 1
+    description "A portable C/C++ library for network traffic capture"
+    url "https://www.tcpdump.org"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "bison" \
+            "flex" \
+            "linux-headers" \
+            "llvm" \
+            "m4" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://www.tcpdump.org/release/libpcap-${recipe.version}.tar.xz" {
+    blake3 "22e2b76edbb4e590f661a37a9248b6ee78c8ecf7f13324fa3793b775a7240fcb"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-shared \
+            --enable-static \
+            --with-pcap=linux
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "libpcap" {
+    files "usr/lib/libpcap.so.*" \
+          "usr/lib/libpcap.so"
+}
+
+package "libpcap-dev" {
+    files "usr/bin/pcap-config" \
+          "usr/include/" \
+          "usr/lib/libpcap.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/"
+}
