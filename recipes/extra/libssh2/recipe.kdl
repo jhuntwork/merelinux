@@ -1,0 +1,55 @@
+recipe {
+    name "libssh2"
+    version "1.11.1"
+    release 1
+    description "A library implementing the SSH2 protocol"
+    url "https://libssh2.org"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "cmake" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "openssl-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://libssh2.org/download/libssh2-${recipe.version}.tar.xz" {
+    blake3 "89cb8c30d467a4c2395309539594c4d7098baf8d429234dfdd740abd380ddb23"
+}
+
+build {
+    script r#"
+        cmake -B build \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_SHARED_LIBS=ON \
+            -DBUILD_STATIC_LIBS=ON \
+            -DCRYPTO_BACKEND=OpenSSL \
+            -DBUILD_EXAMPLES=OFF \
+            -DBUILD_TESTING=OFF
+        cmake --build build
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="${DESTDIR}" cmake --install build
+    "#
+}
+
+package "libssh2" {
+    files "usr/lib/libssh2.so.*" \
+          "usr/lib/libssh2.so"
+}
+
+package "libssh2-dev" {
+    files "usr/include/" \
+          "usr/lib/libssh2.a" \
+          "usr/lib/cmake/" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/man3/"
+}
