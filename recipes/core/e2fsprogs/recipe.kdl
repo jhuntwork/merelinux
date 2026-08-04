@@ -1,0 +1,60 @@
+recipe {
+    name "e2fsprogs"
+    version "1.47.4"
+    release 1
+    description "Ext2/3/4 filesystem utilities"
+    url "https://e2fsprogs.sourceforge.net"
+    archs "aarch64" "x86_64"
+    licenses "GPL2"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf" \
+            "util-linux-libs-dev"
+}
+
+source "https://kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v${recipe.version}/e2fsprogs-${recipe.version}.tar.xz" {
+    blake3 "c0fbe968ae75041dd0294cbf88c367e3032f523ada38bc106ee4f8edea4ce5b3"
+}
+
+build {
+    script r#"
+        export LDFLAGS="$LDFLAGS --static"
+        ./configure --prefix=/usr \
+            --sbindir=/sbin \
+            --sysconfdir=/etc \
+            --mandir=/usr/share/man \
+            --disable-nls \
+            --disable-uuidd \
+            --disable-libuuid \
+            --disable-libblkid \
+            --disable-fsck \
+            --enable-symlink-install
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install install-libs
+    "#
+}
+
+package "e2fsprogs" {
+    files "etc/" \
+          "sbin/" \
+          "usr/bin/" \
+          "usr/lib/e2initrd_helper" \
+          "usr/share/man/"
+}
+
+package "e2fsprogs-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/et/" \
+          "usr/share/ss/"
+}
