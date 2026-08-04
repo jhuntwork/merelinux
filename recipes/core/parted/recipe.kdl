@@ -1,0 +1,53 @@
+recipe {
+    name "parted"
+    version "3.7"
+    release 1
+    description "Disk partition manipulation tool"
+    url "https://www.gnu.org/software/parted/"
+    archs "aarch64" "x86_64"
+    licenses "GPL3"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf" \
+            "util-linux-libs-dev"
+}
+
+source "https://ftp.gnu.org/gnu/parted/parted-${recipe.version}.tar.xz" {
+    blake3 "c3b049775d42ef4d9a7d904ad1628d3f76665d47476a6e2f8106f8cdff380689"
+}
+
+build {
+    script r#"
+        export LDFLAGS="$LDFLAGS --static"
+        ./configure --prefix=/usr \
+            --sbindir=/sbin \
+            --mandir=/usr/share/man \
+            --disable-nls \
+            --disable-shared \
+            --enable-static \
+            --disable-device-mapper \
+            --without-readline
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "parted" {
+    files "sbin/" \
+          "usr/share/man/"
+}
+
+package "parted-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
