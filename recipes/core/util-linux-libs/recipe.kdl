@@ -1,0 +1,52 @@
+recipe {
+    name "util-linux-libs"
+    version "2.42.2"
+    release 1
+    description "libuuid and libblkid from util-linux"
+    url "https://github.com/util-linux/util-linux"
+    archs "aarch64" "x86_64"
+    licenses "BSD-3-Clause"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf"
+}
+
+source "https://kernel.org/pub/linux/utils/util-linux/v2.42/util-linux-${recipe.version}.tar.xz" {
+    blake3 "3d24d2f45130c76da3d0e68c1beb641568780f555b150d99daccf09bb6b1c06c"
+}
+
+build {
+    script r#"
+        export LDFLAGS="$LDFLAGS --static"
+        ./configure --prefix=/usr \
+            --disable-all-programs \
+            --enable-libuuid \
+            --enable-libblkid \
+            --disable-nls \
+            --disable-shared \
+            --enable-static \
+            --without-python \
+            --without-systemd \
+            --without-ncurses
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+        # Remove libtool archives
+        rm -f "$DESTDIR"/usr/lib/*.la
+    "#
+}
+
+package "util-linux-libs-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/"
+}
