@@ -168,6 +168,10 @@ CONFIG_BT_ATH3K=m
 CONFIG_BT_RTL=m
 
 # --- Graphics: core ---
+# Keep the early boot display path built in for framebuffer fallback.
+CONFIG_SYSFB=y
+CONFIG_FB_CORE=y
+CONFIG_VT_CONSOLE=y
 CONFIG_DRM=m
 CONFIG_DRM_FBDEV_EMULATION=y
 CONFIG_FRAMEBUFFER_CONSOLE=y

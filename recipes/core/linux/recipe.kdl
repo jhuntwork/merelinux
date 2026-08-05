@@ -28,7 +28,7 @@ source "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${recipe.version}.tar
 }
 
 source "mere-common.config.fragment" {
-    blake3 "2e6faea7ec2dbe2b62253390a8c9ce6ddc419150b935ff0591e0b0f59de007d1"
+    blake3 "1328af8d08798a909050212122a5112a63f2622774de28ede4dfeee06f2bb2aa"
 }
 
 source "mere-x86_64.config.fragment" {
