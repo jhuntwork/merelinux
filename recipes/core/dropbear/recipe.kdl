@@ -1,7 +1,7 @@
 recipe {
     name "dropbear"
     version "2026.94"
-    release 1
+    release 2
     description "A relatively small SSH server and client"
     url "https://matt.ucc.asn.au/dropbear/dropbear.html"
     licenses "MIT"
