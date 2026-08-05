@@ -169,10 +169,14 @@ CONFIG_BT_RTL=m
 
 # --- Graphics: core ---
 # Keep the early boot display path built in for framebuffer fallback.
+# simpledrm claims the EFI GOP framebuffer and provides fbcon immediately,
+# before the real GPU driver (amdgpu/i915) loads.
 CONFIG_SYSFB=y
+CONFIG_SYSFB_SIMPLEFB=y
+CONFIG_DRM_SIMPLEDRM=y
 CONFIG_FB_CORE=y
 CONFIG_VT_CONSOLE=y
-CONFIG_DRM=m
+CONFIG_DRM=y
 CONFIG_DRM_FBDEV_EMULATION=y
 CONFIG_FRAMEBUFFER_CONSOLE=y
 CONFIG_BACKLIGHT_CLASS_DEVICE=y

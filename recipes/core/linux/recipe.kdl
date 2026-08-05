@@ -1,6 +1,6 @@
 recipe {
     name "linux"
-    version "6.18.36"
+    version "6.18.42"
     release 1
     description "Linux kernel and modules"
     url "http://www.kernel.org"
@@ -24,11 +24,11 @@ recipe {
 }
 
 source "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${recipe.version}.tar.xz" {
-    blake3 "0711a7440999feb5bbab3bfce916e04e4737e27d5693bc87209e14e052bd91e8"
+    blake3 "a39abc6d59532b3f8a779f1130eb56077ae8ea3fc887c3585218e5d90c1c3cce"
 }
 
 source "mere-common.config.fragment" {
-    blake3 "1328af8d08798a909050212122a5112a63f2622774de28ede4dfeee06f2bb2aa"
+    blake3 "45a7478f568aa13c98331683b2e87cf210b444e604523efaf95f17ce5556fa63"
 }
 
 source "mere-x86_64.config.fragment" {
