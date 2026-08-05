@@ -1,0 +1,47 @@
+recipe {
+    name "inih"
+    version "59"
+    release 1
+    description "Simple INI file parser library"
+    url "https://github.com/benhoyt/inih"
+    archs "aarch64" "x86_64"
+    licenses "BSD-3-Clause"
+    depends "llvm" \
+            "musl-dev"
+}
+
+source "https://github.com/benhoyt/inih/archive/refs/tags/r${recipe.version}.tar.gz" {
+    blake3 "92193920728e471f7c5275be6daa2f5bfd092e84ed47d2c0614564ec2510fd45"
+}
+
+build {
+    script r#"
+        cc $CFLAGS -c -DINI_ALLOW_MULTILINE=1 -DINI_ALLOW_BOM=1 ini.c -o ini.o
+        ar rcs libinih.a ini.o
+    "#
+}
+
+install {
+    script r#"
+        install -Dm644 ini.h "${DESTDIR}/usr/include/ini.h"
+        install -Dm644 libinih.a "${DESTDIR}/usr/lib/libinih.a"
+        install -dm755 "${DESTDIR}/usr/lib/pkgconfig"
+        cat > "${DESTDIR}/usr/lib/pkgconfig/inih.pc" << 'EOF'
+prefix=/usr
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: inih
+Description: Simple INI file parser
+Version: 59
+Libs: -L${libdir} -linih
+Cflags: -I${includedir}
+EOF
+    "#
+}
+
+package "inih-dev" {
+    files "usr/include/" \
+          "usr/lib/" \
+          "usr/lib/pkgconfig/"
+}
