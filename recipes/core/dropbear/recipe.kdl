@@ -1,0 +1,63 @@
+recipe {
+    name "dropbear"
+    version "2026.94"
+    release 1
+    description "A relatively small SSH server and client"
+    url "https://matt.ucc.asn.au/dropbear/dropbear.html"
+    licenses "MIT"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "skalibs-dev" \
+            "utmps-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://matt.ucc.asn.au/dropbear/releases/dropbear-${recipe.version}.tar.bz2" {
+    blake3 "54a203b25afcd28368bca57c922a22845426ddc0fcada3284da14d69160300e6"
+}
+
+prepare {
+    script r#"
+        sed -i '/MAX_CMD_LEN/s@9000@20000@' src/sysoptions.h
+    "#
+}
+
+build {
+    script r#"
+        LIBS='-lutmps -lskarnet' \
+            ./configure \
+                --prefix=/usr \
+                --disable-utmp \
+                --disable-wtmp \
+                --enable-utmpx \
+                --enable-wtmpx \
+                --enable-static
+        make PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp"
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" \
+            PROGRAMS="dropbear dbclient dropbearkey dropbearconvert scp" \
+            install
+        mv "${DESTDIR}/usr/bin/scp" "${DESTDIR}/usr/bin/dropbear-scp"
+        install -d -m 0755 "${DESTDIR}/etc/dropbear"
+    "#
+}
+
+package "dropbear" {
+    files "usr/bin/" \
+          "usr/sbin/" \
+          "usr/share/man/" \
+          "etc/dropbear/"
+
+    service "dropbear" {
+        type "daemon"
+        command "dropbear -R -F -E -p 0.0.0.0:22"
+    }
+}
