@@ -1,0 +1,41 @@
+recipe {
+    name "limine"
+    version "12.5.2"
+    release 1
+    description "Modern multiprotocol bootloader and boot manager"
+    url "https://limine-bootloader.org"
+    archs "x86_64"
+    licenses "BSD-2-Clause"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "nasm"
+}
+
+source "https://github.com/limine-bootloader/limine/releases/download/v${recipe.version}/limine-${recipe.version}.tar.xz" {
+    blake3 "3b94b00f73c6ee9d9f5b513efcb33098988fe7435e6f403dfae85b30ff70e14d"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-bios \
+            --enable-uefi-x86-64
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "limine" {
+    files "usr/bin/" \
+          "usr/share/limine/" \
+          "usr/share/man/"
+}
