@@ -1,7 +1,7 @@
 recipe {
     name "limine"
     version "12.5.2"
-    release 1
+    release 2
     description "Modern multiprotocol bootloader and boot manager"
     url "https://limine-bootloader.org"
     archs "x86_64"
