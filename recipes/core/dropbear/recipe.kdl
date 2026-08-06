@@ -1,7 +1,7 @@
 recipe {
     name "dropbear"
     version "2026.94"
-    release 4
+    release 5
     description "A relatively small SSH server and client"
     url "https://matt.ucc.asn.au/dropbear/dropbear.html"
     licenses "MIT"
@@ -58,6 +58,6 @@ package "dropbear" {
 
     service "dropbear" {
         type "daemon"
-        command "dropbear -R -F -E -p 0.0.0.0:22"
+        command "/usr/sbin/dropbear -R -F -E -p 0.0.0.0:22"
     }
 }
