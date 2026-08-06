@@ -1,0 +1,37 @@
+recipe {
+    name "nasm"
+    version "3.01"
+    release 1
+    description "The Netwide Assembler, an assembler for the x86 CPU architecture"
+    url "https://www.nasm.us"
+    archs "x86_64"
+    licenses "BSD"
+    depends "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://www.nasm.us/pub/nasm/releasebuilds/${recipe.version}/nasm-${recipe.version}.tar.xz" {
+    blake3 "68d7d5d4a40f935bde5447a11c8cfb8e80d8b8f4b58d76761d9e0e4977906b4f"
+}
+
+build {
+    script r#"
+        sed -i 's/-std=c23/-std=c17/g' configure
+        ./configure --prefix=/usr
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "nasm" {
+    files "usr/bin/" \
+          "usr/share/man/man1/"
+}
