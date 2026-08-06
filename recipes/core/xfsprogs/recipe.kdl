@@ -1,0 +1,61 @@
+recipe {
+    name "xfsprogs"
+    version "7.1.1"
+    release 1
+    description "XFS filesystem utilities"
+    url "https://xfs.wiki.kernel.org"
+    archs "aarch64" "x86_64"
+    licenses "GPL2"
+    depends "bash" \
+            "busybox" \
+            "inih-dev" \
+            "liburcu-dev" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "pkgconf" \
+            "util-linux-libs-dev"
+}
+
+source "https://kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-${recipe.version}.tar.xz" {
+    blake3 "4123d19783212c46ad56af0a9ec60edf7fccc30792f9dfd3a1a41577c6781603"
+}
+
+prepare {
+    script r#"
+        # musl doesn't have sys/signal.h — use signal.h directly
+        find . -name '*.c' -o -name '*.h' | xargs sed -i 's|sys/signal.h|signal.h|g'
+        # Remove HAVE_MALLINFO reference (musl has neither mallinfo nor mallinfo2)
+        sed -i '/mallinfo/d' libxfs/init.c || true
+    "#
+}
+
+build {
+    script r#"
+        export LDFLAGS="$LDFLAGS --static"
+        make configure
+        ./configure --prefix=/usr \
+            --sbindir=/sbin \
+            --mandir=/usr/share/man \
+            --disable-gettext \
+            --enable-editline=no \
+            --enable-readline=no \
+            --enable-blkid=no
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "xfsprogs" {
+    files "sbin/" \
+          "usr/libexec/" \
+          "usr/share/man/" \
+          "usr/share/xfsprogs/"
+}
