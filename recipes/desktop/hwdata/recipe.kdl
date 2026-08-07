@@ -1,16 +1,16 @@
 recipe {
     name "hwdata"
-    version "0.406"
+    version "0.410"
     release 1
     description "Hardware identification and configuration data (pci.ids, usb.ids)"
     url "https://github.com/vcrhonek/hwdata"
-    archs "aarch64" "x86_64"
+    archs "any"
     licenses "GPL2"
     depends "busybox" "make"
 }
 
 source "https://github.com/vcrhonek/hwdata/archive/refs/tags/v${recipe.version}.tar.gz" {
-    blake3 "c9ac9ad3b6b3bc38ba1a163b53b7378d605c4a02e405537ac4eafe516a27c2b8"
+    blake3 "546817858aabc287c742bd064e9c5cdafdc76e4a9ac91412c4460ca50c16c552"
 }
 
 build {

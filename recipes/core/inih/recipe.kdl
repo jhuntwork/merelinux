@@ -1,6 +1,6 @@
 recipe {
     name "inih"
-    version "59"
+    version "62"
     release 1
     description "Simple INI file parser library"
     url "https://github.com/benhoyt/inih"
@@ -11,7 +11,7 @@ recipe {
 }
 
 source "https://github.com/benhoyt/inih/archive/refs/tags/r${recipe.version}.tar.gz" {
-    blake3 "92193920728e471f7c5275be6daa2f5bfd092e84ed47d2c0614564ec2510fd45"
+    blake3 "d3e654d280e40c816cf4497f2899ba707e610717e34acd06f9d5224cfdbb6c3f"
 }
 
 build {
@@ -33,7 +33,7 @@ includedir=${prefix}/include
 
 Name: inih
 Description: Simple INI file parser
-Version: 59
+Version: 62
 Libs: -L${libdir} -linih
 Cflags: -I${includedir}
 EOF
