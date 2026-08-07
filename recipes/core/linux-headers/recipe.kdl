@@ -1,10 +1,11 @@
 recipe {
     name "linux-headers"
     version "6.19.5"
-    release 1
+    release 2
     description "Linux kernel headers"
     url "http://www.kernel.org"
     licenses "GPL3"
+    archs "aarch64" "x86_64"
     depends "busybox" "llvm" "make" "mimalloc-dev" "musl-dev" "patch" "rsync"
 }
 
