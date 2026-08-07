@@ -6,6 +6,12 @@ on:
       - main
     paths:
       - 'recipes/**/recipe.kdl'
+  workflow_dispatch:
+    inputs:
+      recipes:
+        description: 'Newline-separated recipe.kdl paths to build'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -17,6 +23,7 @@ jobs:
       image: mere/ci:v0.18.1
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      MANUAL_RECIPES: ${{ inputs.recipes }}
     outputs:
       matrix: ${{ steps.detect.outputs.matrix }}
       has_recipes: ${{ steps.detect.outputs.has_recipes }}
@@ -37,8 +44,10 @@ jobs:
           set -eu
           cd "$GITHUB_WORKSPACE"
 
+          if [ "$GITHUB_EVENT_NAME" = workflow_dispatch ]; then
+            changed=$MANUAL_RECIPES
           # For merge commits, diff against the first parent.
-          if git cat-file -t HEAD^2 >/dev/null 2>&1; then
+          elif git cat-file -t HEAD^2 >/dev/null 2>&1; then
             changed=$(
               git diff --name-only HEAD^1 HEAD \
                 | grep '^recipes/[^/]*/[^/]*/recipe\.kdl$' || true
@@ -59,6 +68,18 @@ jobs:
 
           includes='[]'
           for recipe in $changed; do
+            case "$recipe" in
+              recipes/*/*/recipe.kdl) ;;
+              *)
+                printf 'Invalid recipe path: %s\n' "$recipe" >&2
+                exit 1
+                ;;
+            esac
+            [ -f "$recipe" ] || {
+              printf 'Recipe does not exist: %s\n' "$recipe" >&2
+              exit 1
+            }
+
             # Extract archs "x86_64", archs "aarch64" "x86_64", or archs "any".
             archs=$(sed -n 's/.*archs[[:space:]]*//p' "$recipe" | tr -d '"' | tr -s ' ')
             [ -n "$archs" ] || archs=x86_64
