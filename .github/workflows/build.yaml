@@ -1,0 +1,157 @@
+name: Build recipes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'recipes/**/recipe.kdl'
+
+permissions:
+  contents: read
+
+jobs:
+  detect:
+    runs-on: ubuntu-24.04-arm
+    container:
+      image: mere/ci:v0.18.1
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    outputs:
+      matrix: ${{ steps.detect.outputs.matrix }}
+      has_recipes: ${{ steps.detect.outputs.has_recipes }}
+    steps:
+      - name: Git checkout
+        run: |
+          set -eu
+          git init "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@${GITHUB_SERVER_URL#https://}/$GITHUB_REPOSITORY.git"
+          git fetch --depth=2 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Detect changed recipes
+        id: detect
+        run: |
+          set -eu
+          cd "$GITHUB_WORKSPACE"
+
+          # For merge commits, diff against the first parent.
+          if git cat-file -t HEAD^2 >/dev/null 2>&1; then
+            changed=$(
+              git diff --name-only HEAD^1 HEAD \
+                | grep '^recipes/[^/]*/[^/]*/recipe\.kdl$' || true
+            )
+          else
+            changed=$(
+              git diff --name-only HEAD~1 HEAD \
+                | grep '^recipes/[^/]*/[^/]*/recipe\.kdl$' || true
+            )
+          fi
+
+          if [ -z "$changed" ]; then
+            printf 'No recipe changes detected.\n'
+            printf 'has_recipes=false\n' >> "$GITHUB_OUTPUT"
+            printf 'matrix={"include":[]}\n' >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          includes='[]'
+          for recipe in $changed; do
+            # Extract archs "x86_64", archs "aarch64" "x86_64", or archs "any".
+            archs=$(sed -n 's/.*archs[[:space:]]*//p' "$recipe" | tr -d '"' | tr -s ' ')
+            [ -n "$archs" ] || archs=x86_64
+
+            case "$archs" in
+              *any*)
+                includes=$(printf '%s' "$includes" | jq -c \
+                  --arg recipe "$recipe" \
+                  '. + [{recipe: $recipe, arch: "aarch64", runner: "ubuntu-24.04-arm"}]')
+                ;;
+              *)
+                for arch in $archs; do
+                  case "$arch" in
+                    aarch64) runner=ubuntu-24.04-arm ;;
+                    x86_64) runner=ubuntu-24.04 ;;
+                    *)
+                      printf 'Unsupported recipe architecture %s in %s\n' "$arch" "$recipe" >&2
+                      exit 1
+                      ;;
+                  esac
+                  includes=$(printf '%s' "$includes" | jq -c \
+                    --arg recipe "$recipe" \
+                    --arg arch "$arch" \
+                    --arg runner "$runner" \
+                    '. + [{recipe: $recipe, arch: $arch, runner: $runner}]')
+                done
+                ;;
+            esac
+          done
+
+          printf 'has_recipes=true\n' >> "$GITHUB_OUTPUT"
+          printf 'matrix=%s\n' "{\"include\":$includes}" >> "$GITHUB_OUTPUT"
+          printf 'Building: %s\n' "$changed"
+          printf 'Matrix: %s\n' "{\"include\":$includes}"
+
+  build:
+    needs: detect
+    if: needs.detect.outputs.has_recipes == 'true'
+    runs-on: ${{ matrix.runner }}
+    container:
+      image: mere/ci:v0.18.1
+      options: --privileged --cpus=8 --memory=12g
+    strategy:
+      matrix: ${{ fromJSON(needs.detect.outputs.matrix) }}
+      fail-fast: false
+    env:
+      MERE_NO_HARDEN: "1"
+      MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
+      PKGD_PUBLISH_TOKEN: ${{ secrets.PKGD_PUBLISH_TOKEN }}
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - name: Git checkout
+        run: |
+          set -eu
+          git init "$GITHUB_WORKSPACE"
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          cd "$GITHUB_WORKSPACE"
+          git remote add origin "https://x-access-token:${GH_TOKEN}@${GITHUB_SERVER_URL#https://}/$GITHUB_REPOSITORY.git"
+          git fetch --depth=1 origin "$GITHUB_SHA"
+          git checkout --detach FETCH_HEAD
+
+      - name: Setup signing key
+        run: |
+          set -eu
+          grep -q '^root:' /etc/passwd 2>/dev/null || printf 'root:x:0:0:root:/root:/bin/sh\n' >> /etc/passwd
+          install -d -m 700 /root
+          install -d -m 700 /root/.mere/keys
+          printf '%s' "$MERE_SIGNING_KEY" | base64 -d > /root/.mere/keys/mere.key
+          chmod 600 /root/.mere/keys/mere.key
+
+      - name: Build
+        run: |
+          set -eu
+          cd "$GITHUB_WORKSPACE"
+          mere dev build "${{ matrix.recipe }}"
+
+      - name: Publish to pkgd
+        run: |
+          set -eu
+          archives=$(find /mere/dev/outputs -name '*.pkg.tar.zst' -type f)
+          if [ -z "$archives" ]; then
+            printf '::error::Build produced no archives\n'
+            exit 1
+          fi
+
+          set -- curl -sS --fail-with-body \
+            -H "Authorization: Bearer $PKGD_PUBLISH_TOKEN"
+          count=0
+          for archive in $archives; do
+            set -- "$@" -F "package=@$archive"
+            count=$((count + 1))
+          done
+
+          printf 'Publishing %d archive(s) to pkgd\n' "$count"
+          set -- "$@" https://pkgs.merelinux.org/publish
+          "$@"
