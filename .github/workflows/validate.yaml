@@ -10,19 +10,12 @@ jobs:
   validate:
     runs-on: ubuntu-24.04
     container:
-      image: mere/ci:v0.18.5
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      image: mere/ci:v0.18.6
     steps:
       - name: Git checkout
-        run: |
-          set -eu
-          git init "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          cd "$GITHUB_WORKSPACE"
-          git remote add origin "https://x-access-token:${GH_TOKEN}@${GITHUB_SERVER_URL#https://}/$GITHUB_REPOSITORY.git"
-          git fetch --depth=1 origin "$GITHUB_SHA"
-          git checkout --detach FETCH_HEAD
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Validate changed recipes
         run: |

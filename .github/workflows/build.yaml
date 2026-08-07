@@ -20,23 +20,17 @@ jobs:
   detect:
     runs-on: ubuntu-24.04-arm
     container:
-      image: mere/ci:v0.18.5
+      image: mere/ci:v0.18.6
     env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MANUAL_RECIPES: ${{ inputs.recipes }}
     outputs:
       matrix: ${{ steps.detect.outputs.matrix }}
       has_recipes: ${{ steps.detect.outputs.has_recipes }}
     steps:
       - name: Git checkout
-        run: |
-          set -eu
-          git init "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          cd "$GITHUB_WORKSPACE"
-          git remote add origin "https://x-access-token:${GH_TOKEN}@${GITHUB_SERVER_URL#https://}/$GITHUB_REPOSITORY.git"
-          git fetch --depth=2 origin "$GITHUB_SHA"
-          git checkout --detach FETCH_HEAD
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
 
       - name: Detect changed recipes
         id: detect
@@ -120,7 +114,7 @@ jobs:
     if: needs.detect.outputs.has_recipes == 'true'
     runs-on: ${{ matrix.runner }}
     container:
-      image: mere/ci:v0.18.5
+      image: mere/ci:v0.18.6
       options: --privileged --cpus=4 --memory=12g
     strategy:
       matrix: ${{ fromJSON(needs.detect.outputs.matrix) }}
@@ -129,17 +123,11 @@ jobs:
       MERE_NO_HARDEN: "1"
       MERE_SIGNING_KEY: ${{ secrets.MERE_SIGNING_KEY }}
       PKGD_PUBLISH_TOKEN: ${{ secrets.PKGD_PUBLISH_TOKEN }}
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Git checkout
-        run: |
-          set -eu
-          git init "$GITHUB_WORKSPACE"
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          cd "$GITHUB_WORKSPACE"
-          git remote add origin "https://x-access-token:${GH_TOKEN}@${GITHUB_SERVER_URL#https://}/$GITHUB_REPOSITORY.git"
-          git fetch --depth=1 origin "$GITHUB_SHA"
-          git checkout --detach FETCH_HEAD
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
 
       - name: Setup signing key
         run: |
