@@ -1,6 +1,6 @@
 recipe {
     name "nodejs"
-    version "24.17.0"
+    version "24.19.0"
     release 1
     description "A JavaScript runtime"
     url "https://nodejs.org"
@@ -16,7 +16,7 @@ recipe {
 }
 
 source "https://nodejs.org/dist/v${recipe.version}/node-v${recipe.version}.tar.xz" {
-    blake3 "7945eb44a96a664dcf8abe133789cbb1685c29f892107cd12cb0dab82bc9b138"
+    blake3 "edff8bf3addd7718bc07933a5280655161f6699373aac4c6190173933133d4e6"
 }
 
 prepare {
