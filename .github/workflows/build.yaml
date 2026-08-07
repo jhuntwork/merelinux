@@ -100,7 +100,7 @@ jobs:
     runs-on: ${{ matrix.runner }}
     container:
       image: mere/ci:v0.18.1
-      options: --privileged --cpus=8 --memory=12g
+      options: --privileged --cpus=4 --memory=12g
     strategy:
       matrix: ${{ fromJSON(needs.detect.outputs.matrix) }}
       fail-fast: false
