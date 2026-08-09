@@ -1,0 +1,40 @@
+recipe {
+    name "openresolv"
+    version "3.17.4"
+    release 1
+    description "A resolv.conf management framework"
+    url "https://github.com/NetworkConfiguration/openresolv"
+    licenses "BSD-2-Clause"
+    archs "aarch64" "x86_64"
+    depends "busybox" "make"
+}
+
+source "https://github.com/NetworkConfiguration/openresolv/releases/download/v${recipe.version}/openresolv-${recipe.version}.tar.xz" {
+    blake3 "3a6519ae778a8fc2f1ed02a7d2a2211f061cc1b6a0019247d7c977448b63e528"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --sbindir=/usr/sbin \
+            --libexecdir=/usr/lib/resolvconf \
+            --rundir=/run \
+            --mandir=/usr/share/man
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "openresolv" {
+    files "etc/resolvconf.conf" \
+          "usr/lib/resolvconf/" \
+          "usr/sbin/" \
+          "usr/share/man/"
+}
