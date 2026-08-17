@@ -1,0 +1,35 @@
+recipe {
+    name "fd"
+    version "10.3.0"
+    release 1
+    description "A simple, fast and user-friendly alternative to find"
+    url "https://github.com/sharkdp/fd"
+    licenses "MIT" "Apache"
+    archs "aarch64" "x86_64"
+    depends "git" \
+            "llvm" \
+            "make" \
+            "musl-dev" \
+            "rust"
+}
+
+source "${recipe.url}/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "8b861f9890ff98d9239dac30ed96fbd90a022b0a8922a821d4d87f4b8c963726"
+}
+
+build {
+    script r#"
+        export RUSTFLAGS="-C linker=clang -C target-feature=-crt-static"
+        cargo build --release --target ${recipe.arch}-unknown-linux-musl
+    "#
+}
+
+install {
+    script r#"
+        install -Dm755 target/${recipe.arch}-unknown-linux-musl/release/fd "${DESTDIR}/usr/bin/fd"
+    "#
+}
+
+package "fd" {
+    files "usr/bin/fd"
+}
