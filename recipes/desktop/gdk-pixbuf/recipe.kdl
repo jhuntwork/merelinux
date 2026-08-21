@@ -1,0 +1,59 @@
+recipe {
+    name "gdk-pixbuf"
+    version "2.42.12"
+    release 1
+    description "Image loading library"
+    url "https://gitlab.gnome.org/GNOME/gdk-pixbuf"
+    archs "aarch64" "x86_64"
+    licenses "LGPL-2.1"
+    depends "glib-dev" \
+            "libffi-dev" \
+            "libjpeg-turbo-dev" \
+            "libpng-dev" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pcre2" \
+            "pcre2-dev" \
+            "pkgconf" \
+            "shared-mime-info" \
+            "zlib-ng-dev"
+}
+
+source "https://download.gnome.org/sources/gdk-pixbuf/2.42/gdk-pixbuf-${recipe.version}.tar.xz" {
+    blake3 "edf54b48c7008c0ec52e0224b6a10ea680bbb94c23b71fbe5d19ae8e72706bc6"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddefault_library=both \
+            -Dintrospection=disabled \
+            -Dman=false \
+            --wrap-mode=nofallback
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "gdk-pixbuf" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/lib/gdk-pixbuf-2.0/" \
+          "usr/share/thumbnailers/"
+}
+
+package "gdk-pixbuf-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
