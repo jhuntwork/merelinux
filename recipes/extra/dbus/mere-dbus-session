@@ -1,0 +1,48 @@
+#!/bin/sh
+# Ensure a per-user D-Bus session bus exists, then optionally exec a command.
+#
+# Mere does not use systemd/user sessions, and dbus is built without X11
+# autolaunch. Desktop sessions should therefore create an explicit session bus
+# early and export the address to all child processes.
+
+set -eu
+
+if [ -z "${XDG_RUNTIME_DIR:-}" ]; then
+    user="${USER:-$(id -un)}"
+    XDG_RUNTIME_DIR="/run/xdg/${user}"
+    export XDG_RUNTIME_DIR
+fi
+
+if [ ! -d "$XDG_RUNTIME_DIR" ]; then
+    install -d -m 0700 "$XDG_RUNTIME_DIR"
+fi
+
+if [ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ]; then
+    DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
+    export DBUS_SESSION_BUS_ADDRESS
+fi
+
+case "$DBUS_SESSION_BUS_ADDRESS" in
+    unix:path=*)
+        bus_path=${DBUS_SESSION_BUS_ADDRESS#unix:path=}
+        ;;
+    *)
+        # Non-path addresses are valid, but this helper cannot cheaply test
+        # whether they exist. Trust the caller-provided address.
+        if [ "$#" -gt 0 ]; then
+            exec "$@"
+        fi
+        exit 0
+        ;;
+esac
+
+if [ ! -S "$bus_path" ]; then
+    rm -f "$bus_path"
+    dbus-daemon --session --fork \
+        --address="$DBUS_SESSION_BUS_ADDRESS" \
+        --print-pid=1 >"${XDG_RUNTIME_DIR}/dbus-session.pid"
+fi
+
+if [ "$#" -gt 0 ]; then
+    exec "$@"
+fi
