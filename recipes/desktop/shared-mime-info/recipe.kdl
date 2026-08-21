@@ -1,0 +1,46 @@
+recipe {
+    name "shared-mime-info"
+    version "2.4"
+    release 1
+    description "Core database of common MIME types"
+    url "https://gitlab.freedesktop.org/xdg/shared-mime-info"
+    archs "aarch64" "x86_64"
+    licenses "GPL-2.0"
+    depends "gettext" \
+            "glib-dev" \
+            "libxml2-dev" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pcre2" \
+            "pcre2-dev" \
+            "pkgconf"
+}
+
+source "https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/${recipe.version}/shared-mime-info-${recipe.version}.tar.gz" {
+    blake3 "ad130f2f923ab3d5455c643e6257abf3598339fdd134ad0fac4e5dbbbf070eb9"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Dupdate-mimedb=true
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+        mkdir -p "${DESTDIR}/usr/lib"
+        mv "${DESTDIR}/usr/share/pkgconfig" "${DESTDIR}/usr/lib/"
+    "#
+}
+
+package "shared-mime-info" {
+    files "usr/"
+}
