@@ -1,0 +1,34 @@
+recipe {
+    name "scdoc"
+    version "1.11.5"
+    release 1
+    description "A simple man page generator written in C"
+    url "https://git.sr.ht/~sircmpwn/scdoc"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "llvm" \
+            "make" \
+            "musl-dev"
+}
+
+source "https://git.sr.ht/~sircmpwn/scdoc/archive/${recipe.version}.tar.gz" {
+    blake3 "3fd37323fc413c43b7962de5f68213a1c244233b22a7020b015c73e710b0f7b4"
+}
+
+build {
+    script r#"
+        make CC=cc PREFIX=/usr
+    "#
+}
+
+install {
+    script r#"
+        make PREFIX=/usr DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "scdoc" {
+    files "usr/bin/" \
+          "usr/share/man/" \
+          "usr/share/pkgconfig/"
+}
