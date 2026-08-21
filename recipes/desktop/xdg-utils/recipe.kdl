@@ -1,0 +1,35 @@
+recipe {
+    name "xdg-utils"
+    version "1.2.1"
+    release 1
+    description "Desktop integration utilities including xdg-open"
+    url "https://gitlab.freedesktop.org/xdg/xdg-utils"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "busybox" \
+            "make"
+}
+
+source "https://gitlab.freedesktop.org/xdg/xdg-utils/-/archive/v${recipe.version}/xdg-utils-v${recipe.version}.tar.gz" {
+    blake3 "690e2518aac250626a1f2b080b78e102c34eed1962b275e6878233876b19883b"
+}
+
+build {
+    script r#"
+        ./configure --prefix=/usr
+        for xml in scripts/desc/*.xml; do
+            touch "scripts/$(basename "${xml%.xml}").txt"
+        done
+        make -C scripts scripts
+    "#
+}
+
+install {
+    script r#"
+        make -C scripts DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "xdg-utils" {
+    files "usr/bin/"
+}
