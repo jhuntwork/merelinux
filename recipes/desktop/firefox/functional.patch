@@ -1,0 +1,13 @@
+--- a/config/gcc-stl-wrapper.template.h
++++ b/config/gcc-stl-wrapper.template.h
+@@ -30,6 +30,10 @@
+ // limits) and bug 1694575 (iosfwd).
+ // Please be careful when adding more exceptions, especially regarding
+ // the header not directly or indirectly including <new>.
++#ifndef moz_dont_include_mozalloc_for_functional
++#  define moz_dont_include_mozalloc_for_functional
++#endif
++
+ #ifndef moz_dont_include_mozalloc_for_cstdlib
+ #  define moz_dont_include_mozalloc_for_cstdlib
+ #endif
