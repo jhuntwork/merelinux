@@ -1,10 +1,10 @@
 recipe {
     name "firefox"
     version "154.0"
-    release 1
+    release 2
     description "The Firefox web browser"
     url "https://www.mozilla.org"
-    archs "x86_64"
+    archs "aarch64" "x86_64"
     licenses "MPL-2.0"
     depends "alsa-lib" \
             "alsa-lib-dev" \
@@ -35,7 +35,6 @@ recipe {
             "make" \
             "mimalloc-dev" \
             "musl-dev" \
-            "nasm" \
             "nodejs" \
             "pango-dev" \
             "patch" \
@@ -48,6 +47,7 @@ recipe {
             "wayland-dev" \
             "wayland-protocols-dev" \
             "zlib-ng-dev"
+    depends arch="x86_64" "nasm"
 }
 
 source "https://archive.mozilla.org/pub/firefox/releases/${recipe.version}/source/firefox-${recipe.version}.source.tar.xz" {
