@@ -1,0 +1,94 @@
+recipe {
+    name "pipewire"
+    version "1.6.5"
+    release 7
+    description "Multimedia processing graphs"
+    url "https://pipewire.org"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "alsa-lib" \
+            "alsa-lib-dev" \
+            "flac-dev" \
+            "glib-dev" \
+            "libdbus-dev" \
+            "libncurses" \
+            "libncurses-dev" \
+            "libogg-dev" \
+            "libopus-dev" \
+            "libsndfile-dev" \
+            "libudev-zero-dev" \
+            "libvorbis-dev" \
+            "linux-headers" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "patch" \
+            "pcre2" \
+            "pcre2-dev" \
+            "pkgconf" \
+            "readline" \
+            "readline-dev"
+}
+
+source "https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/${recipe.version}/pipewire-${recipe.version}.tar.gz" {
+    blake3 "42affc6fc101274ec734c15271b0105d598262b863dc3d8ce968b7dc4d4c0826"
+}
+
+source "libudev-zero-enumerate.patch" {
+    blake3 "ae3ecbad6d20a522839d7afb6b70883b720ec266c439cecc06ff38bcbcbcd180"
+}
+
+prepare {
+    script r#"
+        patch -p1 < "${MERE_SOURCES_DIR}/libudev-zero-enumerate.patch"
+    "#
+}
+
+build {
+    script r#"
+        export LDFLAGS="$LDFLAGS -lncursesw"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddefault_library=both \
+            -Dpipewire-alsa=enabled \
+            -Dpipewire-jack=disabled \
+            -Dpipewire-v4l2=enabled \
+            -Dlibpulse=disabled \
+            -Dgstreamer=disabled \
+            -Dlogind=disabled \
+            -Dselinux=disabled \
+            -Dtests=disabled \
+            -Dexamples=disabled \
+            -Ddocs=disabled \
+            -Dman=disabled \
+            -Dsession-managers=[]
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "pipewire" {
+    files "etc/security/" \
+          "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/lib/alsa-lib/" \
+          "usr/lib/pipewire-0.3/" \
+          "usr/lib/spa-0.2/" \
+          "usr/lib/udev/" \
+          "usr/share/alsa/" \
+          "usr/share/alsa-card-profile/" \
+          "usr/share/pipewire/"
+}
+
+package "pipewire-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}

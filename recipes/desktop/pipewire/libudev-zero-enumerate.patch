@@ -1,0 +1,28 @@
+--- a/spa/plugins/alsa/alsa-udev.c
++++ b/spa/plugins/alsa/alsa-udev.c
+@@ -165,9 +165,6 @@
+ 	if ((str = udev_device_get_property_value(udev_device, "SOUND_CLASS")) && spa_streq(str, "modem"))
+ 		return SPA_ID_INVALID;
+ 
+-	if (udev_device_get_property_value(udev_device, "SOUND_INITIALIZED") == NULL)
+-		return SPA_ID_INVALID;
+-
+ 	if ((str = udev_device_get_property_value(udev_device, "DEVPATH")) == NULL)
+ 		return SPA_ID_INVALID;
+ 
+@@ -984,6 +981,15 @@
+ 
+ 		process_udev_device(this, ACTION_CHANGE, udev_device);
+ 
++		/* libudev-zero only enumerates devices with char dev nodes
++		 * (controlC0, pcmC0D0p, etc.) but not the parent card device.
++		 * Process the parent so get_card_nr() sees a DEVPATH ending
++		 * in /card<N>. See: github.com/illiliti/libudev-zero/issues/26 */
++		{
++			struct udev_device *pdev = udev_device_get_parent(udev_device);
++			if (pdev)
++				process_udev_device(this, ACTION_CHANGE, pdev);
++		}
+ 		udev_device_unref(udev_device);
+ 	}
+ 	udev_enumerate_unref(enumerate);
