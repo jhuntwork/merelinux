@@ -1,0 +1,85 @@
+recipe {
+    name "pulseaudio"
+    version "17.0"
+    release 1
+    description "Client libraries for the PulseAudio sound server"
+    url "https://www.freedesktop.org/wiki/Software/PulseAudio/"
+    archs "aarch64" "x86_64"
+    licenses "LGPL-2.1-or-later"
+    depends "libdbus-dev" \
+            "libsndfile-dev" \
+            "llvm" \
+            "m4" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf"
+}
+
+source "https://www.freedesktop.org/software/pulseaudio/releases/pulseaudio-${recipe.version}.tar.xz" {
+    blake3 "e56408636f88e3c8b7575795722ebccd7cadb032f7cefda3d055af549b34df4f"
+}
+
+build {
+    script r#"
+        export LDFLAGS="$LDFLAGS -Wl,--undefined-version"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddaemon=false \
+            -Dclient=true \
+            -Ddoxygen=false \
+            -Dman=false \
+            -Dtests=false \
+            -Ddbus=enabled \
+            -Dglib=disabled \
+            -Dalsa=disabled \
+            -Dasyncns=disabled \
+            -Davahi=disabled \
+            -Dbluez5=disabled \
+            -Dbluez5-gstreamer=disabled \
+            -Dconsolekit=disabled \
+            -Delogind=disabled \
+            -Dfftw=disabled \
+            -Dgsettings=disabled \
+            -Dgstreamer=disabled \
+            -Dgtk=disabled \
+            -Djack=disabled \
+            -Dlirc=disabled \
+            -Dopenssl=disabled \
+            -Dorc=disabled \
+            -Doss-output=disabled \
+            -Dsoxr=disabled \
+            -Dspeex=disabled \
+            -Dsystemd=disabled \
+            -Dtcpwrap=disabled \
+            -Dudev=disabled \
+            -Dvalgrind=disabled \
+            -Dx11=disabled \
+            -Dwebrtc-aec=disabled
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "libpulse" {
+    files "etc/pulse/" \
+          "usr/bin/" \
+          "usr/lib/libpulse*.so*" \
+          "usr/lib/pulseaudio/" \
+          "usr/share/bash-completion/" \
+          "usr/share/zsh/"
+}
+
+package "libpulse-dev" {
+    files "usr/include/pulse/" \
+          "usr/lib/cmake/PulseAudio/" \
+          "usr/lib/pkgconfig/libpulse*.pc" \
+          "usr/share/vala/"
+}
