@@ -1,0 +1,45 @@
+recipe {
+    name "alsa-lib"
+    version "1.2.15.3"
+    release 1
+    description "The Advanced Linux Sound Architecture library"
+    url "https://alsa-project.org"
+    archs "aarch64" "x86_64"
+    licenses "LGPL-2.1"
+    depends "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://www.alsa-project.org/files/pub/lib/alsa-lib-${recipe.version}.tar.bz2" {
+    blake3 "5ff23aeab7b00ba7c5113d52b5ff491515566a7fad412f8c467511948707003c"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-shared
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "alsa-lib" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/share/alsa/"
+}
+
+package "alsa-lib-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/aclocal/"
+}
