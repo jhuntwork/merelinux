@@ -1,0 +1,91 @@
+recipe {
+    name "dbus"
+    version "1.16.2"
+    release 3
+    description "A message bus system for inter-process communication"
+    url "https://www.freedesktop.org/wiki/Software/dbus/"
+    licenses "AFL-2.1" "GPL-2.0-or-later"
+    archs "aarch64" "x86_64"
+    depends "expat-dev" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf"
+}
+
+source "https://dbus.freedesktop.org/releases/dbus/dbus-${recipe.version}.tar.xz" {
+    blake3 "b1d1f22858a8f04665e5dca29d194f892620f00fd3e3f4e89dd208e78868436e"
+}
+
+source "mere-dbus-session" {
+    blake3 "9c7a07804c1efa86b1ad6290cdbca13dcae2d57cd5d94ec44e6bc575edc43575"
+}
+
+build {
+    script r#"
+        meson setup build-static \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --localstatedir=/var \
+            -Dsystemd=disabled \
+            -Dapparmor=disabled \
+            -Dselinux=disabled \
+            -Dmodular_tests=disabled \
+            -Ddoxygen_docs=disabled \
+            -Dducktype_docs=disabled \
+            -Dxml_docs=disabled \
+            -Ddefault_library=static \
+            -Dx11_autolaunch=disabled
+        ninja -C build-static
+        meson setup build-shared \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --localstatedir=/var \
+            -Dsystemd=disabled \
+            -Dapparmor=disabled \
+            -Dselinux=disabled \
+            -Dmodular_tests=disabled \
+            -Ddoxygen_docs=disabled \
+            -Dducktype_docs=disabled \
+            -Dxml_docs=disabled \
+            -Dx11_autolaunch=disabled
+        ninja -C build-shared
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build-static install
+        ninja -C build-shared install
+
+        install -Dm755 "${MERE_SOURCES_DIR}/mere-dbus-session" \
+            "${DESTDIR}/usr/bin/mere-dbus-session"
+    "#
+}
+
+package "dbus" {
+    files "etc/" \
+          "usr/bin/" \
+          "usr/libexec/" \
+          "usr/share/dbus-1/" \
+          "usr/share/xml/"
+
+    service "dbus" {
+        type "daemon"
+        command "if { install -d /run/dbus } dbus-daemon --system --nofork --nopidfile --nosyslog --address=unix:path=/run/dbus/system_bus_socket"
+    }
+}
+
+package "libdbus" {
+    files "usr/lib/lib*.so*" \
+          "usr/lib/dbus-1.0/"
+}
+
+package "libdbus-dev" {
+    files "usr/lib/cmake/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/include/"
+}
