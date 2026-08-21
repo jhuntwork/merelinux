@@ -1,0 +1,46 @@
+recipe {
+    name "fribidi"
+    version "1.0.16"
+    release 1
+    description "The Free Implementation of the Unicode Bidirectional Algorithm"
+    url "https://github.com/fribidi/fribidi"
+    archs "aarch64" "x86_64"
+    licenses "LGPL-2.1"
+    depends "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja"
+}
+
+source "https://github.com/fribidi/fribidi/releases/download/v${recipe.version}/fribidi-${recipe.version}.tar.xz" {
+    blake3 "c16ee250f73f149d7d52dc7d285eb73ac755bad7907d237391e23f429b2b71d5"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Ddefault_library=both \
+            -Dtests=false \
+            -Ddocs=false
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "fribidi" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*"
+}
+
+package "fribidi-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
