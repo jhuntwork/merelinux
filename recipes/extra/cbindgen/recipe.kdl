@@ -1,0 +1,33 @@
+recipe {
+    name "cbindgen"
+    version "0.29.4"
+    release 1
+    description "Generates C/C++ headers for Rust libraries with a public C API"
+    url "https://github.com/mozilla/cbindgen"
+    archs "aarch64" "x86_64"
+    licenses "MPL-2.0"
+    depends "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "rust"
+}
+
+source "https://github.com/mozilla/cbindgen/archive/refs/tags/${recipe.version}.tar.gz" {
+    blake3 "4d023480d34d55b19ded65440e501c4ba17ee40a48682f7185f83834e937ecda"
+}
+
+build {
+    script r#"
+        cargo build --release
+    "#
+}
+
+install {
+    script r#"
+        install -Dm755 target/release/cbindgen "${DESTDIR}/usr/bin/cbindgen"
+    "#
+}
+
+package "cbindgen" {
+    files "usr/bin/"
+}
