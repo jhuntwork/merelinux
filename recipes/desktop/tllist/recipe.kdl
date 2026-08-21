@@ -1,0 +1,38 @@
+recipe {
+    name "tllist"
+    version "1.1.0"
+    release 1
+    description "A typed linked list C header library"
+    url "https://codeberg.org/dnkl/tllist"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "llvm" \
+            "meson" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf"
+}
+
+source "https://codeberg.org/dnkl/tllist/archive/${recipe.version}.tar.gz" {
+    blake3 "8822c938a0aa3136f49a563099051b6c328b202257b803ae4a5c3db962bc9a34"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="${DESTDIR}" ninja -C build/ install
+    "#
+}
+
+package "tllist-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/"
+}
