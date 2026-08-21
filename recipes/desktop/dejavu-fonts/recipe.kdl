@@ -1,0 +1,26 @@
+recipe {
+    name "dejavu-fonts"
+    version "2.37"
+    release 1
+    description "DejaVu font family (broad Unicode coverage, common fallback)"
+    url "https://dejavu-fonts.github.io/"
+    archs "aarch64" "x86_64"
+    licenses "Bitstream-Vera"
+    depends "busybox"
+}
+
+source "https://github.com/dejavu-fonts/dejavu-fonts/releases/download/version_2_37/dejavu-fonts-ttf-${recipe.version}.tar.bz2" {
+    blake3 "b702bac8a0f8e0802758549da3b4d8041c3c83c3894e1e8a960eab53af18cce8"
+}
+
+install {
+    script r#"
+        dest="${DESTDIR}/usr/share/fonts/dejavu"
+        mkdir -p "$dest"
+        cp ttf/*.ttf "$dest/"
+    "#
+}
+
+package "dejavu-fonts" {
+    files "usr/share/fonts/"
+}
