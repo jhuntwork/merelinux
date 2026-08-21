@@ -1,0 +1,46 @@
+recipe {
+    name "libvorbis"
+    version "1.3.7"
+    release 1
+    description "General-purpose compressed audio format"
+    url "https://xiph.org"
+    archs "aarch64" "x86_64"
+    licenses "BSD"
+    depends "busybox" \
+            "libogg-dev" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "http://downloads.xiph.org/releases/vorbis/libvorbis-${recipe.version}.tar.xz" {
+    blake3 "c67f3f74ec26d93a5571c4404a64eb6e6587d7d77b46b552f7b410f5bc5b1f03"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-shared \
+            --enable-static
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "libvorbis" {
+    files "usr/lib/lib*.so*"
+}
+
+package "libvorbis-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/aclocal/"
+}
