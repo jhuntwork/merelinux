@@ -10,7 +10,7 @@ jobs:
   validate:
     runs-on: ubuntu-24.04
     container:
-      image: mere/ci:v0.20.1
+      image: mere/ci:v0.21.0
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
