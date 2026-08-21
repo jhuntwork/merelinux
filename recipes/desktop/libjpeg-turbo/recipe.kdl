@@ -1,7 +1,7 @@
 recipe {
     name "libjpeg-turbo"
     version "3.1.4.1"
-    release 2
+    release 3
     description "JPEG image codec with SIMD acceleration"
     url "https://libjpeg-turbo.org/"
     archs "aarch64" "x86_64"
@@ -10,9 +10,8 @@ recipe {
             "llvm" \
             "mimalloc-dev" \
             "musl-dev" \
-            "nasm" \
             "ninja"
-    // Need to figure out arch-specific depends
+    depends arch="x86_64" "nasm"
 }
 
 source "https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/${recipe.version}/libjpeg-turbo-${recipe.version}.tar.gz" {
