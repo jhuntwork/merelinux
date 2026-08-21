@@ -1,7 +1,7 @@
 recipe {
     name "dbus"
     version "1.16.2"
-    release 3
+    release 4
     description "A message bus system for inter-process communication"
     url "https://www.freedesktop.org/wiki/Software/dbus/"
     licenses "AFL-2.1" "GPL-2.0-or-later"
