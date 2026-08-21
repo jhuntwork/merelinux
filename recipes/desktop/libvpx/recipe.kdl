@@ -1,7 +1,7 @@
 recipe {
     name "libvpx"
     version "1.16.0"
-    release 1
+    release 2
     description "WebM VP8/VP9 Codec SDK"
     url "https://www.webmproject.org/code/"
     archs "aarch64" "x86_64"
@@ -11,8 +11,8 @@ recipe {
             "make" \
             "mimalloc-dev" \
             "musl-dev" \
-            "nasm" \
             "perl"
+    depends arch="x86_64" "nasm"
 }
 
 source "https://github.com/webmproject/libvpx/archive/v${recipe.version}.tar.gz" {
@@ -22,6 +22,8 @@ source "https://github.com/webmproject/libvpx/archive/v${recipe.version}.tar.gz"
 build {
     script r#"
         sed -i 's/diff --version/command -v diff/' configure
+        AS_FLAG=""
+        [ "$(uname -m)" = "x86_64" ] && AS_FLAG="--as=nasm"
         CC=clang CXX=clang++ ./configure \
             --prefix=/usr \
             --enable-shared \
@@ -37,7 +39,7 @@ build {
             --disable-unit-tests \
             --disable-install-srcs \
             --disable-install-bins \
-            --as=nasm
+            $AS_FLAG
         make
     "#
 }
