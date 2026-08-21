@@ -1,0 +1,53 @@
+recipe {
+    name "libsndfile"
+    version "1.2.2"
+    release 1
+    description "C library for reading and writing sampled sound files"
+    url "https://github.com/libsndfile/libsndfile"
+    archs "aarch64" "x86_64"
+    licenses "LGPL-2.1"
+    depends "alsa-lib-dev" \
+            "busybox" \
+            "flac-dev" \
+            "libogg-dev" \
+            "libopus-dev" \
+            "libvorbis-dev" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "python"
+}
+
+source "https://github.com/libsndfile/libsndfile/releases/download/${recipe.version}/libsndfile-${recipe.version}.tar.xz" {
+    blake3 "fc805e696ee73ee24377329683b7e00af0db78727af553e74840cc813969ba77"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr \
+            --enable-shared \
+            --enable-static
+        make V=1
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "libsndfile" {
+    files "usr/bin/" \
+          "usr/lib/lib*.so*" \
+          "usr/share/man/man1/"
+}
+
+package "libsndfile-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
