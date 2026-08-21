@@ -20,7 +20,7 @@ jobs:
   detect:
     runs-on: ubuntu-24.04-arm
     container:
-      image: mere/ci:v0.18.6
+      image: mere/ci:v0.20.1
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       MANUAL_RECIPES: ${{ inputs.recipes }}
@@ -120,7 +120,7 @@ jobs:
     if: needs.detect.outputs.has_recipes == 'true'
     runs-on: ${{ matrix.runner }}
     container:
-      image: mere/ci:v0.18.6
+      image: mere/ci:v0.20.1
       options: --privileged --cpus=4 --memory=12g
     strategy:
       matrix: ${{ fromJSON(needs.detect.outputs.matrix) }}

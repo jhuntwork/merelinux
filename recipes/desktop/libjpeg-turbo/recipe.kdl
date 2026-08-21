@@ -1,7 +1,7 @@
 recipe {
     name "libjpeg-turbo"
     version "3.1.4.1"
-    release 1
+    release 2
     description "JPEG image codec with SIMD acceleration"
     url "https://libjpeg-turbo.org/"
     archs "aarch64" "x86_64"
