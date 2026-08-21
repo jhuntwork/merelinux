@@ -1,0 +1,156 @@
+recipe {
+    name "firefox"
+    version "154.0"
+    release 1
+    description "The Firefox web browser"
+    url "https://www.mozilla.org"
+    archs "x86_64"
+    licenses "MPL-2.0"
+    depends "alsa-lib" \
+            "alsa-lib-dev" \
+            "atk-dev" \
+            "cairo-dev" \
+            "cbindgen" \
+            "expat-dev" \
+            "fontconfig-dev" \
+            "freetype-dev" \
+            "fribidi-dev" \
+            "gdk-pixbuf-dev" \
+            "glib-dev" \
+            "gtk+-dev" \
+            "harfbuzz-dev" \
+            "libclang" \
+            "libdbus-dev" \
+            "libepoxy-dev" \
+            "libffi-dev" \
+            "libjpeg-turbo-dev" \
+            "libpng" \
+            "libpng-dev" \
+            "libpulse-dev" \
+            "libvpx-dev" \
+            "libxkbcommon-dev" \
+            "linux-headers" \
+            "llvm" \
+            "llvm-dev" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "nasm" \
+            "nodejs" \
+            "pango-dev" \
+            "patch" \
+            "pcre2-dev" \
+            "pixman-dev" \
+            "pkgconf" \
+            "python" \
+            "rust" \
+            "shared-mime-info" \
+            "wayland-dev" \
+            "wayland-protocols-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://archive.mozilla.org/pub/firefox/releases/${recipe.version}/source/firefox-${recipe.version}.source.tar.xz" {
+    blake3 "fa1958ec5596cbe02fbcb39040dd9b2da6341f4cc3e8770780d39131bfc02dc3"
+}
+
+source "firefox.desktop" {
+    blake3 "628096d0022b6e564d0972a5a3282db9886a7714d2d46f5b96fadfd51f793698"
+}
+
+prepare {
+    script r#"
+        # pid_t missing in libwebrtc desktop capture header
+        sed -i '1i #include <sys/types.h>' \
+            third_party/libwebrtc/modules/desktop_capture/desktop_capturer.h
+
+        # libc++ requires explicit construction, not brace init with non-aggregates
+        sed -i 's/push_back({/emplace_back(Source{/g' \
+            third_party/libwebrtc/modules/desktop_capture/fake_desktop_capturer.cc
+
+        # musl: sys/prctl.h and linux/prctl.h both define prctl_mm_map
+        sed -i '/#include <linux\/prctl.h>/d' \
+            third_party/libwebrtc/rtc_base/platform_thread_types.cc
+
+        # Allow static libc++ linking — safe on mere where everything
+        # is built with the same toolchain
+        sed -i '/Firefox does not support linking statically/s@die.*@return True@' \
+            build/moz.configure/toolchain.configure \
+            build/moz.configure/flags.configure
+    "#
+}
+
+build {
+    script r#"
+        export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
+        export MOZ_NOSPAM=1
+        export MOZBUILD_STATE_PATH="${PWD}/.mozbuild"
+        export CXXSTDLIB=c++
+        export LDFLAGS="-Wl,-rpath=/usr/lib/firefox,--enable-new-dtags -static-libstdc++"
+
+        cat > .mozconfig << 'EOF'
+ac_add_options --prefix=/usr
+ac_add_options --libdir=/usr/lib
+ac_add_options --host=${recipe.arch}-unknown-linux-musl
+ac_add_options --target=${recipe.arch}-unknown-linux-musl
+ac_add_options --disable-crashreporter
+ac_add_options --disable-debug
+ac_add_options --disable-debug-symbols
+ac_add_options --disable-jemalloc
+ac_add_options --disable-necko-wifi
+ac_add_options --disable-profiling
+ac_add_options --disable-tests
+ac_add_options --disable-updater
+ac_add_options --enable-audio-backends=pulseaudio,alsa
+ac_add_options --enable-application=browser
+ac_add_options --enable-dbus
+ac_add_options --enable-default-toolkit=cairo-gtk3-wayland
+ac_add_options --enable-official-branding
+ac_add_options --enable-optimize
+ac_add_options --enable-release
+ac_add_options --enable-rust-simd
+ac_add_options --with-system-ffi
+ac_add_options --with-system-jpeg
+ac_add_options --with-system-libvpx
+ac_add_options --with-system-pixman
+ac_add_options --with-system-png
+ac_add_options --with-system-zlib
+ac_add_options --with-libclang-path=/usr/lib
+ac_add_options --without-wasm-sandboxed-libraries
+
+mk_add_options MOZ_CRASHREPORTER=0
+mk_add_options MOZ_DATA_REPORTING=0
+mk_add_options MOZ_SERVICES_HEALTHREPORT=0
+mk_add_options MOZ_TELEMETRY_REPORTING=0
+EOF
+        ./mach build
+    "#
+}
+
+install {
+    script r#"
+        ./mach install
+
+        install -Dm644 "${MERE_SOURCES_DIR}/firefox.desktop" \
+            "${DESTDIR}/usr/share/applications/firefox.desktop"
+
+        # Install desktop entries.
+        for size in 16 32 48 64 128; do
+            install -Dm644 \
+                "${DESTDIR}/usr/lib/firefox/browser/chrome/icons/default/default${size}.png" \
+                "${DESTDIR}/usr/share/icons/hicolor/${size}x${size}/apps/firefox.png"
+        done
+
+        # musl: never auto-download Cisco's glibc OpenH264 GMP (it can't load
+        # on musl and shadows the system musl build in gmp-gmpopenh264/). The
+        # gmpopenh264 package ships the working plugin; keep the bundled one.
+        install -Dm644 /dev/stdin \
+            "${DESTDIR}/usr/lib/firefox/browser/defaults/preferences/mere.js" << 'EOF'
+pref("media.gmp-gmpopenh264.autoupdate", false);
+EOF
+    "#
+}
+
+package "firefox" {
+    files "usr/"
+}
