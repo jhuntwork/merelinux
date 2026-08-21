@@ -1,0 +1,37 @@
+recipe {
+    name "hicolor-icon-theme"
+    version "0.18"
+    release 1
+    description "Default fallback theme for XDG icon-theme implementations"
+    url "https://www.freedesktop.org/wiki/Software/icon-theme/"
+    archs "aarch64" "x86_64"
+    licenses "GPL-2.0"
+    depends "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja"
+}
+
+source "https://icon-theme.freedesktop.org/releases/hicolor-icon-theme-${recipe.version}.tar.xz" {
+    blake3 "062e251872a23ecf47a127293ae9abf98a1c912f82f819d0cebccf8d9415deb2"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+    "#
+}
+
+package "hicolor-icon-theme" {
+    files "usr/"
+}
