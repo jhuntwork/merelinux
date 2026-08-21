@@ -1,0 +1,64 @@
+recipe {
+    name "fcft"
+    version "3.3.3"
+    release 1
+    description "Simple library for font loading and glyph rasterization"
+    url "https://codeberg.org/dnkl/fcft"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "expat-dev" \
+            "fontconfig-dev" \
+            "freetype-dev" \
+            "harfbuzz-dev" \
+            "libpng-dev" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pixman-dev" \
+            "pkgconf" \
+            "python" \
+            "scdoc" \
+            "tllist-dev" \
+            "utf8proc-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://codeberg.org/dnkl/fcft/archive/${recipe.version}.tar.gz" {
+    blake3 "378925bec7bfbc7ad45beb076811d099cefb72815f3315f4bcf3e503bc25bb2a"
+}
+
+build {
+    script r#"
+        # grapheme + run shaping (harfbuzz + utf8proc) for correct emoji and
+        # complex-script rendering; SVG glyphs via bundled nanosvg (no extra dep).
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddefault_library=shared \
+            -Ddocs=enabled \
+            -Dgrapheme-shaping=enabled \
+            -Drun-shaping=enabled \
+            -Dsvg-backend=nanosvg \
+            -Dtest-text-shaping=false \
+            -Dexamples=false
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="${DESTDIR}" ninja -C build/ install
+    "#
+}
+
+package "fcft" {
+    files "usr/lib/lib*.so*"
+}
+
+package "fcft-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/" \
+          "usr/share/man/"
+}
