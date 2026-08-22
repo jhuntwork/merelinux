@@ -1,0 +1,50 @@
+recipe {
+    name "noto-sans-fonts"
+    version "0"
+    release 1
+    description "Noto Sans + Math/Symbols/Symbols2 variable fonts (broad Unicode fallback coverage)"
+    url "https://github.com/notofonts/latin-greek-cyrillic"
+    archs "aarch64" "x86_64"
+    licenses "OFL-1.1"
+    depends "busybox"
+}
+
+// Pinned to a specific google/fonts mirror commit for reproducibility.
+source "https://raw.githubusercontent.com/google/fonts/7ff85c87f93ea6cca5f41c69f2e4edcb90240f26/ofl/notosans/NotoSans%5Bwdth,wght%5D.ttf" {
+    save-as "NotoSans[wdth,wght].ttf"
+    blake3 "23c7a5412e9fc7cceeaf3b4406696d41b902478298c7507e9c2f04b05a111290"
+}
+
+source "https://raw.githubusercontent.com/google/fonts/7ff85c87f93ea6cca5f41c69f2e4edcb90240f26/ofl/notosans/NotoSans-Italic%5Bwdth,wght%5D.ttf" {
+    save-as "NotoSans-Italic[wdth,wght].ttf"
+    blake3 "84319c4a51884960c3225583f574e19f97bbba93acd87210f5a8995a2e84c4ec"
+}
+
+source "https://raw.githubusercontent.com/google/fonts/7ff85c87f93ea6cca5f41c69f2e4edcb90240f26/ofl/notosansmath/NotoSansMath-Regular.ttf" {
+    blake3 "2d3c7a443c7d1c27623cc976df28531ab770a3a60e2e8ffec8727aaa8ec7f519"
+}
+
+source "https://raw.githubusercontent.com/google/fonts/7ff85c87f93ea6cca5f41c69f2e4edcb90240f26/ofl/notosanssymbols/NotoSansSymbols%5Bwght%5D.ttf" {
+    save-as "NotoSansSymbols[wght].ttf"
+    blake3 "4492b0f3a081828ddb9d5020ec35facb654183da019e5d2d03ad5e700a77f3d7"
+}
+
+source "https://raw.githubusercontent.com/google/fonts/7ff85c87f93ea6cca5f41c69f2e4edcb90240f26/ofl/notosanssymbols2/NotoSansSymbols2-Regular.ttf" {
+    blake3 "db33f1bed45033b74fc48220d325f738f70eade630c5c3baa4160d98e7f843bd"
+}
+
+install {
+    script r#"
+        dest="${DESTDIR}/usr/share/fonts/noto-sans"
+        mkdir -p "$dest"
+        cp "${MERE_SOURCES_DIR}/NotoSans[wdth,wght].ttf" "$dest/"
+        cp "${MERE_SOURCES_DIR}/NotoSans-Italic[wdth,wght].ttf" "$dest/"
+        cp "${MERE_SOURCES_DIR}/NotoSansMath-Regular.ttf" "$dest/"
+        cp "${MERE_SOURCES_DIR}/NotoSansSymbols[wght].ttf" "$dest/"
+        cp "${MERE_SOURCES_DIR}/NotoSansSymbols2-Regular.ttf" "$dest/"
+    "#
+}
+
+package "noto-sans-fonts" {
+    files "usr/share/fonts/"
+}
