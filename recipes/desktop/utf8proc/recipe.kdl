@@ -1,0 +1,38 @@
+recipe {
+    name "utf8proc"
+    version "2.11.3"
+    release 1
+    description "Library for processing UTF-8 encoded Unicode strings"
+    url "https://juliastrings.github.io/utf8proc/"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "llvm" \
+            "make" \
+            "musl-dev"
+}
+
+source "https://github.com/JuliaStrings/utf8proc/archive/v${recipe.version}.tar.gz" {
+    blake3 "3607ef0c754e7e77d48b02d85e50d84e41af81451b96906c99f426f9bfa958ab"
+}
+
+build {
+    script r#"
+        make CC=cc prefix=/usr
+    "#
+}
+
+install {
+    script r#"
+        make CC=cc prefix=/usr DESTDIR="${DESTDIR}" install
+    "#
+}
+
+package "utf8proc" {
+    files "usr/lib/lib*.so*"
+}
+
+package "utf8proc-dev" {
+    files "usr/include/" \
+          "usr/lib/lib*.a" \
+          "usr/lib/pkgconfig/"
+}
