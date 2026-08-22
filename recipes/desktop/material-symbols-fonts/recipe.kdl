@@ -1,0 +1,28 @@
+recipe {
+    name "material-symbols-fonts"
+    version "0"
+    release 1
+    description "Material Symbols Rounded variable icon font"
+    url "https://github.com/google/material-design-icons"
+    archs "aarch64" "x86_64"
+    licenses "Apache-2.0"
+    depends "busybox"
+}
+
+// Pinned to a specific commit for reproducibility; upstream has no tagged
+// font releases, just a continuously-updated variablefont/ directory.
+source "https://raw.githubusercontent.com/google/material-design-icons/528cb964c01fb2b09bc3b9208f82b6d8f8c1c1e2/variablefont/MaterialSymbolsRounded%5BFILL,GRAD,opsz,wght%5D.ttf" {
+    save-as "MaterialSymbolsRounded.ttf"
+    blake3 "d6d672d5984efd3821ffb6620d243caf16e0e10f2dc39a6a51775c8b4edb2893"
+}
+
+install {
+    script r#"
+        install -Dm644 "${MERE_SOURCES_DIR}/MaterialSymbolsRounded.ttf" \
+            "${DESTDIR}/usr/share/fonts/material-symbols/MaterialSymbolsRounded.ttf"
+    "#
+}
+
+package "material-symbols-fonts" {
+    files "usr/share/fonts/"
+}
