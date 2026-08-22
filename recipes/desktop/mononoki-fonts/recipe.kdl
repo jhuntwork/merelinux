@@ -1,0 +1,26 @@
+recipe {
+    name "mononoki-fonts"
+    version "1.6"
+    release 1
+    description "mononoki monospace programming font"
+    url "https://github.com/madmalik/mononoki"
+    archs "aarch64" "x86_64"
+    licenses "OFL-1.1"
+    depends "busybox"
+}
+
+source "https://github.com/madmalik/mononoki/releases/download/${recipe.version}/mononoki.zip" {
+    blake3 "c3142353efa09035c4568fa6dea1d01c98e9cd1e55139f9ca4b4dcce09412393"
+}
+
+install {
+    script r#"
+        dest="${DESTDIR}/usr/share/fonts/mononoki"
+        mkdir -p "$dest"
+        cp mononoki-*.otf "$dest/"
+    "#
+}
+
+package "mononoki-fonts" {
+    files "usr/share/fonts/"
+}
