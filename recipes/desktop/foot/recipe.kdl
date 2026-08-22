@@ -1,0 +1,75 @@
+recipe {
+    name "foot"
+    version "1.27.0"
+    release 1
+    description "A fast, lightweight and minimalistic Wayland terminal emulator"
+    url "https://codeberg.org/dnkl/foot"
+    archs "aarch64" "x86_64"
+    licenses "MIT"
+    depends "expat-dev" \
+            "fcft" \
+            "fcft-dev" \
+            "fontconfig" \
+            "fontconfig-dev" \
+            "freetype" \
+            "freetype-dev" \
+            "harfbuzz" \
+            "harfbuzz-dev" \
+            "libffi-dev" \
+            "libpng-dev" \
+            "libxkbcommon" \
+            "libxkbcommon-dev" \
+            "linux-headers" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ncurses" \
+            "ninja" \
+            "pixman" \
+            "pixman-dev" \
+            "pkgconf" \
+            "python" \
+            "scdoc" \
+            "tllist-dev" \
+            "utf8proc" \
+            "utf8proc-dev" \
+            "wayland" \
+            "wayland-dev" \
+            "wayland-protocols-dev" \
+            "zlib-ng-dev"
+}
+
+source "https://codeberg.org/dnkl/foot/archive/${recipe.version}.tar.gz" {
+    blake3 "34f92e0a50ca36b7de72971eddda215b7222462e2c7365e68e9c14961066c718"
+}
+
+build {
+    script r#"
+        # No systemd units are installed: foot gates them on a systemd
+        # pkg-config lookup that does not resolve on Mere.
+        # tic (from ncurses) generates the terminfo entries.
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Ddocs=enabled \
+            -Dime=true \
+            -Dgrapheme-clustering=enabled \
+            -Dterminfo=enabled \
+            -Dthemes=true \
+            -Dtests=false
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="${DESTDIR}" ninja -C build/ install
+    "#
+}
+
+package "foot" {
+    files "etc/" \
+          "usr/bin/" \
+          "usr/share/"
+}
