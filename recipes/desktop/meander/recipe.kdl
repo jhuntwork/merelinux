@@ -1,7 +1,7 @@
 recipe {
     name "meander"
     version "0.1.0"
-    release 1
+    release 2
     description "An experimental window manager for the River compositor"
     url "https://github.com/jhuntwork/meander"
     archs "aarch64" "x86_64"
@@ -17,8 +17,8 @@ recipe {
             "zig=0.16.0"
 }
 
-source "https://github.com/jhuntwork/meander/archive/c08e27e8e0c4b7be90c4608762fc5ada31dab444.tar.gz" {
-    blake3 "325da968bfb37a885b10973de842dbef2d50ecf6dd36d9b261ea9aacdf50f95d"
+source "https://github.com/jhuntwork/meander/archive/ab66bb6.tar.gz" {
+    blake3 "e7daefe0153b9f0e2c3ce7034277451d9a5ae4235346d24331e86586333a95d3"
 }
 
 install {
