@@ -1,7 +1,7 @@
 recipe {
     name "fontconfig"
     version "2.16.0"
-    release 2
+    release 3
     description "Library for configuring and customizing font access"
     url "https://www.freedesktop.org/wiki/Software/fontconfig/"
     archs "aarch64" "x86_64"
