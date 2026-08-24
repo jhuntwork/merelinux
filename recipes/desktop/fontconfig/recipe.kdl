@@ -1,7 +1,7 @@
 recipe {
     name "fontconfig"
     version "2.16.0"
-    release 3
+    release 4
     description "Library for configuring and customizing font access"
     url "https://www.freedesktop.org/wiki/Software/fontconfig/"
     archs "aarch64" "x86_64"
@@ -51,6 +51,7 @@ install {
 
         mkdir -p "${DESTDIR}/etc-defaults/fonts/conf.d" \
                  "${DESTDIR}/usr/lib/fontconfig/cache"
+        touch "${DESTDIR}/usr/lib/fontconfig/cache/.keep"
         cat > "${DESTDIR}/etc-defaults/fonts/conf.d/00-mere-cache.conf" <<'EOF'
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
