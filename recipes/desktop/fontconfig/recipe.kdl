@@ -38,7 +38,7 @@ build {
             --prefix=/usr \
             --enable-shared \
             --enable-static \
-            --sysconfdir=/etc \
+            --sysconfdir=/etc-defaults \
             --localstatedir=/var
         make
     "#
@@ -49,9 +49,9 @@ install {
         make DESTDIR="${DESTDIR}" install
         rm -rf "${DESTDIR}/var/cache/fontconfig"
 
-        mkdir -p "${DESTDIR}/etc/fonts/conf.d" \
+        mkdir -p "${DESTDIR}/etc-defaults/fonts/conf.d" \
                  "${DESTDIR}/usr/lib/fontconfig/cache"
-        cat > "${DESTDIR}/etc/fonts/conf.d/00-mere-cache.conf" <<'EOF'
+        cat > "${DESTDIR}/etc-defaults/fonts/conf.d/00-mere-cache.conf" <<'EOF'
 <?xml version="1.0"?>
 <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
 <fontconfig>
@@ -62,7 +62,7 @@ EOF
 }
 
 package "fontconfig" {
-    files "etc/fonts/" \
+    files "etc-defaults/fonts/" \
           "usr/bin/" \
           "usr/lib/lib*.so*" \
           "usr/lib/fontconfig/" \
