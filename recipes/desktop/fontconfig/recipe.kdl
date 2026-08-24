@@ -1,20 +1,25 @@
 recipe {
     name "fontconfig"
     version "2.16.0"
-    release 1
+    release 2
     description "Library for configuring and customizing font access"
     url "https://www.freedesktop.org/wiki/Software/fontconfig/"
     archs "aarch64" "x86_64"
     licenses "MIT"
-    depends "expat-dev" \
+    depends "autoconf" \
+            "automake" \
+            "expat-dev" \
             "freetype" \
             "freetype-dev" \
+            "gettext" \
             "gperf" \
             "harfbuzz" \
             "harfbuzz-dev" \
             "libpng" \
             "libpng-dev" \
+            "libtool" \
             "llvm" \
+            "m4" \
             "make" \
             "mimalloc-dev" \
             "musl-dev" \
@@ -23,17 +28,17 @@ recipe {
             "zlib-ng-dev"
 }
 
-source "https://www.freedesktop.org/software/fontconfig/release/fontconfig-${recipe.version}.tar.xz" {
-    blake3 "5c95d48f5b9150f4a06d8acac12c25edaac956007df95a3bf527df02a5908f0e"
+source "https://gitlab.freedesktop.org/fontconfig/fontconfig/-/archive/${recipe.version}/fontconfig-${recipe.version}.tar.bz2" {
+    blake3 "17169c95523bfc283367f6a8099db3d9938ca66fd698c51fb027dc9f29b0da2e"
 }
 
 build {
     script r#"
-        ./configure \
+        ./autogen.sh \
             --prefix=/usr \
             --enable-shared \
             --enable-static \
-            --sysconfdir=/etc \
+            --sysconfdir=/usr/share/fontconfig/config \
             --localstatedir=/var
         make
     "#
@@ -42,22 +47,37 @@ build {
 install {
     script r#"
         make DESTDIR="${DESTDIR}" install
+        rm -rf "${DESTDIR}/var/cache/fontconfig"
+
+        mkdir -p "${DESTDIR}/usr/lib/fontconfig/cache" \
+                 "${DESTDIR}/usr/share/fontconfig/config/fonts/conf.d"
+        touch "${DESTDIR}/usr/lib/fontconfig/cache/.keep"
+        cat > "${DESTDIR}/usr/share/fontconfig/config/fonts/conf.d/00-mere-cache.conf" <<'EOF'
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+    <cachedir>/usr/lib/fontconfig/cache</cachedir>
+</fontconfig>
+EOF
     "#
 }
 
 package "fontconfig" {
-    files "etc/fonts/" \
-          "usr/bin/" \
+    files "usr/bin/" \
           "usr/lib/lib*.so*" \
+          "usr/lib/fontconfig/" \
           "usr/share/fontconfig/" \
-          "usr/share/man/man1/" \
-          "usr/share/man/man5/" \
+          "usr/share/gettext/its/" \
           "usr/share/xml/"
+
+    realizer "fontconfig-cache" {
+        inputs "usr/share/fonts/"
+        command "/usr/bin/fc-cache" "-f" "-s"
+    }
 }
 
 package "fontconfig-dev" {
     files "usr/include/" \
           "usr/lib/lib*.a" \
-          "usr/lib/pkgconfig/" \
-          "usr/share/man/man3/"
+          "usr/lib/pkgconfig/"
 }
