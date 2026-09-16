@@ -1,0 +1,48 @@
+recipe {
+    name "file"
+    version "5.43"
+    release 1
+    description "File type identification utility and library"
+    url "https://www.darwinsys.com/file/"
+    licenses "BSD"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://astron.com/pub/file/file-${recipe.version}.tar.gz" {
+    blake3 "157fe3ce5dfd18bc8b4bb9fab6ca7f5c306fdc279ef59add3059e1df7b83b494"
+}
+
+build {
+    script r#"
+        sed -i 's/misc/file/' configure
+        LDFLAGS='--static' ./configure \
+            --prefix=/usr \
+            --disable-shared \
+            --enable-static
+        make V=1
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "file" {
+    files "usr/bin/file" \
+          "usr/share/file/magic.mgc" \
+          "usr/share/man/man1/file.1"
+}
+
+package "file-dev" {
+    files "usr/include/" \
+          "usr/lib/libmagic.a" \
+          "usr/lib/pkgconfig/libmagic.pc" \
+          "usr/share/man/man3/libmagic.3"
+}
