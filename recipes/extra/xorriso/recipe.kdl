@@ -1,0 +1,40 @@
+recipe {
+    name "xorriso"
+    version "1.5.4.pl02"
+    release 1
+    description "Utilities for creating and manipulating Rock Ridge enhanced ISO 9660 filesystems"
+    url "https://www.gnu.org/software/xorriso/"
+    licenses "GPL-3.0-or-later"
+    archs "x86_64"
+    depends "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "${recipe.url}/xorriso-${recipe.version}.tar.gz" {
+    blake3 "77b75b6c1d8cebbdcc31827e5469f7040e6cd39465231fdc440750b332e93629"
+}
+
+build {
+    script r#"
+        ./configure \
+            --prefix=/usr
+        make
+    "#
+}
+
+install {
+    script r#"
+        make DESTDIR="$DESTDIR" install
+    "#
+}
+
+package "xorriso" {
+    files "usr/bin/xorriso" \
+          "usr/bin/xorriso-dd-target" \
+          "usr/bin/xorrisofs" \
+          "usr/share/man/man1/"
+}
