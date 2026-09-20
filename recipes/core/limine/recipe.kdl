@@ -1,7 +1,7 @@
 recipe {
     name "limine"
-    version "12.5.2"
-    release 2
+    version "12.9.0"
+    release 1
     description "Modern multiprotocol bootloader and boot manager"
     url "https://limine-bootloader.org"
     archs "x86_64"
@@ -15,7 +15,7 @@ recipe {
 }
 
 source "https://github.com/limine-bootloader/limine/releases/download/v${recipe.version}/limine-${recipe.version}.tar.xz" {
-    blake3 "3b94b00f73c6ee9d9f5b513efcb33098988fe7435e6f403dfae85b30ff70e14d"
+    blake3 "b6663a09a11d2ffd17aa21ff49e41fd5db16bc6c2d369c967d95cfde821e9638"
 }
 
 build {
@@ -23,6 +23,7 @@ build {
         ./configure \
             --prefix=/usr \
             --enable-bios \
+            --enable-bios-cd \
             --enable-uefi-x86-64
         make
     "#
