@@ -1,0 +1,27 @@
+recipe {
+    name "rust-std-x86_64-unknown-none"
+    version "1.94.1"
+    release 1
+    description "Rust core libraries for the x86_64-unknown-none target"
+    url "https://www.rust-lang.org"
+    archs "x86_64"
+    licenses "MIT" "Apache"
+    depends "rust"
+}
+
+source "https://static.rust-lang.org/dist/rust-std-${recipe.version}-x86_64-unknown-none.tar.xz" {
+    blake3 "1f3436d53d16da31f97fe688e25454d203058558bcb3f28273beea43c3f20a32"
+}
+
+install {
+    script r#"
+        install -d "${DESTDIR}/usr/lib/rustlib"
+        target_libdir="$(find . -type d -name x86_64-unknown-none -print -quit)"
+        test -n "$target_libdir"
+        cp -a "$target_libdir" "${DESTDIR}/usr/lib/rustlib/"
+    "#
+}
+
+package "rust-std-x86_64-unknown-none" {
+    files "usr/lib/rustlib/x86_64-unknown-none/"
+}
