@@ -1,0 +1,66 @@
+recipe {
+    name "qemu"
+    version "11.0.3"
+    release 1
+    description "Machine emulator and virtualizer (system x86_64 only)"
+    url "https://www.qemu.org"
+    licenses "GPL-2.0-only"
+    archs "x86_64"
+    depends "busybox" \
+            "git" \
+            "glib-dev" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pcre2-dev" \
+            "perl" \
+            "pixman-dev" \
+            "pkgconf" \
+            "python" \
+            "zlib-ng-dev"
+}
+
+source "https://download.qemu.org/qemu-${recipe.version}.tar.xz" {
+    blake3 "4dec2563de07fc53cad61d87e72237c778fdc62c1a4f2b13175bfd6b610465a0"
+}
+
+build {
+    script r#"
+        mkdir build && cd build
+        ../configure \
+          --prefix=/usr \
+          --target-list=x86_64-softmmu,aarch64-softmmu \
+          --enable-kvm \
+          --enable-virtfs \
+          --disable-docs \
+          --disable-gtk \
+          --disable-sdl \
+          --disable-spice \
+          --disable-vnc \
+          --disable-opengl \
+          --disable-xen \
+          --disable-guest-agent \
+          --disable-capstone \
+          --audio-drv-list="" \
+          --cc=cc \
+          --cxx=c++
+        ninja -C .
+    "#
+}
+
+install {
+    script r#"
+        cd build
+        DESTDIR="$DESTDIR" ninja install
+    "#
+}
+
+package "qemu" {
+    files "usr/bin/qemu-system-x86_64" \
+          "usr/bin/qemu-system-aarch64" \
+          "usr/share/qemu/"
+}
