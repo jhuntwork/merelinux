@@ -1,7 +1,7 @@
 recipe {
     name "rust"
     version "1.94.1"
-    release 2
+    release 3
     description "The Rust programming language"
     url "https://www.rust-lang.org"
     archs "aarch64" "x86_64"
@@ -61,10 +61,12 @@ WRAPPER
         chmod +x custom/llvm-config
         export PATH="$(pwd)/custom:$PATH"
         export CHOST="${recipe.arch}-unknown-linux-musl"
+        # Build the host toolchain and the freestanding target together.
         ./configure \
             --prefix=/usr \
             --build="${CHOST}" \
             --host="${CHOST}" \
+            --target="${CHOST},x86_64-unknown-none" \
             --release-channel=stable \
             --disable-docs \
             --disable-codegen-tests \
