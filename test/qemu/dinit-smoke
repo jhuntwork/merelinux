@@ -1,0 +1,94 @@
+#!/bin/sh
+# Boot an existing Mere profile on an ext4 disk with dinit as PID 1.
+set -eu
+if [ "$#" -ne 2 ]; then
+    printf 'Usage: %s STORAGE_ROOT PROFILE_NAME\n' "$0" >&2
+    exit 2
+fi
+storage=$1
+profile=$storage/mere/profiles/$2/root
+qemu=${QEMU:-qemu-system-x86_64}
+for dir in "$storage/mere/store" "$profile"; do
+    if [ ! -d "$dir" ]; then
+        printf 'Missing directory: %s\n' "$dir" >&2
+        exit 2
+    fi
+done
+work=$(mktemp -d)
+cleanup() {
+    # Copied store directories retain read-only modes. Change only directories
+    # in the disposable copy; never follow its absolute store symlinks.
+    find "$work" -type d -exec chmod u+w {} +
+    rm -rf "$work"
+}
+trap cleanup 0
+trap 'exit 130' INT
+trap 'exit 143' TERM
+root=$work/root
+mkdir -p "$root/mere" "$root/etc/dinit.d" "$root/proc" "$root/sys" \
+    "$root/dev" "$root/run" "$root/tmp" "$root/var/log"
+cp -RPp "$storage/mere/store" "$root/mere/"
+for dir in bin sbin usr lib boot; do
+    if [ -d "$profile/$dir" ]; then
+        cp -RPp "$profile/$dir" "$root/"
+    fi
+done
+# Resolve the kernel's logical symlink against this guest's store, not the host.
+kernel_target=$(readlink "$root/boot/vmlinux")
+case $kernel_target in
+    /mere/store/*) kernel=$root$kernel_target ;;
+    *) printf 'Expected a logical store link for boot/vmlinux\n' >&2; exit 2 ;;
+esac
+[ -r "$kernel" ]
+: > "$root/etc/fstab"
+cat > "$root/etc/dinit.d/boot" <<'SERVICE'
+type = internal
+depends-on = shutdown-probe
+SERVICE
+cat > "$root/etc/dinit.d/probe" <<'SERVICE'
+type = scripted
+command = /bin/sh /etc/guest-probe
+options = starts-on-console
+SERVICE
+cat > "$root/etc/dinit.d/shutdown-probe" <<'SERVICE'
+type = process
+command = /bin/sh /etc/shutdown-probe
+depends-on = probe
+options = starts-on-console
+restart = false
+SERVICE
+cat > "$root/etc/guest-probe" <<'GUEST'
+#!/bin/sh
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+printf 'MERE_KERNEL: '; uname -r
+printf 'PID1: '; cat /proc/1/comm
+[ "$(cat /proc/1/comm)" = dinit ]
+printf 'ROOT: '; mount | grep ' on / '
+printf 'DINIT_BOOT_PASS\n'
+sync
+GUEST
+cat > "$root/etc/shutdown-probe" <<'GUEST'
+#!/bin/sh
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+printf 'SHUTDOWN_PROBE_START\n'
+sleep 1
+exec shutdown -p
+GUEST
+truncate -s "${QEMU_DISK_SIZE:-384M}" "$work/root.ext4"
+mke2fs -q -t ext4 -F -d "$root" "$work/root.ext4"
+timeout "${QEMU_TIMEOUT:-120}" "$qemu" \
+    -accel tcg,thread=single -m 256 -smp 1 -nodefaults \
+    -display none -serial stdio -monitor none -no-reboot \
+    -kernel "$kernel" -drive "file=$work/root.ext4,format=raw,if=ide" \
+    -append 'console=ttyS0 root=/dev/sda rootfstype=ext4 rw init=/bin/dinit panic=-1' \
+    > "$work/serial.log" 2>&1 || {
+        cat "$work/serial.log"
+        exit 1
+    }
+cat "$work/serial.log"
+grep -q '^DINIT_BOOT_PASS' "$work/serial.log"
+grep -q 'Issuing shutdown via kernel' "$work/serial.log"
+grep -q 'reboot: Power down' "$work/serial.log"
