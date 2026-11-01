@@ -7,7 +7,7 @@ console support, and automatic devtmpfs mounting needed to reach `/sbin/init`.
 
 ## Installation contract
 
-Install `busybox`, `dinit` (0.22.1 release 2 or later), `mdevd` (release 2 or later),
+Install `busybox`, `dinit` (unpatched 0.22.1 is sufficient), `mdevd` (release 2 or later),
 `shadow`, and `mere-boot` into the **system** profile with
 `settings { init-provider "dinit"; }` in Mere's
 configuration. These are explicit installation requirements: recipe `depends`
@@ -82,11 +82,15 @@ Setup diagnostics go to the kernel-selected console; dinit also writes
 Mere's ordinary logging metadata retain their own configured log files. Log
 rotation is separate work.
 
-A required setup failure prevents normal boot completion. Dinit's automatic
-recovery starts a console-attached Shadow login, initially requesting root.
+A required setup failure prevents normal boot completion. Dinit presents its
+boot-failure menu on the console; select `e` for recovery. Recovery then starts
+a console-attached Shadow login, initially requesting root. Automatic recovery
+is left disabled so the menu and login never compete for console input.
+
 The helper reopens dinit's control socket after failed startup so lifecycle and
 shutdown commands remain available. Credentials and normal PAM policy still
-apply; locked or missing credentials do not grant a shell. There is no automatic reboot. Recovery does not depend on
-`sysinit`, so failure of that graph cannot suppress the authentication prompt.
-An operator repairs the system and explicitly requests reboot or power-off.
-`single` selects the same authenticated recovery path.
+apply; locked or missing credentials do not grant a shell. There is no automatic
+reboot. Recovery does not depend on `sysinit`, so failure of that graph cannot
+suppress the recovery login. An operator repairs the system and explicitly
+requests reboot or power-off. `single` selects the same authenticated recovery
+path directly.

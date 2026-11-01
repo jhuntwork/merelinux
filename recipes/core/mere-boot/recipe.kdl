@@ -10,7 +10,7 @@ recipe {
 }
 
 source "init" {
-    blake3 "31156d323d0d90d190175eead7626fcca539c8435ece67f8166dd121927dfda2"
+    blake3 "916bef670194f057612fa9013e67a556b0dce8cff2669eb63b903405aa01e72a"
 }
 
 source "setup" {

@@ -5,7 +5,7 @@ umask 022
 # The control socket must live on the final /run mount, not a hidden lower one.
 if ! { mkdir -p /run && { mountpoint -q /run || mount -t tmpfs -o mode=0755,nosuid,nodev tmpfs /run; }; }; then
     printf 'mere-boot: cannot prepare /run; entering authenticated recovery\n' >&2
-    exec /bin/dinit --auto-recovery -d /etc/dinit.d -d /usr/share/dinit.d -t recovery
+    exec /bin/dinit -d /etc/dinit.d -d /usr/share/dinit.d -t recovery
 fi
-exec /bin/dinit --auto-recovery -d /etc/dinit.d -d /usr/share/dinit.d \
+exec /bin/dinit -d /etc/dinit.d -d /usr/share/dinit.d \
     --log-file /run/dinit.log "$@"
