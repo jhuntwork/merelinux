@@ -1,0 +1,33 @@
+#!/bin/sh
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+export HOME=/root
+mkdir -p "$HOME"
+cd /
+mere --version
+mere shell -p guest -- /bin/sh -c "printf 'MERE_SHELL_PASS\\n'"
+mere dev key generate
+mere dev build /work/probe/recipe.kdl
+set -- /mere/dev/build/guest-probe-*/pkg/guest-probe-*.pkg.tar.zst
+[ "$#" -eq 1 ] && [ -f "$1" ]
+archive=$1
+mkdir /work/unpacked
+# Check decompression independently: POSIX pipelines only report the last status.
+zstd -d "$archive" -o /work/probe.tar
+tar -xf /work/probe.tar -C /work/unpacked
+[ "$(cat /work/unpacked/usr/share/guest-probe/result)" = guest-build ]
+printf 'MERE_ARCHIVE_PASS\n'
+if mere dev build /work/fail/recipe.kdl > /work/failure.log 2>&1; then
+    cat /work/failure.log
+    printf 'Failing recipe unexpectedly succeeded\n' >&2
+    exit 1
+else
+    status=$?
+fi
+cat /work/failure.log
+[ "$status" -eq 1 ]
+grep -q 'failed with exit code 7' /work/failure.log
+set -- /mere/dev/build/guest-failure-*/pkg/*.pkg.tar.zst
+[ ! -f "$1" ]
+printf 'MERE_FAILURE_PASS\n'
+printf 'MERE_GUEST_TESTS_PASS\n'

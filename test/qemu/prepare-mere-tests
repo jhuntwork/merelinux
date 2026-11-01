@@ -1,0 +1,53 @@
+#!/bin/sh
+# Internal assembly hook; consumes the fresh root prepared by dinit-smoke.
+set -eu
+mere=$1
+root=$2
+results=$3
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+# A dynamic binary may run on the host but fail in the guest. Record the ELF
+# inspection and reject a runtime interpreter before spending time on a boot.
+for tool in readelf sed sha256sum; do
+    command -v "$tool" >/dev/null 2>&1 || {
+        printf 'Missing host utility: %s\n' "$tool" >&2
+        exit 2
+    }
+done
+readelf -l "$mere" > "$results/inputs/mere.elf"
+if grep -q INTERP "$results/inputs/mere.elf"; then
+    printf 'Mere guest tests require a static ELF binary\n' >&2
+    exit 2
+fi
+cp "$mere" "$root/bin/mere"
+mkdir -p "$root/guest-repo/packages" "$root/work"
+# Preserve upstream signed metadata and the cached archives. Rewrite only the
+# transport URL; Mere must still verify the upstream signature and fingerprint.
+set -- "$root"/mere/cache/repos/*/repo.db
+[ "$#" -eq 1 ] && [ -f "$1" ] || {
+    printf 'Expected exactly one prepared repository\n' >&2
+    exit 2
+}
+cp "$1" "$root/guest-repo/repo.db"
+cp "$1.sig" "$root/guest-repo/repo.db.sig"
+cp "$root"/mere/cache/packages/*.pkg.tar.zst "$root/guest-repo/packages/"
+sed 's|https://pkgs.merelinux.org/mere|file:///guest-repo|g' \
+    "$root/mere/config.kdl" > "$root/mere/config.local"
+grep -q 'file:///guest-repo' "$root/mere/config.local" || {
+    printf 'Expected the public Mere repository URL in saved configuration\n' >&2
+    exit 2
+}
+mv "$root/mere/config.local" "$root/mere/config.kdl"
+cp "$root/mere/config.kdl" "$results/inputs/guest-config.kdl"
+(cd "$root/guest-repo" && sha256sum repo.db repo.db.sig packages/*.pkg.tar.zst) \
+    > "$results/inputs/guest-repo.sha256"
+[ -e "$root/bin/zstd" ] || [ -L "$root/bin/zstd" ] || \
+    [ -e "$root/usr/bin/zstd" ] || [ -L "$root/usr/bin/zstd" ] || {
+    printf 'Guest profile needs zstd; replay inputs must come from mere-smoke\n' >&2
+    exit 2
+}
+cp -R "$script_dir/recipes/probe" "$script_dir/recipes/fail" "$root/work/"
+cp "$script_dir/mere-probe" "$root/etc/mere-probe"
+# Run after the boot probe has mounted proc/sys and confirmed dinit PID 1.
+printf '\n/bin/sh /etc/mere-probe\n' >> "$root/etc/guest-probe"
+mkdir "$results/inputs/fixtures"
+cp -R "$script_dir/recipes" "$script_dir/mere-probe" "$results/inputs/fixtures/"

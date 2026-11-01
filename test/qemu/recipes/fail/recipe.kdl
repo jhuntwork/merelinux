@@ -1,0 +1,16 @@
+recipe {
+ name "guest-failure"
+ version "1.0"
+ release 1
+ description "Intentional failure"
+ url "https://merelinux.org"
+ licenses "MIT"
+ archs "x86_64"
+ depends "busybox"
+}
+build {
+ script "exit 7"
+}
+package "guest-failure" {
+ files "*"
+}
