@@ -1,0 +1,28 @@
+#!/bin/sh
+# Getty/login owns the selected tty. Keep supervising across normal logouts.
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+if [ ! -c "/dev/$1" ] || [ ! -x /sbin/getty ] || [ ! -x /usr/bin/login ]; then
+    printf 'mere-boot: console or login unavailable: %s\n' "$1" > /dev/console
+    exit 1
+fi
+child=
+stop() {
+    trap - TERM INT HUP
+    if [ -n "$child" ]; then
+        kill "$child" 2>/dev/null || :
+        wait "$child" 2>/dev/null || :
+    fi
+    exit 0
+}
+trap stop TERM INT HUP
+while :; do
+    /sbin/getty -l /usr/bin/login "${2:-38400}" "$1" &
+    child=$!
+    wait "$child" || :
+    child=
+    sleep 1 &
+    child=$!
+    wait "$child" || :
+    child=
+done

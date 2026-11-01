@@ -1,0 +1,12 @@
+#!/bin/sh
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+exec > /dev/console 2>&1
+case ${1:-} in
+    start) exec /sbin/mdevd -D 3 -O 4 ;;
+    coldplug)
+        mkdir -p /run/.libudev-zero
+        exec /sbin/mdevd-coldplug -O 4
+        ;;
+    *) printf 'mdevd: unknown service action: %s\n' "${1:-}" >&2; exit 2 ;;
+esac

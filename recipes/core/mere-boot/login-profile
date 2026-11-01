@@ -1,0 +1,2 @@
+# Standard command paths for a Mere login shell.
+export PATH=/usr/local/bin:/usr/local/sbin:/bin:/sbin:/usr/bin:/usr/sbin

@@ -1,7 +1,7 @@
 recipe {
     name "mdevd"
     version "0.1.8.1"
-    release 1
+    release 2
     description "A small daemon managing kernel hotplug events, similarly to udevd"
     url "http://skarnet.org/software/mdevd/"
     archs "aarch64" "x86_64"
@@ -46,6 +46,10 @@ source "https://raw.githubusercontent.com/illiliti/libudev-zero/refs/heads/maste
     blake3 "a5a0e4875dd26f438ce73177881b13530a99b6916b0b3466bf875dff9b45bea7"
 }
 
+source "service" {
+    blake3 "d499904ba4962d285f0e9b9db9ada186a4560be7172fcc88715833e033a9585b"
+}
+
 build {
     script r#"
         ./configure \
@@ -68,6 +72,7 @@ install {
         install -m0754 "${MERE_SOURCES_DIR}/settle-nics"    "${DESTDIR}/lib/mdev/helpers/"
         install -m0754 "${MERE_SOURCES_DIR}/sound-control"  "${DESTDIR}/lib/mdev/helpers/"
         install -m0754 "${MERE_SOURCES_DIR}/storage-device" "${DESTDIR}/lib/mdev/helpers/"
+        install -m0755 "${MERE_SOURCES_DIR}/service" "${DESTDIR}/lib/mdev/helpers/service"
         install -m0754 uevents                              "${DESTDIR}/lib/mdev/helpers/"
 
     "#
@@ -80,15 +85,17 @@ package "mdevd" {
 
     service "mdevd" {
         type "daemon"
-        command "/sbin/mdevd" "-D" "3"
+        command "/lib/mdev/helpers/service" "start"
+        log false
         ready-notification 3
         essential true
-        depends-on "mount-proc" "mount-rw"
+        depends-on "mount-proc" "mount-rw" "mount-sys" "mount-runtime"
     }
 
     service "mdevd-coldplug" {
         type "oneshot"
-        up "if { install -d /run/.libudev-zero } mdevd-coldplug"
+        up "/lib/mdev/helpers/service" "coldplug"
+        log false
         essential true
         depends-on "mdevd"
     }

@@ -1,0 +1,48 @@
+#!/bin/sh
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+exec > /dev/console 2>&1
+mount_once() {
+    target=$1
+    shift
+    mountpoint -q "$target" || mount "$@" "$target"
+}
+case ${1:-} in
+    proc)
+        mount_once /proc -t proc -o nosuid,nodev,noexec proc
+        ;;
+    sys)
+        mount_once /sys -t sysfs -o nosuid,nodev,noexec sysfs
+        ;;
+    dev)
+        mount_once /dev -t devtmpfs -o mode=0755,nosuid devtmpfs
+        ;;
+    rw)
+        mount -o remount,rw /
+        ;;
+    runtime)
+        mkdir -p /run /dev/pts /dev/shm /tmp
+        mount_once /run -t tmpfs -o mode=0755,nosuid,nodev tmpfs
+        mount_once /dev/pts -t devpts -o nosuid,noexec,mode=0620 devpts
+        mount_once /dev/shm -t tmpfs -o mode=1777,nosuid,nodev tmpfs
+        chmod 1777 /tmp
+        [ -e /dev/fd ] || ln -s /proc/self/fd /dev/fd
+        ;;
+    local)
+        # Installation must supply fstab, even when it is intentionally empty.
+        [ -r /etc/fstab ]
+        mount -a
+        ;;
+    system)
+        mkdir -p /var/log /var/tmp /root /home
+        chmod 1777 /var/tmp
+        chmod 0700 /root
+        [ ! -r /etc/hostname ] || hostname -F /etc/hostname
+        [ ! -r /etc/sysctl.conf ] || sysctl -p /etc/sysctl.conf
+        swapon -a
+        ;;
+    *)
+        printf 'mere-boot: unknown setup action: %s\n' "${1:-}" >&2
+        exit 2
+        ;;
+esac

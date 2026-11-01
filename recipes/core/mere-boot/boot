@@ -1,0 +1,4 @@
+type = internal
+depends-on = sysinit
+depends-on = tty1
+waits-for.d = boot.d
