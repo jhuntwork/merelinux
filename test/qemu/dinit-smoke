@@ -45,7 +45,7 @@ cat "$results/setup.log"
 mv "$root/test-inputs" "$results/inputs"
 profile=$root/mere/profiles/guest/root
 mkdir -p "$root/mere" "$root/etc/dinit.d" "$root/proc" "$root/sys" \
-    "$root/dev" "$root/run" "$root/tmp" "$root/var/log"
+    "$root/dev" "$root/home" "$root/run" "$root/tmp" "$root/var/log"
 for dir in bin sbin usr lib boot; do
     if [ -d "$profile/$dir" ]; then
         cp -RPp "$profile/$dir" "$root/"
@@ -95,6 +95,9 @@ printf 'SHUTDOWN_PROBE_START\n'
 sleep 1
 exec shutdown -p
 GUEST
+if [ "${MERE_GUEST_TESTS:-0}" = 1 ]; then
+    sh "$script_dir/prepare-mere-tests" "$mere" "$root" "$results"
+fi
 truncate -s "${QEMU_DISK_SIZE:-384M}" "$work/root.ext4"
 mke2fs -q -t ext4 -F -d "$root" "$work/root.ext4"
 timeout "${QEMU_TIMEOUT:-120}" "$qemu" \
@@ -110,3 +113,8 @@ cat "$results/serial.log"
 grep -q '^DINIT_BOOT_PASS' "$results/serial.log"
 grep -q 'Issuing shutdown via kernel' "$results/serial.log"
 grep -q 'reboot: Power down' "$results/serial.log"
+if [ "${MERE_GUEST_TESTS:-0}" = 1 ]; then
+    for marker in MERE_SHELL_PASS MERE_BUILD_SCRIPT_PASS MERE_ARCHIVE_PASS MERE_FAILURE_PASS MERE_GUEST_TESTS_PASS; do
+        grep -q "^$marker" "$results/serial.log"
+    done
+fi

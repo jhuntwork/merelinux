@@ -59,9 +59,8 @@ into the harness.
 ## Next steps
 
 Track harness work in jhuntwork/merelinux#635, distro boot work in #634, and the
-overall dinit transition in #633. A Mere disk-backed guest without an initramfs
-is a separate next step. Extend guest scenarios for package-manager execution and
-service behavior rather than treating this environment probe as that evidence.
+overall dinit transition in #633. Disk boot and package-manager execution
+are covered separately below; the namespace probe alone is not evidence for them.
 
 ## Disk-backed Mere/dinit smoke test
 
@@ -131,3 +130,49 @@ record observed evidence rather than a frozen dependency set. The launcher
 requires successful QEMU exit, the boot pass marker, dinit's kernel shutdown
 message, and kernel power-off message. This remains developer tooling rather
 than an end-user installer or production boot configuration.
+
+## Offline Mere shell/build smoke test
+
+```sh
+QEMU_TIMEOUT=120 sh test/qemu/mere-smoke /absolute/path/to/static/mere \
+    /absolute/new/mere-results
+```
+
+This extends `dinit-smoke` using the same preparation, image assembly, shutdown,
+and cleanup flow. Supply an x86_64 static ELF Mere binary (the published binary
+is suitable). The additional host dependency is `readelf` for recording ELF
+program headers and rejecting an interpreter-dependent executable. Preparation
+also needs `sed`. The guest profile adds `zstd` and its dependencies so the guest
+can decompress and inspect its freshly built archive. Other host requirements
+are the same as the disk smoke test.
+
+Host preparation downloads packages and metadata. QEMU has no network device:
+the guest uses a `file:///guest-repo` mirror assembled from the signed upstream
+metadata and downloaded package cache. Only the transport URL changes; the
+upstream key, fingerprint, and signature verification remain in use. This mirror
+currently expects the single public Mere repository configuration. It is not a
+networking test.
+
+After checking dinit and disk boot, the guest:
+
+1. Runs the supplied Mere binary and enters profile `guest` to execute a marker.
+2. Generates a disposable development signing key in its own home directory.
+3. Builds the local `recipes/probe` fixture through Mere's isolated build path.
+4. Decompresses and extracts the resulting package, requiring exactly one archive
+   and the expected `usr/share/guest-probe/result` payload (`guest-build`).
+5. Builds `recipes/fail`, requiring Mere exit status 1, the recipe's exit code 7
+   in its diagnostic, and no package archive from that failing build.
+6. Reports success and powers off through dinit.
+
+The host requires all scenario markers as well as the normal shutdown markers
+and successful QEMU exit. A failed guest probe prevents normal shutdown and the
+host timeout returns failure. `serial.log` preserves build output and the failure
+diagnostic; `inputs/` also records ELF headers, the guest repository configuration,
+metadata/archive hashes, and fixture sources. The generated private key, built
+archive, and guest filesystem are disposable and are not retained.
+
+Replay with a third argument pointing at a prior **mere-smoke** `inputs/`
+directory. Replay from a plain dinit run lacks the required zstd package and is
+rejected before boot. As with `dinit-smoke`, host replay still needs network
+access and repository retention; guest execution is offline. The fixture tests
+Mere shell/build behavior, not production service integration or bootloader setup.

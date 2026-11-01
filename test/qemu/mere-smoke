@@ -1,0 +1,7 @@
+#!/bin/sh
+# Run the disk guest with offline Mere shell/build checks enabled.
+set -eu
+MERE_GUEST_TESTS=1
+export MERE_GUEST_TESTS
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+exec sh "$script_dir/dinit-smoke" "$@"

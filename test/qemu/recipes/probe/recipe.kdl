@@ -1,0 +1,25 @@
+recipe {
+ name "guest-probe"
+ version "1.0"
+ release 1
+ description "Guest build probe"
+ url "https://merelinux.org"
+ licenses "MIT"
+ archs "x86_64"
+ depends "busybox"
+}
+build {
+ script r#"
+ printf 'MERE_BUILD_SCRIPT_PASS\n'
+ printf 'guest-build\n' > probe.txt
+ "#
+}
+install {
+ script r#"
+ mkdir -p "${DESTDIR}/usr/share/guest-probe"
+ cp probe.txt "${DESTDIR}/usr/share/guest-probe/result"
+ "#
+}
+package "guest-probe" {
+ files "usr/share/guest-probe/"
+}

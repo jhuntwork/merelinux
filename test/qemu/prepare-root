@@ -58,7 +58,11 @@ cp "$inputs/mere.pub" "$root/mere/keys/mere.pub"
 if [ -n "$previous" ]; then
     "$mere" --root "$root" profile apply "$inputs/requested-profile.kdl" -p guest
 else
-    "$mere" --root "$root" install -p guest linux busybox dinit
+    if [ "${MERE_GUEST_TESTS:-0}" = 1 ]; then
+        "$mere" --root "$root" install -p guest linux busybox dinit zstd
+    else
+        "$mere" --root "$root" install -p guest linux busybox dinit
+    fi
 fi
 cp "$root/mere/profiles/guest/root/profile.kdl" "$inputs/profile.kdl"
 sha256sum < "$inputs/config.kdl" > "$inputs/config.sha256"
