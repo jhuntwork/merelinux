@@ -1,7 +1,7 @@
 recipe {
     name "dinit"
     version "0.22.1"
-    release 1
+    release 2
     description "A service manager and init system with dependency support"
     url "https://github.com/davmac314/dinit"
     licenses "Apache-2.0"
@@ -10,6 +10,7 @@ recipe {
             "llvm" \
             "make" \
             "m4" \
+            "patch" \
             "mimalloc-dev" \
             "musl-dev" \
             "skalibs-dev" \
@@ -20,8 +21,13 @@ source "https://github.com/davmac314/dinit/releases/download/v${recipe.version}/
     blake3 "865ba8b776554e9dd63b33d40a782ab4119cd76eebaec14156bad1bee0ff75d3"
 }
 
+source "recovery-console.patch" {
+    blake3 "51165752d41eca2743b608df004305c1326fa5feb04328715eda707e39fb1ec9"
+}
+
 build {
     script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/recovery-console.patch"
         ./configure \
           --sbindir=/sbin \
           --bindir=/bin \

@@ -1,0 +1,14 @@
+--- a/src/dinit.cc
++++ b/src/dinit.cc
+@@ -739,6 +739,11 @@
+             if (auto_recovery) {
+                 try {
+                     services->start_service("recovery");
++                    // Recovery owns the console. Do not also run the boot
++                    // failure prompt, which would compete for its input.
++                    if (services->count_active_services() != 0) {
++                        goto run_event_loop;
++                    }
+                 }
+                 catch (std::exception &exc) {
+                     log(loglevel_t::ERROR, "Unable to start recovery service: ", exc.what());
