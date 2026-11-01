@@ -1,0 +1,73 @@
+#!/bin/sh
+# Boot a disposable Linux initramfs and probe user/ID-map/mount namespaces.
+# Usage: qemu-namespace-smoke KERNEL STATIC_BUSYBOX
+# Host requirements: cpio, gzip, timeout, qemu-system-x86_64 (or QEMU override).
+set -eu
+if [ "$#" -ne 2 ]; then
+    printf 'Usage: %s KERNEL STATIC_BUSYBOX\n' "$0" >&2
+    exit 2
+fi
+kernel=$1
+busybox=$2
+for input in "$kernel" "$busybox"; do
+    if [ ! -r "$input" ]; then
+        printf 'Input is not readable: %s\n' "$input" >&2
+        exit 2
+    fi
+done
+qemu=${QEMU:-qemu-system-x86_64}
+work=$(mktemp -d)
+trap 'rm -rf "$work"' 0
+trap 'exit 130' INT
+trap 'exit 143' TERM
+mkdir -p "$work/root/bin" "$work/root/proc" "$work/root/sys" "$work/root/dev" "$work/root/tmp" "$work/root/mnt"
+cp "$busybox" "$work/root/bin/busybox"
+cat > "$work/root/init" <<'INIT'
+#!/bin/busybox sh
+/bin/busybox --install -s /bin
+export PATH=/bin
+set -eu
+trap 'echo GUEST_SHUTDOWN; poweroff -f' 0
+mount -t proc proc /proc
+mount -t sysfs sysfs /sys
+mount -t devtmpfs devtmpfs /dev
+echo 'GUEST_BOOT_OK'
+uname -a
+if unshare -U -r -m -p -f sh -ec '
+    test "$$" -eq 1
+    mount -t proc proc /proc
+    for process in /proc/[0-9]*; do
+        test "$process" = /proc/1
+    done
+    echo GUEST_PID_PROC_OK
+    echo GUEST_UID_MAP
+    cat /proc/self/uid_map
+    echo GUEST_GID_MAP
+    cat /proc/self/gid_map
+    mount -t tmpfs tmpfs /mnt || exit 1
+    echo writable > /mnt/probe
+    test "$(cat /mnt/probe)" = writable || exit 1
+    umount /mnt || exit 1
+'; then
+    echo 'NAMESPACE_PROBE_PASS'
+else
+    echo 'NAMESPACE_PROBE_FAIL'
+fi
+sync
+INIT
+chmod +x "$work/root/init"
+(cd "$work/root" && find . -print) > "$work/files"
+(cd "$work/root" && cpio -o -H newc < "$work/files") > "$work/initramfs.cpio"
+gzip "$work/initramfs.cpio"
+# Software emulation needs neither /dev/kvm nor host namespace privileges.
+# timeout is an external host utility; the shell syntax is POSIX.
+timeout "${QEMU_TIMEOUT:-120}" "$qemu" \
+    -accel tcg,thread=single -m 256 -smp 1 -nodefaults \
+    -display none -serial stdio -monitor none -no-reboot \
+    -kernel "$kernel" -initrd "$work/initramfs.cpio.gz" \
+    -append 'console=ttyS0 rdinit=/init panic=-1' > "$work/serial.log" 2>&1 || {
+        cat "$work/serial.log"
+        exit 1
+    }
+cat "$work/serial.log"
+grep -q '^NAMESPACE_PROBE_PASS' "$work/serial.log"
