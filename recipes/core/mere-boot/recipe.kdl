@@ -1,0 +1,143 @@
+recipe {
+    name "mere-boot"
+    version "0.1.0"
+    release 1
+    description "Foundational boot services for Mere Linux with dinit"
+    url "https://merelinux.org"
+    licenses "MIT"
+    archs "aarch64" "x86_64"
+    depends "busybox"
+}
+
+source "init" {
+    blake3 "31156d323d0d90d190175eead7626fcca539c8435ece67f8166dd121927dfda2"
+}
+
+source "setup" {
+    blake3 "714fa6451e8ea0d12ee974fdab8fee76184188752aa97d9aaee36d8009bf705b"
+}
+
+source "getty" {
+    blake3 "e942324c8eab2e87c0515f208eaa260316acb60d78e0682b224648a1dfb95a99"
+}
+
+source "recovery" {
+    blake3 "0a8ff9019220c10d5aec8c2c4a6a297c92320d447218a10a7d49555ad06239d3"
+}
+
+source "boot" {
+    blake3 "5f18e95596194b75ba5c1c88bb415582fd19bca610e82d28d87739492c499ac4"
+}
+
+source "recovery.service" {
+    blake3 "e18e1be428ee230085d03584bab216beb477869c90a32f14eb0a04f10b1b9b5d"
+}
+
+source "single" {
+    blake3 "f59f08b983904c6c47544e83d7fc276d58771297af184f638c0a167623bee445"
+}
+
+source "boot.keep" {
+    blake3 "5d9e9021b9a8c8c781e714b68bad269e2a5509b8b9317ddd4c91dc2899ff99d5"
+}
+
+source "login-profile" {
+    blake3 "43bdcd99c1deb6e66e5efa3b396558a7b2297159d83eb141a1698a028173a581"
+}
+
+install {
+    script r#"
+        install -d "${DESTDIR}/sbin" "${DESTDIR}/usr/libexec/mere-boot" \
+            "${DESTDIR}/etc/dinit.d/boot.d"
+        install -m 0755 "${MERE_SOURCES_DIR}/init" "${DESTDIR}/sbin/init"
+        for helper in setup getty recovery; do
+            install -m 0755 "${MERE_SOURCES_DIR}/$helper" "${DESTDIR}/usr/libexec/mere-boot/"
+        done
+        install -m 0644 "${MERE_SOURCES_DIR}/login-profile" "${DESTDIR}/etc/profile"
+        install -m 0644 "${MERE_SOURCES_DIR}/boot.keep" "${DESTDIR}/etc/dinit.d/boot.d/.keep"
+        install -m 0644 "${MERE_SOURCES_DIR}/boot" "${DESTDIR}/etc/dinit.d/boot"
+        install -m 0644 "${MERE_SOURCES_DIR}/recovery.service" "${DESTDIR}/etc/dinit.d/recovery"
+        install -m 0644 "${MERE_SOURCES_DIR}/single" "${DESTDIR}/etc/dinit.d/single"
+    "#
+}
+
+package "mere-boot" {
+    files "sbin/" "usr/" "etc/"
+
+    service "mount-proc" {
+        type "oneshot"
+        up "/usr/libexec/mere-boot/setup" "proc"
+        essential true
+        log false
+    }
+
+    service "mount-sys" {
+        type "oneshot"
+        up "/usr/libexec/mere-boot/setup" "sys"
+        essential true
+        log false
+        depends-on "mount-proc"
+    }
+
+    service "mount-dev" {
+        type "oneshot"
+        up "/usr/libexec/mere-boot/setup" "dev"
+        essential true
+        log false
+        depends-on "mount-proc"
+    }
+
+    service "mount-rw" {
+        type "oneshot"
+        up "/usr/libexec/mere-boot/setup" "rw"
+        essential true
+        log false
+        depends-on "mount-proc"
+    }
+
+    service "mount-runtime" {
+        type "oneshot"
+        up "/usr/libexec/mere-boot/setup" "runtime"
+        essential true
+        log false
+        depends-on "mount-rw" "mount-sys" "mount-dev"
+    }
+
+    service "mount-fstab" {
+        type "oneshot"
+        up "/usr/libexec/mere-boot/setup" "local"
+        essential true
+        log false
+        depends-on "mount-runtime" "mdevd-coldplug"
+    }
+
+    service "system-setup" {
+        type "oneshot"
+        up "/usr/libexec/mere-boot/setup" "system"
+        essential true
+        log false
+        depends-on "mount-fstab"
+    }
+
+    service "sysinit" {
+        type "oneshot"
+        up "/bin/true"
+        essential true
+        log false
+        depends-on "system-setup"
+    }
+
+    service "tty1" {
+        type "daemon"
+        command "/usr/libexec/mere-boot/getty" "tty1" "38400"
+        log false
+        depends-on "sysinit"
+    }
+
+    service "ttyS0" {
+        type "daemon"
+        command "/usr/libexec/mere-boot/getty" "ttyS0" "115200"
+        log false
+        depends-on "sysinit"
+    }
+}

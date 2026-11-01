@@ -1,0 +1,9 @@
+#!/bin/sh
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+printf '\nmere-boot: foundational startup failed. Authentication is required.\n'
+printf 'Repair the system, then request reboot or power-off explicitly.\n'
+# Dinit closes its control socket after the failed graph stops. Reopen it so
+# an authenticated operator can use dinitctl and the shutdown utilities.
+kill -s USR1 1 || printf 'mere-boot: could not reopen the dinit control socket\n' >&2
+# Never use login -f or fall back to an unauthenticated shell.
+exec /usr/bin/login root
