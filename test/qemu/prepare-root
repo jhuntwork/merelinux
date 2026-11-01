@@ -1,0 +1,66 @@
+#!/bin/sh
+# Prepare the explicit package inputs consumed by dinit-smoke.
+set -eu
+if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
+    printf 'Usage: %s ABSOLUTE_MERE_BINARY NEW_ABSOLUTE_ROOT [PREVIOUS_INPUTS_DIR]\n' "$0" >&2
+    exit 2
+fi
+mere=$1
+root=$2
+previous=${3:-}
+case $mere in /*) ;; *) printf 'Mere binary path must be absolute\n' >&2; exit 2 ;; esac
+case $root in /) printf 'Refusing the host root\n' >&2; exit 2 ;; /*) ;; *) printf 'Storage root must be absolute\n' >&2; exit 2 ;; esac
+for tool in mkdir cp curl sha256sum uname cat; do
+    if ! command -v "$tool" >/dev/null 2>&1; then
+        printf 'Missing host utility: %s\n' "$tool" >&2
+        exit 2
+    fi
+done
+if [ ! -x "$mere" ]; then
+    printf 'Mere binary is not executable: %s\n' "$mere" >&2
+    exit 2
+fi
+if [ -n "$previous" ]; then
+    for file in config.kdl mere.pub profile.kdl mere.sha256 architecture; do
+        if [ ! -r "$previous/$file" ]; then
+            printf 'Missing recorded input: %s/%s\n' "$previous" "$file" >&2
+            exit 2
+        fi
+    done
+    expected=$(cat "$previous/mere.sha256")
+    actual=$(sha256sum < "$mere")
+    [ "$actual" = "$expected" ] || {
+        printf 'Mere binary differs from recorded input\n' >&2
+        exit 2
+    }
+    [ "$(uname -m)" = "$(cat "$previous/architecture")" ] || {
+        printf 'Host architecture differs from recorded input\n' >&2
+        exit 2
+    }
+fi
+# Refuse an existing directory so no previous package state influences setup.
+mkdir "$root"
+inputs=$root/test-inputs
+mkdir -p "$root/mere/keys" "$inputs"
+"$mere" --version > "$inputs/mere.version"
+sha256sum < "$mere" > "$inputs/mere.sha256"
+uname -m > "$inputs/architecture"
+if [ -n "$previous" ]; then
+    cp "$previous/config.kdl" "$inputs/config.kdl"
+    cp "$previous/mere.pub" "$inputs/mere.pub"
+    cp "$previous/profile.kdl" "$inputs/requested-profile.kdl"
+else
+    curl -fsSL https://pkgs.merelinux.org/config.kdl -o "$inputs/config.kdl"
+    curl -fsSL https://pkgs.merelinux.org/mere.pub -o "$inputs/mere.pub"
+fi
+cp "$inputs/config.kdl" "$root/mere/config.kdl"
+cp "$inputs/mere.pub" "$root/mere/keys/mere.pub"
+if [ -n "$previous" ]; then
+    "$mere" --root "$root" profile apply "$inputs/requested-profile.kdl" -p guest
+else
+    "$mere" --root "$root" install -p guest linux busybox dinit
+fi
+cp "$root/mere/profiles/guest/root/profile.kdl" "$inputs/profile.kdl"
+sha256sum < "$inputs/config.kdl" > "$inputs/config.sha256"
+sha256sum < "$inputs/mere.pub" > "$inputs/key.sha256"
+printf 'Guest profile ready at %s\nRecorded inputs: %s\n' "$root" "$inputs"

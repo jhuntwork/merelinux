@@ -1,23 +1,28 @@
 #!/bin/sh
-# Boot an existing Mere profile on an ext4 disk with dinit as PID 1.
+# Prepare and boot a disposable Mere root with dinit as PID 1.
 set -eu
-if [ "$#" -ne 2 ]; then
-    printf 'Usage: %s STORAGE_ROOT PROFILE_NAME\n' "$0" >&2
+if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
+    printf 'Usage: %s ABSOLUTE_MERE_BINARY NEW_ABSOLUTE_RESULTS [PREVIOUS_INPUTS_DIR]\n' "$0" >&2
     exit 2
 fi
-storage=$1
-profile=$storage/mere/profiles/$2/root
+mere=$1
+results=$2
+previous=${3:-}
+case $results in /*) ;; *) printf 'Results path must be absolute\n' >&2; exit 2 ;; esac
 qemu=${QEMU:-qemu-system-x86_64}
-for dir in "$storage/mere/store" "$profile"; do
-    if [ ! -d "$dir" ]; then
-        printf 'Missing directory: %s\n' "$dir" >&2
+for tool in "$qemu" mktemp mkdir cp readlink truncate mke2fs timeout find chmod rm grep cat mv dirname; do
+    if ! command -v "$tool" >/dev/null 2>&1; then
+        printf 'Missing host utility: %s\n' "$tool" >&2
         exit 2
     fi
 done
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+# Refuse existing results so a previous run cannot supply a success marker.
+mkdir "$results"
 work=$(mktemp -d)
 cleanup() {
-    # Copied store directories retain read-only modes. Change only directories
-    # in the disposable copy; never follow its absolute store symlinks.
+    # Store directories retain read-only modes. Change only the disposable
+    # tree's directories; never follow its absolute store symlinks.
     find "$work" -type d -exec chmod u+w {} +
     rm -rf "$work"
 }
@@ -25,9 +30,22 @@ trap cleanup 0
 trap 'exit 130' INT
 trap 'exit 143' TERM
 root=$work/root
+if [ -n "$previous" ]; then
+    if ! sh "$script_dir/prepare-root" "$mere" "$root" "$previous" > "$results/setup.log" 2>&1; then
+        cat "$results/setup.log"
+        exit 1
+    fi
+else
+    if ! sh "$script_dir/prepare-root" "$mere" "$root" > "$results/setup.log" 2>&1; then
+        cat "$results/setup.log"
+        exit 1
+    fi
+fi
+cat "$results/setup.log"
+mv "$root/test-inputs" "$results/inputs"
+profile=$root/mere/profiles/guest/root
 mkdir -p "$root/mere" "$root/etc/dinit.d" "$root/proc" "$root/sys" \
     "$root/dev" "$root/run" "$root/tmp" "$root/var/log"
-cp -RPp "$storage/mere/store" "$root/mere/"
 for dir in bin sbin usr lib boot; do
     if [ -d "$profile/$dir" ]; then
         cp -RPp "$profile/$dir" "$root/"
@@ -84,11 +102,11 @@ timeout "${QEMU_TIMEOUT:-120}" "$qemu" \
     -display none -serial stdio -monitor none -no-reboot \
     -kernel "$kernel" -drive "file=$work/root.ext4,format=raw,if=ide" \
     -append 'console=ttyS0 root=/dev/sda rootfstype=ext4 rw init=/bin/dinit panic=-1' \
-    > "$work/serial.log" 2>&1 || {
-        cat "$work/serial.log"
+    > "$results/serial.log" 2>&1 || {
+        cat "$results/serial.log"
         exit 1
     }
-cat "$work/serial.log"
-grep -q '^DINIT_BOOT_PASS' "$work/serial.log"
-grep -q 'Issuing shutdown via kernel' "$work/serial.log"
-grep -q 'reboot: Power down' "$work/serial.log"
+cat "$results/serial.log"
+grep -q '^DINIT_BOOT_PASS' "$results/serial.log"
+grep -q 'Issuing shutdown via kernel' "$results/serial.log"
+grep -q 'reboot: Power down' "$results/serial.log"
