@@ -1,0 +1,10 @@
+#!/bin/sh
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+version=$1
+printf '%s\n' "$version" > /run/guest-lifecycle.version
+trap 'rm /run/guest-lifecycle.pid; exit 0' TERM INT
+trap 'printf reload > /run/guest-lifecycle.reload' HUP
+printf '%s\n' "$$" > /run/guest-lifecycle.pid
+printf 'guest-lifecycle %s started\n' "$version"
+while :; do sleep 1 || :; done
