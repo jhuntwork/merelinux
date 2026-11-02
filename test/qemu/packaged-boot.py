@@ -40,7 +40,7 @@ def dialogue(qemu, kernel, disk, case, output, timeout):
                "-nic", "none", "-kernel", str(kernel), "-drive",
                f"file={disk},format=raw,if=ide", "-append",
                "console=ttyS0 root=/dev/sda rootfstype=ext4 ro init=/sbin/init panic=-1"]
-    if case != "reboot":
+    if case not in ("reboot", "lifecycle"):
         command += ["-no-reboot"]
     with output.open("wb") as log, subprocess.Popen(
             command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
@@ -115,6 +115,10 @@ def dialogue(qemu, kernel, disk, case, output, timeout):
                             send("[ \"$(id -u)\" = 0 ] && dinitctl list >/dev/null && "
                                  "printf 'PACKAGED_%s_PASS\\n' RECOVERY && /sbin/shutdown -p\n")
                             stage = "shutdown"
+                        elif case == "lifecycle":
+                            send(f"/bin/sh /etc/lifecycle/run {cycle}\n")
+                            stage = "login" if cycle < 2 else "shutdown"
+                            cycle += 1
                         elif case == "reboot" and cycle == 0:
                             send("/bin/sh /etc/boot-test/check && "
                                  "printf 'persistent-data\\n' > /var/log/boot-test-data && "
@@ -154,6 +158,15 @@ def dialogue(qemu, kernel, disk, case, output, timeout):
             required += ["PACKAGED_REBOOT_PASS", "reboot: Restarting system"]
             if text.count("PACKAGED_BOOT_PASS") != 2:
                 raise RuntimeError("Reboot must pass both boot cycles")
+        if case == "lifecycle":
+            failed = re.search(r"LIFECYCLE_PHASE_[0-2]_FAIL", text)
+            if failed:
+                raise RuntimeError(f"Lifecycle guest reported {failed.group()}; see serial.log")
+            required += ["MERE_PACKAGE_LIFECYCLE_PASS", "MERE_SERVICE_LIFECYCLE_PASS",
+                         "MERE_ENABLED_BOOT_PASS", "MERE_DISABLED_BOOT_PASS"]
+            required += [f"LIFECYCLE_PHASE_{phase}_PASS" for phase in range(3)]
+            if text.count("PACKAGED_BOOT_PASS") != 3 or text.count("reboot: Restarting system") != 2:
+                raise RuntimeError("Lifecycle checks require three successful boot cycles")
         for marker in required:
             if marker not in text:
                 raise RuntimeError(f"{case}: missing {marker}")
@@ -167,11 +180,14 @@ def main():
         raise RuntimeError("Mere and results paths must be absolute")
     if os.uname().machine != "x86_64":
         raise RuntimeError("This launcher requires an x86_64 host and packages")
+    lifecycle = os.environ.get("MERE_LIFECYCLE_TESTS") == "1"
     qemu = os.environ.get("QEMU", "qemu-system-x86_64")
     for tool in (qemu, "sh", "curl", "sha256sum", "uname", "mke2fs", "e2fsck", "debugfs", "openssl"):
         if not shutil.which(tool):
             raise RuntimeError(f"Missing host utility: {tool}")
-    timeout = float(os.environ.get("QEMU_TIMEOUT", "180"))
+    if lifecycle and not shutil.which("readelf"):
+        raise RuntimeError("Missing host utility: readelf")
+    timeout = float(os.environ.get("QEMU_TIMEOUT", "600" if lifecycle else "180"))
     if not math.isfinite(timeout) or timeout <= 0:
         raise RuntimeError("QEMU_TIMEOUT must be finite and positive")
     disk_mib = int(os.environ.get("QEMU_DISK_MIB", "512"))
@@ -218,7 +234,12 @@ def main():
             shutil.copy2(HERE / "prepare-root", inputs / "prepare-root")
             (inputs / "qemu.version").write_bytes(subprocess.check_output([qemu, "--version"]))
             (inputs / "kernel.sha256").write_text(hashlib.sha256(kernel.read_bytes()).hexdigest() + "\n")
-            for case in ("boot", "reboot", "recovery"):
+            if lifecycle:
+                sys.dont_write_bytecode = True
+                from lifecycle import prepare
+                prepare(mere, root, inputs, HERE)
+            cases = ("lifecycle",) if lifecycle else ("boot", "reboot", "recovery")
+            for case in cases:
                 case_dir = results / case
                 case_dir.mkdir()
                 fstab = "tmpfs /mnt/test tmpfs defaults 0 0\n"
@@ -240,7 +261,7 @@ def main():
                     ["debugfs", "-R", "cat /var/log/boot-test-stops", str(disk)],
                     stderr=subprocess.DEVNULL).decode()
                 (case_dir / "stop.log").write_text(stops)
-                expected = 0 if case == "recovery" else (2 if case == "reboot" else 1)
+                expected = {"recovery": 0, "reboot": 2, "lifecycle": 3}.get(case, 1)
                 if stops.splitlines() != ["mounts-present"] * expected:
                     raise RuntimeError(f"{case}: service stop ordering evidence differs")
                 disk.unlink()

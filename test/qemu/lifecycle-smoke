@@ -1,0 +1,5 @@
+#!/bin/sh
+set -eu
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+export MERE_LIFECYCLE_TESTS=1
+exec sh "$script_dir/packaged-boot-smoke" "$@"

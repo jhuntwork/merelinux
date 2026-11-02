@@ -1,0 +1,40 @@
+recipe {
+    name "guest-lifecycle"
+    version "1.0"
+    release 1
+    description "Disposable service lifecycle fixture"
+    url "https://merelinux.org"
+    licenses "MIT"
+    archs "x86_64"
+    depends "busybox"
+}
+source "daemon" {
+    blake3 "2f7e313e16791e8d304511c47e563ce34d2cd43cfd2e7a1d07867f9c887c0998"
+}
+install {
+    script r#"
+        mkdir -p "${DESTDIR}/usr/libexec" "${DESTDIR}/etc"
+        cp "${MERE_SOURCES_DIR}/daemon" "${DESTDIR}/usr/libexec/guest-lifecycle"
+        chmod 0755 "${DESTDIR}/usr/libexec/guest-lifecycle"
+        printf 'v1\n' > "${DESTDIR}/etc/guest-lifecycle.conf"
+    "#
+}
+package "guest-lifecycle" {
+    files "usr/" "etc/"
+    service "guest-lifecycle" {
+        type "daemon"
+        command "/usr/libexec/guest-lifecycle" "v1"
+        log true
+        depends-on "sysinit"
+    }
+    service "guest-override" {
+        type "oneshot"
+        up "/bin/true"
+        log false
+    }
+    service "guest-old" {
+        type "oneshot"
+        up "/bin/true"
+        log false
+    }
+}

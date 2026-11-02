@@ -1,0 +1,12 @@
+#!/bin/sh
+# Always power off on failure so the host can report the missing phase marker.
+export PATH=/opt:/bin:/sbin:/usr/bin:/usr/sbin
+if /bin/sh /etc/lifecycle/probe "$1"; then
+    printf 'LIFECYCLE_PHASE_%s_PASS\n' "$1"
+    if [ "$1" -lt 2 ]; then
+        exec /sbin/shutdown -r
+    fi
+else
+    printf 'LIFECYCLE_PHASE_%s_FAIL\n' "$1"
+fi
+exec /sbin/shutdown -p

@@ -1,0 +1,144 @@
+#!/bin/sh
+set -eux
+export PATH=/opt:/bin:/sbin:/usr/bin:/usr/sbin
+export HOME=/root
+cd /
+/bin/sh /etc/boot-test/check
+service=guest-lifecycle
+native=/usr/share/dinit.d/$service
+status() {
+    mere --no-color status "$service" > /run/lifecycle-status 2>&1
+    cat /run/lifecycle-status
+    grep -q "OnBoot: $1" /run/lifecycle-status
+    mere --no-color status > /run/lifecycle-list 2>&1
+    cat /run/lifecycle-list
+    grep -q "^guest-lifecycle[[:space:]].*[[:space:]]$1$" /run/lifecycle-list
+}
+stopped() {
+    if dinitctl is-started "$service"; then
+        printf 'Service unexpectedly running\n' >&2
+        exit 1
+    fi
+}
+pid_changed() {
+    attempts=0
+    while [ ! -s /run/guest-lifecycle.pid ] || [ "$(cat /run/guest-lifecycle.pid)" = "$1" ]; do
+        attempts=$((attempts + 1))
+        [ "$attempts" -lt 50 ]
+        sleep 0.1
+    done
+}
+if [ "$1" != 0 ]; then
+    gen=$(cat /var/log/lifecycle-v1-generation)
+    [ "$(readlink /mere/profiles/system/current)" = "gen-$gen" ]
+    grep -qx admin-owned /etc/guest-lifecycle.conf
+    cmp /etc/dinit.d/guest-override /var/log/lifecycle-admin-service
+fi
+case $1 in
+0)
+    mere dev key generate
+    fingerprint_output=$(mere --no-color dev key fingerprint /root/.mere/keys/mere.pub)
+    fingerprint=${fingerprint_output##*: }
+    [ "${#fingerprint}" -eq 64 ]
+    cp /root/.mere/keys/mere.pub /mere/keys/lifecycle.pub
+    # Each version is built from its own recipe and imported only when needed.
+    mere dev build --no-cache /etc/lifecycle/v1/recipe.kdl
+    set -- /mere/dev/build/guest-lifecycle-1.0-1-*/pkg/guest-lifecycle-1.0-1-*.pkg.tar.zst
+    [ "$#" -eq 1 ] && [ -f "$1" ]
+    mere dev import lifecycle "$1"
+    printf '\nrepo "lifecycle" {\n url "file:///mere/dev/repo/lifecycle"\n priority 200\n trusted-fingerprints "%s"\n}\n' "$fingerprint" >> /mere/config.kdl
+    mere install -p system guest-lifecycle
+    gen=$(readlink /mere/profiles/system/current)
+    gen=${gen#gen-}
+    printf '%s\n' "$gen" > /var/log/lifecycle-v1-generation
+    grep -q 'v1' "$native"
+    [ -f /usr/share/dinit.d/guest-old ]
+    [ ! -e /usr/share/dinit.d/guest-new ]
+    printf 'admin-owned\n' > /etc/guest-lifecycle.conf
+    printf 'type = scripted\ncommand = /bin/false\n' > /etc/dinit.d/guest-override
+    cp /etc/dinit.d/guest-override /var/log/lifecycle-admin-service
+    mere dev build --no-cache /etc/lifecycle/v2/recipe.kdl
+    set -- /mere/dev/build/guest-lifecycle-1.0-2-*/pkg/guest-lifecycle-1.0-2-*.pkg.tar.zst
+    [ "$#" -eq 1 ] && [ -f "$1" ]
+    mere dev import lifecycle "$1"
+    mere upgrade --sync guest-lifecycle
+    grep -q 'v2' "$native"
+    [ ! -e /usr/share/dinit.d/guest-old ]
+    [ -f /usr/share/dinit.d/guest-new ]
+    grep -qx admin-owned /etc/guest-lifecycle.conf
+    cmp /etc/dinit.d/guest-override /var/log/lifecycle-admin-service
+    mere start "$service"
+    pid_changed ''
+    grep -qx v2 /run/guest-lifecycle.version
+    mere stop "$service"
+    dinitctl unload "$service"
+    mere uninstall guest-lifecycle
+    for name in guest-lifecycle guest-override guest-new guest-old; do
+        [ ! -e "/usr/share/dinit.d/$name" ]
+    done
+    cmp /etc/dinit.d/guest-override /var/log/lifecycle-admin-service
+    mere store generation activate "$gen"
+    grep -q 'v1' "$native"
+    [ -f /usr/share/dinit.d/guest-old ]
+    [ ! -e /usr/share/dinit.d/guest-new ]
+    cmp /etc/dinit.d/guest-override /var/log/lifecycle-admin-service
+    grep -qx admin-owned /etc/guest-lifecycle.conf
+    printf 'MERE_%s_PASS\n' PACKAGE_LIFECYCLE
+    # The adapter must separate boot intent from current process state.
+    mere start "$service"
+    pid_changed ''
+    first=$(cat /run/guest-lifecycle.pid)
+    status disabled
+    grep -qx v1 /run/guest-lifecycle.version
+    mere reload "$service"
+    attempts=0
+    while [ ! -f /run/guest-lifecycle.reload ]; do
+        attempts=$((attempts + 1))
+        [ "$attempts" -lt 50 ]
+        sleep 0.1
+    done
+    [ "$(cat /run/guest-lifecycle.pid)" = "$first" ]
+    mere restart "$service"
+    pid_changed "$first"
+    mere logs "$service" > /run/lifecycle-logs 2>&1
+    cat /run/lifecycle-logs
+    grep -q 'guest-lifecycle v1 started' /run/lifecycle-logs
+    mere stop "$service"
+    stopped
+    status disabled
+    mere enable "$service"
+    stopped
+    [ -L /etc/dinit.d/boot.d/guest-lifecycle ]
+    status enabled
+    mere start "$service"
+    pid_changed ''
+    first=$(cat /run/guest-lifecycle.pid)
+    mere disable "$service"
+    dinitctl is-started "$service"
+    [ "$(cat /run/guest-lifecycle.pid)" = "$first" ]
+    status disabled
+    [ ! -L /etc/dinit.d/boot.d/guest-lifecycle ]
+    mere stop "$service"
+    stopped
+    mere enable "$service"
+    stopped
+    printf 'MERE_%s_PASS\n' SERVICE_LIFECYCLE
+    ;;
+1)
+    # The previous enable must take effect on an actual reboot.
+    dinitctl is-started "$service"
+    status enabled
+    mere disable "$service"
+    dinitctl is-started "$service"
+    status disabled
+    printf 'MERE_%s_PASS\n' ENABLED_BOOT
+    ;;
+2)
+    # Disable persisted without stopping the previous boot's live process.
+    stopped
+    [ ! -L /etc/dinit.d/boot.d/guest-lifecycle ]
+    grep -q 'v1' "$native"
+    printf 'MERE_%s_PASS\n' DISABLED_BOOT
+    ;;
+*) exit 2 ;;
+esac

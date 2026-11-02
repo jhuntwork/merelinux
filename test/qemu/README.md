@@ -244,3 +244,54 @@ tools are recorded or supplied separately; replay does not pin them. Guest
 execution is offline. This covers the minimum packaged boot contract under #634;
 bootloader setup, package upgrade/removal/rollback, and broader service lifecycle
 behavior remain separate work.
+
+## Service and package lifecycle
+
+```sh
+QEMU_TIMEOUT=600 sh test/qemu/lifecycle-smoke /absolute/path/to/static/mere \
+    /absolute/new/lifecycle-results
+```
+
+This uses the published boot system above and runs the supplied static x86_64
+Mere binary inside the guest. Additional host dependency: `readelf`. Guest
+preparation makes a file-backed mirror from the verified upstream metadata and
+package cache. Only the repository transport URL changes; signature and key
+fingerprint checks remain enabled. There is no guest network device.
+
+The guest generates a disposable signing key and builds two releases of the
+`guest-lifecycle` fixture using `--no-cache`. It imports those signed archives
+into a temporary local repository, then checks:
+
+- Install and upgrade realize the right native service definitions, including
+  services added and removed between package releases.
+- Removal removes package-owned service definitions; generation activation
+  restores the earlier package version and service set.
+- Administrator service overrides and an edited `/etc` configuration survive
+  upgrade, removal, and rollback.
+- The upgraded daemon runs its new payload; the rolled-back daemon runs the
+  earlier payload. Services are explicitly stopped/unloaded before removal and
+  rollback; automatic restart or live reconciliation is not asserted.
+- Start, stop, restart, SIGHUP reload, detailed status, and log retrieval work.
+  PID changes distinguish restart from reload.
+- Enable changes persistent boot intent without starting a stopped daemon.
+  Disable leaves a running daemon's PID unchanged. Status reports persistent
+  intent independently of live state.
+- Across two actual reboots, enabled services start and disabled services stay
+  stopped. The system completes three boot/shutdown cycles with the packaged
+  graph, preserved data, and mount-lifetime records. Read-only filesystem checks
+  bracket the complete three-cycle scenario.
+
+The launcher reports success only after every phase and the final power-off.
+Failures shut the guest down and leave the failing command in `serial.log`;
+missing markers or failed filesystem checks make the host command fail. The
+per-scenario timeout includes package builds and all three boot cycles.
+
+The selected Mere binary must implement these service semantics; an older
+release with a known lifecycle defect should fail, rather than skip the check.
+The optional third argument replays the package identities and trust inputs,
+with the same binary-digest and repository-retention requirements as the boot
+launcher. The results also retain ELF headers, offline mirror hashes/config,
+and lifecycle fixture sources. The private development key and guest-built
+archives are discarded with the guest disk. This remains developer tooling,
+not an installer, a bootloader test, or a claim of automatic running-service
+replacement during package transactions.
