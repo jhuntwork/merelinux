@@ -3,9 +3,7 @@
 export PATH=/opt:/bin:/sbin:/usr/bin:/usr/sbin
 if /bin/sh /etc/lifecycle/probe "$1"; then
     printf 'LIFECYCLE_PHASE_%s_PASS\n' "$1"
-    if [ "$1" -lt 2 ]; then
-        exec /sbin/shutdown -r
-    fi
+    exec /sbin/shutdown -r
 else
     printf 'LIFECYCLE_PHASE_%s_FAIL\n' "$1"
 fi

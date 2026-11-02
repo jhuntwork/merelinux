@@ -1,4 +1,5 @@
 type = internal
 depends-on = sysinit
 depends-on = tty1
+depends-on.d = /usr/share/dinit.d/mere-essential.d
 waits-for.d = boot.d

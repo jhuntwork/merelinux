@@ -71,7 +71,7 @@ def dialogue(qemu, kernel, disk, case, output, timeout):
                     log.flush()
                     transcript += chunk
                     pending += chunk
-                if case != "recovery" and stage != "shutdown" and b"(p)ower off? " in pending:
+                if case != "recovery" and stage not in ("shutdown", "menu") and b"(p)ower off? " in pending:
                     send("p")
                     stage = "shutdown"
                 # Consume only up to each prompt so coalesced output is preserved.
@@ -103,7 +103,7 @@ def dialogue(qemu, kernel, disk, case, output, timeout):
                         send("root\n")
                         stage = "password"
                     elif stage == "password":
-                        if case == "recovery" and not wrong_sent:
+                        if (case == "recovery" or (case == "lifecycle" and cycle == 3)) and not wrong_sent:
                             send("incorrect-guest-password\n")
                             wrong_sent = True
                             stage = "retry"
@@ -115,9 +115,13 @@ def dialogue(qemu, kernel, disk, case, output, timeout):
                             send("[ \"$(id -u)\" = 0 ] && dinitctl list >/dev/null && "
                                  "printf 'PACKAGED_%s_PASS\\n' RECOVERY && /sbin/shutdown -p\n")
                             stage = "shutdown"
+                        elif case == "lifecycle" and cycle == 3:
+                            send('[ "$(id -u)" = 0 ] && dinitctl is-failed guest-essential && '
+                                 "printf 'MERE_%s_PASS\\n' ESSENTIAL_FAILURE; /sbin/shutdown -p\n")
+                            stage = "shutdown"
                         elif case == "lifecycle":
                             send(f"/bin/sh /etc/lifecycle/run {cycle}\n")
-                            stage = "login" if cycle < 2 else "shutdown"
+                            stage = "login" if cycle < 2 else "menu"
                             cycle += 1
                         elif case == "reboot" and cycle == 0:
                             send("/bin/sh /etc/boot-test/check && "
@@ -152,7 +156,7 @@ def dialogue(qemu, kernel, disk, case, output, timeout):
                 raise RuntimeError("Failed boot reported normal boot completion")
         else:
             required += ["PACKAGED_BOOT_PASS"]
-            if "(p)ower off? " in text:
+            if case != "lifecycle" and "(p)ower off? " in text:
                 raise RuntimeError(f"{case}: unexpected boot failure menu")
         if case == "reboot":
             required += ["PACKAGED_REBOOT_PASS", "reboot: Restarting system"]
@@ -163,10 +167,12 @@ def dialogue(qemu, kernel, disk, case, output, timeout):
             if failed:
                 raise RuntimeError(f"Lifecycle guest reported {failed.group()}; see serial.log")
             required += ["MERE_PACKAGE_LIFECYCLE_PASS", "MERE_SERVICE_LIFECYCLE_PASS",
-                         "MERE_ENABLED_BOOT_PASS", "MERE_DISABLED_BOOT_PASS"]
+                         "MERE_ENABLED_BOOT_PASS", "MERE_DISABLED_BOOT_PASS", "MERE_ESSENTIAL_FAILURE_PASS", "Login incorrect"]
             required += [f"LIFECYCLE_PHASE_{phase}_PASS" for phase in range(3)]
-            if text.count("PACKAGED_BOOT_PASS") != 3 or text.count("reboot: Restarting system") != 2:
-                raise RuntimeError("Lifecycle checks require three successful boot cycles")
+            if text.count("PACKAGED_BOOT_PASS") != 3 or text.count("reboot: Restarting system") != 3:
+                raise RuntimeError("Lifecycle checks require three successful boots and one essential-failure reboot")
+            if text.count("(p)ower off? ") != 1:
+                raise RuntimeError("Essential failure must reach exactly one recovery menu")
         for marker in required:
             if marker not in text:
                 raise RuntimeError(f"{case}: missing {marker}")

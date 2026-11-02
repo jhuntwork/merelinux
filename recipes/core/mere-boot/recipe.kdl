@@ -1,7 +1,7 @@
 recipe {
     name "mere-boot"
     version "0.1.0"
-    release 1
+    release 2
     description "Foundational boot services for Mere Linux with dinit"
     url "https://merelinux.org"
     licenses "MIT"
@@ -26,7 +26,7 @@ source "recovery" {
 }
 
 source "boot" {
-    blake3 "5f18e95596194b75ba5c1c88bb415582fd19bca610e82d28d87739492c499ac4"
+    blake3 "724bb861b99cee0484f2c77ef1fd056081823299f46394e01ca6f8256ecb1b22"
 }
 
 source "recovery.service" {

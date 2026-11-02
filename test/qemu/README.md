@@ -259,8 +259,9 @@ package cache. Only the repository transport URL changes; signature and key
 fingerprint checks remain enabled. There is no guest network device.
 
 The guest generates a disposable signing key and builds two releases of the
-`guest-lifecycle` fixture using `--no-cache`. It imports those signed archives
-into a temporary local repository, then checks:
+`guest-lifecycle` fixture plus the in-tree `mere-boot` recipe using `--no-cache`.
+It imports the signed archives into a temporary local repository and explicitly
+adopts the updated boot default in the disposable VM, then checks:
 
 - Install and upgrade realize the right native service definitions, including
   services added and removed between package releases.
@@ -268,23 +269,30 @@ into a temporary local repository, then checks:
   restores the earlier package version and service set.
 - Administrator service overrides and an edited `/etc` configuration survive
   upgrade, removal, and rollback.
-- The upgraded daemon runs its new payload; the rolled-back daemon runs the
-  earlier payload. Services are explicitly stopped/unloaded before removal and
-  rollback; automatic restart or live reconciliation is not asserted.
+- Upgrade and rollback leave the running PID and old payload unchanged. Explicit
+  restart refreshes dinit's definition and runs the active generation's payload.
+  Invalid administrator descriptions fail refresh without changing the PID.
+- Uninstall and generation switches removing a running service are rejected
+  before activation; explicit stop/unload permits removal. Administrator overrides
+  remain authoritative after restoration.
 - Start, stop, restart, SIGHUP reload, detailed status, and log retrieval work.
   PID changes distinguish restart from reload.
 - Enable changes persistent boot intent without starting a stopped daemon.
   Disable leaves a running daemon's PID unchanged. Status reports persistent
   intent independently of live state.
-- Across two actual reboots, enabled services start and disabled services stay
-  stopped. The system completes three boot/shutdown cycles with the packaged
-  graph, preserved data, and mount-lifetime records. Read-only filesystem checks
-  bracket the complete three-cycle scenario.
+- Across two normal reboots, enabled services start and disabled services stay
+  stopped. Essential services start without an optional enable link, remain
+  visible as essential, and reject disable without changing boot intent.
+- A third reboot with a deliberately failing essential override must fail the
+  required boot graph and reach exactly one recovery menu. The host selects
+  authenticated recovery, rejects a wrong password, verifies root and the failed
+  essential service, and explicitly powers off. Three normal shutdowns record
+  mount lifetime; read-only filesystem checks bracket all four boot attempts.
 
 The launcher reports success only after every phase and the final power-off.
 Failures shut the guest down and leave the failing command in `serial.log`;
 missing markers or failed filesystem checks make the host command fail. The
-per-scenario timeout includes package builds and all three boot cycles.
+per-scenario timeout includes package builds and all four boot attempts.
 
 The selected Mere binary must implement these service semantics; an older
 release with a known lifecycle defect should fail, rather than skip the check.
@@ -294,4 +302,5 @@ launcher. The results also retain ELF headers, offline mirror hashes/config,
 and lifecycle fixture sources. The private development key and guest-built
 archives are discarded with the guest disk. This remains developer tooling,
 not an installer, a bootloader test, or a claim of automatic running-service
-replacement during package transactions.
+replacement during package transactions. Existing administrator boot files on
+real machines still require an explicit review/adoption of the new default.

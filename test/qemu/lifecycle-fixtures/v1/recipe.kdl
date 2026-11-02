@@ -9,7 +9,7 @@ recipe {
     depends "busybox"
 }
 source "daemon" {
-    blake3 "2f7e313e16791e8d304511c47e563ce34d2cd43cfd2e7a1d07867f9c887c0998"
+    blake3 "fe19fd7f2fc33d21f830c1f549298e8d0e722e211bc9d30b976a6d20f36ec07b"
 }
 install {
     script r#"
@@ -26,6 +26,12 @@ package "guest-lifecycle" {
         command "/usr/libexec/guest-lifecycle" "v1"
         log true
         depends-on "sysinit"
+    }
+    service "guest-essential" {
+        type "oneshot"
+        up "/usr/libexec/guest-lifecycle" "essential"
+        essential true
+        log false
     }
     service "guest-override" {
         type "oneshot"

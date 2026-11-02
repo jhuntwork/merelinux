@@ -36,3 +36,6 @@ def prepare(mere, root, inputs, here):
     shutil.copytree(here / "lifecycle-fixtures", root / "etc/lifecycle")
     shutil.copytree(here / "lifecycle-fixtures", inputs / "lifecycle-fixtures")
     shutil.copy2(here / "lifecycle.py", inputs / "lifecycle.py")
+    boot_recipe = here.parent.parent / "recipes/core/mere-boot"
+    shutil.copytree(boot_recipe, root / "etc/lifecycle/boot-package")
+    shutil.copytree(boot_recipe, inputs / "boot-package")

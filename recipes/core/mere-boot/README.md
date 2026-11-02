@@ -94,3 +94,16 @@ reboot. Recovery does not depend on `sysinit`, so failure of that graph cannot
 suppress the recovery login. An operator repairs the system and explicitly
 requests reboot or power-off. `single` selects the same authenticated recovery
 path directly.
+
+
+The boot bundle also reads required dependencies from
+`/usr/share/dinit.d/mere-essential.d`. Mere generates the `mere-essential`
+bundle there from essential service metadata; failures of its hard dependencies
+prevent normal boot completion. Use a Mere version implementing this required
+bundle contract. Older Mere versions without the generated directory retain the
+older behavior (dinit warns about the missing dependency directory).
+
+Existing `/etc/dinit.d/boot` files remain administrator-owned. Review and adopt
+the new default explicitly with `mere etc apply /etc/dinit.d/boot` when appropriate,
+or add the required dependency-directory setting to a custom boot graph. The
+package does not overwrite an existing administrator boot configuration.

@@ -1,6 +1,10 @@
 #!/bin/sh
 set -eu
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+if [ "$1" = essential ]; then
+    printf ready > /run/guest-essential.started
+    exit 0
+fi
 version=$1
 printf '%s\n' "$version" > /run/guest-lifecycle.version
 trap 'rm /run/guest-lifecycle.pid; exit 0' TERM INT
