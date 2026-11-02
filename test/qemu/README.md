@@ -176,3 +176,71 @@ directory. Replay from a plain dinit run lacks the required zstd package and is
 rejected before boot. As with `dinit-smoke`, host replay still needs network
 access and repository retention; guest execution is offline. The fixture tests
 Mere shell/build behavior, not production service integration or bootloader setup.
+
+## Published boot contract
+
+```sh
+QEMU_TIMEOUT=180 sh test/qemu/packaged-boot-smoke /absolute/path/to/mere \
+    /absolute/new/boot-results
+```
+
+This x86_64 launcher installs the published `linux`, `busybox`, `dinit`, `shadow`,
+`mdevd`, and `mere-boot` packages into a fresh **system** profile with the dinit
+provider selected. Mere activates their `/etc` defaults and generates their
+service definitions. The launcher keeps the packaged boot graph and helpers;
+it adds only machine configuration, an optional serial login, and a test service
+that records whether `/run` and an fstab filesystem are still mounted when it
+stops. No recipes are built and no production services are replaced.
+
+Host requirements are Python 3.9 or later, a host-runnable Mere binary, an
+x86_64 host, QEMU with TCG/PC firmware, `mke2fs`, `e2fsck`, `debugfs`, `openssl`,
+and the `prepare-root` utilities listed above. No root privileges, host mounts,
+loop devices, KVM, or automatic host software installation are required. The
+packaged kernel needs the built-in disk/filesystem facilities described above.
+`QEMU` accepts one executable or wrapper path. `QEMU_TIMEOUT` is the deadline in
+seconds for each scenario (including both reboot cycles); `QEMU_DISK_MIB`
+defaults to 512 per disposable image.
+
+Three independent ext4 images exercise:
+
+1. Boot from a read-only root through `/sbin/init`, authenticate through the
+   packaged serial getty/login, check foundational mounts, runtime permissions,
+   hostname, coldplug completion directory and the dinit control socket, then
+   power off.
+2. Repeat those checks, write persistent data, reboot, authenticate again, verify
+   the data and first shutdown's service-stop record, and power off.
+3. Fail a required fstab mount, wait for dinit's boot-failure menu, select `e`,
+   reject an incorrect password, accept the fixture root password, and verify
+   root identity and a working `dinitctl` before explicitly powering off.
+
+QEMU has no network device and directly loads the packaged kernel, without an
+initramfs or bootloader. Each image must pass `e2fsck -fn` before and after boot;
+the checker never repairs a filesystem. Successful normal shutdowns must leave
+one stop record per boot proving the runtime and fstab mounts survived service
+shutdown. Recovery must show exactly one menu and no reboot. Failed commands,
+missing markers, unexpected menus, timeouts, and inconsistent filesystems fail
+the launcher.
+
+The root account and its public password `mere-guest-test` are **disposable test
+fixtures**, not package defaults or installation guidance. Never boot these
+images with networking or use this account configuration on an actual system.
+The temporary root and disks are deleted, including on failure. The new results
+directory retains setup/serial/assembly logs, before/after filesystem reports,
+and stop records. `inputs/` records the Mere binary digest/version, package
+identities, upstream configuration/key and hashes, effective provider config,
+kernel digest, QEMU version, and test driver/fixtures.
+
+Replay package identities and trust inputs with:
+
+```sh
+QEMU=/path/to/qemu-wrapper sh test/qemu/packaged-boot-smoke /absolute/path/to/mere \
+    /absolute/new/replay-results /absolute/previous/boot-results/inputs
+```
+
+Use inputs from this launcher. Replay requires the same Mere digest and host
+architecture, network access during preparation, and retention of the recorded
+packages by the repository. It is not an offline archive. QEMU version and host
+tools are recorded or supplied separately; replay does not pin them. Guest
+execution is offline. This covers the minimum packaged boot contract under #634;
+bootloader setup, package upgrade/removal/rollback, and broader service lifecycle
+behavior remain separate work.

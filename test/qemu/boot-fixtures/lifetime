@@ -1,0 +1,8 @@
+#!/bin/sh
+# dinit calls this only when stopping the successfully started test service.
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+mountpoint -q /run
+mountpoint -q /mnt/test
+printf 'mounts-present\n' >> /var/log/boot-test-stops
+sync

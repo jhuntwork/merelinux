@@ -1,0 +1,5 @@
+#!/bin/sh
+# Python handles the serial dialogue without expect or a host pseudo-terminal.
+set -eu
+script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+exec python3 "$script_dir/packaged-boot.py" "$@"
