@@ -1,5 +1,5 @@
 #!/bin/sh
-# Prepare the explicit package inputs consumed by dinit-smoke.
+# Prepare explicit package inputs for the disk-backed guest launchers.
 set -eu
 if [ "$#" -lt 2 ] || [ "$#" -gt 3 ]; then
     printf 'Usage: %s ABSOLUTE_MERE_BINARY NEW_ABSOLUTE_ROOT [PREVIOUS_INPUTS_DIR]\n' "$0" >&2
@@ -8,6 +8,10 @@ fi
 mere=$1
 root=$2
 previous=${3:-}
+profile=guest
+if [ "${MERE_BOOT_TESTS:-0}" = 1 ]; then
+    profile=system
+fi
 case $mere in /*) ;; *) printf 'Mere binary path must be absolute\n' >&2; exit 2 ;; esac
 case $root in /) printf 'Refusing the host root\n' >&2; exit 2 ;; /*) ;; *) printf 'Storage root must be absolute\n' >&2; exit 2 ;; esac
 for tool in mkdir cp curl sha256sum uname cat; do
@@ -55,16 +59,27 @@ else
 fi
 cp "$inputs/config.kdl" "$root/mere/config.kdl"
 cp "$inputs/mere.pub" "$root/mere/keys/mere.pub"
+if [ "$profile" = system ]; then
+    # Keep the upstream trust configuration; only select the init provider.
+    printf '\nsettings {\n    init-provider "dinit"\n}\n' >> "$root/mere/config.kdl"
+    cp "$root/mere/config.kdl" "$inputs/effective-config.kdl"
+fi
 if [ -n "$previous" ]; then
-    "$mere" --root "$root" profile apply "$inputs/requested-profile.kdl" -p guest
+    "$mere" --root "$root" profile apply "$inputs/requested-profile.kdl" -p "$profile"
 else
-    if [ "${MERE_GUEST_TESTS:-0}" = 1 ]; then
+    if [ "$profile" = system ]; then
+        "$mere" --root "$root" install -p system linux busybox dinit shadow mdevd mere-boot
+    elif [ "${MERE_GUEST_TESTS:-0}" = 1 ]; then
         "$mere" --root "$root" install -p guest linux busybox dinit zstd
     else
         "$mere" --root "$root" install -p guest linux busybox dinit
     fi
 fi
-cp "$root/mere/profiles/guest/root/profile.kdl" "$inputs/profile.kdl"
+if [ "$profile" = system ]; then
+    cp "$root/mere/profiles/system/current/profile.kdl" "$inputs/profile.kdl"
+else
+    cp "$root/mere/profiles/guest/root/profile.kdl" "$inputs/profile.kdl"
+fi
 sha256sum < "$inputs/config.kdl" > "$inputs/config.sha256"
 sha256sum < "$inputs/mere.pub" > "$inputs/key.sha256"
 printf 'Guest profile ready at %s\nRecorded inputs: %s\n' "$root" "$inputs"

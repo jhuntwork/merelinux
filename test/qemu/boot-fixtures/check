@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+[ "$(id -u)" = 0 ]
+[ "$(cat /proc/1/comm)" = dinit ]
+[ "$(hostname)" = mere-boot-test ]
+for dir in /proc /sys /dev /run /dev/pts /dev/shm /mnt/test; do
+    mountpoint -q "$dir"
+done
+[ -d /run/.libudev-zero ]
+[ -S /run/dinitctl ]
+[ "$(stat -c %a /tmp)" = 1777 ]
+[ "$(stat -c %a /var/tmp)" = 1777 ]
+for service in mdevd mdevd-coldplug mount-fstab sysinit tty1 ttyS0 boot boot-test-lifetime; do
+    dinitctl is-started "$service"
+done
+dinitctl list
+printf 'PACKAGED_%s_PASS\n' BOOT
