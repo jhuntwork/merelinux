@@ -1,0 +1,47 @@
+recipe {
+    name "bubblewrap"
+    version "0.13.1"
+    release 1
+    description "Unprivileged sandboxing tool using Linux namespaces"
+    url "https://github.com/containers/bubblewrap"
+    licenses "LGPL-2.0-or-later"
+    archs "aarch64" "x86_64"
+    depends "busybox" \
+            "libcap-dev" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "pkgconf"
+}
+
+source "https://github.com/containers/bubblewrap/releases/download/v${recipe.version}/bubblewrap-${recipe.version}.tar.xz" {
+    blake3 "c79294dea8456743297dbe21b4ae2cabc70b737bb5884118a484587738c5aead"
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            -Dprefix=/usr \
+            -Dbuildtype=release \
+            -Dman=disabled \
+            -Dtests=false \
+            -Dselinux=disabled \
+            -Dbash_completion=disabled \
+            -Dzsh_completion=disabled
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="${DESTDIR}" ninja -C build/ install
+    "#
+}
+
+package "bubblewrap" {
+    files "usr/bin/bwrap"
+}
