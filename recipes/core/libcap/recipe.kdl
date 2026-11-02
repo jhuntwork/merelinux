@@ -1,0 +1,62 @@
+recipe {
+    name "libcap"
+    version "2.78"
+    release 1
+    description "POSIX 1003.1e capabilities library and tools"
+    url "https://sites.google.com/site/fullycapable/"
+    licenses "BSD-3-Clause" "GPL-2.0-only"
+    archs "aarch64" "x86_64"
+    depends "bash" \
+            "busybox" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev"
+}
+
+source "https://kernel.org/pub/linux/libs/security/linux-privs/libcap2/libcap-${recipe.version}.tar.xz" {
+    blake3 "8309d1f55e89be484baa938d4a5ec1d661fdf66d639f7a4e99d5c6e4893f9c79"
+}
+
+build {
+    script r#"
+        make \
+            CC="${CC:-cc}" \
+            BUILD_CC="${CC:-cc}" \
+            prefix=/usr \
+            lib=lib \
+            GOLANG=no \
+            PAM_CAP=no \
+            RAISE_SETFCAP=no
+    "#
+}
+
+install {
+    script r#"
+        make \
+            CC="${CC:-cc}" \
+            BUILD_CC="${CC:-cc}" \
+            DESTDIR="${DESTDIR}" \
+            prefix=/usr \
+            lib=lib \
+            GOLANG=no \
+            PAM_CAP=no \
+            RAISE_SETFCAP=no \
+            install
+    "#
+}
+
+package "libcap" {
+    files "usr/lib/libcap.so.*" \
+          "usr/lib/libpsx.so.*" \
+          "usr/lib/*.so" \
+          "usr/sbin/" \
+          "usr/share/man/"
+}
+
+package "libcap-dev" {
+    files "usr/include/" \
+          "usr/lib/*.a" \
+          "usr/lib/pkgconfig/"
+}
