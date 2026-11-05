@@ -521,7 +521,11 @@ def swamp_repo_args(args: argparse.Namespace) -> list[str]:
     repo_dir = args.swamp_repo_dir or os.environ.get("SWAMP_REPO_DIR")
     if not repo_dir:
         die("Swamp operations require --swamp-repo-dir or SWAMP_REPO_DIR")
-    return ["--repo-dir", str(repo_dir)]
+    result = ["--repo-dir", str(repo_dir)]
+    server_url = os.environ.get("SWAMP_SERVER_URL") or os.environ.get("SWAMP_SERVE_URL")
+    if server_url:
+        result.extend(["--server", server_url])
+    return result
 
 
 def invoke_tool_profile(args: argparse.Namespace, inputs: dict[str, Any]) -> list[dict[str, Any]]:
