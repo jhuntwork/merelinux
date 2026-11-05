@@ -522,6 +522,9 @@ def swamp_repo_args(args: argparse.Namespace) -> list[str]:
     if not repo_dir:
         die("Swamp operations require --swamp-repo-dir or SWAMP_REPO_DIR")
     result = ["--repo-dir", str(repo_dir)]
+    token_file = args.swamp_server_token_file or os.environ.get("SWAMP_SERVER_TOKEN_FILE")
+    if token_file:
+        result.extend(["--token-file", str(token_file)])
     server_url = os.environ.get("SWAMP_SERVER_URL") or os.environ.get("SWAMP_SERVE_URL")
     if server_url:
         result.extend(["--server", server_url])
@@ -1021,6 +1024,7 @@ def parse() -> argparse.Namespace:
     parser.add_argument("--tool-profile-root", type=Path,
                         help="validated Mere profile root for image tools")
     parser.add_argument("--swamp-repo-dir", type=Path)
+    parser.add_argument("--swamp-server-token-file", type=Path)
     parser.add_argument("--root-tree", type=Path)
     parser.add_argument("--fixture-root-tree", type=Path)
     parser.add_argument("--fixture-esp-tree", type=Path)
