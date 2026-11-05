@@ -565,6 +565,8 @@ def invoke_mere_dev(args: argparse.Namespace, inputs: dict[str, Any]) -> None:
     if not args.mere_dev_behavior:
         die("--build-packages requires a pre-created pinned @jeremy/mere-dev behavior")
     for package in inputs["packages"]:
+        if package["name"] == "linux":
+            continue
         command(["swamp", "behavior", "run", args.mere_dev_behavior, "build",
                  *swamp_repo_args(args), "--input", f"recipe={ROOT / package['recipe']}"])
 
@@ -604,8 +606,18 @@ def find_existing_kernel(
     inputs: dict[str, Any],
     destination: Path,
     dev_root: Path,
+    linux_package: Path | None = None,
 ) -> tuple[Path, Path, str]:
     version = inputs["toolchain"]["linux_version"]
+    if linux_package is not None:
+        if not linux_package.is_file():
+            die(f"pinned Linux package is unavailable: {linux_package}")
+        if not linux_package.name.startswith(f"linux-{version}-"):
+            die(f"pinned Linux package does not match Linux {version}: {linux_package.name}")
+        candidate = destination / "kernel-candidate"
+        shutil.rmtree(candidate, ignore_errors=True)
+        extract_kernel_archive(linux_package, candidate, inputs)
+        return candidate, linux_package, version
     built_roots = sorted((dev_root / "mere/dev/build").glob(f"linux-{version}-*/pkg/linux"))
     if built_roots:
         package_root = built_roots[-1]
@@ -958,7 +970,12 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
         package_provider_mapping(package_root, name, providers)
         merge_tree(package_root, source_root)
         package_records.append({"name": name, "version": version, "archive_blake3": file_blake3(archive, mere_binary, dev_root)})
-    kernel_dir, kernel_archive, kernel_version = find_existing_kernel(inputs, generated, dev_root)
+    kernel_dir, kernel_archive, kernel_version = find_existing_kernel(
+        inputs,
+        generated,
+        dev_root,
+        args.linux_package,
+    )
     merge_tree(kernel_dir, source_root)
     package_provider_mapping(kernel_dir, "linux", providers)
     package_records.append({"name": "linux", "version": kernel_version, "archive_blake3": file_blake3(kernel_archive, mere_binary, dev_root)})
@@ -1017,11 +1034,13 @@ def parse() -> argparse.Namespace:
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--build", action="store_true")
     parser.add_argument("--build-packages", action="store_true")
+    parser.add_argument("--prepare-generated-inputs", action="store_true")
     parser.add_argument("--mere-dev-behavior")
     parser.add_argument("--mere-dev-root", type=Path,
                         default=None)
     parser.add_argument("--mere-binary", type=Path)
     parser.add_argument("--mere-version")
+    parser.add_argument("--linux-package", type=Path)
     parser.add_argument("--ovmf-code", type=Path)
     parser.add_argument("--ovmf-source-archive", type=Path)
     parser.add_argument("--acpica-source-archive", type=Path)
@@ -1070,6 +1089,25 @@ def main() -> int:
         observations = invoke_tool_profile(args, inputs)
         print(json.dumps({"tool_profile": inputs["tool_profile"], "observations": observations, "smoke": "validated"}, sort_keys=True))
         return 0
+    if args.prepare_generated_inputs:
+        if not args.build_packages:
+            die("--prepare-generated-inputs requires --build-packages")
+        if args.tool_profile_root is None:
+            die("--prepare-generated-inputs requires --tool-profile-root")
+        if args.linux_package is None:
+            die("--prepare-generated-inputs requires --linux-package")
+        check_environment(
+            profile_root=args.tool_profile_root,
+            inputs=inputs,
+            include_swamp=True,
+        )
+        prepare_generated_inputs(args, inputs)
+        print(json.dumps({
+            "generated": str(args.output_dir / "generated-inputs"),
+            "package_manifest": str(args.package_manifest),
+            "firmware_manifest": str(args.firmware_manifest),
+        }, sort_keys=True))
+        return 0
     if not args.build or not args.compare:
         die("--build and --compare are required; a single build is not reproducibility evidence")
     if args.tool_profile_root is None:
@@ -1078,11 +1116,7 @@ def main() -> int:
                       include_swamp=args.build_packages or args.tool_profile_smoke)
     if args.tool_profile_smoke:
         invoke_tool_profile(args, inputs)
-    if args.build_packages:
-        prepare_generated_inputs(args, inputs)
     image_tool_versions = tool_versions()
-    if args.build_packages:
-        prepare_generated_inputs(args, inputs)
     required_paths = ((args.root_tree, "--root-tree"), (args.fixture_root_tree, "--fixture-root-tree"),
                       (args.fixture_esp_tree, "--fixture-esp-tree"), (args.kernel, "--kernel"), (args.limine_efi, "--limine-efi"),
                       (args.package_manifest, "--package-manifest"), (args.firmware_manifest, "--firmware-manifest"))
