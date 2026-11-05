@@ -945,6 +945,19 @@ def prepare_ovmf(args: argparse.Namespace, inputs: dict[str, Any], generated: Pa
     }
 
 
+def tool_profile_archive(dev_root: Path, name: str) -> Path:
+    archives = sorted((dev_root / "mere/cache/packages").glob(f"{name}-*.pkg.tar.zst"))
+    if archives:
+        return archives[-1]
+    output_archives = sorted(
+        path for path in Path("/mere/dev/outputs").glob(f"{name}-*/{name}-*.pkg.tar.zst")
+        if "-dev-" not in path.name
+    )
+    if output_archives:
+        return output_archives[-1]
+    die(f"tool profile package archive is unavailable: {name}")
+
+
 def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -> None:
     if not args.mere_dev_behavior:
         die("generated staging requires --mere-dev-behavior")
@@ -1003,10 +1016,7 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     repository_snapshot = file_blake3(repository_files[-1], mere_binary, dev_root)
     tool_records: list[dict[str, str]] = []
     for name in inputs["tool_profile"]["packages"]:
-        archives = sorted((dev_root / "mere/cache/packages").glob(f"{name}-*.pkg.tar.zst"))
-        if not archives:
-            die(f"tool profile package archive is unavailable: {name}")
-        archive = archives[-1]
+        archive = tool_profile_archive(dev_root, name)
         match = re.match(rf"{re.escape(name)}-(.+)-x86_64-[0-9a-f]+\.pkg\.tar\.zst$", archive.name)
         if not match:
             die(f"cannot parse tool profile archive version: {archive.name}")
