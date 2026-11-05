@@ -1,0 +1,1160 @@
+#!/usr/bin/env python3
+"""Build the pinned, no-initramfs x86_64 UEFI rescue image and fixtures."""
+from __future__ import annotations
+
+import argparse
+import binascii
+import datetime
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import struct
+import subprocess
+import sys
+import tarfile
+import tempfile
+from typing import Any, NoReturn
+import uuid
+import re
+import urllib.request
+
+ROOT = Path(__file__).resolve().parents[1]
+INPUTS = ROOT / "misc-util" / "rescue-image.inputs.json"
+IMAGE_TOOLS = (
+    "parted", "mkfs.fat", "mkfs.ext4", "losetup", "mount", "umount",
+    "tune2fs", "debugfs", "mere",
+)
+PROFILE_IMAGE_TOOLS = ("parted", "mkfs.fat", "mkfs.ext4", "losetup", "tune2fs", "debugfs")
+PROFILE_TOOL_CANDIDATES = {
+    "parted": ("sbin/parted",),
+    "mkfs.fat": ("sbin/mkfs.fat", "sbin/mkfs.vfat"),
+    "mkfs.ext4": ("sbin/mkfs.ext4",),
+    "losetup": ("sbin/losetup",),
+    "tune2fs": ("sbin/tune2fs",),
+    "debugfs": ("sbin/debugfs",),
+}
+REQUIRED_SERVICE_FILES = (
+    "mount-dev", "mount-proc", "mount-sys", "mount-devpts", "mount-shm",
+    "mount-runtime", "mount-tmp", "mount-var-log", "mount-var-tmp", "mdevd",
+    "mdevd-coldplug", "rescue-shell",
+)
+COMMAND_LOG: list[list[str]] = []
+RESOLVED_TOOLS: dict[str, str] = {}
+
+
+def die(message: str) -> NoReturn:
+    print(f"rescue-image-build: error: {message}", file=sys.stderr)
+    raise SystemExit(1)
+
+
+def command(argv: list[str], *, cwd: Path | None = None, capture: bool = False) -> str:
+    print("+", " ".join(json.dumps(part) for part in argv), file=sys.stderr)
+    COMMAND_LOG.append(argv[:])
+    result = subprocess.run(
+        argv,
+        cwd=cwd,
+        check=False,
+        text=True,
+        stdout=subprocess.PIPE if capture else None,
+        stderr=subprocess.PIPE if capture else None,
+    )
+    if result.returncode:
+        if capture and result.stderr:
+            print(result.stderr, file=sys.stderr, end="")
+        die(f"command exited {result.returncode}: {argv[0]}")
+    return result.stdout if capture else ""
+
+
+def digest(path: Path) -> str:
+    """Use Mere's available BLAKE3-equivalent instead of a host b3sum tool."""
+    output = command([executable("mere"), "dev", "hash", str(path)], capture=True)
+    for token in output.split():
+        if len(token) == 64 and all(char in "0123456789abcdef" for char in token.lower()):
+            return token.lower()
+    die(f"mere dev hash returned no BLAKE3 digest for {path}")
+
+
+def tree_digest(path: Path, epoch: int) -> str:
+    with tempfile.NamedTemporaryFile(prefix="mere-tree-", suffix=".tar", delete=False) as stream:
+        archive = Path(stream.name)
+    try:
+        with tarfile.open(archive, mode="w", format=tarfile.USTAR_FORMAT, dereference=False) as tar:
+            entries = [path, *sorted(path.rglob("*"), key=lambda item: item.relative_to(path).as_posix())]
+            for item in entries:
+                relative = "." if item == path else f"./{item.relative_to(path).as_posix()}"
+                info = tar.gettarinfo(str(item), arcname=relative)
+                info.mtime = epoch
+                info.uid = 0
+                info.gid = 0
+                info.uname = ""
+                info.gname = ""
+                if info.isreg():
+                    with item.open("rb") as source:
+                        tar.addfile(info, source)
+                else:
+                    tar.addfile(info)
+        return digest(archive)
+    finally:
+        archive.unlink(missing_ok=True)
+
+
+def check_inputs(inputs: dict[str, Any]) -> None:
+    image = inputs["image"]
+    if image["size_bytes"] != 2 * 1024 * 1024 * 1024:
+        die("image size must remain exactly 2 GiB")
+    if image["esp_size_bytes"] != 256 * 1024 * 1024:
+        die("ESP size must remain exactly 256 MiB")
+    for key in ("disk_guid", "esp_guid", "root_guid", "esp_type_guid", "root_type_guid"):
+        try:
+            uuid.UUID(image[key])
+        except (ValueError, KeyError):
+            die(f"invalid fixed GUID in image inputs: {key}")
+    if inputs["toolchain"]["source_date_epoch"] <= 0:
+        die("SOURCE_DATE_EPOCH must be positive")
+
+
+def executable(name: str) -> str:
+    return RESOLVED_TOOLS.get(name, name)
+
+
+def validate_profile_root(profile_root: Path, inputs: dict[str, Any]) -> None:
+    if not profile_root.is_dir():
+        die(f"tool profile root does not exist: {profile_root}")
+    profile = profile_root / "profile.kdl"
+    realization = profile_root / "realization.v1"
+    if not profile.is_file() or not realization.is_file():
+        die("tool profile root must contain profile.kdl and realization.v1")
+    profile_text = profile.read_text(encoding="utf-8", errors="replace")
+    missing_packages = [
+        package for package in inputs["tool_profile"]["packages"]
+        if f'package "{package}"' not in profile_text
+    ]
+    if missing_packages:
+        die("tool profile root is missing pinned packages: " + ", ".join(missing_packages))
+
+
+def check_environment(*, profile_root: Path, inputs: dict[str, Any], include_swamp: bool = False) -> None:
+    missing: list[str] = []
+    RESOLVED_TOOLS.clear()
+    validate_profile_root(profile_root, inputs)
+    for logical in PROFILE_IMAGE_TOOLS:
+        candidates = tuple(profile_root / relative for relative in PROFILE_TOOL_CANDIDATES[logical])
+        selected = next((candidate for candidate in candidates if candidate.is_file() and os.access(candidate, os.X_OK)), None)
+        if selected is None:
+            missing.append(" or ".join(str(candidate) for candidate in candidates))
+        else:
+            RESOLVED_TOOLS[logical] = str(selected)
+    for logical in ("mount", "umount", "mere"):
+        selected = shutil.which(logical)
+        if selected is None:
+            missing.append(logical)
+        else:
+            RESOLVED_TOOLS[logical] = selected
+    if include_swamp and shutil.which("swamp") is None:
+        missing.append("swamp")
+    if missing:
+        die("missing required image tools: " + ", ".join(missing))
+    if os.geteuid() != 0:
+        die("image assembly requires root for loop and mount operations")
+
+
+def tool_versions() -> dict[str, str]:
+    versions: dict[str, str] = {}
+    for tool in IMAGE_TOOLS:
+        argv = [executable(tool), "--version"]
+        COMMAND_LOG.append(argv[:])
+        result = subprocess.run(argv, check=False, text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        output = (result.stdout or result.stderr).splitlines()
+        if result.returncode and not output:
+            die(f"cannot record version for image tool {tool}")
+        versions[tool] = output[0] if output else "unknown"
+    return versions
+
+
+def check_tree(root: Path, *, image: bool) -> None:
+    if not root.is_dir():
+        die(f"staged root does not exist: {root}")
+    if image:
+        config = root / "boot" / "config"
+        if not config.is_file():
+            die("staged rescue root lacks boot/config for the kernel audit")
+    elif not all((root / path).is_file() for path in ("boot/vmlinux", "etc/fstab", "etc/hostname")):
+        die("fixture root must contain /boot/vmlinux, /etc/fstab, and /etc/hostname")
+    forbidden = []
+    for item in root.rglob("*"):
+        if item.is_file() and item.name.lower() in ("initrd", "initrd.gz", "initramfs", "initramfs.gz"):
+            forbidden.append(str(item.relative_to(root)))
+        if item.is_file() and item.suffix in (".cpio", ".cpio.gz", ".cpio.xz", ".cpio.zst"):
+            forbidden.append(str(item.relative_to(root)))
+    if forbidden:
+        die("staged root contains early-userspace archives: " + ", ".join(forbidden))
+    if not image:
+        return
+    text = (root / "boot" / "config").read_text(encoding="utf-8", errors="replace")
+    required = {
+        "CONFIG_EFI=y", "CONFIG_EFI_STUB=y", "CONFIG_EFI_PARTITION=y",
+        "CONFIG_SCSI=y", "CONFIG_BLK_DEV_SD=y", "CONFIG_USB_STORAGE=y",
+        "CONFIG_USB_XHCI_HCD=y", "CONFIG_USB_EHCI_HCD=y", "CONFIG_EXT4_FS=y",
+        "CONFIG_VFAT_FS=y", "CONFIG_DEVTMPFS=y", "CONFIG_DEVTMPFS_MOUNT=y",
+        "CONFIG_PROC_FS=y", "CONFIG_SYSFS=y", "CONFIG_TMPFS=y",
+        "CONFIG_SERIAL_8250_CONSOLE=y", "CONFIG_VT=y", "CONFIG_FRAMEBUFFER_CONSOLE=y",
+        "CONFIG_INITRAMFS_SOURCE=\"\"",
+    }
+    missing = sorted(option for option in required if option not in text.splitlines())
+    if missing:
+        die("kernel config is missing required built-ins: " + ", ".join(missing))
+    if "CONFIG_INITRAMFS_SOURCE=" in text and 'CONFIG_INITRAMFS_SOURCE=""' not in text:
+        die("kernel config embeds an initramfs")
+
+
+def stage_rescue_root(source: Path, destination: Path, epoch: int) -> None:
+    shutil.copytree(source, destination, symlinks=True)
+    services = ROOT / "misc-util" / "rescue-services"
+    target = destination / "etc" / "dinit.d"
+    target.mkdir(parents=True, exist_ok=True)
+    for path in ("dev/pts", "dev/shm", "proc", "sys", "run", "tmp", "var/log", "var/tmp"):
+        (destination / path).mkdir(parents=True, exist_ok=True)
+    for name in REQUIRED_SERVICE_FILES:
+        shutil.copy2(services / name, target / name)
+    for path in [destination, *destination.rglob("*")]:
+        os.utime(path, (epoch, epoch), follow_symlinks=False)
+
+
+def write_limine_config(path: Path, root_guid: str) -> None:
+    path.write_text(
+        """timeout: 0\ngraphics: no\nserial: yes\ninterface_branding: MERE-LINUX-UEFI-LIMINE\n/Mere Linux Rescue\n    protocol: linux\n    path: boot:///EFI/BOOT/vmlinuz\n    cmdline: root=PARTUUID={root_guid} rootfstype=ext4 rootflags=ro,noload rootwait init=/sbin/dinit console=tty0 console=ttyS0,115200n8 loglevel=4\n""".format(root_guid=root_guid),
+        encoding="ascii",
+    )
+
+
+def gpt_guid(value: str) -> bytes:
+    return uuid.UUID(value).bytes_le
+
+
+def write_gpt(image: Path, inputs: dict[str, Any], ids: dict[str, str]) -> None:
+    """Write deterministic GPT structures, then use parted to inspect them.
+
+    parted cannot set GUIDs portably, so fixed GPT identifiers are written here;
+    parted remains the required partition-table inspection tool.
+    """
+    spec = inputs["image"]
+    sector = spec["sector_size"]
+    sectors = spec["size_bytes"] // sector
+    entry_count, entry_size = 128, 128
+    entry_sectors = entry_count * entry_size // sector
+    first_usable, last_usable = 2 + entry_sectors, sectors - 2 - entry_sectors
+    esp_start = spec["esp_start_lba"]
+    esp_end = esp_start + spec["esp_size_bytes"] // sector - 1
+    root_start = esp_end + 1
+    entries = bytearray(entry_count * entry_size)
+
+    def entry(index: int, type_guid: str, part_guid: str, start: int, end: int, name: str) -> None:
+        offset = index * entry_size
+        entries[offset:offset + 16] = gpt_guid(type_guid)
+        entries[offset + 16:offset + 32] = gpt_guid(part_guid)
+        struct.pack_into("<QQQ", entries, offset + 32, start, end, 0)
+        entries[offset + 56:offset + 56 + len(name.encode("utf-16le"))] = name.encode("utf-16le")
+
+    entry(0, spec["esp_type_guid"], ids["esp_guid"], esp_start, esp_end, "MERE-ESP")
+    entry(1, spec["root_type_guid"], ids["root_guid"], root_start, last_usable, "MERE-ROOT")
+    entries_crc = binascii.crc32(entries) & 0xffffffff
+
+    def header(current: int, backup: int, entry_lba: int) -> bytes:
+        raw = bytearray(sector)
+        raw[0:8] = b"EFI PART"
+        struct.pack_into("<I", raw, 8, 0x00010000)
+        struct.pack_into("<I", raw, 12, 92)
+        struct.pack_into("<I", raw, 16, 0)
+        struct.pack_into("<I", raw, 20, 0)
+        struct.pack_into("<QQQQ", raw, 24, current, backup, first_usable, last_usable)
+        raw[56:72] = gpt_guid(ids["disk_guid"])
+        struct.pack_into("<QIII", raw, 72, entry_lba, entry_count, entry_size, entries_crc)
+        struct.pack_into("<I", raw, 16, binascii.crc32(raw[:92]) & 0xffffffff)
+        return raw
+
+    with image.open("r+b") as stream:
+        mbr = bytearray(sector)
+        mbr[446:462] = bytes([0, 0, 2, 0, 0xEE, 0xFF, 0xFF, 0xFF]) + struct.pack("<II", 1, sectors - 1)
+        mbr[510:512] = b"\x55\xaa"
+        stream.seek(0)
+        stream.write(mbr)
+        stream.seek(sector)
+        stream.write(header(1, sectors - 1, 2))
+        stream.seek(2 * sector)
+        stream.write(entries)
+        stream.seek((sectors - 1) * sector)
+        stream.write(header(sectors - 1, 1, sectors - 1 - entry_sectors))
+        stream.seek((sectors - 1 - entry_sectors) * sector)
+        stream.write(entries)
+    command([executable("parted"), "--script", str(image), "unit", "s", "print"])
+
+
+def esp_digest(kernel: Path, limine: Path, esp_tree: Path | None, inputs: dict[str, Any], root_guid: str, fixture: bool) -> str:
+    with tempfile.TemporaryDirectory(prefix="mere-esp-tree-") as directory:
+        tree = Path(directory)
+        if not fixture:
+            target = tree / "EFI" / "BOOT"
+            target.mkdir(parents=True)
+            shutil.copy2(limine, target / "BOOTX64.EFI")
+            shutil.copy2(kernel, target / "vmlinuz")
+            write_limine_config(target / "limine.conf", root_guid)
+        if esp_tree:
+            for item in esp_tree.rglob("*"):
+                if item.is_file():
+                    target = tree / item.relative_to(esp_tree)
+                    target.parent.mkdir(parents=True, exist_ok=True)
+                    shutil.copy2(item, target)
+        return tree_digest(tree, inputs["toolchain"]["source_date_epoch"])
+
+
+def copy_sparse_region(source: Path, destination: Path, offset: int, size: int) -> None:
+    """Copy a filesystem image into a sparse raw-image region."""
+    with source.open("rb") as source_stream, destination.open("r+b") as destination_stream:
+        destination_stream.seek(offset)
+        remaining = size
+        while remaining:
+            chunk = source_stream.read(min(1024 * 1024, remaining))
+            if not chunk:
+                die(f"filesystem image ended before expected size: {source}")
+            if any(chunk):
+                destination_stream.write(chunk)
+            else:
+                destination_stream.seek(len(chunk), os.SEEK_CUR)
+            remaining -= len(chunk)
+
+
+def format_esp(output: Path, start: int, esp_size: int, ids: dict[str, str],
+               inputs: dict[str, Any]) -> None:
+    """Format the validated BusyBox FAT applet on an exact-size temporary file."""
+    with tempfile.TemporaryDirectory(prefix="mere-rescue-esp-image-") as directory:
+        filesystem = Path(directory) / "esp.fat"
+        with filesystem.open("wb") as stream:
+            stream.truncate(esp_size)
+        command([executable("mkfs.fat"), "-n", ids.get("fat_label", "MERE-ESP"),
+                 str(filesystem), str(esp_size // 1024)])
+        with filesystem.open("r+b") as stream:
+            boot = stream.read(512)
+            if len(boot) != 512:
+                die("FAT formatter produced a short boot sector")
+            backup_sector = struct.unpack_from("<H", boot, 50)[0]
+            serial = int(ids["fat_volume_id"], 16).to_bytes(4, "little")
+            for sector in (0, backup_sector):
+                stream.seek(sector * inputs["image"]["sector_size"] + 67)
+                stream.write(serial)
+        copy_sparse_region(filesystem, output, start, esp_size)
+
+
+def normalize_fat_timestamps(image: Path, esp_start: int, esp_size: int, epoch: int) -> None:
+    """Normalize active FAT directory timestamps after the ESP is populated.
+
+    The parser follows FAT32 directory cluster chains and only edits timestamp
+    fields in active short entries. Long-name entries, free entries, volume
+    labels, FAT tables, and file data remain unchanged.
+    """
+    with image.open("r+b") as stream:
+        stream.seek(esp_start)
+        boot = stream.read(512)
+        if len(boot) != 512 or boot[510:512] != b"\x55\xaa":
+            die("ESP does not contain a valid FAT boot sector")
+        bytes_per_sector = struct.unpack_from("<H", boot, 11)[0]
+        sectors_per_cluster = boot[13]
+        reserved_sectors = struct.unpack_from("<H", boot, 14)[0]
+        fat_count = boot[16]
+        sectors_per_fat = struct.unpack_from("<I", boot, 36)[0]
+        root_cluster = struct.unpack_from("<I", boot, 44)[0] & 0x0fffffff
+        if (bytes_per_sector not in (512, 1024, 2048, 4096) or
+                sectors_per_cluster == 0 or sectors_per_cluster & (sectors_per_cluster - 1) or
+                reserved_sectors == 0 or fat_count == 0 or sectors_per_fat == 0 or root_cluster < 2):
+            die("ESP FAT boot sector has invalid FAT32 geometry")
+        cluster_size = bytes_per_sector * sectors_per_cluster
+        fat_offset = esp_start + reserved_sectors * bytes_per_sector
+        data_offset = fat_offset + fat_count * sectors_per_fat * bytes_per_sector
+        data_size = esp_size - (data_offset - esp_start)
+        cluster_count = data_size // cluster_size
+        if cluster_count < root_cluster:
+            die("ESP FAT data region is too small for its root cluster")
+        image_end = esp_start + esp_size
+        if data_offset + cluster_count * cluster_size > image_end:
+            die("ESP FAT data region exceeds the ESP boundary")
+        fat_end = fat_offset + sectors_per_fat * bytes_per_sector
+        if fat_end > image_end:
+            die("ESP FAT table exceeds the ESP boundary")
+
+        def cluster_offset(cluster: int) -> int:
+            if cluster < 2 or cluster >= root_cluster + cluster_count:
+                die(f"ESP FAT directory references invalid cluster {cluster}")
+            return data_offset + (cluster - 2) * cluster_size
+
+        def next_cluster(cluster: int) -> int:
+            stream.seek(fat_offset + cluster * 4)
+            raw = stream.read(4)
+            if len(raw) != 4:
+                die("ESP FAT table ended while following a directory")
+            return struct.unpack("<I", raw)[0] & 0x0fffffff
+
+        def cluster_chain(start: int) -> list[int]:
+            chain: list[int] = []
+            seen: set[int] = set()
+            cluster = start
+            while 2 <= cluster < 0x0ffffff8:
+                if cluster in seen:
+                    die("ESP FAT directory cluster chain loops")
+                seen.add(cluster)
+                chain.append(cluster)
+                if len(chain) > cluster_count:
+                    die("ESP FAT directory cluster chain is too long")
+                cluster = next_cluster(cluster)
+            if cluster not in (0, 1) and cluster < 0x0ffffff8:
+                die(f"ESP FAT directory chain has invalid terminator {cluster}")
+            return chain
+
+        moment = datetime.datetime.fromtimestamp(epoch, datetime.timezone.utc)
+        fat_date = ((moment.year - 1980) << 9) | (moment.month << 5) | moment.day
+        fat_time = (moment.hour << 11) | (moment.minute << 5) | (moment.second // 2)
+        fat_tenth = (moment.second % 2) * 100
+        visited_directories: set[int] = set()
+
+        def normalize_directory(start: int) -> None:
+            if start in visited_directories:
+                return
+            visited_directories.add(start)
+            for cluster in cluster_chain(start):
+                offset = cluster_offset(cluster)
+                stream.seek(offset)
+                contents = bytearray(stream.read(cluster_size))
+                if len(contents) != cluster_size:
+                    die("ESP FAT directory cluster is truncated")
+                changed = False
+                child_directories: list[int] = []
+                for entry_offset in range(0, cluster_size, 32):
+                    entry = contents[entry_offset:entry_offset + 32]
+                    first = entry[0]
+                    if first == 0x00:
+                        break
+                    if first == 0xe5 or entry[11] == 0x0f:
+                        continue
+                    attributes = entry[11]
+                    if attributes & 0xc0:
+                        die("ESP FAT directory contains an invalid attribute byte")
+                    if attributes & 0x08:
+                        continue
+                    struct.pack_into("<BHH", contents, entry_offset + 13,
+                                     fat_tenth, fat_time, fat_date)
+                    struct.pack_into("<H", contents, entry_offset + 18, fat_date)
+                    struct.pack_into("<HH", contents, entry_offset + 22, fat_time, fat_date)
+                    changed = True
+                    if attributes & 0x10:
+                        name = bytes(entry[0:11]).decode("ascii", errors="ignore").rstrip(" ")
+                        child = (struct.unpack_from("<H", entry, 20)[0] << 16) | struct.unpack_from("<H", entry, 26)[0]
+                        if name not in (".", "..") and child >= 2:
+                            child_directories.append(child)
+                if changed:
+                    stream.seek(offset)
+                    stream.write(contents)
+                for child in child_directories:
+                    normalize_directory(child)
+
+        normalize_directory(root_cluster)
+
+
+def build_one(output: Path, root_tree: Path, kernel: Path, limine: Path,
+              esp_tree: Path | None, inputs: dict[str, Any], *, fixture: bool) -> dict[str, Any]:
+    image = inputs["image"]
+    ids = inputs["fixture"] if fixture else image
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with output.open("wb") as stream:
+        stream.truncate(image["size_bytes"])
+    write_gpt(output, inputs, ids)
+    start = image["esp_start_lba"] * image["sector_size"]
+    esp_size = image["esp_size_bytes"]
+    root_start = start + esp_size
+    format_esp(output, start, esp_size, ids, inputs)
+    root_size = image["size_bytes"] - root_start
+    with tempfile.TemporaryDirectory(prefix="mere-rescue-root-image-") as directory:
+        filesystem = Path(directory) / "root.ext4"
+        with filesystem.open("wb") as stream:
+            stream.truncate(root_size)
+        root_device = command([executable("losetup"), "-f"], capture=True).strip()
+        command([executable("losetup"), "-o", "0", root_device, str(filesystem)])
+        try:
+            command([executable("mkfs.ext4"), "-q", "-U", ids["ext4_uuid"], "-E", f"hash_seed={ids.get('ext4_hash_seed', image['ext4_hash_seed'])}",
+                     "-O", ",".join(image["ext4_features"]), "-T", "default", "-d", str(root_tree), root_device])
+            check_date = datetime.datetime.fromtimestamp(inputs["toolchain"]["source_date_epoch"], datetime.timezone.utc).strftime("%Y%m%d")
+            command([executable("tune2fs"), "-T", check_date, root_device])
+            command([executable("debugfs"), "-w", "-R", f"set_super_value journal_uuid {ids.get('ext4_journal_uuid', image['ext4_journal_uuid'])}", root_device])
+        finally:
+            command([executable("losetup"), "-d", root_device])
+        copy_sparse_region(filesystem, output, root_start, root_size)
+    with tempfile.TemporaryDirectory(prefix="mere-rescue-esp-") as mounted:
+        mountpoint = Path(mounted)
+        command([executable("mount"), "-o", f"loop,offset={start},sizelimit={esp_size}", str(output), str(mountpoint)])
+        try:
+            if not fixture:
+                target = mountpoint / "EFI" / "BOOT"
+                target.mkdir(parents=True)
+                shutil.copy2(limine, target / "BOOTX64.EFI")
+                shutil.copy2(kernel, target / "vmlinuz")
+                write_limine_config(target / "limine.conf", ids["root_guid"])
+            if esp_tree:
+                for item in esp_tree.rglob("*"):
+                    if item.is_file():
+                        target = mountpoint / item.relative_to(esp_tree)
+                        target.parent.mkdir(parents=True, exist_ok=True)
+                        shutil.copy2(item, target)
+            for item in mountpoint.rglob("*"):
+                if item.is_file():
+                    os.utime(item, (inputs["toolchain"]["source_date_epoch"],) * 2)
+        finally:
+            command([executable("umount"), "-l", str(mountpoint)])
+    normalize_fat_timestamps(output, start, esp_size, inputs["toolchain"]["source_date_epoch"])
+    return {
+        "path": str(output), "blake3": digest(output),
+        "esp_contents_blake3": esp_digest(kernel, limine, esp_tree, inputs, ids["root_guid"], fixture),
+        "limine_efi_blake3": digest(limine), "kernel_blake3": digest(kernel),
+        "root_tree_blake3": tree_digest(root_tree, inputs["toolchain"]["source_date_epoch"]),
+    }
+
+
+def swamp_repo_args(args: argparse.Namespace) -> list[str]:
+    repo_dir = args.swamp_repo_dir or os.environ.get("SWAMP_REPO_DIR")
+    if not repo_dir:
+        die("Swamp operations require --swamp-repo-dir or SWAMP_REPO_DIR")
+    return ["--repo-dir", str(repo_dir)]
+
+
+def invoke_tool_profile(args: argparse.Namespace, inputs: dict[str, Any]) -> list[dict[str, Any]]:
+    if not args.tool_shell_behavior:
+        die("--tool-profile-smoke requires a pre-created @jeremy/mere-shell behavior")
+    packages = json.dumps(inputs["tool_profile"]["packages"], separators=(",", ":"))
+    observations: list[dict[str, Any]] = []
+    for command_spec in inputs["tool_profile"]["commands"]:
+        argv = json.dumps(command_spec["argv"], separators=(",", ":"))
+        output = command(["swamp", "--json", "behavior", "run", args.tool_shell_behavior, "run",
+                          *swamp_repo_args(args), "--input", f"packages:json={packages}", "--input", f"argv:json={argv}"], capture=True)
+        try:
+            result = json.loads(output)
+            attributes = result["dataArtifacts"][0]["attributes"]
+        except (json.JSONDecodeError, KeyError, IndexError, TypeError) as error:
+            die(f"tool profile smoke returned malformed Swamp output: {error}")
+        expected_exit_code = command_spec.get("expected_exit_code", 0)
+        success = bool(attributes.get("success"))
+        exit_code = attributes.get("exitCode")
+        observations.append({
+            "name": command_spec["name"],
+            "success": success,
+            "exitCode": exit_code,
+            "expectedExitCode": expected_exit_code,
+        })
+        if (success and exit_code != 0) or (not success and exit_code != expected_exit_code):
+            die(f"tool profile command failed: {command_spec['name']}: {attributes.get('stderr', '')}")
+        if attributes.get("mereVersion") != inputs["tool_profile"]["mere_version"]:
+            die("tool profile reported an unexpected Mere version")
+    return observations
+
+
+def invoke_mere_dev(args: argparse.Namespace, inputs: dict[str, Any]) -> None:
+    if not args.mere_dev_behavior:
+        die("--build-packages requires a pre-created pinned @jeremy/mere-dev behavior")
+    for package in inputs["packages"]:
+        if package["name"] == "linux":
+            continue
+        command(["swamp", "behavior", "run", args.mere_dev_behavior, "build",
+                 *swamp_repo_args(args), "--input", f"recipe={ROOT / package['recipe']}"])
+
+
+def package_build_output(dev_root: Path, name: str) -> tuple[Path, Path, str]:
+    candidates = sorted(dev_root.glob(f"mere/dev/build/{name}-*/pkg/{name}"))
+    if not candidates:
+        die(f"Mere dev build produced no package tree for {name} under {dev_root}")
+    package_root = candidates[-1]
+    workspace = package_root.parent.parent
+    archives = sorted((workspace / "pkg").glob(f"{name}-*.pkg.tar.zst"))
+    if not archives:
+        die(f"Mere dev build produced no package archive for {name}")
+    report = workspace / "build-report.kdl"
+    version_match = re.search(r'\n  version "([^"]+)"', report.read_text(encoding="utf-8")) if report.is_file() else None
+    release_match = re.search(r"\n  release (\d+)", report.read_text(encoding="utf-8")) if report.is_file() else None
+    version = version_match.group(1) if version_match else "unknown"
+    if release_match:
+        version += f"-{release_match.group(1)}"
+    return package_root, archives[-1], version
+
+
+def extract_kernel_archive(archive: Path, destination: Path, inputs: dict[str, Any]) -> None:
+    destination.mkdir(parents=True, exist_ok=True)
+    result = subprocess.run(
+        ["zstd", "-dc", str(archive)], stdout=subprocess.PIPE, check=False,
+    )
+    if result.returncode:
+        die(f"cannot decompress pinned kernel package: {archive}")
+    extractor = subprocess.run(["tar", "-x", "-f", "-", "-C", str(destination)], input=result.stdout, check=False)
+    if extractor.returncode:
+        die(f"cannot extract pinned kernel package: {archive}")
+    check_tree(destination, image=True)
+
+
+def find_existing_kernel(
+    inputs: dict[str, Any],
+    destination: Path,
+    dev_root: Path,
+) -> tuple[Path, Path, str]:
+    version = inputs["toolchain"]["linux_version"]
+    candidates = sorted(
+        (dev_root / "mere/cache/packages").glob(
+            f"linux-{version}-*-x86_64-*.pkg.tar.zst"
+        )
+    )
+    if not candidates:
+        die(
+            f"pinned Linux {version} package is unavailable under "
+            f"{dev_root / 'mere/cache/packages'}"
+        )
+    for archive in candidates:
+        candidate = destination / "kernel-candidate"
+        shutil.rmtree(candidate, ignore_errors=True)
+        try:
+            extract_kernel_archive(archive, candidate, inputs)
+            return candidate, archive, version
+        except SystemExit:
+            continue
+    die("available Linux 6.18.42-2 packages lack the required rescue kernel configuration")
+
+
+def merge_tree(source: Path, destination: Path) -> None:
+    destination.mkdir(parents=True, exist_ok=True)
+    for item in source.iterdir():
+        target = destination / item.name
+        if item.is_dir() and not item.is_symlink():
+            merge_tree(item, target)
+        elif item.is_file() or item.is_symlink():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            if target.exists() or target.is_symlink():
+                target.unlink()
+            shutil.copy2(item, target, follow_symlinks=False)
+
+
+def file_blake3(path: Path, mere_binary: Path, mere_root: Path) -> str:
+    result = subprocess.run(
+        [str(mere_binary), "--root", str(mere_root), "dev", "hash", str(path)],
+        text=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, check=False,
+    )
+    if result.returncode:
+        die(f"Mere hash failed for {path}: {result.stderr.strip()}")
+    for token in result.stdout.split():
+        if len(token) == 64 and all(char in "0123456789abcdef" for char in token.lower()):
+            return token.lower()
+    die(f"Mere hash returned no BLAKE3 digest for {path}")
+
+
+def package_provider_mapping(package_root: Path, package_name: str, providers: dict[str, str]) -> None:
+    for item in package_root.rglob("*"):
+        if item.name == ".mere" or ".mere" in item.parts or not (item.is_file() or item.is_symlink()):
+            continue
+        relative = "/" + item.relative_to(package_root).as_posix()
+        previous = providers.get(relative)
+        if previous and previous != package_name:
+            die(f"package provider conflict for {relative}: {previous} and {package_name}")
+        providers[relative] = package_name
+
+
+def run_checked(argv: list[str], *, cwd: Path | None = None, capture: bool = False) -> str:
+    result = subprocess.run(argv, cwd=cwd, text=True, stdout=subprocess.PIPE if capture else None,
+                            stderr=subprocess.PIPE if capture else None, check=False)
+    if result.returncode:
+        detail = result.stderr.strip() if capture and result.stderr else ""
+        die(f"command failed ({result.returncode}): {' '.join(argv)}{': ' + detail if detail else ''}")
+    return result.stdout if capture else ""
+
+
+def gitlink_commits(repository: Path) -> dict[str, str]:
+    listing = run_checked(["git", "-C", str(repository), "ls-tree", "-r", "-z", "HEAD"], capture=True)
+    commits: dict[str, str] = {}
+    for record in listing.split("\0"):
+        if not record:
+            continue
+        header, relative = record.split("\t", 1)
+        mode, kind, commit = header.split(" ", 2)
+        if mode == "160000" and kind == "commit":
+            commits[relative] = commit
+    return commits
+
+
+def verify_recursive_gitlinks(source: Path, required_paths: list[str]) -> dict[str, str]:
+    """Verify each required submodule against its superproject gitlink."""
+    source = source.resolve()
+    commits = gitlink_commits(source)
+    verified: dict[str, str] = {}
+    for relative in required_paths:
+        commit = commits.get(relative)
+        if commit is None:
+            die(f"required OVMF submodule is not a tracked gitlink: {relative}")
+        child = source / relative
+        actual = run_checked(["git", "-C", str(child), "rev-parse", "HEAD"], capture=True).strip()
+        if actual != commit:
+            die(f"edk2 submodule commit mismatch at {relative}: got {actual}, want {commit}")
+        verified[relative] = commit
+    return dict(sorted(verified.items()))
+
+
+def initialize_recursive_submodules(source: Path, required_paths: list[str]) -> None:
+    """Initialize only the pinned submodules required by the selected OVMF target."""
+    source = source.resolve()
+    commits = gitlink_commits(source)
+    for relative in required_paths:
+        if relative not in commits:
+            die(f"required OVMF submodule is not a tracked gitlink: {relative}")
+        run_checked(["git", "-C", str(source),
+                     "-c", f"submodule.{relative}.update=checkout",
+                     "submodule", "update", "--init", relative])
+
+
+def prepare_recursive_edk2(source: Path, spec: dict[str, Any]) -> tuple[Path, dict[str, str]]:
+    source = source.resolve()
+    if source.exists():
+        shutil.rmtree(source)
+    run_checked(["git", "clone", "--no-checkout", spec["git_url"], str(source)])
+    run_checked(["git", "checkout", "--detach", spec["commit"]], cwd=source)
+    actual = run_checked(["git", "rev-parse", "HEAD"], cwd=source, capture=True).strip()
+    if actual != spec["commit"]:
+        die(f"edk2 superproject commit mismatch: got {actual}, want {spec['commit']}")
+    required_paths = spec.get("required_submodules", [])
+    if not required_paths or any(not isinstance(path, str) or not path for path in required_paths):
+        die("pinned OVMF required_submodules must be a non-empty list of paths")
+    initialize_recursive_submodules(source, required_paths)
+    return source, verify_recursive_gitlinks(source, required_paths)
+
+
+def configure_edk2_conf(source: Path, spec: dict[str, Any]) -> None:
+    conf = source / "Conf"
+    conf.mkdir(exist_ok=True)
+    for name in ("target", "tools_def", "build_rule"):
+        template = source / "BaseTools/Conf" / f"{name}.template"
+        destination = conf / f"{name}.txt"
+        if not template.is_file():
+            die(f"pinned edk2 source is missing BaseTools/Conf/{name}.template")
+        text = template.read_text(encoding="utf-8")
+        if name == "target":
+            values = {
+                "ACTIVE_PLATFORM": spec["build_target"],
+                "TARGET": "RELEASE",
+                "TARGET_ARCH": "X64",
+                "TOOL_CHAIN_TAG": spec["toolchain"],
+            }
+            for key, value in values.items():
+                text, count = re.subn(rf"(?m)^{re.escape(key)}\s*=.*$", f"{key} = {value}", text)
+                if count != 1:
+                    die(f"edk2 target template does not contain one {key} assignment")
+        destination.write_text(text, encoding="utf-8")
+
+
+def prepare_ovmf(args: argparse.Namespace, inputs: dict[str, Any], generated: Path,
+                 mere_binary: Path, dev_root: Path) -> dict[str, Any]:
+    generated = generated.resolve()
+    spec = inputs["ovmf"]
+    explicit = (args.ovmf_code, args.ovmf_source, args.ovmf_build, args.nvram_template)
+    if any(value is not None for value in explicit):
+        if not all(value is not None for value in explicit):
+            die("firmware manifest requires all of --ovmf-code, --ovmf-source, --ovmf-build, and --nvram-template")
+        if not args.ovmf_code.is_file() or not args.nvram_template.is_file():
+            die("explicit OVMF code and NVRAM inputs must be existing files")
+        source = Path(args.ovmf_source)
+        if not source.is_dir():
+            die("explicit OVMF source must be a recursive pinned edk2 checkout directory")
+        actual = run_checked(["git", "-C", str(source), "rev-parse", "HEAD"], capture=True).strip()
+        if actual != spec["commit"]:
+            die(f"explicit OVMF source commit mismatch: got {actual}, want {spec['commit']}")
+        required_paths = spec.get("required_submodules", [])
+        if not required_paths:
+            die("pinned OVMF required_submodules must be a non-empty list of paths")
+        submodule_commits = verify_recursive_gitlinks(source, required_paths)
+        expected_code = (source / spec["code_relative"]).resolve()
+        expected_nvram = (source / spec["vars_relative"]).resolve()
+        if args.ovmf_code.resolve() != expected_code or args.nvram_template.resolve() != expected_nvram:
+            die("explicit OVMF artifacts must be the outputs of the pinned recursive source checkout")
+        return {
+            "source": spec["source_url"],
+            "source_git_url": spec["git_url"],
+            "source_checkout": "recursive-git",
+            "source_archive": "",
+            "source_release": spec["release"],
+            "source_commit": spec["commit"],
+            "source_sha256": spec["source_sha256"],
+            "submodule_commits": submodule_commits,
+            "code_blake3": file_blake3(args.ovmf_code, mere_binary, dev_root),
+            "code_path": str(args.ovmf_code),
+            "nvram_template": str(args.nvram_template),
+            "nvram_template_blake3": file_blake3(args.nvram_template, mere_binary, dev_root),
+        }
+    archive = args.ovmf_source_archive or (generated / f"{spec['release']}.tar.gz")
+    profile_root = args.ovmf_tool_profile_root
+    if profile_root is None:
+        die("OVMF preparation requires --ovmf-tool-profile-root for the pinned Mere LLVM/nasm/flex/bison/make profile")
+    profile_tools = {}
+    for tool in ("clang", "clang++", "nasm", "make", "flex", "bison", "python3"):
+        candidates = (profile_root / "usr/bin" / tool, profile_root / "bin" / tool)
+        selected = next((candidate for candidate in candidates if candidate.is_file() and os.access(candidate, os.X_OK)), None)
+        if selected is None:
+            die(f"OVMF tool profile is missing executable: {tool}")
+        profile_tools[tool] = str(selected)
+    profile_text = (profile_root / "profile.kdl").read_text(encoding="utf-8", errors="replace") if (profile_root / "profile.kdl").is_file() else ""
+    for package in spec["tool_profile_packages"]:
+        if f'package "{package["name"]}"' not in profile_text:
+            die(f"OVMF tool profile is missing pinned package: {package['name']}")
+
+    if not archive.is_file():
+        try:
+            with urllib.request.urlopen(spec["source_url"], timeout=180) as response, archive.open("wb") as stream:
+                shutil.copyfileobj(response, stream)
+        except Exception as error:
+            die(f"cannot acquire pinned OVMF source {spec['release']}: {error}")
+    actual_sha256 = hashlib.sha256(archive.read_bytes()).hexdigest()
+    if actual_sha256 != spec["source_sha256"]:
+        die(f"pinned OVMF source SHA-256 mismatch: got {actual_sha256}, want {spec['source_sha256']}")
+    source, submodule_commits = prepare_recursive_edk2(generated / "ovmf-source", spec)
+    acpica_archive = args.acpica_source_archive or (generated / f"acpica-{spec['acpica_release']}.tar.gz")
+    if not acpica_archive.is_file():
+        try:
+            with urllib.request.urlopen(spec["acpica_source_url"], timeout=180) as response, acpica_archive.open("wb") as stream:
+                shutil.copyfileobj(response, stream)
+        except Exception as error:
+            die(f"cannot acquire pinned ACPICA source {spec['acpica_release']}: {error}")
+    acpica_sha256 = hashlib.sha256(acpica_archive.read_bytes()).hexdigest()
+    if acpica_sha256 != spec["acpica_source_sha256"]:
+        die(f"pinned ACPICA source SHA-256 mismatch: got {acpica_sha256}, want {spec['acpica_source_sha256']}")
+    acpica_parent = generated / "acpica-source"
+    shutil.rmtree(acpica_parent, ignore_errors=True)
+    acpica_parent.mkdir()
+    try:
+        with tarfile.open(acpica_archive, "r:gz") as tar:
+            tar.extractall(acpica_parent, filter=lambda member, path: member)
+    except Exception as error:
+        die(f"cannot extract pinned ACPICA source: {error}")
+    acpica_dirs = [path for path in acpica_parent.iterdir() if path.is_dir()]
+    if len(acpica_dirs) != 1:
+        die("pinned ACPICA source archive did not contain one source directory")
+    acpica = acpica_dirs[0]
+    iasl_dir = acpica / "generate/unix/iasl"
+    iasl_dir.joinpath("obj").mkdir(parents=True, exist_ok=True)
+    (iasl_dir.parent / "bin").mkdir(parents=True, exist_ok=True)
+    iasl_env = os.environ.copy()
+    iasl_env["PATH"] = str(Path(profile_tools["clang"]).parent) + ":" + iasl_env.get("PATH", "")
+    iasl_env["BISON_PKGDATADIR"] = str(profile_root / "usr/share/bison")
+    iasl_env["M4"] = str(profile_root / "usr/bin/m4")
+    iasl_build = subprocess.run([profile_tools["make"], "-C", str(iasl_dir),
+                                 f"CC={profile_tools['clang']}", "NOWERROR=TRUE",
+                                 "CWARNINGFLAGS=-Wno-unknown-warning-option"], env=iasl_env, check=False)
+    if iasl_build.returncode:
+        die("pinned ACPICA iasl build failed")
+    iasl_path = acpica / "generate/unix/bin/iasl"
+    if not iasl_path.is_file():
+        die("pinned ACPICA build did not produce iasl")
+    env = os.environ.copy()
+    env.update({"SOURCE_DATE_EPOCH": str(inputs["toolchain"]["source_date_epoch"]), "TZ": "UTC",
+                "LC_ALL": "C", "PYTHONHASHSEED": "0", "BUILD_NUMBER": "0",
+                "CC": profile_tools["clang"], "CXX": profile_tools["clang++"],
+                "CLANG_BIN": str(Path(profile_tools["clang"]).parent) + "/",
+                "IASL_PREFIX": str(iasl_path.parent) + "/"})
+    env["PATH"] = str(Path(profile_tools["clang"]).parent) + ":" + env.get("PATH", "")
+    env["CPATH"] = str(profile_root / "usr/include") + ":" + env.get("CPATH", "")
+    env["LIBRARY_PATH"] = str(profile_root / "usr/lib") + ":" + env.get("LIBRARY_PATH", "")
+    base_tools = subprocess.run([profile_tools["make"], "-C", str(source / "BaseTools"),
+                                 f"CC={profile_tools['clang']}", f"CXX={profile_tools['clang++']}"], env=env, check=False)
+    if base_tools.returncode:
+        die("pinned OVMF BaseTools build failed")
+    configure_edk2_conf(source, spec)
+    build_env = env.copy()
+    build_env["WORKSPACE"] = str(source)
+    build_env["EDK_TOOLS_PATH"] = str(source / "BaseTools")
+    build_env["PATH"] = ":".join((str(Path(profile_tools["clang"]).parent), str(iasl_path.parent),
+                                   str(source / "BaseTools" / "BinWrappers" / "PosixLike"), build_env.get("PATH", "")))
+    build_args = ["build", "-a", "X64", "-t", spec["toolchain"], "-b", "RELEASE", "-p", spec["build_target"], *spec["build_flags"]]
+    result = subprocess.run(build_args, cwd=source, env=build_env, check=False)
+    if result.returncode:
+        die("pinned OVMF build failed")
+    code = source / spec["code_relative"]
+    vars_template = source / spec["vars_relative"]
+    if not code.is_file() or not vars_template.is_file():
+        die("pinned OVMF build did not produce OVMF_CODE.fd and OVMF_VARS.fd")
+    firmware_dir = generated / "firmware"
+    firmware_dir.mkdir()
+    code_output = firmware_dir / "OVMF_CODE.fd"
+    nvram_output = firmware_dir / "OVMF_VARS-fresh.fd"
+    shutil.copy2(code, code_output)
+    shutil.copy2(vars_template, nvram_output)
+    epoch = inputs["toolchain"]["source_date_epoch"]
+    os.utime(code_output, (epoch, epoch))
+    os.utime(nvram_output, (epoch, epoch))
+    ovmf_profile_records = []
+    for package in spec["tool_profile_packages"]:
+        name = package["name"]
+        candidates = sorted((dev_root / "mere/cache/packages").glob(f"{name}-{package['version']}-*.pkg.tar.zst"))
+        if len(candidates) != 1:
+            die(f"OVMF tool profile package archive is unavailable or ambiguous: {name} {package['version']}")
+        archive_record = candidates[0]
+        actual_archive_blake3 = file_blake3(archive_record, mere_binary, dev_root)
+        if actual_archive_blake3 != package["archive_blake3"]:
+            die(f"OVMF tool profile archive hash mismatch for {name}: got {actual_archive_blake3}, want {package['archive_blake3']}")
+        ovmf_profile_records.append({"name": name, "version": package["version"],
+                                     "archive_blake3": actual_archive_blake3})
+    return {
+        "source": spec["source_url"], "build": " ".join(build_args),
+        "source_release": spec["release"], "source_commit": spec["commit"],
+        "source_sha256": spec["source_sha256"], "source_archive": str(archive),
+        "source_git_url": spec["git_url"], "source_checkout": "allowlisted-git",
+        "required_submodules": sorted(spec["required_submodules"]),
+        "submodule_commits": submodule_commits,
+        "acpica_source": spec["acpica_source_url"], "acpica_release": spec["acpica_release"],
+        "acpica_commit": spec["acpica_commit"], "acpica_source_sha256": spec["acpica_source_sha256"],
+        "acpica_source_archive": str(acpica_archive),
+        "code_blake3": file_blake3(code_output, mere_binary, dev_root),
+        "code_path": str(code_output), "nvram_template": str(nvram_output),
+        "nvram_template_blake3": file_blake3(nvram_output, mere_binary, dev_root),
+        "ovmf_tool_profile_root": str(profile_root),
+        "ovmf_tool_profile_packages": sorted(ovmf_profile_records, key=lambda package: package["name"]),
+    }
+
+
+def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -> None:
+    if not args.mere_dev_behavior:
+        die("generated staging requires --mere-dev-behavior")
+    dev_root = args.mere_dev_root or (ROOT / ".swamp" / "mere-dev" / "root")
+    mere_binary = args.mere_binary or (ROOT / ".swamp" / "mere-dev" / "bin" / f"mere-{inputs['tool_profile']['mere_version']}-linux-x86_64")
+    if not mere_binary.is_file():
+        die(f"pinned Mere {inputs['tool_profile']['mere_version']} binary is unavailable: {mere_binary}")
+    invoke_mere_dev(args, inputs)
+    generated = args.output_dir / "generated-inputs"
+    shutil.rmtree(generated, ignore_errors=True)
+    generated.mkdir(parents=True)
+    source_root = generated / "rescue-source"
+    source_root.mkdir()
+    package_records: list[dict[str, str]] = []
+    package_roots: dict[str, Path] = {}
+    providers: dict[str, str] = {}
+    for package in inputs["packages"]:
+        name = package["name"]
+        if name == "linux":
+            continue
+        package_root, archive, version = package_build_output(dev_root, name)
+        package_roots[name] = package_root
+        package_provider_mapping(package_root, name, providers)
+        merge_tree(package_root, source_root)
+        package_records.append({"name": name, "version": version, "archive_blake3": file_blake3(archive, mere_binary, dev_root)})
+    kernel_dir, kernel_archive, kernel_version = find_existing_kernel(inputs, generated, dev_root)
+    merge_tree(kernel_dir, source_root)
+    package_provider_mapping(kernel_dir, "linux", providers)
+    package_records.append({"name": "linux", "version": kernel_version, "archive_blake3": file_blake3(kernel_archive, mere_binary, dev_root)})
+    source_root.joinpath("etc").mkdir(parents=True, exist_ok=True)
+    source_root.joinpath("etc/hostname").write_text("mere-rescue\n", encoding="ascii")
+    source_root.joinpath("etc/fstab").write_text("# generated rescue fixture\n", encoding="ascii")
+    staged_root = generated / "rescue-root"
+    stage_rescue_root(source_root, staged_root, inputs["toolchain"]["source_date_epoch"])
+    fixture_root = generated / "fixture-root"
+    shutil.copytree(staged_root, fixture_root, symlinks=True)
+    fixture_root.joinpath("etc/hostname").write_text("mere-system\n", encoding="ascii")
+    fixture_root.joinpath("etc/fstab").write_text("# generated installed-system fixture\n", encoding="ascii")
+    fixture_esp = generated / "fixture-esp"
+    target = fixture_esp / "EFI" / "BOOT"
+    target.mkdir(parents=True)
+    limine = package_roots["limine"] / "usr/share/limine/BOOTX64.EFI"
+    if not limine.is_file():
+        die("Limine package did not provide usr/share/limine/BOOTX64.EFI")
+    shutil.copy2(limine, target / "BOOTX64.EFI")
+    shutil.copy2(staged_root / "boot/vmlinux", target / "vmlinuz")
+    write_limine_config(target / "limine.conf", inputs["fixture"]["root_guid"])
+    repository_files = list((dev_root / "mere/cache/repos").glob("*/repo.db"))
+    if not repository_files:
+        die("Mere repository snapshot is unavailable after package preparation")
+    repository_snapshot = file_blake3(repository_files[-1], mere_binary, dev_root)
+    tool_records: list[dict[str, str]] = []
+    for name in inputs["tool_profile"]["packages"]:
+        archives = sorted((dev_root / "mere/cache/packages").glob(f"{name}-*.pkg.tar.zst"))
+        if not archives:
+            die(f"tool profile package archive is unavailable: {name}")
+        archive = archives[-1]
+        match = re.match(rf"{re.escape(name)}-(.+)-x86_64-[0-9a-f]+\.pkg\.tar\.zst$", archive.name)
+        if not match:
+            die(f"cannot parse tool profile archive version: {archive.name}")
+        tool_records.append({"name": name, "version": match.group(1),
+                             "archive_blake3": file_blake3(archive, mere_binary, dev_root)})
+    package_manifest = {
+        "mere": {"version": inputs["tool_profile"]["mere_version"], "binary_blake3": file_blake3(mere_binary, mere_binary, dev_root),
+                 "binary_sha256": inputs["tool_profile"]["mere_binary_sha256"], "repository_snapshot": repository_snapshot},
+        "packages": sorted(package_records, key=lambda package: package["name"]),
+        "providers": dict(sorted(providers.items())),
+        "tool_profile_packages": sorted(tool_records, key=lambda package: package["name"]),
+    }
+    package_manifest_path = generated / "package-manifest.json"
+    package_manifest_path.write_text(json.dumps(package_manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    firmware_manifest = prepare_ovmf(args, inputs, generated, mere_binary, dev_root)
+    firmware_manifest_path = generated / "firmware-manifest.json"
+    firmware_manifest_path.write_text(json.dumps(firmware_manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    args.root_tree, args.fixture_root_tree, args.fixture_esp_tree = staged_root, fixture_root, fixture_esp
+    args.kernel, args.limine_efi = staged_root / "boot/vmlinux", limine
+    args.package_manifest, args.firmware_manifest = package_manifest_path, firmware_manifest_path
+
+
+def parse() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--check", action="store_true")
+    parser.add_argument("--build", action="store_true")
+    parser.add_argument("--build-packages", action="store_true")
+    parser.add_argument("--mere-dev-behavior")
+    parser.add_argument("--mere-dev-root", type=Path,
+                        default=None)
+    parser.add_argument("--mere-binary", type=Path)
+    parser.add_argument("--mere-version")
+    parser.add_argument("--ovmf-code", type=Path)
+    parser.add_argument("--ovmf-source-archive", type=Path)
+    parser.add_argument("--acpica-source-archive", type=Path)
+    parser.add_argument("--ovmf-tool-profile-root", type=Path)
+    parser.add_argument("--ovmf-source")
+    parser.add_argument("--ovmf-build")
+    parser.add_argument("--nvram-template", type=Path)
+    parser.add_argument("--tool-profile-smoke", action="store_true")
+    parser.add_argument("--tool-shell-behavior")
+    parser.add_argument("--tool-profile-root", type=Path,
+                        help="validated Mere profile root for image tools")
+    parser.add_argument("--swamp-repo-dir", type=Path)
+    parser.add_argument("--root-tree", type=Path)
+    parser.add_argument("--fixture-root-tree", type=Path)
+    parser.add_argument("--fixture-esp-tree", type=Path)
+    parser.add_argument("--kernel", type=Path)
+    parser.add_argument("--limine-efi", type=Path)
+    parser.add_argument("--package-manifest", type=Path)
+    parser.add_argument("--firmware-manifest", type=Path)
+    parser.add_argument("--output-dir", type=Path, default=Path("out/rescue-image"))
+    parser.add_argument("--compare", action="store_true")
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse()
+    inputs = json.loads(INPUTS.read_text(encoding="utf-8"))
+    check_inputs(inputs)
+    if args.mere_version and args.mere_version != inputs["tool_profile"]["mere_version"]:
+        die("--mere-version does not match the pinned image input")
+    os.environ.update({key: str(inputs["toolchain"][key]) for key in ("timezone", "locale")})
+    os.environ["TZ"] = inputs["toolchain"]["timezone"]
+    os.environ["LC_ALL"] = inputs["toolchain"]["locale"]
+    os.environ["SOURCE_DATE_EPOCH"] = str(inputs["toolchain"]["source_date_epoch"])
+    os.umask(int(inputs["toolchain"]["umask"], 8))
+    for package in inputs["packages"]:
+        if not (ROOT / package["recipe"]).is_file():
+            die(f"pinned recipe is missing: {package['recipe']}")
+    if args.check:
+        print(json.dumps({"inputs": str(INPUTS), "packages": [p["name"] for p in inputs["packages"]]}, sort_keys=True))
+        return 0
+    if args.tool_profile_smoke and not args.build:
+        if shutil.which("swamp") is None:
+            die("tool profile smoke requires swamp")
+        observations = invoke_tool_profile(args, inputs)
+        print(json.dumps({"tool_profile": inputs["tool_profile"], "observations": observations, "smoke": "validated"}, sort_keys=True))
+        return 0
+    if not args.build or not args.compare:
+        die("--build and --compare are required; a single build is not reproducibility evidence")
+    if args.tool_profile_root is None:
+        die("--build requires --tool-profile-root for the validated Mere image-tool profile")
+    check_environment(profile_root=args.tool_profile_root, inputs=inputs,
+                      include_swamp=args.build_packages or args.tool_profile_smoke)
+    if args.tool_profile_smoke:
+        invoke_tool_profile(args, inputs)
+    if args.build_packages:
+        prepare_generated_inputs(args, inputs)
+    image_tool_versions = tool_versions()
+    if args.build_packages:
+        prepare_generated_inputs(args, inputs)
+    required_paths = ((args.root_tree, "--root-tree"), (args.fixture_root_tree, "--fixture-root-tree"),
+                      (args.fixture_esp_tree, "--fixture-esp-tree"), (args.kernel, "--kernel"), (args.limine_efi, "--limine-efi"),
+                      (args.package_manifest, "--package-manifest"), (args.firmware_manifest, "--firmware-manifest"))
+    for path, label in required_paths:
+        if path is None or not path.exists():
+            die(f"{label} must name an existing input")
+    if not args.fixture_esp_tree.is_dir() or not any(args.fixture_esp_tree.rglob("*")):
+        die("--fixture-esp-tree must be a non-empty directory")
+    package_manifest = json.loads(args.package_manifest.read_text(encoding="utf-8"))
+    firmware_manifest = json.loads(args.firmware_manifest.read_text(encoding="utf-8"))
+    if not package_manifest.get("packages") or not package_manifest.get("mere"):
+        die("package manifest needs mere and packages")
+    if not package_manifest.get("providers"):
+        die("package manifest needs generated package-provider mapping")
+    if package_manifest["providers"].get("/boot/vmlinux") != "linux" or package_manifest["providers"].get("/boot/config") != "linux":
+        die("package manifest provider mapping must identify the Linux boot artifacts")
+    if not all(package_manifest["mere"].get(key) for key in ("version", "binary_blake3", "binary_sha256", "repository_snapshot")):
+        die("package manifest needs Mere version, binary_blake3, binary_sha256, and repository_snapshot")
+    if package_manifest["mere"].get("version") != inputs["tool_profile"]["mere_version"] or package_manifest["mere"].get("binary_sha256") != inputs["tool_profile"]["mere_binary_sha256"]:
+        die("package manifest Mere version or binary SHA-256 does not match pinned tool profile")
+    if not all(firmware_manifest.get(key) for key in ("source", "build", "code_blake3", "nvram_template")):
+        die("firmware manifest needs source, build, code_blake3, and nvram_template")
+    expected = {p["name"] for p in inputs["packages"]}
+    actual = {p.get("name") for p in package_manifest["packages"]}
+    if expected != actual:
+        die("package manifest names do not match pinned image package set")
+    for package in package_manifest["packages"]:
+        digest_value = package.get("archive_blake3", "")
+        if not package.get("version") or len(digest_value) != 64 or any(c not in "0123456789abcdef" for c in digest_value.lower()):
+            die("each image package needs version and a 64-character archive_blake3")
+    profile_packages = package_manifest.get("tool_profile_packages", [])
+    if {package.get("name") for package in profile_packages} != set(inputs["tool_profile"]["packages"]):
+        die("package manifest tool_profile_packages do not match pinned tool profile")
+    for package in profile_packages:
+        digest_value = package.get("archive_blake3", "")
+        if not package.get("version") or len(digest_value) != 64 or any(c not in "0123456789abcdef" for c in digest_value.lower()):
+            die("each tool profile package needs version and a 64-character archive_blake3")
+    check_tree(args.root_tree, image=True)
+    check_tree(args.fixture_root_tree, image=False)
+    stage_dir = Path(tempfile.mkdtemp(prefix="mere-rescue-root-"))
+    try:
+        staged_root = stage_dir / "root"
+        stage_rescue_root(args.root_tree, staged_root, inputs["toolchain"]["source_date_epoch"])
+        args.output_dir.mkdir(parents=True, exist_ok=True)
+        first = build_one(args.output_dir / "mere-rescue.raw", staged_root, args.kernel, args.limine_efi, None, inputs, fixture=False)
+        fixture = build_one(args.output_dir / "mere-system-fixture.raw", args.fixture_root_tree, args.kernel, args.limine_efi, args.fixture_esp_tree, inputs, fixture=True)
+        second = build_one(args.output_dir / "compare" / "mere-rescue.raw", staged_root, args.kernel, args.limine_efi, None, inputs, fixture=False)
+        second_fixture = build_one(args.output_dir / "compare" / "mere-system-fixture.raw", args.fixture_root_tree, args.kernel, args.limine_efi, args.fixture_esp_tree, inputs, fixture=True)
+        dirty = args.output_dir / "mere-system-fixture-dirty-journal.raw"
+        shutil.copyfile(args.output_dir / "mere-system-fixture.raw", dirty)
+        dirty_start = inputs["image"]["esp_start_lba"] * inputs["image"]["sector_size"] + inputs["image"]["esp_size_bytes"]
+        with tempfile.TemporaryDirectory(prefix="mere-fixture-dirty-") as mounted:
+            command([executable("mount"), "-o", f"loop,offset={dirty_start},sizelimit={inputs['image']['size_bytes'] - dirty_start}", str(dirty), mounted])
+            try:
+                marker = Path(mounted) / "var" / "lib" / "mere-rescue-dirty-journal-marker"
+                marker.parent.mkdir(parents=True, exist_ok=True)
+                with marker.open("w", encoding="ascii") as stream:
+                    stream.write("known dirty-journal fixture\n")
+                    stream.flush()
+                    os.fsync(stream.fileno())
+                dirty_hash = digest(dirty)
+            finally:
+                command([executable("umount"), "-l", mounted])
+        rescue_equal = first["blake3"] == second["blake3"]
+        fixture_equal = fixture["blake3"] == second_fixture["blake3"]
+        manifest = {
+            "format": 1, "architecture": "x86_64", "boot": "UEFI-SecureBoot-disabled",
+            "source_revision": command(["git", "rev-parse", "HEAD"], cwd=ROOT, capture=True).strip(),
+            "image_builder_revision": "working-tree", "environment": {
+                "SOURCE_DATE_EPOCH": inputs["toolchain"]["source_date_epoch"], "TZ": inputs["toolchain"]["timezone"],
+                "LC_ALL": inputs["toolchain"]["locale"], "umask": inputs["toolchain"]["umask"]},
+            "inputs": inputs, "tool_profile": inputs["tool_profile"],
+            "tool_profile_root": str(args.tool_profile_root),
+            "resolved_image_tools": {tool: executable(tool) for tool in PROFILE_IMAGE_TOOLS},
+            "package_manifest": package_manifest, "tool_profile_packages": package_manifest["tool_profile_packages"], "firmware_manifest": firmware_manifest,
+            "image_tool_versions": image_tool_versions, "commands": COMMAND_LOG,
+            "artifacts": {"rescue": {"first": first, "second": second, "byte_identical": rescue_equal},
+                          "fixture": {"first": fixture, "second": second_fixture, "byte_identical": fixture_equal,
+                                      "dirty_journal": {"path": str(dirty), "blake3": dirty_hash}}},
+            "reproducibility": {"clean_builds_compared": True, "rescue_byte_identical": rescue_equal,
+                                 "fixture_byte_identical": fixture_equal}, "no_initramfs": True,
+        }
+        (args.output_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+        if not rescue_equal or not fixture_equal:
+            die("clean builds differ; manifest records failed reproducibility comparison")
+    finally:
+        shutil.rmtree(stage_dir, ignore_errors=True)
+    print(json.dumps(manifest["reproducibility"], sort_keys=True))
+    return 0
+
+
+if __name__ == "__main__":
+    main()
