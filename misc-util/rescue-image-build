@@ -565,8 +565,6 @@ def invoke_mere_dev(args: argparse.Namespace, inputs: dict[str, Any]) -> None:
     if not args.mere_dev_behavior:
         die("--build-packages requires a pre-created pinned @jeremy/mere-dev behavior")
     for package in inputs["packages"]:
-        if package["name"] == "linux":
-            continue
         command(["swamp", "behavior", "run", args.mere_dev_behavior, "build",
                  *swamp_repo_args(args), "--input", f"recipe={ROOT / package['recipe']}"])
 
@@ -608,6 +606,18 @@ def find_existing_kernel(
     dev_root: Path,
 ) -> tuple[Path, Path, str]:
     version = inputs["toolchain"]["linux_version"]
+    built_roots = sorted((dev_root / "mere/dev/build").glob(f"linux-{version}-*/pkg/linux"))
+    if built_roots:
+        package_root = built_roots[-1]
+        workspace = package_root.parent.parent
+        archives = sorted((workspace / "pkg").glob(f"linux-{version}-*.pkg.tar.zst"))
+        if not archives:
+            die(f"Mere dev Linux build produced no package archive under {workspace}")
+        archive = archives[-1]
+        candidate = destination / "kernel-candidate"
+        shutil.rmtree(candidate, ignore_errors=True)
+        extract_kernel_archive(archive, candidate, inputs)
+        return candidate, archive, version
     candidates = sorted(
         (dev_root / "mere/cache/packages").glob(
             f"linux-{version}-*-x86_64-*.pkg.tar.zst"
