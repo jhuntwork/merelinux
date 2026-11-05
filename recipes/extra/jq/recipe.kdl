@@ -1,7 +1,7 @@
 recipe {
     name "jq"
-    version "1.8.1"
-    release 4
+    version "1.8.2"
+    release 1
     description "A lightweight and flexible command-line JSON processor"
     url "https://github.com/stedolan/jq"
     licenses "BSD"
@@ -10,7 +10,7 @@ recipe {
 }
 
 source "${recipe.url}/releases/download/jq-${recipe.version}/jq-${recipe.version}.tar.gz" {
-    blake3 "9cd38d1bbee1edf69145fb22032b12eccc49cda2741d3bc8b6c1eb9d7d10ff1e"
+    blake3 "80f6569efea15b7445aa50fa4e85c4fecb6d5950be788b466b1cb87940af5903"
 }
 
 build {
