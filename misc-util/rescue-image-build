@@ -965,7 +965,12 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     mere_binary = args.mere_binary or (ROOT / ".swamp" / "mere-dev" / "bin" / f"mere-{inputs['tool_profile']['mere_version']}-linux-x86_64")
     if not mere_binary.is_file():
         die(f"pinned Mere {inputs['tool_profile']['mere_version']} binary is unavailable: {mere_binary}")
-    invoke_mere_dev(args, inputs)
+    for package in inputs["packages"]:
+        if package["name"] != "linux":
+            # The isolated worker consumes prebuilt package outputs. Package
+            # compilation belongs in a separately approved Mere build, never
+            # in rescue-image preparation.
+            package_build_output(dev_root, package["name"])
     generated = args.output_dir / "generated-inputs"
     shutil.rmtree(generated, ignore_errors=True)
     generated.mkdir(parents=True)
