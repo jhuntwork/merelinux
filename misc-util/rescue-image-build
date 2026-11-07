@@ -1002,19 +1002,24 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     source_root.joinpath("etc/fstab").write_text("# generated rescue fixture\n", encoding="ascii")
     staged_root = generated / "rescue-root"
     stage_rescue_root(source_root, staged_root, inputs["toolchain"]["source_date_epoch"])
-    fixture_root = generated / "fixture-root"
-    shutil.copytree(staged_root, fixture_root, symlinks=True)
-    fixture_root.joinpath("etc/hostname").write_text("mere-system\n", encoding="ascii")
-    fixture_root.joinpath("etc/fstab").write_text("# generated installed-system fixture\n", encoding="ascii")
-    fixture_esp = generated / "fixture-esp"
-    target = fixture_esp / "EFI" / "BOOT"
-    target.mkdir(parents=True)
     limine = package_roots["limine"] / "usr/share/limine/BOOTX64.EFI"
     if not limine.is_file():
         die("Limine package did not provide usr/share/limine/BOOTX64.EFI")
-    shutil.copy2(limine, target / "BOOTX64.EFI")
-    shutil.copy2(staged_root / "boot/vmlinux", target / "vmlinuz")
-    write_limine_config(target / "limine.conf", inputs["fixture"]["root_guid"])
+    rescue_limine = generated / "limine.efi"
+    shutil.copy2(limine, rescue_limine)
+    fixture_root = None
+    fixture_esp = None
+    if args.include_fixture:
+        fixture_root = generated / "fixture-root"
+        shutil.copytree(staged_root, fixture_root, symlinks=True)
+        fixture_root.joinpath("etc/hostname").write_text("mere-system\n", encoding="ascii")
+        fixture_root.joinpath("etc/fstab").write_text("# generated installed-system fixture\n", encoding="ascii")
+        fixture_esp = generated / "fixture-esp"
+        target = fixture_esp / "EFI" / "BOOT"
+        target.mkdir(parents=True)
+        shutil.copy2(limine, target / "BOOTX64.EFI")
+        shutil.copy2(staged_root / "boot/vmlinux", target / "vmlinuz")
+        write_limine_config(target / "limine.conf", inputs["fixture"]["root_guid"])
     repository_files = list((dev_root / "mere/cache/repos").glob("*/repo.db"))
     if not repository_files:
         die("Mere repository snapshot is unavailable after package preparation")
@@ -1039,8 +1044,10 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     firmware_manifest = prepare_ovmf(args, inputs, generated, mere_binary, dev_root)
     firmware_manifest_path = generated / "firmware-manifest.json"
     firmware_manifest_path.write_text(json.dumps(firmware_manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-    args.root_tree, args.fixture_root_tree, args.fixture_esp_tree = staged_root, fixture_root, fixture_esp
-    args.kernel, args.limine_efi = staged_root / "boot/vmlinux", limine
+    args.root_tree = staged_root
+    if args.include_fixture:
+        args.fixture_root_tree, args.fixture_esp_tree = fixture_root, fixture_esp
+    args.kernel, args.limine_efi = staged_root / "boot/vmlinux", rescue_limine
     args.package_manifest, args.firmware_manifest = package_manifest_path, firmware_manifest_path
 
 
@@ -1078,6 +1085,7 @@ def parse() -> argparse.Namespace:
     parser.add_argument("--firmware-manifest", type=Path)
     parser.add_argument("--output-dir", type=Path, default=Path("out/rescue-image"))
     parser.add_argument("--compare", action="store_true")
+    parser.add_argument("--include-fixture", action="store_true")
     return parser.parse_args()
 
 
@@ -1123,8 +1131,10 @@ def main() -> int:
             "firmware_manifest": str(args.firmware_manifest),
         }, sort_keys=True))
         return 0
-    if not args.build or not args.compare:
-        die("--build and --compare are required; a single build is not reproducibility evidence")
+    if not args.build:
+        die("--build is required")
+    if args.compare:
+        args.include_fixture = True
     if args.tool_profile_root is None:
         die("--build requires --tool-profile-root for the validated Mere image-tool profile")
     check_environment(profile_root=args.tool_profile_root, inputs=inputs,
@@ -1132,13 +1142,22 @@ def main() -> int:
     if args.tool_profile_smoke:
         invoke_tool_profile(args, inputs)
     image_tool_versions = tool_versions()
-    required_paths = ((args.root_tree, "--root-tree"), (args.fixture_root_tree, "--fixture-root-tree"),
-                      (args.fixture_esp_tree, "--fixture-esp-tree"), (args.kernel, "--kernel"), (args.limine_efi, "--limine-efi"),
-                      (args.package_manifest, "--package-manifest"), (args.firmware_manifest, "--firmware-manifest"))
+    required_paths = [
+        (args.root_tree, "--root-tree"),
+        (args.kernel, "--kernel"),
+        (args.limine_efi, "--limine-efi"),
+        (args.package_manifest, "--package-manifest"),
+        (args.firmware_manifest, "--firmware-manifest"),
+    ]
+    if args.include_fixture:
+        required_paths.extend([
+            (args.fixture_root_tree, "--fixture-root-tree"),
+            (args.fixture_esp_tree, "--fixture-esp-tree"),
+        ])
     for path, label in required_paths:
         if path is None or not path.exists():
             die(f"{label} must name an existing input")
-    if not args.fixture_esp_tree.is_dir() or not any(args.fixture_esp_tree.rglob("*")):
+    if args.include_fixture and (not args.fixture_esp_tree.is_dir() or not any(args.fixture_esp_tree.rglob("*"))):
         die("--fixture-esp-tree must be a non-empty directory")
     package_manifest = json.loads(args.package_manifest.read_text(encoding="utf-8"))
     firmware_manifest = json.loads(args.firmware_manifest.read_text(encoding="utf-8"))
@@ -1170,33 +1189,56 @@ def main() -> int:
         if not package.get("version") or len(digest_value) != 64 or any(c not in "0123456789abcdef" for c in digest_value.lower()):
             die("each tool profile package needs version and a 64-character archive_blake3")
     check_tree(args.root_tree, image=True)
-    check_tree(args.fixture_root_tree, image=False)
+    if args.include_fixture:
+        check_tree(args.fixture_root_tree, image=False)
     stage_dir = Path(tempfile.mkdtemp(prefix="mere-rescue-root-"))
     try:
         staged_root = stage_dir / "root"
         stage_rescue_root(args.root_tree, staged_root, inputs["toolchain"]["source_date_epoch"])
         args.output_dir.mkdir(parents=True, exist_ok=True)
         first = build_one(args.output_dir / "mere-rescue.raw", staged_root, args.kernel, args.limine_efi, None, inputs, fixture=False)
-        fixture = build_one(args.output_dir / "mere-system-fixture.raw", args.fixture_root_tree, args.kernel, args.limine_efi, args.fixture_esp_tree, inputs, fixture=True)
-        second = build_one(args.output_dir / "compare" / "mere-rescue.raw", staged_root, args.kernel, args.limine_efi, None, inputs, fixture=False)
-        second_fixture = build_one(args.output_dir / "compare" / "mere-system-fixture.raw", args.fixture_root_tree, args.kernel, args.limine_efi, args.fixture_esp_tree, inputs, fixture=True)
-        dirty = args.output_dir / "mere-system-fixture-dirty-journal.raw"
-        shutil.copyfile(args.output_dir / "mere-system-fixture.raw", dirty)
-        dirty_start = inputs["image"]["esp_start_lba"] * inputs["image"]["sector_size"] + inputs["image"]["esp_size_bytes"]
-        with tempfile.TemporaryDirectory(prefix="mere-fixture-dirty-") as mounted:
-            command([executable("mount"), "-o", f"loop,offset={dirty_start},sizelimit={inputs['image']['size_bytes'] - dirty_start}", str(dirty), mounted])
-            try:
-                marker = Path(mounted) / "var" / "lib" / "mere-rescue-dirty-journal-marker"
-                marker.parent.mkdir(parents=True, exist_ok=True)
-                with marker.open("w", encoding="ascii") as stream:
-                    stream.write("known dirty-journal fixture\n")
-                    stream.flush()
-                    os.fsync(stream.fileno())
-                dirty_hash = digest(dirty)
-            finally:
-                command([executable("umount"), "-l", mounted])
-        rescue_equal = first["blake3"] == second["blake3"]
-        fixture_equal = fixture["blake3"] == second_fixture["blake3"]
+        fixture = None
+        if args.include_fixture:
+            fixture = build_one(args.output_dir / "mere-system-fixture.raw", args.fixture_root_tree, args.kernel, args.limine_efi, args.fixture_esp_tree, inputs, fixture=True)
+
+        second = None
+        second_fixture = None
+        dirty = None
+        dirty_hash = None
+        rescue_equal = False
+        fixture_equal = False
+        if args.compare:
+            second = build_one(args.output_dir / "compare" / "mere-rescue.raw", staged_root, args.kernel, args.limine_efi, None, inputs, fixture=False)
+            rescue_equal = first["blake3"] == second["blake3"]
+            if fixture is None:
+                die("--compare requires --include-fixture")
+            second_fixture = build_one(args.output_dir / "compare" / "mere-system-fixture.raw", args.fixture_root_tree, args.kernel, args.limine_efi, args.fixture_esp_tree, inputs, fixture=True)
+            fixture_equal = fixture["blake3"] == second_fixture["blake3"]
+            dirty = args.output_dir / "mere-system-fixture-dirty-journal.raw"
+            shutil.copyfile(args.output_dir / "mere-system-fixture.raw", dirty)
+            dirty_start = inputs["image"]["esp_start_lba"] * inputs["image"]["sector_size"] + inputs["image"]["esp_size_bytes"]
+            with tempfile.TemporaryDirectory(prefix="mere-fixture-dirty-") as mounted:
+                command([executable("mount"), "-o", f"loop,offset={dirty_start},sizelimit={inputs['image']['size_bytes'] - dirty_start}", str(dirty), mounted])
+                try:
+                    marker = Path(mounted) / "var" / "lib" / "mere-rescue-dirty-journal-marker"
+                    marker.parent.mkdir(parents=True, exist_ok=True)
+                    with marker.open("w", encoding="ascii") as stream:
+                        stream.write("known dirty-journal fixture\n")
+                        stream.flush()
+                        os.fsync(stream.fileno())
+                    dirty_hash = digest(dirty)
+                finally:
+                    command([executable("umount"), "-l", mounted])
+
+        artifacts = {"rescue": {"first": first}}
+        if second is not None:
+            artifacts["rescue"].update({"second": second, "byte_identical": rescue_equal})
+        if fixture is not None:
+            artifacts["fixture"] = {"first": fixture}
+            if second_fixture is not None:
+                artifacts["fixture"].update({"second": second_fixture, "byte_identical": fixture_equal})
+            if dirty is not None and dirty_hash is not None:
+                artifacts["fixture"]["dirty_journal"] = {"path": str(dirty), "blake3": dirty_hash}
         manifest = {
             "format": 1, "architecture": "x86_64", "boot": "UEFI-SecureBoot-disabled",
             "source_revision": command(["git", "rev-parse", "HEAD"], cwd=ROOT, capture=True).strip(),
@@ -1208,14 +1250,12 @@ def main() -> int:
             "resolved_image_tools": {tool: executable(tool) for tool in PROFILE_IMAGE_TOOLS},
             "package_manifest": package_manifest, "tool_profile_packages": package_manifest["tool_profile_packages"], "firmware_manifest": firmware_manifest,
             "image_tool_versions": image_tool_versions, "commands": COMMAND_LOG,
-            "artifacts": {"rescue": {"first": first, "second": second, "byte_identical": rescue_equal},
-                          "fixture": {"first": fixture, "second": second_fixture, "byte_identical": fixture_equal,
-                                      "dirty_journal": {"path": str(dirty), "blake3": dirty_hash}}},
-            "reproducibility": {"clean_builds_compared": True, "rescue_byte_identical": rescue_equal,
+            "artifacts": artifacts,
+            "reproducibility": {"clean_builds_compared": args.compare, "rescue_byte_identical": rescue_equal,
                                  "fixture_byte_identical": fixture_equal}, "no_initramfs": True,
         }
         (args.output_dir / "manifest.json").write_text(json.dumps(manifest, indent=2, sort_keys=True) + "\n", encoding="utf-8")
-        if not rescue_equal or not fixture_equal:
+        if args.compare and (not rescue_equal or not fixture_equal):
             die("clean builds differ; manifest records failed reproducibility comparison")
     finally:
         shutil.rmtree(stage_dir, ignore_errors=True)
