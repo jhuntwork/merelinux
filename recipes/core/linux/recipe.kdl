@@ -32,7 +32,7 @@ source "mere-common.config.fragment" {
 }
 
 source "mere-x86_64.config.fragment" {
-    blake3 "3c03fa78986f59bf80d5c4d8e292d99b0c21b9f7dc5e5546e0def71358166bb7"
+    blake3 "159c4579e42c51b05feb3096058ecaa95c347eebacd7216a904d170d02dc16fe"
 }
 
 source "mere-aarch64.config.fragment" {
