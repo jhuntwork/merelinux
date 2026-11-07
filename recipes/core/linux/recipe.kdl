@@ -1,7 +1,7 @@
 recipe {
     name "linux"
-    version "6.18.42"
-    release 2
+    version "6.18.62"
+    release 1
     description "Linux kernel and modules"
     url "http://www.kernel.org"
     licenses "GPL2"
@@ -24,7 +24,7 @@ recipe {
 }
 
 source "https://cdn.kernel.org/pub/linux/kernel/v6.x/linux-${recipe.version}.tar.xz" {
-    blake3 "a39abc6d59532b3f8a779f1130eb56077ae8ea3fc887c3585218e5d90c1c3cce"
+    blake3 "1292d1098eb0bdd33e7636260489533fa02ac8c8c3940a640a05d46eaddbced5"
 }
 
 source "mere-common.config.fragment" {
