@@ -1,0 +1,93 @@
+{
+  "format": 1,
+  "image": {
+    "size_bytes": 2147483648,
+    "sector_size": 512,
+    "esp_size_bytes": 268435456,
+    "esp_start_lba": 2048,
+    "disk_guid": "8e9f8a4c-6480-4f1e-9a19-4b79b6b8a648",
+    "esp_guid": "8e9f8a4c-6480-4f1e-9a19-4b79b6b8a649",
+    "root_guid": "8e9f8a4c-6480-4f1e-9a19-4b79b6b8a64a",
+    "esp_type_guid": "c12a7328-f81f-11d2-ba4b-00a0c93ec93b",
+    "root_type_guid": "4f68bce3-e8cd-4db1-96e7-fbcaf984b709",
+    "fat_volume_id": "4d455245",
+    "fat_label": "MERE-ESP",
+    "ext4_uuid": "64806480-4ef1-4e5c-9e00-648064806480",
+    "ext4_hash_seed": "64806480-6480-4480-8480-648064806480",
+    "ext4_journal_uuid": "64806480-4ef1-4e5c-9e00-648064806481",
+    "ext4_features": ["has_journal", "extent", "64bit", "metadata_csum", "dir_index"]
+  },
+  "fixture": {
+    "disk_guid": "8e9f8a4c-6500-4f1e-9a19-4b79b6b8a650",
+    "esp_guid": "8e9f8a4c-6500-4f1e-9a19-4b79b6b8a651",
+    "root_guid": "8e9f8a4c-6500-4f1e-9a19-4b79b6b8a652",
+    "ext4_uuid": "65006500-4ef1-4e5c-9e00-650065006500",
+    "ext4_journal_uuid": "65006500-4ef1-4e5c-9e00-650065006501",
+    "fat_volume_id": "4d455246"
+  },
+    "toolchain": {
+    "mere_version": "0.23.0",
+    "mere_binary_sha256": "3250c04b7f288056f5db8860a644a17895a7dc6398ddc961e1316bfe928ea631",
+    "limine_version": "12.5.2",
+    "linux_version": "6.18.62",
+    "source_date_epoch": 1767225600,
+    "timezone": "UTC",
+    "locale": "C",
+    "umask": "0022"
+  },
+  "tool_profile": {
+    "mere_version": "0.23.0",
+    "mere_binary_sha256": "3250c04b7f288056f5db8860a644a17895a7dc6398ddc961e1316bfe928ea631",
+    "packages": ["busybox", "parted", "e2fsprogs"],
+    "commands": [
+      {"name": "parted", "argv": ["/sbin/parted", "--version"]},
+      {"name": "mkfs.vfat", "argv": ["/bin/busybox", "mkfs.vfat", "--help"]},
+      {"name": "mkfs.ext4", "argv": ["/sbin/mkfs.ext4", "-V"]},
+      {"name": "losetup", "argv": ["/bin/busybox", "losetup", "--help"]},
+      {"name": "tune2fs", "argv": ["/sbin/tune2fs", "-V"], "expected_exit_code": 1},
+      {"name": "debugfs", "argv": ["/sbin/debugfs", "-V"]}
+    ]
+  },
+  "ovmf": {
+    "release": "edk2-stable202608",
+    "commit": "2970e5699ba6267f3384ffab20f96647578aebc8",
+    "source_url": "https://codeload.github.com/tianocore/edk2/tar.gz/refs/tags/edk2-stable202608",
+    "git_url": "https://github.com/tianocore/edk2.git",
+    "source_sha256": "bac40812213576c3025cf780c33d882f9e087a44201b1cd28a07f6d1eb54b76a",
+    "build_target": "OvmfPkg/OvmfPkgX64.dsc",
+    "toolchain": "CLANGDWARF",
+    "code_relative": "Build/OvmfX64/RELEASE_CLANGDWARF/FV/OVMF_CODE.fd",
+    "vars_relative": "Build/OvmfX64/RELEASE_CLANGDWARF/FV/OVMF_VARS.fd",
+    "acpica_release": "20260930",
+    "acpica_commit": "e85aa3bebaae81ed1e6d163511ac7e1eafe732cf",
+    "acpica_source_url": "https://codeload.github.com/open-acpica/acpica/tar.gz/refs/tags/20260930",
+    "acpica_source_sha256": "feddab0f42f1e01afa3b8ec04f3aaef5e61e891225b8dc8776953ca9f3df1449",
+    "required_submodules": [
+      "BaseTools/Source/C/BrotliCompress/brotli",
+      "CryptoPkg/Library/MbedTlsLib/mbedtls",
+      "CryptoPkg/Library/OpensslLib/openssl",
+      "MdeModulePkg/Library/BrotliCustomDecompressLib/brotli",
+      "MdePkg/Library/MipiSysTLib/mipisyst",
+      "SecurityPkg/DeviceSecurity/SpdmLib/libspdm"
+    ],
+    "tool_profile_packages": [
+      {"name": "llvm", "version": "21.1.8-14", "archive_blake3": "98ba485cc5297ce83b4b3afc444a29fb2f33687a12ac8abf13fe973372da88ec"},
+      {"name": "nasm", "version": "3.01-1", "archive_blake3": "6bd28b1f8cb239b1d6329bce80f857ee7db93f0de916625690a055b46b5ebcaf"},
+      {"name": "flex", "version": "2.6.4-1", "archive_blake3": "087478d5a21b1a9548204b3aebdd273730cd7c5ce84e8c1c7d728aac6f8f6ee7"},
+      {"name": "bison", "version": "3.8.2-1", "archive_blake3": "b3764ac1ab30566d3b80aff7736b32a799e910431e871b69bba20e0b9dcea73b"},
+      {"name": "make", "version": "4.4.1-3", "archive_blake3": "e9822208de054469f10bdd40ba1ff0dbc2fdd04f1b9763005d79b3dda2b091df"},
+      {"name": "m4", "version": "1.4.21-1", "archive_blake3": "6954a828ea88d2b5c09cd80dfe368e769abba9cfb5fcbc61ffdeafc0fa018ce2"},
+      {"name": "util-linux-libs-dev", "version": "2.42.2-1", "archive_blake3": "c7cf8eefc414caac10d0961131669b095ac0a1f5848ba54b01989b2f745caae0"}
+    ],
+    "build_flags": ["-D", "NETWORK_ENABLE=FALSE", "-D", "SECURE_BOOT_ENABLE=FALSE", "-D", "SMM_REQUIRE=FALSE"]
+  },
+  "packages": [
+    {"name": "busybox", "recipe": "recipes/core/busybox/recipe.kdl", "commands": ["sh", "cp", "mount", "umount"]},
+    {"name": "dinit", "recipe": "recipes/core/dinit/recipe.kdl", "commands": ["dinit", "dinitctl"]},
+    {"name": "e2fsprogs", "recipe": "recipes/core/e2fsprogs/recipe.kdl", "commands": ["e2fsck", "tune2fs", "debugfs"]},
+    {"name": "linux", "recipe": "recipes/core/linux/recipe.kdl", "commands": []},
+    {"name": "limine", "recipe": "recipes/core/limine/recipe.kdl", "commands": []},
+    {"name": "mdevd", "recipe": "recipes/core/mdevd/recipe.kdl", "commands": ["mdevd"]},
+    {"name": "parted", "recipe": "recipes/core/parted/recipe.kdl", "commands": ["parted"]}
+  ]
+}

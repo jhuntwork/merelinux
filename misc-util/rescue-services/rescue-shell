@@ -1,0 +1,4 @@
+type = process
+command = /bin/sh -c 'printf "MERE-LINUX-RESCUE-READY pid=%s\\n" "$$" > /dev/console; exec /bin/sh'
+depends-on = mdevd-coldplug mount-devpts mount-shm mount-runtime mount-tmp mount-var-log mount-var-tmp
+runs-on-console = true
