@@ -1,0 +1,4 @@
+type = process
+command = /sbin/mdevd -D 3
+ready-notification = 3
+depends-on = mount-dev mount-proc mount-sys
