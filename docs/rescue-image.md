@@ -127,14 +127,15 @@ resolved profile executable paths in `manifest.json`. `mount`, `umount`,
 `mere`, and `tar` remain deliberate host-side dependencies; they are not
 looked up in the Mere profile.
 
-The top-level `--build --compare --build-packages` path performs package
-preparation and staging before assembly. It builds the pinned non-kernel
-recipes through `@jeremy/mere-dev`, uses the existing pinned Linux
-`6.18.42-2` package after auditing its shipped `boot/config`, stages the rescue
-root and installed-system fixture, creates the fixture ESP, and writes the
-package manifest. It does not rebuild Linux with a rescue-only configuration.
-The kernel audit follows the real 6.18.42 configuration symbols; there is no
-`CONFIG_PARTITION_ADVANCED` or `CONFIG_DEVPTS_FS` requirement in this path.
+The top-level `--build --build-packages` path performs package staging before
+assembly. It consumes prebuilt non-kernel package outputs through
+`@jeremy/mere-dev`, uses the pinned Linux `6.18.62-1` package after auditing
+its shipped `boot/config`, stages the rescue root, and writes the package
+manifest. `--compare` additionally stages the installed-system fixture, creates
+the fixture ESP, and performs the slower internal clean-build and dirty-journal
+audit. The path does not compile Linux or other packages in the rescue worker.
+The kernel audit follows the real 6.18.62 configuration symbols; x86_64 also
+enables the KVM core and Intel/AMD backends as modules.
 
 OVMF preparation is pinned to Tianocore `edk2-stable202608`, commit
 `2970e5699ba6267f3384ffab20f96647578aebc8`, from the codeload source archive

@@ -24,6 +24,14 @@ CONFIG_PM_AUTOSLEEP=y
 # In 6.19, MICROCODE_INTEL/MICROCODE_AMD merged into MICROCODE.
 CONFIG_MICROCODE=y
 
+# --- KVM virtualization ---
+# Keep the hypervisor core built in and ship both vendor backends as modules.
+# This lets the same x86_64 kernel host KVM guests on Intel and AMD systems.
+CONFIG_VIRTUALIZATION=y
+CONFIG_KVM=y
+CONFIG_KVM_INTEL=m
+CONFIG_KVM_AMD=m
+
 # --- Graphics ---
 CONFIG_DRM_I915=m
 CONFIG_DRM_AMDGPU=m

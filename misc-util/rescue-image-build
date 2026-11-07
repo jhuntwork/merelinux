@@ -648,7 +648,7 @@ def find_existing_kernel(
             return candidate, archive, version
         except SystemExit:
             continue
-    die("available Linux 6.18.42-2 packages lack the required rescue kernel configuration")
+    die(f"available Linux {version} packages lack the required rescue kernel configuration")
 
 
 def merge_tree(source: Path, destination: Path) -> None:

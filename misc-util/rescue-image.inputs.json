@@ -29,7 +29,7 @@
     "mere_version": "0.23.0",
     "mere_binary_sha256": "3250c04b7f288056f5db8860a644a17895a7dc6398ddc961e1316bfe928ea631",
     "limine_version": "12.5.2",
-    "linux_version": "6.18.42",
+    "linux_version": "6.18.62",
     "source_date_epoch": 1767225600,
     "timezone": "UTC",
     "locale": "C",
