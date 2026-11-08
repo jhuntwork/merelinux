@@ -1,7 +1,7 @@
 recipe {
     name "inih"
     version "62"
-    release 1
+    release 2
     description "Simple INI file parser library"
     url "https://github.com/benhoyt/inih"
     archs "aarch64" "x86_64"
