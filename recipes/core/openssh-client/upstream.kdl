@@ -1,0 +1,4 @@
+upstream {
+  github "openssh/openssh-portable"
+  tag-prefix "V_"
+}
