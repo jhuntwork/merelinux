@@ -1,0 +1,4 @@
+upstream {
+  github "xiph/opus"
+  tag-prefix "v"
+}

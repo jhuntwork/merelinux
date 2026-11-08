@@ -1,0 +1,4 @@
+upstream {
+  github "dejavu-fonts/dejavu-fonts"
+  tag-prefix "version_"
+}

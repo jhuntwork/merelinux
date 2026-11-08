@@ -1,0 +1,4 @@
+upstream {
+  github "torvalds/linux"
+  tag-prefix "v"
+}

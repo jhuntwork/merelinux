@@ -1,0 +1,3 @@
+upstream {
+  github "urcu/userspace-rcu"
+}

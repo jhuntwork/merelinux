@@ -1,0 +1,4 @@
+upstream {
+  github "pypa/hatch"
+  tag-prefix "hatchling-v"
+}

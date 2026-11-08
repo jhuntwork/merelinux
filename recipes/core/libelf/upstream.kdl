@@ -1,0 +1,4 @@
+upstream {
+  github "sourceware-org/elfutils"
+  tag-prefix "elfutils-"
+}
