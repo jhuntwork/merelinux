@@ -33,7 +33,7 @@ includedir=${prefix}/include
 
 Name: inih
 Description: Simple INI file parser
-Version: 62
+Version: ${recipe.version}
 Libs: -L${libdir} -linih
 Cflags: -I${includedir}
 EOF
