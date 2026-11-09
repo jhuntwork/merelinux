@@ -82,7 +82,15 @@
     "build_flags": ["-D", "NETWORK_ENABLE=FALSE", "-D", "SECURE_BOOT_ENABLE=FALSE", "-D", "SMM_REQUIRE=FALSE"]
   },
   "packages": [
-    {"name": "busybox", "recipe": "recipes/core/busybox/recipe.kdl", "commands": ["sh", "cp", "mount", "umount"]},
+    {"name": "busybox", "recipe": "recipes/core/busybox/recipe.kdl", "commands": ["sh", "cp", "mount", "umount", "udhcpc", "ip"]},
+    {"name": "curl", "recipe": "recipes/core/curl/recipe.kdl", "commands": ["curl"]},
+    {"name": "libcurl", "recipe": "recipes/core/curl/recipe.kdl", "commands": []},
+    {"name": "ca-certs", "recipe": "recipes/core/curl/recipe.kdl", "commands": []},
+    {"name": "libssl-3", "recipe": "recipes/core/openssl/recipe.kdl", "commands": []},
+    {"name": "libpsl", "recipe": "recipes/core/libpsl/recipe.kdl", "commands": []},
+    {"name": "musl", "recipe": "recipes/core/musl/recipe.kdl", "commands": []},
+    {"name": "zlib-ng", "recipe": "recipes/core/zlib-ng/recipe.kdl", "commands": []},
+    {"name": "mimalloc", "recipe": "recipes/core/mimalloc/recipe.kdl", "commands": []},
     {"name": "dinit", "recipe": "recipes/core/dinit/recipe.kdl", "commands": ["dinit", "dinitctl"]},
     {"name": "e2fsprogs", "recipe": "recipes/core/e2fsprogs/recipe.kdl", "commands": ["e2fsck", "tune2fs", "debugfs"]},
     {"name": "linux", "recipe": "recipes/core/linux/recipe.kdl", "commands": []},

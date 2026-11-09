@@ -38,7 +38,7 @@ PROFILE_TOOL_CANDIDATES = {
 REQUIRED_SERVICE_FILES = (
     "mount-dev", "mount-proc", "mount-sys", "mount-devpts", "mount-shm",
     "mount-runtime", "mount-tmp", "mount-var-log", "mount-var-tmp", "mdevd",
-    "mdevd-coldplug", "rescue-shell",
+    "mdevd-coldplug", "network-dhcp", "rescue-shell",
 )
 COMMAND_LOG: list[list[str]] = []
 RESOLVED_TOOLS: dict[str, str] = {}
@@ -572,7 +572,10 @@ def invoke_mere_dev(args: argparse.Namespace, inputs: dict[str, Any]) -> None:
 
 
 def package_build_output(dev_root: Path, name: str) -> tuple[Path, Path, str]:
-    candidates = sorted(dev_root.glob(f"mere/dev/build/{name}-*/pkg/{name}"))
+    # Split packages (for example libcurl and ca-certs) live under the
+    # workspace created for their source recipe, not under a same-named build
+    # directory.
+    candidates = sorted(dev_root.glob(f"mere/dev/build/*/pkg/{name}"))
     if not candidates:
         die(f"Mere dev build produced no package tree for {name} under {dev_root}")
     package_root = candidates[-1]
@@ -664,6 +667,26 @@ def merge_tree(source: Path, destination: Path) -> None:
             shutil.copy2(item, target, follow_symlinks=False)
 
 
+def materialize_etc_defaults(root: Path) -> None:
+    """Apply Mere package defaults to the standalone rescue filesystem."""
+    defaults = root / "etc-defaults"
+    if not defaults.is_dir():
+        return
+    destination = root / "etc"
+    destination.mkdir(parents=True, exist_ok=True)
+    for item in defaults.rglob("*"):
+        relative = item.relative_to(defaults)
+        target = destination / relative
+        if item.is_dir() and not item.is_symlink():
+            target.mkdir(parents=True, exist_ok=True)
+        elif item.is_file() or item.is_symlink():
+            if target.exists() or target.is_symlink():
+                continue
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(item, target, follow_symlinks=False)
+    shutil.rmtree(defaults)
+
+
 def file_blake3(path: Path, mere_binary: Path, mere_root: Path) -> str:
     result = subprocess.run(
         [str(mere_binary), "--root", str(mere_root), "dev", "hash", str(path)],
@@ -681,7 +704,10 @@ def package_provider_mapping(package_root: Path, package_name: str, providers: d
     for item in package_root.rglob("*"):
         if item.name == ".mere" or ".mere" in item.parts or not (item.is_file() or item.is_symlink()):
             continue
-        relative = "/" + item.relative_to(package_root).as_posix()
+        relative_path = item.relative_to(package_root).parts
+        if relative_path and relative_path[0] == "etc-defaults":
+            relative_path = ("etc", *relative_path[1:])
+        relative = "/" + Path(*relative_path).as_posix()
         previous = providers.get(relative)
         if previous and previous != package_name:
             die(f"package provider conflict for {relative}: {previous} and {package_name}")
@@ -998,7 +1024,28 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     package_provider_mapping(kernel_dir, "linux", providers)
     package_records.append({"name": "linux", "version": kernel_version, "archive_blake3": file_blake3(kernel_archive, mere_binary, dev_root)})
     source_root.joinpath("etc").mkdir(parents=True, exist_ok=True)
+    source_root.joinpath("usr/bin").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(mere_binary, source_root / "usr/bin/mere")
+    (source_root / "usr/bin/mere").chmod(0o755)
     source_root.joinpath("etc/hostname").write_text("mere-rescue\n", encoding="ascii")
+    materialize_etc_defaults(source_root)
+    required_files = (
+        "usr/bin/mere",
+        "usr/bin/curl",
+        "lib/ld-musl-x86_64.so.1",
+        "usr/lib/libcurl.so.4",
+        "usr/lib/libssl.so.3",
+        "usr/lib/libcrypto.so.3",
+        "usr/lib/libz.so.1",
+        "usr/lib/libpsl.so.5",
+        "etc/ssl/certs/ca-certificates.crt",
+        "usr/share/udhcpc/default.script",
+        "sbin/udhcpc",
+        "sbin/ip",
+    )
+    missing_files = [path for path in required_files if not (source_root / path).is_file()]
+    if missing_files:
+        die("rescue root is missing required runtime files: " + ", ".join(missing_files))
     source_root.joinpath("etc/fstab").write_text("# generated rescue fixture\n", encoding="ascii")
     staged_root = generated / "rescue-root"
     stage_rescue_root(source_root, staged_root, inputs["toolchain"]["source_date_epoch"])

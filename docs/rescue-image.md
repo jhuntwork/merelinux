@@ -13,6 +13,12 @@ as reproducible.
 The selected Mere version is `0.23.0` throughout the tool profile and build
 inputs. The pinned x86_64 Mere binary SHA-256 is
 `3250c04b7f288056f5db8860a644a17895a7dc6398ddc961e1316bfe928ea631`.
+The same pinned binary is copied into the final rescue root at `/usr/bin/mere`.
+The rescue root also contains the `curl` command, its shared runtime
+libraries, and the pinned CA bundle. The `network-dhcp` dinit service scans
+non-loopback interfaces and runs BusyBox `udhcpc` on the first one that accepts
+a lease, which also writes `/etc/resolv.conf` from the DHCP-provided DNS
+servers.
 The assembler uses `parted` to inspect the deterministic GPT after
 writing fixed GUIDs, and uses `mere dev hash` for BLAKE3 digests. It does not
 require `sgdisk` or a separate `blake3` executable.
@@ -47,6 +53,12 @@ existing pinned Linux package instead of rebuilding Linux:
 ```sh
 for recipe in \
   recipes/core/busybox/recipe.kdl \
+  recipes/core/curl/recipe.kdl \
+  recipes/core/libpsl/recipe.kdl \
+  recipes/core/mimalloc/recipe.kdl \
+  recipes/core/musl/recipe.kdl \
+  recipes/core/openssl/recipe.kdl \
+  recipes/core/zlib-ng/recipe.kdl \
   recipes/core/dinit/recipe.kdl \
   recipes/core/e2fsprogs/recipe.kdl \
   recipes/core/limine/recipe.kdl \
@@ -129,11 +141,16 @@ looked up in the Mere profile.
 
 The top-level `--build --build-packages` path performs package staging before
 assembly. It consumes prebuilt non-kernel package outputs through
-`@jeremy/mere-dev`, uses the pinned Linux `6.18.62-1` package after auditing
-its shipped `boot/config`, stages the rescue root, and writes the package
-manifest. `--compare` additionally stages the installed-system fixture, creates
-the fixture ESP, and performs the slower internal clean-build and dirty-journal
-audit. The path does not compile Linux or other packages in the rescue worker.
+`@jeremy/mere-dev`, including the split runtime outputs from curl, OpenSSL,
+libpsl, musl, zlib-ng, and mimalloc. Split outputs are located under their
+source recipe's build workspace. Mere's `etc-defaults/` package trees are
+materialized into `/etc` for this standalone filesystem because no Mere
+activation runs inside the rescue image. It uses the pinned Linux `6.18.62-1`
+package after auditing its shipped `boot/config`, stages the rescue root, and
+writes the package manifest. `--compare` additionally stages the
+installed-system fixture, creates the fixture ESP, and performs the slower
+internal clean-build and dirty-journal audit. The path does not compile Linux
+or other packages in the rescue worker.
 The kernel audit follows the real 6.18.62 configuration symbols; x86_64 also
 enables the KVM core and Intel/AMD backends as modules.
 
@@ -220,8 +237,11 @@ serial Limine branding. No BIOS, hybrid, direct-kernel, squashfs, or initramfs
 artifact is assembled.
 
 The rescue profile mounts only virtual filesystems, starts mdevd before
-coldplug, and prints `MERE-LINUX-RESCUE-READY`. It has no root remount or
-attached-disk discovery service.
+coldplug, starts `network-dhcp` after sysfs is available, and prints
+`MERE-LINUX-RESCUE-READY`. `network-dhcp` skips `lo`, runs BusyBox `udhcpc` on
+the first non-loopback interface, and uses the DHCP script to install routes
+and `/etc/resolv.conf`. It has no root remount or attached-disk discovery
+service.
 
 The assembler does not run QEMU or inspect OVMF. #649 consumes the pinned OVMF
 code and fresh writable NVRAM provenance recorded alongside this manifest. #650
