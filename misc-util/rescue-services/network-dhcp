@@ -1,0 +1,3 @@
+type = process
+command = /bin/sh -c 'for path in /sys/class/net/*; do interface=${path##*/}; [ "$interface" = lo ] && continue; /sbin/udhcpc -q -i "$interface" -p "/run/udhcpc-$interface.pid" && exit 0; done; exit 1'
+depends-on = mdevd-coldplug mount-proc mount-sys mount-runtime
