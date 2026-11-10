@@ -83,7 +83,7 @@ def tree_digest(path: Path, epoch: int) -> str:
     with tempfile.NamedTemporaryFile(prefix="mere-tree-", suffix=".tar", delete=False) as stream:
         archive = Path(stream.name)
     try:
-        with tarfile.open(archive, mode="w", format=tarfile.USTAR_FORMAT, dereference=False) as tar:
+        with tarfile.open(archive, mode="w", format=tarfile.GNU_FORMAT, dereference=False) as tar:
             entries = [path, *sorted(path.rglob("*"), key=lambda item: item.relative_to(path).as_posix())]
             for item in entries:
                 relative = "." if item == path else f"./{item.relative_to(path).as_posix()}"
