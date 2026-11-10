@@ -8,7 +8,7 @@ import datetime
 import hashlib
 import json
 import os
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 import shutil
 import struct
 import subprocess
@@ -38,6 +38,17 @@ PROFILE_TOOL_CANDIDATES = {
 REQUIRED_SERVICE_FILES = (
     "network-dhcp", "rescue-ready",
 )
+EXTERNAL_PROFILE_LINKS = {
+    "usr/bin": "/mere/profiles/system/current/usr/bin",
+    "usr/sbin": "/mere/profiles/system/current/usr/sbin",
+    "usr/lib": "/mere/profiles/system/current/usr/lib",
+    "usr/share": "/mere/profiles/system/current/usr/share",
+    "usr/libexec": "/mere/profiles/system/current/usr/libexec",
+    "usr/include": "/mere/profiles/system/current/usr/include",
+    "bin": "/mere/profiles/system/current/bin",
+    "sbin": "/mere/profiles/system/current/sbin",
+    "lib": "/mere/profiles/system/current/lib",
+}
 OFFICIAL_MERE_CONFIG_URL = "https://pkgs.merelinux.org/config.kdl"
 OFFICIAL_MERE_KEY_URL = "https://pkgs.merelinux.org/mere.pub"
 COMMAND_LOG: list[list[str]] = []
@@ -182,20 +193,36 @@ def tool_versions() -> dict[str, str]:
 
 
 def staged_path(root: Path, relative: str) -> Path:
-    """Resolve an image-internal absolute symlink without using the host root."""
+    """Resolve image-internal symlinks without using the host root."""
     root = root.resolve()
-    candidate = root / relative
+    resolved: list[str] = []
+    pending = list(PurePosixPath(relative).parts)
     for _ in range(64):
-        if not candidate.is_symlink():
-            resolved = candidate.resolve(strict=False)
-            if not resolved.is_relative_to(root):
+        while pending:
+            component = pending.pop(0)
+            if component in ("", "."):
+                continue
+            if component == "..":
+                if not resolved:
+                    die(f"staged path escapes image root: {relative}")
+                resolved.pop()
+                continue
+            candidate = root.joinpath(*resolved, component)
+            if candidate.is_symlink():
+                link = os.readlink(candidate)
+                if os.path.isabs(link):
+                    resolved = []
+                    target = list(PurePosixPath(link.lstrip("/")).parts)
+                else:
+                    target = list(PurePosixPath(link).parts)
+                pending = target + pending
+                break
+            resolved.append(component)
+        else:
+            result = root.joinpath(*resolved)
+            if not result.is_relative_to(root):
                 die(f"staged path escapes image root: {relative}")
-            return resolved
-        link = os.readlink(candidate)
-        candidate = (root / link.lstrip("/")) if os.path.isabs(link) else candidate.parent / link
-        candidate = Path(os.path.normpath(str(candidate)))
-        if not candidate.resolve(strict=False).is_relative_to(root):
-            die(f"staged symlink escapes image root: {relative} -> {link}")
+            return result
     die(f"staged path contains too many symlink hops: {relative}")
 
 
@@ -599,9 +626,9 @@ def merge_tree(source: Path, destination: Path) -> None:
             shutil.copy2(item, target, follow_symlinks=False)
 
 
-def materialize_etc_defaults(root: Path) -> None:
-    """Apply Mere package defaults to the standalone rescue filesystem."""
-    defaults = root / "etc-defaults"
+def materialize_etc_defaults(root: Path, defaults: Path | None = None) -> None:
+    """Apply package defaults to /etc without removing the generation copy."""
+    defaults = defaults or (root / "etc-defaults")
     if not defaults.is_dir():
         return
     destination = root / "etc"
@@ -616,7 +643,52 @@ def materialize_etc_defaults(root: Path) -> None:
                 continue
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copy2(item, target, follow_symlinks=False)
-    shutil.rmtree(defaults)
+    if defaults == root / "etc-defaults":
+        shutil.rmtree(defaults)
+
+
+def configure_external_profile_links(root: Path) -> None:
+    """Install the stable system links around the active Mere generation."""
+    usr = root / "usr"
+    usr.mkdir(parents=True, exist_ok=True)
+    (usr / "local" / "bin").mkdir(parents=True, exist_ok=True)
+    (usr / "local" / "sbin").mkdir(parents=True, exist_ok=True)
+    (root / "lib64").mkdir(parents=True, exist_ok=True)
+    for relative, target in EXTERNAL_PROFILE_LINKS.items():
+        link = root / relative
+        if link.is_symlink() or link.is_file():
+            link.unlink()
+        elif link.is_dir():
+            shutil.rmtree(link)
+        link.parent.mkdir(parents=True, exist_ok=True)
+        link.symlink_to(target)
+    var_run = root / "var" / "run"
+    var_run.parent.mkdir(parents=True, exist_ok=True)
+    if var_run.is_symlink() or var_run.is_file():
+        var_run.unlink()
+    elif var_run.is_dir():
+        shutil.rmtree(var_run)
+    var_run.symlink_to("/run")
+
+
+def copy_profile_boot_artifacts(profile_root: Path, store_root: Path, root: Path) -> None:
+    """Stage boot files as regular /boot artifacts, like the host installer."""
+    destination = root / "boot"
+    destination.mkdir(parents=True, exist_ok=True)
+    for name in ("vmlinux", "config"):
+        source = profile_root / "boot" / name
+        if not source.is_symlink():
+            resolved = source
+        else:
+            link = os.readlink(source)
+            if not link.startswith("/mere/store/"):
+                die(f"profile boot artifact has an unsafe link: {source} -> {link}")
+            resolved = (store_root / link.removeprefix("/mere/store/")).resolve(strict=True)
+            if not resolved.is_relative_to(store_root.resolve()):
+                die(f"profile boot artifact escapes the Mere store: {source} -> {link}")
+        if not resolved.is_file():
+            die(f"profile boot artifact is missing: {source}")
+        shutil.copy2(resolved, destination / name)
 
 
 def file_blake3(path: Path, mere_binary: Path, mere_root: Path) -> str:
@@ -1038,7 +1110,6 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
         die("Mere rescue profile omitted requested packages: " + ", ".join(missing_requested))
     source_root = generated / "rescue-source"
     store_root = dev_root / "mere" / "store"
-    materialize_profile_tree(profile_root, source_root, store_root)
     store_destination = source_root / "mere" / "store"
     store_destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(store_root, store_destination, symlinks=True)
@@ -1061,14 +1132,16 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     (mere_destination / "keys").mkdir(parents=True, exist_ok=True)
     shutil.copy2(store_root.parent / "config.kdl", mere_destination / "config.kdl")
     shutil.copy2(store_root.parent / "keys" / "mere.pub", mere_destination / "keys" / "mere.pub")
+    configure_external_profile_links(source_root)
+    copy_profile_boot_artifacts(profile_root, store_root, source_root)
     providers: dict[str, str] = {}
-    package_provider_mapping(source_root, "rolling-profile", providers)
+    package_provider_mapping(profile_root, "rolling-profile", providers)
+    providers["/usr/local/bin/mere"] = "rescue-toolchain"
     providers["/boot/vmlinux"] = "linux"
     providers["/boot/config"] = "linux"
     source_root.joinpath("etc").mkdir(parents=True, exist_ok=True)
-    source_root.joinpath("usr/bin").mkdir(parents=True, exist_ok=True)
-    shutil.copy2(mere_binary, source_root / "usr/bin/mere")
-    (source_root / "usr/bin/mere").chmod(0o755)
+    shutil.copy2(mere_binary, source_root / "usr/local/bin/mere")
+    (source_root / "usr/local/bin/mere").chmod(0o755)
     source_root.joinpath("etc/hostname").write_text("mere-rescue\n", encoding="ascii")
     source_root.joinpath("etc/network").mkdir(parents=True, exist_ok=True)
     source_root.joinpath("etc/network/interfaces").write_text(
@@ -1080,7 +1153,7 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     etc_root = dev_root / "etc"
     if etc_root.is_dir():
         materialize_profile_tree(etc_root, source_root / "etc", dev_root / "mere" / "store")
-    materialize_etc_defaults(source_root)
+    materialize_etc_defaults(source_root, profile_root / "etc-defaults")
     source_root.joinpath("etc/passwd").write_text(
         "root:x:0:0:root:/root:/bin/sh\n", encoding="ascii",
     )
@@ -1110,17 +1183,25 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     check_tree(source_root, image=True)
     if not (source_root / "mere" / "store").is_dir():
         die("rescue root is missing the Mere package store")
-    for relative in ("bin/sh", "sbin/init", "usr/bin/curl", "boot/vmlinux"):
+    if not (source_root / "usr").is_dir() or (source_root / "usr").is_symlink():
+        die("rescue root must provide /usr as a real directory")
+    for relative, target in EXTERNAL_PROFILE_LINKS.items():
         projected = source_root / relative
-        if not projected.is_symlink() or not os.readlink(projected).startswith("/mere/store/"):
-            die(f"rescue root projection is not a Mere store symlink: {relative}")
+        if not projected.is_symlink() or os.readlink(projected) != target:
+            die(f"rescue root has incorrect external profile link: {relative}")
+    if not (source_root / "usr/local").is_dir() or (source_root / "usr/local").is_symlink():
+        die("rescue root must preserve unmanaged /usr/local")
+    if not (source_root / "var/run").is_symlink() or os.readlink(source_root / "var/run") != "/run":
+        die("rescue root must link /var/run to /run")
     required_files = (
         "sbin/init",
         "usr/share/dinit.d/sysinit",
         "usr/share/dinit.d/mount-rw",
         "etc/dinit.d/boot",
         "etc/mere-boot.conf",
-        "usr/bin/mere",
+        "boot/vmlinux",
+        "boot/config",
+        "usr/local/bin/mere",
         "usr/bin/curl",
         "lib/ld-musl-x86_64.so.1",
         "usr/lib/libcurl.so.4",

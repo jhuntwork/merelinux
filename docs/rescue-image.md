@@ -18,11 +18,16 @@ and `mere profile apply` refreshes the configured repository before resolving
 the latest x86_64 artifacts. The realized profile records the versions and
 content hashes used for that build, but those values are observations rather
 than package-selection pins.
-The same pinned binary is copied into the final rescue root at `/usr/bin/mere`.
-The final root preserves the Mere store at `/mere/store` and the active system
-projection at `/mere/profiles/system/current`; root-level package files remain
-symlinks into that store so the installed packages are inspectable and Mere can
-operate on them after boot. The rescue root also contains the `curl` command,
+The same pinned binary is copied into the unmanaged `/usr/local/bin/mere`
+path, matching the host system's layout. The final root preserves the Mere
+store at `/mere/store` and the active system generation at
+`/mere/profiles/system/current`; the stable `/bin`, `/sbin`, `/lib`, and `/usr`
+subtree links point through that generation, while the generation's individual
+projection entries point into the store. `/var/run` is a symlink to `/run`.
+The rescue image selects `root-mode = overlay` with `overlay-storage = tmpfs`.
+The ext4 root is mounted read-only and the boot-time writable layer is
+memory-only, so changes disappear at shutdown and the USB root filesystem is
+never remounted read-write. The rescue root also contains the `curl` command,
 its shared runtime libraries, and the pinned CA bundle. The image configures
 loopback and `eth0` for DHCP in `/etc/network/interfaces`. The `network-dhcp`
 dinit service scans non-loopback interfaces and runs BusyBox `udhcpc` on the
@@ -169,13 +174,14 @@ looked up in the Mere profile.
 
 The top-level `--build --pull-packages` path performs a rolling profile
 resolution before assembly. It refreshes repository metadata, applies the
-unversioned package names from `rescue-image.inputs.json`, and materializes the
-resolved profile into the rescue root. The profile's `/mere/store` and
-`/mere/profiles/system/current` projections are retained in the image rather
-than flattened into ordinary files, so absolute profile links remain valid
-after boot. The package manifest records every resolved dependency's version
-and content hash as provenance, plus the requested package names; it does not
-constrain the next run to those values.
+unversioned package names from `rescue-image.inputs.json`, and preserves the
+resolved system generation under `/mere/profiles/system/`. It then installs the
+stable external scaffolding links (`/usr/bin`, `/usr/sbin`, `/usr/lib`,
+`/usr/share`, `/usr/libexec`, `/usr/include`, `/bin`, `/sbin`, and `/lib`) so
+new processes resolve through `current` exactly as they do on a Mere host.
+The package manifest records every resolved dependency's version and content
+hash as provenance, plus the requested package names; it does not constrain
+the next run to those values.
 Mere's `etc-defaults/` package trees are materialized into `/etc` because no
 Mere activation runs inside the rescue image. The separate image-tool profile
 remains pinned because it supplies the host-side formatters and OVMF build
