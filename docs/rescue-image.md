@@ -55,6 +55,14 @@ swamp behavior create @jeremy/mere-shell mere-rescue-tools-023-hoststore \
   --global-arg useHostStore=true
 ```
 
+The assembler initializes each isolated Mere root from the official repository
+files before syncing: `https://pkgs.merelinux.org/config.kdl` and
+`https://pkgs.merelinux.org/mere.pub`. It adds the required dinit provider
+setting to that downloaded config, copies both files into the final image under
+`/mere`, and records their SHA-256 values in the manifest. The root therefore
+has the trust material needed for `mere` commands after boot, not only the
+realized package files.
+
 Build the non-kernel tool-profile recipes only when provisioning the separate
 image-tool profile. The rescue package set is not compiled here; it is resolved
 from the configured rolling Mere repository by `profile apply`:
