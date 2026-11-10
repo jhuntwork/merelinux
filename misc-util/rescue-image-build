@@ -40,6 +40,9 @@ REQUIRED_SERVICE_FILES = (
 )
 COMMAND_LOG: list[list[str]] = []
 RESOLVED_TOOLS: dict[str, str] = {}
+# The rescue image is intentionally physical-access media.  This shared
+# operator password makes the console usable; it is not a security boundary.
+RESCUE_ROOT_SHADOW = "root:$6$mere$K7G8OR9EK7NuGTYboqAp05rpcHXmyOR94E.OOG2dinYnI3KX6l20rEQe9hwF0MmwSVMrM3mM3o0C2H6wwe41k/:19000:0:99999:7:::"
 
 
 def die(message: str) -> NoReturn:
@@ -1039,7 +1042,7 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
         encoding="ascii",
     )
     shadow = source_root.joinpath("etc/shadow")
-    shadow.write_text("root:!:19000:0:99999:7:::\n", encoding="ascii")
+    shadow.write_text(RESCUE_ROOT_SHADOW + "\n", encoding="ascii")
     shadow.chmod(0o600)
     for directory in ("dev", "proc", "sys", "run", "tmp", "root", "home", "mnt"):
         source_root.joinpath(directory).mkdir(parents=True, exist_ok=True)

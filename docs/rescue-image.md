@@ -80,7 +80,11 @@ Mere's package-owned dinit service files under `/usr/share/dinit.d`; applying a
 named profile would omit that service graph. The assembler materializes the
 active system generation, applies `etc-defaults` to `/etc`, and adds the
 rescue-specific DHCP and readiness services under `/etc/dinit.d`. The normal
-`mere-boot` serial getty remains the console entry point.
+`mere-boot` serial getty remains the console entry point. The assembled USB
+provisions the root account with the shared operator password `rescue` so that
+the console is usable. This credential is convenience for physical rescue
+media, not a protection boundary; anyone who can modify or boot the USB can
+replace it. Do not reuse it for network services.
 
 The pinned tool profile uses `busybox`, `parted`, and `e2fsprogs`. Busybox
 supplies the `mkfs.vfat` and `losetup` applets. E2fsprogs supplies `mkfs.ext4`,
