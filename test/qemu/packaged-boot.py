@@ -34,12 +34,13 @@ def fsck(disk, log):
         run(["e2fsck", "-fn", str(disk)], output)
 
 
-def dialogue(qemu, kernel, disk, case, output, timeout):
+def dialogue(qemu, kernel, disk, case, output, timeout, root_mode):
+    rootflags = "ro,noload" if root_mode == "overlay" else "ro"
     command = [qemu, "-accel", "tcg,thread=single", "-m", "512", "-smp", "1",
                "-nodefaults", "-display", "none", "-serial", "stdio", "-monitor", "none",
                "-nic", "none", "-kernel", str(kernel), "-drive",
                f"file={disk},format=raw,if=ide", "-append",
-               "console=ttyS0 root=/dev/sda rootfstype=ext4 ro init=/sbin/init panic=-1"]
+               "console=ttyS0 root=/dev/sda rootfstype=ext4 rootflags=" + rootflags + " init=/sbin/init panic=-1"]
     if case not in ("reboot", "lifecycle"):
         command += ["-no-reboot"]
     with output.open("wb") as log, subprocess.Popen(
@@ -193,6 +194,9 @@ def main():
     disk_mib = int(os.environ.get("QEMU_DISK_MIB", "512"))
     if disk_mib <= 0:
         raise RuntimeError("QEMU_DISK_MIB must be positive")
+    root_mode = os.environ.get("MERE_BOOT_ROOT_MODE", "direct")
+    if root_mode not in ("direct", "overlay"):
+        raise RuntimeError("MERE_BOOT_ROOT_MODE must be direct or overlay")
     results.mkdir()  # Refuse stale logs/markers or existing package state.
     with tempfile.TemporaryDirectory(prefix="mere-packaged-boot-") as work_dir:
         root = Path(work_dir) / "root"
@@ -218,6 +222,8 @@ def main():
             password_hash = subprocess.check_output(
                 ["openssl", "passwd", "-6", "-salt", "mereboot", "-stdin"],
                 input=(PASSWORD + "\n").encode()).decode().strip()
+            write(root, "etc/mere-boot.conf",
+                  f"root-mode = {root_mode}\noverlay-storage = tmpfs\n")
             write(root, "etc/passwd", "root:x:0:0:Test root:/root:/bin/sh\n")
             write(root, "etc/group", (HERE / "boot-fixtures/group").read_text())
             write(root, "etc/shadow", f"root:{password_hash}:19000:0:99999:7:::\n", 0o600)
@@ -254,7 +260,7 @@ def main():
                 fsck(disk, case_dir / "before.fsck")
                 # Preserve a postmortem filesystem report even if dialogue fails.
                 try:
-                    dialogue(qemu, kernel, disk, case, case_dir / "serial.log", timeout)
+                    dialogue(qemu, kernel, disk, case, case_dir / "serial.log", timeout, root_mode)
                 finally:
                     fsck(disk, case_dir / "after.fsck")
                 stops = subprocess.check_output(
