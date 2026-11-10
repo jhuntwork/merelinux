@@ -59,8 +59,8 @@ serial: yes
 interface_branding: MERE-LINUX-UEFI-LIMINE
 /Mere Linux Rescue
     protocol: linux
-    path: boot:///EFI/BOOT/vmlinuz
-    cmdline: root=PARTUUID=<fixed-root-partition-guid> rootfstype=ext4 rootflags=ro,noload rootwait init=/sbin/dinit console=tty0 console=ttyS0,115200n8 loglevel=4
+    path: boot():/EFI/BOOT/vmlinuz
+    cmdline: root=PARTUUID=<fixed-root-partition-guid> rootfstype=ext4 rootflags=ro,noload rootwait init=/bin/dinit console=tty0 console=ttyS0,115200n8 loglevel=4
 ```
 
 `path` is Limine's Linux-protocol kernel path; `kernel_path` is an equivalent alias. The entry has no `module_path`, which is Limine's module/initramfs mechanism. `graphics: no` and `serial: yes` make the QEMU serial transcript include the Limine text menu and branding before Linux starts. The selected Limine release's parser and serial behavior must be checked during the image spike, but changing those options to another boot path is not permitted without a new architecture decision.
@@ -92,7 +92,7 @@ The live root is a normal ext4 filesystem, not a squashfs image, an ISO9660 file
 ```text
 root=PARTUUID=<fixed-root-partition-guid> \
 rootfstype=ext4 rootflags=ro,noload rootwait \
-init=/sbin/dinit \
+init=/bin/dinit \
 console=tty0 console=ttyS0,115200n8 loglevel=4
 ```
 
@@ -127,7 +127,12 @@ The current `mere-common.config.fragment` already sets `CONFIG_EXT4_FS=y`, `CONF
 
 ### 6. Writable runtime state
 
-The live root remains read-only. The dinit live profile creates these volatile mounts before starting services that need them:
+The image starts with the root mounted `ro,noload`. The default `direct` root
+mode then lets the reusable `mere-boot` `mount-rw` service remount that root for
+normal rescue work. The optional `overlay` mode keeps the lower root read-only
+and places the writable upper and work directories on an ephemeral tmpfs.
+Both modes create these volatile mounts before starting services that need
+them:
 
 ```text
 /dev       devtmpfs
@@ -141,9 +146,11 @@ The live root remains read-only. The dinit live profile creates these volatile m
 /var/tmp   tmpfs
 ```
 
-The service graph creates required directories and permissions in those tmpfs filesystems. `/run/dinitctl`, mdevd state, service logs, shell history, temporary downloads, and other runtime state therefore never write to an attached Mere system disk. The live image's root itself is also protected by `ro,noload`.
-
-The dinit live profile must not include a generic `mount-rw` action that remounts the live root. The existing #634 boot graph can be reused only after it has a read-only-root variant with tmpfs runtime mounts and the same mdevd readiness/coldplug ordering.
+The service graph creates required directories and permissions in those tmpfs
+filesystems. `/run/dinitctl`, mdevd state, service logs, shell history,
+temporary downloads, and other runtime state therefore never write to an
+attached Mere system disk. Overlay mode additionally prevents ordinary rescue
+writes from reaching the boot media.
 
 ### 7. Disk-safety contract
 
@@ -227,7 +234,9 @@ Issue #634 does not need to close before the image work starts, but the image pi
 
 1. A packaged dinit executable and `dinitctl` with the selected version and package hash recorded.
 2. A dinit service profile for the live image: virtual filesystem setup, read-only root handling, mdevd readiness followed by coldplug, console access, the deterministic rescue-ready marker, and orderly shutdown without an automatic reboot loop.
-3. The read-only-root/tmpfs runtime variant described in this record. The existing test profile's writable-root assumption cannot be copied unchanged.
+3. The root-mode behavior described in this record: `direct` remains the
+   default, while `overlay` supplies the read-only lower-root/tmpfs runtime
+   variant. Both modes retain the same mdevd readiness/coldplug ordering.
 4. The recovery behavior and failure semantics already demonstrated in #634: preserve diagnostics and make foundational failures recoverable through dinit's console path rather than silently rebooting.
 5. The serial console/getty configuration needed by QEMU. A tty1 login remains the default contract; the QEMU profile enables the serial getty as an explicit machine option.
 

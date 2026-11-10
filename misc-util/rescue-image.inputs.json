@@ -25,11 +25,13 @@
     "ext4_journal_uuid": "65006500-4ef1-4e5c-9e00-650065006501",
     "fat_volume_id": "4d455246"
   },
-    "toolchain": {
+    "boot": {
+    "root_mode": "direct",
+    "overlay_storage": "tmpfs"
+  },
+  "toolchain": {
     "mere_version": "0.23.0",
     "mere_binary_sha256": "3250c04b7f288056f5db8860a644a17895a7dc6398ddc961e1316bfe928ea631",
-    "limine_version": "12.5.2",
-    "linux_version": "6.18.62",
     "source_date_epoch": 1767225600,
     "timezone": "UTC",
     "locale": "C",
@@ -83,19 +85,15 @@
   },
   "packages": [
     {"name": "busybox", "recipe": "recipes/core/busybox/recipe.kdl", "commands": ["sh", "cp", "mount", "umount", "udhcpc", "ip"]},
-    {"name": "curl", "recipe": "recipes/core/curl/recipe.kdl", "commands": ["curl"]},
-    {"name": "libcurl", "recipe": "recipes/core/curl/recipe.kdl", "commands": []},
     {"name": "ca-certs", "recipe": "recipes/core/curl/recipe.kdl", "commands": []},
-    {"name": "libssl-3", "recipe": "recipes/core/openssl/recipe.kdl", "commands": []},
-    {"name": "libpsl", "recipe": "recipes/core/libpsl/recipe.kdl", "commands": []},
-    {"name": "musl", "recipe": "recipes/core/musl/recipe.kdl", "commands": []},
-    {"name": "zlib-ng", "recipe": "recipes/core/zlib-ng/recipe.kdl", "commands": []},
-    {"name": "mimalloc", "recipe": "recipes/core/mimalloc/recipe.kdl", "commands": []},
+    {"name": "curl", "recipe": "recipes/core/curl/recipe.kdl", "commands": ["curl"]},
     {"name": "dinit", "recipe": "recipes/core/dinit/recipe.kdl", "commands": ["dinit", "dinitctl"]},
     {"name": "e2fsprogs", "recipe": "recipes/core/e2fsprogs/recipe.kdl", "commands": ["e2fsck", "tune2fs", "debugfs"]},
     {"name": "linux", "recipe": "recipes/core/linux/recipe.kdl", "commands": []},
     {"name": "limine", "recipe": "recipes/core/limine/recipe.kdl", "commands": []},
     {"name": "mdevd", "recipe": "recipes/core/mdevd/recipe.kdl", "commands": ["mdevd"]},
-    {"name": "parted", "recipe": "recipes/core/parted/recipe.kdl", "commands": ["parted"]}
+    {"name": "mere-boot", "recipe": "recipes/core/mere-boot/recipe.kdl", "commands": ["init", "login", "getty"]},
+    {"name": "parted", "recipe": "recipes/core/parted/recipe.kdl", "commands": ["parted"]},
+    {"name": "shadow", "recipe": "recipes/core/shadow/recipe.kdl", "commands": ["login"]}
   ]
 }

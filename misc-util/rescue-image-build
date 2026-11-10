@@ -36,9 +36,7 @@ PROFILE_TOOL_CANDIDATES = {
     "debugfs": ("sbin/debugfs",),
 }
 REQUIRED_SERVICE_FILES = (
-    "mount-dev", "mount-proc", "mount-sys", "mount-devpts", "mount-shm",
-    "mount-runtime", "mount-tmp", "mount-var-log", "mount-var-tmp", "mdevd",
-    "mdevd-coldplug", "network-dhcp", "rescue-shell",
+    "network-dhcp", "rescue-ready",
 )
 COMMAND_LOG: list[list[str]] = []
 RESOLVED_TOOLS: dict[str, str] = {}
@@ -113,6 +111,11 @@ def check_inputs(inputs: dict[str, Any]) -> None:
             die(f"invalid fixed GUID in image inputs: {key}")
     if inputs["toolchain"]["source_date_epoch"] <= 0:
         die("SOURCE_DATE_EPOCH must be positive")
+    boot = inputs.get("boot", {})
+    if boot.get("root_mode") not in ("direct", "overlay"):
+        die("boot.root_mode must be direct or overlay")
+    if boot.get("overlay_storage") != "tmpfs":
+        die("boot.overlay_storage must be tmpfs")
 
 
 def executable(name: str) -> str:
@@ -224,7 +227,7 @@ def stage_rescue_root(source: Path, destination: Path, epoch: int) -> None:
 
 def write_limine_config(path: Path, root_guid: str) -> None:
     path.write_text(
-        """timeout: 0\ngraphics: no\nserial: yes\ninterface_branding: MERE-LINUX-UEFI-LIMINE\n/Mere Linux Rescue\n    protocol: linux\n    path: boot:///EFI/BOOT/vmlinuz\n    cmdline: root=PARTUUID={root_guid} rootfstype=ext4 rootflags=ro,noload rootwait init=/sbin/dinit console=tty0 console=ttyS0,115200n8 loglevel=4\n""".format(root_guid=root_guid),
+        """timeout: 0\ngraphics: no\nserial: yes\ninterface_branding: MERE-LINUX-UEFI-LIMINE\n/Mere Linux Rescue\n    protocol: linux\n    path: boot():/EFI/BOOT/vmlinuz\n    cmdline: root=PARTUUID={root_guid} rootfstype=ext4 rootflags=ro,noload rootwait init=/sbin/init console=tty0 console=ttyS0,115200n8 loglevel=4\n""".format(root_guid=root_guid),
         encoding="ascii",
     )
 
@@ -470,8 +473,8 @@ def build_one(output: Path, root_tree: Path, kernel: Path, limine: Path,
     start = image["esp_start_lba"] * image["sector_size"]
     esp_size = image["esp_size_bytes"]
     root_start = start + esp_size
+    root_size = image["size_bytes"] - (34 * image["sector_size"]) - root_start
     format_esp(output, start, esp_size, ids, inputs)
-    root_size = image["size_bytes"] - root_start
     with tempfile.TemporaryDirectory(prefix="mere-rescue-root-image-") as directory:
         filesystem = Path(directory) / "root.ext4"
         with filesystem.open("wb") as stream:
@@ -559,99 +562,6 @@ def invoke_tool_profile(args: argparse.Namespace, inputs: dict[str, Any]) -> lis
         if attributes.get("mereVersion") != inputs["tool_profile"]["mere_version"]:
             die("tool profile reported an unexpected Mere version")
     return observations
-
-
-def invoke_mere_dev(args: argparse.Namespace, inputs: dict[str, Any]) -> None:
-    if not args.mere_dev_behavior:
-        die("--build-packages requires a pre-created pinned @jeremy/mere-dev behavior")
-    for package in inputs["packages"]:
-        if package["name"] == "linux":
-            continue
-        command(["swamp", "behavior", "run", args.mere_dev_behavior, "build",
-                 *swamp_repo_args(args), "--input", f"recipe={ROOT / package['recipe']}"])
-
-
-def package_build_output(dev_root: Path, name: str) -> tuple[Path, Path, str]:
-    # Split packages (for example libcurl and ca-certs) live under the
-    # workspace created for their source recipe, not under a same-named build
-    # directory.
-    candidates = sorted(dev_root.glob(f"mere/dev/build/*/pkg/{name}"))
-    if not candidates:
-        die(f"Mere dev build produced no package tree for {name} under {dev_root}")
-    package_root = candidates[-1]
-    workspace = package_root.parent.parent
-    archives = sorted((workspace / "pkg").glob(f"{name}-*.pkg.tar.zst"))
-    if not archives:
-        die(f"Mere dev build produced no package archive for {name}")
-    report = workspace / "build-report.kdl"
-    version_match = re.search(r'\n  version "([^"]+)"', report.read_text(encoding="utf-8")) if report.is_file() else None
-    release_match = re.search(r"\n  release (\d+)", report.read_text(encoding="utf-8")) if report.is_file() else None
-    version = version_match.group(1) if version_match else "unknown"
-    if release_match:
-        version += f"-{release_match.group(1)}"
-    return package_root, archives[-1], version
-
-
-def extract_kernel_archive(archive: Path, destination: Path, inputs: dict[str, Any]) -> None:
-    destination.mkdir(parents=True, exist_ok=True)
-    result = subprocess.run(
-        ["zstd", "-dc", str(archive)], stdout=subprocess.PIPE, check=False,
-    )
-    if result.returncode:
-        die(f"cannot decompress pinned kernel package: {archive}")
-    extractor = subprocess.run(["tar", "-x", "-f", "-", "-C", str(destination)], input=result.stdout, check=False)
-    if extractor.returncode:
-        die(f"cannot extract pinned kernel package: {archive}")
-    check_tree(destination, image=True)
-
-
-def find_existing_kernel(
-    inputs: dict[str, Any],
-    destination: Path,
-    dev_root: Path,
-    linux_package: Path | None = None,
-) -> tuple[Path, Path, str]:
-    version = inputs["toolchain"]["linux_version"]
-    if linux_package is not None:
-        if not linux_package.is_file():
-            die(f"pinned Linux package is unavailable: {linux_package}")
-        if not linux_package.name.startswith(f"linux-{version}-"):
-            die(f"pinned Linux package does not match Linux {version}: {linux_package.name}")
-        candidate = destination / "kernel-candidate"
-        shutil.rmtree(candidate, ignore_errors=True)
-        extract_kernel_archive(linux_package, candidate, inputs)
-        return candidate, linux_package, version
-    built_roots = sorted((dev_root / "mere/dev/build").glob(f"linux-{version}-*/pkg/linux"))
-    if built_roots:
-        package_root = built_roots[-1]
-        workspace = package_root.parent.parent
-        archives = sorted((workspace / "pkg").glob(f"linux-{version}-*.pkg.tar.zst"))
-        if not archives:
-            die(f"Mere dev Linux build produced no package archive under {workspace}")
-        archive = archives[-1]
-        candidate = destination / "kernel-candidate"
-        shutil.rmtree(candidate, ignore_errors=True)
-        extract_kernel_archive(archive, candidate, inputs)
-        return candidate, archive, version
-    candidates = sorted(
-        (dev_root / "mere/cache/packages").glob(
-            f"linux-{version}-*-x86_64-*.pkg.tar.zst"
-        )
-    )
-    if not candidates:
-        die(
-            f"pinned Linux {version} package is unavailable under "
-            f"{dev_root / 'mere/cache/packages'}"
-        )
-    for archive in candidates:
-        candidate = destination / "kernel-candidate"
-        shutil.rmtree(candidate, ignore_errors=True)
-        try:
-            extract_kernel_archive(archive, candidate, inputs)
-            return candidate, archive, version
-        except SystemExit:
-            continue
-    die(f"available Linux {version} packages lack the required rescue kernel configuration")
 
 
 def merge_tree(source: Path, destination: Path) -> None:
@@ -941,18 +851,20 @@ def prepare_ovmf(args: argparse.Namespace, inputs: dict[str, Any], generated: Pa
     epoch = inputs["toolchain"]["source_date_epoch"]
     os.utime(code_output, (epoch, epoch))
     os.utime(nvram_output, (epoch, epoch))
-    ovmf_profile_records = []
+    ovmf_profile_records = parse_profile_packages(profile_root / "profile.kdl")
+    resolved_ovmf = {package["name"]: package for package in ovmf_profile_records}
     for package in spec["tool_profile_packages"]:
         name = package["name"]
-        candidates = sorted((dev_root / "mere/cache/packages").glob(f"{name}-{package['version']}-*.pkg.tar.zst"))
-        if len(candidates) != 1:
-            die(f"OVMF tool profile package archive is unavailable or ambiguous: {name} {package['version']}")
-        archive_record = candidates[0]
-        actual_archive_blake3 = file_blake3(archive_record, mere_binary, dev_root)
-        if actual_archive_blake3 != package["archive_blake3"]:
-            die(f"OVMF tool profile archive hash mismatch for {name}: got {actual_archive_blake3}, want {package['archive_blake3']}")
-        ovmf_profile_records.append({"name": name, "version": package["version"],
-                                     "archive_blake3": actual_archive_blake3})
+        resolved = resolved_ovmf.get(name)
+        if resolved is None:
+            die(f"OVMF tool profile is missing package: {name}")
+        if resolved["version"] != package["version"]:
+            die(f"OVMF tool profile version mismatch for {name}: got {resolved['version']}, want {package['version']}")
+    ovmf_profile_records = [
+        {"name": package["name"], "version": resolved_ovmf[package["name"]]["version"],
+         "content_blake3": resolved_ovmf[package["name"]]["content_blake3"]}
+        for package in spec["tool_profile_packages"]
+    ]
     return {
         "source": spec["source_url"], "build": " ".join(build_args),
         "source_release": spec["release"], "source_commit": spec["commit"],
@@ -971,65 +883,178 @@ def prepare_ovmf(args: argparse.Namespace, inputs: dict[str, Any], generated: Pa
     }
 
 
-def tool_profile_archive(dev_root: Path, name: str) -> Path:
-    archives = sorted((dev_root / "mere/cache/packages").glob(f"{name}-*.pkg.tar.zst"))
-    if archives:
-        return archives[-1]
-    output_archives = sorted(
-        path for path in Path("/mere/dev/outputs").glob(f"{name}-*/{name}-*.pkg.tar.zst")
-        if "-dev-" not in path.name
+def write_rolling_profile(path: Path, inputs: dict[str, Any]) -> list[str]:
+    """Write an unpinned profile containing the image's requested packages."""
+    requested = [package["name"] for package in inputs["packages"]]
+    lines = [
+        "profile {",
+        "    schema-version 2",
+        "    profile-name \"mere-rescue\"",
+    ]
+    lines.extend(f'    package "{name}"' for name in requested)
+    lines.append("}")
+    path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return requested
+
+
+def configure_dinit_root(mere_root: Path) -> None:
+    """Select dinit for the isolated system profile used by image assembly."""
+    config = mere_root / "mere" / "config.kdl"
+    if not config.is_file():
+        die(f"Mere root has no configuration: {config}")
+    text = config.read_text(encoding="utf-8")
+    if 'init-provider "dinit"' not in text:
+        config.write_text(
+            text.rstrip() + '\n\nsettings {\n    init-provider "dinit"\n}\n',
+            encoding="utf-8",
+        )
+
+
+def apply_rolling_profile(
+    *,
+    mere_binary: Path,
+    mere_root: Path,
+    profile_spec: Path,
+    generated: Path,
+) -> tuple[Path, list[dict[str, str]]]:
+    """Refresh and realize the latest requested packages as a dinit system profile."""
+    configure_dinit_root(mere_root)
+    command([str(mere_binary), "--root", str(mere_root), "sync"])
+    command([
+        str(mere_binary), "--root", str(mere_root), "profile", "apply",
+        str(profile_spec),
+    ])
+    profile_root = (mere_root / "mere" / "profiles" / "system" / "current").resolve()
+    if not profile_root.is_dir():
+        die(f"Mere did not activate rescue system profile root: {profile_root}")
+    realized = profile_root / "profile.kdl"
+    if not realized.is_file():
+        die(f"Mere rescue system profile has no realized profile.kdl: {realized}")
+    return profile_root, parse_profile_packages(realized)
+
+
+def parse_profile_packages(path: Path) -> list[dict[str, str]]:
+    """Read resolved package versions and content hashes from realized KDL."""
+    pattern = re.compile(
+        r'^\s*package "([^"]+)" version="([^"]+)" release=(\d+) '
+        r'content-hash="([0-9a-f]{64})"'
     )
-    if output_archives:
-        return output_archives[-1]
-    die(f"tool profile package archive is unavailable: {name}")
+    records: list[dict[str, str]] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        match = pattern.match(line)
+        if match:
+            records.append({
+                "name": match.group(1),
+                "version": f"{match.group(2)}-{match.group(3)}",
+                "content_blake3": match.group(4),
+            })
+    if not records:
+        die(f"Mere rescue profile contains no resolved package records: {path}")
+    return records
+
+
+def materialize_profile_tree(source: Path, destination: Path, store_root: Path) -> None:
+    """Copy a Mere profile while resolving its absolute store links."""
+    destination.mkdir(parents=True, exist_ok=True)
+    for item in source.iterdir():
+        if item.name in {"profile.kdl", "realization.v1"}:
+            continue
+        target = destination / item.name
+        if item.is_symlink():
+            link = os.readlink(item)
+            if not os.path.isabs(link):
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.symlink_to(link)
+                continue
+            if not link.startswith("/mere/store/"):
+                die(f"rescue profile contains an unsafe absolute symlink: {item} -> {link}")
+            resolved = (store_root / link.removeprefix("/mere/store/")).resolve(strict=True)
+            if not resolved.is_relative_to(store_root.resolve()):
+                die(f"rescue profile store link escapes the Mere store: {item} -> {link}")
+            if resolved.is_dir():
+                materialize_profile_tree(resolved, target, store_root)
+            else:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copy2(resolved, target)
+        elif item.is_dir():
+            materialize_profile_tree(item, target, store_root)
+        elif item.is_file():
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copy2(item, target)
+        else:
+            die(f"rescue profile contains unsupported filesystem entry: {item}")
 
 
 def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -> None:
-    if not args.mere_dev_behavior:
-        die("generated staging requires --mere-dev-behavior")
+    if not args.pull_packages:
+        die("generated staging requires --pull-packages")
     dev_root = args.mere_dev_root or (ROOT / ".swamp" / "mere-dev" / "root")
     mere_binary = args.mere_binary or (ROOT / ".swamp" / "mere-dev" / "bin" / f"mere-{inputs['tool_profile']['mere_version']}-linux-x86_64")
     if not mere_binary.is_file():
         die(f"pinned Mere {inputs['tool_profile']['mere_version']} binary is unavailable: {mere_binary}")
-    for package in inputs["packages"]:
-        if package["name"] != "linux":
-            # The isolated worker consumes prebuilt package outputs. Package
-            # compilation belongs in a separately approved Mere build, never
-            # in rescue-image preparation.
-            package_build_output(dev_root, package["name"])
     generated = args.output_dir / "generated-inputs"
     shutil.rmtree(generated, ignore_errors=True)
     generated.mkdir(parents=True)
-    source_root = generated / "rescue-source"
-    source_root.mkdir()
-    package_records: list[dict[str, str]] = []
-    package_roots: dict[str, Path] = {}
-    providers: dict[str, str] = {}
-    for package in inputs["packages"]:
-        name = package["name"]
-        if name == "linux":
-            continue
-        package_root, archive, version = package_build_output(dev_root, name)
-        package_roots[name] = package_root
-        package_provider_mapping(package_root, name, providers)
-        merge_tree(package_root, source_root)
-        package_records.append({"name": name, "version": version, "archive_blake3": file_blake3(archive, mere_binary, dev_root)})
-    kernel_dir, kernel_archive, kernel_version = find_existing_kernel(
-        inputs,
-        generated,
-        dev_root,
-        args.linux_package,
+    profile_spec = generated / "rescue-profile.kdl"
+    requested_packages = write_rolling_profile(profile_spec, inputs)
+    profile_root, package_records = apply_rolling_profile(
+        mere_binary=mere_binary,
+        mere_root=dev_root,
+        profile_spec=profile_spec,
+        generated=generated,
     )
-    merge_tree(kernel_dir, source_root)
-    package_provider_mapping(kernel_dir, "linux", providers)
-    package_records.append({"name": "linux", "version": kernel_version, "archive_blake3": file_blake3(kernel_archive, mere_binary, dev_root)})
+    resolved_names = {package["name"] for package in package_records}
+    missing_requested = sorted(set(requested_packages) - resolved_names)
+    if missing_requested:
+        die("Mere rescue profile omitted requested packages: " + ", ".join(missing_requested))
+    source_root = generated / "rescue-source"
+    materialize_profile_tree(profile_root, source_root, dev_root / "mere" / "store")
+    providers: dict[str, str] = {}
+    package_provider_mapping(source_root, "rolling-profile", providers)
+    providers["/boot/vmlinux"] = "linux"
+    providers["/boot/config"] = "linux"
     source_root.joinpath("etc").mkdir(parents=True, exist_ok=True)
     source_root.joinpath("usr/bin").mkdir(parents=True, exist_ok=True)
     shutil.copy2(mere_binary, source_root / "usr/bin/mere")
     (source_root / "usr/bin/mere").chmod(0o755)
     source_root.joinpath("etc/hostname").write_text("mere-rescue\n", encoding="ascii")
+    etc_root = dev_root / "etc"
+    if etc_root.is_dir():
+        materialize_profile_tree(etc_root, source_root / "etc", dev_root / "mere" / "store")
     materialize_etc_defaults(source_root)
+    source_root.joinpath("etc/passwd").write_text(
+        "root:x:0:0:root:/root:/bin/sh\n", encoding="ascii",
+    )
+    source_root.joinpath("etc/group").write_text(
+        "root:x:0:\n"
+        "kvm:x:10:\n"
+        "tty:x:5:\n"
+        "uucp:x:14:\n"
+        "disk:x:6:\n"
+        "cdrom:x:11:\n"
+        "floppy:x:19:\n"
+        "video:x:44:\n"
+        "audio:x:29:\n"
+        "input:x:97:\n",
+        encoding="ascii",
+    )
+    shadow = source_root.joinpath("etc/shadow")
+    shadow.write_text("root:!:19000:0:99999:7:::\n", encoding="ascii")
+    shadow.chmod(0o600)
+    for directory in ("dev", "proc", "sys", "run", "tmp", "root", "home", "mnt"):
+        source_root.joinpath(directory).mkdir(parents=True, exist_ok=True)
+    boot = inputs["boot"]
+    source_root.joinpath("etc/mere-boot.conf").write_text(
+        f"root-mode = {boot['root_mode']}\noverlay-storage = {boot['overlay_storage']}\n",
+        encoding="ascii",
+    )
+    check_tree(source_root, image=True)
     required_files = (
+        "sbin/init",
+        "usr/share/dinit.d/sysinit",
+        "usr/share/dinit.d/mount-rw",
+        "etc/dinit.d/boot",
+        "etc/mere-boot.conf",
         "usr/bin/mere",
         "usr/bin/curl",
         "lib/ld-musl-x86_64.so.1",
@@ -1046,10 +1071,17 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     missing_files = [path for path in required_files if not (source_root / path).is_file()]
     if missing_files:
         die("rescue root is missing required runtime files: " + ", ".join(missing_files))
+    boot_services = source_root / "etc/dinit.d/boot.d"
+    boot_services.mkdir(parents=True, exist_ok=True)
+    for service in ("ttyS0", "network-dhcp", "rescue-ready"):
+        link = boot_services / service
+        if link.exists() or link.is_symlink():
+            link.unlink()
+        link.symlink_to(f"../{service}" if service != "ttyS0" else "/usr/share/dinit.d/ttyS0")
     source_root.joinpath("etc/fstab").write_text("# generated rescue fixture\n", encoding="ascii")
     staged_root = generated / "rescue-root"
     stage_rescue_root(source_root, staged_root, inputs["toolchain"]["source_date_epoch"])
-    limine = package_roots["limine"] / "usr/share/limine/BOOTX64.EFI"
+    limine = source_root / "usr/share/limine/BOOTX64.EFI"
     if not limine.is_file():
         die("Limine package did not provide usr/share/limine/BOOTX64.EFI")
     rescue_limine = generated / "limine.efi"
@@ -1071,18 +1103,23 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     if not repository_files:
         die("Mere repository snapshot is unavailable after package preparation")
     repository_snapshot = file_blake3(repository_files[-1], mere_binary, dev_root)
+    tool_profile_records = parse_profile_packages(args.tool_profile_root / "profile.kdl")
+    resolved_tool_profile = {package["name"]: package for package in tool_profile_records}
     tool_records: list[dict[str, str]] = []
-    for name in inputs["tool_profile"]["packages"]:
-        archive = tool_profile_archive(dev_root, name)
-        match = re.match(rf"{re.escape(name)}-(.+)-x86_64-[0-9a-f]+\.pkg\.tar\.zst$", archive.name)
-        if not match:
-            die(f"cannot parse tool profile archive version: {archive.name}")
-        tool_records.append({"name": name, "version": match.group(1),
-                             "archive_blake3": file_blake3(archive, mere_binary, dev_root)})
+    for package in inputs["tool_profile"]["packages"]:
+        resolved = resolved_tool_profile.get(package)
+        if resolved is None:
+            die(f"image-tool profile is missing package: {package}")
+        tool_records.append({
+            "name": package,
+            "version": resolved["version"],
+            "content_blake3": resolved["content_blake3"],
+        })
     package_manifest = {
         "mere": {"version": inputs["tool_profile"]["mere_version"], "binary_blake3": file_blake3(mere_binary, mere_binary, dev_root),
                  "binary_sha256": inputs["tool_profile"]["mere_binary_sha256"], "repository_snapshot": repository_snapshot},
         "packages": sorted(package_records, key=lambda package: package["name"]),
+        "requested_packages": sorted(requested_packages),
         "providers": dict(sorted(providers.items())),
         "tool_profile_packages": sorted(tool_records, key=lambda package: package["name"]),
     }
@@ -1102,14 +1139,12 @@ def parse() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--check", action="store_true")
     parser.add_argument("--build", action="store_true")
-    parser.add_argument("--build-packages", action="store_true")
+    parser.add_argument("--pull-packages", action="store_true")
     parser.add_argument("--prepare-generated-inputs", action="store_true")
-    parser.add_argument("--mere-dev-behavior")
     parser.add_argument("--mere-dev-root", type=Path,
                         default=None)
     parser.add_argument("--mere-binary", type=Path)
     parser.add_argument("--mere-version")
-    parser.add_argument("--linux-package", type=Path)
     parser.add_argument("--ovmf-code", type=Path)
     parser.add_argument("--ovmf-source-archive", type=Path)
     parser.add_argument("--acpica-source-archive", type=Path)
@@ -1160,16 +1195,14 @@ def main() -> int:
         print(json.dumps({"tool_profile": inputs["tool_profile"], "observations": observations, "smoke": "validated"}, sort_keys=True))
         return 0
     if args.prepare_generated_inputs:
-        if not args.build_packages:
-            die("--prepare-generated-inputs requires --build-packages")
+        if not args.pull_packages:
+            die("--prepare-generated-inputs requires --pull-packages")
         if args.tool_profile_root is None:
             die("--prepare-generated-inputs requires --tool-profile-root")
-        if args.linux_package is None:
-            die("--prepare-generated-inputs requires --linux-package")
         check_environment(
             profile_root=args.tool_profile_root,
             inputs=inputs,
-            include_swamp=True,
+            include_swamp=False,
         )
         prepare_generated_inputs(args, inputs)
         print(json.dumps({
@@ -1185,7 +1218,7 @@ def main() -> int:
     if args.tool_profile_root is None:
         die("--build requires --tool-profile-root for the validated Mere image-tool profile")
     check_environment(profile_root=args.tool_profile_root, inputs=inputs,
-                      include_swamp=args.build_packages or args.tool_profile_smoke)
+                      include_swamp=args.tool_profile_smoke)
     if args.tool_profile_smoke:
         invoke_tool_profile(args, inputs)
     image_tool_versions = tool_versions()
@@ -1222,19 +1255,19 @@ def main() -> int:
         die("firmware manifest needs source, build, code_blake3, and nvram_template")
     expected = {p["name"] for p in inputs["packages"]}
     actual = {p.get("name") for p in package_manifest["packages"]}
-    if expected != actual:
-        die("package manifest names do not match pinned image package set")
+    if not expected.issubset(actual):
+        die("package manifest does not contain all requested rolling-profile packages")
     for package in package_manifest["packages"]:
-        digest_value = package.get("archive_blake3", "")
+        digest_value = package.get("content_blake3", "")
         if not package.get("version") or len(digest_value) != 64 or any(c not in "0123456789abcdef" for c in digest_value.lower()):
-            die("each image package needs version and a 64-character archive_blake3")
+            die("each resolved profile package needs version and a 64-character content_blake3")
     profile_packages = package_manifest.get("tool_profile_packages", [])
     if {package.get("name") for package in profile_packages} != set(inputs["tool_profile"]["packages"]):
         die("package manifest tool_profile_packages do not match pinned tool profile")
     for package in profile_packages:
-        digest_value = package.get("archive_blake3", "")
+        digest_value = package.get("content_blake3", "")
         if not package.get("version") or len(digest_value) != 64 or any(c not in "0123456789abcdef" for c in digest_value.lower()):
-            die("each tool profile package needs version and a 64-character archive_blake3")
+            die("each tool profile package needs version and a 64-character content_blake3")
     check_tree(args.root_tree, image=True)
     if args.include_fixture:
         check_tree(args.fixture_root_tree, image=False)

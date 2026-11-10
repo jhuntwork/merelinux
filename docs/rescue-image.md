@@ -10,9 +10,14 @@ The assembler is deliberately fail-closed. It requires the fixed inputs in
 image tools, and two clean-build comparisons. A single build cannot be reported
 as reproducible.
 
-The selected Mere version is `0.23.0` throughout the tool profile and build
-inputs. The pinned x86_64 Mere binary SHA-256 is
+The selected Mere version is `0.23.0` throughout the image-tool profile and
+binary input. The pinned x86_64 Mere binary SHA-256 is
 `3250c04b7f288056f5db8860a644a17895a7dc6398ddc961e1316bfe928ea631`.
+The rescue package set is rolling: the profile names packages without versions,
+and `mere profile apply` refreshes the configured repository before resolving
+the latest x86_64 artifacts. The realized profile records the versions and
+content hashes used for that build, but those values are observations rather
+than package-selection pins.
 The same pinned binary is copied into the final rescue root at `/usr/bin/mere`.
 The rescue root also contains the `curl` command, its shared runtime
 libraries, and the pinned CA bundle. The `network-dhcp` dinit service scans
@@ -46,31 +51,36 @@ swamp behavior create @jeremy/mere-shell mere-rescue-tools-023-hoststore \
   --global-arg useHostStore=true
 ```
 
-Build the non-kernel recipes through `@jeremy/mere-dev`, which invokes
-`mere dev build` directly in its isolated root. The top-level command uses the
-existing pinned Linux package instead of rebuilding Linux:
+Build the non-kernel tool-profile recipes only when provisioning the separate
+image-tool profile. The rescue package set is not compiled here; it is resolved
+from the configured rolling Mere repository by `profile apply`:
 
 ```sh
-for recipe in \
-  recipes/core/busybox/recipe.kdl \
-  recipes/core/curl/recipe.kdl \
-  recipes/core/libpsl/recipe.kdl \
-  recipes/core/mimalloc/recipe.kdl \
-  recipes/core/musl/recipe.kdl \
-  recipes/core/openssl/recipe.kdl \
-  recipes/core/zlib-ng/recipe.kdl \
-  recipes/core/dinit/recipe.kdl \
-  recipes/core/e2fsprogs/recipe.kdl \
-  recipes/core/limine/recipe.kdl \
-  recipes/core/mdevd/recipe.kdl \
-  recipes/core/parted/recipe.kdl
-do
-  swamp behavior run mere-rescue-dev-023 build \
-    --repo-dir "$SWAMP_REPO" --input "recipe=$PWD/$recipe"
-done
+cat > rescue-profile.kdl <<'EOF'
+profile {
+  package "busybox"
+  package "curl"
+  package "dinit"
+  package "e2fsprogs"
+  package "linux"
+  package "limine"
+  package "mdevd"
+  package "mere-boot"
+  package "parted"
+  package "shadow"
+}
+EOF
+mere --root "$MERE_ROOT" sync
+mere --root "$MERE_ROOT" profile apply rescue-profile.kdl
 ```
 
-### Isolated image-tool profile
+The isolated Mere root is configured with `init-provider "dinit"` and the
+profile is applied to its system profile. System-profile activation generates
+Mere's package-owned dinit service files under `/usr/share/dinit.d`; applying a
+named profile would omit that service graph. The assembler materializes the
+active system generation, applies `etc-defaults` to `/etc`, and adds the
+rescue-specific DHCP and readiness services under `/etc/dinit.d`. The normal
+`mere-boot` serial getty remains the console entry point.
 
 The pinned tool profile uses `busybox`, `parted`, and `e2fsprogs`. Busybox
 supplies the `mkfs.vfat` and `losetup` applets. E2fsprogs supplies `mkfs.ext4`,
@@ -139,18 +149,16 @@ resolved profile executable paths in `manifest.json`. `mount`, `umount`,
 `mere`, and `tar` remain deliberate host-side dependencies; they are not
 looked up in the Mere profile.
 
-The top-level `--build --build-packages` path performs package staging before
-assembly. It consumes prebuilt non-kernel package outputs through
-`@jeremy/mere-dev`, including the split runtime outputs from curl, OpenSSL,
-libpsl, musl, zlib-ng, and mimalloc. Split outputs are located under their
-source recipe's build workspace. Mere's `etc-defaults/` package trees are
-materialized into `/etc` for this standalone filesystem because no Mere
-activation runs inside the rescue image. It uses the pinned Linux `6.18.62-1`
-package after auditing its shipped `boot/config`, stages the rescue root, and
-writes the package manifest. `--compare` additionally stages the
-installed-system fixture, creates the fixture ESP, and performs the slower
-internal clean-build and dirty-journal audit. The path does not compile Linux
-or other packages in the rescue worker.
+The top-level `--build --pull-packages` path performs a rolling profile
+resolution before assembly. It refreshes repository metadata, applies the
+unversioned package names from `rescue-image.inputs.json`, and materializes the
+resolved profile into the rescue root. The package manifest records every
+resolved dependency's version and content hash as provenance, plus the
+requested package names; it does not constrain the next run to those values.
+Mere's `etc-defaults/` package trees are materialized into `/etc` because no
+Mere activation runs inside the rescue image. The separate image-tool profile
+remains pinned because it supplies the host-side formatters and OVMF build
+inputs. The path does not invoke `mere dev build`.
 The kernel audit follows the real 6.18.62 configuration symbols; x86_64 also
 enables the KVM core and Intel/AMD backends as modules.
 
@@ -178,24 +186,37 @@ The assembler installs the dinit service profile from
 The OVMF build uses a dedicated Mere 0.23 profile containing `llvm`, `nasm`,
 `flex`, `bison`, `make`, `m4`, and `util-linux-libs-dev`. Its recorded root is
 `/mere/profiles/mere-rescue-ovmf-023/root`; the active package versions and
-archive hashes are written into the firmware manifest. The profile supplies
+content hashes are written into the firmware manifest. The profile supplies
 Clang/Clang++, NASM, Make, Flex, Bison, m4, Python, and the UUID development
 headers. ACPICA iasl is built from
 the separately pinned ACPICA source archive above.
 
 ```sh
-misc-util/rescue-image-build --build \
-  --compare \
-  --build-packages \
-  --mere-dev-behavior mere-rescue-dev-023 \
-  --swamp-repo-dir "$SWAMP_REPO" \
+misc-util/rescue-image-build --prepare-generated-inputs --pull-packages \
+  --mere-dev-root "$MERE_ROOT" \
+  --mere-binary "$MERE_BINARY" \
+  --mere-version 0.23.0 \
   --tool-profile-root "$TOOL_PROFILE_ROOT" \
   --ovmf-tool-profile-root /mere/profiles/mere-rescue-ovmf-023/root \
   --output-dir out/rescue-image
+misc-util/rescue-image-build --build \
+  --mere-dev-root "$MERE_ROOT" \
+  --mere-binary "$MERE_BINARY" \
+  --mere-version 0.23.0 \
+  --tool-profile-root "$TOOL_PROFILE_ROOT" \
+  --root-tree out/rescue-image/generated-inputs/rescue-root \
+  --kernel out/rescue-image/generated-inputs/rescue-root/boot/vmlinux \
+  --limine-efi out/rescue-image/generated-inputs/limine.efi \
+  --package-manifest out/rescue-image/generated-inputs/package-manifest.json \
+  --firmware-manifest out/rescue-image/generated-inputs/firmware-manifest.json \
+  --output-dir out/rescue-image
 ```
 
-A representative package manifest has this shape. The package list must include
-every image package and every tool-profile package:
+The preparation command resolves the eight requested package names from the
+configured rolling repository. Mere records all resolved dependencies and
+content hashes in the package manifest as build provenance.
+
+A representative package manifest has this shape:
 
 ```json
 {
@@ -205,16 +226,17 @@ every image package and every tool-profile package:
     "binary_sha256": "3250c04b7f288056f5db8860a644a17895a7dc6398ddc961e1316bfe928ea631",
     "repository_snapshot": "<snapshot>"
   },
+  "requested_packages": ["busybox", "curl", "dinit", "e2fsprogs", "linux", "limine", "mdevd", "parted"],
   "packages": [
-    {"name": "dinit", "version": "<dinit-package-version>", "archive_blake3": "<image-package-hash>"}
+    {"name": "curl", "version": "<resolved-version>", "content_blake3": "<content-hash>"}
   ],
   "providers": {
-    "/bin/busybox": "busybox",
+    "/bin/curl": "rolling-profile",
     "/boot/vmlinux": "linux",
     "/boot/config": "linux"
   },
   "tool_profile_packages": [
-    {"name": "busybox", "version": "1.37.0-10", "archive_blake3": "<tool-package-hash>"}
+    {"name": "busybox", "version": "<resolved-version>", "content_blake3": "<content-hash>"}
   ]
 }
 ```
@@ -232,16 +254,16 @@ The output directory contains:
 
 The rescue ESP layout is exactly `/EFI/BOOT/BOOTX64.EFI`,
 `/EFI/BOOT/limine.conf`, and `/EFI/BOOT/vmlinuz`. The generated config uses the
-fixed root PARTUUID, `rootwait`, `rootflags=ro,noload`, `init=/sbin/dinit`, and
+fixed root PARTUUID, `rootwait`, `rootflags=ro,noload`, `init=/sbin/init`, and
 serial Limine branding. No BIOS, hybrid, direct-kernel, squashfs, or initramfs
 artifact is assembled.
 
-The rescue profile mounts only virtual filesystems, starts mdevd before
-coldplug, starts `network-dhcp` after sysfs is available, and prints
-`MERE-LINUX-RESCUE-READY`. `network-dhcp` skips `lo`, runs BusyBox `udhcpc` on
-the first non-loopback interface, and uses the DHCP script to install routes
-and `/etc/resolv.conf`. It has no root remount or attached-disk discovery
-service.
+The rescue profile uses the packaged `mere-boot` dinit graph, starts mdevd
+before coldplug, starts `network-dhcp` after sysfs is available, and prints
+`MERE-LINUX-RESCUE-READY` on the serial console. `network-dhcp` skips `lo`, runs
+BusyBox `udhcpc` on the first non-loopback interface, and uses the DHCP script
+to install routes and `/etc/resolv.conf`. The image has no attached-disk
+discovery service.
 
 The assembler does not run QEMU or inspect OVMF. #649 consumes the pinned OVMF
 code and fresh writable NVRAM provenance recorded alongside this manifest. #650

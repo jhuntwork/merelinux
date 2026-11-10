@@ -131,6 +131,12 @@ requires successful QEMU exit, the boot pass marker, dinit's kernel shutdown
 message, and kernel power-off message. This remains developer tooling rather
 than an end-user installer or production boot configuration.
 
+Set `MERE_BOOT_ROOT_MODE=overlay` to run the same packaged boot cases with
+`mere-boot`'s ephemeral tmpfs upper layer. The default is `direct`. The overlay
+run keeps the kernel root read-only and verifies the existing dinit boot graph,
+console, recovery, reboot, and shutdown behavior without changing the package
+set or service ordering.
+
 ## Offline Mere shell/build smoke test
 
 ```sh
