@@ -7,6 +7,21 @@ mount_once() {
     shift
     mountpoint -q "$target" || mount "$@" "$target"
 }
+root_mode=direct
+if [ -r /etc/mere-boot.conf ]; then
+    while IFS='=' read -r key value; do
+        key=$(printf '%s' "$key" | tr -d '[:space:]')
+        value=$(printf '%s' "$value" | tr -d '[:space:]')
+        case "$key" in
+            ''|'#'*) continue ;;
+            root-mode) root_mode=$value ;;
+        esac
+    done < /etc/mere-boot.conf
+fi
+case "$root_mode" in
+    direct|overlay) ;;
+    *) printf 'mere-boot: unsupported root mode: %s\n' "$root_mode" >&2; exit 2 ;;
+esac
 case ${1:-} in
     proc)
         mount_once /proc -t proc -o nosuid,nodev,noexec proc
@@ -18,7 +33,9 @@ case ${1:-} in
         mount_once /dev -t devtmpfs -o mode=0755,nosuid devtmpfs
         ;;
     rw)
-        mount -o remount,rw /
+        if [ "$root_mode" = direct ]; then
+            mount -o remount,rw /
+        fi
         ;;
     runtime)
         mkdir -p /run /dev/pts /dev/shm /tmp

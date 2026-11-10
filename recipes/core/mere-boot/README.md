@@ -35,10 +35,26 @@ absent; existing administrator files remain unchanged. Review `mere etc diff`
 and merge relevant defaults on an existing installation. Do not replace the
 whole machine's `/etc` merely to adopt this package.
 
+The default `/etc/mere-boot.conf` selects `root-mode = direct` and
+`overlay-storage = tmpfs`. In `direct` mode, `mount-rw` remounts the root
+filesystem read-write as before. Set `root-mode = overlay` to keep the kernel's
+root filesystem as the read-only lower layer and give the booted system an
+in-memory writable upper layer. The overlay is established by `/sbin/init`
+before dinit starts, so the existing dinit graph remains unchanged. Changes in
+the tmpfs upper layer disappear at shutdown. Other upper-layer storage types
+are not currently supported.
+
+Overlay mode requires `CONFIG_OVERLAY_FS=y` and a root filesystem that can be
+mounted read-only. If setup or configuration validation fails, `mere-boot`
+starts its authenticated recovery service instead of starting a partial dinit
+graph.
+
 ## Graph and ordering
 
 - `mount-proc` establishes procfs. `mount-sys`, `mount-dev`, and `mount-rw` depend
-  on it and establish sysfs, devtmpfs, and a writable root.
+  on it and establish sysfs, devtmpfs, and a writable root. In overlay mode,
+  the writable root is the tmpfs upper layer prepared before dinit starts and
+  `mount-rw` does not remount the lower filesystem.
 - `mount-runtime` waits for those services, establishes `/run`, devpts and shared
   memory, sets the temporary-directory mode, and exposes `/dev/fd`.
 - mdevd starts after those mounts and signals readiness. Its coldplug service

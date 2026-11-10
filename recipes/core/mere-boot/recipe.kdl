@@ -1,7 +1,7 @@
 recipe {
     name "mere-boot"
     version "0.1.0"
-    release 1
+    release 2
     description "Foundational boot services for Mere Linux with dinit"
     url "https://merelinux.org"
     licenses "MIT"
@@ -10,11 +10,15 @@ recipe {
 }
 
 source "init" {
-    blake3 "916bef670194f057612fa9013e67a556b0dce8cff2669eb63b903405aa01e72a"
+    blake3 "cfdf1504fe04cc271ae482be72447577aefe5c1531302fac5d639aae926d013f"
+}
+
+source "boot.conf" {
+    blake3 "08734727dce15eda70924be5b339a3ec02af066c1bb0cd345b4bddd505312fb3"
 }
 
 source "setup" {
-    blake3 "714fa6451e8ea0d12ee974fdab8fee76184188752aa97d9aaee36d8009bf705b"
+    blake3 "1345437690637ee66d046573f003d99b35458f849d6bd5c90dfbaee770c59198"
 }
 
 source "getty" {
@@ -50,6 +54,7 @@ install {
         install -d "${DESTDIR}/sbin" "${DESTDIR}/usr/libexec/mere-boot" \
             "${DESTDIR}/etc/dinit.d/boot.d"
         install -m 0755 "${MERE_SOURCES_DIR}/init" "${DESTDIR}/sbin/init"
+        install -m 0644 "${MERE_SOURCES_DIR}/boot.conf" "${DESTDIR}/etc/mere-boot.conf"
         for helper in setup getty recovery; do
             install -m 0755 "${MERE_SOURCES_DIR}/$helper" "${DESTDIR}/usr/libexec/mere-boot/"
         done
