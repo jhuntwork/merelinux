@@ -1042,9 +1042,9 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     store_destination = source_root / "mere" / "store"
     store_destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(store_root, store_destination, symlinks=True)
-    profile_destination = source_root / "mere" / "profiles" / "system" / "current"
+    profile_destination = source_root / "mere" / "profiles" / "system"
     profile_destination.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copytree(profile_root, profile_destination, symlinks=True)
+    shutil.copytree(profile_root.parent, profile_destination, symlinks=True)
     mere_destination = source_root / "mere"
     (mere_destination / "keys").mkdir(parents=True, exist_ok=True)
     shutil.copy2(store_root.parent / "config.kdl", mere_destination / "config.kdl")
