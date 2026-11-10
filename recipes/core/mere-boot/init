@@ -2,10 +2,63 @@
 # Keep PID 1 when handing system management to dinit.
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 umask 022
+fail_recovery() {
+    printf 'mere-boot: %s; entering authenticated recovery\n' "$1" >&2
+    exec /bin/dinit --system -d /etc/dinit.d -d /usr/share/dinit.d -t recovery
+}
+setup_overlay_root() {
+    mkdir -p /proc /dev || fail_recovery 'cannot prepare early virtual filesystems'
+    mountpoint -q /proc || mount -t proc proc /proc || fail_recovery 'cannot mount procfs'
+    mountpoint -q /dev || mount -t devtmpfs -o mode=0755,nosuid devtmpfs /dev || fail_recovery 'cannot mount devtmpfs'
+    [ -e /dev/console ] || mknod -m 600 /dev/console c 5 1 || fail_recovery 'cannot prepare the console device'
+    [ -e /dev/ttyS0 ] || mknod -m 620 /dev/ttyS0 c 4 64 || fail_recovery 'cannot prepare the serial console device'
+    mount -o remount,ro / || fail_recovery 'cannot make the root filesystem read-only'
+    overlay_dir=/run/mere-boot-overlay
+    lower=$overlay_dir/lower
+    upper=$overlay_dir/upper
+    work=$overlay_dir/work
+    newroot=$overlay_dir/newroot
+    mkdir -p "$lower" "$upper" "$work" "$newroot" || fail_recovery 'cannot prepare overlay directories'
+    mount --bind / "$lower" || fail_recovery 'cannot bind the lower root'
+    mount -t overlay overlay -o "lowerdir=$lower,upperdir=$upper,workdir=$work" "$newroot" || \
+        fail_recovery 'cannot mount the writable root overlay'
+    umount "$lower" || fail_recovery 'cannot release the lower-root bind mount'
+    mount --bind /proc "$newroot/proc" || fail_recovery 'cannot move procfs into the overlay'
+    mount --bind /dev "$newroot/dev" || fail_recovery 'cannot move devtmpfs into the overlay'
+    mount --bind /run "$newroot/run" || fail_recovery 'cannot move the runtime filesystem into the overlay'
+    mkdir -p "$newroot/run/mere-boot-overlay/oldroot" || fail_recovery 'cannot prepare the old-root mountpoint'
+    pivot_root "$newroot" "$newroot/run/mere-boot-overlay/oldroot" || \
+        fail_recovery 'cannot switch to the writable root overlay'
+    cd /
+    umount -l /run/mere-boot-overlay/oldroot || \
+        fail_recovery 'cannot detach the read-only lower root'
+}
+root_mode=direct
+overlay_storage=tmpfs
+if [ -r /etc/mere-boot.conf ]; then
+    while IFS='=' read -r key value; do
+        key=$(printf '%s' "$key" | tr -d '[:space:]')
+        value=$(printf '%s' "$value" | tr -d '[:space:]')
+        case "$key" in
+            ''|'#'*) continue ;;
+            root-mode) root_mode=$value ;;
+            overlay-storage) overlay_storage=$value ;;
+            *) fail_recovery "unknown configuration key: $key" ;;
+        esac
+    done < /etc/mere-boot.conf
+fi
+case "$root_mode:$overlay_storage" in
+    direct:tmpfs) ;;
+    overlay:tmpfs) ;;
+    *) fail_recovery "unsupported root mode or overlay storage: $root_mode/$overlay_storage" ;;
+esac
 # The control socket must live on the final /run mount, not a hidden lower one.
 if ! { mkdir -p /run && { mountpoint -q /run || mount -t tmpfs -o mode=0755,nosuid,nodev tmpfs /run; }; }; then
-    printf 'mere-boot: cannot prepare /run; entering authenticated recovery\n' >&2
-    exec /bin/dinit -d /etc/dinit.d -d /usr/share/dinit.d -t recovery
+    fail_recovery 'cannot prepare /run'
 fi
-exec /bin/dinit -d /etc/dinit.d -d /usr/share/dinit.d \
+if [ "$root_mode" = overlay ]; then
+    setup_overlay_root
+fi
+printf 'MERE-LINUX-RESCUE-READY\n' > /dev/console 2>/dev/null || true
+exec /bin/dinit --system -d /etc/dinit.d -d /usr/share/dinit.d \
     --log-file /run/dinit.log "$@"
