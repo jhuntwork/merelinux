@@ -1046,9 +1046,10 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     profile_destination.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(profile_root.parent, profile_destination, symlinks=True)
     mere_destination = source_root / "mere"
-    # Preserve Mere's GC-root projection alongside the profile generations.
-    # The development root uses absolute host paths, so create image-internal
-    # targets instead of copying those worker-local symlinks.
+    # Initialize the staged root with Mere's canonical filesystem layout.
+    command([str(mere_binary), "--root", str(source_root), "store", "init"])
+    # The development root uses absolute host paths for its GC roots, so
+    # create image-internal targets instead of copying worker-local links.
     gc_system = mere_destination / "gc-roots" / "profiles" / "system"
     (gc_system / "kept").mkdir(parents=True, exist_ok=True)
     (gc_system / "current").symlink_to("/mere/profiles/system/current")
