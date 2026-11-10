@@ -38,6 +38,8 @@ PROFILE_TOOL_CANDIDATES = {
 REQUIRED_SERVICE_FILES = (
     "network-dhcp", "rescue-ready",
 )
+OFFICIAL_MERE_CONFIG_URL = "https://pkgs.merelinux.org/config.kdl"
+OFFICIAL_MERE_KEY_URL = "https://pkgs.merelinux.org/mere.pub"
 COMMAND_LOG: list[list[str]] = []
 RESOLVED_TOOLS: dict[str, str] = {}
 # The rescue image is intentionally physical-access media.  This shared
@@ -901,16 +903,23 @@ def write_rolling_profile(path: Path, inputs: dict[str, Any]) -> list[str]:
 
 
 def configure_dinit_root(mere_root: Path) -> None:
-    """Select dinit for the isolated system profile used by image assembly."""
-    config = mere_root / "mere" / "config.kdl"
-    if not config.is_file():
-        die(f"Mere root has no configuration: {config}")
-    text = config.read_text(encoding="utf-8")
-    if 'init-provider "dinit"' not in text:
-        config.write_text(
-            text.rstrip() + '\n\nsettings {\n    init-provider "dinit"\n}\n',
-            encoding="utf-8",
-        )
+    """Initialize Mere from the official repository trust files and select dinit."""
+    mere_dir = mere_root / "mere"
+    mere_dir.mkdir(parents=True, exist_ok=True)
+    keys_dir = mere_dir / "keys"
+    keys_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        with urllib.request.urlopen(OFFICIAL_MERE_CONFIG_URL, timeout=60) as response:
+            official_config = response.read()
+        with urllib.request.urlopen(OFFICIAL_MERE_KEY_URL, timeout=60) as response:
+            official_key = response.read()
+    except Exception as error:
+        die(f"cannot download official Mere setup files: {error}")
+    if not official_config.strip() or not official_key.strip():
+        die("official Mere setup files must not be empty")
+    config = mere_dir / "config.kdl"
+    config.write_bytes(official_config.rstrip() + b'\n\nsettings {\n    init-provider "dinit"\n}\n')
+    (keys_dir / "mere.pub").write_bytes(official_key)
 
 
 def apply_rolling_profile(
@@ -974,11 +983,11 @@ def materialize_profile_tree(source: Path, destination: Path, store_root: Path) 
             resolved = (store_root / link.removeprefix("/mere/store/")).resolve(strict=True)
             if not resolved.is_relative_to(store_root.resolve()):
                 die(f"rescue profile store link escapes the Mere store: {item} -> {link}")
-            if resolved.is_dir():
-                materialize_profile_tree(resolved, target, store_root)
-            else:
-                target.parent.mkdir(parents=True, exist_ok=True)
-                shutil.copy2(resolved, target)
+            # Keep the profile projection's absolute store links. The image
+            # carries the referenced store below /mere/store, so Mere can
+            # inspect and operate on the installed packages after boot.
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.symlink_to(link)
         elif item.is_dir():
             materialize_profile_tree(item, target, store_root)
         elif item.is_file():
@@ -1011,7 +1020,18 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     if missing_requested:
         die("Mere rescue profile omitted requested packages: " + ", ".join(missing_requested))
     source_root = generated / "rescue-source"
-    materialize_profile_tree(profile_root, source_root, dev_root / "mere" / "store")
+    store_root = dev_root / "mere" / "store"
+    materialize_profile_tree(profile_root, source_root, store_root)
+    store_destination = source_root / "mere" / "store"
+    store_destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(store_root, store_destination, symlinks=True)
+    profile_destination = source_root / "mere" / "profiles" / "system" / "current"
+    profile_destination.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copytree(profile_root, profile_destination, symlinks=True)
+    mere_destination = source_root / "mere"
+    (mere_destination / "keys").mkdir(parents=True, exist_ok=True)
+    shutil.copy2(store_root.parent / "config.kdl", mere_destination / "config.kdl")
+    shutil.copy2(store_root.parent / "keys" / "mere.pub", mere_destination / "keys" / "mere.pub")
     providers: dict[str, str] = {}
     package_provider_mapping(source_root, "rolling-profile", providers)
     providers["/boot/vmlinux"] = "linux"
@@ -1021,6 +1041,13 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
     shutil.copy2(mere_binary, source_root / "usr/bin/mere")
     (source_root / "usr/bin/mere").chmod(0o755)
     source_root.joinpath("etc/hostname").write_text("mere-rescue\n", encoding="ascii")
+    source_root.joinpath("etc/network").mkdir(parents=True, exist_ok=True)
+    source_root.joinpath("etc/network/interfaces").write_text(
+        "auto lo eth0\n\n"
+        "iface lo inet loopback\n\n"
+        "iface eth0 inet dhcp\n",
+        encoding="ascii",
+    )
     etc_root = dev_root / "etc"
     if etc_root.is_dir():
         materialize_profile_tree(etc_root, source_root / "etc", dev_root / "mere" / "store")
@@ -1052,6 +1079,12 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
         encoding="ascii",
     )
     check_tree(source_root, image=True)
+    if not (source_root / "mere" / "store").is_dir():
+        die("rescue root is missing the Mere package store")
+    for relative in ("bin/sh", "sbin/init", "usr/bin/curl", "boot/vmlinux"):
+        projected = source_root / relative
+        if not projected.is_symlink() or not os.readlink(projected).startswith("/mere/store/"):
+            die(f"rescue root projection is not a Mere store symlink: {relative}")
     required_files = (
         "sbin/init",
         "usr/share/dinit.d/sysinit",
@@ -1119,8 +1152,14 @@ def prepare_generated_inputs(args: argparse.Namespace, inputs: dict[str, Any]) -
             "content_blake3": resolved["content_blake3"],
         })
     package_manifest = {
-        "mere": {"version": inputs["tool_profile"]["mere_version"], "binary_blake3": file_blake3(mere_binary, mere_binary, dev_root),
-                 "binary_sha256": inputs["tool_profile"]["mere_binary_sha256"], "repository_snapshot": repository_snapshot},
+        "mere": {
+            "version": inputs["tool_profile"]["mere_version"],
+            "binary_blake3": file_blake3(mere_binary, mere_binary, dev_root),
+            "binary_sha256": inputs["tool_profile"]["mere_binary_sha256"],
+            "repository_snapshot": repository_snapshot,
+            "config_sha256": hashlib.sha256((source_root / "mere" / "config.kdl").read_bytes()).hexdigest(),
+            "key_sha256": hashlib.sha256((source_root / "mere" / "keys" / "mere.pub").read_bytes()).hexdigest(),
+        },
         "packages": sorted(package_records, key=lambda package: package["name"]),
         "requested_packages": sorted(requested_packages),
         "providers": dict(sorted(providers.items())),

@@ -19,11 +19,15 @@ the latest x86_64 artifacts. The realized profile records the versions and
 content hashes used for that build, but those values are observations rather
 than package-selection pins.
 The same pinned binary is copied into the final rescue root at `/usr/bin/mere`.
-The rescue root also contains the `curl` command, its shared runtime
-libraries, and the pinned CA bundle. The `network-dhcp` dinit service scans
-non-loopback interfaces and runs BusyBox `udhcpc` on the first one that accepts
-a lease, which also writes `/etc/resolv.conf` from the DHCP-provided DNS
-servers.
+The final root preserves the Mere store at `/mere/store` and the active system
+projection at `/mere/profiles/system/current`; root-level package files remain
+symlinks into that store so the installed packages are inspectable and Mere can
+operate on them after boot. The rescue root also contains the `curl` command,
+its shared runtime libraries, and the pinned CA bundle. The image configures
+loopback and `eth0` for DHCP in `/etc/network/interfaces`. The `network-dhcp`
+dinit service scans non-loopback interfaces and runs BusyBox `udhcpc` on the
+first one that accepts a lease, which also writes `/etc/resolv.conf` from the
+DHCP-provided DNS servers.
 The assembler uses `parted` to inspect the deterministic GPT after
 writing fixed GUIDs, and uses `mere dev hash` for BLAKE3 digests. It does not
 require `sgdisk` or a separate `blake3` executable.
@@ -50,6 +54,14 @@ swamp behavior create @jeremy/mere-shell mere-rescue-tools-023-hoststore \
   --global-arg mereRoot=/ \
   --global-arg useHostStore=true
 ```
+
+The assembler initializes each isolated Mere root from the official repository
+files before syncing: `https://pkgs.merelinux.org/config.kdl` and
+`https://pkgs.merelinux.org/mere.pub`. It adds the required dinit provider
+setting to that downloaded config, copies both files into the final image under
+`/mere`, and records their SHA-256 values in the manifest. The root therefore
+has the trust material needed for `mere` commands after boot, not only the
+realized package files; it does not rely on the host worker's `/mere` state.
 
 Build the non-kernel tool-profile recipes only when provisioning the separate
 image-tool profile. The rescue package set is not compiled here; it is resolved
@@ -78,8 +90,9 @@ The isolated Mere root is configured with `init-provider "dinit"` and the
 profile is applied to its system profile. System-profile activation generates
 Mere's package-owned dinit service files under `/usr/share/dinit.d`; applying a
 named profile would omit that service graph. The assembler materializes the
-active system generation, applies `etc-defaults` to `/etc`, and adds the
-rescue-specific DHCP and readiness services under `/etc/dinit.d`. The normal
+active system generation, preserves its store and profile projection in the
+image, applies `etc-defaults` to `/etc`, and adds the rescue-specific DHCP and
+readiness services under `/etc/dinit.d`. The normal
 `mere-boot` serial getty remains the console entry point. The assembled USB
 provisions the root account with the shared operator password `rescue` so that
 the console is usable after the operator selects the root login. The login name
@@ -157,9 +170,12 @@ looked up in the Mere profile.
 The top-level `--build --pull-packages` path performs a rolling profile
 resolution before assembly. It refreshes repository metadata, applies the
 unversioned package names from `rescue-image.inputs.json`, and materializes the
-resolved profile into the rescue root. The package manifest records every
-resolved dependency's version and content hash as provenance, plus the
-requested package names; it does not constrain the next run to those values.
+resolved profile into the rescue root. The profile's `/mere/store` and
+`/mere/profiles/system/current` projections are retained in the image rather
+than flattened into ordinary files, so absolute profile links remain valid
+after boot. The package manifest records every resolved dependency's version
+and content hash as provenance, plus the requested package names; it does not
+constrain the next run to those values.
 Mere's `etc-defaults/` package trees are materialized into `/etc` because no
 Mere activation runs inside the rescue image. The separate image-tool profile
 remains pinned because it supplies the host-side formatters and OVMF build
