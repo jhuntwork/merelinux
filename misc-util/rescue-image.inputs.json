@@ -26,7 +26,7 @@
     "fat_volume_id": "4d455246"
   },
     "boot": {
-    "root_mode": "direct",
+    "root_mode": "overlay",
     "overlay_storage": "tmpfs"
   },
   "toolchain": {

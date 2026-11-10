@@ -87,7 +87,10 @@ The separate installed-system fixture is not this image. Its initial supported l
 
 ### 4. Live root, discovery, timing, and command line
 
-The live root is a normal ext4 filesystem, not a squashfs image, an ISO9660 filesystem, or a filesystem hidden behind an overlay. Linux discovers it directly from its GPT partition GUID. The command line supplied by Limine is semantically:
+The live lower root is a normal ext4 filesystem, not a squashfs image, an
+ISO9660 filesystem, or a filesystem hidden behind an initramfs. Linux discovers
+it directly from its GPT partition GUID. The boot runtime adds a temporary
+tmpfs overlay above that read-only lower root.
 
 ```text
 root=PARTUUID=<fixed-root-partition-guid> \
@@ -127,10 +130,11 @@ The current `mere-common.config.fragment` already sets `CONFIG_EXT4_FS=y`, `CONF
 
 ### 6. Writable runtime state
 
-The image starts with the root mounted `ro,noload`. The default `direct` root
-mode then lets the reusable `mere-boot` `mount-rw` service remount that root for
-normal rescue work. The optional `overlay` mode keeps the lower root read-only
-and places the writable upper and work directories on an ephemeral tmpfs.
+The image starts with the lower root mounted `ro,noload`. The rescue image
+selects `root-mode = overlay` with `overlay-storage = tmpfs`, so the lower root
+stays read-only and the writable upper and work directories live on ephemeral
+tmpfs. The reusable `mere-boot` package still supports `direct` mode for other
+installations, but direct mode is not the rescue image's default.
 Both modes create these volatile mounts before starting services that need
 them:
 
@@ -234,9 +238,11 @@ Issue #634 does not need to close before the image work starts, but the image pi
 
 1. A packaged dinit executable and `dinitctl` with the selected version and package hash recorded.
 2. A dinit service profile for the live image: virtual filesystem setup, read-only root handling, mdevd readiness followed by coldplug, console access, the deterministic rescue-ready marker, and orderly shutdown without an automatic reboot loop.
-3. The root-mode behavior described in this record: `direct` remains the
-   default, while `overlay` supplies the read-only lower-root/tmpfs runtime
-   variant. Both modes retain the same mdevd readiness/coldplug ordering.
+3. The root-mode behavior described in this record: the rescue image selects
+   `overlay` with a read-only lower root and ephemeral tmpfs upper/work
+   directories. `mere-boot` retains `direct` as a supported opt-in mode for
+   other installations. Both modes retain the same mdevd readiness/coldplug
+   ordering.
 4. The recovery behavior and failure semantics already demonstrated in #634: preserve diagnostics and make foundational failures recoverable through dinit's console path rather than silently rebooting.
 5. The serial console/getty configuration needed by QEMU. A tty1 login remains the default contract; the QEMU profile enables the serial getty as an explicit machine option.
 
@@ -255,7 +261,10 @@ If #633 changes the final installed layout, it must publish a compatibility mapp
 
 ## Consequences
 
-This decision produces a small, directly writable GPT rescue image that can prove the complete UEFI-to-Limine-to-kernel-to-dinit path without firmware-variable setup or an initramfs. It reuses the repository's existing Limine, Linux, dinit, and mdevd direction and keeps the live root and tested system-disk fixture on the same ext4/dinit model.
+This decision produces a small GPT rescue image with an ext4 lower root and
+an ephemeral writable runtime layer. It can prove the complete
+UEFI-to-Limine-to-kernel-to-dinit path without firmware-variable setup or an
+initramfs.
 
 The design also imposes deliberate limits and costs:
 
