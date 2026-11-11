@@ -1,0 +1,83 @@
+Support an optional readiness pipe for service managers such as dinit and s6.
+Notify only after the control socket is listening. Leave standalone startup
+unchanged when TURNSTILED_READY_FD is unset.
+
+This is a downstream patch against Turnstile 0.1.11, not yet submitted upstream.
+
+diff --git a/src/turnstiled.8.scd b/src/turnstiled.8.scd
+index efa5615..3ae0a97 100644
+--- a/src/turnstiled.8.scd
++++ b/src/turnstiled.8.scd
+@@ -32,6 +32,14 @@ environment variable and directory.
+ 
+ # ENVIRONMENT
+ 
++*TURNSTILED\_READY\_FD*
++	If set, an inherited writable file descriptor numbered 3 or higher.
++	The daemon writes a newline and closes it after its control socket is
++	listening, before starting lingering users. Startup failure does not
++	signal readiness. An invalid value or a notification failure is fatal.
++	The variable is removed before helper processes are started.
++	If unset, no readiness notification is performed.
++
+ *TURNSTILED\_LINGER\_ENABLE\_FORCE*
+ 	If set during daemon startup (to any value), enable lingering even if
+ 	rundir management is disabled. This is primarily for people who want
+diff --git a/src/turnstiled.cc b/src/turnstiled.cc
+index 11af586..c1f9315 100644
+--- a/src/turnstiled.cc
++++ b/src/turnstiled.cc
+@@ -1292,6 +1292,31 @@ static void sock_handle_conn() {
+ }
+ 
+ int main(int argc, char **argv) {
++    /* Validate before opening other descriptors, so a closed readiness fd
++     * cannot accidentally be reused by syslog or another initialization step.
++     */
++    int ready_fd = -1;
++    if (auto *value = std::getenv("TURNSTILED_READY_FD")) {
++        char *end = nullptr;
++        errno = 0;
++        long fd = std::strtol(value, &end, 10);
++        if (
++            (*value < '0') || (*value > '9') || errno || *end ||
++            (fd < 3) || (fd > INT_MAX)
++        ) {
++            std::fprintf(stderr, "turnstiled: invalid TURNSTILED_READY_FD\n");
++            return 1;
++        }
++        ready_fd = static_cast<int>(fd);
++        int flags = fcntl(ready_fd, F_GETFD);
++        if ((flags < 0) || (fcntl(ready_fd, F_SETFD, flags | FD_CLOEXEC) < 0)) {
++            std::fprintf(stderr, "turnstiled: invalid readiness descriptor (%s)\n",
++                         strerror(errno));
++            return 1;
++        }
++        unsetenv("TURNSTILED_READY_FD");
++    }
++
+     /* establish simple signal handler for sigchld */
+     {
+         struct sigaction sa{};
+@@ -1417,6 +1442,21 @@ int main(int argc, char **argv) {
+         pfd.revents = 0;
+     }
+ 
++    /* The control socket is now listening and the event-loop descriptors are
++     * installed. Notify before spawning any lingering-user helper processes.
++     */
++    if (ready_fd >= 0) {
++        ssize_t written;
++        do {
++            written = write(ready_fd, "\n", 1);
++        } while ((written < 0) && (errno == EINTR));
++        close(ready_fd);
++        if (written != 1) {
++            print_err("could not notify readiness");
++            return 1;
++        }
++    }
++
+     print_dbg("turnstiled: main loop");
+ 
+     std::size_t i = 0, curpipes;

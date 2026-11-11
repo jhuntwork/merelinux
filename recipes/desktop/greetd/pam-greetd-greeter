@@ -1,0 +1,9 @@
+# Only the privileged greetd daemon may establish the dedicated greeter session.
+# This policy is not the authenticated user's login policy.
+auth      required    pam_rootok.so
+account   required    pam_permit.so
+password  required    pam_deny.so
+session   required    pam_env.so
+session   required    pam_limits.so
+session   include     system-session
+session   required    pam_turnstile.so

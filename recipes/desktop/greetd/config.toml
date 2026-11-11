@@ -1,0 +1,15 @@
+# Reserve this VT for greetd; leave tty1 available for console/recovery login.
+[terminal]
+vt = 7
+switch = true
+
+[general]
+service = "greetd"
+source_profile = true
+
+# Authenticated shell by default. Select a graphical session explicitly later.
+# No initial_session: automatic login is deliberately disabled.
+[default_session]
+command = "/usr/bin/agreety --cmd /bin/sh"
+user = "greeter"
+service = "greetd-greeter"

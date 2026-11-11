@@ -1,0 +1,7 @@
+# Turnstile's internal helper session, not the interactive login stack.
+# Do not include system-session here: login tracking there could recurse.
+auth       sufficient pam_rootok.so
+session    optional   pam_keyinit.so force revoke
+session    optional   pam_umask.so usergroups umask=022
+session    required   pam_turnstile.so turnstiled
+session    required   pam_limits.so
