@@ -1,0 +1,90 @@
+recipe {
+    name "greetd"
+    version "0.10.3"
+    release 1
+    description "Minimal and flexible login manager"
+    url "https://git.sr.ht/~kennylevinsen/greetd"
+    licenses "GPL-3.0-only"
+    archs "aarch64" "x86_64"
+    depends "linux-pam" \
+            "linux-pam-dev" \
+            "llvm" \
+            "musl-dev" \
+            "patch" \
+            "rust" \
+            "scdoc"
+}
+
+source "https://github.com/kennylevinsen/greetd/archive/refs/tags/${recipe.version}.tar.gz" {
+    blake3 "acf3f31550974bebce635ed84b6fabd21ee06fd12344d5fa993a5c5384724c8b"
+    save-as "greetd-${recipe.version}.tar.gz"
+}
+source "config.toml" {
+    blake3 "615946cf7a30ccd9cd69d97cfc7e910e09bc3ca7c9d1f965f7dc8709ae4e8245"
+}
+source "pam-greetd" {
+    blake3 "5a34f0b9c748bad0a6e47a50a5c8fc3cc88a26bf72ec10e504589fd3ed1dd2f0"
+}
+source "pam-greetd-greeter" {
+    blake3 "3490bbe500697ced6567cecf40402434b73f92919d67ac14c7d071002faf8ca6"
+}
+source "fail-on-runtime-error.patch" {
+    blake3 "0e655896112e6115fc6edab121529edae240c79baa53fb8d1039ea293effe4a0"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/fail-on-runtime-error.patch"
+    "#
+}
+
+build {
+    script r#"
+        # Dynamic musl/PAM is required so PAM can load session modules.
+        export RUSTFLAGS="-C linker=clang -C target-feature=-crt-static"
+        cargo build --release --locked --target ${recipe.arch}-unknown-linux-musl \
+            -p greetd -p agreety
+    "#
+}
+
+check {
+    script r#"
+        export RUSTFLAGS="-C linker=clang -C target-feature=-crt-static"
+        cargo test --release --locked --target ${recipe.arch}-unknown-linux-musl \
+            --workspace --bins --lib
+    "#
+}
+
+install {
+    script r#"
+        for program in greetd agreety; do
+            install -Dm755 "target/${recipe.arch}-unknown-linux-musl/release/${program}" \
+                "${DESTDIR}/usr/bin/${program}"
+        done
+        install -Dm644 "${MERE_SOURCES_DIR}/config.toml" \
+            "${DESTDIR}/etc/greetd/config.toml"
+        install -Dm644 "${MERE_SOURCES_DIR}/pam-greetd" \
+            "${DESTDIR}/etc/pam.d/greetd"
+        install -Dm644 "${MERE_SOURCES_DIR}/pam-greetd-greeter" \
+            "${DESTDIR}/etc/pam.d/greetd-greeter"
+        for page in greetd-1 agreety-1 greetd-5 greetd-ipc-7; do
+            section=${page##*-}
+            name=${page%-*}
+            install -d "${DESTDIR}/usr/share/man/man${section}"
+            scdoc < "man/${page}.scd" \
+                > "${DESTDIR}/usr/share/man/man${section}/${name}.${section}"
+        done
+    "#
+}
+
+package "greetd" {
+    files "etc/" \
+          "usr/bin/" \
+          "usr/share/man/"
+
+    service "greetd" {
+        type "daemon"
+        command "/usr/bin/greetd" "--config" "/etc/greetd/config.toml"
+        depends-on "turnstiled"
+    }
+}

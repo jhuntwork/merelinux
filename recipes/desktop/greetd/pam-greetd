@@ -1,0 +1,10 @@
+# Authenticated user sessions. Keep authentication/account policy intact.
+auth      requisite   pam_nologin.so
+auth      include     system-auth
+account   required    pam_access.so
+account   include     system-account
+password  include     system-password
+session   required    pam_env.so
+session   required    pam_limits.so
+session   include     system-session
+session   required    pam_turnstile.so

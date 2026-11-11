@@ -1,0 +1,14 @@
+Return failure when daemon or session-worker initialization returns an error.
+Without this, a missing greeter account is logged but reported as a successful
+process exit to the service manager. Not yet submitted upstream.
+
+diff --git a/greetd/src/main.rs b/greetd/src/main.rs
+--- a/greetd/src/main.rs
++++ b/greetd/src/main.rs
+@@ -57,5 +57,6 @@ async fn main() {
+         .await;
+     if let Err(e) = res {
+         eprintln!("error: {}", e);
++        std::process::exit(1);
+     }
+ }

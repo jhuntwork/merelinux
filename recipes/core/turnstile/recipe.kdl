@@ -1,0 +1,86 @@
+recipe {
+    name "turnstile"
+    version "0.1.11"
+    release 1
+    description "Independent login tracker and user service manager"
+    url "https://github.com/chimera-linux/turnstile"
+    licenses "BSD-2-Clause"
+    archs "aarch64" "x86_64"
+    depends "linux-pam" \
+            "linux-pam-dev" \
+            "llvm" \
+            "meson" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "patch" \
+            "pkgconf" \
+            "scdoc"
+}
+
+source "https://github.com/chimera-linux/turnstile/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "a87441808705022149616e18e0ac10b91d180ec0877c583e18e187db5600a39e"
+}
+source "turnstiled.conf" {
+    blake3 "d3ab84df66bfac1bb8e47ddbe60eac40d4dcd4d0a160f6c1f5a7682b16fcee80"
+}
+source "pam-turnstiled" {
+    blake3 "4fd4d3cec0ca77f66f742f89dc0c3bdb8d270f4d0de79cacd9e4faa107c6f673"
+}
+source "readiness-fd.patch" {
+    blake3 "7627916a8cc0cf7c5c2ab12d24bba86de13fcdfabf5507d60561f6cb97fa7713"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/readiness-fd.patch"
+    "#
+}
+
+build {
+    script r#"
+        meson setup build/ \
+            --prefix=/usr \
+            --sysconfdir=/etc \
+            --localstatedir=/var \
+            --libexecdir=/usr/libexec \
+            --buildtype=release \
+            -Dpam_moddir=/lib/security \
+            -Ddinit=enabled \
+            -Drunit=disabled \
+            -Ddefault_backend=none \
+            -Dmanage_rundir=true
+        ninja -C build/
+    "#
+}
+
+install {
+    script r#"
+        ninja -C build/ install
+        # Mere materializes service descriptions from provider-neutral metadata.
+        rm "${DESTDIR}/etc/dinit.d/turnstiled"
+        rmdir "${DESTDIR}/etc/dinit.d"
+        # Mere's dinit utilities live in /bin rather than /usr/bin.
+        sed -i 's|command = /usr/bin/dinit-monitor |command = /bin/dinit-monitor |' \
+            "${DESTDIR}/usr/libexec/turnstile/dinit"
+        install -m 0644 "${MERE_SOURCES_DIR}/turnstiled.conf" \
+            "${DESTDIR}/etc/turnstile/turnstiled.conf"
+        install -m 0644 "${MERE_SOURCES_DIR}/pam-turnstiled" \
+            "${DESTDIR}/etc/pam.d/turnstiled"
+    "#
+}
+
+package "turnstile" {
+    files "etc/" \
+          "lib/security/" \
+          "usr/bin/" \
+          "usr/libexec/" \
+          "usr/share/man/"
+
+    service "turnstiled" {
+        type "daemon"
+        command "/bin/env" "TURNSTILED_READY_FD=3" "/usr/bin/turnstiled"
+        ready-notification 3
+        depends-on "sysinit"
+    }
+}
