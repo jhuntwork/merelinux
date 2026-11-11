@@ -1,7 +1,7 @@
 recipe {
     name "seatd"
     version "0.9.3"
-    release 2
+    release 3
     description "A minimal seat management daemon"
     url "https://git.sr.ht/~kennylevinsen/seatd"
     licenses "MIT"
