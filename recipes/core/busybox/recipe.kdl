@@ -1,7 +1,7 @@
 recipe {
     name "busybox"
     version "1.37.0"
-    release 11
+    release 12
     description "Tiny versions of common UNIX utilities built into a single binary"
     url "http://busybox.net"
     licenses "GPL"
@@ -149,9 +149,22 @@ package "busybox" {
           "sbin/" \
           "usr/"
 
+    service "ntpd-sync" {
+        type "oneshot"
+        up "ntpd" "-q" "-n"
+        log false
+    }
+
+    service "hwclock-save" {
+        type "oneshot"
+        up "hwclock" "--systohc" "--utc"
+        log false
+        depends-on "ntpd-sync"
+    }
+
     service "ntpd" {
         type "daemon"
-        command "ntpd" "-d" "-n"
+        command "ntpd" "-n"
     }
 
     service "syslogd" {
