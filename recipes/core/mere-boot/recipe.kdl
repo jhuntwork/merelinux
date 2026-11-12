@@ -1,7 +1,7 @@
 recipe {
     name "mere-boot"
     version "0.1.0"
-    release 2
+    release 3
     description "Foundational boot services for Mere Linux with dinit"
     url "https://merelinux.org"
     licenses "MIT"
@@ -130,6 +130,14 @@ package "mere-boot" {
         essential true
         log false
         depends-on "system-setup"
+    }
+
+    service "network" {
+        type "oneshot"
+        up "/sbin/ifup" "-a"
+        down "/sbin/ifdown" "-a"
+        log false
+        depends-on "mdevd-coldplug" "mount-runtime"
     }
 
     service "tty1" {
