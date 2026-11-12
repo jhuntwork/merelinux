@@ -153,6 +153,7 @@ package "busybox" {
         type "oneshot"
         up "ntpd" "-q" "-n"
         log false
+        depends-on "network"
     }
 
     service "hwclock-save" {
@@ -165,6 +166,7 @@ package "busybox" {
     service "ntpd" {
         type "daemon"
         command "ntpd" "-n"
+        depends-on "network"
     }
 
     service "syslogd" {
