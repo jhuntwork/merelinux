@@ -1,7 +1,7 @@
 recipe {
     name "xz"
-    version "5.8.2"
-    release 4
+    version "5.8.4"
+    release 1
     description "Free general-purpose data compression software with high compression ratio."
     url "https://tukaani.org/xz"
     licenses "GPL2"
@@ -14,7 +14,7 @@ recipe {
 }
 
 source "https://github.com/tukaani-project/xz/releases/download/v${recipe.version}/xz-${recipe.version}.tar.xz" {
-    blake3 "68d67cc938fb8eaa87107a7680fac64895cdc2b1841b6d030bf2713ed730dbaf"
+    blake3 "4776832814549b37914485ee14979b68282d4ddf1c0b679c6f4e055a57666b96"
 }
 
 build {
