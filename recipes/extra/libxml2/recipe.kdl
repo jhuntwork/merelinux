@@ -1,6 +1,6 @@
 recipe {
     name "libxml2"
-    version "2.15.2"
+    version "2.15.4"
     release 1
     description "XML C parser and toolkit"
     url "https://gitlab.gnome.org/GNOME/libxml2"
@@ -17,7 +17,7 @@ recipe {
 }
 
 source "https://gitlab.gnome.org/GNOME/libxml2/-/archive/v${recipe.version}/libxml2-v${recipe.version}.tar.bz2" {
-    blake3 "174328ac55a38334b260399ffcae5cda8d2713e99ca202cf12576c1e0a372018"
+    blake3 "b8153cbb7bd07ef579665f6064b8d7128b41f700ff0bb571d1db7032296943b6"
 }
 
 build {
