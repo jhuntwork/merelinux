@@ -1,0 +1,11 @@
+--- a/mlx/mlx.go
++++ b/mlx/mlx.go
+@@ -9,7 +9,7 @@
+ 
+ // #cgo CXXFLAGS: -std=c++17
+ // #cgo CPPFLAGS: -I${SRCDIR}/include
+-// #cgo LDFLAGS: -lstdc++
++// #cgo LDFLAGS: -lc++
+ // #cgo darwin LDFLAGS: -framework Foundation -framework Metal -framework Accelerate
+ // #include "generated.h"
+ // #include <string.h>
