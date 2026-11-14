@@ -1,0 +1,123 @@
+recipe {
+    name "ollama"
+    version "0.40.16"
+    release 1
+    description "Local language model server with CPU and Vulkan inference"
+    url "https://github.com/ollama/ollama"
+    licenses "MIT"
+    archs "x86_64"
+    depends "busybox" \
+            "ca-certs" \
+            "cmake" \
+            "git" \
+            "go" \
+            "libcxx" \
+            "linux-headers" \
+            "llvm" \
+            "make" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "patch" \
+            "pkgconf" \
+            "shaderc" \
+            "spirv-headers" \
+            "vulkan-headers" \
+            "vulkan-loader" \
+            "vulkan-loader-dev"
+    env CC="clang" CXX="clang++" CGO_ENABLED="1" \
+        GOTOOLCHAIN="local" GOFLAGS="-mod=readonly -p=2"
+}
+
+source "https://github.com/ollama/ollama/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "9f3040b26bd31d03020cf9702a11404796af83f33d9f5e3b200c51546fc0aefd"
+}
+
+// Must match Ollama's LLAMA_CPP_VERSION; update its digest with this pin.
+source "https://github.com/ggml-org/llama.cpp/archive/refs/tags/b12177.tar.gz" {
+    blake3 "07dea00b0a58c6a1e256a7babc02bc7d9280606d768bac3426e1384939c055b1"
+}
+
+source "musl-cxx.patch" {
+    blake3 "62f58be55b2ede849d9d5e597f9137b617ebcac5bdda2a0d63c2ec9dee8af061"
+}
+
+source "smoke.py" {
+    blake3 "1de7f2f44ee0518fae0f645f6d8863ad02f6bdb648692361c7fe9b96bdb472e9"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/musl-cxx.patch"
+        # Fail rather than silently downloading a foreign-libc Go toolchain.
+        # Ollama 0.40.16 requires Go >= 1.26.10.
+        go list -m
+        command -v glslc
+        llama_version="$(tr -d '\r\n' < LLAMA_CPP_VERSION)"
+        test "$llama_version" = "b12177"
+
+        mkdir -p .deps/llama.cpp
+        tar xzf "${MERE_SOURCES_DIR}/$llama_version.tar.gz" \
+            -C .deps/llama.cpp --strip-components=1
+
+        # The root superbuild skips compat patches for a local source override.
+        # Apply Ollama's own ordered patch set before either nested build uses it.
+        cmake -E chdir .deps/llama.cpp cmake \
+            "-DPATCH_DIR=$PWD/llama/compat" \
+            -DPATCH_LABEL=llama/compat \
+            -P "$PWD/cmake/apply-git-patches.cmake"
+
+        # Dependencies remain pinned by go.mod/go.sum; do not rewrite either.
+        go mod download
+    "#
+}
+
+build {
+    script r#"
+        # Nested CMake installs stage the runtime into build/lib/ollama.
+        # Mere's package DESTDIR applies only to the final install phase.
+        unset DESTDIR
+        export OLLAMA_LLAMA_CPP_SOURCE="$PWD/.deps/llama.cpp"
+        cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+            -DOLLAMA_LIB_DIR=lib/ollama \
+            -DOLLAMA_VERSION=${recipe.version} \
+            -DOLLAMA_LLAMA_BACKENDS=vulkan \
+            -DOLLAMA_MLX_BACKENDS= \
+            -DOLLAMA_BUILD_PARALLEL=2 \
+            -DGGML_NATIVE=OFF \
+            -DGGML_OPENMP=OFF
+        # Limit concurrent superbuilds as well as their nested compiler jobs.
+        cmake --build build --parallel 1
+        cmake --build build --target ollama-go-license --parallel 1
+    "#
+}
+
+check {
+    script r#"
+        test -x ollama
+        test -x build/lib/ollama/llama-server
+        test -s build/lib/ollama/vulkan/libggml-vulkan.so
+        ./ollama --version
+        build/lib/ollama/llama-server --version
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" cmake --install build --component ollama-local
+        install -d "$DESTDIR/usr/share/licenses/ollama"
+        install -m644 LICENSE "$DESTDIR/usr/share/licenses/ollama/LICENSE"
+        install -d "$DESTDIR/usr/share/ollama/tests"
+        install -m644 "${MERE_SOURCES_DIR}/smoke.py" "$DESTDIR/usr/share/ollama/tests/"
+    "#
+}
+
+package "ollama" {
+    files "usr/bin/ollama" \
+          "usr/lib/ollama/" \
+          "usr/share/licenses/ollama/" \
+          "usr/share/ollama/"
+}
