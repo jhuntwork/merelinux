@@ -1,0 +1,93 @@
+recipe {
+    name "shaderc"
+    version "2026.4"
+    release 1
+    description "GLSL/HLSL to SPIR-V compiler and shared shader compilation library"
+    url "https://github.com/google/shaderc"
+    licenses "Apache-2.0"
+    archs "x86_64"
+    depends "busybox" \
+            "cmake" \
+            "glslang" \
+            "glslang-dev" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "ninja" \
+            "patch" \
+            "python" \
+            "spirv-headers" \
+            "spirv-tools" \
+            "spirv-tools-dev"
+    env CC="clang" CXX="clang++"
+}
+
+source "https://github.com/google/shaderc/archive/refs/tags/v${recipe.version}.tar.gz" {
+    blake3 "e1613d8aafa35b9bf209ba1ff23d9da5a8948d0f399cf609c19f10f295f17ae9"
+}
+
+source "system-deps.patch" {
+    blake3 "db9257cfcc85c42ced5c33c1947534648e6d6f2487ac93f54c26a733c10a4af3"
+}
+
+source "compute.comp" {
+    blake3 "8f69dc65a2225e4a76e979936f5a8aec2337a4f2328396de563ff17a741d0d92"
+}
+
+source "smoke.sh" {
+    blake3 "a93124f5d3b9601d915c044ae45888cc902049243764e0e23a7082d802689aed"
+}
+
+prepare {
+    script r#"
+        patch -Np1 -i "${MERE_SOURCES_DIR}/system-deps.patch"
+    "#
+}
+
+build {
+    script r#"
+        cmake -S . -B build -G Ninja \
+            -DCMAKE_INSTALL_PREFIX=/usr \
+            -DCMAKE_INSTALL_LIBDIR=lib \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DSHADERC_SKIP_TESTS=ON \
+            -DSHADERC_SKIP_EXAMPLES=ON \
+            -DSHADERC_SKIP_COPYRIGHT_CHECK=ON \
+            -DSHADERC_ENABLE_WERROR_COMPILE=OFF
+        cmake --build build --parallel 2
+    "#
+}
+
+check {
+    script r#"
+        build/glslc/glslc --version
+        build/glslc/glslc --target-env=vulkan1.2 -O -fshader-stage=compute \
+            "${MERE_SOURCES_DIR}/compute.comp" -o build/compute.spv
+        spirv-val --target-env vulkan1.2 build/compute.spv
+    "#
+}
+
+install {
+    script r#"
+        DESTDIR="$DESTDIR" cmake --install build
+        # No bundled static SDK: use the shared API and system dependency packages.
+        rm -f "$DESTDIR/usr/lib/libshaderc.a" "$DESTDIR/usr/lib/libshaderc_util.a"
+        install -d "$DESTDIR/usr/share/licenses/shaderc" \
+            "$DESTDIR/usr/share/shaderc/tests"
+        install -m644 LICENSE "$DESTDIR/usr/share/licenses/shaderc/LICENSE"
+        install -m644 "${MERE_SOURCES_DIR}/compute.comp" \
+            "${MERE_SOURCES_DIR}/smoke.sh" "$DESTDIR/usr/share/shaderc/tests/"
+    "#
+}
+
+package "shaderc" {
+    files "usr/bin/glslc" \
+          "usr/lib/libshaderc_shared.so*" \
+          "usr/share/licenses/shaderc/" \
+          "usr/share/shaderc/"
+}
+
+package "shaderc-dev" {
+    files "usr/include/" \
+          "usr/lib/pkgconfig/shaderc.pc"
+}

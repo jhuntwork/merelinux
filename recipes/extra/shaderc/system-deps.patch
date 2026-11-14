@@ -1,0 +1,69 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -144,11 +144,17 @@
+     add_subdirectory(examples)
+ endif()
+ 
+-add_custom_target(build-version
+-  ${Python_EXECUTABLE}
+-  ${CMAKE_CURRENT_SOURCE_DIR}/utils/update_build_version.py
+-  ${shaderc_SOURCE_DIR} ${spirv-tools_SOURCE_DIR} ${glslang_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR}/build-version.inc
+-  COMMENT "Update build-version.inc in the Shaderc build directory (if necessary).")
++# Installed dependencies have no source-tree CHANGES files or Git metadata.
++# Preserve the shaderc release identity and explicitly identify system libraries.
++file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/CHANGES" shaderc_release
++  REGEX "^v[0-9]+\\.[0-9]+ ")
++list(GET shaderc_release 0 shaderc_release)
++string(REGEX MATCH "v[0-9]+\\.[0-9]+" shaderc_release "${shaderc_release}")
++file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/build-version.inc"
++  "\"shaderc ${shaderc_release}\\n\"\n"
++  "\"spirv-tools system\\n\"\n"
++  "\"glslang system\\n\"\n")
++add_custom_target(build-version)
+ 
+ function(define_pkg_config_file NAME LIBS)
+   add_custom_target(${NAME}-pkg-config ALL
+@@ -173,5 +179,3 @@
+ endfunction()
+ 
+ define_pkg_config_file(shaderc -lshaderc_shared)
+-define_pkg_config_file(shaderc_static "-lshaderc ${EXTRA_STATIC_PKGCONFIG_LIBS} -lshaderc_util")
+-define_pkg_config_file(shaderc_combined -lshaderc_combined)
+--- a/third_party/CMakeLists.txt
++++ b/third_party/CMakeLists.txt
+@@ -1,3 +1,19 @@
++# Use the distribution's dependencies instead of untracked source checkouts.
++find_package(Threads REQUIRED)
++find_package(SPIRV-Tools CONFIG REQUIRED)
++find_package(SPIRV-Tools-opt CONFIG REQUIRED)
++find_package(glslang CONFIG REQUIRED)
++find_package(SPIRV-Headers CONFIG REQUIRED)
++if(NOT TARGET SPIRV-Tools)
++  add_library(SPIRV-Tools ALIAS SPIRV-Tools-static)
++endif()
++add_library(glslang ALIAS glslang::glslang)
++add_library(SPIRV ALIAS glslang::SPIRV)
++set(glslang_SOURCE_DIR /usr/include/glslang PARENT_SCOPE)
++set(spirv-tools_SOURCE_DIR /usr PARENT_SCOPE)
++set(SPIRV-Headers_SOURCE_DIR /usr PARENT_SCOPE)
++return()
++
+ # Suppress all warnings from third-party projects.
+ set_property(DIRECTORY APPEND PROPERTY COMPILE_OPTIONS -w)
+ 
+--- a/libshaderc/CMakeLists.txt
++++ b/libshaderc/CMakeLists.txt
+@@ -94,11 +94,8 @@
+     shaderc_cpp
+     shaderc_private)
+ 
+-shaderc_combine_static_lib(shaderc_combined shaderc)
+-
+-if(SHADERC_ENABLE_INSTALL)
+-  install(TARGETS shaderc_combined DESTINATION ${CMAKE_INSTALL_LIBDIR})
+-endif(SHADERC_ENABLE_INSTALL)
++# Imported system archives do not expose TARGET_OBJECTS for a combined archive.
++# This package distributes the shared API rather than a bundled static SDK.
+ 
+ shaderc_add_tests(
+   TEST_PREFIX shaderc_combined
