@@ -1,6 +1,6 @@
 recipe {
     name "libudev-zero"
-    version "1.0.3"
+    version "1.0.5"
     release 1
     description "Drop-in replacement for libudev"
     url "https://github.com/illiliti/libudev-zero"
@@ -14,7 +14,7 @@ recipe {
 }
 
 source "https://github.com/illiliti/libudev-zero/archive/refs/tags/${recipe.version}.tar.gz" {
-    blake3 "541472ce66e99b1dc6021eb7aca64a2fde9d0b871ac3c817dd1c4e53e2318830"
+    blake3 "cf67b377c73cc92a3ea9343c2b169bc5d62a94c81ea90deea5ba6b1e02e4d1d6"
 }
 
 build {
