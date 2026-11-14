@@ -1,6 +1,6 @@
 recipe {
     name "go"
-    version "1.26.4"
+    version "1.26.11"
     release 1
     description "The Go programming language"
     url "https://go.dev"
@@ -12,15 +12,15 @@ recipe {
 }
 
 source "https://go.dev/dl/go${recipe.version}.src.tar.gz" {
-    blake3 "f2096c36e1bea3dca279af50d25fb89a0a90a1caed583c505cab6a1f44f6447c"
+    blake3 "6e70445519c463b0dce12f65a6399bd504f205ba7061ee01ccae3d632b8377e5"
 }
 
 source "https://go.dev/dl/go${recipe.version}.linux-amd64.tar.gz" {
-    blake3 "24de2813aea0bdde6174564821b18502fac386b5ebf6f574c1087e530996f1a3"
+    blake3 "ba697ccf00f29345a18358bd0415e6012e3e2de0c543d8f1185f238032a542c3"
 }
 
 source "https://go.dev/dl/go${recipe.version}.linux-arm64.tar.gz" {
-    blake3 "97c0e3f08b700bbd632ef4d7e1e3cb1edad26e62efb03c9cfdbd293aaeacba10"
+    blake3 "eaf79e5db2a622c7097756609b6dea665e7c1f8fa761291e4bd15994fa14d449"
 }
 
 build {
