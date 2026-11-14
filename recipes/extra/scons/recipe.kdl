@@ -1,0 +1,36 @@
+recipe {
+    name "scons"
+    version "4.11.1"
+    release 1
+    description "A software construction tool implemented in Python"
+    url "https://scons.org/"
+    licenses "MIT"
+    archs "any"
+    depends "busybox" \
+            "python" \
+            "python-installer"
+}
+
+source "https://files.pythonhosted.org/packages/py3/s/scons/scons-${recipe.version}-py3-none-any.whl" {
+    blake3 "a7d7fb87a2a5cfd1b357c6d791ef37762727fe848e4a73d8afe030a594ff98cd"
+}
+
+install {
+    script r#"
+        python3 -m installer \
+            --destdir "${DESTDIR}" \
+            --prefix /usr \
+            --no-compile-bytecode \
+            "${MERE_SOURCES_DIR}/scons-${recipe.version}-py3-none-any.whl"
+
+        # Entry points must use the active profile's Python, not the build store.
+        for script in scons sconsign scons-configure-cache; do
+            sed -i '1c#!/usr/bin/python3' "${DESTDIR}/usr/bin/${script}"
+        done
+    "#
+}
+
+package "scons" {
+    strip false
+    files "usr/bin/" "usr/lib/"
+}
