@@ -1,6 +1,6 @@
 recipe {
     name "libnftnl"
-    version "1.3.1"
+    version "1.3.2"
     release 1
     description "A userspace library providing a low-level netlink programming interface (API) to the in-kernel nf_tables subsystem."
     url "https://www.netfilter.org/projects/libnftnl/index.html"
@@ -16,7 +16,7 @@ recipe {
 }
 
 source "https://www.netfilter.org/pub/libnftnl/libnftnl-${recipe.version}.tar.xz" {
-    blake3 "ad4196d1382a8c05b14543864aa222a6921a027c61cc8c45f0ddc2e699d152e5"
+    blake3 "258bc3ed793cac2a0b6086f1b204878466a6ee78e8c9eff923a5993a11cf997c"
 }
 
 build {
