@@ -1,6 +1,6 @@
 recipe {
     name "harfbuzz"
-    version "14.1.0"
+    version "15.1.0"
     release 1
     description "A text shaping library"
     url "https://github.com/harfbuzz/harfbuzz"
@@ -9,6 +9,7 @@ recipe {
     depends "freetype" \
             "freetype-dev" \
             "glib-dev" \
+            "harfbuzz-dev" \
             "libpng" \
             "libpng-dev" \
             "llvm" \
@@ -21,7 +22,7 @@ recipe {
 }
 
 source "https://github.com/harfbuzz/harfbuzz/releases/download/${recipe.version}/harfbuzz-${recipe.version}.tar.xz" {
-    blake3 "4f2a0c4a7c9175218eda362a5494f848332a8eac4cd83cad3d05a0cd272f2fe2"
+    blake3 "f89de52926f25d2ee5bc5382ce24eaa348e576bfe5871391285e56519389d881"
 }
 
 build {
