@@ -1,0 +1,56 @@
+recipe {
+    name "herdr-core"
+    version "0.1.20"
+    release 1
+    description "Persistent terminal and coding-agent runtime for Herdr"
+    url "https://github.com/herdrdev/herdr-core"
+    archs "aarch64" "x86_64"
+    licenses "Apache-2.0"
+    depends "ca-certs" \
+            "linux-headers" \
+            "llvm" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "rust" \
+            "zig=0.16.0"
+}
+
+source "https://github.com/herdrdev/herdr-core/archive/f0828f1e40fac656a5bac077e20c605d38760164.tar.gz" {
+    save-as "herdr-core-${recipe.version}.tar.gz"
+    blake3 "b0747026b533416eb0ed02ceee5db9f6d67defce1218577897857b794fc5f21f"
+}
+
+source "https://github.com/ghostty-org/ghostty/archive/291fd050b9e9c293c8adb6a140742649b7e42d3a.tar.gz" {
+    save-as "ghostty-291fd050b9e9c293c8adb6a140742649b7e42d3a.tar.gz"
+    blake3 "585c0640204cf8985fbb71a18e6224d4214114fa952fa0788e02d2969f463e6e"
+}
+
+prepare {
+    script r#"
+        mkdir -p vendor/ghostty
+        tar -xf "${MERE_SOURCES_DIR}/ghostty-291fd050b9e9c293c8adb6a140742649b7e42d3a.tar.gz" \
+            --strip-components=1 -C vendor/ghostty
+    "#
+}
+
+build {
+    script r#"
+        unset DESTDIR
+        cargo build --release --locked \
+            --target "${recipe.arch}-unknown-linux-musl" \
+            --bin herdr-core
+    "#
+}
+
+install {
+    script r#"
+        install -Dm755 \
+            "target/${recipe.arch}-unknown-linux-musl/release/herdr-core" \
+            "${DESTDIR}/usr/bin/herdr-core"
+        ln -s herdr-core "${DESTDIR}/usr/bin/hc"
+    "#
+}
+
+package "herdr-core" {
+    files "usr/bin/"
+}
