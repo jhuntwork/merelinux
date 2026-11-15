@@ -1,7 +1,7 @@
 recipe {
     name "rust"
     version "1.94.1"
-    release 3
+    release 4
     description "The Rust programming language"
     url "https://www.rust-lang.org"
     archs "aarch64" "x86_64"
@@ -78,7 +78,7 @@ WRAPPER
             --set="target.${CHOST}.llvm-config=$(pwd)/custom/llvm-config" \
             --set="target.${CHOST}.musl-root=/" \
             --set="target.${CHOST}.crt-static=false" \
-            --tools='cargo,src'
+            --tools='cargo,clippy,rustdoc,rustfmt,src'
         ./x.py build -v
     "#
 }
