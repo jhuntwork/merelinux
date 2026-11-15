@@ -1,7 +1,7 @@
 recipe {
     name "rust"
-    version "1.94.1"
-    release 4
+    version "1.95.0"
+    release 1
     description "The Rust programming language"
     url "https://www.rust-lang.org"
     archs "aarch64" "x86_64"
@@ -22,7 +22,7 @@ recipe {
 }
 
 source "https://static.rust-lang.org/dist/rustc-${recipe.version}-src.tar.xz" {
-    blake3 "ee1748543766e3c63d64c1ce505f6dcac4fc99c73027e12a3474da0cbd95e342"
+    blake3 "71eb97afb6596792f752b7d6bc9382727f9f50734bdd639ae35c094254e167fb"
 }
 
 source "musl-native-host-base-and-dynamic-linking.patch" {
