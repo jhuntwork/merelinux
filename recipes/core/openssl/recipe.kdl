@@ -1,7 +1,7 @@
 recipe {
     name "openssl"
-    version "3.6.1"
-    release 5
+    version "3.6.5"
+    release 1
     description "a toolkit for the TLS and SSL protocols"
     url "https://www.openssl.org"
     licenses "BSD"
@@ -19,7 +19,7 @@ recipe {
 }
 
 source "https://www.openssl.org/source/openssl-${recipe.version}.tar.gz" {
-    blake3 "90c0c093c5f09397f840cce374e4e6f56134727ac0867aaeccb5314aa3196544"
+    blake3 "1f7fe0f6b2d9c46f70eee94d4e8700cf754623e9764af424e3eb9a9127d77999"
 }
 
 source "linux-aarch64-clang.patch" {
