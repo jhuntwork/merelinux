@@ -1,0 +1,101 @@
+recipe {
+    name "herdr-app"
+    version "0.1.15"
+    release 1
+    description "Desktop app for persistent terminals and coding agents"
+    url "https://github.com/herdrdev/herdr-app"
+    archs "aarch64" "x86_64"
+    licenses "Apache-2.0"
+    depends "ca-certs" \
+            "expat-dev" \
+            "fontconfig" \
+            "linux-headers" \
+            "fontconfig-dev" \
+            "freetype" \
+            "freetype-dev" \
+            "harfbuzz" \
+            "harfbuzz-dev" \
+            "herdr-core" \
+            "libclang" \
+            "libpng-dev" \
+            "libxkbcommon" \
+            "libxkbcommon-dev" \
+            "llvm" \
+            "llvm-dev" \
+            "mesa" \
+            "mesa-dev" \
+            "mimalloc-dev" \
+            "musl-dev" \
+            "patch" \
+            "pkgconf" \
+            "rust" \
+            "vulkan-loader" \
+            "vulkan-loader-dev" \
+            "wayland" \
+            "wayland-dev" \
+            "wayland-protocols-dev" \
+            "xkeyboard-config" \
+            "zlib-ng-dev" \
+            "zig=0.16.0"
+}
+
+source "https://github.com/herdrdev/herdr-app/archive/17eac390c346a731ba1ac14816ad91dc7cd2209b.tar.gz" {
+    save-as "herdr-app-${recipe.version}.tar.gz"
+    blake3 "aaa405461d0d24c74b4273ddca78a4f6d8990b655b074320ca8eee33be850694"
+}
+
+source "https://github.com/ghostty-org/ghostty/archive/291fd050b9e9c293c8adb6a140742649b7e42d3a.tar.gz" {
+    save-as "ghostty-291fd050b9e9c293c8adb6a140742649b7e42d3a.tar.gz"
+    blake3 "585c0640204cf8985fbb71a18e6224d4214114fa952fa0788e02d2969f463e6e"
+}
+
+source "mere-musl.patch" {
+    blake3 "a2bb2d04d0e0578a4dc4feff2e78cce1018d6c2f8810f82cf365dfa1da5a6a10"
+}
+
+prepare {
+    script r#"
+        mkdir -p vendor/ghostty
+        tar -xf "${MERE_SOURCES_DIR}/ghostty-291fd050b9e9c293c8adb6a140742649b7e42d3a.tar.gz" \
+            --strip-components=1 -C vendor/ghostty
+        patch -Np1 -i "${MERE_SOURCES_DIR}/mere-musl.patch"
+    "#
+}
+
+build {
+    script r#"
+        unset DESTDIR
+        export LIBUNWIND_LIB_DIR=/usr/lib
+        cargo build --release --locked \
+            --target "${recipe.arch}-unknown-linux-musl" \
+            --bin herdr-app
+    "#
+}
+
+install {
+    script r#"
+        install -Dm755 \
+            "target/${recipe.arch}-unknown-linux-musl/release/herdr-app" \
+            "${DESTDIR}/usr/bin/herdr-app"
+        install -Dm644 assets/icons/herdr-ui-icon-clean.svg \
+            "${DESTDIR}/usr/share/icons/hicolor/scalable/apps/herdr-app.svg"
+        install -Dm644 /dev/stdin \
+            "${DESTDIR}/usr/share/applications/herdr-app.desktop" <<'EOF'
+[Desktop Entry]
+Type=Application
+Name=Herdr
+Comment=Terminals and coding agents that keep running
+Exec=herdr-app
+Icon=herdr-app
+Terminal=false
+Categories=Development;
+StartupWMClass=herdr-app
+EOF
+    "#
+}
+
+package "herdr-app" {
+    files "usr/bin/" \
+          "usr/share/applications/" \
+          "usr/share/icons/"
+}

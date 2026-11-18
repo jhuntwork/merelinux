@@ -1,0 +1,280 @@
+diff --git i/Cargo.lock w/Cargo.lock
+index 5d23753..bf0278c 100644
+--- i/Cargo.lock
++++ w/Cargo.lock
+@@ -153,19 +153,6 @@ dependencies = [
+  "const-oid",
+ ]
+ 
+-[[package]]
+-name = "ahash"
+-version = "0.8.12"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "5a15f179cd60c4584b8a8c596927aadc462e27f2ca70c04e0071964a73ba7a75"
+-dependencies = [
+- "cfg-if",
+- "const-random",
+- "once_cell",
+- "version_check",
+- "zerocopy",
+-]
+-
+ [[package]]
+ name = "aho-corasick"
+ version = "1.1.5"
+@@ -314,12 +301,6 @@ version = "0.7.8"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "d3fb67a6e08acf24fdeccbac2cb6ac4305825bd1f117462e0e6f2f193345ad56"
+ 
+-[[package]]
+-name = "as-raw-xcb-connection"
+-version = "1.0.1"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "175571dd1d178ced59193a6fc02dde1b972eb0bc56c892cde9beeceac5bf0f6b"
+-
+ [[package]]
+ name = "as-slice"
+ version = "0.2.1"
+@@ -1318,26 +1299,6 @@ version = "0.10.2"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "a6ef517f0926dd24a1582492c791b6a4818a4d94e789a334894aa15b0d12f55c"
+ 
+-[[package]]
+-name = "const-random"
+-version = "0.1.18"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "87e00182fe74b066627d63b85fd550ac2998d4b0bd86bfed477a0ae4c7c71359"
+-dependencies = [
+- "const-random-macro",
+-]
+-
+-[[package]]
+-name = "const-random-macro"
+-version = "0.1.16"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "f9d839f2a20b0aee515dc581a6172f2321f96cab76c1a38a4c584a194955390e"
+-dependencies = [
+- "getrandom 0.2.17",
+- "once_cell",
+- "tiny-keccak",
+-]
+-
+ [[package]]
+ name = "convert_case"
+ version = "0.10.0"
+@@ -2709,16 +2670,6 @@ dependencies = [
+  "version_check",
+ ]
+ 
+-[[package]]
+-name = "gethostname"
+-version = "1.1.0"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "1bd49230192a3797a9a4d6abe9b3eed6f7fa4c8a8a4947977c6f80025f92cbd8"
+-dependencies = [
+- "rustix",
+- "windows-link 0.2.1",
+-]
+-
+ [[package]]
+ name = "getrandom"
+ version = "0.2.17"
+@@ -3157,7 +3108,6 @@ dependencies = [
+  "accesskit",
+  "accesskit_unix",
+  "anyhow",
+- "as-raw-xcb-connection",
+  "ashpd",
+  "bytemuck",
+  "calloop",
+@@ -3188,10 +3138,7 @@ dependencies = [
+  "wayland-protocols",
+  "wayland-protocols-plasma",
+  "wayland-protocols-wlr",
+- "x11rb",
+  "xkbcommon",
+- "zed-scap",
+- "zed-xim",
+ ]
+ 
+ [[package]]
+@@ -8165,15 +8112,6 @@ version = "0.1.9"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "9e1c906769ad99c88eaa54e728060edef082f8e358ff32030cb7c7d315e81109"
+ 
+-[[package]]
+-name = "tiny-keccak"
+-version = "2.0.2"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "2c9d3793400a45f954c52e73d068316d76b6f4e36977e3fcebb13a2721e80237"
+-dependencies = [
+- "crunchy",
+-]
+-
+ [[package]]
+ name = "tiny-skia"
+ version = "0.11.4"
+@@ -9956,26 +9894,6 @@ dependencies = [
+  "pkg-config",
+ ]
+ 
+-[[package]]
+-name = "x11rb"
+-version = "0.13.2"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "9993aa5be5a26815fe2c3eacfc1fde061fc1a1f094bf1ad2a18bf9c495dd7414"
+-dependencies = [
+- "as-raw-xcb-connection",
+- "gethostname",
+- "libc",
+- "rustix",
+- "x11rb-protocol",
+- "xcursor",
+-]
+-
+-[[package]]
+-name = "x11rb-protocol"
+-version = "0.13.2"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "ea6fc2961e4ef194dcbfe56bb845534d0dc8098940c7e5c012a258bfec6701bd"
+-
+ [[package]]
+ name = "x25519-dalek"
+ version = "3.0.0"
+@@ -10005,22 +9923,6 @@ version = "0.3.11"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+ checksum = "163b33ed8786455e2fa5d72f554057ce3f3182425434f756cd39c99839d88e23"
+ 
+-[[package]]
+-name = "xim-ctext"
+-version = "0.3.0"
+-dependencies = [
+- "encoding_rs",
+-]
+-
+-[[package]]
+-name = "xim-parser"
+-version = "0.2.2"
+-source = "registry+https://github.com/rust-lang/crates.io-index"
+-checksum = "5dcee45f89572d5a65180af3a84e7ddb24f5ea690a6d3aa9de231281544dd7b7"
+-dependencies = [
+- "bitflags 2.13.1",
+-]
+-
+ [[package]]
+ name = "xkbcommon"
+ version = "0.8.0"
+@@ -10260,18 +10162,6 @@ dependencies = [
+  "xcb",
+ ]
+ 
+-[[package]]
+-name = "zed-xim"
+-version = "0.4.0-zed"
+-dependencies = [
+- "ahash",
+- "hashbrown 0.14.5",
+- "log",
+- "x11rb",
+- "xim-ctext",
+- "xim-parser",
+-]
+-
+ [[package]]
+ name = "zeno"
+ version = "0.3.3"
+@@ -10477,3 +10367,11 @@ dependencies = [
+  "syn 3.0.4",
+  "winnow 1.0.4",
+ ]
++
++[[patch.unused]]
++name = "xim-ctext"
++version = "0.3.0"
++
++[[patch.unused]]
++name = "zed-xim"
++version = "0.4.0-zed"
+diff --git i/Cargo.toml w/Cargo.toml
+index a37bd21..14be105 100644
+--- i/Cargo.toml
++++ w/Cargo.toml
+@@ -18,7 +18,7 @@ publish.workspace = true
+ [dependencies]
+ ghostty-sys = { path = "crates/ghostty-sys" }
+ gpui = { package = "gpui-pre", version = "=0.3.8", features = ["render-to-image"] }
+-gpui_platform = { package = "gpui-pre-platform", version = "=0.3.8", features = ["font-kit", "x11", "wayland", "runtime_shaders"] }
++gpui_platform = { package = "gpui-pre-platform", version = "=0.3.8", features = ["font-kit", "wayland", "runtime_shaders"] }
+ gpui-shell = { path = "vendor/gpui-kit/crates/shell" }
+ gpui-base = { path = "vendor/gpui-kit/crates/base" }
+ anyhow = "1"
+@@ -53,7 +53,7 @@ swash = "=0.2.10"
+ tiny-skia = { version = "=0.11.4", default-features = false, features = ["std", "simd"] }
+ 
+ [target.'cfg(target_os = "linux")'.dependencies]
+-gpui_linux = { package = "gpui-pre-linux", version = "=0.3.8", features = ["render-to-image"] }
++gpui_linux = { package = "gpui-pre-linux", version = "=0.3.8", default-features = false, features = ["wayland", "render-to-image"] }
+ 
+ [target.'cfg(target_os = "macos")'.dependencies]
+ gpui_macos = { package = "gpui-pre-macos", version = "=0.3.8", features = ["render-to-image"] }
+diff --git i/crates/ghostty-sys/build.rs w/crates/ghostty-sys/build.rs
+index 63e6a1b..1eb64e6 100644
+--- i/crates/ghostty-sys/build.rs
++++ w/crates/ghostty-sys/build.rs
+@@ -9,6 +9,8 @@ fn zig_target(target: &str) -> &'static str {
+     match target {
+         "x86_64-unknown-linux-gnu" => "x86_64-linux-gnu",
+         "aarch64-unknown-linux-gnu" => "aarch64-linux-gnu",
++        "x86_64-unknown-linux-musl" => "x86_64-linux-musl",
++        "aarch64-unknown-linux-musl" => "aarch64-linux-musl",
+         "x86_64-apple-darwin" => "x86_64-macos",
+         "aarch64-apple-darwin" => "aarch64-macos",
+         "x86_64-pc-windows-msvc" => "x86_64-windows-msvc",
+diff --git i/vendor/gpui-kit/Cargo.toml w/vendor/gpui-kit/Cargo.toml
+index 966d5a9..cc24a64 100644
+--- i/vendor/gpui-kit/Cargo.toml
++++ w/vendor/gpui-kit/Cargo.toml
+@@ -33,7 +33,7 @@ story = { path = "crates/story" }
+ # every snapshot crate together with its Cargo.lock entry; `script/check-gpui-pin.ts`
+ # fails CI when a pin is not exact.
+ gpui = { package = "gpui-pre", version = "=0.3.8" }
+-gpui_platform = { package = "gpui-pre-platform", version = "=0.3.8", features = ["font-kit", "x11", "wayland", "runtime_shaders"] }
++gpui_platform = { package = "gpui-pre-platform", version = "=0.3.8", features = ["font-kit", "wayland", "runtime_shaders"] }
+ gpui_web = { package = "gpui-pre-web", version = "=0.3.8" }
+ # Fast is optional; existing crates select it through their gpui-fast feature.
+ # Explicit package fields make Cargo use these dependency keys as Rust crate names;
+diff --git i/vendor/quickjs-jit-runtime/build.rs w/vendor/quickjs-jit-runtime/build.rs
+index 006bcbf..f416506 100644
+--- i/vendor/quickjs-jit-runtime/build.rs
++++ w/vendor/quickjs-jit-runtime/build.rs
+@@ -1,6 +1,15 @@
+ use std::{env, fs, path::PathBuf};
+ 
+ fn main() {
++    // rustc must locate the archive while bundling it into this crate's rlib;
++    // the C linker's default search directories are not sufficient here.
++    println!("cargo:rerun-if-env-changed=LIBUNWIND_LIB_DIR");
++    if env::var("CARGO_CFG_TARGET_OS").as_deref() == Ok("linux")
++        && env::var("CARGO_CFG_TARGET_ENV").as_deref() == Ok("musl")
++    {
++        let libdir = env::var("LIBUNWIND_LIB_DIR").unwrap_or_else(|_| "/usr/lib".into());
++        println!("cargo:rustc-link-search=native={libdir}");
++    }
+     println!("cargo:rustc-check-cfg=cfg(rquickjs_memory_sanitizer)");
+     println!("cargo:rustc-check-cfg=cfg(rquickjs_sanitizer)");
+     println!("cargo:rerun-if-env-changed=CARGO_CFG_SANITIZE");
+diff --git i/vendor/quickjs-jit-runtime/src/compiler/baseline.rs w/vendor/quickjs-jit-runtime/src/compiler/baseline.rs
+index 5b08075..543de55 100644
+--- i/vendor/quickjs-jit-runtime/src/compiler/baseline.rs
++++ w/vendor/quickjs-jit-runtime/src/compiler/baseline.rs
+@@ -2658,7 +2658,9 @@ fn systemv_registration_offset(eh_frame: &[u8]) -> Result<usize, CodeMemoryError
+     target_endian = "little",
+     any(target_arch = "x86_64", target_arch = "aarch64")
+ ))]
+-#[link(name = "gcc_s")]
++// Mere's native musl toolchain uses LLVM libunwind for JIT frame registration.
++#[cfg_attr(target_env = "musl", link(name = "unwind", kind = "static"))]
++#[cfg_attr(not(target_env = "musl"), link(name = "gcc_s"))]
+ unsafe extern "C" {
+     #[link_name = "__register_frame"]
+     fn systemv_register_frame(begin: *const std::ffi::c_void);
