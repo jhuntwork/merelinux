@@ -1,0 +1,49 @@
+recipe {
+    name "gmpopenh264"
+    version "2.6.0"
+    release 1
+    description "OpenH264 Gecko Media Plugin for Firefox"
+    url "https://github.com/cisco/openh264"
+    archs "aarch64" "x86_64"
+    licenses "BSD-2-Clause"
+    depends "linux-headers" "llvm" "make" "musl-dev"
+    depends arch="x86_64" "nasm"
+}
+
+source "https://codeload.github.com/cisco/openh264/tar.gz/v${recipe.version}" {
+    save-as "openh264-${recipe.version}.tar.gz"
+    blake3 "aa5ec038847b098d8b2f1b137300880fae8cae26bb3691272961ccb18a935a96"
+}
+
+// Gecko Media Plugin API headers matching the Firefox the plugin targets.
+source "https://codeload.github.com/mozilla/gmp-api/tar.gz/Firefox135" {
+    save-as "gmp-api-Firefox135.tar.gz"
+    blake3 "6656ad164391281b7e6075521b912e0a067863c3df0d5a98b44d7598dee1aae6"
+}
+
+prepare {
+    script r#"
+        mkdir -p gmp-api
+        tar -xf "${MERE_SOURCES_DIR}/gmp-api-Firefox135.tar.gz" \
+            --strip-components=1 -C gmp-api
+    "#
+}
+
+build {
+    script r#"
+        make -j"$(nproc)" CC=clang CXX=clang++ AR=llvm-ar ARCH="${recipe.arch}" plugin
+    "#
+}
+
+install {
+    script r#"
+        plugin_dir="${DESTDIR}/usr/lib/mozilla/plugins/gmp-gmpopenh264/system-installed"
+        install -Dm755 libgmpopenh264.so "$plugin_dir/libgmpopenh264.so"
+        install -Dm644 gmpopenh264.info "$plugin_dir/gmpopenh264.info"
+        install -Dm644 LICENSE "${DESTDIR}/usr/share/licenses/gmpopenh264/LICENSE"
+    "#
+}
+
+package "gmpopenh264" {
+    files "usr/"
+}
