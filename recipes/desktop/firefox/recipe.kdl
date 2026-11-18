@@ -1,7 +1,7 @@
 recipe {
     name "firefox"
-    version "154.0"
-    release 2
+    version "160.0.1"
+    release 1
     description "The Firefox web browser"
     url "https://www.mozilla.org"
     archs "aarch64" "x86_64"
@@ -51,15 +51,22 @@ recipe {
 }
 
 source "https://archive.mozilla.org/pub/firefox/releases/${recipe.version}/source/firefox-${recipe.version}.source.tar.xz" {
-    blake3 "fa1958ec5596cbe02fbcb39040dd9b2da6341f4cc3e8770780d39131bfc02dc3"
+    blake3 "2c03e17b37a6a8d2e9b5e80cb1213effbe928bf6cf06578334d01437e95c3bd6"
 }
 
 source "firefox.desktop" {
     blake3 "628096d0022b6e564d0972a5a3282db9886a7714d2d46f5b96fadfd51f793698"
 }
 
+source "system-openh264.patch" {
+    blake3 "9ca7a2f2b04cce5cb4f8b1286e03f81cdac23e649c024adc7809140a44a155f9"
+}
+
 prepare {
     script r#"
+        # Register the gmpopenh264 package's musl plugin with Firefox.
+        patch -p1 < "${MERE_SOURCES_DIR}/system-openh264.patch"
+
         # pid_t missing in libwebrtc desktop capture header
         sed -i '1i #include <sys/types.h>' \
             third_party/libwebrtc/modules/desktop_capture/desktop_capturer.h
@@ -141,11 +148,12 @@ install {
                 "${DESTDIR}/usr/share/icons/hicolor/${size}x${size}/apps/firefox.png"
         done
 
-        # musl: never auto-download Cisco's glibc OpenH264 GMP (it can't load
-        # on musl and shadows the system musl build in gmp-gmpopenh264/). The
-        # gmpopenh264 package ships the working plugin; keep the bundled one.
+        # The gmpopenh264 package's musl plugin is registered by
+        # system-openh264.patch. Hide and never download Mozilla's prebuilt
+        # glibc plugin, which cannot load on musl.
         install -Dm644 /dev/stdin \
             "${DESTDIR}/usr/lib/firefox/browser/defaults/preferences/mere.js" << 'EOF'
+pref("media.gmp-gmpopenh264.visible", false);
 pref("media.gmp-gmpopenh264.autoupdate", false);
 EOF
     "#
