@@ -1,0 +1,56 @@
+recipe {
+    name "gmpopenh264"
+    version "2.6.0"
+    release 1
+    description "OpenH264 Gecko Media Plugin for Firefox"
+    url "https://github.com/cisco/openh264"
+    archs "aarch64" "x86_64"
+    licenses "BSD-2-Clause"
+    depends "linux-headers" "llvm" "make" "musl-dev"
+    depends arch="x86_64" "nasm"
+}
+
+// Verify the upstream archives against the SHA-256 digests from the
+// FreeBSD ports before extracting them. The .source suffix keeps Mere
+// from automatically extracting the first archive before verification.
+source "https://codeload.github.com/cisco/openh264/tar.gz/v${recipe.version}" {
+    save-as "gmpopenh264-2.6.0.source"
+}
+
+source "https://codeload.github.com/mozilla/gmp-api/tar.gz/Firefox135" {
+    save-as "gmp-api-Firefox135.source"
+}
+
+prepare {
+    script r#"
+        (
+            cd "${MERE_SOURCES_DIR}"
+            sha256sum -c - << 'EOF'
+558544ad358283a7ab2930d69a9ceddf913f4a51ee9bf1bfb9e377322af81a69  gmpopenh264-2.6.0.source
+939be3596292ff445bf3cd5454a03041f68258444f7fff023a0bac17b238b40f  gmp-api-Firefox135.source
+EOF
+        ) || exit 1
+        tar -xzf "${MERE_SOURCES_DIR}/gmpopenh264-2.6.0.source" --strip-components=1
+        mkdir -p gmp-api
+        tar -xzf "${MERE_SOURCES_DIR}/gmp-api-Firefox135.source" -C gmp-api --strip-components=1
+    "#
+}
+
+build {
+    script r#"
+        make -j"$(nproc)" CC=clang CXX=clang++ AR=llvm-ar ARCH="${recipe.arch}" plugin
+    "#
+}
+
+install {
+    script r#"
+        plugin_dir="${DESTDIR}/usr/lib/mozilla/plugins/gmp-gmpopenh264/system-installed"
+        install -Dm755 libgmpopenh264.so "$plugin_dir/libgmpopenh264.so"
+        install -Dm644 gmpopenh264.info "$plugin_dir/gmpopenh264.info"
+        install -Dm644 LICENSE "${DESTDIR}/usr/share/licenses/gmpopenh264/LICENSE"
+    "#
+}
+
+package "gmpopenh264" {
+    files "usr/"
+}
