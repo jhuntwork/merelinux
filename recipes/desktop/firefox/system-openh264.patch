@@ -1,0 +1,33 @@
+--- a/toolkit/mozapps/extensions/internal/GMPProvider.sys.mjs
++++ b/toolkit/mozapps/extensions/internal/GMPProvider.sys.mjs
+@@ -743,6 +743,20 @@
+     );
+     this.buildPluginList();
+     this.ensureProperCDMInstallState();
++
++    // Mere's native OpenH264 plugin is installed by the package manager.
++    if (GMPPrefs.getBool(GMPPrefs.KEY_PLUGIN_ENABLED, true, OPEN_H264_ID)) {
++      const path = "/usr/lib/mozilla/plugins/gmp-gmpopenh264/system-installed";
++      try {
++        const library = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsIFile);
++        library.initWithPath(PathUtils.join(path, "libgmpopenh264.so"));
++        if (library.exists()) {
++          lazy.gmpService.addPluginDirectory(path);
++        }
++      } catch (e) {
++        this._log.warn("startup - adding system OpenH264 plugin failed", e);
++      }
++    }
+ 
+     Services.prefs.addObserver(GMPPrefs.KEY_LOG_BASE, configureLogging);
+ 
+@@ -869,6 +883,9 @@
+   buildPluginList() {
+     this._plugins = new Map();
+     for (let aPlugin of GMP_PLUGINS) {
++      if (aPlugin.id === OPEN_H264_ID) {
++        continue;
++      }
+       let plugin = {
+         id: aPlugin.id,
+         name: lazy.addonsBundle.formatValueSync(aPlugin.name),
